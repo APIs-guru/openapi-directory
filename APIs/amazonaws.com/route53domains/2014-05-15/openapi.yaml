@@ -2167,8 +2167,6 @@ components:
     BillingRecords:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BillingRecord'
     Boolean:
       type: boolean
@@ -2457,8 +2455,6 @@ components:
     ExtraParamList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExtraParam'
     ContactDetail:
       type: object
@@ -2513,8 +2509,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     OperationId:
       type: string
@@ -2526,8 +2520,6 @@ components:
     DomainStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainStatus'
     String:
       type: string
@@ -2544,8 +2536,6 @@ components:
     DomainSuggestionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainSuggestion'
     DomainSummary:
       type: object
@@ -2568,8 +2558,6 @@ components:
     DomainSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainSummary'
     Transferable:
       type: string
@@ -2638,8 +2626,6 @@ components:
     NameserverList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Nameserver'
     RegistrarName:
       type: string
@@ -2667,8 +2653,6 @@ components:
     GlueIpList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GlueIp'
     HostName:
       type: string
@@ -2683,14 +2667,10 @@ components:
     OperationSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OperationSummary'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     Nameserver:
       type: object

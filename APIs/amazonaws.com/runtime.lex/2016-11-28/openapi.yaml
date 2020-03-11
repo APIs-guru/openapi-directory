@@ -303,8 +303,6 @@ paths:
                   description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/IntentSummary'
                   minItems: 0
                   maxItems: 3
@@ -938,8 +936,6 @@ components:
     listOfButtons:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Button'
       minItems: 0
       maxItems: 5
@@ -974,8 +970,6 @@ components:
     IntentSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IntentSummary'
       minItems: 0
       maxItems: 3
@@ -1044,8 +1038,6 @@ components:
     genericAttachmentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericAttachment'
       minItems: 0
       maxItems: 10

@@ -3099,8 +3099,6 @@ components:
     Destinations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Destination'
     ExportTaskStatusCode:
       type: string
@@ -3114,14 +3112,10 @@ components:
     ExportTasks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExportTask'
     LogGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogGroup'
     OrderBy:
       type: string
@@ -3131,8 +3125,6 @@ components:
     LogStreams:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogStream'
     MetricName:
       type: string
@@ -3146,8 +3138,6 @@ components:
     MetricFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricFilter'
     DescribeQueriesMaxResults:
       type: integer
@@ -3164,20 +3154,14 @@ components:
     QueryInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/QueryInfo'
     ResourcePolicies:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourcePolicy'
     SubscriptionFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubscriptionFilter'
     TargetArn:
       type: string
@@ -3293,8 +3277,6 @@ components:
     InputLogStreamNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogStreamName'
       minItems: 1
       maxItems: 100
@@ -3308,14 +3290,10 @@ components:
     FilteredLogEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilteredLogEvent'
     SearchedLogStreams:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SearchedLogStream'
     FilteredLogEvent:
       type: object
@@ -3341,14 +3319,10 @@ components:
     OutputLogEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputLogEvent'
     LogGroupFieldList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogGroupField'
     LogRecordPointer:
       type: string
@@ -3363,8 +3337,6 @@ components:
     QueryResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResultRows'
     QueryStatistics:
       type: object
@@ -3395,8 +3367,6 @@ components:
     InputLogEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputLogEvent'
       minItems: 1
       maxItems: 10000
@@ -3446,8 +3416,6 @@ components:
     LogGroupNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogGroupName'
     SequenceToken:
       type: string
@@ -3486,8 +3454,6 @@ components:
     MetricTransformations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricTransformation'
       minItems: 1
       maxItems: 1
@@ -3525,8 +3491,6 @@ components:
     MetricFilterMatches:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricFilterMatchRecord'
     MetricValue:
       type: string
@@ -3621,8 +3585,6 @@ components:
     ResultRows:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResultField'
     StatsValue:
       type: number
@@ -3680,8 +3642,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
     TagValue:
@@ -3691,8 +3651,6 @@ components:
     TestEventMessages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventMessage'
       minItems: 1
       maxItems: 50

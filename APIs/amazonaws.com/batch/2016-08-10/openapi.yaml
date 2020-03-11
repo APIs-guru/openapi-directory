@@ -317,8 +317,6 @@ paths:
                   description: The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ComputeEnvironmentOrder'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -507,8 +505,6 @@ paths:
                   description: A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 maxResults:
                   description: 'The maximum number of cluster results returned by <code>DescribeComputeEnvironments</code> in paginated output. When this parameter is used, <code>DescribeComputeEnvironments</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeComputeEnvironments</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeComputeEnvironments</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
@@ -571,8 +567,6 @@ paths:
                   description: A list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 maxResults:
                   description: 'The maximum number of results returned by <code>DescribeJobDefinitions</code> in paginated output. When this parameter is used, <code>DescribeJobDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
@@ -641,8 +635,6 @@ paths:
                   description: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 maxResults:
                   description: 'The maximum number of results returned by <code>DescribeJobQueues</code> in paginated output. When this parameter is used, <code>DescribeJobQueues</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeJobQueues</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>DescribeJobQueues</code> returns up to 100 results and a <code>nextToken</code> value if applicable.'
@@ -695,8 +687,6 @@ paths:
                   description: A list of up to 100 job IDs.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -967,8 +957,6 @@ paths:
                   description: 'A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a <code>SEQUENTIAL</code> type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an <code>N_TO_N</code> type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/JobDependency'
                 jobDefinition:
                   description: 'The job definition used by this job. This value can be one of <code>name</code>, <code>name:revision</code>, or the Amazon Resource Name (ARN) for the job definition. If <code>name</code> is specified without a revision then the latest active revision is used.'
@@ -1195,8 +1183,6 @@ paths:
                   description: Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ComputeEnvironmentOrder'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1292,8 +1278,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     String:
       type: string
@@ -1506,34 +1490,24 @@ components:
     Volumes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Volume'
     EnvironmentVariables:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeyValuePair'
     MountPoints:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MountPoint'
     Boolean:
       type: boolean
     Ulimits:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Ulimit'
     ResourceRequirements:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceRequirement'
     LinuxParameters:
       type: object
@@ -1545,8 +1519,6 @@ components:
     NodeRangeProperties:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NodeRangeProperty'
     SubmitJobResponse:
       type: object
@@ -1576,8 +1548,6 @@ components:
     NodePropertyOverrides:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NodePropertyOverride'
     TerminateJobResponse:
       type: object
@@ -1649,8 +1619,6 @@ components:
     NetworkInterfaceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NetworkInterface'
     AttemptContainerDetail:
       type: object
@@ -1695,8 +1663,6 @@ components:
     AttemptDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttemptDetail'
     CEState:
       type: string
@@ -1827,14 +1793,10 @@ components:
     ComputeEnvironmentDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComputeEnvironmentDetail'
     ComputeEnvironmentOrders:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComputeEnvironmentOrder'
     ComputeResourceUpdate:
       type: object
@@ -2107,8 +2069,6 @@ components:
     JobDefinitionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobDefinition'
     DescribeJobQueuesRequest:
       type: object
@@ -2126,8 +2086,6 @@ components:
     JobQueueDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobQueueDetail'
     DescribeJobsRequest:
       type: object
@@ -2141,14 +2099,10 @@ components:
     JobDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobDetail'
     DeviceCgroupPermissions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeviceCgroupPermission'
     Device:
       type: object
@@ -2174,8 +2128,6 @@ components:
     DevicesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Device'
     KeyValuePair:
       type: object
@@ -2285,8 +2237,6 @@ components:
     JobDependencyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobDependency'
     JobStatus:
       type: string
@@ -2457,8 +2407,6 @@ components:
     JobSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobSummary'
     ListJobsRequest:
       type: object

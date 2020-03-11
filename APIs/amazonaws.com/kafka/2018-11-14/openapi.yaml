@@ -498,8 +498,6 @@ paths:
                              
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 name:
                   description: |2-
@@ -1513,8 +1511,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1687,8 +1683,6 @@ paths:
                              
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/BrokerEBSVolumeInfo'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1992,8 +1986,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     __stringMin5Max32:
       type: string
@@ -3200,8 +3192,6 @@ components:
     __listOfClusterOperationInfo:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClusterOperationInfo'
     ListClustersRequest:
       type: object
@@ -3210,8 +3200,6 @@ components:
     __listOfClusterInfo:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClusterInfo'
     ListConfigurationRevisionsRequest:
       type: object
@@ -3220,8 +3208,6 @@ components:
     __listOfConfigurationRevision:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigurationRevision'
     ListConfigurationsRequest:
       type: object
@@ -3230,8 +3216,6 @@ components:
     __listOfConfiguration:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Configuration'
     ListKafkaVersionsRequest:
       type: object
@@ -3240,8 +3224,6 @@ components:
     __listOfKafkaVersion:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KafkaVersion'
     ListNodesRequest:
       type: object
@@ -3250,8 +3232,6 @@ components:
     __listOfNodeInfo:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NodeInfo'
     ListTagsForResourceRequest:
       type: object
@@ -3260,8 +3240,6 @@ components:
     __listOfBrokerEBSVolumeInfo:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BrokerEBSVolumeInfo'
     NodeExporter:
       type: object

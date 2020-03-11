@@ -2104,8 +2104,6 @@ paths:
                   description: The keys of the tags that you want to remove from the resource.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
   /2017-08-29/tags:
     post:
@@ -2285,8 +2283,6 @@ components:
     __listOfInput:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Input'
     MotionImageInserter:
       type: object
@@ -2323,8 +2319,6 @@ components:
     __listOfOutputGroup:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputGroup'
     TimecodeConfig:
       type: object
@@ -2360,8 +2354,6 @@ components:
     __listOfInputTemplate:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputTemplate'
     CreatePresetResponse:
       type: object
@@ -2372,14 +2364,10 @@ components:
     __listOfAudioDescription:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AudioDescription'
     __listOfCaptionDescriptionPreset:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaptionDescriptionPreset'
     ContainerSettings:
       type: object
@@ -3406,8 +3394,6 @@ components:
     __listOf__integerMin1Max2147483647:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__integerMin1Max2147483647'
     __integerMin0Max8:
       type: integer
@@ -3457,8 +3443,6 @@ components:
     __listOf__stringMin1:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__stringMin1'
     AudioSelectorGroup:
       type: object
@@ -3915,8 +3899,6 @@ components:
     __listOfOutputChannelMapping:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputChannelMapping'
     ChannelMapping:
       type: object
@@ -4030,8 +4012,6 @@ components:
     __listOfCmafAdditionalManifest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CmafAdditionalManifest'
     __stringPatternS3:
       type: string
@@ -5016,8 +4996,6 @@ components:
     __listOfDashAdditionalManifest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DashAdditionalManifest'
     DashIsoHbbtvCompliance:
       type: string
@@ -5159,8 +5137,6 @@ components:
     __listOfEndpoint:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Endpoint'
     S3DestinationSettings:
       type: object
@@ -6411,20 +6387,14 @@ components:
     __listOfHlsAdMarkers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HlsAdMarkers'
     __listOfHlsAdditionalManifest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HlsAdditionalManifest'
     __listOfHlsCaptionLanguageMapping:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HlsCaptionLanguageMapping'
     HlsManifestCompression:
       type: string
@@ -6599,8 +6569,6 @@ components:
     __listOfInsertableImage:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InsertableImage'
     ImageInserter:
       type: object
@@ -6688,8 +6656,6 @@ components:
     __listOfInputClipping:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputClipping'
     InputPsiControl:
       type: string
@@ -6700,8 +6666,6 @@ components:
     __listOf__stringPatternS3ASSETMAPXml:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__stringPatternS3ASSETMAPXml'
     InputTimecodeSource:
       type: string
@@ -6958,8 +6922,6 @@ components:
     __listOfOutputGroupDetail:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputGroupDetail'
     JobStatus:
       type: string
@@ -6986,8 +6948,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     Type:
       type: string
@@ -7018,8 +6978,6 @@ components:
     __listOfJobTemplate:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobTemplate'
     ListJobsRequest:
       type: object
@@ -7028,8 +6986,6 @@ components:
     __listOfJob:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Job'
     PresetListBy:
       type: string
@@ -7045,8 +7001,6 @@ components:
     __listOfPreset:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Preset'
     QueueListBy:
       type: string
@@ -7061,8 +7015,6 @@ components:
     __listOfQueue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Queue'
     ListTagsForResourceRequest:
       type: object
@@ -7168,8 +7120,6 @@ components:
     __listOf__integerMin32Max8182:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__integerMin32Max8182'
     __integerMin0Max500:
       type: integer
@@ -7621,8 +7571,6 @@ components:
     __listOfMsSmoothAdditionalManifest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MsSmoothAdditionalManifest'
     MsSmoothManifestEncoding:
       type: string
@@ -7743,8 +7691,6 @@ components:
     __listOfCaptionDescription:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaptionDescription'
     OutputSettings:
       type: object
@@ -7787,8 +7733,6 @@ components:
     __listOf__integerMinNegative60Max6:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__integerMinNegative60Max6'
     OutputChannelMapping:
       type: object
@@ -7842,8 +7786,6 @@ components:
     __listOfOutput:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Output'
     OutputGroup:
       type: object
@@ -7864,8 +7806,6 @@ components:
     __listOfOutputDetail:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputDetail'
     OutputGroupDetail:
       type: object
@@ -8067,8 +8007,6 @@ components:
     __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
     __stringPatternHttps:
       type: string
@@ -8076,8 +8014,6 @@ components:
     __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
     __stringPatternW:
       type: string
@@ -8112,8 +8048,6 @@ components:
     __listOfTeletextPageType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TeletextPageType'
     TeletextPageType:
       type: string
@@ -8170,8 +8104,6 @@ components:
     __listOfId3Insertion:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Id3Insertion'
     TtmlStylePassthrough:
       type: string

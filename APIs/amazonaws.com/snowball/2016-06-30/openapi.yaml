@@ -1685,8 +1685,6 @@ components:
     AddressList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Address'
     AmiId:
       type: string
@@ -1733,8 +1731,6 @@ components:
     ClusterListEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClusterListEntry'
     KmsKeyARN:
       type: string
@@ -1856,8 +1852,6 @@ components:
     CompatibleImageList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CompatibleImage'
     SnowballCapacity:
       type: string
@@ -1950,8 +1944,6 @@ components:
     JobMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobMetadata'
     Ec2AmiResource:
       type: object
@@ -1968,8 +1960,6 @@ components:
     Ec2AmiResourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Ec2AmiResource'
     ResourceARN:
       type: string
@@ -1984,8 +1974,6 @@ components:
     EventTriggerDefinitionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventTriggerDefinition'
     GSTIN:
       type: string
@@ -2043,8 +2031,6 @@ components:
     JobListEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobListEntry'
     JobLogs:
       type: object
@@ -2075,20 +2061,14 @@ components:
     S3ResourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3Resource'
     LambdaResourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LambdaResource'
     JobStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobState'
     KeyRange:
       type: object

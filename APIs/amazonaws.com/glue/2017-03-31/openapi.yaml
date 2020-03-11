@@ -10609,8 +10609,6 @@ components:
     ActionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Action'
     AttemptCount:
       type: integer
@@ -10622,30 +10620,22 @@ components:
     PartitionInputList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PartitionInput'
       minItems: 0
       maxItems: 100
     PartitionErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PartitionError'
     DeleteConnectionNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 0
       maxItems: 25
     NameStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     ErrorByName:
       type: object
@@ -10654,8 +10644,6 @@ components:
     BatchDeletePartitionValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PartitionValueList'
       minItems: 0
       maxItems: 25
@@ -10671,16 +10659,12 @@ components:
     BatchDeleteTableNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 0
       maxItems: 100
     TableErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TableError'
     VersionString:
       type: string
@@ -10690,88 +10674,62 @@ components:
     BatchDeleteTableVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VersionString'
       minItems: 0
       maxItems: 100
     TableVersionErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TableVersionError'
     CrawlerNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 0
       maxItems: 100
     CrawlerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Crawler'
     DevEndpointNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericString'
       minItems: 1
       maxItems: 25
     DevEndpointList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DevEndpoint'
     JobNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     JobList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Job'
     BatchGetPartitionValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PartitionValueList'
       minItems: 0
       maxItems: 1000
     PartitionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Partition'
     TriggerNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     TriggerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Trigger'
     WorkflowNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 1
       maxItems: 25
@@ -10780,8 +10738,6 @@ components:
     Workflows:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Workflow'
       minItems: 1
       maxItems: 25
@@ -10816,22 +10772,16 @@ components:
     BatchStopJobRunErrorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchStopJobRunError'
     BatchStopJobRunJobRunIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IdString'
       minItems: 1
       maxItems: 25
     BatchStopJobRunSuccessfulSubmissionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchStopJobRunSuccessfulSubmission'
     BatchStopJobRunSuccessfulSubmission:
       type: object
@@ -10855,8 +10805,6 @@ components:
     BoundedPartitionValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ValueString'
       minItems: 0
       maxItems: 100
@@ -10896,8 +10844,6 @@ components:
     CatalogEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CatalogEntry'
     Timestamp:
       type: string
@@ -10918,8 +10864,6 @@ components:
     CatalogTablesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 1
     CatalogTarget:
@@ -10938,8 +10882,6 @@ components:
     CatalogTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CatalogTarget'
     Classification:
       type: string
@@ -11074,14 +11016,10 @@ components:
     ClassifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Classifier'
     ClassifierNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     CloudWatchEncryptionMode:
       type: string
@@ -11131,8 +11069,6 @@ components:
     CodeGenNodeArgs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CodeGenNodeArg'
       minItems: 0
       maxItems: 50
@@ -11209,8 +11145,6 @@ components:
     ColumnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Column'
     ColumnNameString:
       type: string
@@ -11222,8 +11156,6 @@ components:
     ColumnValueStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ColumnValuesString'
     Comparator:
       type: string
@@ -11276,8 +11208,6 @@ components:
     ConditionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Condition'
     RecordsCount:
       type: integer
@@ -11310,8 +11240,6 @@ components:
     MatchCriteria:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 0
       maxItems: 10
@@ -11394,8 +11322,6 @@ components:
     ConnectionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Connection'
     ConnectionName:
       type: string
@@ -11433,8 +11359,6 @@ components:
     OrchestrationStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericString'
     ConnectionsList:
       type: object
@@ -11481,8 +11405,6 @@ components:
     CrawlList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Crawl'
     Role:
       type: string
@@ -11659,8 +11581,6 @@ components:
     CrawlerMetricsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CrawlerMetrics'
     CrawlerNodeDetails:
       type: object
@@ -11672,20 +11592,14 @@ components:
     S3TargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3Target'
     JdbcTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JdbcTarget'
     DynamoDBTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DynamoDBTarget'
     CreateGrokClassifierRequest:
       type: object
@@ -11790,8 +11704,6 @@ components:
     CsvHeader:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     DatabaseInput:
       type: object
@@ -11822,14 +11734,10 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericString'
     PublicKeysList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GenericString'
       maxItems: 5
     IntegerValue:
@@ -11897,8 +11805,6 @@ components:
     GlueTables:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GlueTable'
       minItems: 0
       maxItems: 10
@@ -11936,14 +11842,10 @@ components:
     DagNodes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CodeGenNode'
     DagEdges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CodeGenEdge'
     Language:
       type: string
@@ -12091,8 +11993,6 @@ components:
     PrincipalPermissionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PrincipalPermissions'
     Database:
       type: object
@@ -12121,8 +12021,6 @@ components:
     DatabaseList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Database'
     DeleteBehavior:
       type: string
@@ -12133,8 +12031,6 @@ components:
     ValueStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ValueString'
     DescriptionStringRemovable:
       type: string
@@ -12233,8 +12129,6 @@ components:
     DevEndpointNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     Path:
       type: string
@@ -12258,14 +12152,10 @@ components:
     EdgeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Edge'
     S3EncryptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3Encryption'
     JobBookmarksEncryption:
       type: object
@@ -12560,8 +12450,6 @@ components:
     JobRunList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobRun'
     TaskRunProperties:
       type: object
@@ -12616,8 +12504,6 @@ components:
     TaskRunList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TaskRun'
     TransformStatusType:
       type: string
@@ -12630,8 +12516,6 @@ components:
     TransformSchema:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SchemaColumn'
       maxItems: 100
     TransformFilterCriteria:
@@ -12681,8 +12565,6 @@ components:
     TransformList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MLTransform'
     Location:
       type: object
@@ -12700,8 +12582,6 @@ components:
     MappingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MappingEntry'
     Partition:
       type: object
@@ -12769,8 +12649,6 @@ components:
     SecurityConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityConfiguration'
     Table:
       type: object
@@ -12842,14 +12720,10 @@ components:
     GetTableVersionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TableVersion'
     TableList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Table'
     GlueResourceArn:
       type: string
@@ -12912,8 +12786,6 @@ components:
     UserDefinedFunctionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserDefinedFunction'
     Workflow:
       type: object
@@ -12971,8 +12843,6 @@ components:
     WorkflowRuns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkflowRun'
       minItems: 1
       maxItems: 1000
@@ -13014,8 +12884,6 @@ components:
     PathList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Path'
     JdbcTarget:
       type: object
@@ -13052,8 +12920,6 @@ components:
     PredecessorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Predecessor'
     JobUpdate:
       type: object
@@ -13137,8 +13003,6 @@ components:
     TransformIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HashString'
     LocationMap:
       type: object
@@ -13275,8 +13139,6 @@ components:
     NodeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Node'
     NotifyDelayAfter:
       type: integer
@@ -13297,8 +13159,6 @@ components:
     OrderList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Order'
     ParametersMapValue:
       type: string
@@ -13368,14 +13228,10 @@ components:
     PermissionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Permission'
     SecurityGroupIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
       minItems: 0
       maxItems: 50
@@ -13437,8 +13293,6 @@ components:
     ResourceUriList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceUri'
       minItems: 0
       maxItems: 1000
@@ -13492,14 +13346,10 @@ components:
     SearchPropertyPredicates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PropertyPredicate'
     SortCriteria:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SortCriterion'
       minItems: 0
       maxItems: 1
@@ -13589,8 +13439,6 @@ components:
     TagKeysList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 50

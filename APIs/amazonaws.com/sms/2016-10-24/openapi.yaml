@@ -2457,8 +2457,6 @@ components:
     AppIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AppId'
     AppLaunchStatus:
       type: string
@@ -2589,8 +2587,6 @@ components:
     Apps:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AppSummary'
     AssociatePublicIpAddress:
       type: boolean
@@ -2610,8 +2606,6 @@ components:
     ConnectorCapabilityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConnectorCapability'
     VmManagerName:
       type: string
@@ -2671,20 +2665,14 @@ components:
     ConnectorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Connector'
     ServerGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerGroup'
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     ServerId:
       type: string
@@ -2731,14 +2719,10 @@ components:
     ServerGroupLaunchConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerGroupLaunchConfiguration'
     ServerGroupReplicationConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerGroupReplicationConfiguration'
     NextToken:
       type: string
@@ -2747,8 +2731,6 @@ components:
     ReplicationJobList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReplicationJob'
     ReplicationJob:
       type: object
@@ -2811,14 +2793,10 @@ components:
     ReplicationRunList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReplicationRun'
     VmServerAddressList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VmServerAddress'
     ServerCatalogStatus:
       type: string
@@ -2831,8 +2809,6 @@ components:
     ServerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Server'
     InstanceType:
       type: string
@@ -2995,8 +2971,6 @@ components:
     ServerLaunchConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerLaunchConfiguration'
     ServerGroupLaunchConfiguration:
       type: object
@@ -3014,8 +2988,6 @@ components:
     ServerReplicationConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerReplicationConfiguration'
     ServerGroupReplicationConfiguration:
       type: object

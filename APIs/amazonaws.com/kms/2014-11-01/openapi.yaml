@@ -4618,8 +4618,6 @@ components:
     AliasList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AliasListEntry'
     AliasNameType:
       type: string
@@ -4689,8 +4687,6 @@ components:
     GrantOperationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GrantOperation'
     GrantConstraints:
       type: object
@@ -4705,8 +4701,6 @@ components:
     GrantTokenList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GrantTokenType'
       minItems: 0
       maxItems: 10
@@ -4757,8 +4751,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     KeyMetadata:
       type: object
@@ -4848,8 +4840,6 @@ components:
     CustomKeyStoresList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomKeyStoresListEntry'
     DateType:
       type: string
@@ -4896,8 +4886,6 @@ components:
     EncryptionAlgorithmSpecList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EncryptionAlgorithmSpec'
     EncryptionContextKey:
       type: string
@@ -4928,8 +4916,6 @@ components:
     SigningAlgorithmSpecList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SigningAlgorithmSpec'
     GrantListEntry:
       type: object
@@ -4965,8 +4951,6 @@ components:
     GrantList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GrantListEntry'
     GrantOperation:
       type: string
@@ -4998,8 +4982,6 @@ components:
     KeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeyListEntry'
     KeyManagerType:
       type: string
@@ -5017,8 +4999,6 @@ components:
     PolicyNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyNameType'
     MessageType:
       type: string
@@ -5065,8 +5045,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKeyType'
 security:
   - hmac: []

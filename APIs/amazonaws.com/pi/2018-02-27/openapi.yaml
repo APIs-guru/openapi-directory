@@ -414,8 +414,6 @@ components:
     DataPointsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataPoint'
     ServiceType:
       type: string
@@ -451,20 +449,14 @@ components:
     ResponsePartitionKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResponsePartitionKey'
     DimensionKeyDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DimensionKeyDescription'
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
       maxItems: 10
@@ -479,8 +471,6 @@ components:
     MetricValuesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Double'
     DimensionKeyDescription:
       type: object
@@ -498,16 +488,12 @@ components:
     MetricQueryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricQuery'
       minItems: 1
       maxItems: 15
     MetricKeyDataPointsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricKeyDataPoints'
     ResponseResourceMetricKey:
       type: object

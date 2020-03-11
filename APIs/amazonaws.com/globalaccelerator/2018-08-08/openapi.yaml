@@ -2095,8 +2095,6 @@ components:
     IpSets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpSet'
     AcceleratorStatus:
       type: string
@@ -2153,8 +2151,6 @@ components:
     Accelerators:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Accelerator'
     ByoipCidr:
       type: object
@@ -2183,8 +2179,6 @@ components:
     ByoipCidrs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ByoipCidr'
     CidrAuthorizationContext:
       type: object
@@ -2207,8 +2201,6 @@ components:
     IpAddresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpAddress'
       minItems: 0
       maxItems: 2
@@ -2218,14 +2210,10 @@ components:
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     EndpointConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EndpointConfiguration'
       minItems: 0
       maxItems: 10
@@ -2286,8 +2274,6 @@ components:
     PortRanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PortRange'
       minItems: 1
       maxItems: 10
@@ -2357,14 +2343,10 @@ components:
     EndpointDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EndpointDescription'
     EndpointGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EndpointGroup'
     IpAddress:
       type: string
@@ -2385,8 +2367,6 @@ components:
     Listeners:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Listener'
     ResourceArn:
       type: string
@@ -2430,8 +2410,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

@@ -248,8 +248,6 @@ paths:
                   description: 'The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Account'
                   minItems: 1
                   maxItems: 50
@@ -362,8 +360,6 @@ paths:
                   description: The list of AWS account identifiers for the member accounts to delete from the behavior graph.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -476,8 +472,6 @@ paths:
                   description: <p>The list of AWS account identifiers for the member account for which to return member details.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -892,16 +886,12 @@ components:
     AccountIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 50
     AccountList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Account'
       minItems: 1
       maxItems: 50
@@ -928,14 +918,10 @@ components:
     MemberDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MemberDetail'
     UnprocessedAccountList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnprocessedAccount'
     DeleteGraphRequest:
       type: object
@@ -997,8 +983,6 @@ components:
     GraphList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Graph'
     PaginationToken:
       type: string

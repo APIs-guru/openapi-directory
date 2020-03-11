@@ -2219,8 +2219,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/Version'
             minItems: 1
             maxItems: 5
@@ -2318,8 +2316,6 @@ paths:
                   description: 'An array of <code>Intent</code> objects. Each intent represents a command that a user can express. For example, a pizza ordering bot might support an OrderPizza intent. For more information, see <a>how-it-works</a>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Intent'
                 clarificationPrompt:
                   description: 'Obtains information from the user. To define a prompt, provide one or more messages and specify the number of attempts to get information from the user. If you provide more than one message, Amazon Lex chooses one of the messages to use to prompt the user. For more information, see <a>how-it-works</a>.'
@@ -2452,8 +2448,6 @@ paths:
                   description: 'An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see <a>how-it-works</a>. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Slot'
                   minItems: 0
                   maxItems: 100
@@ -2461,8 +2455,6 @@ paths:
                   description: '<p>An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas". </p> <p>In each utterance, a slot name is enclosed in curly braces. </p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Utterance'
                   minItems: 0
                   maxItems: 1500
@@ -2613,8 +2605,6 @@ paths:
                   description: '<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/EnumerationValue'
                   minItems: 0
                   maxItems: 10000
@@ -2640,8 +2630,6 @@ paths:
                   description: Configuration information that extends the parent built-in slot type. The configuration is added to the settings for the parent slot type.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SlotTypeConfiguration'
                   minItems: 0
                   maxItems: 10
@@ -3512,8 +3500,6 @@ components:
     MessageList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Message'
       minItems: 1
       maxItems: 15
@@ -3555,8 +3541,6 @@ components:
     LogSettingsRequestList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogSettingsRequest'
     IamRoleArn:
       type: string
@@ -3949,8 +3933,6 @@ components:
     BotAliasMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BotAliasMetadata'
     BotChannelName:
       type: string
@@ -4010,8 +3992,6 @@ components:
     BotChannelAssociationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BotChannelAssociation'
     Status:
       type: string
@@ -4046,14 +4026,10 @@ components:
     BotMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BotMetadata'
     BotVersions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Version'
       minItems: 1
       maxItems: 5
@@ -4062,8 +4038,6 @@ components:
     LocaleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Locale'
     BuiltinIntentMetadata:
       type: object
@@ -4078,8 +4052,6 @@ components:
     BuiltinIntentMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BuiltinIntentMetadata'
     BuiltinIntentSlot:
       type: object
@@ -4091,8 +4063,6 @@ components:
     BuiltinIntentSlotList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BuiltinIntentSlot'
     BuiltinSlotTypeSignature:
       type: string
@@ -4109,8 +4079,6 @@ components:
     BuiltinSlotTypeMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BuiltinSlotTypeMetadata'
     ContentString:
       type: string
@@ -4138,8 +4106,6 @@ components:
     LogSettingsResponseList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogSettingsResponse'
     Count:
       type: integer
@@ -4153,8 +4119,6 @@ components:
     IntentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Intent'
     SessionTTL:
       type: integer
@@ -4181,16 +4145,12 @@ components:
     SlotList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Slot'
       minItems: 0
       maxItems: 100
     IntentUtteranceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Utterance'
       minItems: 0
       maxItems: 1500
@@ -4234,8 +4194,6 @@ components:
     EnumerationValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EnumerationValue'
       minItems: 0
       maxItems: 10000
@@ -4252,8 +4210,6 @@ components:
     SlotTypeConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SlotTypeConfiguration'
       minItems: 0
       maxItems: 10
@@ -4314,8 +4270,6 @@ components:
     SynonymList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Value'
     ExportStatus:
       type: string
@@ -4407,8 +4361,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     GetIntentRequest:
       type: object
@@ -4421,8 +4373,6 @@ components:
     IntentMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IntentMetadata'
     GetIntentsRequest:
       type: object
@@ -4439,8 +4389,6 @@ components:
     SlotTypeMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SlotTypeMetadata'
     GetSlotTypesRequest:
       type: object
@@ -4458,8 +4406,6 @@ components:
     ListsOfUtterances:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UtteranceList'
     GroupNumber:
       type: integer
@@ -4511,8 +4457,6 @@ components:
     ListOfUtterance:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UtteranceData'
     UtteranceList:
       type: object
@@ -4749,8 +4693,6 @@ components:
     SlotUtteranceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Utterance'
       minItems: 0
       maxItems: 10

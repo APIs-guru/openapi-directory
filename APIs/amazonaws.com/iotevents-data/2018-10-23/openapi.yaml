@@ -154,8 +154,6 @@ paths:
                   description: 'The list of messages to send. Each message has the following format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code> '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Message'
                   minItems: 1
     parameters:
@@ -215,8 +213,6 @@ paths:
                   description: 'The list of detectors (instances) to update, along with the values to update.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/UpdateDetectorRequest'
                   minItems: 1
     parameters:
@@ -513,8 +509,6 @@ components:
     BatchPutMessageErrorEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchPutMessageErrorEntry'
     MessageId:
       type: string
@@ -534,8 +528,6 @@ components:
     Messages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Message'
       minItems: 1
     BatchPutMessageRequest:
@@ -563,14 +555,10 @@ components:
     BatchUpdateDetectorErrorEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchUpdateDetectorErrorEntry'
     UpdateDetectorRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UpdateDetectorRequest'
       minItems: 1
     BatchUpdateDetectorRequest:
@@ -649,26 +637,18 @@ components:
     Variables:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Variable'
     Timers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Timer'
     VariableDefinitions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VariableDefinition'
     TimerDefinitions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TimerDefinition'
     DetectorStateDefinition:
       type: object
@@ -719,8 +699,6 @@ components:
     DetectorSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorSummary'
     InputName:
       type: string

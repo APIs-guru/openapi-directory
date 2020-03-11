@@ -574,8 +574,6 @@ components:
     UsageRecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UsageRecord'
       minItems: 0
       maxItems: 25
@@ -586,8 +584,6 @@ components:
     UsageRecordResultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UsageRecordResult'
     Boolean:
       type: boolean

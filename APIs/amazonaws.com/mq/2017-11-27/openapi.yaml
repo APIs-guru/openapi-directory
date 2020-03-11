@@ -231,8 +231,6 @@ paths:
                   description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 storageType:
                   description: The storage type of the broker.
@@ -244,8 +242,6 @@ paths:
                   description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 tags:
                   description: Create tags when creating the broker.
@@ -256,8 +252,6 @@ paths:
                   description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/User'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -587,8 +581,6 @@ paths:
                   description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 password:
                   description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
@@ -762,8 +754,6 @@ paths:
                   description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 password:
                   description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
@@ -946,8 +936,6 @@ paths:
                   description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
   '/v1/tags/{resource-arn}#tagKeys':
     delete:
@@ -994,8 +982,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1891,8 +1877,6 @@ components:
     __listOfEngineVersion:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EngineVersion'
     BrokerEngineType:
       type: object
@@ -1907,8 +1891,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     BrokerInstance:
       type: object
@@ -1926,8 +1908,6 @@ components:
     __listOfAvailabilityZone:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     BrokerStorageType:
       type: string
@@ -1938,8 +1918,6 @@ components:
     __listOfDeploymentMode:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeploymentMode'
     BrokerInstanceOption:
       type: object
@@ -2074,8 +2052,6 @@ components:
     __listOfConfigurationId:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigurationId'
     Configurations:
       type: object
@@ -2128,8 +2104,6 @@ components:
     __listOfUser:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/User'
     CreateBrokerRequest:
       type: object
@@ -2249,8 +2223,6 @@ components:
     __listOfBrokerEngineType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BrokerEngineType'
     __integerMin5Max100:
       type: integer
@@ -2263,8 +2235,6 @@ components:
     __listOfBrokerInstanceOption:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BrokerInstanceOption'
     DescribeBrokerRequest:
       type: object
@@ -2273,8 +2243,6 @@ components:
     __listOfBrokerInstance:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BrokerInstance'
     LogsSummary:
       type: object
@@ -2298,8 +2266,6 @@ components:
     __listOfUserSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserSummary'
     DescribeConfigurationRequest:
       type: object
@@ -2340,8 +2306,6 @@ components:
     __listOfBrokerSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BrokerSummary'
     ListConfigurationRevisionsRequest:
       type: object
@@ -2350,8 +2314,6 @@ components:
     __listOfConfigurationRevision:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigurationRevision'
     ListConfigurationsRequest:
       type: object
@@ -2360,8 +2322,6 @@ components:
     __listOfConfiguration:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Configuration'
     ListTagsRequest:
       type: object
@@ -2442,8 +2402,6 @@ components:
     __listOfSanitizationWarning:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SanitizationWarning'
     UpdateUserRequest:
       type: object

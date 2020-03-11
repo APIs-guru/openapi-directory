@@ -420,8 +420,6 @@ paths:
                   description: A list of the numbers of fragments for which to retrieve media. You retrieve these values with <a>ListFragments</a>.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FragmentNumberString'
                   minItems: 1
                   maxItems: 1000
@@ -735,14 +733,10 @@ components:
     FragmentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Fragment'
     FragmentNumberList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FragmentNumberString'
       minItems: 1
       maxItems: 1000

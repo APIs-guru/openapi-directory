@@ -155,8 +155,6 @@ paths:
                   description: A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Arn'
                   minItems: 1
                   maxItems: 100
@@ -442,8 +440,6 @@ paths:
                   description: The deployment application configuration.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DeploymentApplicationConfig'
                   minItems: 1
                   maxItems: 1
@@ -684,8 +680,6 @@ paths:
                   description: The sources of the robot application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SourceConfig'
                 robotSoftwareSuite:
                   description: Information about a robot software suite (ROS distribution).
@@ -853,8 +847,6 @@ paths:
                   description: The sources of the simulation application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SourceConfig'
                 simulationSoftwareSuite:
                   description: Information about a simulation software suite.
@@ -1078,8 +1070,6 @@ paths:
                   description: The robot application to use in the simulation job.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/RobotApplicationConfig'
                   minItems: 1
                   maxItems: 1
@@ -1087,8 +1077,6 @@ paths:
                   description: The simulation application to use in the simulation job.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SimulationApplicationConfig'
                   minItems: 1
                   maxItems: 1
@@ -1096,8 +1084,6 @@ paths:
                   description: <p>Specify data sources to mount read-only files from S3 into your simulation. These files are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DataSourceConfig'
                   minItems: 1
                   maxItems: 5
@@ -1897,8 +1883,6 @@ paths:
                   description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -1987,8 +1971,6 @@ paths:
                   description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2068,8 +2050,6 @@ paths:
                   description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2149,8 +2129,6 @@ paths:
                   description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2230,8 +2208,6 @@ paths:
                   description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2299,8 +2275,6 @@ paths:
                   description: Optional filters to limit results.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2374,8 +2348,6 @@ paths:
                   description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 1
@@ -2708,8 +2680,6 @@ paths:
                   description: A list of simulation job requests to create in the batch.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SimulationJobRequest'
                   minItems: 1
                 tags:
@@ -2863,8 +2833,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2937,8 +2905,6 @@ paths:
                   description: The sources of the robot application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SourceConfig'
                 robotSoftwareSuite:
                   description: Information about a robot software suite (ROS distribution).
@@ -3028,8 +2994,6 @@ paths:
                   description: The sources of the simulation application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SourceConfig'
                 simulationSoftwareSuite:
                   description: Information about a simulation software suite.
@@ -3543,16 +3507,12 @@ components:
     Subnets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 16
     SecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 5
@@ -4105,8 +4065,6 @@ components:
     Arns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 100
@@ -4122,8 +4080,6 @@ components:
     SimulationJobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationJob'
     BatchPolicy:
       type: object
@@ -4191,8 +4147,6 @@ components:
     DeploymentApplicationConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeploymentApplicationConfig'
       minItems: 1
       maxItems: 1
@@ -4285,8 +4239,6 @@ components:
     SourceConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SourceConfig'
     RobotSoftwareSuite:
       type: object
@@ -4326,8 +4278,6 @@ components:
     Sources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Source'
     LastUpdatedAt:
       type: string
@@ -4467,24 +4417,18 @@ components:
     RobotApplicationConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RobotApplicationConfig'
       minItems: 1
       maxItems: 1
     SimulationApplicationConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationApplicationConfig'
       minItems: 1
       maxItems: 1
     DataSourceConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSourceConfig'
       minItems: 1
       maxItems: 5
@@ -4546,8 +4490,6 @@ components:
     CreateSimulationJobRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationJobRequest'
       minItems: 1
     SimulationJobStatus:
@@ -4601,8 +4543,6 @@ components:
     DataSources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSource'
     VPCConfigResponse:
       type: object
@@ -4623,8 +4563,6 @@ components:
     S3KeyOutputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3KeyOutput'
     DataSource:
       type: object
@@ -4642,16 +4580,12 @@ components:
     S3Keys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3Key'
       minItems: 1
       maxItems: 100
     DataSourceNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Name'
     DeleteFleetRequest:
       type: object
@@ -4753,8 +4687,6 @@ components:
     DeploymentJobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeploymentJob'
       minItems: 0
       maxItems: 200
@@ -4794,8 +4726,6 @@ components:
     RobotDeploymentSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RobotDeployment'
     DescribeFleetRequest:
       type: object
@@ -4809,8 +4739,6 @@ components:
     Robots:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Robot'
       minItems: 0
       maxItems: 1000
@@ -4885,14 +4813,10 @@ components:
     FailedCreateSimulationJobRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedCreateSimulationJobRequest'
     SimulationJobSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationJobSummary'
       minItems: 0
       maxItems: 100
@@ -4950,16 +4874,12 @@ components:
     FilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Name'
       minItems: 1
       maxItems: 1
     Filters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
       minItems: 1
       maxItems: 1
@@ -4988,8 +4908,6 @@ components:
     Fleets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Fleet'
       minItems: 0
       maxItems: 200
@@ -5083,8 +5001,6 @@ components:
     RobotApplicationSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RobotApplicationSummary'
       minItems: 0
       maxItems: 100
@@ -5120,8 +5036,6 @@ components:
     SimulationApplicationSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationApplicationSummary'
       minItems: 0
       maxItems: 100
@@ -5141,8 +5055,6 @@ components:
     SimulationJobBatchSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SimulationJobBatchSummary'
     ListSimulationJobsRequest:
       type: object
@@ -5182,8 +5094,6 @@ components:
     PortMappingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PortMapping'
       minItems: 0
       maxItems: 10
@@ -5285,8 +5195,6 @@ components:
     RobotApplicationNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Name'
     RobotApplicationSummary:
       type: object
@@ -5347,8 +5255,6 @@ components:
     SimulationApplicationNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Name'
     SimulationApplicationSummary:
       type: object
@@ -5536,8 +5442,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

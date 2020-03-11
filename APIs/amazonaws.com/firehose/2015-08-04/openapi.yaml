@@ -1401,8 +1401,6 @@ components:
     TagDeliveryStreamInputTagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -1525,8 +1523,6 @@ components:
     DestinationDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DestinationDescription'
     DeliveryStreamDescription:
       type: object
@@ -1604,8 +1600,6 @@ components:
     DeliveryStreamNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeliveryStreamName'
     DescribeDeliveryStreamInputLimit:
       type: integer
@@ -2092,8 +2086,6 @@ components:
     ListOfNonEmptyStrings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     KinesisStreamARN:
       type: string
@@ -2123,8 +2115,6 @@ components:
     ListOfNonEmptyStringsWithoutWhitespace:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyStringWithoutWhitespace'
     TagKey:
       type: string
@@ -2137,8 +2127,6 @@ components:
     ListTagsForDeliveryStreamOutputTagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
@@ -2266,8 +2254,6 @@ components:
     ProcessorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Processor'
     ProcessorType:
       type: string
@@ -2276,8 +2262,6 @@ components:
     ProcessorParameterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProcessorParameter'
     Processor:
       type: object
@@ -2319,16 +2303,12 @@ components:
     PutRecordBatchRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Record'
       minItems: 1
       maxItems: 500
     PutRecordBatchResponseEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PutRecordBatchResponseEntry'
       minItems: 1
       maxItems: 500
@@ -2468,8 +2448,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

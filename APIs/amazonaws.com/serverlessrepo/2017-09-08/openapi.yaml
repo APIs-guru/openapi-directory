@@ -191,8 +191,6 @@ paths:
                   description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 licenseBody:
                   description: |-
@@ -464,8 +462,6 @@ paths:
                      this parameter for an application that requires capabilities, the call will fail.</p>
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 changeSetName:
                   description: |-
@@ -488,15 +484,11 @@ paths:
                      </i> API.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 parameterOverrides:
                   description: A list of parameter values for the parameters of the application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ParameterValue'
                 resourceTypes:
                   description: |-
@@ -504,8 +496,6 @@ paths:
                      </i> API.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 rollbackConfiguration:
                   description: |-
@@ -540,8 +530,6 @@ paths:
                      </i> API.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                 templateId:
                   description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -807,8 +795,6 @@ paths:
                   description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
                 readmeBody:
                   description: <p>A text readme file in Markdown language that contains a more detailed description of the application and how it works.</p><p>Maximum size 5 MB</p>
@@ -936,8 +922,6 @@ paths:
                   description: An array of policy statements applied to the application.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ApplicationPolicyStatement'
   '/applications/{applicationId}/templates/{templateId}':
     get:
@@ -1171,6 +1155,70 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/unshare':
+    post:
+      operationId: UnshareApplication
+      description: <p>Unshares an application from an AWS Organization.</p><p>This operation can be called only from the organization's master account.</p>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - organizationId
+              properties:
+                organizationId:
+                  description: The AWS Organization ID to unshare the application from.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1368,8 +1416,6 @@ components:
     __listOfRollbackTrigger:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RollbackTrigger'
     Tag:
       type: object
@@ -1551,6 +1597,9 @@ components:
           description: |-
             For the list of actions supported for this operation, see <a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions">Application 
              Permissions</a>.
+        PrincipalOrgIDs:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'An array of PrinciplalOrgIDs, which corresponds to AWS IAM <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id">aws:PrincipalOrgID</a> global condition key.'
         Principals:
           $ref: '#/components/schemas/__listOf__string'
           description: 'An array of AWS account IDs, or * to make the application public.'
@@ -1616,8 +1665,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     ApplicationSummary:
       type: object
@@ -1810,20 +1857,14 @@ components:
     __listOfParameterDefinition:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterDefinition'
     __listOfCapability:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Capability'
     __listOfParameterValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterValue'
     RollbackConfiguration:
       type: object
@@ -1844,8 +1885,6 @@ components:
     __listOfTag:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     CreateCloudFormationChangeSetRequest:
       type: object
@@ -1958,8 +1997,6 @@ components:
     __listOfApplicationPolicyStatement:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ApplicationPolicyStatement'
     GetApplicationRequest:
       type: object
@@ -1980,8 +2017,6 @@ components:
     __listOfApplicationDependencySummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ApplicationDependencySummary'
     ListApplicationVersionsRequest:
       type: object
@@ -1990,8 +2025,6 @@ components:
     __listOfVersionSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VersionSummary'
     ListApplicationsRequest:
       type: object
@@ -2000,8 +2033,6 @@ components:
     __listOfApplicationSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ApplicationSummary'
     ParameterDefinition:
       type: object
@@ -2098,6 +2129,15 @@ components:
       description: |-
         This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
          </i> Data Type.
+    UnshareApplicationRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: UnshareApplicationRequest
+      properties:
+        OrganizationId:
+          $ref: '#/components/schemas/__string'
+          description: The AWS Organization ID to unshare the application from.
     UpdateApplicationRequest:
       type: object
       title: UpdateApplicationRequest

@@ -2170,8 +2170,6 @@ components:
     ArnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Arn'
     AttributeType:
       type: string
@@ -2190,8 +2188,6 @@ components:
     Values:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Value'
       minItems: 1
       maxItems: 20
@@ -2211,8 +2207,6 @@ components:
     CategoricalParameterRanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CategoricalParameterRange'
       minItems: 1
       maxItems: 20
@@ -2249,8 +2243,6 @@ components:
     ContinuousParameterRanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContinuousParameterRange'
       minItems: 1
       maxItems: 20
@@ -2318,8 +2310,6 @@ components:
     ForecastTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ForecastType'
       minItems: 1
       maxItems: 20
@@ -2413,8 +2403,6 @@ components:
     DatasetGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetGroupSummary'
     Status:
       type: string
@@ -2449,8 +2437,6 @@ components:
     DatasetImportJobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetImportJobSummary'
     DatasetSummary:
       type: object
@@ -2477,8 +2463,6 @@ components:
     Datasets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetSummary'
     FieldStatistics:
       type: object
@@ -2504,8 +2488,6 @@ components:
     TestWindows:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WindowSummary'
     EvaluationResult:
       type: object
@@ -2525,8 +2507,6 @@ components:
     FeaturizationPipeline:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FeaturizationMethod'
       minItems: 1
       maxItems: 1
@@ -2545,16 +2525,12 @@ components:
     ForecastDimensions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Name'
       minItems: 1
       maxItems: 5
     Featurizations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Featurization'
       minItems: 1
       maxItems: 1
@@ -2637,8 +2613,6 @@ components:
     Filters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
     ForecastExportJobSummary:
       type: object
@@ -2668,8 +2642,6 @@ components:
     ForecastExportJobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ForecastExportJobSummary'
     ForecastSummary:
       type: object
@@ -2705,14 +2677,10 @@ components:
     Forecasts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ForecastSummary'
     PredictorEvaluationResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EvaluationResult'
     ParameterRanges:
       type: object
@@ -2730,8 +2698,6 @@ components:
     SupplementaryFeatures:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SupplementaryFeature'
       minItems: 1
       maxItems: 1
@@ -2758,8 +2724,6 @@ components:
     IntegerParameterRanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IntegerParameterRange'
       minItems: 1
       maxItems: 20
@@ -2774,14 +2738,10 @@ components:
     Predictors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PredictorSummary'
     WeightedQuantileLosses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WeightedQuantileLoss'
     Metrics:
       type: object
@@ -2800,8 +2760,6 @@ components:
     TestWindowDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TestWindowSummary'
     PredictorExecution:
       type: object
@@ -2816,8 +2774,6 @@ components:
     PredictorExecutions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PredictorExecution'
       minItems: 1
       maxItems: 5
@@ -2852,8 +2808,6 @@ components:
     SchemaAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SchemaAttribute'
     SchemaAttribute:
       type: object

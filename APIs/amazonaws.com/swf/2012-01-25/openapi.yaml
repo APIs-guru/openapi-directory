@@ -3170,8 +3170,6 @@ components:
     ActivityTypeInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ActivityTypeInfo'
     PageToken:
       type: string
@@ -3450,8 +3448,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 5
     ContinueAsNewWorkflowExecutionDecisionAttributes:
@@ -3809,14 +3805,10 @@ components:
     DecisionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Decision'
     HistoryEventList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HistoryEvent'
     DecisionTaskCompletedEventAttributes:
       type: object
@@ -3917,8 +3909,6 @@ components:
     DomainInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DomainInfo'
     DurationInSeconds:
       type: string
@@ -4853,8 +4843,6 @@ components:
     ResourceTagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceTag'
     MarkerName:
       type: string
@@ -4910,8 +4898,6 @@ components:
     ResourceTagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceTagKey'
     WorkflowRunId:
       type: string
@@ -5077,8 +5063,6 @@ components:
     WorkflowExecutionInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkflowExecutionInfo'
     WorkflowExecutionTerminatedCause:
       type: string
@@ -5134,8 +5118,6 @@ components:
     WorkflowTypeInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkflowTypeInfo'
 security:
   - hmac: []

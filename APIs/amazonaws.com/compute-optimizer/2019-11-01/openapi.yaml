@@ -779,16 +779,12 @@ components:
     AccountIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
     AutoScalingGroupArn:
       type: string
     AutoScalingGroupArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutoScalingGroupArn'
     DesiredCapacity:
       type: integer
@@ -826,8 +822,6 @@ components:
     UtilizationMetrics:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UtilizationMetric'
     LookBackPeriodInDays:
       type: number
@@ -835,8 +829,6 @@ components:
     AutoScalingGroupRecommendationOptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutoScalingGroupRecommendationOption'
     LastRefreshTimestamp:
       type: string
@@ -875,8 +867,6 @@ components:
     ProjectedUtilizationMetrics:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UtilizationMetric'
     PerformanceRisk:
       type: number
@@ -904,8 +894,6 @@ components:
     AutoScalingGroupRecommendations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutoScalingGroupRecommendation'
     Code:
       type: string
@@ -919,8 +907,6 @@ components:
     FilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
     Filter:
       type: object
@@ -937,8 +923,6 @@ components:
     Filters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
     NextToken:
       type: string
@@ -947,20 +931,14 @@ components:
     GetRecommendationErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GetRecommendationError'
     InstanceArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceArn'
     InstanceRecommendations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceRecommendation'
     InstanceArn:
       type: string
@@ -977,8 +955,6 @@ components:
     RecommendedOptionProjectedMetrics:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecommendedOptionProjectedMetric'
     Status:
       type: string
@@ -1011,8 +987,6 @@ components:
     RecommendationSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecommendationSummary'
     IncludeMemberAccounts:
       type: boolean
@@ -1021,14 +995,10 @@ components:
     RecommendationOptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceRecommendationOption'
     RecommendationSources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecommendationSource'
     InstanceRecommendation:
       type: object
@@ -1091,14 +1061,10 @@ components:
     MetricValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricValue'
     Timestamps:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Timestamp'
     ProjectedMetric:
       type: object
@@ -1116,8 +1082,6 @@ components:
     ProjectedMetrics:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProjectedMetric'
     UtilizationMetric:
       type: object
@@ -1165,8 +1129,6 @@ components:
     Summaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Summary'
     RecommendedInstanceType:
       type: string

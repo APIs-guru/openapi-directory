@@ -1695,8 +1695,6 @@ components:
     AddressAllocationIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AddressAllocationId'
     Arn:
       type: string
@@ -1753,8 +1751,6 @@ components:
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -1775,8 +1771,6 @@ components:
     HomeDirectoryMappings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HomeDirectoryMapEntry'
       minItems: 1
       maxItems: 50
@@ -1889,15 +1883,11 @@ components:
     SshPublicKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SshPublicKey'
       maxItems: 5
     SubnetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
     VpcEndpointId:
       type: string
@@ -1941,14 +1931,10 @@ components:
     ListedServers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListedServer'
     ListedUsers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListedUser'
     ListedServer:
       type: object
@@ -2054,8 +2040,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

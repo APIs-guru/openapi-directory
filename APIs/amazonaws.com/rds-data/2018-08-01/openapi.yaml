@@ -167,8 +167,6 @@ paths:
                   description: '<p>The parameter set for the batch operation.</p> <p>The maximum number of parameters in a parameter set is 1,000.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SqlParametersList'
                 resourceArn:
                   description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -514,8 +512,6 @@ paths:
                   description: The parameters for the SQL statement.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SqlParameter'
                 resourceArn:
                   description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -701,8 +697,6 @@ components:
     SqlParametersList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SqlParameter'
     BadRequestException: {}
     StatementTimeoutException: {}
@@ -799,36 +793,26 @@ components:
       type: array
       description: <p>An array of arrays.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ArrayValue'
     BooleanArray:
       type: array
       description: <p>An array of Boolean values.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BoxedBoolean'
     DoubleArray:
       type: array
       description: <p>An array of floating point numbers.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BoxedDouble'
     LongArray:
       type: array
       description: <p>An array of integers.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BoxedLong'
     StringArray:
       type: array
       description: <p>An array of strings.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Value:
       type: object
@@ -867,8 +851,6 @@ components:
     ArrayValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Value'
     DbName:
       type: string
@@ -877,8 +859,6 @@ components:
     SqlParameterSets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SqlParametersList'
     SqlStatement:
       type: string
@@ -921,8 +901,6 @@ components:
     UpdateResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UpdateResult'
     BeginTransactionRequest:
       type: object
@@ -1059,8 +1037,6 @@ components:
     SqlStatementResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SqlStatementResult'
     ResultSetOptions:
       type: object
@@ -1111,22 +1087,16 @@ components:
     Metadata:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ColumnMetadata'
     FieldList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Field'
     RecordsUpdated:
       type: integer
     SqlRecords:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FieldList'
     Field:
       type: object
@@ -1160,8 +1130,6 @@ components:
     Row:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Value'
     Record:
       type: object
@@ -1173,8 +1141,6 @@ components:
     Records:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Record'
     ResultSetMetadata:
       type: object

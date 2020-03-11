@@ -1910,8 +1910,6 @@ components:
     ActivityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ActivityListItem'
     Arn:
       type: string
@@ -2000,8 +1998,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     Definition:
       type: string
@@ -2092,8 +2088,6 @@ components:
     ExecutionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExecutionListItem'
     ExecutionStartedEventDetails:
       type: object
@@ -2144,8 +2138,6 @@ components:
       type: array
       description: Contains details about the events that occurred during an execution.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HistoryEvent'
     HistoryEventType:
       type: string
@@ -2562,8 +2554,6 @@ components:
     StateMachineList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StateMachineListItem'
     LogDestination:
       type: object
@@ -2575,8 +2565,6 @@ components:
     LogDestinationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogDestination'
     LogLevel:
       type: string
@@ -2630,8 +2618,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

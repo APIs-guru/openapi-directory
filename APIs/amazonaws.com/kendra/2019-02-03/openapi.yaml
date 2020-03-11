@@ -2148,8 +2148,6 @@ components:
     AdditionalResultAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AdditionalResultAttribute'
     TextWithHighlights:
       type: object
@@ -2164,8 +2162,6 @@ components:
     AttributeFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttributeFilter'
       minItems: 1
       maxItems: 5
@@ -2224,16 +2220,12 @@ components:
     DocumentIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentId'
       minItems: 1
       maxItems: 10
     BatchDeleteDocumentResponseFailedDocuments:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDeleteDocumentResponseFailedDocument'
     DocumentId:
       type: string
@@ -2270,16 +2262,12 @@ components:
     DocumentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Document'
       minItems: 1
       maxItems: 10
     BatchPutDocumentResponseFailedDocuments:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchPutDocumentResponseFailedDocument'
     BatchPutDocumentResponseFailedDocument:
       type: object
@@ -2303,8 +2291,6 @@ components:
     ChangeDetectingColumns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
       maxItems: 5
@@ -2331,14 +2317,10 @@ components:
     ClickFeedbackList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClickFeedback'
     DataSourceToIndexFieldMappingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSourceToIndexFieldMapping'
       minItems: 1
       maxItems: 100
@@ -2579,8 +2561,6 @@ components:
     DataSourceInclusionsExclusionsStrings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSourceInclusionsExclusionsStringsMember'
       minItems: 0
       maxItems: 100
@@ -2617,8 +2597,6 @@ components:
     DataSourceSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSourceSummary'
     DataSourceSyncJobStatus:
       type: string
@@ -2657,8 +2635,6 @@ components:
     DataSourceSyncJobHistoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSourceSyncJob'
     IndexFieldName:
       type: string
@@ -2684,16 +2660,12 @@ components:
     SubnetIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       minItems: 1
       maxItems: 6
     SecurityGroupIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcSecurityGroupId'
       minItems: 1
       maxItems: 10
@@ -2736,8 +2708,6 @@ components:
     DocumentMetadataConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentMetadataConfiguration'
       minItems: 0
       maxItems: 500
@@ -2761,16 +2731,12 @@ components:
     DocumentAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentAttribute'
       minItems: 1
       maxItems: 100
     PrincipalList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Principal'
       minItems: 1
       maxItems: 200
@@ -2824,16 +2790,12 @@ components:
     DocumentAttributeKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentAttributeKey'
       minItems: 1
       maxItems: 100
     DocumentAttributeStringListValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       minItems: 1
       maxItems: 5
@@ -2859,8 +2821,6 @@ components:
     DocumentAttributeValueCountPairList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentAttributeValueCountPair'
     DocumentAttributeValueType:
       type: string
@@ -2948,8 +2908,6 @@ components:
     FacetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Facet'
     FacetResult:
       type: object
@@ -2964,8 +2922,6 @@ components:
     FacetResultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FacetResult'
     IndexedQuestionAnswersCount:
       type: integer
@@ -3001,8 +2957,6 @@ components:
     FaqSummaryItems:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaqSummary'
     Highlight:
       type: object
@@ -3023,8 +2977,6 @@ components:
     HighlightList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Highlight'
     Importance:
       type: integer
@@ -3056,8 +3008,6 @@ components:
     IndexConfigurationSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IndexConfigurationSummary'
     TextDocumentStatistics:
       type: object
@@ -3161,8 +3111,6 @@ components:
     QueryResultItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/QueryResultItem'
     Url:
       type: string
@@ -3222,8 +3170,6 @@ components:
     RelevanceFeedbackList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RelevanceFeedback'
     S3BucketName:
       type: string
@@ -3242,8 +3188,6 @@ components:
     SharePointUrlList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Url'
       minItems: 1
       maxItems: 100

@@ -1392,8 +1392,6 @@ components:
     AllowedHeaders:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Header'
       minItems: 0
       maxItems: 100
@@ -1407,8 +1405,6 @@ components:
     AllowedMethods:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MethodName'
       minItems: 1
       maxItems: 4
@@ -1420,8 +1416,6 @@ components:
     AllowedOrigins:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Origin'
       minItems: 1
       maxItems: 100
@@ -1478,8 +1472,6 @@ components:
     ContainerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Container'
     ContainerListLimit:
       type: integer
@@ -1516,8 +1508,6 @@ components:
       type: array
       description: 'The CORS policy of the container. '
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CorsRule'
       minItems: 1
       maxItems: 100
@@ -1528,16 +1518,12 @@ components:
     ExposeHeaders:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Header'
       minItems: 0
       maxItems: 100
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     LifecyclePolicy:
       type: string
@@ -1572,8 +1558,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

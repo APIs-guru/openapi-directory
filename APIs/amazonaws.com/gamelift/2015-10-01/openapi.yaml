@@ -6523,8 +6523,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonZeroAndMaxString'
     AcceptanceType:
       type: string
@@ -6590,8 +6588,6 @@ components:
     AliasList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Alias'
     AmazonResourceName:
       type: string
@@ -6699,8 +6695,6 @@ components:
     BuildList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Build'
     CertificateType:
       type: string
@@ -6726,8 +6720,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
@@ -6814,8 +6806,6 @@ components:
     IpPermissionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpPermission'
       maxItems: 50
     ProtectionPolicy:
@@ -6849,8 +6839,6 @@ components:
     MetricGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricGroup'
       maxItems: 1
     FleetType:
@@ -6940,8 +6928,6 @@ components:
     GamePropertyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameProperty'
       maxItems: 16
     IdStringModel:
@@ -7019,14 +7005,10 @@ components:
     PlayerLatencyPolicyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlayerLatencyPolicy'
     GameSessionQueueDestinationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameSessionQueueDestination'
     GameSessionQueue:
       type: object
@@ -7050,8 +7032,6 @@ components:
     QueueArnsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ArnStringModel'
     MatchmakingRequestTimeoutInteger:
       type: integer
@@ -7196,8 +7176,6 @@ components:
     PlayerIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonZeroAndMaxString'
       minItems: 1
       maxItems: 25
@@ -7208,8 +7186,6 @@ components:
     PlayerSessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlayerSession'
     ZipBlob:
       type: string
@@ -7265,14 +7241,10 @@ components:
     EC2InstanceLimitList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EC2InstanceLimit'
     FleetIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FleetId'
       minItems: 1
     PositiveInteger:
@@ -7281,32 +7253,22 @@ components:
     FleetAttributesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FleetAttributes'
     FleetCapacityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FleetCapacity'
     EventList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Event'
     FleetUtilizationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FleetUtilization'
     GameSessionDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameSessionDetail'
     GameSessionPlacement:
       type: object
@@ -7369,20 +7331,14 @@ components:
     GameSessionQueueNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameSessionQueueName'
     GameSessionQueueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameSessionQueue'
     GameSessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GameSession'
     InstanceId:
       type: string
@@ -7390,38 +7346,26 @@ components:
     InstanceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Instance'
     MatchmakingConfigurationNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingConfigurationName'
     MatchmakingConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingConfiguration'
     MatchmakingIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingIdStringModel'
     MatchmakingTicketList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingTicket'
     MatchmakingRuleSetNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingRuleSetName'
       minItems: 1
       maxItems: 10
@@ -7432,8 +7376,6 @@ components:
     MatchmakingRuleSetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchmakingRuleSet'
     PlayerSessionId:
       type: string
@@ -7451,20 +7393,14 @@ components:
     ScalingPolicyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ScalingPolicy'
     VpcPeeringAuthorizationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcPeeringAuthorization'
     VpcPeeringConnectionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcPeeringConnection'
     DesiredPlayerSession:
       type: object
@@ -7479,8 +7415,6 @@ components:
     DesiredPlayerSessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DesiredPlayerSession'
     DnsName:
       type: string
@@ -7590,8 +7524,6 @@ components:
     FleetActionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FleetAction'
       minItems: 1
       maxItems: 1
@@ -7700,8 +7632,6 @@ components:
     MatchedPlayerSessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MatchedPlayerSession'
     GameSessionConnectionInfo:
       type: object
@@ -7743,14 +7673,10 @@ components:
     PlayerLatencyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlayerLatency'
     PlacedPlayerSessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlacedPlayerSession'
     GameSessionQueueDestination:
       type: object
@@ -7865,8 +7791,6 @@ components:
     ScriptList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Script'
     MatchedPlayerSession:
       type: object
@@ -7900,8 +7824,6 @@ components:
     PlayerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Player'
     MatchmakingTicket:
       type: object
@@ -8045,8 +7967,6 @@ components:
     ServerProcessList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerProcess'
       minItems: 1
       maxItems: 50
@@ -8127,8 +8047,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

@@ -2189,34 +2189,24 @@ components:
     InstanceGroupConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceGroupConfig'
     InstanceGroupIdsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     StepConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepConfig'
     StepIdsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     ResourceId:
       type: string
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     AdjustmentType:
       type: string
@@ -2229,8 +2219,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     StringMap:
       type: object
@@ -2255,8 +2243,6 @@ components:
     ApplicationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Application'
     ScalingConstraints:
       type: object
@@ -2274,8 +2260,6 @@ components:
     ScalingRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ScalingRule'
     AutoScalingPolicy:
       type: object
@@ -2343,8 +2327,6 @@ components:
     PortRanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PortRange'
     BlockPublicAccessConfiguration:
       type: object
@@ -2404,8 +2386,6 @@ components:
     BootstrapActionConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BootstrapActionConfig'
     BootstrapActionDetail:
       type: object
@@ -2417,8 +2397,6 @@ components:
     BootstrapActionDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BootstrapActionDetail'
     StepId:
       type: string
@@ -2443,8 +2421,6 @@ components:
     CancelStepsInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CancelStepsInfo'
     StepCancellationOption:
       type: string
@@ -2505,8 +2481,6 @@ components:
     MetricDimensionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricDimension'
     CloudWatchAlarmDefinition:
       type: object
@@ -2604,8 +2578,6 @@ components:
     ConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Configuration'
     XmlString:
       type: string
@@ -2770,8 +2742,6 @@ components:
     ClusterStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClusterState'
     ClusterTimeline:
       type: object
@@ -2811,8 +2781,6 @@ components:
     ClusterSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClusterSummary'
     Command:
       type: object
@@ -2830,8 +2798,6 @@ components:
     CommandList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Command'
     Configuration:
       type: object
@@ -2849,20 +2815,14 @@ components:
     XmlStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlString'
     JobFlowExecutionStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobFlowExecutionState'
     JobFlowDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobFlowDetail'
     Step:
       type: object
@@ -2888,14 +2848,10 @@ components:
     EC2InstanceIdsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceId'
     EC2InstanceIdsToTerminateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceId'
     VolumeSpecification:
       type: object
@@ -2938,14 +2894,10 @@ components:
     EbsBlockDeviceConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EbsBlockDeviceConfig'
     EbsBlockDeviceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EbsBlockDevice'
     EbsConfiguration:
       type: object
@@ -2970,14 +2922,10 @@ components:
     EbsVolumeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EbsVolume'
     XmlStringMaxLen256List:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     FailureDetails:
       type: object
@@ -2995,8 +2943,6 @@ components:
     KeyValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeyValue'
     HadoopJarStepConfig:
       type: object
@@ -3120,8 +3066,6 @@ components:
     InstanceTypeSpecificationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceTypeSpecification'
     InstanceFleetProvisioningSpecifications:
       type: object
@@ -3169,20 +3113,14 @@ components:
     InstanceTypeConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceTypeConfig'
     InstanceFleetConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceFleetConfig'
     InstanceFleetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceFleet'
     InstanceFleetModifyConfig:
       type: object
@@ -3455,14 +3393,10 @@ components:
     InstanceGroupDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceGroupDetail'
     InstanceGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceGroup'
     InstanceGroupModifyConfig:
       type: object
@@ -3488,8 +3422,6 @@ components:
     InstanceGroupModifyConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceGroupModifyConfig'
     InstanceGroupStateChangeReasonCode:
       type: string
@@ -3524,14 +3456,10 @@ components:
     InstanceGroupTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceGroupType'
     InstanceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Instance'
     InstanceResizePolicy:
       type: object
@@ -3575,8 +3503,6 @@ components:
     InstanceStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceState'
     InstanceTimeline:
       type: object
@@ -3715,14 +3641,10 @@ components:
     StepDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepDetail'
     SupportedProductsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     JobFlowDetail:
       type: object
@@ -3800,8 +3722,6 @@ components:
     SecurityGroupsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/XmlStringMaxLen256'
     JobFlowInstancesConfig:
       type: object
@@ -3873,20 +3793,14 @@ components:
     SecurityConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityConfigurationSummary'
     StepStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepState'
     StepSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepSummary'
     MetricDimension:
       type: object
@@ -3911,8 +3825,6 @@ components:
     NewSupportedProductsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SupportedProductConfig'
     Port:
       type: integer

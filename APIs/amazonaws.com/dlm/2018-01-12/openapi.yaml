@@ -242,8 +242,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/PolicyId'
         - name: state
           in: query
@@ -262,8 +260,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/ResourceTypeValues'
             minItems: 1
             maxItems: 1
@@ -274,8 +270,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagFilter'
             minItems: 1
             maxItems: 50
@@ -286,8 +280,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagFilter'
             minItems: 0
             maxItems: 50
@@ -523,8 +515,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -698,24 +688,18 @@ components:
     ResourceTypeValuesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceTypeValues'
       minItems: 1
       maxItems: 1
     TargetTagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
     ScheduleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Schedule'
       minItems: 1
       maxItems: 1
@@ -792,8 +776,6 @@ components:
     AvailabilityZoneList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
       minItems: 1
       maxItems: 10
@@ -884,8 +866,6 @@ components:
     TimesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Time'
       maxItems: 1
     CreateRule:
@@ -953,8 +933,6 @@ components:
     CrossRegionCopyRules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CrossRegionCopyRule'
       minItems: 0
       maxItems: 3
@@ -985,8 +963,6 @@ components:
     PolicyIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyId'
     GettablePolicyStateValues:
       type: string
@@ -997,16 +973,12 @@ components:
     TargetTagsFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagFilter'
       minItems: 1
       maxItems: 50
     TagsToAddFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagFilter'
       minItems: 0
       maxItems: 50
@@ -1017,8 +989,6 @@ components:
     LifecyclePolicySummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LifecyclePolicySummary'
     GetLifecyclePolicyRequest:
       type: object
@@ -1112,16 +1082,12 @@ components:
     TagsToAddList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 45
     VariableTagsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 45
@@ -1174,8 +1140,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200

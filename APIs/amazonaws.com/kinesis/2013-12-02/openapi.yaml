@@ -2489,8 +2489,6 @@ components:
     ConsumerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Consumer'
     PositiveIntegerObject:
       type: integer
@@ -2605,8 +2603,6 @@ components:
     MetricsNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MetricsName'
       minItems: 1
       maxItems: 7
@@ -2625,8 +2621,6 @@ components:
     EnhancedMonitoringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EnhancedMetrics'
     ErrorCode:
       type: string
@@ -2643,8 +2637,6 @@ components:
     RecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Record'
     MillisBehindLatest:
       type: integer
@@ -2696,8 +2688,6 @@ components:
     ShardList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Shard'
     ListStreamConsumersInputLimit:
       type: integer
@@ -2710,8 +2700,6 @@ components:
     StreamNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StreamName'
     TagKey:
       type: string
@@ -2724,8 +2712,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
     MetricsName:
@@ -2746,16 +2732,12 @@ components:
     PutRecordsRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PutRecordsRequestEntry'
       minItems: 1
       maxItems: 500
     PutRecordsResultEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PutRecordsResultEntry'
       minItems: 1
       maxItems: 500
@@ -2817,8 +2799,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

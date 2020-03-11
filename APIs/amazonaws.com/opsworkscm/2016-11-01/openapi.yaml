@@ -1580,8 +1580,6 @@ components:
       type: array
       description: ' A list of individual account attributes. '
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountAttribute'
     ServerName:
       type: string
@@ -1596,8 +1594,6 @@ components:
     EngineAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EngineAttribute'
     NodeAssociationStatusToken:
       type: string
@@ -1632,8 +1628,6 @@ components:
     Strings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     BackupStatus:
       type: string
@@ -1726,16 +1720,12 @@ components:
     Backups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Backup'
     Boolean:
       type: boolean
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
@@ -1850,8 +1840,6 @@ components:
     ServerEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServerEvent'
     NodeAssociationStatus:
       type: string
@@ -1863,8 +1851,6 @@ components:
     Servers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Server'
     EngineAttributeName:
       type: string
@@ -1948,8 +1934,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

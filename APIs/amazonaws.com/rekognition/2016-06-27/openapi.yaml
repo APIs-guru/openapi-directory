@@ -5129,8 +5129,6 @@ components:
     Assets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Asset'
     Attribute:
       type: string
@@ -5140,8 +5138,6 @@ components:
     Attributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Attribute'
     Boolean:
       type: boolean
@@ -5192,8 +5188,6 @@ components:
     Urls:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Url'
     String:
       type: string
@@ -5312,8 +5306,6 @@ components:
     CelebrityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Celebrity'
     Timestamp:
       type: integer
@@ -5335,8 +5327,6 @@ components:
     CelebrityRecognitions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CelebrityRecognition'
     ClientRequestToken:
       type: string
@@ -5351,8 +5341,6 @@ components:
     CollectionIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CollectionId'
     CompareFacesMatch:
       type: object
@@ -5367,8 +5355,6 @@ components:
     CompareFacesMatchList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CompareFacesMatch'
     Image:
       type: object
@@ -5401,8 +5387,6 @@ components:
     CompareFacesUnmatchList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComparedFace'
     OrientationCorrection:
       type: string
@@ -5414,8 +5398,6 @@ components:
     Landmarks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Landmark'
     Pose:
       type: object
@@ -5443,8 +5425,6 @@ components:
     ComparedFaceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComparedFace'
     ContentClassifier:
       type: string
@@ -5454,8 +5434,6 @@ components:
     ContentClassifiers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContentClassifier'
       maxItems: 256
     ModerationLabel:
@@ -5484,8 +5462,6 @@ components:
     ContentModerationDetections:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContentModerationDetection'
     ContentModerationSortBy:
       type: string
@@ -5597,8 +5573,6 @@ components:
     CustomLabels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomLabel'
     DateTime:
       type: string
@@ -5611,8 +5585,6 @@ components:
     FaceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaceId'
       minItems: 1
       maxItems: 4096
@@ -5622,8 +5594,6 @@ components:
     VersionNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VersionName'
       minItems: 1
       maxItems: 10
@@ -5637,8 +5607,6 @@ components:
     ProjectVersionDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProjectVersionDescription'
     ProjectsPageSize:
       type: integer
@@ -5647,8 +5615,6 @@ components:
     ProjectDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProjectDescription'
     StreamProcessorStatus:
       type: string
@@ -5661,14 +5627,10 @@ components:
     FaceDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaceDetail'
     Labels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Label'
     HumanLoopConfig:
       type: object
@@ -5689,8 +5651,6 @@ components:
     ModerationLabels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModerationLabel'
     HumanLoopActivationOutput:
       type: object
@@ -5721,8 +5681,6 @@ components:
     RegionsOfInterest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RegionOfInterest'
       minItems: 0
       maxItems: 10
@@ -5738,8 +5696,6 @@ components:
     TextDetectionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TextDetection'
     EmotionName:
       type: string
@@ -5766,8 +5722,6 @@ components:
     Emotions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Emotion'
     Summary:
       type: object
@@ -5903,14 +5857,10 @@ components:
     FaceDetections:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaceDetection'
     FaceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Face'
     FaceMatch:
       type: object
@@ -5925,14 +5875,10 @@ components:
     FaceMatchList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaceMatch'
     FaceModelVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     FaceRecord:
       type: object
@@ -5947,8 +5893,6 @@ components:
     FaceRecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaceRecord'
     FaceSearchSettings:
       type: object
@@ -5976,8 +5920,6 @@ components:
     Polygon:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Point'
     JobId:
       type: string
@@ -6023,8 +5965,6 @@ components:
     PersonMatches:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PersonMatch'
     LabelDetectionSortBy:
       type: string
@@ -6034,8 +5974,6 @@ components:
     LabelDetections:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LabelDetection'
     PersonTrackingSortBy:
       type: string
@@ -6045,14 +5983,10 @@ components:
     PersonDetections:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PersonDetection'
     TextDetectionResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TextDetectionResult'
     S3Object:
       type: object
@@ -6076,8 +6010,6 @@ components:
     HumanLoopActivationReasons:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HumanLoopActivationReason'
       minItems: 1
     HumanLoopActivationReason:
@@ -6104,8 +6036,6 @@ components:
     UnindexedFaces:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnindexedFace'
     InferenceUnits:
       type: integer
@@ -6123,8 +6053,6 @@ components:
     Instances:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Instance'
     JobTag:
       type: string
@@ -6154,8 +6082,6 @@ components:
     Parents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Parent'
     Label:
       type: object
@@ -6236,8 +6162,6 @@ components:
     StreamProcessorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StreamProcessor'
     MaxFaces:
       type: integer
@@ -6423,8 +6347,6 @@ components:
     Reasons:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Reason'
     RegionOfInterest:
       type: object

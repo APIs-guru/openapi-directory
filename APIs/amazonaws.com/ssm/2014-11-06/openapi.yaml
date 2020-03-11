@@ -10633,8 +10633,6 @@ components:
     AccountIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
       maxItems: 20
     SharedDocumentVersion:
@@ -10656,14 +10654,10 @@ components:
       type: array
       description: A list of of AWS accounts where the current document is shared and the version shared with each account.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountSharingInfo'
     Accounts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Account'
       minItems: 1
       maxItems: 50
@@ -10701,8 +10695,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 1000
     Activation:
@@ -10746,8 +10738,6 @@ components:
     ActivationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Activation'
     ResourceTypeForTagging:
       type: string
@@ -10791,8 +10781,6 @@ components:
     Targets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Target'
       minItems: 0
       maxItems: 5
@@ -10973,8 +10961,6 @@ components:
     AssociationDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationDescription'
     AssociationExecutionId:
       type: string
@@ -11046,8 +11032,6 @@ components:
     AssociationExecutionFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationExecutionFilter'
       minItems: 1
     AssociationResourceId:
@@ -11124,21 +11108,15 @@ components:
     AssociationExecutionTargetsFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationExecutionTargetsFilter'
       minItems: 1
     AssociationExecutionTargetsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationExecutionTarget'
     AssociationExecutionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationExecution'
     AssociationFilterKey:
       type: string
@@ -11169,23 +11147,17 @@ components:
     AssociationFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationFilter'
       minItems: 1
     AssociationIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationId'
       minItems: 1
       maxItems: 10
     AssociationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Association'
     AssociationStatusAggregatedCount:
       type: object
@@ -11252,8 +11224,6 @@ components:
     AssociationVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssociationVersionInfo'
       minItems: 1
     AttachmentName:
@@ -11292,8 +11262,6 @@ components:
     AttachmentContentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachmentContent'
     AttachmentIdentifier:
       type: string
@@ -11308,8 +11276,6 @@ components:
     AttachmentInformationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachmentInformation'
     AttachmentsSourceKey:
       type: string
@@ -11320,8 +11286,6 @@ components:
     AttachmentsSourceValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachmentsSourceValue'
       minItems: 1
       maxItems: 1
@@ -11341,8 +11305,6 @@ components:
     AttachmentsSourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachmentsSource'
       minItems: 0
       maxItems: 20
@@ -11382,8 +11344,6 @@ components:
     StepExecutionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepExecution'
     AutomationParameterMap:
       type: object
@@ -11405,8 +11365,6 @@ components:
     TargetMaps:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetMap'
       minItems: 0
       maxItems: 300
@@ -11423,8 +11381,6 @@ components:
     TargetLocations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetLocation'
       minItems: 1
       maxItems: 100
@@ -11541,8 +11497,6 @@ components:
     AutomationExecutionFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutomationExecutionFilterValue'
       minItems: 1
       maxItems: 10
@@ -11562,8 +11516,6 @@ components:
     AutomationExecutionFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutomationExecutionFilter'
       minItems: 1
       maxItems: 10
@@ -11649,14 +11601,10 @@ components:
     AutomationExecutionMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutomationExecutionMetadata'
     AutomationParameterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutomationParameterValue'
       minItems: 0
       maxItems: 10
@@ -11685,8 +11633,6 @@ components:
     CalendarNameOrARNList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CalendarNameOrARN'
     CalendarState:
       type: string
@@ -11700,8 +11646,6 @@ components:
     InstanceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceId'
       minItems: 0
       maxItems: 50
@@ -11882,8 +11826,6 @@ components:
     CommandFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CommandFilter'
       minItems: 1
       maxItems: 5
@@ -11909,8 +11851,6 @@ components:
     CommandPluginList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CommandPlugin'
     CommandInvocation:
       type: object
@@ -11966,14 +11906,10 @@ components:
     CommandInvocationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CommandInvocation'
     CommandList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Command'
     CommandMaxResults:
       type: integer
@@ -12154,16 +12090,12 @@ components:
     ComplianceItemEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceItemEntry'
       minItems: 0
       maxItems: 10000
     ComplianceItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceItem'
     ComplianceQueryOperatorType:
       type: string
@@ -12176,15 +12108,11 @@ components:
     ComplianceResourceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceResourceId'
       minItems: 1
     ComplianceResourceTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceResourceType'
       minItems: 1
     ComplianceStringFilterKey:
@@ -12194,8 +12122,6 @@ components:
     ComplianceStringFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceFilterValue'
       minItems: 1
       maxItems: 20
@@ -12215,8 +12141,6 @@ components:
     ComplianceStringFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceStringFilter'
     ComplianceSummaryCount:
       type: integer
@@ -12256,8 +12180,6 @@ components:
     ComplianceSummaryItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceSummaryItem'
     SeveritySummary:
       type: object
@@ -12293,8 +12215,6 @@ components:
     CreateAssociationBatchRequestEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CreateAssociationBatchRequestEntry'
       minItems: 1
     CreateAssociationBatchRequestEntry:
@@ -12342,8 +12262,6 @@ components:
     FailedCreateAssociationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedCreateAssociation'
     DocumentContent:
       type: string
@@ -12351,8 +12269,6 @@ components:
     DocumentRequiresList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentRequires'
       minItems: 1
     DocumentVersionName:
@@ -12494,8 +12410,6 @@ components:
     OpsItemNotifications:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsItemNotification'
     OpsItemPriority:
       type: integer
@@ -12504,8 +12418,6 @@ components:
     RelatedOpsItems:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RelatedOpsItem'
     OpsItemSource:
       type: string
@@ -12554,8 +12466,6 @@ components:
     PatchIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchId'
       minItems: 0
       maxItems: 50
@@ -12576,8 +12486,6 @@ components:
     PatchSourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchSource'
       minItems: 0
       maxItems: 20
@@ -12667,8 +12575,6 @@ components:
     ParameterNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PSParameterName'
       minItems: 1
       maxItems: 10
@@ -12699,8 +12605,6 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DescribeActivationsFilter:
       type: object
@@ -12715,8 +12619,6 @@ components:
     DescribeActivationsFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DescribeActivationsFilter'
     MaxResults:
       type: integer
@@ -12727,16 +12629,12 @@ components:
     StepExecutionFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepExecutionFilter'
       minItems: 1
       maxItems: 6
     PatchOrchestratorFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchOrchestratorFilter'
       minItems: 0
       maxItems: 5
@@ -12747,8 +12645,6 @@ components:
     PatchList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Patch'
     DocumentPermissionType:
       type: string
@@ -12761,33 +12657,23 @@ components:
     InstanceAssociationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceAssociation'
     EffectivePatchList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EffectivePatch'
     InstanceAssociationStatusInfos:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceAssociationStatusInfo'
     InstanceInformationFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceInformationFilter'
       minItems: 0
     InstanceInformationStringFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceInformationStringFilter'
       minItems: 0
     MaxResultsEC2Compatible:
@@ -12797,14 +12683,10 @@ components:
     InstanceInformationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceInformation'
     InstancePatchStateFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstancePatchStateFilter'
       minItems: 0
       maxItems: 4
@@ -12815,28 +12697,20 @@ components:
     InstancePatchStatesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstancePatchState'
       minItems: 1
       maxItems: 5
     InstancePatchStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstancePatchState'
     PatchComplianceDataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchComplianceData'
     InventoryDeletionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryDeletionStatusItem'
     MaintenanceWindowExecutionTaskId:
       type: string
@@ -12846,8 +12720,6 @@ components:
     MaintenanceWindowFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowFilter'
       minItems: 0
       maxItems: 5
@@ -12858,20 +12730,14 @@ components:
     MaintenanceWindowExecutionTaskInvocationIdentityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowExecutionTaskInvocationIdentity'
     MaintenanceWindowExecutionTaskIdentityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowExecutionTaskIdentity'
     MaintenanceWindowExecutionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowExecution'
     MaintenanceWindowResourceType:
       type: string
@@ -12884,38 +12750,26 @@ components:
     ScheduledWindowExecutionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ScheduledWindowExecution'
     MaintenanceWindowTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowTarget'
     MaintenanceWindowTaskList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowTask'
     MaintenanceWindowsForTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowIdentityForTarget'
     MaintenanceWindowIdentityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowIdentity'
     OpsItemFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsItemFilter'
     OpsItemMaxResults:
       type: integer
@@ -12924,32 +12778,22 @@ components:
     OpsItemSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsItemSummary'
     ParametersFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParametersFilter'
     ParameterStringFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterStringFilter'
     ParameterMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterMetadata'
     PatchBaselineIdentityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchBaselineIdentity'
     Integer:
       type: integer
@@ -12958,8 +12802,6 @@ components:
     PatchGroupPatchBaselineMappingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchGroupPatchBaselineMapping'
     PatchProperty:
       type: string
@@ -12978,8 +12820,6 @@ components:
     PatchPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchPropertyEntry'
     SessionState:
       type: string
@@ -12993,16 +12833,12 @@ components:
     SessionFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SessionFilter'
       minItems: 1
       maxItems: 5
     SessionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Session'
     DescriptionInDocument:
       type: string
@@ -13045,14 +12881,10 @@ components:
     DocumentParameterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentParameter'
     PlatformTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlatformType'
     DocumentSchemaVersion:
       type: string
@@ -13083,8 +12915,6 @@ components:
     DocumentFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentFilter'
       minItems: 1
     DocumentIdentifier:
@@ -13127,8 +12957,6 @@ components:
     DocumentIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentIdentifier'
     DocumentKeyValuesFilterKey:
       type: string
@@ -13137,8 +12965,6 @@ components:
     DocumentKeyValuesFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentKeyValuesFilterValue'
     DocumentKeyValuesFilter:
       type: object
@@ -13153,8 +12979,6 @@ components:
     DocumentKeyValuesFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentKeyValuesFilter'
       minItems: 0
       maxItems: 6
@@ -13232,8 +13056,6 @@ components:
     DocumentVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentVersionInfo'
       minItems: 1
     DocumentVersionNumber:
@@ -13368,32 +13190,24 @@ components:
     InventoryFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryFilter'
       minItems: 1
       maxItems: 5
     InventoryAggregatorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryAggregator'
       minItems: 1
       maxItems: 10
     ResultAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResultAttribute'
       minItems: 1
       maxItems: 1
     InventoryResultEntityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryResultEntity'
     GetInventorySchemaMaxResults:
       type: integer
@@ -13408,14 +13222,10 @@ components:
     InventoryItemSchemaResultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryItemSchema'
     MaintenanceWindowExecutionTaskIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowExecutionTaskId'
     MaintenanceWindowExecutionStatus:
       type: string
@@ -13464,8 +13274,6 @@ components:
     MaintenanceWindowTaskParametersList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowTaskParameters'
     MaintenanceWindowTaskPriority:
       type: integer
@@ -13566,38 +13374,28 @@ components:
     OpsFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsFilter'
       minItems: 1
       maxItems: 5
     OpsAggregatorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsAggregator'
       minItems: 1
       maxItems: 12
     OpsResultAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsResultAttribute'
       minItems: 1
       maxItems: 1
     OpsEntityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsEntity'
     ParameterHistoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterHistory'
     Parameter:
       type: object
@@ -13634,14 +13432,10 @@ components:
     ParameterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Parameter'
     PatchGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchGroup'
     ServiceSettingId:
       type: string
@@ -13879,8 +13673,6 @@ components:
     InstanceInformationFilterValueSet:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceInformationFilterValue'
       minItems: 1
       maxItems: 100
@@ -14017,8 +13809,6 @@ components:
     InstancePatchStateFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstancePatchStateFilterValue'
       minItems: 1
       maxItems: 1
@@ -14055,8 +13845,6 @@ components:
     InventoryGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryGroup'
       minItems: 1
       maxItems: 15
@@ -14123,8 +13911,6 @@ components:
     InventoryDeletionSummaryItems:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryDeletionSummaryItem'
     InventoryItemSchemaVersion:
       type: string
@@ -14151,8 +13937,6 @@ components:
     InventoryFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryFilterValue'
       minItems: 1
       maxItems: 40
@@ -14209,8 +13993,6 @@ components:
     InventoryItemEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryItemEntry'
       minItems: 0
       maxItems: 10000
@@ -14264,8 +14046,6 @@ components:
     InventoryItemAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryItemAttribute'
       minItems: 1
       maxItems: 50
@@ -14278,8 +14058,6 @@ components:
     InventoryItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryItem'
       minItems: 1
       maxItems: 30
@@ -14353,16 +14131,12 @@ components:
     KeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     PSParameterVersion:
       type: integer
     ParameterLabelList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterLabel'
       minItems: 1
       maxItems: 10
@@ -14383,14 +14157,10 @@ components:
     ResourceComplianceSummaryItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceComplianceSummaryItem'
     ResourceDataSyncItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceDataSyncItem'
     Long:
       type: integer
@@ -14501,8 +14271,6 @@ components:
     MaintenanceWindowFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowFilterValue'
     MaintenanceWindowFilter:
       type: object
@@ -14728,8 +14496,6 @@ components:
     MaintenanceWindowTaskParameterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MaintenanceWindowTaskParameterValue'
     MaintenanceWindowTaskParameterValueExpression:
       type: object
@@ -14747,8 +14513,6 @@ components:
     NotificationEventList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NotificationEvent'
     NotificationType:
       type: string
@@ -14834,8 +14598,6 @@ components:
     OpsEntityItemEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsEntityItemEntry'
       minItems: 0
       maxItems: 10000
@@ -14864,8 +14626,6 @@ components:
     OpsFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsFilterValue'
       minItems: 1
       maxItems: 40
@@ -14944,8 +14704,6 @@ components:
     OpsItemFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OpsItemFilterValue'
     OpsItemFilterOperator:
       type: string
@@ -14983,8 +14741,6 @@ components:
     OpsItemOpsDataKeysList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     OpsItemSummary:
       type: object
@@ -15071,8 +14827,6 @@ components:
     ParameterPolicyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterInlinePolicy'
     ParameterHistory:
       type: object
@@ -15183,8 +14937,6 @@ components:
     ParameterStringFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterStringFilterValue'
       minItems: 1
       maxItems: 50
@@ -15212,8 +14964,6 @@ components:
     ParameterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterValue'
     ParametersFilterKey:
       type: string
@@ -15224,8 +14974,6 @@ components:
     ParametersFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParametersFilterValue'
       minItems: 1
       maxItems: 50
@@ -15354,8 +15102,6 @@ components:
     PatchFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchFilterValue'
       minItems: 1
       maxItems: 20
@@ -15375,8 +15121,6 @@ components:
     PatchFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchFilter'
       minItems: 0
       maxItems: 4
@@ -15401,8 +15145,6 @@ components:
     PatchOrchestratorFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchOrchestratorFilterValue'
     PatchOrchestratorFilter:
       type: object
@@ -15451,8 +15193,6 @@ components:
     PatchRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchRule'
       minItems: 0
       maxItems: 10
@@ -15462,8 +15202,6 @@ components:
     PatchSourceProductList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PatchSourceProduct'
       minItems: 1
       maxItems: 20
@@ -15500,8 +15238,6 @@ components:
     Regions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Region'
       minItems: 1
       maxItems: 50
@@ -15517,8 +15253,6 @@ components:
     TargetParameterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParameterValue'
     ResourceComplianceSummaryItem:
       type: object
@@ -15560,8 +15294,6 @@ components:
     ResourceDataSyncOrganizationalUnitList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceDataSyncOrganizationalUnit'
       minItems: 1
       maxItems: 1000
@@ -15673,8 +15405,6 @@ components:
     ResourceDataSyncSourceRegionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceDataSyncSourceRegion'
     ResourceDataSyncSourceRegion:
       type: string
@@ -15830,8 +15560,6 @@ components:
     SessionManagerParameterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SessionManagerParameterValue'
     SessionManagerParameters:
       type: object
@@ -15840,8 +15568,6 @@ components:
     ValidNextStepList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ValidNextStep'
     TargetLocation:
       type: object
@@ -15944,8 +15670,6 @@ components:
     StepExecutionFilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StepExecutionFilterValue'
       minItems: 1
       maxItems: 10
@@ -15997,8 +15721,6 @@ components:
     TargetValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetValue'
       minItems: 0
       maxItems: 50
@@ -16015,8 +15737,6 @@ components:
     TargetMapValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetMapValue'
       minItems: 0
       maxItems: 25

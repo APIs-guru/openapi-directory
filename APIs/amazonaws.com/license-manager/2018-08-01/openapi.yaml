@@ -1651,8 +1651,6 @@ components:
     ConsumedLicenseSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConsumedLicenseSummary'
     String:
       type: string
@@ -1666,28 +1664,20 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     ProductInformationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductInformation'
     FilterName:
       type: string
     FilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
     Filter:
       type: object
@@ -1704,14 +1694,10 @@ components:
     Filters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
     ManagedResourceSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ManagedResourceSummary'
     OrganizationConfiguration:
       type: object
@@ -1748,8 +1734,6 @@ components:
     InventoryFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InventoryFilter'
     LicenseConfiguration:
       type: object
@@ -1819,8 +1803,6 @@ components:
     LicenseConfigurationAssociations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LicenseConfigurationAssociation'
     LicenseConfigurationStatus:
       type: string
@@ -1852,20 +1834,14 @@ components:
     LicenseConfigurationUsageList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LicenseConfigurationUsage'
     LicenseConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LicenseConfiguration'
     MetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Metadata'
     LicenseOperationFailure:
       type: object
@@ -1898,8 +1874,6 @@ components:
     LicenseOperationFailureList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LicenseOperationFailure'
     LicenseSpecification:
       type: object
@@ -1913,14 +1887,10 @@ components:
     LicenseSpecifications:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LicenseSpecification'
     ResourceInventoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceInventory'
     ManagedResourceSummary:
       type: object
@@ -1945,8 +1915,6 @@ components:
     ProductInformationFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductInformationFilter'
     ProductInformation:
       type: object
@@ -2013,8 +1981,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
 security:
   - hmac: []

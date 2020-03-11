@@ -548,8 +548,6 @@ components:
     ContentClassifiers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContentClassifier'
       maxItems: 256
     ServiceQuotaExceededException: {}
@@ -648,8 +646,6 @@ components:
     HumanLoopSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HumanLoopSummary'
     SortOrder:
       type: string

@@ -6662,16 +6662,12 @@ components:
     AmazonResourceNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AmazonResourceName'
     String:
       type: string
     AndroidPaths:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     AppPackagesCleanup:
       type: boolean
@@ -6742,8 +6738,6 @@ components:
     Artifacts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Artifact'
     BillingMethod:
       type: string
@@ -6810,8 +6804,6 @@ components:
     Rules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Rule'
     DevicePool:
       type: object
@@ -6838,8 +6830,6 @@ components:
     PackageIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     InstanceProfile:
       type: object
@@ -7168,14 +7158,10 @@ components:
     IosPaths:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DeviceHostPaths:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     CustomerArtifactPaths:
       type: object
@@ -7213,8 +7199,6 @@ components:
     DeviceInstances:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeviceInstance'
     DeviceAvailability:
       type: string
@@ -7335,8 +7319,6 @@ components:
     DeviceFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     DeviceFilter:
       type: object
@@ -7354,14 +7336,10 @@ components:
     DeviceFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeviceFilter'
     InstanceLabels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     InstanceStatus:
       type: string
@@ -7413,8 +7391,6 @@ components:
     IncompatibilityMessages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IncompatibilityMessage'
     DevicePoolCompatibilityResult:
       type: object
@@ -7432,14 +7408,10 @@ components:
     DevicePoolCompatibilityResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DevicePoolCompatibilityResult'
     DevicePools:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DevicePool'
     DeviceSelectionConfiguration:
       type: object
@@ -7470,8 +7442,6 @@ components:
     Devices:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Device'
     VideoCapture:
       type: boolean
@@ -7872,74 +7842,50 @@ components:
     InstanceProfiles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceProfile'
     Jobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Job'
     NetworkProfiles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NetworkProfile'
     OfferingPromotions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OfferingPromotion'
     OfferingTransactions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OfferingTransaction'
     Offerings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Offering'
     Projects:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Project'
     RemoteAccessSessions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RemoteAccessSession'
     Runs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Run'
     Samples:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Sample'
     Suites:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Suite'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 150
     MaxPageSize:
@@ -7949,14 +7895,10 @@ components:
     TestGridProjects:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TestGridProject'
     TestGridSessionActions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TestGridSessionAction'
     TestGridSessionArtifactCategory:
       type: string
@@ -7966,8 +7908,6 @@ components:
     TestGridSessionArtifacts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TestGridSessionArtifact'
     TestGridSessionStatus:
       type: string
@@ -7978,14 +7918,10 @@ components:
     TestGridSessions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TestGridSession'
     Tests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Test'
     UniqueProblemsByExecutionResultMap:
       type: object
@@ -7994,14 +7930,10 @@ components:
     Uploads:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Upload'
     VPCEConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VPCEConfiguration'
     Location:
       type: object
@@ -8040,8 +7972,6 @@ components:
     RecurringCharges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecurringCharge'
     Offering:
       type: object
@@ -8157,8 +8087,6 @@ components:
     Problems:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Problem'
     Radios:
       type: object
@@ -8264,8 +8192,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       maxItems: 150
     TestGridSessionAction:
@@ -8319,8 +8245,6 @@ components:
     UniqueProblems:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UniqueProblem'
     UploadStatus:
       type: string

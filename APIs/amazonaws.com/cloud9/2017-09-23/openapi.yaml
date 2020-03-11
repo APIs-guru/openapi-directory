@@ -1411,8 +1411,6 @@ components:
     BoundedEnvironmentIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EnvironmentId'
       minItems: 1
       maxItems: 25
@@ -1442,8 +1440,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
@@ -1474,8 +1470,6 @@ components:
     PermissionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Permissions'
     String:
       type: string
@@ -1486,8 +1480,6 @@ components:
     EnvironmentMembersList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EnvironmentMember'
     EnvironmentStatus:
       type: string
@@ -1502,8 +1494,6 @@ components:
     EnvironmentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Environment'
     EnvironmentType:
       type: string
@@ -1554,8 +1544,6 @@ components:
     EnvironmentIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EnvironmentId'
     EnvironmentLifecycleStatus:
       type: string
@@ -1598,8 +1586,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

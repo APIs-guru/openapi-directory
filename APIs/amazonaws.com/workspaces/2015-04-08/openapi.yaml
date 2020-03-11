@@ -3075,8 +3075,6 @@ components:
     AccountModificationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountModification'
     Alias:
       type: string
@@ -3088,8 +3086,6 @@ components:
     IpGroupIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpGroupId'
     IpGroupId:
       type: string
@@ -3097,8 +3093,6 @@ components:
     IpRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpRuleItem'
     BooleanObject:
       type: boolean
@@ -3108,8 +3102,6 @@ components:
     BundleIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BundleId'
       minItems: 1
       maxItems: 25
@@ -3147,8 +3139,6 @@ components:
     BundleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceBundle'
     BundleOwner:
       type: string
@@ -3177,8 +3167,6 @@ components:
     ClientPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ClientPropertiesResult'
     NonEmptyString:
       type: string
@@ -3229,8 +3217,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     IpGroupName:
       type: string
@@ -3239,28 +3225,20 @@ components:
     WorkspaceRequestList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceRequest'
       minItems: 1
       maxItems: 25
     FailedCreateWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedCreateWorkspaceRequest'
     WorkspaceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Workspace'
     DedicatedTenancyCidrRangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
     DedicatedTenancySupportEnum:
       type: string
@@ -3298,8 +3276,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     PaginationToken:
       type: string
@@ -3308,8 +3284,6 @@ components:
     ResourceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 25
@@ -3320,36 +3294,26 @@ components:
     WorkspacesIpGroupsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspacesIpGroup'
     DirectoryIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DirectoryId'
       minItems: 1
       maxItems: 25
     DirectoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceDirectory'
     WorkspaceImageIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceImageId'
       minItems: 1
       maxItems: 25
     WorkspaceImageList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceImage'
     WorkspaceId:
       type: string
@@ -3357,22 +3321,16 @@ components:
     SnapshotList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Snapshot'
     WorkspaceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceId'
       minItems: 1
       maxItems: 25
     WorkspaceConnectionStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkspaceConnectionStatus'
     UserName:
       type: string
@@ -3437,8 +3395,6 @@ components:
     DnsIpAddresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpAddress'
     Ec2ImageId:
       type: string
@@ -3506,32 +3462,22 @@ components:
     FailedRebootWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
     FailedRebuildWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
     FailedStartWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
     FailedStopWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
     FailedTerminateWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedWorkspaceChangeRequest'
     WorkspaceImageIngestionProcess:
       type: string
@@ -3544,8 +3490,6 @@ components:
     IpRevokedRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpRule'
     IpRuleDesc:
       type: string
@@ -3590,8 +3534,6 @@ components:
     ModificationStateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModificationState'
     SelfservicePermissions:
       type: object
@@ -3704,8 +3646,6 @@ components:
     RebootWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RebootRequest'
       minItems: 1
       maxItems: 25
@@ -3721,16 +3661,12 @@ components:
     RebuildWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RebuildRequest'
       minItems: 1
       maxItems: 1
     SubnetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       maxItems: 2
     Tenancy:
@@ -3775,8 +3711,6 @@ components:
     StartWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StartRequest'
       minItems: 1
       maxItems: 25
@@ -3790,8 +3724,6 @@ components:
     StopWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StopRequest'
       minItems: 1
       maxItems: 25
@@ -3831,8 +3763,6 @@ components:
     TerminateWorkspaceRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TerminateRequest'
       minItems: 1
       maxItems: 25

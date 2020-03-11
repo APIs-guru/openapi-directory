@@ -1055,8 +1055,6 @@ paths:
                   description: An array of events that indicate the status of jobs to back up resources to the backup vault.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/BackupVaultEvent'
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}':
     delete:
@@ -2979,8 +2977,6 @@ paths:
                   description: A list of keys to identify which key-value tags to remove from a resource.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3062,8 +3058,6 @@ components:
     BackupRulesInput:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupRuleInput'
     TagValue:
       type: string
@@ -3092,14 +3086,10 @@ components:
     ResourceArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ARN'
     ListOfTags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Condition'
     CreateBackupVaultOutput:
       type: object
@@ -3707,14 +3697,10 @@ components:
     BackupJobsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupJob'
     BackupRules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupRule'
     BackupPlan:
       type: object
@@ -3755,8 +3741,6 @@ components:
     BackupPlanTemplatesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupPlanTemplatesListMember'
     BackupPlansListMember:
       type: object
@@ -3789,14 +3773,10 @@ components:
     BackupPlanVersionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupPlansListMember'
     BackupPlansList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupPlansListMember'
     BackupRuleName:
       type: string
@@ -3822,8 +3802,6 @@ components:
     CopyActions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CopyAction'
     BackupRule:
       type: object
@@ -3934,14 +3912,10 @@ components:
     BackupSelectionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupSelectionsListMember'
     BackupVaultEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupVaultEvent'
     BackupVaultListMember:
       type: object
@@ -3968,8 +3942,6 @@ components:
     BackupVaultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupVaultListMember'
     long:
       type: integer
@@ -4076,8 +4048,6 @@ components:
     CopyJobsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CopyJob'
     CreateBackupPlanInput:
       type: object
@@ -4238,8 +4208,6 @@ components:
     ResourceTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceType'
     MaxResults:
       type: integer
@@ -4280,8 +4248,6 @@ components:
     ProtectedResourcesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProtectedResource'
     ListRecoveryPointsByBackupVaultInput:
       type: object
@@ -4290,8 +4256,6 @@ components:
     RecoveryPointByBackupVaultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecoveryPointByBackupVault'
     ListRecoveryPointsByResourceInput:
       type: object
@@ -4300,8 +4264,6 @@ components:
     RecoveryPointByResourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecoveryPointByResource'
     ListRestoreJobsInput:
       type: object
@@ -4310,8 +4272,6 @@ components:
     RestoreJobsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RestoreJobsListMember'
     ListTagsInput:
       type: object
@@ -4553,8 +4513,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/string'
     TagResourceInput:
       type: object

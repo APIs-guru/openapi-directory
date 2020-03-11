@@ -3297,8 +3297,6 @@ components:
     Statements:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Statement'
     AndStatement:
       type: object
@@ -3354,8 +3352,6 @@ components:
     TextTransformations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TextTransformation'
       minItems: 1
     PositionalConstraint:
@@ -3398,8 +3394,6 @@ components:
     Rules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Rule'
     ConsumedCapacity:
       type: integer
@@ -3674,8 +3668,6 @@ components:
     CountryCodes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CountryCode'
       minItems: 1
     EntityName:
@@ -3696,14 +3688,10 @@ components:
     IPAddresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IPAddress'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
     IPSetSummary:
@@ -3728,8 +3716,6 @@ components:
     RegularExpressionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Regex'
       minItems: 1
     RegexPatternSetSummary:
@@ -3834,8 +3820,6 @@ components:
     RuleSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RuleSummary'
     ExcludedRule:
       type: object
@@ -3849,8 +3833,6 @@ components:
     ExcludedRules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExcludedRule'
     SingleHeader:
       type: object
@@ -4022,8 +4004,6 @@ components:
     SampledHTTPRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SampledHTTPRequest'
     PopulationSize:
       type: integer
@@ -4078,8 +4058,6 @@ components:
     HTTPHeaders:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HTTPHeader'
     HTTPMethod:
       type: string
@@ -4128,8 +4106,6 @@ components:
     IPSetSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IPSetSummary'
     NextMarker:
       type: string
@@ -4143,20 +4119,14 @@ components:
     ManagedRuleGroupSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ManagedRuleGroupSummary'
     LoggingConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LoggingConfiguration'
     RegexPatternSetSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RegexPatternSetSummary'
     ResourceType:
       type: string
@@ -4166,14 +4136,10 @@ components:
     ResourceArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceArn'
     RuleGroupSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RuleGroupSummary'
     TagInfoForResource:
       type: object
@@ -4188,22 +4154,16 @@ components:
     WebACLSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WebACLSummary'
     LogDestinationConfigs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceArn'
       minItems: 1
       maxItems: 100
     RedactedFields:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FieldToMatch'
       maxItems: 100
     ManagedRuleGroupStatement:
@@ -4532,8 +4492,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
     TextTransformationPriority:

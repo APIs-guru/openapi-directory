@@ -380,14 +380,10 @@ components:
     IceServerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IceServer'
     Uris:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Uri'
     Password:
       type: string

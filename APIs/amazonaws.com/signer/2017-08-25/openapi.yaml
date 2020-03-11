@@ -806,8 +806,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -1177,8 +1175,6 @@ components:
     EncryptionAlgorithms:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EncryptionAlgorithm'
     EncryptionAlgorithmOptions:
       type: object
@@ -1252,8 +1248,6 @@ components:
     HashAlgorithms:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HashAlgorithm'
     HashAlgorithmOptions:
       type: object
@@ -1271,8 +1265,6 @@ components:
     ImageFormats:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImageFormat'
     Key:
       type: string
@@ -1289,8 +1281,6 @@ components:
     SigningJobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SigningJob'
     ListSigningPlatformsRequest:
       type: object
@@ -1299,8 +1289,6 @@ components:
     SigningPlatforms:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SigningPlatform'
     bool:
       type: boolean
@@ -1311,8 +1299,6 @@ components:
     SigningProfiles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SigningProfile'
     ListTagsForResourceRequest:
       type: object
@@ -1453,8 +1439,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200

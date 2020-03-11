@@ -206,8 +206,6 @@ paths:
                   description: Metadata that can be used to manage the detector model.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                 evaluationMethod:
                   description: 'Information about the order in which events are evaluated and how actions are executed. '
@@ -345,8 +343,6 @@ paths:
                   description: Metadata that can be used to manage the input.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1133,8 +1129,6 @@ paths:
                   description: The new or modified tags for the resource.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
   '/tags#resourceArn&tagKeys':
     delete:
@@ -1193,8 +1187,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1265,8 +1257,6 @@ components:
     States:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/State'
       minItems: 1
     StateName:
@@ -1302,8 +1292,6 @@ components:
     Attributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Attribute'
       minItems: 1
       maxItems: 200
@@ -1381,8 +1369,6 @@ components:
     DetectorDebugOptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorDebugOption'
       minItems: 1
     TagResourceResponse:
@@ -1442,14 +1428,17 @@ components:
       type: object
       required:
         - timerName
-        - seconds
       properties:
         timerName:
           $ref: '#/components/schemas/TimerName'
           description: The name of the timer.
         seconds:
+          deprecated: true
           $ref: '#/components/schemas/Seconds'
-          description: 'The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. '
+          description: The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression.
+        durationExpression:
+          $ref: '#/components/schemas/VariableValue'
+          description: 'The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (<code>$variable.&lt;variable-name&gt;</code>), and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. '
       description: Information needed to set the timer.
     ClearTimerAction:
       type: object
@@ -1468,7 +1457,7 @@ components:
         timerName:
           $ref: '#/components/schemas/TimerName'
           description: The name of the timer to reset.
-      description: Information needed to reset the timer.
+      description: 'Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. '
     LambdaAction:
       type: object
       required:
@@ -1497,7 +1486,7 @@ components:
           description: The URL of the SQS queue where the data is written.
         useBase64:
           $ref: '#/components/schemas/UseBase64'
-          description: 'Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
+          description: Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue.
       description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
     FirehoseAction:
       type: object
@@ -1548,8 +1537,6 @@ components:
     Actions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Action'
     AttributeJsonPath:
       type: string
@@ -1596,8 +1583,6 @@ components:
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     EvaluationMethod:
       type: string
@@ -1845,8 +1830,6 @@ components:
     DetectorModelSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorModelSummary'
     DetectorModelVersionSummary:
       type: object
@@ -1879,8 +1862,6 @@ components:
     DetectorModelVersionSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorModelVersionSummary'
     EventName:
       type: string
@@ -1903,8 +1884,6 @@ components:
     Events:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Event'
     FirehoseSeparator:
       type: string
@@ -1943,8 +1922,6 @@ components:
     InputSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputSummary'
     MQTTTopic:
       type: string
@@ -1989,8 +1966,6 @@ components:
     TransitionEvents:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TransitionEvent'
     OnInputLifecycle:
       type: object
@@ -2015,15 +1990,17 @@ components:
       type: string
     Seconds:
       type: integer
+      minimum: 1
+      maximum: 31622400
+    VariableValue:
+      type: string
+      minLength: 1
+      maxLength: 1024
     VariableName:
       type: string
       pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
       minLength: 1
       maxLength: 128
-    VariableValue:
-      type: string
-      minLength: 1
-      maxLength: 1024
     UseBase64:
       type: boolean
     State:
@@ -2051,8 +2028,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

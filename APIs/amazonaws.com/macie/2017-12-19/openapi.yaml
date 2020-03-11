@@ -687,14 +687,10 @@ components:
     S3ResourcesClassification:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3ResourceClassification'
     FailedS3Resources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedS3Resource'
     BucketName:
       type: string
@@ -734,8 +730,6 @@ components:
     S3Resources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3Resource'
     ErrorCode:
       type: string
@@ -779,8 +773,6 @@ components:
     MemberAccounts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MemberAccount'
     MemberAccount:
       type: object
@@ -827,8 +819,6 @@ components:
     S3ResourcesClassificationUpdate:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/S3ResourceClassificationUpdate'
 security:
   - hmac: []

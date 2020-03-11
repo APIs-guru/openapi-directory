@@ -1760,8 +1760,6 @@ components:
     SourceCode:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Code'
     Toolchain:
       type: object
@@ -1861,26 +1859,18 @@ components:
     ProjectsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProjectSummary'
     ResourcesResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Resource'
     TeamMemberResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TeamMember'
     UserProfilesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserProfileSummary'
     State:
       type: string
@@ -1924,8 +1914,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagValue:
       type: string

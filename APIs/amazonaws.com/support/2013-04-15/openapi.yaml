@@ -1104,8 +1104,6 @@ components:
     Attachments:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Attachment'
     ExpiryTime:
       type: string
@@ -1118,8 +1116,6 @@ components:
     CcEmailAddressList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CcEmailAddress'
       minItems: 0
       maxItems: 10
@@ -1156,8 +1152,6 @@ components:
     AttachmentSet:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttachmentDetails'
     BeforeTime:
       type: string
@@ -1234,16 +1228,12 @@ components:
     CaseIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaseId'
       minItems: 0
       maxItems: 100
     CaseList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaseDetails'
     CaseStatus:
       type: string
@@ -1262,8 +1252,6 @@ components:
     CategoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Category'
     CcEmailAddress:
       type: string
@@ -1289,8 +1277,6 @@ components:
     CommunicationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Communication'
     IssueType:
       type: string
@@ -1307,34 +1293,24 @@ components:
     ServiceCodeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceCode'
       minItems: 0
       maxItems: 100
     ServiceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Service'
     SeverityLevelsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SeverityLevel'
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     TrustedAdvisorCheckRefreshStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TrustedAdvisorCheckRefreshStatus'
     String:
       type: string
@@ -1369,14 +1345,10 @@ components:
     TrustedAdvisorCheckSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TrustedAdvisorCheckSummary'
     TrustedAdvisorCheckList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TrustedAdvisorCheckDescription'
     Double:
       type: number
@@ -1498,8 +1470,6 @@ components:
     TrustedAdvisorResourceDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TrustedAdvisorResourceDetail'
     TrustedAdvisorCheckSummary:
       type: object

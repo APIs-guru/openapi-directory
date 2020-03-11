@@ -638,20 +638,14 @@ components:
     StringSetAttributeValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StringAttributeValue'
     NumberSetAttributeValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NumberAttributeValue'
     BinarySetAttributeValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BinaryAttributeValue'
     MapAttributeValue:
       type: object
@@ -660,8 +654,6 @@ components:
     ListAttributeValue:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttributeValue'
     NullAttributeValue:
       type: boolean
@@ -721,8 +713,6 @@ components:
     RecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Record'
     ShardIteratorType:
       type: string
@@ -763,8 +753,6 @@ components:
     KeySchema:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeySchemaElement'
       minItems: 1
       maxItems: 2
@@ -785,8 +773,6 @@ components:
     StreamList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Stream'
     OperationType:
       type: string
@@ -873,8 +859,6 @@ components:
     ShardDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Shard'
     Stream:
       type: object

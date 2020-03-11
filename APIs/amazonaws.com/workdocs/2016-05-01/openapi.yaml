@@ -563,8 +563,6 @@ paths:
                   description: 'The users, groups, or organization being granted permission.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SharePrincipal'
                 NotificationOptions:
                   description: Set of options which defines notification preferences of given action.
@@ -1028,8 +1026,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/CustomMetadataKeyType'
             maxItems: 8
         - name: deleteAll
@@ -1221,8 +1217,6 @@ paths:
                   description: List of labels to add to the resource.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SharedLabel'
                   maxItems: 20
     parameters:
@@ -1299,8 +1293,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/SharedLabel'
             maxItems: 20
         - name: deleteAll
@@ -4452,8 +4444,6 @@ components:
     SharePrincipalList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SharePrincipal'
     NotificationOptions:
       type: object
@@ -4480,8 +4470,6 @@ components:
     ShareResultsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ShareResult'
     BooleanEnumType:
       type: string
@@ -4545,8 +4533,6 @@ components:
     CommentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Comment'
     CreateCommentRequest:
       type: object
@@ -4641,8 +4627,6 @@ components:
     SharedLabels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SharedLabel'
       maxItems: 20
     CreateLabelsRequest:
@@ -4766,8 +4750,6 @@ components:
     CustomMetadataKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomMetadataKeyType'
       maxItems: 8
     DeactivateUserRequest:
@@ -4822,8 +4804,6 @@ components:
     UserActivities:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Activity'
     DescribeCommentsRequest:
       type: object
@@ -4845,8 +4825,6 @@ components:
     DocumentVersionMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentVersionMetadata'
     ResourceSortType:
       type: string
@@ -4871,14 +4849,10 @@ components:
     FolderMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FolderMetadata'
     DocumentMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentMetadata'
     SearchQueryType:
       type: string
@@ -4896,8 +4870,6 @@ components:
     GroupMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GroupMetadata'
     DescribeNotificationSubscriptionsRequest:
       type: object
@@ -4906,8 +4878,6 @@ components:
     SubscriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Subscription'
       maxItems: 256
     DescribeResourcePermissionsRequest:
@@ -4917,8 +4887,6 @@ components:
     PrincipalList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Principal'
     DescribeRootFoldersRequest:
       type: object
@@ -4949,8 +4917,6 @@ components:
     OrganizationUserList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/User'
     SizeType:
       type: integer
@@ -5188,8 +5154,6 @@ components:
     UserMetadataList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UserMetadata'
     RoleType:
       type: string
@@ -5216,8 +5180,6 @@ components:
     PermissionInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PermissionInfo'
     PrincipalType:
       type: string
@@ -5256,8 +5218,6 @@ components:
     ResourcePathComponentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourcePathComponent'
     ResourcePathComponent:
       type: object

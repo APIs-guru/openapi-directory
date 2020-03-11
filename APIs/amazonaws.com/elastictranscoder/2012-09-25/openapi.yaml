@@ -315,8 +315,6 @@ paths:
                   description: A section of the request body that provides information about the files that are being transcoded.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/JobInput'
                   maxItems: 200
                 Output:
@@ -361,8 +359,6 @@ paths:
                   description: ' A section of the request body that provides information about the transcoded (target) files. We recommend that you use the <code>Outputs</code> syntax instead of the <code>Output</code> syntax. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/CreateJobOutput'
                   maxItems: 30
                 OutputKeyPrefix:
@@ -374,8 +370,6 @@ paths:
                   description: '<p>If you specify a preset in <code>PresetId</code> for which the value of <code>Container</code> is fmp4 (Fragmented MP4) or ts (MPEG-TS), Playlists contains information about the master playlists that you want Elastic Transcoder to create.</p> <p>The maximum number of master playlists in a job is 30.</p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/CreateJobPlaylist'
                   maxItems: 30
                 UserMetadata:
@@ -1343,8 +1337,6 @@ paths:
                   description: The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics that you want the action to send a test notification to.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SnsTopic'
                   maxItems: 30
     parameters:
@@ -1715,8 +1707,6 @@ components:
     JobWatermarks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobWatermark'
     JobAlbumArt:
       type: object
@@ -1732,8 +1722,6 @@ components:
       type: array
       deprecated: true
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Clip'
     Captions:
       type: object
@@ -1832,8 +1820,6 @@ components:
     Permissions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Permission'
       maxItems: 30
     CreatePresetResponse:
@@ -1878,8 +1864,6 @@ components:
     PresetWatermarks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PresetWatermark'
     AudioCodec:
       type: string
@@ -2034,8 +2018,6 @@ components:
     AccessControls:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessControl'
       maxItems: 30
     WatermarkKey:
@@ -2071,8 +2053,6 @@ components:
     Artworks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Artwork'
     Ascending:
       type: string
@@ -2141,8 +2121,6 @@ components:
     CaptionFormats:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaptionFormat'
       maxItems: 4
     CaptionMergePolicy:
@@ -2177,8 +2155,6 @@ components:
     CaptionSources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CaptionSource'
       maxItems: 20
     Clip:
@@ -2196,8 +2172,6 @@ components:
     CreateJobOutputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CreateJobOutput'
       maxItems: 30
     Filename:
@@ -2210,8 +2184,6 @@ components:
     OutputKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Key'
       maxItems: 30
     HlsContentProtection:
@@ -2261,15 +2233,11 @@ components:
     CreateJobPlaylists:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CreateJobPlaylist'
       maxItems: 30
     JobInputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobInput'
       maxItems: 200
     UserMetadata:
@@ -2456,8 +2424,6 @@ components:
     Warnings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Warning'
     Description:
       type: string
@@ -2624,8 +2590,6 @@ components:
     ExceptionMessages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Grantee:
       type: string
@@ -2718,14 +2682,10 @@ components:
     JobOutputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobOutput'
     Playlists:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Playlist'
     JobStatus:
       type: string
@@ -2766,8 +2726,6 @@ components:
     Jobs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Job'
     KeyIdGuid:
       type: string
@@ -2790,8 +2748,6 @@ components:
     Pipelines:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Pipeline'
     ListPresetsRequest:
       type: object
@@ -2801,8 +2757,6 @@ components:
     Presets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Preset'
     NonEmptyBase64EncodedString:
       type: string
@@ -2925,8 +2879,6 @@ components:
     SnsTopics:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SnsTopic'
       maxItems: 30
     Success:

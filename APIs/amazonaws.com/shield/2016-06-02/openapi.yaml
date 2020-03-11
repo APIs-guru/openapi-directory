@@ -1580,8 +1580,6 @@ components:
     SubResourceSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubResourceSummary'
     AttackTimestamp:
       type: string
@@ -1589,20 +1587,14 @@ components:
     SummarizedCounterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SummarizedCounter'
     AttackProperties:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttackProperty'
     MitigationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Mitigation'
     AttackDetail:
       type: object
@@ -1670,8 +1662,6 @@ components:
     TopContributors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Contributor'
     Unit:
       type: string
@@ -1704,16 +1694,12 @@ components:
     AttackSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttackSummary'
     String:
       type: string
     AttackVectorDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttackVectorDescription'
     AttackVectorDescription:
       type: object
@@ -1747,16 +1733,12 @@ components:
     LogBucketList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogBucket'
       minItems: 0
       maxItems: 10
     EmergencyContactList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EmergencyContact'
       minItems: 0
       maxItems: 10
@@ -1825,8 +1807,6 @@ components:
     HealthCheckIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HealthCheckId'
     Integer:
       type: integer
@@ -1843,14 +1823,10 @@ components:
     Limits:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Limit'
     ResourceArnFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceArn'
     TimeRange:
       type: object
@@ -1874,8 +1850,6 @@ components:
     Protections:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Protection'
     Mitigation:
       type: object
@@ -1892,8 +1866,6 @@ components:
     SummarizedAttackVectorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SummarizedAttackVector'
     SubResourceSummary:
       type: object

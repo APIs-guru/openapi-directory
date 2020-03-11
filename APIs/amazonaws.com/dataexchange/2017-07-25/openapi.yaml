@@ -1393,8 +1393,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2113,8 +2111,6 @@ components:
     ListOfJobError:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobError'
     State:
       type: string
@@ -2208,8 +2204,6 @@ components:
       type: array
       description: The list of sources for the assets.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssetSourceEntry'
     Details:
       type: object
@@ -2245,8 +2239,6 @@ components:
       type: array
       description: The destination where the assets will be exported.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssetDestinationEntry'
     ExportAssetsToS3ResponseDetails:
       type: object
@@ -2421,8 +2413,6 @@ components:
     ListOfRevisionEntry:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RevisionEntry'
     ListDataSetsRequest:
       type: object
@@ -2431,8 +2421,6 @@ components:
     ListOfDataSetEntry:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataSetEntry'
     ListJobsRequest:
       type: object
@@ -2441,8 +2429,6 @@ components:
     ListOfJobEntry:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JobEntry'
     ListRevisionAssetsRequest:
       type: object
@@ -2451,8 +2437,6 @@ components:
     ListOfAssetEntry:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AssetEntry'
     ListTagsForResourceRequest:
       type: object
@@ -2512,8 +2496,6 @@ components:
     ListOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     UntagResourceRequest:
       type: object

@@ -2659,14 +2659,10 @@ components:
     BatchCreateVariableErrorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchCreateVariableError'
     VariableEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VariableEntry'
       minItems: 1
       maxItems: 25
@@ -2686,22 +2682,16 @@ components:
     BatchGetVariableErrorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchGetVariableError'
     NameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/string'
       minItems: 1
       maxItems: 100
     VariableList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Variable'
     identifier:
       type: string
@@ -2715,20 +2705,14 @@ components:
     ListOfStrings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/string'
     RuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Rule'
     ListOfModelVersions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModelVersion'
     nonEmptyString:
       type: string
@@ -2754,8 +2738,6 @@ components:
     NonEmptyListOfStrings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/string'
       minItems: 1
     Rule:
@@ -2799,8 +2781,6 @@ components:
     DetectorVersionSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorVersionSummary'
     MaxResults:
       type: integer
@@ -2809,8 +2789,6 @@ components:
     ModelVersionDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModelVersionDetail'
     time:
       type: string
@@ -2833,8 +2811,6 @@ components:
     DetectorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Detector'
     DetectorVersionSummary:
       type: object
@@ -2965,8 +2941,6 @@ components:
     ExternalModelList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExternalModel'
     ExternalModelsMaxResults:
       type: integer
@@ -2975,8 +2949,6 @@ components:
     ModelList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Model'
     OutcomesMaxResults:
       type: integer
@@ -2985,14 +2957,10 @@ components:
     OutcomeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Outcome'
     ListOfModelScores:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModelScores'
     RulesMaxResults:
       type: integer
@@ -3001,8 +2969,6 @@ components:
     RuleDetailList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RuleDetail'
     VariablesMaxResults:
       type: integer
@@ -3078,8 +3044,6 @@ components:
     ModelVariablesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ModelVariable'
     Model:
       type: object

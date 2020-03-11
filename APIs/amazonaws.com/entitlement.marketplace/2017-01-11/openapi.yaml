@@ -308,8 +308,6 @@ components:
     EntitlementList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Entitlement'
       minItems: 0
     Integer:
@@ -323,8 +321,6 @@ components:
     FilterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
       minItems: 1
     GetEntitlementFilterName:

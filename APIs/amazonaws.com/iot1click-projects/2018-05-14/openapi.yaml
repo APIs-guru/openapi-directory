@@ -1022,8 +1022,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -1403,8 +1401,6 @@ components:
     PlacementSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PlacementSummary'
     ListProjectsRequest:
       type: object
@@ -1413,8 +1409,6 @@ components:
     ProjectSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProjectSummary'
     ProjectArn:
       type: string
@@ -1473,8 +1467,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

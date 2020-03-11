@@ -1416,8 +1416,6 @@ components:
     ComplianceViolators:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComplianceViolator'
     CustomerPolicyScopeId:
       type: string
@@ -1427,8 +1425,6 @@ components:
     CustomerPolicyScopeIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CustomerPolicyScopeId'
     CustomerPolicyScopeIdType:
       type: string
@@ -1479,8 +1475,6 @@ components:
     EvaluationResults:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EvaluationResult'
     PolicyComplianceDetail:
       type: object
@@ -1584,26 +1578,18 @@ components:
     PolicyComplianceStatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicyComplianceStatus'
     MemberAccounts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AWSAccountId'
     PolicySummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PolicySummary'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
@@ -1636,14 +1622,10 @@ components:
     ResourceTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceType'
     ResourceTags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceTag'
       minItems: 0
       maxItems: 8
@@ -1741,8 +1723,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

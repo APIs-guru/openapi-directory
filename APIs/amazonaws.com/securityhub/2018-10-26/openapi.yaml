@@ -264,8 +264,6 @@ paths:
                   description: The ARNs of the standards subscriptions to disable.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                   minItems: 1
                   maxItems: 25
@@ -326,8 +324,6 @@ paths:
                   description: The list of standards checks to enable.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/StandardsSubscriptionRequest'
                   minItems: 1
                   maxItems: 25
@@ -388,8 +384,6 @@ paths:
                   description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">AWS Security Finding Format</a>. Maximum of 100 findings per request.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AwsSecurityFinding'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -847,8 +841,6 @@ paths:
                   description: 'The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and the email address.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountDetails'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -962,8 +954,6 @@ paths:
                   description: The list of account IDs for the accounts from which to decline the invitations to Security Hub.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1515,8 +1505,6 @@ paths:
                   description: The list of the account IDs that sent the invitations to delete.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1579,8 +1567,6 @@ paths:
                   description: The list of account IDs for the member accounts to delete.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1649,8 +1635,6 @@ paths:
                   description: A list of custom action target ARNs for the custom action targets to retrieve.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                 NextToken:
                   description: '<p>The token that is required for pagination. On your first call to the <code>DescribeActionTargets</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
@@ -2150,8 +2134,6 @@ paths:
                   description: The account IDs of the member accounts to disassociate from the master account.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2326,8 +2308,6 @@ paths:
                   description: The list of the standards subscription ARNs for the standards to retrieve.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                   minItems: 1
                   maxItems: 25
@@ -2659,8 +2639,6 @@ paths:
                   description: The finding attributes used to sort the list of returned findings.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SortCriterion'
                 NextToken:
                   description: '<p>The token that is required for pagination. On your first call to the <code>GetFindings</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
@@ -3119,8 +3097,6 @@ paths:
                   description: The ARNs of the insights to describe.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                 NextToken:
                   description: '<p>The token that is required for pagination. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
@@ -3237,8 +3213,6 @@ paths:
                   description: 'The list of account IDs for the Security Hub member accounts to return the details for. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3301,8 +3275,6 @@ paths:
                   description: 'The list of account IDs of the AWS accounts to invite to Security Hub as members. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -3511,8 +3483,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -3821,38 +3791,26 @@ components:
     StringFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StringFilter'
     DateFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DateFilter'
     NumberFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NumberFilter'
     MapFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MapFilter'
     IpFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpFilter'
     KeywordFilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeywordFilter'
     CreateMembersResponse:
       type: object
@@ -4128,14 +4086,10 @@ components:
     AccountDetailsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountDetails'
     AccountIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     ActionTarget:
       type: object
@@ -4157,14 +4111,10 @@ components:
     ActionTargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ActionTarget'
     ArnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     AvailabilityZone:
       type: object
@@ -4179,8 +4129,6 @@ components:
     AvailabilityZones:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZone'
     AwsCloudFrontDistributionLogging:
       type: object
@@ -4248,8 +4196,6 @@ components:
     AwsCloudFrontDistributionOriginItemList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsCloudFrontDistributionOriginItem'
     AwsCodeBuildProjectEnvironment:
       type: object
@@ -4333,14 +4279,10 @@ components:
     NonEmptyStringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     AwsEc2InstanceDetails:
       type: object
@@ -4401,8 +4343,6 @@ components:
     AwsEc2NetworkInterfaceSecurityGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2NetworkInterfaceSecurityGroup'
     AwsEc2NetworkInterfaceDetails:
       type: object
@@ -4433,8 +4373,6 @@ components:
     AwsEc2SecurityGroupIpPermissionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2SecurityGroupIpPermission'
     AwsEc2SecurityGroupDetails:
       type: object
@@ -4461,26 +4399,18 @@ components:
     AwsEc2SecurityGroupUserIdGroupPairList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2SecurityGroupUserIdGroupPair'
     AwsEc2SecurityGroupIpRangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2SecurityGroupIpRange'
     AwsEc2SecurityGroupIpv6RangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2SecurityGroupIpv6Range'
     AwsEc2SecurityGroupPrefixListIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsEc2SecurityGroupPrefixListId'
     AwsEc2SecurityGroupIpPermission:
       type: object
@@ -4634,8 +4564,6 @@ components:
     SecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     LoadBalancerState:
       type: object
@@ -4797,8 +4725,6 @@ components:
     AwsLambdaFunctionLayerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsLambdaFunctionLayer'
     AwsLambdaFunctionTracingConfig:
       type: object
@@ -4929,8 +4855,6 @@ components:
     AwsRdsDbInstanceAssociatedRoles:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsRdsDbInstanceAssociatedRole'
     AwsRdsDbInstanceEndpoint:
       type: object
@@ -4948,8 +4872,6 @@ components:
     AwsRdsDbInstanceVpcSecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsRdsDbInstanceVpcSecurityGroup'
     AwsRdsDbInstanceDetails:
       type: object
@@ -5035,8 +4957,6 @@ components:
     TypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     Severity:
       type: object
@@ -5060,8 +4980,6 @@ components:
     MalwareList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Malware'
     Network:
       type: object
@@ -5125,14 +5043,10 @@ components:
     ThreatIntelIndicatorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ThreatIntelIndicator'
     ResourceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Resource'
     Compliance:
       type: object
@@ -5167,8 +5081,6 @@ components:
     RelatedFindingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RelatedFinding'
     Note:
       type: object
@@ -5443,14 +5355,10 @@ components:
     AwsSecurityFindingList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsSecurityFinding'
     AwsSnsTopicSubscriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsSnsTopicSubscription'
     AwsSnsTopicDetails:
       type: object
@@ -5497,8 +5405,6 @@ components:
     AwsWafWebAclRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AwsWafWebAclRule'
     AwsWafWebAclDetails:
       type: object
@@ -5526,8 +5432,6 @@ components:
     WafExcludedRuleList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WafExcludedRule'
     WafOverrideAction:
       type: object
@@ -5561,8 +5465,6 @@ components:
     StandardsSubscriptionArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
       minItems: 1
       maxItems: 25
@@ -5578,14 +5480,10 @@ components:
     StandardsSubscriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StandardsSubscription'
     StandardsSubscriptionRequests:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StandardsSubscriptionRequest'
       minItems: 1
       maxItems: 25
@@ -5610,14 +5508,10 @@ components:
     ImportFindingsErrorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImportFindingsError'
     CategoryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     ComplianceStatus:
       type: string
@@ -5629,8 +5523,6 @@ components:
     RelatedRequirementsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     ContainerDetails:
       type: object
@@ -5697,8 +5589,6 @@ components:
     ResultList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Result'
     DateRange:
       type: object
@@ -5790,8 +5680,6 @@ components:
     ProductsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Product'
     DescribeStandardsControlsRequest:
       type: object
@@ -5800,8 +5688,6 @@ components:
     StandardsControls:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StandardsControl'
     DescribeStandardsRequest:
       type: object
@@ -5810,8 +5696,6 @@ components:
     Standards:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Standard'
     DisableImportFindingsForProductRequest:
       type: object
@@ -5870,8 +5754,6 @@ components:
     SortCriteria:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SortCriterion'
     GetFindingsRequest:
       type: object
@@ -5926,8 +5808,6 @@ components:
     InsightList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Insight'
     GetInvitationsCountRequest:
       type: object
@@ -5965,8 +5845,6 @@ components:
     MemberList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Member'
     ImportFindingsError:
       type: object
@@ -6022,8 +5900,6 @@ components:
     InsightResultValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InsightResultValue'
     IntegrationType:
       type: string
@@ -6033,8 +5909,6 @@ components:
     IntegrationTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IntegrationType'
     Timestamp:
       type: string
@@ -6042,8 +5916,6 @@ components:
     InvitationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Invitation'
     InviteMembersRequest:
       type: object
@@ -6073,8 +5945,6 @@ components:
     ProductSubscriptionArnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     ListInvitationsRequest:
       type: object
@@ -6471,8 +6341,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

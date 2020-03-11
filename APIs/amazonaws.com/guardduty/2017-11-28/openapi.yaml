@@ -238,8 +238,6 @@ paths:
                   description: IDs of the findings that you want to archive.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -703,8 +701,6 @@ paths:
                   description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountDetail'
                   minItems: 1
                   maxItems: 50
@@ -951,8 +947,6 @@ paths:
                   description: Types of sample findings to generate.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingType'
                   minItems: 0
                   maxItems: 50
@@ -1147,8 +1141,6 @@ paths:
                   description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -1608,8 +1600,6 @@ paths:
                   description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -1666,8 +1656,6 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to delete.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2041,8 +2029,6 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2099,8 +2085,6 @@ paths:
                   description: IDs of the findings that you want to retrieve.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -2167,8 +2151,6 @@ paths:
                   description: Types of finding statistics to retrieve.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingStatisticType'
                   minItems: 0
                   maxItems: 10
@@ -2264,8 +2246,6 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts that you want to describe.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2322,8 +2302,6 @@ paths:
                   description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2613,8 +2591,6 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts to start monitoring.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2671,8 +2647,6 @@ paths:
                   description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
@@ -2729,8 +2703,6 @@ paths:
                   description: IDs of the findings to unarchive.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -2780,8 +2752,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 200
@@ -2839,8 +2809,6 @@ paths:
                   description: IDs of the findings that you want to mark as useful or not useful.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FindingId'
                   minItems: 0
                   maxItems: 50
@@ -3415,16 +3383,12 @@ components:
     AccountDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountDetail'
       minItems: 1
       maxItems: 50
     AccountIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 50
@@ -3511,8 +3475,6 @@ components:
     FindingIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FindingId'
       minItems: 0
       maxItems: 50
@@ -3567,28 +3529,20 @@ components:
     Eq:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Neq:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Integer:
       type: integer
     Equals:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     NotEquals:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Long:
       type: integer
@@ -3794,8 +3748,6 @@ components:
     UnprocessedAccounts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnprocessedAccount'
       minItems: 0
       maxItems: 50
@@ -3834,8 +3786,6 @@ components:
     FindingTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FindingType'
       minItems: 0
       maxItems: 50
@@ -3964,14 +3914,10 @@ components:
     Destinations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Destination'
     DetectorIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DetectorId'
       minItems: 0
       maxItems: 50
@@ -4001,8 +3947,6 @@ components:
     ThreatIntelligenceDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ThreatIntelligenceDetail'
     Evidence:
       type: object
@@ -4019,8 +3963,6 @@ components:
     FilterNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterName'
       minItems: 0
       maxItems: 50
@@ -4132,8 +4074,6 @@ components:
     FindingStatisticTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FindingStatisticType'
       minItems: 0
       maxItems: 10
@@ -4147,8 +4087,6 @@ components:
     Findings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Finding'
       minItems: 0
       maxItems: 50
@@ -4256,8 +4194,6 @@ components:
     Members:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Member'
       minItems: 0
       maxItems: 50
@@ -4293,20 +4229,14 @@ components:
     NetworkInterfaces:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NetworkInterface'
     ProductCodes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductCode'
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     InstanceDetails:
       type: object
@@ -4370,8 +4300,6 @@ components:
     Invitations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Invitation'
       minItems: 0
       maxItems: 50
@@ -4393,16 +4321,12 @@ components:
     IpSetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       minItems: 0
       maxItems: 50
     Ipv6Addresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     MaxResults:
       type: integer
@@ -4459,8 +4383,6 @@ components:
     ThreatIntelSetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
       minItems: 0
       maxItems: 50
@@ -4525,14 +4447,10 @@ components:
     PrivateIpAddresses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PrivateIpAddressDetails'
     SecurityGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroup'
     NetworkInterface:
       type: object
@@ -4587,8 +4505,6 @@ components:
     PortProbeDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PortProbeDetail'
     PortProbeDetail:
       type: object
@@ -4664,8 +4580,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200
@@ -4681,8 +4595,6 @@ components:
     ThreatNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ThreatIntelligenceDetail:
       type: object

@@ -2137,8 +2137,6 @@ components:
     CognitoIdentityProviderList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CognitoIdentityProvider'
     IdentityPoolName:
       type: string
@@ -2160,14 +2158,10 @@ components:
     OIDCProviderList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ARNString'
     SAMLProviderList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ARNString'
     IdentityPoolTagsType:
       type: object
@@ -2199,16 +2193,12 @@ components:
     IdentityIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IdentityId'
       minItems: 1
       maxItems: 60
     UnprocessedIdentityIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnprocessedIdentityId'
       maxItems: 60
     IdentityPoolId:
@@ -2228,8 +2218,6 @@ components:
     DeveloperUserIdentifierList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DeveloperUserIdentifier'
     ErrorCode:
       type: string
@@ -2262,14 +2250,10 @@ components:
     IdentitiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IdentityDescription'
     LoginsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IdentityProviderName'
     IdentityPoolShortDescription:
       type: object
@@ -2288,8 +2272,6 @@ components:
     IdentityPoolTagsListType:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKeysType'
     TagValueType:
       type: string
@@ -2298,8 +2280,6 @@ components:
     IdentityPoolsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IdentityPoolShortDescription'
     IdentityProviderId:
       type: string
@@ -2353,8 +2333,6 @@ components:
     MappingRulesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MappingRule'
       minItems: 1
       maxItems: 25

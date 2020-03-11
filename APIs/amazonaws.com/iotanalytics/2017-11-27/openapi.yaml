@@ -168,8 +168,6 @@ paths:
                   description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Message'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -331,8 +329,6 @@ paths:
                   description: Metadata which can be used to manage the channel.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -461,8 +457,6 @@ paths:
                   description: A list of actions that create the data set contents.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetAction'
                   minItems: 1
                   maxItems: 1
@@ -470,8 +464,6 @@ paths:
                   description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetTrigger'
                   minItems: 0
                   maxItems: 5
@@ -479,8 +471,6 @@ paths:
                   description: When data set contents are created they are delivered to destinations specified here.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetContentDeliveryRule'
                   minItems: 0
                   maxItems: 20
@@ -508,8 +498,6 @@ paths:
                   description: Metadata which can be used to manage the data set.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -828,8 +816,6 @@ paths:
                   description: Metadata which can be used to manage the data store.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -958,8 +944,6 @@ paths:
                   description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/PipelineActivity'
                   minItems: 1
                   maxItems: 25
@@ -967,8 +951,6 @@ paths:
                   description: Metadata which can be used to manage the pipeline.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -1377,8 +1359,6 @@ paths:
                   description: A list of "DatasetAction" objects.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetAction'
                   minItems: 1
                   maxItems: 1
@@ -1386,8 +1366,6 @@ paths:
                   description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetTrigger'
                   minItems: 0
                   maxItems: 5
@@ -1395,8 +1373,6 @@ paths:
                   description: When data set contents are created they are delivered to destinations specified here.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DatasetContentDeliveryRule'
                   minItems: 0
                   maxItems: 20
@@ -1774,8 +1750,6 @@ paths:
                   description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/PipelineActivity'
                   minItems: 1
                   maxItems: 25
@@ -2101,8 +2075,6 @@ paths:
                   description: The new or modified tags for the resource.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
@@ -2190,8 +2162,6 @@ paths:
                   description: The sample message payloads on which the pipeline activity is run.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/MessagePayload'
                   minItems: 1
                   maxItems: 10
@@ -2427,8 +2397,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -3049,8 +3017,6 @@ components:
     AttributeNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AttributeName'
       minItems: 1
       maxItems: 50
@@ -3070,8 +3036,6 @@ components:
     BatchPutMessageErrorEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchPutMessageErrorEntry'
     MessageId:
       type: string
@@ -3089,8 +3053,6 @@ components:
     Messages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Message'
     BatchPutMessageRequest:
       type: object
@@ -3248,8 +3210,6 @@ components:
     ChannelSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ChannelSummary'
     ComputeType:
       type: string
@@ -3275,8 +3235,6 @@ components:
     Variables:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Variable'
       minItems: 0
       maxItems: 50
@@ -3303,8 +3261,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -3342,24 +3298,18 @@ components:
     DatasetActions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetAction'
       minItems: 1
       maxItems: 1
     DatasetTriggers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetTrigger'
       minItems: 0
       maxItems: 5
     DatasetContentDeliveryRules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetContentDeliveryRule'
       minItems: 0
       maxItems: 20
@@ -3441,8 +3391,6 @@ components:
     PipelineActivities:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PipelineActivity'
       minItems: 1
       maxItems: 25
@@ -3552,8 +3500,6 @@ components:
     DatasetActionSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetActionSummary'
       minItems: 1
       maxItems: 1
@@ -3647,8 +3593,6 @@ components:
     DatasetContentSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetContentSummary'
     DatasetContentVersionValue:
       type: object
@@ -3672,8 +3616,6 @@ components:
     DatasetEntries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetEntry'
     PresignedURI:
       type: string
@@ -3702,8 +3644,6 @@ components:
     DatasetSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatasetSummary'
     Schedule:
       type: object
@@ -3795,8 +3735,6 @@ components:
     DatastoreSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DatastoreSummary'
     DeleteChannelRequest:
       type: object
@@ -3975,8 +3913,6 @@ components:
     PipelineSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PipelineSummary'
     ResourceArn:
       type: string
@@ -3999,8 +3935,6 @@ components:
     MessagePayloads:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MessagePayload'
       minItems: 1
       maxItems: 10
@@ -4019,8 +3953,6 @@ components:
     ReprocessingSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReprocessingSummary'
     PipelineSummary:
       type: object
@@ -4057,8 +3989,6 @@ components:
     QueryFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/QueryFilter'
       minItems: 0
       maxItems: 1
@@ -4131,8 +4061,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

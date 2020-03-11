@@ -885,8 +885,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 0
             maxItems: 200
@@ -1326,8 +1324,6 @@ components:
     JournalS3ExportList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/JournalS3ExportDescription'
     LedgerSummary:
       type: object
@@ -1345,8 +1341,6 @@ components:
     LedgerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LedgerSummary'
     MaxResults:
       type: integer
@@ -1382,8 +1376,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200

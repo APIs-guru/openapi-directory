@@ -2432,8 +2432,6 @@ components:
     CloudWatchLoggingOptionDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOptionDescription'
     Id:
       type: string
@@ -2484,8 +2482,6 @@ components:
     InputDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputDescription'
     Output:
       type: object
@@ -2512,8 +2508,6 @@ components:
     OutputDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputDescription'
     ReferenceDataSource:
       type: object
@@ -2534,8 +2528,6 @@ components:
     ReferenceDataSourceDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReferenceDataSourceDescription'
     VpcConfiguration:
       type: object
@@ -2699,8 +2691,6 @@ components:
     VpcConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcConfiguration'
     ApplicationConfiguration:
       type: object
@@ -2781,8 +2771,6 @@ components:
     VpcConfigurationDescriptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcConfigurationDescription'
     ApplicationConfigurationDescription:
       type: object
@@ -2856,8 +2844,6 @@ components:
     VpcConfigurationUpdates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/VpcConfigurationUpdate'
     ApplicationConfigurationUpdate:
       type: object
@@ -3004,8 +2990,6 @@ components:
     ApplicationSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ApplicationSummary'
     BucketARN:
       type: string
@@ -3127,14 +3111,10 @@ components:
     CloudWatchLoggingOptionUpdates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOptionUpdate'
     CloudWatchLoggingOptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CloudWatchLoggingOption'
     TextContent:
       type: string
@@ -3200,8 +3180,6 @@ components:
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 200
@@ -3278,26 +3256,18 @@ components:
     ParsedInputRecords:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParsedInputRecord'
     ProcessedInputRecords:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProcessedInputRecord'
     RawInputRecords:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RawInputRecord'
     PropertyGroups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PropertyGroup'
       maxItems: 50
     FileKey:
@@ -3414,8 +3384,6 @@ components:
     InAppStreamNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InAppStreamName'
     InAppTableName:
       type: string
@@ -3571,8 +3539,6 @@ components:
     RecordColumns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecordColumn'
       minItems: 1
       maxItems: 1000
@@ -3643,14 +3609,10 @@ components:
     InputUpdates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InputUpdate'
     Inputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Input'
     RecordRowPath:
       type: string
@@ -3770,8 +3732,6 @@ components:
     SnapshotSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SnapshotDetails'
     ListApplicationsInputLimit:
       type: integer
@@ -3852,14 +3812,10 @@ components:
     OutputUpdates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OutputUpdate'
     Outputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Output'
     Parallelism:
       type: integer
@@ -3872,8 +3828,6 @@ components:
     ParsedInputRecord:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ParsedInputRecordField'
     ProcessedInputRecord:
       type: string
@@ -4006,20 +3960,14 @@ components:
     ReferenceDataSourceUpdates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReferenceDataSourceUpdate'
     ReferenceDataSources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReferenceDataSource'
     SqlRunConfigurations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SqlRunConfiguration'
     RunConfiguration:
       type: object
@@ -4049,8 +3997,6 @@ components:
     SecurityGroupIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       minItems: 1
       maxItems: 5
@@ -4079,8 +4025,6 @@ components:
     SubnetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       minItems: 1
       maxItems: 16
@@ -4107,8 +4051,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 200

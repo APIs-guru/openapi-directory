@@ -2193,8 +2193,6 @@ components:
     SecurityGroupIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceId'
     ResolverEndpointDirection:
       type: string
@@ -2204,16 +2202,12 @@ components:
     IpAddressesRequest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpAddressRequest'
       minItems: 1
       maxItems: 10
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     RuleTypeOption:
       type: string
@@ -2228,8 +2222,6 @@ components:
     TargetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetAddress'
       minItems: 1
     ResolverRule:
@@ -2279,8 +2271,6 @@ components:
     FilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
     Filter:
       type: object
@@ -2299,8 +2289,6 @@ components:
     Filters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
     ResolverRulePolicy:
       type: string
@@ -2375,8 +2363,6 @@ components:
     IpAddressesResponse:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpAddressResponse'
     MaxResults:
       type: integer
@@ -2387,20 +2373,14 @@ components:
     ResolverEndpoints:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResolverEndpoint'
     ResolverRuleAssociations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResolverRuleAssociation'
     ResolverRules:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResolverRule'
     Port:
       type: integer
@@ -2466,8 +2446,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TargetAddress:
       type: object

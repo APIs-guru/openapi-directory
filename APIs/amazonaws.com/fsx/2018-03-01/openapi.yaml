@@ -1736,8 +1736,6 @@ components:
       type: array
       description: 'A list of <code>Tag</code> values, with a maximum of 50 elements.'
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 50
@@ -1842,16 +1840,12 @@ components:
       type: array
       description: A list of backup IDs.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BackupId'
       maxItems: 50
     Backups:
       type: array
       description: A list of backups.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Backup'
       maxItems: 50
     TaskId:
@@ -1915,8 +1909,6 @@ components:
     DataRepositoryTaskPaths:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataRepositoryTaskPath'
       maxItems: 100
     DataRepositoryTask:
@@ -1967,16 +1959,12 @@ components:
       type: array
       description: 'A list of subnet IDs. Currently, you can specify only one subnet ID in a call to the <code>CreateFileSystem</code> operation.'
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       maxItems: 50
     SecurityGroupIds:
       type: array
       description: A list of security group IDs.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       maxItems: 50
     CreateFileSystemWindowsConfiguration:
@@ -2167,8 +2155,6 @@ components:
     DataRepositoryTaskFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataRepositoryTaskFilterValue'
       maxItems: 20
     DataRepositoryTaskFilter:
@@ -2189,8 +2175,6 @@ components:
     DataRepositoryTaskFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataRepositoryTaskFilter'
       maxItems: 3
     DataRepositoryTaskPath:
@@ -2210,8 +2194,6 @@ components:
     DataRepositoryTasks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataRepositoryTask'
       maxItems: 50
     DeleteFileSystemWindowsConfiguration:
@@ -2248,8 +2230,6 @@ components:
       type: array
       description: A list of <code>Filter</code> elements.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
       maxItems: 10
     MaxResults:
@@ -2265,24 +2245,18 @@ components:
     TaskIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TaskId'
       maxItems: 50
     FileSystemIds:
       type: array
       description: A list of <code>FileSystemId</code>s.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FileSystemId'
       maxItems: 50
     FileSystems:
       type: array
       description: A list of file systems.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FileSystem'
       maxItems: 50
     DirectoryPassword:
@@ -2304,8 +2278,6 @@ components:
     DnsIps:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpAddress'
       minItems: 1
       maxItems: 2
@@ -2326,8 +2298,6 @@ components:
       type: array
       description: A list of network interface IDs.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NetworkInterfaceId'
       maxItems: 50
     WindowsFileSystemConfiguration:
@@ -2402,8 +2372,6 @@ components:
       type: array
       description: A list of maintenance operations.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FileSystemMaintenanceOperation'
       maxItems: 20
     FilterName:
@@ -2416,8 +2384,6 @@ components:
       type: array
       description: A list of filter values.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
       maxItems: 20
     Filter:
@@ -2516,8 +2482,6 @@ components:
       type: array
       description: 'A list of <code>TagKey</code> values, with a maximum of 50 elements.'
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

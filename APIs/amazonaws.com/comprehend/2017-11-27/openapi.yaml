@@ -4453,8 +4453,6 @@ components:
     ListOfDominantLanguages:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DominantLanguage'
     BatchDetectDominantLanguageItemResult:
       type: object
@@ -4469,26 +4467,18 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ListOfDetectDominantLanguageResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDetectDominantLanguageItemResult'
     BatchItemErrorList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchItemError'
     ListOfEntities:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Entity'
     BatchDetectEntitiesItemResult:
       type: object
@@ -4518,14 +4508,10 @@ components:
     ListOfDetectEntitiesResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDetectEntitiesItemResult'
     ListOfKeyPhrases:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeyPhrase'
     BatchDetectKeyPhrasesItemResult:
       type: object
@@ -4540,8 +4526,6 @@ components:
     ListOfDetectKeyPhrasesResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDetectKeyPhrasesItemResult'
     SentimentType:
       type: string
@@ -4582,14 +4566,10 @@ components:
     ListOfDetectSentimentResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDetectSentimentItemResult'
     ListOfSyntaxTokens:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SyntaxToken'
     BatchDetectSyntaxItemResult:
       type: object
@@ -4613,8 +4593,6 @@ components:
     ListOfDetectSyntaxResult:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchDetectSyntaxItemResult'
     String:
       type: string
@@ -4686,14 +4664,10 @@ components:
     ListOfClasses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentClass'
     ListOfLabels:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentLabel'
     ClientRequestTokenString:
       type: string
@@ -4728,8 +4702,6 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
     DocumentClassifierInputDataConfig:
       type: object
@@ -5242,8 +5214,6 @@ components:
     DocumentClassificationJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentClassificationJobProperties'
     ModelStatus:
       type: string
@@ -5280,8 +5250,6 @@ components:
     DocumentClassifierPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DocumentClassifierProperties'
     DocumentLabel:
       type: object
@@ -5322,8 +5290,6 @@ components:
     DominantLanguageDetectionJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DominantLanguageDetectionJobProperties'
     EndpointStatus:
       type: string
@@ -5352,8 +5318,6 @@ components:
     EndpointPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EndpointProperties'
     EntitiesDetectionJobFilter:
       type: object
@@ -5374,8 +5338,6 @@ components:
     EntitiesDetectionJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntitiesDetectionJobProperties'
     EntityType:
       type: string
@@ -5464,14 +5426,10 @@ components:
     EntityTypesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntityTypesListItem'
     EntityRecognizerMetadataEntityTypesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntityRecognizerMetadataEntityTypesListItem'
     EntityRecognizerMetadata:
       type: object
@@ -5518,8 +5476,6 @@ components:
     EntityRecognizerPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EntityRecognizerProperties'
     EntityTypeName:
       type: string
@@ -5574,8 +5530,6 @@ components:
     KeyPhrasesDetectionJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/KeyPhrasesDetectionJobProperties'
     MaxResultsInteger:
       type: integer
@@ -5619,8 +5573,6 @@ components:
     SentimentDetectionJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SentimentDetectionJobProperties'
     TopicsDetectionJobFilter:
       type: object
@@ -5641,8 +5593,6 @@ components:
     TopicsDetectionJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TopicsDetectionJobProperties'
     NumberOfTopicsInteger:
       type: integer
@@ -5687,8 +5637,6 @@ components:
     SecurityGroupIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       minItems: 1
       maxItems: 5
@@ -5700,8 +5648,6 @@ components:
     Subnets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       minItems: 1
       maxItems: 16
@@ -5728,8 +5674,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
 security:
   - hmac: []

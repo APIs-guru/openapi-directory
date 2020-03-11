@@ -177,8 +177,6 @@ paths:
                   description: 'A list of event types associated with this notification rule. For a list of allowed events, see <a>EventTypeSummary</a>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/EventTypeId'
                 Resource:
                   description: 'The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in AWS CodePipeline, repositories in AWS CodeCommit, and build projects in AWS CodeBuild.'
@@ -188,8 +186,6 @@ paths:
                   description: A list of Amazon Resource Names (ARNs) of SNS topics to associate with the notification rule.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Target'
                   maxItems: 10
                 DetailType:
@@ -410,8 +406,6 @@ paths:
                   description: The filters to use to return information by service or resource type.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ListEventTypesFilter'
                 NextToken:
                   description: 'An enumeration token that, when provided in a request, returns the next batch of the results.'
@@ -477,8 +471,6 @@ paths:
                   description: '<p>The filters to use to return information by service or resource type. For valid values, see <a>ListNotificationRulesFilter</a>.</p> <note> <p>A filter with the same name can appear more than once when used with OR statements. Filters with different names should be applied with AND statements.</p> </note>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ListNotificationRulesFilter'
                 NextToken:
                   description: 'An enumeration token that, when provided in a request, returns the next batch of the results.'
@@ -589,8 +581,6 @@ paths:
                   description: '<p>The filters to use to return information by service or resource type. Valid filters include target type, target address, and target status.</p> <note> <p>A filter with the same name can appear more than once when used with OR statements. Filters with different names should be applied with AND statements.</p> </note>'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ListTargetsFilter'
                 NextToken:
                   description: 'An enumeration token that, when provided in a request, returns the next batch of the results.'
@@ -822,8 +812,6 @@ paths:
                   description: The key names of the tags to remove.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -887,15 +875,11 @@ paths:
                   description: A list of event types associated with this notification rule.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/EventTypeId'
                 Targets:
                   description: The address and type of the targets to receive notifications from this notification rule.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Target'
                   maxItems: 10
                 DetailType:
@@ -1168,8 +1152,6 @@ components:
     EventTypeIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventTypeId'
     NotificationRuleResource:
       type: string
@@ -1177,8 +1159,6 @@ components:
     Targets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Target'
       maxItems: 10
     DetailType:
@@ -1270,14 +1250,10 @@ components:
     EventTypeBatch:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventTypeSummary'
     TargetsBatch:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TargetSummary'
     NotificationRuleCreatedBy:
       type: string
@@ -1319,8 +1295,6 @@ components:
     ListEventTypesFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListEventTypesFilter'
     NextToken:
       type: string
@@ -1354,8 +1328,6 @@ components:
     ListNotificationRulesFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListNotificationRulesFilter'
     ListNotificationRulesRequest:
       type: object
@@ -1373,8 +1345,6 @@ components:
     NotificationRuleBatch:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NotificationRuleSummary'
     ListTagsForResourceRequest:
       type: object
@@ -1396,8 +1366,6 @@ components:
     ListTargetsFilters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ListTargetsFilter'
     ListTargetsRequest:
       type: object
@@ -1444,8 +1412,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

@@ -691,8 +691,6 @@ paths:
                   description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1306,8 +1304,6 @@ paths:
                   description: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/__string'
   '/harvest_jobs/{id}':
     get:
@@ -1576,8 +1572,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1770,8 +1764,6 @@ components:
     __listOfHlsManifestCreateOrUpdateParameters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HlsManifestCreateOrUpdateParameters'
     __integer:
       type: integer
@@ -1795,8 +1787,6 @@ components:
         ad markers are output.  Specify multiple items to create ad markers for all of the included
         message types.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__AdTriggersElement'
     AdsOnDeliveryRestrictions:
       enum:
@@ -1833,8 +1823,6 @@ components:
     __listOf__PeriodTriggersElement:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__PeriodTriggersElement'
     Profile:
       enum:
@@ -2226,8 +2214,6 @@ components:
     __listOfHlsManifest:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HlsManifest'
     CmafPackage:
       type: object
@@ -2462,8 +2448,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     CreateOriginEndpointRequest:
       required:
@@ -2590,8 +2574,6 @@ components:
     __listOfIngestEndpoint:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IngestEndpoint'
     HlsManifest:
       required:
@@ -2717,8 +2699,6 @@ components:
     __listOfChannel:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Channel'
     ListHarvestJobsRequest:
       type: object
@@ -2727,8 +2707,6 @@ components:
     __listOfHarvestJob:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HarvestJob'
     ListOriginEndpointsRequest:
       type: object
@@ -2737,8 +2715,6 @@ components:
     __listOfOriginEndpoint:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OriginEndpoint'
     ListTagsForResourceRequest:
       type: object

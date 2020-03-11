@@ -967,8 +967,6 @@ paths:
                   description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/LayerVersionArn'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2479,8 +2477,6 @@ paths:
                   description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/LayerVersionArn'
   '/2018-10-31/layers#find=LayerVersion&Arn':
     get:
@@ -3132,8 +3128,6 @@ paths:
                   description: 'A list of compatible <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">function runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Runtime'
                   maxItems: 5
                 LicenseInfo:
@@ -3756,8 +3750,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4165,15 +4157,11 @@ components:
     SubnetIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SubnetId'
       maxItems: 16
     SecurityGroupIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SecurityGroupId'
       maxItems: 5
     ResourceArn:
@@ -4720,8 +4708,6 @@ components:
     AliasList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AliasConfiguration'
     BatchSize:
       type: integer
@@ -4736,8 +4722,6 @@ components:
     CompatibleRuntimes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Runtime'
       maxItems: 5
     ReservedConcurrentExecutions:
@@ -4913,8 +4897,6 @@ components:
     LayerList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LayerVersionArn'
     CreateFunctionRequest:
       type: object
@@ -5040,8 +5022,6 @@ components:
     EventSourceMappingsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EventSourceMappingConfiguration'
     FunctionCodeLocation:
       type: object
@@ -5086,8 +5066,6 @@ components:
     LayersReferenceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Layer'
     State:
       type: string
@@ -5140,14 +5118,10 @@ components:
     FunctionEventInvokeConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FunctionEventInvokeConfig'
     FunctionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FunctionConfiguration'
     FunctionVersion:
       type: string
@@ -5315,8 +5289,6 @@ components:
     LayerVersionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LayerVersionsListItem'
     LayersListItem:
       type: object
@@ -5334,8 +5306,6 @@ components:
     LayersList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LayersListItem'
     MaxListItems:
       type: integer
@@ -5387,8 +5357,6 @@ components:
     ProvisionedConcurrencyConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisionedConcurrencyConfigListItem'
     ListTagsRequest:
       type: object
@@ -5505,8 +5473,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagResourceRequest:
       type: object

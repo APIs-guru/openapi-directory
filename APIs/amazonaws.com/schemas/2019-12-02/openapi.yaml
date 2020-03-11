@@ -1334,8 +1334,6 @@ paths:
                   description: An array of strings that
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/GetDiscoveredSchemaVersionItemInput'
                   minItems: 1
                   maxItems: 10
@@ -2106,8 +2104,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2630,8 +2626,6 @@ components:
     __listOfGetDiscoveredSchemaVersionItemInput:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GetDiscoveredSchemaVersionItemInput'
       minItems: 1
       maxItems: 10
@@ -2657,8 +2651,6 @@ components:
     __listOfDiscovererSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DiscovererSummary'
     ListRegistriesRequest:
       type: object
@@ -2667,8 +2659,6 @@ components:
     __listOfRegistrySummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RegistrySummary'
     ListSchemaVersionsRequest:
       type: object
@@ -2677,8 +2667,6 @@ components:
     __listOfSchemaVersionSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SchemaVersionSummary'
     ListSchemasRequest:
       type: object
@@ -2687,8 +2675,6 @@ components:
     __listOfSchemaSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SchemaSummary'
     ListTagsForResourceRequest:
       type: object
@@ -2767,8 +2753,6 @@ components:
     __listOfSearchSchemaVersionSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SearchSchemaVersionSummary'
     SearchSchemaSummary:
       type: object
@@ -2800,8 +2784,6 @@ components:
     __listOfSearchSchemaSummary:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SearchSchemaSummary'
     StartDiscovererRequest:
       type: object
@@ -2830,8 +2812,6 @@ components:
     __listOf__string:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/__string'
     UntagResourceRequest:
       type: object

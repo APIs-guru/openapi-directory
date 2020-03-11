@@ -1945,8 +1945,6 @@ components:
     ServiceQuotaListDefinition:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceQuota'
     RequestStatus:
       type: string
@@ -1959,20 +1957,14 @@ components:
     RequestedServiceQuotaChangeHistoryListDefinition:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RequestedServiceQuotaChange'
     ServiceQuotaIncreaseRequestInTemplateList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
     ServiceInfoListDefinition:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceInfo'
     MetricDimensionName:
       type: string

@@ -469,8 +469,6 @@ components:
       type: array
       description: A list of additional artifacts.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AdditionalArtifact'
     CompressionFormat:
       type: string
@@ -499,8 +497,6 @@ components:
       type: array
       description: A list of report definitions.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ReportDefinition'
     ReportDefinition:
       type: object
@@ -559,8 +555,6 @@ components:
       type: array
       description: 'A list of strings that indicate the content that is included in the report, such as service or usage type.'
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SchemaElement'
     S3Bucket:
       type: string

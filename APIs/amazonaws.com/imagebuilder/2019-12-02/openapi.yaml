@@ -430,8 +430,6 @@ paths:
                   description: ' The distributions of the distribution configuration. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Distribution'
                 tags:
                   description: ' The tags of the distribution configuration. '
@@ -813,8 +811,6 @@ paths:
                   description: ' The components of the image recipe. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ComponentConfiguration'
                   minItems: 1
                 parentImage:
@@ -826,8 +822,6 @@ paths:
                   description: ' The block device mappings of the image recipe. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/InstanceBlockDeviceMapping'
                 tags:
                   description: ' The tags of the image recipe. '
@@ -939,8 +933,6 @@ paths:
                   description: ' The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
                   description: ' The instance profile to associate with the instance used to customize your EC2 AMI. '
@@ -951,8 +943,6 @@ paths:
                   description: ' The security group IDs to associate with the instance used to customize your EC2 AMI. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
                   description: ' The subnet ID in which to place the instance used to customize your EC2 AMI. '
@@ -2314,8 +2304,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2414,8 +2402,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2520,8 +2506,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2632,8 +2616,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2732,8 +2714,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2839,8 +2819,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -2946,8 +2924,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -3046,8 +3022,6 @@ paths:
                   description: ' The filters. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
@@ -3564,8 +3538,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -3667,8 +3639,6 @@ paths:
                   description: ' The distributions of the distribution configuration. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Distribution'
                 clientToken:
                   description: ' The idempotency token of the distribution configuration. '
@@ -3899,8 +3869,6 @@ paths:
                   description: ' The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
                   description: ' The instance profile to associate with the instance used to customize your EC2 AMI. '
@@ -3911,8 +3879,6 @@ paths:
                   description: ' The security group IDs to associate with the instance used to customize your EC2 AMI. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
                   description: ' The subnet ID to place the instance used to customize your EC2 AMI in. '
@@ -4534,8 +4500,6 @@ components:
     AccountList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     ImageState:
       type: object
@@ -4605,16 +4569,12 @@ components:
     AmiList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Ami'
     Arn:
       type: string
     ArnList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Arn'
     ImageBuildVersionArn:
       type: string
@@ -4711,8 +4671,6 @@ components:
     ComponentConfigurationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComponentConfiguration'
       minItems: 1
     ComponentFormat:
@@ -4756,8 +4714,6 @@ components:
     ComponentSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComponentSummary'
     ComponentVersion:
       type: object
@@ -4793,8 +4749,6 @@ components:
     ComponentVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComponentVersion'
     InlineComponentData:
       type: string
@@ -4844,8 +4798,6 @@ components:
     DistributionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Distribution'
     CreateDistributionConfigurationRequest:
       type: object
@@ -4949,8 +4901,6 @@ components:
     InstanceBlockDeviceMappings:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceBlockDeviceMapping'
     CreateImageRecipeRequest:
       type: object
@@ -5015,14 +4965,10 @@ components:
     InstanceTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceType'
     SecurityGroupIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     Logging:
       type: object
@@ -5161,8 +5107,6 @@ components:
     DistributionConfigurationSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DistributionConfigurationSummary'
     EbsIopsInteger:
       type: integer
@@ -5215,16 +5159,12 @@ components:
     FilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterValue'
       minItems: 1
       maxItems: 10
     FilterList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Filter'
       minItems: 1
       maxItems: 10
@@ -5460,8 +5400,6 @@ components:
     ImagePipelineList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImagePipeline'
     ImageRecipeSummary:
       type: object
@@ -5491,8 +5429,6 @@ components:
     ImageRecipeSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImageRecipeSummary'
     ImageStatus:
       type: string
@@ -5542,8 +5478,6 @@ components:
     ImageSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImageSummary'
     ImageVersion:
       type: object
@@ -5573,8 +5507,6 @@ components:
     ImageVersionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ImageVersion'
     ImportComponentRequest:
       type: object
@@ -5648,14 +5580,10 @@ components:
     InfrastructureConfigurationSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InfrastructureConfigurationSummary'
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NonEmptyString'
     RestrictedInteger:
       type: integer
@@ -5864,8 +5792,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50

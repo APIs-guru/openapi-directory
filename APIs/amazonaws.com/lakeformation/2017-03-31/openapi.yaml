@@ -1140,14 +1140,10 @@ components:
     BatchPermissionsRequestEntryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchPermissionsRequestEntry'
     BatchPermissionsFailureList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BatchPermissionsFailureEntry'
     BatchPermissionsRequestEntry:
       type: object
@@ -1223,8 +1219,6 @@ components:
     PermissionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Permission'
     CatalogResource:
       type: object
@@ -1238,8 +1232,6 @@ components:
     ColumnNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NameString'
     ColumnWildcard:
       type: object
@@ -1269,8 +1261,6 @@ components:
     DataLakePrincipalList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataLakePrincipal'
       minItems: 0
       maxItems: 10
@@ -1284,8 +1274,6 @@ components:
     PrincipalPermissionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PrincipalPermissions'
     DataLakeSettings:
       type: object
@@ -1347,8 +1335,6 @@ components:
     StringValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StringValue'
     FilterCondition:
       type: object
@@ -1366,8 +1352,6 @@ components:
     FilterConditionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FilterCondition'
       minItems: 1
       maxItems: 20
@@ -1380,8 +1364,6 @@ components:
     PrincipalResourcePermissionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PrincipalResourcePermissions'
     IAMRoleArn:
       type: string
@@ -1392,8 +1374,6 @@ components:
     ResourceInfoList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceInfo'
     NullableBoolean:
       type: boolean

@@ -223,8 +223,6 @@ paths:
                   description: The encryption configuration for the cluster.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/EncryptionConfig'
                   maxItems: 1
     parameters:
@@ -358,15 +356,11 @@ paths:
                   description: 'The IDs of subnets to launch your pods into. At this time, pods running on Fargate are not assigned public IP addresses, so only private subnets (with no direct route to an Internet Gateway) are accepted for this parameter.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 selectors:
                   description: 'The selectors to match for pods to use this Fargate profile. Each selector must have an associated namespace. Optionally, you can also specify labels for a namespace. You may specify up to five selectors in a Fargate profile.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/FargateProfileSelector'
                 clientRequestToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -535,15 +529,11 @@ paths:
                   description: 'The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 instanceTypes:
                   description: 'The instance type to use for your node group. Currently, you can specify a single instance type for a node group. The default value for this parameter is <code>t3.medium</code>. If you choose a GPU instance type, be sure to specify the <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/String'
                 amiType:
                   description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI.'
@@ -1295,8 +1285,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/TagKey'
             minItems: 1
             maxItems: 50
@@ -1656,16 +1644,12 @@ components:
     StringList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     BoxedBoolean:
       type: boolean
     LogSetups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogSetup'
     TagValue:
       type: string
@@ -1865,8 +1849,6 @@ components:
     labelsKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     UpdateNodegroupVersionResponse:
       type: object
@@ -1888,8 +1870,6 @@ components:
     AutoScalingGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AutoScalingGroup'
     Boolean:
       type: boolean
@@ -1961,8 +1941,6 @@ components:
     EncryptionConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EncryptionConfig'
       maxItems: 1
     Cluster:
@@ -2073,8 +2051,6 @@ components:
     FargateProfileSelectors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FargateProfileSelector'
     CreateFargateProfileRequest:
       type: object
@@ -2350,8 +2326,6 @@ components:
     ErrorDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ErrorDetail'
     FargateProfileStatus:
       type: string
@@ -2409,8 +2383,6 @@ components:
     IssueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Issue'
     ListClustersRequestMaxResults:
       type: integer
@@ -2447,8 +2419,6 @@ components:
     LogTypes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LogType'
     LogSetup:
       type: object
@@ -2498,8 +2468,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 1
       maxItems: 50
@@ -2533,8 +2501,6 @@ components:
     UpdateParams:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UpdateParam'
     UpdateClusterConfigRequest:
       type: object

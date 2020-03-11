@@ -622,8 +622,6 @@ paths:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/LexiconName'
                   maxItems: 5
                 OutputFormat:
@@ -653,8 +651,6 @@ paths:
                   description: The type of speech marks returned for the input text.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SpeechMarkType'
                   maxItems: 4
                 Text:
@@ -850,8 +846,6 @@ paths:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/LexiconName'
                   maxItems: 5
                 OutputFormat:
@@ -869,8 +863,6 @@ paths:
                   description: The type of speech marks returned for the input text.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SpeechMarkType'
                   maxItems: 4
                 Text:
@@ -1205,14 +1197,10 @@ components:
     VoiceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Voice'
     EngineList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Engine'
     Gender:
       type: string
@@ -1314,8 +1302,6 @@ components:
     LanguageCodeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LanguageCode'
     LanguageName:
       type: string
@@ -1343,14 +1329,10 @@ components:
     LexiconDescriptionList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LexiconDescription'
     LexiconNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LexiconName'
       maxItems: 5
     ListLexiconsInput:
@@ -1375,8 +1357,6 @@ components:
     SynthesisTasks:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SynthesisTask'
     OutputFormat:
       type: string
@@ -1412,8 +1392,6 @@ components:
     SpeechMarkTypeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SpeechMarkType'
       maxItems: 4
     Text:

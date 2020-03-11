@@ -217,8 +217,6 @@ paths:
                   description: 'The list of scopes that is defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Scope'
                 redirectUri:
                   description: The location of the application that will receive the authorization code. Users authorize the service to send the request to this location.
@@ -287,8 +285,6 @@ paths:
                   description: 'The list of scopes that are defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/Scope'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -515,8 +511,6 @@ components:
     Scopes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Scope'
     URI:
       type: string

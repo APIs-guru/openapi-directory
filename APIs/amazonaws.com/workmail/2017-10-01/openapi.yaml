@@ -3791,24 +3791,18 @@ components:
     IpRangeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/IpRange'
       minItems: 0
       maxItems: 10
     ActionsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessControlRuleAction'
       minItems: 0
       maxItems: 10
     UserIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/WorkMailIdentifier'
       minItems: 0
       maxItems: 10
@@ -3860,16 +3854,12 @@ components:
     AccessControlRuleNameList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessControlRuleName'
       minItems: 0
       maxItems: 10
     AccessControlRulesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccessControlRule'
       minItems: 0
       maxItems: 10
@@ -3881,8 +3871,6 @@ components:
     Aliases:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EmailAddress'
     AmazonResourceName:
       type: string
@@ -4013,8 +4001,6 @@ components:
     Groups:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Group'
     IpRange:
       type: string
@@ -4032,46 +4018,32 @@ components:
     Members:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Member'
     Permissions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Permission'
     OrganizationSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OrganizationSummary'
     ResourceDelegates:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Delegate'
     Resources:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Resource'
     TagList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
     Users:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/User'
     Member:
       type: object
@@ -4114,8 +4086,6 @@ components:
     PermissionValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PermissionType'
     Permission:
       type: object
@@ -4189,8 +4159,6 @@ components:
     TagKeyList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 50

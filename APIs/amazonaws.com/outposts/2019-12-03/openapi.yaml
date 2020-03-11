@@ -733,8 +733,6 @@ components:
       type: array
       description: Information about the instance types.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceTypeItem'
     OutpostArn:
       type: string
@@ -762,8 +760,6 @@ components:
       type: array
       description: Information about the Outposts.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Outpost'
     ListSitesInput:
       type: object
@@ -773,8 +769,6 @@ components:
       type: array
       description: Information about the sites.
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Site'
     OwnerId:
       type: string

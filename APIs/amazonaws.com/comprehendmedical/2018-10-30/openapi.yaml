@@ -1335,8 +1335,6 @@ components:
     TraitList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Trait'
     Attribute:
       type: object
@@ -1375,8 +1373,6 @@ components:
     AttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Attribute'
     AttributeName:
       type: string
@@ -1526,20 +1522,14 @@ components:
     ComprehendMedicalAsyncJobPropertiesList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ComprehendMedicalAsyncJobProperties'
     EntityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Entity'
     UnmappedAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnmappedAttribute'
     Entity:
       type: object
@@ -1583,8 +1573,6 @@ components:
     ICD10CMTraitList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ICD10CMTrait'
     ICD10CMAttribute:
       type: object
@@ -1617,8 +1605,6 @@ components:
     ICD10CMAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ICD10CMAttribute'
     ICD10CMConcept:
       type: object
@@ -1636,8 +1622,6 @@ components:
     ICD10CMConceptList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ICD10CMConcept'
     OntologyLinkingBoundedLengthString:
       type: string
@@ -1688,8 +1672,6 @@ components:
     ICD10CMEntityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ICD10CMEntity'
     ICD10CMTraitName:
       type: string
@@ -1711,8 +1693,6 @@ components:
     RxNormEntityList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RxNormEntity'
     S3Bucket:
       type: string
@@ -1740,8 +1720,6 @@ components:
     RxNormTraitList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RxNormTrait'
     RxNormAttribute:
       type: object
@@ -1774,8 +1752,6 @@ components:
     RxNormAttributeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RxNormAttribute'
     RxNormConcept:
       type: object
@@ -1793,8 +1769,6 @@ components:
     RxNormConceptList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RxNormConcept'
     RxNormEntityCategory:
       type: string

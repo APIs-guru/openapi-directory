@@ -6444,8 +6444,6 @@ components:
     AccountIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
     Tag:
       type: object
@@ -6463,8 +6461,6 @@ components:
     AddTags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 20
     AllowedValue:
@@ -6472,8 +6468,6 @@ components:
     AllowedValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AllowedValue'
     ApproximateCount:
       type: integer
@@ -6500,16 +6494,12 @@ components:
     ServiceActionAssociations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceActionAssociation'
       minItems: 1
       maxItems: 50
     FailedServiceActionAssociations:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FailedServiceActionAssociation'
       maxItems: 50
     BudgetDetail:
@@ -6522,8 +6512,6 @@ components:
     Budgets:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/BudgetDetail'
     CausingEntity:
       type: string
@@ -6545,8 +6533,6 @@ components:
     CloudWatchDashboards:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CloudWatchDashboard'
     ConstraintDescription:
       type: string
@@ -6574,8 +6560,6 @@ components:
     ConstraintDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConstraintDetail'
     ConstraintParameters:
       type: string
@@ -6592,8 +6576,6 @@ components:
     ConstraintSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConstraintSummary'
     CopyOption:
       type: string
@@ -6602,8 +6584,6 @@ components:
     CopyOptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/CopyOption'
     ProductArn:
       type: string
@@ -6616,8 +6596,6 @@ components:
     SourceProvisioningArtifactProperties:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SourceProvisioningArtifactPropertiesMap'
     IdempotencyToken:
       type: string
@@ -6672,8 +6650,6 @@ components:
     Tags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Tag'
       maxItems: 50
     OrganizationNode:
@@ -6778,8 +6754,6 @@ components:
     NotificationArns:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/NotificationArn'
       maxItems: 5
     ProvisionedProductName:
@@ -6790,8 +6764,6 @@ components:
     UpdateProvisioningParameters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UpdateProvisioningParameter'
     ProvisioningArtifactInfo:
       type: object
@@ -6868,8 +6840,6 @@ components:
     TagOptionDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagOptionDetail'
     OrganizationNodeValue:
       type: string
@@ -6895,8 +6865,6 @@ components:
     ProvisioningArtifactSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningArtifactSummary'
     ProductViewSummary:
       type: object
@@ -6938,8 +6906,6 @@ components:
     ProvisioningArtifacts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningArtifact'
     ProvisionedProductDetail:
       type: object
@@ -7038,28 +7004,20 @@ components:
     ResourceChanges:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceChange'
     Verbose:
       type: boolean
     ProvisioningArtifactParameters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningArtifactParameter'
     UsageInstructions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UsageInstruction'
     TagOptionSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagOptionSummary'
     ProvisioningArtifactPreferences:
       type: object
@@ -7117,14 +7075,10 @@ components:
     RecordOutputs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecordOutput'
     ExecutionParameters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExecutionParameter'
     Description:
       type: string
@@ -7158,8 +7112,6 @@ components:
     ExecutionParameterValueList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ExecutionParameterValue'
       minItems: 0
       maxItems: 25
@@ -7238,16 +7190,12 @@ components:
     LaunchPathSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/LaunchPathSummary'
     PortfolioName:
       type: string
     PortfolioDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/PortfolioDetail'
     OrganizationNodeType:
       type: string
@@ -7258,32 +7206,22 @@ components:
     OrganizationNodes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/OrganizationNode'
     Principals:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Principal'
     ProvisionedProductPlans:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisionedProductPlanSummary'
     ProvisioningArtifactViews:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningArtifactView'
     ProvisioningArtifactDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningArtifactDetail'
     ListRecordHistorySearchFilter:
       type: object
@@ -7298,8 +7236,6 @@ components:
     RecordDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecordDetail'
     SearchFilterKey:
       type: string
@@ -7310,20 +7246,14 @@ components:
     ResourceDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceDetail'
     ServiceActionSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceActionSummary'
     StackInstances:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/StackInstance'
     TagOptionActive:
       type: boolean
@@ -7347,8 +7277,6 @@ components:
     Namespaces:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
     NoEcho:
       type: boolean
@@ -7418,8 +7346,6 @@ components:
     ProductViewAggregationValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductViewAggregationValue'
     ProductViewAggregations:
       type: object
@@ -7428,8 +7354,6 @@ components:
     ProductViewDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductViewDetail'
     ProductViewDistributor:
       type: string
@@ -7445,8 +7369,6 @@ components:
     ProductViewFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductViewFilterValue'
     ProductViewFilters:
       type: object
@@ -7461,8 +7383,6 @@ components:
     ProductViewSummaries:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProductViewSummary'
     PropertyKey:
       type: string
@@ -7479,8 +7399,6 @@ components:
     ProvisioningParameters:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisioningParameter'
     ProvisioningPreferences:
       type: object
@@ -7577,22 +7495,16 @@ components:
     ProvisionedProductAttributes:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisionedProductAttribute'
     ProvisionedProductId:
       type: string
     ProvisionedProductDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisionedProductDetail'
     ProvisionedProductViewFilterValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ProvisionedProductViewFilterValue'
     ProvisionedProductFilters:
       type: object
@@ -7715,14 +7627,10 @@ components:
     StackSetAccounts:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
     StackSetRegions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Region'
     ProvisioningArtifactPropertyName:
       type: string
@@ -7796,14 +7704,10 @@ components:
     RecordErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecordError'
     RecordTags:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RecordTag'
       maxItems: 50
     RecordError:
@@ -7875,14 +7779,10 @@ components:
     Scope:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceAttribute'
     ResourceChangeDetails:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceChangeDetail'
     ResourceChange:
       type: object
@@ -8025,14 +7925,10 @@ components:
     SuccessfulShares:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AccountId'
     ShareErrors:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ShareError'
     ShareError:
       type: object
@@ -8089,8 +7985,6 @@ components:
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagKey'
     TagOptionSummary:
       type: object
@@ -8105,8 +7999,6 @@ components:
     TagOptionValues:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TagOptionValue'
     UpdateProvisioningPreferences:
       type: object

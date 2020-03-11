@@ -356,8 +356,6 @@ paths:
                   description: Endpoint details of each endpoint in the dataflow endpoint group.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/EndpointDetails'
                 tags:
                   description: Tags of a dataflow endpoint group.
@@ -469,8 +467,6 @@ paths:
                   description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DataflowEdge'
                 minimumViableContactDurationSeconds:
                   description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
@@ -945,8 +941,6 @@ paths:
                   description: 'A list of lists of ARNs. Each list of ARNs is an edge, with a <i>from</i> <code>Config</code> and a <i>to</i> <code>Config</code>.'
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/DataflowEdge'
                 minimumViableContactDurationSeconds:
                   description: Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
@@ -1140,8 +1134,6 @@ paths:
                   description: Status of a contact reservation.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/ContactStatus'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1466,8 +1458,6 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: member
               $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1655,8 +1645,6 @@ components:
     DataflowEdge:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigArn'
       minItems: 2
       maxItems: 2
@@ -2012,8 +2000,6 @@ components:
     ConfigList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ConfigListItem'
     ConfigTypeData:
       type: object
@@ -2107,8 +2093,6 @@ components:
     ContactList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContactData'
     SafeName:
       type: string
@@ -2135,8 +2119,6 @@ components:
     EndpointDetailsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/EndpointDetails'
     CreateDataflowEndpointGroupRequest:
       type: object
@@ -2158,8 +2140,6 @@ components:
     DataflowEdgeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataflowEdge'
     CreateMissionProfileRequest:
       type: object
@@ -2247,8 +2227,6 @@ components:
     DataflowEndpointGroupList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/DataflowEndpointListItem'
     JsonString:
       type: string
@@ -2370,8 +2348,6 @@ components:
     GroundStationIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     noradSatelliteID:
       type: integer
@@ -2398,8 +2374,6 @@ components:
     GroundStationList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GroundStationData'
     ListConfigsRequest:
       type: object
@@ -2409,8 +2383,6 @@ components:
     StatusList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ContactStatus'
     ListContactsRequest:
       type: object
@@ -2463,8 +2435,6 @@ components:
     MissionProfileList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/MissionProfileListItem'
     ListSatellitesRequest:
       type: object
@@ -2474,8 +2444,6 @@ components:
     SatelliteList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SatelliteListItem'
     ListTagsForResourceRequest:
       type: object
@@ -2554,20 +2522,14 @@ components:
     SecurityGroupIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     SubnetList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     TagKeys:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     TagResourceRequest:
       type: object

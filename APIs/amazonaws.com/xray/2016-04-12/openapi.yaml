@@ -148,8 +148,6 @@ paths:
                   description: Specify the trace IDs of requests for which to retrieve segments.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/TraceId'
                 NextToken:
                   description: Pagination token.
@@ -659,8 +657,6 @@ paths:
                   description: Information about rules that the service is using to sample requests.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/SamplingStatisticsDocument'
                   maxItems: 25
     parameters:
@@ -860,8 +856,6 @@ paths:
                   description: Trace IDs of requests for which to generate a service graph.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/TraceId'
                 NextToken:
                   description: Pagination token.
@@ -1044,8 +1038,6 @@ paths:
                   description: <p/>
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/TelemetryRecord'
                 EC2InstanceId:
                   description: <p/>
@@ -1104,8 +1096,6 @@ paths:
                   description: A string containing a JSON document defining one or more segments or subsegments.
                   type: array
                   items:
-                    xml:
-                      name: member
                     $ref: '#/components/schemas/TraceSegmentDocument'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1583,8 +1573,6 @@ components:
     AliasNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     Alias:
       type: object
@@ -1602,8 +1590,6 @@ components:
     AliasList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Alias'
     AnnotationKey:
       type: string
@@ -1625,8 +1611,6 @@ components:
     ValuesWithServiceIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ValueWithServiceIds'
     Annotations:
       type: object
@@ -1672,8 +1656,6 @@ components:
     TraceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TraceId'
     BatchGetTracesRequest:
       type: object
@@ -1690,14 +1672,10 @@ components:
     TraceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Trace'
     UnprocessedTraceIdList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TraceId'
     Boolean:
       type: boolean
@@ -1870,8 +1848,6 @@ components:
     Histogram:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/HistogramEntry'
     Edge:
       type: object
@@ -1898,8 +1874,6 @@ components:
     EdgeList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Edge'
     NullableLong:
       type: integer
@@ -1960,8 +1934,6 @@ components:
     ErrorRootCauseServices:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ErrorRootCauseService'
     ErrorRootCause:
       type: object
@@ -1973,8 +1945,6 @@ components:
     RootCauseExceptions:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/RootCauseException'
     ErrorRootCauseEntity:
       type: object
@@ -1992,14 +1962,10 @@ components:
     ErrorRootCauseEntityPath:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ErrorRootCauseEntity'
     ServiceNames:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/String'
     ErrorRootCauseService:
       type: object
@@ -2026,14 +1992,10 @@ components:
     ErrorRootCauses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ErrorRootCause'
     FaultRootCauseServices:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaultRootCauseService'
     FaultRootCause:
       type: object
@@ -2058,8 +2020,6 @@ components:
     FaultRootCauseEntityPath:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaultRootCauseEntity'
     FaultRootCauseService:
       type: object
@@ -2086,8 +2046,6 @@ components:
     FaultRootCauses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/FaultRootCause'
     GetEncryptionConfigRequest:
       type: object
@@ -2117,8 +2075,6 @@ components:
     GroupSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/GroupSummary'
     GetSamplingRulesRequest:
       type: object
@@ -2130,8 +2086,6 @@ components:
     SamplingRuleRecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SamplingRuleRecord'
     GetSamplingStatisticSummariesRequest:
       type: object
@@ -2143,14 +2097,10 @@ components:
     SamplingStatisticSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SamplingStatisticSummary'
     SamplingStatisticsDocumentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SamplingStatisticsDocument'
       maxItems: 25
     GetSamplingTargetsRequest:
@@ -2165,14 +2115,10 @@ components:
     SamplingTargetDocumentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/SamplingTargetDocument'
     UnprocessedStatisticsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnprocessedStatistics'
     GetServiceGraphRequest:
       type: object
@@ -2199,8 +2145,6 @@ components:
     ServiceList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Service'
     GetTimeSeriesServiceStatisticsRequest:
       type: object
@@ -2233,8 +2177,6 @@ components:
     TimeSeriesServiceStatisticsList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TimeSeriesServiceStatistics'
     GetTraceGraphRequest:
       type: object
@@ -2294,8 +2236,6 @@ components:
     TraceSummaryList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TraceSummary'
     GroupSummary:
       type: object
@@ -2366,8 +2306,6 @@ components:
     TelemetryRecordList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TelemetryRecord'
     PutTelemetryRecordsRequest:
       type: object
@@ -2390,8 +2328,6 @@ components:
     TraceSegmentDocumentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TraceSegmentDocument'
     PutTraceSegmentsRequest:
       type: object
@@ -2405,8 +2341,6 @@ components:
     UnprocessedTraceSegmentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/UnprocessedTraceSegment'
     RequestCount:
       type: integer
@@ -2421,8 +2355,6 @@ components:
     ResponseTimeRootCauseServices:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResponseTimeRootCauseService'
     ResponseTimeRootCause:
       type: object
@@ -2447,8 +2379,6 @@ components:
     ResponseTimeRootCauseEntityPath:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResponseTimeRootCauseEntity'
     ResponseTimeRootCauseService:
       type: object
@@ -2475,8 +2405,6 @@ components:
     ResponseTimeRootCauses:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResponseTimeRootCause'
     RootCauseException:
       type: object
@@ -2587,8 +2515,6 @@ components:
     SegmentList:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/Segment'
     ServiceStatistics:
       type: object
@@ -2671,8 +2597,6 @@ components:
     ServiceIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ServiceId'
     TimeSeriesServiceStatistics:
       type: object
@@ -2704,26 +2628,18 @@ components:
     TraceAvailabilityZones:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/AvailabilityZoneDetail'
     TraceInstanceIds:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/InstanceIdDetail'
     TraceResourceARNs:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/ResourceARNDetail'
     TraceUsers:
       type: array
       items:
-        xml:
-          name: member
         $ref: '#/components/schemas/TraceUser'
     TraceSummary:
       type: object
