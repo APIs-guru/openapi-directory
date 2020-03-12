@@ -2789,6 +2789,12 @@ paths:
               ResizeCluster:
                 $ref: '#/components/schemas/ResizeClusterMessage'
                 description: 'An action that runs a <code>ResizeCluster</code> API operation. '
+              PauseCluster:
+                $ref: '#/components/schemas/PauseClusterMessage'
+                description: 'An action that runs a <code>PauseCluster</code> API operation. '
+              ResumeCluster:
+                $ref: '#/components/schemas/ResumeClusterMessage'
+                description: 'An action that runs a <code>ResumeCluster</code> API operation. '
             description: 'The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. '
         - name: Schedule
           in: query
@@ -7196,6 +7202,8 @@ paths:
             type: string
             enum:
               - ResizeCluster
+              - PauseCluster
+              - ResumeCluster
         - name: StartTime
           in: query
           required: false
@@ -8094,6 +8102,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidS3BucketNameFault'
+        '485':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -8176,6 +8190,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidS3BucketNameFault'
+        '485':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       requestBody:
         content:
           text/xml:
@@ -9382,6 +9402,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -9460,6 +9486,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       requestBody:
         content:
           text/xml:
@@ -10253,6 +10285,12 @@ paths:
               ResizeCluster:
                 $ref: '#/components/schemas/ResizeClusterMessage'
                 description: 'An action that runs a <code>ResizeCluster</code> API operation. '
+              PauseCluster:
+                $ref: '#/components/schemas/PauseClusterMessage'
+                description: 'An action that runs a <code>PauseCluster</code> API operation. '
+              ResumeCluster:
+                $ref: '#/components/schemas/ResumeClusterMessage'
+                description: 'An action that runs a <code>ResumeCluster</code> API operation. '
             description: 'The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. '
         - name: Schedule
           in: query
@@ -10628,6 +10666,102 @@ paths:
             type: string
             enum:
               - ModifySnapshotSchedule
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  '/#Action=PauseCluster':
+    get:
+      x-aws-operation-name: PauseCluster
+      operationId: GET PauseCluster
+      description: Pauses a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PauseClusterResult'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The identifier of the cluster to be paused.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - PauseCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: PauseCluster
+      operationId: POST PauseCluster
+      description: Pauses a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PauseClusterResult'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PauseClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - PauseCluster
         - name: Version
           in: query
           required: true
@@ -11897,6 +12031,102 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  '/#Action=ResumeCluster':
+    get:
+      x-aws-operation-name: ResumeCluster
+      operationId: GET ResumeCluster
+      description: Resumes a paused cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResumeClusterResult'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The identifier of the cluster to be resumed.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ResumeCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ResumeCluster
+      operationId: POST ResumeCluster
+      description: Resumes a paused cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResumeClusterResult'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ResumeClusterMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ResumeCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   '/#Action=RevokeClusterSecurityGroupIngress':
     get:
       x-aws-operation-name: RevokeClusterSecurityGroupIngress
@@ -12572,6 +12802,24 @@ components:
         Classic:
           $ref: '#/components/schemas/BooleanOptional'
           description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
+    PauseClusterMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+      title: PauseClusterMessage
+      properties:
+        ClusterIdentifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the cluster to be paused.
+    ResumeClusterMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+      title: ResumeClusterMessage
+      properties:
+        ClusterIdentifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the cluster to be resumed.
     ScheduledActionAlreadyExistsFault: {}
     ScheduledActionQuotaExceededFault: {}
     ScheduledActionTypeUnsupportedFault: {}
@@ -13065,6 +13313,11 @@ components:
           $ref: '#/components/schemas/Cluster'
     SnapshotCopyDisabledFault: {}
     SnapshotScheduleUpdateInProgressFault: {}
+    PauseClusterResult:
+      type: object
+      properties:
+        Cluster:
+          $ref: '#/components/schemas/Cluster'
     PurchaseReservedNodeOfferingResult:
       type: object
       properties:
@@ -13094,6 +13347,11 @@ components:
           $ref: '#/components/schemas/TableRestoreStatus'
     InProgressTableRestoreQuotaExceededFault: {}
     InvalidTableRestoreArgumentFault: {}
+    ResumeClusterResult:
+      type: object
+      properties:
+        Cluster:
+          $ref: '#/components/schemas/Cluster'
     RevokeClusterSecurityGroupIngressResult:
       type: object
       properties:
@@ -13670,7 +13928,7 @@ components:
           description: The node type for the nodes in the cluster.
         ClusterStatus:
           $ref: '#/components/schemas/String'
-          description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>available, prep-for-resize</code> </p> </li> <li> <p> <code>available, resize-cleanup</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
+          description: '<p> The current state of the cluster. Possible values are the following:</p> <ul> <li> <p> <code>available</code> </p> </li> <li> <p> <code>available, prep-for-resize</code> </p> </li> <li> <p> <code>available, resize-cleanup</code> </p> </li> <li> <p> <code>cancelling-resize</code> </p> </li> <li> <p> <code>creating</code> </p> </li> <li> <p> <code>deleting</code> </p> </li> <li> <p> <code>final-snapshot</code> </p> </li> <li> <p> <code>hardware-failure</code> </p> </li> <li> <p> <code>incompatible-hsm</code> </p> </li> <li> <p> <code>incompatible-network</code> </p> </li> <li> <p> <code>incompatible-parameters</code> </p> </li> <li> <p> <code>incompatible-restore</code> </p> </li> <li> <p> <code>modifying</code> </p> </li> <li> <p> <code>paused</code> </p> </li> <li> <p> <code>rebooting</code> </p> </li> <li> <p> <code>renaming</code> </p> </li> <li> <p> <code>resizing</code> </p> </li> <li> <p> <code>rotating-keys</code> </p> </li> <li> <p> <code>storage-full</code> </p> </li> <li> <p> <code>updating-hsm</code> </p> </li> </ul>'
         ClusterAvailabilityStatus:
           $ref: '#/components/schemas/String'
           description: '<p>The availability status of the cluster for queries. Possible values are the following:</p> <ul> <li> <p>Available - The cluster is available for queries. </p> </li> <li> <p>Unavailable - The cluster is not available for queries.</p> </li> <li> <p>Maintenance - The cluster is intermittently available for queries due to maintenance activities.</p> </li> <li> <p>Modifying - The cluster is intermittently available for queries due to changes that modify the cluster.</p> </li> <li> <p>Failed - The cluster failed and is not available for queries.</p> </li> </ul>'
@@ -14356,6 +14614,12 @@ components:
         ResizeCluster:
           $ref: '#/components/schemas/ResizeClusterMessage'
           description: 'An action that runs a <code>ResizeCluster</code> API operation. '
+        PauseCluster:
+          $ref: '#/components/schemas/PauseClusterMessage'
+          description: 'An action that runs a <code>PauseCluster</code> API operation. '
+        ResumeCluster:
+          $ref: '#/components/schemas/ResumeClusterMessage'
+          description: 'An action that runs a <code>ResumeCluster</code> API operation. '
       description: 'The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. '
     CreateScheduledActionMessage:
       type: object
@@ -15038,6 +15302,8 @@ components:
       type: string
       enum:
         - ResizeCluster
+        - PauseCluster
+        - ResumeCluster
     ScheduledActionFilterList:
       type: array
       items:
