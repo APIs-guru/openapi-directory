@@ -755,6 +755,9 @@ paths:
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The workflow state of a finding.
+                    WorkflowStatus:
+                      $ref: '#/components/schemas/StringFilterList'
+                      description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The updated record state for the finding.
@@ -1425,6 +1428,9 @@ paths:
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The workflow state of a finding.
+                    WorkflowStatus:
+                      $ref: '#/components/schemas/StringFilterList'
+                      description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The updated record state for the finding.
@@ -2614,6 +2620,9 @@ paths:
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The workflow state of a finding.
+                    WorkflowStatus:
+                      $ref: '#/components/schemas/StringFilterList'
+                      description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The updated record state for the finding.
@@ -2938,6 +2947,9 @@ paths:
                     WorkflowState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The workflow state of a finding.
+                    WorkflowStatus:
+                      $ref: '#/components/schemas/StringFilterList'
+                      description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       $ref: '#/components/schemas/StringFilterList'
                       description: The updated record state for the finding.
@@ -3094,7 +3106,7 @@ paths:
               type: object
               properties:
                 InsightArns:
-                  description: The ARNs of the insights to describe.
+                  description: 'The ARNs of the insights to describe. If you do not provide any insight ARNs, then <code>GetInsights</code> returns all of your custom insights. It does not return any managed insights.'
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
@@ -3688,7 +3700,7 @@ components:
           description: The security findings provider-specific identifier for a finding.
         ProductArn:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The ARN generated by Security Hub that uniquely identifies a third-party company (security-findings provider) after this provider''s product (solution that generates findings) is registered with Security Hub. '
+          description: 'The ARN generated by Security Hub that uniquely identifies a product that generates findings. This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for a custom integration.'
         GeneratorId:
           $ref: '#/components/schemas/NonEmptyString'
           description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. '
@@ -3761,6 +3773,9 @@ components:
         WorkflowState:
           $ref: '#/components/schemas/WorkflowState'
           description: 'The workflow state of a finding. '
+        Workflow:
+          $ref: '#/components/schemas/Workflow'
+          description: Provides information about the status of the investigation into a finding.
         RecordState:
           $ref: '#/components/schemas/RecordState'
           description: The record state of a finding.
@@ -4944,6 +4959,13 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The status of the VPC security group.
       description: A VPC security groups that the DB instance belongs to.
+    AwsS3BucketServerSideEncryptionConfiguration:
+      type: object
+      properties:
+        Rules:
+          $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionRules'
+          description: The encryption rules that are applied to the S3 bucket.
+      description: The encryption configuration for the S3 bucket.
     AwsS3BucketDetails:
       type: object
       properties:
@@ -4953,22 +4975,72 @@ components:
         OwnerName:
           $ref: '#/components/schemas/NonEmptyString'
           description: The display name of the owner of the S3 bucket.
+        CreatedAt:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The date and time when the S3 bucket was created.
+        ServerSideEncryptionConfiguration:
+          $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionConfiguration'
+          description: The encryption rules that are applied to the S3 bucket.
       description: The details of an Amazon S3 bucket.
+    AwsS3BucketServerSideEncryptionByDefault:
+      type: object
+      properties:
+        SSEAlgorithm:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Server-side encryption algorithm to use for the default encryption.
+        KMSMasterKeyID:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: AWS KMS customer master key (CMK) ID to use for the default encryption.
+      description: Specifies the default server-side encryption to apply to new objects in the bucket.
+    AwsS3BucketServerSideEncryptionRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionRule'
+    AwsS3BucketServerSideEncryptionRule:
+      type: object
+      properties:
+        ApplyServerSideEncryptionByDefault:
+          $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionByDefault'
+          description: 'Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> Object request doesn''t specify any server-side encryption, this default encryption is applied.'
+      description: An encryption rule to apply to the S3 bucket.
+    AwsS3ObjectDetails:
+      type: object
+      properties:
+        LastModified:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The date and time when the object was last modified.
+        ETag:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The opaque identifier assigned by a web server to a specific version of a resource found at a URL.
+        VersionId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version of the object.
+        ContentType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A standard MIME type describing the format of the object data.
+        ServerSideEncryption:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'If the object is stored using server-side encryption, the value of the server-side encryption algorithm used when storing this object in Amazon S3.'
+        SSEKMSKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
+      description: Details about an AWS S3 object.
     TypeList:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
     Severity:
       type: object
-      required:
-        - Normalized
       properties:
         Product:
           $ref: '#/components/schemas/Double'
           description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+        Label:
+          $ref: '#/components/schemas/SeverityLabel'
+          description: <p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>
         Normalized:
           $ref: '#/components/schemas/Integer'
-          description: The normalized severity of a finding.
+          description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
       description: The severity of the finding.
     Remediation:
       type: object
@@ -5067,12 +5139,21 @@ components:
         - BENIGN_POSITIVE
     WorkflowState:
       type: string
+      deprecated: true
       enum:
         - NEW
         - ASSIGNED
         - IN_PROGRESS
         - DEFERRED
         - RESOLVED
+      description: 'This field is deprecated, use Workflow.Status instead.'
+    Workflow:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/WorkflowStatus'
+          description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+      description: Provides information about the status of the investigation into a finding.
     RecordState:
       type: string
       enum:
@@ -5330,6 +5411,9 @@ components:
         WorkflowState:
           $ref: '#/components/schemas/StringFilterList'
           description: The workflow state of a finding.
+        WorkflowStatus:
+          $ref: '#/components/schemas/StringFilterList'
+          description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
         RecordState:
           $ref: '#/components/schemas/StringFilterList'
           description: The updated record state for the finding.
@@ -5798,7 +5882,7 @@ components:
       properties:
         InsightArns:
           $ref: '#/components/schemas/ArnList'
-          description: The ARNs of the insights to describe.
+          description: 'The ARNs of the insights to describe. If you do not provide any insight ARNs, then <code>GetInsights</code> returns all of your custom insights. It does not return any managed insights.'
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: '<p>The token that is required for pagination. On your first call to the <code>GetInsights</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
@@ -6162,6 +6246,9 @@ components:
         AwsS3Bucket:
           $ref: '#/components/schemas/AwsS3BucketDetails'
           description: Details about an Amazon S3 Bucket related to a finding.
+        AwsS3Object:
+          $ref: '#/components/schemas/AwsS3ObjectDetails'
+          description: Details about an Amazon S3 object related to a finding.
         AwsIamAccessKey:
           $ref: '#/components/schemas/AwsIamAccessKeyDetails'
           description: Details about an IAM access key related to a finding.
@@ -6231,6 +6318,14 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The reason that the account was not processed.
       description: Details about the account that was not processed.
+    SeverityLabel:
+      type: string
+      enum:
+        - INFORMATIONAL
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
     SeverityRating:
       type: string
       enum:
@@ -6457,5 +6552,12 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The unique identifier for the rule to exclude from the rule group.
       description: Details about a rule to exclude from a rule group.
+    WorkflowStatus:
+      type: string
+      enum:
+        - NEW
+        - NOTIFIED
+        - RESOLVED
+        - SUPPRESSED
 security:
   - hmac: []

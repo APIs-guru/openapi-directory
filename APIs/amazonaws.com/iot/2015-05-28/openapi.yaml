@@ -5497,7 +5497,7 @@ paths:
   '/things/{thingName}':
     post:
       operationId: CreateThing
-      description: '<p>Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a <code>ResourceAlreadyExistsException</code> is thrown.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
+      description: '<p>Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a <code>ResourceAlreadyExistsException</code> is thrown.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5812,7 +5812,7 @@ paths:
   '/thing-groups/{thingGroupName}':
     post:
       operationId: CreateThingGroup
-      description: '<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
+      description: '<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -8362,7 +8362,7 @@ paths:
         - name: endpointType
           in: query
           required: false
-          description: '<p>The endpoint type. Valid endpoint types include:</p> <ul> <li> <p> <code>iot:Data</code> - Returns a VeriSign signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Data-ATS</code> - Returns an ATS signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:CredentialProvider</code> - Returns an AWS IoT credentials provider API endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Jobs</code> - Returns an AWS IoT device management Jobs API endpoint.</p> </li> </ul>'
+          description: '<p>The endpoint type. Valid endpoint types include:</p> <ul> <li> <p> <code>iot:Data</code> - Returns a VeriSign signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Data-ATS</code> - Returns an ATS signed data endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:CredentialProvider</code> - Returns an AWS IoT credentials provider API endpoint.</p> </li> </ul> <ul> <li> <p> <code>iot:Jobs</code> - Returns an AWS IoT device management Jobs API endpoint.</p> </li> </ul> <p>We strongly recommend that customers use the newer <code>iot:Data-ATS</code> endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities.</p>'
           schema:
             type: string
             maxLength: 128
@@ -12397,7 +12397,7 @@ paths:
                 - templateBody
               properties:
                 templateBody:
-                  description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+                  description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html">Provisioning Devices That Have Device Certificates</a> for more information.'
                   type: string
                 parameters:
                   description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
@@ -13974,7 +13974,7 @@ paths:
         - name: newStatus
           in: query
           required: true
-          description: '<p>The new status.</p> <p> <b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p> <p> <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>'
+          description: '<p>The new status.</p> <p> <b>Note:</b> Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not intended for developer use.</p> <p> <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>'
           schema:
             type: string
             enum:
@@ -14790,6 +14790,9 @@ components:
         cloudwatchAlarm:
           $ref: '#/components/schemas/CloudwatchAlarmAction'
           description: Change the state of a CloudWatch alarm.
+        cloudwatchLogs:
+          $ref: '#/components/schemas/CloudwatchLogsAction'
+          description: Send data to CloudWatch logs.
         elasticsearch:
           $ref: '#/components/schemas/ElasticsearchAction'
           description: Write data to an Amazon Elasticsearch Service domain.
@@ -16607,6 +16610,19 @@ components:
           $ref: '#/components/schemas/StateValue'
           description: 'The value of the alarm state. Acceptable values are: OK, ALARM, INSUFFICIENT_DATA.'
       description: Describes an action that updates a CloudWatch alarm.
+    CloudwatchLogsAction:
+      type: object
+      required:
+        - roleArn
+        - logGroupName
+      properties:
+        roleArn:
+          $ref: '#/components/schemas/AwsArn'
+          description: The IAM role that allows access to the CloudWatch log.
+        logGroupName:
+          $ref: '#/components/schemas/LogGroupName'
+          description: The CloudWatch log group to which the action sends data.
+      description: Describes an action that sends data to CloudWatch logs.
     ElasticsearchAction:
       type: object
       required:
@@ -17857,6 +17873,8 @@ components:
     StateReason:
       type: string
     StateValue:
+      type: string
+    LogGroupName:
       type: string
     String:
       type: string
@@ -20719,7 +20737,7 @@ components:
       properties:
         templateBody:
           $ref: '#/components/schemas/TemplateBody'
-          description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+          description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html">Provisioning Devices That Have Device Certificates</a> for more information.'
         parameters:
           $ref: '#/components/schemas/Parameters'
           description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'

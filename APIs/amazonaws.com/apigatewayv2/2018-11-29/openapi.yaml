@@ -299,7 +299,7 @@ paths:
         - name: basepath
           in: query
           required: false
-          description: Represents the base path of the imported API. Supported only for HTTP APIs.
+          description: 'Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href="https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.'
           schema:
             type: string
         - name: failOnWarnings
@@ -493,10 +493,7 @@ paths:
                   description: Represents an Amazon Resource Name (ARN).
                   type: string
                 authorizerResultTtlInSeconds:
-                  description: |2-
-
-                                <p>An integer with a value between [0-3600].</p>
-                             
+                  description: 'An integer with a value between [0-3600].'
                   type: integer
                   minimum: 0
                   maximum: 3600
@@ -921,13 +918,17 @@ paths:
                   description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
                   type: string
                 timeoutInMillis:
-                  description: |2-
-
-                                <p>An integer with a value between [50-29000].</p>
-                             
+                  description: 'An integer with a value between [50-29000].'
                   type: integer
                   minimum: 50
                   maximum: 29000
+                tlsConfig:
+                  description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
+                  type: object
+                  properties:
+                    ServerNameToVerify:
+                      $ref: '#/components/schemas/StringWithLengthBetween1And512'
+                      description: 'If you specify a server name, API Gateway uses it to verify the hostname on the integration''s certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1608,10 +1609,10 @@ paths:
                       description: 'Specifies the logging level for this route: INFO, ERROR, or OFF. This property affects the log entries pushed to Amazon CloudWatch Logs. Supported only for WebSocket APIs.'
                     ThrottlingBurstLimit:
                       $ref: '#/components/schemas/__integer'
-                      description: Specifies the throttling burst limit. Supported only for WebSocket APIs.
+                      description: Specifies the throttling burst limit.
                     ThrottlingRateLimit:
                       $ref: '#/components/schemas/__double'
-                      description: Specifies the throttling rate limit. Supported only for WebSocket APIs.
+                      description: Specifies the throttling rate limit.
                 deploymentId:
                   description: The identifier.
                   type: string
@@ -1691,6 +1692,141 @@ paths:
           description: The next page of elements from this collection. Not valid for the last element of the collection.
           schema:
             type: string
+  /v2/vpclinks:
+    post:
+      operationId: CreateVpcLink
+      description: Creates a VPC link.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVpcLinkResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - subnetIds
+              properties:
+                name:
+                  description: 'A string with a length between [1-128].'
+                  type: string
+                securityGroupIds:
+                  description: A list of security group IDs for the VPC link.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                subnetIds:
+                  description: A list of subnet IDs to include in the VPC link.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                tags:
+                  description: Represents a collection of tags associated with the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/StringWithLengthBetween1And1600'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVpcLinks
+      description: Gets a collection of VPC links.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVpcLinksResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of elements to be returned for this resource.
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The next page of elements from this collection. Not valid for the last element of the collection.
+          schema:
+            type: string
+  '/v2/apis/{apiId}/stages/{stageName}/accesslogsettings':
+    delete:
+      operationId: DeleteAccessLogSettings
+      description: 'Deletes the AccessLogSettings for a Stage. To disable access logging for a Stage, delete its AccessLogSettings.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          schema:
+            type: string
+        - name: stageName
+          in: path
+          required: true
+          description: 'The stage name. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v2/apis/{apiId}':
     delete:
       operationId: DeleteApi
@@ -1798,7 +1934,7 @@ paths:
         - name: basepath
           in: query
           required: false
-          description: Represents the base path of the imported API. Supported only for HTTP APIs.
+          description: 'Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href="https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.'
           schema:
             type: string
         - name: failOnWarnings
@@ -2201,10 +2337,7 @@ paths:
                   description: Represents an Amazon Resource Name (ARN).
                   type: string
                 authorizerResultTtlInSeconds:
-                  description: |2-
-
-                                <p>An integer with a value between [0-3600].</p>
-                             
+                  description: 'An integer with a value between [0-3600].'
                   type: integer
                   minimum: 0
                   maximum: 3600
@@ -2711,13 +2844,17 @@ paths:
                   description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
                   type: string
                 timeoutInMillis:
-                  description: |2-
-
-                                <p>An integer with a value between [50-29000].</p>
-                             
+                  description: 'An integer with a value between [50-29000].'
                   type: integer
                   minimum: 50
                   maximum: 29000
+                tlsConfig:
+                  description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
+                  type: object
+                  properties:
+                    ServerNameToVerify:
+                      $ref: '#/components/schemas/StringWithLengthBetween1And512'
+                      description: 'If you specify a server name, API Gateway uses it to verify the hostname on the integration''s certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.'
   '/v2/apis/{apiId}/integrations/{integrationId}/integrationresponses/{integrationResponseId}':
     delete:
       operationId: DeleteIntegrationResponse
@@ -3201,6 +3338,52 @@ paths:
                 target:
                   description: 'A string with a length between [1-128].'
                   type: string
+  '/v2/apis/{apiId}/routes/{routeId}/requestparameters/{requestParameterKey}':
+    delete:
+      operationId: DeleteRouteRequestParameter
+      description: Deletes a route request parameter.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The API identifier.
+          schema:
+            type: string
+        - name: requestParameterKey
+          in: path
+          required: true
+          description: The route request parameter key.
+          schema:
+            type: string
+        - name: routeId
+          in: path
+          required: true
+          description: The route ID.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v2/apis/{apiId}/routes/{routeId}/routeresponses/{routeResponseId}':
     delete:
       operationId: DeleteRouteResponse
@@ -3570,10 +3753,10 @@ paths:
                       description: 'Specifies the logging level for this route: INFO, ERROR, or OFF. This property affects the log entries pushed to Amazon CloudWatch Logs. Supported only for WebSocket APIs.'
                     ThrottlingBurstLimit:
                       $ref: '#/components/schemas/__integer'
-                      description: Specifies the throttling burst limit. Supported only for WebSocket APIs.
+                      description: Specifies the throttling burst limit.
                     ThrottlingRateLimit:
                       $ref: '#/components/schemas/__double'
-                      description: Specifies the throttling rate limit. Supported only for WebSocket APIs.
+                      description: Specifies the throttling rate limit.
                 deploymentId:
                   description: The identifier.
                   type: string
@@ -3590,6 +3773,118 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/StringWithLengthBetween0And2048'
+  '/v2/vpclinks/{vpcLinkId}':
+    delete:
+      operationId: DeleteVpcLink
+      description: Deletes a VPC link.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVpcLinkResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: vpcLinkId
+          in: path
+          required: true
+          description: The ID of the VPC link.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVpcLink
+      description: Gets a VPC link.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVpcLinkResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: vpcLinkId
+          in: path
+          required: true
+          description: The ID of the VPC link.
+          schema:
+            type: string
+    patch:
+      operationId: UpdateVpcLink
+      description: Updates a VPC link.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVpcLinkResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: vpcLinkId
+          in: path
+          required: true
+          description: The ID of the VPC link.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: 'A string with a length between [1-128].'
+                  type: string
   '/v2/apis/{apiId}/models/{modelId}/template':
     get:
       operationId: GetModelTemplate
@@ -3778,10 +4073,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: |2-
-
-                        <p>The Tag keys to delete.</p>
-                     
+          description: The Tag keys to delete
           schema:
             type: array
             items:
@@ -3910,10 +4202,7 @@ components:
         $ref: '#/components/schemas/__string'
     IntegerWithLengthBetweenMinus1And86400:
       type: integer
-      description: |2-
-
-                    <p>An integer with a value between [-1-86400].</p>
-                 
+      description: An integer with a value between -1 and 86400. Supported only for HTTP APIs.
       minimum: -1
       maximum: 86400
     StringWithLengthBetween1And1600:
@@ -4055,10 +4344,10 @@ components:
           description: 'Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can''t delete it.'
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -4079,16 +4368,16 @@ components:
           description: 'The integration response selection expression for the integration. Supported only for WebSocket APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -4107,6 +4396,9 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfig'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
     StringWithLengthBetween1And512:
       type: string
       description: 'A string with a length between [1-512].'
@@ -4266,7 +4558,7 @@ components:
           description: The name of the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: The collection of tags. Each tag element is associated with a given resource.
@@ -4281,7 +4573,7 @@ components:
       enum:
         - ERROR
         - INFO
-        - 'false'
+        - 'OFF'
       description: The logging level.
     __integer:
       type: integer
@@ -4302,14 +4594,47 @@ components:
           description: 'Specifies the logging level for this route: INFO, ERROR, or OFF. This property affects the log entries pushed to Amazon CloudWatch Logs. Supported only for WebSocket APIs.'
         ThrottlingBurstLimit:
           $ref: '#/components/schemas/__integer'
-          description: Specifies the throttling burst limit. Supported only for WebSocket APIs.
+          description: Specifies the throttling burst limit.
         ThrottlingRateLimit:
           $ref: '#/components/schemas/__double'
-          description: Specifies the throttling rate limit. Supported only for WebSocket APIs.
+          description: Specifies the throttling rate limit.
       description: Represents a collection of route settings.
     StringWithLengthBetween0And2048:
       type: string
       description: 'A string with a length between [0-2048].'
+    CreateVpcLinkResponse:
+      type: object
+      properties:
+        CreatedDate:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The timestamp when the VPC link was created.
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: A list of security group IDs for the VPC link.
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+          description: A list of subnet IDs to include in the VPC link.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: Tags for the VPC link.
+        VpcLinkId:
+          $ref: '#/components/schemas/Id'
+          description: The ID of the VPC link.
+        VpcLinkStatus:
+          $ref: '#/components/schemas/VpcLinkStatus'
+          description: The status of the VPC link.
+        VpcLinkStatusMessage:
+          $ref: '#/components/schemas/StringWithLengthBetween0And1024'
+          description: A message summarizing the cause of the status of the VPC link.
+        VpcLinkVersion:
+          $ref: '#/components/schemas/VpcLinkVersion'
+          description: The version of the VPC link.
+    DeleteVpcLinkResponse:
+      type: object
+      properties: {}
     GetApiResponse:
       type: object
       properties:
@@ -4491,10 +4816,10 @@ components:
           description: 'Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can''t delete it.'
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -4515,16 +4840,16 @@ components:
           description: 'The integration response selection expression for the integration. Supported only for WebSocket APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -4543,6 +4868,9 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfig'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
     GetIntegrationResponseResponse:
       type: object
       properties:
@@ -4734,7 +5062,7 @@ components:
           description: The name of the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: The collection of tags. Each tag element is associated with a given resource.
@@ -4749,11 +5077,48 @@ components:
           description: The next page of elements from this collection. Not valid for the last element of the collection.
     GetTagsResponse:
       type: object
-      required:
-        - Tags
       properties:
         Tags:
           $ref: '#/components/schemas/Tags'
+    GetVpcLinkResponse:
+      type: object
+      properties:
+        CreatedDate:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The timestamp when the VPC link was created.
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: A list of security group IDs for the VPC link.
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+          description: A list of subnet IDs to include in the VPC link.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: Tags for the VPC link.
+        VpcLinkId:
+          $ref: '#/components/schemas/Id'
+          description: The ID of the VPC link.
+        VpcLinkStatus:
+          $ref: '#/components/schemas/VpcLinkStatus'
+          description: The status of the VPC link.
+        VpcLinkStatusMessage:
+          $ref: '#/components/schemas/StringWithLengthBetween0And1024'
+          description: A message summarizing the cause of the status of the VPC link.
+        VpcLinkVersion:
+          $ref: '#/components/schemas/VpcLinkVersion'
+          description: The version of the VPC link.
+    GetVpcLinksResponse:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/__listOfVpcLink'
+          description: A collection of VPC links.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The next page of elements from this collection. Not valid for the last element of the collection.
     ImportApiResponse:
       type: object
       properties:
@@ -4983,10 +5348,10 @@ components:
           description: 'Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can''t delete it.'
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -5007,16 +5372,16 @@ components:
           description: 'The integration response selection expression for the integration. Supported only for WebSocket APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -5035,6 +5400,9 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfig'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
     UpdateIntegrationResponseResponse:
       type: object
       properties:
@@ -5175,10 +5543,40 @@ components:
           description: The name of the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: The collection of tags. Each tag element is associated with a given resource.
+    UpdateVpcLinkResponse:
+      type: object
+      properties:
+        CreatedDate:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The timestamp when the VPC link was created.
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: A list of security group IDs for the VPC link.
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+          description: A list of subnet IDs to include in the VPC link.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: Tags for the VPC link.
+        VpcLinkId:
+          $ref: '#/components/schemas/Id'
+          description: The ID of the VPC link.
+        VpcLinkStatus:
+          $ref: '#/components/schemas/VpcLinkStatus'
+          description: The status of the VPC link.
+        VpcLinkStatusMessage:
+          $ref: '#/components/schemas/StringWithLengthBetween0And1024'
+          description: A message summarizing the cause of the status of the VPC link.
+        VpcLinkVersion:
+          $ref: '#/components/schemas/VpcLinkVersion'
+          description: The version of the VPC link.
     AccessLogSettings:
       type: object
       properties:
@@ -5321,10 +5719,7 @@ components:
       description: 'The authorization type. For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer. For HTTP APIs, valid values are NONE for open access, or JWT for using JSON Web Tokens.'
     IntegerWithLengthBetween0And3600:
       type: integer
-      description: |2-
-
-                    <p>An integer with a value between [0-3600].</p>
-                 
+      description: 'An integer with a value between [0-3600].'
       minimum: 0
       maximum: 3600
     AuthorizerType:
@@ -5560,12 +5955,16 @@ components:
         $ref: '#/components/schemas/StringWithLengthBetween0And32K'
     IntegerWithLengthBetween50And29000:
       type: integer
-      description: |2-
-
-                    <p>An integer with a value between [50-29000].</p>
-                 
+      description: 'An integer with a value between [50-29000].'
       minimum: 50
       maximum: 29000
+    TlsConfigInput:
+      type: object
+      properties:
+        ServerNameToVerify:
+          $ref: '#/components/schemas/StringWithLengthBetween1And512'
+          description: 'If you specify a server name, API Gateway uses it to verify the hostname on the integration''s certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.'
+      description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
     CreateIntegrationRequest:
       type: object
       required:
@@ -5574,10 +5973,10 @@ components:
       properties:
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -5592,16 +5991,16 @@ components:
           description: Specifies the integration's HTTP method type.
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -5620,7 +6019,17 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfigInput'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
       description: Creates a new Integration resource to represent an integration.
+    TlsConfig:
+      type: object
+      properties:
+        ServerNameToVerify:
+          $ref: '#/components/schemas/StringWithLengthBetween1And512'
+          description: 'If you specify a server name, API Gateway uses it to verify the hostname on the integration''s certificate. The server name is also included in the TLS handshake to support Server Name Indication (SNI) or virtual hosting.'
+      description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
     CreateIntegrationResponseRequest:
       type: object
       required:
@@ -5777,11 +6186,59 @@ components:
           description: The name of the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: The collection of tags. Each tag element is associated with a given resource.
       description: Creates a new Stage resource to represent a stage.
+    SecurityGroupIdList:
+      type: array
+      description: A list of security group IDs for the VPC link.
+      items:
+        $ref: '#/components/schemas/__string'
+    SubnetIdList:
+      type: array
+      description: A list of subnet IDs to include in the VPC link.
+      items:
+        $ref: '#/components/schemas/__string'
+    CreateVpcLinkRequest:
+      type: object
+      required:
+        - SubnetIds
+        - Name
+      title: CreateVpcLinkRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: A list of security group IDs for the VPC link.
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+          description: A list of subnet IDs to include in the VPC link.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: A list of tags.
+      description: Creates a VPC link
+    VpcLinkStatus:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - DELETING
+        - FAILED
+        - INACTIVE
+      description: The status of the VPC link.
+    VpcLinkVersion:
+      type: string
+      enum:
+        - V2
+      description: The version of the VPC link.
+    DeleteAccessLogSettingsRequest:
+      type: object
+      title: DeleteAccessLogSettingsRequest
+      properties: {}
     DeleteApiMappingRequest:
       type: object
       title: DeleteApiMappingRequest
@@ -5822,6 +6279,10 @@ components:
       type: object
       title: DeleteRouteRequest
       properties: {}
+    DeleteRouteRequestParameterRequest:
+      type: object
+      title: DeleteRouteRequestParameterRequest
+      properties: {}
     DeleteRouteResponseRequest:
       type: object
       title: DeleteRouteResponseRequest
@@ -5833,6 +6294,10 @@ components:
     DeleteStageRequest:
       type: object
       title: DeleteStageRequest
+      properties: {}
+    DeleteVpcLinkRequest:
+      type: object
+      title: DeleteVpcLinkRequest
       properties: {}
     Deployment:
       type: object
@@ -6035,6 +6500,18 @@ components:
       type: object
       title: GetTagsRequest
       properties: {}
+    GetVpcLinkRequest:
+      type: object
+      title: GetVpcLinkRequest
+      properties: {}
+    GetVpcLinksRequest:
+      type: object
+      title: GetVpcLinksRequest
+      properties: {}
+    __listOfVpcLink:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcLink'
     ImportApiRequest:
       type: object
       required:
@@ -6053,10 +6530,10 @@ components:
           description: 'Specifies whether an integration is managed by API Gateway. If you created an API using using quick create, the resulting integration is managed by API Gateway. You can update a managed integration, but you can''t delete it.'
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -6077,16 +6554,16 @@ components:
           description: 'The integration response selection expression for the integration. Supported only for WebSocket APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -6105,6 +6582,9 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfig'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
       description: Represents an integration.
     IntegrationResponse:
       type: object
@@ -6270,7 +6750,7 @@ components:
           description: The name of the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: The collection of tags. Each tag element is associated with a given resource.
@@ -6391,10 +6871,10 @@ components:
       properties:
         ConnectionId:
           $ref: '#/components/schemas/StringWithLengthBetween1And1024'
-          description: The connection ID.
+          description: The ID of the VPC link for a private integration. Supported only for HTTP APIs.
         ConnectionType:
           $ref: '#/components/schemas/ConnectionType'
-          description: 'The type of the network connection to the integration endpoint. Currently the only valid value is INTERNET, for connections through the public routable internet.'
+          description: The type of the network connection to the integration endpoint. Specify INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and resources in a VPC. The default value is INTERNET.
         ContentHandlingStrategy:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p> <p>CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p> <p>CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p> <p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
@@ -6409,16 +6889,16 @@ components:
           description: Specifies the integration's HTTP method type.
         IntegrationType:
           $ref: '#/components/schemas/IntegrationType'
-          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
+          description: '<p>The integration type of an integration. One of the following:</p> <p>AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. Supported only for WebSocket APIs.</p> <p>AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p> <p>HTTP: for integrating the route or method request with an HTTP endpoint. This integration is also referred to as the HTTP custom integration. Supported only for WebSocket APIs.</p> <p>HTTP_PROXY: for integrating the route or method request with an HTTP endpoint, with the client request passed through as-is. This is also referred to as HTTP proxy integration. For HTTP API private integrations, use an HTTP_PROXY integration.</p> <p>MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend. Supported only for WebSocket APIs.</p>'
         IntegrationUri:
           $ref: '#/components/schemas/UriWithLengthBetween1And2048'
-          description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
+          description: '<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href="https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>'
         PassthroughBehavior:
           $ref: '#/components/schemas/PassthroughBehavior'
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported only for WebSocket APIs.</p> <p>WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p> <p>NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p> <p>WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
         PayloadFormatVersion:
           $ref: '#/components/schemas/StringWithLengthBetween1And64'
-          description: 'Specifies the format of the payload sent to an integration. Required for HTTP APIs. Currently, the only supported value is 1.0.'
+          description: Specifies the format of the payload sent to an integration. Required for HTTP APIs.
         RequestParameters:
           $ref: '#/components/schemas/IntegrationParameters'
           description: |-
@@ -6437,6 +6917,9 @@ components:
         TimeoutInMillis:
           $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+        TlsConfig:
+          $ref: '#/components/schemas/TlsConfigInput'
+          description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
       description: Updates an Integration.
     UpdateIntegrationResponseRequest:
       type: object
@@ -6565,7 +7048,51 @@ components:
           description: Route settings for the stage.
         StageVariables:
           $ref: '#/components/schemas/StageVariablesMap'
-          description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+. Supported only for WebSocket APIs.'
+          description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&amp;=,]+.'
       description: Updates a Stage.
+    UpdateVpcLinkRequest:
+      type: object
+      title: UpdateVpcLinkRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+      description: Updates a VPC link.
+    VpcLink:
+      type: object
+      required:
+        - VpcLinkId
+        - SecurityGroupIds
+        - SubnetIds
+        - Name
+      properties:
+        CreatedDate:
+          $ref: '#/components/schemas/__timestampIso8601'
+          description: The timestamp when the VPC link was created.
+        Name:
+          $ref: '#/components/schemas/StringWithLengthBetween1And128'
+          description: The name of the VPC link.
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+          description: A list of security group IDs for the VPC link.
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+          description: A list of subnet IDs to include in the VPC link.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: Tags for the VPC link.
+        VpcLinkId:
+          $ref: '#/components/schemas/Id'
+          description: The ID of the VPC link.
+        VpcLinkStatus:
+          $ref: '#/components/schemas/VpcLinkStatus'
+          description: The status of the VPC link.
+        VpcLinkStatusMessage:
+          $ref: '#/components/schemas/StringWithLengthBetween0And1024'
+          description: A message summarizing the cause of the status of the VPC link.
+        VpcLinkVersion:
+          $ref: '#/components/schemas/VpcLinkVersion'
+          description: The version of the VPC link.
+      description: Represents a VPC link.
 security:
   - hmac: []

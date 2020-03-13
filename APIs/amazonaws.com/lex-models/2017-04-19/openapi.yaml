@@ -607,6 +607,13 @@ paths:
                     iamRoleArn:
                       $ref: '#/components/schemas/IamRoleArn'
                       description: 'The Amazon Resource Name (ARN) of an IAM role with permission to write to your CloudWatch Logs for text logs and your S3 bucket for audio logs. If audio encryption is enabled, this role also provides access permission for the AWS KMS key used for encrypting audio logs. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html">Creating an IAM Role and Policy for Conversation Logs</a>.'
+                tags:
+                  description: 'A list of tags to add to the bot alias. You can only add tags when you create an alias, you can''t use the <code>PutBotAlias</code> operation to update the tags on a bot alias. To update tags, use the <code>TagResource</code> operation.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
   '/bots/{botName}/aliases/{aliasName}/channels/{name}':
     delete:
       operationId: DeleteBotChannelAssociation
@@ -2246,6 +2253,123 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'Gets a list of tags associated with the specified resource. Only bots, bot aliases, and bot channels can have tags associated with them.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to get a list of tags for.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'A list of tag keys to add to the resource. If a tag key already exists, the existing value is replaced with the new value.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
   '/bots/{name}/versions/$LATEST':
     put:
       operationId: PutBot
@@ -2373,6 +2497,13 @@ paths:
                 createVersion:
                   description: 'When set to <code>true</code> a new numbered version of the bot is created. This is the same as calling the <code>CreateBotVersion</code> operation. If you don''t specify <code>createVersion</code>, the default is <code>false</code>.'
                   type: boolean
+                tags:
+                  description: 'A list of tags to add to the bot. You can only add tags when you create a bot, you can''t use the <code>PutBot</code> operation to update the tags on a bot. To update tags, use the <code>TagResource</code> operation.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2698,6 +2829,81 @@ paths:
                   enum:
                     - OVERWRITE_LATEST
                     - FAIL_ON_CONFLICT
+                tags:
+                  description: 'A list of tags to add to the imported bot. You can only add tags when you import a bot, you can''t add tags to an intent or slot type.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: 'Removes tags from a bot, bot alias or bot channel.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to remove the tags from.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'A list of tag keys to remove from the resource. If a tag key does not exist on the resource, it is ignored.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3403,6 +3609,12 @@ components:
       pattern: '\$LATEST|[0-9]+'
       minLength: 1
       maxLength: 64
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tags associated with a resource.
     PutBotResponse:
       type: object
       example:
@@ -3484,6 +3696,9 @@ components:
         detectSentiment:
           $ref: '#/components/schemas/Boolean'
           description: ' <code>true</code> if the bot is configured to send user utterances to Amazon Comprehend for sentiment analysis. If the <code>detectSentiment</code> field was not specified in the request, the <code>detectSentiment</code> field is <code>false</code> in the response.'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tags associated with the bot.
     Intent:
       type: object
       required:
@@ -3511,6 +3726,19 @@ components:
       type: string
       minLength: 1
       maxLength: 50000
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          $ref: '#/components/schemas/TagKey'
+          description: The key for the tag. Keys are not case-sensitive and must be unique.
+        value:
+          $ref: '#/components/schemas/TagValue'
+          description: The value associated with a key. The value may be an empty string but it can't be null.
+      description: 'A list of key/value pairs that identify a bot, bot alias, or bot channel. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @. '
     PutBotAliasResponse:
       type: object
       properties:
@@ -3538,6 +3766,9 @@ components:
         conversationLogs:
           $ref: '#/components/schemas/ConversationLogsResponse'
           description: The settings that determine how Amazon Lex uses conversation logs for the alias.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tags associated with a bot.
     LogSettingsRequestList:
       type: array
       items:
@@ -3861,9 +4092,22 @@ components:
         importStatus:
           $ref: '#/components/schemas/ImportStatus'
           description: 'The status of the import job. If the status is <code>FAILED</code>, you can get the reason for the failure using the <code>GetImport</code> operation.'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tags added to the imported bot.
         createdDate:
           $ref: '#/components/schemas/Timestamp'
           description: A timestamp for the date and time that the import job was requested.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
     AliasName:
       type: string
       pattern: '^([A-Za-z]_?)+$'
@@ -3874,6 +4118,10 @@ components:
       pattern: '^(-|^([A-Za-z]_?)+$)$'
       minLength: 1
       maxLength: 100
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
     Blob:
       type: string
     Boolean:
@@ -4458,6 +4706,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UtteranceData'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     UtteranceList:
       type: object
       properties:
@@ -4568,6 +4826,9 @@ components:
         conversationLogs:
           $ref: '#/components/schemas/ConversationLogsRequest'
           description: Settings for conversation logs for the alias.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'A list of tags to add to the bot alias. You can only add tags when you create an alias, you can''t use the <code>PutBotAlias</code> operation to update the tags on a bot alias. To update tags, use the <code>TagResource</code> operation.'
     PutBotRequest:
       type: object
       required:
@@ -4611,6 +4872,9 @@ components:
         createVersion:
           $ref: '#/components/schemas/Boolean'
           description: 'When set to <code>true</code> a new numbered version of the bot is created. This is the same as calling the <code>CreateBotVersion</code> operation. If you don''t specify <code>createVersion</code>, the default is <code>false</code>.'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'A list of tags to add to the bot. You can only add tags when you create a bot, you can''t use the <code>PutBot</code> operation to update the tags on a bot. To update tags, use the <code>TagResource</code> operation.'
     PutIntentRequest:
       type: object
       title: PutIntentRequest
@@ -4741,6 +5005,32 @@ components:
         mergeStrategy:
           $ref: '#/components/schemas/MergeStrategy'
           description: <p>Specifies the action that the <code>StartImport</code> operation should take when there is an existing resource with the same name.</p> <ul> <li> <p>FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the <code>failureReason</code> field of the response to the <code>GetImport</code> operation.</p> <p>OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.</p> </li> </ul>
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'A list of tags to add to the imported bot. You can only add tags when you import a bot, you can''t add tags to an intent or slot type.'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'A list of tag keys to add to the resource. If a tag key already exists, the existing value is replaced with the new value.'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UtteranceString:
       type: string
       minLength: 1
