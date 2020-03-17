@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: azure.local
+host: management.azure.com
 info:
   description: 'Use these REST APIs for managing OAuth2 servers configuration in your Azure API Management deployment. OAuth 2.0 can be used to authorize developer accounts for Azure API Management. For more information refer to [How to OAuth2](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-oauth2).'
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimauthorizationservers.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimauthorizationservers.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,12 +25,16 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  apim_key:
-    in: header
-    name: Authorization
-    type: apiKey
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow.
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
 security:
-  - apim_key: []
+  - azure_auth:
+      - user_impersonation
 parameters:
   AuthenticationServerIdParameter:
     description: Identifier of the authorization server.
@@ -42,11 +46,26 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  /authorizationServers:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers':
     get:
       description: Lists a collection of authorization servers defined within a service instance.
-      operationId: AuthorizationServer_List
+      operationId: AuthorizationServer_ListByService
       parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: |-
             | Field | Supported operators    | Supported functions                         |
             |-------|------------------------|---------------------------------------------|
@@ -77,6 +96,11 @@ paths:
           name: api-version
           required: true
           type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: A Collection of the Authorization Server entities for the specified API Management service instance.
@@ -87,62 +111,84 @@ paths:
       x-ms-examples:
         ApiManagementListAuthorizationServers:
           parameters:
-            Accept: application/json
             api-version: '2017-03-01'
-            apimBaseUrl: apimservice1.management.azure-api.net
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
           responses:
             '200':
               body:
-                count: 2
+                nextLink: ''
                 value:
-                  - authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-                    authorizationMethods:
-                      - GET
-                    bearerTokenSendingMethods:
-                      - authorizationHeader
-                    clientAuthenticationMethod:
-                      - Basic
-                    clientId: '1'
-                    clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                    clientSecret: '2'
-                    defaultScope: read write
-                    description: test server
-                    grantTypes:
-                      - authorizationCode
-                    id: /authorizationServers/5a58bb95a40f7ef2e05be74b
-                    name: 2d0057b0-bf3a-4c54-9de7-0e5e39789c1b
-                    resourceOwnerPassword: pwd
-                    resourceOwnerUsername: un
-                    supportState: true
-                    tokenEndpoint: 'https://www.contoso.com/oauth2/token'
-                  - authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-                    authorizationMethods:
-                      - GET
-                    bearerTokenSendingMethods:
-                      - authorizationHeader
-                    clientAuthenticationMethod:
-                      - Basic
-                    clientId: '1'
-                    clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                    clientSecret: '2'
-                    defaultScope: read write
-                    description: test server
-                    grantTypes:
-                      - authorizationCode
-                    id: /authorizationServers/5a58bb37a40f7ef2e05bd7f3
-                    name: f3e4a805-3d6e-48e1-839d-05da510d84a5
-                    resourceOwnerPassword: pwd
-                    resourceOwnerUsername: un
-                    supportState: true
-                    tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer
+                    name: newauthServer
+                    properties:
+                      authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                      authorizationMethods:
+                        - GET
+                      bearerTokenSendingMethods:
+                        - authorizationHeader
+                      clientId: '1'
+                      clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                      clientSecret: '2'
+                      defaultScope: read write
+                      description: test server
+                      displayName: test2
+                      grantTypes:
+                        - authorizationCode
+                        - implicit
+                      resourceOwnerPassword: pwd
+                      resourceOwnerUsername: un
+                      supportState: true
+                      tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                    type: Microsoft.ApiManagement/service/authorizationServers
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2
+                    name: newauthServer2
+                    properties:
+                      authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                      authorizationMethods:
+                        - GET
+                      bearerTokenSendingMethods:
+                        - authorizationHeader
+                      clientAuthenticationMethod:
+                        - Basic
+                      clientId: '1'
+                      clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                      clientSecret: '2'
+                      defaultScope: read write
+                      description: test server
+                      displayName: test3
+                      grantTypes:
+                        - authorizationCode
+                        - implicit
+                      resourceOwnerPassword: pwd
+                      resourceOwnerUsername: un
+                      supportState: true
+                      tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                    type: Microsoft.ApiManagement/service/authorizationServers
       x-ms-odata: '#/definitions/AuthorizationServerContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/authorizationServers/{authsid}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}':
     delete:
       description: Deletes specific authorization server instance.
       operationId: AuthorizationServer_Delete
       parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/AuthenticationServerIdParameter'
         - description: The entity state (Etag) version of the authentication server to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -152,6 +198,11 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -186,22 +237,44 @@ paths:
       tags:
         - AuthorizationServers
       x-ms-examples:
-        ApiManagementDeleteAuthorizationServers:
+        ApiManagementDeleteAuthorizationServer:
           parameters:
-            If-Match: '"AAAAAAAAI0Q="'
+            If-Match: '*'
             api-version: '2017-03-01'
-            apimBaseUrl: apimservice1.management.azure-api.net
-            authsid: 5a58bebda40f7e104892b414
+            authsid: newauthServer2
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
           responses:
             '204': {}
     get:
       description: Gets the details of the authorization server specified by its identifier.
       operationId: AuthorizationServer_Get
       parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/AuthenticationServerIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -242,41 +315,136 @@ paths:
       tags:
         - AuthorizationServers
       x-ms-examples:
-        ApiManagementGetAuthorizationServers:
+        ApiManagementGetAuthorizationServer:
           parameters:
-            Accept: application/json
             api-version: '2017-03-01'
-            apimBaseUrl: apimservice1.management.azure-api.net
-            authsid: 5a58bd24a40f7e104892a241
+            authsid: newauthServer2
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
           responses:
             '200':
               body:
-                authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-                authorizationMethods:
-                  - GET
-                bearerTokenSendingMethods:
-                  - authorizationHeader
-                clientAuthenticationMethod: null
-                clientId: '1'
-                clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                clientSecret: '2'
-                defaultScope: read write
-                description: test server
-                grantTypes:
-                  - authorizationCode
-                  - implicit
-                  - resourceOwnerPassword
-                id: /authorizationServers/5a58bd24a40f7e104892a241
-                name: 660e8b6e-baa4-443e-ae8d-208b25ee560b
-                resourceOwnerPassword: pwd
-                resourceOwnerUsername: un
-                supportState: true
-                tokenBodyParameters: null
-                tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2
+                name: newauthServer2
+                properties:
+                  authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                  authorizationMethods:
+                    - GET
+                  bearerTokenSendingMethods:
+                    - authorizationHeader
+                  clientAuthenticationMethod:
+                    - Basic
+                  clientId: '1'
+                  clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                  clientSecret: '2'
+                  defaultScope: read write
+                  description: test server
+                  displayName: test3
+                  grantTypes:
+                    - authorizationCode
+                    - implicit
+                  resourceOwnerPassword: pwd
+                  resourceOwnerUsername: un
+                  supportState: true
+                  tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                type: Microsoft.ApiManagement/service/authorizationServers
+    head:
+      description: Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
+      operationId: AuthorizationServer_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Specified authorization server entity exists and current entity state version is present in the ETag header.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Body contract.
+            properties:
+              code:
+                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                type: string
+              details:
+                description: 'The list of invalid fields send in request, in case of validation error.'
+                items:
+                  description: Error Field contract.
+                  properties:
+                    code:
+                      description: Property level error code.
+                      type: string
+                    message:
+                      description: Human-readable representation of property-level error.
+                      type: string
+                    target:
+                      description: Property name.
+                      type: string
+                type: array
+              message:
+                description: Human-readable representation of the error.
+                type: string
+      tags:
+        - AuthorizationServers
+      x-ms-examples:
+        ApiManagementHeadAuthorizationServer:
+          parameters:
+            api-version: '2017-03-01'
+            authsid: newauthServer2
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              headers:
+                etag: AAAAAAAAAAa=
     patch:
       description: Updates the details of the authorization server specified by its identifier.
       operationId: AuthorizationServer_Update
       parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/AuthenticationServerIdParameter'
         - description: OAuth2 Server settings Update parameters.
           in: body
@@ -292,6 +460,11 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -326,20 +499,39 @@ paths:
       tags:
         - AuthorizationServers
       x-ms-examples:
-        ApiManagementPatchAuthorizationServers:
+        ApiManagementUpdateAuthorizationServer:
           parameters:
-            If-Match: '"AAAAAAAAIn4="'
+            If-Match: '*'
             api-version: '2017-03-01'
-            apimBaseUrl: apimservice1.management.azure-api.net
-            authsid: 5a58be75a40f7e104892b205
+            authsid: newauthServer
             parameters:
-              authorizationEndpoint: 'https://www.contoso.com/oauth2/auth1'
+              properties:
+                clientId: update
+                clientSecret: updated
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
           responses:
             '204': {}
     put:
       description: Creates new authorization server or updates an existing authorization server.
       operationId: AuthorizationServer_CreateOrUpdate
       parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/AuthenticationServerIdParameter'
         - description: Create or update parameters.
           in: body
@@ -350,6 +542,11 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -390,76 +587,82 @@ paths:
       tags:
         - AuthorizationServers
       x-ms-examples:
-        ApiManagementPutAuthorizationServers:
+        ApiManagementCreateAuthorizationServer:
           parameters:
             api-version: '2017-03-01'
-            apimBaseUrl: apimservice1.management.azure-api.net
-            authsid: 5a58bb1ca40f7ef2e05bd557
+            authsid: newauthServer
             parameters:
-              authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-              authorizationMethods:
-                - GET
-              bearerTokenSendingMethods:
-                - authorizationHeader
-              clientAuthenticationMethod:
-                - Basic
-              clientId: '1'
-              clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-              clientSecret: '2'
-              defaultScope: read write
-              description: test server
-              grantTypes:
-                - authorizationCode
-              name: 68d89b6f-a724-4035-bc3c-a7ab17d849d8
-              resourceOwnerPassword: pwd
-              resourceOwnerUsername: un
-              supportState: true
-              tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+              properties:
+                authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                authorizationMethods:
+                  - GET
+                bearerTokenSendingMethods:
+                  - authorizationHeader
+                clientId: '1'
+                clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                clientSecret: '2'
+                defaultScope: read write
+                description: test server
+                displayName: test2
+                grantTypes:
+                  - authorizationCode
+                  - implicit
+                resourceOwnerPassword: pwd
+                resourceOwnerUsername: un
+                supportState: true
+                tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
           responses:
             '200':
               body:
-                authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-                authorizationMethods:
-                  - GET
-                bearerTokenSendingMethods:
-                  - authorizationHeader
-                clientAuthenticationMethod:
-                  - Basic
-                clientId: '1'
-                clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                clientSecret: '2'
-                defaultScope: read write
-                description: test server
-                grantTypes:
-                  - authorizationCode
-                id: /authorizationServers/5a58bb1ca40f7ef2e05bd557
-                name: 68d89b6f-a724-4035-bc3c-a7ab17d849d8
-                resourceOwnerPassword: pwd
-                resourceOwnerUsername: un
-                supportState: true
-                tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer
+                name: newauthServer
+                properties:
+                  authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                  authorizationMethods:
+                    - GET
+                  bearerTokenSendingMethods:
+                    - authorizationHeader
+                  clientId: '1'
+                  clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                  clientSecret: '2'
+                  defaultScope: read write
+                  description: test server
+                  displayName: test2
+                  grantTypes:
+                    - authorizationCode
+                    - implicit
+                  resourceOwnerPassword: pwd
+                  resourceOwnerUsername: un
+                  supportState: true
+                  tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                type: Microsoft.ApiManagement/service/authorizationServers
             '201':
               body:
-                authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
-                authorizationMethods:
-                  - GET
-                bearerTokenSendingMethods:
-                  - authorizationHeader
-                clientAuthenticationMethod:
-                  - Basic
-                clientId: '1'
-                clientRegistrationEndpoint: 'https://www.contoso.com/apps'
-                clientSecret: '2'
-                defaultScope: read write
-                description: test server
-                grantTypes:
-                  - authorizationCode
-                id: /authorizationServers/5a58bb1ca40f7ef2e05bd557
-                name: 68d89b6f-a724-4035-bc3c-a7ab17d849d8
-                resourceOwnerPassword: pwd
-                resourceOwnerUsername: un
-                supportState: true
-                tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer
+                name: newauthServer
+                properties:
+                  authorizationEndpoint: 'https://www.contoso.com/oauth2/auth'
+                  authorizationMethods:
+                    - GET
+                  bearerTokenSendingMethods:
+                    - authorizationHeader
+                  clientId: '1'
+                  clientRegistrationEndpoint: 'https://www.contoso.com/apps'
+                  clientSecret: '2'
+                  defaultScope: read write
+                  description: test server
+                  displayName: test2
+                  grantTypes:
+                    - authorizationCode
+                    - implicit
+                  resourceOwnerPassword: pwd
+                  resourceOwnerUsername: un
+                  supportState: true
+                  tokenEndpoint: 'https://www.contoso.com/oauth2/token'
+                type: Microsoft.ApiManagement/service/authorizationServers
 definitions:
   AuthorizationServerCollection:
     description: Paged OAuth2 Authorization Servers list representation.
@@ -478,12 +681,27 @@ definitions:
         type: array
   AuthorizationServerContract:
     allOf:
-      - $ref: '#/definitions/AuthorizationServerContractProperties'
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
     description: External OAuth authorization server settings.
     properties:
-      id:
-        description: Identifier of the Authorization Server entity.
-        type: string
+      properties:
+        $ref: '#/definitions/AuthorizationServerContractProperties'
+        description: Properties of the External OAuth authorization server Contract.
+        x-ms-client-flatten: true
   AuthorizationServerContractBaseProperties:
     description: External OAuth authorization server Update settings contract.
     properties:
@@ -579,6 +797,11 @@ definitions:
       clientRegistrationEndpoint:
         description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
         type: string
+      displayName:
+        description: User-friendly authorization server name.
+        maxLength: 50
+        minLength: 1
+        type: string
       grantTypes:
         description: 'Form of an authorization grant, which the client uses to request the access token.'
         externalDocs:
@@ -603,18 +826,36 @@ definitions:
               - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
                 value: clientCredentials
         type: array
-      name:
-        description: User-friendly authorization server name.
-        maxLength: 50
-        minLength: 1
-        type: string
     required:
-      - name
+      - displayName
       - clientRegistrationEndpoint
       - authorizationEndpoint
       - clientId
       - grantTypes
   AuthorizationServerUpdateContract:
+    allOf:
+      - description: The Resource definition.
+        properties:
+          id:
+            description: Resource ID.
+            readOnly: true
+            type: string
+          name:
+            description: Resource name.
+            readOnly: true
+            type: string
+          type:
+            description: Resource type for API Management resource.
+            readOnly: true
+            type: string
+        x-ms-azure-resource: true
+    description: External OAuth authorization server settings.
+    properties:
+      properties:
+        $ref: '#/definitions/AuthorizationServerUpdateContractProperties'
+        description: Properties of the External OAuth authorization server update Contract.
+        x-ms-client-flatten: true
+  AuthorizationServerUpdateContractProperties:
     allOf:
       - $ref: '#/definitions/AuthorizationServerContractBaseProperties'
     description: External OAuth authorization server Update settings contract.
@@ -628,6 +869,11 @@ definitions:
       clientRegistrationEndpoint:
         description: Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced.
         type: string
+      displayName:
+        description: User-friendly authorization server name.
+        maxLength: 50
+        minLength: 1
+        type: string
       grantTypes:
         description: 'Form of an authorization grant, which the client uses to request the access token.'
         externalDocs:
@@ -652,11 +898,6 @@ definitions:
               - description: 'Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4.'
                 value: clientCredentials
         type: array
-      name:
-        description: User-friendly authorization server name.
-        maxLength: 50
-        minLength: 1
-        type: string
   TokenBodyParameterContract:
     description: OAuth acquire token request body parameter (www-url-form-encoded).
     properties:
@@ -669,14 +910,3 @@ definitions:
     required:
       - name
       - value
-x-ms-parameterized-host:
-  hostTemplate: '{apimBaseUrl}'
-  parameters:
-    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
-      in: path
-      name: apimBaseUrl
-      required: true
-      type: string
-      x-ms-skip-url-encoding: true
-  positionInOperation: first
-  useSchemePrefix: false

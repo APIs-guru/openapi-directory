@@ -1,0 +1,137 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Mixed Reality Resource Provider API
+  title: Mixed Reality
+  version: 2019-12-02-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mixedreality/resource-manager/Microsoft.MixedReality/preview/2019-12-02-preview/common.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: mixedreality-common
+  x-tags:
+    - Azure
+    - Microsoft
+parameters:
+  accountKeyRegenerateParameter:
+    description: Required information for key regeneration.
+    in: body
+    name: regenerate
+    required: true
+    schema:
+      $ref: '#/definitions/AccountKeyRegenerateRequest'
+    x-ms-parameter-location: method
+  accountNameParameter:
+    description: Name of an Mixed Reality Account.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: accountName
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  apiVersionParameter:
+    description: Version of the API to be used with the client request.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  locationParameter:
+    description: The location in which uniqueness will be verified.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: location
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  resourceGroupNameParameter:
+    description: Name of an Azure resource group.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  subscriptionIdParameter:
+    description: Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths: {}
+definitions:
+  AccountKeyRegenerateRequest:
+    description: Request for account key regeneration
+    properties:
+      serial:
+        default: 1
+        description: serial of key to be regenerated
+        enum:
+          - 1
+          - 2
+        type: integer
+        x-ms-enum:
+          name: Serial
+          values:
+            - description: The Primary Key
+              name: Primary
+              value: 1
+            - description: The Secondary Key
+              name: Secondary
+              value: 2
+    type: object
+  AccountKeys:
+    description: Developer Keys of account
+    properties:
+      primaryKey:
+        description: value of primary key.
+        readOnly: true
+        type: string
+      secondaryKey:
+        description: value of secondary key.
+        readOnly: true
+        type: string
+    type: object
+  ErrorResponse:
+    description: Response on Error
+    properties:
+      code:
+        description: String that can be used to programmatically identify the error.
+        type: string
+      details:
+        description: 'An array of JSON objects that MUST contain name/value pairs for code and message, and MAY contain a name/value pair for target, as described above.The contents of this section are service-defined but must adhere to the aforementioned schema.'
+        type: string
+      message:
+        description: Describes the error in detail and provides debugging information
+        type: string
+      target:
+        description: The target of the particular error
+        type: string
+    required:
+      - message
+      - code
+    type: object
+  MixedRealityAccountProperties:
+    description: Common Properties shared by Mixed Reality Accounts
+    properties:
+      accountDomain:
+        description: Correspond domain name of certain Spatial Anchors Account
+        readOnly: true
+        type: string
+      accountId:
+        description: unique id of certain account.
+        readOnly: true
+        type: string
+    type: object

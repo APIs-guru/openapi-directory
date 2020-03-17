@@ -12,9 +12,9 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Service/stable/2019-05-06/searchservice.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Service/track1/stable/2019-05-06/searchservice.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: search-searchservice
   x-tags:
@@ -40,7 +40,7 @@ parameters:
     type: string
     x-ms-client-request-id: true
     x-ms-parameter-grouping:
-      name: request-options
+      name: search-request-options
     x-ms-parameter-location: method
   IfMatchParameter:
     description: Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.
@@ -94,24 +94,18 @@ paths:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Data-Sources'
       operationId: DataSources_List
       parameters:
-        - description: 'Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
-          in: query
-          name: $select
-          required: false
-          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/ListDataSourcesResult'
+            $ref: '#/definitions/DataSourceListResult'
       tags:
         - DataSources
       x-ms-examples:
         SearchServiceListDataSources:
           parameters:
-            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -134,6 +128,15 @@ paths:
                     description: My Cosmos DB data source.
                     name: mydocdbdatasource
                     type: cosmosdb
+                  - container:
+                      name: mycontainer
+                    credentials:
+                      connectionString: null
+                    dataChangeDetectionPolicy: null
+                    dataDeletionDetectionPolicy: null
+                    description: My Azure Blob data source.
+                    name: myblobdatasource
+                    type: azureblob
       x-ms-request-id: request-id
     post:
       description: Creates a new datasource.
@@ -377,24 +380,18 @@ paths:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Indexers'
       operationId: Indexers_List
       parameters:
-        - description: 'Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
-          in: query
-          name: $select
-          required: false
-          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/ListIndexersResult'
+            $ref: '#/definitions/IndexerListResult'
       tags:
         - Indexers
       x-ms-examples:
         SearchServiceListIndexers:
           parameters:
-            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -808,7 +805,7 @@ paths:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Indexes'
       operationId: Indexes_List
       parameters:
-        - description: 'Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
+        - description: 'Selects which properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
           in: query
           name: $select
           required: false
@@ -819,13 +816,12 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/ListIndexesResult'
+            $ref: '#/definitions/IndexListResult'
       tags:
         - Indexes
       x-ms-examples:
         SearchServiceListIndexes:
           parameters:
-            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -2111,7 +2107,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/GetIndexStatisticsResult'
+            $ref: '#/definitions/IndexGetStatisticsResult'
       tags:
         - Indexes
       x-ms-examples:
@@ -2182,24 +2178,18 @@ paths:
         url: 'https://docs.microsoft.com/rest/api/searchservice/list-skillset'
       operationId: Skillsets_List
       parameters:
-        - description: 'Selects which top-level properties of the skillsets to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
-          in: query
-          name: $select
-          required: false
-          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: The list is successfully returned.
           schema:
-            $ref: '#/definitions/ListSkillsetsResult'
+            $ref: '#/definitions/SkillsetListResult'
       tags:
         - Skillsets
       x-ms-examples:
         SearchServiceListSkillsets:
           parameters:
-            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -2460,8 +2450,6 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
-        - $ref: '#/parameters/IfMatchParameter'
-        - $ref: '#/parameters/IfNoneMatchParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '204':
@@ -2604,8 +2592,6 @@ paths:
           schema:
             $ref: '#/definitions/Skillset'
         - $ref: '#/parameters/ClientRequestIdParameter'
-        - $ref: '#/parameters/IfMatchParameter'
-        - $ref: '#/parameters/IfNoneMatchParameter'
         - $ref: '#/parameters/PreferHeaderParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -2846,24 +2832,18 @@ paths:
         url: 'https://docs.microsoft.com/rest/api/searchservice/List-Synonym-Maps'
       operationId: SynonymMaps_List
       parameters:
-        - description: 'Selects which top-level properties of the synonym maps to retrieve. Specified as a comma-separated list of JSON property names, or ''*'' for all properties. The default is all properties.'
-          in: query
-          name: $select
-          required: false
-          type: string
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/ListSynonymMapsResult'
+            $ref: '#/definitions/SynonymMapListResult'
       tags:
         - SynonymMaps
       x-ms-examples:
         SearchServiceListSynonymMaps:
           parameters:
-            $select: '*'
             api-version: '2019-05-06'
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -3207,7 +3187,7 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: AnalyzerName
   AsciiFoldingTokenFilter:
     allOf:
@@ -3245,12 +3225,8 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: CharFilterName
-      values:
-        - description: 'A character filter that attempts to strip out HTML constructs. See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html'
-          name: HtmlStrip
-          value: html_strip
   CjkBigramTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -3294,7 +3270,7 @@ definitions:
         maximum: 300
         type: integer
     x-ms-discriminator-value: '#Microsoft.Azure.Search.ClassicTokenizer'
-  CognitiveServicesAccount:
+  CognitiveServices:
     description: Abstract base class for describing any cognitive service resource attached to the skillset.
     discriminator: '@odata.type'
     properties:
@@ -3304,9 +3280,9 @@ definitions:
         type: string
     required:
       - '@odata.type'
-  CognitiveServicesAccountKey:
+  CognitiveServicesByKey:
     allOf:
-      - $ref: '#/definitions/CognitiveServicesAccount'
+      - $ref: '#/definitions/CognitiveServices'
     description: A cognitive service resource provisioned with a key that is attached to a skillset.
     properties:
       key:
@@ -3393,10 +3369,10 @@ definitions:
     required:
       - '@odata.type'
   DataContainer:
-    description: Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed.
+    description: Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed.
     properties:
       name:
-        description: The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed.
+        description: The name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed.
         type: string
       query:
         description: A query that is applied to this data container. The syntax and meaning of this parameter is datasource-specific. Not supported by Azure SQL datasources.
@@ -3454,6 +3430,16 @@ definitions:
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source'
         type: string
+  DataSourceListResult:
+    description: 'Response from a List Datasources request. If successful, it includes the full definitions of all datasources.'
+    properties:
+      value:
+        description: The datasources in the Search service.
+        items:
+          $ref: '#/definitions/DataSource'
+        readOnly: true
+        type: array
+        x-ms-client-name: DataSources
   DataSourceType:
     description: Defines the type of a datasource.
     enum:
@@ -3463,17 +3449,8 @@ definitions:
       - azuretable
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: DataSourceType
-      values:
-        - name: AzureSql
-          value: azuresql
-        - name: CosmosDb
-          value: cosmosdb
-        - name: AzureBlob
-          value: azureblob
-        - name: AzureTable
-          value: azuretable
   DataType:
     description: Defines the data type of a field in a search index.
     enum:
@@ -3487,11 +3464,11 @@ definitions:
       - Edm.ComplexType
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: DataType
-  DefaultCognitiveServicesAccount:
+  DefaultCognitiveServices:
     allOf:
-      - $ref: '#/definitions/CognitiveServicesAccount'
+      - $ref: '#/definitions/CognitiveServices'
     description: An empty object that represents the default cognitive service resource for a skillset.
     x-ms-discriminator-value: '#Microsoft.Azure.Search.DefaultCognitiveServices'
   DictionaryDecompounderTokenFilter:
@@ -3696,80 +3673,15 @@ definitions:
   EntityRecognitionSkillLanguage:
     description: The language codes supported for input text by EntityRecognitionSkill.
     enum:
-      - ar
-      - cs
-      - zh-Hans
-      - zh-Hant
-      - da
-      - nl
-      - en
-      - fi
-      - fr
       - de
-      - el
-      - hu
-      - it
-      - ja
-      - ko
-      - 'no'
-      - pl
-      - pt-PT
-      - pt-BR
-      - ru
+      - en
       - es
-      - sv
-      - tr
+      - fr
+      - it
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: EntityRecognitionSkillLanguage
-      values:
-        - description: Arabic
-          value: ar
-        - description: Czech
-          value: cs
-        - description: Chinese-Simplified
-          value: zh-Hans
-        - description: Chinese-Traditional
-          value: zh-Hant
-        - description: Danish
-          value: da
-        - description: Dutch
-          value: nl
-        - description: English
-          value: en
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: German
-          value: de
-        - description: Greek
-          value: el
-        - description: Hungarian
-          value: hu
-        - description: Italian
-          value: it
-        - description: Japanese
-          value: ja
-        - description: Korean
-          value: ko
-        - description: Norwegian (Bokmaal)
-          value: 'no'
-        - description: Polish
-          value: pl
-        - description: Portuguese (Portugal)
-          value: pt-PT
-        - description: Portuguese (Brazil)
-          value: pt-BR
-        - description: Russian
-          value: ru
-        - description: Spanish
-          value: es
-        - description: Swedish
-          value: sv
-        - description: Turkish
-          value: tr
   Field:
     description: 'Represents a field in an index definition, which describes the name, data type, and search behavior of a field.'
     externalDocs:
@@ -3887,21 +3799,6 @@ definitions:
         type: string
     required:
       - boostingDuration
-  GetIndexStatisticsResult:
-    description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
-    properties:
-      documentCount:
-        description: The number of documents in the index.
-        format: int64
-        readOnly: true
-        type: integer
-        x-nullable: false
-      storageSize:
-        description: The amount of storage in bytes consumed by the index.
-        format: int64
-        readOnly: true
-        type: integer
-        x-nullable: false
   HighWaterMarkChangeDetectionPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
@@ -3943,13 +3840,8 @@ definitions:
       - zh
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: ImageAnalysisSkillLanguage
-      values:
-        - description: English
-          value: en
-        - description: Chinese
-          value: zh
   ImageDetail:
     description: A string indicating which domain-specific details to return.
     enum:
@@ -4023,6 +3915,31 @@ definitions:
     required:
       - name
       - fields
+  IndexGetStatisticsResult:
+    description: Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date.
+    properties:
+      documentCount:
+        description: The number of documents in the index.
+        format: int64
+        readOnly: true
+        type: integer
+        x-nullable: false
+      storageSize:
+        description: The amount of storage in bytes consumed by the index.
+        format: int64
+        readOnly: true
+        type: integer
+        x-nullable: false
+  IndexListResult:
+    description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
+    properties:
+      value:
+        description: The indexes in the Search service.
+        items:
+          $ref: '#/definitions/Index'
+        readOnly: true
+        type: array
+        x-ms-client-name: Indexes
   Indexer:
     description: Represents an indexer.
     externalDocs:
@@ -4182,6 +4099,16 @@ definitions:
         format: duration
         readOnly: true
         type: string
+  IndexerListResult:
+    description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
+    properties:
+      value:
+        description: The indexers in the Search service.
+        items:
+          $ref: '#/definitions/Indexer'
+        readOnly: true
+        type: array
+        x-ms-client-name: Indexers
   IndexerStatus:
     description: Represents the overall indexer status.
     enum:
@@ -4360,41 +4287,8 @@ definitions:
       - sv
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: KeyPhraseExtractionSkillLanguage
-      values:
-        - description: Danish
-          value: da
-        - description: Dutch
-          value: nl
-        - description: English
-          value: en
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: German
-          value: de
-        - description: Italian
-          value: it
-        - description: Japanese
-          value: ja
-        - description: Korean
-          value: ko
-        - description: Norwegian (Bokmaal)
-          value: 'no'
-        - description: Polish
-          value: pl
-        - description: Portuguese (Portugal)
-          value: pt-PT
-        - description: Portuguese (Brazil)
-          value: pt-BR
-        - description: Russian
-          value: ru
-        - description: Spanish
-          value: es
-        - description: Swedish
-          value: sv
   KeywordMarkerTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -4486,56 +4380,6 @@ definitions:
         format: int32
         type: integer
     x-ms-discriminator-value: '#Microsoft.Azure.Search.LimitTokenFilter'
-  ListDataSourcesResult:
-    description: 'Response from a List Datasources request. If successful, it includes the full definitions of all datasources.'
-    properties:
-      value:
-        description: The datasources in the Search service.
-        items:
-          $ref: '#/definitions/DataSource'
-        readOnly: true
-        type: array
-        x-ms-client-name: DataSources
-  ListIndexersResult:
-    description: 'Response from a List Indexers request. If successful, it includes the full definitions of all indexers.'
-    properties:
-      value:
-        description: The indexers in the Search service.
-        items:
-          $ref: '#/definitions/Indexer'
-        readOnly: true
-        type: array
-        x-ms-client-name: Indexers
-  ListIndexesResult:
-    description: 'Response from a List Indexes request. If successful, it includes the full definitions of all indexes.'
-    properties:
-      value:
-        description: The indexes in the Search service.
-        items:
-          $ref: '#/definitions/Index'
-        readOnly: true
-        type: array
-        x-ms-client-name: Indexes
-  ListSkillsetsResult:
-    description: 'Response from a list Skillset request. If successful, it includes the full definitions of all skillsets.'
-    properties:
-      value:
-        description: The skillsets defined in the Search service.
-        items:
-          $ref: '#/definitions/Skillset'
-        readOnly: true
-        type: array
-        x-ms-client-name: Skillsets
-  ListSynonymMapsResult:
-    description: 'Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.'
-    properties:
-      value:
-        description: The synonym maps in the Search service.
-        items:
-          $ref: '#/definitions/SynonymMap'
-        readOnly: true
-        type: array
-        x-ms-client-name: SynonymMaps
   MagnitudeScoringFunction:
     allOf:
       - $ref: '#/definitions/ScoringFunction'
@@ -4811,6 +4655,50 @@ definitions:
       - person
     type: string
     x-ms-external: true
+  NamedEntityRecognitionSkill:
+    allOf:
+      - $ref: '#/definitions/Skill'
+    description: Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.
+    externalDocs:
+      url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition'
+    properties:
+      categories:
+        description: A list of named entity categories.
+        items:
+          $ref: '#/definitions/NamedEntityCategory'
+          x-nullable: false
+        type: array
+      defaultLanguageCode:
+        $ref: '#/definitions/NamedEntityRecognitionSkillLanguage'
+        description: A value indicating which language code to use. Default is en.
+      minimumPrecision:
+        description: A value between 0 and 1 to indicate the confidence of the results.
+        format: double
+        type: number
+        x-nullable: true
+    x-ms-discriminator-value: '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
+    x-ms-external: true
+  NamedEntityRecognitionSkillLanguage:
+    description: The language codes supported for input text by NamedEntityRecognitionSkill.
+    enum:
+      - ar
+      - cs
+      - da
+      - de
+      - en
+      - es
+      - fi
+      - fr
+      - he
+      - hu
+      - it
+      - ko
+      - pt-br
+      - pt
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: NamedEntityRecognitionSkillLanguage
   OcrSkill:
     allOf:
       - $ref: '#/definitions/Skill'
@@ -4861,61 +4749,8 @@ definitions:
       - sk
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: OcrSkillLanguage
-      values:
-        - description: Chinese-Simplified
-          value: zh-Hans
-        - description: Chinese-Traditional
-          value: zh-Hant
-        - description: Czech
-          value: cs
-        - description: Danish
-          value: da
-        - description: Dutch
-          value: nl
-        - description: English
-          value: en
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: German
-          value: de
-        - description: Greek
-          value: el
-        - description: Hungarian
-          value: hu
-        - description: Italian
-          value: it
-        - description: Japanese
-          value: ja
-        - description: Korean
-          value: ko
-        - description: Norwegian (Bokmaal)
-          value: nb
-        - description: Polish
-          value: pl
-        - description: Portuguese
-          value: pt
-        - description: Russian
-          value: ru
-        - description: Spanish
-          value: es
-        - description: Swedish
-          value: sv
-        - description: Turkish
-          value: tr
-        - description: Arabic
-          value: ar
-        - description: Romanian
-          value: ro
-        - description: 'Serbian (Cyrillic, Serbia)'
-          value: sr-Cyrl
-        - description: 'Serbian (Latin, Serbia)'
-          value: sr-Latn
-        - description: Slovak
-          value: sk
   OutputFieldMappingEntry:
     description: Output field mapping for a skill.
     externalDocs:
@@ -5147,7 +4982,7 @@ definitions:
       url: 'http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary'
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: RegexFlags
   ResourceCounter:
     description: Represents a resource's usage and quota.
@@ -5260,39 +5095,8 @@ definitions:
       - tr
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: SentimentSkillLanguage
-      values:
-        - description: Danish
-          value: da
-        - description: Dutch
-          value: nl
-        - description: English
-          value: en
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: German
-          value: de
-        - description: Greek
-          value: el
-        - description: Italian
-          value: it
-        - description: Norwegian (Bokmaal)
-          value: 'no'
-        - description: Polish
-          value: pl
-        - description: Portuguese (Portugal)
-          value: pt-PT
-        - description: Russian
-          value: ru
-        - description: Spanish
-          value: es
-        - description: Swedish
-          value: sv
-        - description: Turkish
-          value: tr
   ServiceCounters:
     description: Represents service-level resource counters and quotas.
     properties:
@@ -5436,9 +5240,8 @@ definitions:
         type: string
         x-ms-client-name: ETag
       cognitiveServices:
-        $ref: '#/definitions/CognitiveServicesAccount'
+        $ref: '#/definitions/CognitiveServices'
         description: Details about cognitive services to be used when running skills.
-        x-ms-client-name: CognitiveServicesAccount
       description:
         description: The description of the skillset.
         type: string
@@ -5454,6 +5257,16 @@ definitions:
       - name
       - description
       - skills
+  SkillsetListResult:
+    description: 'Response from a list Skillset request. If successful, it includes the full definitions of all skillsets.'
+    properties:
+      value:
+        description: The skillsets defined in the Search service.
+        items:
+          $ref: '#/definitions/Skillset'
+        readOnly: true
+        type: array
+        x-ms-client-name: Skillsets
   SnowballTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -5542,27 +5355,8 @@ definitions:
       - pt
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: SplitSkillLanguage
-      values:
-        - description: Danish
-          value: da
-        - description: German
-          value: de
-        - description: English
-          value: en
-        - description: Spanish
-          value: es
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: Italian
-          value: it
-        - description: Korean
-          value: ko
-        - description: Portuguese
-          value: pt
   SqlIntegratedChangeTrackingPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
@@ -5833,6 +5627,16 @@ definitions:
       - name
       - format
       - synonyms
+  SynonymMapListResult:
+    description: 'Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.'
+    properties:
+      value:
+        description: The synonym maps in the Search service.
+        items:
+          $ref: '#/definitions/SynonymMap'
+        readOnly: true
+        type: array
+        x-ms-client-name: SynonymMaps
   SynonymTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -5983,135 +5787,8 @@ definitions:
       - yua
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: TextTranslationSkillLanguage
-      values:
-        - description: Afrikaans
-          value: af
-        - description: Arabic
-          value: ar
-        - description: Bangla
-          value: bn
-        - description: Bosnian (Latin)
-          value: bs
-        - description: Bulgarian
-          value: bg
-        - description: Cantonese (Traditional)
-          value: yue
-        - description: Catalan
-          value: ca
-        - description: Chinese Simplified
-          value: zh-Hans
-        - description: Chinese Traditional
-          value: zh-Hant
-        - description: Croatian
-          value: hr
-        - description: Czech
-          value: cs
-        - description: Danish
-          value: da
-        - description: Dutch
-          value: nl
-        - description: English
-          value: en
-        - description: Estonian
-          value: et
-        - description: Fijian
-          value: fj
-        - description: Filipino
-          value: fil
-        - description: Finnish
-          value: fi
-        - description: French
-          value: fr
-        - description: German
-          value: de
-        - description: Greek
-          value: el
-        - description: Haitian Creole
-          value: ht
-        - description: Hebrew
-          value: he
-        - description: Hindi
-          value: hi
-        - description: Hmong Daw
-          value: mww
-        - description: Hungarian
-          value: hu
-        - description: Icelandic
-          value: is
-        - description: Indonesian
-          value: id
-        - description: Italian
-          value: it
-        - description: Japanese
-          value: ja
-        - description: Kiswahili
-          value: sw
-        - description: Klingon
-          value: tlh
-        - description: Korean
-          value: ko
-        - description: Latvian
-          value: lv
-        - description: Lithuanian
-          value: lt
-        - description: Malagasy
-          value: mg
-        - description: Malay
-          value: ms
-        - description: Maltese
-          value: mt
-        - description: Norwegian
-          value: nb
-        - description: Persian
-          value: fa
-        - description: Polish
-          value: pl
-        - description: Portuguese
-          value: pt
-        - description: Queretaro Otomi
-          value: otq
-        - description: Romanian
-          value: ro
-        - description: Russian
-          value: ru
-        - description: Samoan
-          value: sm
-        - description: Serbian (Cyrillic)
-          value: sr-Cyrl
-        - description: Serbian (Latin)
-          value: sr-Latn
-        - description: Slovak
-          value: sk
-        - description: Slovenian
-          value: sl
-        - description: Spanish
-          value: es
-        - description: Swedish
-          value: sv
-        - description: Tahitian
-          value: ty
-        - description: Tamil
-          value: ta
-        - description: Telugu
-          value: te
-        - description: Thai
-          value: th
-        - description: Tongan
-          value: to
-        - description: Turkish
-          value: tr
-        - description: Ukrainian
-          value: uk
-        - description: Urdu
-          value: ur
-        - description: Vietnamese
-          value: vi
-        - description: Welsh
-          value: cy
-        - description: Yucatec Maya
-          value: yua
   TextWeights:
     description: Defines weights on index fields for which matches should boost scoring in search queries.
     properties:
@@ -6193,111 +5870,8 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: TokenFilterName
-      values:
-        - description: 'A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html'
-          name: ArabicNormalization
-          value: arabic_normalization
-        - description: 'Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html'
-          name: Apostrophe
-          value: apostrophe
-        - description: 'Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html'
-          name: AsciiFolding
-          value: asciifolding
-        - description: 'Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html'
-          name: CjkBigram
-          value: cjk_bigram
-        - description: 'Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html'
-          name: CjkWidth
-          value: cjk_width
-        - description: 'Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html'
-          name: Classic
-          value: classic
-        - description: 'Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/commongrams/CommonGramsFilter.html'
-          name: CommonGram
-          value: common_grams
-        - description: 'Generates n-grams of the given size(s) starting from the front or the back of an input token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html'
-          name: EdgeNGram
-          value: edgeNGram_v2
-        - description: 'Removes elisions. For example, "l''avion" (the plane) will be converted to "avion" (plane). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html'
-          name: Elision
-          value: elision
-        - description: 'Normalizes German characters according to the heuristics of the German2 snowball algorithm. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/de/GermanNormalizationFilter.html'
-          name: GermanNormalization
-          value: german_normalization
-        - description: 'Normalizes text in Hindi to remove some differences in spelling variations. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/hi/HindiNormalizationFilter.html'
-          name: HindiNormalization
-          value: hindi_normalization
-        - description: 'Normalizes the Unicode representation of text in Indian languages. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/in/IndicNormalizationFilter.html'
-          name: IndicNormalization
-          value: indic_normalization
-        - description: 'Emits each incoming token twice, once as keyword and once as non-keyword. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordRepeatFilter.html'
-          name: KeywordRepeat
-          value: keyword_repeat
-        - description: 'A high-performance kstem filter for English. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/en/KStemFilter.html'
-          name: KStem
-          value: kstem
-        - description: 'Removes words that are too long or too short. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LengthFilter.html'
-          name: Length
-          value: length
-        - description: 'Limits the number of tokens while indexing. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html'
-          name: Limit
-          value: limit
-        - description: 'Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm'
-          name: Lowercase
-          value: lowercase
-        - description: 'Generates n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html'
-          name: NGram
-          value: nGram_v2
-        - description: 'Applies normalization for Persian. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizationFilter.html'
-          name: PersianNormalization
-          value: persian_normalization
-        - description: 'Create tokens for phonetic matches. See https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html'
-          name: Phonetic
-          value: phonetic
-        - description: 'Uses the Porter stemming algorithm to transform the token stream. See http://tartarus.org/~martin/PorterStemmer'
-          name: PorterStem
-          value: porter_stem
-        - description: 'Reverses the token string. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html'
-          name: Reverse
-          value: reverse
-        - description: 'Normalizes use of the interchangeable Scandinavian characters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.html'
-          name: ScandinavianNormalization
-          value: scandinavian_normalization
-        - description: 'Folds Scandinavian characters åÅäæÄÆ-&gt;a and öÖøØ-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html'
-          name: ScandinavianFoldingNormalization
-          value: scandinavian_folding
-        - description: 'Creates combinations of tokens as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/shingle/ShingleFilter.html'
-          name: Shingle
-          value: shingle
-        - description: 'A filter that stems words using a Snowball-generated stemmer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html'
-          name: Snowball
-          value: snowball
-        - description: 'Normalizes the Unicode representation of Sorani text. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.html'
-          name: SoraniNormalization
-          value: sorani_normalization
-        - description: 'Language specific stemming filter. See https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters'
-          name: Stemmer
-          value: stemmer
-        - description: 'Removes stop words from a token stream. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html'
-          name: Stopwords
-          value: stopwords
-        - description: 'Trims leading and trailing whitespace from tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TrimFilter.html'
-          name: Trim
-          value: trim
-        - description: 'Truncates the terms to a specific length. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.html'
-          name: Truncate
-          value: truncate
-        - description: 'Filters out tokens with same text as the previous token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html'
-          name: Unique
-          value: unique
-        - description: 'Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html'
-          name: Uppercase
-          value: uppercase
-        - description: Splits words into subwords and performs optional transformations on subword groups.
-          name: WordDelimiter
-          value: word_delimiter
   TokenInfo:
     description: Information about a token returned by an analyzer.
     properties:
@@ -6356,48 +5930,8 @@ definitions:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
     type: string
     x-ms-enum:
-      modelAsString: true
+      modelAsString: false
       name: TokenizerName
-      values:
-        - description: 'Grammar-based tokenizer that is suitable for processing most European-language documents. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicTokenizer.html'
-          name: Classic
-          value: classic
-        - description: 'Tokenizes the input from an edge into n-grams of the given size(s). See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html'
-          name: EdgeNGram
-          value: edgeNGram
-        - description: 'Emits the entire input as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html'
-          name: Keyword
-          value: keyword_v2
-        - description: 'Divides text at non-letters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LetterTokenizer.html'
-          name: Letter
-          value: letter
-        - description: 'Divides text at non-letters and converts them to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseTokenizer.html'
-          name: Lowercase
-          value: lowercase
-        - description: Divides text using language-specific rules.
-          name: MicrosoftLanguageTokenizer
-          value: microsoft_language_tokenizer
-        - description: Divides text using language-specific rules and reduces words to their base forms.
-          name: MicrosoftLanguageStemmingTokenizer
-          value: microsoft_language_stemming_tokenizer
-        - description: 'Tokenizes the input into n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html'
-          name: NGram
-          value: nGram
-        - description: 'Tokenizer for path-like hierarchies. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html'
-          name: PathHierarchy
-          value: path_hierarchy_v2
-        - description: 'Tokenizer that uses regex pattern matching to construct distinct tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html'
-          name: Pattern
-          value: pattern
-        - description: 'Standard Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html'
-          name: Standard
-          value: standard_v2
-        - description: 'Tokenizes urls and emails as one token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html'
-          name: UaxUrlEmail
-          value: uax_url_email
-        - description: 'Divides text at whitespace. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html'
-          name: Whitespace
-          value: whitespace
   TruncateTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'

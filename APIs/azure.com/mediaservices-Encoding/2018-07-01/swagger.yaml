@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/Encoding.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mediaservices/resource-manager/Microsoft.Media/preview/2019-05-01-preview/Encoding.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -103,9 +103,9 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncode
                     name: sampleEncode
                     properties:
-                      created: '2019-10-10T22:38:01.0599386-07:00'
+                      created: '2018-07-26T19:11:48.9717921-07:00'
                       description: A sample Transform using the Standard Encoder with a built in preset.
-                      lastModified: '2019-10-10T22:38:01.0599386-07:00'
+                      lastModified: '2018-07-26T19:11:48.9717921-07:00'
                       outputs:
                         - onError: StopProcessingJob
                           preset:
@@ -116,24 +116,24 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex
                     name: sampleEncodeAndVideoIndex
                     properties:
-                      created: '2019-10-10T22:38:01.0649389-07:00'
+                      created: '2018-07-26T19:11:48.9767793-07:00'
                       description: 'A sample Transform using the Standard Encoder with a built-in preset, as well as the Video Analyzer.'
-                      lastModified: '2019-10-10T22:38:01.0649389-07:00'
+                      lastModified: '2018-07-26T19:11:48.9767793-07:00'
                       outputs:
-                        - onError: StopProcessingJob
-                          preset:
-                            '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
-                            presetName: AdaptiveStreaming
-                          relativePriority: Normal
                         - onError: StopProcessingJob
                           preset:
                             '@odata.type': '#Microsoft.Media.VideoAnalyzerPreset'
                             insightsToExtract: AllInsights
                           relativePriority: Normal
+                        - onError: StopProcessingJob
+                          preset:
+                            '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
+                            presetName: AdaptiveStreaming
+                          relativePriority: Normal
                     type: Microsoft.Media/mediaservices/transforms
         Lists the Transforms filter by created:
           parameters:
-            $filter: 'properties/created gt 2019-10-10T22:38:01.7859346Z and properties/created le 2019-10-10T22:38:11.7859346Z'
+            $filter: 'properties/created gt 2018-09-27T22:56:07.7621546Z and properties/created le 2018-09-27T22:56:17.7621546Z'
             $orderby: properties/created
             accountName: contosomedia
             api-version: '2018-07-01'
@@ -146,9 +146,9 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex
                     name: sampleEncodeAndVideoIndex
                     properties:
-                      created: '2019-10-10T22:38:11.7859346-07:00'
+                      created: '2018-09-27T22:56:17.7621546-07:00'
                       description: A sample Transform using the Video Analyzer.
-                      lastModified: '2019-10-10T22:38:11.7859346-07:00'
+                      lastModified: '2018-09-27T22:56:17.7621546-07:00'
                       outputs:
                         - onError: StopProcessingJob
                           preset:
@@ -158,7 +158,7 @@ paths:
                     type: Microsoft.Media/mediaservices/transforms
         Lists the Transforms filter by lastmodified:
           parameters:
-            $filter: 'properties/lastmodified gt 2019-10-10T22:38:01.8751625Z and properties/lastmodified le 2019-10-10T22:38:11.8751625Z'
+            $filter: 'properties/lastmodified gt 2018-09-27T22:56:07.7840953Z and properties/lastmodified le 2018-09-27T22:56:17.7840953Z'
             $orderby: properties/lastmodified desc
             accountName: contosomedia
             api-version: '2018-07-01'
@@ -171,9 +171,9 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex
                     name: sampleEncodeAndVideoIndex
                     properties:
-                      created: '2019-10-10T22:38:11.8751625-07:00'
+                      created: '2018-09-27T22:56:17.7840953-07:00'
                       description: A sample Transform using the Video Analyzer.
-                      lastModified: '2019-10-10T22:38:11.8751625-07:00'
+                      lastModified: '2018-09-27T22:56:17.7840953-07:00'
                       outputs:
                         - onError: StopProcessingJob
                           preset:
@@ -196,27 +196,27 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncodeAndVideoIndex
                     name: sampleEncodeAndVideoIndex
                     properties:
-                      created: '2019-10-10T22:38:01.5489351-07:00'
+                      created: '2018-09-27T22:56:07.5846087-07:00'
                       description: 'A sample Transform using the Standard Encoder with a built-in preset, as well as the Video Analyzer.'
-                      lastModified: '2019-10-10T22:38:01.5489351-07:00'
+                      lastModified: '2018-09-27T22:56:07.5846087-07:00'
                       outputs:
-                        - onError: StopProcessingJob
-                          preset:
-                            '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
-                            presetName: AdaptiveStreaming
-                          relativePriority: Normal
                         - onError: StopProcessingJob
                           preset:
                             '@odata.type': '#Microsoft.Media.VideoAnalyzerPreset'
                             insightsToExtract: AllInsights
                           relativePriority: Normal
+                        - onError: StopProcessingJob
+                          preset:
+                            '@odata.type': '#Microsoft.Media.BuiltInStandardEncoderPreset'
+                            presetName: AdaptiveStreaming
+                          relativePriority: Normal
                     type: Microsoft.Media/mediaservices/transforms
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleEncode
                     name: sampleEncode
                     properties:
-                      created: '2019-10-10T22:38:01.5489351-07:00'
+                      created: '2018-09-27T22:56:07.5846087-07:00'
                       description: A sample Transform using the Standard Encoder with a built in preset.
-                      lastModified: '2019-10-10T22:38:01.5489351-07:00'
+                      lastModified: '2018-09-27T22:56:07.5846087-07:00'
                       outputs:
                         - onError: StopProcessingJob
                           preset:
@@ -301,9 +301,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/sampleTransform
                 name: sampleTransform
                 properties:
-                  created: '2019-10-10T22:38:01.9599144-07:00'
+                  created: '2018-08-08T16:29:57.8095562-04:00'
                   description: A sample Transform using the Standard Encoder with a built in preset.
-                  lastModified: '2019-10-10T22:38:01.9599144-07:00'
+                  lastModified: '2018-08-08T16:29:57.8095562-04:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -363,9 +363,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/transformToUpdate
                 name: transformToUpdate
                 properties:
-                  created: '2019-10-10T22:38:02.3591446-07:00'
+                  created: '2019-05-29T17:01:44.2001108-07:00'
                   description: Example transform to illustrate update.
-                  lastModified: '2019-10-10T22:38:02.4291412-07:00'
+                  lastModified: '2019-05-29T17:01:44.2761137-07:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -427,9 +427,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/createdTransform
                 name: createdTransform
                 properties:
-                  created: '2019-10-10T22:38:02.2021719-07:00'
+                  created: '2019-05-29T17:01:44.0571152-07:00'
                   description: Example Transform to illustrate create and update.
-                  lastModified: '2019-10-10T22:38:02.2021719-07:00'
+                  lastModified: '2019-05-29T17:01:44.0571152-07:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -442,9 +442,9 @@ paths:
                 id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/createdTransform
                 name: createdTransform
                 properties:
-                  created: '2019-10-10T22:38:02.2021719-07:00'
+                  created: '2019-05-29T17:01:44.0571152-07:00'
                   description: Example Transform to illustrate create and update.
-                  lastModified: '2019-10-10T22:38:02.2021719-07:00'
+                  lastModified: '2019-05-29T17:01:44.0571152-07:00'
                   outputs:
                     - onError: StopProcessingJob
                       preset:
@@ -471,7 +471,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: Specifies the key by which the result collection should be ordered.
+        - description: Specifies the by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -489,7 +489,7 @@ paths:
       x-ms-examples:
         Lists Jobs for the Transform filter by created.:
           parameters:
-            $filter: 'properties/created ge 2019-10-10T22:38:13.1259050Z and properties/created le 2019-10-10T22:38:23.1259050Z'
+            $filter: 'properties/created ge 2018-09-27T22:56:18.5507138Z and properties/created le 2018-09-27T22:56:28.5507138Z'
             $orderby: properties/created
             accountName: contosomedia
             api-version: '2018-07-01'
@@ -504,53 +504,47 @@ paths:
                     name: job2
                     properties:
                       correlationData: {}
-                      created: '2019-10-10T22:38:13.125905Z'
+                      created: '2018-09-27T22:56:18.5507138Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job2 input
                             files: []
-                      lastModified: '2019-10-10T22:38:13.125905Z'
+                      lastModified: '2018-09-27T22:56:18.5507138Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job2 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:03.125905Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:03.125905Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job3
                     name: job3
                     properties:
                       correlationData: {}
-                      created: '2019-10-10T22:38:23.125905Z'
-                      endTime: '2019-10-10T22:38:03.125905Z'
+                      created: '2018-09-27T22:56:28.5507138Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job3 input
                             files: []
-                      lastModified: '2019-10-10T22:38:23.125905Z'
+                      lastModified: '2018-09-27T22:56:28.5507138Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job3 output
-                          endTime: '2019-10-10T22:38:03.125905Z'
                           label: example-custom-label
                           progress: 100
-                          startTime: '2019-10-10T22:28:03.125905Z'
                           state: Finished
                       priority: Low
-                      startTime: '2019-10-10T22:28:03.125905Z'
                       state: Finished
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists Jobs for the Transform filter by lastmodified.:
           parameters:
-            $filter: 'properties/lastmodified ge 2019-10-10T22:38:13.1931019Z and properties/lastmodified le 2019-10-10T22:38:23.1931019Z'
+            $filter: 'properties/lastmodified ge 2018-09-27T22:56:18.5821662Z and properties/lastmodified le 2018-09-27T22:56:28.5821662Z'
             $orderby: properties/lastmodified desc
             accountName: contosomedia
             api-version: '2018-07-01'
@@ -565,48 +559,42 @@ paths:
                     name: job3
                     properties:
                       correlationData: {}
-                      created: '2019-10-10T22:38:23.1931019Z'
-                      endTime: '2019-10-10T22:38:03.1931019Z'
+                      created: '2018-09-27T22:56:28.5821662Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job3 input
                             files: []
-                      lastModified: '2019-10-10T22:38:23.1931019Z'
+                      lastModified: '2018-09-27T22:56:28.5821662Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job3 output
-                          endTime: '2019-10-10T22:38:03.1931019Z'
                           label: example-custom-label
                           progress: 100
-                          startTime: '2019-10-10T22:28:03.1931019Z'
                           state: Finished
                       priority: Low
-                      startTime: '2019-10-10T22:28:03.1931019Z'
                       state: Finished
                     type: Microsoft.Media/mediaservices/transforms/jobs
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job2
                     name: job2
                     properties:
                       correlationData: {}
-                      created: '2019-10-10T22:38:13.1931019Z'
+                      created: '2018-09-27T22:56:18.5821662Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job2 input
                             files: []
-                      lastModified: '2019-10-10T22:38:13.1931019Z'
+                      lastModified: '2018-09-27T22:56:18.5821662Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job2 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:03.1931019Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:03.1931019Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists Jobs for the Transform filter by name and state.:
@@ -626,7 +614,6 @@ paths:
                     properties:
                       correlationData: {}
                       created: '0001-01-01T00:00:00Z'
-                      endTime: '2019-10-10T22:38:03.0624915Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
@@ -637,13 +624,10 @@ paths:
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job3 output
-                          endTime: '2019-10-10T22:38:03.0624915Z'
                           label: example-custom-label
                           progress: 100
-                          startTime: '2019-10-10T22:28:03.0624915Z'
                           state: Finished
                       priority: Low
-                      startTime: '2019-10-10T22:28:03.0624915Z'
                       state: Finished
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists Jobs for the Transform filter by name.:
@@ -697,10 +681,8 @@ paths:
                           assetName: job2 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:02.7835215Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.7835215Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists Jobs for the Transform filter by state equal.:
@@ -732,10 +714,8 @@ paths:
                           assetName: job2 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:02.8754914Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.8754914Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job3
@@ -755,10 +735,8 @@ paths:
                           assetName: job3 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:02.8754914Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.8754914Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists Jobs for the Transform filter by state not equal.:
@@ -799,7 +777,6 @@ paths:
                     properties:
                       correlationData: {}
                       created: '0001-01-01T00:00:00Z'
-                      endTime: '2019-10-10T22:38:02.9885137Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
@@ -810,13 +787,10 @@ paths:
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job4 output
-                          endTime: '2019-10-10T22:38:02.9885137Z'
                           label: example-custom-label
                           progress: 100
-                          startTime: '2019-10-10T22:28:02.9885137Z'
                           state: Finished
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.9885137Z'
                       state: Finished
                     type: Microsoft.Media/mediaservices/transforms/jobs
         Lists all of the Jobs for the Transform.:
@@ -834,14 +808,14 @@ paths:
                     name: job1
                     properties:
                       correlationData: {}
-                      created: '0001-01-01T00:00:00Z'
+                      created: '2018-08-08T16:29:58.0908004Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job1 input
                             files: []
-                      lastModified: '0001-01-01T00:00:00Z'
+                      lastModified: '2018-08-08T16:29:58.0908004Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job1 output
@@ -855,48 +829,42 @@ paths:
                     name: job2
                     properties:
                       correlationData: {}
-                      created: '0001-01-01T00:00:00Z'
+                      created: '2018-08-08T16:29:58.0927994Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job2 input
                             files: []
-                      lastModified: '0001-01-01T00:00:00Z'
+                      lastModified: '2018-08-08T16:29:58.0927994Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job2 output
                           label: example-custom-label
                           progress: 50
-                          startTime: '2019-10-10T22:28:02.6465994Z'
                           state: Processing
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.6465994Z'
                       state: Processing
                     type: Microsoft.Media/mediaservices/transforms/jobs
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job3
                     name: job3
                     properties:
                       correlationData: {}
-                      created: '0001-01-01T00:00:00Z'
-                      endTime: '2019-10-10T22:38:02.6465994Z'
+                      created: '2018-08-08T16:29:58.0927994Z'
                       input:
                         '@odata.type': '#Microsoft.Media.JobInputs'
                         inputs:
                           - '@odata.type': '#Microsoft.Media.JobInputAsset'
                             assetName: job3 input
                             files: []
-                      lastModified: '0001-01-01T00:00:00Z'
+                      lastModified: '2018-08-08T16:29:58.0927994Z'
                       outputs:
                         - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                           assetName: job3 output
-                          endTime: '2019-10-10T22:38:02.6465994Z'
                           label: example-custom-label
                           progress: 100
-                          startTime: '2019-10-10T22:28:02.6465994Z'
                           state: Finished
                       priority: Low
-                      startTime: '2019-10-10T22:28:02.6465994Z'
                       state: Finished
                     type: Microsoft.Media/mediaservices/transforms/jobs
       x-ms-odata: '#/definitions/Job'
@@ -989,14 +957,14 @@ paths:
                 name: job1
                 properties:
                   correlationData: {}
-                  created: '0001-01-01T00:00:00Z'
+                  created: '2018-08-08T16:29:58.1798Z'
                   input:
                     '@odata.type': '#Microsoft.Media.JobInputs'
                     inputs:
                       - '@odata.type': '#Microsoft.Media.JobInputAsset'
                         assetName: job1 input
                         files: []
-                  lastModified: '0001-01-01T00:00:00Z'
+                  lastModified: '2018-08-08T16:29:58.1798Z'
                   outputs:
                     - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                       assetName: job1 output
@@ -1061,7 +1029,7 @@ paths:
                 name: job1
                 properties:
                   correlationData: {}
-                  created: '0001-01-01T00:00:00Z'
+                  created: '2018-08-08T16:29:58.3218119Z'
                   description: Example job to illustrate update.
                   input:
                     '@odata.type': '#Microsoft.Media.JobInputs'
@@ -1069,7 +1037,7 @@ paths:
                       - '@odata.type': '#Microsoft.Media.JobInputAsset'
                         assetName: job1 input
                         files: []
-                  lastModified: '2019-10-10T22:38:03.737608Z'
+                  lastModified: '2018-08-08T16:29:58.3368364Z'
                   outputs:
                     - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                       assetName: job1 output
@@ -1142,12 +1110,12 @@ paths:
                   correlationData:
                     Key 2: Value 2
                     key1: value1
-                  created: '2019-10-10T22:38:03.4426085Z'
+                  created: '2018-08-08T16:29:58.2188352Z'
                   input:
                     '@odata.type': '#Microsoft.Media.JobInputAsset'
                     assetName: job1-InputAsset
                     files: []
-                  lastModified: '2019-10-10T22:38:03.4426085Z'
+                  lastModified: '2018-08-08T16:29:58.2188352Z'
                   outputs:
                     - '@odata.type': '#Microsoft.Media.JobOutputAsset'
                       assetName: job1-OutputAsset
@@ -1265,13 +1233,8 @@ definitions:
     description: 'The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track.'
     properties:
       audioLanguage:
-        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US'').  If you know the language of your content, it is recommended that you specify it. If the language isn''t specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to ''en-US''." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463'
+        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US'').  The list of supported languages are English (''en-US'' and ''en-GB''), Spanish (''es-ES'' and ''es-MX''), French (''fr-FR''), Italian (''it-IT''), Japanese (''ja-JP''), Portuguese (''pt-BR''), Chinese (''zh-CN''), German (''de-DE''), Arabic (''ar-EG'' and ''ar-SY''), Russian (''ru-RU''), Hindi (''hi-IN''), and Korean (''ko-KR''). If you know the language of your content, it is recommended that you specify it. If the language isn''t specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. This language detection feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to ''en-US''."'
         type: string
-      experimentalOptions:
-        additionalProperties:
-          type: string
-        description: Dictionary containing key value pairs for parameters not exposed in the preset itself
-        type: object
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.AudioAnalyzerPreset'
   AudioOverlay:
@@ -1295,7 +1258,6 @@ definitions:
           - AdaptiveStreaming
           - AACGoodQualityAudio
           - ContentAwareEncodingExperimental
-          - ContentAwareEncoding
           - H264MultipleBitrate1080p
           - H264MultipleBitrate720p
           - H264MultipleBitrateSD
@@ -1316,13 +1278,11 @@ definitions:
               value: AACGoodQualityAudio
             - description: 'Exposes an experimental preset for content-aware encoding. Given any input content, the service attempts to automatically determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. The underlying algorithms will continue to evolve over time. The output will contain MP4 files with video and audio interleaved.'
               value: ContentAwareEncodingExperimental
-            - description: 'Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content, the service performs an initial lightweight analysis of the input content, and uses the results to determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. This preset is particularly effective for low and medium complexity videos, where the output files will be at lower bitrates but at a quality that still delivers a good experience to viewers. The output will contain MP4 files with video and audio interleaved.'
-              value: ContentAwareEncoding
             - description: 'Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 1080p and goes down to 360p.'
               value: H264MultipleBitrate1080p
             - description: 'Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 360p.'
               value: H264MultipleBitrate720p
-            - description: 'Produces a set of 5 GOP-aligned MP4 files, ranging from 1600kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p.'
+            - description: 'Produces a set of 5 GOP-aligned MP4 files, ranging from 1600 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 360p.'
               value: H264MultipleBitrateSD
     required:
       - presetName
@@ -1405,11 +1365,6 @@ definitions:
       - $ref: '#/definitions/Preset'
     description: Describes all the settings to be used when analyzing a video in order to detect all the faces present.
     properties:
-      experimentalOptions:
-        additionalProperties:
-          type: string
-        description: Dictionary containing key value pairs for parameters not exposed in the preset itself
-        type: object
       resolution:
         description: 'Specifies the maximum resolution at which your video is analyzed. The default behavior is "SourceResolution," which will keep the input video at its original resolution when analyzed. Using "StandardDefinition" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to "StandardDefinition" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.'
         enum:
@@ -1808,12 +1763,6 @@ definitions:
       '@odata.type':
         description: The discriminator for derived types.
         type: string
-      endTime:
-        description: The UTC date and time at which this Job Output finished processing.
-        format: date-time
-        readOnly: true
-        type: string
-        x-nullable: true
       error:
         $ref: '#/definitions/JobError'
         description: 'If the JobOutput is in the Error state, it contains the details of the error.'
@@ -1827,12 +1776,6 @@ definitions:
         readOnly: true
         type: integer
         x-nullable: false
-      startTime:
-        description: The UTC date and time at which this Job Output began processing.
-        format: date-time
-        readOnly: true
-        type: string
-        x-nullable: true
       state:
         description: Describes the state of the JobOutput.
         enum:
@@ -1896,12 +1839,6 @@ definitions:
       description:
         description: Optional customer supplied description of the Job.
         type: string
-      endTime:
-        description: The UTC date and time at which this Job finished processing.
-        format: date-time
-        readOnly: true
-        type: string
-        x-nullable: true
       input:
         $ref: '#/definitions/JobInput'
         description: The inputs for the Job.
@@ -1933,12 +1870,6 @@ definitions:
               value: Normal
             - description: Used for TransformOutputs that should take precedence over others.
               value: High
-      startTime:
-        description: The UTC date and time at which this Job began processing.
-        format: date-time
-        readOnly: true
-        type: string
-        x-nullable: true
       state:
         description: The current state of the job.
         enum:

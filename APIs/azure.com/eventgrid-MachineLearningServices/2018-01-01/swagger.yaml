@@ -1,0 +1,111 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  description: Describes the schema of the Azure Machine Learning Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.
+  title: Schema of Azure Machine Learning Services events published to Azure Event Grid
+  version: '2018-01-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/data-plane/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: eventgrid-MachineLearningServices
+  x-tags:
+    - Azure
+    - Microsoft
+paths: {}
+definitions:
+  MachineLearningServicesDatasetDriftDetectedEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.MachineLearningServices.DatasetDriftDetected event.
+    properties:
+      baseDatasetId:
+        description: The ID of the base Dataset used to detect drift.
+        type: string
+      dataDriftId:
+        description: The ID of the data drift monitor that triggered the event.
+        type: string
+      dataDriftName:
+        description: The name of the data drift monitor that triggered the event.
+        type: string
+      driftCoefficient:
+        description: The coefficient result that triggered the event.
+        format: double
+        type: number
+      endTime:
+        description: The end time of the target dataset time series that resulted in drift detection.
+        format: date-time
+        type: string
+      runId:
+        description: The ID of the Run that detected data drift.
+        type: string
+      startTime:
+        description: The start time of the target dataset time series that resulted in drift detection.
+        format: date-time
+        type: string
+      targetDatasetId:
+        description: The ID of the target Dataset used to detect drift.
+        type: string
+    type: object
+  MachineLearningServicesModelDeployedEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.MachineLearningServices.ModelDeployed event.
+    properties:
+      modelIds:
+        description: A common separated list of model IDs. The IDs of the models deployed in the service.
+        type: string
+      serviceComputeType:
+        description: 'The compute type (e.g. ACI, AKS) of the deployed service.'
+        type: string
+      serviceName:
+        description: The name of the deployed service.
+        type: string
+      serviceProperties:
+        description: The properties of the deployed service.
+        type: object
+      serviceTags:
+        description: The tags of the deployed service.
+        type: object
+    type: object
+  MachineLearningServicesModelRegisteredEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.MachineLearningServices.ModelRegistered event.
+    properties:
+      modelName:
+        description: The name of the model that was registered.
+        type: string
+      modelProperties:
+        description: The properties of the model that was registered.
+        type: object
+      modelTags:
+        description: The tags of the model that was registered.
+        type: object
+      modelVersion:
+        description: The version of the model that was registered.
+        type: integer
+    type: object
+  MachineLearningServicesRunCompletedEventData:
+    description: Schema of the Data property of an EventGridEvent for an Microsoft.MachineLearningServices.RunCompleted event.
+    properties:
+      experimentId:
+        description: The ID of the experiment that the run belongs to.
+        type: string
+      experimentName:
+        description: The name of the experiment that the run belongs to.
+        type: string
+      runId:
+        description: The ID of the Run that was completed.
+        type: string
+      runProperties:
+        description: The properties of the completed Run.
+        type: object
+      runTags:
+        description: The tags of the completed Run.
+        type: object
+      runType:
+        description: The Run Type of the completed Run.
+        type: string
+    type: object
