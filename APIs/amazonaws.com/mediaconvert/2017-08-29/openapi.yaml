@@ -2408,7 +2408,7 @@ components:
           description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
         CodecSettings:
           $ref: '#/components/schemas/VideoCodecSettings'
-          description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
+          description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
         ColorMetadata:
           $ref: '#/components/schemas/ColorMetadata'
           description: 'Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don''t specify a value, the service sets this to Insert by default.'
@@ -3451,6 +3451,115 @@ components:
           $ref: '#/components/schemas/__listOf__stringMin1'
           description: 'Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated to add any number of audio selectors to the group.'
       description: Group of Audio Selectors
+    Av1AdaptiveQuantization:
+      type: string
+      enum:
+        - 'OFF'
+        - LOW
+        - MEDIUM
+        - HIGH
+        - HIGHER
+        - MAX
+      description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+    Av1FramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    Av1FramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+      description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+    __integerMin1Max10:
+      type: integer
+      minimum: 1
+      maximum: 10
+    __doubleMin0Max1:
+      type: number
+      format: double
+    Av1QvbrSettings:
+      type: object
+      properties:
+        QvbrQualityLevel:
+          $ref: '#/components/schemas/__integerMin1Max10'
+          description: 'Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within av1Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.'
+        QvbrQualityLevelFineTune:
+          $ref: '#/components/schemas/__doubleMin0Max1'
+          description: 'Optional. Specify a value here to set the QVBR quality to a level that is between whole numbers. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR quality level to the nearest third of a whole number. For example, if you set qvbrQualityLevel to 7 and you set qvbrQualityLevelFineTune to .25, your actual QVBR quality level is 7.33.'
+      description: 'Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
+    Av1RateControlMode:
+      type: string
+      enum:
+        - QVBR
+      description: '''With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''''t use CBR or VBR.'''
+    __integerMin1Max2147483647:
+      type: integer
+      minimum: 1
+      maximum: 2147483647
+    __doubleMin0:
+      type: number
+      format: double
+    __integerMin1000Max1152000000:
+      type: integer
+      minimum: 1000
+      maximum: 1152000000
+    __integerMin7Max15:
+      type: integer
+      minimum: 7
+      maximum: 15
+    __integerMin1Max32:
+      type: integer
+      minimum: 1
+      maximum: 32
+    Av1SpatialAdaptiveQuantization:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Adjust quantization within each frame based on spatial variation of content complexity.
+    Av1Settings:
+      type: object
+      properties:
+        AdaptiveQuantization:
+          $ref: '#/components/schemas/Av1AdaptiveQuantization'
+          description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+        FramerateControl:
+          $ref: '#/components/schemas/Av1FramerateControl'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          $ref: '#/components/schemas/Av1FramerateConversionAlgorithm'
+          description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+        FramerateDenominator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        FramerateNumerator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        GopSize:
+          $ref: '#/components/schemas/__doubleMin0'
+          description: 'Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert doesn''t support GOP length in seconds. This value must be greater than zero and preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer value.'
+        MaxBitrate:
+          $ref: '#/components/schemas/__integerMin1000Max1152000000'
+          description: 'Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR.'
+        NumberBFramesBetweenReferenceFrames:
+          $ref: '#/components/schemas/__integerMin7Max15'
+          description: 'Specify the number of B-frames. With AV1, MediaConvert supports only 7 or 15.'
+        QvbrSettings:
+          $ref: '#/components/schemas/Av1QvbrSettings'
+          description: 'Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
+        RateControlMode:
+          $ref: '#/components/schemas/Av1RateControlMode'
+          description: '''With AV1 outputs, for rate control mode, MediaConvert supports only quality-defined variable bitrate (QVBR). You can''''t use CBR or VBR.'''
+        Slices:
+          $ref: '#/components/schemas/__integerMin1Max32'
+          description: 'Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or 32. For progressive pictures, this value must be less than or equal to the number of macroblock rows. For interlaced pictures, this value must be less than or equal to half the number of macroblock rows.'
+        SpatialAdaptiveQuantization:
+          $ref: '#/components/schemas/Av1SpatialAdaptiveQuantization'
+          description: Adjust quantization within each frame based on spatial variation of content complexity.
+      description: 'Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.'
     __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG:
       type: string
       pattern: '^((s3://(.*?)\.(bmp|BMP|png|PNG))|(https?://(.*?)\.(bmp|BMP|png|PNG)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
@@ -4023,10 +4132,6 @@ components:
           $ref: '#/components/schemas/S3DestinationSettings'
           description: Settings associated with S3 destination
       description: Settings associated with the destination. Will vary based on the type of destination
-    __integerMin1Max2147483647:
-      type: integer
-      minimum: 1
-      maximum: 2147483647
     CmafManifestCompression:
       type: string
       enum:
@@ -4173,7 +4278,7 @@ components:
         - FORCE_709
         - FORCE_HDR10
         - FORCE_HLG_2020
-      description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn''t support conversion from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.'
+      description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR.'
     Hdr10Metadata:
       type: object
       properties:
@@ -4226,7 +4331,7 @@ components:
           description: Brightness level.
         ColorSpaceConversion:
           $ref: '#/components/schemas/ColorSpaceConversion'
-          description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, and from SDR to HDR. The service doesn''t support conversion from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output.'
+          description: 'Specify the color space you want for this output. The service supports conversion between HDR formats, between SDR formats, from SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn''t upgrade the dynamic range. The converted video has an HDR format, but visually appears the same as an unconverted output. HDR to SDR conversion uses Elemental tone mapping technology to approximate the outcome of manually regrading from HDR to SDR.'
         Contrast:
           $ref: '#/components/schemas/__integerMin1Max100'
           description: Contrast level.
@@ -5713,17 +5818,6 @@ components:
         - SINGLE_PASS_HQ
         - MULTI_PASS_HQ
       description: 'Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
-    __integerMin1000Max1152000000:
-      type: integer
-      minimum: 1000
-      maximum: 1152000000
-    __integerMin1Max10:
-      type: integer
-      minimum: 1
-      maximum: 10
-    __doubleMin0Max1:
-      type: number
-      format: double
     H264QvbrSettings:
       type: object
       properties:
@@ -5757,9 +5851,6 @@ components:
         - ENABLED
         - TRANSITION_DETECTION
       description: 'Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.'
-    __doubleMin0:
-      type: number
-      format: double
     __integerMin0Max100:
       type: integer
       minimum: 0
@@ -5776,10 +5867,6 @@ components:
       type: integer
       minimum: 0
       maximum: 7
-    __integerMin1Max32:
-      type: integer
-      minimum: 1
-      maximum: 32
     H264SlowPal:
       type: string
       enum:
@@ -8173,6 +8260,7 @@ components:
       type: string
       enum:
         - FRAME_CAPTURE
+        - AV1
         - H_264
         - H_265
         - MPEG2
@@ -8181,6 +8269,9 @@ components:
     VideoCodecSettings:
       type: object
       properties:
+        Av1Settings:
+          $ref: '#/components/schemas/Av1Settings'
+          description: 'Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.'
         Codec:
           $ref: '#/components/schemas/VideoCodec'
           description: Specifies the video codec. This must be equal to one of the enum values defined by the object  VideoCodec.
@@ -8199,7 +8290,7 @@ components:
         ProresSettings:
           $ref: '#/components/schemas/ProresSettings'
           description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
-      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
+      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
     __integerMin0Max15:
       type: integer
       minimum: 0
