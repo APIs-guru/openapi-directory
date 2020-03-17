@@ -349,6 +349,11 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 2048
+                Tags:
+                  description: An optional set of tags to associate with the job when it is created.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -520,6 +525,167 @@ paths:
                 Policy:
                   description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
                   type: string
+  '/v20180820/jobs/{id}/tagging#x-amz-account-id':
+    delete:
+      operationId: DeleteJobTagging
+      description: 'Delete the tags on a Amazon S3 batch operations job, if any.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteJobTaggingResult'
+        '480':
+          description: InternalServiceException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: NotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to remove tags from.
+          schema:
+            type: string
+            maxLength: 64
+        - name: id
+          in: path
+          required: true
+          description: The ID for the job whose tags you want to delete.
+          schema:
+            type: string
+            minLength: 5
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetJobTagging
+      description: Retrieve the tags on a Amazon S3 batch operations job.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetJobTaggingResult'
+        '480':
+          description: InternalServiceException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: NotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to retrieve tags for.
+          schema:
+            type: string
+            maxLength: 64
+        - name: id
+          in: path
+          required: true
+          description: The ID for the job whose tags you want to retrieve.
+          schema:
+            type: string
+            minLength: 5
+            maxLength: 36
+    put:
+      operationId: PutJobTagging
+      description: Replace the set of tags on a Amazon S3 batch operations job.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PutJobTaggingResult'
+        '480':
+          description: InternalServiceException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: NotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: TooManyTagsException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+      parameters:
+        - name: x-amz-account-id
+          in: header
+          required: true
+          description: The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to replace tags on.
+          schema:
+            type: string
+            maxLength: 64
+        - name: id
+          in: path
+          required: true
+          description: The ID for the job whose tags you want to replace.
+          schema:
+            type: string
+            minLength: 5
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The set of tags to associate with the job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Tag'
   '/v20180820/configuration/publicAccessBlock#x-amz-account-id':
     delete:
       operationId: DeletePublicAccessBlock
@@ -1106,17 +1272,33 @@ components:
           $ref: '#/components/schemas/NonEmptyMaxLength1024String'
           description: The ETag for the specified manifest object.
       description: Contains the information required to locate a manifest object.
+    S3Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+          description: <p/>
+        Value:
+          $ref: '#/components/schemas/MaxLength1024String'
+          description: <p/>
+      description: <p/>
     TooManyRequestsException: {}
     BadRequestException: {}
     IdempotencyException: {}
     InternalServiceException: {}
+    DeleteJobTaggingResult:
+      type: object
+      properties: {}
+    NotFoundException: {}
     DescribeJobResult:
       type: object
       properties:
         Job:
           $ref: '#/components/schemas/JobDescriptor'
           description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
-    NotFoundException: {}
     GetAccessPointResult:
       type: object
       properties:
@@ -1149,6 +1331,12 @@ components:
         PolicyStatus:
           $ref: '#/components/schemas/PolicyStatus'
           description: Indicates the current policy status of the specified access point.
+    GetJobTaggingResult:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/S3TagSet'
+          description: The set of tags associated with the job.
     GetPublicAccessBlockOutput:
       type: object
       properties:
@@ -1192,6 +1380,10 @@ components:
         - Suspended
     InvalidRequestException: {}
     InvalidNextTokenException: {}
+    PutJobTaggingResult:
+      type: object
+      properties: {}
+    TooManyTagsException: {}
     UpdateJobPriorityResult:
       type: object
       required:
@@ -1367,6 +1559,10 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
+    S3TagSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/S3Tag'
     CreateJobRequest:
       type: object
       required:
@@ -1402,6 +1598,9 @@ components:
         RoleArn:
           $ref: '#/components/schemas/IAMRoleArn'
           description: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
+        Tags:
+          $ref: '#/components/schemas/S3TagSet'
+          description: An optional set of tags to associate with the job when it is created.
     JobId:
       type: string
       minLength: 5
@@ -1416,6 +1615,10 @@ components:
     DeleteAccessPointRequest:
       type: object
       title: DeleteAccessPointRequest
+      properties: {}
+    DeleteJobTaggingRequest:
+      type: object
+      title: DeleteJobTaggingRequest
       properties: {}
     DeletePublicAccessBlockRequest:
       type: object
@@ -1500,6 +1703,10 @@ components:
     GetAccessPointRequest:
       type: object
       title: GetAccessPointRequest
+      properties: {}
+    GetJobTaggingRequest:
+      type: object
+      title: GetJobTaggingRequest
       properties: {}
     GetPublicAccessBlockRequest:
       type: object
@@ -1676,6 +1883,15 @@ components:
         Policy:
           $ref: '#/components/schemas/Policy'
           description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+    PutJobTaggingRequest:
+      type: object
+      required:
+        - Tags
+      title: PutJobTaggingRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/S3TagSet'
+          description: The set of tags to associate with the job.
     PutPublicAccessBlockRequest:
       type: object
       required:
@@ -1786,10 +2002,6 @@ components:
           $ref: '#/components/schemas/S3SSEAlgorithm'
           description: <p/>
       description: <p/>
-    S3TagSet:
-      type: array
-      items:
-        $ref: '#/components/schemas/S3Tag'
     S3StorageClass:
       type: string
       enum:
@@ -1864,19 +2076,6 @@ components:
       enum:
         - AES256
         - KMS
-    S3Tag:
-      type: object
-      required:
-        - Key
-        - Value
-      properties:
-        Key:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
-        Value:
-          $ref: '#/components/schemas/MaxLength1024String'
-          description: <p/>
-      description: <p/>
     UpdateJobPriorityRequest:
       type: object
       title: UpdateJobPriorityRequest

@@ -8262,7 +8262,7 @@ components:
           description: Parameters returned by the request.
         NextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+          description: The token to use when requesting the next set of items.
     DescribeParametersRequest:
       type: object
       title: DescribeParametersRequest
@@ -12515,6 +12515,9 @@ components:
         AWSKMSKeyARN:
           $ref: '#/components/schemas/ResourceDataSyncAWSKMSKeyARN'
           description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as the destination Amazon S3 bucket.
+        DestinationDataSharing:
+          $ref: '#/components/schemas/ResourceDataSyncDestinationDataSharing'
+          description: 'Enables destination data sharing. By default, this field is <code>null</code>.'
       description: Information about the target Amazon S3 bucket for the Resource Data Sync.
     ResourceDataSyncType:
       type: string
@@ -15164,9 +15167,8 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/AttributeValue'
-    PatchStringDate:
+    PatchStringDateTime:
       type: string
-      pattern: '^(\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$'
       minLength: 1
       maxLength: 10
     PatchRule:
@@ -15184,8 +15186,8 @@ components:
           $ref: '#/components/schemas/ApproveAfterDays'
           description: 'The number of days after the release date of each patch matched by the rule that the patch is marked as approved in the patch baseline. For example, a value of <code>7</code> means that patches are approved seven days after they are released. '
         ApproveUntilDate:
-          $ref: '#/components/schemas/PatchStringDate'
-          description: The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically
+          $ref: '#/components/schemas/PatchStringDateTime'
+          description: Example API
         EnableNonSecurity:
           $ref: '#/components/schemas/Boolean'
           description: 'For instances identified by the approval rule filters, enables a patch baseline to apply non-security updates available in the specified repository. The default value is ''false''. Applies to Linux instances only.'
@@ -15312,6 +15314,17 @@ components:
     ResourceDataSyncCreatedTime:
       type: string
       format: date-time
+    ResourceDataSyncDestinationDataSharingType:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ResourceDataSyncDestinationDataSharing:
+      type: object
+      properties:
+        DestinationDataSharingType:
+          $ref: '#/components/schemas/ResourceDataSyncDestinationDataSharingType'
+          description: The sharing data type. Only <code>Organization</code> is supported.
+      description: Synchronize Systems Manager Inventory data from multiple AWS accounts defined in AWS Organizations to a centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the central bucket. Each key prefix represents a different AWS account ID.
     ResourceDataSyncIncludeFutureRegions:
       type: boolean
     ResourceDataSyncSourceWithState:
