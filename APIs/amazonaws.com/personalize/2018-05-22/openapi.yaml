@@ -3106,6 +3106,9 @@ components:
         failureReason:
           $ref: '#/components/schemas/FailureReason'
           description: 'If the batch inference job failed, the reason for the failure.'
+        solutionVersionArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the solution version used by the batch inference job.
       description: A truncated version of the <a>BatchInferenceJob</a> datatype. The <a>ListBatchInferenceJobs</a> operation returns a list of batch inference job summaries.
     BatchInferenceJobs:
       type: array
@@ -3723,6 +3726,9 @@ components:
         trainingMode:
           $ref: '#/components/schemas/TrainingMode'
           description: '<p>The scope of training used to create the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution''s training data, while the <code>UPDATE</code> option processes only the training data that has changed since the creation of the last solution version. Choose <code>UPDATE</code> when you want to start recommending items added to the dataset without retraining the model.</p> <important> <p>The <code>UPDATE</code> option can only be used after you''ve created a solution version with the <code>FULL</code> option and the training solution uses the <a>native-recipe-hrnn-coldstart</a>.</p> </important>'
+        tunedHPOParams:
+          $ref: '#/components/schemas/TunedHPOParams'
+          description: 'If hyperparameter optimization was performed, contains the hyperparameter values of the best performing model.'
         status:
           $ref: '#/components/schemas/Status'
           description: '<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>'
@@ -3788,7 +3794,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/HPOObjectiveType'
-          description: The data type of the metric.
+          description: The type of the metric. Valid values are <code>Maximize</code> and <code>Minimize</code>.
         metricName:
           $ref: '#/components/schemas/MetricName'
           description: The name of the metric.
@@ -3959,5 +3965,12 @@ components:
       type: number
       format: double
       minimum: 0
+    TunedHPOParams:
+      type: object
+      properties:
+        algorithmHyperParameters:
+          $ref: '#/components/schemas/HyperParameters'
+          description: A list of the hyperparameter values of the best performing model.
+      description: 'If hyperparameter optimization (HPO) was performed, contains the hyperparameter values of the best performing model.'
 security:
   - hmac: []
