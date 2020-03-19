@@ -29,11 +29,11 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/resource-manager'
 tags:
-  - name: organizations
   - name: liens
   - name: operations
   - name: folders
   - name: projects
+  - name: organizations
 paths:
   /v1/liens:
     get:
@@ -56,8 +56,12 @@ paths:
           schema:
             type: string
         - description: |-
-            The name of the resource to list all attached Liens.
+            Required. The name of the resource to list all attached Liens.
             For example, `projects/1234`.
+
+            (google.api.field_policy).resource_type annotation is not set since the
+            parent depends on the meta api implementation. This field could be a
+            project or other sub project resources.
           in: query
           name: parent
           schema:
@@ -81,17 +85,17 @@ paths:
       tags:
         - liens
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Create a Lien which applies to the resource denoted by the `parent` field.
@@ -127,17 +131,17 @@ paths:
         - liens
   '/v1/organizations:search':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Searches Organization resources that are visible to the user and satisfy
@@ -268,17 +272,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Request that a new Project be created. The result is an Operation which
@@ -398,17 +402,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     put:
       description: |-
         Updates the attributes of the Project identified by the specified
@@ -447,17 +451,17 @@ paths:
         - projects
   '/v1/projects/{projectId}:getAncestry':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Gets a list of ancestors in the resource hierarchy for the Project
@@ -500,17 +504,17 @@ paths:
         - projects
   '/v1/projects/{projectId}:undelete':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Restores the Project identified by the specified
@@ -552,17 +556,17 @@ paths:
         - projects
   '/v1/projects/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Returns the IAM access control policy for the specified Project.
@@ -608,17 +612,17 @@ paths:
         - projects
   '/v1/projects/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Sets the IAM access control policy for the specified Project. Overwrites
@@ -701,17 +705,17 @@ paths:
         - projects
   '/v1/projects/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Returns permissions that a caller has on the specified Project.
@@ -760,7 +764,7 @@ paths:
         `resourcemanager.projects.updateLiens`.
       operationId: cloudresourcemanager.liens.delete
       parameters:
-        - description: The name/identifier of the Lien to delete.
+        - description: Required. The name/identifier of the Lien to delete.
           in: path
           name: name
           required: true
@@ -786,13 +790,13 @@ paths:
       tags:
         - liens
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudresourcemanager.operations.get
+      description: Fetches an Organization resource identified by the specified resource name.
+      operationId: cloudresourcemanager.organizations.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The resource name of the Organization to fetch. This is the organization's
+            relative path in the API, formatted as "organizations/[organizationId]".
+            For example, "organizations/1234".
           in: path
           name: name
           required: true
@@ -804,7 +808,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: '#/components/schemas/Organization'
           description: Successful response
       security:
         - Oauth2:
@@ -816,35 +820,35 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - operations
+        - organizations
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
   '/v1/{resource}:clearOrgPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.projects.clearOrgPolicy
+      operationId: cloudresourcemanager.organizations.clearOrgPolicy
       parameters:
         - description: Name of the resource for the `Policy` to clear.
           in: path
@@ -871,20 +875,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Gets the effective `Policy` on a resource. This is the result of merging
@@ -892,7 +896,7 @@ paths:
         an `etag`set because it is a computed `Policy` across multiple resources.
         Subtrees of Resource Manager resource hierarchy with 'under:' prefix will
         not be expanded.
-      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.organizations.getEffectiveOrgPolicy
       parameters:
         - description: The name of the resource to start computing the effective `Policy`.
           in: path
@@ -923,20 +927,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Gets the access control policy for an Organization resource. May be empty
@@ -981,17 +985,17 @@ paths:
         - organizations
   '/v1/{resource}:getOrgPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Gets a `Policy` on a resource.
@@ -1000,7 +1004,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.projects.getOrgPolicy
+      operationId: cloudresourcemanager.organizations.getOrgPolicy
       parameters:
         - description: Name of the resource the `Policy` is set on.
           in: path
@@ -1031,23 +1035,23 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.organizations.listAvailableOrgPolicyConstraints
       parameters:
         - description: Name of the resource to list `Constraints` for.
           in: path
@@ -1078,23 +1082,23 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:listOrgPolicies':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.projects.listOrgPolicies
+      operationId: cloudresourcemanager.organizations.listOrgPolicies
       parameters:
         - description: Name of the resource to list Policies for.
           in: path
@@ -1125,20 +1129,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Sets the access control policy on an Organization resource. Replaces any
@@ -1179,17 +1183,17 @@ paths:
         - organizations
   '/v1/{resource}:setOrgPolicy':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Updates the specified `Policy` on the resource. Creates a new `Policy` for
@@ -1197,7 +1201,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.projects.setOrgPolicy
+      operationId: cloudresourcemanager.organizations.setOrgPolicy
       parameters:
         - description: Resource name of the resource to attach the `Policy`.
           in: path
@@ -1224,20 +1228,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Returns permissions that a caller has on the specified Organization.
@@ -1697,33 +1701,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string

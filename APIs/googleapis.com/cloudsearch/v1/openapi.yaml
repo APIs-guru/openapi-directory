@@ -29,27 +29,27 @@ info:
 externalDocs:
   url: 'https://developers.google.com/cloud-search/docs/guides/'
 tags:
-  - name: debug
   - name: media
   - name: stats
   - name: settings
   - name: indexing
-  - name: operations
   - name: query
+  - name: operations
+  - name: debug
 paths:
   '/v1/debug/{name}/items:searchByViewUrl':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Fetches the item whose viewUrl exactly matches that of the URL provided
@@ -92,17 +92,17 @@ paths:
         - debug
   '/v1/debug/{name}:checkAccess':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Checks whether an item is accessible by specified principal.
@@ -212,17 +212,17 @@ paths:
       tags:
         - debug
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/debug/{parent}/unmappedids':
     get:
       description: |-
@@ -290,17 +290,17 @@ paths:
       tags:
         - debug
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/indexing/{name}':
     delete:
       description: |-
@@ -424,17 +424,17 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/indexing/{name}/items':
     get:
       description: |-
@@ -524,30 +524,30 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/indexing/{name}/items:deleteQueueItems':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Deletes all items in a queue. This method is useful for deleting stale
@@ -591,17 +591,17 @@ paths:
         - indexing
   '/v1/indexing/{name}/items:poll':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Polls for unreserved items from the indexing queue and marks a
@@ -668,17 +668,17 @@ paths:
         - indexing
   '/v1/indexing/{name}/items:unreserve':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Unreserves all items from a queue, making them all eligible to be
@@ -813,17 +813,17 @@ paths:
       tags:
         - indexing
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     put:
       description: |-
         Updates the schema of a data source. This method does not perform
@@ -871,17 +871,17 @@ paths:
         - indexing
   '/v1/indexing/{name}:index':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Updates Item ACL, metadata, and
@@ -930,17 +930,17 @@ paths:
         - indexing
   '/v1/indexing/{name}:push':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Pushes an item onto a queue for later polling and updating.
@@ -986,17 +986,17 @@ paths:
         - indexing
   '/v1/indexing/{name}:upload':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an upload session for uploading item content. For items smaller
@@ -1042,17 +1042,17 @@ paths:
         - indexing
   '/v1/media/{resourceName}':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Uploads media for indexing.
@@ -1113,17 +1113,17 @@ paths:
         - media
   /v1/query/search:
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         The Cloud Search Query API provides the search method, which returns
@@ -1132,6 +1132,10 @@ paths:
         that you have indexed from a third party.
 
         **Note:** This API requires a standard end user account to execute.
+        A service account can't perform Query API requests directly; to use a
+        service account to perform queries, set up [G Suite domain-wide delegation
+        of
+        authority](https://developers.google.com/cloud-search/docs/guides/delegation/).
       operationId: cloudsearch.query.search
       requestBody:
         content:
@@ -1162,6 +1166,10 @@ paths:
         Returns list of sources that user can use for Search and Suggest APIs.
 
         **Note:** This API requires a standard end user account to execute.
+        A service account can't perform Query API requests directly; to use a
+        service account to perform queries, set up [G Suite domain-wide delegation
+        of
+        authority](https://developers.google.com/cloud-search/docs/guides/delegation/).
       operationId: cloudsearch.query.sources.list
       parameters:
         - description: Number of sources to return in the response.
@@ -1231,35 +1239,39 @@ paths:
       tags:
         - query
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   /v1/query/suggest:
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Provides suggestions for autocompleting the query.
 
         **Note:** This API requires a standard end user account to execute.
+        A service account can't perform Query API requests directly; to use a
+        service account to perform queries, set up [G Suite domain-wide delegation
+        of
+        authority](https://developers.google.com/cloud-search/docs/guides/delegation/).
       operationId: cloudsearch.query.suggest
       requestBody:
         content:
@@ -1335,17 +1347,17 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a datasource.
@@ -1429,17 +1441,17 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a search application.
@@ -1565,17 +1577,17 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     put:
       description: |-
         Updates a datasource.
@@ -1622,17 +1634,17 @@ paths:
         - settings
   '/v1/settings/{name}:reset':
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Resets a search application to default settings. This will return an empty
@@ -1740,17 +1752,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/stats/index/{name}':
     get:
       description: |-
@@ -1821,17 +1833,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   /v1/stats/query:
     get:
       description: |-
@@ -1893,17 +1905,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/stats/query/{name}':
     get:
       description: |-
@@ -1974,17 +1986,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   /v1/stats/session:
     get:
       description: |-
@@ -2047,17 +2059,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/stats/session/{name}':
     get:
       description: |-
@@ -2129,17 +2141,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   /v1/stats/user:
     get:
       description: |-
@@ -2201,17 +2213,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/stats/user/{name}':
     get:
       description: |-
@@ -2282,17 +2294,17 @@ paths:
       tags:
         - stats
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/{name}':
     get:
       description: |-
@@ -2343,17 +2355,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     _.xgafv:
@@ -2443,9 +2455,9 @@ components:
             Indicates the operator name required in the query in order to isolate the
             boolean property. For example, if operatorName is *closed* and the
             property's name is *isClosed*, then queries like
-            *closed:&lt;value&gt;* will show results only where the value of the
+            *closed:&lt;value&gt;* show results only where the value of the
             property named *isClosed* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any
             String properties or text within the content field for the item.
             The operator name can only contain lowercase letters (a-z).
@@ -2663,7 +2675,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             date property using the greater-than operator. For example, if
             greaterThanOperatorName is *closedafter* and the property's name is
-            *closeDate*, then queries like *closedafter:&lt;value&gt;* will
+            *closeDate*, then queries like *closedafter:&lt;value&gt;*
             show results only where the value of the property named *closeDate* is
             later than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -2674,7 +2686,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             date property using the less-than operator. For example, if
             lessThanOperatorName is *closedbefore* and the property's name is
-            *closeDate*, then queries like *closedbefore:&lt;value&gt;* will
+            *closeDate*, then queries like *closedbefore:&lt;value&gt;*
             show results only where the value of the property named *closeDate* is
             earlier than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -2686,9 +2698,9 @@ components:
             date property. For example, suppose an issue tracking schema object
             has a property named *closeDate* that specifies an operator with an
             operatorName of *closedon*. For searches on that data, queries like
-            *closedon:&lt;value&gt;* will show results only where the value of the
+            *closedon:&lt;value&gt;* show results only where the value of the
             *closeDate* property matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any String
             properties or text within the content field for the indexed datasource.
             The operator name can only contain lowercase letters (a-z).
@@ -2736,17 +2748,17 @@ components:
     DisplayedProperty:
       description: |-
         A reference to a top-level property within the object that should be
-        displayed in search results. The values of the chosen properties will be
+        displayed in search results. The values of the chosen properties is
         displayed in the search results along with the
-        dislpay label
+        display label
         for that property if one is specified. If a display label is not specified,
-        only the values will be shown.
+        only the values is shown.
       properties:
         propertyName:
           description: |-
             The name of the top-level property as defined in a property definition
             for the object. If the name is not a defined property in the schema, an
-            error will be given when attempting to update the schema.
+            error is given when attempting to update the schema.
           type: string
       type: object
     DoubleOperatorOptions:
@@ -2847,7 +2859,7 @@ components:
         optional. Search operators let users restrict the query to specific fields
         relevant to the type of item being searched. For example, if you provide no
         operator for a *priority* enum property with possible values *p0* and *p1*,
-        a query that contains the term *p0* will return items that have *p0* as the
+        a query that contains the term *p0* returns items that have *p0* as the
         value of the *priority* property, as well as any items that contain the
         string *p0* in other fields. If you provide an operator name for the enum,
         such as *priority*, then search users can use that operator to refine
@@ -2859,9 +2871,9 @@ components:
             Indicates the operator name required in the query in order to isolate the
             enum property. For example, if operatorName is *priority* and the
             property's name is *priorityVal*, then queries like
-            *priority:&lt;value&gt;* will show results only where the value of the
+            *priority:&lt;value&gt;* show results only where the value of the
             property named *priorityVal* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any String
             properties or text within the content field for the item.
             The operator name can only contain lowercase letters (a-z).
@@ -3105,7 +3117,7 @@ components:
             as the freshness indicator.
             The maximum length is 256 characters.
 
-            When a property is used to calculate fresheness, the value defaults
+            When a property is used to calculate freshness, the value defaults
             to 2 years from the current time.
           type: string
       type: object
@@ -3192,9 +3204,9 @@ components:
             Indicates the operator name required in the query in order to isolate the
             html property. For example, if operatorName is *subject* and the
             property's name is *subjectLine*, then queries like
-            *subject:&lt;value&gt;* will show results only where the value of the
+            *subject:&lt;value&gt;* show results only where the value of the
             property named *subjectLine* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator return
             all items where *&lt;value&gt;* matches the value of any
             html properties or text within the content field for the item.
             The operator name can only contain lowercase letters (a-z).
@@ -3266,7 +3278,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             integer property using the greater-than operator. For example, if
             greaterThanOperatorName is *priorityabove* and the property's name is
-            *priorityVal*, then queries like *priorityabove:&lt;value&gt;* will
+            *priorityVal*, then queries like *priorityabove:&lt;value&gt;*
             show results only where the value of the property named *priorityVal* is
             greater than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -3277,7 +3289,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             integer property using the less-than operator. For example, if
             lessThanOperatorName is *prioritybelow* and the property's name is
-            *priorityVal*, then queries like *prioritybelow:&lt;value&gt;* will
+            *priorityVal*, then queries like *prioritybelow:&lt;value&gt;*
             show results only where the value of the property named *priorityVal* is
             less than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -3288,9 +3300,9 @@ components:
             Indicates the operator name required in the query in order to isolate the
             integer property. For example, if operatorName is *priority* and the
             property's name is *priorityVal*, then queries like
-            *priority:&lt;value&gt;* will show results only where the value of the
+            *priority:&lt;value&gt;* show results only where the value of the
             property named *priorityVal* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any String
             properties or text within the content field for the item.
             The operator name can only contain lowercase letters (a-z).
@@ -3786,7 +3798,7 @@ components:
       properties:
         properties:
           description: |-
-            The list of displayed properties for the metaline. The maxiumum number of
+            The list of displayed properties for the metaline. The maximum number of
             properties is 5.
           items:
             $ref: '#/components/schemas/DisplayedProperty'
@@ -3864,12 +3876,12 @@ components:
       properties:
         metalines:
           description: |-
-            Defines the properties that will be displayed in the metalines of the
-            search results. The property values will be displayed in the order given
-            here. If a property holds multiple values, all of the values will be
-            diplayed before the next properties. For this reason, it is a good practice
-            to specify singular properties before repeated properties in this list. All
-            of the properties must set
+            Defines the properties that are displayed in the metalines of the
+            search results. The property values are displayed in the order given
+            here. If a property holds multiple values, all of the values are
+            displayed before the next properties. For this reason, it is a good
+            practice to specify singular properties before repeated properties in this
+            list. All of the properties must set
             is_returnable
             to true. The maximum number of metalines is 3.
           items:
@@ -3877,9 +3889,9 @@ components:
           type: array
         objectDisplayLabel:
           description: |-
-            The user friendly label to display in the search result to inidicate the
-            type of the item. This is OPTIONAL; if not given, an object label will not
-            be displayed on the context line of the search results. The maximum length
+            The user friendly label to display in the search result to indicate the
+            type of the item. This is OPTIONAL; if not provided, an object label isn't
+            displayed on the context line of the search results. The maximum length
             is 32 characters.
           type: string
       type: object
@@ -4129,7 +4141,7 @@ components:
             Indicates that multiple values are allowed for the property. For example, a
             document only has one description but can have multiple comments. Cannot be
             true for properties whose type is a boolean.
-            If set to false, properties that contain more than one value will cause the
+            If set to false, properties that contain more than one value cause the
             indexing request for that item to be rejected.
           type: boolean
         isReturnable:
@@ -4159,8 +4171,6 @@ components:
             property. Only supported for Text properties. IsReturnable must be true to
             set this option. In a given datasource maximum of 5 properties can be
             marked as is_wildcard_searchable.
-
-            Note: This is an alpha feature and is enabled for whitelisted users only.
           type: boolean
         name:
           description: |-
@@ -4188,14 +4198,14 @@ components:
       properties:
         displayLabel:
           description: |-
-            The user friendly label for the property that will be used if the property
-            is specified to be displayed in ObjectDisplayOptions. If given, the display
-            label will be shown in front of the property values when the property is
+            The user friendly label for the property that is used if the property
+            is specified to be displayed in ObjectDisplayOptions. If provided, the
+            display label is shown in front of the property values when the property is
             part of the object display options. For example, if the property value is
             '1', the value by itself may not be useful context for the user. If the
-            display name given was 'priority', then the user will see 'priority : 1' in
-            the search results which provides clear conext to search users. This is
-            OPTIONAL; if not given, only the property values will be displayed.
+            display name given was 'priority', then the user sees 'priority : 1' in
+            the search results which provides clear context to search users. This is
+            OPTIONAL; if not given, only the property values are displayed.
             The maximum length is 32 characters.
           type: string
       type: object
@@ -4371,6 +4381,11 @@ components:
           description: |-
             Indicates the operator name that can be used to  isolate the property using
             the less-than operator.
+          type: string
+        objectType:
+          description: |-
+            Name of the object corresponding to the operator. This field is only filled
+            for schema-specific operators, and is unset for common operators.
           type: string
         operatorName:
           description: The name of the operator.
@@ -5115,24 +5130,24 @@ components:
       properties:
         exactMatchWithOperator:
           description: |-
-            If true, the text value will be tokenized as one atomic value in
+            If true, the text value is tokenized as one atomic value in
             operator searches and facet matches. For example, if the operator name is
             "genre" and the value is "science-fiction" the query restrictions
-            "genre:science" and "genre:fiction" will not match the item;
-            "genre:science-fiction" will. Value matching is case-sensitive
+            "genre:science" and "genre:fiction" doesn't match the item;
+            "genre:science-fiction" does. Value matching is case-sensitive
             and does not remove special characters.
-            If false, the text will be tokenized. For example, if the value is
-            "science-fiction" the queries "genre:science" and "genre:fiction" will
-            match the item.
+            If false, the text is tokenized. For example, if the value is
+            "science-fiction" the queries "genre:science" and "genre:fiction"
+            matches the item.
           type: boolean
         operatorName:
           description: |-
             Indicates the operator name required in the query in order to isolate the
             text property. For example, if operatorName is *subject* and the
             property's name is *subjectLine*, then queries like
-            *subject:&lt;value&gt;* will show results only where the value of the
+            *subject:&lt;value&gt;* show results only where the value of the
             property named *subjectLine* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any
             text properties or text within the content field for the item.
             The operator name can only contain lowercase letters (a-z).
@@ -5171,7 +5186,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             timestamp property using the greater-than operator. For example, if
             greaterThanOperatorName is *closedafter* and the property's name is
-            *closeDate*, then queries like *closedafter:&lt;value&gt;* will
+            *closeDate*, then queries like *closedafter:&lt;value&gt;*
             show results only where the value of the property named *closeDate* is
             later than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -5182,7 +5197,7 @@ components:
             Indicates the operator name required in the query in order to isolate the
             timestamp property using the less-than operator. For example, if
             lessThanOperatorName is *closedbefore* and the property's name is
-            *closeDate*, then queries like *closedbefore:&lt;value&gt;* will
+            *closeDate*, then queries like *closedbefore:&lt;value&gt;*
             show results only where the value of the property named *closeDate* is
             earlier than *&lt;value&gt;*.
             The operator name can only contain lowercase letters (a-z).
@@ -5193,9 +5208,9 @@ components:
             Indicates the operator name required in the query in order to isolate the
             timestamp property. For example, if operatorName is *closedon* and the
             property's name is *closeDate*, then queries like
-            *closedon:&lt;value&gt;* will show results only where the value of the
+            *closedon:&lt;value&gt;* show results only where the value of the
             property named *closeDate* matches *&lt;value&gt;*. By contrast, a
-            search that uses the same *&lt;value&gt;* without an operator will return
+            search that uses the same *&lt;value&gt;* without an operator returns
             all items where *&lt;value&gt;* matches the value of any String
             properties or text within the content field for the item. The operator
             name can only contain lowercase letters (a-z). The maximum length is 32

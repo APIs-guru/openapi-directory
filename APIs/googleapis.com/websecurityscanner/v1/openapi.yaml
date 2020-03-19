@@ -88,6 +88,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -98,7 +99,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     patch:
       description: Updates a ScanConfig. This method support partial update of a ScanConfig.
       operationId: websecurityscanner.projects.scanConfigs.patch
@@ -142,6 +142,7 @@ paths:
         - projects
   '/v1/{name}:start':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -152,7 +153,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Start a ScanRun according to the given ScanConfig.
       operationId: websecurityscanner.projects.scanConfigs.start
@@ -187,6 +187,7 @@ paths:
         - projects
   '/v1/{name}:stop':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -197,7 +198,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Stops a ScanRun. The stopped ScanRun is returned.
       operationId: websecurityscanner.projects.scanConfigs.scanRuns.stop
@@ -277,6 +277,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -287,7 +288,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/{parent}/findingTypeStats':
     get:
       description: List all FindingTypeStats under a given ScanRun.
@@ -318,6 +318,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -328,7 +329,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/{parent}/findings':
     get:
       description: List Findings under a given ScanRun.
@@ -384,6 +384,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -394,7 +395,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/{parent}/scanConfigs':
     get:
       description: Lists ScanConfigs under a given project.
@@ -440,6 +440,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -450,7 +451,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new ScanConfig.
       operationId: websecurityscanner.projects.scanConfigs.create
@@ -530,6 +530,7 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -540,7 +541,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     _.xgafv:
@@ -634,6 +634,9 @@ components:
         googleAccount:
           $ref: '#/components/schemas/GoogleAccount'
           description: Authentication using a Google account.
+        iapCredential:
+          $ref: '#/components/schemas/IapCredential'
+          description: Authentication using Identity-Aware-Proxy (IAP).
       type: object
     CrawledUrl:
       description: |-
@@ -735,6 +738,15 @@ components:
             Output only. The URL containing human-readable payload that user can leverage to
             reproduce the vulnerability.
           type: string
+        severity:
+          description: Output only. The severity level of the reported vulnerability.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - CRITICAL
+            - HIGH
+            - MEDIUM
+            - LOW
+          type: string
         trackingId:
           description: |-
             Output only. The tracking ID uniquely identifies a vulnerability instance across
@@ -802,6 +814,26 @@ components:
           type: string
         value:
           description: Header value.
+          type: string
+      type: object
+    IapCredential:
+      description: Describes authentication configuration for Identity-Aware-Proxy (IAP).
+      properties:
+        iapTestServiceAccountInfo:
+          $ref: '#/components/schemas/IapTestServiceAccountInfo'
+          description: |-
+            Authentication configuration when Web-Security-Scanner service
+            account is added in Identity-Aware-Proxy (IAP) access policies.
+      type: object
+    IapTestServiceAccountInfo:
+      description: |-
+        Describes authentication configuration when Web-Security-Scanner
+        service account is added in Identity-Aware-Proxy (IAP) access policies.
+      properties:
+        targetAudienceClientId:
+          description: |-
+            Required. Describes OAuth2 client id of resources protected by
+            Identity-Aware-Proxy (IAP).
           type: string
       type: object
     ListCrawledUrlsResponse:
@@ -911,6 +943,11 @@ components:
             - ENABLED
             - DISABLED
           type: string
+        managedScan:
+          description: |-
+            Whether the scan config is managed by Cloud Web Security Scanner, output
+            only.
+          type: boolean
         maxQps:
           description: |-
             The maximum QPS during scanning. A valid value ranges from 5 to 20
@@ -940,6 +977,11 @@ components:
           items:
             type: string
           type: array
+        staticIpScan:
+          description: |-
+            Whether the scan configuration has enabled static IP address scan feature.
+            If enabled, the scanner will access applications from static IP addresses.
+          type: boolean
         userAgent:
           description: The user agent used during scanning.
           enum:

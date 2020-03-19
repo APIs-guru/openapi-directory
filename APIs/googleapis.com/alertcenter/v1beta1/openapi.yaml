@@ -97,17 +97,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/alerts/{alertId}':
     delete:
       description: |-
@@ -181,17 +181,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/alerts/{alertId}/feedback':
     get:
       description: |-
@@ -240,17 +240,17 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Creates new feedback for an alert. Attempting to create a feedback for
@@ -328,30 +328,30 @@ paths:
       tags:
         - alerts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/alerts/{alertId}:undelete':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Restores, or "undeletes", an alert that was marked for deletion within the
@@ -388,17 +388,17 @@ paths:
         - alerts
   '/v1beta1/alerts:batchDelete':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Performs batch delete operation on alerts.
       operationId: alertcenter.alerts.batchDelete
@@ -423,17 +423,17 @@ paths:
         - alerts
   '/v1beta1/alerts:batchUndelete':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Performs batch undelete operation on alerts.
       operationId: alertcenter.alerts.batchUndelete
@@ -484,17 +484,17 @@ paths:
       tags:
         - v1beta1
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings
@@ -655,7 +655,7 @@ components:
           type: array
         supersedingAlert:
           description: |-
-            Alert id superseding this alert. It is used to indicate that superseding
+            Alert ID superseding this alert. It is used to indicate that superseding
             alert is essentially extension of this alert and we found the relationship
             after creating both alerts.
           type: string
@@ -884,7 +884,7 @@ components:
       description: A request to perform batch delete on alerts.
       properties:
         alertId:
-          description: Required. list of alert ids.
+          description: Required. list of alert IDs.
           items:
             type: string
           type: array
@@ -903,7 +903,7 @@ components:
           description: The status details for each failed alert_id.
           type: object
         successAlertIds:
-          description: The successful list of alert ids.
+          description: The successful list of alert IDs.
           items:
             type: string
           type: array
@@ -912,7 +912,7 @@ components:
       description: A request to perform batch undelete on alerts.
       properties:
         alertId:
-          description: Required. list of alert ids.
+          description: Required. list of alert IDs.
           items:
             type: string
           type: array
@@ -931,7 +931,7 @@ components:
           description: The status details for each failed alert_id.
           type: object
         successAlertIds:
-          description: The successful list of alert ids.
+          description: The successful list of alert IDs.
           items:
             type: string
           type: array
@@ -1025,6 +1025,19 @@ components:
         serialNumber:
           description: The serial number of the device.
           type: string
+      type: object
+    DlpRuleViolation:
+      description: Alerts that get triggered on violations of Data Loss Prevention (DLP) rules.
+      properties:
+        ruleViolationInfo:
+          $ref: '#/components/schemas/RuleViolationInfo'
+          description: |-
+            Details about the violated DLP rule.
+
+            Admins can use the predefined detectors provided by Google Cloud DLP
+            https://cloud.google.com/dlp/ when setting up a DLP rule. Matched Cloud DLP
+            detectors in this violation if any will be captured in the
+            MatchInfo.predefined_detector.
       type: object
     DomainId:
       description: Domain ID of Gmail phishing alerts.
@@ -1150,7 +1163,7 @@ components:
         loginTime:
           description: |-
             Optional. The successful login time that is associated with the warning
-            event. This will not be present for blocked login attempts.
+            event. This isn't present for blocked login attempts.
           format: google-datetime
           type: string
       type: object
@@ -1164,6 +1177,7 @@ components:
         * Suspicious message reported
         * Phishing reclassification
         * Malware reclassification
+        * Gmail potential employee spoofing
       properties:
         domainId:
           $ref: '#/components/schemas/DomainId'
@@ -1179,6 +1193,13 @@ components:
           items:
             $ref: '#/components/schemas/GmailMessageInfo'
           type: array
+        systemActionType:
+          description: System actions on the messages.
+          enum:
+            - SYSTEM_ACTION_TYPE_UNSPECIFIED
+            - NO_OPERATION
+            - REMOVED_FROM_INBOX
+          type: string
       type: object
     MaliciousEntity:
       description: Entity whose actions triggered a Gmail phishing alert.
@@ -1186,9 +1207,22 @@ components:
         displayName:
           description: The header from display name.
           type: string
+        entity:
+          $ref: '#/components/schemas/User'
+          description: The actor who triggered a gmail phishing alert.
         fromHeader:
           description: The sender email address.
           type: string
+      type: object
+    MatchInfo:
+      description: Proto that contains match information from the condition part of the rule.
+      properties:
+        predefinedDetector:
+          $ref: '#/components/schemas/PredefinedDetectorInfo'
+          description: For matched detector predefined by Google.
+        userDefinedDetector:
+          $ref: '#/components/schemas/UserDefinedDetectorInfo'
+          description: For matched detector defined by administrators.
       type: object
     Notification:
       description: |-
@@ -1222,6 +1256,13 @@ components:
             $ref: '#/components/schemas/GmailMessageInfo'
           type: array
       type: object
+    PredefinedDetectorInfo:
+      description: Detector provided by Google.
+      properties:
+        detectorName:
+          description: Name that uniquely identifies the detector.
+          type: string
+      type: object
     RequestInfo:
       description: Requests for one application that needs default SQL setup.
       properties:
@@ -1240,6 +1281,94 @@ components:
             Required. Number of requests sent for this application to set up default
             SQL instance.
           format: int64
+          type: string
+      type: object
+    ResourceInfo:
+      description: Proto that contains resource information.
+      properties:
+        documentId:
+          description: Drive file ID.
+          type: string
+        resourceTitle:
+          description: 'Title of the resource, for example email subject, or document title.'
+          type: string
+      type: object
+    RuleInfo:
+      description: Proto that contains rule information.
+      properties:
+        displayName:
+          description: User provided name of the rule.
+          type: string
+        resourceName:
+          description: Resource name that uniquely identifies the rule.
+          type: string
+      type: object
+    RuleViolationInfo:
+      description: |-
+        Common alert information about violated rules that are configured by G Suite
+        administrators.
+      properties:
+        dataSource:
+          description: Source of the data.
+          enum:
+            - DATA_SOURCE_UNSPECIFIED
+            - DRIVE
+          type: string
+        matchInfo:
+          description: List of matches that were found in the resource content.
+          items:
+            $ref: '#/components/schemas/MatchInfo'
+          type: array
+        recipients:
+          description: |-
+            Resource recipients.
+
+            For Drive, they are grantees that the Drive file was shared with at the
+            time of rule triggering. Valid values include user emails, group emails,
+            domains, or 'anyone' if the file was publicly accessible. If the file was
+            private the recipients list will be empty.
+
+            For Gmail, they are emails of the users or groups that the Gmail message
+            was sent to.
+          items:
+            type: string
+          type: array
+        resourceInfo:
+          $ref: '#/components/schemas/ResourceInfo'
+          description: Details of the resource which violated the rule.
+        ruleInfo:
+          $ref: '#/components/schemas/RuleInfo'
+          description: Details of the violated rule.
+        suppressedActionTypes:
+          description: Actions suppressed due to other actions with higher priority.
+          items:
+            enum:
+              - ACTION_TYPE_UNSPECIFIED
+              - DRIVE_BLOCK_EXTERNAL_SHARING
+              - DRIVE_WARN_ON_EXTERNAL_SHARING
+              - ALERT
+            type: string
+          type: array
+        trigger:
+          description: Trigger of the rule.
+          enum:
+            - TRIGGER_UNSPECIFIED
+            - DRIVE_SHARE
+          type: string
+        triggeredActionTypes:
+          description: Actions applied as a consequence of the rule being triggered.
+          items:
+            enum:
+              - ACTION_TYPE_UNSPECIFIED
+              - DRIVE_BLOCK_EXTERNAL_SHARING
+              - DRIVE_WARN_ON_EXTERNAL_SHARING
+              - ALERT
+            type: string
+          type: array
+        triggeringUserEmail:
+          description: |-
+            Email of the user who caused the violation. Value could be empty if not
+            applicable, for example, a violation found by drive continuous scan.
           type: string
       type: object
     Settings:
@@ -1339,6 +1468,26 @@ components:
             Optional. The unique identifier of the G Suite organization account of the
             customer the alert is associated with.
             Inferred from the caller identity if not provided.
+          type: string
+      type: object
+    User:
+      description: A user.
+      properties:
+        displayName:
+          description: Display name of the user.
+          type: string
+        emailAddress:
+          description: Email address of the user.
+          type: string
+      type: object
+    UserDefinedDetectorInfo:
+      description: Detector defined by administrators.
+      properties:
+        displayName:
+          description: Display name of the detector.
+          type: string
+        resourceName:
+          description: Resource name that uniquely identifies the detector.
           type: string
       type: object
   securitySchemes:

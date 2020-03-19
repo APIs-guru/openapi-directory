@@ -86,40 +86,91 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}':
-    get:
-      description: Returns the service configuration and enabled state for a given service.
-      operationId: serviceusage.services.get
+    delete:
+      description: Deletes a consumer override.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete
       parameters:
         - description: |-
-            Name of the consumer and service to get the `ConsumerState` for.
+            The resource name of the override to delete.
 
             An example name would be:
-            `projects/123/services/serviceusage.googleapis.com`
-            where `123` is the project number (not project ID).
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
+        - description: |-
+            Whether to force the deletion of the quota override.
+            If deleting an override would cause the effective quota for the consumer to
+            decrease by more than 10 percent, the call is rejected, as a safety measure
+            to avoid accidentally decreasing quota too quickly. Setting the force
+            parameter to true ignores this restriction.
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
+    get:
+      description: Retrieves a summary of quota information for a specific quota limit.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.get
+      parameters:
+        - description: |-
+            The resource name of the quota limit.
+
+            Use the quota limit resource name returned by previous
+            ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: Specifies the level of detail for quota information in the response.
+          in: query
+          name: view
+          schema:
+            enum:
+              - QUOTA_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConsumerQuotaLimit'
           description: Successful response
       security:
         - Oauth2:
@@ -133,30 +184,85 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    patch:
+      description: Updates a consumer override.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.patch
+      parameters:
+        - description: |-
+            The resource name of the override to update.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Whether to force the update of the quota override.
+            If updating an override would cause the effective quota for the consumer to
+            decrease by more than 10 percent, the call is rejected, as a safety measure
+            to avoid accidentally decreasing quota too quickly. Setting the force
+            parameter to true ignores this restriction.
+          in: query
+          name: force
+          schema:
+            type: boolean
+        - description: |-
+            Update only the specified fields of the override.
+            If unset, all fields will be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuotaOverride'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
   '/v1beta1/{name}:disable':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Disable a service so that it can no longer be used with a project.
@@ -209,17 +315,17 @@ paths:
         - services
   '/v1beta1/{name}:enable':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Enable a service so that it can be used with a project.
@@ -268,6 +374,307 @@ paths:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
+  '/v1beta1/{parent}/adminOverrides':
+    get:
+      description: Lists all admin overrides on this limit.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.list
+      parameters:
+        - description: |-
+            The resource name of the parent quota limit, returned by a
+            ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListAdminOverridesResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - services
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Creates an admin override.
+        An admin override is applied by an administrator of a parent folder or
+        parent organization of the consumer receiving the override. An admin
+        override is intended to limit the amount of quota the consumer can use out
+        of the total quota pool allocated to all children of the folder or
+        organization.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.create
+      parameters:
+        - description: |-
+            The resource name of the parent quota limit, returned by a
+            ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Whether to force the creation of the quota override.
+            If creating an override would cause the effective quota for the consumer to
+            decrease by more than 10 percent, the call is rejected, as a safety measure
+            to avoid accidentally decreasing quota too quickly. Setting the force
+            parameter to true ignores this restriction.
+          in: query
+          name: force
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuotaOverride'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
+  '/v1beta1/{parent}/consumerOverrides':
+    get:
+      description: Lists all consumer overrides on this limit.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list
+      parameters:
+        - description: |-
+            The resource name of the parent quota limit, returned by a
+            ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListConsumerOverridesResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - services
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Creates a consumer override.
+        A consumer override is applied to the consumer on its own authority to
+        limit its own quota usage. Consumer overrides cannot be used to grant more
+        quota than would be allowed by admin overrides, producer overrides, or the
+        default limit of the service.
+      operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.create
+      parameters:
+        - description: |-
+            The resource name of the parent quota limit, returned by a
+            ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Whether to force the creation of the quota override.
+            If creating an override would cause the effective quota for the consumer to
+            decrease by more than 10 percent, the call is rejected, as a safety measure
+            to avoid accidentally decreasing quota too quickly. Setting the force
+            parameter to true ignores this restriction.
+          in: query
+          name: force
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuotaOverride'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
+  '/v1beta1/{parent}/consumerQuotaMetrics':
+    get:
+      description: |-
+        Retrieves a summary of all quota information visible to the service
+        consumer, organized by service metric. Each metric includes information
+        about all of its defined limits. Each limit includes the limit
+        configuration (quota unit, preciseness, default value), the current
+        effective limit value, and all of the overrides applied to the limit.
+      operationId: serviceusage.services.consumerQuotaMetrics.list
+      parameters:
+        - description: |-
+            Parent of the quotas resource.
+
+            Some example names would be:
+            projects/123/services/serviceconsumermanagement.googleapis.com
+            folders/345/services/serviceconsumermanagement.googleapis.com
+            organizations/456/services/serviceconsumermanagement.googleapis.com
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: Requested size of the next page of data.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies the level of detail for quota information in the response.
+          in: query
+          name: view
+          schema:
+            enum:
+              - QUOTA_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListConsumerQuotaMetricsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - services
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{parent}/services':
     get:
       description: |-
@@ -333,30 +740,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{parent}/services:batchEnable':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Enable multiple services on a project. The operation is atomic: if enabling
@@ -479,6 +886,12 @@ components:
       name: upload_protocol
       schema:
         type: string
+  requestBodies:
+    QuotaOverride:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QuotaOverride'
   schemas:
     Api:
       description: |-
@@ -604,6 +1017,28 @@ components:
 
             Example: https://www.googleapis.com/oauth2/v1/certs
           type: string
+        jwtLocations:
+          description: |-
+            Defines the locations to extract the JWT.
+
+            JWT locations can be either from HTTP headers or URL query parameters.
+            The rule is that the first match wins. The checking order is: checking
+            all headers first, then URL query parameters.
+
+            If not specified,  default to use following 3 locations:
+               1) Authorization: Bearer
+               2) x-goog-iap-jwt-assertion
+               3) access_token query parameter
+
+            Default locations can be specified as followings:
+               jwt_locations:
+               - header: Authorization
+                 value_prefix: "Bearer "
+               - header: x-goog-iap-jwt-assertion
+               - query: access_token
+          items:
+            $ref: '#/components/schemas/JwtLocation'
+          type: array
       type: object
     AuthRequirement:
       description: |-
@@ -716,20 +1151,36 @@ components:
       description: A backend rule provides configuration for an individual API element.
       properties:
         address:
-          description: The address of the API backend.
+          description: |-
+            The address of the API backend.
+
+            The scheme is used to determine the backend protocol and security.
+            The following schemes are accepted:
+
+               SCHEME        PROTOCOL    SECURITY
+               http://       HTTP        None
+               https://      HTTP        TLS
+               grpc://       gRPC        None
+               grpcs://      gRPC        TLS
+
+            It is recommended to explicitly include a scheme. Leaving out the scheme
+            may cause constrasting behaviors across platforms.
+
+            If the port is unspecified, the default is:
+            - 80 for schemes without TLS
+            - 443 for schemes with TLS
+
+            For HTTP backends, use protocol
+            to specify the protocol version.
           type: string
         deadline:
           description: |-
-            The number of seconds to wait for a response from a request.  The default
-            deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
+            The number of seconds to wait for a response from a request. The default
+            varies based on the request protocol and deployment environment.
           format: double
           type: number
         disableAuth:
           description: |-
-            When disable_auth is false,  a JWT ID token will be generated with the
-            value from BackendRule.address as jwt_audience, overrode to the HTTP
-            "Authorization" request header and sent to the backend.
-
             When disable_auth is true, a JWT ID token won't be generated and the
             original "Authorization" HTTP header will be preserved. If the header is
             used to carry the original token and is expected by the backend, this
@@ -758,6 +1209,30 @@ components:
             - PATH_TRANSLATION_UNSPECIFIED
             - CONSTANT_ADDRESS
             - APPEND_PATH_TO_ADDRESS
+          type: string
+        protocol:
+          description: |-
+            The protocol used for sending a request to the backend.
+            The supported values are "http/1.1" and "h2".
+
+            The default value is inferred from the scheme in the
+            address field:
+
+               SCHEME        PROTOCOL
+               http://       http/1.1
+               https://      http/1.1
+               grpc://       h2
+               grpcs://      h2
+
+            For secure HTTP backends (https://) that support HTTP/2, set this field
+            to "h2" for improved performance.
+
+            Configuring this field to non-default values is only supported for secure
+            HTTP backends. This field will be ignored for all other backends.
+
+            See
+            https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+            for more details on the supported values.
           type: string
         selector:
           description: |-
@@ -876,6 +1351,83 @@ components:
           description: |-
             The monitored resource type. The type must be defined in
             Service.monitored_resources section.
+          type: string
+      type: object
+    ConsumerQuotaLimit:
+      description: Consumer quota settings for a quota limit.
+      properties:
+        allowsAdminOverrides:
+          description: Whether admin overrides are allowed on this limit
+          type: boolean
+        isPrecise:
+          description: Whether this limit is precise or imprecise.
+          type: boolean
+        metric:
+          description: |-
+            The name of the parent metric of this limit.
+
+            An example name would be:
+            `compute.googleapis.com/cpus`
+          type: string
+        name:
+          description: |-
+            The resource name of the quota limit.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
+
+            The resource name is intended to be opaque and should not be parsed for
+            its component strings, since its representation could change in the future.
+          type: string
+        quotaBuckets:
+          description: |-
+            Summary of the enforced quota buckets, organized by quota dimension,
+            ordered from least specific to most specific (for example, the global
+            default bucket, with no quota dimensions, will always appear first).
+          items:
+            $ref: '#/components/schemas/QuotaBucket'
+          type: array
+        unit:
+          description: |-
+            The limit unit.
+
+            An example unit would be
+            `1/{project}/{region}`
+            Note that `{project}` and `{region}` are not placeholders in this example;
+            the literal characters `{` and `}` occur in the string.
+          type: string
+      type: object
+    ConsumerQuotaMetric:
+      description: Consumer quota settings for a quota metric.
+      properties:
+        consumerQuotaLimits:
+          description: The consumer quota for each quota limit defined on the metric.
+          items:
+            $ref: '#/components/schemas/ConsumerQuotaLimit'
+          type: array
+        displayName:
+          description: |-
+            The display name of the metric.
+
+            An example name would be:
+            "CPUs"
+          type: string
+        metric:
+          description: |-
+            The name of the metric.
+
+            An example name would be:
+            `compute.googleapis.com/cpus`
+          type: string
+        name:
+          description: |-
+            The resource name of the quota settings on this metric for this consumer.
+
+            An example name would be:
+            `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus
+
+            The resource name is intended to be opaque and should not be parsed for
+            its component strings, since its representation could change in the future.
           type: string
       type: object
     Context:
@@ -1431,6 +1983,7 @@ components:
             The semantic version of the service configuration. The config version
             affects the interpretation of the service configuration. For example,
             certain features are enabled by default for certain config versions.
+
             The latest config version is `3`.
           format: uint32
           type: integer
@@ -1547,6 +2100,38 @@ components:
         usage:
           $ref: '#/components/schemas/Usage'
           description: Configuration controlling usage of this service.
+      type: object
+    GoogleApiServiceIdentity:
+      description: |-
+        The per-product per-project service identity for a service.
+
+
+        Use this field to configure per-product per-project service identity.
+        Example of a service identity configuration.
+
+            usage:
+              service_identity:
+              - service_account_parent: "projects/123456789"
+                display_name: "Cloud XXX Service Agent"
+                description: "Used as the identity of Cloud XXX to access resources"
+      properties:
+        description:
+          description: |-
+            Optional. A user-specified opaque description of the service account.
+            Must be less than or equal to 256 UTF-8 bytes.
+          type: string
+        displayName:
+          description: |-
+            Optional. A user-specified name for the service account.
+            Must be less than or equal to 100 UTF-8 bytes.
+          type: string
+        serviceAccountParent:
+          description: |-
+            A service account project that hosts the service accounts.
+
+            An example name would be:
+            `projects/123456789`
+          type: string
       type: object
     GoogleApiServiceusageV1OperationMetadata:
       description: The operation metadata returned for the batchend services operation.
@@ -1969,6 +2554,11 @@ components:
           items:
             $ref: '#/components/schemas/HttpRule'
           type: array
+        allowHalfDuplex:
+          description: |-
+            When this flag is set to true, HTTP requests will be allowed to invoke a
+            half-duplex streaming method.
+          type: boolean
         body:
           description: |-
             The name of the request field whose value is mapped to the HTTP request
@@ -2018,6 +2608,27 @@ components:
             Refer to selector for syntax details.
           type: string
       type: object
+    JwtLocation:
+      description: Specifies a location to extract JWT from an API request.
+      properties:
+        header:
+          description: Specifies HTTP header name to extract JWT token.
+          type: string
+        query:
+          description: Specifies URL query parameter name to extract JWT token.
+          type: string
+        valuePrefix:
+          description: |-
+            The value prefix. The value format is "value_prefix{token}"
+            Only applies to "in" header type. Must be empty for "in" query type.
+            If not empty, the header value has to match (case sensitive) this prefix.
+            If not matched, JWT will not be extracted. If matched, JWT will be
+            extracted after the prefix is removed.
+
+            For example, for "Authorization: Bearer {JWT}",
+            value_prefix="Bearer " with a space at the end.
+          type: string
+      type: object
     LabelDescriptor:
       description: A description of a label.
       properties:
@@ -2033,6 +2644,48 @@ components:
             - STRING
             - BOOL
             - INT64
+          type: string
+      type: object
+    ListAdminOverridesResponse:
+      description: Response message for ListAdminOverrides.
+      properties:
+        nextPageToken:
+          description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          type: string
+        overrides:
+          description: Admin overrides on this limit.
+          items:
+            $ref: '#/components/schemas/QuotaOverride'
+          type: array
+      type: object
+    ListConsumerOverridesResponse:
+      description: Response message for ListConsumerOverrides.
+      properties:
+        nextPageToken:
+          description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
+          type: string
+        overrides:
+          description: Consumer overrides on this limit.
+          items:
+            $ref: '#/components/schemas/QuotaOverride'
+          type: array
+      type: object
+    ListConsumerQuotaMetricsResponse:
+      description: Response message for ListConsumerQuotaMetrics
+      properties:
+        metrics:
+          description: 'Quota settings for the consumer, organized by quota metric.'
+          items:
+            $ref: '#/components/schemas/ConsumerQuotaMetric'
+          type: array
+        nextPageToken:
+          description: |-
+            Token identifying which result to start with; returned by a previous list
+            call.
           type: string
       type: object
     ListOperationsResponse:
@@ -2882,6 +3535,47 @@ components:
             $ref: '#/components/schemas/MetricRule'
           type: array
       type: object
+    QuotaBucket:
+      description: A quota bucket is a quota provisioning unit for a specific set of dimensions.
+      properties:
+        adminOverride:
+          $ref: '#/components/schemas/QuotaOverride'
+          description: Admin override on this quota bucket.
+        consumerOverride:
+          $ref: '#/components/schemas/QuotaOverride'
+          description: Consumer override on this quota bucket.
+        defaultLimit:
+          description: |-
+            The default limit of this quota bucket, as specified by the service
+            configuration.
+          format: int64
+          type: string
+        dimensions:
+          additionalProperties:
+            type: string
+          description: |-
+            The dimensions of this quota bucket.
+
+            If this map is empty, this is the global bucket, which is the default quota
+            value applied to all requests that do not have a more specific override.
+
+            If this map is nonempty, the default limit, effective limit, and quota
+            overrides apply only to requests that have the dimensions given in the map.
+
+            For example, if the map has key "region" and value "us-east-1", then the
+            specified effective limit is only effective in that region, and the
+            specified overrides apply only in that region.
+          type: object
+        effectiveLimit:
+          description: |-
+            The effective limit of this quota bucket. Equal to default_limit if there
+            are no overrides.
+          format: int64
+          type: string
+        producerOverride:
+          $ref: '#/components/schemas/QuotaOverride'
+          description: Producer override on this quota bucket.
+      type: object
     QuotaLimit:
       description: |-
         `QuotaLimit` defines a specific limit that applies over a specified duration
@@ -2998,17 +3692,19 @@ components:
             the override is only applied to quota consumed in that region.
 
             This map has the following restrictions:
-            - Keys that are not defined in the limit's unit are not valid keys.
-              Any string appearing in {brackets} in the unit (besides {project} or
-              {user}) is a defined key.
-            - "project" is not a valid key; the project is already specified in
-              the parent resource name.
-            - "user" is not a valid key; the API does not support quota overrides
-              that apply only to a specific user.
-            - If "region" appears as a key, its value must be a valid Cloud region.
-            - If "zone" appears as a key, its value must be a valid Cloud zone.
-            - If any valid key other than "region" or "zone" appears in the map, then
-              all valid keys other than "region" or "zone" must also appear in the map.
+
+            *   Keys that are not defined in the limit's unit are not valid keys.
+                Any string appearing in {brackets} in the unit (besides {project} or
+                {user}) is a defined key.
+            *   "project" is not a valid key; the project is already specified in
+                the parent resource name.
+            *   "user" is not a valid key; the API does not support quota overrides
+                that apply only to a specific user.
+            *   If "region" appears as a key, its value must be a valid Cloud region.
+            *   If "zone" appears as a key, its value must be a valid Cloud zone.
+            *   If any valid key other than "region" or "zone" appears in the map, then
+                all valid keys other than "region" or "zone" must also appear in the
+                map.
           type: object
         name:
           description: |-
@@ -3319,6 +4015,9 @@ components:
           items:
             $ref: '#/components/schemas/UsageRule'
           type: array
+        serviceIdentity:
+          $ref: '#/components/schemas/GoogleApiServiceIdentity'
+          description: The configuration of a per-product per-project service identity.
       type: object
     UsageRule:
       description: |-

@@ -33,8 +33,6 @@ tags:
 paths:
   /v1/apps:
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -44,6 +42,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates an App Engine application for a Google Cloud Platform project. Required fields:
@@ -100,8 +100,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -111,6 +109,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates the specified Application resource. You can update the following fields:
@@ -200,8 +200,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -211,6 +209,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Uploads the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.create
@@ -318,8 +318,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -329,6 +327,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: 'Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update certificate_data with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate display_name may also be updated.'
       operationId: appengine.apps.authorizedCertificates.patch
@@ -413,8 +413,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -424,6 +422,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/domainMappings':
     get:
       description: Lists the domain mappings on an application.
@@ -468,8 +468,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -479,6 +477,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: 'Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see AuthorizedDomains.ListAuthorizedDomains.'
       operationId: appengine.apps.domainMappings.create
@@ -587,8 +587,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -598,6 +596,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: 'Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update certificate_id to point to an AuthorizedCertificate resource. A user must be authorized to administer the associated domain in order to update a DomainMapping resource.'
       operationId: appengine.apps.domainMappings.patch
@@ -687,8 +687,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -698,6 +696,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Creates a firewall rule for the application.
       operationId: appengine.apps.firewall.ingressRules.create
@@ -797,8 +797,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -808,6 +806,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: Updates the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.patch
@@ -850,8 +850,6 @@ paths:
         - apps
   '/v1/apps/{appsId}/firewall/ingressRules:batchUpdate':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -861,6 +859,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: 'Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules.If the final rule does not match traffic with the ''*'' wildcard IP range, then an "allow all" rule is explicitly added to the end of the list.'
       operationId: appengine.apps.firewall.ingressRules.batchUpdate
@@ -939,8 +939,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -950,6 +948,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/locations/{locationsId}':
     get:
       description: Gets information about a location.
@@ -990,8 +990,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1001,6 +999,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/operations':
     get:
       description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as "/v1/{name=users/*}/operations" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
@@ -1050,8 +1050,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1061,6 +1059,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/operations/{operationsId}':
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
@@ -1101,8 +1101,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1112,6 +1110,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/services':
     get:
       description: Lists all the services in the application.
@@ -1156,8 +1156,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1167,6 +1165,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/services/{servicesId}':
     delete:
       description: Deletes the specified service and all enclosed versions.
@@ -1237,8 +1237,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1248,6 +1246,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: Updates the configuration of the specified service.
       operationId: appengine.apps.services.patch
@@ -1351,8 +1351,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1362,6 +1360,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Deploys code and resource files to a new version.
       operationId: appengine.apps.services.versions.create
@@ -1487,8 +1487,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1498,6 +1496,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses:Standard environment
@@ -1614,8 +1614,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1625,6 +1623,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}':
     delete:
       description: 'Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.'
@@ -1719,8 +1719,6 @@ paths:
       tags:
         - apps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1730,10 +1728,10 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1743,6 +1741,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: 'Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in "debug mode", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started.Only applicable for instances in App Engine flexible environment.'
       operationId: appengine.apps.services.versions.instances.debug
@@ -1792,8 +1792,6 @@ paths:
         - apps
   '/v1/apps/{appsId}:repair':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
@@ -1803,6 +1801,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: 'Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, Error retrieving the App Engine service account. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.'
       operationId: appengine.apps.repair

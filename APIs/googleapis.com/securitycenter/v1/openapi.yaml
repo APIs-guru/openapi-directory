@@ -90,10 +90,6 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -101,6 +97,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: |-
         Creates or updates a finding. The corresponding source must exist for a
@@ -161,10 +161,6 @@ paths:
         - organizations
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -172,6 +168,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -209,10 +209,6 @@ paths:
         - organizations
   '/v1/{name}:setState':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -220,6 +216,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Updates the state of a finding.
       operationId: securitycenter.organizations.sources.findings.setState
@@ -362,6 +362,12 @@ paths:
             * security_center_properties.resource_owners: `=`, `:`
 
             For example, `resource_properties.size = 100` is a valid filter string.
+
+            Use a partial match on the empty string to filter based on a property
+            existing: "resource_properties.my_property : \"\""
+
+            Use a negated partial match on the empty string to filter based on a
+            property not existing: "-resource_properties.my_property : \"\""
           in: query
           name: filter
           schema:
@@ -431,10 +437,6 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -442,12 +444,12 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1/{parent}/assets:group':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -455,6 +457,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Filters an organization's assets and  groups them by their specified
@@ -491,10 +497,6 @@ paths:
         - organizations
   '/v1/{parent}/assets:runDiscovery':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -502,6 +504,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Runs asset discovery. The discovery is tracked with a long-running
@@ -575,12 +581,18 @@ paths:
 
             Possible "state_change" values when compare_duration is specified:
 
-            * "CHANGED":   indicates that the finding was present at the start of
-                             compare_duration, but changed its state at read_time.
-            * "UNCHANGED": indicates that the finding was present at the start of
-                             compare_duration and did not change state at read_time.
-            * "ADDED":     indicates that the finding was not present at the start
-                             of compare_duration, but was present at read_time.
+            * "CHANGED":   indicates that the finding was present and matched the given
+                             filter at the start of compare_duration, but changed its
+                             state at read_time.
+            * "UNCHANGED": indicates that the finding was present and matched the given
+                             filter at the start of compare_duration and did not change
+                             state at read_time.
+            * "ADDED":     indicates that the finding did not match the given filter or
+                             was not present at the start of compare_duration, but was
+                             present at read_time.
+            * "REMOVED":   indicates that the finding was present and matched the
+                             filter at the start of compare_duration, but did not match
+                             the filter at read_time.
 
             If compare_duration is not specified, then the only possible state_change
             is "UNUSED", which will be the state_change set for all findings present at
@@ -640,6 +652,12 @@ paths:
             source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
 
             For example, `source_properties.size = 100` is a valid filter string.
+
+            Use a partial match on the empty string to filter based on a property
+            existing: "source_properties.my_property : \"\""
+
+            Use a negated partial match on the empty string to filter based on a
+            property not existing: "-source_properties.my_property : \"\""
           in: query
           name: filter
           schema:
@@ -706,10 +724,6 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -717,6 +731,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Creates a finding. The corresponding source must exist for finding creation
@@ -761,10 +779,6 @@ paths:
         - organizations
   '/v1/{parent}/findings:group':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -772,6 +786,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Filters an organization or source's findings and  groups them by their
@@ -803,6 +821,102 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/GroupFindingsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - organizations
+  '/v1/{parent}/notificationConfigs':
+    get:
+      description: Lists notification configs.
+      operationId: securitycenter.organizations.notificationConfigs.list
+      parameters:
+        - description: |-
+            Required. Name of the organization to list notification configs.
+            Its format is "organizations/[organization_id]".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            The maximum number of results to return in a single response. Default is
+            10, minimum is 1, maximum is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            The value returned by the last `ListNotificationConfigsResponse`; indicates
+            that this is a continuation of a prior `ListNotificationConfigs` call, and
+            that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListNotificationConfigsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - organizations
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Creates a notification config.
+      operationId: securitycenter.organizations.notificationConfigs.create
+      parameters:
+        - description: |-
+            Required. Resource name of the new notification config's parent. Its format is
+            "organizations/[organization_id]".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Required.
+            Unique identifier provided by the client within the parent scope.
+            It must be between 1 and 128 characters, and contains alphanumeric
+            characters, underscores or hyphens only.
+          in: query
+          name: configId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationConfig'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NotificationConfig'
           description: Successful response
       security:
         - Oauth2:
@@ -855,10 +969,6 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -866,6 +976,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Creates a source.
       operationId: securitycenter.organizations.sources.create
@@ -900,10 +1014,6 @@ paths:
         - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -911,6 +1021,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
@@ -945,10 +1059,6 @@ paths:
         - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -956,6 +1066,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
@@ -990,10 +1104,6 @@ paths:
         - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -1001,6 +1111,10 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions
@@ -1366,33 +1480,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -1501,6 +1638,18 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudSecuritycenterV1NotificationMessage:
+      description: Cloud SCC's Notification
+      properties:
+        finding:
+          $ref: '#/components/schemas/Finding'
+          description: |-
+            If it's a Finding based notification config, this field will be
+            populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+      type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
       properties:
@@ -1531,6 +1680,268 @@ components:
             - COMPLETED
             - SUPERSEDED
             - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Asset:
+      description: |-
+        Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
+        Platform (GCP) resource.
+
+        The Asset is a Cloud SCC resource that captures information about a single
+        GCP resource. All modifications to an Asset are only within the context of
+        Cloud SCC and don't affect the referenced GCP resource.
+      properties:
+        createTime:
+          description: The time at which the asset was created in Cloud SCC.
+          format: google-datetime
+          type: string
+        iamPolicy:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy'
+          description: |-
+            IAM Policy information associated with the GCP resource described by the
+            Cloud SCC asset. This information is managed and defined by the GCP
+            resource and cannot be modified by the user.
+        name:
+          description: |-
+            The relative resource name of this asset. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/assets/{asset_id}".
+          type: string
+        resourceProperties:
+          additionalProperties: {}
+          description: |-
+            Resource managed properties. These properties are managed and defined by
+            the GCP resource and cannot be modified by the user.
+          type: object
+        securityCenterProperties:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
+          description: |-
+            Cloud SCC managed properties. These properties are managed by
+            Cloud SCC and cannot be modified by the user.
+        securityMarks:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+          description: |-
+            User specified security marks. These marks are entirely managed by the user
+            and come from the SecurityMarks resource that belongs to the asset.
+        updateTime:
+          description: |-
+            The time at which the asset was last updated, added, or deleted in Cloud
+            SCC.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Finding:
+      description: |-
+        Cloud Security Command Center (Cloud SCC) finding.
+
+        A finding is a record of assessment data (security, risk, health or privacy)
+        ingested into Cloud SCC for presentation, notification, analysis,
+        policy testing, and enforcement. For example, an XSS vulnerability in an
+        App Engine application is a finding.
+      properties:
+        category:
+          description: |-
+            The additional taxonomy group within findings from a given source.
+            This field is immutable after creation time.
+            Example: "XSS_FLASH_INJECTION"
+          type: string
+        createTime:
+          description: The time at which the finding was created in Cloud SCC.
+          format: google-datetime
+          type: string
+        eventTime:
+          description: |-
+            The time at which the event took place. For example, if the finding
+            represents an open firewall it would capture the time the detector believes
+            the firewall became open. The accuracy is determined by the detector.
+          format: google-datetime
+          type: string
+        externalUri:
+          description: |-
+            The URI that, if available, points to a web page outside of Cloud SCC
+            where additional information about the finding can be found. This field is
+            guaranteed to be either empty or a well formed URL.
+          type: string
+        name:
+          description: |-
+            The relative resource name of this finding. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
+          type: string
+        parent:
+          description: |-
+            The relative resource name of the source the finding belongs to. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            This field is immutable after creation time.
+            For example:
+            "organizations/{organization_id}/sources/{source_id}"
+          type: string
+        resourceName:
+          description: |-
+            For findings on Google Cloud Platform (GCP) resources, the full resource
+            name of the GCP resource this finding is for. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+            When the finding is for a non-GCP resource, the resourceName can be a
+            customer or partner defined string.
+            This field is immutable after creation time.
+          type: string
+        securityMarks:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+          description: |-
+            Output only. User specified security marks. These marks are entirely
+            managed by the user and come from the SecurityMarks resource that belongs
+            to the finding.
+        sourceProperties:
+          additionalProperties: {}
+          description: |-
+            Source specific properties. These properties are managed by the source
+            that writes the finding. The key names in the source_properties map must be
+            between 1 and 255 characters, and must start with a letter and contain
+            alphanumeric characters or underscores only.
+          type: object
+        state:
+          description: The state of the finding.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1IamPolicy:
+      description: |-
+        IAM Policy information associated with the GCP resource described by the
+        Cloud SCC asset. This information is managed and defined by the GCP
+        resource and cannot be modified by the user.
+      properties:
+        policyBlob:
+          description: |-
+            The JSON representation of the Policy associated with the asset.
+            See https://cloud.google.com/iam/reference/rest/v1p1beta1/Policy for
+            format details.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1NotificationMessage:
+      description: Cloud SCC's Notification
+      properties:
+        finding:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding'
+          description: |-
+            If it's a Finding based notification config, this field will be
+            populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+        temporalAsset:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1TemporalAsset'
+          description: |-
+            If it's an asset based notification config, this field will be
+            populated.
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse:
+      description: Response of asset discovery run
+      properties:
+        duration:
+          description: The duration between asset discovery run start and end
+          format: google-duration
+          type: string
+        state:
+          description: The state of an asset discovery run.
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLETED
+            - SUPERSEDED
+            - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
+      description: |-
+        Cloud SCC managed properties. These properties are managed by Cloud SCC and
+        cannot be modified by the user.
+      properties:
+        resourceDisplayName:
+          description: The user defined display name for this resource.
+          type: string
+        resourceName:
+          description: |-
+            The full resource name of the GCP resource this asset
+            represents. This field is immutable after create time. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceOwners:
+          description: Owners of the Google Cloud resource.
+          items:
+            type: string
+          type: array
+        resourceParent:
+          description: |-
+            The full resource name of the immediate parent of the resource. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceParentDisplayName:
+          description: The user defined display name for the parent of this resource.
+          type: string
+        resourceProject:
+          description: |-
+            The full resource name of the project the resource belongs to. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceProjectDisplayName:
+          description: The user defined display name for the project of this resource.
+          type: string
+        resourceType:
+          description: |-
+            The type of the GCP resource. Examples include: APPLICATION,
+            PROJECT, and ORGANIZATION. This is a case insensitive field defined by
+            Cloud SCC and/or the producer of the resource and is immutable
+            after create time.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
+      description: |-
+        User specified security marks that are attached to the parent Cloud Security
+        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
+        SCC organization -- they can be modified and viewed by all users who have
+        proper permissions on the organization.
+      properties:
+        marks:
+          additionalProperties:
+            type: string
+          description: |-
+            Mutable user specified security marks belonging to the parent resource.
+            Constraints are as follows:
+
+              * Keys and values are treated as case insensitive
+              * Keys must be between 1 - 256 characters (inclusive)
+              * Keys must be letters, numbers, underscores, or dashes
+              * Values have leading and trailing whitespace trimmed, remaining
+                characters must be between 1 - 4096 characters (inclusive)
+          type: object
+        name:
+          description: |-
+            The relative resource name of the SecurityMarks. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Examples:
+            "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1TemporalAsset:
+      description: |-
+        Wrapper over asset object that also captures the state change for the asset
+        e.g. if it was a newly created asset vs updated or deleted asset.
+      properties:
+        asset:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Asset'
+          description: 'Asset data that includes attributes, properties and marks about the asset.'
+        changeType:
+          description: Represents if the asset was created/updated/deleted.
+          enum:
+            - CHANGE_TYPE_UNSPECIFIED
+            - CREATED
+            - UPDATED
+            - DELETED
           type: string
       type: object
     GroupAssetsRequest:
@@ -1616,12 +2027,21 @@ components:
             * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             * security_marks.marks: `=`, `:`
             * security_center_properties.resource_name: `=`, `:`
+            * security_center_properties.resource_display_name: `=`, `:`
             * security_center_properties.resource_type: `=`, `:`
             * security_center_properties.resource_parent: `=`, `:`
+            * security_center_properties.resource_parent_display_name: `=`, `:`
             * security_center_properties.resource_project: `=`, `:`
+            * security_center_properties.resource_project_display_name: `=`, `:`
             * security_center_properties.resource_owners: `=`, `:`
 
             For example, `resource_properties.size = 100` is a valid filter string.
+
+            Use a partial match on the empty string to filter based on a property
+            existing: "resource_properties.my_property : \"\""
+
+            Use a negated partial match on the empty string to filter based on a
+            property not existing: "-resource_properties.my_property : \"\""
           type: string
         groupBy:
           description: |-
@@ -1633,12 +2053,16 @@ components:
             The following fields are supported when compare_duration is not set:
 
             * security_center_properties.resource_project
+            * security_center_properties.resource_project_display_name
             * security_center_properties.resource_type
             * security_center_properties.resource_parent
+            * security_center_properties.resource_parent_display_name
 
             The following fields are supported when compare_duration is set:
 
             * security_center_properties.resource_type
+            * security_center_properties.resource_project_display_name
+            * security_center_properties.resource_parent_display_name
           type: string
         pageSize:
           description: |-
@@ -1704,12 +2128,18 @@ components:
 
             Possible "state_change" values when compare_duration is specified:
 
-            * "CHANGED":   indicates that the finding was present at the start of
-                             compare_duration, but changed its state at read_time.
-            * "UNCHANGED": indicates that the finding was present at the start of
-                             compare_duration and did not change state at read_time.
-            * "ADDED":     indicates that the finding was not present at the start
-                             of compare_duration, but was present at read_time.
+            * "CHANGED":   indicates that the finding was present and matched the given
+                             filter at the start of compare_duration, but changed its
+                             state at read_time.
+            * "UNCHANGED": indicates that the finding was present and matched the given
+                             filter at the start of compare_duration and did not change
+                             state at read_time.
+            * "ADDED":     indicates that the finding did not match the given filter or
+                             was not present at the start of compare_duration, but was
+                             present at read_time.
+            * "REMOVED":   indicates that the finding was present and matched the
+                             filter at the start of compare_duration, but did not match
+                             the filter at read_time.
 
             If compare_duration is not specified, then the only possible state_change
             is "UNUSED",  which will be the state_change set for all findings present
@@ -1764,6 +2194,12 @@ components:
             * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
 
             For example, `source_properties.size = 100` is a valid filter string.
+
+            Use a partial match on the empty string to filter based on a property
+            existing: "source_properties.my_property : \"\""
+
+            Use a negated partial match on the empty string to filter based on a
+            property not existing: "-source_properties.my_property : \"\""
           type: string
         groupBy:
           description: |-
@@ -1931,6 +2367,20 @@ components:
             - REMOVED
           type: string
       type: object
+    ListNotificationConfigsResponse:
+      description: Response message for listing notification configs.
+      properties:
+        nextPageToken:
+          description: |-
+            Token to retrieve the next page of results, or empty if there are no more
+            results.
+          type: string
+        notificationConfigs:
+          description: Notification configs belonging to the requested parent.
+          items:
+            $ref: '#/components/schemas/NotificationConfig'
+          type: array
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1956,6 +2406,37 @@ components:
           items:
             $ref: '#/components/schemas/Source'
           type: array
+      type: object
+    NotificationConfig:
+      description: |-
+        Cloud Security Command Center (Cloud SCC) notification configs.
+
+        A notification config is a Cloud SCC resource that contains the configuration
+        to send notifications for create/update events of findings, assets and etc.
+      properties:
+        description:
+          description: The description of the notification config (max of 1024 characters).
+          type: string
+        name:
+          description: |-
+            The relative resource name of this notification config. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/notificationConfigs/notify_public_bucket".
+          type: string
+        pubsubTopic:
+          description: |-
+            The PubSub topic to send notifications to. Its format is
+            "projects/[project_id]/topics/[topic]".
+          type: string
+        serviceAccount:
+          description: |-
+            Output only. The service account that needs "pubsub.topics.publish"
+            permission to publish to the PubSub topic.
+          type: string
+        streamingConfig:
+          $ref: '#/components/schemas/StreamingConfig'
+          description: The config for triggering streaming-based notifications.
       type: object
     Operation:
       description: |-
@@ -2339,6 +2820,36 @@ components:
             A developer-facing error message, which should be in English. Any
             user-facing error message should be localized and sent in the
             google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    StreamingConfig:
+      description: |-
+        The config for streaming-based notifications, which send each event as soon
+        as it is detected.
+      properties:
+        filter:
+          description: |-
+            Expression that defines the filter to apply across create/update events
+            of assets or findings as specified by the event type. The expression is a
+            list of zero or more restrictions combined via logical operators `AND`
+            and `OR`. Parentheses are supported, and `OR` has higher precedence than
+            `AND`.
+
+            Restrictions have the form `<field> <operator> <value>` and may have a
+            `-` character in front of them to indicate negation. The fields map to
+            those defined in the corresponding resource.
+
+            The supported operators are:
+
+            * `=` for all value types.
+            * `>`, `<`, `>=`, `<=` for integer values.
+            * `:`, meaning substring matching, for strings.
+
+            The supported value types are:
+
+            * string literals in quotes.
+            * integer literals without quotes.
+            * boolean literals `true` and `false` without quotes.
           type: string
       type: object
     TestIamPermissionsRequest:

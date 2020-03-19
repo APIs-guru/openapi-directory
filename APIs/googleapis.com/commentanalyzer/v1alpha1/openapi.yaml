@@ -33,14 +33,14 @@ tags:
 paths:
   '/v1alpha1/comments:analyze':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -68,14 +68,14 @@ paths:
         - comments
   '/v1alpha1/comments:suggestscore':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -230,7 +230,7 @@ components:
             For the prod installation, known as Perspective API, at
             blade:commentanalyzer-esf and commentanalyzer.googleapis.com, see
             go/checker-models (internal) and
-            https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md#models.
+            https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md#all-attribute-types.
           type: object
         sessionId:
           description: |-

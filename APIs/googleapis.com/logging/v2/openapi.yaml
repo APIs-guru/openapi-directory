@@ -5,12 +5,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Writes log entries and manages your Stackdriver Logging configuration. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the <a href=https://cloud.google.com/logging/docs>Stackdriver Logging documentation</a>.'
+  description: 'Writes log entries and manages your Cloud Logging configuration. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the documentation at https://cloud.google.com/logging/docs.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Stackdriver Logging
+  title: Cloud Logging
   version: v2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -31,29 +31,31 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/logging/docs/'
 tags:
-  - name: folders
-  - name: exclusions
   - name: monitoredResourceDescriptors
   - name: organizations
   - name: entries
-  - name: sinks
   - name: logs
+  - name: sinks
   - name: projects
   - name: billingAccounts
+  - name: locations
+  - name: folders
+  - name: exclusions
+  - name: v2
 paths:
   '/v2/entries:list':
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: 'Lists log entries. Use this method to retrieve log entries that originated from a project/folder/organization/billing account. For ways to export log entries, see Exporting Logs.'
       operationId: logging.entries.list
@@ -90,17 +92,17 @@ paths:
         - entries
   '/v2/entries:write':
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: 'Writes log entries to Logging. This API method is the only way to send log entries to Logging. This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging libraries configured to use Logging. A single request may contain log entries for a maximum of 1000 different resources (projects, organizations, billing accounts or folders)'
       operationId: logging.entries.write
@@ -173,21 +175,21 @@ paths:
       tags:
         - monitoredResourceDescriptors
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.folders.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -219,26 +221,26 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v2/{metricName}':
     delete:
       description: Deletes a logs-based metric.
       operationId: logging.projects.metrics.delete
       parameters:
         - description: |
-            The resource name of the metric to delete:
+            Required. The resource name of the metric to delete:
             "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           in: path
           name: metricName
@@ -273,7 +275,7 @@ paths:
       operationId: logging.projects.metrics.get
       parameters:
         - description: |
-            The resource name of the desired metric:
+            Required. The resource name of the desired metric:
             "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           in: path
           name: metricName
@@ -308,23 +310,23 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     put:
       description: Creates or updates a logs-based metric.
       operationId: logging.projects.metrics.update
       parameters:
         - description: |-
-            The resource name of the metric to update:
+            Required. The resource name of the metric to update:
             "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
             The updated metric must be provided in the request and it's name field must be the same as [METRIC_ID] If the metric does not exist in [PROJECT_ID], then a new metric is created.
           in: path
@@ -363,7 +365,7 @@ paths:
   '/v2/{name}':
     delete:
       description: Deletes an exclusion.
-      operationId: logging.billingAccounts.exclusions.delete
+      operationId: logging.exclusions.delete
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion to delete:
@@ -395,10 +397,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
     get:
       description: Gets the description of an exclusion.
-      operationId: logging.billingAccounts.exclusions.get
+      operationId: logging.exclusions.get
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion:
@@ -438,22 +440,22 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - exclusions
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: Changes one or more properties of an existing exclusion.
-      operationId: logging.billingAccounts.exclusions.patch
+      operationId: logging.exclusions.patch
       parameters:
         - description: |-
             Required. The resource name of the exclusion to update:
@@ -495,11 +497,178 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
+  '/v2/{name}/cmekSettings':
+    get:
+      description: 'Gets the Logs Router CMEK settings for the given resource.Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once configured, it applies to all projects and folders in the GCP organization.See Enabling CMEK for Logs Router for more information.'
+      operationId: logging.getCmekSettings
+      parameters:
+        - description: |-
+            Required. The resource for which to retrieve CMEK settings.
+            "projects/[PROJECT_ID]/cmekSettings"
+            "organizations/[ORGANIZATION_ID]/cmekSettings"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+            "folders/[FOLDER_ID]/cmekSettings"
+            Example: "organizations/12345/cmekSettings".Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once configured, it applies to all projects and folders in the GCP organization.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CmekSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - v2
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+    patch:
+      description: 'Updates the Logs Router CMEK settings for the given resource.Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once configured, it applies to all projects and folders in the GCP organization.UpdateCmekSettings will fail if 1) kms_key_name is invalid, or 2) the associated service account does not have the required roles/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key, or 3) access to the key is disabled.See Enabling CMEK for Logs Router for more information.'
+      operationId: logging.updateCmekSettings
+      parameters:
+        - description: |-
+            Required. The resource name for the CMEK settings to update.
+            "projects/[PROJECT_ID]/cmekSettings"
+            "organizations/[ORGANIZATION_ID]/cmekSettings"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+            "folders/[FOLDER_ID]/cmekSettings"
+            Example: "organizations/12345/cmekSettings".Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once configured, it applies to all projects and folders in the GCP organization.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: 'Optional. Field mask identifying which fields from cmek_settings should be updated. A field will be overwritten if and only if it is in the update mask. Output only fields cannot be updated.See FieldMask for more information.Example: "updateMask=kmsKeyName"'
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CmekSettings'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CmekSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - v2
+  '/v2/{parent}/buckets':
+    get:
+      description: Lists buckets (Beta).
+      operationId: logging.folders.locations.buckets.list
+      parameters:
+        - description: |-
+            Required. The parent resource whose buckets are to be listed:
+            "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+            "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+            "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+            Note: The locations portion of the resource must be specified, but supplying the character - in place of LOCATION_ID will return all buckets.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response. The values of other method parameters should be identical to those in the previous call.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBucketsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - folders
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v2/{parent}/exclusions':
     get:
       description: Lists all the exclusions in a parent resource.
-      operationId: logging.billingAccounts.exclusions.list
+      operationId: logging.exclusions.list
       parameters:
         - description: |
             Required. The parent resource whose exclusions are to be listed.
@@ -548,22 +717,22 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - exclusions
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new exclusion in a specified parent resource. Only log entries belonging to that resource can be excluded. You can have up to 10 exclusions in a resource.
-      operationId: logging.billingAccounts.exclusions.create
+      operationId: logging.exclusions.create
       parameters:
         - description: |-
             Required. The parent resource in which to create the exclusion:
@@ -600,11 +769,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.folders.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -653,19 +822,19 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v2/{parent}/metrics':
     get:
       description: Lists logs-based metrics.
@@ -717,23 +886,23 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a logs-based metric.
       operationId: logging.projects.metrics.create
       parameters:
         - description: |-
-            The resource name of the project in which to create the metric:
+            Required. The resource name of the project in which to create the metric:
             "projects/[PROJECT_ID]"
             The new metric must be provided in the request.
           in: path
@@ -772,7 +941,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.billingAccounts.sinks.list
+      operationId: logging.folders.sinks.list
       parameters:
         - description: |
             Required. The parent resource whose sinks are to be listed:
@@ -821,22 +990,22 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.billingAccounts.sinks.create
+      operationId: logging.folders.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink:
@@ -878,11 +1047,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.billingAccounts.sinks.delete
+      operationId: logging.folders.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -914,10 +1083,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     get:
       description: Gets a sink.
-      operationId: logging.billingAccounts.sinks.get
+      operationId: logging.folders.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -957,22 +1126,22 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.patch
+      operationId: logging.folders.sinks.patch
       parameters:
         - description: |-
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
@@ -1023,10 +1192,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.update
+      operationId: logging.folders.sinks.update
       parameters:
         - description: |-
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
@@ -1077,7 +1246,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
 components:
   parameters:
     _.xgafv:
@@ -1178,6 +1347,9 @@ components:
         usePartitionedTables:
           description: 'Optional. Whether to use BigQuery''s partition tables. By default, Logging creates dated tables based on the log entries'' timestamps, e.g. syslog_20170523. With partitioned tables the date suffix is no longer present and special query syntax has to be used instead. In both cases, tables are sharded based on UTC timezone.'
           type: boolean
+        usesTimestampColumnPartitioning:
+          description: 'Output only. True if new timestamp column based partitioning is in use, false if legacy ingestion-time partitioning is in use. All new sinks will have this field set true and will use timestamp column based partitioning. If use_partitioned_tables is false, this value has no meaning and will be false. Legacy sinks using partitioned tables will have this field set to false.'
+          type: boolean
       type: object
     BucketOptions:
       description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'
@@ -1191,6 +1363,19 @@ components:
         linearBuckets:
           $ref: '#/components/schemas/Linear'
           description: The linear bucket.
+      type: object
+    CmekSettings:
+      description: 'Describes the customer-managed encryption key (CMEK) settings associated with a project, folder, organization, billing account, or flexible resource.Note: CMEK for the Logs Router can currently only be configured for GCP organizations. Once configured, it applies to all projects and folders in the GCP organization.See Enabling CMEK for Logs Router for more information.'
+      properties:
+        kmsKeyName:
+          description: 'The resource name for the configured Cloud KMS key.KMS key name format:  "projects/PROJECT_ID/locations/LOCATION/keyRings/KEYRING/cryptoKeys/KEY"For example:  "projects/my-project-id/locations/my-region/keyRings/key-ring-name/cryptoKeys/key-name"To enable CMEK for the Logs Router, set this field to a valid kms_key_name for which the associated service account has the required roles/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key.The Cloud KMS key used by the Log Router can be updated by changing the kms_key_name to a new valid key name. Encryption operations that are in progress will be completed with the key that was in use when they started. Decryption operations will be completed using the key that was used at the time of encryption unless access to that key has been revoked.To disable CMEK for the Logs Router, set this field to an empty string.See Enabling CMEK for Logs Router for more information.'
+          type: string
+        name:
+          description: Output only. The resource name of the CMEK settings.
+          type: string
+        serviceAccountId:
+          description: 'Output only. The service account that will be used by the Logs Router to access your Cloud KMS key.Before enabling CMEK for Logs Router, you must first assign the role roles/cloudkms.cryptoKeyEncrypterDecrypter to the service account that the Logs Router will use to access your Cloud KMS key. Use GetCmekSettings to obtain the service account ID.See Enabling CMEK for Logs Router for more information.'
+          type: string
       type: object
     Empty:
       description: |-
@@ -1316,6 +1501,18 @@ components:
           format: double
           type: number
       type: object
+    ListBucketsResponse:
+      description: The response from ListBuckets (Beta).
+      properties:
+        buckets:
+          description: A list of buckets.
+          items:
+            $ref: '#/components/schemas/LogBucket'
+          type: array
+        nextPageToken:
+          description: 'If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.'
+          type: string
+      type: object
     ListExclusionsResponse:
       description: Result returned from ListExclusions.
       properties:
@@ -1345,7 +1542,7 @@ components:
           description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. page_token must be the value of next_page_token from the previous response. The values of other method parameters should be identical to those in the previous call.'
           type: string
         projectIds:
-          description: 'Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: "my-project-1A".'
+          description: 'Optional. Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: "my-project-1A".'
           items:
             type: string
           type: array
@@ -1421,6 +1618,35 @@ components:
             $ref: '#/components/schemas/LogSink'
           type: array
       type: object
+    LogBucket:
+      description: Describes a repository of logs (Beta).
+      properties:
+        createTime:
+          description: Output only. The creation timestamp of the bucket. This is not set for any of the default buckets.
+          format: google-datetime
+          type: string
+        description:
+          description: Describes this bucket.
+          type: string
+        lifecycleState:
+          description: Output only. The bucket lifecycle state.
+          enum:
+            - LIFECYCLE_STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETE_REQUESTED
+          type: string
+        name:
+          description: 'The resource name of the bucket. For example: "projects/my-project-id/locations/my-location/buckets/my-bucket-id The supported locations are:  "global"  "us-central1"For the location of global it is unspecified where logs are actually stored. Once a bucket has been created, the location can not be changed.'
+          type: string
+        retentionDays:
+          description: 'Logs will be retained by default for this amount of time, after which they will automatically be deleted. The minimum retention period is 1 day. If this value is set to zero at bucket creation time, the default time of 30 days will be used.'
+          format: int32
+          type: integer
+        updateTime:
+          description: Output only. The last update timestamp of the bucket.
+          format: google-datetime
+          type: string
+      type: object
     LogEntry:
       description: An individual entry in a log.
       properties:
@@ -1428,7 +1654,7 @@ components:
           $ref: '#/components/schemas/HttpRequest'
           description: 'Optional. Information about the HTTP request associated with this log entry, if applicable.'
         insertId:
-          description: 'Optional. A unique identifier for the log entry. If you provide a value, then Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which can be removed. If omitted in new log entries, then Logging assigns its own unique identifier. The insert_id is also used to order log entries that have the same timestamp value.'
+          description: 'Optional. A unique identifier for the log entry. If you provide a value, then Logging considers other log entries in the same project, with the same timestamp, and with the same insert_id to be duplicates which are removed in a single query result. However, there are no guarantees of de-duplication in the export of logs.If the insert_id is omitted when writing a log entry, the Logging API  assigns its own unique identifier in this field.In queries, the insert_id is also used to order log entries that have the same log_name and timestamp values.'
           type: string
         jsonPayload:
           additionalProperties:
@@ -1447,11 +1673,11 @@ components:
             "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
             "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
             "folders/[FOLDER_ID]/logs/[LOG_ID]"
-            A project number may optionally be used in place of PROJECT_ID. The project number is translated to its corresponding PROJECT_ID internally and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
+            A project number may be used in place of PROJECT_ID. The project number is translated to its corresponding PROJECT_ID internally and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
           type: string
         metadata:
           $ref: '#/components/schemas/MonitoredResourceMetadata'
-          description: 'Deprecated. Output only. Additional metadata about the monitored resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources have this field populated for GKE versions older than 1.12.6. For GKE versions 1.12.6 and above, the metadata field has been deprecated. The Kubernetes pod labels that used to be in metadata.userLabels will now be present in the labels field with a key prefix of k8s-pod/. The Stackdriver system labels that were present in the metadata.systemLabels field will no longer be available in the LogEntry.'
+          description: 'Output only. Deprecated. Additional metadata about the monitored resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources have this field populated for GKE versions older than 1.12.6. For GKE versions 1.12.6 and above, the metadata field has been deprecated. The Kubernetes pod labels that used to be in metadata.userLabels will now be present in the labels field with a key prefix of k8s-pod/. The Stackdriver system labels that were present in the metadata.systemLabels field will no longer be available in the LogEntry.'
         operation:
           $ref: '#/components/schemas/LogEntryOperation'
           description: 'Optional. Information about an operation associated with the log entry, if applicable.'
@@ -1484,7 +1710,7 @@ components:
           $ref: '#/components/schemas/LogEntrySourceLocation'
           description: 'Optional. Source code location information associated with the log entry, if any.'
         spanId:
-          description: 'Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as <code>"000000000000004a"</code>.'
+          description: 'Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as 000000000000004a.'
           type: string
         textPayload:
           description: 'The log entry payload, represented as a Unicode string (UTF-8).'
@@ -1649,10 +1875,6 @@ components:
         disabled:
           description: 'Optional. If set to True, then this sink is disabled and it does not export any log entries.'
           type: boolean
-        endTime:
-          description: Do not use. This field is ignored.
-          format: google-datetime
-          type: string
         filter:
           description: |
             Optional. An advanced logs filter. The only exported log entries are those that are in the resource owning the sink and that match the filter. For example:
@@ -1673,10 +1895,6 @@ components:
             - VERSION_FORMAT_UNSPECIFIED
             - V2
             - V1
-          type: string
-        startTime:
-          description: Do not use. This field is ignored.
-          format: google-datetime
           type: string
         updateTime:
           description: Output only. The last update timestamp of the sink.This field may not be present for older sinks.
@@ -1738,6 +1956,29 @@ components:
           type: string
         unit:
           description: |-
+            The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.Different systems may scale the values to be more easily displayed (so a value of 0.02KBy might be displayed as 20By, and a value of 3523KBy might be displayed as 3.5MBy). However, if the unit is KBy, then the value of the metric is always in thousands of bytes, no matter how it may be displayed..If you want a custom metric to record the exact number of CPU-seconds used by a job, you can create an INT64 CUMULATIVE metric whose unit is s{CPU} (or equivalently 1s{CPU} or just s). If the job uses 12,005 CPU-seconds, then the value is written as 12005.Alternatively, if you want a custom metric to record data in a more granular way, you can create a DOUBLE CUMULATIVE metric whose unit is ks{CPU}, and then write the value 12.005 (which is 12005/1000), or use Kis{CPU} and write 11.723 (which is 12005/1024).The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
+            bit bit
+            By byte
+            s second
+            min minute
+            h hour
+            d dayPrefixes (PREFIX)
+            k kilo (10^3)
+            M mega (10^6)
+            G giga (10^9)
+            T tera (10^12)
+            P peta (10^15)
+            E exa (10^18)
+            Z zetta (10^21)
+            Y yotta (10^24)
+            m milli (10^-3)
+            u micro (10^-6)
+            n nano (10^-9)
+            p pico (10^-12)
+            f femto (10^-15)
+            a atto (10^-18)
+            z zepto (10^-21)
+            y yocto (10^-24)
             Ki kibi (2^10)
             Mi mebi (2^20)
             Gi gibi (2^30)
@@ -2025,7 +2266,7 @@ components:
             [LOG_ID] must be URL-encoded. For example:
             "projects/my-project-id/logs/syslog"
             "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
-            The permission <code>logging.logEntries.create</code> is needed on each project, organization, billing account, or folder that is receiving new log entries, whether the resource is specified in <code>logName</code> or in an individual log entry.
+            The permission logging.logEntries.create is needed on each project, organization, billing account, or folder that is receiving new log entries, whether the resource is specified in logName or in an individual log entry.
           type: string
         partialSuccess:
           description: 'Optional. Whether valid entries should be written even if some other entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any entry is not written, then the response status is the error associated with one of the failed entries and the response includes error details keyed by the entries'' zero-based index in the entries.write method.'
@@ -2040,7 +2281,7 @@ components:
             See LogEntry.
       type: object
     WriteLogEntriesResponse:
-      description: Result returned from WriteLogEntries. empty
+      description: Result returned from WriteLogEntries.
       properties: {}
       type: object
   securitySchemes:

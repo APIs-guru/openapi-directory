@@ -59,17 +59,17 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{name}':
     delete:
       description: Deletes a message.
@@ -96,14 +96,14 @@ paths:
       tags:
         - spaces
     get:
-      description: Returns a message.
-      operationId: chat.spaces.messages.get
+      description: Returns a membership.
+      operationId: chat.spaces.members.get
       parameters:
         - description: |-
-            Required. Resource name of the message to be retrieved, in the form
-            "spaces/*/messages/*".
+            Required. Resource name of the membership to be retrieved, in the form
+            "spaces/*/members/*".
 
-            Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4
+            Example: spaces/AAAAMpdlehY/members/105115627578887013105
           in: path
           name: name
           required: true
@@ -115,22 +115,22 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/Membership'
           description: Successful response
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     put:
       description: Updates a message.
       operationId: chat.spaces.messages.update
@@ -209,30 +209,30 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{parent}/messages':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Creates a message.
       operationId: chat.spaces.messages.create
@@ -576,8 +576,10 @@ components:
       properties:
         actionMethodName:
           description: |-
-            Apps Script function to invoke when the containing element is
-            clicked/activated.
+            The method name is used to identify which part of the form triggered the
+            form submission. This information is echoed back to the bot as part of
+            the card click event. The same method name can be used for several
+            elements that trigger a common behavior if desired.
           type: string
         parameters:
           description: List of action parameters.
@@ -589,7 +591,11 @@ components:
       description: An image that is specified by a URL and can have an onclick action.
       properties:
         aspectRatio:
-          description: The aspect ratio of this image (width/height).
+          description: |-
+            The aspect ratio of this image (width/height). This field allows clients
+            to reserve the right height for the image while waiting for it to load.
+            It's not meant to override the native aspect ratio of the image.
+            If unset, server will fill it by prefetching the image.
           format: double
           type: number
         imageUrl:
@@ -915,6 +921,9 @@ components:
       properties:
         displayName:
           description: The user's display name.
+          type: string
+        domainId:
+          description: Obfuscated domain information.
           type: string
         name:
           description: 'Resource name, in the format "users/*".'

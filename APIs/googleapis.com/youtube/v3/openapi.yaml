@@ -2445,10 +2445,15 @@ paths:
       description: Lists members for a channel.
       operationId: youtube.members.list
       parameters:
-        - description: The part parameter specifies the member resource parts that the API response will include. Supported values are id and snippet.
+        - description: The part parameter specifies the member resource parts that the API response will include. Set the parameter value to snippet.
           in: query
           name: part
           required: true
+          schema:
+            type: string
+        - description: The filterByMemberChannelId parameter represents a comma separated list of channel IDs. Only data about members that are part of this list will be included in the response. It can be used to efficiently check whether specific users are entitled to perks offered via third parties.
+          in: query
+          name: filterByMemberChannelId
           schema:
             type: string
         - description: 'The hasAccessToLevel parameter specifies, when set, the ID of a pricing level that members from the results set should have access to. When not set, all members will be considered, regardless of their active pricing level.'
@@ -2461,7 +2466,7 @@ paths:
           name: maxResults
           schema:
             default: 5
-            maximum: 50
+            maximum: 50000
             minimum: 0
             type: integer
         - description: The mode parameter specifies which channel members to return.
@@ -5544,6 +5549,8 @@ components:
             - eligible
             - longUploadsUnspecified
           type: string
+        madeForKids:
+          type: boolean
         privacyStatus:
           description: Privacy status of the channel.
           enum:
@@ -5551,6 +5558,8 @@ components:
             - public
             - unlisted
           type: string
+        selfDeclaredMadeForKids:
+          type: boolean
       type: object
     ChannelTopicDetails:
       description: Freebase topic information related to the channel.
@@ -6957,6 +6966,7 @@ components:
             - ultraLow
           type: string
         mesh:
+          description: 'The mesh for projecting the video if projection is mesh. The mesh value must be a UTF-8 string containing the base-64 encoding of 3D mesh data that follows the  Spherical Video V2 RFC specification for an mshp box, excluding the box size and type but including the following four reserved zero bytes for the version and flags.'
           format: byte
           type: string
         monitorStream:
@@ -7104,6 +7114,8 @@ components:
             - low
             - normal
           type: string
+        madeForKids:
+          type: boolean
         privacyStatus:
           description: 'The broadcast''s privacy status. Note that the broadcast represents exactly one YouTube video, so the privacy settings are identical to those supported for videos. In addition, you can set this field by modifying the broadcast resource or by setting the privacyStatus field of the corresponding video resource.'
           enum:
@@ -7118,6 +7130,8 @@ components:
             - recorded
             - recording
           type: string
+        selfDeclaredMadeForKids:
+          type: boolean
       type: object
     LiveChatBan:
       description: A liveChatBan resource represents a ban for a YouTube live chat.
@@ -7697,9 +7711,6 @@ components:
         etag:
           description: Etag of this resource.
           type: string
-        id:
-          description: The ID that YouTube assigns to uniquely identify the member.
-          type: string
         kind:
           default: 'youtube#member'
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#member".'
@@ -7751,27 +7762,47 @@ components:
     MembershipsDetails:
       properties:
         accessibleLevels:
-          description: All levels that the user has access to. This includes the purchased level and all other levels that are included because of a higher purchase.
+          description: Ids of all levels that the user has access to. This includes the currently active level and all other levels that are included because of a higher purchase.
           items:
             type: string
           type: array
+        highestAccessibleLevel:
+          description: Id of the highest level that the user has access to at the moment.
+          type: string
+        highestAccessibleLevelDisplayName:
+          description: Display name of the highest level that the user has access to at the moment.
+          type: string
+        membershipsDuration:
+          $ref: '#/components/schemas/MembershipsDuration'
+          description: Data about memberships duration without taking into consideration pricing levels.
+        membershipsDurationAtLevels:
+          description: Data about memberships duration on particular pricing levels.
+          items:
+            $ref: '#/components/schemas/MembershipsDurationAtLevel'
+          type: array
+      type: object
+    MembershipsDuration:
+      properties:
         memberSince:
           description: The date and time when the user became a continuous member across all levels.
           type: string
-        memberSinceCurrentLevel:
-          description: The date and time when the user started to continuously have access to the currently highest level.
-          type: string
-        memberTotalDuration:
+        memberTotalDurationMonths:
           description: The cumulative time the user has been a member across all levels in complete months (the time is rounded down to the nearest integer).
           format: int32
           type: integer
-        memberTotalDurationCurrentLevel:
-          description: The cumulative time the user has had access to the currently highest level in complete months (the time is rounded down to the nearest integer).
+      type: object
+    MembershipsDurationAtLevel:
+      properties:
+        level:
+          description: Pricing level id.
+          type: string
+        memberSince:
+          description: The date and time when the user became a continuous member for the given level.
+          type: string
+        memberTotalDurationMonths:
+          description: The cumulative time the user has been a member for the given level in complete months (the time is rounded down to the nearest integer).
           format: int32
           type: integer
-        purchasedLevel:
-          description: The highest level the user has access to at the moment.
-          type: string
       type: object
     MembershipsLevel:
       description: A membershipsLevel resource represents an offer made by YouTube creators for their fans. Users can become members of the channel by joining one of the available levels. They will provide recurring monetary support and receives special benefits.
@@ -9284,6 +9315,8 @@ components:
             - creativeCommon
             - youtube
           type: string
+        madeForKids:
+          type: boolean
         privacyStatus:
           description: The video's privacy status.
           enum:
@@ -9312,6 +9345,8 @@ components:
             - uploaderAccountClosed
             - uploaderAccountSuspended
           type: string
+        selfDeclaredMadeForKids:
+          type: boolean
         uploadStatus:
           description: The status of the uploaded video.
           enum:

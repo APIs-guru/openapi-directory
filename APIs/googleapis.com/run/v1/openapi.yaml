@@ -31,7 +31,172 @@ externalDocs:
 tags:
   - name: projects
   - name: namespaces
+  - name: api
 paths:
+  '/api/v1/{name}':
+    get:
+      description: Rpc to get information about a secret.
+      operationId: run.api.v1.namespaces.secrets.get
+      parameters:
+        - description: |-
+            Required. The name of the secret being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Secret'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - api
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    patch:
+      description: Rpc to update a namespace.
+      operationId: run.api.v1.namespaces.patch
+      parameters:
+        - description: |-
+            Required. The name of the namespace being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Required. Indicates which fields in the provided namespace to update.
+            This field is currently unused.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Namespace'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - api
+    put:
+      description: |-
+        Rpc to replace a secret.
+
+        Only the spec and metadata labels and annotations are modifiable. After
+        the Update request, Cloud Run will work to make the 'status'
+        match the requested 'spec'.
+
+        May provide metadata.resourceVersion to enforce update from last read for
+        optimistic concurrency control.
+      operationId: run.api.v1.namespaces.secrets.replaceSecret
+      parameters:
+        - description: |-
+            Required. The name of the secret being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Secret'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Secret'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - api
+  '/api/v1/{parent}/secrets':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: Creates a new secret.
+      operationId: run.api.v1.namespaces.secrets.create
+      parameters:
+        - description: |-
+            Required. The project ID or project number in which this secret should
+            be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Secret'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Secret'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - api
   '/apis/domains.cloudrun.com/v1/{name}':
     delete:
       description: Delete a domain mapping.
@@ -109,6 +274,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -118,8 +285,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/apis/domains.cloudrun.com/v1/{parent}/authorizeddomains':
     get:
       description: List authorized domains.
@@ -157,6 +322,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -166,8 +333,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/apis/domains.cloudrun.com/v1/{parent}/domainmappings':
     get:
       description: List domain mappings.
@@ -242,6 +407,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -251,8 +418,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Create a new domain mapping.
       operationId: run.namespaces.domainmappings.create
@@ -288,14 +453,11 @@ paths:
         - namespaces
   '/apis/serving.knative.dev/v1/{name}':
     delete:
-      description: |-
-        Delete a service.
-        This will cause the Service to stop serving traffic and will delete the
-        child entities like Routes, Configurations and Revisions.
-      operationId: run.namespaces.services.delete
+      description: Delete a revision.
+      operationId: run.namespaces.revisions.delete
       parameters:
         - description: |-
-            The name of the service to delete.
+            The name of the revision to delete.
             For Cloud Run (fully managed), replace {namespace_id} with the project ID
             or number.
           in: path
@@ -338,11 +500,11 @@ paths:
       tags:
         - namespaces
     get:
-      description: Get information about a service.
-      operationId: run.namespaces.services.get
+      description: Get information about a revision.
+      operationId: run.namespaces.revisions.get
       parameters:
         - description: |-
-            The name of the service to retrieve.
+            The name of the revision to retrieve.
             For Cloud Run (fully managed), replace {namespace_id} with the project ID
             or number.
           in: path
@@ -356,7 +518,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Revision'
           description: Successful response
       security:
         - Oauth2:
@@ -366,6 +528,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -375,8 +539,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     put:
       description: |-
         Replace a service.
@@ -492,6 +654,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -501,8 +665,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/apis/serving.knative.dev/v1/{parent}/revisions':
     get:
       description: List revisions.
@@ -577,6 +739,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -586,8 +750,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/apis/serving.knative.dev/v1/{parent}/routes':
     get:
       description: List routes.
@@ -662,6 +824,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -671,8 +835,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/apis/serving.knative.dev/v1/{parent}/services':
     get:
       description: List services.
@@ -747,6 +909,8 @@ paths:
       tags:
         - namespaces
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -756,8 +920,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Create a service.
       operationId: run.namespaces.services.create
@@ -793,14 +955,11 @@ paths:
         - namespaces
   '/v1/{name}':
     delete:
-      description: |-
-        Delete a service.
-        This will cause the Service to stop serving traffic and will delete the
-        child entities like Routes, Configurations and Revisions.
-      operationId: run.projects.locations.services.delete
+      description: Delete a domain mapping.
+      operationId: run.projects.locations.domainmappings.delete
       parameters:
         - description: |-
-            The name of the service to delete.
+            The name of the domain mapping to delete.
             For Cloud Run (fully managed), replace {namespace_id} with the project ID
             or number.
           in: path
@@ -843,13 +1002,12 @@ paths:
       tags:
         - projects
     get:
-      description: Get information about a service.
-      operationId: run.projects.locations.services.get
+      description: Rpc to get information about a secret.
+      operationId: run.projects.locations.secrets.get
       parameters:
         - description: |-
-            The name of the service to retrieve.
-            For Cloud Run (fully managed), replace {namespace_id} with the project ID
-            or number.
+            Required. The name of the secret being retrieved. If needed, replace
+            {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -861,7 +1019,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Secret'
           description: Successful response
       security:
         - Oauth2:
@@ -871,6 +1029,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -880,11 +1040,48 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
+    patch:
+      description: Rpc to update a namespace.
+      operationId: run.projects.locations.namespaces.patch
+      parameters:
+        - description: |-
+            Required. The name of the namespace being retrieved. If needed, replace
+            {namespace_id} with the project ID.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Required. Indicates which fields in the provided namespace to update.
+            This field is currently unused.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Namespace'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Namespace'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
     put:
       description: |-
-        Replace a service.
+        Rpc to replace a secret.
 
         Only the spec and metadata labels and annotations are modifiable. After
         the Update request, Cloud Run will work to make the 'status'
@@ -892,12 +1089,11 @@ paths:
 
         May provide metadata.resourceVersion to enforce update from last read for
         optimistic concurrency control.
-      operationId: run.projects.locations.services.replaceService
+      operationId: run.projects.locations.secrets.replaceSecret
       parameters:
         - description: |-
-            The name of the service being replaced.
-            For Cloud Run (fully managed), replace {namespace_id} with the project ID
-            or number.
+            Required. The name of the secret being retrieved. If needed, replace
+            {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -908,13 +1104,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/Secret'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: '#/components/schemas/Secret'
           description: Successful response
       security:
         - Oauth2:
@@ -965,6 +1161,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -974,8 +1172,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{parent}/authorizeddomains':
     get:
       description: List authorized domains.
@@ -1013,6 +1209,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1022,8 +1220,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{parent}/configurations':
     get:
       description: List configurations.
@@ -1098,6 +1294,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1107,8 +1305,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{parent}/domainmappings':
     get:
       description: List domain mappings.
@@ -1183,6 +1379,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1192,8 +1390,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Create a new domain mapping.
       operationId: run.projects.locations.domainmappings.create
@@ -1301,6 +1497,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1310,8 +1508,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{parent}/routes':
     get:
       description: List routes.
@@ -1386,6 +1582,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1395,8 +1593,51 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+  '/v1/{parent}/secrets':
+    parameters:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: Creates a new secret.
+      operationId: run.projects.locations.secrets.create
+      parameters:
+        - description: |-
+            Required. The project ID or project number in which this secret should
+            be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Secret'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Secret'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/{parent}/services':
     get:
       description: List services.
@@ -1471,6 +1712,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1480,8 +1723,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Create a service.
       operationId: run.projects.locations.services.create
@@ -1559,6 +1800,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1568,10 +1811,10 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1581,8 +1824,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Sets the IAM Access control policy for the specified Service. Overwrites
@@ -1619,6 +1860,8 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1628,8 +1871,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Returns permissions that a caller has on the specified Project.
@@ -1748,6 +1989,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DomainMapping'
+    Namespace:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Namespace'
+    Secret:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Secret'
     Service:
       content:
         application/json:
@@ -2621,33 +2872,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -3087,6 +3361,65 @@ components:
           description: |-
             Resource name for the location, which may vary between implementations.
             For example: `"projects/example-project/locations/us-east1"`
+          type: string
+      type: object
+    Namespace:
+      description: |-
+        Cloud Run fully managed: not supported
+
+        Cloud Run on GKE: supported
+
+        Namespace provides a scope for Names.
+        Use of multiple namespaces is optional.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+          description: |-
+            Standard object's metadata.
+            More info:
+            https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+        spec:
+          $ref: '#/components/schemas/NamespaceSpec'
+          description: |-
+            Spec defines the behavior of the Namespace.
+            More info:
+            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+        status:
+          $ref: '#/components/schemas/NamespaceStatus'
+          description: |-
+            Status describes the current status of a Namespace.
+            More info:
+            https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+      type: object
+    NamespaceSpec:
+      description: |-
+        Cloud Run fully managed: not supported
+
+        Cloud Run on GKE: supported
+
+        NamespaceSpec describes the attributes on a Namespace.
+      properties:
+        finalizers:
+          description: |-
+            Finalizers is an opaque list of values that must be empty to permanently
+            remove object from storage. More info:
+            https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
+          items:
+            type: string
+          type: array
+      type: object
+    NamespaceStatus:
+      description: |-
+        Cloud Run fully managed: not supported
+
+        Cloud Run on GKE: supported
+
+        NamespaceStatus is information about the current status of a Namespace.
+      properties:
+        phase:
+          description: |-
+            Phase is the current lifecycle phase of the namespace.
+            More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
           type: string
       type: object
     ObjectMeta:
@@ -3843,6 +4176,45 @@ components:
             URL holds the url that will distribute traffic over the provided traffic
             targets. It generally has the form:
             https://{route-hash}-{project-hash}-{cluster-level-suffix}.a.run.app
+          type: string
+      type: object
+    Secret:
+      description: |-
+        Cloud Run fully managed: not supported
+
+        Cloud Run on GKE: supported
+
+        Secret holds secret data of a certain type. The total bytes of the values in
+        the Data field must be less than MaxSecretSize bytes.
+      properties:
+        data:
+          additionalProperties:
+            format: byte
+            type: string
+          description: |-
+            Data contains the secret data. Each key must consist of alphanumeric
+            characters, '-', '_' or '.'. The serialized form of the secret data is a
+            base64 encoded string, representing the arbitrary (possibly non-string)
+            data value here. Described in https://tools.ietf.org/html/rfc4648#section-4
+          type: object
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+          description: |-
+            Standard object's metadata.
+            More info:
+            https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+        stringData:
+          additionalProperties:
+            type: string
+          description: |-
+            stringData allows specifying non-binary secret data in string form.
+            It is provided as a write-only convenience method.
+            All keys and values are merged into the data field on write, overwriting
+            any existing values. It is never output when reading from the API.
+            +k8s:conversion-gen=false
+          type: object
+        type:
+          description: Used to facilitate programmatic handling of secret data.
           type: string
       type: object
     SecretEnvSource:

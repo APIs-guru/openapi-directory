@@ -1,11 +1,12 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/pagespeedonline/v5'
+  - url: 'https://pagespeedonline.googleapis.com/'
 info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Analyzes the performance of a web page and provides tailored suggestions to make that page faster.
+  description: |
+    The PageSpeed Insights API lets you analyze the performance of your website with a simple API.  It offers tailored suggestions for how you can optimize your site, and lets you easily integrate PageSpeed Insights analysis into your development tools and workflow.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -29,33 +30,38 @@ info:
   x-providerName: googleapis.com
   x-serviceName: pagespeedonline
 externalDocs:
-  url: 'https://developers.google.com/speed/docs/insights/v5/get-started'
+  url: 'https://developers.google.com/speed/docs/insights/v5/about'
 tags:
   - name: pagespeedapi
 paths:
-  /runPagespeed:
+  /pagespeedonline/v5/runPagespeed:
     get:
-      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.'
+      description: |-
+        Runs PageSpeed analysis on the page at the specified URL, and returns
+        PageSpeed scores, a list of suggestions to make that page faster, and other
+        information.
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
-        - description: The URL to fetch and analyze
+        - description: The captcha token passed when filling out a captcha.
           in: query
-          name: url
-          required: true
+          name: captchaToken
           schema:
             type: string
-        - description: 'A Lighthouse category to run; if none are given, only Performance category will be run'
+        - description: |-
+            A Lighthouse category to run; if none are given, only Performance category
+            will be run
           explode: true
           in: query
           name: category
           schema:
             items:
               enum:
-                - accessibility
-                - best-practices
-                - performance
-                - pwa
-                - seo
+                - CATEGORY_UNSPECIFIED
+                - ACCESSIBILITY
+                - BEST_PRACTICES
+                - PERFORMANCE
+                - PWA
+                - SEO
               type: string
             type: array
         - description: The locale used to localize formatted results
@@ -63,13 +69,21 @@ paths:
           name: locale
           schema:
             type: string
-        - description: 'The analysis strategy (desktop or mobile) to use, and desktop is the default'
+        - description: |-
+            The analysis strategy (desktop or mobile) to use, and desktop is the
+            default
           in: query
           name: strategy
           schema:
             enum:
-              - desktop
-              - mobile
+              - STRATEGY_UNSPECIFIED
+              - DESKTOP
+              - MOBILE
+            type: string
+        - description: The URL to fetch and analyze
+          in: query
+          name: url
+          schema:
             type: string
         - description: Campaign name for analytics.
           in: query
@@ -88,26 +102,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/PagespeedApiPagespeedResponseV5'
           description: Successful response
+      security:
+        - Oauth2:
+            - openid
+          Oauth2c:
+            - openid
       tags:
         - pagespeedapi
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - '1'
+          - '2'
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
         default: json
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -135,30 +181,143 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
       schema:
         type: string
   schemas:
-    GoogleprotobufListValue:
-      items:
-        $ref: '#/components/schemas/GoogleprotobufValue'
-      type: array
-    GoogleprotobufValue: {}
+    AuditRefs:
+      description: |-
+        A light reference to an audit by id, used to group and weight audits in a
+        given category.
+      properties:
+        group:
+          description: The category group that the audit belongs to (optional).
+          type: string
+        id:
+          description: The audit ref id.
+          type: string
+        weight:
+          description: The weight this audit's score has on the overall category score.
+          format: double
+          type: number
+      type: object
+    Bucket:
+      description: |-
+        A proportion of data in the total distribution, bucketed by a min/max
+        percentage. Each bucket's range is bounded by min <= x < max, In
+        millisecond.
+      properties:
+        max:
+          description: Upper bound for a bucket's range.
+          format: int32
+          type: integer
+        min:
+          description: Lower bound for a bucket's range.
+          format: int32
+          type: integer
+        proportion:
+          description: The proportion of data in this bucket.
+          format: double
+          type: number
+      type: object
+    Categories:
+      description: The categories in a Lighthouse run.
+      properties:
+        accessibility:
+          $ref: '#/components/schemas/LighthouseCategoryV5'
+          description: 'The accessibility category, containing all accessibility related audits.'
+        best-practices:
+          $ref: '#/components/schemas/LighthouseCategoryV5'
+          description: |-
+            The best practices category, containing all best practices related
+            audits.
+        performance:
+          $ref: '#/components/schemas/LighthouseCategoryV5'
+          description: 'The performance category, containing all performance related audits.'
+        pwa:
+          $ref: '#/components/schemas/LighthouseCategoryV5'
+          description: |-
+            The Progressive-Web-App (PWA) category, containing all pwa related
+            audits.
+        seo:
+          $ref: '#/components/schemas/LighthouseCategoryV5'
+          description: |-
+            The Search-Engine-Optimization (SEO) category, containing all seo related
+            audits.
+      type: object
+    CategoryGroupV5:
+      description: Message containing a category
+      properties:
+        description:
+          description: The description of what the category is grouping
+          type: string
+        title:
+          description: The human readable title of the group
+          type: string
+      type: object
+    ConfigSettings:
+      description: Message containing the configuration settings for the Lighthouse run.
+      properties:
+        channel:
+          description: |-
+            How Lighthouse was run, e.g. from the Chrome extension or from the npm
+            module.
+          type: string
+        emulatedFormFactor:
+          description: The form factor the emulation should use.
+          type: string
+        locale:
+          description: The locale setting.
+          type: string
+        onlyCategories:
+          description: List of categories of audits the run should conduct.
+      type: object
+    Environment:
+      description: Message containing environment configuration for a Lighthouse run.
+      properties:
+        benchmarkIndex:
+          description: The benchmark index number that indicates rough device class.
+          format: double
+          type: number
+        hostUserAgent:
+          description: The user agent string of the version of Chrome used.
+          type: string
+        networkUserAgent:
+          description: The user agent string that was sent over the network.
+          type: string
+      type: object
+    I18n:
+      description: Message containing the i18n data for the LHR - Version 1.
+      properties:
+        rendererFormattedStrings:
+          $ref: '#/components/schemas/RendererFormattedStrings'
+          description: |-
+            Internationalized strings that are formatted to the locale in
+            configSettings.
+      type: object
     LighthouseAuditResultV5:
+      description: An audit's result object in a Lighthouse result.
       properties:
         description:
           description: The description of the audit.
           type: string
         details:
-          additionalProperties: {}
+          additionalProperties:
+            description: Properties of the object.
           description: Freeform details section of the audit.
           type: object
         displayValue:
@@ -174,35 +333,30 @@ components:
           description: The audit's id.
           type: string
         numericValue:
-          description: 'A numeric value that has a meaning specific to the audit, e.g. the number of nodes in the DOM or the timestamp of a specific load event. More information can be found in the audit details, if present.'
+          description: |-
+            A numeric value that has a meaning specific to the audit, e.g. the number
+            of nodes in the DOM or the timestamp of a specific load event. More
+            information can be found in the audit details, if present.
           format: double
           type: number
-        score: {}
+        score:
+          description: 'The score of the audit, can be null.'
         scoreDisplayMode:
           description: The enumerated score display mode.
           type: string
         title:
           description: The human readable title.
           type: string
-        warnings: {}
+        warnings:
+          description: 'Possible warnings that occurred in the audit, can be null.'
       type: object
     LighthouseCategoryV5:
+      description: A Lighthouse category.
       properties:
         auditRefs:
           description: An array of references to all the audit members of this category.
           items:
-            properties:
-              group:
-                description: The category group that the audit belongs to (optional).
-                type: string
-              id:
-                description: The audit ref id.
-                type: string
-              weight:
-                description: The weight this audit's score has on the overall category score.
-                format: double
-                type: number
-            type: object
+            $ref: '#/components/schemas/AuditRefs'
           type: array
         description:
           description: A more detailed description of the category and its importance.
@@ -213,76 +367,36 @@ components:
         manualDescription:
           description: A description for the manual audits in the category.
           type: string
-        score: {}
+        score:
+          description: |-
+            The overall score of the category, the weighted average of all its audits.
+            (The category's score, can be null.)
         title:
           description: The human-friendly name of the category.
           type: string
       type: object
     LighthouseResultV5:
+      description: The Lighthouse result object.
       properties:
         audits:
           additionalProperties:
             $ref: '#/components/schemas/LighthouseAuditResultV5'
-            description: An audit that was performed in this run. Keyed by audit id.
           description: Map of audits in the LHR.
           type: object
         categories:
+          $ref: '#/components/schemas/Categories'
           description: Map of categories in the LHR.
-          properties:
-            accessibility:
-              $ref: '#/components/schemas/LighthouseCategoryV5'
-              description: 'The accessibility category, containing all accessibility related audits.'
-            best-practices:
-              $ref: '#/components/schemas/LighthouseCategoryV5'
-              description: 'The best practices category, containing all web best practice related audits.'
-            performance:
-              $ref: '#/components/schemas/LighthouseCategoryV5'
-              description: 'The performance category, containing all performance related audits.'
-            pwa:
-              $ref: '#/components/schemas/LighthouseCategoryV5'
-              description: 'The Progressive-Web-App (PWA) category, containing all pwa related audits.'
-            seo:
-              $ref: '#/components/schemas/LighthouseCategoryV5'
-              description: 'The Search-Engine-Optimization (SEO) category, containing all seo related audits.'
-          type: object
         categoryGroups:
           additionalProperties:
-            description: A grouping contained in a category that groups similar audits together.
-            properties:
-              description:
-                description: An optional human readable description of the category group.
-                type: string
-              title:
-                description: The title of the category group.
-                type: string
-            type: object
+            $ref: '#/components/schemas/CategoryGroupV5'
           description: Map of category groups in the LHR.
           type: object
         configSettings:
+          $ref: '#/components/schemas/ConfigSettings'
           description: The configuration settings for this LHR.
-          properties:
-            emulatedFormFactor:
-              description: The form factor the emulation should use.
-              type: string
-            locale:
-              description: The locale setting.
-              type: string
-            onlyCategories: {}
-          type: object
         environment:
+          $ref: '#/components/schemas/Environment'
           description: Environment settings that were used when making this LHR.
-          properties:
-            benchmarkIndex:
-              description: The benchmark index number that indicates rough device class.
-              format: double
-              type: number
-            hostUserAgent:
-              description: The user agent string of the version of Chrome used.
-              type: string
-            networkUserAgent:
-              description: The user agent string that was sent over the network.
-              type: string
-          type: object
         fetchTime:
           description: The time that this run was fetched.
           type: string
@@ -290,61 +404,8 @@ components:
           description: The final resolved url that was audited.
           type: string
         i18n:
+          $ref: '#/components/schemas/I18n'
           description: The internationalization strings that are required to render the LHR.
-          properties:
-            rendererFormattedStrings:
-              description: Internationalized strings that are formatted to the locale in configSettings.
-              properties:
-                auditGroupExpandTooltip:
-                  description: The tooltip text on an expandable chevron icon.
-                  type: string
-                crcInitialNavigation:
-                  description: The label for the initial request in a critical request chain.
-                  type: string
-                crcLongestDurationLabel:
-                  description: The label for values shown in the summary of critical request chains.
-                  type: string
-                errorLabel:
-                  description: The label shown next to an audit or metric that has had an error.
-                  type: string
-                errorMissingAuditInfo:
-                  description: The error string shown next to an erroring audit.
-                  type: string
-                labDataTitle:
-                  description: The title of the lab data performance category.
-                  type: string
-                lsPerformanceCategoryDescription:
-                  description: The disclaimer shown under performance explaning that the network can vary.
-                  type: string
-                manualAuditsGroupTitle:
-                  description: The heading shown above a list of audits that were not computerd in the run.
-                  type: string
-                notApplicableAuditsGroupTitle:
-                  description: The heading shown above a list of audits that do not apply to a page.
-                  type: string
-                opportunityResourceColumnLabel:
-                  description: The heading for the estimated page load savings opportunity of an audit.
-                  type: string
-                opportunitySavingsColumnLabel:
-                  description: The heading for the estimated page load savings of opportunity audits.
-                  type: string
-                passedAuditsGroupTitle:
-                  description: The heading that is shown above a list of audits that are passing.
-                  type: string
-                scorescaleLabel:
-                  description: 'The label that explains the score gauges scale (0-49, 50-89, 90-100).'
-                  type: string
-                toplevelWarningsMessage:
-                  description: The label shown preceding important warnings that may have invalidated an entire report.
-                  type: string
-                varianceDisclaimer:
-                  description: The disclaimer shown below a performance metric value.
-                  type: string
-                warningHeader:
-                  description: The label shown above a bulleted list of warnings.
-                  type: string
-              type: object
-          type: object
         lighthouseVersion:
           description: The lighthouse version that was used to generate this LHR.
           type: string
@@ -352,87 +413,46 @@ components:
           description: The original requested url.
           type: string
         runWarnings:
-          $ref: '#/components/schemas/GoogleprotobufListValue'
-          description: 'List of all run warnings in the LHR. Will always output to at least `[]`.'
+          description: 'List of all run warnings in the LHR.  Will always output to at least `[]`.'
+          items: {}
+          type: array
         runtimeError:
-          description: 'A top-level error message that, if present, indicates a serious enough problem that this Lighthouse result may need to be discarded.'
-          properties:
-            code:
-              description: The enumerated Lighthouse Error code.
-              type: string
-            message:
-              description: A human readable message explaining the error code.
-              type: string
-          type: object
+          $ref: '#/components/schemas/RuntimeError'
+          description: |-
+            A top-level error message that, if present, indicates a serious enough
+            problem that this Lighthouse result may need to be discarded.
         stackPacks:
           description: The Stack Pack advice strings.
           items:
-            properties:
-              descriptions:
-                additionalProperties:
-                  description: The specific stack pack description.
-                  type: string
-                description: The stack pack advice strings.
-                type: object
-              iconDataURL:
-                description: The stack pack icon data uri.
-                type: string
-              id:
-                description: The stack pack id.
-                type: string
-              title:
-                description: The stack pack title.
-                type: string
-            type: object
+            $ref: '#/components/schemas/StackPack'
           type: array
         timing:
+          $ref: '#/components/schemas/Timing'
           description: Timing information for this LHR.
-          properties:
-            total:
-              description: The total duration of Lighthouse's run.
-              format: double
-              type: number
-          type: object
         userAgent:
           description: The user agent that was used to run this LHR.
           type: string
       type: object
     PagespeedApiLoadingExperienceV5:
+      description: The CrUX loading experience object that contains CrUX data breakdowns.
       properties:
         id:
           description: 'The url, pattern or origin which the metrics are on.'
           type: string
         initial_url:
+          description: 'The requested URL, which may differ from the resolved "id".'
           type: string
         metrics:
           additionalProperties:
-            description: The type of the metric.
-            properties:
-              category:
-                type: string
-              distributions:
-                items:
-                  properties:
-                    max:
-                      format: int32
-                      type: integer
-                    min:
-                      format: int32
-                      type: integer
-                    proportion:
-                      format: double
-                      type: number
-                  type: object
-                type: array
-              percentile:
-                format: int32
-                type: integer
-            type: object
+            $ref: '#/components/schemas/UserPageLoadMetricV5'
+          description: 'The map of <metrics, data>.'
           type: object
         overall_category:
+          description: The human readable speed "category" of the id.
           type: string
       type: object
     PagespeedApiPagespeedResponseV5:
+      description: The Pagespeed API response object.
       properties:
         analysisUTCTimestamp:
           description: The UTC timestamp of this analysis.
@@ -441,10 +461,11 @@ components:
           description: The captcha verify result
           type: string
         id:
-          description: 'Canonicalized and final URL for the document, after following page redirects (if any).'
+          description: |-
+            Canonicalized and final URL for the document, after following page
+            redirects (if any).
           type: string
         kind:
-          default: 'pagespeedonline#result'
           description: Kind of result.
           type: string
         lighthouseResult:
@@ -457,15 +478,159 @@ components:
           $ref: '#/components/schemas/PagespeedApiLoadingExperienceV5'
           description: Metrics of the aggregated page loading experience of the origin
         version:
+          $ref: '#/components/schemas/PagespeedVersion'
           description: The version of PageSpeed used to generate these results.
-          properties:
-            major:
-              description: The major version number of PageSpeed used to generate these results.
-              format: int32
-              type: integer
-            minor:
-              description: The minor version number of PageSpeed used to generate these results.
-              format: int32
-              type: integer
-          type: object
       type: object
+    PagespeedVersion:
+      description: The Pagespeed Version object.
+      properties:
+        major:
+          description: The major version number of PageSpeed used to generate these results.
+          type: string
+        minor:
+          description: The minor version number of PageSpeed used to generate these results.
+          type: string
+      type: object
+    RendererFormattedStrings:
+      description: Message holding the formatted strings used in the renderer.
+      properties:
+        auditGroupExpandTooltip:
+          description: The tooltip text on an expandable chevron icon.
+          type: string
+        crcInitialNavigation:
+          description: The label for the initial request in a critical request chain.
+          type: string
+        crcLongestDurationLabel:
+          description: The label for values shown in the summary of critical request chains.
+          type: string
+        errorLabel:
+          description: The label shown next to an audit or metric that has had an error.
+          type: string
+        errorMissingAuditInfo:
+          description: The error string shown next to an erroring audit.
+          type: string
+        labDataTitle:
+          description: The title of the lab data performance category.
+          type: string
+        lsPerformanceCategoryDescription:
+          description: |-
+            The disclaimer shown under performance explaning that the network can
+            vary.
+          type: string
+        manualAuditsGroupTitle:
+          description: |-
+            The heading shown above a list of audits that were not computerd in the
+            run.
+          type: string
+        notApplicableAuditsGroupTitle:
+          description: The heading shown above a list of audits that do not apply to a page.
+          type: string
+        opportunityResourceColumnLabel:
+          description: |-
+            The heading for the estimated page load savings opportunity of an
+            audit.
+          type: string
+        opportunitySavingsColumnLabel:
+          description: The heading for the estimated page load savings of opportunity audits.
+          type: string
+        passedAuditsGroupTitle:
+          description: The heading that is shown above a list of audits that are passing.
+          type: string
+        scorescaleLabel:
+          description: 'The label that explains the score gauges scale (0-49, 50-89, 90-100).'
+          type: string
+        toplevelWarningsMessage:
+          description: |-
+            The label shown preceding important warnings that may have invalidated
+            an entire report.
+          type: string
+        varianceDisclaimer:
+          description: The disclaimer shown below a performance metric value.
+          type: string
+        warningHeader:
+          description: The label shown above a bulleted list of warnings.
+          type: string
+      type: object
+    RuntimeError:
+      description: Message containing a runtime error config.
+      properties:
+        code:
+          description: The enumerated Lighthouse Error code.
+          type: string
+        message:
+          description: A human readable message explaining the error code.
+          type: string
+      type: object
+    StackPack:
+      description: Message containing Stack Pack information.
+      properties:
+        descriptions:
+          additionalProperties:
+            type: string
+          description: The stack pack advice strings.
+          type: object
+        iconDataURL:
+          description: The stack pack icon data uri.
+          type: string
+        id:
+          description: The stack pack id.
+          type: string
+        title:
+          description: The stack pack title.
+          type: string
+      type: object
+    Timing:
+      description: Message containing the performance timing data for the Lighthouse run.
+      properties:
+        total:
+          description: The total duration of Lighthouse's run.
+          format: double
+          type: number
+      type: object
+    UserPageLoadMetricV5:
+      description: A CrUX metric object for a single metric and form factor.
+      properties:
+        category:
+          description: The category of the specific time metric.
+          type: string
+        distributions:
+          description: Metric distributions. Proportions should sum up to 1.
+          items:
+            $ref: '#/components/schemas/Bucket'
+          type: array
+        formFactor:
+          description: Identifies the form factor of the metric being collected.
+          type: string
+        median:
+          description: 'The median number of the metric, in millisecond.'
+          format: int32
+          type: integer
+        metricId:
+          description: Identifies the type of the metric.
+          type: string
+        percentile:
+          description: |-
+            We use this field to store certain percentile value for this metric.
+            For v4, this field contains pc50.
+            For v5, this field contains pc90.
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            openid: Associate you with your personal info on Google
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            openid: Associate you with your personal info on Google
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+      type: oauth2

@@ -31,9 +31,9 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/speech-to-text/docs/quickstart-protocol'
 tags:
+  - name: projects
   - name: operations
   - name: speech
-  - name: projects
 paths:
   /v1p1beta1/operations:
     get:
@@ -87,15 +87,15 @@ paths:
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1p1beta1/operations/{name}':
     get:
       description: |-
@@ -128,28 +128,28 @@ paths:
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1p1beta1/speech:longrunningrecognize':
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Performs asynchronous speech recognition: receive results via the
@@ -182,15 +182,15 @@ paths:
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Performs synchronous speech recognition: receive results after all audio
@@ -247,15 +247,15 @@ paths:
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1p1beta1/{name}/operations':
     get:
       description: |-
@@ -310,15 +310,15 @@ paths:
     parameters:
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
 components:
   parameters:
     _.xgafv:
@@ -819,9 +819,6 @@ components:
           description: |-
             Required. Provides information to the recognizer that specifies how to
             process the request.
-        name:
-          description: Use `model` field in RecognitionConfig instead.
-          type: string
       type: object
     RecognizeResponse:
       description: |-
@@ -947,7 +944,7 @@ components:
           type: integer
         languageCode:
           description: |-
-            The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
+            Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
             of the language in this result. This language code was detected to have
             the most likelihood of being spoken in the audio.
           type: string
@@ -1008,7 +1005,7 @@ components:
           type: string
         speakerTag:
           description: |-
-            A distinct integer value is assigned for every speaker within
+            Output only. A distinct integer value is assigned for every speaker within
             the audio. This field specifies which one of those speakers was detected to
             have spoken this word. Value ranges from '1' to diarization_speaker_count.
             speaker_tag is set if enable_speaker_diarization = 'true' and only in the

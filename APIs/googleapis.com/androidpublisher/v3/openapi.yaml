@@ -37,6 +37,7 @@ tags:
   - name: orders
   - name: purchases
   - name: reviews
+  - name: systemapks
 paths:
   '/internalappsharing/{packageName}/artifacts/apk':
     parameters:
@@ -999,6 +1000,8 @@ paths:
           required: true
           schema:
             enum:
+              - automotiveScreenshots
+              - daydreamStereoImage
               - featureGraphic
               - icon
               - phoneScreenshots
@@ -1050,6 +1053,8 @@ paths:
           required: true
           schema:
             enum:
+              - automotiveScreenshots
+              - daydreamStereoImage
               - featureGraphic
               - icon
               - phoneScreenshots
@@ -1109,6 +1114,8 @@ paths:
           required: true
           schema:
             enum:
+              - automotiveScreenshots
+              - daydreamStereoImage
               - featureGraphic
               - icon
               - phoneScreenshots
@@ -1161,6 +1168,8 @@ paths:
           required: true
           schema:
             enum:
+              - automotiveScreenshots
+              - daydreamStereoImage
               - featureGraphic
               - icon
               - phoneScreenshots
@@ -2378,6 +2387,165 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - reviews
+  '/{packageName}/systemApks/{versionCode}/variants':
+    get:
+      description: Returns the list of previously created system APK variants.
+      operationId: androidpublisher.systemapks.variants.list
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The version code of the App Bundle.
+          in: path
+          name: versionCode
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SystemApkVariantsListResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - systemapks
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Creates a new variant of APK which is suitable for inclusion in a system image.
+      operationId: androidpublisher.systemapks.variants.create
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The version code of the App Bundle.
+          in: path
+          name: versionCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemApkVariantsCreateRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Variant'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - systemapks
+  '/{packageName}/systemApks/{versionCode}/variants/{variantId}':
+    get:
+      description: Returns a previously created system APK variant.
+      operationId: androidpublisher.systemapks.variants.get
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The version code of the App Bundle.
+          in: path
+          name: versionCode
+          required: true
+          schema:
+            type: string
+        - description: Unique identifier for this variant.
+          in: path
+          name: variantId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Variant'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - systemapks
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{packageName}/systemApks/{versionCode}/variants/{variantId}:download':
+    get:
+      description: Download a previously created APK which is suitable for inclusion in a system image.
+      operationId: androidpublisher.systemapks.variants.download
+      parameters:
+        - description: 'Unique identifier for the Android app; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          schema:
+            type: string
+        - description: The version code of the App Bundle.
+          in: path
+          name: versionCode
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: variantId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - systemapks
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
 components:
   parameters:
     alt:
@@ -2463,6 +2631,8 @@ components:
         binary:
           $ref: '#/components/schemas/ApkBinary'
           description: Information about the binary payload of this APK.
+        testBinary:
+          $ref: '#/components/schemas/ApkBinary'
         versionCode:
           description: 'The version code of the APK, as specified in the APK''s manifest file.'
           format: int32
@@ -2565,6 +2735,10 @@ components:
           items:
             $ref: '#/components/schemas/ModRange'
           type: array
+        stratifiedSamplings:
+          items:
+            $ref: '#/components/schemas/StratifiedSampling'
+          type: array
         versionCodes:
           items:
             format: int64
@@ -2641,6 +2815,20 @@ components:
           description: Screen width in pixels
           format: int32
           type: integer
+      type: object
+    DeviceSpec:
+      properties:
+        screenDensity:
+          format: uint32
+          type: integer
+        supportedAbis:
+          items:
+            type: string
+          type: array
+        supportedLocales:
+          items:
+            type: string
+          type: array
       type: object
     ExpansionFile:
       properties:
@@ -2793,9 +2981,6 @@ components:
         purchaseType:
           description: Purchase type enum value. Unmodifiable after creation.
           type: string
-        season:
-          $ref: '#/components/schemas/Season'
-          description: Definition of a season for a seasonal subscription. Can be defined only for yearly subscriptions.
         sku:
           description: 'The stock-keeping-unit (SKU) of the product, unique within an app.'
           type: string
@@ -2908,17 +3093,6 @@ components:
           format: int64
           type: string
       type: object
-    MonthDay:
-      properties:
-        day:
-          description: 'Day of a month, value in [1, 31] range. Valid range depends on the specified month.'
-          format: uint32
-          type: integer
-        month:
-          description: 'Month of a year. e.g. 1 = JAN, 2 = FEB etc.'
-          format: uint32
-          type: integer
-      type: object
     PageInfo:
       properties:
         resultPerPage:
@@ -2993,21 +3167,16 @@ components:
             - Rewarded (i.e. from watching a video ad instead of paying)
           format: int32
           type: integer
+        quantity:
+          description: The quantity associated with the purchase of the inapp product.
+          format: int32
+          type: integer
       type: object
     ProductPurchasesAcknowledgeRequest:
       properties:
         developerPayload:
           description: Payload to attach to the purchase.
           type: string
-      type: object
-    Prorate:
-      properties:
-        defaultPrice:
-          $ref: '#/components/schemas/Price'
-          description: Default price cannot be zero and must be less than the full subscription price. Default price is always in the developer's Checkout merchant currency. Targeted countries have their prices set automatically based on the default_price.
-        start:
-          $ref: '#/components/schemas/MonthDay'
-          description: Defines the first day on which the price takes effect.
       type: object
     Review:
       properties:
@@ -3066,20 +3235,26 @@ components:
         salt:
           format: int32
           type: integer
-      type: object
-    Season:
-      properties:
-        end:
-          $ref: '#/components/schemas/MonthDay'
-          description: Inclusive end date of the recurrence period.
-        prorations:
-          description: Optionally present list of prorations for the season. Each proration is a one-off discounted entry into a subscription. Each proration contains the first date on which the discount is available and the new pricing information.
+        stratifiedSamplings:
           items:
-            $ref: '#/components/schemas/Prorate'
+            $ref: '#/components/schemas/StratifiedSampling'
           type: array
-        start:
-          $ref: '#/components/schemas/MonthDay'
-          description: Inclusive start date of the recurrence period.
+        useAndroidId:
+          type: boolean
+      type: object
+    StratifiedSampling:
+      properties:
+        modRanges:
+          items:
+            $ref: '#/components/schemas/ModRange'
+          type: array
+        stratum:
+          $ref: '#/components/schemas/Stratum'
+      type: object
+    Stratum:
+      properties:
+        brand:
+          type: string
       type: object
     SubscriptionCancelSurveyResult:
       description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
@@ -3166,6 +3341,9 @@ components:
           description: 'Time at which the subscription will expire, in milliseconds since the Epoch.'
           format: int64
           type: string
+        externalAccountId:
+          description: User account identifier in the third-party service. Only present if account linking happened as part of the subscription purchase flow.
+          type: string
         familyName:
           description: The family name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
@@ -3219,10 +3397,21 @@ components:
         profileName:
           description: The profile name of the user when the subscription was purchased. Only present for purchases made with 'Subscribe with Google'.
           type: string
+        promotionCode:
+          description: The promotion code applied on this purchase. This field is only set if a vanity code promotion is applied when the subscription was purchased.
+          type: string
+        promotionType:
+          description: |-
+            The type of promotion applied on this purchase. This field is only set if a promotion is applied when the subscription was purchased. Possible values are:  
+            - One time code 
+            - Vanity code
+          format: int32
+          type: integer
         purchaseType:
           description: |-
             The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
-            - Test (i.e. purchased from a license testing account)
+            - Test (i.e. purchased from a license testing account) 
+            - Promo (i.e. purchased using a promo code)
           format: int32
           type: integer
         startTimeMillis:
@@ -3253,8 +3442,32 @@ components:
           format: int64
           type: string
       type: object
+    SystemApkVariantsCreateRequest:
+      properties:
+        deviceSpec:
+          $ref: '#/components/schemas/DeviceSpec'
+      type: object
+    SystemApkVariantsListResponse:
+      properties:
+        variants:
+          items:
+            $ref: '#/components/schemas/Variant'
+          type: array
+      type: object
     Testers:
       properties:
+        autoEnrolledAndroidGroups:
+          items:
+            type: string
+          type: array
+        autoEnrolledGoogleGroups:
+          items:
+            type: string
+          type: array
+        excludedGoogleGroups:
+          items:
+            type: string
+          type: array
         googleGroups:
           description: 'A list of all Google Groups, as email addresses, that define testers for this track.'
           items:
@@ -3296,14 +3509,24 @@ components:
           type: array
         countryTargeting:
           $ref: '#/components/schemas/CountryTargeting'
+        inAppUpdatePriority:
+          description: 'In-app update priority of the release. All newly added APKs in the release will be considered at this priority. in_app_update_priority can take values between [0, 5]. 5 is the highest priority. Default priority is 0. See https://developer.android.com/guide/playcore/in-app-updates.'
+          format: int32
+          type: integer
         name:
           description: 'The release name, used to identify this release in the Play Console UI. Not required to be unique. This is optional, if not set it will be generated from the version_name in the APKs.'
           type: string
+        pinnedVersions:
+          items:
+            $ref: '#/components/schemas/TrackReleasePin'
+          type: array
         releaseNotes:
           description: The description of what is new in the app in this release.
           items:
             $ref: '#/components/schemas/LocalizedText'
           type: array
+        rollbackEnabled:
+          type: boolean
         sampling:
           $ref: '#/components/schemas/Sampling'
         status:
@@ -3319,6 +3542,48 @@ components:
             format: int64
             type: string
           type: array
+      type: object
+    TrackReleasePin:
+      properties:
+        targetings:
+          items:
+            $ref: '#/components/schemas/TrackReleasePinPinTargeting'
+          type: array
+        versionCodes:
+          items:
+            format: int64
+            type: string
+          type: array
+      type: object
+    TrackReleasePinPinTargeting:
+      properties:
+        countryCodes:
+          items:
+            type: string
+          type: array
+        devices:
+          items:
+            $ref: '#/components/schemas/TrackReleasePinPinTargetingDevicePin'
+          type: array
+        phoneskyVersions:
+          items:
+            format: int64
+            type: string
+          type: array
+        sdkVersions:
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    TrackReleasePinPinTargetingDevicePin:
+      properties:
+        brand:
+          type: string
+        device:
+          type: string
+        product:
+          type: string
       type: object
     TracksListResponse:
       properties:
@@ -3373,6 +3638,15 @@ components:
         thumbsUpCount:
           description: Number of users who have given this review a thumbs up
           format: int32
+          type: integer
+      type: object
+    Variant:
+      description: Represents the variant of a generated system APK from an uploaded App Bundle.
+      properties:
+        deviceSpec:
+          $ref: '#/components/schemas/DeviceSpec'
+        variantId:
+          format: uint32
           type: integer
       type: object
     VoidedPurchase:

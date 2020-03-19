@@ -1,11 +1,11 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/games/v1configuration'
+  - url: 'https://www.googleapis.com/'
 info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Publishing API for Google Play Game Services.
+  description: The Google Play Game Services Publishing API allows developers to configure their games in Game Services.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -29,13 +29,13 @@ info:
   x-providerName: googleapis.com
   x-serviceName: gamesConfiguration
 externalDocs:
-  url: 'https://developers.google.com/games/services'
+  url: 'https://developers.google.com/games/'
 tags:
   - name: achievementConfigurations
   - name: imageConfigurations
   - name: leaderboardConfigurations
 paths:
-  '/achievements/{achievementId}':
+  '/games/v1configuration/achievements/{achievementId}':
     delete:
       description: Delete the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.delete
@@ -81,42 +81,17 @@ paths:
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Update the metadata of the achievement configuration with the given ID. This method supports patch semantics.
-      operationId: gamesConfiguration.achievementConfigurations.patch
-      parameters:
-        - description: The ID of the achievement used by this method.
-          in: path
-          name: achievementId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AchievementConfiguration'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/AchievementConfiguration'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-      tags:
-        - achievementConfigurations
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     put:
       description: Update the metadata of the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.update
@@ -146,7 +121,7 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
-  '/applications/{applicationId}/achievements':
+  '/games/v1configuration/applications/{applicationId}/achievements':
     get:
       description: Returns a list of the achievement configurations in this application.
       operationId: gamesConfiguration.achievementConfigurations.list
@@ -157,12 +132,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of resource configurations to return in the response, used for paging. For any response, the actual number of resources returned may be less than the specified maxResults.'
+        - description: |-
+            The maximum number of resource configurations to return in the response,
+            used for paging. For any response, the actual number of resources returned
+            may be less than the specified <code>maxResults</code>.
           in: query
           name: maxResults
           schema:
-            maximum: 200
-            minimum: 1
             type: integer
         - description: The token returned by the previous request.
           in: query
@@ -184,13 +160,17 @@ paths:
       tags:
         - achievementConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Insert a new achievement configuration in this application.
       operationId: gamesConfiguration.achievementConfigurations.insert
@@ -220,7 +200,7 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
-  '/applications/{applicationId}/leaderboards':
+  '/games/v1configuration/applications/{applicationId}/leaderboards':
     get:
       description: Returns a list of the leaderboard configurations in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.list
@@ -231,12 +211,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The maximum number of resource configurations to return in the response, used for paging. For any response, the actual number of resources returned may be less than the specified maxResults.'
+        - description: |-
+            The maximum number of resource configurations to return in the response,
+            used for paging. For any response, the actual number of resources returned
+            may be less than the specified <code>maxResults</code>.
           in: query
           name: maxResults
           schema:
-            maximum: 200
-            minimum: 1
             type: integer
         - description: The token returned by the previous request.
           in: query
@@ -258,13 +239,17 @@ paths:
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Insert a new leaderboard configuration in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.insert
@@ -294,15 +279,19 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
-  '/images/{resourceId}/imageType/{imageType}':
+  '/games/v1configuration/images/{resourceId}/imageType/{imageType}':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Uploads an image for a resource with the given ID and image type.
       operationId: gamesConfiguration.imageConfigurations.upload
@@ -319,6 +308,7 @@ paths:
           required: true
           schema:
             enum:
+              - IMAGE_TYPE_UNSPECIFIED
               - ACHIEVEMENT_ICON
               - LEADERBOARD_ICON
             type: string
@@ -336,7 +326,7 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - imageConfigurations
-  '/leaderboards/{leaderboardId}':
+  '/games/v1configuration/leaderboards/{leaderboardId}':
     delete:
       description: Delete the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.delete
@@ -382,42 +372,17 @@ paths:
       tags:
         - leaderboardConfigurations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Update the metadata of the leaderboard configuration with the given ID. This method supports patch semantics.
-      operationId: gamesConfiguration.leaderboardConfigurations.patch
-      parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LeaderboardConfiguration'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/LeaderboardConfiguration'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-      tags:
-        - leaderboardConfigurations
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     put:
       description: Update the metadata of the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.update
@@ -449,14 +414,37 @@ paths:
         - leaderboardConfigurations
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - '1'
+          - '2'
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
         default: json
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -484,15 +472,21 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
       schema:
         type: string
   requestBodies:
@@ -508,14 +502,14 @@ components:
             $ref: '#/components/schemas/LeaderboardConfiguration'
   schemas:
     AchievementConfiguration:
-      description: This is a JSON template for an achievement configuration resource.
+      description: An achievement configuration resource.
       properties:
         achievementType:
-          description: |-
-            The type of the achievement.
-            Possible values are:  
-            - "STANDARD" - Achievement is either locked or unlocked. 
-            - "INCREMENTAL" - Achievement is incremental.
+          description: The type of the achievement.
+          enum:
+            - ACHIEVEMENT_TYPE_UNSPECIFIED
+            - STANDARD
+            - INCREMENTAL
           type: string
         draft:
           $ref: '#/components/schemas/AchievementConfigurationDetail'
@@ -524,22 +518,22 @@ components:
           description: The ID of the achievement.
           type: string
         initialState:
-          description: |-
-            The initial state of the achievement.
-            Possible values are:  
-            - "HIDDEN" - Achievement is hidden. 
-            - "REVEALED" - Achievement is revealed. 
-            - "UNLOCKED" - Achievement is unlocked.
+          description: The initial state of the achievement.
+          enum:
+            - INITIAL_STATE_UNSPECIFIED
+            - HIDDEN
+            - REVEALED
           type: string
         kind:
-          default: 'gamesConfiguration#achievementConfiguration'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfiguration.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#achievementConfiguration</code>.
           type: string
         published:
           $ref: '#/components/schemas/AchievementConfigurationDetail'
           description: The read-only published data of the achievement.
         stepsToUnlock:
-          description: Steps to unlock. Only applicable to incremental achievements.
+          description: Steps to unlock.  Only applicable to incremental achievements.
           format: int32
           type: integer
         token:
@@ -547,7 +541,7 @@ components:
           type: string
       type: object
     AchievementConfigurationDetail:
-      description: This is a JSON template for an achievement configuration detail.
+      description: An achievement configuration detail.
       properties:
         description:
           $ref: '#/components/schemas/LocalizedStringBundle'
@@ -556,8 +550,9 @@ components:
           description: The icon url of this achievement. Writes to this field are ignored.
           type: string
         kind:
-          default: 'gamesConfiguration#achievementConfigurationDetail'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfigurationDetail.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#achievementConfigurationDetail</code>.
           type: string
         name:
           $ref: '#/components/schemas/LocalizedStringBundle'
@@ -572,7 +567,7 @@ components:
           type: integer
       type: object
     AchievementConfigurationListResponse:
-      description: This is a JSON template for a ListConfigurations response.
+      description: A ListConfigurations response.
       properties:
         items:
           description: The achievement configurations.
@@ -580,37 +575,53 @@ components:
             $ref: '#/components/schemas/AchievementConfiguration'
           type: array
         kind:
-          default: 'gamesConfiguration#achievementConfigurationListResponse'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#achievementConfigurationListResponse.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string
+            <code>gamesConfiguration#achievementConfigurationListResponse</code>.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
           type: string
       type: object
     GamesNumberAffixConfiguration:
-      description: This is a JSON template for a number affix resource.
+      description: A number affix resource.
       properties:
         few:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: 'When the language requires special treatment of "small" numbers (as with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in Polish).'
+          description: |-
+            When the language requires special treatment of "small" numbers (as with 2,
+            3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in
+            Polish).
         many:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).
+          description: |-
+            When the language requires special treatment of "large" numbers (as with
+            numbers ending 11-99 in Maltese).
         one:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: 'When the language requires special treatment of numbers like one (as with the number 1 in English and most other languages; in Russian, any number ending in 1 but not ending in 11 is in this class).'
+          description: |-
+            When the language requires special treatment of numbers like one (as with
+            the number 1 in English and most other languages; in Russian, any number
+            ending in 1 but not ending in 11 is in this class).
         other:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: 'When the language does not require special treatment of the given quantity (as with all numbers in Chinese, or 42 in English).'
+          description: |-
+            When the language does not require special treatment of the given quantity
+            (as with all numbers in Chinese, or 42 in English).
         two:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: 'When the language requires special treatment of numbers like two (as with 2 in Welsh, or 102 in Slovenian).'
+          description: |-
+            When the language requires special treatment of numbers like two (as with 2
+            in Welsh, or 102 in Slovenian).
         zero:
           $ref: '#/components/schemas/LocalizedStringBundle'
-          description: When the language requires special treatment of the number 0 (as in Arabic).
+          description: |-
+            When the language requires special treatment of the number 0 (as in
+            Arabic).
       type: object
     GamesNumberFormatConfiguration:
-      description: This is a JSON template for a number format resource.
+      description: A number format resource.
       properties:
         currencyCode:
           description: The curreny code string. Only used for CURRENCY format type.
@@ -620,26 +631,35 @@ components:
           format: int32
           type: integer
         numberFormatType:
-          description: |-
-            The formatting for the number.
-            Possible values are:  
-            - "NUMERIC" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.
-            - "TIME_DURATION" - Numbers are formatted to hours, minutes and seconds.
-            - "CURRENCY" - Numbers are formatted to currency according to locale.
+          description: The formatting for the number.
+          enum:
+            - NUMBER_FORMAT_TYPE_UNSPECIFIED
+            - NUMERIC
+            - TIME_DURATION
+            - CURRENCY
           type: string
         suffix:
           $ref: '#/components/schemas/GamesNumberAffixConfiguration'
-          description: An optional suffix for the NUMERIC format type. These strings follow the same  plural rules as all Android string resources.
+          description: |-
+            An optional suffix for the NUMERIC format type.  These strings follow the
+            same <a
+            href="http://developer.android.com/guide/topics/resources/string-resource.html#Plurals">
+            plural rules</a> as all Android string resources.
       type: object
     ImageConfiguration:
-      description: This is a JSON template for an image configuration resource.
+      description: An image configuration resource.
       properties:
         imageType:
           description: The image type for the image.
+          enum:
+            - IMAGE_TYPE_UNSPECIFIED
+            - ACHIEVEMENT_ICON
+            - LEADERBOARD_ICON
           type: string
         kind:
-          default: 'gamesConfiguration#imageConfiguration'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#imageConfiguration.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#imageConfiguration</code>.
           type: string
         resourceId:
           description: The resource ID of resource which the image belongs to.
@@ -649,7 +669,7 @@ components:
           type: string
       type: object
     LeaderboardConfiguration:
-      description: This is a JSON template for an leaderboard configuration resource.
+      description: An leaderboard configuration resource.
       properties:
         draft:
           $ref: '#/components/schemas/LeaderboardConfigurationDetail'
@@ -658,8 +678,9 @@ components:
           description: The ID of the leaderboard.
           type: string
         kind:
-          default: 'gamesConfiguration#leaderboardConfiguration'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfiguration.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#leaderboardConfiguration</code>.
           type: string
         published:
           $ref: '#/components/schemas/LeaderboardConfigurationDetail'
@@ -673,25 +694,25 @@ components:
           format: int64
           type: string
         scoreOrder:
-          description: |-
-            The type of the leaderboard.
-            Possible values are:  
-            - "LARGER_IS_BETTER" - Larger scores posted are ranked higher. 
-            - "SMALLER_IS_BETTER" - Smaller scores posted are ranked higher.
+          enum:
+            - SCORE_ORDER_UNSPECIFIED
+            - LARGER_IS_BETTER
+            - SMALLER_IS_BETTER
           type: string
         token:
           description: The token for this resource.
           type: string
       type: object
     LeaderboardConfigurationDetail:
-      description: This is a JSON template for a leaderboard configuration detail.
+      description: A leaderboard configuration detail.
       properties:
         iconUrl:
           description: The icon url of this leaderboard. Writes to this field are ignored.
           type: string
         kind:
-          default: 'gamesConfiguration#leaderboardConfigurationDetail'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfigurationDetail.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#leaderboardConfigurationDetail</code>.
           type: string
         name:
           $ref: '#/components/schemas/LocalizedStringBundle'
@@ -705,7 +726,7 @@ components:
           type: integer
       type: object
     LeaderboardConfigurationListResponse:
-      description: This is a JSON template for a ListConfigurations response.
+      description: A ListConfigurations response.
       properties:
         items:
           description: The leaderboard configurations.
@@ -713,19 +734,22 @@ components:
             $ref: '#/components/schemas/LeaderboardConfiguration'
           type: array
         kind:
-          default: 'gamesConfiguration#leaderboardConfigurationListResponse'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardConfigurationListResponse.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string
+            <code>gamesConfiguration#leaderboardConfigurationListResponse</code>.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
           type: string
       type: object
     LocalizedString:
-      description: This is a JSON template for a localized string resource.
+      description: A localized string resource.
       properties:
         kind:
-          default: 'gamesConfiguration#localizedString'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedString.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#localizedString</code>.
           type: string
         locale:
           description: The locale string.
@@ -735,11 +759,12 @@ components:
           type: string
       type: object
     LocalizedStringBundle:
-      description: This is a JSON template for a localized string bundle resource.
+      description: A localized string bundle resource.
       properties:
         kind:
-          default: 'gamesConfiguration#localizedStringBundle'
-          description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedStringBundle.'
+          description: |-
+            Uniquely identifies the type of this resource. Value is always the fixed
+            string <code>gamesConfiguration#localizedStringBundle</code>.
           type: string
         translations:
           description: The locale strings.

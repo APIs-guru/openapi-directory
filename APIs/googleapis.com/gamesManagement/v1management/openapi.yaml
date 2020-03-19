@@ -840,6 +840,9 @@ components:
         experienceInfo:
           $ref: '#/components/schemas/GamesPlayerExperienceInfoResource'
           description: An object to represent Play Game experience information for the player.
+        friendStatus:
+          description: 'The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.'
+          type: string
         kind:
           default: 'gamesManagement#player'
           description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#player.'

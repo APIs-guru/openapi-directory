@@ -76,6 +76,8 @@ paths:
       tags:
         - accessPolicies
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -85,8 +87,6 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Create an `AccessPolicy`. Fails if this organization already has a
@@ -196,6 +196,8 @@ paths:
       tags:
         - accessPolicies
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -205,8 +207,6 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     patch:
       description: |-
         Update an Access Level. The longrunning
@@ -309,6 +309,8 @@ paths:
       tags:
         - accessPolicies
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -318,8 +320,6 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Create an Access Level. The longrunning
@@ -406,6 +406,8 @@ paths:
       tags:
         - accessPolicies
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -415,8 +417,6 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Create an Service Perimeter. The
@@ -542,8 +542,9 @@ components:
   schemas:
     AccessLevel:
       description: |-
-        An `AccessLevel` is a label that can be applied to requests to GCP services,
-        along with a list of requirements necessary for the label to be applied.
+        An `AccessLevel` is a label that can be applied to requests to Google Cloud
+        services, along with a list of requirements necessary for the label to be
+        applied.
       properties:
         basic:
           $ref: '#/components/schemas/BasicLevel'
@@ -552,6 +553,9 @@ components:
           description: Output only. Time the `AccessLevel` was created in UTC.
           format: google-datetime
           type: string
+        custom:
+          $ref: '#/components/schemas/CustomLevel'
+          description: A `CustomLevel` written in the Common Expression Language.
         description:
           description: Description of the `AccessLevel` and its use. Does not affect behavior.
           type: string
@@ -572,10 +576,10 @@ components:
     AccessPolicy:
       description: |-
         `AccessPolicy` is a container for `AccessLevels` (which define the necessary
-        attributes to use GCP services) and `ServicePerimeters` (which define regions
-        of services able to freely pass data within a perimeter). An access policy is
-        globally visible within an organization, and the restrictions it specifies
-        apply to all projects within an organization.
+        attributes to use Google Cloud services) and `ServicePerimeters` (which
+        define regions of services able to freely pass data within a perimeter). An
+        access policy is globally visible within an organization, and the
+        restrictions it specifies apply to all projects within an organization.
       properties:
         createTime:
           description: Output only. Time the `AccessPolicy` was created in UTC.
@@ -681,6 +685,16 @@ components:
             type: string
           type: array
       type: object
+    CustomLevel:
+      description: |-
+        `CustomLevel` is an `AccessLevel` using the Cloud Common Expression Language
+        to represent the necessary conditions for the level to apply to a request.
+        See CEL spec at: https://github.com/google/cel-spec
+      properties:
+        expr:
+          $ref: '#/components/schemas/Expr'
+          description: Required. A Cloud CEL expression evaluating to a boolean.
+      type: object
     DevicePolicy:
       description: |-
         `DevicePolicy` specifies device specific restrictions necessary to acquire a
@@ -731,6 +745,62 @@ components:
             Whether or not screenlock is required for the DevicePolicy to be true.
             Defaults to `false`.
           type: boolean
+      type: object
+    Expr:
+      description: |-
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
+
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
+      properties:
+        description:
+          description: |-
+            Optional. Description of the expression. This is a longer text which
+            describes the expression, e.g. when hovered over it in a UI.
+          type: string
+        expression:
+          description: |-
+            Textual representation of an expression in Common Expression Language
+            syntax.
+          type: string
+        location:
+          description: |-
+            Optional. String indicating the location of the expression for error
+            reporting, e.g. a file name and a position in the file.
+          type: string
+        title:
+          description: |-
+            Optional. Title for the expression, i.e. a short string describing
+            its purpose. This can be used e.g. in UIs which allow to enter the
+            expression.
+          type: string
       type: object
     ListAccessLevelsResponse:
       description: A response to `ListAccessLevelsRequest`.
@@ -834,6 +904,8 @@ components:
             - DESKTOP_WINDOWS
             - DESKTOP_LINUX
             - DESKTOP_CHROME_OS
+            - ANDROID
+            - IOS
           type: string
         requireVerifiedChromeOs:
           description: |-
@@ -845,15 +917,16 @@ components:
       type: object
     ServicePerimeter:
       description: |-
-        `ServicePerimeter` describes a set of GCP resources which can freely import
-        and export data amongst themselves, but not export outside of the
+        `ServicePerimeter` describes a set of Google Cloud resources which can freely
+        import and export data amongst themselves, but not export outside of the
         `ServicePerimeter`. If a request with a source within this `ServicePerimeter`
         has a target outside of the `ServicePerimeter`, the request will be blocked.
         Otherwise the request is allowed. There are two types of Service Perimeter -
-        Regular and Bridge. Regular Service Perimeters cannot overlap, a single GCP
-        project can only belong to a single regular Service Perimeter. Service
-        Perimeter Bridges can contain only GCP projects as members, a single GCP
-        project may belong to multiple Service Perimeter Bridges.
+        Regular and Bridge. Regular Service Perimeters cannot overlap, a single
+        Google Cloud project can only belong to a single regular Service Perimeter.
+        Service Perimeter Bridges can contain only Google Cloud projects as members,
+        a single Google Cloud project may belong to multiple Service Perimeter
+        Bridges.
       properties:
         createTime:
           description: Output only. Time the `ServicePerimeter` was created in UTC.
@@ -898,8 +971,8 @@ components:
       type: object
     ServicePerimeterConfig:
       description: |-
-        `ServicePerimeterConfig` specifies a set of GCP resources that describe
-        specific Service Perimeter configuration.
+        `ServicePerimeterConfig` specifies a set of Google Cloud resources that
+        describe specific Service Perimeter configuration.
       properties:
         accessLevels:
           description: |-
@@ -907,8 +980,8 @@ components:
             `ServicePerimeter` to be accessed from the internet. `AccessLevels` listed
             must be in the same policy as this `ServicePerimeter`. Referencing a
             nonexistent `AccessLevel` is a syntax error. If no `AccessLevel` names are
-            listed, resources within the perimeter can only be accessed via GCP calls
-            with request origins within the perimeter. Example:
+            listed, resources within the perimeter can only be accessed via Google
+            Cloud calls with request origins within the perimeter. Example:
             `"accessPolicies/MY_POLICY/accessLevels/MY_LEVEL"`.
             For Service Perimeter Bridge, must be empty.
           items:
@@ -916,15 +989,15 @@ components:
           type: array
         resources:
           description: |-
-            A list of GCP resources that are inside of the service perimeter.
+            A list of Google Cloud resources that are inside of the service perimeter.
             Currently only projects are allowed. Format: `projects/{project_number}`
           items:
             type: string
           type: array
         restrictedServices:
           description: |-
-            GCP services that are subject to the Service Perimeter restrictions. Must
-            contain a list of services. For example, if
+            Google Cloud services that are subject to the Service Perimeter
+            restrictions. Must contain a list of services. For example, if
             `storage.googleapis.com` is specified, access to the storage buckets
             inside the perimeter must meet the perimeter's access restrictions.
           items:
@@ -932,7 +1005,7 @@ components:
           type: array
         unrestrictedServices:
           description: |-
-            GCP services that are not subject to the Service Perimeter
+            Google Cloud services that are not subject to the Service Perimeter
             restrictions. Deprecated. Must be set to a single wildcard "*".
 
             The wildcard means that unless explicitly specified by
@@ -940,9 +1013,9 @@ components:
           items:
             type: string
           type: array
-        vpcServiceRestriction:
-          $ref: '#/components/schemas/VpcServiceRestriction'
-          description: Alpha. Configuration for within Perimeter allowed APIs.
+        vpcAccessibleServices:
+          $ref: '#/components/schemas/VpcAccessibleServices'
+          description: Beta. Configuration for APIs allowed within Perimeter.
       type: object
     Status:
       description: |-
@@ -974,9 +1047,9 @@ components:
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    VpcServiceRestriction:
+    VpcAccessibleServices:
       description: |-
-        Alpha. Specifies how APIs are allowed to communicate within the Service
+        Specifies how APIs are allowed to communicate within the Service
         Perimeter.
       properties:
         allowedServices:

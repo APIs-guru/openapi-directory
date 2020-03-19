@@ -31,9 +31,9 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/monitoring/api/'
 tags:
-  - name: projects
   - name: services
   - name: uptimeCheckIps
+  - name: projects
 paths:
   /v3/uptimeCheckIps:
     get:
@@ -73,23 +73,26 @@ paths:
       tags:
         - uptimeCheckIps
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v3/{name}':
     delete:
-      description: Delete the given ServiceLevelObjective.
-      operationId: monitoring.services.serviceLevelObjectives.delete
+      description: 'Deletes a metric descriptor. Only user-created custom metrics (https://cloud.google.com/monitoring/custom-metrics) can be deleted.'
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'Resource name of the ServiceLevelObjective to delete. Of the form projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}.'
+        - description: |-
+            Required. The metric descriptor on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+            An example of [METRIC_ID] is: "custom.googleapis.com/my_test_metric".
           in: path
           name: name
           required: true
@@ -118,12 +121,15 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
-        - services
+        - projects
     get:
-      description: Get a ServiceLevelObjective by name.
-      operationId: monitoring.services.serviceLevelObjectives.get
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: 'Resource name of the ServiceLevelObjective to get. Of the form projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}.'
+        - description: |-
+            Required. The metric descriptor on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+            An example value of [METRIC_ID] is "compute.googleapis.com/instance/disk/read_bytes_count".
           in: path
           name: name
           required: true
@@ -144,7 +150,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjective'
+                $ref: '#/components/schemas/MetricDescriptor'
           description: Successful response
       security:
         - Oauth2:
@@ -164,31 +170,37 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
-        - services
+        - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     patch:
-      description: Update the given ServiceLevelObjective.
-      operationId: monitoring.services.serviceLevelObjectives.patch
+      description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
+      operationId: monitoring.projects.alertPolicies.patch
       parameters:
-        - description: 'Resource name for this ServiceLevelObjective. Of the form projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}.'
+        - description: |-
+            Required if the policy exists. The resource name for this policy. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
+            [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: A set of field paths defining which fields to use for the update.
+        - description: |-
+            Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert_policy), or to the field's default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display_name, documentation, documentation.content, documentation.mime_type, user_labels, user_label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following:
+            The new policy will have the same [ALERT_POLICY_ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents.
+            Conditions in the new policy will keep their former [CONDITION_ID] if the supplied condition includes the name field with that [CONDITION_ID]. If the supplied condition omits the name field, then a new [CONDITION_ID] is created.
           in: query
           name: updateMask
           schema:
@@ -197,13 +209,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceLevelObjective'
+              $ref: '#/components/schemas/AlertPolicy'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjective'
+                $ref: '#/components/schemas/AlertPolicy'
           description: Successful response
       security:
         - Oauth2:
@@ -215,12 +227,15 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
-        - services
+        - projects
     put:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
       parameters:
-        - description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+        - description: |-
+            Output only. The name of this group. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique [GROUP_ID] that is generated automatically.
           in: path
           name: name
           required: true
@@ -261,8 +276,8 @@ paths:
       operationId: monitoring.projects.alertPolicies.list
       parameters:
         - description: |-
-            The project whose alert policies are to be listed. The format is
-            projects/[PROJECT_ID]
+            Required. The project whose alert policies are to be listed. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
             Note that this field names the parent container in which the alerting policies to be listed are stored. To retrieve a single alerting policy by name, use the GetAlertPolicy operation, instead.
           in: path
           name: name
@@ -270,12 +285,12 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering.'
+        - description: 'If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).'
           in: query
           name: filter
           schema:
             type: string
-        - description: 'A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering.'
+        - description: 'A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).'
           in: query
           name: orderBy
           schema:
@@ -313,22 +328,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates a new alerting policy.
       operationId: monitoring.projects.alertPolicies.create
       parameters:
-        - description: 'The project in which to create the alerting policy. The format is projects/[PROJECT_ID].Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form /alertPolicies/[POLICY_ID], identifying the policy in the container.'
+        - description: |-
+            Required. The project in which to create the alerting policy. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
+            Note that this field names the parent container in which the alerting policy will be written, not the name of the created policy. The alerting policy that is returned will have a name that contains a normalized representation of this name as a prefix but adds a suffix of the form /alertPolicies/[ALERT_POLICY_ID], identifying the policy in the container.
           in: path
           name: name
           required: true
@@ -360,22 +378,24 @@ paths:
         - projects
   '/v3/{name}/collectdTimeSeries':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
       parameters:
-        - description: The project in which to create the time series. The format is "projects/PROJECT_ID_OR_NUMBER".
+        - description: |
+            The project in which to create the time series. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -414,24 +434,35 @@ paths:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
       parameters:
-        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project whose groups are to be listed. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+        - description: |-
+            A group name. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.
           in: query
           name: ancestorsOfGroup
           schema:
             type: string
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
+        - description: |-
+            A group name. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            Returns groups whose parent_name field contains the group name. If no groups have this parent, the results are empty.
           in: query
           name: childrenOfGroup
           schema:
             type: string
-        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
+        - description: |-
+            A group name. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            Returns the descendants of the specified group. This is a superset of the results returned by the children_of_group filter, and includes children-of-children, and so forth.
           in: query
           name: descendantsOfGroup
           schema:
@@ -441,7 +472,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+        - description: If this field is not empty then it must contain the next_page_token value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
           schema:
@@ -469,22 +500,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
       parameters:
-        - description: 'The project in which to create the group. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project in which to create the group. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -524,7 +557,9 @@ paths:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
       parameters:
-        - description: 'The group whose members are listed. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: |
+            Required. The group whose members are listed. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
           in: path
           name: name
           required: true
@@ -532,8 +567,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |
-            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
-            resource.type = "gce_instance"
+            An optional list filter (https://cloud.google.com/monitoring/api/learn_more#filtering) describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
+            `resource.type = "gce_instance"`
           in: query
           name: filter
           schema:
@@ -553,7 +588,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+        - description: If this field is not empty then it must contain the next_page_token value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
           in: query
           name: pageToken
           schema:
@@ -581,23 +616,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v3/{name}/metricDescriptors':
     get:
       description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -605,7 +642,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |
-            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
+            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter (https://cloud.google.com/monitoring/api/v3/filters) specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics (https://cloud.google.com/monitoring/custom-metrics):
             metric.type = starts_with("custom.googleapis.com/")
           in: query
           name: filter
@@ -648,22 +685,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
-      description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
+      description: 'Creates a new metric descriptor. User-created metric descriptors define custom metrics (https://cloud.google.com/monitoring/custom-metrics).'
       operationId: monitoring.projects.metricDescriptors.create
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -702,7 +741,9 @@ paths:
       description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -710,7 +751,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |
-            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            An optional filter (https://cloud.google.com/monitoring/api/v3/filters) describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
             resource.type = starts_with("gce_") AND resource.label:id
           in: query
           name: filter
@@ -753,25 +794,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v3/{name}/notificationChannelDescriptors':
     get:
       description: Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.
       operationId: monitoring.projects.notificationChannelDescriptors.list
       parameters:
         - description: |-
-            The REST resource name of the parent from which to retrieve the notification channel descriptors. The expected syntax is:
-            projects/[PROJECT_ID]
+            Required. The REST resource name of the parent from which to retrieve the notification channel descriptors. The expected syntax is:
+            projects/[PROJECT_ID_OR_NUMBER]
             Note that this names the parent container in which to look for the descriptors; to retrieve a single descriptor by name, use the GetNotificationChannelDescriptor operation, instead.
           in: path
           name: name
@@ -812,35 +853,38 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v3/{name}/notificationChannels':
     get:
       description: Lists the notification channels that have been created for the project.
       operationId: monitoring.projects.notificationChannels.list
       parameters:
-        - description: 'The project on which to execute the request. The format is projects/[PROJECT_ID]. That is, this names the container in which to look for the notification channels; it does not name a specific channel. To query a specific channel by REST resource name, use the GetNotificationChannel operation.'
+        - description: |-
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
+            This names the container in which to look for the notification channels; it does not name a specific channel. To query a specific channel by REST resource name, use the GetNotificationChannel operation.
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'If provided, this field specifies the criteria that must be met by notification channels to be included in the response.For more details, see sorting and filtering.'
+        - description: 'If provided, this field specifies the criteria that must be met by notification channels to be included in the response.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).'
           in: query
           name: filter
           schema:
             type: string
-        - description: 'A comma-separated list of fields by which to sort the result. Supports the same set of fields as in filter. Entries can be prefixed with a minus sign to sort in descending rather than ascending order.For more details, see sorting and filtering.'
+        - description: 'A comma-separated list of fields by which to sort the result. Supports the same set of fields as in filter. Entries can be prefixed with a minus sign to sort in descending rather than ascending order.For more details, see sorting and filtering (https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).'
           in: query
           name: orderBy
           schema:
@@ -878,25 +922,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: 'Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.'
       operationId: monitoring.projects.notificationChannels.create
       parameters:
         - description: |-
-            The project on which to execute the request. The format is:
-            projects/[PROJECT_ID]
-            Note that this names the container into which the channel will be written. This does not name the newly created channel. The resulting channel's name will have a normalized version of this field as a prefix, but will add /notificationChannels/[CHANNEL_ID] to identify the channel.
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
+            This names the container into which the channel will be written, this does not name the newly created channel. The resulting channel's name will have a normalized version of this field as a prefix, but will add /notificationChannels/[CHANNEL_ID] to identify the channel.
           in: path
           name: name
           required: true
@@ -931,19 +975,21 @@ paths:
       description: Lists time series that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.timeSeries.list
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
+        - description: 'The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.'
           in: query
           name: aggregation.alignmentPeriod
           schema:
             type: string
-        - description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+        - description: 'The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric_kind and the value_type of the original time series. Reduction can yield a time series with a different metric_kind or value_type than the input time series.Time series data must first be aligned (see per_series_aligner) in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified, and must not be ALIGN_NONE. An alignment_period must also be specified; otherwise, an error is returned.'
           in: query
           name: aggregation.crossSeriesReducer
           schema:
@@ -963,7 +1009,7 @@ paths:
               - REDUCE_PERCENTILE_50
               - REDUCE_PERCENTILE_05
             type: string
-        - description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+        - description: 'The set of fields to preserve when cross_series_reducer is specified. The group_by_fields determine how the time series are partitioned into subsets prior to applying the aggregation operation. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The cross_series_reducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in group_by_fields are aggregated away. If group_by_fields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If cross_series_reducer is not defined, this field is ignored.'
           explode: true
           in: query
           name: aggregation.groupByFields
@@ -971,7 +1017,7 @@ paths:
             items:
               type: string
             type: array
-        - description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+        - description: 'An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN_NONE, all alignments cause all the data points in an alignment_period to be mathematically grouped together, resulting in a single data point for each alignment_period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric_kind and value_type of the original time series. Alignment can change the metric_kind or the value_type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified and not equal to ALIGN_NONE and alignment_period must be specified; otherwise, an error is returned.'
           in: query
           name: aggregation.perSeriesAligner
           schema:
@@ -997,7 +1043,7 @@ paths:
               - ALIGN_PERCENT_CHANGE
             type: string
         - description: |
-            A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
+            Required. A monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
             metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
                 metric.labels.instance_name = "my-instance-name"
           in: query
@@ -1029,7 +1075,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Specifies which information is returned about the time series.
+        - description: Required. Specifies which information is returned about the time series.
           in: query
           name: view
           schema:
@@ -1060,22 +1106,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
       parameters:
-        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: name
           required: true
@@ -1111,22 +1159,22 @@ paths:
         - projects
   '/v3/{name}:getVerificationCode':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: 'Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as "G-123456") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.'
       operationId: monitoring.projects.notificationChannels.getVerificationCode
       parameters:
-        - description: 'The notification channel for which a verification code is to be generated and retrieved. This must name a channel that is already verified; if the specified channel is not verified, the request will fail.'
+        - description: 'Required. The notification channel for which a verification code is to be generated and retrieved. This must name a channel that is already verified; if the specified channel is not verified, the request will fail.'
           in: path
           name: name
           required: true
@@ -1158,22 +1206,22 @@ paths:
         - projects
   '/v3/{name}:sendVerificationCode':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.
       operationId: monitoring.projects.notificationChannels.sendVerificationCode
       parameters:
-        - description: The notification channel to which to send a verification code.
+        - description: Required. The notification channel to which to send a verification code.
           in: path
           name: name
           required: true
@@ -1205,22 +1253,22 @@ paths:
         - projects
   '/v3/{name}:verify':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
       operationId: monitoring.projects.notificationChannels.verify
       parameters:
-        - description: The notification channel to verify.
+        - description: Required. The notification channel to verify.
           in: path
           name: name
           required: true
@@ -1255,7 +1303,9 @@ paths:
       description: List the ServiceLevelObjectives for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.list
       parameters:
-        - description: 'Resource name of the parent Service. Of the form projects/{project_id}/services/{service_id}.'
+        - description: |
+            Required. Resource name of the parent Service. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
           in: path
           name: parent
           required: true
@@ -1309,29 +1359,31 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Create a ServiceLevelObjective for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.create
       parameters:
-        - description: 'Resource name of the parent Service. Of the form projects/{project_id}/services/{service_id}.'
+        - description: |
+            Required. Resource name of the parent Service. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
           in: path
           name: parent
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'Optional. The ServiceLevelObjective id to use for this ServiceLevelObjective. If omitted, an id will be generated instead. Must match the pattern a-z0-9-+'
+        - description: 'Optional. The ServiceLevelObjective id to use for this ServiceLevelObjective. If omitted, an id will be generated instead. Must match the pattern [a-z0-9\-]+'
           in: query
           name: serviceLevelObjectiveId
           schema:
@@ -1364,7 +1416,10 @@ paths:
       description: List Services for this workspace.
       operationId: monitoring.services.list
       parameters:
-        - description: 'Resource name of the parent Workspace. Of the form projects/{project_id}.'
+        - description: |
+            Required. Resource name of the parent containing the listed services, either a project or Stackdriver Account (workspace). The formats are:
+            projects/[PROJECT_ID_OR_NUMBER]
+            workspaces/[HOST_PROJECT_ID]
           in: path
           name: parent
           required: true
@@ -1418,29 +1473,31 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Create a Service.
       operationId: monitoring.services.create
       parameters:
-        - description: 'Resource name of the parent workspace. Of the form projects/{project_id}.'
+        - description: |
+            Required. Resource name of the parent workspace. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: parent
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'Optional. The Service id to use for this Service. If omitted, an id will be generated instead. Must match the pattern a-z0-9-+'
+        - description: 'Optional. The Service id to use for this Service. If omitted, an id will be generated instead. Must match the pattern [a-z0-9\-]+'
           in: query
           name: serviceId
           schema:
@@ -1473,7 +1530,9 @@ paths:
       description: Lists the existing valid Uptime check configurations for the project (leaving out any invalid configurations).
       operationId: monitoring.projects.uptimeCheckConfigs.list
       parameters:
-        - description: 'The project whose Uptime check configurations are listed. The format  is projects/[PROJECT_ID].'
+        - description: |
+            Required. The project whose Uptime check configurations are listed. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: parent
           required: true
@@ -1513,22 +1572,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates a new Uptime check configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.create
       parameters:
-        - description: 'The project in which to create the Uptime check. The format  is projects/[PROJECT_ID].'
+        - description: |
+            Required. The project in which to create the Uptime check. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
           in: path
           name: parent
           required: true
@@ -1636,26 +1697,26 @@ components:
       schema:
         type: string
   requestBodies:
+    AlertPolicy:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertPolicy'
     Group:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Group'
-    ServiceLevelObjective:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ServiceLevelObjective'
   schemas:
     Aggregation:
-      description: 'Describes how to combine multiple time series to provide different views of the data. Aggregation consists of an alignment step on individual time series (alignment_period and per_series_aligner) followed by an optional reduction step of the data across the aligned time series (cross_series_reducer and group_by_fields). For more details, see Aggregation.'
+      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Aggregating Time Series.'
       properties:
         alignmentPeriod:
-          description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
+          description: 'The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.'
           format: google-duration
           type: string
         crossSeriesReducer:
-          description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          description: 'The reduction operation to be used to combine time series into a single time series, where the value of each data point in the resulting series is a function of all the already aligned values in the input time series.Not all reducer operations can be applied to all time series. The valid choices depend on the metric_kind and the value_type of the original time series. Reduction can yield a time series with a different metric_kind or value_type than the input time series.Time series data must first be aligned (see per_series_aligner) in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified, and must not be ALIGN_NONE. An alignment_period must also be specified; otherwise, an error is returned.'
           enum:
             - REDUCE_NONE
             - REDUCE_MEAN
@@ -1673,12 +1734,12 @@ components:
             - REDUCE_PERCENTILE_05
           type: string
         groupByFields:
-          description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+          description: 'The set of fields to preserve when cross_series_reducer is specified. The group_by_fields determine how the time series are partitioned into subsets prior to applying the aggregation operation. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The cross_series_reducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in group_by_fields are aggregated away. If group_by_fields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If cross_series_reducer is not defined, this field is ignored.'
           items:
             type: string
           type: array
         perSeriesAligner:
-          description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          description: 'An Aligner describes how to bring the data points in a single time series into temporal alignment. Except for ALIGN_NONE, all alignments cause all the data points in an alignment_period to be mathematically grouped together, resulting in a single data point for each alignment_period with end timestamp at the end of the period.Not all alignment operations may be applied to all time series. The valid choices depend on the metric_kind and value_type of the original time series. Alignment can change the metric_kind or the value_type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If cross_series_reducer is specified, then per_series_aligner must be specified and not equal to ALIGN_NONE and alignment_period must be specified; otherwise, an error is returned.'
           enum:
             - ALIGN_NONE
             - ALIGN_DELTA
@@ -1713,7 +1774,7 @@ components:
             - AND_WITH_MATCHING_RESOURCE
           type: string
         conditions:
-          description: 'A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If |condition_time_series_uery_language| is present, it must be the only |condition|.'
+          description: 'A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If condition_time_series_query_language is present, it must be the only condition.'
           items:
             $ref: '#/components/schemas/Condition'
           type: array
@@ -1734,14 +1795,14 @@ components:
           description: 'A read-only record of the most recent change to the alerting policy. If provided in a call to create or update, this field will be ignored.'
         name:
           description: |-
-            Required if the policy exists. The resource name for this policy. The syntax is:
-            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+            Required if the policy exists. The resource name for this policy. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
             [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
           type: string
         notificationChannels:
           description: |
-            Identifies the notification channels to which notifications should be sent when incidents are opened or closed or when new violations occur on an already opened incident. Each element of this array corresponds to the name field in each of the NotificationChannel objects that are returned from the ListNotificationChannels method. The syntax of the entries in this field is:
-            projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+            Identifies the notification channels to which notifications should be sent when incidents are opened or closed or when new violations occur on an already opened incident. Each element of this array corresponds to the name field in each of the NotificationChannel objects that are returned from the ListNotificationChannels method. The format of the entries in this field is:
+            projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
           items:
             type: string
           type: array
@@ -1821,7 +1882,7 @@ components:
           type: string
       type: object
     ClusterIstio:
-      description: 'Istio service. Learn more at http://istio.io.'
+      description: 'Istio service scoped to a single Kubernetes cluster. Learn more at http://istio.io.'
       properties:
         clusterName:
           description: The name of the Kubernetes cluster in which this Istio service is defined. Corresponds to the cluster_name resource label in k8s_cluster resources.
@@ -1930,8 +1991,8 @@ components:
           type: string
         name:
           description: |-
-            Required if the condition exists. The unique resource name for this condition. Its syntax is:
-            projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
+            Required if the condition exists. The unique resource name for this condition. Its format is:
+            projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
             [CONDITION_ID] is assigned by Stackdriver Monitoring when the condition is created as part of a new or updated alerting policy.When calling the alertPolicies.create method, do not include the name field in the conditions of the requested alerting policy. Stackdriver Monitoring creates the condition identifiers and includes them in the new policy.When calling the alertPolicies.update method to update a policy, including a condition name causes the existing condition to be updated. Conditions without names are added to the updated policy. Existing conditions are deleted if they are not updated.Best practice is to preserve [CONDITION_ID] if you make only small changes, such as those to condition thresholds, durations, or trigger values. Otherwise, treat the change as a new condition and let the existing condition be deleted.
           type: string
       type: object
@@ -1982,7 +2043,7 @@ components:
       description: The CreateTimeSeries request.
       properties:
         timeSeries:
-          description: The new data to be added to a list of time series. Adds at most one data point to each of several time series. The new data point must be more recent than any other point in its time series. Each TimeSeries value must fully specify a unique time series by supplying all label values for the metric and the monitored resource.The maximum number of TimeSeries objects per Create request is 200.
+          description: Required. The new data to be added to a list of time series. Adds at most one data point to each of several time series. The new data point must be more recent than any other point in its time series. Each TimeSeries value must fully specify a unique time series by supplying all label values for the metric and the monitored resource.The maximum number of TimeSeries objects per Create request is 200.
           items:
             $ref: '#/components/schemas/TimeSeries'
           type: array
@@ -2249,10 +2310,16 @@ components:
           description: 'If true, the members of this group are considered to be a cluster. The system can perform additional analysis on groups that are clusters.'
           type: boolean
         name:
-          description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+          description: |-
+            Output only. The name of this group. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique [GROUP_ID] that is generated automatically.
           type: string
         parentName:
-          description: 'The name of the group''s parent, if it has one. The format is "projects/{project_id_or_number}/groups/{group_id}". For groups with no parent, parentName is the empty string, "".'
+          description: |-
+            The name of the group's parent, if it has one. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+            For groups with no parent, parent_name is the empty string, "".
           type: string
       type: object
     HttpCheck:
@@ -2293,7 +2360,10 @@ components:
           description: 'The GCP zone the Uptime check should egress from. Only respected for internal Uptime checks, where internal_network is specified.'
           type: string
         name:
-          description: 'A unique resource name for this InternalChecker. The format is:projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID].[PROJECT_ID] is the Stackdriver Workspace project for the Uptime check config associated with the internal checker.'
+          description: |-
+            A unique resource name for this InternalChecker. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/internalCheckers/[INTERNAL_CHECKER_ID]
+            [PROJECT_ID_OR_NUMBER] is the Stackdriver Workspace project for the Uptime check config associated with the internal checker.
           type: string
         network:
           description: 'The GCP VPC network (https://cloud.google.com/vpc/docs/vpc) where the internal resource lives (ex: "default").'
@@ -2364,7 +2434,7 @@ components:
             $ref: '#/components/schemas/AlertPolicy'
           type: array
         nextPageToken:
-          description: 'If there might be more results than were returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there might be more results than were returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
       type: object
     ListGroupMembersResponse:
@@ -2376,7 +2446,7 @@ components:
             $ref: '#/components/schemas/MonitoredResource'
           type: array
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
         totalSize:
           description: The total number of elements matching this request.
@@ -2392,7 +2462,7 @@ components:
             $ref: '#/components/schemas/Group'
           type: array
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
       type: object
     ListMetricDescriptorsResponse:
@@ -2404,14 +2474,14 @@ components:
             $ref: '#/components/schemas/MetricDescriptor'
           type: array
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
       type: object
     ListMonitoredResourceDescriptorsResponse:
       description: The ListMonitoredResourceDescriptors response.
       properties:
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
         resourceDescriptors:
           description: 'The monitored resource descriptors that are available to this project and that match filter, if present.'
@@ -2447,7 +2517,7 @@ components:
       description: The ListServiceLevelObjectives response.
       properties:
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
         serviceLevelObjectives:
           description: The ServiceLevelObjectives matching the specified filter.
@@ -2459,7 +2529,7 @@ components:
       description: The ListServices response.
       properties:
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
         services:
           description: The Services matching the specified filter.
@@ -2476,7 +2546,7 @@ components:
             $ref: '#/components/schemas/Status'
           type: array
         nextPageToken:
-          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
           type: string
         timeSeries:
           description: One or more time series that match the filter included in the request.
@@ -2512,6 +2582,19 @@ components:
             $ref: '#/components/schemas/UptimeCheckIp'
           type: array
       type: object
+    MeshIstio:
+      description: Istio service scoped to an Istio mesh
+      properties:
+        meshUid:
+          description: Identifier for the mesh in which this Istio service is defined. Corresponds to the mesh_uid metric label in Istio metrics.
+          type: string
+        serviceName:
+          description: The name of the Istio service underlying this service. Corresponds to the destination_service_name metric label in Istio metrics.
+          type: string
+        serviceNamespace:
+          description: The namespace of the Istio service underlying this service. Corresponds to the destination_service_namespace metric label in Istio metrics.
+          type: string
+      type: object
     Metric:
       description: 'A specific metric, identified by specifying values for all of the labels of a MetricDescriptor.'
       properties:
@@ -2537,7 +2620,7 @@ components:
           format: google-duration
           type: string
         filter:
-          description: 'A filter that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
+          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
           type: string
         trigger:
           $ref: '#/components/schemas/Trigger'
@@ -2595,6 +2678,29 @@ components:
           type: string
         unit:
           description: |-
+            The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.Different systems may scale the values to be more easily displayed (so a value of 0.02KBy might be displayed as 20By, and a value of 3523KBy might be displayed as 3.5MBy). However, if the unit is KBy, then the value of the metric is always in thousands of bytes, no matter how it may be displayed..If you want a custom metric to record the exact number of CPU-seconds used by a job, you can create an INT64 CUMULATIVE metric whose unit is s{CPU} (or equivalently 1s{CPU} or just s). If the job uses 12,005 CPU-seconds, then the value is written as 12005.Alternatively, if you want a custom metric to record data in a more granular way, you can create a DOUBLE CUMULATIVE metric whose unit is ks{CPU}, and then write the value 12.005 (which is 12005/1000), or use Kis{CPU} and write 11.723 (which is 12005/1024).The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
+            bit bit
+            By byte
+            s second
+            min minute
+            h hour
+            d dayPrefixes (PREFIX)
+            k kilo (10^3)
+            M mega (10^6)
+            G giga (10^9)
+            T tera (10^12)
+            P peta (10^15)
+            E exa (10^18)
+            Z zetta (10^21)
+            Y yotta (10^24)
+            m milli (10^-3)
+            u micro (10^-6)
+            n nano (10^-9)
+            p pico (10^-12)
+            f femto (10^-15)
+            a atto (10^-18)
+            z zepto (10^-21)
+            y yocto (10^-24)
             Ki kibi (2^10)
             Mi mebi (2^20)
             Gi gibi (2^30)
@@ -2686,14 +2792,14 @@ components:
             $ref: '#/components/schemas/Aggregation'
           type: array
         denominatorFilter:
-          description: 'A filter that identifies a time series that should be used as the denominator of a ratio that will be compared with the threshold. If a denominator_filter is specified, the time series specified by the filter field will be used as the numerator.The filter must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
+          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies a time series that should be used as the denominator of a ratio that will be compared with the threshold. If a denominator_filter is specified, the time series specified by the filter field will be used as the numerator.The filter must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
           type: string
         duration:
           description: 'The amount of time that a time series must violate the threshold to be considered failing. Currently, only values that are a multiple of a minute--e.g., 0, 60, 120, or 300 seconds--are supported. If an invalid value is given, an error will be returned. When choosing a duration, it is useful to keep in mind the frequency of the underlying time series data (which may also be affected by any alignments specified in the aggregations field); a good duration is long enough so that a single outlier does not generate spurious alerts, but short enough that unhealthy states are detected and alerted on quickly.'
           format: google-duration
           type: string
         filter:
-          description: 'A filter that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
+          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
           type: string
         thresholdValue:
           description: A value against which to compare the time series.
@@ -2798,8 +2904,8 @@ components:
           type: object
         name:
           description: |-
-            The full REST resource name for this channel. The syntax is:
-            projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+            The full REST resource name for this channel. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
             The [CHANNEL_ID] is automatically assigned by the server on creation.
           type: string
         type:
@@ -2832,10 +2938,20 @@ components:
           items:
             $ref: '#/components/schemas/LabelDescriptor'
           type: array
+        launchStage:
+          description: The product launch stage for channels of this type.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - EARLY_ACCESS
+            - ALPHA
+            - BETA
+            - GA
+            - DEPRECATED
+          type: string
         name:
           description: |-
-            The full REST resource name for this descriptor. The syntax is:
-            projects/[PROJECT_ID]/notificationChannelDescriptors/[TYPE]
+            The full REST resource name for this descriptor. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[TYPE]
             In the above, [TYPE] is the value of the type field.
           type: string
         type:
@@ -2904,7 +3020,7 @@ components:
       description: 'The resource submessage for group checks. It can be used instead of a monitored resource, when multiple resources are being monitored.'
       properties:
         groupId:
-          description: 'The group of resources being monitored. Should be only the [GROUP_ID], and not the full-path projects/[PROJECT_ID]/groups/[GROUP_ID].'
+          description: 'The group of resources being monitored. Should be only the [GROUP_ID], and not the full-path projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID].'
           type: string
         resourceType:
           description: The resource type of the group members.
@@ -2936,8 +3052,13 @@ components:
         displayName:
           description: Name used for UI elements listing this Service.
           type: string
+        meshIstio:
+          $ref: '#/components/schemas/MeshIstio'
+          description: Type used for Istio services scoped to an Istio mesh.
         name:
-          description: 'Resource name for this Service. Of the form projects/{project_id}/services/{service_id}.'
+          description: |
+            Resource name for this Service. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID}
           type: string
         telemetry:
           $ref: '#/components/schemas/Telemetry'
@@ -2981,7 +3102,9 @@ components:
           format: double
           type: number
         name:
-          description: 'Resource name for this ServiceLevelObjective. Of the form projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}.'
+          description: |
+            Resource name for this ServiceLevelObjective. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
           type: string
         rollingPeriod:
           description: 'A rolling time period, semantically "in the past <rolling_period>". Must be an integer multiple of 1 day no larger than 30 days.'
@@ -2999,13 +3122,15 @@ components:
           type: string
       type: object
     SpanContext:
-      description: 'The context of a span, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.It contains the name of a span with format:  projects/PROJECT_ID/traces/TRACE_ID/spans/SPAN_ID'
+      description: |
+        The context of a span, attached to Exemplars in Distribution values during aggregation.It contains the name of a span with format:
+        projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
       properties:
         spanName:
           description: |-
-            The resource name of the span in the following format:
-            projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
-            TRACE_ID is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.SPAN_ID is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
+            The resource name of the span. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
+            [TRACE_ID] is a unique identifier for a trace within a project; it is a 32-character hexadecimal encoding of a 16-byte array.[SPAN_ID] is a unique identifier for a span within a trace; it is a 16-character hexadecimal encoding of an 8-byte array.
           type: string
       type: object
     Status:
@@ -3204,7 +3329,10 @@ components:
           $ref: '#/components/schemas/MonitoredResource'
           description: 'The monitored resource (https://cloud.google.com/monitoring/api/resources) associated with the configuration. The following monitored resource types are supported for Uptime checks:  uptime_url,  gce_instance,  gae_app,  aws_ec2_instance,  aws_elb_load_balancer'
         name:
-          description: 'A unique resource name for this Uptime check configuration. The format is:projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.'
+          description: |-
+            A unique resource name for this Uptime check configuration. The format is:
+             projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
+            This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
           type: string
         period:
           description: 'How often, in seconds, the Uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Optional, defaults to 60s.'
@@ -3255,7 +3383,7 @@ components:
       description: The VerifyNotificationChannel request.
       properties:
         code:
-          description: 'The verification code that was delivered to the channel as a result of invoking the SendNotificationChannelVerificationCode API method or that was retrieved from a verified channel via GetNotificationChannelVerificationCode. For example, one might have "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only guaranteed that the code is valid UTF-8; one should not make any assumptions regarding the structure or format of the code).'
+          description: 'Required. The verification code that was delivered to the channel as a result of invoking the SendNotificationChannelVerificationCode API method or that was retrieved from a verified channel via GetNotificationChannelVerificationCode. For example, one might have "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only guaranteed that the code is valid UTF-8; one should not make any assumptions regarding the structure or format of the code).'
           type: string
       type: object
     WindowsBasedSli:

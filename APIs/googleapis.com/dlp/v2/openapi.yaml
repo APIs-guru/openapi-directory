@@ -31,10 +31,10 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/dlp/docs/'
 tags:
-  - name: locations
-  - name: projects
   - name: infoTypes
   - name: organizations
+  - name: locations
+  - name: projects
 paths:
   /v2/infoTypes:
     get:
@@ -45,14 +45,14 @@ paths:
       operationId: dlp.infoTypes.list
       parameters:
         - description: |-
-            Optional filter to only return infoTypes supported by certain parts of the
+            filter to only return infoTypes supported by certain parts of the
             API. Defaults to supported_by=INSPECT.
           in: query
           name: filter
           schema:
             type: string
         - description: |-
-            Optional BCP-47 language code for localized infoType friendly
+            BCP-47 language code for localized infoType friendly
             names. If omitted, or if localized strings are not available,
             en-US strings will be returned.
           in: query
@@ -81,17 +81,17 @@ paths:
       tags:
         - infoTypes
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v2/locations/{locationId}/infoTypes':
     get:
       description: |-
@@ -109,14 +109,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional filter to only return infoTypes supported by certain parts of the
+            filter to only return infoTypes supported by certain parts of the
             API. Defaults to supported_by=INSPECT.
           in: query
           name: filter
           schema:
             type: string
         - description: |-
-            Optional BCP-47 language code for localized infoType friendly
+            BCP-47 language code for localized infoType friendly
             names. If omitted, or if localized strings are not available,
             en-US strings will be returned.
           in: query
@@ -138,28 +138,29 @@ paths:
       tags:
         - locations
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v2/{name}':
     delete:
       description: |-
-        Deletes an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.delete
+        Deletes a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.delete
       parameters:
         - description: |-
-            Required. Resource name of the organization and inspectTemplate to be deleted, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Required. Resource name of the organization and deidentify template to be deleted,
+            for example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -179,17 +180,18 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: |-
-        Gets an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.get
+        Gets a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.get
       parameters:
         - description: |-
-            Required. Resource name of the organization and inspectTemplate to be read, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Required. Resource name of the organization and deidentify template to be read, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -201,7 +203,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GooglePrivacyDlpV2InspectTemplate'
+                $ref: '#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate'
           description: Successful response
       security:
         - Oauth2:
@@ -209,29 +211,30 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
-        Updates the InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.patch
+        Updates the DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - description: |-
-            Required. Resource name of organization and inspectTemplate to be updated, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Required. Resource name of organization and deidentify template to be updated, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -242,13 +245,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+              $ref: '#/components/schemas/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GooglePrivacyDlpV2InspectTemplate'
+                $ref: '#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate'
           description: Successful response
       security:
         - Oauth2:
@@ -256,20 +259,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{name}:activate':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Activate a job trigger. Causes the immediate execute of a trigger
@@ -306,17 +309,17 @@ paths:
         - projects
   '/v2/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running DlpJob. The server
@@ -352,19 +355,118 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v2/{name}:finish':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Finish a running hybrid DlpJob. Triggers the finalization steps and running
+        of any enabled actions that have not yet run.
+        Early access feature is in a pre-release state and might change or have
+        limited support. For more information, see
+        https://cloud.google.com/products#product-launch-stages.
+      operationId: dlp.projects.locations.dlpJobs.finish
+      parameters:
+        - description: Required. The name of the DlpJob resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePrivacyDlpV2FinishDlpJobRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GoogleProtobufEmpty'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v2/{name}:hybridInspect':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Inspect hybrid content and store findings to a job.
+        To review the findings inspect the job. Inspection will occur
+        asynchronously.
+        Early access feature is in a pre-release state and might change or have
+        limited support. For more information, see
+        https://cloud.google.com/products#product-launch-stages.
+      operationId: dlp.projects.locations.dlpJobs.hybridInspect
+      parameters:
+        - description: |-
+            Required. Resource name of the job to execute a hybrid inspect on, for example
+            `projects/dlp-test-project/dlpJob/53234423`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePrivacyDlpV2HybridInspectDlpJobRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2HybridInspectResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v2/{parent}/content:deidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         De-identifies potentially sensitive info from a ContentItem.
@@ -405,17 +507,17 @@ paths:
         - projects
   '/v2/{parent}/content:inspect':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Finds potentially sensitive info in content.
@@ -457,17 +559,17 @@ paths:
         - projects
   '/v2/{parent}/content:reidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Re-identifies content that has been de-identified.
@@ -508,7 +610,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -527,7 +629,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -545,14 +647,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListDeidentifyTemplates`.
           in: query
           name: pageToken
@@ -571,26 +673,26 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a DeidentifyTemplate for re-using frequently used configuration
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -619,7 +721,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -636,14 +738,14 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Optional. Allows filtering.
+            Allows filtering.
 
             Supported syntax:
 
             * Filter expressions are made up of one or more restrictions.
             * Restrictions can be combined by `AND` or `OR` logical operators. A
             sequence of restrictions implicitly uses `AND`.
-            * A restriction has the form of `<field> <operator> <value>`.
+            * A restriction has the form of `{field} {operator} {value}`.
             * Supported fields/values for inspect jobs:
                 - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
                 - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -676,7 +778,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -727,17 +829,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a new job to inspect storage or calculate risk metrics.
@@ -777,17 +879,17 @@ paths:
         - projects
   '/v2/{parent}/image:redact':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Redacts potentially sensitive info from an image.
@@ -831,7 +933,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.list
+      operationId: dlp.projects.inspectTemplates.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -850,7 +952,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -868,14 +970,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListInspectTemplates`.
           in: query
           name: pageToken
@@ -894,25 +996,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.create
+      operationId: dlp.projects.inspectTemplates.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -941,7 +1043,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -957,14 +1059,14 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Optional. Allows filtering.
+            Allows filtering.
 
             Supported syntax:
 
             * Filter expressions are made up of one or more restrictions.
             * Restrictions can be combined by `AND` or `OR` logical operators. A
             sequence of restrictions implicitly uses `AND`.
-            * A restriction has the form of `<field> <operator> <value>`.
+            * A restriction has the form of `{field} {operator} {value}`.
             * Supported fields/values for inspect jobs:
                 - `status` - HEALTHY|PAUSED|CANCELLED
                 - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -993,7 +1095,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of triggeredJob fields to order by,
+            Comma separated list of triggeredJob fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1012,13 +1114,13 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: 'Optional size of the page, can be limited by a server.'
+        - description: 'Size of the page, can be limited by a server.'
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to ListJobTriggers. `order_by` field must not
             change for subsequent calls.
           in: query
@@ -1040,17 +1142,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a job trigger to run DLP actions such as scanning storage for
@@ -1086,17 +1188,17 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:deidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         De-identifies potentially sensitive info from a ContentItem.
@@ -1145,17 +1247,17 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:inspect':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Finds potentially sensitive info in content.
@@ -1205,17 +1307,17 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:reidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Re-identifies content that has been de-identified.
@@ -1264,7 +1366,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.locations.deidentifyTemplates.list
+      operationId: dlp.projects.locations.deidentifyTemplates.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -1284,7 +1386,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1302,14 +1404,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListDeidentifyTemplates`.
           in: query
           name: pageToken
@@ -1328,26 +1430,26 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a DeidentifyTemplate for re-using frequently used configuration
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.locations.deidentifyTemplates.create
+      operationId: dlp.projects.locations.deidentifyTemplates.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -1384,7 +1486,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/locations/{locationId}/dlpJobs':
     get:
       description: |-
@@ -1409,14 +1511,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional. Allows filtering.
+            Allows filtering.
 
             Supported syntax:
 
             * Filter expressions are made up of one or more restrictions.
             * Restrictions can be combined by `AND` or `OR` logical operators. A
             sequence of restrictions implicitly uses `AND`.
-            * A restriction has the form of `<field> <operator> <value>`.
+            * A restriction has the form of `{field} {operator} {value}`.
             * Supported fields/values for inspect jobs:
                 - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
                 - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -1442,7 +1544,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1493,17 +1595,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a new job to inspect storage or calculate risk metrics.
@@ -1551,17 +1653,17 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/image:redact':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Redacts potentially sensitive info from an image.
@@ -1613,7 +1715,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.list
+      operationId: dlp.projects.locations.inspectTemplates.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -1633,7 +1735,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1651,14 +1753,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListInspectTemplates`.
           in: query
           name: pageToken
@@ -1677,25 +1779,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.locations.inspectTemplates.create
+      operationId: dlp.projects.locations.inspectTemplates.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -1732,7 +1834,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/locations/{locationId}/jobTriggers':
     get:
       description: |-
@@ -1756,14 +1858,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional. Allows filtering.
+            Allows filtering.
 
             Supported syntax:
 
             * Filter expressions are made up of one or more restrictions.
             * Restrictions can be combined by `AND` or `OR` logical operators. A
             sequence of restrictions implicitly uses `AND`.
-            * A restriction has the form of `<field> <operator> <value>`.
+            * A restriction has the form of `{field} {operator} {value}`.
             * Supported fields/values for inspect jobs:
                 - `status` - HEALTHY|PAUSED|CANCELLED
                 - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -1785,7 +1887,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of triggeredJob fields to order by,
+            Comma separated list of triggeredJob fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1804,13 +1906,13 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: 'Optional size of the page, can be limited by a server.'
+        - description: 'Size of the page, can be limited by a server.'
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to ListJobTriggers. `order_by` field must not
             change for subsequent calls.
           in: query
@@ -1832,17 +1934,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a job trigger to run DLP actions such as scanning storage for
@@ -1890,7 +1992,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.locations.storedInfoTypes.list
+      operationId: dlp.projects.locations.storedInfoTypes.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -1910,7 +2012,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -1929,14 +2031,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListStoredInfoTypes`.
           in: query
           name: pageToken
@@ -1955,25 +2057,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.locations.storedInfoTypes.create
+      operationId: dlp.projects.locations.storedInfoTypes.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -2010,14 +2112,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/storedInfoTypes':
     get:
       description: |-
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -2036,7 +2138,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional comma separated list of fields to order by,
+            Comma separated list of fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
             default sorting order is ascending, redundant space characters are
             insignificant.
@@ -2055,14 +2157,14 @@ paths:
           schema:
             type: string
         - description: |-
-            Optional size of the page, can be limited by server. If zero server returns
+            Size of the page, can be limited by server. If zero server returns
             a page of max size 100.
           in: query
           name: pageSize
           schema:
             type: integer
         - description: |-
-            Optional page token to continue retrieval. Comes from previous call
+            Page token to continue retrieval. Comes from previous call
             to `ListStoredInfoTypes`.
           in: query
           name: pageToken
@@ -2081,25 +2183,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - description: |-
             Required. The parent resource name, for example projects/my-project-id or
@@ -2128,7 +2230,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -2261,7 +2363,7 @@ components:
         jobNotificationEmails:
           $ref: '#/components/schemas/GooglePrivacyDlpV2JobNotificationEmails'
           description: |-
-            Enable email notification to project owners and editors on job's
+            Enable email notification for project owners and editors on job's
             completion/failure.
         pubSub:
           $ref: '#/components/schemas/GooglePrivacyDlpV2PublishToPubSub'
@@ -2288,16 +2390,22 @@ components:
       properties:
         categoricalStatsResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CategoricalStatsResult'
+          description: Categorical stats result
         deltaPresenceEstimationResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2DeltaPresenceEstimationResult'
+          description: Delta-presence result
         kAnonymityResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2KAnonymityResult'
+          description: K-anonymity result
         kMapEstimationResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2KMapEstimationResult'
+          description: K-map result
         lDiversityResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2LDiversityResult'
+          description: L-divesity result
         numericalStatsResult:
           $ref: '#/components/schemas/GooglePrivacyDlpV2NumericalStatsResult'
+          description: Numerical stats result
         requestedPrivacyMetric:
           $ref: '#/components/schemas/GooglePrivacyDlpV2PrivacyMetric'
           description: Privacy metric to compute.
@@ -2316,19 +2424,18 @@ components:
         tuple is highly reidentifiable).
       properties:
         quasiIds:
-          description: 'Quasi-identifier columns. [required]'
+          description: Required. Quasi-identifier columns.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2QuasiIdField'
           type: array
         relativeFrequency:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           description: |-
-            The relative frequency column must contain a floating-point number
+            Required. The relative frequency column must contain a floating-point number
             between 0 and 1 (inclusive). Null values are assumed to be zero.
-            [required]
         table:
           $ref: '#/components/schemas/GooglePrivacyDlpV2BigQueryTable'
-          description: 'Auxiliary table location. [required]'
+          description: Required. Auxiliary table location.
       type: object
     GooglePrivacyDlpV2BigQueryField:
       description: Message defining a field of a BigQuery table.
@@ -2345,8 +2452,11 @@ components:
       properties:
         rowNumber:
           description: |-
-            Absolute number of the row from the beginning of the table at the time
-            of scanning.
+            Row number inferred at the time the table was scanned. This value is
+            nondeterministic, cannot be queried, and may be null for inspection
+            jobs. To locate findings within a table, specify
+            `inspect_job.storage_config.big_query_options.identifying_fields` in
+            `CreateDlpJobRequest`.
           format: int64
           type: string
         tableReference:
@@ -2365,8 +2475,11 @@ components:
           type: array
         identifyingFields:
           description: |-
-            References to fields uniquely identifying rows within the table.
-            Nested fields in the format, like `person.birthdate.year`, are allowed.
+            Table fields that may uniquely identify a row within the table. When
+            `actions.saveFindings.outputConfig.table` is specified, the values of
+            columns specified here are available in the output table under
+            `location.content_locations.record_location.record_key.id_values`. Nested
+            fields such as `person.birthdate.year` are allowed.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           type: array
@@ -2489,6 +2602,8 @@ components:
             - IMAGE_PNG
             - IMAGE_SVG
             - TEXT_UTF8
+            - WORD_DOCUMENT
+            - PDF
             - AVRO
           type: string
       type: object
@@ -2510,6 +2625,7 @@ components:
             depending on the data.
       type: object
     GooglePrivacyDlpV2CategoricalStatsHistogramBucket:
+      description: Histogram of value frequencies in the column.
       properties:
         bucketSize:
           description: Total number of values in this bucket.
@@ -2590,8 +2706,12 @@ components:
         alone and skipped.
       properties:
         charactersToSkip:
+          description: Characters to not transform when masking.
           type: string
         commonCharactersToIgnore:
+          description: |-
+            Common characters to not transform when masking. Useful to avoid removing
+            punctuation.
           enum:
             - COMMON_CHARS_TO_IGNORE_UNSPECIFIED
             - NUMERIC
@@ -2645,6 +2765,8 @@ components:
               - BINARY_FILE
               - TEXT_FILE
               - IMAGE
+              - WORD
+              - PDF
               - AVRO
             type: string
           type: array
@@ -2776,9 +2898,9 @@ components:
       properties:
         field:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
-          description: 'Field within the record this condition is evaluated against. [required]'
+          description: Required. Field within the record this condition is evaluated against.
         operator:
-          description: 'Operator used to compare the field or infoType to the value. [required]'
+          description: Required. Operator used to compare the field or infoType to the value.
           enum:
             - RELATIONAL_OPERATOR_UNSPECIFIED
             - EQUAL_TO
@@ -2791,15 +2913,68 @@ components:
           type: string
         value:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Value'
-          description: 'Value to compare against. [Required, except for `EXISTS` tests.]'
+          description: 'Value to compare against. [Mandatory, except for `EXISTS` tests.]'
       type: object
     GooglePrivacyDlpV2Conditions:
       description: A collection of conditions.
       properties:
         conditions:
+          description: A collection of conditions.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2Condition'
           type: array
+      type: object
+    GooglePrivacyDlpV2Container:
+      description: |-
+        Represents a container that may contain DLP findings.
+        Examples of a container include a file, table, or database record.
+      properties:
+        fullPath:
+          description: |-
+            A string representation of the full container name.
+            Examples:
+            - BigQuery: 'Project:DataSetId.TableId'
+            - Google Cloud Storage: 'gs://Bucket/folders/filename.txt'
+          type: string
+        projectId:
+          description: |-
+            Project where the finding was found.
+            Can be different from the project that owns the finding.
+          type: string
+        relativePath:
+          description: |-
+            The rest of the path after the root.
+            Examples:
+            - For BigQuery table `project_id:dataset_id.table_id`, the relative path is
+             `table_id`
+            - Google Cloud Storage file `gs://bucket/folder/filename.txt`, the relative
+             path is `folder/filename.txt`
+          type: string
+        rootPath:
+          description: |-
+            The root of the container.
+            Examples:
+            - For BigQuery table `project_id:dataset_id.table_id`, the root is
+             `dataset_id`
+            - For Google Cloud Storage file `gs://bucket/folder/filename.txt`, the root
+             is `gs://bucket`
+          type: string
+        type:
+          description: 'Container type, for example BigQuery or Google Cloud Storage.'
+          type: string
+        updateTime:
+          description: |-
+            Findings container modification timestamp, if applicable.
+            For Google Cloud Storage contains last file modification timestamp.
+            For BigQuery table contains last_modified_time property.
+            For Datastore - not populated.
+          format: google-datetime
+          type: string
+        version:
+          description: |-
+            Findings container version, if available
+            ("generation" for Google Cloud Storage).
+          type: string
       type: object
     GooglePrivacyDlpV2ContentItem:
       description: Container structure for the content to inspect.
@@ -2818,7 +2993,9 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2ContentLocation:
-      description: Findings container location data.
+      description: |-
+        Precise location of the finding within a document, record, image, or metadata
+        container.
       properties:
         containerName:
           description: |-
@@ -2826,9 +3003,9 @@ components:
             The top level name is the source file name or table name. Names of some
             common storage containers are formatted as follows:
 
-            * BigQuery tables:  `<project_id>:<dataset_id>.<table_id>`
-            * Cloud Storage files: `gs://<bucket>/<path>`
-            * Datastore namespace: <namespace>
+            * BigQuery tables:  `{project_id}:{dataset_id}.{table_id}`
+            * Cloud Storage files: `gs://{bucket}/{path}`
+            * Datastore namespace: {namespace}
 
             Nested names could be absent if the embedded object has no string
             identifier (for an example an image contained within a document).
@@ -2852,6 +3029,9 @@ components:
         imageLocation:
           $ref: '#/components/schemas/GooglePrivacyDlpV2ImageLocation'
           description: Location within an image's pixels.
+        metadataLocation:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2MetadataLocation'
+          description: Location within the metadata for inspected content.
         recordLocation:
           $ref: '#/components/schemas/GooglePrivacyDlpV2RecordLocation'
           description: Location within a row or record of a database table.
@@ -2861,7 +3041,7 @@ components:
       properties:
         deidentifyTemplate:
           $ref: '#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate'
-          description: The DeidentifyTemplate to create.
+          description: Required. The DeidentifyTemplate to create.
         locationId:
           description: |-
             The geographic location to store the deidentification template. Reserved
@@ -2883,6 +3063,7 @@ components:
       properties:
         inspectJob:
           $ref: '#/components/schemas/GooglePrivacyDlpV2InspectJobConfig'
+          description: Set to control what and how to inspect.
         jobId:
           description: |-
             The job id can contain uppercase and lowercase letters,
@@ -2897,13 +3078,14 @@ components:
           type: string
         riskJob:
           $ref: '#/components/schemas/GooglePrivacyDlpV2RiskAnalysisJobConfig'
+          description: Set to choose what metric to calculate.
       type: object
     GooglePrivacyDlpV2CreateInspectTemplateRequest:
       description: Request message for CreateInspectTemplate.
       properties:
         inspectTemplate:
           $ref: '#/components/schemas/GooglePrivacyDlpV2InspectTemplate'
-          description: The InspectTemplate to create.
+          description: Required. The InspectTemplate to create.
         locationId:
           description: |-
             The geographic location to store the inspection template. Reserved for
@@ -2922,7 +3104,7 @@ components:
       properties:
         jobTrigger:
           $ref: '#/components/schemas/GooglePrivacyDlpV2JobTrigger'
-          description: The JobTrigger to create.
+          description: Required. The JobTrigger to create.
         locationId:
           description: |-
             The geographic location to store the job trigger. Reserved for
@@ -2941,7 +3123,7 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/GooglePrivacyDlpV2StoredInfoTypeConfig'
-          description: Configuration of the storedInfoType to create.
+          description: Required. Configuration of the storedInfoType to create.
         locationId:
           description: |-
             The geographic location to store the stored infoType. Reserved for
@@ -2964,7 +3146,7 @@ components:
         context:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           description: |-
-            Optional. A context may be used for higher security and maintaining
+            A context may be used for higher security and maintaining
             referential integrity such that the same identifier in two different
             contexts will be given a distinct surrogate. The context is appended to
             plaintext value being encrypted. On decryption the provided context is
@@ -2992,7 +3174,7 @@ components:
             This annotation will be applied to the surrogate by prefixing it with
             the name of the custom info type followed by the number of
             characters comprising the surrogate. The following scheme defines the
-            format: <info type name>(<surrogate character count>):<surrogate>
+            format: {info type name}({surrogate character count}):{surrogate}
 
             For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
             the surrogate is 'abc', the full replacement value
@@ -3003,7 +3185,7 @@ components:
             surrogate when it occurs in free text.
 
             Note: For record transformations where the entire cell in a table is being
-            transformed, surrogates are optional to use. Surrogates are used to denote
+            transformed, surrogates are not mandatory. Surrogates are used to denote
             the location of the token and are necessary for re-identification in free
             form text.
 
@@ -3045,10 +3227,13 @@ components:
       properties:
         kmsWrapped:
           $ref: '#/components/schemas/GooglePrivacyDlpV2KmsWrappedCryptoKey'
+          description: Kms wrapped key
         transient:
           $ref: '#/components/schemas/GooglePrivacyDlpV2TransientCryptoKey'
+          description: Transient crypto key
         unwrapped:
           $ref: '#/components/schemas/GooglePrivacyDlpV2UnwrappedCryptoKey'
+          description: Unwrapped crypto key
       type: object
     GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig:
       description: |-
@@ -3067,6 +3252,7 @@ components:
         referential integrity.
       properties:
         commonAlphabet:
+          description: Common alphabets.
           enum:
             - FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED
             - NUMERIC
@@ -3099,7 +3285,7 @@ components:
             - a string is encoded in UTF-8 format followed by a single byte of value 2
         cryptoKey:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CryptoKey'
-          description: 'The key used by the encryption algorithm. [required]'
+          description: Required. The key used by the encryption algorithm.
         customAlphabet:
           description: |-
             This is supported by mapping these to the alphanumeric characters
@@ -3241,19 +3427,16 @@ components:
             results in the same shift for the same context and crypto_key. If
             set, must also set context. Can only be applied to table items.
         lowerBoundDays:
-          description: |-
-            For example, -5 means shift date to at most 5 days back in the past.
-            [Required]
+          description: 'Required. For example, -5 means shift date to at most 5 days back in the past.'
           format: int32
           type: integer
         upperBoundDays:
           description: |-
-            Range of shift in days. Actual shift will be selected at random within this
+            Required. Range of shift in days. Actual shift will be selected at random within this
             range (inclusive ends). Negative means shift to earlier in time. Must not
             be more than 365250 days (1000 years) each direction.
 
             For example, 3 means shift date to at most 3 days into the future.
-            [Required]
           format: int32
           type: integer
       type: object
@@ -3265,9 +3448,10 @@ components:
         date:
           $ref: '#/components/schemas/GoogleTypeDate'
           description: |-
-            One or more of the following must be set. All fields are optional, but
-            when set must be valid date or time values.
+            One or more of the following must be set.
+            Must be a valid date or time value.
         dayOfWeek:
+          description: Day of week
           enum:
             - DAY_OF_WEEK_UNSPECIFIED
             - MONDAY
@@ -3280,8 +3464,10 @@ components:
           type: string
         time:
           $ref: '#/components/schemas/GoogleTypeTimeOfDay'
+          description: Time of day
         timeZone:
           $ref: '#/components/schemas/GooglePrivacyDlpV2TimeZone'
+          description: Time zone
       type: object
     GooglePrivacyDlpV2DeidentifyConfig:
       description: The configuration that controls how the data will change.
@@ -3314,7 +3500,7 @@ components:
             deidentify_template_name argument.
         deidentifyTemplateName:
           description: |-
-            Optional template to use. Any configuration directly specified in
+            Template to use. Any configuration directly specified in
             deidentify_config will override those set in the template. Singular fields
             that are set in this request will replace their corresponding fields in the
             template. Repeated fields are appended. Singular sub-messages and groups
@@ -3328,7 +3514,7 @@ components:
             inspect_template_name argument.
         inspectTemplateName:
           description: |-
-            Optional template to use. Any configuration directly specified in
+            Template to use. Any configuration directly specified in
             inspect_config will override those set in the template. Singular fields
             that are set in this request will replace their corresponding fields in the
             template. Repeated fields are appended. Singular sub-messages and groups
@@ -3359,7 +3545,7 @@ components:
         See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
       properties:
         createTime:
-          description: 'The creation timestamp of an inspectTemplate, output only field.'
+          description: Output only. The creation timestamp of an inspectTemplate.
           format: google-datetime
           type: string
         deidentifyConfig:
@@ -3373,14 +3559,14 @@ components:
           type: string
         name:
           description: |-
-            The template name. Output only.
+            Output only. The template name.
 
             The template will have one of the following formats:
             `projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID` OR
             `organizations/ORGANIZATION_ID/deidentifyTemplates/TEMPLATE_ID`
           type: string
         updateTime:
-          description: 'The last update timestamp of an inspectTemplate, output only field.'
+          description: Output only. The last update timestamp of an inspectTemplate.
           format: google-datetime
           type: string
       type: object
@@ -3401,15 +3587,15 @@ components:
           type: array
         quasiIds:
           description: |-
-            Fields considered to be quasi-identifiers. No two fields can have the
-            same tag. [required]
+            Required. Fields considered to be quasi-identifiers. No two fields can have the
+            same tag.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2QuasiId'
           type: array
         regionCode:
           description: |-
             ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-            Required if no column is tagged with a region-specific InfoType (like
+            Set if no column is tagged with a region-specific InfoType (like
             US_ZIP_5) or a region code.
           type: string
       type: object
@@ -3578,6 +3764,7 @@ components:
             - DONE
             - CANCELED
             - FAILED
+            - ACTIVE
           type: string
         type:
           description: The type of job.
@@ -3613,10 +3800,10 @@ components:
       description: |-
         Details information about an error encountered during job execution or
         the results of an unsuccessful activation of the JobTrigger.
-        Output only field.
       properties:
         details:
           $ref: '#/components/schemas/GoogleRpcStatus'
+          description: Detailed error codes and messages.
         timestamps:
           description: The times the error occurred.
           items:
@@ -3669,6 +3856,7 @@ components:
       properties:
         conditions:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Conditions'
+          description: Conditions to apply to the expression.
         logicalOperator:
           description: |-
             The operator to apply to the result of conditions. Default and currently
@@ -3693,7 +3881,7 @@ components:
           description: |-
             Only apply the transformation if the condition evaluates to true for the
             given `RecordCondition`. The conditions are allowed to reference fields
-            that are not used in the actual transformation. [optional]
+            that are not used in the actual transformation.
 
             Example Use Cases:
 
@@ -3701,7 +3889,7 @@ components:
             column for the same record is within a specific range.
             - Redact a field if the date of birth field is greater than 85.
         fields:
-          description: 'Input field(s) to apply the transformation to. [required]'
+          description: Required. Input field(s) to apply the transformation to.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           type: array
@@ -3748,6 +3936,30 @@ components:
           description: |-
             The type of content that might have been found.
             Provided if `excluded_types` is false.
+        jobCreateTime:
+          description: Time the job started that produced this finding.
+          format: google-datetime
+          type: string
+        jobName:
+          description: The job that stored the finding.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |-
+            The labels associated with this `Finding`.
+
+            Label keys must be between 1 and 63 characters long and must conform
+            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+
+            Label values must be between 0 and 63 characters long and must conform
+            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+
+            No more than 10 labels can be associated with a given finding.
+
+            Example: <code>"environment" : "production"</code>
+            Example: <code>"pipeline" : "etl"</code>
+          type: object
         likelihood:
           description: Confidence of how likely it is that the `info_type` is correct.
           enum:
@@ -3761,6 +3973,12 @@ components:
         location:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Location'
           description: Where the content was found.
+        name:
+          description: |-
+            Resource name in format
+            projects/{project}/locations/{location}/findings/{finding} Populated only
+            when viewing persisted findings.
+          type: string
         quote:
           description: |-
             The content that was found. Even if the content is not textual, it
@@ -3775,8 +3993,15 @@ components:
             Contains data parsed from quotes. Only populated if include_quote was set
             to true and a supported infoType was requested. Currently supported
             infoTypes: DATE, DATE_OF_BIRTH and TIME.
+        resourceName:
+          description: The job that stored the finding.
+          type: string
+        triggerName:
+          description: 'Job trigger name, if applicable, for this finding.'
+          type: string
       type: object
     GooglePrivacyDlpV2FindingLimits:
+      description: Configuration to control the number of findings returned.
       properties:
         maxFindingsPerInfoType:
           description: Configuration of findings limit given for specified infoTypes.
@@ -3786,7 +4011,7 @@ components:
         maxFindingsPerItem:
           description: |-
             Max number of findings that will be returned for each item scanned.
-            When set within `InspectDataSourceRequest`,
+            When set within `InspectJobConfig`,
             the maximum returned is 2000 regardless if this is set higher.
             When set within `InspectContentRequest`, this field is ignored.
           format: int32
@@ -3799,6 +4024,10 @@ components:
           format: int32
           type: integer
       type: object
+    GooglePrivacyDlpV2FinishDlpJobRequest:
+      description: The request message for finishing a DLP hybrid job.
+      properties: {}
+      type: object
     GooglePrivacyDlpV2FixedSizeBucketingConfig:
       description: |-
         Buckets values based on fixed size ranges. The
@@ -3807,7 +4036,7 @@ components:
         the user for simple bucketing strategies.
 
         The transformed value will be a hyphenated string of
-        <lower_bound>-<upper_bound>, i.e if lower_bound = 10 and upper_bound = 20
+        {lower_bound}-{upper_bound}, i.e if lower_bound = 10 and upper_bound = 20
         all values that are within this bucket will be replaced with "10-20".
 
         This can be used on data of type: double, long.
@@ -3820,25 +4049,24 @@ components:
       properties:
         bucketSize:
           description: |-
-            Size of each bucket (except for minimum and maximum buckets). So if
+            Required. Size of each bucket (except for minimum and maximum buckets). So if
             `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
             following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
-            60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].
+            60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
           format: double
           type: number
         lowerBound:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Value'
           description: |-
-            Lower bound value of buckets. All values less than `lower_bound` are
+            Required. Lower bound value of buckets. All values less than `lower_bound` are
             grouped together into a single bucket; for example if `lower_bound` = 10,
-            then all values less than 10 are replaced with the value “-10”. [Required].
+            then all values less than 10 are replaced with the value “-10”.
         upperBound:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Value'
           description: |-
-            Upper bound value of buckets. All values greater than upper_bound are
+            Required. Upper bound value of buckets. All values greater than upper_bound are
             grouped together into a single bucket; for example if `upper_bound` = 89,
             then all values greater than 89 are replaced with the value “89+”.
-            [Required].
       type: object
     GooglePrivacyDlpV2HotwordRule:
       description: |-
@@ -3862,6 +4090,155 @@ components:
             adjusted upwards if the area code is known to be the local area code of
             a company office using the hotword regex "\(xxx\)", where "xxx"
             is the area code in question.
+      type: object
+    GooglePrivacyDlpV2HybridContentItem:
+      description: |-
+        An individual hybrid item to inspect. Will be stored temporarily during
+        processing.
+      properties:
+        findingDetails:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2HybridFindingDetails'
+          description: Supplementary information that will be added to each finding.
+        item:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2ContentItem'
+          description: The item to inspect.
+      type: object
+    GooglePrivacyDlpV2HybridFindingDetails:
+      description: Populate to associate additional data with each finding.
+      properties:
+        containerDetails:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2Container'
+          description: Details about the container where the content being inspected is from.
+        fileOffset:
+          description: |-
+            Offset in bytes of the line, from the beginning of the file, where the
+            finding  is located. Populate if the item being scanned is only part of a
+            bigger item, such as a shard of a file and you want to track the absolute
+            position of the finding.
+          format: int64
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |-
+            Labels to represent user provided metadata about the data being inspected.
+            If configured by the job, some key values may be required.
+            The labels associated with `Finding`'s produced by hybrid
+            inspection.
+
+            Label keys must be between 1 and 63 characters long and must conform
+            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+
+            Label values must be between 0 and 63 characters long and must conform
+            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+
+            No more than 10 labels can be associated with a given finding.
+
+            Example: <code>"environment" : "production"</code>
+            Example: <code>"pipeline" : "etl"</code>
+          type: object
+        rowOffset:
+          description: |-
+            Offset of the row for tables. Populate if the row(s) being scanned are
+            part of a bigger dataset and you want to keep track of their absolute
+            position.
+          format: int64
+          type: string
+        tableOptions:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2TableOptions'
+          description: |-
+            If the container is a table, additional information to make findings
+            meaningful such as the columns that are primary keys. If not known ahead
+            of time, can also be set within each inspect hybrid call and the two
+            will be merged. Note that identifying_fields will only be stored to
+            BigQuery, and only if the BigQuery action has been included.
+      type: object
+    GooglePrivacyDlpV2HybridInspectDlpJobRequest:
+      description: Request to search for potentially sensitive info in a custom location.
+      properties:
+        hybridItem:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2HybridContentItem'
+          description: The item to inspect.
+      type: object
+    GooglePrivacyDlpV2HybridInspectJobTriggerRequest:
+      description: Request to search for potentially sensitive info in a custom location.
+      properties:
+        hybridItem:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2HybridContentItem'
+          description: The item to inspect.
+      type: object
+    GooglePrivacyDlpV2HybridInspectResponse:
+      description: Quota exceeded errors will be thrown once quota has been met.
+      properties: {}
+      type: object
+    GooglePrivacyDlpV2HybridInspectStatistics:
+      description: Statistics related to processing hybrid inspect requests.
+      properties:
+        abortedCount:
+          description: |-
+            The number of hybrid inspection requests aborted because the job ran
+            out of quota or was ended before they could be processed.
+          format: int64
+          type: string
+        pendingCount:
+          description: |-
+            The number of hybrid requests currently being processed. Only populated
+            when called via method `getDlpJob`.
+            A burst of traffic may cause hybrid inspect requests to be enqueued.
+            Processing will take place as quickly as possible, but resource limitations
+            may impact how long a request is enqueued for.
+          format: int64
+          type: string
+        processedCount:
+          description: The number of hybrid inspection requests processed within this job.
+          format: int64
+          type: string
+      type: object
+    GooglePrivacyDlpV2HybridOptions:
+      description: |-
+        Configuration to control jobs where the content being inspected is outside
+        of Google Cloud Platform.
+      properties:
+        description:
+          description: |-
+            A short description of where the data is coming from. Will be stored once
+            in the job. 256 max length.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: |-
+            To organize findings, these labels will be added to each finding.
+
+            Label keys must be between 1 and 63 characters long and must conform
+            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+
+            Label values must be between 0 and 63 characters long and must conform
+            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+
+            No more than 10 labels can be associated with a given finding.
+
+            Example: <code>"environment" : "production"</code>
+            Example: <code>"pipeline" : "etl"</code>
+          type: object
+        requiredFindingLabelKeys:
+          description: |-
+            These are labels that each inspection request must include within their
+            'finding_labels' map. Request may contain others, but any missing one of
+            these will be rejected.
+
+            Label keys must be between 1 and 63 characters long and must conform
+            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+
+            No more than 10 keys can be required.
+          items:
+            type: string
+          type: array
+        tableOptions:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2TableOptions'
+          description: |-
+            If the container is a table, additional information to make findings
+            meaningful such as the columns that are primary keys.
       type: object
     GooglePrivacyDlpV2ImageLocation:
       description: Location of the finding within an image.
@@ -3972,7 +4349,7 @@ components:
           type: array
         primitiveTransformation:
           $ref: '#/components/schemas/GooglePrivacyDlpV2PrimitiveTransformation'
-          description: 'Primitive transformation to apply to the infoType. [required]'
+          description: Required. Primitive transformation to apply to the infoType.
       type: object
     GooglePrivacyDlpV2InfoTypeTransformations:
       description: |-
@@ -3983,8 +4360,8 @@ components:
       properties:
         transformations:
           description: |-
-            Transformation for each infoType. Cannot specify more than one
-            for a given infoType. [required]
+            Required. Transformation for each infoType. Cannot specify more than one
+            for a given infoType.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2InfoTypeTransformation'
           type: array
@@ -4039,6 +4416,7 @@ components:
           type: array
         limits:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FindingLimits'
+          description: Configuration to control the number of findings returned.
         minLikelihood:
           description: |-
             Only returns findings equal or above this threshold. The default is
@@ -4071,7 +4449,7 @@ components:
             the template referenced by the inspect_template_name argument.
         inspectTemplateName:
           description: |-
-            Optional template to use. Any configuration directly specified in
+            Template to use. Any configuration directly specified in
             inspect_config will override those set in the template. Singular fields
             that are set in this request will replace their corresponding fields in the
             template. Repeated fields are appended. Singular sub-messages and groups
@@ -4104,6 +4482,7 @@ components:
           description: A summary of the outcome of this inspect job.
       type: object
     GooglePrivacyDlpV2InspectJobConfig:
+      description: Controls what and how to inspect for findings.
       properties:
         actions:
           description: Actions to execute at the completion of the job.
@@ -4149,7 +4528,7 @@ components:
         to learn more.
       properties:
         createTime:
-          description: 'The creation timestamp of an inspectTemplate, output only field.'
+          description: Output only. The creation timestamp of an inspectTemplate.
           format: google-datetime
           type: string
         description:
@@ -4163,14 +4542,14 @@ components:
           description: The core content of the template. Configuration of the scanning process.
         name:
           description: |-
-            The template name. Output only.
+            Output only. The template name.
 
             The template will have one of the following formats:
             `projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID` OR
-            `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`
+            `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`;
           type: string
         updateTime:
-          description: 'The last update timestamp of an inspectTemplate, output only field.'
+          description: Output only. The last update timestamp of an inspectTemplate.
           format: google-datetime
           type: string
       type: object
@@ -4214,7 +4593,7 @@ components:
         See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
       properties:
         createTime:
-          description: 'The creation timestamp of a triggeredJob, output only field.'
+          description: Output only. The creation timestamp of a triggeredJob.
           format: google-datetime
           type: string
         description:
@@ -4225,17 +4604,18 @@ components:
           type: string
         errors:
           description: |-
-            A stream of errors encountered when the trigger was activated. Repeated
+            Output only. A stream of errors encountered when the trigger was activated. Repeated
             errors may result in the JobTrigger automatically being paused.
             Will return the last 100 errors. Whenever the JobTrigger is modified
-            this list will be cleared. Output only field.
+            this list will be cleared.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2Error'
           type: array
         inspectJob:
           $ref: '#/components/schemas/GooglePrivacyDlpV2InspectJobConfig'
+          description: 'For inspect jobs, a snapshot of the configuration.'
         lastRunTime:
-          description: 'The timestamp of the last time this trigger executed, output only field.'
+          description: Output only. The timestamp of the last time this trigger executed.
           format: google-datetime
           type: string
         name:
@@ -4245,7 +4625,7 @@ components:
             `projects/dlp-test-project/jobTriggers/53234423`.
           type: string
         status:
-          description: 'A status for this trigger. [required]'
+          description: Required. A status for this trigger.
           enum:
             - STATUS_UNSPECIFIED
             - HEALTHY
@@ -4261,7 +4641,7 @@ components:
             $ref: '#/components/schemas/GooglePrivacyDlpV2Trigger'
           type: array
         updateTime:
-          description: 'The last update timestamp of a triggeredJob, output only field.'
+          description: Output only. The last update timestamp of a triggeredJob.
           format: google-datetime
           type: string
       type: object
@@ -4271,7 +4651,7 @@ components:
         entityId:
           $ref: '#/components/schemas/GooglePrivacyDlpV2EntityId'
           description: |-
-            Optional message indicating that multiple rows might be associated to a
+            Message indicating that multiple rows might be associated to a
             single individual. If the same entity_id is associated to multiple
             quasi-identifier tuples over distinct rows, we consider the entire
             collection of tuples as the composite quasi-identifier. This collection
@@ -4311,6 +4691,7 @@ components:
           type: array
       type: object
     GooglePrivacyDlpV2KAnonymityHistogramBucket:
+      description: Histogram of k-anonymity equivalence classes.
       properties:
         bucketSize:
           description: Total number of equivalence classes in this bucket.
@@ -4353,7 +4734,6 @@ components:
         using publicly available data (like the US Census), or using a custom
         statistical model (indicated as one or several BigQuery tables), or by
         extrapolating from the distribution of values in the input dataset.
-        A column with a semantic tag attached.
       properties:
         auxiliaryTables:
           description: |-
@@ -4365,15 +4745,15 @@ components:
           type: array
         quasiIds:
           description: |-
-            Fields considered to be quasi-identifiers. No two columns can have the
-            same tag. [required]
+            Required. Fields considered to be quasi-identifiers. No two columns can have the
+            same tag.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2TaggedField'
           type: array
         regionCode:
           description: |-
             ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-            Required if no column is tagged with a region-specific InfoType (like
+            Set if no column is tagged with a region-specific InfoType (like
             US_ZIP_5) or a region code.
           type: string
       type: object
@@ -4488,10 +4868,10 @@ components:
         dlp.kms.encrypt
       properties:
         cryptoKeyName:
-          description: 'The resource name of the KMS CryptoKey to use for unwrapping. [required]'
+          description: Required. The resource name of the KMS CryptoKey to use for unwrapping.
           type: string
         wrappedKey:
-          description: 'The wrapped data crypto key. [required]'
+          description: Required. The wrapped data crypto key.
           format: byte
           type: string
       type: object
@@ -4535,6 +4915,7 @@ components:
           type: array
       type: object
     GooglePrivacyDlpV2LDiversityHistogramBucket:
+      description: Histogram of l-diversity equivalence class sensitive value frequencies.
       properties:
         bucketSize:
           description: Total number of equivalence classes in this bucket.
@@ -4736,6 +5117,9 @@ components:
             Unicode character offsets delimiting the finding.
             These are relative to the finding's containing element.
             Provided when the content is text.
+        container:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2Container'
+          description: 'Information about the container where this finding occurred, if available.'
         contentLocations:
           description: |-
             List of nested objects pointing to the precise location of the finding
@@ -4743,6 +5127,25 @@ components:
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2ContentLocation'
           type: array
+      type: object
+    GooglePrivacyDlpV2Manual:
+      description: |-
+        Job trigger option for hybrid jobs. Jobs must be manually created
+        and finished.
+      properties: {}
+      type: object
+    GooglePrivacyDlpV2MetadataLocation:
+      description: Metadata Location
+      properties:
+        storageLabel:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2StorageMetadataLabel'
+          description: Storage metadata.
+        type:
+          description: Type of metadata containing the finding.
+          enum:
+            - METADATATYPE_UNSPECIFIED
+            - STORAGE_METADATA
+          type: string
       type: object
     GooglePrivacyDlpV2NumericalStatsConfig:
       description: |-
@@ -4786,6 +5189,7 @@ components:
             If unspecified, then all available columns will be used for a new table or
             an (existing) table with no schema, and no changes will be made to an
             existing table that has a schema.
+            Only for use with external storage.
           enum:
             - OUTPUT_SCHEMA_UNSPECIFIED
             - BASIC_COLUMNS
@@ -4862,42 +5266,59 @@ components:
       properties:
         bucketingConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2BucketingConfig'
+          description: Bucketing
         characterMaskConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CharacterMaskConfig'
+          description: Mask
         cryptoDeterministicConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CryptoDeterministicConfig'
+          description: Deterministic Crypto
         cryptoHashConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CryptoHashConfig'
+          description: Crypto
         cryptoReplaceFfxFpeConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig'
+          description: Ffx-Fpe
         dateShiftConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2DateShiftConfig'
+          description: Date Shift
         fixedSizeBucketingConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FixedSizeBucketingConfig'
+          description: Fixed size bucketing
         redactConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2RedactConfig'
+          description: Redact
         replaceConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2ReplaceValueConfig'
+          description: Replace
         replaceWithInfoTypeConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2ReplaceWithInfoTypeConfig'
+          description: Replace with infotype
         timePartConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2TimePartConfig'
+          description: Time extraction
       type: object
     GooglePrivacyDlpV2PrivacyMetric:
       description: Privacy metric to compute for reidentification risk analysis.
       properties:
         categoricalStatsConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CategoricalStatsConfig'
+          description: Categorical stats
         deltaPresenceEstimationConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2DeltaPresenceEstimationConfig'
+          description: delta-presence
         kAnonymityConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2KAnonymityConfig'
+          description: K-anonymity
         kMapEstimationConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2KMapEstimationConfig'
+          description: k-map
         lDiversityConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2LDiversityConfig'
+          description: l-diversity
         numericalStatsConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2NumericalStatsConfig'
+          description: Numerical stats
       type: object
     GooglePrivacyDlpV2Proximity:
       description: |-
@@ -4976,7 +5397,7 @@ components:
           type: string
         field:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
-          description: 'Identifies the column. [required]'
+          description: Required. Identifies the column.
         inferred:
           $ref: '#/components/schemas/GoogleProtobufEmpty'
           description: |-
@@ -4997,9 +5418,11 @@ components:
         in the data corresponds to which column in the statistical model.
       properties:
         customTag:
+          description: A auxiliary field.
           type: string
         field:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
+          description: Identifies the column.
       type: object
     GooglePrivacyDlpV2QuasiIdentifierField:
       description: |-
@@ -5007,9 +5430,14 @@ components:
         in the data corresponds to which column in the statistical model.
       properties:
         customTag:
+          description: |-
+            A column can be tagged with a custom tag. In this case, the user must
+            indicate an auxiliary table that contains statistical information on
+            the possible values of this column (below).
           type: string
         field:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
+          description: Identifies the column.
       type: object
     GooglePrivacyDlpV2QuoteInfo:
       description: Message for infoType-dependent details parsed from quote.
@@ -5049,7 +5477,7 @@ components:
         idValues:
           description: |-
             Values of identifying columns in the given row. Order of values matches
-            the order of field identifiers specified in the scanning request.
+            the order of `identifying_fields` specified in the scanning request.
           items:
             type: string
           type: array
@@ -5091,7 +5519,7 @@ components:
         recordSuppressions:
           description: |-
             Configuration defining which records get suppressed entirely. Records that
-            match any suppression rule are omitted from the output [optional].
+            match any suppression rule are omitted from the output.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2RecordSuppression'
           type: array
@@ -5173,7 +5601,7 @@ components:
           description: Configuration for the inspector.
         inspectTemplateName:
           description: |-
-            Optional template to use. Any configuration directly specified in
+            Template to use. Any configuration directly specified in
             `inspect_config` will override those set in the template. Singular fields
             that are set in this request will replace their corresponding fields in the
             template. Repeated fields are appended. Singular sub-messages and groups
@@ -5202,7 +5630,7 @@ components:
              - `CryptoReplaceFfxFpeConfig`
         reidentifyTemplateName:
           description: |-
-            Optional template to use. References an instance of `DeidentifyTemplate`.
+            Template to use. References an instance of `DeidentifyTemplate`.
             Any configuration directly specified in `reidentify_config` or
             `inspect_config` will override those set in the template. Singular fields
             that are set in this request will replace their corresponding fields in the
@@ -5232,9 +5660,11 @@ components:
       properties: {}
       type: object
     GooglePrivacyDlpV2RequestedOptions:
+      description: Snapshot of the inspection configuration.
       properties:
         jobConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2InspectJobConfig'
+          description: Inspect config.
         snapshotInspectTemplate:
           $ref: '#/components/schemas/GooglePrivacyDlpV2InspectTemplate'
           description: |-
@@ -5244,6 +5674,13 @@ components:
     GooglePrivacyDlpV2Result:
       description: All result fields mentioned below are updated while the job is processing.
       properties:
+        hybridStats:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2HybridInspectStatistics'
+          description: |-
+            Statistics related to the processing of hybrid inspect.
+            Early access feature is in a pre-release state and might change or have
+            limited support. For more information, see
+            https://cloud.google.com/products#product-launch-stages.
         infoTypeStats:
           description: |-
             Statistics of how many instances of each info type were found during
@@ -5280,8 +5717,10 @@ components:
           description: Input dataset to compute metrics over.
       type: object
     GooglePrivacyDlpV2Row:
+      description: Values of the row.
       properties:
         values:
+          description: Individual cells.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2Value'
           type: array
@@ -5295,6 +5734,7 @@ components:
       properties:
         outputConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2OutputStorageConfig'
+          description: Location to store findings outside of DLP.
       type: object
     GooglePrivacyDlpV2Schedule:
       description: Schedule for triggeredJobs.
@@ -5323,34 +5763,46 @@ components:
         tuple is highly reidentifiable).
       properties:
         quasiIds:
-          description: 'Quasi-identifier columns. [required]'
+          description: Required. Quasi-identifier columns.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2QuasiIdentifierField'
           type: array
         relativeFrequency:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           description: |-
-            The relative frequency column must contain a floating-point number
+            Required. The relative frequency column must contain a floating-point number
             between 0 and 1 (inclusive). Null values are assumed to be zero.
-            [required]
         table:
           $ref: '#/components/schemas/GooglePrivacyDlpV2BigQueryTable'
-          description: 'Auxiliary table location. [required]'
+          description: Required. Auxiliary table location.
       type: object
     GooglePrivacyDlpV2StorageConfig:
       description: Shared message indicating Cloud storage type.
       properties:
         bigQueryOptions:
           $ref: '#/components/schemas/GooglePrivacyDlpV2BigQueryOptions'
-          description: BigQuery options specification.
+          description: BigQuery options.
         cloudStorageOptions:
           $ref: '#/components/schemas/GooglePrivacyDlpV2CloudStorageOptions'
-          description: Google Cloud Storage options specification.
+          description: Google Cloud Storage options.
         datastoreOptions:
           $ref: '#/components/schemas/GooglePrivacyDlpV2DatastoreOptions'
-          description: Google Cloud Datastore options specification.
+          description: Google Cloud Datastore options.
+        hybridOptions:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2HybridOptions'
+          description: |-
+            Hybrid inspection options.
+            Early access feature is in a pre-release state and might change or have
+            limited support. For more information, see
+            https://cloud.google.com/products#product-launch-stages.
         timespanConfig:
           $ref: '#/components/schemas/GooglePrivacyDlpV2TimespanConfig'
+      type: object
+    GooglePrivacyDlpV2StorageMetadataLabel:
+      description: Storage metadata label to indicate which metadata entry contains findings.
+      properties:
+        key:
+          type: string
       type: object
     GooglePrivacyDlpV2StoredInfoType:
       description: |-
@@ -5380,12 +5832,18 @@ components:
         description:
           description: Description of the StoredInfoType (max 256 characters).
           type: string
+        dictionary:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2Dictionary'
+          description: Store dictionary-based CustomInfoType.
         displayName:
           description: Display name of the StoredInfoType (max 256 characters).
           type: string
         largeCustomDictionary:
           $ref: '#/components/schemas/GooglePrivacyDlpV2LargeCustomDictionaryConfig'
           description: StoredInfoType where findings are defined by a dictionary of phrases.
+        regex:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2Regex'
+          description: Store regular expression-based StoredInfoType.
       type: object
     GooglePrivacyDlpV2StoredInfoTypeStats:
       description: Statistics for a StoredInfoType.
@@ -5414,10 +5872,12 @@ components:
             anomalies detected in the storedInfoType data that render it unusable. Only
             the five most recent errors will be displayed, with the most recent error
             appearing first.
-            <p>For example, some of the data for stored custom dictionaries is put in
+
+            For example, some of the data for stored custom dictionaries is put in
             the user's Google Cloud Storage bucket, and if this data is modified or
             deleted by the user or another system, the dictionary becomes invalid.
-            <p>If any errors occur, fix the problem indicated by the error message and
+
+            If any errors occur, fix the problem indicated by the error message and
             use the UpdateStoredInfoType API method to create another version of the
             storedInfoType to continue using it, reusing the same `config` if it was
             not the source of the error.
@@ -5461,12 +5921,14 @@ components:
         `TransformationResultCode` and error details occurred.
       properties:
         code:
+          description: Outcome of the transformation.
           enum:
             - TRANSFORMATION_RESULT_CODE_UNSPECIFIED
             - SUCCESS
             - ERROR
           type: string
         count:
+          description: Number of transformations counted by this result.
           format: int64
           type: string
         details:
@@ -5494,10 +5956,12 @@ components:
         learn more.
       properties:
         headers:
+          description: Headers of the table.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
           type: array
         rows:
+          description: Rows of the table.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2Row'
           type: array
@@ -5510,7 +5974,21 @@ components:
           format: int64
           type: string
       type: object
+    GooglePrivacyDlpV2TableOptions:
+      description: Instructions regarding the table content being inspected.
+      properties:
+        identifyingFields:
+          description: |-
+            The columns that are the primary keys for table objects included in
+            ContentItem. A copy of this cell's value will stored alongside alongside
+            each finding so that the finding can be traced to the specific row it came
+            from. No more than 3 may be provided.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
+          type: array
+      type: object
     GooglePrivacyDlpV2TaggedField:
+      description: A column with a semantic tag attached.
       properties:
         customTag:
           description: |-
@@ -5520,7 +5998,7 @@ components:
           type: string
         field:
           $ref: '#/components/schemas/GooglePrivacyDlpV2FieldId'
-          description: 'Identifies the column. [required]'
+          description: Required. Identifies the column.
         inferred:
           $ref: '#/components/schemas/GoogleProtobufEmpty'
           description: |-
@@ -5545,6 +6023,7 @@ components:
         portion of the value.
       properties:
         partToExtract:
+          description: The part of the time to keep.
           enum:
             - TIME_PART_UNSPECIFIED
             - YEAR
@@ -5556,6 +6035,7 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2TimeZone:
+      description: Time zone of the date time object.
       properties:
         offsetMinutes:
           description: |-
@@ -5617,8 +6097,10 @@ components:
       properties:
         leaveUntransformed:
           $ref: '#/components/schemas/GooglePrivacyDlpV2LeaveUntransformed'
+          description: Ignore errors
         throwError:
           $ref: '#/components/schemas/GooglePrivacyDlpV2ThrowError'
+          description: Throw an error
       type: object
     GooglePrivacyDlpV2TransformationOverview:
       description: Overview of the modifications that occurred.
@@ -5657,6 +6139,7 @@ components:
           $ref: '#/components/schemas/GooglePrivacyDlpV2RecordSuppression'
           description: The specific suppression option these stats apply to.
         results:
+          description: Collection of all transformations that took place or had an error.
           items:
             $ref: '#/components/schemas/GooglePrivacyDlpV2SummaryResult'
           type: array
@@ -5675,7 +6158,7 @@ components:
       properties:
         name:
           description: |-
-            Name of the key. [required]
+            Required. Name of the key.
             This is an arbitrary string used to differentiate different keys.
             A unique key is generated per name: two separate `TransientCryptoKey`
             protos share the same generated key if their names are the same.
@@ -5686,6 +6169,13 @@ components:
     GooglePrivacyDlpV2Trigger:
       description: What event needs to occur for a new job to be started.
       properties:
+        manual:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2Manual'
+          description: |-
+            For use with hybrid jobs. Jobs must be manually created and finished.
+            Early access feature is in a pre-release state and might change or have
+            limited support. For more information, see
+            https://cloud.google.com/products#product-launch-stages.
         schedule:
           $ref: '#/components/schemas/GooglePrivacyDlpV2Schedule'
           description: Create a job on a repeating basis based on the elapse of time.
@@ -5696,7 +6186,7 @@ components:
         leaking the key. Choose another type of key if possible.
       properties:
         key:
-          description: 'A 128/192/256 bit key. [required]'
+          description: Required. A 128/192/256 bit key.
           format: byte
           type: string
       type: object
@@ -5757,10 +6247,13 @@ components:
         int64 only holds up to 8 bytes of data.
       properties:
         booleanValue:
+          description: boolean
           type: boolean
         dateValue:
           $ref: '#/components/schemas/GoogleTypeDate'
+          description: date
         dayOfWeekValue:
+          description: day of week
           enum:
             - DAY_OF_WEEK_UNSPECIFIED
             - MONDAY
@@ -5772,16 +6265,21 @@ components:
             - SUNDAY
           type: string
         floatValue:
+          description: float
           format: double
           type: number
         integerValue:
+          description: integer
           format: int64
           type: string
         stringValue:
+          description: string
           type: string
         timeValue:
           $ref: '#/components/schemas/GoogleTypeTimeOfDay'
+          description: time of day
         timestampValue:
+          description: timestamp
           format: google-datetime
           type: string
       type: object

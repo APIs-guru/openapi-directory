@@ -816,6 +816,16 @@ components:
             instance is connected. If left unspecified, the `default` network
             will be used.
           type: string
+        connectMode:
+          description: |-
+            Optional. The connect mode of Redis instance.
+            If not provided, default one will be used.
+            Current default: DIRECT_PEERING.
+          enum:
+            - CONNECT_MODE_UNSPECIFIED
+            - DIRECT_PEERING
+            - PRIVATE_SERVICE_ACCESS
+          type: string
         createTime:
           description: Output only. The time the instance was created.
           format: google-datetime
@@ -899,9 +909,8 @@ components:
         redisVersion:
           description: |-
             Optional. The version of Redis software.
-            If not provided, latest supported version will be used. Updating the
-            version will perform an upgrade/downgrade to the new version. Currently,
-            the supported values are:
+            If not provided, latest supported version will be used. Currently, the
+            supported values are:
 
              *   `REDIS_4_0` for Redis 4.0 compatibility (default)
              *   `REDIS_3_2` for Redis 3.2 compatibility

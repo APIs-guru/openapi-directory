@@ -33,24 +33,6 @@ externalDocs:
 tags:
   - name: userinfo
 paths:
-  /oauth2/v2/certs:
-    get:
-      operationId: oauth2.getCertForOpenIdConnect
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Jwk'
-          description: Successful response
-    parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
   /oauth2/v2/tokeninfo:
     parameters:
       - $ref: '#/components/parameters/alt'
@@ -197,29 +179,6 @@ components:
       schema:
         type: string
   schemas:
-    Jwk:
-      properties:
-        keys:
-          items:
-            properties:
-              alg:
-                default: RS256
-                type: string
-              e:
-                type: string
-              kid:
-                type: string
-              kty:
-                default: RSA
-                type: string
-              'n':
-                type: string
-              use:
-                default: sig
-                type: string
-            type: object
-          type: array
-      type: object
     Tokeninfo:
       properties:
         access_type:

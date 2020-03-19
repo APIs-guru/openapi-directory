@@ -77,17 +77,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Starts a build with the specified configuration.
@@ -158,30 +158,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/projects/{projectId}/builds/{id}:cancel':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Cancels a build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -219,17 +219,17 @@ paths:
         - projects
   '/v1/projects/{projectId}/builds/{id}:retry':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new build based on the specified build.
@@ -331,17 +331,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new `BuildTrigger`.
@@ -442,17 +442,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: |-
         Updates a `BuildTrigger` by its project ID and trigger ID.
@@ -493,17 +493,17 @@ paths:
         - projects
   '/v1/projects/{projectId}/triggers/{triggerId}:run':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Runs a `BuildTrigger` at a particular source revision.
       operationId: cloudbuild.projects.triggers.run
@@ -569,30 +569,30 @@ paths:
       tags:
         - operations
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -867,6 +867,15 @@ components:
         projectId:
           description: Output only. ID of the project.
           type: string
+        queueTtl:
+          description: |-
+            TTL in queue for this build. If provided and the build is enqueued longer
+            than this value, the build will expire and the build status will be
+            `EXPIRED`.
+
+            The TTL starts ticking from create_time.
+          format: google-duration
+          type: string
         results:
           $ref: '#/components/schemas/Results'
           description: Output only. Results of the build.
@@ -896,6 +905,7 @@ components:
             - INTERNAL_ERROR
             - TIMEOUT
             - CANCELLED
+            - EXPIRED
           type: string
         statusDetail:
           description: Output only. Customer-readable message about the current status.
@@ -1142,6 +1152,7 @@ components:
             - INTERNAL_ERROR
             - TIMEOUT
             - CANCELLED
+            - EXPIRED
           type: string
         timeout:
           description: |-
@@ -1213,7 +1224,7 @@ components:
         ignoredFiles:
           description: |-
             ignored_files and included_files are file glob matches using
-            http://godoc/pkg/path/filepath#Match extended with support for "**".
+            https://golang.org/pkg/path/filepath/#Match extended with support for "**".
 
             If ignored_files and changed files are both empty, then they are
             not used to determine whether or not to trigger a build.
@@ -1249,7 +1260,10 @@ components:
         substitutions:
           additionalProperties:
             type: string
-          description: Substitutions data for Build resource.
+          description: |-
+            Substitutions for Build resource. The keys must match the following
+            regular expression: `^_[A-Z0-9_]+$`.The keys cannot conflict with the
+            keys in bindings.
           type: object
         tags:
           description: Tags for annotation of a `BuildTrigger`
@@ -1457,6 +1471,9 @@ components:
             - COMMENTS_DISABLED
             - COMMENTS_ENABLED
           type: string
+        invertRegex:
+          description: 'If true, branches that do NOT match the git_ref will trigger a build.'
+          type: boolean
       type: object
     PushFilter:
       description: Push contains filter properties for matching GitHub git pushes.
@@ -1468,6 +1485,11 @@ components:
             The syntax of the regular expressions accepted is the syntax accepted by
             RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
+        invertRegex:
+          description: |-
+            When true, only trigger a build if the revision regex does NOT match the
+            git_ref regex.
+          type: boolean
         tag:
           description: |-
             Regexes matching tags to build.
@@ -1496,6 +1518,11 @@ components:
             This must be a relative path. If a step's `dir` is specified and is an
             absolute path, this value is ignored for that step's execution.
           type: string
+        invertRegex:
+          description: |-
+            Only trigger a build if the revision regex does NOT match the revision
+            regex.
+          type: boolean
         projectId:
           description: |-
             ID of the project that owns the Cloud Source Repository. If omitted, the

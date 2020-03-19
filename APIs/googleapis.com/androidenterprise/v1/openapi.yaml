@@ -1199,41 +1199,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Updates the content of a store page. This method supports patch semantics.
-      operationId: androidenterprise.storelayoutpages.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the page.
-          in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StorePage'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/StorePage'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - storelayoutpages
     put:
       description: Updates the content of a store page.
       operationId: androidenterprise.storelayoutpages.update
@@ -1420,47 +1385,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Updates a cluster. This method supports patch semantics.
-      operationId: androidenterprise.storelayoutclusters.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the page.
-          in: path
-          name: pageId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the cluster.
-          in: path
-          name: clusterId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/StoreCluster'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/StoreCluster'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - storelayoutclusters
     put:
       description: Updates a cluster.
       operationId: androidenterprise.storelayoutclusters.update
@@ -1668,44 +1592,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: |-
-        Updates the details of an EMM-managed user.
-
-        Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
-      operationId: androidenterprise.users.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/User'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - users
     put:
       description: |-
         Updates the details of an EMM-managed user.
@@ -1984,55 +1870,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Updates the device policy. This method supports patch semantics.
-      operationId: androidenterprise.devices.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the device.
-          in: path
-          name: deviceId
-          required: true
-          schema:
-            type: string
-        - description: |-
-            Mask that identifies which fields to update. If not set, all modifiable fields will be modified.
-
-            When set in a query parameter, this field should be specified as updateMask=<field1>,<field2>,...
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Device'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Device'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - devices
     put:
       description: Updates the device policy
       operationId: androidenterprise.devices.update
@@ -2257,53 +2094,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: 'Requests to install the latest version of an app to a device. If the app is already installed, then it is updated to the latest version if necessary. This method supports patch semantics.'
-      operationId: androidenterprise.installs.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - description: The Android ID of the device.
-          in: path
-          name: deviceId
-          required: true
-          schema:
-            type: string
-        - description: 'The ID of the product represented by the install, e.g. "app:com.google.android.gm".'
-          in: path
-          name: installId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Install'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Install'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - installs
     put:
       description: 'Requests to install the latest version of an app to a device. If the app is already installed, then it is updated to the latest version if necessary.'
       operationId: androidenterprise.installs.update
@@ -2485,53 +2275,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Adds or updates a per-device managed configuration for an app for the specified device. This method supports patch semantics.
-      operationId: androidenterprise.managedconfigurationsfordevice.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - description: The Android ID of the device.
-          in: path
-          name: deviceId
-          required: true
-          schema:
-            type: string
-        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
-          in: path
-          name: managedConfigurationForDeviceId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManagedConfiguration'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ManagedConfiguration'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - managedconfigurationsfordevice
     put:
       description: Adds or updates a per-device managed configuration for an app for the specified device.
       operationId: androidenterprise.managedconfigurationsfordevice.update
@@ -2781,52 +2524,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Adds or updates an entitlement to an app for a user. This method supports patch semantics.
-      operationId: androidenterprise.entitlements.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
-          in: path
-          name: entitlementId
-          required: true
-          schema:
-            type: string
-        - description: 'Set to true to also install the product on all the user''s devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.'
-          in: query
-          name: install
-          schema:
-            type: boolean
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Entitlement'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Entitlement'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - entitlements
     put:
       description: Adds or updates an entitlement to an app for a user.
       operationId: androidenterprise.entitlements.update
@@ -2989,47 +2686,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties. This method supports patch semantics.'
-      operationId: androidenterprise.managedconfigurationsforuser.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the user.
-          in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
-          in: path
-          name: managedConfigurationForUserId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManagedConfiguration'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ManagedConfiguration'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - managedconfigurationsforuser
     put:
       description: 'Adds or updates the managed configuration settings for an app for the specified user. If you support the Managed configurations iframe, you can apply managed configurations to a user by specifying an mcmId and its associated configuration variables (if any) in the request. Alternatively, all EMMs can apply managed configurations by passing a list of managed properties.'
       operationId: androidenterprise.managedconfigurationsforuser.update
@@ -3266,41 +2922,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-    patch:
-      description: Updates an existing web app. This method supports patch semantics.
-      operationId: androidenterprise.webapps.patch
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          schema:
-            type: string
-        - description: The ID of the web app.
-          in: path
-          name: webAppId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/WebApp'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/WebApp'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - webapps
     put:
       description: Updates an existing web app.
       operationId: androidenterprise.webapps.update
@@ -3423,21 +3044,6 @@ components:
       schema:
         type: string
   requestBodies:
-    Device:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Device'
-    Entitlement:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Entitlement'
-    Install:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Install'
     ManagedConfiguration:
       content:
         application/json:
@@ -4053,7 +3659,7 @@ components:
           $ref: '#/components/schemas/ConfigurationVariables'
           description: Contains the ID of the managed configuration profile and the set of configuration variables (if any) defined for the user.
         kind:
-          default: 'androidenterprise#managedConfiguration'
+          description: Deprecated.
           type: string
         managedProperty:
           description: The set of managed properties for this configuration.
@@ -4346,6 +3952,11 @@ components:
         distributionChannel:
           description: How and to whom the package is made available. The value publicGoogleHosted means that the package is available through the Play store and not restricted to a specific enterprise. The value privateGoogleHosted means that the package is a private app (restricted to an enterprise) but hosted by Google. The value privateSelfHosted means that the package is a private app (restricted to an enterprise) and is privately hosted.
           type: string
+        features:
+          description: Noteworthy features (if any) of this product.
+          items:
+            type: string
+          type: array
         iconUrl:
           description: A link to an image that can be used as an icon for the product. This image is suitable for use at up to 512px x 512px.
           type: string

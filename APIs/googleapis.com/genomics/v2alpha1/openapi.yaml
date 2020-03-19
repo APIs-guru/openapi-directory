@@ -35,6 +35,8 @@ tags:
 paths:
   '/v2alpha1/pipelines:run':
     parameters:
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -42,10 +44,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Runs a pipeline.  The returned Operation's metadata field will contain a
@@ -92,6 +92,8 @@ paths:
         - pipelines
   '/v2alpha1/workers/{id}:checkIn':
     parameters:
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -99,10 +101,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         The worker uses this method to retrieve the assigned operation and
@@ -175,6 +175,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -182,12 +184,12 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
   '/v2alpha1/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -195,10 +197,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.

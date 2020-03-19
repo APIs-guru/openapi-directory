@@ -35,17 +35,17 @@ tags:
 paths:
   /v4/spreadsheets:
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: 'Creates a spreadsheet, returning the newly created spreadsheet.'
       operationId: sheets.spreadsheets.create
@@ -154,17 +154,17 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}':
     get:
       description: |-
@@ -208,30 +208,30 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v4/spreadsheets/{spreadsheetId}/developerMetadata:search':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Returns all developer metadata matching the specified DataFilter.
@@ -276,17 +276,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Copies a single sheet from a spreadsheet to another spreadsheet.
@@ -366,10 +366,9 @@ paths:
         - description: |-
             The major dimension that results should use.
 
-            For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
-            then requesting `range=A1:B2,majorDimension=ROWS` will return
-            `[[1,2],[3,4]]`,
-            whereas requesting `range=A1:B2,majorDimension=COLUMNS` will return
+            For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`, then
+            requesting `range=A1:B2,majorDimension=ROWS` returns `[[1,2],[3,4]]`,
+            whereas requesting `range=A1:B2,majorDimension=COLUMNS` returns
             `[[1,3],[2,4]]`.
           in: query
           name: majorDimension
@@ -421,17 +420,17 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     put:
       description: |-
         Sets values in a range of a spreadsheet.
@@ -455,9 +454,9 @@ paths:
             Determines if the update response should include the values
             of the cells that were updated. By default, responses
             do not include the updated values.
-            If the range to write was larger than than the range actually written,
-            the response will include all values in the requested range (excluding
-            trailing empty rows and columns).
+            If the range to write was larger than the range actually written, the
+            response includes all values in the requested range (excluding trailing
+            empty rows and columns).
           in: query
           name: includeValuesInResponse
           schema:
@@ -524,17 +523,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Appends values to a spreadsheet. The input range is used to search for
@@ -561,7 +560,7 @@ paths:
             type: string
         - description: |-
             The A1 notation of a range to search for a logical table of data.
-            Values will be appended after the last row of the table.
+            Values are appended after the last row of the table.
           in: path
           name: range
           required: true
@@ -644,17 +643,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values/{range}:clear':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Clears values from a spreadsheet.
@@ -704,17 +703,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClear':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Clears one or more ranges of values from a spreadsheet.
@@ -758,17 +757,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Clears one or more ranges of values from a spreadsheet.
@@ -840,9 +839,8 @@ paths:
             The major dimension that results should use.
 
             For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
-            then requesting `range=A1:B2,majorDimension=ROWS` will return
-            `[[1,2],[3,4]]`,
-            whereas requesting `range=A1:B2,majorDimension=COLUMNS` will return
+            then requesting `range=A1:B2,majorDimension=ROWS` returns `[[1,2],[3,4]]`,
+            whereas requesting `range=A1:B2,majorDimension=COLUMNS` returns
             `[[1,3],[2,4]]`.
           in: query
           name: majorDimension
@@ -902,30 +900,30 @@ paths:
       tags:
         - spreadsheets
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Returns one or more ranges of values that match the specified data filters.
@@ -969,17 +967,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Sets values in one or more ranges of a spreadsheet.
@@ -1023,17 +1021,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Sets values in one or more ranges of a spreadsheet.
@@ -1077,17 +1075,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:batchUpdate':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Applies one or more updates to the spreadsheet.
@@ -1146,17 +1144,17 @@ paths:
         - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}:getByDataFilter':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Returns the spreadsheet at the given ID.
@@ -1605,25 +1603,52 @@ components:
         firstBandColor:
           $ref: '#/components/schemas/Color'
           description: The first color that is alternating. (Required)
+        firstBandColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The first color that is alternating. (Required)
+            If first_band_color is also set, this field takes precedence.
         footerColor:
           $ref: '#/components/schemas/Color'
           description: |-
             The color of the last row or column. If this field is not set, the last
-            row or column will be filled with either first_band_color or
+            row or column is filled with either first_band_color or
             second_band_color, depending on the color of the previous row or
             column.
+        footerColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the last row or column. If this field is not set, the last
+            row or column is filled with either first_band_color or
+            second_band_color, depending on the color of the previous row or
+            column.
+            If footer_color is also set, this field takes precedence.
         headerColor:
           $ref: '#/components/schemas/Color'
           description: |-
-            The color of the first row or column. If this field is set, the first
-            row or column will be filled with this color and the colors will
-            alternate between first_band_color and second_band_color starting
-            from the second row or column. Otherwise, the first row or column will be
-            filled with first_band_color and the colors will proceed to alternate
-            as they normally would.
+            The color of the first row or column. If this field is set, the first row
+            or column is filled with this color and the colors alternate between
+            first_band_color and second_band_color starting from the second
+            row or column. Otherwise, the first row or column is filled with
+            first_band_color and the colors proceed to alternate as they normally
+            would.
+        headerColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the first row or column. If this field is set, the first row
+            or column is filled with this color and the colors alternate between
+            first_band_color and second_band_color starting from the second
+            row or column. Otherwise, the first row or column is filled with
+            first_band_color and the colors proceed to alternate as they normally
+            would. If header_color is also set, this field takes precedence.
         secondBandColor:
           $ref: '#/components/schemas/Color'
           description: The second color that is alternating. (Required)
+        secondBandColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The second color that is alternating. (Required)
+            If second_band_color is also set, this field takes precedence.
       type: object
     BaselineValueFormat:
       description: Formatting options for baseline value.
@@ -1645,6 +1670,12 @@ components:
           description: |-
             Color to be used, in case baseline value represents a negative change for
             key value. This field is optional.
+        negativeColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            Color to be used, in case baseline value represents a negative change for
+            key value. This field is optional.
+            If negative_color is also set, this field takes precedence.
         position:
           $ref: '#/components/schemas/TextPosition'
           description: |-
@@ -1655,6 +1686,12 @@ components:
           description: |-
             Color to be used, in case baseline value represents a positive change for
             key value. This field is optional.
+        positiveColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            Color to be used, in case baseline value represents a positive change for
+            key value. This field is optional.
+            If positive_color is also set, this field takes precedence.
         textFormat:
           $ref: '#/components/schemas/TextFormat'
           description: Text formatting options for baseline value.
@@ -1713,8 +1750,14 @@ components:
         color:
           $ref: '#/components/schemas/Color'
           description: |-
-            The color for elements (i.e. bars, lines, points) associated with this
-            series.  If empty, a default color is used.
+            The color for elements (such as bars, lines, and points) associated with
+            this series.  If empty, a default color is used.
+        colorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color for elements (such as bars, lines, and points) associated with
+            this series.  If empty, a default color is used.
+            If color is also set, this field takes precedence.
         lineStyle:
           $ref: '#/components/schemas/LineStyle'
           description: |-
@@ -1892,10 +1935,9 @@ components:
       properties:
         clearedRanges:
           description: |-
-            The ranges that were cleared, in A1 notation.
-            (If the requests were for an unbounded range or a ranger larger
-             than the bounds of the sheet, this will be the actual ranges
-             that were cleared, bounded to the sheet's limits.)
+            The ranges that were cleared, in A1 notation. If the requests are for an
+            unbounded range or a ranger larger than the bounds of the sheet, this is
+            the actual ranges that were cleared, bounded to the sheet's limits.
           items:
             type: string
           type: array
@@ -1917,10 +1959,9 @@ components:
       properties:
         clearedRanges:
           description: |-
-            The ranges that were cleared, in A1 notation.
-            (If the requests were for an unbounded range or a ranger larger
-             than the bounds of the sheet, this will be the actual ranges
-             that were cleared, bounded to the sheet's limits.)
+            The ranges that were cleared, in A1 notation. If the requests are for an
+            unbounded range or a ranger larger than the bounds of the sheet, this is
+            the actual ranges that were cleared, bounded to the sheet's limits.
           items:
             type: string
           type: array
@@ -1935,9 +1976,8 @@ components:
       properties:
         dataFilters:
           description: |-
-            The data filters used to match the ranges of values to retrieve.  Ranges
-            that match any of the specified data filters will be included in the
-            response.
+            The data filters used to match the ranges of values to retrieve. Ranges
+            that match any of the specified data filters are included in the response.
           items:
             $ref: '#/components/schemas/DataFilter'
           type: array
@@ -1956,10 +1996,9 @@ components:
             The major dimension that results should use.
 
             For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
-            then a request that selects that range and sets `majorDimension=ROWS` will
-            return `[[1,2],[3,4]]`,
-            whereas a request that sets `majorDimension=COLUMNS` will return
-            `[[1,3],[2,4]]`.
+            then a request that selects that range and sets `majorDimension=ROWS`
+            returns `[[1,2],[3,4]]`, whereas a request that sets
+            `majorDimension=COLUMNS` returns `[[1,3],[2,4]]`.
           enum:
             - DIMENSION_UNSPECIFIED
             - ROWS
@@ -2022,13 +2061,13 @@ components:
         responseIncludeGridData:
           description: |-
             True if grid data should be returned. Meaningful only if
-            if include_spreadsheet_in_response is 'true'.
+            include_spreadsheet_in_response is 'true'.
             This parameter is ignored if a field mask was set in the request.
           type: boolean
         responseRanges:
           description: |-
             Limits the ranges included in the response spreadsheet.
-            Meaningful only if include_spreadsheet_response is 'true'.
+            Meaningful only if include_spreadsheet_in_response is 'true'.
           items:
             type: string
           type: array
@@ -2058,8 +2097,8 @@ components:
         data:
           description: |-
             The new values to apply to the spreadsheet.  If more than one range is
-            matched by the specified DataFilter the specified values will be
-            applied to all of those ranges.
+            matched by the specified DataFilter the specified values are applied to
+            all of those ranges.
           items:
             $ref: '#/components/schemas/DataFilterValueRange'
           type: array
@@ -2068,10 +2107,10 @@ components:
             Determines if the update response should include the values
             of the cells that were updated. By default, responses
             do not include the updated values. The `updatedData` field within
-            each of the BatchUpdateValuesResponse.responses will contain
-            the updated values. If the range to write was larger than than the range
-            actually written, the response will include all values in the requested
-            range (excluding trailing empty rows and columns).
+            each of the BatchUpdateValuesResponse.responses contains the updated
+            values. If the range to write was larger than the range actually written,
+            the response includes all values in the requested range (excluding trailing
+            empty rows and columns).
           type: boolean
         responseDateTimeRenderOption:
           description: |-
@@ -2146,10 +2185,10 @@ components:
             Determines if the update response should include the values
             of the cells that were updated. By default, responses
             do not include the updated values. The `updatedData` field within
-            each of the BatchUpdateValuesResponse.responses will contain
-            the updated values. If the range to write was larger than than the range
-            actually written, the response will include all values in the requested
-            range (excluding trailing empty rows and columns).
+            each of the BatchUpdateValuesResponse.responses contains the updated
+            values. If the range to write was larger than the range actually written,
+            the response includes all values in the requested range (excluding trailing
+            empty rows and columns).
           type: boolean
         responseDateTimeRenderOption:
           description: |-
@@ -2287,6 +2326,11 @@ components:
         color:
           $ref: '#/components/schemas/Color'
           description: The color of the border.
+        colorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the border.
+            If color is also set, this field takes precedence.
         style:
           description: The style of the border.
           enum:
@@ -2328,6 +2372,11 @@ components:
         bubbleBorderColor:
           $ref: '#/components/schemas/Color'
           description: The bubble border color.
+        bubbleBorderColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The bubble border color.
+            If bubble_border_color is also set, this field takes precedence.
         bubbleLabels:
           $ref: '#/components/schemas/ChartData'
           description: The data containing the bubble labels.  These do not need to be unique.
@@ -2536,6 +2585,11 @@ components:
         backgroundColor:
           $ref: '#/components/schemas/Color'
           description: The background color of the cell.
+        backgroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color of the cell.
+            If background_color is also set, this field takes precedence.
         borders:
           $ref: '#/components/schemas/Borders'
           description: The borders of the cell.
@@ -2678,6 +2732,12 @@ components:
           description: |-
             The background color of the entire chart.
             Not applicable to Org charts.
+        backgroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color of the entire chart.
+            Not applicable to Org charts.
+            If background_color is also set, this field takes precedence.
         basicChart:
           $ref: '#/components/schemas/BasicChartSpec'
           description: |-
@@ -3110,9 +3170,9 @@ components:
         values:
           description: |-
             The data to be written.  If the provided values exceed any of the ranges
-            matched by the data filter then the request will fail.  If the provided
-            values are less than the matched ranges only the specified values will be
-            written, existing values in the matched ranges will remain unaffected.
+            matched by the data filter then the request fails.  If the provided values
+            are less than the matched ranges only the specified values are written,
+            existing values in the matched ranges remain unaffected.
           items:
             items: {}
             type: array
@@ -3739,15 +3799,26 @@ components:
           $ref: '#/components/schemas/Color'
           description: |-
             The background fill color to filter by; only cells with this fill color are
-            shown. Mutually exclusive with all other filter criteria. Requests to set
-            this field will fail with a 400 error if any other filter criteria field is
-            set.
+            shown. Mutually exclusive with visible_foreground_color.
+        visibleBackgroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background fill color to filter by; only cells with this fill color are
+            shown. This field is mutually exclusive with visible_foreground_color,
+            and must be set to an RGB-type color. If visible_background_color is
+            also set, this field takes precedence.
         visibleForegroundColor:
           $ref: '#/components/schemas/Color'
           description: |-
-            The text color to filter by; only cells with this text color are shown.
-            Mutually exclusive with all other filter criteria. Requests to set this
-            field will fail with a 400 error if any other filter criteria field is set.
+            The foreground color to filter by; only cells with this foreground color
+            are shown. Mutually exclusive with visible_background_color.
+        visibleForegroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The foreground color to filter by; only cells with this foreground color
+            are shown. This field is mutually exclusive with
+            visible_background_color, and must be set to an RGB-type color. If
+            visible_foreground_color is also set, this field takes precedence.
       type: object
     FilterView:
       description: A filter view.
@@ -4143,6 +4214,12 @@ components:
           description: |-
             The color of the column representing this series in each bucket.
             This field is optional.
+        barColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the column representing this series in each bucket.
+            This field is optional.
+            If bar_color is also set, this field takes precedence.
         data:
           $ref: '#/components/schemas/ChartData'
           description: The data for this histogram series.
@@ -4195,6 +4272,11 @@ components:
         color:
           $ref: '#/components/schemas/Color'
           description: The color this interpolation point should use.
+        colorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color this interpolation point should use.
+            If color is also set, this field takes precedence.
         type:
           description: How the value should be interpreted.
           enum:
@@ -4446,6 +4528,11 @@ components:
         nodeColor:
           $ref: '#/components/schemas/Color'
           description: The color of the org chart nodes.
+        nodeColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the org chart nodes.
+            If node_color is also set, this field takes precedence.
         nodeSize:
           description: The size of the org chart nodes.
           enum:
@@ -4464,6 +4551,11 @@ components:
         selectedNodeColor:
           $ref: '#/components/schemas/Color'
           description: The color of the selected org chart nodes.
+        selectedNodeColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the selected org chart nodes.
+            If selected_node_color is also set, this field takes precedence.
         tooltips:
           $ref: '#/components/schemas/ChartData'
           description: |-
@@ -5247,7 +5339,7 @@ components:
           description: |-
             The data filters describing the criteria used to determine which
             DeveloperMetadata entries to return.  DeveloperMetadata matching any of the
-            specified filters will be included in the response.
+            specified filters are included in the response.
           items:
             $ref: '#/components/schemas/DataFilter'
           type: array
@@ -5313,6 +5405,7 @@ components:
         data:
           description: |-
             Data in the grid, if this is a grid sheet.
+
             The number of GridData objects returned is dependent on the number of
             ranges requested on this sheet. For example, if this is representing
             `Sheet1`, and the spreadsheet was requested with ranges
@@ -5407,6 +5500,11 @@ components:
         tabColor:
           $ref: '#/components/schemas/Color'
           description: The color of the tab in the UI.
+        tabColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the tab in the UI.
+            If tab_color is also set, this field takes precedence.
         title:
           description: The name of the sheet.
           type: string
@@ -5439,6 +5537,11 @@ components:
         backgroundColor:
           $ref: '#/components/schemas/Color'
           description: The background color of the slicer.
+        backgroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color of the slicer.
+            If background_color is also set, this field takes precedence.
         columnIndex:
           description: The column index in the data table on which the filter is applied to.
           format: int32
@@ -5486,9 +5589,15 @@ components:
         backgroundColor:
           $ref: '#/components/schemas/Color'
           description: |-
-            The background fill color to sort by. Mutually exclusive with sorting by
-            text color. Requests to set this field will fail with a 400 error if
-            foreground color is also set.
+            The background fill color to sort by; cells with this fill color are sorted
+            to the top. Mutually exclusive with foreground_color.
+        backgroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background fill color to sort by; cells with this fill color are sorted
+            to the top. Mutually exclusive with foreground_color, and must be an
+            RGB-type color. If background_color is also set, this field takes
+            precedence.
         dimensionIndex:
           description: The dimension the sort should be applied to.
           format: int32
@@ -5496,9 +5605,15 @@ components:
         foregroundColor:
           $ref: '#/components/schemas/Color'
           description: |-
-            The text color to sort by. Mutually exclusive with sorting by background
-            fill color. Requests to set this field will fail with a 400 error if
-            background color is also set.
+            The foreground color to sort by; cells with this foreground color are
+            sorted to the top. Mutually exclusive with background_color.
+        foregroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The foreground color to sort by; cells with this foreground color are
+            sorted to the top. Mutually exclusive with background_color, and must
+            be an RGB-type color. If foreground_color is also set, this field takes
+            precedence.
         sortOrder:
           description: The order data should be sorted.
           enum:
@@ -5582,8 +5697,8 @@ components:
           $ref: '#/components/schemas/IterativeCalculationSettings'
           description: |-
             Determines whether and how circular references are resolved with iterative
-            calculation.  Absence of this field means that circular references will
-            result in calculation errors.
+            calculation.  Absence of this field means that circular references result
+            in calculation errors.
         locale:
           description: |-
             The locale of the spreadsheet in one of the following formats:
@@ -5617,8 +5732,8 @@ components:
           type: string
         themeColors:
           description: |-
-            The spreadsheet theme color pairs. For update users need to give all pairs
-            of theme colors.
+            The spreadsheet theme color pairs. To update you must provide all theme
+            color pairs.
           items:
             $ref: '#/components/schemas/ThemeColorPair'
           type: array
@@ -5641,6 +5756,11 @@ components:
         foregroundColor:
           $ref: '#/components/schemas/Color'
           description: The foreground color of the text.
+        foregroundColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The foreground color of the text.
+            If foreground_color is also set, this field takes precedence.
         italic:
           description: True if the text is italicized.
           type: boolean
@@ -5764,6 +5884,13 @@ components:
             The background color for cells with a color value greater than or equal
             to maxValue. Defaults to #109618 if not
             specified.
+        maxValueColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color for cells with a color value greater than or equal
+            to maxValue. Defaults to #109618 if not
+            specified.
+            If max_value_color is also set, this field takes precedence.
         midValueColor:
           $ref: '#/components/schemas/Color'
           description: |-
@@ -5771,17 +5898,38 @@ components:
             minValue and
             maxValue. Defaults to #efe6dc if not
             specified.
+        midValueColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color for cells with a color value at the midpoint between
+            minValue and
+            maxValue. Defaults to #efe6dc if not
+            specified.
+            If mid_value_color is also set, this field takes precedence.
         minValueColor:
           $ref: '#/components/schemas/Color'
           description: |-
             The background color for cells with a color value less than or equal to
             minValue. Defaults to #dc3912 if not
             specified.
+        minValueColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color for cells with a color value less than or equal to
+            minValue. Defaults to #dc3912 if not
+            specified.
+            If min_value_color is also set, this field takes precedence.
         noDataColor:
           $ref: '#/components/schemas/Color'
           description: |-
             The background color for cells that have no color data associated with
             them. Defaults to #000000 if not specified.
+        noDataColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color for cells that have no color data associated with
+            them. Defaults to #000000 if not specified.
+            If no_data_color is also set, this field takes precedence.
       type: object
     TreemapChartSpec:
       description: A <a href="/chart/interactive/docs/gallery/treemap">Treemap chart</a>.
@@ -5816,6 +5964,11 @@ components:
         headerColor:
           $ref: '#/components/schemas/Color'
           description: The background color for header cells.
+        headerColorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The background color for header cells.
+            If header_color is also set, this field takes precedence.
         hideTooltips:
           description: True to hide tooltips.
           type: boolean
@@ -6350,6 +6503,11 @@ components:
         color:
           $ref: '#/components/schemas/Color'
           description: The color of the column.
+        colorStyle:
+          $ref: '#/components/schemas/ColorStyle'
+          description: |-
+            The color of the column.
+            If color is also set, this field takes precedence.
         label:
           description: The label of the column's legend.
           type: string

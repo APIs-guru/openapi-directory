@@ -37,6 +37,7 @@ tags:
   - name: datafeeds
   - name: datafeedstatuses
   - name: liasettings
+  - name: localinventory
   - name: orderinvoices
   - name: orderreports
   - name: orderreturns
@@ -44,6 +45,7 @@ tags:
   - name: pos
   - name: products
   - name: productstatuses
+  - name: pubsubnotificationsettings
   - name: regionalinventory
   - name: returnaddress
   - name: returnpolicy
@@ -287,6 +289,37 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
+  /localinventory/batch:
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Updates local inventory for multiple products or stores in a single request.
+      operationId: content.localinventory.custombatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalinventoryCustomBatchRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LocalinventoryCustomBatchResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - localinventory
   /pos/batch:
     parameters:
       - $ref: '#/components/parameters/alt'
@@ -770,6 +803,55 @@ paths:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - accounts
+  '/{merchantId}/accounts/{accountId}/listlinks':
+    get:
+      description: Returns the list of accounts linked to your Merchant Center account.
+      operationId: content.accounts.listlinks
+      parameters:
+        - description: 'The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and accountId must be the ID of a sub-account of this account.'
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the account for which to list links.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of links to return in the response, used for pagination.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountsListLinksResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
   '/{merchantId}/accountstatuses':
     get:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
@@ -2893,7 +2975,7 @@ paths:
       - $ref: '#/components/parameters/userIp'
   '/{merchantId}/products':
     get:
-      description: Lists the products in your Merchant Center account.
+      description: Lists the products in your Merchant Center account. The response might contain fewer items than specified by maxResults. Rely on nextPageToken to determine if there are more items to be requested.
       operationId: content.products.list
       parameters:
         - description: The ID of the account that contains the products. This account cannot be a multi-client account.
@@ -3038,6 +3120,50 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/products/{productId}/localinventory':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Update the local inventory of a product in your Merchant Center account.
+      operationId: content.localinventory.insert
+      parameters:
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The REST ID of the product for which to update local inventory.
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalInventory'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LocalInventory'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - localinventory
   '/{merchantId}/products/{productId}/regionalinventory':
     parameters:
       - $ref: '#/components/parameters/alt'
@@ -3180,6 +3306,68 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/pubsubnotificationsettings':
+    get:
+      description: Retrieves a Merchant Center account's pubsub notification settings.
+      operationId: content.pubsubnotificationsettings.get
+      parameters:
+        - description: The ID of the account for which to get pubsub notification settings.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PubsubNotificationSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - pubsubnotificationsettings
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    put:
+      description: Register a Merchant Center account for pubsub notifications. Note that cloud topic name should not be provided as part of the request.
+      operationId: content.pubsubnotificationsettings.update
+      parameters:
+        - description: The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PubsubNotificationSettings'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PubsubNotificationSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - pubsubnotificationsettings
   '/{merchantId}/returnaddress':
     get:
       description: Lists the return addresses of the Merchant Center account.
@@ -3632,6 +3820,39 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/supportedPickupServices':
+    get:
+      description: Retrieves supported pickup services for an account.
+      operationId: content.shippingsettings.getsupportedpickupservices
+      parameters:
+        - description: The ID of the account for which to retrieve the supported pickup services.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ShippingsettingsGetSupportedPickupServicesResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - shippingsettings
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
   '/{merchantId}/testorders':
     parameters:
       - $ref: '#/components/parameters/alt'
@@ -3774,6 +3995,7 @@ paths:
               - template1a
               - template1b
               - template2
+              - template3
             type: string
         - description: The country of the template to retrieve. Defaults to US.
           in: query
@@ -4231,6 +4453,11 @@ components:
         linkedAccountId:
           description: The ID of the linked account.
           type: string
+        services:
+          description: List of provided services.
+          items:
+            type: string
+          type: array
       type: object
     AccountsCustomBatchResponse:
       properties:
@@ -4273,12 +4500,32 @@ components:
         linkedAccountId:
           description: The ID of the linked account.
           type: string
+        services:
+          description: List of provided services.
+          items:
+            type: string
+          type: array
       type: object
     AccountsLinkResponse:
       properties:
         kind:
           default: 'content#accountsLinkResponse'
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsLinkResponse".'
+          type: string
+      type: object
+    AccountsListLinksResponse:
+      properties:
+        kind:
+          default: 'content#accountsListLinksResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsListLinksResponse".'
+          type: string
+        links:
+          description: The list of available links.
+          items:
+            $ref: '#/components/schemas/LinkedAccount'
+          type: array
+        nextPageToken:
+          description: The token for the retrieval of the next page of links.
           type: string
       type: object
     AccountsListResponse:
@@ -4509,8 +4756,10 @@ components:
     CustomerReturnReason:
       properties:
         description:
+          description: Description of the reason.
           type: string
         reasonCode:
+          description: Code of the return reason.
           type: string
       type: object
     CutoffTime:
@@ -5288,6 +5537,118 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsSetPosDataProviderResponse".'
           type: string
       type: object
+    LinkService:
+      properties:
+        service:
+          description: Service provided to or by the linked account.
+          type: string
+        status:
+          description: Status of the link
+          type: string
+      type: object
+    LinkedAccount:
+      properties:
+        linkedAccountId:
+          description: The ID of the linked account.
+          type: string
+        services:
+          description: List of provided services.
+          items:
+            $ref: '#/components/schemas/LinkService'
+          type: array
+      type: object
+    LocalInventory:
+      description: 'Local inventory resource. For accepted attribute values, see the local product inventory feed specification.'
+      properties:
+        availability:
+          description: Availability of the product.
+          type: string
+        instoreProductLocation:
+          description: In-store product location.
+          type: string
+        kind:
+          default: 'content#localInventory'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localInventory".'
+          type: string
+        pickupMethod:
+          description: 'Supported pickup method for this offer. Unless the value is "not supported", this field must be submitted together with pickupSla.'
+          type: string
+        pickupSla:
+          description: Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with pickupMethod.
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+          description: Price of the product.
+        quantity:
+          description: Quantity of the product. Must be nonnegative.
+          format: uint32
+          type: integer
+        salePrice:
+          $ref: '#/components/schemas/Price'
+          description: Sale price of the product. Mandatory if sale_price_effective_date is defined.
+        salePriceEffectiveDate:
+          description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates may be specified as ''null'' if undecided.'
+          type: string
+        storeCode:
+          description: Store code of this local inventory resource.
+          type: string
+      type: object
+    LocalinventoryCustomBatchRequest:
+      properties:
+        entries:
+          description: The request entries to be processed in the batch.
+          items:
+            $ref: '#/components/schemas/LocalinventoryCustomBatchRequestEntry'
+          type: array
+      type: object
+    LocalinventoryCustomBatchRequestEntry:
+      description: Batch entry encoding a single local inventory update request.
+      properties:
+        batchId:
+          description: 'An entry ID, unique within the batch request.'
+          format: uint32
+          type: integer
+        localInventory:
+          $ref: '#/components/schemas/LocalInventory'
+          description: Local inventory of the product.
+        merchantId:
+          description: The ID of the managing account.
+          format: uint64
+          type: string
+        method:
+          description: Method of the batch request entry.
+          type: string
+        productId:
+          description: The ID of the product for which to update local inventory.
+          type: string
+      type: object
+    LocalinventoryCustomBatchResponse:
+      properties:
+        entries:
+          description: The result of the execution of the batch requests.
+          items:
+            $ref: '#/components/schemas/LocalinventoryCustomBatchResponseEntry'
+          type: array
+        kind:
+          default: 'content#localinventoryCustomBatchResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localinventoryCustomBatchResponse".'
+          type: string
+      type: object
+    LocalinventoryCustomBatchResponseEntry:
+      description: Batch entry encoding a single local inventory update response.
+      properties:
+        batchId:
+          description: The ID of the request entry this entry responds to.
+          format: uint32
+          type: integer
+        errors:
+          $ref: '#/components/schemas/Errors'
+          description: A list of errors defined if and only if the request failed.
+        kind:
+          default: 'content#localinventoryCustomBatchResponseEntry'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localinventoryCustomBatchResponseEntry".'
+          type: string
+      type: object
     LocationIdSet:
       properties:
         locationIds:
@@ -5311,20 +5672,27 @@ components:
           type: number
       type: object
     MerchantOrderReturn:
+      description: Order return. Production access (all methods) requires the order manager role. Sandbox access does not.
       properties:
         creationDate:
+          description: 'The date of creation of the return, in ISO 8601 format.'
           type: string
         merchantOrderId:
+          description: Merchant defined order ID.
           type: string
         orderId:
+          description: Google order ID.
           type: string
         orderReturnId:
+          description: Order return ID generated by Google.
           type: string
         returnItems:
+          description: Items of the return.
           items:
             $ref: '#/components/schemas/MerchantOrderReturnItem'
           type: array
         returnShipments:
+          description: Shipments of the return.
           items:
             $ref: '#/components/schemas/ReturnShipment'
           type: array
@@ -5333,17 +5701,23 @@ components:
       properties:
         customerReturnReason:
           $ref: '#/components/schemas/CustomerReturnReason'
+          description: The reason that the customer chooses to return an item.
         itemId:
+          description: 'Product level item ID. If the returned items are of the same product, they will have the same ID.'
           type: string
         merchantReturnReason:
           $ref: '#/components/schemas/RefundReason'
+          description: The reason that merchant chooses to accept a return item.
         product:
           $ref: '#/components/schemas/OrderLineItemProduct'
+          description: Product data from the time of the order placement.
         returnShipmentIds:
+          description: IDs of the return shipments that this return item belongs to.
           items:
             type: string
           type: array
         state:
+          description: State of the item.
           type: string
       type: object
     Order:
@@ -5395,7 +5769,18 @@ components:
           description: 'The date when the order was placed, in ISO 8601 format.'
           type: string
         promotions:
-          description: Promotions associated with the order.
+          description: |-
+            Promotions associated with the order.
+
+            To determine which promotions apply to which products, check the Promotions[].appliedItems[].lineItemId field against the LineItems[].id field for each promotion. If a promotion is applied to more than 1 offerId, divide the discount value by the number of affected offers to determine how much discount to apply to each offerId.
+
+            Examples:  
+            - To calculate price paid by the customer for a single line item including the discount: For each promotion, subtract the LineItems[].adjustments[].priceAdjustment.value amount from the LineItems[].Price.value. 
+            - To calculate price paid by the customer for a single line item including the discount in case of multiple quantity: For each promotion, divide the LineItems[].adjustments[].priceAdjustment.value by the quantity of products then subtract the resulting value from the LineItems[].Product.Price.value for each quantity item.  
+
+            Only 1 promotion can be applied to an offerId in a given order. To refund an item which had a promotion applied to it, make sure to refund the amount after first subtracting the promotion discount from the item price.
+
+            More details about the program are here.
           items:
             $ref: '#/components/schemas/OrderPromotion'
           type: array
@@ -5942,7 +6327,9 @@ components:
             - "colis prive" (Colis Privé) 
             - "boxtal" (Boxtal) 
             - "geodis" (GEODIS) 
-            - "tnt" (TNT)
+            - "tnt" (TNT) 
+            - "db schenker" (DB Schenker) 
+            - "aramex" (Aramex)
           type: string
         creationDate:
           description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -6539,6 +6926,27 @@ components:
         kind:
           default: 'content#ordersUpdateShipmentResponse'
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateShipmentResponse".'
+          type: string
+      type: object
+    PickupCarrierService:
+      properties:
+        carrierName:
+          description: 'The name of the pickup carrier (e.g., "UPS"). Required.'
+          type: string
+        serviceName:
+          description: 'The name of the pickup service (e.g., "Access point"). Required.'
+          type: string
+      type: object
+    PickupServicesPickupService:
+      properties:
+        carrierName:
+          description: 'The name of the carrier (e.g., "UPS"). Always present.'
+          type: string
+        country:
+          description: 'The CLDR country code of the carrier (e.g., "US"). Always present.'
+          type: string
+        serviceName:
+          description: 'The name of the pickup service (e.g., "Access point"). Always present.'
           type: string
       type: object
     PosCustomBatchRequest:
@@ -7473,6 +7881,22 @@ components:
             $ref: '#/components/schemas/ProductStatus'
           type: array
       type: object
+    PubsubNotificationSettings:
+      description: 'Settings for Pub/Sub notifications, all methods require that the caller is a direct user of the merchant center account.'
+      properties:
+        cloudTopicName:
+          description: Cloud pub/sub topic to which notifications are sent (read-only).
+          type: string
+        kind:
+          default: 'content#pubsubNotificationSettings'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#pubsubNotificationSettings".'
+          type: string
+        registeredEvents:
+          description: 'List of event types. Supported event types: orderPendingShipment.'
+          items:
+            type: string
+          type: array
+      type: object
     RateGroup:
       properties:
         applicableShippingLabels:
@@ -7503,8 +7927,10 @@ components:
     RefundReason:
       properties:
         description:
+          description: Description of the reason.
           type: string
         reasonCode:
+          description: Code of the refund reason.
           type: string
       type: object
     RegionalInventory:
@@ -7703,20 +8129,27 @@ components:
     ReturnShipment:
       properties:
         creationDate:
+          description: 'The date of creation of the shipment, in ISO 8601 format.'
           type: string
         deliveryDate:
+          description: 'The date of delivery of the shipment, in ISO 8601 format.'
           type: string
         returnMethodType:
+          description: Type of the return method.
           type: string
         shipmentId:
+          description: Shipment ID generated by Google.
           type: string
         shipmentTrackingInfos:
+          description: Tracking information of the shipment. One return shipment might be handled by several shipping carriers sequentially.
           items:
             $ref: '#/components/schemas/ShipmentTrackingInfo'
           type: array
         shippingDate:
+          description: 'The date of shipping of the shipment, in ISO 8601 format.'
           type: string
         state:
+          description: State of the shipment.
           type: string
       type: object
     ReturnaddressCustomBatchRequest:
@@ -7887,11 +8320,17 @@ components:
         name:
           description: Free-form name of the service. Must be unique within target account. Required.
           type: string
+        pickupService:
+          $ref: '#/components/schemas/PickupCarrierService'
+          description: The carrier-service pair delivering items to collection points. The list of supported pickup services can be retrieved via the getSupportedPickupServices method. Required if and only if the service delivery type is pickup.
         rateGroups:
           description: 'Shipping rate group definitions. Only the last one is allowed to have an empty applicableShippingLabels, which means "everything else". The other applicableShippingLabels must not overlap.'
           items:
             $ref: '#/components/schemas/RateGroup'
           type: array
+        shipmentType:
+          description: Type of locations this service ships orders to.
+          type: string
       type: object
     ShipmentInvoice:
       properties:
@@ -7927,8 +8366,10 @@ components:
     ShipmentTrackingInfo:
       properties:
         carrier:
+          description: The shipping carrier that handles the package.
           type: string
         trackingNumber:
+          description: The tracking number for the package.
           type: string
       type: object
     ShippingSettings:
@@ -8031,6 +8472,18 @@ components:
           default: 'content#shippingsettingsGetSupportedHolidaysResponse'
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedHolidaysResponse".'
           type: string
+      type: object
+    ShippingsettingsGetSupportedPickupServicesResponse:
+      properties:
+        kind:
+          default: 'content#shippingsettingsGetSupportedPickupServicesResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedPickupServicesResponse".'
+          type: string
+        pickupServices:
+          description: A list of supported pickup services. May be empty.
+          items:
+            $ref: '#/components/schemas/PickupServicesPickupService'
+          type: array
       type: object
     ShippingsettingsListResponse:
       properties:

@@ -130,6 +130,10 @@ paths:
           Oauth2c:
             - 'https://mail.google.com/'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.action.compose'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.action.compose'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
           Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
@@ -990,6 +994,10 @@ paths:
           Oauth2c:
             - 'https://mail.google.com/'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.action.compose'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.action.compose'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
           Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
@@ -1079,6 +1087,18 @@ paths:
             - 'https://mail.google.com/'
           Oauth2c:
             - 'https://mail.google.com/'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.metadata'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.metadata'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.metadata'
           Oauth2c:
@@ -1274,6 +1294,14 @@ paths:
             - 'https://mail.google.com/'
           Oauth2c:
             - 'https://mail.google.com/'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
           Oauth2c:
@@ -1474,7 +1502,7 @@ paths:
       description: |-
         Adds a delegate with its verification status set directly to accepted, without sending any verification email. The delegate user must be a member of the same G Suite organization as the delegator user.
 
-        Gmail imposes limtations on the number of delegates and delegators each user in a G Suite organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators.
+        Gmail imposes limitations on the number of delegates and delegators each user in a G Suite organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators.
 
         Note that a delegate user must be referred to by their primary email address, and not an email alias.
 
@@ -2942,6 +2970,18 @@ paths:
           Oauth2c:
             - 'https://mail.google.com/'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.action'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.metadata'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.metadata'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/gmail.addons.current.message.readonly'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.metadata'
           Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
@@ -3976,6 +4016,10 @@ components:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://mail.google.com/': 'Read, compose, send, and permanently delete all your email from Gmail'
+            'https://www.googleapis.com/auth/gmail.addons.current.action.compose': Manage drafts and send emails when you interact with the add-on
+            'https://www.googleapis.com/auth/gmail.addons.current.message.action': View your email messages when you interact with the add-on
+            'https://www.googleapis.com/auth/gmail.addons.current.message.metadata': View your email message metadata when the add-on is running
+            'https://www.googleapis.com/auth/gmail.addons.current.message.readonly': View your email messages when the add-on is running
             'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
             'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
             'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
@@ -3993,6 +4037,10 @@ components:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://mail.google.com/': 'Read, compose, send, and permanently delete all your email from Gmail'
+            'https://www.googleapis.com/auth/gmail.addons.current.action.compose': Manage drafts and send emails when you interact with the add-on
+            'https://www.googleapis.com/auth/gmail.addons.current.message.action': View your email messages when you interact with the add-on
+            'https://www.googleapis.com/auth/gmail.addons.current.message.metadata': View your email message metadata when the add-on is running
+            'https://www.googleapis.com/auth/gmail.addons.current.message.readonly': View your email messages when the add-on is running
             'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
             'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
             'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels

@@ -37,6 +37,8 @@ tags:
 paths:
   /v1/applicationDetailService/getApkDetails:
     parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -46,8 +48,6 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Gets the details of an Android application APK.
       operationId: testing.applicationDetailService.getApkDetails
@@ -72,6 +72,8 @@ paths:
         - applicationDetailService
   '/v1/projects/{projectId}/testMatrices':
     parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -81,8 +83,6 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates and runs a matrix of tests according to the given specifications.
@@ -175,6 +175,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -184,10 +186,10 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel':
     parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -197,8 +199,6 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Cancels unfinished test executions in a test matrix.
@@ -286,6 +286,8 @@ paths:
       tags:
         - testEnvironmentCatalog
     parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -295,8 +297,6 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
 components:
   parameters:
     _.xgafv:
@@ -628,6 +628,9 @@ components:
           items:
             type: string
           type: array
+        thumbnailUrl:
+          description: URL of a thumbnail image of the device.
+          type: string
       type: object
     AndroidRoboTest:
       description: |-
@@ -1091,7 +1094,7 @@ components:
     IosModel:
       description: |-
         A description of an iOS device tests may be run on.
-        Next tag: 11
+        Next tag: 12
       properties:
         deviceCapabilities:
           description: |-
@@ -1504,6 +1507,15 @@ components:
           description: URI for the action.
           type: string
       type: object
+    SystraceSetup:
+      properties:
+        durationSeconds:
+          description: |-
+            Systrace duration in seconds.
+            Should be between 1 and 30 seconds. 0 disables systrace.
+          format: int32
+          type: integer
+      type: object
     TestDetails:
       description: Additional details about the progress of the running test.
       properties:
@@ -1745,6 +1757,13 @@ components:
             NETWORK_CONFIGURATION environment type when calling
             TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string
+        systrace:
+          $ref: '#/components/schemas/SystraceSetup'
+          description: |-
+            Systrace configuration for the run.
+            If set a systrace will be taken, starting on test start and lasting for the
+            configured duration. The systrace file thus obtained is put in the results
+            bucket together with the other artifacts from the run.
       type: object
     TestSpecification:
       description: A description of how to run the test.

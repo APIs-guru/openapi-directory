@@ -2890,9 +2890,6 @@ components:
         purchaseType:
           description: Purchase type enum value. Unmodifiable after creation.
           type: string
-        season:
-          $ref: '#/components/schemas/Season'
-          description: Definition of a season for a seasonal subscription. Can be defined only for yearly subscriptions.
         sku:
           description: 'The stock-keeping-unit (SKU) of the product, unique within an app.'
           type: string
@@ -2956,17 +2953,6 @@ components:
             $ref: '#/components/schemas/Listing'
           type: array
       type: object
-    MonthDay:
-      properties:
-        day:
-          description: 'Day of a month, value in [1, 31] range. Valid range depends on the specified month.'
-          format: uint32
-          type: integer
-        month:
-          description: 'Month of a year. e.g. 1 = JAN, 2 = FEB etc.'
-          format: uint32
-          type: integer
-      type: object
     PageInfo:
       properties:
         resultPerPage:
@@ -3029,15 +3015,6 @@ components:
           format: int32
           type: integer
       type: object
-    Prorate:
-      properties:
-        defaultPrice:
-          $ref: '#/components/schemas/Price'
-          description: Default price cannot be zero and must be less than the full subscription price. Default price is always in the developer's Checkout merchant currency. Targeted countries have their prices set automatically based on the default_price.
-        start:
-          $ref: '#/components/schemas/MonthDay'
-          description: Defines the first day on which the price takes effect.
-      type: object
     Review:
       properties:
         authorName:
@@ -3082,20 +3059,6 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/ReviewReplyResult'
-      type: object
-    Season:
-      properties:
-        end:
-          $ref: '#/components/schemas/MonthDay'
-          description: Inclusive end date of the recurrence period.
-        prorations:
-          description: Optionally present list of prorations for the season. Each proration is a one-off discounted entry into a subscription. Each proration contains the first date on which the discount is available and the new pricing information.
-          items:
-            $ref: '#/components/schemas/Prorate'
-          type: array
-        start:
-          $ref: '#/components/schemas/MonthDay'
-          description: Inclusive start date of the recurrence period.
       type: object
     SubscriptionCancelSurveyResult:
       description: Information provided by the user when they complete the subscription cancellation flow (cancellation reason survey).
@@ -3221,7 +3184,8 @@ components:
         purchaseType:
           description: |-
             The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
-            - Test (i.e. purchased from a license testing account)
+            - Test (i.e. purchased from a license testing account) 
+            - Promo (i.e. purchased using a promo code)
           format: int32
           type: integer
         startTimeMillis:

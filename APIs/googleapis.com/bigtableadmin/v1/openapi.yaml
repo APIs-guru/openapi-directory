@@ -130,17 +130,17 @@ components:
             The location where this cluster's nodes and storage reside. For best
             performance, clients should be located as close as possible to this
             cluster. Currently only zones are supported, so values should be of the
-            form `projects/<project>/locations/<zone>`.
+            form `projects/{project}/locations/{zone}`.
           type: string
         name:
           description: |-
-            (`OutputOnly`)
+            Required. (`OutputOnly`)
             The unique name of the cluster. Values are of the form
-            `projects/<project>/instances/<instance>/clusters/a-z*`.
+            `projects/{project}/instances/{instance}/clusters/a-z*`.
           type: string
         serveNodes:
           description: |-
-            The number of nodes allocated to this cluster. More nodes enable higher
+            Required. The number of nodes allocated to this cluster. More nodes enable higher
             throughput and more consistent performance.
           format: int32
           type: integer
@@ -190,19 +190,19 @@ components:
         cluster:
           $ref: '#/components/schemas/Cluster'
           description: |-
-            The cluster to be created.
+            Required. The cluster to be created.
             Fields marked `OutputOnly` must be left blank.
         clusterId:
           description: |-
-            The ID to be used when referring to the new cluster within its instance,
+            Required. The ID to be used when referring to the new cluster within its instance,
             e.g., just `mycluster` rather than
             `projects/myproject/instances/myinstance/clusters/mycluster`.
           type: string
         parent:
           description: |-
-            The unique name of the instance in which to create the new cluster.
+            Required. The unique name of the instance in which to create the new cluster.
             Values are of the form
-            `projects/<project>/instances/<instance>`.
+            `projects/{project}/instances/{instance}`.
           type: string
       type: object
     CreateInstanceMetadata:
@@ -227,7 +227,7 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/Cluster'
           description: |-
-            The clusters to be created within the instance, mapped by desired
+            Required. The clusters to be created within the instance, mapped by desired
             cluster ID, e.g., just `mycluster` rather than
             `projects/myproject/instances/myinstance/clusters/mycluster`.
             Fields marked `OutputOnly` must be left blank.
@@ -236,18 +236,18 @@ components:
         instance:
           $ref: '#/components/schemas/Instance'
           description: |-
-            The instance to create.
+            Required. The instance to create.
             Fields marked `OutputOnly` must be left blank.
         instanceId:
           description: |-
-            The ID to be used when referring to the new instance within its project,
+            Required. The ID to be used when referring to the new instance within its project,
             e.g., just `myinstance` rather than
             `projects/myproject/instances/myinstance`.
           type: string
         parent:
           description: |-
-            The unique name of the project in which to create the new instance.
-            Values are of the form `projects/<project>`.
+            Required. The unique name of the project in which to create the new instance.
+            Values are of the form `projects/{project}`.
           type: string
       type: object
     Instance:
@@ -259,7 +259,7 @@ components:
       properties:
         displayName:
           description: |-
-            The descriptive name for this instance as it appears in UIs.
+            Required. The descriptive name for this instance as it appears in UIs.
             Can be changed at any time, but should be kept globally unique
             to avoid confusion.
           type: string
@@ -267,7 +267,7 @@ components:
           additionalProperties:
             type: string
           description: |-
-            Labels are a flexible and lightweight mechanism for organizing cloud
+            Required. Labels are a flexible and lightweight mechanism for organizing cloud
             resources into groups that reflect a customer's organizational needs and
             deployment strategies. They can be used to filter resources and aggregate
             metrics.
@@ -281,9 +281,9 @@ components:
           type: object
         name:
           description: |-
-            (`OutputOnly`)
+            Required. (`OutputOnly`)
             The unique name of the instance. Values are of the form
-            `projects/<project>/instances/a-z+[a-z0-9]`.
+            `projects/{project}/instances/a-z+[a-z0-9]`.
           type: string
         state:
           description: |-
@@ -295,7 +295,7 @@ components:
             - CREATING
           type: string
         type:
-          description: The type of the instance. Defaults to `PRODUCTION`.
+          description: Required. The type of the instance. Defaults to `PRODUCTION`.
           enum:
             - TYPE_UNSPECIFIED
             - PRODUCTION
@@ -307,10 +307,10 @@ components:
       properties:
         instance:
           $ref: '#/components/schemas/Instance'
-          description: The Instance which will (partially) replace the current value.
+          description: Required. The Instance which will (partially) replace the current value.
         updateMask:
           description: |-
-            The subset of Instance fields which should be replaced.
+            Required. The subset of Instance fields which should be replaced.
             Must be explicitly set.
           format: google-fieldmask
           type: string

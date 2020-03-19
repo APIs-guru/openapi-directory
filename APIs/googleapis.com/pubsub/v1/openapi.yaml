@@ -36,17 +36,17 @@ tags:
 paths:
   '/v1/{name}':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: |-
         Updates an existing topic. Note that certain properties of a
@@ -54,7 +54,7 @@ paths:
       operationId: pubsub.projects.topics.patch
       parameters:
         - description: |-
-            The name of the topic. It must have the format
+            Required. The name of the topic. It must have the format
             `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
             and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
             underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -97,7 +97,7 @@ paths:
       operationId: pubsub.projects.topics.create
       parameters:
         - description: |-
-            The name of the topic. It must have the format
+            Required. The name of the topic. It must have the format
             `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
             and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
             underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -144,7 +144,7 @@ paths:
       operationId: pubsub.projects.snapshots.list
       parameters:
         - description: |-
-            The name of the project in which to list snapshots.
+            Required. The name of the project in which to list snapshots.
             Format is `projects/{project-id}`.
           in: path
           name: project
@@ -184,24 +184,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{project}/subscriptions':
     get:
       description: Lists matching subscriptions.
       operationId: pubsub.projects.subscriptions.list
       parameters:
         - description: |-
-            The name of the project in which to list subscriptions.
+            Required. The name of the project in which to list subscriptions.
             Format is `projects/{project-id}`.
           in: path
           name: project
@@ -241,24 +241,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{project}/topics':
     get:
       description: Lists matching topics.
       operationId: pubsub.projects.topics.list
       parameters:
         - description: |-
-            The name of the project in which to list topics.
+            Required. The name of the project in which to list topics.
             Format is `projects/{project-id}`.
           in: path
           name: project
@@ -298,17 +298,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{resource}:getIamPolicy':
     get:
       description: |-
@@ -358,30 +358,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -424,17 +424,17 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -494,7 +494,7 @@ paths:
       operationId: pubsub.projects.snapshots.delete
       parameters:
         - description: |-
-            The name of the snapshot to delete.
+            Required. The name of the snapshot to delete.
             Format is `projects/{project}/snapshots/{snap}`.
           in: path
           name: snapshot
@@ -530,7 +530,7 @@ paths:
       operationId: pubsub.projects.snapshots.get
       parameters:
         - description: |-
-            The name of the snapshot to get.
+            Required. The name of the snapshot to get.
             Format is `projects/{project}/snapshots/{snap}`.
           in: path
           name: snapshot
@@ -557,17 +557,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{subscription}':
     delete:
       description: |-
@@ -579,7 +579,7 @@ paths:
       operationId: pubsub.projects.subscriptions.delete
       parameters:
         - description: |-
-            The subscription to delete.
+            Required. The subscription to delete.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -610,7 +610,7 @@ paths:
       operationId: pubsub.projects.subscriptions.get
       parameters:
         - description: |-
-            The name of the subscription to get.
+            Required. The name of the subscription to get.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -637,30 +637,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{subscription}:acknowledge':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Acknowledges the messages associated with the `ack_ids` in the
@@ -673,7 +673,7 @@ paths:
       operationId: pubsub.projects.subscriptions.acknowledge
       parameters:
         - description: |-
-            The subscription whose message is being acknowledged.
+            Required. The subscription whose message is being acknowledged.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -706,17 +706,17 @@ paths:
         - projects
   '/v1/{subscription}:modifyAckDeadline':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Modifies the ack deadline for a specific message. This method is useful
@@ -727,7 +727,7 @@ paths:
       operationId: pubsub.projects.subscriptions.modifyAckDeadline
       parameters:
         - description: |-
-            The name of the subscription.
+            Required. The name of the subscription.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -760,17 +760,17 @@ paths:
         - projects
   '/v1/{subscription}:modifyPushConfig':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Modifies the `PushConfig` for a specified subscription.
@@ -782,7 +782,7 @@ paths:
       operationId: pubsub.projects.subscriptions.modifyPushConfig
       parameters:
         - description: |-
-            The name of the subscription.
+            Required. The name of the subscription.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -815,17 +815,17 @@ paths:
         - projects
   '/v1/{subscription}:pull':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Pulls messages from the server. The server may return `UNAVAILABLE` if
@@ -834,7 +834,7 @@ paths:
       operationId: pubsub.projects.subscriptions.pull
       parameters:
         - description: |-
-            The subscription from which messages should be pulled.
+            Required. The subscription from which messages should be pulled.
             Format is `projects/{project}/subscriptions/{sub}`.
           in: path
           name: subscription
@@ -867,17 +867,17 @@ paths:
         - projects
   '/v1/{subscription}:seek':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Seeks an existing subscription to a point in time or to a given snapshot,
@@ -890,7 +890,7 @@ paths:
         must be on the same topic.
       operationId: pubsub.projects.subscriptions.seek
       parameters:
-        - description: The subscription to affect.
+        - description: Required. The subscription to affect.
           in: path
           name: subscription
           required: true
@@ -931,7 +931,7 @@ paths:
       operationId: pubsub.projects.topics.delete
       parameters:
         - description: |-
-            Name of the topic to delete.
+            Required. Name of the topic to delete.
             Format is `projects/{project}/topics/{topic}`.
           in: path
           name: topic
@@ -962,7 +962,7 @@ paths:
       operationId: pubsub.projects.topics.get
       parameters:
         - description: |-
-            The name of the topic to get.
+            Required. The name of the topic to get.
             Format is `projects/{project}/topics/{topic}`.
           in: path
           name: topic
@@ -989,17 +989,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{topic}/snapshots':
     get:
       description: |-
@@ -1012,7 +1012,7 @@ paths:
       operationId: pubsub.projects.topics.snapshots.list
       parameters:
         - description: |-
-            The name of the topic that snapshots are attached to.
+            Required. The name of the topic that snapshots are attached to.
             Format is `projects/{project}/topics/{topic}`.
           in: path
           name: topic
@@ -1052,24 +1052,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{topic}/subscriptions':
     get:
       description: Lists the names of the subscriptions on this topic.
       operationId: pubsub.projects.topics.subscriptions.list
       parameters:
         - description: |-
-            The name of the topic that subscriptions are attached to.
+            Required. The name of the topic that subscriptions are attached to.
             Format is `projects/{project}/topics/{topic}`.
           in: path
           name: topic
@@ -1109,30 +1109,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{topic}:publish':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
@@ -1140,7 +1140,7 @@ paths:
       operationId: pubsub.projects.topics.publish
       parameters:
         - description: |-
-            The messages in the request will be published on this topic.
+            Required. The messages in the request will be published on this topic.
             Format is `projects/{project}/topics/{topic}`.
           in: path
           name: topic
@@ -1254,7 +1254,7 @@ components:
       properties:
         ackIds:
           description: |-
-            The acknowledgment ID for the messages being acknowledged that was returned
+            Required. The acknowledgment ID for the messages being acknowledged that was returned
             by the Pub/Sub system in the `Pull` response. Must not be empty.
           items:
             type: string
@@ -1336,7 +1336,7 @@ components:
           type: object
         subscription:
           description: |-
-            The subscription whose backlog the snapshot retains.
+            Required. The subscription whose backlog the snapshot retains.
             Specifically, the created snapshot is guaranteed to retain:
              (a) The existing backlog on the subscription. More precisely, this is
                  defined as the messages in the subscription's backlog that are
@@ -1346,6 +1346,44 @@ components:
                  successful completion of the CreateSnapshot request.
             Format is `projects/{project}/subscriptions/{sub}`.
           type: string
+      type: object
+    DeadLetterPolicy:
+      description: |-
+        Dead lettering is done on a best effort basis. The same message might be
+        dead lettered multiple times.
+
+        If validation on any of the fields fails at subscription creation/updation,
+        the create/update subscription request will fail.
+      properties:
+        deadLetterTopic:
+          description: |-
+            The name of the topic to which dead letter messages should be published.
+            Format is `projects/{project}/topics/{topic}`.The Cloud Pub/Sub service
+            account associated with the enclosing subscription's parent project (i.e.,
+            service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+            permission to Publish() to this topic.
+
+            The operation will fail if the topic does not exist.
+            Users should ensure that there is a subscription attached to this topic
+            since messages published to a topic with no subscriptions are lost.
+          type: string
+        maxDeliveryAttempts:
+          description: |-
+            The maximum number of delivery attempts for any message. The value must be
+            between 5 and 100.
+
+            The number of delivery attempts is defined as 1 + (the sum of number of
+            NACKs and number of times the acknowledgement deadline has been exceeded
+            for the message).
+
+            A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that
+            client libraries may automatically extend ack_deadlines.
+
+            This field will be honored on a best effort basis.
+
+            If this parameter is 0, a default value of 5 is used.
+          format: int32
+          type: integer
       type: object
     Empty:
       description: |-
@@ -1378,33 +1416,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -1500,7 +1561,7 @@ components:
       properties:
         ackDeadlineSeconds:
           description: |-
-            The new ack deadline with respect to the time this request was sent to
+            Required. The new ack deadline with respect to the time this request was sent to
             the Pub/Sub system. For example, if the value is 10, the new
             ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
             was made. Specifying zero might immediately make the message available for
@@ -1511,7 +1572,7 @@ components:
           format: int32
           type: integer
         ackIds:
-          description: List of acknowledgment IDs.
+          description: Required. List of acknowledgment IDs.
           items:
             type: string
           type: array
@@ -1522,7 +1583,7 @@ components:
         pushConfig:
           $ref: '#/components/schemas/PushConfig'
           description: |-
-            The push configuration for future deliveries.
+            Required. The push configuration for future deliveries.
 
             An empty `pushConfig` indicates that the Pub/Sub system should
             stop pushing messages from the given subscription and allow
@@ -1673,7 +1734,7 @@ components:
       description: Request for the Publish method.
       properties:
         messages:
-          description: The messages to publish.
+          description: Required. The messages to publish.
           items:
             $ref: '#/components/schemas/PubsubMessage'
           type: array
@@ -1734,17 +1795,20 @@ components:
       properties:
         maxMessages:
           description: |-
-            The maximum number of messages to return for this request. Must be a
+            Required. The maximum number of messages to return for this request. Must be a
             positive integer. The Pub/Sub system may return fewer than the number
             specified.
           format: int32
           type: integer
         returnImmediately:
           description: |-
-            If this field set to true, the system will respond immediately even if
+            Optional. If this field set to true, the system will respond immediately even if
             it there are no messages available to return in the `Pull` response.
             Otherwise, the system may wait (for a bounded amount of time) until at
-            least one message is available, rather than returning no messages.
+            least one message is available, rather than returning no messages. Warning:
+            setting this field to `true` is discouraged because it adversely impacts
+            the performance of `Pull` operations. We recommend that users do not set
+            this field.
           type: boolean
       type: object
     PullResponse:
@@ -1806,6 +1870,26 @@ components:
         ackId:
           description: This ID can be used to acknowledge the received message.
           type: string
+        deliveryAttempt:
+          description: |-
+            Delivery attempt counter is 1 + (the sum of number of NACKs and number of
+            ack_deadline exceeds) for this message.
+
+            A NACK is any call to ModifyAckDeadline with a 0 deadline. An ack_deadline
+            exceeds event is whenever a message is not acknowledged within
+            ack_deadline. Note that ack_deadline is initially
+            Subscription.ackDeadlineSeconds, but may get extended automatically by
+            the client library.
+
+            The first delivery of a given message will have this value as 1. The value
+            is calculated at best effort and is approximate.
+
+            If a DeadLetterPolicy is not set on the subscription, this will be 0.
+            <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+            API might be changed in backward-incompatible ways and is not recommended
+            for production use. It is not subject to any SLA or deprecation policy.
+          format: int32
+          type: integer
         message:
           $ref: '#/components/schemas/PubsubMessage'
           description: The message.
@@ -1914,6 +1998,20 @@ components:
             system will eventually redeliver the message.
           format: int32
           type: integer
+        deadLetterPolicy:
+          $ref: '#/components/schemas/DeadLetterPolicy'
+          description: |-
+            A policy that specifies the conditions for dead lettering messages in
+            this subscription. If dead_letter_policy is not set, dead lettering
+            is disabled.
+
+            The Cloud Pub/Sub service account associated with this subscriptions's
+            parent project (i.e.,
+            service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+            permission to Acknowledge() messages on this subscription.
+            <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+            API might be changed in backward-incompatible ways and is not recommended
+            for production use. It is not subject to any SLA or deprecation policy.
         expirationPolicy:
           $ref: '#/components/schemas/ExpirationPolicy'
           description: |-
@@ -1942,7 +2040,7 @@ components:
           type: string
         name:
           description: |-
-            The name of the subscription. It must have the format
+            Required. The name of the subscription. It must have the format
             `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
             start with a letter, and contain only letters (`[A-Za-z]`), numbers
             (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
@@ -1967,7 +2065,7 @@ components:
           type: boolean
         topic:
           description: |-
-            The name of the topic from which this subscription is receiving messages.
+            Required. The name of the topic from which this subscription is receiving messages.
             Format is `projects/{project}/topics/{topic}`.
             The value of this field will be `_deleted-topic_` if the topic has been
             deleted.
@@ -2022,7 +2120,7 @@ components:
             are in effect.
         name:
           description: |-
-            The name of the topic. It must have the format
+            Required. The name of the topic. It must have the format
             `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
             and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
             underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -2035,10 +2133,10 @@ components:
       properties:
         snapshot:
           $ref: '#/components/schemas/Snapshot'
-          description: The updated snapshot object.
+          description: Required. The updated snapshot object.
         updateMask:
           description: |-
-            Indicates which fields in the provided snapshot to update.
+            Required. Indicates which fields in the provided snapshot to update.
             Must be specified and non-empty.
           format: google-fieldmask
           type: string
@@ -2048,10 +2146,10 @@ components:
       properties:
         subscription:
           $ref: '#/components/schemas/Subscription'
-          description: The updated subscription object.
+          description: Required. The updated subscription object.
         updateMask:
           description: |-
-            Indicates which fields in the provided subscription to update.
+            Required. Indicates which fields in the provided subscription to update.
             Must be specified and non-empty.
           format: google-fieldmask
           type: string
@@ -2061,10 +2159,10 @@ components:
       properties:
         topic:
           $ref: '#/components/schemas/Topic'
-          description: The updated topic object.
+          description: Required. The updated topic object.
         updateMask:
           description: |-
-            Indicates which fields in the provided topic to update. Must be specified
+            Required. Indicates which fields in the provided topic to update. Must be specified
             and non-empty. Note that if `update_mask` contains
             "message_storage_policy" then the new value will be determined based on the
             policy configured at the project or organization level. The

@@ -99,8 +99,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     patch:
       description: Updates security marks.
       operationId: securitycenter.organizations.sources.findings.updateSecurityMarks
@@ -131,13 +131,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SecurityMarks'
+              $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/SecurityMarks'
+                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
           description: Successful response
       security:
         - Oauth2:
@@ -157,8 +157,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -210,8 +210,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Updates the state of a finding.
       operationId: securitycenter.organizations.sources.findings.setState
@@ -237,7 +237,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Finding'
+                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
           description: Successful response
       security:
         - Oauth2:
@@ -389,8 +389,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1beta1/{parent}/assets:group':
     parameters:
       - $ref: '#/components/parameters/fields'
@@ -402,8 +402,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Filters an organization's assets and  groups them by their specified
@@ -449,8 +449,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Runs asset discovery. The discovery is tracked with a long-running
@@ -607,8 +607,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Creates a finding. The corresponding source must exist for finding creation
@@ -636,13 +636,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Finding'
+              $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Finding'
+                $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
           description: Successful response
       security:
         - Oauth2:
@@ -662,8 +662,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Filters an organization or source's findings and  groups them by their
@@ -756,8 +756,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates a source.
       operationId: securitycenter.organizations.sources.create
@@ -801,8 +801,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
@@ -846,8 +846,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
@@ -891,8 +891,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions
@@ -1035,7 +1035,7 @@ components:
             Cloud SCC managed properties. These properties are managed by
             Cloud SCC and cannot be modified by the user.
         securityMarks:
-          $ref: '#/components/schemas/SecurityMarks'
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
           description: |-
             User specified security marks. These marks are entirely managed by the user
             and come from the SecurityMarks resource that belongs to the asset.
@@ -1250,33 +1250,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -1285,10 +1308,11 @@ components:
       description: |-
         Cloud Security Command Center (Cloud SCC) finding.
 
-        A finding is a record of assessment data (security, risk, health or privacy)
-        ingested into Cloud SCC for presentation, notification, analysis,
-        policy testing, and enforcement. For example, an XSS vulnerability in an
-        App Engine application is a finding.
+        A finding is a record of assessment data like security, risk, health, or
+        privacy, that is ingested into Cloud SCC for presentation, notification,
+        analysis, policy testing, and enforcement. For example, a
+        cross-site scripting (XSS) vulnerability in an App Engine application is a
+        finding.
       properties:
         category:
           description: |-
@@ -1322,7 +1346,7 @@ components:
           type: string
         parent:
           description: |-
-            Immutable. The relative resource name of the source the finding belongs to. See:
+            The relative resource name of the source the finding belongs to. See:
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
             This field is immutable after creation time.
             For example:
@@ -1384,6 +1408,18 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudSecuritycenterV1NotificationMessage:
+      description: Cloud SCC's Notification
+      properties:
+        finding:
+          $ref: '#/components/schemas/Finding'
+          description: |-
+            If it's a Finding based notification config, this field will be
+            populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+      type: object
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
       properties:
@@ -1400,6 +1436,84 @@ components:
             - TERMINATED
           type: string
       type: object
+    GoogleCloudSecuritycenterV1beta1Finding:
+      description: |-
+        Cloud Security Command Center (Cloud SCC) finding.
+
+        A finding is a record of assessment data (security, risk, health or privacy)
+        ingested into Cloud SCC for presentation, notification, analysis,
+        policy testing, and enforcement. For example, an XSS vulnerability in an
+        App Engine application is a finding.
+      properties:
+        category:
+          description: |-
+            The additional taxonomy group within findings from a given source.
+            This field is immutable after creation time.
+            Example: "XSS_FLASH_INJECTION"
+          type: string
+        createTime:
+          description: The time at which the finding was created in Cloud SCC.
+          format: google-datetime
+          type: string
+        eventTime:
+          description: |-
+            The time at which the event took place. For example, if the finding
+            represents an open firewall it would capture the time the detector believes
+            the firewall became open. The accuracy is determined by the detector.
+          format: google-datetime
+          type: string
+        externalUri:
+          description: |-
+            The URI that, if available, points to a web page outside of Cloud SCC
+            where additional information about the finding can be found. This field is
+            guaranteed to be either empty or a well formed URL.
+          type: string
+        name:
+          description: |-
+            The relative resource name of this finding. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
+          type: string
+        parent:
+          description: |-
+            Immutable. The relative resource name of the source the finding belongs to. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            This field is immutable after creation time.
+            For example:
+            "organizations/{organization_id}/sources/{source_id}"
+          type: string
+        resourceName:
+          description: |-
+            For findings on Google Cloud Platform (GCP) resources, the full resource
+            name of the GCP resource this finding is for. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+            When the finding is for a non-GCP resource, the resourceName can be a
+            customer or partner defined string.
+            This field is immutable after creation time.
+          type: string
+        securityMarks:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1SecurityMarks'
+          description: |-
+            Output only. User specified security marks. These marks are entirely
+            managed by the user and come from the SecurityMarks resource that belongs
+            to the finding.
+        sourceProperties:
+          additionalProperties: {}
+          description: |-
+            Source specific properties. These properties are managed by the source
+            that writes the finding. The key names in the source_properties map must be
+            between 1 and 255 characters, and must start with a letter and contain
+            alphanumeric characters or underscores only.
+          type: object
+        state:
+          description: The state of the finding.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          type: string
+      type: object
     GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse:
       description: Response of asset discovery run
       properties:
@@ -1414,6 +1528,297 @@ components:
             - COMPLETED
             - SUPERSEDED
             - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1beta1SecurityMarks:
+      description: |-
+        User specified security marks that are attached to the parent Cloud Security
+        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
+        SCC organization -- they can be modified and viewed by all users who have
+        proper permissions on the organization.
+      properties:
+        marks:
+          additionalProperties:
+            type: string
+          description: |-
+            Mutable user specified security marks belonging to the parent resource.
+            Constraints are as follows:
+
+              * Keys and values are treated as case insensitive
+              * Keys must be between 1 - 256 characters (inclusive)
+              * Keys must be letters, numbers, underscores, or dashes
+              * Values have leading and trailing whitespace trimmed, remaining
+                characters must be between 1 - 4096 characters (inclusive)
+          type: object
+        name:
+          description: |-
+            The relative resource name of the SecurityMarks. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Examples:
+            "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Asset:
+      description: |-
+        Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
+        Platform (GCP) resource.
+
+        The Asset is a Cloud SCC resource that captures information about a single
+        GCP resource. All modifications to an Asset are only within the context of
+        Cloud SCC and don't affect the referenced GCP resource.
+      properties:
+        createTime:
+          description: The time at which the asset was created in Cloud SCC.
+          format: google-datetime
+          type: string
+        iamPolicy:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy'
+          description: |-
+            IAM Policy information associated with the GCP resource described by the
+            Cloud SCC asset. This information is managed and defined by the GCP
+            resource and cannot be modified by the user.
+        name:
+          description: |-
+            The relative resource name of this asset. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/assets/{asset_id}".
+          type: string
+        resourceProperties:
+          additionalProperties: {}
+          description: |-
+            Resource managed properties. These properties are managed and defined by
+            the GCP resource and cannot be modified by the user.
+          type: object
+        securityCenterProperties:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
+          description: |-
+            Cloud SCC managed properties. These properties are managed by
+            Cloud SCC and cannot be modified by the user.
+        securityMarks:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+          description: |-
+            User specified security marks. These marks are entirely managed by the user
+            and come from the SecurityMarks resource that belongs to the asset.
+        updateTime:
+          description: |-
+            The time at which the asset was last updated, added, or deleted in Cloud
+            SCC.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1Finding:
+      description: |-
+        Cloud Security Command Center (Cloud SCC) finding.
+
+        A finding is a record of assessment data (security, risk, health or privacy)
+        ingested into Cloud SCC for presentation, notification, analysis,
+        policy testing, and enforcement. For example, an XSS vulnerability in an
+        App Engine application is a finding.
+      properties:
+        category:
+          description: |-
+            The additional taxonomy group within findings from a given source.
+            This field is immutable after creation time.
+            Example: "XSS_FLASH_INJECTION"
+          type: string
+        createTime:
+          description: The time at which the finding was created in Cloud SCC.
+          format: google-datetime
+          type: string
+        eventTime:
+          description: |-
+            The time at which the event took place. For example, if the finding
+            represents an open firewall it would capture the time the detector believes
+            the firewall became open. The accuracy is determined by the detector.
+          format: google-datetime
+          type: string
+        externalUri:
+          description: |-
+            The URI that, if available, points to a web page outside of Cloud SCC
+            where additional information about the finding can be found. This field is
+            guaranteed to be either empty or a well formed URL.
+          type: string
+        name:
+          description: |-
+            The relative resource name of this finding. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Example:
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
+          type: string
+        parent:
+          description: |-
+            The relative resource name of the source the finding belongs to. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            This field is immutable after creation time.
+            For example:
+            "organizations/{organization_id}/sources/{source_id}"
+          type: string
+        resourceName:
+          description: |-
+            For findings on Google Cloud Platform (GCP) resources, the full resource
+            name of the GCP resource this finding is for. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+            When the finding is for a non-GCP resource, the resourceName can be a
+            customer or partner defined string.
+            This field is immutable after creation time.
+          type: string
+        securityMarks:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
+          description: |-
+            Output only. User specified security marks. These marks are entirely
+            managed by the user and come from the SecurityMarks resource that belongs
+            to the finding.
+        sourceProperties:
+          additionalProperties: {}
+          description: |-
+            Source specific properties. These properties are managed by the source
+            that writes the finding. The key names in the source_properties map must be
+            between 1 and 255 characters, and must start with a letter and contain
+            alphanumeric characters or underscores only.
+          type: object
+        state:
+          description: The state of the finding.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1IamPolicy:
+      description: |-
+        IAM Policy information associated with the GCP resource described by the
+        Cloud SCC asset. This information is managed and defined by the GCP
+        resource and cannot be modified by the user.
+      properties:
+        policyBlob:
+          description: |-
+            The JSON representation of the Policy associated with the asset.
+            See https://cloud.google.com/iam/reference/rest/v1p1beta1/Policy for
+            format details.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1NotificationMessage:
+      description: Cloud SCC's Notification
+      properties:
+        finding:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding'
+          description: |-
+            If it's a Finding based notification config, this field will be
+            populated.
+        notificationConfigName:
+          description: Name of the notification config that generated current notification.
+          type: string
+        temporalAsset:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1TemporalAsset'
+          description: |-
+            If it's an asset based notification config, this field will be
+            populated.
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse:
+      description: Response of asset discovery run
+      properties:
+        duration:
+          description: The duration between asset discovery run start and end
+          format: google-duration
+          type: string
+        state:
+          description: The state of an asset discovery run.
+          enum:
+            - STATE_UNSPECIFIED
+            - COMPLETED
+            - SUPERSEDED
+            - TERMINATED
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
+      description: |-
+        Cloud SCC managed properties. These properties are managed by Cloud SCC and
+        cannot be modified by the user.
+      properties:
+        resourceDisplayName:
+          description: The user defined display name for this resource.
+          type: string
+        resourceName:
+          description: |-
+            The full resource name of the GCP resource this asset
+            represents. This field is immutable after create time. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceOwners:
+          description: Owners of the Google Cloud resource.
+          items:
+            type: string
+          type: array
+        resourceParent:
+          description: |-
+            The full resource name of the immediate parent of the resource. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceParentDisplayName:
+          description: The user defined display name for the parent of this resource.
+          type: string
+        resourceProject:
+          description: |-
+            The full resource name of the project the resource belongs to. See:
+            https://cloud.google.com/apis/design/resource_names#full_resource_name
+          type: string
+        resourceProjectDisplayName:
+          description: The user defined display name for the project of this resource.
+          type: string
+        resourceType:
+          description: |-
+            The type of the GCP resource. Examples include: APPLICATION,
+            PROJECT, and ORGANIZATION. This is a case insensitive field defined by
+            Cloud SCC and/or the producer of the resource and is immutable
+            after create time.
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
+      description: |-
+        User specified security marks that are attached to the parent Cloud Security
+        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
+        SCC organization -- they can be modified and viewed by all users who have
+        proper permissions on the organization.
+      properties:
+        marks:
+          additionalProperties:
+            type: string
+          description: |-
+            Mutable user specified security marks belonging to the parent resource.
+            Constraints are as follows:
+
+              * Keys and values are treated as case insensitive
+              * Keys must be between 1 - 256 characters (inclusive)
+              * Keys must be letters, numbers, underscores, or dashes
+              * Values have leading and trailing whitespace trimmed, remaining
+                characters must be between 1 - 4096 characters (inclusive)
+          type: object
+        name:
+          description: |-
+            The relative resource name of the SecurityMarks. See:
+            https://cloud.google.com/apis/design/resource_names#relative_resource_name
+            Examples:
+            "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
+          type: string
+      type: object
+    GoogleCloudSecuritycenterV1p1beta1TemporalAsset:
+      description: |-
+        Wrapper over asset object that also captures the state change for the asset
+        e.g. if it was a newly created asset vs updated or deleted asset.
+      properties:
+        asset:
+          $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Asset'
+          description: 'Asset data that includes attributes, properties and marks about the asset.'
+        changeType:
+          description: Represents if the asset was created/updated/deleted.
+          enum:
+            - CHANGE_TYPE_UNSPECIFIED
+            - CREATED
+            - UPDATED
+            - DELETED
           type: string
       type: object
     GroupAssetsRequest:
@@ -1676,7 +2081,7 @@ components:
         findings:
           description: Findings matching the list request.
           items:
-            $ref: '#/components/schemas/Finding'
+            $ref: '#/components/schemas/GoogleCloudSecuritycenterV1beta1Finding'
           type: array
         nextPageToken:
           description: |-

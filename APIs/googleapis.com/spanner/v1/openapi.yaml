@@ -35,7 +35,10 @@ tags:
 paths:
   '/v1/{database}':
     delete:
-      description: Drops (aka deletes) a Cloud Spanner database.
+      description: |-
+        Drops (aka deletes) a Cloud Spanner database.
+        Completed backups for the database will be retained according to their
+        `expire_time`.
       operationId: spanner.projects.instances.databases.dropDatabase
       parameters:
         - description: Required. The database to be dropped.
@@ -64,17 +67,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
   '/v1/{database}/ddl':
     get:
       description: |-
@@ -109,17 +112,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates the schema of a Cloud Spanner database by
@@ -222,17 +225,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates a new session. A session can be used to perform
@@ -248,7 +251,7 @@ paths:
 
         Active sessions use additional server resources, so it is a good idea to
         delete idle and unneeded sessions.
-        Aside from explicit deletes, Cloud Spanner can delete sessions for which no
+        Aside from explicit deletes, Cloud Spanner may delete sessions for which no
         operations are sent for more than an hour. If a session is deleted,
         requests to it return `NOT_FOUND`.
 
@@ -288,17 +291,17 @@ paths:
         - projects
   '/v1/{database}/sessions:batchCreate':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates multiple new sessions.
@@ -372,12 +375,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.backups.operations.get
       parameters:
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -397,7 +401,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/InstanceConfig'
+                $ref: '#/components/schemas/Operation'
           description: Successful response
       security:
         - Oauth2:
@@ -411,83 +415,62 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     patch:
-      description: |-
-        Updates an instance, and begins allocating or releasing resources
-        as requested. The returned long-running
-        operation can be used to track the
-        progress of updating the instance. If the named instance does not
-        exist, returns `NOT_FOUND`.
-
-        Immediately upon completion of this request:
-
-          * For resource types for which a decrease in the instance's allocation
-            has been requested, billing is based on the newly-requested level.
-
-        Until completion of the returned operation:
-
-          * Cancelling the operation sets its metadata's
-            cancel_time, and begins
-            restoring resources to their pre-request values. The operation
-            is guaranteed to succeed at undoing all resource changes,
-            after which point it terminates with a `CANCELLED` status.
-          * All other attempts to modify the instance are rejected.
-          * Reading the instance via the API continues to give the pre-request
-            resource levels.
-
-        Upon completion of the returned operation:
-
-          * Billing begins for all successfully-allocated resources (some types
-            may have lower than the requested levels).
-          * All newly-reserved resources are available for serving the instance's
-            tables.
-          * The instance's new resource levels are readable via the API.
-
-        The returned long-running operation will
-        have a name of the format `<instance_name>/operations/<operation_id>` and
-        can be used to track the instance modification.  The
-        metadata field type is
-        UpdateInstanceMetadata.
-        The response field type is
-        Instance, if successful.
-
-        Authorization requires `spanner.instances.update` permission on
-        resource name.
-      operationId: spanner.projects.instances.patch
+      description: Updates a pending or completed Backup.
+      operationId: spanner.projects.instances.backups.patch
       parameters:
         - description: |-
-            Required. A unique identifier for the instance, which cannot be changed
-            after the instance is created. Values are of the form
-            `projects/<project>/instances/a-z*[a-z0-9]`. The final
-            segment of the name must be between 2 and 64 characters in length.
+            Output only for the CreateBackup][DatabaseAdmin.CreateBackup] operation.
+            Required for the UpdateBackup operation.
+
+            A globally unique identifier for the backup which cannot be
+            changed. Values are of the form
+            `projects/<project>/instances/<instance>/backups/a-z*[a-z0-9]`
+            The final segment of the name must be between 2 and 60 characters
+            in length.
+
+            The backup is stored in the location(s) specified in the instance
+            configuration of the instance containing the backup, identified
+            by the prefix of the backup name of the form
+            `projects/<project>/instances/<instance>`.
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
+        - description: |-
+            Required. A mask specifying which fields (e.g. `expire_time`) in the
+            Backup resource should be updated. This mask is relative to the Backup
+            resource, not to the request message. The field mask must always be
+            specified; this prevents any future fields from being erased accidentally
+            by clients that do not know about them.
+          in: query
+          name: updateMask
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateInstanceRequest'
+              $ref: '#/components/schemas/Backup'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: '#/components/schemas/Backup'
           description: Successful response
       security:
         - Oauth2:
@@ -502,17 +485,17 @@ paths:
         - projects
   '/v1/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -552,6 +535,395 @@ paths:
             - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
+  '/v1/{parent}/backupOperations':
+    get:
+      description: |-
+        Lists the backup long-running operations in
+        the given instance. A backup operation has a name of the form
+        `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation>`.
+        The long-running operation
+        metadata field type
+        `metadata.type_url` describes the type of the metadata. Operations returned
+        include those that have completed/failed/canceled within the last 7 days,
+        and pending operations. Operations returned are ordered by
+        `operation.metadata.value.progress.start_time` in descending order starting
+        from the most recently started operation.
+      operationId: spanner.projects.instances.backupOperations.list
+      parameters:
+        - description: |-
+            Required. The instance of the backup operations. Values are of
+            the form `projects/<project>/instances/<instance>`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            A filter expression that filters what operations are returned in the
+            response.
+
+            The filter expression must specify the field name of an operation, a
+            comparison operator, and the value that you want to use for filtering.
+            The value must be a string, a number, or a boolean. The comparison operator
+            must be
+            <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+            roughly synonymous with equality. Filter rules are case insensitive.
+
+            The long-running operation fields eligible for filtering are:
+              * `name` --> The name of the long-running operation
+              * `done` --> False if the operation is in progress, else true.
+              * `metadata.type_url` (using filter string `metadata.@type`) and fields
+                 in `metadata.value` (using filter string `metadata.<field_name>`,
+                 where <field_name> is a field in metadata.value) are eligible for
+                 filtering.
+              * `error` --> Error associated with the long-running operation.
+              * `response.type_url` (using filter string `response.@type`) and fields
+                 in `response.value` (using filter string `response.<field_name>`,
+                 where <field_name> is a field in response.value) are eligible for
+                 filtering.
+
+            To filter on multiple expressions, provide each separate expression within
+            parentheses. By default, each expression is an AND expression. However,
+            you can include AND, OR, and NOT expressions explicitly.
+
+            Some examples of using filters are:
+
+              * `done:true` --> The operation is complete.
+              * `metadata.database:prod`
+                     --> The database the backup was taken from has a name containing
+                         the string "prod".
+              * `(metadata.@type:type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata)
+                 AND (metadata.name:howl)
+                 AND (metadata.progress.start_time < \"2018-03-28T14:50:00Z\")
+                 AND (error:*)`
+                     --> Return CreateBackup operations where the created backup name
+                         contains the string "howl", the progress.start_time of the
+                         backup operation is before 2018-03-28T14:50:00Z, and the
+                         operation returned an error.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: |-
+            Number of operations to be returned in the response. If 0 or
+            less, defaults to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            If non-empty, `page_token` should contain a
+            next_page_token
+            from a previous ListBackupOperationsResponse to the
+            same `parent` and with the same `filter`.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBackupOperationsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v1/{parent}/backups':
+    get:
+      description: |-
+        Lists completed and pending backups.
+        Backups returned are ordered by `create_time` in descending order,
+        starting from the most recent `create_time`.
+      operationId: spanner.projects.instances.backups.list
+      parameters:
+        - description: |-
+            Required. The instance to list backups from.  Values are of the
+            form `projects/<project>/instances/<instance>`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            A filter expression that filters backups listed in the response.
+            The expression must specify the field name, a comparison operator,
+            and the value that you want to use for filtering. The value must be a
+            string, a number, or a boolean. The comparison operator must be
+            <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+            roughly synonymous with equality. Filter rules are case insensitive.
+
+            The fields eligible for filtering are:
+              * `name`
+              * `database`
+              * `state`
+              * `create_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+              * `expire_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+              * `size_bytes`
+
+            To filter on multiple expressions, provide each separate expression within
+            parentheses. By default, each expression is an AND expression. However,
+            you can include AND, OR, and NOT expressions explicitly.
+
+            Some examples of using filters are:
+
+              * `name:Howl` --> The backup's name contains the string "howl".
+              * `database:prod`
+                     --> The database's name contains the string "prod".
+              * `state:CREATING` --> The backup is pending creation.
+              * `state:READY` --> The backup is fully created and ready for use.
+              * `(name:howl) AND (create_time < \"2018-03-28T14:50:00Z\")`
+                     --> The backup name contains the string "howl" and `create_time`
+                         of the backup is before 2018-03-28T14:50:00Z.
+              * `expire_time < \"2018-03-28T14:50:00Z\"`
+                     --> The backup `expire_time` is before 2018-03-28T14:50:00Z.
+              * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: |-
+            Number of backups to be returned in the response. If 0 or
+            less, defaults to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            If non-empty, `page_token` should contain a
+            next_page_token from a
+            previous ListBackupsResponse to the same `parent` and with the same
+            `filter`.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBackupsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Starts creating a new Cloud Spanner Backup.
+        The returned backup long-running operation
+        will have a name of the format
+        `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation_id>`
+        and can be used to track creation of the backup. The
+        metadata field type is
+        CreateBackupMetadata. The
+        response field type is
+        Backup, if successful. Cancelling the returned operation will stop the
+        creation and delete the backup.
+        There can be only one pending backup creation per database. Backup creation
+        of different databases can run concurrently.
+      operationId: spanner.projects.instances.backups.create
+      parameters:
+        - description: |-
+            Required. The name of the instance in which the backup will be
+            created. This must be the same instance that contains the database the
+            backup will be created from. The backup will be stored in the
+            location(s) specified in the instance configuration of this
+            instance. Values are of the form
+            `projects/<project>/instances/<instance>`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            Required. The id of the backup to be created. The `backup_id` appended to
+            `parent` forms the full backup name of the form
+            `projects/<project>/instances/<instance>/backups/<backup_id>`.
+          in: query
+          name: backupId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Backup'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+      tags:
+        - projects
+  '/v1/{parent}/databaseOperations':
+    get:
+      description: |-
+        Lists database longrunning-operations.
+        A database operation has a name of the form
+        `projects/<project>/instances/<instance>/databases/<database>/operations/<operation>`.
+        The long-running operation
+        metadata field type
+        `metadata.type_url` describes the type of the metadata. Operations returned
+        include those that have completed/failed/canceled within the last 7 days,
+        and pending operations.
+      operationId: spanner.projects.instances.databaseOperations.list
+      parameters:
+        - description: |-
+            Required. The instance of the database operations.
+            Values are of the form `projects/<project>/instances/<instance>`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            A filter expression that filters what operations are returned in the
+            response.
+
+            The filter expression must specify the field name, a comparison operator,
+            and the value that you want to use for filtering. The value must be a
+            string, a number, or a boolean. The comparison operator must be
+            <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+            roughly synonymous with equality. Filter rules are case insensitive.
+
+            The long-running operation fields eligible for filtering are:
+              * `name` --> The name of the long-running operation
+              * `done` --> False if the operation is in progress, else true.
+              * `metadata.type_url` (using filter string `metadata.@type`) and fields
+                 in `metadata.value` (using filter string `metadata.<field_name>`,
+                 where <field_name> is a field in metadata.value) are eligible for
+                 filtering.
+              * `error` --> Error associated with the long-running operation.
+              * `response.type_url` (using filter string `response.@type`) and fields
+                 in `response.value` (using filter string `response.<field_name>`,
+                 where <field_name> is a field in response.value) are eligible for
+                 filtering.
+
+            To filter on multiple expressions, provide each separate expression within
+            parentheses. By default, each expression is an AND expression. However,
+            you can include AND, OR, and NOT expressions explicitly.
+
+            Some examples of using filters are:
+
+              * `done:true` --> The operation is complete.
+              * `(metadata.@type:type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata)
+                 AND (metadata.source_type:BACKUP)
+                 AND (metadata.backup_info.backup:backup_howl)
+                 AND (metadata.name:restored_howl)
+                 AND (metadata.progress.start_time < \"2018-03-28T14:50:00Z\")
+                 AND (error:*)`
+                     --> Return RestoreDatabase operations from backups whose name
+                         contains "backup_howl", where the created database name
+                         contains the string "restored_howl", the start_time of the
+                         restore operation is before 2018-03-28T14:50:00Z,
+                         and the operation returned an error.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: |-
+            Number of operations to be returned in the response. If 0 or
+            less, defaults to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            If non-empty, `page_token` should contain a
+            next_page_token
+            from a previous ListDatabaseOperationsResponse to the
+            same `parent` and with the same `filter`.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListDatabaseOperationsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/{parent}/databases':
     get:
       description: Lists Cloud Spanner databases.
@@ -600,17 +972,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates a new Cloud Spanner database and starts to prepare it for serving.
@@ -637,6 +1009,75 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateDatabaseRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+      tags:
+        - projects
+  '/v1/{parent}/databases:restore':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Create a new database by restoring from a completed backup. The new
+        database must be in the same project and in an instance with the same
+        instance configuration as the instance containing
+        the backup. The returned database long-running
+        operation has a name of the format
+        `projects/<project>/instances/<instance>/databases/<database>/operations/<operation_id>`,
+        and can be used to track the progress of the operation, and to cancel it.
+        The metadata field type is
+        RestoreDatabaseMetadata.
+        The response type
+        is Database, if
+        successful. Cancelling the returned operation will stop the restore and
+        delete the database.
+        There can be only one database being restored into an instance at a time.
+        Once the restore operation completes, a new restore operation can be
+        initiated, without waiting for the optimize operation associated with the
+        first restore to complete.
+      operationId: spanner.projects.instances.databases.restore
+      parameters:
+        - description: |-
+            Required. The name of the instance in which to create the
+            restored database. This instance must be in the same project and
+            have the same instance configuration as the instance containing
+            the source backup. Values are of the form
+            `projects/<project>/instances/<instance>.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreDatabaseRequest'
       responses:
         '200':
           content:
@@ -704,17 +1145,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
   '/v1/{parent}/instances':
     get:
       description: Lists all instances in the given project.
@@ -787,17 +1228,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates an instance and begins preparing it to begin serving. The
@@ -870,25 +1311,27 @@ paths:
         - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
-        Gets the access control policy for a database resource.
-        Returns an empty policy if a database exists but does
-        not have a policy set.
+        Gets the access control policy for a database or backup resource.
+        Returns an empty policy if a database or backup exists but does not have a
+        policy set.
 
         Authorization requires `spanner.databases.getIamPolicy` permission on
         resource.
+        For backups, authorization requires `spanner.backups.getIamPolicy`
+        permission on resource.
       operationId: spanner.projects.instances.backups.getIamPolicy
       parameters:
         - description: 'REQUIRED: The Cloud Spanner resource for which the policy is being retrieved. The format is `projects/<project ID>/instances/<instance ID>` for instance resources and `projects/<project ID>/instances/<instance ID>/databases/<database ID>` for database resources.'
@@ -923,23 +1366,25 @@ paths:
         - projects
   '/v1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
-        Sets the access control policy on a database resource.
+        Sets the access control policy on a database or backup resource.
         Replaces any existing policy.
 
         Authorization requires `spanner.databases.setIamPolicy`
+        permission on resource.
+        For backups, authorization requires `spanner.backups.setIamPolicy`
         permission on resource.
       operationId: spanner.projects.instances.backups.setIamPolicy
       parameters:
@@ -975,25 +1420,29 @@ paths:
         - projects
   '/v1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
-        Returns permissions that the caller has on the specified database resource.
+        Returns permissions that the caller has on the specified database or backup
+        resource.
 
         Attempting this RPC on a non-existent Cloud Spanner database will
         result in a NOT_FOUND error if the user has
         `spanner.databases.list` permission on the containing Cloud
         Spanner instance. Otherwise returns an empty set of permissions.
+        Calling this method on a backup that does not exist will
+        result in a NOT_FOUND error if the user has
+        `spanner.backups.list` permission on the containing instance.
       operationId: spanner.projects.instances.backups.testIamPermissions
       parameters:
         - description: 'REQUIRED: The Cloud Spanner resource for which permissions are being tested. The format is `projects/<project ID>/instances/<instance ID>` for instance resources and `projects/<project ID>/instances/<instance ID>/databases/<database ID>` for database resources.'
@@ -1028,17 +1477,17 @@ paths:
         - projects
   '/v1/{session}:beginTransaction':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Begins a new transaction. This step can often be skipped:
@@ -1079,17 +1528,17 @@ paths:
         - projects
   '/v1/{session}:commit':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Commits a transaction. The request includes the mutations to be
@@ -1134,17 +1583,17 @@ paths:
         - projects
   '/v1/{session}:executeBatchDml':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Executes a batch of SQL DML statements. This method allows many statements
@@ -1192,17 +1641,17 @@ paths:
         - projects
   '/v1/{session}:executeSql':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Executes an SQL statement, returning all results in a single reply. This
@@ -1250,17 +1699,17 @@ paths:
         - projects
   '/v1/{session}:executeStreamingSql':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Like ExecuteSql, except returns the result
@@ -1302,17 +1751,17 @@ paths:
         - projects
   '/v1/{session}:partitionQuery':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates a set of partition tokens that can be used to execute a query
@@ -1360,17 +1809,17 @@ paths:
         - projects
   '/v1/{session}:partitionRead':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates a set of partition tokens that can be used to execute a read
@@ -1420,17 +1869,17 @@ paths:
         - projects
   '/v1/{session}:read':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Reads rows from the database using key lookups and scans, as a
@@ -1480,17 +1929,17 @@ paths:
         - projects
   '/v1/{session}:rollback':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Rolls back a transaction, releasing any locks it holds. It is a good
@@ -1535,17 +1984,17 @@ paths:
         - projects
   '/v1/{session}:streamingRead':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Like Read, except returns the result set as a
@@ -1663,6 +2112,11 @@ components:
       schema:
         type: string
   requestBodies:
+    Backup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Backup'
     ExecuteSqlRequest:
       content:
         application/json:
@@ -1674,6 +2128,91 @@ components:
           schema:
             $ref: '#/components/schemas/ReadRequest'
   schemas:
+    Backup:
+      description: A backup of a Cloud Spanner database.
+      properties:
+        createTime:
+          description: |-
+            Output only. The backup will contain an externally consistent
+            copy of the database at the timestamp specified by
+            `create_time`. `create_time` is approximately the time the
+            CreateBackup request is received.
+          format: google-datetime
+          type: string
+        database:
+          description: |-
+            Required for the CreateBackup operation.
+            Name of the database from which this backup was
+            created. This needs to be in the same instance as the backup.
+            Values are of the form
+            `projects/<project>/instances/<instance>/databases/<database>`.
+          type: string
+        expireTime:
+          description: |-
+            Required for the CreateBackup
+            operation. The expiration time of the backup, with microseconds
+            granularity that must be at least 6 hours and at most 366 days
+            from the time the CreateBackup request is processed. Once the `expire_time`
+            has passed, the backup is eligible to be automatically deleted by Cloud
+            Spanner to free the resources used by the backup.
+          format: google-datetime
+          type: string
+        name:
+          description: |-
+            Output only for the CreateBackup][DatabaseAdmin.CreateBackup] operation.
+            Required for the UpdateBackup operation.
+
+            A globally unique identifier for the backup which cannot be
+            changed. Values are of the form
+            `projects/<project>/instances/<instance>/backups/a-z*[a-z0-9]`
+            The final segment of the name must be between 2 and 60 characters
+            in length.
+
+            The backup is stored in the location(s) specified in the instance
+            configuration of the instance containing the backup, identified
+            by the prefix of the backup name of the form
+            `projects/<project>/instances/<instance>`.
+          type: string
+        referencingDatabases:
+          description: |-
+            Output only. The names of the restored databases that reference the backup.
+            The database names are of
+            the form `projects/<project>/instances/<instance>/databases/<database>`.
+            Referencing databases may exist in different instances. The existence of
+            any referencing database prevents the backup from being deleted. When a
+            restored database from the backup enters the `READY` state, the reference
+            to the backup is removed.
+          items:
+            type: string
+          type: array
+        sizeBytes:
+          description: Output only. Size of the backup in bytes.
+          format: int64
+          type: string
+        state:
+          description: Output only. The current state of the backup.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - READY
+          type: string
+      type: object
+    BackupInfo:
+      description: Information about a backup.
+      properties:
+        backup:
+          description: Name of the backup.
+          type: string
+        createTime:
+          description: |-
+            The backup contains an externally consistent copy of `source_database` at
+            the timestamp specified by `create_time`.
+          format: google-datetime
+          type: string
+        sourceDatabase:
+          description: Name of the database the backup was created from.
+          type: string
+      type: object
     BatchCreateSessionsRequest:
       description: The request for BatchCreateSessions.
       properties:
@@ -1834,6 +2373,38 @@ components:
           format: google-datetime
           type: string
       type: object
+    CreateBackupMetadata:
+      description: |-
+        Metadata type for the operation returned by
+        CreateBackup.
+      properties:
+        cancelTime:
+          description: |-
+            The time at which cancellation of this operation was received.
+            Operations.CancelOperation
+            starts asynchronous cancellation on a long-running operation. The server
+            makes a best effort to cancel the operation, but success is not guaranteed.
+            Clients can use
+            Operations.GetOperation or
+            other methods to check whether the cancellation succeeded or whether the
+            operation completed despite cancellation. On successful cancellation,
+            the operation is not deleted; instead, it becomes an operation with
+            an Operation.error value with a google.rpc.Status.code of 1,
+            corresponding to `Code.CANCELLED`.
+          format: google-datetime
+          type: string
+        database:
+          description: The name of the database the backup is created from.
+          type: string
+        name:
+          description: The name of the backup being created.
+          type: string
+        progress:
+          $ref: '#/components/schemas/OperationProgress'
+          description: |-
+            The progress of the
+            CreateBackup operation.
+      type: object
     CreateDatabaseMetadata:
       description: |-
         Metadata type for the operation returned by
@@ -1856,7 +2427,7 @@ components:
           type: string
         extraStatements:
           description: |-
-            An optional list of DDL statements to run inside the newly created
+            Optional. A list of DDL statements to run inside the newly created
             database. Statements can create tables, indexes, etc. These
             statements execute atomically with the creation of the database:
             if there is an error in any statement, the database is not created.
@@ -1916,6 +2487,10 @@ components:
     Database:
       description: A Cloud Spanner database.
       properties:
+        createTime:
+          description: 'Output only. If exists, the time at which the database creation started.'
+          format: google-datetime
+          type: string
         name:
           description: |-
             Required. The name of the database. Values are of the form
@@ -1924,12 +2499,18 @@ components:
             statement. This name can be passed to other API methods to
             identify the database.
           type: string
+        restoreInfo:
+          $ref: '#/components/schemas/RestoreInfo'
+          description: |-
+            Output only. Applicable only for restored databases. Contains information
+            about the restore source.
         state:
           description: Output only. The current database state.
           enum:
             - STATE_UNSPECIFIED
             - CREATING
             - READY
+            - READY_OPTIMIZING
           type: string
       type: object
     Delete:
@@ -1938,7 +2519,10 @@ components:
         keySet:
           $ref: '#/components/schemas/KeySet'
           description: |-
-            Required. The primary keys of the rows within table to delete.
+            Required. The primary keys of the rows within table to delete.  The
+            primary keys must be specified in the order in which they appear in the
+            `PRIMARY KEY()` clause of the table's equivalent DDL statement (the DDL
+            statement used to create the table).
             Delete is idempotent. The transaction will succeed even if some or all
             rows do not exist.
         table:
@@ -2091,6 +2675,9 @@ components:
             - PLAN
             - PROFILE
           type: string
+        queryOptions:
+          $ref: '#/components/schemas/QueryOptions'
+          description: Query optimizer configuration to use for the given query.
         resumeToken:
           description: |-
             If this request is resuming a previously interrupted SQL statement
@@ -2134,33 +2721,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -2234,21 +2844,7 @@ components:
             Must be unique per project and between 4 and 30 characters in length.
           type: string
         endpointUris:
-          description: |-
-            Output only. A set of endpoint URIs based on your instance config
-            that you can use instead of the global endpoint `spanner.googleapis.com`.
-
-            For example, if your instance config is `us-central1` (a regional config
-            in Iowa), then your instance specific endpoints may include
-            `us-central1-spanner.googleapis.com`. By calling these endpoints instead of
-            the global endpoint, you optimize network routing which could reduce
-            network latency.
-
-            The client libraries, JDBC drivers, and other SDK clients automatically
-            call these instance specific endpoints.
-
-            If you are using DNS whitelists, firewalls, or filtering to control access
-            to endpoints, make sure you grant access to `*spanner.googleapis.com`.
+          description: Deprecated. This field is not populated.
           items:
             type: string
           type: array
@@ -2480,6 +3076,71 @@ components:
             $ref: '#/components/schemas/KeyRange'
           type: array
       type: object
+    ListBackupOperationsResponse:
+      description: |-
+        The response for
+        ListBackupOperations.
+      properties:
+        nextPageToken:
+          description: |-
+            `next_page_token` can be sent in a subsequent
+            ListBackupOperations
+            call to fetch more of the matching metadata.
+          type: string
+        operations:
+          description: |-
+            The list of matching backup long-running
+            operations. Each operation's name will be
+            prefixed by the backup's name and the operation's
+            metadata will be of type
+            CreateBackupMetadata. Operations returned include those that are
+            pending or have completed/failed/canceled within the last 7 days.
+            Operations returned are ordered by
+            `operation.metadata.value.progress.start_time` in descending order starting
+            from the most recently started operation.
+          items:
+            $ref: '#/components/schemas/Operation'
+          type: array
+      type: object
+    ListBackupsResponse:
+      description: The response for ListBackups.
+      properties:
+        backups:
+          description: |-
+            The list of matching backups. Backups returned are ordered by `create_time`
+            in descending order, starting from the most recent `create_time`.
+          items:
+            $ref: '#/components/schemas/Backup'
+          type: array
+        nextPageToken:
+          description: |-
+            `next_page_token` can be sent in a subsequent
+            ListBackups call to fetch more
+            of the matching backups.
+          type: string
+      type: object
+    ListDatabaseOperationsResponse:
+      description: |-
+        The response for
+        ListDatabaseOperations.
+      properties:
+        nextPageToken:
+          description: |-
+            `next_page_token` can be sent in a subsequent
+            ListDatabaseOperations
+            call to fetch more of the matching metadata.
+          type: string
+        operations:
+          description: |-
+            The list of matching database long-running
+            operations. Each operation's name will be
+            prefixed by the database's name. The operation's
+            metadata field type
+            `metadata.type_url` describes the type of the metadata.
+          items:
+            $ref: '#/components/schemas/Operation'
+          type: array
+      type: object
     ListDatabasesResponse:
       description: The response for ListDatabases.
       properties:
@@ -2638,6 +3299,42 @@ components:
             is `TakeSnapshot()`, the inferred response type is
             `TakeSnapshotResponse`.
           type: object
+      type: object
+    OperationProgress:
+      description: |-
+        Encapsulates progress related information for a Cloud Spanner long
+        running operation.
+      properties:
+        endTime:
+          description: |-
+            If set, the time at which this operation failed or was completed
+            successfully.
+          format: google-datetime
+          type: string
+        progressPercent:
+          description: |-
+            Percent completion of the operation.
+            Values are between 0 and 100 inclusive.
+          format: int32
+          type: integer
+        startTime:
+          description: Time the request was received.
+          format: google-datetime
+          type: string
+      type: object
+    OptimizeRestoredDatabaseMetadata:
+      description: |-
+        Metadata type for the long-running operation used to track the progress
+        of optimizations performed on a newly restored database. This long-running
+        operation is automatically created by the system after the successful
+        completion of a database restore, and cannot be cancelled.
+      properties:
+        name:
+          description: Name of the restored database being optimized.
+          type: string
+        progress:
+          $ref: '#/components/schemas/OperationProgress'
+          description: The progress of the post-restore optimizations.
       type: object
     PartialResultSet:
       description: |-
@@ -3073,6 +3770,29 @@ components:
           format: int32
           type: integer
       type: object
+    QueryOptions:
+      description: Query optimizer configuration.
+      properties:
+        optimizerVersion:
+          description: |-
+            An option to control the selection of optimizer version.
+
+            This parameter allows individual queries to pick different query
+            optimizer versions.
+
+            Specifying "latest" as a value instructs Cloud Spanner to use the
+            latest supported query optimizer version. If not specified, Cloud Spanner
+            uses optimizer version set at the database level options. Any other
+            positive integer (from the list of supported optimizer versions)
+            overrides the default optimizer version for query execution.
+            The list of supported optimizer versions can be queried from
+            SPANNER_SYS.SUPPORTED_OPTIMIZER_VERSIONS. Executing a SQL statement
+            with an invalid optimizer version will fail with a syntax error
+            (`INVALID_ARGUMENT`) status.
+
+            The `optimizer_version` statement hint has precedence over this setting.
+          type: string
+      type: object
     QueryPlan:
       description: Contains an ordered list of nodes appearing in the query plan.
       properties:
@@ -3253,6 +3973,92 @@ components:
             - READ_WRITE
             - READ_ONLY
             - WITNESS
+          type: string
+      type: object
+    RestoreDatabaseMetadata:
+      description: |-
+        Metadata type for the long-running operation returned by
+        RestoreDatabase.
+      properties:
+        backupInfo:
+          $ref: '#/components/schemas/BackupInfo'
+          description: Information about the backup used to restore the database.
+        cancelTime:
+          description: |-
+            The time at which cancellation of this operation was received.
+            Operations.CancelOperation
+            starts asynchronous cancellation on a long-running operation. The server
+            makes a best effort to cancel the operation, but success is not guaranteed.
+            Clients can use
+            Operations.GetOperation or
+            other methods to check whether the cancellation succeeded or whether the
+            operation completed despite cancellation. On successful cancellation,
+            the operation is not deleted; instead, it becomes an operation with
+            an Operation.error value with a google.rpc.Status.code of 1,
+            corresponding to `Code.CANCELLED`.
+          format: google-datetime
+          type: string
+        name:
+          description: Name of the database being created and restored to.
+          type: string
+        optimizeDatabaseOperationName:
+          description: |-
+            If exists, the name of the long-running operation that will be used to
+            track the post-restore optimization process to optimize the performance of
+            the restored database, and remove the dependency on the restore source.
+            The name is of the form
+            `projects/<project>/instances/<instance>/databases/<database>/operations/<operation>
+            where the <database> is the name of database being created and restored to.
+            The metadata type of the  long-running operation is
+            OptimizeRestoredDatabaseMetadata. This long-running operation will be
+            automatically created by the system after the RestoreDatabase long-running
+            operation completes successfully. This operation will not be created if the
+            restore was not successful.
+          type: string
+        progress:
+          $ref: '#/components/schemas/OperationProgress'
+          description: |-
+            The progress of the
+            RestoreDatabase
+            operation.
+        sourceType:
+          description: The type of the restore source.
+          enum:
+            - TYPE_UNSPECIFIED
+            - BACKUP
+          type: string
+      type: object
+    RestoreDatabaseRequest:
+      description: |-
+        The request for
+        RestoreDatabase.
+      properties:
+        backup:
+          description: |-
+            Name of the backup from which to restore.  Values are of the form
+            `projects/<project>/instances/<instance>/backups/<backup>`.
+          type: string
+        databaseId:
+          description: |-
+            Required. The id of the database to create and restore to. This
+            database must not already exist. The `database_id` appended to
+            `parent` forms the full database name of the form
+            `projects/<project>/instances/<instance>/databases/<database_id>`.
+          type: string
+      type: object
+    RestoreInfo:
+      description: Information about the database restore.
+      properties:
+        backupInfo:
+          $ref: '#/components/schemas/BackupInfo'
+          description: |-
+            Information about the backup used to restore the database. The backup
+            may no longer exist.
+        sourceType:
+          description: The type of the restore source.
+          enum:
+            - TYPE_UNSPECIFIED
+            - BACKUP
           type: string
       type: object
     ResultSet:

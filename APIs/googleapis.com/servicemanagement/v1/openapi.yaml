@@ -100,17 +100,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   /v1/services:
     get:
       description: |-
@@ -181,17 +181,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new managed service.
@@ -300,17 +300,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/services/{serviceName}/config':
     get:
       description: Gets a service configuration (version) for a managed service.
@@ -370,17 +370,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/services/{serviceName}/configs':
     get:
       description: |-
@@ -435,17 +435,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service.
@@ -549,30 +549,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/services/{serviceName}/configs:submit':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new service configuration (version) for a managed service based
@@ -688,17 +688,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates a new service configuration rollout. Based on rollout, the
@@ -794,30 +794,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/services/{serviceName}:disable':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Disables a service for a project, so it can no longer be
@@ -860,17 +860,17 @@ paths:
         - services
   '/v1/services/{serviceName}:enable':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Enables a service for a project, so it can be used
@@ -914,17 +914,17 @@ paths:
         - services
   '/v1/services/{serviceName}:undelete':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Revives a previously deleted managed service. The method restores the
@@ -963,17 +963,17 @@ paths:
         - services
   '/v1/services:generateConfigReport':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Generates and returns a report (errors, warnings and changes from
@@ -1045,30 +1045,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Gets the access control policy for a resource.
@@ -1118,17 +1118,17 @@ paths:
         - services
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -1171,17 +1171,17 @@ paths:
         - services
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -1551,6 +1551,28 @@ components:
 
             Example: https://www.googleapis.com/oauth2/v1/certs
           type: string
+        jwtLocations:
+          description: |-
+            Defines the locations to extract the JWT.
+
+            JWT locations can be either from HTTP headers or URL query parameters.
+            The rule is that the first match wins. The checking order is: checking
+            all headers first, then URL query parameters.
+
+            If not specified,  default to use following 3 locations:
+               1) Authorization: Bearer
+               2) x-goog-iap-jwt-assertion
+               3) access_token query parameter
+
+            Default locations can be specified as followings:
+               jwt_locations:
+               - header: Authorization
+                 value_prefix: "Bearer "
+               - header: x-goog-iap-jwt-assertion
+               - query: access_token
+          items:
+            $ref: '#/components/schemas/JwtLocation'
+          type: array
       type: object
     AuthRequirement:
       description: |-
@@ -1663,20 +1685,36 @@ components:
       description: A backend rule provides configuration for an individual API element.
       properties:
         address:
-          description: The address of the API backend.
+          description: |-
+            The address of the API backend.
+
+            The scheme is used to determine the backend protocol and security.
+            The following schemes are accepted:
+
+               SCHEME        PROTOCOL    SECURITY
+               http://       HTTP        None
+               https://      HTTP        TLS
+               grpc://       gRPC        None
+               grpcs://      gRPC        TLS
+
+            It is recommended to explicitly include a scheme. Leaving out the scheme
+            may cause constrasting behaviors across platforms.
+
+            If the port is unspecified, the default is:
+            - 80 for schemes without TLS
+            - 443 for schemes with TLS
+
+            For HTTP backends, use protocol
+            to specify the protocol version.
           type: string
         deadline:
           description: |-
-            The number of seconds to wait for a response from a request.  The default
-            deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
+            The number of seconds to wait for a response from a request. The default
+            varies based on the request protocol and deployment environment.
           format: double
           type: number
         disableAuth:
           description: |-
-            When disable_auth is false,  a JWT ID token will be generated with the
-            value from BackendRule.address as jwt_audience, overrode to the HTTP
-            "Authorization" request header and sent to the backend.
-
             When disable_auth is true, a JWT ID token won't be generated and the
             original "Authorization" HTTP header will be preserved. If the header is
             used to carry the original token and is expected by the backend, this
@@ -1705,6 +1743,30 @@ components:
             - PATH_TRANSLATION_UNSPECIFIED
             - CONSTANT_ADDRESS
             - APPEND_PATH_TO_ADDRESS
+          type: string
+        protocol:
+          description: |-
+            The protocol used for sending a request to the backend.
+            The supported values are "http/1.1" and "h2".
+
+            The default value is inferred from the scheme in the
+            address field:
+
+               SCHEME        PROTOCOL
+               http://       http/1.1
+               https://      http/1.1
+               grpc://       h2
+               grpcs://      h2
+
+            For secure HTTP backends (https://) that support HTTP/2, set this field
+            to "h2" for improved performance.
+
+            Configuring this field to non-default values is only supported for secure
+            HTTP backends. This field will be ignored for all other backends.
+
+            See
+            https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+            for more details on the supported values.
           type: string
         selector:
           description: |-
@@ -2376,33 +2438,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -2864,6 +2949,11 @@ components:
           items:
             $ref: '#/components/schemas/HttpRule'
           type: array
+        allowHalfDuplex:
+          description: |-
+            When this flag is set to true, HTTP requests will be allowed to invoke a
+            half-duplex streaming method.
+          type: boolean
         body:
           description: |-
             The name of the request field whose value is mapped to the HTTP request
@@ -2911,6 +3001,27 @@ components:
             Selects a method to which this rule applies.
 
             Refer to selector for syntax details.
+          type: string
+      type: object
+    JwtLocation:
+      description: Specifies a location to extract JWT from an API request.
+      properties:
+        header:
+          description: Specifies HTTP header name to extract JWT token.
+          type: string
+        query:
+          description: Specifies URL query parameter name to extract JWT token.
+          type: string
+        valuePrefix:
+          description: |-
+            The value prefix. The value format is "value_prefix{token}"
+            Only applies to "in" header type. Must be empty for "in" query type.
+            If not empty, the header value has to match (case sensitive) this prefix.
+            If not matched, JWT will not be extracted. If matched, JWT will be
+            extracted after the prefix is removed.
+
+            For example, for "Authorization: Bearer {JWT}",
+            value_prefix="Bearer " with a space at the end.
           type: string
       type: object
     LabelDescriptor:
@@ -3206,6 +3317,58 @@ components:
           type: string
         unit:
           description: |-
+            The units in which the metric value is reported. It is only applicable
+            if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
+            defines the representation of the stored metric values.
+
+            Different systems may scale the values to be more easily displayed (so a
+            value of `0.02KBy` _might_ be displayed as `20By`, and a value of
+            `3523KBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+            `KBy`, then the value of the metric is always in thousands of bytes, no
+            matter how it may be displayed..
+
+            If you want a custom metric to record the exact number of CPU-seconds used
+            by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
+            `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
+            CPU-seconds, then the value is written as `12005`.
+
+            Alternatively, if you want a custom metric to record data in a more
+            granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
+            `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
+            or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
+
+            The supported units are a subset of [The Unified Code for Units of
+            Measure](http://unitsofmeasure.org/ucum.html) standard:
+
+            **Basic units (UNIT)**
+
+            * `bit`   bit
+            * `By`    byte
+            * `s`     second
+            * `min`   minute
+            * `h`     hour
+            * `d`     day
+
+            **Prefixes (PREFIX)**
+
+            * `k`     kilo    (10^3)
+            * `M`     mega    (10^6)
+            * `G`     giga    (10^9)
+            * `T`     tera    (10^12)
+            * `P`     peta    (10^15)
+            * `E`     exa     (10^18)
+            * `Z`     zetta   (10^21)
+            * `Y`     yotta   (10^24)
+
+            * `m`     milli   (10^-3)
+            * `u`     micro   (10^-6)
+            * `n`     nano    (10^-9)
+            * `p`     pico    (10^-12)
+            * `f`     femto   (10^-15)
+            * `a`     atto    (10^-18)
+            * `z`     zepto   (10^-21)
+            * `y`     yocto   (10^-24)
+
             * `Ki`    kibi    (2^10)
             * `Mi`    mebi    (2^20)
             * `Gi`    gibi    (2^30)
@@ -4007,7 +4170,9 @@ components:
           format: google-datetime
           type: string
         createdBy:
-          description: The user who created the Rollout. Readonly.
+          description: |-
+            This field is deprecated and will be deleted. Please remove usage of
+            this field.
           type: string
         deleteServiceStrategy:
           $ref: '#/components/schemas/DeleteServiceStrategy'
@@ -4098,6 +4263,7 @@ components:
             The semantic version of the service configuration. The config version
             affects the interpretation of the service configuration. For example,
             certain features are enabled by default for certain config versions.
+
             The latest config version is `3`.
           format: uint32
           type: integer
@@ -4214,6 +4380,38 @@ components:
         usage:
           $ref: '#/components/schemas/Usage'
           description: Configuration controlling usage of this service.
+      type: object
+    ServiceIdentity:
+      description: |-
+        The per-product per-project service identity for a service.
+
+
+        Use this field to configure per-product per-project service identity.
+        Example of a service identity configuration.
+
+            usage:
+              service_identity:
+              - service_account_parent: "projects/123456789"
+                display_name: "Cloud XXX Service Agent"
+                description: "Used as the identity of Cloud XXX to access resources"
+      properties:
+        description:
+          description: |-
+            Optional. A user-specified opaque description of the service account.
+            Must be less than or equal to 256 UTF-8 bytes.
+          type: string
+        displayName:
+          description: |-
+            Optional. A user-specified name for the service account.
+            Must be less than or equal to 100 UTF-8 bytes.
+          type: string
+        serviceAccountParent:
+          description: |-
+            A service account project that hosts the service accounts.
+
+            An example name would be:
+            `projects/123456789`
+          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
@@ -4546,6 +4744,9 @@ components:
           items:
             $ref: '#/components/schemas/UsageRule'
           type: array
+        serviceIdentity:
+          $ref: '#/components/schemas/ServiceIdentity'
+          description: The configuration of a per-product per-project service identity.
       type: object
     UsageRule:
       description: |-

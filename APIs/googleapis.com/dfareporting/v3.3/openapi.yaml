@@ -1208,8 +1208,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Advertiser group ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -1469,8 +1468,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Landing page ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -1717,8 +1715,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Advertiser ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -2003,8 +2000,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Campaign ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -2635,8 +2631,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Content category ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -3070,8 +3065,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Creative Field ID
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -3237,7 +3231,7 @@ paths:
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
     patch:
-      description: Updates an existing creative field value. This method supports patch semantics.
+      description: Updates an existing creative field. This method supports patch semantics.
       operationId: dfareporting.creativeFieldValues.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -3252,8 +3246,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Creative Field Value ID
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -3591,8 +3584,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Creative group ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -3891,8 +3883,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Creative ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -4487,8 +4478,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Event tag ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -4837,8 +4827,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Floodlight activity ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -5128,8 +5117,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Floodlight activity Group ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -5301,8 +5289,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Floodlight configuration ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -5969,8 +5956,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Placement group ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -6178,8 +6164,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Placement strategy ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -6540,8 +6525,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Placement ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -7496,8 +7480,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Remarketing list ID.
-          in: query
+        - in: query
           name: remarketingListId
           required: true
           schema:
@@ -7684,8 +7667,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Remarketing list ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -8380,8 +8362,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Site ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -8717,8 +8698,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Subaccount ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -9050,8 +9030,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Targeting template ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -9421,8 +9400,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: User role ID.
-          in: query
+        - in: query
           name: id
           required: true
           schema:
@@ -11969,7 +11947,7 @@ components:
           $ref: '#/components/schemas/CreativeAssetId'
           description: ID of the creative asset. This is a required field.
         clickTags:
-          description: List of detected click tags for assets. This is a read-only auto-generated field.
+          description: 'List of detected click tags for assets. This is a read-only, auto-generated field. This field is empty for a rich media asset.'
           items:
             $ref: '#/components/schemas/ClickTag'
           type: array
@@ -16736,7 +16714,7 @@ components:
           type: string
       type: object
     UserProfile:
-      description: Represents a UserProfile resource.
+      description: "A UserProfile resource lets you list all DFA user profiles that are associated with a Google user account. The profile_id needs to be specified in other API requests.\_"
       properties:
         accountId:
           description: The account ID to which this profile belongs.
@@ -16746,11 +16724,11 @@ components:
           description: The account name this profile belongs to.
           type: string
         etag:
-          description: The eTag of this response for caching purposes.
+          description: Etag of this resource.
           type: string
         kind:
           default: 'dfareporting#userProfile'
-          description: 'The kind of resource this is, in this case dfareporting#userProfile.'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#userProfile".'
           type: string
         profileId:
           description: The unique ID of the user profile.
@@ -16771,7 +16749,7 @@ components:
       description: Represents the list of user profiles.
       properties:
         etag:
-          description: The eTag of this response for caching purposes.
+          description: Etag of this resource.
           type: string
         items:
           description: The user profiles returned in this response.
@@ -16780,7 +16758,7 @@ components:
           type: array
         kind:
           default: 'dfareporting#userProfileList'
-          description: 'The kind of list this is, in this case dfareporting#userProfileList.'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#userProfileList".'
           type: string
       type: object
     UserRole:

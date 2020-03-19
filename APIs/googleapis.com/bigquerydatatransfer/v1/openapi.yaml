@@ -105,17 +105,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: |-
         Updates a data transfer configuration.
@@ -256,30 +256,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{name}:checkValidCreds':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Returns true if valid credentials exist for the given data source and
@@ -390,17 +390,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{parent}/runs':
     get:
       description: Returns information about running and completed jobs.
@@ -482,17 +482,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{parent}/transferConfigs':
     get:
       description: Returns information about all data transfers in the project.
@@ -558,17 +558,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Creates a new data transfer configuration.
       operationId: bigquerydatatransfer.projects.transferConfigs.create
@@ -716,30 +716,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{parent}:scheduleRuns':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates transfer runs for a time range [start_time, end_time].
@@ -784,17 +784,17 @@ paths:
         - projects
   '/v1/{parent}:startManualRuns':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Start manual transfer runs to be executed now with schedule_time equal to
@@ -948,6 +948,7 @@ components:
             - AUTHORIZATION_TYPE_UNSPECIFIED
             - AUTHORIZATION_CODE
             - GOOGLE_PLUS_AUTHORIZATION_CODE
+            - FIRST_PARTY_OAUTH
           type: string
         clientId:
           description: Data source client id which should be used to receive refresh token.
@@ -1112,6 +1113,15 @@ components:
         validationRegex:
           description: Regular expression which can be used for parameter validation.
           type: string
+      type: object
+    EmailPreferences:
+      description: |-
+        Represents preferences for sending email notifications for transfer run
+        events.
+      properties:
+        enableFailureEmail:
+          description: 'If true, email notifications will be sent on transfer run failures.'
+          type: boolean
       type: object
     Empty:
       description: |-
@@ -1397,6 +1407,11 @@ components:
         displayName:
           description: User specified display name for the data transfer.
           type: string
+        emailPreferences:
+          $ref: '#/components/schemas/EmailPreferences'
+          description: |-
+            Email notifications will be sent according to these preferences
+            to the email address of the user who owns this transfer config.
         name:
           description: |-
             The resource name of the transfer config.
@@ -1410,6 +1425,11 @@ components:
         nextRunTime:
           description: Output only. Next time when data transfer will run.
           format: google-datetime
+          type: string
+        notificationPubsubTopic:
+          description: |-
+            Pub/Sub topic where notifications will be sent after transfer runs
+            associated with this transfer config finish.
           type: string
         params:
           additionalProperties:
@@ -1481,6 +1501,12 @@ components:
         destinationDatasetId:
           description: Output only. The BigQuery target dataset id.
           type: string
+        emailPreferences:
+          $ref: '#/components/schemas/EmailPreferences'
+          description: |-
+            Output only. Email notifications will be sent according to these
+            preferences to the email address of the user who owns the transfer config
+            this run was derived from.
         endTime:
           description: |-
             Output only. Time when transfer run ended.
@@ -1496,6 +1522,11 @@ components:
             Transfer run names have the form
             `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
             The name is ignored when creating a transfer run.
+          type: string
+        notificationPubsubTopic:
+          description: |-
+            Output only. Pub/Sub topic where a notification will be sent after this
+            transfer run finishes
           type: string
         params:
           additionalProperties:

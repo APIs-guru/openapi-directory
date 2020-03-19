@@ -29,16 +29,15 @@ info:
 externalDocs:
   url: 'https://firebase.google.com/docs/hosting/'
 tags:
+  - name: projects
   - name: sites
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.sites.domains.delete
       parameters:
-        - description: |-
-            Required. The name of the version to be deleted, in the format:
-            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true
@@ -101,17 +100,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     patch:
       description: |-
         Updates the specified metadata for a version. Note that this method will
@@ -255,17 +254,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a domain mapping on the specified site.
       operationId: firebasehosting.sites.domains.create
@@ -364,21 +363,21 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
   '/v1beta1/{parent}/releases':
     get:
       description: Lists the releases that have been created on the specified site.
-      operationId: firebasehosting.sites.releases.list
+      operationId: firebasehosting.sites.channels.releases.list
       parameters:
         - description: |-
             Required. The parent for which to list files, in the format:
@@ -426,22 +425,22 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Creates a new release which makes the content of the specified version
-        actively display on the site.
-      operationId: firebasehosting.sites.releases.create
+        actively display on the appropriate URL(s).
+      operationId: firebasehosting.sites.channels.releases.create
       parameters:
         - description: |-
             The site that the release belongs to, in the format:
@@ -536,17 +535,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a new version for a site.
       operationId: firebasehosting.sites.versions.create
@@ -597,19 +596,61 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - sites
-  '/v1beta1/{parent}:populateFiles':
+  '/v1beta1/{parent}/versions:clone':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+    post:
+      description: |-
+        Creates a new version on the target site using the content
+        of the specified version.
+      operationId: firebasehosting.sites.versions.clone
+      parameters:
+        - description: |-
+            Required. The target site where the cloned version will reside,
+            in the format: `sites/{site}`
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneVersionRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      tags:
+        - sites
+  '/v1beta1/{parent}:populateFiles':
+    parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Adds content files to a version.
       operationId: firebasehosting.sites.versions.populateFiles
@@ -773,6 +814,28 @@ components:
           description: |-
             The token to serve at the specified URL path to satisfy the certificate
             challenge.
+          type: string
+      type: object
+    CloneVersionRequest:
+      description: The request sent to CloneVersion.
+      properties:
+        exclude:
+          $ref: '#/components/schemas/PathFilter'
+          description: |-
+            If provided, only paths that do not match any of the regexes in this
+            list will be included in the new version.
+        finalize:
+          description: 'If true, immediately finalize the version after cloning is complete.'
+          type: boolean
+        include:
+          $ref: '#/components/schemas/PathFilter'
+          description: |-
+            If provided, only paths that match one or more regexes in this list
+            will be included in the new version.
+        sourceVersion:
+          description: |-
+            Required. The name of the version to be cloned, in the format:
+            `sites/{site}/versions/{version}`
           type: string
       type: object
     CloudRunRewrite:
@@ -974,6 +1037,58 @@ components:
           description: 'The list of versions, if any exist.'
           items:
             $ref: '#/components/schemas/Version'
+          type: array
+      type: object
+    Operation:
+      description: |-
+        This resource represents a long-running operation that is the result of a
+        network API call.
+      properties:
+        done:
+          description: |-
+            If the value is `false`, it means the operation is still in progress.
+            If `true`, the operation is completed, and either `error` or `response` is
+            available.
+          type: boolean
+        error:
+          $ref: '#/components/schemas/Status'
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: |-
+            Service-specific metadata associated with the operation.  It typically
+            contains progress information and common metadata such as create time.
+            Some services might not provide such metadata.  Any method that returns a
+            long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: |-
+            The server-assigned name, which is only unique within the same service that
+            originally returns it. If you use the default HTTP mapping, the
+            `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: |-
+            The normal response of the operation in case of success.  If the original
+            method returns no data on success, such as `Delete`, the response is
+            `google.protobuf.Empty`.  If the original method is standard
+            `Get`/`Create`/`Update`, the response should be the resource.  For other
+            methods, the response should have the type `XxxResponse`, where `Xxx`
+            is the original method name.  For example, if the original method name
+            is `TakeSnapshot()`, the inferred response type is
+            `TakeSnapshotResponse`.
+          type: object
+      type: object
+    PathFilter:
+      description: A representation of filter path.
+      properties:
+        regexes:
+          description: An array of regexes to filter by.
+          items:
+            type: string
           type: array
       type: object
     PopulateVersionFilesRequest:
@@ -1189,6 +1304,36 @@ components:
           format: int64
           type: string
       type: object
+    Status:
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
+        different programming environments, including REST APIs and RPC APIs. It is
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details.
+
+        You can find out more about this error model and how to work with it in the
+        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      properties:
+        code:
+          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          format: int32
+          type: integer
+        details:
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
+            message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: |-
+            A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
     Version:
       description: |-
         A `Version` is the collection of configuration and
@@ -1268,6 +1413,7 @@ components:
             - DELETED
             - ABANDONED
             - EXPIRED
+            - CLONING
           type: string
         versionBytes:
           description: |-

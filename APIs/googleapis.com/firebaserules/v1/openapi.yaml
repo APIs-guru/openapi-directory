@@ -104,6 +104,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -113,8 +115,6 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     patch:
       description: |-
         Update a `Release` via PATCH.
@@ -242,6 +242,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -251,8 +253,6 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Create a `Release`.
@@ -381,6 +381,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -390,8 +392,6 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Create a `Ruleset` from `Source`.
@@ -484,6 +484,8 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -493,10 +495,10 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
   '/v1/{name}:test':
     parameters:
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -506,8 +508,6 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Test `Source` for syntactic and semantic correctness. Issues present, if
@@ -950,6 +950,14 @@ components:
           description: First column on the source line associated with the source fragment.
           format: int32
           type: integer
+        currentOffset:
+          description: Start position relative to the beginning of the file.
+          format: int32
+          type: integer
+        endOffset:
+          description: End position relative to the beginning of the file.
+          format: int32
+          type: integer
         fileName:
           description: Name of the `File`.
           type: string
@@ -983,6 +991,7 @@ components:
             - LEVEL_UNSPECIFIED
             - NONE
             - FULL
+            - VISITED
           type: string
         functionMocks:
           description: |-

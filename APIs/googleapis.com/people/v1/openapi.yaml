@@ -49,7 +49,7 @@ paths:
           schema:
             type: integer
         - description: |-
-            The next_page_token value returned from a previous call to
+            Optional. The next_page_token value returned from a previous call to
             [ListContactGroups](/people/api/rest/v1/contactgroups/list).
             Requests the next page of resources.
           in: query
@@ -57,7 +57,7 @@ paths:
           schema:
             type: string
         - description: |-
-            A sync token, returned by a previous call to `contactgroups.list`.
+            Optional. A sync token, returned by a previous call to `contactgroups.list`.
             Only resources changed since the sync token was created will be returned.
           in: query
           name: syncToken
@@ -82,17 +82,17 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Create a new contact group owned by the authenticated user.
       operationId: people.contactGroups.create
@@ -156,24 +156,24 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
   '/v1/people:batchGet':
     get:
       description: |-
         Provides information about a list of specific people by specifying a list
         of requested resource names. Use `people/me` to indicate the authenticated
         user.
-        <br>
+
         The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.getBatchGet
       parameters:
@@ -227,7 +227,7 @@ paths:
 
             - To get information about the authenticated user, specify `people/me`.
             - To get information about a google account, specify
-              `people/`<var>account_id</var>.
+              `people/{account_id}`.
             - To get information about a contact, specify the resource name that
               identifies the contact as returned by
             [`people.connections.list`](/people/api/rest/v1/people.connections/list).
@@ -287,30 +287,30 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
   '/v1/people:createContact':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Create a new contact and return the person resource for that contact.
       operationId: people.people.createContact
@@ -441,17 +441,17 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     put:
       description: |-
         Update the name of an existing contact group owned by the authenticated
@@ -460,7 +460,7 @@ paths:
       parameters:
         - description: |-
             The resource name for the contact group, assigned by the server. An ASCII
-            string, in the form of `contactGroups/`<var>contact_group_id</var>.
+            string, in the form of `contactGroups/{contact_group_id}`.
           in: path
           name: resourceName
           required: true
@@ -491,7 +491,7 @@ paths:
       description: |-
         Provides a list of the authenticated user's contacts merged with any
         connected profiles.
-        <br>
+
         The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.connections.list
       parameters:
@@ -509,7 +509,12 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The token of the page to be returned.
+        - description: |-
+            Optional. A page token, received from a previous `ListConnections` call.
+            Provide this to retrieve the subsequent page.
+
+            When paginating, all other parameters provided to `ListConnections`
+            must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -560,16 +565,16 @@ paths:
           schema:
             type: string
         - description: |-
-            Whether the response should include a sync token, which can be used to get
-            all changes since the last request. For subsequent sync requests use the
-            `sync_token` param instead. Initial sync requests that specify
+            Optional. Whether the response should include `next_sync_token`, which can be used to
+            get all changes since the last request. For subsequent sync requests use
+            the `sync_token` param instead. Initial sync requests that specify
             `request_sync_token` have an additional rate limit.
           in: query
           name: requestSyncToken
           schema:
             type: boolean
         - description: |-
-            The order in which the connections should be sorted. Defaults to
+            Optional. The order in which the connections should be sorted. Defaults to
             `LAST_MODIFIED_ASCENDING`.
           in: query
           name: sortOrder
@@ -581,9 +586,12 @@ paths:
               - LAST_NAME_ASCENDING
             type: string
         - description: |-
-            A sync token returned by a previous call to `people.connections.list`.
-            Only resources changed since the sync token was created will be returned.
+            Optional. A sync token, received from a previous `ListConnections` call.
+            Provide this to retrieve only the resources changed since the last request.
             Sync requests that specify `sync_token` have an additional rate limit.
+
+            When syncing, all other parameters provided to `ListConnections`
+            must match the call that provided the sync token.
           in: query
           name: syncToken
           schema:
@@ -607,34 +615,34 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
   '/v1/{resourceName}/members:modify':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Modify the members of a contact group owned by the authenticated user.
-        <br>
+
         The only system contact groups that can have members added are
         `contactGroups/myContacts` and `contactGroups/starred`. Other system
         contact groups are deprecated and can only have contacts removed.
@@ -693,17 +701,17 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
   '/v1/{resourceName}:deleteContactPhoto':
     delete:
       description: Delete a contact's photo.
@@ -769,40 +777,40 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
   '/v1/{resourceName}:updateContact':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: |-
         Update contact data for an existing contact person. Any non-contact data
         will not be modified.
 
         The request throws a 400 error if `updatePersonFields` is not specified.
-        <br>
+
         The request throws a 400 error if `person.metadata.sources` is not
         specified for the contact to be updated.
-        <br>
+
         The request throws a 400 error with an error with reason
         `"failedPrecondition"` if `person.metadata.sources.etag` is different than
         the contact's etag, which indicates the contact has changed since its data
@@ -813,7 +821,7 @@ paths:
         - description: |-
             The resource name for the person, assigned by the server. An ASCII string
             with a max length of 27 characters, in the form of
-            `people/`<var>person_id</var>.
+            `people/{person_id}`.
           in: path
           name: resourceName
           required: true
@@ -870,17 +878,17 @@ paths:
         - people
   '/v1/{resourceName}:updateContactPhoto':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: Update a contact's photo.
       operationId: people.people.updateContactPhoto
@@ -1163,7 +1171,7 @@ components:
         resourceName:
           description: |-
             The resource name for the contact group, assigned by the server. An ASCII
-            string, in the form of `contactGroups/`<var>contact_group_id</var>.
+            string, in the form of `contactGroups/{contact_group_id}`.
           type: string
       type: object
     ContactGroupMembership:
@@ -1175,7 +1183,7 @@ components:
         contactGroupResourceName:
           description: |-
             The resource name for the contact group, assigned by the server. An ASCII
-            string, in the form of `contactGroups/`<var>contact_group_id</var>.
+            string, in the form of `contactGroups/{contact_group_id}`.
             Only contact_group_resource_name can be used for modifying memberships.
             Any contact group membership can be removed, but only user group or
             "myContacts" or "starred" system groups memberships can be added. A
@@ -1386,6 +1394,7 @@ components:
           type: string
       type: object
     GetPeopleResponse:
+      description: The response to a get request for a list of people by resource name.
       properties:
         responses:
           description: The response for each requested resource name.
@@ -1448,6 +1457,7 @@ components:
           type: string
       type: object
     ListConnectionsResponse:
+      description: The response to a request for the authenticated user's connections.
       properties:
         connections:
           description: The list of people that the requestor is connected to.
@@ -1455,10 +1465,15 @@ components:
             $ref: '#/components/schemas/Person'
           type: array
         nextPageToken:
-          description: The token that can be used to retrieve the next page of results.
+          description: |-
+            A token, which can be sent as `page_token` to retrieve the next page.
+            If this field is omitted, there are no subsequent pages.
           type: string
         nextSyncToken:
-          description: The token that can be used to retrieve changes since the last request.
+          description: |-
+            A token, which can be sent as `sync_token` to retrieve changes since the
+            last request. Request must set `request_sync_token` to return the sync
+            token.
           type: string
         totalItems:
           description: The total number of items in the list without pagination.
@@ -1527,15 +1542,15 @@ components:
       properties:
         resourceNamesToAdd:
           description: |-
-            The resource names of the contact people to add in the form of
-            `people/`<var>person_id</var>.
+            Optional. The resource names of the contact people to add in the form of
+            `people/{person_id}`.
           items:
             type: string
           type: array
         resourceNamesToRemove:
           description: |-
-            The resource names of the contact people to remove in the form of
-            `people/`<var>person_id</var>.
+            Optional. The resource names of the contact people to remove in the form of
+            `people/{person_id}`.
           items:
             type: string
           type: array
@@ -1621,6 +1636,8 @@ components:
             - INITIALS
             - GPLUS
             - OTHER_NAME
+            - ALTERNATE_NAME
+            - SHORT_NAME
           type: string
         value:
           description: The nickname.
@@ -1713,7 +1730,7 @@ components:
           type: array
         ageRange:
           description: |-
-            Output only. **DEPRECATED** (Please use `person.ageRanges` instead)**
+            Output only. **DEPRECATED** (Please use `person.ageRanges` instead)
 
             The person's age range.
           enum:
@@ -1844,7 +1861,7 @@ components:
           description: |-
             The resource name for the person, assigned by the server. An ASCII string
             with a max length of 27 characters, in the form of
-            `people/`<var>person_id</var>.
+            `people/{person_id}`.
           type: string
         sipAddresses:
           description: The person's SIP addresses.
@@ -1997,8 +2014,9 @@ components:
         url:
           description: |-
             The URL of the photo. You can change the desired size by appending a query
-            parameter `sz=`<var>size</var> at the end of the url. Example:
-            `https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50`
+            parameter `sz={size}` at the end of the url, where {size} is the size in
+            pixels. Example:
+            https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50
           type: string
       type: object
     ProfileMetadata:

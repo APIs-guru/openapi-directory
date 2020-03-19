@@ -97,17 +97,17 @@ paths:
       tags:
         - availableProjects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
   /v1beta1/projects:
     get:
       description: |-
@@ -173,17 +173,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/{name}':
     delete:
       description: Removes a SHA certificate from the specified AndroidApp.
@@ -220,15 +220,15 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the WebApp identified by the specified resource name.
-      operationId: firebase.projects.webApps.get
+      description: Gets the IosApp identified by the specified resource name.
+      operationId: firebase.projects.iosApps.get
       parameters:
         - description: |-
             The fully qualified resource name of the App, in the format:
-            <br><code>projects/<var>projectId</var>/webApps/<var>appId</var></code>
+            <code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
             <br>As an <var>appId</var> is a unique identifier, the Unique Resource
             from Sub-Collection access pattern may be used here, in the format:
-            <br><code>projects/-/webApps/<var>appId</var></code>
+            <br><code>projects/-/iosApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -240,7 +240,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WebApp'
+                $ref: '#/components/schemas/IosApp'
           description: Successful response
       security:
         - Oauth2:
@@ -262,26 +262,26 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the attributes of the WebApp identified by the specified
+        Updates the attributes of the IosApp identified by the specified
         resource name.
-      operationId: firebase.projects.webApps.patch
+      operationId: firebase.projects.iosApps.patch
       parameters:
         - description: |-
-            The fully qualified resource name of the App, for example:
-            <br><code>projects/<var>projectId</var>/webApps/<var>appId</var></code>
+            The fully qualified resource name of the App, in the format:
+            <br><code>projects/<var>projectId</var>/iosApps/<var>appId</var></code>
           in: path
           name: name
           required: true
@@ -290,8 +290,8 @@ paths:
           x-reservedExpansion: true
         - description: |-
             Specifies which fields to update.
-            <br>Note that the fields `name`, `appId`, and `projectId` are all
-            immutable.
+            <br>Note that the fields `name`, `appId`, `projectId`, and `bundleId`
+            are all immutable.
           in: query
           name: updateMask
           schema:
@@ -300,13 +300,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebApp'
+              $ref: '#/components/schemas/IosApp'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/WebApp'
+                $ref: '#/components/schemas/IosApp'
           description: Successful response
       security:
         - Oauth2:
@@ -382,17 +382,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Requests that a new AndroidApp be created.
@@ -403,7 +403,7 @@ paths:
       operationId: firebase.projects.androidApps.create
       parameters:
         - description: |-
-            The parent Project for which to list Apps, in the format:
+            The parent Project in which to create an App, in the format:
             <br><code>projects/<var>projectId</var></code>
           in: path
           name: parent
@@ -516,30 +516,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/{parent}/defaultLocation:finalize':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Sets the default Google Cloud Platform (GCP) resource location for the
@@ -678,17 +678,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Requests that a new IosApp be created.
@@ -699,7 +699,7 @@ paths:
       operationId: firebase.projects.iosApps.create
       parameters:
         - description: |-
-            The parent Project for which to list Apps, in the format:
+            The parent Project in which to create an App, in the format:
             <br><code>projects/<var>projectId</var></code>
           in: path
           name: parent
@@ -776,17 +776,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Adds a SHA certificate to the specified AndroidApp.
       operationId: firebase.projects.androidApps.sha.create
@@ -889,17 +889,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Requests that a new WebApp be created.
@@ -910,7 +910,7 @@ paths:
       operationId: firebase.projects.webApps.create
       parameters:
         - description: |-
-            The parent Project for which to list Apps, in the format:
+            The parent Project in which to create an App, in the format:
             <br><code>projects/<var>projectId</var></code>
           in: path
           name: parent
@@ -943,17 +943,17 @@ paths:
         - projects
   '/v1beta1/{parent}:addGoogleAnalytics':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Links a FirebaseProject with an existing
@@ -1046,17 +1046,17 @@ paths:
         - projects
   '/v1beta1/{parent}:removeAnalytics':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Unlinks the specified `FirebaseProject` from its Google Analytics account.
@@ -1177,30 +1177,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
   '/v1beta1/{project}:addFirebase':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Adds Firebase resources to the specified existing
@@ -1345,11 +1345,11 @@ components:
       schema:
         type: string
   requestBodies:
-    WebApp:
+    IosApp:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/WebApp'
+            $ref: '#/components/schemas/IosApp'
   schemas:
     AddFirebaseRequest:
       description: All fields are required.

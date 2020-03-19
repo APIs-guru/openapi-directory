@@ -3009,6 +3009,23 @@ components:
         volumeId:
           type: string
       type: object
+    BooksSubscriptionReleaseInfo:
+      properties:
+        amountInMicros:
+          description: Amount in micros of the specified currency code.
+          format: int64
+          type: string
+        currencyCode:
+          description: Currency code of the amount.
+          type: string
+        releaseNumber:
+          description: The release number of this issue/volume/book.
+          type: string
+        releaseTimestampUs:
+          description: The release date.
+          format: int64
+          type: string
+      type: object
     BooksVolumesRecommendedRateResponse:
       properties:
         consistency_token:
@@ -3728,8 +3745,26 @@ components:
                 type: string
               isComplete:
                 type: boolean
+              seriesFormatType:
+                type: string
               seriesId:
                 type: string
+              seriesSubscriptionReleaseInfo:
+                properties:
+                  cancellationTimestampUs:
+                    description: Cancellation date of the series subscription (or when it ends).
+                    format: int64
+                    type: string
+                  currentReleaseInfo:
+                    $ref: '#/components/schemas/BooksSubscriptionReleaseInfo'
+                    description: Release information for the last release.
+                  nextReleaseInfo:
+                    $ref: '#/components/schemas/BooksSubscriptionReleaseInfo'
+                    description: Release information for the next release.
+                  seriesSubscriptionType:
+                    description: series subscription type.
+                    type: string
+                type: object
               seriesType:
                 type: string
               subscriptionId:

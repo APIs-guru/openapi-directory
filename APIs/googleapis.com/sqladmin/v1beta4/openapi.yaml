@@ -31,6 +31,8 @@ info:
 externalDocs:
   url: 'https://developers.google.com/cloud-sql/'
 tags:
+  - name: databases
+  - name: sslCerts
   - name: backupRuns
   - name: tiers
   - name: flags
@@ -38,8 +40,6 @@ tags:
   - name: operations
   - name: instances
   - name: projects
-  - name: databases
-  - name: sslCerts
 paths:
   /sql/v1beta4/flags:
     get:
@@ -95,8 +95,15 @@ paths:
           schema:
             type: string
         - description: |-
-            An expression for filtering the results of the request, such as by name or
-            label.
+            A filter expression that filters resources listed in the response.
+            The expression is in the form of field:value. For example,
+            'instanceType:CLOUD_SQL_INSTANCE'. Fields can be nested as needed as per
+            their JSON representation, such as 'settings.userLabels.auto_start:true'.
+
+            Multiple filter queries are space-separated. For example.
+            'state:RUNNABLE instanceType:CLOUD_SQL_INSTANCE'. By default, each
+            expression is an AND expression. However, you can include AND and OR
+            expressions explicitly.
           in: query
           name: filter
           schema:
@@ -155,13 +162,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL creates this database instance.
-            Format: projects/{project}/locations/{location}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -202,13 +202,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of database instance to delete.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -241,13 +234,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            Name of the resource database instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: resourceName
           schema:
             type: string
       responses:
@@ -298,13 +284,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of the database instance for Cloud SQL to update.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -330,11 +309,8 @@ paths:
         - instances
     put:
       description: |-
-        Updates settings of a Cloud SQL instance. <aside
-        class="caution"><strong>Caution:</strong> This is not a partial update, so
-        you must include values for all the settings that you want to retain. For
-        partial updates, use <a
-        href="/sql/docs/db_path/admin-api/rest/v1beta4/instances/patch">patch</a>.</aside>
+        Updates settings of a Cloud SQL instance. Using this operation might cause
+        your instance to restart.
       operationId: sql.instances.update
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -347,13 +323,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The name of the database instance for Cloud SQL to update.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: resourceName
           schema:
             type: string
       requestBody:
@@ -413,13 +382,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL should add this server CA.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -469,13 +431,6 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: |-
-            The parent, which owns this collection of backupRuns.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -522,13 +477,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL should create this backupRun.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -580,14 +528,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of the backupRun to delete.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/backupRuns/{backupRun}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -626,14 +566,6 @@ paths:
           in: path
           name: id
           required: true
-          schema:
-            type: string
-        - description: |-
-            Name of the resource backupRun.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/backupRuns/{backupRun}
-          in: query
-          name: resourceName
           schema:
             type: string
       responses:
@@ -680,7 +612,9 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
     post:
-      description: Creates a Cloud SQL instance as a clone of the source instance.
+      description: |-
+        Creates a Cloud SQL instance as a clone of the source instance. Using this
+        operation might cause your instance to restart.
       operationId: sql.instances.clone
       parameters:
         - description: Project ID of the source as well as the clone Cloud SQL instance.
@@ -695,13 +629,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL should clone this instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -760,13 +687,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL creates this ephemeral certificate.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -805,13 +725,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent, which owns this collection of databases.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -862,13 +775,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL should add this database.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -915,14 +821,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of the database to delete.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/databases/{database}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -963,14 +861,6 @@ paths:
           in: path
           name: database
           required: true
-          schema:
-            type: string
-        - description: |-
-            Name of the resource database.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/databases/{database}
-          in: query
-          name: resourceName
           schema:
             type: string
       responses:
@@ -1027,14 +917,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of the database for Cloud SQL to update.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/databases/{database}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1080,14 +962,6 @@ paths:
           in: path
           name: database
           required: true
-          schema:
-            type: string
-        - description: |-
-            The name of the database for Cloud SQL to update.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/databases/{database}
-          in: query
-          name: resourceName
           schema:
             type: string
       requestBody:
@@ -1144,13 +1018,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL demotes this master database instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1205,13 +1072,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL exports this database instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1245,7 +1105,9 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
     post:
-      description: Failover the instance to its failover replica instance.
+      description: |-
+        Failover the instance to its failover replica instance. Using this
+        operation might cause your instance to restart.
       operationId: sql.instances.failover
       parameters:
         - description: ID of the project that contains the read replica.
@@ -1258,14 +1120,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL sends this database instance during a
-            failover. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -1322,13 +1176,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL imports this database instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1368,13 +1215,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent, which owns this collection of server CAs.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -1421,7 +1261,9 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
     post:
-      description: Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+      description: |-
+        Promotes the read replica instance to be a stand-alone Cloud SQL instance.
+        Using this operation might cause your instance to restart.
       operationId: sql.instances.promoteReplica
       parameters:
         - description: ID of the project that contains the read replica.
@@ -1434,13 +1276,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL promotes this replica database
-            instance. Format: projects/{project}/locations/{location}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -1488,14 +1323,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL reshedule this database instance's
-            maintenance. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -1552,13 +1379,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL resets this SSL config.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -1606,13 +1426,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL restarts this database instance.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -1645,7 +1458,9 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
     post:
-      description: Restores a backup of a Cloud SQL instance.
+      description: |-
+        Restores a backup of a Cloud SQL instance. Using this operation might cause
+        your instance to restart.
       operationId: sql.instances.restoreBackup
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1658,14 +1473,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL restores this database instance from
-            backup. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -1722,13 +1529,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL rotates these server CAs.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1767,13 +1567,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent, which owns this collection of SSL certificates.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -1825,13 +1618,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL creates this SSL certificate.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -1880,14 +1666,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The name of SSL certificate to delete.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/sslCerts/{sslCert}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -1931,14 +1709,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            Name of the resource ssl certificate.
-            Format:
-            projects/{project}/locations/{location}/instances/{instance}/sslCerts/{sslCert}
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -1969,6 +1739,62 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+  '/sql/v1beta4/projects/{project}/instances/{instance}/startExternalSync':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: Start External master migration.
+      operationId: sql.projects.instances.startExternalSync
+      parameters:
+        - description: ID of the project that contains the first generation instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+        - description: External sync mode
+          in: query
+          name: syncMode
+          schema:
+            enum:
+              - EXTERNAL_SYNC_MODE_UNSPECIFIED
+              - ONLINE
+              - OFFLINE
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - projects
   '/sql/v1beta4/projects/{project}/instances/{instance}/startReplica':
     parameters:
       - $ref: '#/components/parameters/access_token'
@@ -1996,14 +1822,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL starts this database instance
-            replication. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -2053,14 +1871,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: |-
-            The parent resource where Cloud SQL stops this database instance
-            replication. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -2106,13 +1916,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL truncates this log.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -2165,13 +1968,6 @@ paths:
           name: name
           schema:
             type: string
-        - description: |-
-            The name of the user to delete.
-            Format: projects/{project}/locations/{location}/instances/{instance}/users
-          in: query
-          name: resourceName
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -2204,13 +2000,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent, which owns this collection of users.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -2257,13 +2046,6 @@ paths:
           in: path
           name: instance
           required: true
-          schema:
-            type: string
-        - description: |-
-            The parent resource where Cloud SQL creates this user.
-            Format: projects/{project}/locations/{location}/instances/{instance}
-          in: query
-          name: parent
           schema:
             type: string
       requestBody:
@@ -2315,13 +2097,6 @@ paths:
           name: name
           schema:
             type: string
-        - description: |-
-            The name of the user for Cloud SQL to update.
-            Format: projects/{project}/locations/{location}/instances/{instance}/users
-          in: query
-          name: resourceName
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -2345,6 +2120,67 @@ paths:
             - 'https://www.googleapis.com/auth/sqlservice.admin'
       tags:
         - users
+  '/sql/v1beta4/projects/{project}/instances/{instance}/verifyExternalSyncSettings':
+    parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: Verify External master external sync settings.
+      operationId: sql.projects.instances.verifyExternalSyncSettings
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+        - description: External sync mode
+          in: query
+          name: syncMode
+          schema:
+            enum:
+              - EXTERNAL_SYNC_MODE_UNSPECIFIED
+              - ONLINE
+              - OFFLINE
+            type: string
+        - description: Flag to enable verifying connection only
+          in: query
+          name: verifyConnectionOnly
+          schema:
+            type: boolean
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SqlInstancesVerifyExternalSyncSettingsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/sqlservice.admin'
+      tags:
+        - projects
   '/sql/v1beta4/projects/{project}/operations':
     get:
       description: |-
@@ -2373,15 +2209,6 @@ paths:
             results to view.
           in: query
           name: pageToken
-          schema:
-            type: string
-        - description: |-
-            Indirect parent. The direct parent should combine with the instance name,
-            which owns this collection of operations.
-            Format:
-            projects/{project}/locations/{location}
-          in: query
-          name: parent
           schema:
             type: string
       responses:
@@ -2429,13 +2256,6 @@ paths:
           in: path
           name: operation
           required: true
-          schema:
-            type: string
-        - description: |-
-            The name of the operation for Cloud SQL to get.
-            Format: projects/{project}/locations/{location}/operations/{operation}
-          in: query
-          name: resourceName
           schema:
             type: string
       responses:
@@ -2512,66 +2332,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-  '/sql/v1beta4/{parent}/rescheduleMaintenance':
-    parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-    post:
-      description: Reschedules the maintenance on the given instance.
-      operationId: sql.projects.locations.instances.rescheduleMaintenance
-      parameters:
-        - description: |-
-            The parent resource where Cloud SQL reshedule this database instance's
-            maintenance. Format:
-            projects/{project}/locations/{location}/instances/{instance}
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-        - description: Cloud SQL instance ID. This does not include the project ID.
-          in: query
-          name: instance
-          schema:
-            type: string
-        - description: ID of the project that contains the instance.
-          in: query
-          name: project
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SqlInstancesRescheduleMaintenanceRequestBody'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/Operation'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/sqlservice.admin'
-      tags:
-        - projects
 components:
   parameters:
     _.xgafv:
@@ -2660,11 +2420,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DatabaseInstance'
-    SqlInstancesRescheduleMaintenanceRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SqlInstancesRescheduleMaintenanceRequestBody'
     User:
       content:
         application/json:
@@ -2709,8 +2464,8 @@ components:
       properties:
         binaryLogEnabled:
           description: |-
-            Whether binary log is enabled. If backup configuration is disabled, binary
-            log must be disabled as well.
+            (MySQL only) Whether binary log is enabled. If backup configuration is
+            disabled, binarylog must be disabled as well.
           type: boolean
         enabled:
           description: Whether this configuration is enabled.
@@ -2721,6 +2476,9 @@ components:
         location:
           description: Location of the backup
           type: string
+        pointInTimeRecoveryEnabled:
+          description: Reserved for future use.
+          type: boolean
         replicationLogArchivingEnabled:
           description: Reserved for future use.
           type: boolean
@@ -2869,6 +2627,10 @@ components:
           description: Reserved for future use.
           format: int64
           type: string
+        pointInTime:
+          description: Reserved for future use.
+          format: google-datetime
+          type: string
       type: object
     Database:
       description: Represents a SQL database on the Cloud SQL instance.
@@ -2964,14 +2726,10 @@ components:
             instances: <code>MYSQL_5_6</code> (default) or <code>MYSQL_5_5</code>
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
-            - OBSOLETE_MYSQL_5_0
             - MYSQL_5_1
             - MYSQL_5_5
-            - MARIADB_10_0
             - MYSQL_5_6
             - MYSQL_5_7
-            - OBSOLETE_POSTGRES_9_5
-            - SQLSERVER_ENTERPRISE_2016
             - POSTGRES_9_6
             - POSTGRES_11
             - SQLSERVER_2017_STANDARD
@@ -2979,6 +2737,7 @@ components:
             - SQLSERVER_2017_EXPRESS
             - SQLSERVER_2017_WEB
             - POSTGRES_10
+            - POSTGRES_12
           type: string
         diskEncryptionConfiguration:
           $ref: '#/components/schemas/DiskEncryptionConfiguration'
@@ -3327,6 +3086,14 @@ components:
     Flag:
       description: A flag resource.
       properties:
+        allowedIntValues:
+          description: |-
+            Use this field if only certain integers are accepted. Can be combined
+            with min_value and max_value to add additional values.
+          items:
+            format: int64
+            type: string
+          type: array
         allowedStringValues:
           description: |-
             For <code>STRING</code> flags, a list of strings that the value can be set
@@ -3342,14 +3109,10 @@ components:
           items:
             enum:
               - SQL_DATABASE_VERSION_UNSPECIFIED
-              - OBSOLETE_MYSQL_5_0
               - MYSQL_5_1
               - MYSQL_5_5
-              - MARIADB_10_0
               - MYSQL_5_6
               - MYSQL_5_7
-              - OBSOLETE_POSTGRES_9_5
-              - SQLSERVER_ENTERPRISE_2016
               - POSTGRES_9_6
               - POSTGRES_11
               - SQLSERVER_2017_STANDARD
@@ -3357,6 +3120,7 @@ components:
               - SQLSERVER_2017_EXPRESS
               - SQLSERVER_2017_WEB
               - POSTGRES_10
+              - POSTGRES_12
             type: string
           type: array
         inBeta:
@@ -3536,7 +3300,7 @@ components:
             this value in a subsequent request to return the next page of results.
           type: string
         warnings:
-          description: List of warnings that ocurred while handling the request.
+          description: List of warnings that occurred while handling the request.
           items:
             $ref: '#/components/schemas/ApiWarning'
           type: array
@@ -3745,11 +3509,20 @@ components:
             PEM representation of the slave's private key. The corresponsing public key
             is encoded in the client's certificate.
           type: string
+        dumpFilePath:
+          description: The dump file to create the Cloud SQL replica.
+          type: string
         hostPort:
           description: 'The host and port of the on-premises instance in host:port format'
           type: string
         kind:
           description: 'This is always <code>sql#onPremisesConfiguration</code>.'
+          type: string
+        password:
+          description: The password for connecting to on-premises instance.
+          type: string
+        username:
+          description: The username for connecting to on-premises instance.
           type: string
       type: object
     Operation:
@@ -3835,6 +3608,7 @@ components:
             - DEFER_MAINTENANCE
             - CREATE_CLONE
             - RESCHEDULE_MAINTENANCE
+            - START_EXTERNAL_SYNC
           type: string
         selfLink:
           description: The URI of this resource.
@@ -3949,7 +3723,9 @@ components:
         scheduleTime:
           description: |-
             Optional. Timestamp when the maintenance shall be rescheduled to if
-            reschedule_type=SPECIFIC_TIME.
+            reschedule_type=SPECIFIC_TIME, in <a
+            href="https://tools.ietf.org/html/rfc3339">RFC 3339</a> format, for
+            example <code>2012-11-15T16:19:00.094Z</code>.
           format: google-datetime
           type: string
       type: object
@@ -4014,7 +3790,7 @@ components:
           type: array
         availabilityType:
           description: |-
-            Availability type (PostgreSQL instances only). Potential values:
+            Availability type (PostgreSQL and MySQL instances only). Potential values:
             <br><code>ZONAL</code>: The instance serves data from only one zone.
             Outages in that zone affect data accessibility. <br><code>REGIONAL</code>:
             The instance can serve data from more than one zone in a region (it is
@@ -4140,12 +3916,47 @@ components:
             single key value pair.
           type: object
       type: object
+    SqlExternalSyncSettingError:
+      description: External master migration setting error.
+      properties:
+        detail:
+          description: Additional information about the error encountered.
+          type: string
+        kind:
+          description: 'This is always <code>sql#migrationSettingError</code>.'
+          type: string
+        type:
+          description: Identifies the specific error that occurred.
+          enum:
+            - SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED
+            - CONNECTION_FAILURE
+            - BINLOG_NOT_ENABLED
+            - INCOMPATIBLE_DATABASE_VERSION
+            - REPLICA_ALREADY_SETUP
+            - INSUFFICIENT_PRIVILEGE
+            - UNSUPPORTED_MIGRATION_TYPE
+            - NO_PGLOGICAL_INSTALLED
+            - PGLOGICAL_NODE_ALREADY_EXISTS
+          type: string
+      type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
       description: Reschedule options for maintenance windows.
       properties:
         reschedule:
           $ref: '#/components/schemas/Reschedule'
           description: Required. The type of the reschedule the user wants.
+      type: object
+    SqlInstancesVerifyExternalSyncSettingsResponse:
+      description: Instance verify external sync settings response.
+      properties:
+        errors:
+          description: List of migration violations.
+          items:
+            $ref: '#/components/schemas/SqlExternalSyncSettingError'
+          type: array
+        kind:
+          description: 'This is always <code>sql#migrationSettingErrorList</code>.'
+          type: string
       type: object
     SqlScheduledMaintenance:
       description: Any scheduled maintenancce for this instance.
@@ -4170,6 +3981,18 @@ components:
         recoveryModel:
           description: The recovery model of a SQL Server database
           type: string
+      type: object
+    SqlServerUserDetails:
+      description: Represents a Sql Server user on the Cloud SQL instance.
+      properties:
+        disabled:
+          description: If the user has been disabled
+          type: boolean
+        serverRoles:
+          description: The server roles for this user
+          items:
+            type: string
+          type: array
       type: object
     SslCert:
       description: SslCerts Resource
@@ -4359,6 +4182,8 @@ components:
             apps domain is prefixed if applicable. Can be omitted for
             <code>update</code> since it is already specified on the URL.
           type: string
+        sqlserverUserDetails:
+          $ref: '#/components/schemas/SqlServerUserDetails'
       type: object
     UsersListResponse:
       description: User list response.

@@ -83,6 +83,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -91,9 +94,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v1/{name}/locations':
     get:
       description: Lists information about the supported locations for this service.
@@ -136,6 +136,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -144,9 +147,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v1/{name}/operations':
     get:
       description: |-
@@ -199,6 +199,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -207,11 +210,11 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v1/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -220,9 +223,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -260,6 +260,9 @@ paths:
         - projects
   '/v1/{name}:reimage':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -268,9 +271,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Reimages a node's OS.
       operationId: tpu.projects.locations.nodes.reimage
@@ -303,6 +303,9 @@ paths:
         - projects
   '/v1/{name}:start':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -311,9 +314,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Starts a node.
       operationId: tpu.projects.locations.nodes.start
@@ -346,6 +346,9 @@ paths:
         - projects
   '/v1/{name}:stop':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -354,9 +357,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Stops a node.
       operationId: tpu.projects.locations.nodes.stop
@@ -434,6 +434,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -442,9 +445,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v1/{parent}/nodes':
     get:
       description: Lists nodes.
@@ -482,6 +482,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -490,9 +493,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates a node.
       operationId: tpu.projects.locations.nodes.create
@@ -575,6 +575,9 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -583,9 +586,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
 components:
   parameters:
     _.xgafv:
@@ -823,7 +823,6 @@ components:
             conflicts with any subnetworks in the user's provided network, or the
             provided network is peered with another network that is using that CIDR
             block.
-            Required.
           type: string
         createTime:
           description: Output only. The time when the node was created.

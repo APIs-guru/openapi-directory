@@ -32,10 +32,74 @@ tags:
   - name: groups
 paths:
   /v1beta1/groups:
+    get:
+      description: Lists the `Group`s under a customer or namespace.
+      operationId: cloudidentity.groups.list
+      parameters:
+        - description: |-
+            The maximum number of results to return.
+
+            Note that the number of results returned may be less than this value even
+            if there are more available results. To fetch all results, clients must
+            continue calling this method repeatedly until the response no longer
+            contains a `next_page_token`.
+
+            If unspecified, defaults to 200 for `View.BASIC` and to 50 for `View.FULL`.
+
+            Must not be greater than 1000 for `View.BASIC` or 500 for `View.FULL`.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: 'The `next_page_token` value returned from a previous list request, if any.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Required. The parent resource under which to list all `Group`s.
+
+            Must be of the form `identitysources/{identity_source_id}` for external-
+            identity-mapped groups or `customers/{customer_id}` for Google Groups.
+          in: query
+          name: parent
+          schema:
+            type: string
+        - description: |-
+            The level of detail to be returned.
+
+            If unspecified, defaults to `View.BASIC`.
+          in: query
+          name: view
+          schema:
+            enum:
+              - VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListGroupsResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -44,9 +108,22 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
-      description: Creates a Group.
+      description: Creates a `Group`.
       operationId: cloudidentity.groups.create
+      parameters:
+        - description: Required. The initial configuration option for the `Group`.
+          in: query
+          name: initialGroupConfig
+          schema:
+            enum:
+              - INITIAL_GROUP_CONFIG_UNSPECIFIED
+              - WITH_INITIAL_OWNER
+              - EMPTY
+            type: string
       requestBody:
         $ref: '#/components/requestBodies/Group'
       responses:
@@ -70,25 +147,34 @@ paths:
   '/v1beta1/groups:lookup':
     get:
       description: |-
-        Looks up [resource
-        name](https://cloud.google.com/apis/design/resource_names) of a Group by
-        its EntityKey.
+        Looks up the [resource
+        name](https://cloud.google.com/apis/design/resource_names) of a `Group` by
+        its `EntityKey`.
       operationId: cloudidentity.groups.lookup
       parameters:
         - description: |-
-            The id of the entity within the given namespace. The id must be unique
-            within its namespace.
+            The ID of the entity.
+
+            For Google-managed entities, the `id` must be the email address of an
+            existing group or user.
+
+            For external-identity-mapped entities, the `id` must be a string conforming
+            to the Identity Source's requirements.
+
+            Must be unique within a `namespace`.
           in: query
           name: groupKey.id
           schema:
             type: string
         - description: |-
-            Namespaces provide isolation for ids, i.e an id only needs to be unique
-            within its namespace.
+            The namespace in which the entity exists.
 
-            Namespaces are currently only created as part of IdentitySource creation
-            from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
-            created corresponding to every Identity Source `identity_source_id`.
+            If not specified, the `EntityKey` represents a Google-managed entity such
+            as a Google user or a Google Group.
+
+            If specified, the `EntityKey` represents an external-identity-mapped group.
+            The namespace must correspond to an identity source created in Admin
+            Console and must be in the form of `identitysources/{identity_source_id}.
           in: query
           name: groupKey.namespace
           schema:
@@ -116,9 +202,6 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -127,37 +210,54 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1beta1/groups:search':
     get:
-      description: Searches for Groups.
+      description: Searches for `Group`s matching a specified query.
       operationId: cloudidentity.groups.search
       parameters:
         - description: |-
-            The default page size is 200 (max 1000) for the BASIC view, and 50
-            (max 500) for the FULL view.
+            The maximum number of results to return.
+
+            Note that the number of results returned may be less than this value even
+            if there are more available results. To fetch all results, clients must
+            continue calling this method repeatedly until the response no longer
+            contains a `next_page_token`.
+
+            If unspecified, defaults to 200 for `GroupView.BASIC` and to 50 for
+            `GroupView.FULL`.
+
+            Must not be greater than 1000 for `GroupView.BASIC` or 500 for
+            `GroupView.FULL`.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous search request, if any.'
+        - description: |-
+            The `next_page_token` value returned from a previous search request, if
+            any.
           in: query
           name: pageToken
           schema:
             type: string
         - description: |-
-            Query string for performing search on groups.
-            Users can search on namespace and label attributes of groups.
-            EXACT match ('=') is supported on namespace, and CONTAINS match (':') is
-            supported on labels. This is a `required` field.
-            Multiple queries can be combined using `AND` operator. The operator is case
-            sensitive.
-            An example query would be:
-            "namespace=<namespace_value> AND labels:<labels_value>".
+            Required. The search query.
+
+            Must be specified in [Common Expression
+            Language](https://opensource.google/projects/cel). May only contain
+            equality operators on the parent and inclusion operators on labels (e.g.,
+            `parent == 'customers/{customer_id}' &&
+            'cloudidentity.googleapis.com/groups.discussion_forum' in labels`).
           in: query
           name: query
           schema:
             type: string
-        - description: 'Group resource view to be returned. Defaults to [GroupView.BASIC]().'
+        - description: |-
+            The level of detail to be returned.
+
+            If unspecified, defaults to `View.BASIC`.
           in: query
           name: view
           schema:
@@ -188,9 +288,6 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -199,18 +296,19 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1beta1/{name}':
     delete:
-      description: Deletes a Membership.
+      description: Deletes a `Membership`.
       operationId: cloudidentity.groups.memberships.delete
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Membership to be deleted.
+            Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Membership` to delete.
 
-            Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
-            the unique id assigned to the Group to which Membership belongs to, and
-            member_id is the unique id assigned to the member.
+            Must be of the form `groups/{group_id}/memberships/{membership_id}`.
           in: path
           name: name
           required: true
@@ -236,16 +334,14 @@ paths:
       tags:
         - groups
     get:
-      description: Retrieves a Membership.
+      description: Retrieves a `Membership`.
       operationId: cloudidentity.groups.memberships.get
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Membership to be retrieved.
+            Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Membership` to retrieve.
 
-            Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
-            the unique id assigned to the Group to which Membership belongs to, and
-            `member_id` is the unique id assigned to the member.
+            Must be of the form `groups/{group_id}/memberships/{membership_id}`.
           in: path
           name: name
           required: true
@@ -275,9 +371,6 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -286,23 +379,28 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     patch:
-      description: Updates a Group.
+      description: Updates a `Group`.
       operationId: cloudidentity.groups.patch
       parameters:
         - description: |-
-            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group in the format: `groups/{group_id}`, where group_id is the unique id
-            assigned to the Group.
+            Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Group`.
 
-            Must be left blank while creating a Group
+            Shall be of the form `groups/{group_id}`.
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'Editable fields: `display_name`, `description`'
+        - description: |-
+            Required. The fully-qualified names of fields to update.
+
+            May only contain the following fields: `display_name`, `description`.
           in: query
           name: updateMask
           schema:
@@ -330,17 +428,66 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - groups
+  '/v1beta1/{name}:modifyMembershipRoles':
+    parameters:
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+    post:
+      description: Modifies the `MembershipRole`s of a `Membership`.
+      operationId: cloudidentity.groups.memberships.modifyMembershipRoles
+      parameters:
+        - description: |-
+            Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Membership` whose roles are to be modified.
+
+            Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyMembershipRolesRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyMembershipRolesResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - groups
   '/v1beta1/{parent}/memberships':
     get:
-      description: List Memberships within a Group.
+      description: Lists the `Membership`s within a `Group`.
       operationId: cloudidentity.groups.memberships.list
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group to list Memberships within.
+            Required. The parent `Group` resource under which to lookup the `Membership` name.
 
-            Format: `groups/{group_id}`, where `group_id` is the unique id assigned to
-            the Group.
+            Must be of the form `groups/{group_id}`.
           in: path
           name: parent
           required: true
@@ -348,18 +495,33 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            The default page size is 200 (max 1000) for the BASIC view, and 50
-            (max 500) for the FULL view.
+            The maximum number of results to return.
+
+            Note that the number of results returned may be less than this value even
+            if there are more available results. To fetch all results, clients must
+            continue calling this method repeatedly until the response no longer
+            contains a `next_page_token`.
+
+            If unspecified, defaults to 200 for `GroupView.BASIC` and to 50 for
+            `GroupView.FULL`.
+
+            Must not be greater than 1000 for `GroupView.BASIC` or 500 for
+            `GroupView.FULL`.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'The next_page_token value returned from a previous list request, if any'
+        - description: |-
+            The `next_page_token` value returned from a previous search request, if
+            any.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Membership resource view to be returned. Defaults to MembershipView.BASIC.
+        - description: |-
+            The level of detail to be returned.
+
+            If unspecified, defaults to `MembershipView.BASIC`.
           in: query
           name: view
           schema:
@@ -390,9 +552,6 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -401,14 +560,17 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
-      description: Creates a Membership.
+      description: Creates a `Membership`.
       operationId: cloudidentity.groups.memberships.create
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group to create Membership within. Format: `groups/{group_id}`, where
-            `group_id` is the unique id assigned to the Group.
+            Required. The parent `Group` resource under which to create the `Membership`.
+
+            Must be of the form `groups/{group_id}`.
           in: path
           name: parent
           required: true
@@ -441,17 +603,15 @@ paths:
   '/v1beta1/{parent}/memberships:lookup':
     get:
       description: |-
-        Looks up [resource
-        name](https://cloud.google.com/apis/design/resource_names) of a Membership
-        within a Group by member's EntityKey.
+        Looks up the [resource
+        name](https://cloud.google.com/apis/design/resource_names) of a
+        `Membership` by its `EntityKey`.
       operationId: cloudidentity.groups.memberships.lookup
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group to lookup Membership within.
+            Required. The parent `Group` resource under which to lookup the `Membership` name.
 
-            Format: `groups/{group_id}`, where `group_id` is the unique id assigned to
-            the Group.
+            Must be of the form `groups/{group_id}`.
           in: path
           name: parent
           required: true
@@ -459,19 +619,28 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            The id of the entity within the given namespace. The id must be unique
-            within its namespace.
+            The ID of the entity.
+
+            For Google-managed entities, the `id` must be the email address of an
+            existing group or user.
+
+            For external-identity-mapped entities, the `id` must be a string conforming
+            to the Identity Source's requirements.
+
+            Must be unique within a `namespace`.
           in: query
           name: memberKey.id
           schema:
             type: string
         - description: |-
-            Namespaces provide isolation for ids, i.e an id only needs to be unique
-            within its namespace.
+            The namespace in which the entity exists.
 
-            Namespaces are currently only created as part of IdentitySource creation
-            from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
-            created corresponding to every Identity Source `identity_source_id`.
+            If not specified, the `EntityKey` represents a Google-managed entity such
+            as a Google user or a Google Group.
+
+            If specified, the `EntityKey` represents an external-identity-mapped group.
+            The namespace must correspond to an identity source created in Admin
+            Console and must be in the form of `identitysources/{identity_source_id}.
           in: query
           name: memberKey.namespace
           schema:
@@ -499,9 +668,6 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
@@ -510,6 +676,9 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
 components:
   parameters:
     _.xgafv:
@@ -596,165 +765,281 @@ components:
   schemas:
     EntityKey:
       description: |-
-        An EntityKey uniquely identifies an Entity. Namespaces are used to provide
-        isolation for ids.  A single Id can be reused across namespaces but the
-        combination of a namespace and an id must be unique.
+        A unique identifier for an entity in the Cloud Identity Groups API.
+
+        An entity can represent either a group with an optional `namespace` or a user
+        without a `namespace`. The combination of `id` and `namespace` must be
+        unique; however, the same `id` can be used with different `namespace`s.
       properties:
         id:
           description: |-
-            The id of the entity within the given namespace. The id must be unique
-            within its namespace.
+            The ID of the entity.
+
+            For Google-managed entities, the `id` must be the email address of an
+            existing group or user.
+
+            For external-identity-mapped entities, the `id` must be a string conforming
+            to the Identity Source's requirements.
+
+            Must be unique within a `namespace`.
           type: string
         namespace:
           description: |-
-            Namespaces provide isolation for ids, i.e an id only needs to be unique
-            within its namespace.
+            The namespace in which the entity exists.
 
-            Namespaces are currently only created as part of IdentitySource creation
-            from Admin Console. A namespace `"identitysources/{identity_source_id}"` is
-            created corresponding to every Identity Source `identity_source_id`.
+            If not specified, the `EntityKey` represents a Google-managed entity such
+            as a Google user or a Google Group.
+
+            If specified, the `EntityKey` represents an external-identity-mapped group.
+            The namespace must correspond to an identity source created in Admin
+            Console and must be in the form of `identitysources/{identity_source_id}.
           type: string
       type: object
+    GetMembershipGraphResponse:
+      description: The response message for MembershipsService.GetMembershipGraph.
+      properties:
+        adjacencyList:
+          description: The membership graph's path information represented as an adjacency list.
+          items:
+            $ref: '#/components/schemas/MembershipAdjacencyList'
+          type: array
+        groups:
+          description: |-
+            The resources representing each group in the adjacency list. Each
+            group in this list can be correlated to a 'group' of the
+            MembershipAdjacencyList using the 'name' of the Group resource.
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+      type: object
     Group:
-      description: Resource representing a Group
+      description: |-
+        A group within the Cloud Identity Groups API.
+
+        A `Group` is a collection of entities, where each entity is either a user,
+        another group or a service account.
       properties:
         additionalGroupKeys:
-          description: Optional. Additional entity key aliases for a Group
+          description: Additional entity key aliases for a Group.
           items:
             $ref: '#/components/schemas/EntityKey'
           type: array
         createTime:
-          description: |-
-            Output only. The time when the Group was created.
-            Output only
+          description: Output only. The time when the `Group` was created.
           format: google-datetime
           type: string
         description:
           description: |-
-            An extended description to help users determine the purpose of a Group. For
-            example, you can include information about who should join the Group, the
-            types of messages to send to the Group, links to FAQs about the Group, or
-            related Groups. Maximum length is 4,096 characters.
+            An extended description to help users determine the purpose of a `Group`.
+
+            Must not be longer than 4,096 characters.
           type: string
         displayName:
-          description: The Group's display name.
+          description: The display name of the `Group`.
           type: string
         groupKey:
           $ref: '#/components/schemas/EntityKey'
-          description: |-
-            Required. Immutable. EntityKey of the Group.
-
-            Must be set when creating a Group, read-only afterwards.
+          description: Required. Immutable. The `EntityKey` of the `Group`.
         labels:
           additionalProperties:
             type: string
           description: |-
-            Required. Labels for Group resource.
-            Required.
-            For creating Groups under a namespace, set label key to
-            'labels/system/groups/external' and label value as empty.
+            Required. The labels that apply to the `Group`.
+
+            Must not contain more than one entry. Must contain the entry
+            `'cloudidentity.googleapis.com/groups.discussion_forum': ''` if the `Group`
+            is a Google Group or `'system/groups/external': ''` if the `Group` is an
+            external-identity-mapped group.
           type: object
         name:
           description: |-
-            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group in the format: `groups/{group_id}`, where group_id is the unique id
-            assigned to the Group.
+            Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Group`.
 
-            Must be left blank while creating a Group
+            Shall be of the form `groups/{group_id}`.
           type: string
         parent:
           description: |-
-            Required. Immutable. The entity under which this Group resides in Cloud Identity resource
-            hierarchy. Must be set when creating a Group, read-only afterwards.
+            Required. Immutable. The resource name of the entity under which this `Group` resides in the
+            Cloud Identity resource hierarchy.
 
-            Currently allowed types: 'identitysources'.
+            Must be of the form `identitysources/{identity_source_id}` for external-
+            identity-mapped groups or `customers/{customer_id}` for Google Groups.
           type: string
         updateTime:
-          description: |-
-            Output only. The time when the Group was last updated.
-            Output only
+          description: Output only. The time when the `Group` was last updated.
           format: google-datetime
           type: string
       type: object
+    ListGroupsResponse:
+      description: The response message for GroupsService.ListGroups.
+      properties:
+        groups:
+          description: The `Group`s under the specified `parent`.
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        nextPageToken:
+          description: |-
+            A continuation token to retrieve the next page of results, or empty if
+            there are no more results available.
+          type: string
+      type: object
     ListMembershipsResponse:
+      description: The response message for MembershipsService.ListMemberships.
       properties:
         memberships:
-          description: List of Memberships
+          description: The `Membership`s under the specified `parent`.
           items:
             $ref: '#/components/schemas/Membership'
           type: array
         nextPageToken:
           description: |-
-            Token to retrieve the next page of results, or empty if there are no
-            more results available for listing.
+            A continuation token to retrieve the next page of results, or empty if
+            there are no more results available.
           type: string
       type: object
     LookupGroupNameResponse:
+      description: The response message for GroupsService.LookupGroupName.
       properties:
         name:
           description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Group in the format: `groups/{group_id}`, where `group_id` is the unique id
-            assigned to the Group.
+            Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the looked-up `Group`.
           type: string
       type: object
     LookupMembershipNameResponse:
+      description: The response message for MembershipsService.LookupMembershipName.
       properties:
         name:
           description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Membership being looked up.
+            The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the looked-up `Membership`.
 
-            Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
-            the unique id assigned to the Group to which Membership belongs to, and
-            `member_id` is the unique id assigned to the member.
+            Must be of the form `groups/{group_id}/memberships/{membership_id}`.
           type: string
       type: object
     Membership:
-      description: Resource representing a Membership within a Group
+      description: |-
+        A membership within the Cloud Identity Groups API.
+
+        A `Membership` defines a relationship between a `Group` and an entity
+        belonging to that `Group`, referred to as a "member".
       properties:
         createTime:
-          description: Output only. Creation timestamp of the Membership.
+          description: Output only. The time when the `Membership` was created.
           format: google-datetime
           type: string
         memberKey:
           $ref: '#/components/schemas/EntityKey'
           description: |-
-            Required. Immutable. EntityKey of the entity to be added as the member. Must be set while
-            creating a Membership, read-only afterwards.
+            Immutable. The `EntityKey` of the member.
 
-            Currently allowed entity types: `Users`, `Groups`.
-            This field will be deprecated soon.
+            Either `member_key` or `preferred_member_key` must be set when calling
+            MembershipsService.CreateMembership but not both; both shall be set
+            when returned.
         name:
           description: |-
-            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-            Membership in the format: `groups/{group_id}/memberships/{member_id}`,
-            where group_id is the unique id assigned to the Group to which Membership
-            belongs to, and member_id is the unique id assigned to the member
+            Output only. The [resource name](https://cloud.google.com/apis/design/resource_names) of
+            the `Membership`.
 
-            Must be left blank while creating a Membership.
+            Shall be of the form `groups/{group_id}/memberships/{membership_id}`.
           type: string
+        preferredMemberKey:
+          $ref: '#/components/schemas/EntityKey'
+          description: |-
+            Required. Immutable. The `EntityKey` of the member.
+
+            Either `member_key` or `preferred_member_key` must be set when calling
+            MembershipsService.CreateMembership but not both; both shall be set
+            when returned.
         roles:
           description: |-
-            Roles for a member within the Group.
+            The `MembershipRole`s that apply to the `Membership`.
 
-            Currently supported MembershipRoles: `"MEMBER", "OWNER", "MANAGER"`.
+            If unspecified, defaults to a single `MembershipRole` with `name` `MEMBER`.
+
+            Must not contain duplicate `MembershipRole`s with the same `name`.
           items:
             $ref: '#/components/schemas/MembershipRole'
           type: array
         updateTime:
-          description: Output only. Last updated timestamp of the Membership.
+          description: Output only. The time when the `Membership` was last updated.
           format: google-datetime
           type: string
       type: object
+    MembershipAdjacencyList:
+      description: Membership graph's path information as an adjacency list.
+      properties:
+        edges:
+          description: Each edge contains information about the member that belongs to this group.
+          items:
+            $ref: '#/components/schemas/Membership'
+          type: array
+        group:
+          description: Resource name of the group that the members belong to.
+          type: string
+      type: object
     MembershipRole:
-      description: Resource representing a role within a Membership.
+      description: |-
+        A membership role within the Cloud Identity Groups API.
+
+        A `MembershipRole` defines the privileges granted to a `Membership`.
       properties:
         name:
           description: |-
-            MembershipRole in string format.
-            Currently supported MembershipRoles: `"MEMBER", "OWNER", "MANAGER"`.
+            The name of the `MembershipRole`.
+
+            Must be one of `OWNER`, `MANAGER`, `MEMBER`.
           type: string
+      type: object
+    ModifyMembershipRolesRequest:
+      description: The request message for MembershipsService.ModifyMembershipRoles.
+      properties:
+        addRoles:
+          description: |-
+            The `MembershipRole`s to be added.
+
+            Adding or removing roles in the same request as updating roles is not
+            supported.
+
+            Must not be set if `update_roles_params` is set.
+          items:
+            $ref: '#/components/schemas/MembershipRole'
+          type: array
+        removeRoles:
+          description: |-
+            The `name`s of the `MembershipRole`s to be removed.
+
+            Adding or removing roles in the same request as updating roles is not
+            supported.
+
+            It is not possible to remove the `MEMBER` `MembershipRole`. If you wish to
+            delete a `Membership`, call MembershipsService.DeleteMembership
+            instead.
+
+            Must not contain `MEMBER`. Must not be set if `update_roles_params` is set.
+          items:
+            type: string
+          type: array
+        updateRolesParams:
+          description: |-
+            The `MembershipRole`s to be updated.
+
+            Updating roles in the same request as adding or removing roles is not
+            supported.
+
+            Must not be set if either `add_roles` or `remove_roles` is set.
+          items:
+            $ref: '#/components/schemas/UpdateMembershipRolesParams'
+          type: array
+      type: object
+    ModifyMembershipRolesResponse:
+      description: The response message for MembershipsService.ModifyMembershipRoles.
+      properties:
+        membership:
+          $ref: '#/components/schemas/Membership'
+          description: The `Membership` resource after modifying its `MembershipRole`s.
       type: object
     Operation:
       description: |-
@@ -800,16 +1085,17 @@ components:
           type: object
       type: object
     SearchGroupsResponse:
+      description: The response message for GroupsService.SearchGroups.
       properties:
         groups:
-          description: List of Groups satisfying the search query.
+          description: The `Group`s that match the search query.
           items:
             $ref: '#/components/schemas/Group'
           type: array
         nextPageToken:
           description: |-
-            Token to retrieve the next page of results, or empty if there are no
-            more results available for specified query.
+            A continuation token to retrieve the next page of results, or empty if
+            there are no more results available.
           type: string
       type: object
     Status:
@@ -841,6 +1127,25 @@ components:
             user-facing error message should be localized and sent in the
             google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    UpdateMembershipRolesParams:
+      description: The details of an update to a `MembershipRole`.
+      properties:
+        fieldMask:
+          description: |-
+            The fully-qualified names of fields to update.
+
+            May only contain the field `expiry_detail`.
+          format: google-fieldmask
+          type: string
+        membershipRole:
+          $ref: '#/components/schemas/MembershipRole'
+          description: |-
+            The `MembershipRole`s to be updated.
+
+            Only `MEMBER` `MembershipRoles` can currently be updated.
+
+            May only contain a `MembershipRole` with `name` `MEMBER`.
       type: object
   securitySchemes:
     Oauth2:

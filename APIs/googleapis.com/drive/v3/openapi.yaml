@@ -837,6 +837,12 @@ paths:
       description: Creates a new file.
       operationId: drive.files.create
       parameters:
+        - description: Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. Requests that specify more than one parent will fail.
+          in: query
+          name: enforceSingleParent
+          schema:
+            default: false
+            type: boolean
         - description: Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
           in: query
           name: ignoreDefaultVisibility
@@ -1097,6 +1103,12 @@ paths:
           name: addParents
           schema:
             type: string
+        - description: 'Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. If the item''s owner makes a request to add a single parent, the item will be removed from all current folders and placed in the requested folder. Other requests that increase the number of parents will fail, except when the canAddMyDriveParent file capability is true and a single parent is being added.'
+          in: query
+          name: enforceSingleParent
+          schema:
+            default: false
+            type: boolean
         - description: 'Whether to set the ''keepForever'' field in the new head revision. This is only applicable to files with binary content in Google Drive. Only 200 revisions for the file can be kept forever. If the limit is reached, try deleting pinned revisions.'
           in: query
           name: keepRevisionForever
@@ -1650,6 +1662,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. Requests that specify more than one parent will fail.
+          in: query
+          name: enforceSingleParent
+          schema:
+            default: false
+            type: boolean
         - description: Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
           in: query
           name: ignoreDefaultVisibility
@@ -1851,6 +1869,18 @@ paths:
           name: emailMessage
           schema:
             type: string
+        - description: Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. See moveToNewOwnersRoot for details.
+          in: query
+          name: enforceSingleParent
+          schema:
+            default: false
+            type: boolean
+        - description: 'This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. When set to true, the item will be moved to the new owner''s My Drive root folder and all prior parents removed. If set to false, when enforceSingleParent=true, parents are not changed. If set to false, when enforceSingleParent=false, existing parents are not changed; however, the file will be added to the new owner''s My Drive root folder, unless it is already in the new owner''s My Drive.'
+          in: query
+          name: moveToNewOwnersRoot
+          schema:
+            default: false
+            type: boolean
         - description: 'Whether to send a notification email when sharing to users or groups. This defaults to true for users and groups, and is not allowed for other requests. It must not be disabled for ownership transfers.'
           in: query
           name: sendNotificationEmail
@@ -3076,6 +3106,9 @@ components:
             canAddChildren:
               description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
               type: boolean
+            canAddMyDriveParent:
+              description: Whether the current user can add a parent for the item without removing an existing parent in the same request. Not populated for shared drive files.
+              type: boolean
             canChangeCopyRequiresWriterPermission:
               description: Whether the current user can change the copyRequiresWriterPermission restriction of this file.
               type: boolean
@@ -3147,6 +3180,9 @@ components:
               type: boolean
             canRemoveChildren:
               description: 'Whether the current user can remove children from this folder. This is always false when the item is not a folder. For a folder in a shared drive, use canDeleteChildren or canTrashChildren instead.'
+              type: boolean
+            canRemoveMyDriveParent:
+              description: Whether the current user can remove a parent from the item without adding another parent in the same request. Not populated for shared drive files.
               type: boolean
             canRename:
               description: Whether the current user can rename this file.
@@ -3406,6 +3442,16 @@ components:
         sharingUser:
           $ref: '#/components/schemas/User'
           description: 'The user who shared the file with the requesting user, if applicable.'
+        shortcutDetails:
+          description: 'Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.'
+          properties:
+            targetId:
+              description: The ID of the file that this shortcut points to.
+              type: string
+            targetMimeType:
+              description: 'The MIME type of the file that this shortcut points to. The value of this field is a snapshot of the target''s MIME type, captured when the shortcut is created.'
+              type: string
+          type: object
         size:
           description: The size of the file's content in bytes. This is only applicable to files with binary content in Google Drive.
           format: int64
@@ -3559,7 +3605,7 @@ components:
                 description: Whether this permission is inherited. This field is always populated. This is an output-only field.
                 type: boolean
               inheritedFrom:
-                description: The ID of the item from which this permission is inherited. This is an output-only field and is only populated for members of the shared drive.
+                description: The ID of the item from which this permission is inherited. This is an output-only field.
                 type: string
               permissionType:
                 description: |-

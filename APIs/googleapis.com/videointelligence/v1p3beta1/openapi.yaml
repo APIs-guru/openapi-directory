@@ -35,17 +35,17 @@ tags:
 paths:
   '/v1p3beta1/videos:annotate':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Performs asynchronous video annotation. Progress and results can be
@@ -174,6 +174,42 @@ components:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_VideoAnnotationResults'
           type: array
       type: object
+    GoogleCloudVideointelligenceV1_DetectedAttribute:
+      description: A generic detected attribute represented by name in string format.
+      properties:
+        confidence:
+          description: 'Detected attribute confidence. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: |-
+            The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+            A full list of supported type names will be provided in the document.
+          type: string
+        value:
+          description: |-
+            Text value of the detection result. For example, the value for "HairColor"
+            can be "black", "blonde", etc.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_DetectedLandmark:
+      description: |-
+        A generic detected landmark represented by name in string format and a 2D
+        location.
+      properties:
+        confidence:
+          description: 'The confidence score of the detected landmark. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: 'The name of this landmark, i.e. left_hand, right_shoulder.'
+          type: string
+        point:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_NormalizedVertex'
+          description: |-
+            The 2D point of the detected landmark using the normalized image
+            coordindate system. The normalized coordinates have the range from 0 to 1.
+      type: object
     GoogleCloudVideointelligenceV1_Entity:
       description: Detected entity from video analysis.
       properties:
@@ -272,6 +308,29 @@ components:
         segment:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment'
           description: Video segment where a label was detected.
+      type: object
+    GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation:
+      description: 'Annotation corresponding to one detected, tracked and recognized logo class.'
+      properties:
+        entity:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_Entity'
+          description: |-
+            Entity category information to specify the logo class that all the logo
+            tracks within this LogoRecognitionAnnotation are recognized as.
+        segments:
+          description: |-
+            All video segments where the recognized logo appears. There might be
+            multiple instances of the same logo class appearing in one VideoSegment.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment'
+          type: array
+        tracks:
+          description: |-
+            All logo tracks where the recognized logo appears. Each track corresponds
+            to one logo instance appearing in consecutive frames.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_Track'
+          type: array
       type: object
     GoogleCloudVideointelligenceV1_NormalizedBoundingBox:
       description: |-
@@ -476,6 +535,53 @@ components:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment'
           description: Video segment where a text snippet was detected.
       type: object
+    GoogleCloudVideointelligenceV1_TimestampedObject:
+      description: |-
+        For tracking related features.
+        An object at time_offset with attributes, and located with
+        normalized_bounding_box.
+      properties:
+        attributes:
+          description: Optional. The attributes of the object in the bounding box.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_DetectedAttribute'
+          type: array
+        landmarks:
+          description: Optional. The detected landmarks.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_DetectedLandmark'
+          type: array
+        normalizedBoundingBox:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_NormalizedBoundingBox'
+          description: 'Normalized Bounding box in a frame, where the object is located.'
+        timeOffset:
+          description: |-
+            Time-offset, relative to the beginning of the video,
+            corresponding to the video frame for this object.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_Track:
+      description: A track of an object instance.
+      properties:
+        attributes:
+          description: Optional. Attributes in the track level.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_DetectedAttribute'
+          type: array
+        confidence:
+          description: Optional. The confidence score of the tracked object.
+          format: float
+          type: number
+        segment:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment'
+          description: Video segment of a track.
+        timestampedObjects:
+          description: The object with timestamp and attributes per frame in the track.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_TimestampedObject'
+          type: array
+      type: object
     GoogleCloudVideointelligenceV1_VideoAnnotationProgress:
       description: Annotation progress for a single video.
       properties:
@@ -491,11 +597,12 @@ components:
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
+            - LOGO_RECOGNITION
           type: string
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         progressPercent:
           description: |-
@@ -538,8 +645,13 @@ components:
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
+        logoRecognitionAnnotations:
+          description: 'Annotations for list of logos detected, tracked and recognized in video.'
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation'
+          type: array
         objectAnnotations:
           description: Annotations for list of objects detected and tracked in video.
           items:
@@ -686,6 +798,42 @@ components:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults'
           type: array
       type: object
+    GoogleCloudVideointelligenceV1beta2_DetectedAttribute:
+      description: A generic detected attribute represented by name in string format.
+      properties:
+        confidence:
+          description: 'Detected attribute confidence. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: |-
+            The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+            A full list of supported type names will be provided in the document.
+          type: string
+        value:
+          description: |-
+            Text value of the detection result. For example, the value for "HairColor"
+            can be "black", "blonde", etc.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_DetectedLandmark:
+      description: |-
+        A generic detected landmark represented by name in string format and a 2D
+        location.
+      properties:
+        confidence:
+          description: 'The confidence score of the detected landmark. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: 'The name of this landmark, i.e. left_hand, right_shoulder.'
+          type: string
+        point:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_NormalizedVertex'
+          description: |-
+            The 2D point of the detected landmark using the normalized image
+            coordindate system. The normalized coordinates have the range from 0 to 1.
+      type: object
     GoogleCloudVideointelligenceV1beta2_Entity:
       description: Detected entity from video analysis.
       properties:
@@ -784,6 +932,29 @@ components:
         segment:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment'
           description: Video segment where a label was detected.
+      type: object
+    GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation:
+      description: 'Annotation corresponding to one detected, tracked and recognized logo class.'
+      properties:
+        entity:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_Entity'
+          description: |-
+            Entity category information to specify the logo class that all the logo
+            tracks within this LogoRecognitionAnnotation are recognized as.
+        segments:
+          description: |-
+            All video segments where the recognized logo appears. There might be
+            multiple instances of the same logo class appearing in one VideoSegment.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment'
+          type: array
+        tracks:
+          description: |-
+            All logo tracks where the recognized logo appears. Each track corresponds
+            to one logo instance appearing in consecutive frames.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_Track'
+          type: array
       type: object
     GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox:
       description: |-
@@ -988,6 +1159,53 @@ components:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment'
           description: Video segment where a text snippet was detected.
       type: object
+    GoogleCloudVideointelligenceV1beta2_TimestampedObject:
+      description: |-
+        For tracking related features.
+        An object at time_offset with attributes, and located with
+        normalized_bounding_box.
+      properties:
+        attributes:
+          description: Optional. The attributes of the object in the bounding box.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_DetectedAttribute'
+          type: array
+        landmarks:
+          description: Optional. The detected landmarks.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_DetectedLandmark'
+          type: array
+        normalizedBoundingBox:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox'
+          description: 'Normalized Bounding box in a frame, where the object is located.'
+        timeOffset:
+          description: |-
+            Time-offset, relative to the beginning of the video,
+            corresponding to the video frame for this object.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_Track:
+      description: A track of an object instance.
+      properties:
+        attributes:
+          description: Optional. Attributes in the track level.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_DetectedAttribute'
+          type: array
+        confidence:
+          description: Optional. The confidence score of the tracked object.
+          format: float
+          type: number
+        segment:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment'
+          description: Video segment of a track.
+        timestampedObjects:
+          description: The object with timestamp and attributes per frame in the track.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_TimestampedObject'
+          type: array
+      type: object
     GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress:
       description: Annotation progress for a single video.
       properties:
@@ -1003,11 +1221,12 @@ components:
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
+            - LOGO_RECOGNITION
           type: string
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         progressPercent:
           description: |-
@@ -1050,8 +1269,13 @@ components:
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
+        logoRecognitionAnnotations:
+          description: 'Annotations for list of logos detected, tracked and recognized in video.'
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation'
+          type: array
         objectAnnotations:
           description: Annotations for list of objects detected and tracked in video.
           items:
@@ -1198,6 +1422,42 @@ components:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults'
           type: array
       type: object
+    GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute:
+      description: A generic detected attribute represented by name in string format.
+      properties:
+        confidence:
+          description: 'Detected attribute confidence. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: |-
+            The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+            A full list of supported type names will be provided in the document.
+          type: string
+        value:
+          description: |-
+            Text value of the detection result. For example, the value for "HairColor"
+            can be "black", "blonde", etc.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark:
+      description: |-
+        A generic detected landmark represented by name in string format and a 2D
+        location.
+      properties:
+        confidence:
+          description: 'The confidence score of the detected landmark. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: 'The name of this landmark, i.e. left_hand, right_shoulder.'
+          type: string
+        point:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex'
+          description: |-
+            The 2D point of the detected landmark using the normalized image
+            coordindate system. The normalized coordinates have the range from 0 to 1.
+      type: object
     GoogleCloudVideointelligenceV1p1beta1_Entity:
       description: Detected entity from video analysis.
       properties:
@@ -1296,6 +1556,29 @@ components:
         segment:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
           description: Video segment where a label was detected.
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation:
+      description: 'Annotation corresponding to one detected, tracked and recognized logo class.'
+      properties:
+        entity:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_Entity'
+          description: |-
+            Entity category information to specify the logo class that all the logo
+            tracks within this LogoRecognitionAnnotation are recognized as.
+        segments:
+          description: |-
+            All video segments where the recognized logo appears. There might be
+            multiple instances of the same logo class appearing in one VideoSegment.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+          type: array
+        tracks:
+          description: |-
+            All logo tracks where the recognized logo appears. Each track corresponds
+            to one logo instance appearing in consecutive frames.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_Track'
+          type: array
       type: object
     GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox:
       description: |-
@@ -1500,6 +1783,53 @@ components:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
           description: Video segment where a text snippet was detected.
       type: object
+    GoogleCloudVideointelligenceV1p1beta1_TimestampedObject:
+      description: |-
+        For tracking related features.
+        An object at time_offset with attributes, and located with
+        normalized_bounding_box.
+      properties:
+        attributes:
+          description: Optional. The attributes of the object in the bounding box.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute'
+          type: array
+        landmarks:
+          description: Optional. The detected landmarks.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark'
+          type: array
+        normalizedBoundingBox:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox'
+          description: 'Normalized Bounding box in a frame, where the object is located.'
+        timeOffset:
+          description: |-
+            Time-offset, relative to the beginning of the video,
+            corresponding to the video frame for this object.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_Track:
+      description: A track of an object instance.
+      properties:
+        attributes:
+          description: Optional. Attributes in the track level.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute'
+          type: array
+        confidence:
+          description: Optional. The confidence score of the tracked object.
+          format: float
+          type: number
+        segment:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment'
+          description: Video segment of a track.
+        timestampedObjects:
+          description: The object with timestamp and attributes per frame in the track.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_TimestampedObject'
+          type: array
+      type: object
     GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress:
       description: Annotation progress for a single video.
       properties:
@@ -1515,11 +1845,12 @@ components:
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
+            - LOGO_RECOGNITION
           type: string
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         progressPercent:
           description: |-
@@ -1562,8 +1893,13 @@ components:
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
+        logoRecognitionAnnotations:
+          description: 'Annotations for list of logos detected, tracked and recognized in video.'
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation'
+          type: array
         objectAnnotations:
           description: Annotations for list of objects detected and tracked in video.
           items:
@@ -1710,6 +2046,42 @@ components:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults'
           type: array
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute:
+      description: A generic detected attribute represented by name in string format.
+      properties:
+        confidence:
+          description: 'Detected attribute confidence. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: |-
+            The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+            A full list of supported type names will be provided in the document.
+          type: string
+        value:
+          description: |-
+            Text value of the detection result. For example, the value for "HairColor"
+            can be "black", "blonde", etc.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark:
+      description: |-
+        A generic detected landmark represented by name in string format and a 2D
+        location.
+      properties:
+        confidence:
+          description: 'The confidence score of the detected landmark. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: 'The name of this landmark, i.e. left_hand, right_shoulder.'
+          type: string
+        point:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex'
+          description: |-
+            The 2D point of the detected landmark using the normalized image
+            coordindate system. The normalized coordinates have the range from 0 to 1.
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_Entity:
       description: Detected entity from video analysis.
       properties:
@@ -1808,6 +2180,29 @@ components:
         segment:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
           description: Video segment where a label was detected.
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation:
+      description: 'Annotation corresponding to one detected, tracked and recognized logo class.'
+      properties:
+        entity:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_Entity'
+          description: |-
+            Entity category information to specify the logo class that all the logo
+            tracks within this LogoRecognitionAnnotation are recognized as.
+        segments:
+          description: |-
+            All video segments where the recognized logo appears. There might be
+            multiple instances of the same logo class appearing in one VideoSegment.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+          type: array
+        tracks:
+          description: |-
+            All logo tracks where the recognized logo appears. Each track corresponds
+            to one logo instance appearing in consecutive frames.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_Track'
+          type: array
       type: object
     GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox:
       description: |-
@@ -2012,6 +2407,53 @@ components:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
           description: Video segment where a text snippet was detected.
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_TimestampedObject:
+      description: |-
+        For tracking related features.
+        An object at time_offset with attributes, and located with
+        normalized_bounding_box.
+      properties:
+        attributes:
+          description: Optional. The attributes of the object in the bounding box.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute'
+          type: array
+        landmarks:
+          description: Optional. The detected landmarks.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark'
+          type: array
+        normalizedBoundingBox:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox'
+          description: 'Normalized Bounding box in a frame, where the object is located.'
+        timeOffset:
+          description: |-
+            Time-offset, relative to the beginning of the video,
+            corresponding to the video frame for this object.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_Track:
+      description: A track of an object instance.
+      properties:
+        attributes:
+          description: Optional. Attributes in the track level.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute'
+          type: array
+        confidence:
+          description: Optional. The confidence score of the tracked object.
+          format: float
+          type: number
+        segment:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
+          description: Video segment of a track.
+        timestampedObjects:
+          description: The object with timestamp and attributes per frame in the track.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_TimestampedObject'
+          type: array
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress:
       description: Annotation progress for a single video.
       properties:
@@ -2027,11 +2469,12 @@ components:
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
+            - LOGO_RECOGNITION
           type: string
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         progressPercent:
           description: |-
@@ -2074,8 +2517,13 @@ components:
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
+        logoRecognitionAnnotations:
+          description: 'Annotations for list of logos detected, tracked and recognized in video.'
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation'
+          type: array
         objectAnnotations:
           description: Annotations for list of objects detected and tracked in video.
           items:
@@ -2221,11 +2669,13 @@ components:
               - LABEL_DETECTION
               - SHOT_CHANGE_DETECTION
               - EXPLICIT_CONTENT_DETECTION
+              - FACE_DETECTION
               - SPEECH_TRANSCRIPTION
               - TEXT_DETECTION
               - OBJECT_TRACKING
               - LOGO_RECOGNITION
               - CELEBRITY_RECOGNITION
+              - PERSON_DETECTION
             type: string
           type: array
         inputContent:
@@ -2238,11 +2688,11 @@ components:
         inputUri:
           description: |-
             Input video location. Currently, only
-            [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
+            [Cloud Storage](https://cloud.google.com/storage/) URIs are
             supported, which must be specified in the following format:
             `gs://bucket-id/object-id` (other URI formats return
             google.rpc.Code.INVALID_ARGUMENT). For more information, see
-            [Request URIs](/storage/docs/reference-uris).
+            [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
             A video URI may include wildcards in `object-id`, and thus identify
             multiple videos. Supported wildcards: '*' to match 0 or more characters;
             '?' to match 1 character. If unset, the input video should be embedded
@@ -2257,11 +2707,11 @@ components:
         outputUri:
           description: |-
             Optional. Location where the output (in JSON format) should be stored.
-            Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
+            Currently, only [Cloud Storage](https://cloud.google.com/storage/)
             URIs are supported, which must be specified in the following format:
             `gs://bucket-id/object-id` (other URI formats return
             google.rpc.Code.INVALID_ARGUMENT). For more information, see
-            [Request URIs](/storage/docs/reference-uris).
+            [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
           type: string
         videoContext:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoContext'
@@ -2341,6 +2791,24 @@ components:
             can be "black", "blonde", etc.
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark:
+      description: |-
+        A generic detected landmark represented by name in string format and a 2D
+        location.
+      properties:
+        confidence:
+          description: 'The confidence score of the detected landmark. Range [0, 1].'
+          format: float
+          type: number
+        name:
+          description: 'The name of this landmark, i.e. left_hand, right_shoulder.'
+          type: string
+        point:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex'
+          description: |-
+            The 2D point of the detected landmark using the normalized image
+            coordindate system. The normalized coordinates have the range from 0 to 1.
+      type: object
     GoogleCloudVideointelligenceV1p3beta1_Entity:
       description: Detected entity from video analysis.
       properties:
@@ -2397,6 +2865,37 @@ components:
             Time-offset, relative to the beginning of the video, corresponding to the
             video frame for this location.
           format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation:
+      description: Face detection annotation.
+      properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_Track'
+          type: array
+      type: object
+    GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig:
+      description: Config for FACE_DETECTION.
+      properties:
+        includeAttributes:
+          description: |-
+            Whether to enable face attributes detection, such as glasses, dark_glasses,
+            mouth_open etc. Ignored if 'include_bounding_boxes' is false.
+          type: boolean
+        includeBoundingBoxes:
+          description: Whether bounding boxes be included in the face annotation output.
+          type: boolean
+        model:
+          description: |-
+            Model to use for face detection.
+            Supported values: "builtin/stable" (the default if unset) and
+            "builtin/latest".
           type: string
       type: object
     GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation:
@@ -2642,6 +3141,36 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation:
+      description: Person detection annotation per video.
+      properties:
+        tracks:
+          description: The trackes that a person is detected.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_Track'
+          type: array
+      type: object
+    GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig:
+      description: Config for PERSON_DETECTION.
+      properties:
+        includeAttributes:
+          description: |-
+            Whether to enable person attributes detection, such as cloth color (black,
+            blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair
+            color (black, blonde, etc), hair length (long, short, bald), etc.
+            Ignored if 'include_bounding_boxes' is false.
+          type: boolean
+        includeBoundingBoxes:
+          description: |-
+            Whether bounding boxes be included in the person detection annotation
+            output.
+          type: boolean
+        includePoseLandmarks:
+          description: |-
+            Whether to enable pose landmarks detection. Ignored if
+            'include_bounding_boxes' is false.
+          type: boolean
+      type: object
     GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity:
       description: The recognized celebrity with confidence score.
       properties:
@@ -2808,7 +3337,7 @@ components:
           description: Streaming annotation results.
         annotationResultsUri:
           description: |-
-            GCS URI that stores annotation results of one streaming session.
+            Cloud Storage URI that stores annotation results of one streaming session.
             It is a directory that can hold multiple files in JSON format.
             Example uri format:
             gs://bucket_id/object_id/cloud_project_name-session_id
@@ -2921,6 +3450,11 @@ components:
           items:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute'
           type: array
+        landmarks:
+          description: Optional. The detected landmarks.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark'
+          type: array
         normalizedBoundingBox:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox'
           description: 'Normalized Bounding box in a frame, where the object is located.'
@@ -2964,16 +3498,18 @@ components:
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
             - EXPLICIT_CONTENT_DETECTION
+            - FACE_DETECTION
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
             - LOGO_RECOGNITION
             - CELEBRITY_RECOGNITION
+            - PERSON_DETECTION
           type: string
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         progressPercent:
           description: |-
@@ -3009,6 +3545,11 @@ components:
         explicitAnnotation:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation'
           description: Explicit content annotation.
+        faceDetectionAnnotations:
+          description: Face detection annotations.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation'
+          type: array
         frameLabelAnnotations:
           description: |-
             Label annotations on frame level.
@@ -3019,7 +3560,7 @@ components:
         inputUri:
           description: |-
             Video file location in
-            [Google Cloud Storage](https://cloud.google.com/storage/).
+            [Cloud Storage](https://cloud.google.com/storage/).
           type: string
         logoRecognitionAnnotations:
           description: 'Annotations for list of logos detected, tracked and recognized in video.'
@@ -3030,6 +3571,11 @@ components:
           description: Annotations for list of objects detected and tracked in video.
           items:
             $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation'
+          type: array
+        personDetectionAnnotations:
+          description: Person detection annotations.
+          items:
+            $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation'
           type: array
         segment:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
@@ -3094,12 +3640,18 @@ components:
         explicitContentDetectionConfig:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig'
           description: Config for EXPLICIT_CONTENT_DETECTION.
+        faceDetectionConfig:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig'
+          description: Config for FACE_DETECTION.
         labelDetectionConfig:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig'
           description: Config for LABEL_DETECTION.
         objectTrackingConfig:
           $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig'
           description: Config for OBJECT_TRACKING.
+        personDetectionConfig:
+          $ref: '#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig'
+          description: Config for PERSON_DETECTION.
         segments:
           description: |-
             Video segments to annotate. The segments may overlap and are not required

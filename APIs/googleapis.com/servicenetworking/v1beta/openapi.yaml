@@ -66,6 +66,8 @@ paths:
       tags:
         - operations
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -75,10 +77,10 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
   '/v1beta/{name}/connections':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -88,8 +90,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates the allocated ranges that are assigned to a connection.
@@ -195,6 +195,8 @@ paths:
       tags:
         - services
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -204,8 +206,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates a private connection that establishes a VPC Network Peering
@@ -254,6 +254,8 @@ paths:
         - services
   '/v1beta/{parent}:addSubnetwork':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -263,8 +265,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         For service producers, provisions a new subnet in a
@@ -318,6 +318,8 @@ paths:
         - services
   '/v1beta/{parent}:searchRange':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -327,8 +329,6 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Service producers can use this method to find a currently unused range
@@ -640,6 +640,28 @@ components:
 
             Example: https://www.googleapis.com/oauth2/v1/certs
           type: string
+        jwtLocations:
+          description: |-
+            Defines the locations to extract the JWT.
+
+            JWT locations can be either from HTTP headers or URL query parameters.
+            The rule is that the first match wins. The checking order is: checking
+            all headers first, then URL query parameters.
+
+            If not specified,  default to use following 3 locations:
+               1) Authorization: Bearer
+               2) x-goog-iap-jwt-assertion
+               3) access_token query parameter
+
+            Default locations can be specified as followings:
+               jwt_locations:
+               - header: Authorization
+                 value_prefix: "Bearer "
+               - header: x-goog-iap-jwt-assertion
+               - query: access_token
+          items:
+            $ref: '#/components/schemas/JwtLocation'
+          type: array
       type: object
     AuthRequirement:
       description: |-
@@ -752,20 +774,36 @@ components:
       description: A backend rule provides configuration for an individual API element.
       properties:
         address:
-          description: The address of the API backend.
+          description: |-
+            The address of the API backend.
+
+            The scheme is used to determine the backend protocol and security.
+            The following schemes are accepted:
+
+               SCHEME        PROTOCOL    SECURITY
+               http://       HTTP        None
+               https://      HTTP        TLS
+               grpc://       gRPC        None
+               grpcs://      gRPC        TLS
+
+            It is recommended to explicitly include a scheme. Leaving out the scheme
+            may cause constrasting behaviors across platforms.
+
+            If the port is unspecified, the default is:
+            - 80 for schemes without TLS
+            - 443 for schemes with TLS
+
+            For HTTP backends, use protocol
+            to specify the protocol version.
           type: string
         deadline:
           description: |-
-            The number of seconds to wait for a response from a request.  The default
-            deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
+            The number of seconds to wait for a response from a request. The default
+            varies based on the request protocol and deployment environment.
           format: double
           type: number
         disableAuth:
           description: |-
-            When disable_auth is false,  a JWT ID token will be generated with the
-            value from BackendRule.address as jwt_audience, overrode to the HTTP
-            "Authorization" request header and sent to the backend.
-
             When disable_auth is true, a JWT ID token won't be generated and the
             original "Authorization" HTTP header will be preserved. If the header is
             used to carry the original token and is expected by the backend, this
@@ -794,6 +832,30 @@ components:
             - PATH_TRANSLATION_UNSPECIFIED
             - CONSTANT_ADDRESS
             - APPEND_PATH_TO_ADDRESS
+          type: string
+        protocol:
+          description: |-
+            The protocol used for sending a request to the backend.
+            The supported values are "http/1.1" and "h2".
+
+            The default value is inferred from the scheme in the
+            address field:
+
+               SCHEME        PROTOCOL
+               http://       http/1.1
+               https://      http/1.1
+               grpc://       h2
+               grpcs://      h2
+
+            For secure HTTP backends (https://) that support HTTP/2, set this field
+            to "h2" for improved performance.
+
+            Configuring this field to non-default values is only supported for secure
+            HTTP backends. This field will be ignored for all other backends.
+
+            See
+            https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+            for more details on the supported values.
           type: string
         selector:
           description: |-
@@ -1655,6 +1717,11 @@ components:
           items:
             $ref: '#/components/schemas/HttpRule'
           type: array
+        allowHalfDuplex:
+          description: |-
+            When this flag is set to true, HTTP requests will be allowed to invoke a
+            half-duplex streaming method.
+          type: boolean
         body:
           description: |-
             The name of the request field whose value is mapped to the HTTP request
@@ -1702,6 +1769,27 @@ components:
             Selects a method to which this rule applies.
 
             Refer to selector for syntax details.
+          type: string
+      type: object
+    JwtLocation:
+      description: Specifies a location to extract JWT from an API request.
+      properties:
+        header:
+          description: Specifies HTTP header name to extract JWT token.
+          type: string
+        query:
+          description: Specifies URL query parameter name to extract JWT token.
+          type: string
+        valuePrefix:
+          description: |-
+            The value prefix. The value format is "value_prefix{token}"
+            Only applies to "in" header type. Must be empty for "in" query type.
+            If not empty, the header value has to match (case sensitive) this prefix.
+            If not matched, JWT will not be extracted. If matched, JWT will be
+            extracted after the prefix is removed.
+
+            For example, for "Authorization: Bearer {JWT}",
+            value_prefix="Bearer " with a space at the end.
           type: string
       type: object
     LabelDescriptor:
@@ -2730,6 +2818,7 @@ components:
             The semantic version of the service configuration. The config version
             affects the interpretation of the service configuration. For example,
             certain features are enabled by default for certain config versions.
+
             The latest config version is `3`.
           format: uint32
           type: integer
@@ -2846,6 +2935,38 @@ components:
         usage:
           $ref: '#/components/schemas/Usage'
           description: Configuration controlling usage of this service.
+      type: object
+    ServiceIdentity:
+      description: |-
+        The per-product per-project service identity for a service.
+
+
+        Use this field to configure per-product per-project service identity.
+        Example of a service identity configuration.
+
+            usage:
+              service_identity:
+              - service_account_parent: "projects/123456789"
+                display_name: "Cloud XXX Service Agent"
+                description: "Used as the identity of Cloud XXX to access resources"
+      properties:
+        description:
+          description: |-
+            Optional. A user-specified opaque description of the service account.
+            Must be less than or equal to 256 UTF-8 bytes.
+          type: string
+        displayName:
+          description: |-
+            Optional. A user-specified name for the service account.
+            Must be less than or equal to 100 UTF-8 bytes.
+          type: string
+        serviceAccountParent:
+          description: |-
+            A service account project that hosts the service accounts.
+
+            An example name would be:
+            `projects/123456789`
+          type: string
       type: object
     SourceContext:
       description: |-
@@ -3072,6 +3193,9 @@ components:
           items:
             $ref: '#/components/schemas/UsageRule'
           type: array
+        serviceIdentity:
+          $ref: '#/components/schemas/ServiceIdentity'
+          description: The configuration of a per-product per-project service identity.
       type: object
     UsageRule:
       description: |-

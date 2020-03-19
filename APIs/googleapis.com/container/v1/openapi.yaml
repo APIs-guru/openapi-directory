@@ -39,7 +39,7 @@ paths:
       operationId: container.projects.zones.clusters.list
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           in: path
@@ -48,7 +48,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides, or "-" for all zones.
             This field has been deprecated and replaced by the parent field.
@@ -83,8 +83,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -109,7 +109,7 @@ paths:
       operationId: container.projects.zones.clusters.create
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           in: path
@@ -118,7 +118,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -161,7 +161,7 @@ paths:
       operationId: container.projects.zones.clusters.delete
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -170,7 +170,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -180,7 +180,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to delete.
+            Deprecated. The name of the cluster to delete.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -213,7 +213,7 @@ paths:
       operationId: container.projects.zones.clusters.get
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -222,7 +222,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -232,7 +232,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to retrieve.
+            Deprecated. The name of the cluster to retrieve.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -264,8 +264,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -277,7 +277,7 @@ paths:
       operationId: container.projects.zones.clusters.update
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -286,7 +286,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -296,7 +296,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -327,8 +327,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -340,7 +340,7 @@ paths:
       operationId: container.projects.zones.clusters.addons
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -349,7 +349,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -359,7 +359,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -390,8 +390,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -403,7 +403,7 @@ paths:
       operationId: container.projects.zones.clusters.legacyAbac
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -412,7 +412,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -422,7 +422,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -453,8 +453,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -462,11 +462,15 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
     post:
-      description: Sets the locations for a specific cluster.
+      description: |-
+        Sets the locations for a specific cluster.
+        Deprecated. Use
+        [projects.locations.clusters.update](/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.update)
+        instead.
       operationId: container.projects.zones.clusters.locations
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -475,7 +479,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -485,7 +489,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -516,8 +520,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -529,7 +533,7 @@ paths:
       operationId: container.projects.zones.clusters.logging
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -538,7 +542,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -548,7 +552,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -579,8 +583,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -592,7 +596,7 @@ paths:
       operationId: container.projects.zones.clusters.master
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -601,7 +605,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -611,7 +615,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -642,8 +646,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -655,7 +659,7 @@ paths:
       operationId: container.projects.zones.clusters.monitoring
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -664,7 +668,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -674,7 +678,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -706,7 +710,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.list
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the parent field.
           in: path
@@ -715,7 +719,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -725,7 +729,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the parent field.
           in: path
           name: clusterId
@@ -757,8 +761,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -770,7 +774,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.create
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the parent field.
           in: path
@@ -779,7 +783,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -789,7 +793,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the parent field.
           in: path
           name: clusterId
@@ -821,7 +825,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.delete
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -830,7 +834,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -840,7 +844,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -848,7 +852,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to delete.
+            Deprecated. The name of the node pool to delete.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -882,7 +886,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.get
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -891,7 +895,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -901,7 +905,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -909,7 +913,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool.
+            Deprecated. The name of the node pool.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -942,8 +946,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -955,8 +959,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -968,7 +972,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.autoscaling
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -977,7 +981,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -987,7 +991,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -995,7 +999,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to upgrade.
+            Deprecated. The name of the node pool to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -1026,8 +1030,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1039,7 +1043,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.setManagement
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1048,7 +1052,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1058,7 +1062,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1066,7 +1070,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to update.
+            Deprecated. The name of the node pool to update.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -1097,8 +1101,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1110,7 +1114,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.setSize
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1119,7 +1123,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1129,7 +1133,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1137,7 +1141,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to update.
+            Deprecated. The name of the node pool to update.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -1168,8 +1172,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1181,7 +1185,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.update
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1190,7 +1194,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1200,7 +1204,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1208,7 +1212,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to upgrade.
+            Deprecated. The name of the node pool to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -1239,8 +1243,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1254,7 +1258,7 @@ paths:
       operationId: container.projects.zones.clusters.nodePools.rollback
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1263,7 +1267,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1273,7 +1277,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to rollback.
+            Deprecated. The name of the cluster to rollback.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1281,7 +1285,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to rollback.
+            Deprecated. The name of the node pool to rollback.
             This field has been deprecated and replaced by the name field.
           in: path
           name: nodePoolId
@@ -1312,8 +1316,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1325,7 +1329,7 @@ paths:
       operationId: container.projects.zones.clusters.resourceLabels
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1334,7 +1338,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1344,7 +1348,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1375,8 +1379,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1388,7 +1392,7 @@ paths:
       operationId: container.projects.zones.clusters.completeIpRotation
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1397,7 +1401,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1407,7 +1411,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1438,8 +1442,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1497,8 +1501,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1513,7 +1517,7 @@ paths:
       operationId: container.projects.zones.clusters.setMasterAuth
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1522,7 +1526,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1532,7 +1536,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1563,8 +1567,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1576,7 +1580,7 @@ paths:
       operationId: container.projects.zones.clusters.setNetworkPolicy
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1585,7 +1589,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1595,7 +1599,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1626,8 +1630,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1639,7 +1643,7 @@ paths:
       operationId: container.projects.zones.clusters.startIpRotation
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1648,7 +1652,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1658,7 +1662,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: path
           name: clusterId
@@ -1690,7 +1694,7 @@ paths:
       operationId: container.projects.zones.operations.list
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           in: path
@@ -1699,7 +1703,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) to return operations for, or `-` for
             all zones. This field has been deprecated and replaced by the parent field.
           in: path
@@ -1733,8 +1737,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1747,7 +1751,7 @@ paths:
       operationId: container.projects.zones.operations.get
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1756,7 +1760,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1766,7 +1770,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The server-assigned `name` of the operation.
+            Deprecated. The server-assigned `name` of the operation.
             This field has been deprecated and replaced by the name field.
           in: path
           name: operationId
@@ -1798,8 +1802,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1811,8 +1815,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1824,7 +1828,7 @@ paths:
       operationId: container.projects.zones.operations.cancel
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1833,7 +1837,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the operation resides.
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1842,7 +1846,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The server-assigned `name` of the operation.
+            Deprecated. The server-assigned `name` of the operation.
             This field has been deprecated and replaced by the name field.
           in: path
           name: operationId
@@ -1874,7 +1878,7 @@ paths:
       operationId: container.projects.zones.getServerconfig
       parameters:
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1883,7 +1887,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) to return operations for.
             This field has been deprecated and replaced by the name field.
           in: path
@@ -1916,8 +1920,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -1940,21 +1944,21 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: query
           name: clusterId
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the node pool to delete.
+            Deprecated. The name of the node pool to delete.
             This field has been deprecated and replaced by the name field.
           in: query
           name: nodePoolId
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: query
@@ -1962,7 +1966,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -1985,12 +1989,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified operation.
-      operationId: container.projects.locations.operations.get
+      description: Retrieves the requested node pool.
+      operationId: container.projects.locations.clusters.nodePools.get
       parameters:
         - description: |-
-            The name (project, location, operation id) of the operation to get.
-            Specified in the format 'projects/*/locations/*/operations/*'.
+            The name (project, location, cluster, node pool id) of the node pool to
+            get. Specified in the format
+            'projects/*/locations/*/clusters/*/nodePools/*'.
           in: path
           name: name
           required: true
@@ -1998,31 +2003,29 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The server-assigned `name` of the operation.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           in: query
-          name: operationId
+          name: clusterId
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
-            number](https://support.google.com/cloud/answer/6158840).
+            Deprecated. The name of the node pool.
+            This field has been deprecated and replaced by the name field.
+          in: query
+          name: nodePoolId
+          schema:
+            type: string
+        - description: |-
+            Deprecated. The Google Developers Console [project ID or project
+            number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           in: query
           name: projectId
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
-            [zone](/compute/docs/zones#available) in which the cluster
-            resides.
-            This field has been deprecated and replaced by the name field.
-          in: query
-          name: zone
-          schema:
-            type: string
-        - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -2035,7 +2038,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: '#/components/schemas/NodePool'
           description: Successful response
       security:
         - Oauth2:
@@ -2048,8 +2051,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2104,7 +2107,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           in: query
@@ -2112,7 +2115,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) to return operations for.
             This field has been deprecated and replaced by the name field.
           in: query
@@ -2137,8 +2140,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2150,8 +2153,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2195,8 +2198,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2240,8 +2243,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2288,8 +2291,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2333,8 +2336,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2379,8 +2382,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2424,8 +2427,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2433,7 +2436,11 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
     post:
-      description: Sets the locations for a specific cluster.
+      description: |-
+        Sets the locations for a specific cluster.
+        Deprecated. Use
+        [projects.locations.clusters.update](/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.update)
+        instead.
       operationId: container.projects.locations.clusters.setLocations
       parameters:
         - description: |-
@@ -2469,8 +2476,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2514,8 +2521,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2560,8 +2567,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2606,8 +2613,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2654,8 +2661,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2699,8 +2706,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2744,8 +2751,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2789,8 +2796,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2835,8 +2842,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2880,8 +2887,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -2954,8 +2961,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3019,8 +3026,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3045,7 +3052,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           in: query
@@ -3053,7 +3060,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides, or "-" for all zones.
             This field has been deprecated and replaced by the parent field.
@@ -3079,8 +3086,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3163,8 +3170,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3186,14 +3193,14 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the parent field.
           in: query
           name: clusterId
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the parent field.
           in: query
@@ -3201,7 +3208,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -3227,8 +3234,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3284,7 +3291,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           in: query
@@ -3292,7 +3299,7 @@ paths:
           schema:
             type: string
         - description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) to return operations for, or `-` for
             all zones. This field has been deprecated and replaced by the parent field.
           in: query
@@ -3317,8 +3324,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
@@ -3589,6 +3596,9 @@ components:
         AutoprovisioningNodePoolDefaults contains defaults for a node pool created
         by NAP.
       properties:
+        management:
+          $ref: '#/components/schemas/NodeManagement'
+          description: Specifies the node management options for NAP created node-pools.
         oauthScopes:
           description: |-
             Scopes that are used by NAP when creating node pools. If oauth_scopes are
@@ -3601,6 +3611,9 @@ components:
             The Google Cloud Platform Service Account to be used by the node VMs. If
             service_account is specified, scopes should be empty.
           type: string
+        upgradeSettings:
+          $ref: '#/components/schemas/UpgradeSettings'
+          description: Specifies the upgrade settings for NAP created node pools
       type: object
     BigQueryDestination:
       description: Parameters for using BigQuery as the destination of resource usage export.
@@ -3628,18 +3641,18 @@ components:
           type: string
         operationId:
           description: |-
-            Required. Deprecated. The server-assigned `name` of the operation.
+            Deprecated. The server-assigned `name` of the operation.
             This field has been deprecated and replaced by the name field.
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the operation resides.
             This field has been deprecated and replaced by the name field.
           type: string
@@ -3819,11 +3832,14 @@ components:
             The logging service the cluster should use to write logs.
             Currently available options:
 
-            * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
-            service with Kubernetes-native resource model
-            * `logging.googleapis.com` - the Google Cloud Logging service.
+            * `logging.googleapis.com/kubernetes` - The Cloud Logging
+            service with a Kubernetes-native resource model
+            * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
+              available as of GKE 1.15).
             * `none` - no logs will be exported from the cluster.
-            * if left as an empty string,`logging.googleapis.com` will be used.
+
+            If left as an empty string,`logging.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
           type: string
         maintenancePolicy:
           $ref: '#/components/schemas/MaintenancePolicy'
@@ -3844,9 +3860,14 @@ components:
             The monitoring service the cluster should use to write metrics.
             Currently available options:
 
-            * `monitoring.googleapis.com` - the Google Cloud Monitoring service.
-            * `none` - no metrics will be exported from the cluster.
-            * if left as an empty string, `monitoring.googleapis.com` will be used.
+            * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+            service with a Kubernetes-native resource model
+            * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
+              longer available as of GKE 1.15).
+            * `none` - No metrics will be exported from the cluster.
+
+            If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
           type: string
         name:
           description: |-
@@ -3927,6 +3948,9 @@ components:
             notation (e.g. `1.2.3.4/29`). Service addresses are
             typically put in the last `/16` from the container CIDR.
           type: string
+        shieldedNodes:
+          $ref: '#/components/schemas/ShieldedNodes'
+          description: Shielded Nodes configuration.
         status:
           description: '[Output only] The current status of this cluster.'
           enum:
@@ -3958,6 +3982,11 @@ components:
         verticalPodAutoscaling:
           $ref: '#/components/schemas/VerticalPodAutoscaling'
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        workloadIdentityConfig:
+          $ref: '#/components/schemas/WorkloadIdentityConfig'
+          description: |-
+            Configuration for the use of Kubernetes Service Accounts in GCP IAM
+            policies.
         zone:
           description: |-
             [Output only] The name of the Google Compute Engine
@@ -4039,10 +4068,14 @@ components:
             The logging service the cluster should use to write logs.
             Currently available options:
 
-            * "logging.googleapis.com/kubernetes" - the Google Cloud Logging
-            service with Kubernetes-native resource model
-            * "logging.googleapis.com" - the Google Cloud Logging service
-            * "none" - no logs will be exported from the cluster
+            * `logging.googleapis.com/kubernetes` - The Cloud Logging
+            service with a Kubernetes-native resource model
+            * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
+              available as of GKE 1.15).
+            * `none` - no logs will be exported from the cluster.
+
+            If left as an empty string,`logging.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
           type: string
         desiredMasterAuthorizedNetworksConfig:
           $ref: '#/components/schemas/MasterAuthorizedNetworksConfig'
@@ -4065,10 +4098,14 @@ components:
             The monitoring service the cluster should use to write metrics.
             Currently available options:
 
-            * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
-            service with Kubernetes-native resource model
-            * "monitoring.googleapis.com" - the Google Cloud Monitoring service
-            * "none" - no metrics will be exported from the cluster
+            * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+            service with a Kubernetes-native resource model
+            * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
+              longer available as of GKE 1.15).
+            * `none` - No metrics will be exported from the cluster.
+
+            If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
           type: string
         desiredNodePoolAutoscaling:
           $ref: '#/components/schemas/NodePoolAutoscaling'
@@ -4101,16 +4138,22 @@ components:
         desiredResourceUsageExportConfig:
           $ref: '#/components/schemas/ResourceUsageExportConfig'
           description: The desired configuration for exporting resource usage.
+        desiredShieldedNodes:
+          $ref: '#/components/schemas/ShieldedNodes'
+          description: Configuration for Shielded Nodes.
         desiredVerticalPodAutoscaling:
           $ref: '#/components/schemas/VerticalPodAutoscaling'
           description: Cluster-level Vertical Pod Autoscaling configuration.
+        desiredWorkloadIdentityConfig:
+          $ref: '#/components/schemas/WorkloadIdentityConfig'
+          description: Configuration for Workload Identity.
       type: object
     CompleteIPRotationRequest:
       description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -4120,13 +4163,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -4157,13 +4200,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the parent field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -4174,7 +4217,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the parent field.
           type: string
         nodePool:
@@ -4188,13 +4231,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the parent field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the parent field.
@@ -4313,8 +4356,8 @@ components:
         disabled:
           description: |-
             Whether the Horizontal Pod Autoscaling feature is enabled in the cluster.
-            When enabled, it ensures that a Heapster pod is running in the cluster,
-            which is also used by the Cloud Monitoring service.
+            When enabled, it ensures that metrics are collected into Stackdriver
+            Monitoring.
           type: boolean
       type: object
     HttpCacheControlResponseHeader:
@@ -4685,6 +4728,24 @@ components:
           format: int64
           type: string
       type: object
+    Metric:
+      description: 'Progress metric is (string, int|float|string) pair.'
+      properties:
+        doubleValue:
+          description: For metrics with floating point value.
+          format: double
+          type: number
+        intValue:
+          description: For metrics with integer value.
+          format: int64
+          type: string
+        name:
+          description: 'Required. Metric name, e.g., "nodes total", "percent done".'
+          type: string
+        stringValue:
+          description: 'For metrics with custom values (ratios, visual progress, etc.).'
+          type: string
+      type: object
     NetworkConfig:
       description: NetworkConfig reports the relative names of network & subnetwork.
       properties:
@@ -4810,8 +4871,9 @@ components:
              "configure-sh"
              "containerd-configure-sh"
              "enable-os-login"
-             "gci-update-strategy"
              "gci-ensure-gke-docker"
+             "gci-metrics-enabled"
+             "gci-update-strategy"
              "instance-template"
              "kube-env"
              "startup-script"
@@ -4865,10 +4927,21 @@ components:
             https://cloud.google.com/compute/docs/instances/preemptible for more
             information about preemptible VM instances.
           type: boolean
+        reservationAffinity:
+          $ref: '#/components/schemas/ReservationAffinity'
+          description: |-
+            The optional reservation affinity. Setting this field will apply
+            the specified [Zonal Compute
+            Reservation](/compute/docs/instances/reserving-zonal-resources)
+            to this node pool.
+        sandboxConfig:
+          $ref: '#/components/schemas/SandboxConfig'
+          description: Sandbox configuration for this node.
         serviceAccount:
           description: |-
-            The Google Cloud Platform Service Account to be used by the node VMs. If
-            no Service Account is specified, the "default" service account is used.
+            The Google Cloud Platform Service Account to be used by the node VMs.
+            Specify the email address of the Service Account; otherwise, if no Service
+            Account is specified, the "default" service account is used.
           type: string
         shieldedInstanceConfig:
           $ref: '#/components/schemas/ShieldedInstanceConfig'
@@ -4891,6 +4964,9 @@ components:
           items:
             $ref: '#/components/schemas/NodeTaint'
           type: array
+        workloadMetadataConfig:
+          $ref: '#/components/schemas/WorkloadMetadataConfig'
+          description: The workload metadata configuration for this node.
       type: object
     NodeManagement:
       description: |-
@@ -4952,6 +5028,13 @@ components:
           items:
             type: string
           type: array
+        locations:
+          description: |-
+            The list of Google Compute Engine [zones](/compute/docs/zones#available)
+            in which the NodePool's nodes should be located.
+          items:
+            type: string
+          type: array
         management:
           $ref: '#/components/schemas/NodeManagement'
           description: NodeManagement configuration for this NodePool.
@@ -4986,6 +5069,9 @@ components:
             [Output only] Additional information about the current status of this
             node pool instance, if available.
           type: string
+        upgradeSettings:
+          $ref: '#/components/schemas/UpgradeSettings'
+          description: Upgrade settings control disruption and speed of the upgrade.
         version:
           description: The version of the Kubernetes of this node.
           type: string
@@ -5091,6 +5177,9 @@ components:
             - SET_NETWORK_POLICY
             - SET_MAINTENANCE_POLICY
           type: string
+        progress:
+          $ref: '#/components/schemas/OperationProgress'
+          description: 'Output only. [Output only] Progress information for an operation.'
         selfLink:
           description: Server-defined URL for the resource.
           type: string
@@ -5109,7 +5198,7 @@ components:
             - ABORTING
           type: string
         statusMessage:
-          description: 'If an error has occurred, a textual description of the error.'
+          description: 'Output only. If an error has occurred, a textual description of the error.'
           type: string
         targetLink:
           description: Server-defined URL for the target of the operation.
@@ -5120,6 +5209,42 @@ components:
             [zone](/compute/docs/zones#available) in which the operation
             is taking place.
             This field is deprecated, use location instead.
+          type: string
+      type: object
+    OperationProgress:
+      description: Information about operation (or operation stage) progress.
+      properties:
+        metrics:
+          description: |-
+            Progress metric bundle, for example:
+              metrics: [{name: "nodes done",     int_value: 15},
+                        {name: "nodes total",    int_value: 32}]
+            or
+              metrics: [{name: "progress",       double_value: 0.56},
+                        {name: "progress scale", double_value: 1.0}]
+          items:
+            $ref: '#/components/schemas/Metric'
+          type: array
+        name:
+          description: |-
+            A non-parameterized string describing an operation stage.
+            Unset for single-stage operations.
+          type: string
+        stages:
+          description: Substages of an operation or a stage.
+          items:
+            $ref: '#/components/schemas/OperationProgress'
+          type: array
+        status:
+          description: |-
+            Status of an operation stage.
+            Unset for single-stage operations.
+          enum:
+            - STATUS_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+            - ABORTING
           type: string
       type: object
     PrivateClusterConfig:
@@ -5140,6 +5265,9 @@ components:
             range will be used for assigning internal IP addresses to the master or
             set of masters, as well as the ILB VIP. This range must not overlap with
             any other ranges in use within the cluster's network.
+          type: string
+        peeringName:
+          description: Output only. The peering name in the customer VPC used by this cluster.
           type: string
         privateEndpoint:
           description: Output only. The internal IP address of this cluster's master endpoint.
@@ -5185,6 +5313,32 @@ components:
           $ref: '#/components/schemas/TimeWindow'
           description: The window of the first recurrence.
       type: object
+    ReservationAffinity:
+      description: |-
+        [ReservationAffinity](/compute/docs/instances/reserving-zonal-resources) is
+        the configuration of desired reservation which instances could take
+        capacity from.
+      properties:
+        consumeReservationType:
+          description: Corresponds to the type of reservation consumption.
+          enum:
+            - UNSPECIFIED
+            - NO_RESERVATION
+            - ANY_RESERVATION
+            - SPECIFIC_RESERVATION
+          type: string
+        key:
+          description: |-
+            Corresponds to the label key of a reservation resource. To target a
+            SPECIFIC_RESERVATION by name, specify "googleapis.com/reservation-name" as
+            the key and specify the name of your reservation as its value.
+          type: string
+        values:
+          description: Corresponds to the label value(s) of reservation resource(s).
+          items:
+            type: string
+          type: array
+      type: object
     ResourceLimit:
       description: |-
         Contains information about amount of some resource in the cluster.
@@ -5225,7 +5379,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to rollback.
+            Deprecated. The name of the cluster to rollback.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5236,21 +5390,31 @@ components:
           type: string
         nodePoolId:
           description: |-
-            Required. Deprecated. The name of the node pool to rollback.
+            Deprecated. The name of the node pool to rollback.
             This field has been deprecated and replaced by the name field.
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
+          type: string
+      type: object
+    SandboxConfig:
+      description: SandboxConfig contains configurations of the sandbox to use for the node.
+      properties:
+        type:
+          description: Type of the sandbox to use for the node.
+          enum:
+            - UNSPECIFIED
+            - GVISOR
           type: string
       type: object
     ServerConfig:
@@ -5288,7 +5452,7 @@ components:
             cluster.
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5298,13 +5462,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5318,7 +5482,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           type: string
         labelFingerprint:
@@ -5337,7 +5501,7 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           type: string
@@ -5348,7 +5512,7 @@ components:
           type: object
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5361,7 +5525,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           type: string
         enabled:
@@ -5374,13 +5538,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5391,7 +5555,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         locations:
@@ -5413,13 +5577,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5430,16 +5594,22 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         loggingService:
           description: |-
-            Required. The logging service the cluster should use to write metrics.
+            Required. The logging service the cluster should use to write logs.
             Currently available options:
 
-            * "logging.googleapis.com" - the Google Cloud Logging service
-            * "none" - no metrics will be exported from the cluster
+            * `logging.googleapis.com/kubernetes` - The Cloud Logging
+            service with a Kubernetes-native resource model
+            * `logging.googleapis.com` - The legacy Cloud Logging service (no longer
+              available as of GKE 1.15).
+            * `none` - no logs will be exported from the cluster.
+
+            If left as an empty string,`logging.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `logging.googleapis.com` for earlier versions.
           type: string
         name:
           description: |-
@@ -5448,13 +5618,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5502,7 +5672,7 @@ components:
           type: string
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5512,7 +5682,7 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
@@ -5521,7 +5691,7 @@ components:
           description: Required. A description of the update.
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5532,7 +5702,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         monitoringService:
@@ -5540,10 +5710,14 @@ components:
             Required. The monitoring service the cluster should use to write metrics.
             Currently available options:
 
-            * "monitoring.googleapis.com/kubernetes" - the Google Cloud Monitoring
-            service with Kubernetes-native resource model
-            * "monitoring.googleapis.com" - the Google Cloud Monitoring service
-            * "none" - no metrics will be exported from the cluster
+            * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+            service with a Kubernetes-native resource model
+            * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
+              longer available as of GKE 1.15).
+            * `none` - No metrics will be exported from the cluster.
+
+            If left as an empty string,`monitoring.googleapis.com/kubernetes` will be
+            used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.
           type: string
         name:
           description: |-
@@ -5552,13 +5726,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5569,7 +5743,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5582,13 +5756,13 @@ components:
           description: Required. Configuration options for the NetworkPolicy feature.
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5602,7 +5776,7 @@ components:
           description: Required. Autoscaling configuration for the node pool.
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5613,18 +5787,18 @@ components:
           type: string
         nodePoolId:
           description: |-
-            Required. Deprecated. The name of the node pool to upgrade.
+            Deprecated. The name of the node pool to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5637,7 +5811,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           type: string
         management:
@@ -5651,18 +5825,18 @@ components:
           type: string
         nodePoolId:
           description: |-
-            Required. Deprecated. The name of the node pool to update.
+            Deprecated. The name of the node pool to update.
             This field has been deprecated and replaced by the name field.
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5675,7 +5849,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to update.
+            Deprecated. The name of the cluster to update.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5690,18 +5864,18 @@ components:
           type: integer
         nodePoolId:
           description: |-
-            Required. Deprecated. The name of the node pool to update.
+            Deprecated. The name of the node pool to update.
             This field has been deprecated and replaced by the name field.
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5728,6 +5902,13 @@ components:
             boot process if signature verification fails.
           type: boolean
       type: object
+    ShieldedNodes:
+      description: Configuration of Shielded Nodes feature.
+      properties:
+        enabled:
+          description: Whether Shielded Nodes features are enabled on all nodes in this cluster.
+          type: boolean
+      type: object
     StartIPRotationRequest:
       description: |-
         StartIPRotationRequest creates a new IP for the cluster and then performs
@@ -5735,7 +5916,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster.
+            Deprecated. The name of the cluster.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5745,7 +5926,7 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://developers.google.com/console/help/new/#projectnumber).
             This field has been deprecated and replaced by the name field.
           type: string
@@ -5754,7 +5935,7 @@ components:
           type: boolean
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5798,7 +5979,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5808,7 +5989,7 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
@@ -5817,7 +5998,7 @@ components:
           description: Required. A description of the update.
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5828,7 +6009,7 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         masterVersion:
@@ -5851,13 +6032,13 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
@@ -5868,12 +6049,22 @@ components:
       properties:
         clusterId:
           description: |-
-            Required. Deprecated. The name of the cluster to upgrade.
+            Deprecated. The name of the cluster to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         imageType:
           description: Required. The desired image type for the node pool.
           type: string
+        locations:
+          description: |-
+            The desired list of Google Compute Engine
+            [zones](/compute/docs/zones#available) in which the node pool's nodes
+            should be located. Changing the locations for a node pool will result
+            in nodes being either created or removed from the node pool, depending
+            on whether locations are being added or removed.
+          items:
+            type: string
+          type: array
         name:
           description: |-
             The name (project, location, cluster, node pool) of the node pool to
@@ -5882,7 +6073,7 @@ components:
           type: string
         nodePoolId:
           description: |-
-            Required. Deprecated. The name of the node pool to upgrade.
+            Deprecated. The name of the node pool to upgrade.
             This field has been deprecated and replaced by the name field.
           type: string
         nodeVersion:
@@ -5901,17 +6092,63 @@ components:
           type: string
         projectId:
           description: |-
-            Required. Deprecated. The Google Developers Console [project ID or project
+            Deprecated. The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
             This field has been deprecated and replaced by the name field.
           type: string
+        upgradeSettings:
+          $ref: '#/components/schemas/UpgradeSettings'
+          description: Upgrade settings control disruption and speed of the upgrade.
+        workloadMetadataConfig:
+          $ref: '#/components/schemas/WorkloadMetadataConfig'
+          description: The desired workload metadata config for the node pool.
         zone:
           description: |-
-            Required. Deprecated. The name of the Google Compute Engine
+            Deprecated. The name of the Google Compute Engine
             [zone](/compute/docs/zones#available) in which the cluster
             resides.
             This field has been deprecated and replaced by the name field.
           type: string
+      type: object
+    UpgradeSettings:
+      description: |-
+        These upgrade settings control the level of parallelism and the level of
+        disruption caused by an upgrade.
+
+        maxUnavailable controls the number of nodes that can be simultaneously
+        unavailable.
+
+        maxSurge controls the number of additional nodes that can be added to the
+        node pool temporarily for the time of the upgrade to increase the number of
+        available nodes.
+
+        (maxUnavailable + maxSurge) determines the level of parallelism (how many
+        nodes are being upgraded at the same time).
+
+        Note: upgrades inevitably introduce some disruption since workloads need to
+        be moved from old nodes to new, upgraded ones. Even if maxUnavailable=0,
+        this holds true. (Disruption stays within the limits of
+        PodDisruptionBudget, if it is configured.)
+
+        Consider a hypothetical node pool with 5 nodes having maxSurge=2,
+        maxUnavailable=1. This means the upgrade process upgrades 3 nodes
+        simultaneously. It creates 2 additional (upgraded) nodes, then it brings
+        down 3 old (not yet upgraded) nodes at the same time. This ensures that
+        there are always at least 4 nodes available.
+      properties:
+        maxSurge:
+          description: |-
+            The maximum number of nodes that can be created beyond the current size
+            of the node pool during the upgrade process.
+          format: int32
+          type: integer
+        maxUnavailable:
+          description: |-
+            The maximum number of nodes that can be simultaneously unavailable during
+            the upgrade process. A node is considered available if its status is
+            Ready.
+          format: int32
+          type: integer
       type: object
     UsableSubnetwork:
       description: |-
@@ -5974,6 +6211,30 @@ components:
         enabled:
           description: Enables vertical pod autoscaling.
           type: boolean
+      type: object
+    WorkloadIdentityConfig:
+      description: |-
+        Configuration for the use of Kubernetes Service Accounts in GCP IAM
+        policies.
+      properties:
+        workloadPool:
+          description: The workload pool to attach all Kubernetes service accounts to.
+          type: string
+      type: object
+    WorkloadMetadataConfig:
+      description: |-
+        WorkloadMetadataConfig defines the metadata configuration to expose to
+        workloads on the node pool.
+      properties:
+        mode:
+          description: |-
+            Mode is the configuration for how to expose metadata to workloads running
+            on the node pool.
+          enum:
+            - MODE_UNSPECIFIED
+            - GCE_METADATA
+            - GKE_METADATA
+          type: string
       type: object
   securitySchemes:
     Oauth2:

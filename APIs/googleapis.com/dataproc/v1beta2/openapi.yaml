@@ -33,7 +33,7 @@ tags:
 paths:
   '/v1beta2/projects/{projectId}/regions/{region}/clusters':
     get:
-      description: 'Lists all regions/{region}/clusters in a project.'
+      description: 'Lists all regions/{region}/clusters in a project alphabetically.'
       operationId: dataproc.projects.regions.clusters.list
       parameters:
         - description: Required. The ID of the Google Cloud Platform project that the cluster belongs to.
@@ -42,14 +42,12 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: 'Optional. A filter constraining the clusters to list. Filters are case-sensitive and have the following syntax:field = value AND field = value ...where field is one of status.state, clusterName, or labels.[KEY], and [KEY] is a label key. value can be * to match all values. status.state can be one of the following: ACTIVE, INACTIVE, CREATING, RUNNING, ERROR, DELETING, or UPDATING. ACTIVE contains the CREATING, UPDATING, and RUNNING states. INACTIVE contains the DELETING and ERROR states. clusterName is the name of the cluster provided at creation time. Only the logical AND operator is supported; space-separated items are treated as having an implicit AND operator.Example filter:status.state = ACTIVE AND clusterName = mycluster AND labels.env = staging AND labels.starred = *'
           in: query
           name: filter
@@ -80,19 +78,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
-      description: Creates a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata.
+      description: 'Creates a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).'
       operationId: dataproc.projects.regions.clusters.create
       parameters:
         - description: Required. The ID of the Google Cloud Platform project that the cluster belongs to.
@@ -101,14 +99,12 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: 'Optional. A unique id used to identify the request. If the server receives two CreateClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
           in: query
           name: requestId
@@ -135,7 +131,7 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}':
     delete:
-      description: Deletes a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata.
+      description: 'Deletes a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).'
       operationId: dataproc.projects.regions.clusters.delete
       parameters:
         - description: Required. The ID of the Google Cloud Platform project that the cluster belongs to.
@@ -144,21 +140,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The cluster name.
           in: path
           name: clusterName
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Optional. Specifying the cluster_uuid means the RPC should fail (with error NOT_FOUND) if cluster with specified UUID does not exist.
           in: query
           name: clusterUuid
@@ -193,21 +186,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The cluster name.
           in: path
           name: clusterName
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         '200':
           content:
@@ -223,19 +213,19 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     patch:
-      description: Updates a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata.
+      description: 'Updates a cluster in a project. The returned Operation.metadata will be ClusterOperationMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).'
       operationId: dataproc.projects.regions.clusters.patch
       parameters:
         - description: Required. The ID of the Google Cloud Platform project the cluster belongs to.
@@ -244,22 +234,19 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The cluster name.
           in: path
           name: clusterName
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: 'Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning allows removing nodes from the cluster without interrupting jobs in progress. Timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day.Only supported on Dataproc image versions 1.2 and higher.'
+        - description: 'Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning allows removing nodes from the cluster without interrupting jobs in progress. Timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).Only supported on Dataproc image versions 1.2 and higher.'
           in: query
           name: gracefulDecommissionTimeout
           schema:
@@ -344,19 +331,19 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:diagnose':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
-      description: 'Gets cluster diagnostic information. The returned Operation.metadata will be ClusterOperationMetadata. After the operation completes, Operation.response contains Empty.'
+      description: 'Gets cluster diagnostic information. The returned Operation.metadata will be ClusterOperationMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata). After the operation completes, Operation.response contains Empty.'
       operationId: dataproc.projects.regions.clusters.diagnose
       parameters:
         - description: Required. The ID of the Google Cloud Platform project that the cluster belongs to.
@@ -365,26 +352,131 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The cluster name.
           in: path
           name: clusterName
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DiagnoseClusterRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:start':
+    parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Starts a cluster in a project.
+      operationId: dataproc.projects.regions.clusters.start
+      parameters:
+        - description: Required. The ID of the Google Cloud Platform project the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required. The Dataproc region in which to handle the request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Required. The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartClusterRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:stop':
+    parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Stops a cluster in a project.
+      operationId: dataproc.projects.regions.clusters.stop
+      parameters:
+        - description: Required. The ID of the Google Cloud Platform project the cluster belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required. The Dataproc region in which to handle the request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Required. The cluster name.
+          in: path
+          name: clusterName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopClusterRequest'
       responses:
         '200':
           content:
@@ -410,14 +502,12 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: 'Optional. If set, the returned jobs list includes only jobs that were submitted to the named cluster.'
           in: query
           name: clusterName
@@ -462,17 +552,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
   '/v1beta2/projects/{projectId}/regions/{region}/jobs/{jobId}':
     delete:
       description: 'Deletes the job from the project. If the job is active, the delete fails, and the response returns FAILED_PRECONDITION.'
@@ -484,21 +574,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The job ID.
           in: path
           name: jobId
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         '200':
           content:
@@ -523,21 +610,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The job ID.
           in: path
           name: jobId
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         '200':
           content:
@@ -553,17 +637,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     patch:
       description: Updates a job in a project.
       operationId: dataproc.projects.regions.jobs.patch
@@ -574,21 +658,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The job ID.
           in: path
           name: jobId
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: 'Required. Specifies the path, relative to <code>Job</code>, of the field to update. For example, to update the labels of a Job the <code>update_mask</code> parameter would be specified as <code>labels</code>, and the PATCH request body would specify the new value. <strong>Note:</strong> Currently, <code>labels</code> is the only field that can be updated.'
           in: query
           name: updateMask
@@ -615,19 +696,19 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
-      description: 'Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs.list or regions/{region}/jobs.get.'
+      description: 'Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs.list (https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list) or regions/{region}/jobs.get (https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).'
       operationId: dataproc.projects.regions.jobs.cancel
       parameters:
         - description: Required. The ID of the Google Cloud Platform project that the job belongs to.
@@ -636,21 +717,18 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: Required. The job ID.
           in: path
           name: jobId
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -672,17 +750,17 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs:submit':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Submits a job to a cluster.
       operationId: dataproc.projects.regions.jobs.submit
@@ -693,14 +771,12 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
-        - description: Required. The Cloud Dataproc region in which to handle the request.
+        - description: Required. The Dataproc region in which to handle the request.
           in: path
           name: region
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -712,6 +788,54 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Job'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/projects/{projectId}/regions/{region}/jobs:submitAsOperation':
+    parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Submits job to a cluster.
+      operationId: dataproc.projects.regions.jobs.submitAsOperation
+      parameters:
+        - description: Required. The ID of the Google Cloud Platform project that the job belongs to.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required. The Dataproc region in which to handle the request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitJobRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
           description: Successful response
       security:
         - Oauth2:
@@ -798,17 +922,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
       operationId: dataproc.projects.regions.workflowTemplates.update
@@ -844,17 +968,17 @@ paths:
         - projects
   '/v1beta2/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.'
       operationId: dataproc.projects.regions.operations.cancel
@@ -882,19 +1006,19 @@ paths:
         - projects
   '/v1beta2/{name}:instantiate':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
-      description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata. Also see Using WorkflowMetadata.On successful completion, Operation.response will be Empty.'
+      description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#workflowmetadata). Also see Using WorkflowMetadata (https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).On successful completion, Operation.response will be Empty.'
       operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - description: |-
@@ -966,17 +1090,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates new autoscaling policy.
       operationId: dataproc.projects.regions.autoscalingPolicies.create
@@ -1050,17 +1174,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates new workflow template.
       operationId: dataproc.projects.regions.workflowTemplates.create
@@ -1096,19 +1220,19 @@ paths:
         - projects
   '/v1beta2/{parent}/workflowTemplates:instantiateInline':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
-      description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata. Also see Using WorkflowMetadata.On successful completion, Operation.response will be Empty.'
+      description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata). Also see Using WorkflowMetadata (https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).On successful completion, Operation.response will be Empty.'
       operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - description: |-
@@ -1182,30 +1306,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
   '/v1beta2/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Sets the access control policy on the specified resource. Replaces any existing policy.Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED'
       operationId: dataproc.projects.regions.workflowTemplates.setIamPolicy
@@ -1238,17 +1362,17 @@ paths:
         - projects
   '/v1beta2/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: dataproc.projects.regions.workflowTemplates.testIamPermissions
@@ -1362,6 +1486,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Cluster'
+    SubmitJobRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SubmitJobRequest'
     WorkflowTemplate:
       content:
         application/json:
@@ -1376,7 +1505,7 @@ components:
           format: int32
           type: integer
         acceleratorTypeUri:
-          description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypesExamples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.'
+          description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypesExamples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.'
           type: string
       type: object
     AutoscalingConfig:
@@ -1386,7 +1515,7 @@ components:
           description: |-
             Optional. The autoscaling policy used by the cluster.Only resource names including projectid and location (region) are valid. Examples:
             https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]
-            projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]Note that the policy must be in the same project and Cloud Dataproc region.
+            projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]Note that the policy must be in the same project and Dataproc region.
           type: string
       type: object
     AutoscalingPolicy:
@@ -1481,11 +1610,11 @@ components:
           description: Required. The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.
           type: string
         clusterUuid:
-          description: Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.
+          description: Output only. A cluster UUID (Unique Universal Identifier). Dataproc generates this value when it creates the cluster.
           type: string
         config:
           $ref: '#/components/schemas/ClusterConfig'
-          description: 'Required. The cluster config. Note that Cloud Dataproc may set default values, and values may change when clusters are updated.'
+          description: 'Required. The cluster config. Note that Dataproc may set default values, and values may change when clusters are updated.'
         labels:
           additionalProperties:
             type: string
@@ -1513,7 +1642,7 @@ components:
           $ref: '#/components/schemas/AutoscalingConfig'
           description: Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
         configBucket:
-          description: 'Optional. A Google Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Cloud Dataproc staging bucket).'
+          description: 'Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging bucket).'
           type: string
         encryptionConfig:
           $ref: '#/components/schemas/EncryptionConfig'
@@ -1670,7 +1799,7 @@ components:
             - UPDATING
           type: string
         stateStartTime:
-          description: Output only. Time when this state was entered.
+          description: 'Output only. Time when this state was entered (see JSON representation of Timestamp (https://developers.google.com/protocol-buffers/docs/proto3#json)).'
           format: google-datetime
           type: string
         substate:
@@ -1736,23 +1865,36 @@ components:
           type: object
       type: object
     Expr:
-      description: |
-        Represents an expression text. Example:
-        title: "User account presence"
-        description: "Determines whether the request has a user account"
-        expression: "size(request.user) > 0"
+      description: |-
+        Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec.Example (Comparison):
+        title: "Summary size limit"
+        description: "Determines if a summary is less than 100 chars"
+        expression: "document.summary.size() < 100"
+        Example (Equality):
+        title: "Requestor is owner"
+        description: "Determines if requestor is the document owner"
+        expression: "document.owner == request.auth.claims.email"
+        Example (Logic):
+        title: "Public documents"
+        description: "Determine whether the document should be publicly visible"
+        expression: "document.type != 'private' && document.type != 'internal'"
+        Example (Data Manipulation):
+        title: "Notification string"
+        description: "Create a notification string with a timestamp."
+        expression: "'New message received at ' + string(document.create_time)"
+        The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information.
       properties:
         description:
-          description: 'An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.'
+          description: 'Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.'
           type: string
         expression:
-          description: Textual representation of an expression in Common Expression Language syntax.The application context of the containing message determines which well-known feature set of CEL is supported.
+          description: Textual representation of an expression in Common Expression Language syntax.
           type: string
         location:
-          description: 'An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.'
+          description: 'Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.'
           type: string
         title:
-          description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
+          description: 'Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
           type: string
       type: object
     GceClusterConfig:
@@ -1777,10 +1919,7 @@ components:
           $ref: '#/components/schemas/ReservationAffinity'
           description: Optional. Reservation Affinity for consuming Zonal reservation.
         serviceAccount:
-          description: |-
-            Optional. The service account of the instances. Defaults to the default Compute Engine service account. Custom service accounts need permissions equivalent to the following IAM roles:
-            roles/logging.logWriter
-            roles/storage.objectAdmin(see https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts for more information). Example: [account_id]@[project_id].iam.gserviceaccount.com
+          description: 'Optional. The Dataproc service account (also see VM Data Plane identity) used by Dataproc cluster VM instances to access Google Cloud Platform services.If not specified, the Compute Engine default service account is used.'
           type: string
         serviceAccountScopes:
           description: |-
@@ -1809,7 +1948,7 @@ components:
           type: array
         zoneUri:
           description: |-
-            Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
+            Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
             https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]
             projects/[project_id]/zones/[zone]
             us-central1-f
@@ -1831,7 +1970,7 @@ components:
           type: integer
       type: object
     HadoopJob:
-      description: 'A Cloud Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).'
+      description: 'A Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).'
       properties:
         archiveUris:
           description: 'Optional. HCFS URIs of archives to be extracted in the working directory of Hadoop drivers and tasks. Supported file types: .jar, .tar, .tar.gz, .tgz, or .zip.'
@@ -1865,11 +2004,11 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure Hadoop. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site and classes in user code.'
+          description: 'Optional. A mapping of property names to values, used to configure Hadoop. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site and classes in user code.'
           type: object
       type: object
     HiveJob:
-      description: 'A Cloud Dataproc job for running Apache Hive (https://hive.apache.org/) queries on YARN.'
+      description: 'A Dataproc job for running Apache Hive (https://hive.apache.org/) queries on YARN.'
       properties:
         continueOnFailure:
           description: Optional. Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
@@ -1882,7 +2021,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names and values, used to configure Hive. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-site.xml, and classes in user code.'
+          description: 'Optional. A mapping of property names and values, used to configure Hive. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-site.xml, and classes in user code.'
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains Hive queries.
@@ -1927,7 +2066,7 @@ components:
           description: Optional. The Compute Engine image resource used for cluster instances. It can be specified or may be inferred from SoftwareConfig.image_version.
           type: string
         instanceNames:
-          description: 'Output only. The list of instance names. Cloud Dataproc derives the names from cluster_name, num_instances, and the instance group.'
+          description: 'Output only. The list of instance names. Dataproc derives the names from cluster_name, num_instances, and the instance group.'
           items:
             type: string
           type: array
@@ -1939,18 +2078,25 @@ components:
             Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
             https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
             projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
-            n1-standard-2Auto Zone Exception: If you are using the Cloud Dataproc Auto Zone Placement feature, you must use the short name of the machine type resource, for example, n1-standard-2.
+            n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto Zone Placement feature, you must use the short name of the machine type resource, for example, n1-standard-2.
           type: string
         managedGroupConfig:
           $ref: '#/components/schemas/ManagedGroupConfig'
           description: Output only. The config for Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
         minCpuPlatform:
-          description: Specifies the minimum cpu platform for the Instance Group. See Cloud Dataproc&rarr;Minimum CPU Platform.
+          description: Specifies the minimum cpu platform for the Instance Group. See Dataproc&rarr;Minimum CPU Platform.
           type: string
         numInstances:
           description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
           format: int32
           type: integer
+        preemptibility:
+          description: Optional. Specifies the preemptibility of the instance group.
+          enum:
+            - PREEMPTIBILITY_UNSPECIFIED
+            - NON_PREEMPTIBLE
+            - PREEMPTIBLE
+          type: string
       type: object
     InstantiateWorkflowTemplateRequest:
       description: A request to instantiate a workflow template.
@@ -1972,8 +2118,11 @@ components:
           type: integer
       type: object
     Job:
-      description: A Cloud Dataproc job resource.
+      description: A Dataproc job resource.
       properties:
+        done:
+          description: 'Output only. Indicates whether the job is completed. If the value is false, the job is still in progress. If true, the job is completed, and status.state field will indicate if it was successful, failed, or cancelled.'
+          type: boolean
         driverControlFilesUri:
           description: 'Output only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
           type: string
@@ -2030,21 +2179,38 @@ components:
             $ref: '#/components/schemas/YarnApplication'
           type: array
       type: object
+    JobMetadata:
+      description: Job Operation metadata.
+      properties:
+        jobId:
+          description: Output only. The job id.
+          type: string
+        operationType:
+          description: Output only. Operation type.
+          type: string
+        startTime:
+          description: Output only. Job submission time.
+          format: google-datetime
+          type: string
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: Output only. Most recent job status.
+      type: object
     JobPlacement:
-      description: Cloud Dataproc job config.
+      description: Dataproc job config.
       properties:
         clusterName:
           description: Required. The name of the cluster where the job will be submitted.
           type: string
         clusterUuid:
-          description: Output only. A cluster UUID generated by the Cloud Dataproc service when the job is submitted.
+          description: Output only. A cluster UUID generated by the Dataproc service when the job is submitted.
           type: string
       type: object
     JobReference:
       description: Encapsulates the full scoping used to reference a job.
       properties:
         jobId:
-          description: 'Optional. The job ID, which must be unique within the project.The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or hyphens (-). The maximum length is 100 characters.If not specified by the caller, the job ID will be provided by the server.'
+          description: 'Optional. The job ID, which must be unique within the project. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or hyphens (-). The maximum length is 100 characters.If not specified by the caller, the job ID will be provided by the server.'
           type: string
         projectId:
           description: Required. The ID of the Google Cloud Platform project that the job belongs to.
@@ -2059,10 +2225,10 @@ components:
           type: integer
       type: object
     JobStatus:
-      description: Cloud Dataproc job status.
+      description: Dataproc job status.
       properties:
         details:
-          description: 'Output only. Optional job state details, such as an error description if the state is <code>ERROR</code>.'
+          description: 'Output only. Optional Job state details, such as an error description if the state is <code>ERROR</code>.'
           type: string
         state:
           description: Output only. A state message specifying the overall job state.
@@ -2145,19 +2311,19 @@ components:
       description: Specifies the cluster auto-delete schedule configuration.
       properties:
         autoDeleteTime:
-          description: Optional. The time when cluster will be auto-deleted.
+          description: 'Optional. The time when cluster will be auto-deleted. (see JSON representation of Timestamp (https://developers.google.com/protocol-buffers/docs/proto3#json)).'
           format: google-datetime
           type: string
         autoDeleteTtl:
-          description: 'Optional. The lifetime duration of cluster. The cluster will be auto-deleted at the end of this period. Valid range: 10m, 14d.Example: "1d", to delete the cluster 1 day after its creation..'
+          description: 'Optional. The lifetime duration of cluster. The cluster will be auto-deleted at the end of this period. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).'
           format: google-duration
           type: string
         idleDeleteTtl:
-          description: 'Optional. The duration to keep the cluster alive while idling. Passing this threshold will cause the cluster to be deleted. Valid range: 10m, 14d.Example: "10m", the minimum value, to delete the cluster when it has had no jobs running for 10 minutes.'
+          description: 'Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json).'
           format: google-duration
           type: string
         idleStartTime:
-          description: Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness.
+          description: 'Output only. The time when cluster became idle (most recent job finished) and became eligible for deletion due to idleness (see JSON representation of Timestamp (https://developers.google.com/protocol-buffers/docs/proto3#json)).'
           format: google-datetime
           type: string
       type: object
@@ -2272,7 +2438,7 @@ components:
           description: Required. Cloud Storage URI of executable file.
           type: string
         executionTimeout:
-          description: Optional. Amount of time executable has to complete. Default is 10 minutes. Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.
+          description: 'Optional. Amount of time executable has to complete. Default is 10 minutes (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).Cluster creation fails with an explanatory error message (the name of the executable that caused the error and the exceeded timeout period) if the executable is not completed at end of the timeout period.'
           format: google-duration
           type: string
       type: object
@@ -2342,7 +2508,7 @@ components:
           description: Validation based on a list of allowed values.
       type: object
     PigJob:
-      description: 'A Cloud Dataproc job for running Apache Pig (https://pig.apache.org/) queries on YARN.'
+      description: 'A Dataproc job for running Apache Pig (https://pig.apache.org/) queries on YARN.'
       properties:
         continueOnFailure:
           description: Optional. Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
@@ -2358,7 +2524,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure Pig. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and classes in user code.'
+          description: 'Optional. A mapping of property names to values, used to configure Pig. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and classes in user code.'
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains the Pig queries.
@@ -2438,7 +2604,7 @@ components:
           type: integer
       type: object
     PrestoJob:
-      description: 'A Cloud Dataproc job for running Presto (https://prestosql.io/) queries'
+      description: 'A Dataproc job for running Presto (https://prestosql.io/) queries'
       properties:
         clientTags:
           description: Optional. Presto client tags to attach to this query
@@ -2467,7 +2633,7 @@ components:
           description: A list of queries.
       type: object
     PySparkJob:
-      description: 'A Cloud Dataproc job for running Apache PySpark (https://spark.apache.org/docs/0.9.0/python-programming-guide.html) applications on YARN.'
+      description: 'A Dataproc job for running Apache PySpark (https://spark.apache.org/docs/0.9.0/python-programming-guide.html) applications on YARN.'
       properties:
         archiveUris:
           description: 'Optional. HCFS URIs of archives to be extracted in the working directory of .jar, .tar, .tar.gz, .tgz, and .zip.'
@@ -2498,7 +2664,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
+          description: 'Optional. A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
           type: object
         pythonFileUris:
           description: 'Optional. HCFS file URIs of Python files to pass to the PySpark framework. Supported file types: .py, .egg, and .zip.'
@@ -2572,7 +2738,7 @@ components:
       description: Specifies the selection and config of software inside the cluster.
       properties:
         imageVersion:
-          description: 'Optional. The version of software inside the cluster. It must be one of the supported Cloud Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest Debian version.'
+          description: 'Optional. The version of software inside the cluster. It must be one of the supported Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest Debian version.'
           type: string
         optionalComponents:
           description: The set of optional components to activate on the cluster.
@@ -2587,7 +2753,9 @@ components:
               - PRESTO
               - ZEPPELIN
               - ZOOKEEPER
+              - SOLR
               - HBASE
+              - RANGER
             type: string
           type: array
         properties:
@@ -2607,7 +2775,7 @@ components:
           type: object
       type: object
     SparkJob:
-      description: 'A Cloud Dataproc job for running Apache Spark (http://spark.apache.org/) applications on YARN. The specification of the main method to call to drive the job. Specify either the jar file that contains the main class or the main class name. To pass both a main jar and a main class in that jar, add the jar to CommonJob.jar_file_uris, and then specify the main class name in main_class.'
+      description: 'A Dataproc job for running Apache Spark (http://spark.apache.org/) applications on YARN. The specification of the main method to call to drive the job. Specify either the jar file that contains the main class or the main class name. To pass both a main jar and a main class in that jar, add the jar to CommonJob.jar_file_uris, and then specify the main class name in main_class.'
       properties:
         archiveUris:
           description: 'Optional. HCFS URIs of archives to be extracted in the working directory of Spark drivers and tasks. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip.'
@@ -2641,11 +2809,11 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure Spark. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
+          description: 'Optional. A mapping of property names to values, used to configure Spark. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
           type: object
       type: object
     SparkRJob:
-      description: 'A Cloud Dataproc job for running Apache SparkR (https://spark.apache.org/docs/latest/sparkr.html) applications on YARN.'
+      description: 'A Dataproc job for running Apache SparkR (https://spark.apache.org/docs/latest/sparkr.html) applications on YARN.'
       properties:
         archiveUris:
           description: 'Optional. HCFS URIs of archives to be extracted in the working directory of Spark drivers and tasks. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip.'
@@ -2671,11 +2839,11 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure SparkR. Properties that conflict with values set by the Cloud Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
+          description: 'Optional. A mapping of property names to values, used to configure SparkR. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.'
           type: object
       type: object
     SparkSqlJob:
-      description: 'A Cloud Dataproc job for running Apache Spark SQL (http://spark.apache.org/sql/) queries.'
+      description: 'A Dataproc job for running Apache Spark SQL (http://spark.apache.org/sql/) queries.'
       properties:
         jarFileUris:
           description: Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
@@ -2688,7 +2856,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: 'Optional. A mapping of property names to values, used to configure Spark SQL''s SparkConf. Properties that conflict with values set by the Cloud Dataproc API may be overwritten.'
+          description: 'Optional. A mapping of property names to values, used to configure Spark SQL''s SparkConf. Properties that conflict with values set by the Dataproc API may be overwritten.'
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains SQL queries.
@@ -2701,6 +2869,16 @@ components:
             type: string
           description: 'Optional. Mapping of query variable names to values (equivalent to the Spark SQL command: SET name="value";).'
           type: object
+      type: object
+    StartClusterRequest:
+      description: A request to start a cluster.
+      properties:
+        clusterUuid:
+          description: Optional. Specifying the cluster_uuid means the RPC should fail (with error NOT_FOUND) if cluster with specified UUID does not exist.
+          type: string
+        requestId:
+          description: 'Optional. A unique id used to identify the request. If the server receives two StartClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
+          type: string
       type: object
     Status:
       description: 'The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors).'
@@ -2718,6 +2896,16 @@ components:
           type: array
         message:
           description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+          type: string
+      type: object
+    StopClusterRequest:
+      description: A request to stop a cluster.
+      properties:
+        clusterUuid:
+          description: Optional. Specifying the cluster_uuid means the RPC should fail (with error NOT_FOUND) if cluster with specified UUID does not exist.
+          type: string
+        requestId:
+          description: 'Optional. A unique id used to identify the request. If the server receives two StopClusterRequest requests with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.'
           type: string
       type: object
     SubmitJobRequest:
@@ -2810,7 +2998,7 @@ components:
           type: array
       type: object
     WorkflowMetadata:
-      description: A Cloud Dataproc workflow template resource.
+      description: A Dataproc workflow template resource.
       properties:
         clusterName:
           description: Output only. The name of the target cluster.
@@ -2888,7 +3076,7 @@ components:
           type: string
       type: object
     WorkflowTemplate:
-      description: A Cloud Dataproc workflow template resource.
+      description: A Dataproc workflow template resource.
       properties:
         createTime:
           description: Output only. The time template was created.
@@ -2964,7 +3152,7 @@ components:
             - KILLED
           type: string
         trackingUrl:
-          description: 'Optional. Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or TimelineServer that provides application-specific information. The URL uses the internal hostname, and requires a proxy server for resolution and, possibly, access.'
+          description: 'Output only. The HTTP URL of the ApplicationMaster, HistoryServer, or TimelineServer that provides application-specific information. The URL uses the internal hostname, and requires a proxy server for resolution and, possibly, access.'
           type: string
       type: object
   securitySchemes:

@@ -6,12 +6,12 @@ info:
     name: Google
     url: 'https://google.com'
   description: |
-    Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenCensus.
+    Sends application trace data to Cloud Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Cloud Trace API directly. If you are looking to instrument your application for Cloud Trace, we recommend using OpenCensus.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Stackdriver Trace
+  title: Cloud Trace
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -34,7 +34,10 @@ tags:
 paths:
   '/v1/projects/{projectId}/traces':
     get:
-      description: Returns of a list of traces that match the specified filter conditions.
+      description: |-
+        Returns of a list of traces that match the specified filter conditions.
+        In this case, listing for traces is considered an active developer method,
+        even though it is technically a read-only method.
       operationId: cloudtrace.projects.traces.list
       parameters:
         - description: Required. ID of the Cloud project where the trace data is stored.
@@ -156,7 +159,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
@@ -167,6 +169,7 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Sends new traces to Stackdriver Trace or updates existing traces. If the ID
@@ -174,6 +177,8 @@ paths:
         in the existing trace and its spans are overwritten by the provided values,
         and any new fields provided are merged with the existing trace data. If the
         ID does not match, a new trace is created.
+        In this case, writing traces is not considered an active developer
+        method since traces are machine generated.
       operationId: cloudtrace.projects.patchTraces
       parameters:
         - description: Required. ID of the Cloud project where the trace data is stored.
@@ -207,7 +212,10 @@ paths:
         - projects
   '/v1/projects/{projectId}/traces/{traceId}':
     get:
-      description: Gets a single trace by its ID.
+      description: |-
+        Gets a single trace by its ID.
+        In this case, getting for traces is considered an active developer method,
+        even though it is technically a read-only method.
       operationId: cloudtrace.projects.traces.get
       parameters:
         - description: Required. ID of the Cloud project where the trace data is stored.
@@ -241,7 +249,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
@@ -252,6 +259,7 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     _.xgafv:

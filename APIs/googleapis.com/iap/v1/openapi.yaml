@@ -30,15 +30,15 @@ externalDocs:
   url: 'https://cloud.google.com/iap'
 tags:
   - name: v1
-  - name: oauth
+  - name: projects
 paths:
-  '/v1/oauth/{name}':
+  '/v1/{name}':
     delete:
       description: |-
-        Deletes an Identity Aware Proxy (IAP) OAuth client. Useful if the secret
-        was compromised.
-        Requires that the client is owned by IAP.
-      operationId: iap.oauth.projects.brands.identityAwareProxyClients.delete
+        Deletes an Identity Aware Proxy (IAP) OAuth client. Useful for removing
+        obsolete clients, managing the number of clients in a given project, and
+        cleaning up after tests. Requires that the client is owned by IAP.
+      operationId: iap.projects.brands.identityAwareProxyClients.delete
       parameters:
         - description: |-
             Required. Name of the Identity Aware Proxy client to be deleted.
@@ -63,12 +63,12 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
+        - projects
     get:
       description: |-
         Retrieves an Identity Aware Proxy (IAP) OAuth client.
         Requires that the client is owned by IAP.
-      operationId: iap.oauth.projects.brands.identityAwareProxyClients.get
+      operationId: iap.projects.brands.identityAwareProxyClients.get
       parameters:
         - description: |-
             Required. Name of the Identity Aware Proxy client to be fetched.
@@ -93,39 +93,118 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
+        - projects
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-  '/v1/oauth/{name}:resetSecret':
+  '/v1/{name}:iapSettings':
+    get:
+      description: Gets the IAP settings on a particular IAP protected resource.
+      operationId: iap.getIapSettings
+      parameters:
+        - description: |-
+            Required. The resource name for which to retrieve the settings.
+            Authorization: Requires the `getSettings` permission for the associated
+            resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IapSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - v1
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+    patch:
+      description: |-
+        Updates the IAP settings on a particular IAP protected resource. It
+        replaces all fields unless the `update_mask` is set.
+      operationId: iap.updateIapSettings
+      parameters:
+        - description: Required. The resource name of the IAP protected resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            The field mask specifying which IAP settings should be updated.
+            If omitted, the all of the settings are updated. See
+            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IapSettings'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IapSettings'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - v1
+  '/v1/{name}:resetSecret':
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful for
-        removing obsolete clients, managing the number of clients in a given
-        project, and cleaning up after tests.
-        Requires that the client is owned by IAP.
-      operationId: iap.oauth.projects.brands.identityAwareProxyClients.resetSecret
+        Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the
+        secret was compromised. Requires that the client is owned by IAP.
+      operationId: iap.projects.brands.identityAwareProxyClients.resetSecret
       parameters:
         - description: |-
             Required. Name of the Identity Aware Proxy client to that will have its
@@ -155,11 +234,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
-  '/v1/oauth/{parent}/brands':
+        - projects
+  '/v1/{parent}/brands':
     get:
       description: Lists the existing brands for the project.
-      operationId: iap.oauth.projects.brands.list
+      operationId: iap.projects.brands.list
       parameters:
         - description: |-
             Required. GCP Project number/id.
@@ -183,28 +262,29 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
+        - projects
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Constructs a new OAuth brand for the project if one does not exists.
-        The created brand is 'internal only', meaning that OAuth clients created
-        under it only accept requests from users who belong to the same GSuites
-        account as the project. The brand is created in un-reviewed status.
-        NOTE: the 'internal_only' can be manually changed in Pantheon UI.
-        Requires that brand does not already exists for the project.
-      operationId: iap.oauth.projects.brands.create
+        Constructs a new OAuth brand for the project if one does not exist.
+        The created brand is "internal only", meaning that OAuth clients created
+        under it only accept requests from users who belong to the same G Suite
+        organization as the project. The brand is created in an un-reviewed status.
+        NOTE: The "internal only" status can be manually changed in the Google
+        Cloud console. Requires that a brand does not already exist for the
+        project, and that the specified support email is owned by the caller.
+      operationId: iap.projects.brands.create
       parameters:
         - description: |-
             Required. GCP Project number/id under which the brand is to be created.
@@ -233,11 +313,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
-  '/v1/oauth/{parent}/identityAwareProxyClients':
+        - projects
+  '/v1/{parent}/identityAwareProxyClients':
     get:
       description: Lists the existing clients for the brand.
-      operationId: iap.oauth.projects.brands.identityAwareProxyClients.list
+      operationId: iap.projects.brands.identityAwareProxyClients.list
       parameters:
         - description: |-
             Required. Full brand path.
@@ -281,26 +361,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
+        - projects
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Creates an Identity Aware Proxy (IAP) OAuth client, the client is owned
-        by IAP.
-        Requires that the brand for the project exists and that it is set for
-        internal only use.
-      operationId: iap.oauth.projects.brands.identityAwareProxyClients.create
+        Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned
+        by IAP. Requires that the brand for the project exists and that it is
+        set for internal-only use.
+      operationId: iap.projects.brands.identityAwareProxyClients.create
       parameters:
         - description: |-
             Required. Path to create the client in.
@@ -331,100 +410,19 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - oauth
-  '/v1/{name}:iapSettings':
-    get:
-      description: Gets the IAP settings on a particular IAP protected resource.
-      operationId: iap.getIapSettings
-      parameters:
-        - description: |-
-            Required. The resource name for which to retrieve the settings.
-            Authorization: Requires the `getSettings` permission for the associated
-            resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/IapSettings'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - v1
-    parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-    patch:
-      description: |-
-        Updates the IAP settings on a particular IAP protected resource. It
-        replaces all fields unless the `update_mask` is set.
-      operationId: iap.updateIapSettings
-      parameters:
-        - description: Required. The resource name of the IAP protected resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-        - description: |-
-            The field mask specifying which IAP settings should be updated.
-            If omitted, the all of the settings are updated. See
-            https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IapSettings'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/IapSettings'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - v1
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
@@ -467,13 +465,13 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
@@ -516,13 +514,13 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
@@ -784,33 +782,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -911,8 +932,20 @@ components:
           type: string
       type: object
     OAuthSettings:
-      description: Configuration for OAuth login&consent flow behavior.
+      description: |-
+        Configuration for OAuth login&consent flow behavior as well as for OAuth
+        Credentials.
       properties:
+        clientId:
+          description: |-
+            OAuth 2.0 client ID used in the OAuth flow to generate an access token. If
+            this field is set, you can skip obtaining the OAuth credentials in this
+            step:
+            https://developers.google.com/identity/protocols/OAuth2?hl=en_US#1.-obtain-oauth-2.0-credentials-from-the-google-api-console.
+            However, this could allow for client sharing. The risks of client sharing
+            are outlined here:
+            https://cloud.google.com/iap/docs/sharing-oauth-clients#risks.
+          type: string
         loginHint:
           description: |-
             Domain hint to send as hd=? parameter in OAuth request flow. Enables

@@ -33,7 +33,7 @@ tags:
 paths:
   /v1/groups:
     get:
-      description: List groups within a customer or a domain.
+      description: Lists groups within a customer or a domain.
       operationId: cloudidentity.groups.list
       parameters:
         - description: |-
@@ -48,9 +48,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: |-
-            `Required`. May be made Optional in the future.
-            Customer ID to list all groups from.
+        - description: Required. Customer ID to list all groups from.
           in: query
           name: parent
           schema:
@@ -87,6 +85,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -95,9 +96,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Creates a Group.
       operationId: cloudidentity.groups.create
@@ -170,6 +168,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -178,9 +179,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/groups:search':
     get:
       description: Searches for Groups.
@@ -199,7 +197,7 @@ paths:
           schema:
             type: string
         - description: |-
-            `Required`. Query string for performing search on groups. Users can search
+            Required. `Required`. Query string for performing search on groups. Users can search
             on parent and label attributes of groups.
             EXACT match ('==') is supported on parent, and CONTAINS match ('in') is
             supported on labels.
@@ -239,6 +237,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -247,16 +248,13 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{name}':
     delete:
       description: Deletes a Membership.
       operationId: cloudidentity.groups.memberships.delete
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Membership to be deleted.
 
             Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
@@ -291,7 +289,7 @@ paths:
       operationId: cloudidentity.groups.memberships.get
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Membership to be retrieved.
 
             Format: `groups/{group_id}/memberships/{member_id}`, where `group_id` is
@@ -326,6 +324,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -334,9 +335,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     patch:
       description: Updates a Group.
       operationId: cloudidentity.groups.patch
@@ -353,7 +351,7 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'Editable fields: `display_name`, `description`'
+        - description: 'Required. Editable fields: `display_name`, `description`'
           in: query
           name: updateMask
           schema:
@@ -383,11 +381,11 @@ paths:
         - groups
   '/v1/{parent}/memberships':
     get:
-      description: List Memberships within a Group.
+      description: Lists Memberships within a Group.
       operationId: cloudidentity.groups.memberships.list
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Group to list Memberships within.
 
             Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to
@@ -442,6 +440,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -450,15 +451,12 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: Creates a Membership.
       operationId: cloudidentity.groups.memberships.create
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Group to create Membership within. Format: `groups/{group_id}`, where
             `group_id` is the unique ID assigned to the Group.
           in: path
@@ -499,7 +497,7 @@ paths:
       operationId: cloudidentity.groups.memberships.lookup
       parameters:
         - description: |-
-            [Resource name](https://cloud.google.com/apis/design/resource_names) of the
+            Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the
             Group to lookup Membership within.
 
             Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to
@@ -551,6 +549,9 @@ paths:
       tags:
         - groups
     parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -559,9 +560,6 @@ paths:
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
 components:
   parameters:
     _.xgafv:
@@ -646,6 +644,284 @@ components:
           schema:
             $ref: '#/components/schemas/Group'
   schemas:
+    AndroidAttributes:
+      description: Resource representing the Android specific attributes of a Device.
+      properties:
+        basebandVersion:
+          description: Baseband version of Android device.
+          type: string
+        bootloaderVersion:
+          description: 'Device bootloader version. Example: 0.6.7.'
+          type: string
+        buildNumber:
+          description: Build number of Android device.
+          type: string
+        enabledDeveloperOptions:
+          description: Whether developer options is enabled on device.
+          type: boolean
+        enabledUnknownSources:
+          description: Whether applications from unknown sources can be installed on device.
+          type: boolean
+        enabledUsbDebugging:
+          description: Whether adb (USB debugging) is enabled on device.
+          type: boolean
+        encryptionState:
+          description: Device encryption state.
+          enum:
+            - ENCRYPTION_STATE_UNSPECIFIED
+            - UNSUPPORTED_BY_DEVICE
+            - ENCRYPTED
+            - NOT_ENCRYPTED
+          type: string
+        hardware:
+          description: 'Device hardware. Example: Sprout.'
+          type: string
+        kernelVersion:
+          description: Kernel version of Android device.
+          type: string
+        otherAccounts:
+          description: |-
+            Domain name for Google accounts on device. Type for other accounts on
+            device. Will only be populated if |ownership_privilege| is
+            |PROFILE_OWNER| or |DEVICE_OWNER|. Does not include the account signed in
+            to the device policy app if that account's domain has only one account.
+            Examples: "com.example", "xyz.com".
+          items:
+            type: string
+          type: array
+        ownerProfileAccount:
+          description: |-
+            Whether this account is on an owner/primary profile.
+            For phones, only true for owner profiles. Android 4+ devices
+            can have secondary or restricted user profiles.
+          type: boolean
+        ownershipPrivilege:
+          description: Ownership privileges on device.
+          enum:
+            - OWNERSHIP_PRIVILEGE_UNSPECIFIED
+            - DEVICE_ADMINISTRATOR
+            - PROFILE_OWNER
+            - DEVICE_OWNER
+          type: string
+        securityPatchTime:
+          description: OS security patch update time on device.
+          format: google-datetime
+          type: string
+        supportsWorkProfile:
+          description: |-
+            Whether device supports Android work profiles. If false, this service
+            will not block access to corp data even if an administrator turns on the
+            "Enforce Work Profile" policy.
+          type: boolean
+      type: object
+    ApproveDeviceUserResponse:
+      description: Response message for approving the device to access user data.
+      properties:
+        deviceUser:
+          $ref: '#/components/schemas/DeviceUser'
+          description: Resultant DeviceUser object for the action.
+      type: object
+    BlockDeviceUserResponse:
+      description: Response message for blocking the device from accessing user data.
+      properties:
+        deviceUser:
+          $ref: '#/components/schemas/DeviceUser'
+          description: Resultant DeviceUser object for the action.
+      type: object
+    CancelWipeDeviceResponse:
+      description: Response message for cancelling an unfinished device wipe.
+      properties:
+        device:
+          $ref: '#/components/schemas/Device'
+          description: |-
+            Resultant Device object for the action. Note that asset tags will not be
+            returned in the device object.
+      type: object
+    CancelWipeDeviceUserResponse:
+      description: Response message for cancelling an unfinished user account wipe.
+      properties:
+        deviceUser:
+          $ref: '#/components/schemas/DeviceUser'
+          description: Resultant DeviceUser object for the action.
+      type: object
+    Device:
+      description: |-
+        Represents a Device known to Google Cloud, independent of the device
+        ownership, type, and whether it is assigned or in use by a user.
+      properties:
+        androidSpecificAttributes:
+          $ref: '#/components/schemas/AndroidAttributes'
+          description: Output only. Attributes specific to Android devices.
+        assetTag:
+          description: Asset tag of the device.
+          type: string
+        brand:
+          description: 'Output only. Device brand. Example: Samsung.'
+          type: string
+        compromisedState:
+          description: Output only. Represents whether the Device is compromised.
+          enum:
+            - COMPROMISED_STATE_UNSPECIFIED
+            - COMPROMISED
+            - UNCOMPROMISED
+          type: string
+        createTime:
+          description: |-
+            Output only. When the Company-Owned device was imported. This field is empty for BYOD
+            devices.
+          format: google-datetime
+          type: string
+        deviceType:
+          description: Output only. Type of device.
+          enum:
+            - DEVICE_TYPE_UNSPECIFIED
+            - ANDROID
+            - IOS
+            - GOOGLE_SYNC
+            - WINDOWS
+            - MAC_OS
+            - LINUX
+            - CHROME_OS
+          type: string
+        imei:
+          description: Output only. IMEI number of device if GSM device; empty otherwise.
+          type: string
+        lastSyncTime:
+          description: Most recent time when device synced with this service.
+          format: google-datetime
+          type: string
+        managementState:
+          description: Output only. Management state of the device
+          enum:
+            - MANAGEMENT_STATE_UNSPECIFIED
+            - APPROVED
+            - BLOCKED
+            - PENDING
+            - UNPROVISIONED
+            - WIPING
+            - WIPED
+          type: string
+        manufacturer:
+          description: 'Output only. Device manufacturer. Example: Motorola.'
+          type: string
+        meid:
+          description: Output only. MEID number of device if CDMA device; empty otherwise.
+          type: string
+        model:
+          description: 'Output only. Model name of device. Example: Pixel 3.'
+          type: string
+        name:
+          description: |-
+            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names)
+            of the Device in format: `devices/{device_id}`, where device_id is
+            the unique id assigned to the Device.
+          type: string
+        networkOperator:
+          description: 'Output only. Mobile or network operator of device, if available.'
+          type: string
+        osVersion:
+          description: 'Output only. OS version of the device. Example: Android 8.1.0.'
+          type: string
+        ownerType:
+          description: Whether the device is owned by the company or an individual
+          enum:
+            - DEVICE_OWNERSHIP_UNSPECIFIED
+            - COMPANY
+            - BYOD
+          type: string
+        releaseVersion:
+          description: 'Output only. OS release version. Example: 6.0.'
+          type: string
+        serialNumber:
+          description: 'Serial Number of device. Example: HT82V1A01076.'
+          type: string
+        wifiMacAddresses:
+          description: WiFi MAC addresses of device.
+          items:
+            type: string
+          type: array
+      type: object
+    DeviceUser:
+      description: A DeviceUser is a resource representing a user's use of a Device
+      properties:
+        compromisedState:
+          description: Compromised State of the DeviceUser object
+          enum:
+            - COMPROMISED_STATE_UNSPECIFIED
+            - COMPROMISED
+            - NOT_COMPROMISED
+          type: string
+        firstSyncTime:
+          description: Output only. Most recent time when user registered with this service.
+          format: google-datetime
+          type: string
+        languageCode:
+          description: 'Output only. Default locale used on device, in IETF BCP-47 format.'
+          type: string
+        lastSyncTime:
+          description: Output only. Last time when user synced with policies.
+          format: google-datetime
+          type: string
+        managementState:
+          description: Output only. Management state of the user on the device.
+          enum:
+            - MANAGEMENT_STATE_UNSPECIFIED
+            - WIPING
+            - WIPED
+            - APPROVED
+            - BLOCKED
+            - PENDING_APPROVAL
+            - UNENROLLED
+          type: string
+        name:
+          description: |-
+            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of
+            the DeviceUser in format: `devices/{device_id}/deviceUsers/{user_id}`,
+            where user_id is the ID of the user associated with the user session.
+          type: string
+        passwordState:
+          description: Password state of the DeviceUser object
+          enum:
+            - PASSWORD_STATE_UNSPECIFIED
+            - PASSWORD_SET
+            - PASSWORD_NOT_SET
+          type: string
+        userAgent:
+          description: Output only. User agent on the device for this specific user
+          type: string
+        userEmail:
+          description: Email address of the user registered on the device.
+          type: string
+      type: object
+    EndpointApp:
+      description: An EndpointApp represents an app that is installed on a device
+      properties:
+        displayName:
+          description: Output only. Name of the app displayed to the user
+          type: string
+        name:
+          description: |-
+            Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of
+            the EndpointApp in format:
+            `devices/{device}/deviceUsers/{device_user}/endpointApps/{endpoint_app}`,
+            where client_app_id is the ID of the app associated with the Device.
+          type: string
+        packageName:
+          description: Output only. Full package name of the installed app
+          type: string
+        permissions:
+          description: Output only. Names of all permissions granted to the installed app
+          items:
+            type: string
+          type: array
+        versionCode:
+          description: Output only. Version code of the installed app
+          format: int32
+          type: integer
+        versionName:
+          description: Output only. Version name of the installed app
+          type: string
+      type: object
     EntityKey:
       description: |-
         An EntityKey uniquely identifies an Entity. Namespaces are used to provide
@@ -720,6 +996,48 @@ components:
             Output only. The time when the Group was last updated.
             Output only.
           format: google-datetime
+          type: string
+      type: object
+    ListDeviceUsersResponse:
+      description: Response message that is returned in LRO result of ListDeviceUsers Operation.
+      properties:
+        deviceUsers:
+          description: Devices meeting the list restrictions.
+          items:
+            $ref: '#/components/schemas/DeviceUser'
+          type: array
+        nextPageToken:
+          description: |-
+            Token to retrieve the next page of results. Empty if there are no more
+            results.
+          type: string
+      type: object
+    ListDevicesResponse:
+      description: Response message that is returned in LRO result of ListDevices Operation.
+      properties:
+        devices:
+          description: Devices meeting the list restrictions.
+          items:
+            $ref: '#/components/schemas/Device'
+          type: array
+        nextPageToken:
+          description: |-
+            Token to retrieve the next page of results. Empty if there are no more
+            results.
+          type: string
+      type: object
+    ListEndpointAppsResponse:
+      description: Response message for listing all apps on the device.
+      properties:
+        endpointApps:
+          description: The list of matching EndpointApps found as a result of the request.
+          items:
+            $ref: '#/components/schemas/EndpointApp'
+          type: array
+        nextPageToken:
+          description: |-
+            Token to retrieve the next page of results. Empty if there are no more
+            results.
           type: string
       type: object
     ListGroupsResponse:
@@ -903,6 +1221,22 @@ components:
             user-facing error message should be localized and sent in the
             google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    WipeDeviceResponse:
+      description: Response message for wiping all data on the device.
+      properties:
+        device:
+          $ref: '#/components/schemas/Device'
+          description: |-
+            Resultant Device object for the action. Note that asset tags will not be
+            returned in the device object.
+      type: object
+    WipeDeviceUserResponse:
+      description: Response message for wiping the user's account from the device.
+      properties:
+        deviceUser:
+          $ref: '#/components/schemas/DeviceUser'
+          description: Resultant DeviceUser object for the action.
       type: object
   securitySchemes:
     Oauth2:

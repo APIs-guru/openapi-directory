@@ -34,19 +34,20 @@ tags:
 paths:
   '/v2/{name}':
     delete:
-      description: Deletes a cluster from an instance.
-      operationId: bigtableadmin.projects.instances.clusters.delete
+      description: Permanently deletes a specified table and all of its data.
+      operationId: bigtableadmin.projects.instances.tables.delete
       parameters:
         - description: |-
-            The unique name of the cluster to be deleted. Values are of the form
-            `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            Required. The unique name of the table to be deleted.
+            Values are of the form
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
           schema:
             type: string
           x-reservedExpansion: true
-        - description: 'If true, ignore safety checks when deleting the app profile.'
+        - description: 'Required. If true, ignore safety checks when deleting the app profile.'
           in: query
           name: ignoreWarnings
           schema:
@@ -64,21 +65,21 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigtable.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/bigtable.admin.table'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigtable.admin.cluster'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigtable.admin.instance'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigtable.admin.instance'
+            - 'https://www.googleapis.com/auth/bigtable.admin.table'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-bigtable.admin'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-bigtable.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.table'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.table'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -86,12 +87,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a cluster.
-      operationId: bigtableadmin.projects.instances.clusters.get
+      description: Gets metadata information about the specified table.
+      operationId: bigtableadmin.projects.instances.tables.get
       parameters:
         - description: |-
-            The unique name of the requested cluster. Values are of the form
-            `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            Required. The unique name of the requested table.
+            Values are of the form
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -116,7 +118,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Cluster'
+                $ref: '#/components/schemas/Table'
           description: Successful response
       security:
         - Oauth2:
@@ -124,25 +126,25 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigtable.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/bigtable.admin.table'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/bigtable.admin.cluster'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigtable.admin.instance'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigtable.admin.instance'
+            - 'https://www.googleapis.com/auth/bigtable.admin.table'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-bigtable.admin'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-bigtable.admin'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.table'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.cluster'
+            - 'https://www.googleapis.com/auth/cloud-bigtable.admin.table'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
           Oauth2c:
@@ -150,17 +152,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: Updates an app profile within an instance.
       operationId: bigtableadmin.projects.instances.appProfiles.patch
@@ -181,7 +183,7 @@ paths:
           schema:
             type: boolean
         - description: |-
-            The subset of app profile fields which should be replaced.
+            Required. The subset of app profile fields which should be replaced.
             If unset, all fields will be replaced.
           in: query
           name: updateMask
@@ -231,9 +233,9 @@ paths:
       operationId: bigtableadmin.projects.instances.clusters.update
       parameters:
         - description: |-
-            (`OutputOnly`)
+            Required. (`OutputOnly`)
             The unique name of the cluster. Values are of the form
-            `projects/<project>/instances/<instance>/clusters/a-z*`.
+            `projects/{project}/instances/{instance}/clusters/a-z*`.
           in: path
           name: name
           required: true
@@ -345,17 +347,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v2/{name}/operations':
     get:
       description: |-
@@ -432,30 +434,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v2/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -513,17 +515,17 @@ paths:
         - operations
   '/v2/{name}:checkConsistency':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Checks replication consistency based on a consistency token, that is, if
@@ -532,9 +534,9 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.checkConsistency
       parameters:
         - description: |-
-            The unique name of the Table for which to check replication consistency.
+            Required. The unique name of the Table for which to check replication consistency.
             Values are of the form
-            `projects/<project>/instances/<instance>/tables/<table>`.
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -578,17 +580,17 @@ paths:
         - projects
   '/v2/{name}:dropRowRange':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Permanently drop/delete a row range from a specified table. The request can
@@ -597,9 +599,9 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.dropRowRange
       parameters:
         - description: |-
-            The unique name of the table on which to drop a range of rows.
+            Required. The unique name of the table on which to drop a range of rows.
             Values are of the form
-            `projects/<project>/instances/<instance>/tables/<table>`.
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -643,17 +645,17 @@ paths:
         - projects
   '/v2/{name}:generateConsistencyToken':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Generates a consistency token for a Table, which can be used in
@@ -663,9 +665,9 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.generateConsistencyToken
       parameters:
         - description: |-
-            The unique name of the Table for which to create a consistency token.
+            Required. The unique name of the Table for which to create a consistency token.
             Values are of the form
-            `projects/<project>/instances/<instance>/tables/<table>`.
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -709,17 +711,17 @@ paths:
         - projects
   '/v2/{name}:modifyColumnFamilies':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Performs a series of column family modifications on the specified table.
@@ -729,9 +731,9 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.modifyColumnFamilies
       parameters:
         - description: |-
-            The unique name of the table whose families should be modified.
+            Required. The unique name of the table whose families should be modified.
             Values are of the form
-            `projects/<project>/instances/<instance>/tables/<table>`.
+            `projects/{project}/instances/{instance}/tables/{table}`.
           in: path
           name: name
           required: true
@@ -779,10 +781,10 @@ paths:
       operationId: bigtableadmin.projects.instances.appProfiles.list
       parameters:
         - description: |-
-            The unique name of the instance for which a list of app profiles is
+            Required. The unique name of the instance for which a list of app profiles is
             requested. Values are of the form
-            `projects/<project>/instances/<instance>`.
-            Use `<instance> = '-'` to list AppProfiles for all Instances in a project,
+            `projects/{project}/instances/{instance}`.
+            Use `{instance} = '-'` to list AppProfiles for all Instances in a project,
             e.g., `projects/myproject/instances/-`.
           in: path
           name: parent
@@ -844,25 +846,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates an app profile within an instance.
       operationId: bigtableadmin.projects.instances.appProfiles.create
       parameters:
         - description: |-
-            The unique name of the instance in which to create the new app profile.
+            Required. The unique name of the instance in which to create the new app profile.
             Values are of the form
-            `projects/<project>/instances/<instance>`.
+            `projects/{project}/instances/{instance}`.
           in: path
           name: parent
           required: true
@@ -870,7 +872,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            The ID to be used when referring to the new app profile within its
+            Required. The ID to be used when referring to the new app profile within its
             instance, e.g., just `myprofile` rather than
             `projects/myproject/instances/myinstance/appProfiles/myprofile`.
           in: query
@@ -927,9 +929,9 @@ paths:
       operationId: bigtableadmin.projects.instances.clusters.list
       parameters:
         - description: |-
-            The unique name of the instance for which a list of clusters is requested.
-            Values are of the form `projects/<project>/instances/<instance>`.
-            Use `<instance> = '-'` to list Clusters for all Instances in a project,
+            Required. The unique name of the instance for which a list of clusters is requested.
+            Values are of the form `projects/{project}/instances/{instance}`.
+            Use `{instance} = '-'` to list Clusters for all Instances in a project,
             e.g., `projects/myproject/instances/-`.
           in: path
           name: parent
@@ -981,25 +983,25 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a cluster within an instance.
       operationId: bigtableadmin.projects.instances.clusters.create
       parameters:
         - description: |-
-            The unique name of the instance in which to create the new cluster.
+            Required. The unique name of the instance in which to create the new cluster.
             Values are of the form
-            `projects/<project>/instances/<instance>`.
+            `projects/{project}/instances/{instance}`.
           in: path
           name: parent
           required: true
@@ -1007,7 +1009,7 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            The ID to be used when referring to the new cluster within its instance,
+            Required. The ID to be used when referring to the new cluster within its instance,
             e.g., just `mycluster` rather than
             `projects/myproject/instances/myinstance/clusters/mycluster`.
           in: query
@@ -1059,8 +1061,8 @@ paths:
       operationId: bigtableadmin.projects.instances.list
       parameters:
         - description: |-
-            The unique name of the project for which a list of instances is requested.
-            Values are of the form `projects/<project>`.
+            Required. The unique name of the project for which a list of instances is requested.
+            Values are of the form `projects/{project}`.
           in: path
           name: parent
           required: true
@@ -1111,24 +1113,24 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Create an instance within a project.
       operationId: bigtableadmin.projects.instances.create
       parameters:
         - description: |-
-            The unique name of the project in which to create the new instance.
-            Values are of the form `projects/<project>`.
+            Required. The unique name of the project in which to create the new instance.
+            Values are of the form `projects/{project}`.
           in: path
           name: parent
           required: true
@@ -1180,8 +1182,8 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.list
       parameters:
         - description: |-
-            The unique name of the instance for which tables should be listed.
-            Values are of the form `projects/<project>/instances/<instance>`.
+            Required. The unique name of the instance for which tables should be listed.
+            Values are of the form `projects/{project}/instances/{instance}`.
           in: path
           name: parent
           required: true
@@ -1255,17 +1257,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a new table in the specified instance.
@@ -1274,8 +1276,8 @@ paths:
       operationId: bigtableadmin.projects.instances.tables.create
       parameters:
         - description: |-
-            The unique name of the instance in which to create the table.
-            Values are of the form `projects/<project>/instances/<instance>`.
+            Required. The unique name of the instance in which to create the table.
+            Values are of the form `projects/{project}/instances/{instance}`.
           in: path
           name: parent
           required: true
@@ -1319,21 +1321,22 @@ paths:
         - projects
   '/v2/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Gets the access control policy for a table resource. Returns an empty
-        policy if an table exists but does not have a policy set.
+        Gets the access control policy for a Table or Backup resource.
+        Returns an empty policy if the resource exists but does not have a policy
+        set.
       operationId: bigtableadmin.projects.instances.tables.getIamPolicy
       parameters:
         - description: |-
@@ -1386,21 +1389,21 @@ paths:
         - projects
   '/v2/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Sets the access control policy on a table resource. Replaces any existing
-        policy.
+        Sets the access control policy on a Table or Backup resource.
+        Replaces any existing policy.
       operationId: bigtableadmin.projects.instances.tables.setIamPolicy
       parameters:
         - description: |-
@@ -1453,17 +1456,17 @@ paths:
         - projects
   '/v2/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Returns permissions that the caller has on the specified table resource.
       operationId: bigtableadmin.projects.instances.tables.testIamPermissions
@@ -1812,7 +1815,7 @@ components:
         google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency
       properties:
         consistencyToken:
-          description: The token created using GenerateConsistencyToken for the Table.
+          description: Required. The token created using GenerateConsistencyToken for the Table.
           type: string
       type: object
     CheckConsistencyResponse:
@@ -1848,17 +1851,17 @@ components:
             The location where this cluster's nodes and storage reside. For best
             performance, clients should be located as close as possible to this
             cluster. Currently only zones are supported, so values should be of the
-            form `projects/<project>/locations/<zone>`.
+            form `projects/{project}/locations/{zone}`.
           type: string
         name:
           description: |-
-            (`OutputOnly`)
+            Required. (`OutputOnly`)
             The unique name of the cluster. Values are of the form
-            `projects/<project>/instances/<instance>/clusters/a-z*`.
+            `projects/{project}/instances/{instance}/clusters/a-z*`.
           type: string
         serveNodes:
           description: |-
-            The number of nodes allocated to this cluster. More nodes enable higher
+            Required. The number of nodes allocated to this cluster. More nodes enable higher
             throughput and more consistent performance.
           format: int32
           type: integer
@@ -1934,19 +1937,19 @@ components:
         cluster:
           $ref: '#/components/schemas/Cluster'
           description: |-
-            The cluster to be created.
+            Required. The cluster to be created.
             Fields marked `OutputOnly` must be left blank.
         clusterId:
           description: |-
-            The ID to be used when referring to the new cluster within its instance,
+            Required. The ID to be used when referring to the new cluster within its instance,
             e.g., just `mycluster` rather than
             `projects/myproject/instances/myinstance/clusters/mycluster`.
           type: string
         parent:
           description: |-
-            The unique name of the instance in which to create the new cluster.
+            Required. The unique name of the instance in which to create the new cluster.
             Values are of the form
-            `projects/<project>/instances/<instance>`.
+            `projects/{project}/instances/{instance}`.
           type: string
       type: object
     CreateInstanceMetadata:
@@ -1971,7 +1974,7 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/Cluster'
           description: |-
-            The clusters to be created within the instance, mapped by desired
+            Required. The clusters to be created within the instance, mapped by desired
             cluster ID, e.g., just `mycluster` rather than
             `projects/myproject/instances/myinstance/clusters/mycluster`.
             Fields marked `OutputOnly` must be left blank.
@@ -1980,18 +1983,18 @@ components:
         instance:
           $ref: '#/components/schemas/Instance'
           description: |-
-            The instance to create.
+            Required. The instance to create.
             Fields marked `OutputOnly` must be left blank.
         instanceId:
           description: |-
-            The ID to be used when referring to the new instance within its project,
+            Required. The ID to be used when referring to the new instance within its project,
             e.g., just `myinstance` rather than
             `projects/myproject/instances/myinstance`.
           type: string
         parent:
           description: |-
-            The unique name of the project in which to create the new instance.
-            Values are of the form `projects/<project>`.
+            Required. The unique name of the project in which to create the new instance.
+            Values are of the form `projects/{project}`.
           type: string
       type: object
     CreateTableRequest:
@@ -2022,11 +2025,11 @@ components:
           type: array
         table:
           $ref: '#/components/schemas/Table'
-          description: The Table to create.
+          description: Required. The Table to create.
         tableId:
           description: |-
-            The name by which the new table should be referred to within the parent
-            instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
+            Required. The name by which the new table should be referred to within the parent
+            instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
             Maximum 50 characters.
           type: string
       type: object
@@ -2060,33 +2063,56 @@ components:
       type: object
     Expr:
       description: |-
-        Represents an expression text. Example:
+        Represents a textual expression in the Common Expression Language (CEL)
+        syntax. CEL is a C-like expression language. The syntax and semantics of CEL
+        are documented at https://github.com/google/cel-spec.
 
-            title: "User account presence"
-            description: "Determines whether the request has a user account"
-            expression: "size(request.user) > 0"
+        Example (Comparison):
+
+            title: "Summary size limit"
+            description: "Determines if a summary is less than 100 chars"
+            expression: "document.summary.size() < 100"
+
+        Example (Equality):
+
+            title: "Requestor is owner"
+            description: "Determines if requestor is the document owner"
+            expression: "document.owner == request.auth.claims.email"
+
+        Example (Logic):
+
+            title: "Public documents"
+            description: "Determine whether the document should be publicly visible"
+            expression: "document.type != 'private' && document.type != 'internal'"
+
+        Example (Data Manipulation):
+
+            title: "Notification string"
+            description: "Create a notification string with a timestamp."
+            expression: "'New message received at ' + string(document.create_time)"
+
+        The exact variables and functions that may be referenced within an expression
+        are determined by the service that evaluates it. See the service
+        documentation for additional information.
       properties:
         description:
           description: |-
-            An optional description of the expression. This is a longer text which
+            Optional. Description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: |-
-            Textual representation of an expression in
-            Common Expression Language syntax.
-
-            The application context of the containing message determines which
-            well-known feature set of CEL is supported.
+            Textual representation of an expression in Common Expression Language
+            syntax.
           type: string
         location:
           description: |-
-            An optional string indicating the location of the expression for error
+            Optional. String indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
           description: |-
-            An optional title for the expression, i.e. a short string describing
+            Optional. Title for the expression, i.e. a short string describing
             its purpose. This can be used e.g. in UIs which allow to enter the
             expression.
           type: string
@@ -2161,7 +2187,7 @@ components:
       properties:
         displayName:
           description: |-
-            The descriptive name for this instance as it appears in UIs.
+            Required. The descriptive name for this instance as it appears in UIs.
             Can be changed at any time, but should be kept globally unique
             to avoid confusion.
           type: string
@@ -2169,7 +2195,7 @@ components:
           additionalProperties:
             type: string
           description: |-
-            Labels are a flexible and lightweight mechanism for organizing cloud
+            Required. Labels are a flexible and lightweight mechanism for organizing cloud
             resources into groups that reflect a customer's organizational needs and
             deployment strategies. They can be used to filter resources and aggregate
             metrics.
@@ -2183,9 +2209,9 @@ components:
           type: object
         name:
           description: |-
-            (`OutputOnly`)
+            Required. (`OutputOnly`)
             The unique name of the instance. Values are of the form
-            `projects/<project>/instances/a-z+[a-z0-9]`.
+            `projects/{project}/instances/a-z+[a-z0-9]`.
           type: string
         state:
           description: |-
@@ -2197,7 +2223,7 @@ components:
             - CREATING
           type: string
         type:
-          description: The type of the instance. Defaults to `PRODUCTION`.
+          description: Required. The type of the instance. Defaults to `PRODUCTION`.
           enum:
             - TYPE_UNSPECIFIED
             - PRODUCTION
@@ -2384,7 +2410,7 @@ components:
       properties:
         modifications:
           description: |-
-            Modifications to be atomically applied to the specified table's families.
+            Required. Modifications to be atomically applied to the specified table's families.
             Entries are applied in order, meaning that earlier modifications can be
             masked by later ones (in the case of repeated updates to the same family,
             for example).
@@ -2449,10 +2475,10 @@ components:
       properties:
         instance:
           $ref: '#/components/schemas/Instance'
-          description: The Instance which will (partially) replace the current value.
+          description: Required. The Instance which will (partially) replace the current value.
         updateMask:
           description: |-
-            The subset of Instance fields which should be replaced.
+            Required. The subset of Instance fields which should be replaced.
             Must be explicitly set.
           format: google-fieldmask
           type: string

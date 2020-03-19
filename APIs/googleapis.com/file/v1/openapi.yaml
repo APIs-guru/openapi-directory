@@ -90,13 +90,13 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     patch:
       description: Updates the settings of a specific instance.
@@ -104,7 +104,7 @@ paths:
       parameters:
         - description: |-
             Output only. The resource name of the instance, in the format
-            projects/{project_id}/locations/{location_id}/instances/{instance_id}.
+            projects/{project}/locations/{location}/instances/{instance}.
           in: path
           name: name
           required: true
@@ -115,9 +115,10 @@ paths:
             Mask of fields to update.  At least one path must be supplied in this
             field.  The elements of the repeated paths field may only include these
             fields:
-            "description"
-            "file_shares"
-            "labels"
+
+            * "description"
+            * "file_shares"
+            * "labels"
           in: query
           name: updateMask
           schema:
@@ -158,6 +159,13 @@ paths:
           name: filter
           schema:
             type: string
+        - description: |-
+            If true, the returned list will include locations which are not yet
+            revealed.
+          in: query
+          name: includeUnrevealedLocations
+          schema:
+            type: boolean
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -186,13 +194,13 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
   '/v1/{name}/operations':
     get:
@@ -249,26 +257,26 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
   '/v1/{name}:cancel':
     parameters:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: |-
@@ -369,13 +377,13 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
     post:
       description: Creates an instance.
@@ -532,81 +540,6 @@ components:
           type: string
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1Instance:
-      description: |-
-        Instance represents the interface for SLM services to actuate the state
-        of control plane resources.
-
-        Example Instance in JSON, where
-          consumer-project=snapchat,
-          producer-project=cloud-sql:
-
-        ```json
-        Instance:
-        {
-          "name":
-          "projects/snapchat/locations/us-east1/instances/prod-instance",
-          "create_time": {
-            "seconds": 1526406431,
-          },
-          "labels": {
-            "env": "prod",
-            "foo": "bar"
-          },
-          "state": READY,
-          "software_versions": {
-            "software_update": "cloud-sql-09-28-2018",
-          },
-          "maintenance_policy_names": {
-            "UpdatePolicy":
-            "projects/snapchat/locations/us-east1/maintenancePolicies/prod-update-policy",
-          }
-          "rollout_metadata": {
-            "projects/cloud-sql/locations/global/rolloutTypes/software_update": {
-              "release":
-              "projects/cloud-sql/locations/global/releases/cloud-sql-09-28-2018",
-              "rollout":
-              "projects/cloud-sql/locations/us-east1/rollouts/cloud-sql-09-28-2018-canary",
-            },
-            "projects/cloud-sql/locations/global/rolloutTypes/instance_restart": {
-              "release":
-              "projects/cloud-sql/locations/global/releases/cloud-sql-09-20-repair",
-              "rollout":
-              "projects/cloud-sql/locations/us-east1/rollouts/cloud-sql-09-20-repair-100-percent",
-            }
-          }
-          "tenant_project_id": "cloud-sql-test-tenant",
-          "producer_metadata": {
-            "cloud-sql-tier": "basic",
-            "cloud-sql-instance-size": "1G",
-          },
-          "provisioned_resources": [
-            {
-              "resource-type": "compute-instance",
-              "resource-url":
-              "https://www.googleapis.com/compute/v1/projects/cloud-sql/zones/us-east1-b/instances/vm-1",
-            }
-          ],
-          "maintenance_schedules": {
-            "csa_rollout": {
-               "start_time": {
-                  "seconds": 1526406431,
-               },
-               "end_time": {
-                  "seconds": 1535406431,
-               },
-            },
-            "ncsa_rollout": {
-               "start_time": {
-                  "seconds": 1526406431,
-               },
-               "end_time": {
-                  "seconds": 1535406431,
-               },
-            }
-          },
-          "consumer_defined_name": "my-sql-instance1",
-        }
-        ```
       properties:
         consumerDefinedName:
           description: |-
@@ -665,17 +598,13 @@ components:
           items:
             $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource'
           type: array
-        rolloutMetadata:
-          additionalProperties:
-            $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata'
+        slmInstanceTemplate:
           description: |-
-            The map between RolloutType and the corresponding RolloutMetadata.
-            This is only mutated by rollout service. For actuation implementation,
-            this information is pass-through for Rollout management. Producer shall
-            not modify by itself.
-            For update of a single entry in this map, the update field mask shall
-            follow this sementics: go/advanced-field-masks
-          type: object
+            Link to the SLM instance template. Only populated when updating SLM
+            instances via SSA's Actuation service adaptor.
+            Service producers with custom control plane (e.g. Cloud SQL) doesn't
+            need to populate this field. Instead they should use software_versions.
+          type: string
         sloMetadata:
           $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata'
           description: |-
@@ -700,6 +629,7 @@ components:
             - UPDATING
             - REPAIRING
             - DELETING
+            - ERROR
           type: string
         tenantProjectId:
           description: |-
@@ -763,28 +693,6 @@ components:
             This should be equal to SaasInstanceNode.node_id.
           type: string
       type: object
-    GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata:
-      description: NotificationMetadata is the notification state for an instance.
-      properties:
-        rescheduled:
-          description: Whether the instance update has been rescheduled.
-          type: boolean
-        scheduledEndTime:
-          description: |-
-            The scheduled end time for the maintenance window during which update
-            can be performed on the instance.
-          format: google-datetime
-          type: string
-        scheduledStartTime:
-          description: |-
-            The scheduled start time for the maintenance window during which
-            update can be performed on the instance.
-          format: google-datetime
-          type: string
-        targetRelease:
-          description: The target release to be applied to the instance.
-          type: string
-      type: object
     GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource:
       description: Describes provisioned dataplane resources.
       properties:
@@ -803,23 +711,26 @@ components:
             "https://www.googleapis.com/compute/v1/projects/...)".
           type: string
       type: object
-    GoogleCloudSaasacceleratorManagementProvidersV1RolloutMetadata:
-      description: RolloutMetadata for an actuation instance. It maps to a single RolloutType.
+    GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility:
+      description: |-
+        SloEligibility is a tuple containing eligibility value: true if an instance
+        is eligible for SLO calculation or false if it should be excluded from all
+        SLO-related calculations along with a user-defined reason.
       properties:
-        notification:
-          $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1NotificationMetadata'
-          description: Instance level notification metadata.
-        releaseName:
-          description: The last Release that has been applied to the instance.
-          type: string
-        rolloutName:
-          description: The last rollout that has been applied to the instance.
+        eligible:
+          description: Whether an instance is eligible or ineligible.
+          type: boolean
+        reason:
+          description: |-
+            User-defined reason for the current value of instance eligibility. Usually,
+            this can be directly mapped to the internal state. An empty reason is
+            allowed.
           type: string
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion:
-      description: SloExclusion represents an excusion in SLI calculation applies to all SLOs.
+      description: SloExclusion represents an exclusion in SLI calculation applies to all SLOs.
       properties:
-        exclusionDuration:
+        duration:
           description: |-
             Exclusion duration. No restrictions on the possible values.
 
@@ -830,10 +741,6 @@ components:
             original exclusion expiration - otherwise it is possible that there will
             be "gaps" in the exclusion application in the exported timeseries.
           format: google-duration
-          type: string
-        exclusionStartTime:
-          description: Start time of the exclusion. No alignment (e.g. to a full minute) needed.
-          format: google-datetime
           type: string
         reason:
           description: |-
@@ -848,12 +755,19 @@ components:
             signaling that the instance should be excluded from all SLIs defined
             in the service SLO configuration.
           type: string
+        startTime:
+          description: Start time of the exclusion. No alignment (e.g. to a full minute) needed.
+          format: google-datetime
+          type: string
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata:
       description: |-
         SloMetadata contains resources required for proper SLO classification of the
         instance.
       properties:
+        eligibility:
+          $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility'
+          description: Optional. User-defined instance eligibility.
         exclusions:
           description: |-
             List of SLO exclusion windows. When multiple entries in the list match
@@ -867,14 +781,14 @@ components:
 
             This field can be used to mark the instance as temporary ineligible
             for the purpose of SLO calculation. For permanent instance SLO exclusion,
-            a dedicated tier name can be used that does not have targets specified
-            in the service SLO configuration.
+            use of custom instance eligibility is recommended. See 'eligibility' field
+            below.
           items:
             $ref: '#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1SloExclusion'
           type: array
         nodes:
           description: |-
-            Optional: list of nodes.
+            Optional. List of nodes.
             Some producers need to use per-node metadata to calculate SLO.
             This field allows such producers to publish per-node SLO meta data,
             which will be consumed by SSA Eligibility Exporter and published in the
@@ -898,7 +812,7 @@ components:
           format: google-datetime
           type: string
         description:
-          description: Optional. A description of the instance (2048 characters or less).
+          description: Optional. The description of the instance (2048 characters or less).
           type: string
         etag:
           description: |-
@@ -920,7 +834,7 @@ components:
         name:
           description: |-
             Output only. The resource name of the instance, in the format
-            projects/{project_id}/locations/{location_id}/instances/{instance_id}.
+            projects/{project}/locations/{location}/instances/{instance}.
           type: string
         networks:
           description: |-
@@ -948,6 +862,9 @@ components:
             - TIER_UNSPECIFIED
             - STANDARD
             - PREMIUM
+            - BASIC_HDD
+            - BASIC_SSD
+            - HIGH_SCALE_SSD
           type: string
       type: object
     ListInstancesResponse:

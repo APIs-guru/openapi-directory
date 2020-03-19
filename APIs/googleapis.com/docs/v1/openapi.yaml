@@ -33,17 +33,17 @@ tags:
 paths:
   /v1/documents:
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a blank document using the title given in the request. Other fields
@@ -134,30 +134,30 @@ paths:
       tags:
         - documents
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/documents/{documentId}:batchUpdate':
     parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Applies one or more updates to the document.
@@ -477,12 +477,21 @@ components:
       type: object
     CreateFooterRequest:
       description: |-
-        Creates a Footer. The new footer will be
-        applied to the DocumentStyle.
+        Creates a Footer. The new footer is applied to
+        the SectionStyle at the location of the
+        SectionBreak if specificed, otherwise
+        it is applied to the DocumentStyle.
 
-        If a footer of the specified type already exists then a 400 bad request error
-        will be returned.
+        If a footer of the specified type already exists, a 400 bad request error
+        is returned.
       properties:
+        sectionBreakLocation:
+          $ref: '#/components/schemas/Location'
+          description: |-
+            The location of the SectionBreak
+            immediately preceding the section whose SectionStyle this footer should belong to. If this is
+            unset or refers to the first section break in the document, the footer
+            applies to the document style.
         type:
           description: The type of footer to create.
           enum:
@@ -497,14 +506,63 @@ components:
           description: The ID of the created footer.
           type: string
       type: object
+    CreateFootnoteRequest:
+      description: |-
+        Creates a Footnote segment
+        and inserts a new FootnoteReference
+        to it at the given location.
+
+        The new Footnote segment will contain a
+        space followed by a newline character.
+      properties:
+        endOfSegmentLocation:
+          $ref: '#/components/schemas/EndOfSegmentLocation'
+          description: |-
+            Inserts the footnote reference at the end of the document body.
+
+            Footnote references cannot be inserted inside a header, footer or
+            footnote. Since footnote references can only be inserted in the body, the
+            segment ID field
+            must be empty.
+        location:
+          $ref: '#/components/schemas/Location'
+          description: |-
+            Inserts the footnote reference at a specific index in the document.
+
+            The footnote reference must be inserted inside the bounds of an existing
+            Paragraph. For instance, it cannot be
+            inserted at a table's start index (i.e. between the table and its
+            preceding paragraph).
+
+            Footnote references cannot be inserted inside an equation,
+            header, footer or footnote. Since footnote references can only be
+            inserted in the body, the segment ID field must be empty.
+      type: object
+    CreateFootnoteResponse:
+      description: The result of creating a footnote.
+      properties:
+        footnoteId:
+          description: The ID of the created footnote.
+          type: string
+      type: object
     CreateHeaderRequest:
       description: |-
-        Creates a Header. The new header will be
-        applied to the DocumentStyle.
+        Creates a Header. The new header is applied to
+        the SectionStyle at the location of the
+        SectionBreak if specificed, otherwise
+        it is applied to the DocumentStyle.
 
-        If a header of the specified type already exists then a 400 bad request error
-        will be returned.
+        If a header of the specified type already exists, a 400 bad request error
+        is returned.
       properties:
+        sectionBreakLocation:
+          $ref: '#/components/schemas/Location'
+          description: |-
+            The location of the SectionBreak
+            which begins the section this header should belong to. If
+            `section_break_location' is unset or if it refers to the first section
+            break in the document body, the header applies to the
+            DocumentStyle
         type:
           description: The type of header to create.
           enum:
@@ -677,6 +735,34 @@ components:
               element.
             * Deleting individual rows or cells of a table. Deleting the content within
               a table cell is allowed.
+      type: object
+    DeleteFooterRequest:
+      description: Deletes a Footer from the document.
+      properties:
+        footerId:
+          description: |-
+            The id of the footer to delete. If this footer is defined on
+            DocumentStyle, the reference to
+            this footer is removed, resulting in no footer of that type for
+            the first section of the document. If this footer is defined on a
+            SectionStyle, the reference to this
+            footer is removed and the footer of that type is now continued from
+            the previous section.
+          type: string
+      type: object
+    DeleteHeaderRequest:
+      description: Deletes a Header from the document.
+      properties:
+        headerId:
+          description: |-
+            The id of the header to delete. If this header is defined on
+            DocumentStyle, the reference to
+            this header is removed, resulting in no header of that type for
+            the first section of the document. If this header is defined on a
+            SectionStyle, the reference to this
+            header is removed and the header of that type is now continued from
+            the previous section.
+          type: string
       type: object
     DeleteNamedRangeRequest:
       description: Deletes a NamedRange.
@@ -968,15 +1054,11 @@ components:
           description: |-
             Indicates whether to use the even page header / footer IDs for the even
             pages.
-
-            This property is read-only.
           type: boolean
         useFirstPageHeaderFooter:
           description: |-
             Indicates whether to use the first page header / footer IDs for the first
             page.
-
-            This property is read-only.
           type: boolean
       type: object
     DocumentStyleSuggestionState:
@@ -1010,6 +1092,12 @@ components:
         marginBottomSuggested:
           description: Indicates if there was a suggested change to margin_bottom.
           type: boolean
+        marginFooterSuggested:
+          description: Indicates if there was a suggested change to margin_footer.
+          type: boolean
+        marginHeaderSuggested:
+          description: Indicates if there was a suggested change to margin_header.
+          type: boolean
         marginLeftSuggested:
           description: Indicates if there was a suggested change to margin_left.
           type: boolean
@@ -1027,6 +1115,11 @@ components:
           description: |-
             A mask that indicates which of the fields in size have been changed in this
             suggestion.
+        useCustomHeaderFooterMarginsSuggested:
+          description: |-
+            Indicates if there was a suggested change to
+            use_custom_header_footer_margins.
+          type: boolean
         useEvenPageHeaderFooterSuggested:
           description: Indicates if there was a suggested change to use_even_page_header_footer.
           type: boolean
@@ -2796,6 +2889,9 @@ components:
         createFooter:
           $ref: '#/components/schemas/CreateFooterRequest'
           description: Creates a footer.
+        createFootnote:
+          $ref: '#/components/schemas/CreateFootnoteRequest'
+          description: Creates a footnote.
         createHeader:
           $ref: '#/components/schemas/CreateHeaderRequest'
           description: Creates a header.
@@ -2808,6 +2904,12 @@ components:
         deleteContentRange:
           $ref: '#/components/schemas/DeleteContentRangeRequest'
           description: Deletes content from the document.
+        deleteFooter:
+          $ref: '#/components/schemas/DeleteFooterRequest'
+          description: Deletes a footer from the document.
+        deleteHeader:
+          $ref: '#/components/schemas/DeleteHeaderRequest'
+          description: Deletes a header from the document.
         deleteNamedRange:
           $ref: '#/components/schemas/DeleteNamedRangeRequest'
           description: Deletes a named range.
@@ -2887,6 +2989,9 @@ components:
         createFooter:
           $ref: '#/components/schemas/CreateFooterResponse'
           description: The result of creating a footer.
+        createFootnote:
+          $ref: '#/components/schemas/CreateFootnoteResponse'
+          description: The result of creating a footnote.
         createHeader:
           $ref: '#/components/schemas/CreateHeaderResponse'
           description: The result of creating a header.
@@ -2956,7 +3061,7 @@ components:
           description: The padding at the end of the column.
         width:
           $ref: '#/components/schemas/Dimension'
-          description: The width of the column.
+          description: Output only. The width of the column.
       type: object
     SectionStyle:
       description: The styling that applies to a section.
@@ -2967,6 +3072,10 @@ components:
 
             If empty, the section contains one column with the default properties in
             the Docs editor.
+            A section can be updated to have no more than three columns.
+
+            When updating this property, setting a concrete value is required.
+            Unsetting this property will result in a 400 bad request error.
           items:
             $ref: '#/components/schemas/SectionColumnProperties'
           type: array
@@ -2975,6 +3084,9 @@ components:
             The style of column separators.
 
             This style can be set even when there is one column in the section.
+
+            When updating this property, setting a concrete value is required.
+            Unsetting this property results in a 400 bad request error.
           enum:
             - COLUMN_SEPARATOR_STYLE_UNSPECIFIED
             - NONE
@@ -2984,10 +3096,81 @@ components:
           description: |-
             The content direction of this section. If unset, the value defaults to
             LEFT_TO_RIGHT.
+
+            When updating this property, setting a concrete value is required.
+            Unsetting this property results in a 400 bad request error.
           enum:
             - CONTENT_DIRECTION_UNSPECIFIED
             - LEFT_TO_RIGHT
             - RIGHT_TO_LEFT
+          type: string
+        defaultFooterId:
+          description: |-
+            The ID of the default footer. If unset, the value inherits from the
+            previous SectionBreak's SectionStyle.
+            If the value is unset in the first SectionBreak, it inherits from
+            DocumentStyle's default_footer_id.
+
+            This property is read-only.
+          type: string
+        defaultHeaderId:
+          description: |-
+            The ID of the default header. If unset, the value inherits from the
+            previous SectionBreak's SectionStyle.
+            If the value is unset in the first SectionBreak, it inherits from
+            DocumentStyle's default_header_id.
+
+            This property is read-only.
+          type: string
+        evenPageFooterId:
+          description: |-
+            The ID of the footer used only for even pages. If the value of
+            DocumentStyle's use_even_page_header_footer is true,
+            this value is used for the footers on even pages in the section. If it
+            is false, the footers on even pages uses the default_footer_id. If unset, the value
+            inherits from the previous SectionBreak's SectionStyle. If the value is unset in
+            the first SectionBreak, it inherits from DocumentStyle's
+            even_page_footer_id.
+
+            This property is read-only.
+          type: string
+        evenPageHeaderId:
+          description: |-
+            The ID of the header used only for even pages. If the value of
+            DocumentStyle's use_even_page_header_footer is true,
+            this value is used for the headers on even pages in the section. If it
+            is false, the headers on even pages uses the default_header_id. If unset, the value
+            inherits from the previous SectionBreak's SectionStyle. If the value is unset in
+            the first SectionBreak, it inherits from DocumentStyle's
+            even_page_header_id.
+
+            This property is read-only.
+          type: string
+        firstPageFooterId:
+          description: |-
+            The ID of the footer used only for the first page of the section.
+            If use_first_page_header_footer is true,
+            this value is used for the footer on the first page of the section. If
+            it is false, the footer on the first page of the section uses the
+            default_footer_id.
+            If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in
+            the first SectionBreak, it inherits from DocumentStyle's
+            first_page_footer_id.
+
+            This property is read-only.
+          type: string
+        firstPageHeaderId:
+          description: |-
+            The ID of the header used only for the first page of the section.
+            If use_first_page_header_footer is true,
+            this value is used for the header on the first page of the section. If
+            it is false, the header on the first page of the section uses the
+            default_header_id.
+            If unset, the value inherits from the previous SectionBreak's SectionStyle. If the value is unset in
+            the first SectionBreak, it inherits from DocumentStyle's
+            first_page_header_id.
+
+            This property is read-only.
           type: string
         marginBottom:
           $ref: '#/components/schemas/Dimension'
@@ -3043,6 +3226,18 @@ components:
 
             When updating this property, setting a concrete value is required.
             Unsetting this property results in a 400 bad request error.
+        pageNumberStart:
+          description: |-
+            The page number from which to start counting the number of pages for this
+            section. If unset, page numbering continues from the previous section.
+            If the value is unset in the first
+            SectionBreak, refer to DocumentStyle's
+            page_number_start.
+
+            When updating this property, setting a concrete value is required.
+            Unsetting this property results in a 400 bad request error.
+          format: int32
+          type: integer
         sectionType:
           description: Output only. The type of section.
           enum:
@@ -3050,6 +3245,17 @@ components:
             - CONTINUOUS
             - NEXT_PAGE
           type: string
+        useFirstPageHeaderFooter:
+          description: |-
+            Indicates whether to use the first page header / footer IDs for the first
+            page of the section. If unset, it inherits from DocumentStyle's
+            use_first_page_header_footer for the
+            first section. If the value is unset for subsequent sectors, it should be
+            interpreted as false.
+
+            When updating this property, setting a concrete value is required.
+            Unsetting this property results in a 400 bad request error.
+          type: boolean
       type: object
     Shading:
       description: The shading of a paragraph.

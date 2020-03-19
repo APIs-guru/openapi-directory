@@ -33,10 +33,7 @@ tags:
 paths:
   '/v1alpha1/{name}':
     delete:
-      description: |-
-        Deletes a `WorkerPool` by its project ID and WorkerPool name.
-
-        This API is experimental.
+      description: Deletes a `WorkerPool` by its project ID and WorkerPool name.
       operationId: cloudbuild.projects.workerPools.delete
       parameters:
         - description: |-
@@ -63,10 +60,7 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Returns information about a `WorkerPool`.
-
-        This API is experimental.
+      description: Returns information about a `WorkerPool`.
       operationId: cloudbuild.projects.workerPools.get
       parameters:
         - description: |-
@@ -97,18 +91,15 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
     patch:
-      description: |-
-        Update a `WorkerPool`.
-
-        This API is experimental.
+      description: Update a `WorkerPool`.
       operationId: cloudbuild.projects.workerPools.patch
       parameters:
         - description: |-
@@ -141,10 +132,7 @@ paths:
         - projects
   '/v1alpha1/{parent}/workerPools':
     get:
-      description: |-
-        List project's `WorkerPool`s.
-
-        This API is experimental.
+      description: List project's `WorkerPool`s.
       operationId: cloudbuild.projects.workerPools.list
       parameters:
         - description: ID of the parent project.
@@ -173,18 +161,15 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
     post:
-      description: |-
-        Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-
-        This API is experimental.
+      description: 'Creates a `WorkerPool` to run the builds, and returns the new worker pool.'
       operationId: cloudbuild.projects.workerPools.create
       parameters:
         - description: ID of the parent project.
@@ -447,6 +432,15 @@ components:
         projectId:
           description: Output only. ID of the project.
           type: string
+        queueTtl:
+          description: |-
+            TTL in queue for this build. If provided and the build is enqueued longer
+            than this value, the build will expire and the build status will be
+            `EXPIRED`.
+
+            The TTL starts ticking from create_time.
+          format: google-duration
+          type: string
         results:
           $ref: '#/components/schemas/Results'
           description: Output only. Results of the build.
@@ -476,6 +470,7 @@ components:
             - INTERNAL_ERROR
             - TIMEOUT
             - CANCELLED
+            - EXPIRED
           type: string
         statusDetail:
           description: Output only. Customer-readable message about the current status.
@@ -722,6 +717,7 @@ components:
             - INTERNAL_ERROR
             - TIMEOUT
             - CANCELLED
+            - EXPIRED
           type: string
         timeout:
           description: |-
@@ -862,6 +858,11 @@ components:
             This must be a relative path. If a step's `dir` is specified and is an
             absolute path, this value is ignored for that step's execution.
           type: string
+        invertRegex:
+          description: |-
+            Only trigger a build if the revision regex does NOT match the revision
+            regex.
+          type: boolean
         projectId:
           description: |-
             ID of the project that owns the Cloud Source Repository. If omitted, the

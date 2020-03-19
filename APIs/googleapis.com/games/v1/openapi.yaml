@@ -693,7 +693,6 @@ paths:
             enum:
               - PUBLIC
               - SOCIAL
-              - SOCIAL_1P
             type: string
         - description: The time span for the scores and ranks you're requesting.
           in: query
@@ -763,7 +762,6 @@ paths:
             enum:
               - PUBLIC
               - SOCIAL
-              - SOCIAL_1P
             type: string
         - description: The time span for the scores and ranks you're requesting.
           in: query
@@ -862,6 +860,7 @@ paths:
           schema:
             enum:
               - connected
+              - friends_all
               - playedWith
               - played_with
               - visible
@@ -3223,6 +3222,9 @@ components:
         experienceInfo:
           $ref: '#/components/schemas/PlayerExperienceInfo'
           description: An object to represent Play Game experience information for the player.
+        friendStatus:
+          description: 'The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.'
+          type: string
         kind:
           default: 'games#player'
           description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#player.'

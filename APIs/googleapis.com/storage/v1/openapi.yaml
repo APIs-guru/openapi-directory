@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/storage/v1'
+  - url: 'https://storage.googleapis.com/storage/v1'
 info:
   contact:
     name: Google
@@ -1516,6 +1516,11 @@ paths:
           name: delimiter
           schema:
             type: string
+        - description: 'Filter results to objects whose names are lexicographically before endOffset. If startOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).'
+          in: query
+          name: endOffset
+          schema:
+            type: string
         - description: 'If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.'
           in: query
           name: includeTrailingDelimiter
@@ -1549,6 +1554,11 @@ paths:
         - description: The project to be billed for this request if the target bucket is requester-pays bucket.
           in: query
           name: provisionalUserProject
+          schema:
+            type: string
+        - description: 'Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).'
+          in: query
+          name: startOffset
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -1725,6 +1735,11 @@ paths:
           name: delimiter
           schema:
             type: string
+        - description: 'Filter results to objects whose names are lexicographically before endOffset. If startOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).'
+          in: query
+          name: endOffset
+          schema:
+            type: string
         - description: 'If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.'
           in: query
           name: includeTrailingDelimiter
@@ -1758,6 +1773,11 @@ paths:
         - description: The project to be billed for this request if the target bucket is requester-pays bucket.
           in: query
           name: provisionalUserProject
+          schema:
+            type: string
+        - description: 'Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).'
+          in: query
+          name: startOffset
           schema:
             type: string
         - description: The project to be billed for this request. Required for Requester Pays buckets.
@@ -3587,7 +3607,7 @@ components:
           description: The bucket's IAM configuration.
           properties:
             bucketPolicyOnly:
-              description: The bucket's Bucket Policy Only configuration.
+              description: 'The bucket''s uniform bucket-level access configuration. The feature was formerly known as Bucket Policy Only. For backward compatibility, this field will be populated with identical information as the uniformBucketLevelAccess field. We recommend using the uniformBucketLevelAccess field to enable and disable the feature.'
               properties:
                 enabled:
                   description: 'If set, access is controlled only by bucket-level or above IAM policies.'
@@ -3657,7 +3677,7 @@ components:
                         description: 'A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the "Early Access" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released.'
                         type: string
                       matchesStorageClass:
-                        description: 'Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.'
+                        description: 'Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.'
                         items:
                           type: string
                         type: array
@@ -3725,7 +3745,7 @@ components:
           description: The URI of this bucket.
           type: string
         storageClass:
-          description: 'The bucket''s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.'
+          description: 'The bucket''s default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, ARCHIVE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes.'
           type: string
         timeCreated:
           description: The creation time of the bucket in RFC 3339 format.
@@ -3752,6 +3772,11 @@ components:
               description: 'If the requested object path is missing, and any mainPageSuffix object is missing, if applicable, the service will return the named object from this bucket as the content for a 404 Not Found result.'
               type: string
           type: object
+        zone_affinity:
+          description: The zone or zones from which the bucket is intended to use zonal quota. Requests for data from outside the specified affinities are still allowed but won’t be able to use zonal quota. The zone or zones need to be within the bucket location otherwise the requests will fail with a 400 Bad Request response.
+          items:
+            type: string
+          type: array
       type: object
     BucketAccessControl:
       description: An access-control entry.
