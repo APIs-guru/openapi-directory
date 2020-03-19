@@ -614,7 +614,7 @@ function writeSpec(source, format, exPatch, command) {
         if (e.message.indexOf('Can not')>=0)
           e.message = 'Warning: '+e.message;
         if (resolverContext.anyDiff || (!e.message.startsWith('Warning'))) {
-          //throw new SpecError(e, context);
+          //throw new SpecError(e, context); // yark
           process.exitCode = 1;
           warnings.push(e.message||e.context.message||e); // FIXME openapi_3
         }
@@ -852,6 +852,10 @@ function fixSpec(swagger, errors) {
     var newValue;
 
     switch(error.code) {
+      case 'PATTERN':
+        //TODO: add warning?
+        jp.remove(swagger, path);
+        break;
       case 'EQUIVALENT_PATH':
         swagger['x-hasEquivalentPaths'] = true;
         break;
