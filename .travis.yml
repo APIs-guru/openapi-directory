@@ -3,6 +3,7 @@ node_js:
   - 10
 install:
   - npm i --no-optional
+  - wget -O node_modules/swagger2openapi/schemas/openapi-3.0.json https://raw.githubusercontent.com/Mermade/oas-kit/master/packages/oas-validator/schemas/openapi-3.0.json
 script:
   - node --max-old-space-size=8192 scripts/collection.js validate -q
 deploy:
