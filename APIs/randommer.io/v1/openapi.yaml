@@ -1,0 +1,472 @@
+openapi: 3.0.1
+info:
+  title: Randommer
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-origin:
+    - format: openapi
+      url: 'https://randommer.io/api/docs/v1/swagger.json'
+      version: '3.0'
+  x-providerName: randommer.io
+paths:
+  /api/Card:
+    get:
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Card
+  /api/Card/Types:
+    get:
+      parameters:
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Card
+  /api/Hash:
+    post:
+      parameters:
+        - in: query
+          name: hashType
+          required: true
+          schema:
+            $ref: '#/components/schemas/HashType'
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetHash'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetHash'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/GetHash'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetHash'
+        required: true
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Hash
+  /api/Name:
+    get:
+      parameters:
+        - in: query
+          name: nameType
+          required: true
+          schema:
+            $ref: '#/components/schemas/NameType'
+        - in: query
+          name: quantity
+          required: true
+          schema:
+            format: int32
+            maximum: 10000
+            minimum: 1
+            type: integer
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Name
+  /api/Name/suggestions:
+    get:
+      parameters:
+        - in: query
+          name: startingWords
+          schema:
+            type: string
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Name
+  /api/Number:
+    get:
+      parameters:
+        - in: query
+          name: min
+          schema:
+            default: 1
+            format: int32
+            maximum: 2147483646
+            minimum: -2147483648
+            type: integer
+        - in: query
+          name: max
+          schema:
+            default: 100
+            format: int32
+            maximum: 2147483647
+            minimum: -2147483647
+            type: integer
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Number
+  /api/Number/Sequence:
+    get:
+      parameters:
+        - in: query
+          name: min
+          schema:
+            default: 1
+            format: int32
+            maximum: 1000
+            minimum: 0
+            type: integer
+        - in: query
+          name: max
+          schema:
+            default: 100
+            format: int32
+            maximum: 12000
+            minimum: 1
+            type: integer
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+            text/json:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+            text/plain:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+          description: Success
+      tags:
+        - Number
+  /api/Phone/Countries:
+    get:
+      parameters:
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Phone
+  /api/Phone/Generate:
+    get:
+      parameters:
+        - in: query
+          name: CountryCode
+          required: true
+          schema:
+            maxLength: 2
+            type: string
+        - in: query
+          name: Quantity
+          required: true
+          schema:
+            format: int32
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Phone
+  /api/Phone/Validate:
+    get:
+      parameters:
+        - in: query
+          name: telephone
+          required: true
+          schema:
+            maxLength: 25
+            type: string
+        - in: query
+          name: CountryCode
+          schema:
+            maxLength: 2
+            type: string
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Phone
+  /api/SocialNumber:
+    get:
+      parameters:
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - SocialNumber
+  /api/Text/Humanize:
+    post:
+      parameters:
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+        required: true
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Text
+  /api/Text/LoremIpsum:
+    get:
+      parameters:
+        - in: query
+          name: loremType
+          required: true
+          schema:
+            $ref: '#/components/schemas/LoremType'
+        - in: query
+          name: type
+          required: true
+          schema:
+            $ref: '#/components/schemas/TextType'
+        - in: query
+          name: number
+          required: true
+          schema:
+            format: int32
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Text
+  /api/Text/Password:
+    get:
+      parameters:
+        - in: query
+          name: length
+          required: true
+          schema:
+            format: int32
+            maximum: 250
+            minimum: 3
+            type: integer
+        - in: query
+          name: hasDigits
+          required: true
+          schema:
+            type: boolean
+        - in: query
+          name: hasUppercase
+          required: true
+          schema:
+            type: boolean
+        - in: query
+          name: hasSpecial
+          required: true
+          schema:
+            type: boolean
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Text
+  /api/Text/Transform:
+    post:
+      parameters:
+        - in: query
+          name: textActionType
+          required: true
+          schema:
+            $ref: '#/components/schemas/TextActionType'
+        - in: query
+          name: caseType
+          schema:
+            $ref: '#/components/schemas/CaseType'
+        - in: query
+          name: find
+          schema:
+            type: string
+        - in: query
+          name: replace
+          schema:
+            type: string
+        - description: Enter your key
+          in: header
+          name: X-Api-Key
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TextDto'
+        required: true
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Text
+components:
+  schemas:
+    CaseType:
+      enum:
+        - LowerCase
+        - UpperCase
+        - SentenceCase
+        - TitleCase
+      type: string
+    GetHash:
+      additionalProperties: false
+      properties:
+        key:
+          format: int32
+          type: integer
+        text:
+          maxLength: 100000
+          type: string
+      required:
+        - text
+      type: object
+    HashType:
+      enum:
+        - md5
+        - sha1
+        - sha256
+        - sha384
+        - sha512
+        - crc32
+        - caesarencryption
+        - caesardecryption
+      type: string
+    LoremType:
+      enum:
+        - normal
+        - business
+      type: string
+    NameType:
+      enum:
+        - firstname
+        - surname
+        - fullname
+      type: string
+    TextActionType:
+      enum:
+        - Transform
+        - Replace
+      type: string
+    TextDto:
+      additionalProperties: false
+      properties:
+        text:
+          nullable: true
+          type: string
+      type: object
+    TextType:
+      enum:
+        - paragraphs
+        - words
+      type: string
