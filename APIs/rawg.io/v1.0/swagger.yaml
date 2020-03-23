@@ -1,0 +1,2316 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.rawg.io
+basePath: /api
+info:
+  contact:
+    x-twitter: rawgtheworld
+  description: |
+
+    The largest open video games database.
+
+    ### Why build on RAWG
+    - More than 350,000 games for 50 platforms including mobiles.
+    - Rich metadata: tags, genres, developers, publishers, individual creators, official websites, release dates,
+    Metacritic ratings.
+    - Where to buy: links to digital distribution services
+    - Similar games based on visual similarity.
+    - Player activity data: Steam average playtime and RAWG player counts and ratings.
+    - Actively developing and constantly getting better by user contribution and our algorithms.
+
+    ### Terms of Use
+    - Free for personal use as long as you attribute RAWG as the source of the data and/or images and add an active
+    hyperlink from every page where the data of RAWG is used.
+    - Free for commercial use for startups and hobby projects with not more than 100,000 monthly active users or 500,000
+    page views per month. If your project is larger than that, email us at [api@rawg.io](mailto:api@rawg.io) for
+    commercial terms.
+    - No cloning. It would not be cool if you used our API to launch a clone of RAWG. We know it is not always easy
+    to say what is a duplicate and what isn't. Drop us a line at [api@rawg.io](mailto:api@rawg.io) if you are in doubt,
+    and we will talk it through.
+    - Every API request should have a User-Agent header with your app name. If you don’t provide it, we may ban your
+    requests.
+
+    __[Read more](https://rawg.io/apidocs)__.
+  title: RAWG Video Games Database
+  version: v1.0
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    url: 'https://twitter.com/rawgtheworld/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://api.rawg.io/docs/?format=openapi'
+      version: '2.0'
+  x-providerName: rawg.io
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions: {}
+paths:
+  /creator-roles:
+    get:
+      description: ''
+      operationId: creator-roles_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Position'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of creator positions (jobs).
+      tags:
+        - creator-roles
+    parameters: []
+  /creators:
+    get:
+      description: ''
+      operationId: creators_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Person'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of game creators.
+      tags:
+        - creators
+    parameters: []
+  '/creators/{id}':
+    get:
+      description: ''
+      operationId: creators_read
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PersonSingle'
+      summary: Get details of the creator.
+      tags:
+        - creators
+    parameters:
+      - description: A unique integer value identifying this Person.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /developers:
+    get:
+      description: ''
+      operationId: developers_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Developer'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of game developers.
+      tags:
+        - developers
+    parameters: []
+  '/developers/{id}':
+    get:
+      description: ''
+      operationId: developers_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/DeveloperSingle'
+      summary: Get details of the developer.
+      tags:
+        - developers
+    parameters:
+      - description: A unique integer value identifying this Developer.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /games:
+    get:
+      description: ''
+      operationId: games_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - description: Search query.
+          in: query
+          name: search
+          type: string
+        - description: 'Filter by parent platforms, for example: `1,2,3`.'
+          in: query
+          name: parent_platforms
+          type: string
+        - description: 'Filter by platforms, for example: `4,5`.'
+          in: query
+          name: platforms
+          type: string
+        - description: 'Filter by stores, for example: `5,6`.'
+          in: query
+          name: stores
+          type: string
+        - description: 'Filter by developers, for example: `1612,18893` or `valve-software,feral-interactive`.'
+          in: query
+          name: developers
+          type: string
+        - description: 'Filter by publishers, for example: `354,20987` or `electronic-arts,microsoft-studios`.'
+          in: query
+          name: publishers
+          type: string
+        - description: 'Filter by genres, for example: `4,51` or `action,indie`.'
+          in: query
+          name: genres
+          type: string
+        - description: 'Filter by tags, for example: `31,7` or `singleplayer,multiplayer`.'
+          in: query
+          name: tags
+          type: string
+        - description: 'Filter by creators, for example: `78,28` or `cris-velasco,mike-morasky`.'
+          in: query
+          name: creators
+          type: string
+        - description: 'Filter by a release date, for example: `2010-01-01,2018-12-31.1960-01-01,1969-12-31`.'
+          in: query
+          name: dates
+          type: string
+        - description: 'Filter by platforms count, for example: `1`.'
+          in: query
+          name: platforms_count
+          type: integer
+        - description: 'Exclude games from a particular collection, for example: `123`.'
+          in: query
+          name: exclude_collection
+          type: integer
+        - description: Exclude additions.
+          in: query
+          name: exclude_additions
+          type: boolean
+        - description: Exclude games which have additions.
+          in: query
+          name: exclude_parents
+          type: boolean
+        - description: Exclude games which included in a game series.
+          in: query
+          name: exclude_game_series
+          type: boolean
+        - description: 'Available fields: `name`, `released`, `added`, `created`, `rating`. You can reverse the sort order adding a hyphen, for example: `-released`.'
+          in: query
+          name: ordering
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Game'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of games.
+      tags:
+        - games
+    parameters: []
+  /games/sitemap:
+    get:
+      description: ''
+      operationId: games_sitemap_read
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/GameSingle'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get The Sitemap Games list.
+      tags:
+        - games
+    parameters: []
+  '/games/{game_pk}/additions':
+    get:
+      description: ''
+      operationId: games_additions_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Game'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: 'Get a list of DLC''s for the game, GOTY and other editions, companion apps, etc.'
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{game_pk}/development-team':
+    get:
+      description: ''
+      operationId: games_development-team_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/GamePersonList'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of individual creators that were part of the development team.
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{game_pk}/game-series':
+    get:
+      description: ''
+      operationId: games_game-series_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Game'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of games that are part of the same series.
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{game_pk}/parent-games':
+    get:
+      description: ''
+      operationId: games_parent-games_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Game'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of parent games for DLC's and editions.
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{game_pk}/screenshots':
+    get:
+      description: ''
+      operationId: games_screenshots_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/ScreenShot'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get screenshots for the game.
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{game_pk}/stores':
+    get:
+      description: ''
+      operationId: games_stores_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/GameStoreFull'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get links to the stores that sell the game.
+      tags:
+        - games
+    parameters:
+      - in: path
+        name: game_pk
+        required: true
+        type: string
+  '/games/{id}':
+    get:
+      description: ''
+      operationId: games_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GameSingle'
+      summary: Get details of the game.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/achievements':
+    get:
+      description: ''
+      operationId: games_achievements_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParentAchievement'
+      summary: Get a list of game achievements.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/movies':
+    get:
+      description: ''
+      operationId: games_movies_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Movie'
+      summary: Get a list of game trailers.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/reddit':
+    get:
+      description: ''
+      operationId: games_reddit_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Reddit'
+      summary: Get a list of most recent posts from the game's subreddit.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/suggested':
+    get:
+      description: ''
+      operationId: games_suggested_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GameSingle'
+      summary: Get a list of visually similar games.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/twitch':
+    get:
+      description: ''
+      operationId: games_twitch_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Twitch'
+      summary: Get streams on Twitch associated with the game .
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  '/games/{id}/youtube':
+    get:
+      description: ''
+      operationId: games_youtube_read
+      parameters:
+        - description: An ID or a slug identifying this Game.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Youtube'
+      summary: Get videos from YouTube associated with the game.
+      tags:
+        - games
+    parameters:
+      - description: A unique integer value identifying this Game.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /genres:
+    get:
+      description: ''
+      operationId: genres_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Genre'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of video game genres.
+      tags:
+        - genres
+    parameters: []
+  '/genres/{id}':
+    get:
+      description: ''
+      operationId: genres_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GenreSingle'
+      summary: Get details of the genre.
+      tags:
+        - genres
+    parameters:
+      - description: A unique integer value identifying this Genre.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /platforms:
+    get:
+      description: ''
+      operationId: platforms_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Platform'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of video game platforms.
+      tags:
+        - platforms
+    parameters: []
+  /platforms/lists/parents:
+    get:
+      description: 'For instance, for PS2 and PS4 the “parent platform” is PlayStation.'
+      operationId: platforms_lists_parents_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/PlatformParentSingle'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of parent platforms.
+      tags:
+        - platforms
+    parameters: []
+  '/platforms/{id}':
+    get:
+      description: ''
+      operationId: platforms_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlatformSingle'
+      summary: Get details of the platform.
+      tags:
+        - platforms
+    parameters:
+      - description: A unique integer value identifying this Platform.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /publishers:
+    get:
+      description: ''
+      operationId: publishers_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Publisher'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of video game publishers.
+      tags:
+        - publishers
+    parameters: []
+  '/publishers/{id}':
+    get:
+      description: ''
+      operationId: publishers_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PublisherSingle'
+      summary: Get details of the publisher.
+      tags:
+        - publishers
+    parameters:
+      - description: A unique integer value identifying this Publisher.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /stores:
+    get:
+      description: ''
+      operationId: stores_list
+      parameters:
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Store'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of video game storefronts.
+      tags:
+        - stores
+    parameters: []
+  '/stores/{id}':
+    get:
+      description: ''
+      operationId: stores_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StoreSingle'
+      summary: Get details of the store.
+      tags:
+        - stores
+    parameters:
+      - description: A unique integer value identifying this Store.
+        in: path
+        name: id
+        required: true
+        type: integer
+  /tags:
+    get:
+      description: ''
+      operationId: tags_list
+      parameters:
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                format: uri
+                type: string
+                x-nullable: true
+              previous:
+                format: uri
+                type: string
+                x-nullable: true
+              results:
+                items:
+                  $ref: '#/definitions/Tag'
+                type: array
+            required:
+              - count
+              - results
+            type: object
+      summary: Get a list of tags.
+      tags:
+        - tags
+    parameters: []
+  '/tags/{id}':
+    get:
+      description: ''
+      operationId: tags_read
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/TagSingle'
+      summary: Get details of the tag.
+      tags:
+        - tags
+    parameters:
+      - description: A unique integer value identifying this Tag.
+        in: path
+        name: id
+        required: true
+        type: integer
+definitions:
+  Developer:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  DeveloperSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  Game:
+    properties:
+      added:
+        readOnly: true
+        title: Added
+        type: integer
+      added_by_status:
+        readOnly: true
+        title: Added by status
+        type: object
+      background_image:
+        format: uri
+        readOnly: true
+        title: Background image
+        type: string
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      metacritic:
+        readOnly: true
+        title: Metacritic
+        type: integer
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      playtime:
+        description: in hours
+        readOnly: true
+        title: Playtime
+        type: integer
+      rating:
+        title: Rating
+        type: number
+      rating_top:
+        readOnly: true
+        title: Rating top
+        type: integer
+      ratings:
+        readOnly: true
+        title: Ratings
+        type: object
+      ratings_count:
+        readOnly: true
+        title: Ratings count
+        type: integer
+      released:
+        format: date
+        readOnly: true
+        title: Released
+        type: string
+      reviews_text_count:
+        readOnly: true
+        title: Reviews text count
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+      suggestions_count:
+        readOnly: true
+        title: Suggestions count
+        type: integer
+      tba:
+        readOnly: true
+        title: TBA
+        type: boolean
+    required:
+      - rating
+    type: object
+  GamePersonList:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  GameSingle:
+    properties:
+      achievements_count:
+        readOnly: true
+        title: Achievements count
+        type: integer
+      added:
+        readOnly: true
+        title: Added
+        type: integer
+      added_by_status:
+        readOnly: true
+        title: Added by status
+        type: object
+      additions_count:
+        readOnly: true
+        title: Additions count
+        type: integer
+      alternative_names:
+        items:
+          maxLength: 200
+          minLength: 1
+          title: Alternative names
+          type: string
+        readOnly: true
+        type: array
+      background_image:
+        format: uri
+        readOnly: true
+        title: Background image
+        type: string
+      background_image_additional:
+        readOnly: true
+        title: Background image additional
+        type: string
+      creators_count:
+        readOnly: true
+        title: Creators count
+        type: integer
+      description:
+        minLength: 1
+        readOnly: true
+        title: Description
+        type: string
+      game_series_count:
+        readOnly: true
+        title: Game series count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      metacritic:
+        readOnly: true
+        title: Metacritic
+        type: integer
+      metacritic_url:
+        description: 'For example "http://www.metacritic.com/game/playstation-4/the-witcher-3-wild-hunt"'
+        minLength: 1
+        readOnly: true
+        title: Metacritic url
+        type: string
+      movies_count:
+        readOnly: true
+        title: Movies count
+        type: integer
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      name_original:
+        minLength: 1
+        readOnly: true
+        title: Name original
+        type: string
+      parent_achievements_count:
+        readOnly: true
+        title: Parent achievements count
+        type: string
+      parents_count:
+        readOnly: true
+        title: Parents count
+        type: integer
+      playtime:
+        description: in hours
+        readOnly: true
+        title: Playtime
+        type: integer
+      rating:
+        title: Rating
+        type: number
+      rating_top:
+        readOnly: true
+        title: Rating top
+        type: integer
+      ratings:
+        readOnly: true
+        title: Ratings
+        type: object
+      ratings_count:
+        readOnly: true
+        title: Ratings count
+        type: integer
+      reactions:
+        readOnly: true
+        title: Reactions
+        type: object
+      reddit_count:
+        readOnly: true
+        title: Reddit count
+        type: integer
+      reddit_description:
+        minLength: 1
+        readOnly: true
+        title: Reddit description
+        type: string
+      reddit_logo:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Reddit logo
+        type: string
+      reddit_name:
+        minLength: 1
+        readOnly: true
+        title: Reddit name
+        type: string
+      reddit_url:
+        description: 'For example "https://www.reddit.com/r/uncharted/" or "uncharted"'
+        minLength: 1
+        readOnly: true
+        title: Reddit url
+        type: string
+      released:
+        format: date
+        readOnly: true
+        title: Released
+        type: string
+      reviews_text_count:
+        readOnly: true
+        title: Reviews text count
+        type: string
+      screenshots_count:
+        readOnly: true
+        title: Screenshots count
+        type: integer
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+      suggestions_count:
+        readOnly: true
+        title: Suggestions count
+        type: integer
+      tba:
+        readOnly: true
+        title: TBA
+        type: boolean
+      twitch_count:
+        readOnly: true
+        title: Twitch count
+        type: string
+      updated:
+        format: date-time
+        readOnly: true
+        title: Updated
+        type: string
+      website:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Website
+        type: string
+      youtube_count:
+        readOnly: true
+        title: Youtube count
+        type: string
+    required:
+      - rating
+    type: object
+  GameStoreFull:
+    properties:
+      game_id:
+        readOnly: true
+        title: Game id
+        type: string
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      store_id:
+        readOnly: true
+        title: Store id
+        type: string
+      url:
+        format: uri
+        maxLength: 500
+        minLength: 1
+        title: Url
+        type: string
+    required:
+      - url
+    type: object
+  Genre:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  GenreSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  Movie:
+    properties:
+      data:
+        readOnly: true
+        title: Data
+        type: object
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      preview:
+        format: uri
+        readOnly: true
+        title: Preview
+        type: string
+    type: object
+  ParentAchievement:
+    properties:
+      description:
+        minLength: 1
+        readOnly: true
+        title: Description
+        type: string
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      percent:
+        format: decimal
+        readOnly: true
+        title: Percent
+        type: string
+    type: object
+  Person:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  PersonSingle:
+    properties:
+      description:
+        minLength: 1
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        minLength: 1
+        title: Name
+        type: string
+      rating:
+        format: decimal
+        readOnly: true
+        title: Rating
+        type: string
+      rating_top:
+        readOnly: true
+        title: Rating top
+        type: integer
+      reviews_count:
+        readOnly: true
+        title: Reviews count
+        type: integer
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+      updated:
+        format: date-time
+        readOnly: true
+        title: Updated
+        type: string
+    required:
+      - name
+    type: object
+  Platform:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+        x-nullable: true
+      image_background:
+        format: uri
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+      year_end:
+        maximum: 32767
+        minimum: 0
+        title: Year end
+        type: integer
+        x-nullable: true
+      year_start:
+        maximum: 32767
+        minimum: 0
+        title: Year start
+        type: integer
+        x-nullable: true
+    required:
+      - name
+    type: object
+  PlatformParentSingle:
+    properties:
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      platforms:
+        items:
+          $ref: '#/definitions/Platform'
+        type: array
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+      - platforms
+    type: object
+  PlatformSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+        x-nullable: true
+      image_background:
+        format: uri
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+      year_end:
+        maximum: 32767
+        minimum: 0
+        title: Year end
+        type: integer
+        x-nullable: true
+      year_start:
+        maximum: 32767
+        minimum: 0
+        title: Year start
+        type: integer
+        x-nullable: true
+    required:
+      - name
+    type: object
+  Position:
+    properties:
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    type: object
+  Publisher:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  PublisherSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  Reddit:
+    properties:
+      created:
+        format: date-time
+        readOnly: true
+        title: Created
+        type: string
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image
+        type: string
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      text:
+        minLength: 1
+        readOnly: true
+        title: Text
+        type: string
+      url:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Url
+        type: string
+      username:
+        minLength: 1
+        readOnly: true
+        title: Username
+        type: string
+      username_url:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Username url
+        type: string
+    type: object
+  ScreenShot:
+    example:
+      hidden: false
+      image: '@image.jpg'
+    properties:
+      height:
+        readOnly: true
+        title: Height
+        type: integer
+      hidden:
+        default: false
+        description: Set image as hidden or visible.
+        title: Hidden
+        type: boolean
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image:
+        description: An image file with size up to 20 MB.
+        format: uri
+        readOnly: true
+        title: Image
+        type: string
+      width:
+        readOnly: true
+        title: Width
+        type: integer
+    type: object
+  Store:
+    properties:
+      domain:
+        maxLength: 255
+        title: Domain
+        type: string
+        x-nullable: true
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  StoreSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      domain:
+        maxLength: 255
+        title: Domain
+        type: string
+        x-nullable: true
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  Tag:
+    properties:
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      language:
+        minLength: 1
+        readOnly: true
+        title: Language
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  TagSingle:
+    properties:
+      description:
+        title: Description
+        type: string
+      games_count:
+        readOnly: true
+        title: Games count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      image_background:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Image background
+        type: string
+      name:
+        maxLength: 100
+        minLength: 1
+        title: Name
+        type: string
+      slug:
+        format: slug
+        minLength: 1
+        pattern: '^[-a-zA-Z0-9_]+$'
+        readOnly: true
+        title: Slug
+        type: string
+    required:
+      - name
+    type: object
+  Twitch:
+    properties:
+      created:
+        format: date-time
+        readOnly: true
+        title: Created
+        type: string
+      description:
+        minLength: 1
+        readOnly: true
+        title: Description
+        type: string
+      external_id:
+        readOnly: true
+        title: External id
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      language:
+        minLength: 1
+        readOnly: true
+        title: Language
+        type: string
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      published:
+        format: date-time
+        readOnly: true
+        title: Published
+        type: string
+      thumbnail:
+        format: uri
+        minLength: 1
+        readOnly: true
+        title: Thumbnail
+        type: string
+      view_count:
+        readOnly: true
+        title: View count
+        type: integer
+    type: object
+  Youtube:
+    properties:
+      channel_id:
+        minLength: 1
+        readOnly: true
+        title: Channel id
+        type: string
+      channel_title:
+        minLength: 1
+        readOnly: true
+        title: Channel title
+        type: string
+      comments_count:
+        readOnly: true
+        title: Comments count
+        type: integer
+      created:
+        format: date-time
+        readOnly: true
+        title: Created
+        type: string
+      description:
+        minLength: 1
+        readOnly: true
+        title: Description
+        type: string
+      dislike_count:
+        readOnly: true
+        title: Dislike count
+        type: integer
+      external_id:
+        minLength: 1
+        readOnly: true
+        title: External id
+        type: string
+      favorite_count:
+        readOnly: true
+        title: Favorite count
+        type: integer
+      id:
+        readOnly: true
+        title: ID
+        type: integer
+      like_count:
+        readOnly: true
+        title: Like count
+        type: integer
+      name:
+        minLength: 1
+        readOnly: true
+        title: Name
+        type: string
+      thumbnails:
+        readOnly: true
+        title: Thumbnails
+        type: object
+      view_count:
+        readOnly: true
+        title: View count
+        type: integer
+    type: object
