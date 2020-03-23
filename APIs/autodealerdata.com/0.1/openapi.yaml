@@ -1,0 +1,613 @@
+openapi: 3.0.2
+info:
+  description: |-
+    This API provides access to our Automotive Data. Use of this API is subject to our <a href="https://autodealerdata.com/tos">Terms of Service</a>
+
+    For a quick start guide <a href="/APIQuickStart">click here</a>
+
+    Equivalent HTTP GET and POST methods are available for some endpoints. 
+  title: CIS Automotive
+  version: '0.1'
+  x-apisguru-categories:
+    - ecommerce
+  x-origin:
+    - format: openapi
+      url: 'https://api.autodealerdata.com/openapi.json'
+      version: '3.0'
+  x-providerName: autodealerdata.com
+paths:
+  /daysSupply:
+    get:
+      description: |-
+        Average, median, standard deviation, population variance, and whole region average of the 
+        days of supply left on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
+        a dealer by dealer basis while the whole region average treats the entire region like a single dealership. 
+        The average field may differ from the whole region average, especially when dealers are out of 
+        a given model. 
+
+        The available brand and region names can be retrieved from their respective endpoints.
+      operationId: daysSupply_daysSupply_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Days worth of supply left on dealer lots
+      tags:
+        - Supply Data
+  /daysToSell:
+    get:
+      description: |-
+        Average, median, standard deviation, population variance, and whole region average of the 
+        number of days a vehicle spends on dealer lots for a given brand and region. The average, median, stdDev, and pVar fields are calculated on
+        a dealer by dealer basis while the whole region average treats the entire region like a single dealership. 
+        The average field may differ from the whole region average.
+
+        The available brand and region names can be retrieved from their respective endpoints.
+      operationId: daysToSell_daysToSell_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Days a vehicle takes to sell
+      tags:
+        - Supply Data
+  /getBrands:
+    get:
+      description: |-
+        Get vehicle brand names. 
+
+        These names are used as arguments for other endpoints. The names are generally not case sensitive
+        when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
+      operationId: getBrandNames_getBrands_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a list of brand names
+      tags:
+        - Static Data
+  /getDealers:
+    get:
+      description: 'Dealership information in a given zip code using the first 4 digits. For example a call with the zip code 65412 would return dealers in the range [65410, 65419]'
+      operationId: getDealers_getDealers_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: zipCode
+          required: true
+          schema:
+            title: Zipcode
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Dealers in a zip code.
+      tags:
+        - Dealership Data
+  /getInactiveModels:
+    get:
+      description: |-
+        Get all model names including discontinued models. Because these models are no longer built, or have very poor market performance
+        they are not incuded in the normal getModels endpoint. Many users itterate through the model names with our new vehicle sales
+        endpoints and waste some of their quota making self contradictory requests. This endpoint was created to aleviate the use case where
+        someone requests information on new vehicle sales for a model that has not been sold new for a long, long, time. 
+
+        These names are used as arguments for other endpoints. The names are generally not case sensitive
+        when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
+      operationId: getModelNamesAll_getInactiveModels_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a list of model names including discontinued models
+      tags:
+        - Static Data
+  /getModels:
+    get:
+      description: |-
+        Get brand model names for currently active models. This endpoint does not return model names that have been discontinued or have 
+        sold less than 10 vehicles in the last month and a half.
+
+        These names are used as arguments for other endpoints. The names are generally not case sensitive
+        when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
+      operationId: getModelNames_getModels_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a list of model names
+      tags:
+        - Static Data
+  /getRegions:
+    get:
+      description: |-
+        Get region names. These names are used as arguments for other endpoints. The names are generally not case sensitive
+        when used with other endpoints, but it is best practice to use the names returned by this endpoint without changes.
+      operationId: getRegions_getRegions_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a list of region names
+      tags:
+        - Static Data
+  /getToken:
+    get:
+      description: |-
+        This is the first function you should call. 
+
+        If you are accessing our API through a third party provider they will handle authenticating to our API for you 
+        and you will not need call this function or retrieve a JSON Web Token. 
+
+        All other functions require the JSON Web Token (JWT) from this function to 
+        be incuded in their arguments. The value of the "token" field is the actual JWT and any other values in the returned JSON
+        are metadata there for your convenience. Tokens are valid for a default of 24 hours (86400 seconds). If you try calling an
+        API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
+        to get a new token.
+      operationId: makeToken_getToken_get
+      parameters:
+        - in: query
+          name: apiID
+          required: true
+          schema:
+            title: Apiid
+            type: string
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            title: Apikey
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONWebToken'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a JWT from your API credentials
+      tags:
+        - Authentication
+    post:
+      description: |-
+        This is the first function you should call. 
+
+        If you are accessing our API through a third party provider they will handle authenticating to our API for you 
+        and you will not need call this function or retrieve a JSON Web Token. 
+
+        All other functions require the JSON Web Token (JWT) from this function to 
+        be incuded in their arguments. The value of the "token" field is the actual JWT and any other values in the returned JSON
+        are metadata there for your convenience. Tokens are valid for a default of 24 hours (86400 seconds). If you try calling an
+        API endpoint with a missing, invalid, or expired JWT it will return a HTTP 403 code. You would then need to call this end point
+        to get a new token.
+      operationId: makeToken_getToken_post
+      parameters:
+        - in: query
+          name: apiID
+          required: true
+          schema:
+            title: Apiid
+            type: string
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            title: Apikey
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONWebToken'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get a JWT from your API credentials
+      tags:
+        - Authentication
+  /listPrice:
+    get:
+      description: |-
+        Average, median, standard deviation, and population variance of the ask price of new vehicles over the last 15 days for a given brand and region.
+
+        The available brand and region names can be retrieved from their respective endpoints.
+      operationId: getAvgListPrice_listPrice_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Stats on ask price of new vehicles
+      tags:
+        - Pricing Data
+  /salePrice:
+    get:
+      description: |-
+        Average, median, standard deviation, and population variance of the sale price of new vehicles over the last 15 days for a given brand and region.
+
+        The available brand and region names can be retrieved from their respective endpoints.
+      operationId: getAvgSalePrice_salePrice_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Stats on sale price of new vehicles
+      tags:
+        - Pricing Data
+  /salePriceHistogram:
+    get:
+      description: |-
+        Histogram of the sale price of vehicles over the last 45 days for a given model and region. 
+        Price buckets are grouped in units of $1000
+        The available brand, model, and region names can be retrieved from their respective endpoints.
+      operationId: getModelSaleBuckets_salePriceHistogram_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: modelName
+          required: true
+          schema:
+            title: Modelname
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Histogram of sales price of new vehicles by model
+      tags:
+        - Pricing Data
+  /topModels:
+    get:
+      description: |-
+        Sales ranking of different models by region over the last 45 days. 
+        The <strong>percentOfTopSales</strong> value is the percent of the top seller the model represents. 
+
+        For example: a value of 80% means that model sold 8 vehicles for every 10 of the top model sold.
+
+        The other fields represent the model percent of X. The <strong>brandMarketShare</strong> field is that brand's market share of the region
+        over the report's time interval.
+      operationId: getTopModels_topModels_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Top models in a given region
+      tags:
+        - Sales Data
+components:
+  schemas:
+    GenericResponse:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 3600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          title: Data
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      title: GenericResponse
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    JSONWebToken:
+      properties:
+        createdOn:
+          title: Createdon
+          type: integer
+        expires:
+          title: Expires
+          type: integer
+        token:
+          title: Token
+          type: string
+      required:
+        - token
+      title: JSONWebToken
+      type: object
+    ValidationError:
+      properties:
+        loc:
+          items:
+            type: string
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+        - loc
+        - msg
+        - type
+      title: ValidationError
+      type: object
