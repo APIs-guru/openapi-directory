@@ -1,0 +1,50 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://mycru.io/'
+info:
+  description: |-
+    This endpoint is a curated list of job titles and skills. The list contains more than 12360 professional skills and job titles and is constantly growing with the help of mycru.io's community of freelancers.
+
+    We are providing this endpoint to help other developers to build job or HR related applications or any other applications that are using professional job titles and skill tags. The myru API is extreme helpful to prevent free form inputs in your apps when asking for job skills or professional titles and allows convenient autocomplete for input fields. With this API you can build smarter logics with your data and benefit from mycru’s curated data structure.
+
+    The endpoint URL is: https://mycru.io/api/v1/skills
+
+    Authentication: Use Basic Auth with your mycru username and password (mycru Skills API Subscription is needed).
+
+    Each skill is provided as a pair of a display name and a slug.
+
+    You can see the endpoints content for the letters A-R as png here >> https://mycru.io/jobtitles-skills.png
+    Attention: Make sure to zoom in, because the png is 213x 14523(!!) We recommend to download it.
+
+    Learn more on https://mycru.io/mycru-api/
+
+    Questions and support: api@mycru.io
+  title: Job titles and skill tags API by mycru.io
+  version: 1.0.0
+  x-apisguru-categories:
+    - enterprise
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://mycru.io/banner/mycru512x512.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: apiBlueprint
+      url: 'https://mycrujobtitlesskills.docs.apiary.io/api-description-document'
+      version: 1A
+  x-providerName: mycru.io
+tags: []
+paths:
+  /api/v1/skills:
+    get:
+      description: ''
+      responses:
+        '200':
+          description: OK
+          headers: {}
+      summary: Sample response. Each skill or job title comes as a pair of NAME and SLUG.
+      tags: []
+components:
+  schemas:
+    Over_12K_of_curated_job_titles_and_skills_as_list: {}
