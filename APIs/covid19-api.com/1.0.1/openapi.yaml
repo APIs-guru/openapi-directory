@@ -1,0 +1,302 @@
+openapi: 3.0.2
+info:
+  title: COVID-19 data
+  version: 1.0.1
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - format: openapi
+      url: 'https://covid19-api.com/docs.json'
+      version: '3.0'
+  x-providerName: covid19-api.com
+paths:
+  /country:
+    get:
+      description: Get data for specific country.
+      operationId: getCountryDataByParams
+      parameters:
+        - description: Name of the country
+          in: query
+          name: country
+          required: true
+          schema:
+            type: string
+        - description: Format of the response
+          in: query
+          name: format
+          schema:
+            default: json
+            enum:
+              - json
+              - xml
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Canada:
+                  value:
+                    - confirmed: 257
+                      country: Canada
+                      deaths: 1
+                      province: Ontario
+                      recovered: 5
+                    - confirmed: 231
+                      country: Canada
+                      deaths: 7
+                      province: British Columbia
+                      recovered: 4
+                    - confirmed: 121
+                      country: Canada
+                      deaths: 1
+                      province: Quebec
+                      recovered: 0
+                    - confirmed: 119
+                      country: Canada
+                      deaths: 0
+                      province: Alberta
+                      recovered: 0
+                    - confirmed: 17
+                      country: Canada
+                      deaths: 0
+                      province: Manitoba
+                      recovered: 0
+                    - confirmed: 16
+                      country: Canada
+                      deaths: 0
+                      province: Saskatchewan
+                      recovered: 0
+                    - confirmed: 14
+                      country: Canada
+                      deaths: 0
+                      province: Nova Scotia
+                      recovered: 0
+                    - confirmed: 11
+                      country: Canada
+                      deaths: 0
+                      province: New Brunswick
+                      recovered: 0
+                    - confirmed: 9
+                      country: Canada
+                      deaths: 0
+                      province: Grand Princess
+                      recovered: 0
+                    - confirmed: 3
+                      country: Canada
+                      deaths: 0
+                      province: Newfoundland and Labrador
+                      recovered: 0
+                    - confirmed: 2
+                      country: Canada
+                      deaths: 0
+                      province: Prince Edward Island
+                      recovered: 0
+                Italy:
+                  value:
+                    - confirmed: 41035
+                      country: Italy
+                      deaths: 3405
+                      province: ''
+                      recovered: 4440
+              schema:
+                items:
+                  properties:
+                    confirmed:
+                      type: integer
+                    country:
+                      type: string
+                    deaths:
+                      type: integer
+                    province:
+                      type: string
+                    recovered:
+                      type: integer
+                  type: object
+                type: array
+            application/xml:
+              examples:
+                Canada:
+                  value: |-
+                    <?xml version="1.0"?>
+                    <response>
+                    <item key="0"><country>Canada</country><province>Ontario</province><confirmed>257</confirmed><recovered>5</recovered><deaths>1</deaths></item><item key="1"><country>Canada</country><province>British Columbia</province><confirmed>231</confirmed><recovered>4</recovered><deaths>7</deaths></item><item key="2"><country>Canada</country><province>Quebec</province><confirmed>121</confirmed><recovered>0</recovered><deaths>1</deaths></item><item key="3"><country>Canada</country><province>Alberta</province><confirmed>119</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="4"><country>Canada</country><province>Manitoba</province><confirmed>17</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="5"><country>Canada</country><province>Saskatchewan</province><confirmed>16</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="6"><country>Canada</country><province>Nova Scotia</province><confirmed>14</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="7"><country>Canada</country><province>New Brunswick</province><confirmed>11</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="8"><country>Canada</country><province>Grand Princess</province><confirmed>9</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="9"><country>Canada</country><province>Newfoundland and Labrador</province><confirmed>3</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="10"><country>Canada</country><province>Prince Edward Island</province><confirmed>2</confirmed><recovered>0</recovered><deaths>0</deaths></item>
+                    </response>
+                Italy:
+                  value: |-
+                    <?xml version="1.0"?>
+                    <response>
+                    <item key="0"><country>Italy</country><province/><confirmed>41035</confirmed><recovered>4440</recovered><deaths>3405</deaths></item></response>
+              schema:
+                items:
+                  properties:
+                    confirmed:
+                      type: integer
+                    country:
+                      type: string
+                    deaths:
+                      type: integer
+                    province:
+                      type: string
+                    recovered:
+                      type: integer
+                  type: object
+                type: array
+          description: Data about COVID-19 for selected country
+      summary: getCountryDataByParams
+      tags:
+        - GetCountryData
+  '/country/{country}.{format}':
+    get:
+      description: Get data for specific country. Country name and format are in path.
+      operationId: getCountryDataByPath
+      parameters:
+        - description: Name of the country
+          in: path
+          name: country
+          required: true
+          schema:
+            type: string
+        - description: Format of the response
+          in: path
+          name: format
+          required: true
+          schema:
+            default: json
+            enum:
+              - json
+              - xml
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Canada:
+                  value:
+                    - confirmed: 257
+                      country: Canada
+                      deaths: 1
+                      province: Ontario
+                      recovered: 5
+                    - confirmed: 231
+                      country: Canada
+                      deaths: 7
+                      province: British Columbia
+                      recovered: 4
+                    - confirmed: 121
+                      country: Canada
+                      deaths: 1
+                      province: Quebec
+                      recovered: 0
+                    - confirmed: 119
+                      country: Canada
+                      deaths: 0
+                      province: Alberta
+                      recovered: 0
+                    - confirmed: 17
+                      country: Canada
+                      deaths: 0
+                      province: Manitoba
+                      recovered: 0
+                    - confirmed: 16
+                      country: Canada
+                      deaths: 0
+                      province: Saskatchewan
+                      recovered: 0
+                    - confirmed: 14
+                      country: Canada
+                      deaths: 0
+                      province: Nova Scotia
+                      recovered: 0
+                    - confirmed: 11
+                      country: Canada
+                      deaths: 0
+                      province: New Brunswick
+                      recovered: 0
+                    - confirmed: 9
+                      country: Canada
+                      deaths: 0
+                      province: Grand Princess
+                      recovered: 0
+                    - confirmed: 3
+                      country: Canada
+                      deaths: 0
+                      province: Newfoundland and Labrador
+                      recovered: 0
+                    - confirmed: 2
+                      country: Canada
+                      deaths: 0
+                      province: Prince Edward Island
+                      recovered: 0
+                Italy:
+                  value:
+                    - confirmed: 41035
+                      country: Italy
+                      deaths: 3405
+                      province: ''
+                      recovered: 4440
+              schema:
+                items:
+                  properties:
+                    confirmed:
+                      type: integer
+                    country:
+                      type: string
+                    deaths:
+                      type: integer
+                    province:
+                      type: string
+                    recovered:
+                      type: integer
+                  type: object
+                type: array
+            application/xml:
+              examples:
+                Canada:
+                  value: |-
+                    <?xml version="1.0"?>
+                    <response>
+                    <item key="0"><country>Canada</country><province>Ontario</province><confirmed>257</confirmed><recovered>5</recovered><deaths>1</deaths></item> <item key="1"><country>Canada</country><province>British Columbia</province><confirmed>231</confirmed><recovered>4</recovered><deaths>7</deaths></item><item key="2"><country>Canada</country><province>Quebec</province><confirmed>121</confirmed><recovered>0</recovered><deaths>1</deaths></item><item key="3"><country>Canada</country><province>Alberta</province><confirmed>119</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="4"><country>Canada</country><province>Manitoba</province><confirmed>17</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="5"><country>Canada</country><province>Saskatchewan</province><confirmed>16</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="6"><country>Canada</country><province>Nova Scotia</province><confirmed>14</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="7"><country>Canada</country><province>New Brunswick</province><confirmed>11</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="8"><country>Canada</country><province>Grand Princess</province><confirmed>9</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="9"><country>Canada</country><province>Newfoundland and Labrador</province><confirmed>3</confirmed><recovered>0</recovered><deaths>0</deaths></item><item key="10"><country>Canada</country><province>Prince Edward Island</province><confirmed>2</confirmed><recovered>0</recovered><deaths>0</deaths></item>
+                    </response>
+                Italy:
+                  value: |-
+                    <?xml version="1.0"?>
+                    <response>
+                    <item key="0"><country>Italy</country><province/><confirmed>41035</confirmed><recovered>4440</recovered><deaths>3405</deaths></item>
+                    </response>
+              schema:
+                items:
+                  properties:
+                    confirmed:
+                      type: integer
+                    country:
+                      type: string
+                    deaths:
+                      type: integer
+                    province:
+                      type: string
+                    recovered:
+                      type: integer
+                  type: object
+                type: array
+          description: Data about COVID-19 for selected country
+      summary: getCountryDataByPath
+      tags:
+        - GetCountryData
+components:
+  schemas:
+    Country-read:
+      description: ''
+      properties:
+        confirmed:
+          type: integer
+        deaths:
+          type: integer
+        name:
+          type: string
+        province:
+          type: string
+        recovered:
+          type: integer
+      type: object
