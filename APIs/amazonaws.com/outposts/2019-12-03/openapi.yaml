@@ -175,13 +175,13 @@ paths:
                   minLength: 1
                   maxLength: 255
                 AvailabilityZone:
-                  description: The Availability Zone.
+                  description: <p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
                   type: string
                   pattern: '[a-z\d-]+'
                   minLength: 1
                   maxLength: 1000
                 AvailabilityZoneId:
-                  description: The ID of the Availability Zone.
+                  description: <p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
                   type: string
                   pattern: '[a-z]+[0-9]+-az[0-9]+'
                   minLength: 1
@@ -631,13 +631,13 @@ components:
     AvailabilityZone:
       type: string
       pattern: '[a-z\d-]+'
-      description: The Availability Zone.
+      description: <p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
       minLength: 1
       maxLength: 1000
     AvailabilityZoneId:
       type: string
       pattern: '[a-z]+[0-9]+-az[0-9]+'
-      description: The ID of the Availability Zone.
+      description: <p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
       minLength: 1
       maxLength: 255
     OutpostName:
