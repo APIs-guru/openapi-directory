@@ -918,10 +918,10 @@ paths:
                   description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
                   type: string
                 timeoutInMillis:
-                  description: 'An integer with a value between [50-29000].'
+                  description: 'An integer with a value between [50-30000].'
                   type: integer
                   minimum: 50
-                  maximum: 29000
+                  maximum: 30000
                 tlsConfig:
                   description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
                   type: object
@@ -2844,10 +2844,10 @@ paths:
                   description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
                   type: string
                 timeoutInMillis:
-                  description: 'An integer with a value between [50-29000].'
+                  description: 'An integer with a value between [50-30000].'
                   type: integer
                   minimum: 50
-                  maximum: 29000
+                  maximum: 30000
                 tlsConfig:
                   description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
                   type: object
@@ -4394,8 +4394,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration. Supported only for WebSocket APIs.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfig'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
@@ -4866,8 +4866,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration. Supported only for WebSocket APIs.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfig'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
@@ -5398,8 +5398,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration. Supported only for WebSocket APIs.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfig'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
@@ -5953,11 +5953,11 @@ components:
       description: A mapping of identifier keys to templates. The value is an actual template script. The key is typically a SelectionKey which is chosen based on evaluating a selection expression.
       additionalProperties:
         $ref: '#/components/schemas/StringWithLengthBetween0And32K'
-    IntegerWithLengthBetween50And29000:
+    IntegerWithLengthBetween50And30000:
       type: integer
-      description: 'An integer with a value between [50-29000].'
+      description: 'An integer with a value between [50-30000].'
       minimum: 50
-      maximum: 29000
+      maximum: 30000
     TlsConfigInput:
       type: object
       properties:
@@ -6017,8 +6017,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfigInput'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
@@ -6580,8 +6580,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration. Supported only for WebSocket APIs.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfig'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
@@ -6915,8 +6915,8 @@ components:
           $ref: '#/components/schemas/SelectionExpression'
           description: The template selection expression for the integration.
         TimeoutInMillis:
-          $ref: '#/components/schemas/IntegerWithLengthBetween50And29000'
-          description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.'
+          $ref: '#/components/schemas/IntegerWithLengthBetween50And30000'
+          description: 'Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.'
         TlsConfig:
           $ref: '#/components/schemas/TlsConfigInput'
           description: 'The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.'
