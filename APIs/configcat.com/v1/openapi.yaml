@@ -1,0 +1,1387 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@configcat.com
+    name: ConfigCat
+    url: 'https://configcat.com'
+    x-twitter: configcat
+  description: The purpose of this API is to manage Feature Flags & Settings programmatically.
+  termsOfService: 'https://configcat.com/termsofserviceagreement'
+  title: ConfigCat Public API (Beta)
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://twitter.com/configcat/profile_image?size=original'
+  x-origin:
+    - format: openapi
+      url: 'https://api.configcat.com/docs/v1/swagger.json'
+      version: '3.0'
+  x-providerName: configcat.com
+security:
+  - Basic: []
+tags:
+  - description: '<a href="https://configcat.com/docs/main-concepts/#product" target="_blank">Read</a> about the concept of Products.'
+    name: Products
+  - description: '<a href="https://configcat.com/docs/main-concepts/#config" target="_blank">Read</a> about the concept of Configs.'
+    name: Configs
+  - description: '<a href="https://configcat.com/docs/main-concepts/#environment" target="_blank">Read</a> about the concept of Environments.'
+    name: Environments
+  - description: '<a href="https://configcat.com/docs/main-concepts/#setting" target="_blank">Read</a> about the concept of Settings.'
+    name: Feature Flags & Settings
+  - description: Manage Feature Flag & Setting values.
+    name: Feature Flag & Setting values
+  - description: 'Manage Feature Flag & Setting values using <a target="_blank" href="https://app.configcat.com/apikey">API key</a>.'
+    name: Feature Flag & Setting values using SDK API Key
+  - description: ''
+    name: AuditLogs
+  - description: ''
+    name: Me
+paths:
+  '/v1/configs/{configId}/settings':
+    get:
+      operationId: get-settings
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                type: array
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the list of Settings for a given Config.
+      tags:
+        - Feature Flags & Settings
+    post:
+      operationId: create-setting
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateSettingModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSettingModel'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateSettingModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateSettingModel'
+        required: true
+      responses:
+        '201':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+          description: When the creation was successful.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Create a new Setting for a specified Config.
+      tags:
+        - Feature Flags & Settings
+  '/v1/environments/{environmentId}':
+    put:
+      operationId: update-environment
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnvironmentModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnvironmentModel'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnvironmentModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnvironmentModel'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Update an Environment.
+      tags:
+        - Environments
+  '/v1/environments/{environmentId}/settings/{settingId}/value':
+    get:
+      operationId: get-setting-value
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The id of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: 'When everything is ok, the setting value data returned.'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the value of a Setting for a specified Environment.
+      tags:
+        - Feature Flag & Setting values
+    patch:
+      operationId: update-setting-value
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The id of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+          in: query
+          name: reason
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json-patch+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+        description: 'The JSON Patch operations (http://jsonpatch.com).'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: When the patch was successful.
+        '204':
+          description: When no change applied on the resource.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: 'Update the value of a Setting for a specified Environment using JSON Patch http://jsonpatch.com.'
+      tags:
+        - Feature Flag & Setting values
+    put:
+      operationId: replace-setting-value
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The id of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+          in: query
+          name: reason
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Update the value of a Setting for a specified Environment.
+      tags:
+        - Feature Flag & Setting values
+  /v1/me:
+    get:
+      operationId: get-me
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/MeModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MeModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MeModel'
+          description: ''
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+      summary: Get authenticated user details.
+      tags:
+        - Me
+  /v1/products:
+    get:
+      operationId: get-products
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProductModel-haljson'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProductModel'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProductModel'
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProductModel'
+                type: array
+          description: ''
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+      summary: Get the list of Products.
+      tags:
+        - Products
+  '/v1/products/{productId}/auditlogs':
+    get:
+      operationId: get-auditlogs
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Config.
+          in: query
+          name: configId
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Environment.
+          in: query
+          name: environmentId
+          schema:
+            format: uuid
+            type: string
+        - description: Filter Audit logs by Audit log type.
+          in: query
+          name: auditLogType
+          schema:
+            $ref: '#/components/schemas/AuditLogType'
+        - description: Filter Audit logs by starting UTC date.
+          in: query
+          name: fromUtcDateTime
+          schema:
+            format: date-time
+            type: string
+        - description: Filter Audit logs by ending UTC date.
+          in: query
+          name: toUtcDateTime
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+                type: array
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the list of Audit logs for a given Product optionally filtered by Config and/or Environment.
+      tags:
+        - AuditLogs
+  '/v1/products/{productId}/configs':
+    get:
+      operationId: get-configs
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigModel-haljson'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigModel'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigModel'
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ConfigModel'
+                type: array
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the list of Configs for a given Product.
+      tags:
+        - Configs
+  '/v1/products/{productId}/environments':
+    get:
+      operationId: get-environments
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnvironmentModel'
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnvironmentModel'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnvironmentModel'
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnvironmentModel'
+                type: array
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the list of Environments for a given Product.
+      tags:
+        - Environments
+    post:
+      operationId: create-environment
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentModel'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentModel'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EnvironmentModel'
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Create a new Environment for a specified product.
+      tags:
+        - Environments
+  '/v1/settings/{settingId}':
+    delete:
+      operationId: delete-setting
+      parameters:
+        - description: The identifier of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        '204':
+          description: When the delete was successful.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Delete a Setting.
+      tags:
+        - Feature Flags & Settings
+    get:
+      operationId: get-setting
+      parameters:
+        - description: The identifier of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+          description: 'When everything is ok, the setting data returned.'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get a Setting.
+      tags:
+        - Feature Flags & Settings
+    patch:
+      operationId: update-setting
+      parameters:
+        - description: The identifier of the Setting.
+          in: path
+          name: settingId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json-patch+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+        description: 'The JSON Patch operations (http://jsonpatch.com).'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+          description: When the update was successful.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: 'Update a Setting using JSON Patch http://jsonpatch.com.'
+      tags:
+        - Feature Flags & Settings
+  '/v1/settings/{settingKeyOrId}/value':
+    get:
+      operationId: get-setting-value-by-apikey
+      parameters:
+        - description: The key or The id of the Setting.
+          in: path
+          name: settingKeyOrId
+          required: true
+          schema:
+            type: string
+        - description: 'The ConfigCat API Key. (https://app.configcat.com/connect)'
+          in: header
+          name: X-CONFIGCAT-APIKEY
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Get the value of a Setting for an API Key.
+      tags:
+        - Feature Flag & Setting values using SDK API Key
+    patch:
+      operationId: update-setting-value-by-apikey
+      parameters:
+        - description: The key or The id of the Setting.
+          in: path
+          name: settingKeyOrId
+          required: true
+          schema:
+            type: string
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+          in: query
+          name: reason
+          schema:
+            type: string
+        - description: 'The ConfigCat API Key. (https://app.configcat.com/connect)'
+          in: header
+          name: X-CONFIGCAT-APIKEY
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          application/json-patch+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Operation'
+              type: array
+        description: 'The JSON Patch operations (http://jsonpatch.com).'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: ''
+        '204':
+          description: When no change applied on the resource.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: 'Update the value of a Setting for an API Key using JSON Patch http://jsonpatch.com.'
+      tags:
+        - Feature Flag & Setting values using SDK API Key
+    put:
+      operationId: replace-setting-value-by-apikey
+      parameters:
+        - description: The key or The id of the Setting.
+          in: path
+          name: settingKeyOrId
+          required: true
+          schema:
+            type: string
+        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+          in: query
+          name: reason
+          schema:
+            type: string
+        - description: 'The ConfigCat API Key. (https://app.configcat.com/connect)'
+          in: header
+          name: X-CONFIGCAT-APIKEY
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingValueModel'
+        required: true
+      responses:
+        '200':
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel-haljson'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SettingValueModel'
+          description: ''
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. In case of the Public API credentials are invalid.
+        '404':
+          description: Not found.
+      summary: Update the value of a Setting for an API Key.
+      tags:
+        - Feature Flag & Setting values using SDK API Key
+components:
+  schemas:
+    AuditLogItemModel:
+      additionalProperties: false
+      properties:
+        actionTarget:
+          nullable: true
+          readOnly: true
+          type: string
+        auditLogDateTime:
+          format: date-time
+          readOnly: true
+          type: string
+        auditLogId:
+          format: int64
+          readOnly: true
+          type: integer
+        auditLogType:
+          nullable: true
+          readOnly: true
+          type: string
+        details:
+          nullable: true
+          readOnly: true
+          type: string
+        userEmail:
+          nullable: true
+          readOnly: true
+          type: string
+        userName:
+          nullable: true
+          readOnly: true
+          type: string
+        where:
+          nullable: true
+          readOnly: true
+          type: string
+        why:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    AuditLogType:
+      enum:
+        - productCreated
+        - productChanged
+        - productOwnershipTransferred
+        - teamMemberInvited
+        - teamMemberInvitationRevoked
+        - teamMemberJoined
+        - teamMemberPermissionGroupChanged
+        - teamMemberRemoved
+        - teamMemberLeft
+        - teamMemberInvitationChanged
+        - teamMemberInvitationResent
+        - teamMemberInvitationRejected
+        - configCreated
+        - configChanged
+        - configDeleted
+        - environmentCreated
+        - environmentChanged
+        - environmentDeleted
+        - settingCreated
+        - settingChanged
+        - settingDeleted
+        - settingValueChanged
+        - webHookCreated
+        - webHookChanged
+        - webHookDeleted
+        - subscriptionChanged
+        - memberGroupCreated
+        - memberGroupChanged
+        - memberGroupDeleted
+        - apiKeyAdded
+        - apiKeyRemoved
+        - integrationAdded
+        - integrationChanged
+        - integrationRemoved
+        - apiKeyConnected
+      type: string
+    ConfigModel:
+      additionalProperties: false
+      properties:
+        configId:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    ConfigModel-haljson:
+      properties:
+        _links:
+          properties:
+            settings:
+              type: string
+          type: object
+        configId:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    CreateEnvironmentModel:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - name
+      type: object
+    CreateSettingModel:
+      additionalProperties: false
+      properties:
+        hint:
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        key:
+          maxLength: 255
+          minLength: 0
+          pattern: '^[a-zA-Z]+[a-zA-Z0-9_]*'
+          type: string
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        settingType:
+          allOf:
+            - $ref: '#/components/schemas/SettingType'
+      required:
+        - key
+        - name
+        - settingType
+      type: object
+    EnvironmentModel:
+      additionalProperties: false
+      properties:
+        environmentId:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    MeModel:
+      additionalProperties: false
+      properties:
+        email:
+          nullable: true
+          readOnly: true
+          type: string
+        fullName:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    Operation:
+      additionalProperties: false
+      properties:
+        from:
+          nullable: true
+          type: string
+        op:
+          nullable: true
+          type: string
+        path:
+          nullable: true
+          type: string
+        value:
+          additionalProperties: false
+          nullable: true
+          type: object
+      type: object
+    ProductModel:
+      additionalProperties: false
+      properties:
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+        productId:
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    ProductModel-haljson:
+      properties:
+        _links:
+          properties:
+            configs:
+              type: string
+            environments:
+              type: string
+          type: object
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+        productId:
+          format: uuid
+          readOnly: true
+          type: string
+      type: object
+    RolloutPercentageItemModel:
+      additionalProperties: false
+      properties:
+        percentage:
+          format: int64
+          type: integer
+        value:
+          additionalProperties: false
+          type: object
+      required:
+        - percentage
+        - value
+      type: object
+    RolloutRuleComparator:
+      enum:
+        - isOneOf
+        - isNotOneOf
+        - contains
+        - doesNotContain
+        - semVerIsOneOf
+        - semVerIsNotOneOf
+        - semVerLess
+        - semVerLessOrEquals
+        - semVerGreater
+        - semVerGreaterOrEquals
+        - numberEquals
+        - numberDoesNotEqual
+        - numberLess
+        - numberLessOrEquals
+        - numberGreater
+        - numberGreaterOrEquals
+        - sensitiveIsOneOf
+        - sensitiveIsNotOneOf
+      type: string
+    RolloutRuleModel:
+      additionalProperties: false
+      properties:
+        comparator:
+          allOf:
+            - $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        comparisonValue:
+          maxLength: 65535
+          minLength: 0
+          type: string
+        value:
+          additionalProperties: false
+          type: object
+      required:
+        - comparisonAttribute
+        - comparisonValue
+        - value
+      type: object
+    SettingDataModel:
+      additionalProperties: false
+      properties:
+        hint:
+          nullable: true
+          readOnly: true
+          type: string
+        key:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+        settingId:
+          format: int32
+          readOnly: true
+          type: integer
+        settingType:
+          allOf:
+            - $ref: '#/components/schemas/SettingType'
+          readOnly: true
+      type: object
+    SettingModel:
+      additionalProperties: false
+      properties:
+        hint:
+          nullable: true
+          readOnly: true
+          type: string
+        key:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+        settingId:
+          format: int32
+          readOnly: true
+          type: integer
+        settingType:
+          allOf:
+            - $ref: '#/components/schemas/SettingType'
+          readOnly: true
+      type: object
+    SettingType:
+      enum:
+        - boolean
+        - string
+        - int
+        - double
+      type: string
+    SettingValueModel:
+      additionalProperties: false
+      properties:
+        config:
+          allOf:
+            - $ref: '#/components/schemas/ConfigModel'
+          nullable: true
+          readOnly: true
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentModel'
+          nullable: true
+          readOnly: true
+        rolloutPercentageItems:
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+          nullable: true
+          type: array
+        rolloutRules:
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+          nullable: true
+          type: array
+        setting:
+          allOf:
+            - $ref: '#/components/schemas/SettingDataModel'
+          nullable: true
+          readOnly: true
+        value:
+          additionalProperties: false
+          type: object
+      required:
+        - value
+      type: object
+    SettingValueModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            config:
+              properties:
+                _links:
+                  properties:
+                    settings:
+                      type: string
+                  type: object
+                configId:
+                  format: uuid
+                  readOnly: true
+                  type: string
+                name:
+                  nullable: true
+                  readOnly: true
+                  type: string
+              type: object
+            environment:
+              additionalProperties: false
+              properties:
+                environmentId:
+                  format: uuid
+                  readOnly: true
+                  type: string
+                name:
+                  nullable: true
+                  readOnly: true
+                  type: string
+              type: object
+            setting:
+              additionalProperties: false
+              properties:
+                hint:
+                  nullable: true
+                  readOnly: true
+                  type: string
+                key:
+                  nullable: true
+                  readOnly: true
+                  type: string
+                name:
+                  nullable: true
+                  readOnly: true
+                  type: string
+                settingId:
+                  format: int32
+                  readOnly: true
+                  type: integer
+                settingType:
+                  allOf:
+                    - $ref: '#/components/schemas/SettingType'
+                  readOnly: true
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        rolloutPercentageItems:
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+          nullable: true
+          type: array
+        rolloutRules:
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+          nullable: true
+          type: array
+        value:
+          additionalProperties: false
+          type: object
+      type: object
+    UpdateEnvironmentModel:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+      type: object
+    UpdateSettingValueModel:
+      additionalProperties: false
+      properties:
+        rolloutPercentageItems:
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+          nullable: true
+          type: array
+        rolloutRules:
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+          nullable: true
+          type: array
+        value:
+          additionalProperties: false
+          type: object
+      required:
+        - value
+      type: object
+  securitySchemes:
+    Basic:
+      description: '<a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Get your personal Public API credentials</a> to access this API.'
+      scheme: basic
+      type: http
