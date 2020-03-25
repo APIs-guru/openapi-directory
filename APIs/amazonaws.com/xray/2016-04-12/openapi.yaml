@@ -1941,6 +1941,9 @@ components:
         Services:
           $ref: '#/components/schemas/ErrorRootCauseServices'
           description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+        ClientImpacting:
+          $ref: '#/components/schemas/NullableBoolean'
+          description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause of a trace summary error.
     RootCauseExceptions:
       type: array
@@ -2003,6 +2006,9 @@ components:
         Services:
           $ref: '#/components/schemas/FaultRootCauseServices'
           description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+        ClientImpacting:
+          $ref: '#/components/schemas/NullableBoolean'
+          description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause information for a trace summary fault.
     FaultRootCauseEntity:
       type: object
@@ -2362,6 +2368,9 @@ components:
         Services:
           $ref: '#/components/schemas/ResponseTimeRootCauseServices'
           description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
+        ClientImpacting:
+          $ref: '#/components/schemas/NullableBoolean'
+          description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause information for a response time warning.
     ResponseTimeRootCauseEntity:
       type: object

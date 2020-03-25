@@ -163,6 +163,78 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/packages/associate/{PackageID}/{DomainName}':
+    post:
+      operationId: AssociatePackage
+      description: Associates a package with an Amazon ES domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociatePackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: PackageID
+          in: path
+          required: true
+          description: Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.
+          schema:
+            type: string
+        - name: DomainName
+          in: path
+          required: true
+          description: Name of the domain that you want to associate the package with.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+            minLength: 3
+            maxLength: 28
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/serviceSoftwareUpdate/cancel:
     post:
       operationId: CancelElasticsearchServiceSoftwareUpdate
@@ -438,6 +510,104 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/packages:
+    post:
+      operationId: CreatePackage
+      description: Create a package for use with Amazon ES domains.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InvalidTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '484':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - PackageName
+                - PackageType
+                - PackageSource
+              properties:
+                PackageName:
+                  description: Unique identifier for the package.
+                  type: string
+                  pattern: '[a-z][a-z0-9\-]+'
+                  minLength: 3
+                  maxLength: 28
+                PackageType:
+                  description: Type of package. Currently supports only TXT-DICTIONARY.
+                  type: string
+                  enum:
+                    - TXT-DICTIONARY
+                PackageDescription:
+                  description: Description of the package.
+                  type: string
+                  maxLength: 1024
+                PackageSource:
+                  description: The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code>
+                  type: object
+                  properties:
+                    S3BucketName:
+                      $ref: '#/components/schemas/S3BucketName'
+                      description: Name of the bucket containing the package.
+                    S3Key:
+                      $ref: '#/components/schemas/S3Key'
+                      description: Key (file name) of the package.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/domain/{DomainName}':
     delete:
       operationId: DeleteElasticsearchDomain
@@ -562,6 +732,68 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/packages/{PackageID}':
+    delete:
+      operationId: DeletePackage
+      description: Delete the package.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: PackageID
+          in: path
+          required: true
+          description: Internal ID of the package that you want to delete. Use <code>DescribePackages</code> to find this value.
+          schema:
+            type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -996,6 +1228,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/packages/describe:
+    post:
+      operationId: DescribePackages
+      description: 'Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePackagesResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Filters:
+                  description: A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DescribePackagesFilter'
+                MaxResults:
+                  description: ' Set this value to limit the number of results returned. '
+                  type: integer
+                  maximum: 100
+                NextToken:
+                  description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/reservedInstanceOfferings:
     get:
       operationId: DescribeReservedElasticsearchInstanceOfferings
@@ -1144,6 +1457,78 @@ paths:
             type: string
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/packages/dissociate/{PackageID}/{DomainName}':
+    post:
+      operationId: DissociatePackage
+      description: Dissociates a package from the Amazon ES domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DissociatePackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: PackageID
+          in: path
+          required: true
+          description: Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.
+          schema:
+            type: string
+        - name: DomainName
+          in: path
+          required: true
+          description: Name of the domain that you want to associate the package with.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+            minLength: 3
+            maxLength: 28
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1390,6 +1775,89 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/packages/{PackageID}/domains':
+    get:
+      operationId: ListDomainsForPackage
+      description: Lists all Amazon ES domains associated with the package.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDomainsForPackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: PackageID
+          in: path
+          required: true
+          description: The package for which to list domains.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Limits results to a maximum number of domains.
+          schema:
+            type: integer
+            description: ' Set this value to limit the number of results returned. '
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
+          schema:
+            type: string
+            description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/instanceTypes/{ElasticsearchVersion}':
     get:
       operationId: ListElasticsearchInstanceTypes
@@ -1525,6 +1993,93 @@ paths:
           in: query
           required: false
           description: ''
+          schema:
+            type: string
+            description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/domain/{DomainName}/packages':
+    get:
+      operationId: ListPackagesForDomain
+      description: Lists all packages associated with the Amazon ES domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackagesForDomainResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The name of the domain for which you want to list associated packages.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+            minLength: 3
+            maxLength: 28
+        - name: maxResults
+          in: query
+          required: false
+          description: Limits results to a maximum number of packages.
+          schema:
+            type: integer
+            description: ' Set this value to limit the number of results returned. '
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
           schema:
             type: string
             description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
@@ -1936,6 +2491,16 @@ components:
     LimitExceededException: {}
     ValidationException: {}
     InternalException: {}
+    AssociatePackageResponse:
+      type: object
+      properties:
+        DomainPackageDetails:
+          $ref: '#/components/schemas/DomainPackageDetails'
+          description: <code>DomainPackageDetails</code>
+      description: ' Container for response returned by <code> <a>AssociatePackage</a> </code> operation. '
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    ConflictException: {}
     CancelElasticsearchServiceSoftwareUpdateResponse:
       type: object
       properties:
@@ -1943,7 +2508,6 @@ components:
           $ref: '#/components/schemas/ServiceSoftwareOptions'
           description: The current status of the Elasticsearch service software update.
       description: The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
-    ResourceNotFoundException: {}
     CreateElasticsearchDomainResponse:
       type: object
       properties:
@@ -2089,6 +2653,19 @@ components:
     DisabledOperationException: {}
     InvalidTypeException: {}
     ResourceAlreadyExistsException: {}
+    CreatePackageResponse:
+      type: object
+      properties:
+        PackageDetails:
+          $ref: '#/components/schemas/PackageDetails'
+          description: Information about the package <code>PackageDetails</code>.
+      description: ' Container for response returned by <code> <a>CreatePackage</a> </code> operation. '
+    S3BucketName:
+      type: string
+      minLength: 3
+      maxLength: 63
+    S3Key:
+      type: string
     DeleteElasticsearchDomainResponse:
       type: object
       properties:
@@ -2096,6 +2673,13 @@ components:
           $ref: '#/components/schemas/ElasticsearchDomainStatus'
           description: The status of the Elasticsearch domain being deleted.
       description: 'The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.'
+    DeletePackageResponse:
+      type: object
+      properties:
+        PackageDetails:
+          $ref: '#/components/schemas/PackageDetails'
+          description: <code>PackageDetails</code>
+      description: ' Container for response parameters to <code> <a>DeletePackage</a> </code> operation. '
     DescribeElasticsearchDomainResponse:
       type: object
       required:
@@ -2135,6 +2719,25 @@ components:
         LimitsByRole:
           $ref: '#/components/schemas/LimitsByRole'
       description: ' Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
+    DescribePackagesResponse:
+      type: object
+      properties:
+        PackageDetailsList:
+          $ref: '#/components/schemas/PackageDetailsList'
+          description: List of <code>PackageDetails</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: ' Container for response returned by <code> <a>DescribePackages</a> </code> operation. '
+    DescribePackagesFilter:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/DescribePackagesFilterName'
+          description: Any field from <code>PackageDetails</code>.
+        Value:
+          $ref: '#/components/schemas/DescribePackagesFilterValues'
+          description: A list of values for the specified field.
+      description: Filter to apply in <code>DescribePackage</code> response.
     DescribeReservedElasticsearchInstanceOfferingsResponse:
       type: object
       properties:
@@ -2155,6 +2758,13 @@ components:
           $ref: '#/components/schemas/ReservedElasticsearchInstanceList'
           description: List of reserved Elasticsearch instances.
       description: Container for results from <code>DescribeReservedElasticsearchInstances</code>
+    DissociatePackageResponse:
+      type: object
+      properties:
+        DomainPackageDetails:
+          $ref: '#/components/schemas/DomainPackageDetails'
+          description: <code>DomainPackageDetails</code>
+      description: ' Container for response returned by <code> <a>DissociatePackage</a> </code> operation. '
     GetCompatibleElasticsearchVersionsResponse:
       type: object
       properties:
@@ -2192,6 +2802,15 @@ components:
           $ref: '#/components/schemas/DomainInfoList'
           description: List of Elasticsearch domain names.
       description: The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.
+    ListDomainsForPackageResponse:
+      type: object
+      properties:
+        DomainPackageDetailsList:
+          $ref: '#/components/schemas/DomainPackageDetailsList'
+          description: List of <code>DomainPackageDetails</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: ' Container for response parameters to <code> <a>ListDomainsForPackage</a> </code> operation. '
     ListElasticsearchInstanceTypesResponse:
       type: object
       properties:
@@ -2210,6 +2829,16 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: ' Container for the parameters for response received from <code> <a>ListElasticsearchVersions</a> </code> operation. '
+    ListPackagesForDomainResponse:
+      type: object
+      properties:
+        DomainPackageDetailsList:
+          $ref: '#/components/schemas/DomainPackageDetailsList'
+          description: List of <code>DomainPackageDetails</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: Pagination token that needs to be supplied to the next call to get the next page of results.
+      description: ' Container for response parameters to <code> <a>ListPackagesForDomain</a> </code> operation. '
     ListTagsResponse:
       type: object
       properties:
@@ -2390,6 +3019,41 @@ components:
           $ref: '#/components/schemas/OptionStatus'
           description: ' Status of the advanced security options for the specified Elasticsearch domain.'
       description: ' Specifies the status of advanced security options for the specified Elasticsearch domain.'
+    PackageID:
+      type: string
+    AssociatePackageRequest:
+      type: object
+      title: AssociatePackageRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>AssociatePackage</a> </code> operation. '
+    DomainPackageDetails:
+      type: object
+      properties:
+        PackageID:
+          $ref: '#/components/schemas/PackageID'
+          description: Internal ID of the package.
+        PackageName:
+          $ref: '#/components/schemas/PackageName'
+          description: User specified name of the package.
+        PackageType:
+          $ref: '#/components/schemas/PackageType'
+          description: Currently supports only TXT-DICTIONARY.
+        LastUpdated:
+          $ref: '#/components/schemas/LastUpdated'
+          description: Timestamp of the most-recent update to the association status.
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+          description: Name of the domain you've associated a package with.
+        DomainPackageStatus:
+          $ref: '#/components/schemas/DomainPackageStatus'
+          description: State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+        ReferencePath:
+          $ref: '#/components/schemas/ReferencePath'
+          description: 'The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.'
+        ErrorDetails:
+          $ref: '#/components/schemas/ErrorDetails'
+          description: Additional information if the package is in an error state. Null otherwise.
+      description: Information on a package that is associated with a domain.
     CancelElasticsearchServiceSoftwareUpdateRequest:
       type: object
       required:
@@ -2700,11 +3364,87 @@ components:
           $ref: '#/components/schemas/AdvancedSecurityOptions'
           description: The current status of the Elasticsearch domain's advanced security options.
       description: The current status of an Elasticsearch domain.
+    PackageName:
+      type: string
+      pattern: '[a-z][a-z0-9\-]+'
+      minLength: 3
+      maxLength: 28
+    PackageType:
+      type: string
+      enum:
+        - TXT-DICTIONARY
+    PackageDescription:
+      type: string
+      maxLength: 1024
+    PackageSource:
+      type: object
+      properties:
+        S3BucketName:
+          $ref: '#/components/schemas/S3BucketName'
+          description: Name of the bucket containing the package.
+        S3Key:
+          $ref: '#/components/schemas/S3Key'
+          description: Key (file name) of the package.
+      description: The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code>
+    CreatePackageRequest:
+      type: object
+      required:
+        - PackageName
+        - PackageType
+        - PackageSource
+      title: CreatePackageRequest
+      properties:
+        PackageName:
+          $ref: '#/components/schemas/PackageName'
+          description: Unique identifier for the package.
+        PackageType:
+          $ref: '#/components/schemas/PackageType'
+          description: Type of package. Currently supports only TXT-DICTIONARY.
+        PackageDescription:
+          $ref: '#/components/schemas/PackageDescription'
+          description: Description of the package.
+        PackageSource:
+          $ref: '#/components/schemas/PackageSource'
+          description: The customer S3 location <code>PackageSource</code> for importing the package.
+      description: ' Container for request parameters to <code> <a>CreatePackage</a> </code> operation. '
+    PackageDetails:
+      type: object
+      properties:
+        PackageID:
+          $ref: '#/components/schemas/PackageID'
+          description: Internal ID of the package.
+        PackageName:
+          $ref: '#/components/schemas/PackageName'
+          description: User specified name of the package.
+        PackageType:
+          $ref: '#/components/schemas/PackageType'
+          description: Currently supports only TXT-DICTIONARY.
+        PackageDescription:
+          $ref: '#/components/schemas/PackageDescription'
+          description: User-specified description of the package.
+        PackageStatus:
+          $ref: '#/components/schemas/PackageStatus'
+          description: Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
+        CreatedAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: Timestamp which tells creation date of the package.
+        ErrorDetails:
+          $ref: '#/components/schemas/ErrorDetails'
+          description: Additional information if the package is in an error state. Null otherwise.
+      description: Basic information about a package.
+    CreatedAt:
+      type: string
+      format: date-time
     DeleteElasticsearchDomainRequest:
       type: object
       title: DeleteElasticsearchDomainRequest
       properties: {}
       description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
+    DeletePackageRequest:
+      type: object
+      title: DeletePackageRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>DeletePackage</a> </code> operation. '
     DeploymentCloseDateTimeStamp:
       type: string
       format: date-time
@@ -2799,9 +3539,24 @@ components:
       description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>data: If the given InstanceType is used as data node</li> <li>master: If the given InstanceType is used as master node</li> <li>ultra_warm: If the given InstanceType is used as warm node</li> </ul> '
       additionalProperties:
         $ref: '#/components/schemas/Limits'
-    GUID:
+    DescribePackagesFilterName:
       type: string
-      pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
+      enum:
+        - PackageID
+        - PackageName
+        - PackageStatus
+    DescribePackagesFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/DescribePackagesFilterValue'
+    DescribePackagesFilterList:
+      type: array
+      description: A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.
+      items:
+        $ref: '#/components/schemas/DescribePackagesFilter'
+    DescribePackagesFilterValue:
+      type: string
+      pattern: '^[0-9a-zA-Z\*\.\\/\?-]*$'
     MaxResults:
       type: integer
       description: ' Set this value to limit the number of results returned. '
@@ -2809,6 +3564,27 @@ components:
     NextToken:
       type: string
       description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+    DescribePackagesRequest:
+      type: object
+      title: DescribePackagesRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/DescribePackagesFilterList'
+          description: Only returns packages that match the <code>DescribePackagesFilterList</code> values.
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: Limits results to a maximum number of packages.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
+      description: ' Container for request parameters to <code> <a>DescribePackage</a> </code> operation. '
+    PackageDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageDetails'
+    GUID:
+      type: string
+      pattern: '\p{XDigit}{8}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{4}-\p{XDigit}{12}'
     DescribeReservedElasticsearchInstanceOfferingsRequest:
       type: object
       title: DescribeReservedElasticsearchInstanceOfferingsRequest
@@ -2827,6 +3603,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReservedElasticsearchInstance'
+    DissociatePackageRequest:
+      type: object
+      title: DissociatePackageRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>DissociatePackage</a> </code> operation. '
     DomainEndpointOptionsStatus:
       type: object
       required:
@@ -2856,6 +3637,30 @@ components:
       description: ' Contains the list of Elasticsearch domain information.'
       items:
         $ref: '#/components/schemas/DomainInfo'
+    LastUpdated:
+      type: string
+      format: date-time
+    DomainPackageStatus:
+      type: string
+      enum:
+        - ASSOCIATING
+        - ASSOCIATION_FAILED
+        - ACTIVE
+        - DISSOCIATING
+        - DISSOCIATION_FAILED
+    ReferencePath:
+      type: string
+    ErrorDetails:
+      type: object
+      properties:
+        ErrorType:
+          $ref: '#/components/schemas/ErrorType'
+        ErrorMessage:
+          $ref: '#/components/schemas/ErrorMessage'
+    DomainPackageDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainPackageDetails'
     Double:
       type: number
       format: double
@@ -2988,6 +3793,10 @@ components:
       description: ' List of instance types supported by Amazon Elasticsearch service. '
       items:
         $ref: '#/components/schemas/ESPartitionInstanceType'
+    ErrorType:
+      type: string
+    ErrorMessage:
+      type: string
     GetCompatibleElasticsearchVersionsRequest:
       type: object
       title: GetCompatibleElasticsearchVersionsRequest
@@ -3074,6 +3883,11 @@ components:
           $ref: '#/components/schemas/AdditionalLimitList'
           description: ' List of additional limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
       description: ' Limits for given InstanceType and for each of it''s role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> '
+    ListDomainsForPackageRequest:
+      type: object
+      title: ListDomainsForPackageRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>ListDomainsForPackage</a> </code> operation. '
     ListElasticsearchInstanceTypesRequest:
       type: object
       title: ListElasticsearchInstanceTypesRequest
@@ -3084,6 +3898,11 @@ components:
       title: ListElasticsearchVersionsRequest
       properties: {}
       description: '<p> Container for the parameters to the <code> <a>ListElasticsearchVersions</a> </code> operation. <p> Use <code> <a>MaxResults</a> </code> to control the maximum number of results to retrieve in a single call. </p> <p> Use <code> <a>NextToken</a> </code> in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. </p> </p>'
+    ListPackagesForDomainRequest:
+      type: object
+      title: ListPackagesForDomainRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>ListPackagesForDomain</a> </code> operation. '
     ListTagsRequest:
       type: object
       title: ListTagsRequest
@@ -3117,6 +3936,17 @@ components:
     UIntValue:
       type: integer
       minimum: 0
+    PackageStatus:
+      type: string
+      enum:
+        - COPYING
+        - COPY_FAILED
+        - VALIDATING
+        - VALIDATION_FAILED
+        - AVAILABLE
+        - DELETING
+        - DELETED
+        - DELETE_FAILED
     ReservationToken:
       type: string
       minLength: 5

@@ -1655,6 +1655,9 @@ components:
         OpsCenterEnabled:
           $ref: '#/components/schemas/OpsCenterEnabled'
           description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+        CWEMonitorEnabled:
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         OpsItemSNSTopicArn:
           $ref: '#/components/schemas/OpsItemSNSTopicArn'
           description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem. '
@@ -2149,6 +2152,9 @@ components:
         OpsCenterEnabled:
           $ref: '#/components/schemas/OpsCenterEnabled'
           description: ' When set to <code>true</code>, creates opsItems for any problems detected on an application. '
+        CWEMonitorEnabled:
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         OpsItemSNSTopicArn:
           $ref: '#/components/schemas/OpsItemSNSTopicArn'
           description: ' The SNS topic provided to Application Insights that is associated to the created opsItem. Allows you to receive notifications for updates to the opsItem.'
@@ -2289,6 +2295,8 @@ components:
       maxLength: 300
     OpsCenterEnabled:
       type: boolean
+    CWEMonitorEnabled:
+      type: boolean
     Remarks:
       type: string
     ApplicationInfo:
@@ -2306,6 +2314,9 @@ components:
         OpsCenterEnabled:
           $ref: '#/components/schemas/OpsCenterEnabled'
           description: ' Indicates whether Application Insights will create opsItems for any problem detected by Application Insights for an application. '
+        CWEMonitorEnabled:
+          $ref: '#/components/schemas/CWEMonitorEnabled'
+          description: ' Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as <code>instance terminated</code>, <code>failed deployment</code>, and others. '
         Remarks:
           $ref: '#/components/schemas/Remarks'
           description: '<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>'
@@ -2314,6 +2325,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ApplicationInfo'
+    CloudWatchEventDetailType:
+      type: string
+    CloudWatchEventId:
+      type: string
+    CloudWatchEventSource:
+      type: string
+      enum:
+        - EC2
+        - CODE_DEPLOY
+        - HEALTH
+    CodeDeployApplication:
+      type: string
+    CodeDeployDeploymentGroup:
+      type: string
+    CodeDeployDeploymentId:
+      type: string
+    CodeDeployInstanceGroupId:
+      type: string
+    CodeDeployState:
+      type: string
     ComponentConfiguration:
       type: string
       minLength: 1
@@ -2454,6 +2485,69 @@ components:
         Value:
           $ref: '#/components/schemas/Value'
           description: The value of the source observation metric.
+        CloudWatchEventId:
+          $ref: '#/components/schemas/CloudWatchEventId'
+          description: ' The ID of the CloudWatch Event-based observation related to the detected problem. '
+        CloudWatchEventSource:
+          $ref: '#/components/schemas/CloudWatchEventSource'
+          description: ' The source of the CloudWatch Event. '
+        CloudWatchEventDetailType:
+          $ref: '#/components/schemas/CloudWatchEventDetailType'
+          description: ' The detail type of the CloudWatch Event-based observation, for example, <code>EC2 Instance State-change Notification</code>. '
+        HealthEventArn:
+          $ref: '#/components/schemas/HealthEventArn'
+          description: ' The Amazon Resource Name (ARN) of the AWS Health Event-based observation.'
+        HealthService:
+          $ref: '#/components/schemas/HealthService'
+          description: ' The service to which the AWS Health Event belongs, such as EC2. '
+        HealthEventTypeCode:
+          $ref: '#/components/schemas/HealthEventTypeCode'
+          description: ' The type of the AWS Health event, for example, <code>AWS_EC2_POWER_CONNECTIVITY_ISSUE</code>. '
+        HealthEventTypeCategory:
+          $ref: '#/components/schemas/HealthEventTypeCategory'
+          description: ' The category of the AWS Health event, such as <code>issue</code>. '
+        HealthEventDescription:
+          $ref: '#/components/schemas/HealthEventDescription'
+          description: ' The description of the AWS Health event provided by the service, such as Amazon EC2. '
+        CodeDeployDeploymentId:
+          $ref: '#/components/schemas/CodeDeployDeploymentId'
+          description: ' The deployment ID of the CodeDeploy-based observation related to the detected problem. '
+        CodeDeployDeploymentGroup:
+          $ref: '#/components/schemas/CodeDeployDeploymentGroup'
+          description: ' The deployment group to which the CodeDeploy deployment belongs. '
+        CodeDeployState:
+          $ref: '#/components/schemas/CodeDeployState'
+          description: ' The status of the CodeDeploy deployment, for example <code>SUCCESS</code> or <code> FAILURE</code>. '
+        CodeDeployApplication:
+          $ref: '#/components/schemas/CodeDeployApplication'
+          description: ' The CodeDeploy application to which the deployment belongs. '
+        CodeDeployInstanceGroupId:
+          $ref: '#/components/schemas/CodeDeployInstanceGroupId'
+          description: ' The instance group to which the CodeDeploy instance belongs. '
+        Ec2State:
+          $ref: '#/components/schemas/Ec2State'
+          description: ' The state of the instance, such as <code>STOPPING</code> or <code>TERMINATING</code>. '
+        XRayFaultPercent:
+          $ref: '#/components/schemas/XRayFaultPercent'
+          description: ' The X-Ray request fault percentage for this node. '
+        XRayThrottlePercent:
+          $ref: '#/components/schemas/XRayThrottlePercent'
+          description: ' The X-Ray request throttle percentage for this node. '
+        XRayErrorPercent:
+          $ref: '#/components/schemas/XRayErrorPercent'
+          description: ' The X-Ray request error percentage for this node. '
+        XRayRequestCount:
+          $ref: '#/components/schemas/XRayRequestCount'
+          description: ' The X-Ray request count for this node. '
+        XRayRequestAverageLatency:
+          $ref: '#/components/schemas/XRayRequestAverageLatency'
+          description: ' The X-Ray node request average latency for this node. '
+        XRayNodeName:
+          $ref: '#/components/schemas/XRayNodeName'
+          description: ' The name of the X-Ray node. '
+        XRayNodeType:
+          $ref: '#/components/schemas/XRayNodeType'
+          description: ' The type of the X-Ray node. '
       description: Describes an anomaly or error with the application.
     ProblemId:
       type: string
@@ -2501,6 +2595,8 @@ components:
           $ref: '#/components/schemas/Feedback'
           description: Feedback provided by the user about the problem.
       description: Describes a problem that is detected by correlating observations.
+    Ec2State:
+      type: string
     EndTime:
       type: string
       format: date-time
@@ -2519,6 +2615,16 @@ components:
       type: string
       enum:
         - INSIGHTS_FEEDBACK
+    HealthEventArn:
+      type: string
+    HealthEventDescription:
+      type: string
+    HealthEventTypeCategory:
+      type: string
+    HealthEventTypeCode:
+      type: string
+    HealthService:
+      type: string
     Insights:
       type: string
     LineTime:
@@ -2570,6 +2676,20 @@ components:
     Value:
       type: number
       format: double
+    XRayFaultPercent:
+      type: integer
+    XRayThrottlePercent:
+      type: integer
+    XRayErrorPercent:
+      type: integer
+    XRayRequestCount:
+      type: integer
+    XRayRequestAverageLatency:
+      type: integer
+    XRayNodeName:
+      type: string
+    XRayNodeType:
+      type: string
     ObservationList:
       type: array
       items:
