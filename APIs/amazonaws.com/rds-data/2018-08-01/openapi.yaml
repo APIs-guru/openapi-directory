@@ -164,7 +164,7 @@ paths:
                   minLength: 0
                   maxLength: 64
                 parameterSets:
-                  description: '<p>The parameter set for the batch operation.</p> <p>The maximum number of parameters in a parameter set is 1,000.</p>'
+                  description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/SqlParametersList'
@@ -447,7 +447,7 @@ paths:
   /Execute:
     post:
       operationId: ExecuteStatement
-      description: '<p>Runs a SQL statement against a database.</p> <important> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> </important> <p>The response size limit is 1 MB or 1,000 records. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated.</p>'
+      description: '<p>Runs a SQL statement against a database.</p> <important> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> </important> <p>The response size limit is 1 MB. If the call returns more than 1 MB of response data, the call is terminated.</p>'
       responses:
         '200':
           description: Success
@@ -509,7 +509,7 @@ paths:
                   description: A value that indicates whether to include metadata in the results.
                   type: boolean
                 parameters:
-                  description: The parameters for the SQL statement.
+                  description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
                   type: array
                   items:
                     $ref: '#/components/schemas/SqlParameter'
@@ -881,7 +881,7 @@ components:
           description: The name of the database.
         parameterSets:
           $ref: '#/components/schemas/SqlParameterSets'
-          description: '<p>The parameter set for the batch operation.</p> <p>The maximum number of parameters in a parameter set is 1,000.</p>'
+          description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
         resourceArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -1064,7 +1064,7 @@ components:
           description: A value that indicates whether to include metadata in the results.
         parameters:
           $ref: '#/components/schemas/SqlParametersList'
-          description: The parameters for the SQL statement.
+          description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
         resourceArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.

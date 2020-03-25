@@ -571,7 +571,7 @@ paths:
   '/#X-Amz-Target=AmazonAthena.ListNamedQueries':
     post:
       operationId: ListNamedQueries
-      description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -628,7 +628,7 @@ paths:
   '/#X-Amz-Target=AmazonAthena.ListQueryExecutions':
     post:
       operationId: ListQueryExecutions
-      description: '<p>Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      description: '<p>Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1296,7 +1296,7 @@ components:
           description: The maximum number of queries to return in this request.
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
-          description: The name of the workgroup from which the named queries are being returned.
+          description: 'The name of the workgroup from which the named queries are returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.'
     ListQueryExecutionsOutput:
       type: object
       properties:
@@ -1318,7 +1318,7 @@ components:
           description: The maximum number of query executions to return in this request.
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
-          description: The name of the workgroup from which queries are being returned.
+          description: 'The name of the workgroup from which queries are returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.'
     ListTagsForResourceOutput:
       type: object
       properties:
@@ -1686,7 +1686,7 @@ components:
           description: 'The completion date, current state, submission time, and state change reason (if applicable) for the query execution.'
         Statistics:
           $ref: '#/components/schemas/QueryExecutionStatistics'
-          description: 'The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.'
+          description: 'Query execution statistics, such as the amount of data scanned, the amount of time that the query took to process, and the type of statement that was run.'
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
           description: The name of the workgroup in which the query ran.
@@ -1781,7 +1781,7 @@ components:
       properties:
         State:
           $ref: '#/components/schemas/QueryExecutionState'
-          description: 'The state of query execution. <code>QUEUED</code> state is listed but is not used by Athena and is reserved for future use. <code>RUNNING</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>SUCCEEDED</code> indicates that the query completed without errors. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that a user input interrupted query execution. '
+          description: 'The state of query execution. <code>QUEUED</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>RUNNING</code> indicates that the query is in execution phase. <code>SUCCEEDED</code> indicates that the query completed without errors. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that a user input interrupted query execution. '
         StateChangeReason:
           $ref: '#/components/schemas/String'
           description: Further detail about the status of the query.

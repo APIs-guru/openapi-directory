@@ -585,7 +585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListNodegroups
-      description: Lists the Amazon EKS node groups associated with the specified cluster in your AWS account in the specified Region.
+      description: Lists the Amazon EKS managed node groups associated with the specified cluster in your AWS account in the specified Region. Self-managed node groups are not listed.
       responses:
         '200':
           description: Success
@@ -2360,9 +2360,11 @@ components:
         - Ec2LaunchTemplateNotFound
         - Ec2LaunchTemplateVersionMismatch
         - Ec2SubnetNotFound
+        - Ec2SubnetInvalidConfiguration
         - IamInstanceProfileNotFound
         - IamLimitExceeded
         - IamNodeRoleNotFound
+        - NodeCreationFailure
         - AsgInstanceLaunchFailures
         - InstanceLimitExceeded
         - InsufficientFreeAddresses
