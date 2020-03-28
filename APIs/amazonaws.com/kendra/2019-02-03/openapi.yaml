@@ -448,6 +448,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
           description: InternalServerException
           content:
             application/json:
@@ -1675,6 +1681,9 @@ components:
         Description:
           $ref: '#/components/schemas/Description'
           description: A description for the index.
+        ClientToken:
+          $ref: '#/components/schemas/ClientTokenName'
+          description: A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”
     DeleteFaqRequest:
       type: object
       required:
@@ -2089,7 +2098,6 @@ components:
           description: 'The document metadata to update. '
     S3ObjectKey:
       type: string
-      pattern: .*
       minLength: 1
       maxLength: 1024
     AccessControlListConfiguration:
@@ -2198,7 +2206,7 @@ components:
         LessThanOrEquals:
           $ref: '#/components/schemas/DocumentAttribute'
           description: Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
-      description: Provides filtering the query results based on document attributes.
+      description: '<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use a total of 3 layers. For example, you can use:</p> <ol> <li> <p> <code>&lt;AndAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol>'
     DocumentAttribute:
       type: object
       required:
@@ -2318,6 +2326,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ClickFeedback'
+    ClientTokenName:
+      type: string
+      minLength: 1
+      maxLength: 100
     DataSourceToIndexFieldMappingList:
       type: array
       items:
@@ -2513,6 +2525,15 @@ components:
         CrawlAttachments:
           $ref: '#/components/schemas/Boolean'
           description: ' <code>TRUE</code> to include attachments to documents stored in your Microsoft SharePoint site in the index; otherwise, <code>FALSE</code>.'
+        UseChangeLog:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Set to <code>TRUE</code> to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.'
+        InclusionPatterns:
+          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+          description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
+        ExclusionPatterns:
+          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+          description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
         VpcConfiguration:
           $ref: '#/components/schemas/DataSourceVpcConfiguration'
         FieldMappings:
@@ -2550,12 +2571,11 @@ components:
       maxLength: 40
     DataSourceFieldName:
       type: string
-      pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
+      pattern: '^[a-zA-Z][a-zA-Z0-9_.]*$'
       minLength: 1
       maxLength: 100
     DataSourceInclusionsExclusionsStringsMember:
       type: string
-      pattern: '^\P{C}*$'
       minLength: 1
       maxLength: 50
     DataSourceInclusionsExclusionsStrings:
@@ -2753,7 +2773,7 @@ components:
           description: The title of the document.
         Blob:
           $ref: '#/components/schemas/Blob'
-          description: The contents of the document as a base-64 encoded string.
+          description: '<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you''re using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>'
         S3Path:
           $ref: '#/components/schemas/S3Path'
         Attributes:
@@ -2801,7 +2821,6 @@ components:
       maxItems: 5
     DocumentAttributeStringValue:
       type: string
-      pattern: '^\P{C}*$'
       minLength: 1
       maxLength: 2048
     Long:
