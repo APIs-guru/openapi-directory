@@ -109,7 +109,7 @@ paths:
   '/#Action=BuildSuggesters':
     get:
       x-aws-operation-name: BuildSuggesters
-      operationId: GET BuildSuggesters
+      operationId: GET_BuildSuggesters
       description: 'Indexes the search suggestions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters">Configuring Suggesters</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -171,7 +171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BuildSuggesters
-      operationId: POST BuildSuggesters
+      operationId: POST_BuildSuggesters
       description: 'Indexes the search suggestions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters">Configuring Suggesters</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -221,7 +221,7 @@ paths:
   '/#Action=CreateDomain':
     get:
       x-aws-operation-name: CreateDomain
-      operationId: GET CreateDomain
+      operationId: GET_CreateDomain
       description: 'Creates a new search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html" target="_blank">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -283,7 +283,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDomain
-      operationId: POST CreateDomain
+      operationId: POST_CreateDomain
       description: 'Creates a new search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html" target="_blank">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -333,7 +333,7 @@ paths:
   '/#Action=DefineAnalysisScheme':
     get:
       x-aws-operation-name: DefineAnalysisScheme
-      operationId: GET DefineAnalysisScheme
+      operationId: GET_DefineAnalysisScheme
       description: 'Configures an analysis scheme that can be applied to a <code>text</code> or <code>text-array</code> field to define language-specific text processing options. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -424,7 +424,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineAnalysisScheme
-      operationId: POST DefineAnalysisScheme
+      operationId: POST_DefineAnalysisScheme
       description: 'Configures an analysis scheme that can be applied to a <code>text</code> or <code>text-array</code> field to define language-specific text processing options. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -486,7 +486,7 @@ paths:
   '/#Action=DefineExpression':
     get:
       x-aws-operation-name: DefineExpression
-      operationId: GET DefineExpression
+      operationId: GET_DefineExpression
       description: 'Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -575,7 +575,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineExpression
-      operationId: POST DefineExpression
+      operationId: POST_DefineExpression
       description: 'Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -637,7 +637,7 @@ paths:
   '/#Action=DefineIndexField':
     get:
       x-aws-operation-name: DefineIndexField
-      operationId: GET DefineIndexField
+      operationId: GET_DefineIndexField
       description: 'Configures an <code><a>IndexField</a></code> for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the <code><a>IndexFieldType</a></code>. If the field exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -749,7 +749,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineIndexField
-      operationId: POST DefineIndexField
+      operationId: POST_DefineIndexField
       description: 'Configures an <code><a>IndexField</a></code> for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the <code><a>IndexFieldType</a></code>. If the field exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -811,7 +811,7 @@ paths:
   '/#Action=DefineSuggester':
     get:
       x-aws-operation-name: DefineSuggester
-      operationId: GET DefineSuggester
+      operationId: GET_DefineSuggester
       description: 'Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -900,7 +900,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineSuggester
-      operationId: POST DefineSuggester
+      operationId: POST_DefineSuggester
       description: 'Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -962,7 +962,7 @@ paths:
   '/#Action=DeleteAnalysisScheme':
     get:
       x-aws-operation-name: DeleteAnalysisScheme
-      operationId: GET DeleteAnalysisScheme
+      operationId: GET_DeleteAnalysisScheme
       description: 'Deletes an analysis scheme. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -1040,7 +1040,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteAnalysisScheme
-      operationId: POST DeleteAnalysisScheme
+      operationId: POST_DeleteAnalysisScheme
       description: 'Deletes an analysis scheme. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -1096,7 +1096,7 @@ paths:
   '/#Action=DeleteDomain':
     get:
       x-aws-operation-name: DeleteDomain
-      operationId: GET DeleteDomain
+      operationId: GET_DeleteDomain
       description: 'Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html" target="_blank">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -1152,7 +1152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDomain
-      operationId: POST DeleteDomain
+      operationId: POST_DeleteDomain
       description: 'Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html" target="_blank">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -1196,7 +1196,7 @@ paths:
   '/#Action=DeleteExpression':
     get:
       x-aws-operation-name: DeleteExpression
-      operationId: GET DeleteExpression
+      operationId: GET_DeleteExpression
       description: 'Removes an <code><a>Expression</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1274,7 +1274,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteExpression
-      operationId: POST DeleteExpression
+      operationId: POST_DeleteExpression
       description: 'Removes an <code><a>Expression</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1330,7 +1330,7 @@ paths:
   '/#Action=DeleteIndexField':
     get:
       x-aws-operation-name: DeleteIndexField
-      operationId: GET DeleteIndexField
+      operationId: GET_DeleteIndexField
       description: 'Removes an <code><a>IndexField</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1407,7 +1407,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteIndexField
-      operationId: POST DeleteIndexField
+      operationId: POST_DeleteIndexField
       description: 'Removes an <code><a>IndexField</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1463,7 +1463,7 @@ paths:
   '/#Action=DeleteSuggester':
     get:
       x-aws-operation-name: DeleteSuggester
-      operationId: GET DeleteSuggester
+      operationId: GET_DeleteSuggester
       description: 'Deletes a suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1541,7 +1541,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteSuggester
-      operationId: POST DeleteSuggester
+      operationId: POST_DeleteSuggester
       description: 'Deletes a suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1597,7 +1597,7 @@ paths:
   '/#Action=DescribeAnalysisSchemes':
     get:
       x-aws-operation-name: DescribeAnalysisSchemes
-      operationId: GET DescribeAnalysisSchemes
+      operationId: GET_DescribeAnalysisSchemes
       description: 'Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1673,7 +1673,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAnalysisSchemes
-      operationId: POST DescribeAnalysisSchemes
+      operationId: POST_DescribeAnalysisSchemes
       description: 'Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1723,7 +1723,7 @@ paths:
   '/#Action=DescribeAvailabilityOptions':
     get:
       x-aws-operation-name: DescribeAvailabilityOptions
-      operationId: GET DescribeAvailabilityOptions
+      operationId: GET_DescribeAvailabilityOptions
       description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1809,7 +1809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAvailabilityOptions
-      operationId: POST DescribeAvailabilityOptions
+      operationId: POST_DescribeAvailabilityOptions
       description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1877,7 +1877,7 @@ paths:
   '/#Action=DescribeDomainEndpointOptions':
     get:
       x-aws-operation-name: DescribeDomainEndpointOptions
-      operationId: GET DescribeDomainEndpointOptions
+      operationId: GET_DescribeDomainEndpointOptions
       description: 'Returns the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -1957,7 +1957,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDomainEndpointOptions
-      operationId: POST DescribeDomainEndpointOptions
+      operationId: POST_DescribeDomainEndpointOptions
       description: 'Returns the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2019,7 +2019,7 @@ paths:
   '/#Action=DescribeDomains':
     get:
       x-aws-operation-name: DescribeDomains
-      operationId: GET DescribeDomains
+      operationId: GET_DescribeDomains
       description: 'Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain''s search endpoint: <code>q=matchall&amp;amp;q.parser=structured&amp;amp;size=0</code>. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2074,7 +2074,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDomains
-      operationId: POST DescribeDomains
+      operationId: POST_DescribeDomains
       description: 'Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain''s search endpoint: <code>q=matchall&amp;amp;q.parser=structured&amp;amp;size=0</code>. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2118,7 +2118,7 @@ paths:
   '/#Action=DescribeExpressions':
     get:
       x-aws-operation-name: DescribeExpressions
-      operationId: GET DescribeExpressions
+      operationId: GET_DescribeExpressions
       description: 'Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2194,7 +2194,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeExpressions
-      operationId: POST DescribeExpressions
+      operationId: POST_DescribeExpressions
       description: 'Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2244,7 +2244,7 @@ paths:
   '/#Action=DescribeIndexFields':
     get:
       x-aws-operation-name: DescribeIndexFields
-      operationId: GET DescribeIndexFields
+      operationId: GET_DescribeIndexFields
       description: 'Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2320,7 +2320,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeIndexFields
-      operationId: POST DescribeIndexFields
+      operationId: POST_DescribeIndexFields
       description: 'Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2370,7 +2370,7 @@ paths:
   '/#Action=DescribeScalingParameters':
     get:
       x-aws-operation-name: DescribeScalingParameters
-      operationId: GET DescribeScalingParameters
+      operationId: GET_DescribeScalingParameters
       description: 'Gets the scaling parameters configured for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2432,7 +2432,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeScalingParameters
-      operationId: POST DescribeScalingParameters
+      operationId: POST_DescribeScalingParameters
       description: 'Gets the scaling parameters configured for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2482,7 +2482,7 @@ paths:
   '/#Action=DescribeServiceAccessPolicies':
     get:
       x-aws-operation-name: DescribeServiceAccessPolicies
-      operationId: GET DescribeServiceAccessPolicies
+      operationId: GET_DescribeServiceAccessPolicies
       description: 'Gets information about the access policies that control access to the domain''s document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2550,7 +2550,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeServiceAccessPolicies
-      operationId: POST DescribeServiceAccessPolicies
+      operationId: POST_DescribeServiceAccessPolicies
       description: 'Gets information about the access policies that control access to the domain''s document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2600,7 +2600,7 @@ paths:
   '/#Action=DescribeSuggesters':
     get:
       x-aws-operation-name: DescribeSuggesters
-      operationId: GET DescribeSuggesters
+      operationId: GET_DescribeSuggesters
       description: 'Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2676,7 +2676,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSuggesters
-      operationId: POST DescribeSuggesters
+      operationId: POST_DescribeSuggesters
       description: 'Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2726,7 +2726,7 @@ paths:
   '/#Action=IndexDocuments':
     get:
       x-aws-operation-name: IndexDocuments
-      operationId: GET IndexDocuments
+      operationId: GET_IndexDocuments
       description: Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is <code>RequiresIndexDocuments</code>.
       responses:
         '200':
@@ -2788,7 +2788,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: IndexDocuments
-      operationId: POST IndexDocuments
+      operationId: POST_IndexDocuments
       description: Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is <code>RequiresIndexDocuments</code>.
       responses:
         '200':
@@ -2838,7 +2838,7 @@ paths:
   '/#Action=ListDomainNames':
     get:
       x-aws-operation-name: ListDomainNames
-      operationId: GET ListDomainNames
+      operationId: GET_ListDomainNames
       description: Lists all search domains owned by an account.
       responses:
         '200':
@@ -2878,7 +2878,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListDomainNames
-      operationId: POST ListDomainNames
+      operationId: POST_ListDomainNames
       description: Lists all search domains owned by an account.
       responses:
         '200':
@@ -2911,7 +2911,7 @@ paths:
   '/#Action=UpdateAvailabilityOptions':
     get:
       x-aws-operation-name: UpdateAvailabilityOptions
-      operationId: GET UpdateAvailabilityOptions
+      operationId: GET_UpdateAvailabilityOptions
       description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -3003,7 +3003,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateAvailabilityOptions
-      operationId: POST UpdateAvailabilityOptions
+      operationId: POST_UpdateAvailabilityOptions
       description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -3077,7 +3077,7 @@ paths:
   '/#Action=UpdateDomainEndpointOptions':
     get:
       x-aws-operation-name: UpdateDomainEndpointOptions
-      operationId: GET UpdateDomainEndpointOptions
+      operationId: GET_UpdateDomainEndpointOptions
       description: 'Updates the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -3177,7 +3177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateDomainEndpointOptions
-      operationId: POST UpdateDomainEndpointOptions
+      operationId: POST_UpdateDomainEndpointOptions
       description: 'Updates the domain''s endpoint options, specifically whether all requests to the domain must arrive over HTTPS. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html" target="_blank">Configuring Domain Endpoint Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -3251,7 +3251,7 @@ paths:
   '/#Action=UpdateScalingParameters':
     get:
       x-aws-operation-name: UpdateScalingParameters
-      operationId: GET UpdateScalingParameters
+      operationId: GET_UpdateScalingParameters
       description: 'Configures scaling parameters for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -3342,7 +3342,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateScalingParameters
-      operationId: POST UpdateScalingParameters
+      operationId: POST_UpdateScalingParameters
       description: 'Configures scaling parameters for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
       responses:
         '200':
@@ -3404,7 +3404,7 @@ paths:
   '/#Action=UpdateServiceAccessPolicies':
     get:
       x-aws-operation-name: UpdateServiceAccessPolicies
-      operationId: GET UpdateServiceAccessPolicies
+      operationId: GET_UpdateServiceAccessPolicies
       description: 'Configures the access rules that control access to the domain''s document and search endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank"> Configuring Access for an Amazon CloudSearch Domain</a>.'
       responses:
         '200':
@@ -3485,7 +3485,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateServiceAccessPolicies
-      operationId: POST UpdateServiceAccessPolicies
+      operationId: POST_UpdateServiceAccessPolicies
       description: 'Configures the access rules that control access to the domain''s document and search endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank"> Configuring Access for an Amazon CloudSearch Domain</a>.'
       responses:
         '200':

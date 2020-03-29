@@ -109,7 +109,7 @@ paths:
   '/#Action=CancelUpdateStack':
     get:
       x-aws-operation-name: CancelUpdateStack
-      operationId: GET CancelUpdateStack
+      operationId: GET_CancelUpdateStack
       description: '<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note> <p>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</p> </note>'
       responses:
         '200':
@@ -160,7 +160,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CancelUpdateStack
-      operationId: POST CancelUpdateStack
+      operationId: POST_CancelUpdateStack
       description: '<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note> <p>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</p> </note>'
       responses:
         '200':
@@ -194,7 +194,7 @@ paths:
   '/#Action=ContinueUpdateRollback':
     get:
       x-aws-operation-name: ContinueUpdateRollback
-      operationId: GET ContinueUpdateRollback
+      operationId: GET_ContinueUpdateRollback
       description: '<p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state, continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can manually <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed"> fix the error</a> and continue the rollback. By continuing the rollback, you can return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and then try to update the stack again.</p> <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when AWS CloudFormation cannot roll back all changes after a failed stack update. For example, you might have a stack that is rolling back to an old database instance that was deleted outside of AWS CloudFormation. Because AWS CloudFormation doesn''t know the database was deleted, it assumes that the database instance still exists and attempts to roll back to it, causing the update rollback to fail.</p>'
       responses:
         '200':
@@ -267,7 +267,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ContinueUpdateRollback
-      operationId: POST ContinueUpdateRollback
+      operationId: POST_ContinueUpdateRollback
       description: '<p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state, continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can manually <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed"> fix the error</a> and continue the rollback. By continuing the rollback, you can return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and then try to update the stack again.</p> <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when AWS CloudFormation cannot roll back all changes after a failed stack update. For example, you might have a stack that is rolling back to an old database instance that was deleted outside of AWS CloudFormation. Because AWS CloudFormation doesn''t know the database was deleted, it assumes that the database instance still exists and attempts to roll back to it, causing the update rollback to fail.</p>'
       responses:
         '200':
@@ -305,7 +305,7 @@ paths:
   '/#Action=CreateChangeSet':
     get:
       x-aws-operation-name: CreateChangeSet
-      operationId: GET CreateChangeSet
+      operationId: GET_CreateChangeSet
       description: '<p>Creates a list of changes that will be applied to a stack so that you can review the changes before executing them. You can create a change set for a stack that doesn''t exist or an existing stack. If you create a change set for a stack that doesn''t exist, the change set shows all of the resources that AWS CloudFormation will create. If you create a change set for an existing stack, AWS CloudFormation compares the stack''s information with the information that you submit in the change set and lists the differences. Use change sets to understand which resources AWS CloudFormation will create or change, and how it will change resources in an existing stack, before you create or update a stack.</p> <p>To create a change set for a stack that doesn''t exist, for the <code>ChangeSetType</code> parameter, specify <code>CREATE</code>. To create a change set for an existing stack, specify <code>UPDATE</code> for the <code>ChangeSetType</code> parameter. To create a change set for an import operation, specify <code>IMPORT</code> for the <code>ChangeSetType</code> parameter. After the <code>CreateChangeSet</code> call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set or to review it, use the <a>DescribeChangeSet</a> action.</p> <p>When you are satisfied with the changes the change set will make, execute the change set by using the <a>ExecuteChangeSet</a> action. AWS CloudFormation doesn''t make changes until you execute the change set.</p>'
       responses:
         '200':
@@ -494,7 +494,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateChangeSet
-      operationId: POST CreateChangeSet
+      operationId: POST_CreateChangeSet
       description: '<p>Creates a list of changes that will be applied to a stack so that you can review the changes before executing them. You can create a change set for a stack that doesn''t exist or an existing stack. If you create a change set for a stack that doesn''t exist, the change set shows all of the resources that AWS CloudFormation will create. If you create a change set for an existing stack, AWS CloudFormation compares the stack''s information with the information that you submit in the change set and lists the differences. Use change sets to understand which resources AWS CloudFormation will create or change, and how it will change resources in an existing stack, before you create or update a stack.</p> <p>To create a change set for a stack that doesn''t exist, for the <code>ChangeSetType</code> parameter, specify <code>CREATE</code>. To create a change set for an existing stack, specify <code>UPDATE</code> for the <code>ChangeSetType</code> parameter. To create a change set for an import operation, specify <code>IMPORT</code> for the <code>ChangeSetType</code> parameter. After the <code>CreateChangeSet</code> call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set or to review it, use the <a>DescribeChangeSet</a> action.</p> <p>When you are satisfied with the changes the change set will make, execute the change set by using the <a>ExecuteChangeSet</a> action. AWS CloudFormation doesn''t make changes until you execute the change set.</p>'
       responses:
         '200':
@@ -544,7 +544,7 @@ paths:
   '/#Action=CreateStack':
     get:
       x-aws-operation-name: CreateStack
-      operationId: GET CreateStack
+      operationId: GET_CreateStack
       description: 'Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.'
       responses:
         '200':
@@ -741,7 +741,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateStack
-      operationId: POST CreateStack
+      operationId: POST_CreateStack
       description: 'Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.'
       responses:
         '200':
@@ -797,7 +797,7 @@ paths:
   '/#Action=CreateStackInstances':
     get:
       x-aws-operation-name: CreateStackInstances
-      operationId: GET CreateStackInstances
+      operationId: GET_CreateStackInstances
       description: 'Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must specify at least one value for <code>Regions</code>.'
       responses:
         '200':
@@ -943,7 +943,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateStackInstances
-      operationId: POST CreateStackInstances
+      operationId: POST_CreateStackInstances
       description: 'Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either <code>Accounts</code> or <code>DeploymentTargets</code>, and you must specify at least one value for <code>Regions</code>.'
       responses:
         '200':
@@ -1011,7 +1011,7 @@ paths:
   '/#Action=CreateStackSet':
     get:
       x-aws-operation-name: CreateStackSet
-      operationId: GET CreateStackSet
+      operationId: GET_CreateStackSet
       description: Creates a stack set.
       responses:
         '200':
@@ -1166,7 +1166,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateStackSet
-      operationId: POST CreateStackSet
+      operationId: POST_CreateStackSet
       description: Creates a stack set.
       responses:
         '200':
@@ -1216,7 +1216,7 @@ paths:
   '/#Action=DeleteChangeSet':
     get:
       x-aws-operation-name: DeleteChangeSet
-      operationId: GET DeleteChangeSet
+      operationId: GET_DeleteChangeSet
       description: '<p>Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set.</p> <p>If the call successfully completes, AWS CloudFormation successfully deleted the change set.</p>'
       responses:
         '200':
@@ -1273,7 +1273,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteChangeSet
-      operationId: POST DeleteChangeSet
+      operationId: POST_DeleteChangeSet
       description: '<p>Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set.</p> <p>If the call successfully completes, AWS CloudFormation successfully deleted the change set.</p>'
       responses:
         '200':
@@ -1311,7 +1311,7 @@ paths:
   '/#Action=DeleteStack':
     get:
       x-aws-operation-name: DeleteStack
-      operationId: GET DeleteStack
+      operationId: GET_DeleteStack
       description: 'Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.'
       responses:
         '200':
@@ -1378,7 +1378,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteStack
-      operationId: POST DeleteStack
+      operationId: POST_DeleteStack
       description: 'Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.'
       responses:
         '200':
@@ -1412,7 +1412,7 @@ paths:
   '/#Action=DeleteStackInstances':
     get:
       x-aws-operation-name: DeleteStackInstances
-      operationId: GET DeleteStackInstances
+      operationId: GET_DeleteStackInstances
       description: 'Deletes stack instances for the specified accounts, in the specified regions. '
       responses:
         '200':
@@ -1550,7 +1550,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteStackInstances
-      operationId: POST DeleteStackInstances
+      operationId: POST_DeleteStackInstances
       description: 'Deletes stack instances for the specified accounts, in the specified regions. '
       responses:
         '200':
@@ -1612,7 +1612,7 @@ paths:
   '/#Action=DeleteStackSet':
     get:
       x-aws-operation-name: DeleteStackSet
-      operationId: GET DeleteStackSet
+      operationId: GET_DeleteStackSet
       description: 'Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see <a>DeleteStackInstances</a>. '
       responses:
         '200':
@@ -1664,7 +1664,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteStackSet
-      operationId: POST DeleteStackSet
+      operationId: POST_DeleteStackSet
       description: 'Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see <a>DeleteStackInstances</a>. '
       responses:
         '200':
@@ -1708,7 +1708,7 @@ paths:
   '/#Action=DeregisterType':
     get:
       x-aws-operation-name: DeregisterType
-      operationId: GET DeregisterType
+      operationId: GET_DeregisterType
       description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
       responses:
         '200':
@@ -1788,7 +1788,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeregisterType
-      operationId: POST DeregisterType
+      operationId: POST_DeregisterType
       description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
       responses:
         '200':
@@ -1832,7 +1832,7 @@ paths:
   '/#Action=DescribeAccountLimits':
     get:
       x-aws-operation-name: DescribeAccountLimits
-      operationId: GET DescribeAccountLimits
+      operationId: GET_DescribeAccountLimits
       description: 'Retrieves your account''s AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account. For more information about account limits, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">AWS CloudFormation Limits</a> in the <i>AWS CloudFormation User Guide</i>.'
       responses:
         '200':
@@ -1874,7 +1874,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAccountLimits
-      operationId: POST DescribeAccountLimits
+      operationId: POST_DescribeAccountLimits
       description: 'Retrieves your account''s AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account. For more information about account limits, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html">AWS CloudFormation Limits</a> in the <i>AWS CloudFormation User Guide</i>.'
       responses:
         '200':
@@ -1906,7 +1906,7 @@ paths:
   '/#Action=DescribeChangeSet':
     get:
       x-aws-operation-name: DescribeChangeSet
-      operationId: GET DescribeChangeSet
+      operationId: GET_DescribeChangeSet
       description: 'Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">Updating Stacks Using Change Sets</a> in the AWS CloudFormation User Guide.'
       responses:
         '200':
@@ -1971,7 +1971,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeChangeSet
-      operationId: POST DescribeChangeSet
+      operationId: POST_DescribeChangeSet
       description: 'Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">Updating Stacks Using Change Sets</a> in the AWS CloudFormation User Guide.'
       responses:
         '200':
@@ -2009,7 +2009,7 @@ paths:
   '/#Action=DescribeStackDriftDetectionStatus':
     get:
       x-aws-operation-name: DescribeStackDriftDetectionStatus
-      operationId: GET DescribeStackDriftDetectionStatus
+      operationId: GET_DescribeStackDriftDetectionStatus
       description: '<p>Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <a>DetectStackDrift</a> to initiate a stack drift detection operation. <code>DetectStackDrift</code> returns a <code>StackDriftDetectionId</code> you can use to monitor the progress of the operation using <code>DescribeStackDriftDetectionStatus</code>. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p>'
       responses:
         '200':
@@ -2051,7 +2051,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackDriftDetectionStatus
-      operationId: POST DescribeStackDriftDetectionStatus
+      operationId: POST_DescribeStackDriftDetectionStatus
       description: '<p>Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <a>DetectStackDrift</a> to initiate a stack drift detection operation. <code>DetectStackDrift</code> returns a <code>StackDriftDetectionId</code> you can use to monitor the progress of the operation using <code>DescribeStackDriftDetectionStatus</code>. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p>'
       responses:
         '200':
@@ -2083,7 +2083,7 @@ paths:
   '/#Action=DescribeStackEvents':
     get:
       x-aws-operation-name: DescribeStackEvents
-      operationId: GET DescribeStackEvents
+      operationId: GET_DescribeStackEvents
       description: '<p>Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack''s event history, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html">Stacks</a> in the AWS CloudFormation User Guide.</p> <note> <p>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID).</p> </note>'
       responses:
         '200':
@@ -2131,7 +2131,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackEvents
-      operationId: POST DescribeStackEvents
+      operationId: POST_DescribeStackEvents
       description: '<p>Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack''s event history, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html">Stacks</a> in the AWS CloudFormation User Guide.</p> <note> <p>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID).</p> </note>'
       responses:
         '200':
@@ -2169,7 +2169,7 @@ paths:
   '/#Action=DescribeStackInstance':
     get:
       x-aws-operation-name: DescribeStackInstance
-      operationId: GET DescribeStackInstance
+      operationId: GET_DescribeStackInstance
       description: '<p>Returns the stack instance that''s associated with the specified stack set, AWS account, and region.</p> <p>For a list of stack instances that are associated with a specific stack set, use <a>ListStackInstances</a>.</p>'
       responses:
         '200':
@@ -2235,7 +2235,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackInstance
-      operationId: POST DescribeStackInstance
+      operationId: POST_DescribeStackInstance
       description: '<p>Returns the stack instance that''s associated with the specified stack set, AWS account, and region.</p> <p>For a list of stack instances that are associated with a specific stack set, use <a>ListStackInstances</a>.</p>'
       responses:
         '200':
@@ -2279,7 +2279,7 @@ paths:
   '/#Action=DescribeStackResource':
     get:
       x-aws-operation-name: DescribeStackResource
-      operationId: GET DescribeStackResource
+      operationId: GET_DescribeStackResource
       description: '<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p>'
       responses:
         '200':
@@ -2325,7 +2325,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackResource
-      operationId: POST DescribeStackResource
+      operationId: POST_DescribeStackResource
       description: '<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p>'
       responses:
         '200':
@@ -2357,7 +2357,7 @@ paths:
   '/#Action=DescribeStackResourceDrifts':
     get:
       x-aws-operation-name: DescribeStackResourceDrifts
-      operationId: GET DescribeStackResourceDrifts
+      operationId: GET_DescribeStackResourceDrifts
       description: '<p>Returns drift information for the resources that have been checked for drift in the specified stack. This includes actual and expected configuration values for resources where AWS CloudFormation detects configuration drift.</p> <p>For a given stack, there will be one <code>StackResourceDrift</code> for each stack resource that has been checked for drift. Resources that have not yet been checked for drift are not included. Resources that do not currently support drift detection are not checked, and so not included. For a list of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all supported resources for a given stack.</p>'
       responses:
         '200':
@@ -2425,7 +2425,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackResourceDrifts
-      operationId: POST DescribeStackResourceDrifts
+      operationId: POST_DescribeStackResourceDrifts
       description: '<p>Returns drift information for the resources that have been checked for drift in the specified stack. This includes actual and expected configuration values for resources where AWS CloudFormation detects configuration drift.</p> <p>For a given stack, there will be one <code>StackResourceDrift</code> for each stack resource that has been checked for drift. Resources that have not yet been checked for drift are not included. Resources that do not currently support drift detection are not checked, and so not included. For a list of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all supported resources for a given stack.</p>'
       responses:
         '200':
@@ -2469,7 +2469,7 @@ paths:
   '/#Action=DescribeStackResources':
     get:
       x-aws-operation-name: DescribeStackResources
-      operationId: GET DescribeStackResources
+      operationId: GET_DescribeStackResources
       description: '<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> <note> <p>Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead.</p> </note> <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">AWS CloudFormation User Guide</a>.</p> <note> <p>A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.</p> </note>'
       responses:
         '200':
@@ -2521,7 +2521,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackResources
-      operationId: POST DescribeStackResources
+      operationId: POST_DescribeStackResources
       description: '<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> <note> <p>Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead.</p> </note> <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">AWS CloudFormation User Guide</a>.</p> <note> <p>A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.</p> </note>'
       responses:
         '200':
@@ -2553,7 +2553,7 @@ paths:
   '/#Action=DescribeStackSet':
     get:
       x-aws-operation-name: DescribeStackSet
-      operationId: GET DescribeStackSet
+      operationId: GET_DescribeStackSet
       description: 'Returns the description of the specified stack set. '
       responses:
         '200':
@@ -2599,7 +2599,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackSet
-      operationId: POST DescribeStackSet
+      operationId: POST_DescribeStackSet
       description: 'Returns the description of the specified stack set. '
       responses:
         '200':
@@ -2637,7 +2637,7 @@ paths:
   '/#Action=DescribeStackSetOperation':
     get:
       x-aws-operation-name: DescribeStackSetOperation
-      operationId: GET DescribeStackSetOperation
+      operationId: GET_DescribeStackSetOperation
       description: 'Returns the description of the specified stack set operation. '
       responses:
         '200':
@@ -2698,7 +2698,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStackSetOperation
-      operationId: POST DescribeStackSetOperation
+      operationId: POST_DescribeStackSetOperation
       description: 'Returns the description of the specified stack set operation. '
       responses:
         '200':
@@ -2742,7 +2742,7 @@ paths:
   '/#Action=DescribeStacks':
     get:
       x-aws-operation-name: DescribeStacks
-      operationId: GET DescribeStacks
+      operationId: GET_DescribeStacks
       description: '<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p> <note> <p>If the stack does not exist, an <code>AmazonCloudFormationException</code> is returned.</p> </note>'
       responses:
         '200':
@@ -2790,7 +2790,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStacks
-      operationId: POST DescribeStacks
+      operationId: POST_DescribeStacks
       description: '<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p> <note> <p>If the stack does not exist, an <code>AmazonCloudFormationException</code> is returned.</p> </note>'
       responses:
         '200':
@@ -2828,7 +2828,7 @@ paths:
   '/#Action=DescribeType':
     get:
       x-aws-operation-name: DescribeType
-      operationId: GET DescribeType
+      operationId: GET_DescribeType
       description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
       responses:
         '200':
@@ -2908,7 +2908,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeType
-      operationId: POST DescribeType
+      operationId: POST_DescribeType
       description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
       responses:
         '200':
@@ -2952,7 +2952,7 @@ paths:
   '/#Action=DescribeTypeRegistration':
     get:
       x-aws-operation-name: DescribeTypeRegistration
-      operationId: GET DescribeTypeRegistration
+      operationId: GET_DescribeTypeRegistration
       description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
       responses:
         '200':
@@ -3001,7 +3001,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeTypeRegistration
-      operationId: POST DescribeTypeRegistration
+      operationId: POST_DescribeTypeRegistration
       description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
       responses:
         '200':
@@ -3039,7 +3039,7 @@ paths:
   '/#Action=DetectStackDrift':
     get:
       x-aws-operation-name: DetectStackDrift
-      operationId: GET DetectStackDrift
+      operationId: GET_DetectStackDrift
       description: '<p>Detects whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, AWS CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackDrift</code> to detect drift on all supported resources for a given stack, or <a>DetectStackResourceDrift</a> to detect drift on individual resources.</p> <p>For a list of stack resources that currently support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p> <code>DetectStackDrift</code> can take up to several minutes, depending on the number of resources contained within the stack. Use <a>DescribeStackDriftDetectionStatus</a> to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p> <p>When detecting drift on a stack, AWS CloudFormation does not detect drift on any nested stacks belonging to that stack. Perform <code>DetectStackDrift</code> directly on the nested stack itself.</p>'
       responses:
         '200':
@@ -3091,7 +3091,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetectStackDrift
-      operationId: POST DetectStackDrift
+      operationId: POST_DetectStackDrift
       description: '<p>Detects whether a stack''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, AWS CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackDrift</code> to detect drift on all supported resources for a given stack, or <a>DetectStackResourceDrift</a> to detect drift on individual resources.</p> <p>For a list of stack resources that currently support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p> <code>DetectStackDrift</code> can take up to several minutes, depending on the number of resources contained within the stack. Use <a>DescribeStackDriftDetectionStatus</a> to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p> <p>When detecting drift on a stack, AWS CloudFormation does not detect drift on any nested stacks belonging to that stack. Perform <code>DetectStackDrift</code> directly on the nested stack itself.</p>'
       responses:
         '200':
@@ -3123,7 +3123,7 @@ paths:
   '/#Action=DetectStackResourceDrift':
     get:
       x-aws-operation-name: DetectStackResourceDrift
-      operationId: GET DetectStackResourceDrift
+      operationId: GET_DetectStackResourceDrift
       description: '<p>Returns information about whether a resource''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which AWS CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackResourceDrift</code> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p>'
       responses:
         '200':
@@ -3171,7 +3171,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetectStackResourceDrift
-      operationId: POST DetectStackResourceDrift
+      operationId: POST_DetectStackResourceDrift
       description: '<p>Returns information about whether a resource''s actual configuration differs, or has <i>drifted</i>, from it''s expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which AWS CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackResourceDrift</code> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p>'
       responses:
         '200':
@@ -3203,7 +3203,7 @@ paths:
   '/#Action=DetectStackSetDrift':
     get:
       x-aws-operation-name: DetectStackSetDrift
-      operationId: GET DetectStackSetDrift
+      operationId: GET_DetectStackSetDrift
       description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
       responses:
         '200':
@@ -3294,7 +3294,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetectStackSetDrift
-      operationId: POST DetectStackSetDrift
+      operationId: POST_DetectStackSetDrift
       description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
       responses:
         '200':
@@ -3344,7 +3344,7 @@ paths:
   '/#Action=EstimateTemplateCost':
     get:
       x-aws-operation-name: EstimateTemplateCost
-      operationId: GET EstimateTemplateCost
+      operationId: GET_EstimateTemplateCost
       description: Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.
       responses:
         '200':
@@ -3401,7 +3401,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: EstimateTemplateCost
-      operationId: POST EstimateTemplateCost
+      operationId: POST_EstimateTemplateCost
       description: Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.
       responses:
         '200':
@@ -3433,7 +3433,7 @@ paths:
   '/#Action=ExecuteChangeSet':
     get:
       x-aws-operation-name: ExecuteChangeSet
-      operationId: GET ExecuteChangeSet
+      operationId: GET_ExecuteChangeSet
       description: '<p>Updates a stack using the input information that was provided when the specified change set was created. After the call successfully completes, AWS CloudFormation starts updating the stack. Use the <a>DescribeStacks</a> action to view the status of the update.</p> <p>When you execute a change set, AWS CloudFormation deletes all other change sets associated with the stack because they aren''t valid for the updated stack.</p> <p>If a stack policy is associated with the stack, AWS CloudFormation enforces the policy during the update. You can''t specify a temporary stack policy that overrides the current policy.</p>'
       responses:
         '200':
@@ -3517,7 +3517,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ExecuteChangeSet
-      operationId: POST ExecuteChangeSet
+      operationId: POST_ExecuteChangeSet
       description: '<p>Updates a stack using the input information that was provided when the specified change set was created. After the call successfully completes, AWS CloudFormation starts updating the stack. Use the <a>DescribeStacks</a> action to view the status of the update.</p> <p>When you execute a change set, AWS CloudFormation deletes all other change sets associated with the stack because they aren''t valid for the updated stack.</p> <p>If a stack policy is associated with the stack, AWS CloudFormation enforces the policy during the update. You can''t specify a temporary stack policy that overrides the current policy.</p>'
       responses:
         '200':
@@ -3573,7 +3573,7 @@ paths:
   '/#Action=GetStackPolicy':
     get:
       x-aws-operation-name: GetStackPolicy
-      operationId: GET GetStackPolicy
+      operationId: GET_GetStackPolicy
       description: 'Returns the stack policy for a specified stack. If a stack doesn''t have a policy, a null value is returned.'
       responses:
         '200':
@@ -3613,7 +3613,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: GetStackPolicy
-      operationId: POST GetStackPolicy
+      operationId: POST_GetStackPolicy
       description: 'Returns the stack policy for a specified stack. If a stack doesn''t have a policy, a null value is returned.'
       responses:
         '200':
@@ -3645,7 +3645,7 @@ paths:
   '/#Action=GetTemplate':
     get:
       x-aws-operation-name: GetTemplate
-      operationId: GET GetTemplate
+      operationId: GET_GetTemplate
       description: '<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> <p> If the template does not exist, a <code>ValidationError</code> is returned. </p> </note>'
       responses:
         '200':
@@ -3709,7 +3709,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: GetTemplate
-      operationId: POST GetTemplate
+      operationId: POST_GetTemplate
       description: '<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> <p> If the template does not exist, a <code>ValidationError</code> is returned. </p> </note>'
       responses:
         '200':
@@ -3747,7 +3747,7 @@ paths:
   '/#Action=GetTemplateSummary':
     get:
       x-aws-operation-name: GetTemplateSummary
-      operationId: GET GetTemplateSummary
+      operationId: GET_GetTemplateSummary
       description: '<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack or stack set.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a stack set, or a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>'
       responses:
         '200':
@@ -3817,7 +3817,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: GetTemplateSummary
-      operationId: POST GetTemplateSummary
+      operationId: POST_GetTemplateSummary
       description: '<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack or stack set.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a stack set, or a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>'
       responses:
         '200':
@@ -3855,7 +3855,7 @@ paths:
   '/#Action=ListChangeSets':
     get:
       x-aws-operation-name: ListChangeSets
-      operationId: GET ListChangeSets
+      operationId: GET_ListChangeSets
       description: 'Returns the ID and status of each active change set for a stack. For example, AWS CloudFormation lists change sets that are in the <code>CREATE_IN_PROGRESS</code> or <code>CREATE_PENDING</code> state.'
       responses:
         '200':
@@ -3905,7 +3905,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListChangeSets
-      operationId: POST ListChangeSets
+      operationId: POST_ListChangeSets
       description: 'Returns the ID and status of each active change set for a stack. For example, AWS CloudFormation lists change sets that are in the <code>CREATE_IN_PROGRESS</code> or <code>CREATE_PENDING</code> state.'
       responses:
         '200':
@@ -3937,7 +3937,7 @@ paths:
   '/#Action=ListExports':
     get:
       x-aws-operation-name: ListExports
-      operationId: GET ListExports
+      operationId: GET_ListExports
       description: '<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html"> AWS CloudFormation Export Stack Output Values</a>.</p>'
       responses:
         '200':
@@ -3979,7 +3979,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListExports
-      operationId: POST ListExports
+      operationId: POST_ListExports
       description: '<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html"> AWS CloudFormation Export Stack Output Values</a>.</p>'
       responses:
         '200':
@@ -4017,7 +4017,7 @@ paths:
   '/#Action=ListImports':
     get:
       x-aws-operation-name: ListImports
-      operationId: GET ListImports
+      operationId: GET_ListImports
       description: '<p>Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see <a>ListExports</a>. </p> <p>For more information about importing an exported output value, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p>'
       responses:
         '200':
@@ -4065,7 +4065,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListImports
-      operationId: POST ListImports
+      operationId: POST_ListImports
       description: '<p>Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see <a>ListExports</a>. </p> <p>For more information about importing an exported output value, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p>'
       responses:
         '200':
@@ -4103,7 +4103,7 @@ paths:
   '/#Action=ListStackInstances':
     get:
       x-aws-operation-name: ListStackInstances
-      operationId: GET ListStackInstances
+      operationId: GET_ListStackInstances
       description: Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
       responses:
         '200':
@@ -4179,7 +4179,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStackInstances
-      operationId: POST ListStackInstances
+      operationId: POST_ListStackInstances
       description: Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
       responses:
         '200':
@@ -4217,7 +4217,7 @@ paths:
   '/#Action=ListStackResources':
     get:
       x-aws-operation-name: ListStackResources
-      operationId: GET ListStackResources
+      operationId: GET_ListStackResources
       description: '<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p>'
       responses:
         '200':
@@ -4265,7 +4265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStackResources
-      operationId: POST ListStackResources
+      operationId: POST_ListStackResources
       description: '<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p>'
       responses:
         '200':
@@ -4303,7 +4303,7 @@ paths:
   '/#Action=ListStackSetOperationResults':
     get:
       x-aws-operation-name: ListStackSetOperationResults
-      operationId: GET ListStackSetOperationResults
+      operationId: GET_ListStackSetOperationResults
       description: 'Returns summary information about the results of a stack set operation. '
       responses:
         '200':
@@ -4380,7 +4380,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStackSetOperationResults
-      operationId: POST ListStackSetOperationResults
+      operationId: POST_ListStackSetOperationResults
       description: 'Returns summary information about the results of a stack set operation. '
       responses:
         '200':
@@ -4424,7 +4424,7 @@ paths:
   '/#Action=ListStackSetOperations':
     get:
       x-aws-operation-name: ListStackSetOperations
-      operationId: GET ListStackSetOperations
+      operationId: GET_ListStackSetOperations
       description: 'Returns summary information about operations performed on a stack set. '
       responses:
         '200':
@@ -4486,7 +4486,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStackSetOperations
-      operationId: POST ListStackSetOperations
+      operationId: POST_ListStackSetOperations
       description: 'Returns summary information about operations performed on a stack set. '
       responses:
         '200':
@@ -4524,7 +4524,7 @@ paths:
   '/#Action=ListStackSets':
     get:
       x-aws-operation-name: ListStackSets
-      operationId: GET ListStackSets
+      operationId: GET_ListStackSets
       description: Returns summary information about stack sets that are associated with the user.
       responses:
         '200':
@@ -4583,7 +4583,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStackSets
-      operationId: POST ListStackSets
+      operationId: POST_ListStackSets
       description: Returns summary information about stack sets that are associated with the user.
       responses:
         '200':
@@ -4615,7 +4615,7 @@ paths:
   '/#Action=ListStacks':
     get:
       x-aws-operation-name: ListStacks
-      operationId: GET ListStacks
+      operationId: GET_ListStacks
       description: 'Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).'
       responses:
         '200':
@@ -4665,7 +4665,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListStacks
-      operationId: POST ListStacks
+      operationId: POST_ListStacks
       description: 'Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).'
       responses:
         '200':
@@ -4703,7 +4703,7 @@ paths:
   '/#Action=ListTypeRegistrations':
     get:
       x-aws-operation-name: ListTypeRegistrations
-      operationId: GET ListTypeRegistrations
+      operationId: GET_ListTypeRegistrations
       description: Returns a list of registration tokens for the specified type(s).
       responses:
         '200':
@@ -4794,7 +4794,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTypeRegistrations
-      operationId: POST ListTypeRegistrations
+      operationId: POST_ListTypeRegistrations
       description: Returns a list of registration tokens for the specified type(s).
       responses:
         '200':
@@ -4844,7 +4844,7 @@ paths:
   '/#Action=ListTypeVersions':
     get:
       x-aws-operation-name: ListTypeVersions
-      operationId: GET ListTypeVersions
+      operationId: GET_ListTypeVersions
       description: Returns summary information about the versions of a type.
       responses:
         '200':
@@ -4934,7 +4934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTypeVersions
-      operationId: POST ListTypeVersions
+      operationId: POST_ListTypeVersions
       description: Returns summary information about the versions of a type.
       responses:
         '200':
@@ -4984,7 +4984,7 @@ paths:
   '/#Action=ListTypes':
     get:
       x-aws-operation-name: ListTypes
-      operationId: GET ListTypes
+      operationId: GET_ListTypes
       description: Returns summary information about types that have been registered with CloudFormation.
       responses:
         '200':
@@ -5068,7 +5068,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTypes
-      operationId: POST ListTypes
+      operationId: POST_ListTypes
       description: Returns summary information about types that have been registered with CloudFormation.
       responses:
         '200':
@@ -5118,7 +5118,7 @@ paths:
   '/#Action=RecordHandlerProgress':
     get:
       x-aws-operation-name: RecordHandlerProgress
-      operationId: GET RecordHandlerProgress
+      operationId: GET_RecordHandlerProgress
       description: '<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>'
       responses:
         '200':
@@ -5239,7 +5239,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RecordHandlerProgress
-      operationId: POST RecordHandlerProgress
+      operationId: POST_RecordHandlerProgress
       description: '<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. Do not use this API in your code.</p>'
       responses:
         '200':
@@ -5283,7 +5283,7 @@ paths:
   '/#Action=RegisterType':
     get:
       x-aws-operation-name: RegisterType
-      operationId: GET RegisterType
+      operationId: GET_RegisterType
       description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
       responses:
         '200':
@@ -5383,7 +5383,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RegisterType
-      operationId: POST RegisterType
+      operationId: POST_RegisterType
       description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
       responses:
         '200':
@@ -5421,7 +5421,7 @@ paths:
   '/#Action=SetStackPolicy':
     get:
       x-aws-operation-name: SetStackPolicy
-      operationId: GET SetStackPolicy
+      operationId: GET_SetStackPolicy
       description: Sets a stack policy for a specified stack.
       responses:
         '200':
@@ -5473,7 +5473,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SetStackPolicy
-      operationId: POST SetStackPolicy
+      operationId: POST_SetStackPolicy
       description: Sets a stack policy for a specified stack.
       responses:
         '200':
@@ -5501,7 +5501,7 @@ paths:
   '/#Action=SetTypeDefaultVersion':
     get:
       x-aws-operation-name: SetTypeDefaultVersion
-      operationId: GET SetTypeDefaultVersion
+      operationId: GET_SetTypeDefaultVersion
       description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
       responses:
         '200':
@@ -5581,7 +5581,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SetTypeDefaultVersion
-      operationId: POST SetTypeDefaultVersion
+      operationId: POST_SetTypeDefaultVersion
       description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
       responses:
         '200':
@@ -5625,7 +5625,7 @@ paths:
   '/#Action=SignalResource':
     get:
       x-aws-operation-name: SignalResource
-      operationId: GET SignalResource
+      operationId: GET_SignalResource
       description: Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.
       responses:
         '200':
@@ -5686,7 +5686,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SignalResource
-      operationId: POST SignalResource
+      operationId: POST_SignalResource
       description: Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.
       responses:
         '200':
@@ -5714,7 +5714,7 @@ paths:
   '/#Action=StopStackSetOperation':
     get:
       x-aws-operation-name: StopStackSetOperation
-      operationId: GET StopStackSetOperation
+      operationId: GET_StopStackSetOperation
       description: 'Stops an in-progress operation on a stack set and its associated stack instances. '
       responses:
         '200':
@@ -5781,7 +5781,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StopStackSetOperation
-      operationId: POST StopStackSetOperation
+      operationId: POST_StopStackSetOperation
       description: 'Stops an in-progress operation on a stack set and its associated stack instances. '
       responses:
         '200':
@@ -5831,7 +5831,7 @@ paths:
   '/#Action=UpdateStack':
     get:
       x-aws-operation-name: UpdateStack
-      operationId: GET UpdateStack
+      operationId: GET_UpdateStack
       description: '<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">Updating a Stack</a>.</p>'
       responses:
         '200':
@@ -6009,7 +6009,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateStack
-      operationId: POST UpdateStack
+      operationId: POST_UpdateStack
       description: '<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">Updating a Stack</a>.</p>'
       responses:
         '200':
@@ -6053,7 +6053,7 @@ paths:
   '/#Action=UpdateStackInstances':
     get:
       x-aws-operation-name: UpdateStackInstances
-      operationId: GET UpdateStackInstances
+      operationId: GET_UpdateStackInstances
       description: '<p>Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. </p> <p>You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a>. </p> <p>During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only update the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>'
       responses:
         '200':
@@ -6200,7 +6200,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateStackInstances
-      operationId: POST UpdateStackInstances
+      operationId: POST_UpdateStackInstances
       description: '<p>Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. </p> <p>You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html">CreateStackInstances</a>. </p> <p>During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value.</p> <p>You can only update the parameter <i>values</i> that are specified in the stack set; to add or delete a parameter itself, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html">UpdateStackSet</a> to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using <code>UpdateStackInstances</code>.</p>'
       responses:
         '200':
@@ -6268,7 +6268,7 @@ paths:
   '/#Action=UpdateStackSet':
     get:
       x-aws-operation-name: UpdateStackSet
-      operationId: GET UpdateStackSet
+      operationId: GET_UpdateStackSet
       description: '<p>Updates the stack set, and associated stack instances in the specified accounts and regions.</p> <p>Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent <a>CreateStackInstances</a> calls on the specified stack set use the updated stack set.</p>'
       responses:
         '200':
@@ -6500,7 +6500,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateStackSet
-      operationId: POST UpdateStackSet
+      operationId: POST_UpdateStackSet
       description: '<p>Updates the stack set, and associated stack instances in the specified accounts and regions.</p> <p>Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent <a>CreateStackInstances</a> calls on the specified stack set use the updated stack set.</p>'
       responses:
         '200':
@@ -6568,7 +6568,7 @@ paths:
   '/#Action=UpdateTerminationProtection':
     get:
       x-aws-operation-name: UpdateTerminationProtection
-      operationId: GET UpdateTerminationProtection
+      operationId: GET_UpdateTerminationProtection
       description: '<p>Updates termination protection for the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a Stack From Being Deleted</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p> For <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested stacks</a>, termination protection is set on the root stack and cannot be changed directly on the nested stack.</p>'
       responses:
         '200':
@@ -6616,7 +6616,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateTerminationProtection
-      operationId: POST UpdateTerminationProtection
+      operationId: POST_UpdateTerminationProtection
       description: '<p>Updates termination protection for the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html">Protecting a Stack From Being Deleted</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p> For <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html">nested stacks</a>, termination protection is set on the root stack and cannot be changed directly on the nested stack.</p>'
       responses:
         '200':
@@ -6648,7 +6648,7 @@ paths:
   '/#Action=ValidateTemplate':
     get:
       x-aws-operation-name: ValidateTemplate
-      operationId: GET ValidateTemplate
+      operationId: GET_ValidateTemplate
       description: 'Validates a specified template. AWS CloudFormation first checks if the template is valid JSON. If it isn''t, AWS CloudFormation checks if the template is valid YAML. If both these checks fail, AWS CloudFormation returns a template validation error.'
       responses:
         '200':
@@ -6697,7 +6697,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ValidateTemplate
-      operationId: POST ValidateTemplate
+      operationId: POST_ValidateTemplate
       description: 'Validates a specified template. AWS CloudFormation first checks if the template is valid JSON. If it isn''t, AWS CloudFormation checks if the template is valid YAML. If both these checks fail, AWS CloudFormation returns a template validation error.'
       responses:
         '200':

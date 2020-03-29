@@ -115,7 +115,7 @@ paths:
   '/#Action=AddRoleToDBCluster':
     get:
       x-aws-operation-name: AddRoleToDBCluster
-      operationId: GET AddRoleToDBCluster
+      operationId: GET_AddRoleToDBCluster
       description: '<p>Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -187,7 +187,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddRoleToDBCluster
-      operationId: POST AddRoleToDBCluster
+      operationId: POST_AddRoleToDBCluster
       description: '<p>Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -239,7 +239,7 @@ paths:
   '/#Action=AddRoleToDBInstance':
     get:
       x-aws-operation-name: AddRoleToDBInstance
-      operationId: GET AddRoleToDBInstance
+      operationId: GET_AddRoleToDBInstance
       description: '<p>Associates an AWS Identity and Access Management (IAM) role with a DB instance.</p> <note> <p>To add a role to a DB instance, the status of the DB instance must be <code>available</code>.</p> </note>'
       responses:
         '200':
@@ -311,7 +311,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddRoleToDBInstance
-      operationId: POST AddRoleToDBInstance
+      operationId: POST_AddRoleToDBInstance
       description: '<p>Associates an AWS Identity and Access Management (IAM) role with a DB instance.</p> <note> <p>To add a role to a DB instance, the status of the DB instance must be <code>available</code>.</p> </note>'
       responses:
         '200':
@@ -363,7 +363,7 @@ paths:
   '/#Action=AddSourceIdentifierToSubscription':
     get:
       x-aws-operation-name: AddSourceIdentifierToSubscription
-      operationId: GET AddSourceIdentifierToSubscription
+      operationId: GET_AddSourceIdentifierToSubscription
       description: Adds a source identifier to an existing RDS event notification subscription.
       responses:
         '200':
@@ -421,7 +421,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddSourceIdentifierToSubscription
-      operationId: POST AddSourceIdentifierToSubscription
+      operationId: POST_AddSourceIdentifierToSubscription
       description: Adds a source identifier to an existing RDS event notification subscription.
       responses:
         '200':
@@ -465,7 +465,7 @@ paths:
   '/#Action=AddTagsToResource':
     get:
       x-aws-operation-name: AddTagsToResource
-      operationId: GET AddTagsToResource
+      operationId: GET_AddTagsToResource
       description: '<p>Adds metadata tags to an Amazon RDS resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon RDS resources, or used in a Condition statement in an IAM policy for Amazon RDS.</p> <p>For an overview on tagging Amazon RDS resources, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a>.</p>'
       responses:
         '200':
@@ -528,7 +528,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddTagsToResource
-      operationId: POST AddTagsToResource
+      operationId: POST_AddTagsToResource
       description: '<p>Adds metadata tags to an Amazon RDS resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon RDS resources, or used in a Condition statement in an IAM policy for Amazon RDS.</p> <p>For an overview on tagging Amazon RDS resources, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a>.</p>'
       responses:
         '200':
@@ -574,7 +574,7 @@ paths:
   '/#Action=ApplyPendingMaintenanceAction':
     get:
       x-aws-operation-name: ApplyPendingMaintenanceAction
-      operationId: GET ApplyPendingMaintenanceAction
+      operationId: GET_ApplyPendingMaintenanceAction
       description: 'Applies a pending maintenance action to a resource (for example, to a DB instance).'
       responses:
         '200':
@@ -644,7 +644,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ApplyPendingMaintenanceAction
-      operationId: POST ApplyPendingMaintenanceAction
+      operationId: POST_ApplyPendingMaintenanceAction
       description: 'Applies a pending maintenance action to a resource (for example, to a DB instance).'
       responses:
         '200':
@@ -694,7 +694,7 @@ paths:
   '/#Action=AuthorizeDBSecurityGroupIngress':
     get:
       x-aws-operation-name: AuthorizeDBSecurityGroupIngress
-      operationId: GET AuthorizeDBSecurityGroupIngress
+      operationId: GET_AuthorizeDBSecurityGroupIngress
       description: '<p>Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).</p> <note> <p>You can''t authorize ingress from an EC2 security group in one AWS Region to an Amazon RDS DB instance in another. You can''t authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another.</p> </note> <p>For an overview of CIDR ranges, go to the <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Wikipedia Tutorial</a>. </p>'
       responses:
         '200':
@@ -782,7 +782,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AuthorizeDBSecurityGroupIngress
-      operationId: POST AuthorizeDBSecurityGroupIngress
+      operationId: POST_AuthorizeDBSecurityGroupIngress
       description: '<p>Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC instances. Second, IP ranges are available if the application accessing your database is running on the Internet. Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).</p> <note> <p>You can''t authorize ingress from an EC2 security group in one AWS Region to an Amazon RDS DB instance in another. You can''t authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another.</p> </note> <p>For an overview of CIDR ranges, go to the <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Wikipedia Tutorial</a>. </p>'
       responses:
         '200':
@@ -838,7 +838,7 @@ paths:
   '/#Action=BacktrackDBCluster':
     get:
       x-aws-operation-name: BacktrackDBCluster
-      operationId: GET BacktrackDBCluster
+      operationId: GET_BacktrackDBCluster
       description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -909,7 +909,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BacktrackDBCluster
-      operationId: POST BacktrackDBCluster
+      operationId: POST_BacktrackDBCluster
       description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -953,7 +953,7 @@ paths:
   '/#Action=CancelExportTask':
     get:
       x-aws-operation-name: CancelExportTask
-      operationId: GET CancelExportTask
+      operationId: GET_CancelExportTask
       description: 'Cancels an export task in progress that is exporting a snapshot to Amazon S3. Any data that has already been written to the S3 bucket isn''t removed. '
       responses:
         '200':
@@ -1005,7 +1005,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CancelExportTask
-      operationId: POST CancelExportTask
+      operationId: POST_CancelExportTask
       description: 'Cancels an export task in progress that is exporting a snapshot to Amazon S3. Any data that has already been written to the S3 bucket isn''t removed. '
       responses:
         '200':
@@ -1049,7 +1049,7 @@ paths:
   '/#Action=CopyDBClusterParameterGroup':
     get:
       x-aws-operation-name: CopyDBClusterParameterGroup
-      operationId: GET CopyDBClusterParameterGroup
+      operationId: GET_CopyDBClusterParameterGroup
       description: <p>Copies the specified DB cluster parameter group.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -1128,7 +1128,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBClusterParameterGroup
-      operationId: POST CopyDBClusterParameterGroup
+      operationId: POST_CopyDBClusterParameterGroup
       description: <p>Copies the specified DB cluster parameter group.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -1178,7 +1178,7 @@ paths:
   '/#Action=CopyDBClusterSnapshot':
     get:
       x-aws-operation-name: CopyDBClusterSnapshot
-      operationId: GET CopyDBClusterSnapshot
+      operationId: GET_CopyDBClusterSnapshot
       description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -1293,7 +1293,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBClusterSnapshot
-      operationId: POST CopyDBClusterSnapshot
+      operationId: POST_CopyDBClusterSnapshot
       description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -1361,7 +1361,7 @@ paths:
   '/#Action=CopyDBParameterGroup':
     get:
       x-aws-operation-name: CopyDBParameterGroup
-      operationId: GET CopyDBParameterGroup
+      operationId: GET_CopyDBParameterGroup
       description: Copies the specified DB parameter group.
       responses:
         '200':
@@ -1440,7 +1440,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBParameterGroup
-      operationId: POST CopyDBParameterGroup
+      operationId: POST_CopyDBParameterGroup
       description: Copies the specified DB parameter group.
       responses:
         '200':
@@ -1490,7 +1490,7 @@ paths:
   '/#Action=CopyDBSnapshot':
     get:
       x-aws-operation-name: CopyDBSnapshot
-      operationId: GET CopyDBSnapshot
+      operationId: GET_CopyDBSnapshot
       description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -1605,7 +1605,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBSnapshot
-      operationId: POST CopyDBSnapshot
+      operationId: POST_CopyDBSnapshot
       description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -1667,7 +1667,7 @@ paths:
   '/#Action=CopyOptionGroup':
     get:
       x-aws-operation-name: CopyOptionGroup
-      operationId: GET CopyOptionGroup
+      operationId: GET_CopyOptionGroup
       description: Copies the specified option group.
       responses:
         '200':
@@ -1746,7 +1746,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyOptionGroup
-      operationId: POST CopyOptionGroup
+      operationId: POST_CopyOptionGroup
       description: Copies the specified option group.
       responses:
         '200':
@@ -1796,7 +1796,7 @@ paths:
   '/#Action=CreateCustomAvailabilityZone':
     get:
       x-aws-operation-name: CreateCustomAvailabilityZone
-      operationId: GET CreateCustomAvailabilityZone
+      operationId: GET_CreateCustomAvailabilityZone
       description: '<p>Creates a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -1872,7 +1872,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCustomAvailabilityZone
-      operationId: POST CreateCustomAvailabilityZone
+      operationId: POST_CreateCustomAvailabilityZone
       description: '<p>Creates a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -1922,7 +1922,7 @@ paths:
   '/#Action=CreateDBCluster':
     get:
       x-aws-operation-name: CreateDBCluster
-      operationId: GET CreateDBCluster
+      operationId: GET_CreateDBCluster
       description: '<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For cross-region replication where the DB cluster identified by <code>ReplicationSourceIdentifier</code> is encrypted, you must also specify the <code>PreSignedUrl</code> parameter.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2288,7 +2288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBCluster
-      operationId: POST CreateDBCluster
+      operationId: POST_CreateDBCluster
       description: '<p>Creates a new Amazon Aurora DB cluster.</p> <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL DB instance. For cross-region replication where the DB cluster identified by <code>ReplicationSourceIdentifier</code> is encrypted, you must also specify the <code>PreSignedUrl</code> parameter.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2428,7 +2428,7 @@ paths:
   '/#Action=CreateDBClusterEndpoint':
     get:
       x-aws-operation-name: CreateDBClusterEndpoint
-      operationId: GET CreateDBClusterEndpoint
+      operationId: GET_CreateDBClusterEndpoint
       description: <p>Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -2541,7 +2541,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBClusterEndpoint
-      operationId: POST CreateDBClusterEndpoint
+      operationId: POST_CreateDBClusterEndpoint
       description: <p>Creates a new custom endpoint and associates it with an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -2609,7 +2609,7 @@ paths:
   '/#Action=CreateDBClusterParameterGroup':
     get:
       x-aws-operation-name: CreateDBClusterParameterGroup
-      operationId: GET CreateDBClusterParameterGroup
+      operationId: GET_CreateDBClusterParameterGroup
       description: '<p>Creates a new DB cluster parameter group.</p> <p>Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.</p> <p> A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using <code>ModifyDBClusterParameterGroup</code>. Once you''ve created a DB cluster parameter group, you need to associate it with your DB cluster using <code>ModifyDBCluster</code>. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect. </p> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <code>DescribeDBClusterParameters</code> action to verify that your DB cluster parameter group has been created or modified.</p> </important> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2682,7 +2682,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBClusterParameterGroup
-      operationId: POST CreateDBClusterParameterGroup
+      operationId: POST_CreateDBClusterParameterGroup
       description: '<p>Creates a new DB cluster parameter group.</p> <p>Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.</p> <p> A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using <code>ModifyDBClusterParameterGroup</code>. Once you''ve created a DB cluster parameter group, you need to associate it with your DB cluster using <code>ModifyDBCluster</code>. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect. </p> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <code>DescribeDBClusterParameters</code> action to verify that your DB cluster parameter group has been created or modified.</p> </important> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2726,7 +2726,7 @@ paths:
   '/#Action=CreateDBClusterSnapshot':
     get:
       x-aws-operation-name: CreateDBClusterSnapshot
-      operationId: GET CreateDBClusterSnapshot
+      operationId: GET_CreateDBClusterSnapshot
       description: '<p>Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2811,7 +2811,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBClusterSnapshot
-      operationId: POST CreateDBClusterSnapshot
+      operationId: POST_CreateDBClusterSnapshot
       description: '<p>Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -2873,7 +2873,7 @@ paths:
   '/#Action=CreateDBInstance':
     get:
       x-aws-operation-name: CreateDBInstance
-      operationId: GET CreateDBInstance
+      operationId: GET_CreateDBInstance
       description: Creates a new DB instance.
       responses:
         '200':
@@ -3308,7 +3308,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBInstance
-      operationId: POST CreateDBInstance
+      operationId: POST_CreateDBInstance
       description: Creates a new DB instance.
       responses:
         '200':
@@ -3454,7 +3454,7 @@ paths:
   '/#Action=CreateDBInstanceReadReplica':
     get:
       x-aws-operation-name: CreateDBInstanceReadReplica
-      operationId: GET CreateDBInstanceReadReplica
+      operationId: GET_CreateDBInstanceReadReplica
       description: '<p>Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, Oracle, or PostgreSQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html">Working with Read Replicas</a> in the <i>Amazon RDS User Guide</i>. </p> <p>Amazon Aurora doesn''t support this action. You must call the <code>CreateDBInstance</code> action to create a DB instance for an Aurora DB cluster. </p> <p>All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following. </p> <important> <p>Your source DB instance must have backup retention enabled. </p> </important>'
       responses:
         '200':
@@ -3797,7 +3797,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBInstanceReadReplica
-      operationId: POST CreateDBInstanceReadReplica
+      operationId: POST_CreateDBInstanceReadReplica
       description: '<p>Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, Oracle, or PostgreSQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html">Working with Read Replicas</a> in the <i>Amazon RDS User Guide</i>. </p> <p>Amazon Aurora doesn''t support this action. You must call the <code>CreateDBInstance</code> action to create a DB instance for an Aurora DB cluster. </p> <p>All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following. </p> <important> <p>Your source DB instance must have backup retention enabled. </p> </important>'
       responses:
         '200':
@@ -3943,7 +3943,7 @@ paths:
   '/#Action=CreateDBParameterGroup':
     get:
       x-aws-operation-name: CreateDBParameterGroup
-      operationId: GET CreateDBParameterGroup
+      operationId: GET_CreateDBParameterGroup
       description: '<p>Creates a new DB parameter group.</p> <p> A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you''ve created a DB parameter group, you need to associate it with your DB instance using <i>ModifyDBInstance</i>. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect. </p> <important> <p>After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>'
       responses:
         '200':
@@ -4016,7 +4016,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBParameterGroup
-      operationId: POST CreateDBParameterGroup
+      operationId: POST_CreateDBParameterGroup
       description: '<p>Creates a new DB parameter group.</p> <p> A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using <i>ModifyDBParameterGroup</i>. Once you''ve created a DB parameter group, you need to associate it with your DB instance using <i>ModifyDBInstance</i>. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect. </p> <important> <p>After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>'
       responses:
         '200':
@@ -4060,7 +4060,7 @@ paths:
   '/#Action=CreateDBProxy':
     get:
       x-aws-operation-name: CreateDBProxy
-      operationId: GET CreateDBProxy
+      operationId: GET_CreateDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>
       responses:
         '200':
@@ -4183,7 +4183,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBProxy
-      operationId: POST CreateDBProxy
+      operationId: POST_CreateDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>
       responses:
         '200':
@@ -4233,7 +4233,7 @@ paths:
   '/#Action=CreateDBSecurityGroup':
     get:
       x-aws-operation-name: CreateDBSecurityGroup
-      operationId: GET CreateDBSecurityGroup
+      operationId: GET_CreateDBSecurityGroup
       description: <p>Creates a new DB security group. DB security groups control access to a DB instance.</p> <note> <p>A DB security group controls access to EC2-Classic DB instances that are not in a VPC.</p> </note>
       responses:
         '200':
@@ -4306,7 +4306,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBSecurityGroup
-      operationId: POST CreateDBSecurityGroup
+      operationId: POST_CreateDBSecurityGroup
       description: <p>Creates a new DB security group. DB security groups control access to a DB instance.</p> <note> <p>A DB security group controls access to EC2-Classic DB instances that are not in a VPC.</p> </note>
       responses:
         '200':
@@ -4356,7 +4356,7 @@ paths:
   '/#Action=CreateDBSnapshot':
     get:
       x-aws-operation-name: CreateDBSnapshot
-      operationId: GET CreateDBSnapshot
+      operationId: GET_CreateDBSnapshot
       description: Creates a DBSnapshot. The source DBInstance must be in "available" state.
       responses:
         '200':
@@ -4435,7 +4435,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBSnapshot
-      operationId: POST CreateDBSnapshot
+      operationId: POST_CreateDBSnapshot
       description: Creates a DBSnapshot. The source DBInstance must be in "available" state.
       responses:
         '200':
@@ -4491,7 +4491,7 @@ paths:
   '/#Action=CreateDBSubnetGroup':
     get:
       x-aws-operation-name: CreateDBSubnetGroup
-      operationId: GET CreateDBSubnetGroup
+      operationId: GET_CreateDBSubnetGroup
       description: Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
       responses:
         '200':
@@ -4584,7 +4584,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBSubnetGroup
-      operationId: POST CreateDBSubnetGroup
+      operationId: POST_CreateDBSubnetGroup
       description: Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
       responses:
         '200':
@@ -4646,7 +4646,7 @@ paths:
   '/#Action=CreateEventSubscription':
     get:
       x-aws-operation-name: CreateEventSubscription
-      operationId: GET CreateEventSubscription
+      operationId: GET_CreateEventSubscription
       description: '<p>Creates an RDS event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your RDS sources. If you don''t specify either the SourceType or the SourceIdentifier, you are notified of events generated from all RDS sources belonging to your customer account.</p> <note> <p>RDS event notification is only available for unencrypted SNS topics. If you specify an encrypted SNS topic, event notifications aren''t sent for the topic.</p> </note>'
       responses:
         '200':
@@ -4771,7 +4771,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateEventSubscription
-      operationId: POST CreateEventSubscription
+      operationId: POST_CreateEventSubscription
       description: '<p>Creates an RDS event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup.</p> <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your RDS sources. If you don''t specify either the SourceType or the SourceIdentifier, you are notified of events generated from all RDS sources belonging to your customer account.</p> <note> <p>RDS event notification is only available for unencrypted SNS topics. If you specify an encrypted SNS topic, event notifications aren''t sent for the topic.</p> </note>'
       responses:
         '200':
@@ -4845,7 +4845,7 @@ paths:
   '/#Action=CreateGlobalCluster':
     get:
       x-aws-operation-name: CreateGlobalCluster
-      operationId: GET CreateGlobalCluster
+      operationId: GET_CreateGlobalCluster
       description: '<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -4945,7 +4945,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateGlobalCluster
-      operationId: POST CreateGlobalCluster
+      operationId: POST_CreateGlobalCluster
       description: '<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5001,7 +5001,7 @@ paths:
   '/#Action=CreateOptionGroup':
     get:
       x-aws-operation-name: CreateOptionGroup
-      operationId: GET CreateOptionGroup
+      operationId: GET_CreateOptionGroup
       description: Creates a new option group. You can create up to 20 option groups.
       responses:
         '200':
@@ -5080,7 +5080,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateOptionGroup
-      operationId: POST CreateOptionGroup
+      operationId: POST_CreateOptionGroup
       description: Creates a new option group. You can create up to 20 option groups.
       responses:
         '200':
@@ -5124,7 +5124,7 @@ paths:
   '/#Action=DeleteCustomAvailabilityZone':
     get:
       x-aws-operation-name: DeleteCustomAvailabilityZone
-      operationId: GET DeleteCustomAvailabilityZone
+      operationId: GET_DeleteCustomAvailabilityZone
       description: '<p>Deletes a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -5176,7 +5176,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCustomAvailabilityZone
-      operationId: POST DeleteCustomAvailabilityZone
+      operationId: POST_DeleteCustomAvailabilityZone
       description: '<p>Deletes a custom Availability Zone (AZ).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -5220,7 +5220,7 @@ paths:
   '/#Action=DeleteDBCluster':
     get:
       x-aws-operation-name: DeleteDBCluster
-      operationId: GET DeleteDBCluster
+      operationId: GET_DeleteDBCluster
       description: '<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p/> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5302,7 +5302,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBCluster
-      operationId: POST DeleteDBCluster
+      operationId: POST_DeleteDBCluster
       description: '<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p/> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5364,7 +5364,7 @@ paths:
   '/#Action=DeleteDBClusterEndpoint':
     get:
       x-aws-operation-name: DeleteDBClusterEndpoint
-      operationId: GET DeleteDBClusterEndpoint
+      operationId: GET_DeleteDBClusterEndpoint
       description: <p>Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -5422,7 +5422,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBClusterEndpoint
-      operationId: POST DeleteDBClusterEndpoint
+      operationId: POST_DeleteDBClusterEndpoint
       description: <p>Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -5472,7 +5472,7 @@ paths:
   '/#Action=DeleteDBClusterParameterGroup':
     get:
       x-aws-operation-name: DeleteDBClusterParameterGroup
-      operationId: GET DeleteDBClusterParameterGroup
+      operationId: GET_DeleteDBClusterParameterGroup
       description: '<p>Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can''t be associated with any DB clusters.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5520,7 +5520,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBClusterParameterGroup
-      operationId: POST DeleteDBClusterParameterGroup
+      operationId: POST_DeleteDBClusterParameterGroup
       description: '<p>Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can''t be associated with any DB clusters.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5560,7 +5560,7 @@ paths:
   '/#Action=DeleteDBClusterSnapshot':
     get:
       x-aws-operation-name: DeleteDBClusterSnapshot
-      operationId: GET DeleteDBClusterSnapshot
+      operationId: GET_DeleteDBClusterSnapshot
       description: '<p>Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB cluster snapshot must be in the <code>available</code> state to be deleted.</p> </note> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5612,7 +5612,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBClusterSnapshot
-      operationId: POST DeleteDBClusterSnapshot
+      operationId: POST_DeleteDBClusterSnapshot
       description: '<p>Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB cluster snapshot must be in the <code>available</code> state to be deleted.</p> </note> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -5656,7 +5656,7 @@ paths:
   '/#Action=DeleteDBInstance':
     get:
       x-aws-operation-name: DeleteDBInstance
-      operationId: GET DeleteDBInstance
+      operationId: GET_DeleteDBInstance
       description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon RDS DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted. </p> <p>When a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when you skip creation of the final snapshot with the <code>SkipFinalSnapshot</code> parameter.</p> <p>If the specified DB instance is part of an Amazon Aurora DB cluster, you can''t delete the DB instance if both of the following conditions are true:</p> <ul> <li> <p>The DB cluster is a Read Replica of another Amazon Aurora DB cluster.</p> </li> <li> <p>The DB instance is the only instance in the DB cluster.</p> </li> </ul> <p>To delete a DB instance in this case, first call the <code>PromoteReadReplicaDBCluster</code> API action to promote the DB cluster so it''s no longer a Read Replica. After the promotion completes, then call the <code>DeleteDBInstance</code> API action to delete the final instance in the DB cluster.</p>'
       responses:
         '200':
@@ -5750,7 +5750,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBInstance
-      operationId: POST DeleteDBInstance
+      operationId: POST_DeleteDBInstance
       description: '<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can''t be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon RDS DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can''t be canceled or reverted once submitted. </p> <p>When a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when you skip creation of the final snapshot with the <code>SkipFinalSnapshot</code> parameter.</p> <p>If the specified DB instance is part of an Amazon Aurora DB cluster, you can''t delete the DB instance if both of the following conditions are true:</p> <ul> <li> <p>The DB cluster is a Read Replica of another Amazon Aurora DB cluster.</p> </li> <li> <p>The DB instance is the only instance in the DB cluster.</p> </li> </ul> <p>To delete a DB instance in this case, first call the <code>PromoteReadReplicaDBCluster</code> API action to promote the DB cluster so it''s no longer a Read Replica. After the promotion completes, then call the <code>DeleteDBInstance</code> API action to delete the final instance in the DB cluster.</p>'
       responses:
         '200':
@@ -5818,7 +5818,7 @@ paths:
   '/#Action=DeleteDBInstanceAutomatedBackup':
     get:
       x-aws-operation-name: DeleteDBInstanceAutomatedBackup
-      operationId: GET DeleteDBInstanceAutomatedBackup
+      operationId: GET_DeleteDBInstanceAutomatedBackup
       description: Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.
       responses:
         '200':
@@ -5870,7 +5870,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBInstanceAutomatedBackup
-      operationId: POST DeleteDBInstanceAutomatedBackup
+      operationId: POST_DeleteDBInstanceAutomatedBackup
       description: Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.
       responses:
         '200':
@@ -5914,7 +5914,7 @@ paths:
   '/#Action=DeleteDBParameterGroup':
     get:
       x-aws-operation-name: DeleteDBParameterGroup
-      operationId: GET DeleteDBParameterGroup
+      operationId: GET_DeleteDBParameterGroup
       description: Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.
       responses:
         '200':
@@ -5962,7 +5962,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBParameterGroup
-      operationId: POST DeleteDBParameterGroup
+      operationId: POST_DeleteDBParameterGroup
       description: Deletes a specified DB parameter group. The DB parameter group to be deleted can't be associated with any DB instances.
       responses:
         '200':
@@ -6002,7 +6002,7 @@ paths:
   '/#Action=DeleteDBProxy':
     get:
       x-aws-operation-name: DeleteDBProxy
-      operationId: GET DeleteDBProxy
+      operationId: GET_DeleteDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>
       responses:
         '200':
@@ -6054,7 +6054,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBProxy
-      operationId: POST DeleteDBProxy
+      operationId: POST_DeleteDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>
       responses:
         '200':
@@ -6098,7 +6098,7 @@ paths:
   '/#Action=DeleteDBSecurityGroup':
     get:
       x-aws-operation-name: DeleteDBSecurityGroup
-      operationId: GET DeleteDBSecurityGroup
+      operationId: GET_DeleteDBSecurityGroup
       description: <p>Deletes a DB security group.</p> <note> <p>The specified DB security group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -6146,7 +6146,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBSecurityGroup
-      operationId: POST DeleteDBSecurityGroup
+      operationId: POST_DeleteDBSecurityGroup
       description: <p>Deletes a DB security group.</p> <note> <p>The specified DB security group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -6186,7 +6186,7 @@ paths:
   '/#Action=DeleteDBSnapshot':
     get:
       x-aws-operation-name: DeleteDBSnapshot
-      operationId: GET DeleteDBSnapshot
+      operationId: GET_DeleteDBSnapshot
       description: '<p>Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
       responses:
         '200':
@@ -6238,7 +6238,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBSnapshot
-      operationId: POST DeleteDBSnapshot
+      operationId: POST_DeleteDBSnapshot
       description: '<p>Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
       responses:
         '200':
@@ -6282,7 +6282,7 @@ paths:
   '/#Action=DeleteDBSubnetGroup':
     get:
       x-aws-operation-name: DeleteDBSubnetGroup
-      operationId: GET DeleteDBSubnetGroup
+      operationId: GET_DeleteDBSubnetGroup
       description: <p>Deletes a DB subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -6336,7 +6336,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBSubnetGroup
-      operationId: POST DeleteDBSubnetGroup
+      operationId: POST_DeleteDBSubnetGroup
       description: <p>Deletes a DB subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -6382,7 +6382,7 @@ paths:
   '/#Action=DeleteEventSubscription':
     get:
       x-aws-operation-name: DeleteEventSubscription
-      operationId: GET DeleteEventSubscription
+      operationId: GET_DeleteEventSubscription
       description: Deletes an RDS event notification subscription.
       responses:
         '200':
@@ -6434,7 +6434,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteEventSubscription
-      operationId: POST DeleteEventSubscription
+      operationId: POST_DeleteEventSubscription
       description: Deletes an RDS event notification subscription.
       responses:
         '200':
@@ -6478,7 +6478,7 @@ paths:
   '/#Action=DeleteGlobalCluster':
     get:
       x-aws-operation-name: DeleteGlobalCluster
-      operationId: GET DeleteGlobalCluster
+      operationId: GET_DeleteGlobalCluster
       description: <p> Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -6530,7 +6530,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteGlobalCluster
-      operationId: POST DeleteGlobalCluster
+      operationId: POST_DeleteGlobalCluster
       description: <p> Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -6574,7 +6574,7 @@ paths:
   '/#Action=DeleteInstallationMedia':
     get:
       x-aws-operation-name: DeleteInstallationMedia
-      operationId: GET DeleteInstallationMedia
+      operationId: GET_DeleteInstallationMedia
       description: 'Deletes the installation medium for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.'
       responses:
         '200':
@@ -6620,7 +6620,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteInstallationMedia
-      operationId: POST DeleteInstallationMedia
+      operationId: POST_DeleteInstallationMedia
       description: 'Deletes the installation medium for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.'
       responses:
         '200':
@@ -6658,7 +6658,7 @@ paths:
   '/#Action=DeleteOptionGroup':
     get:
       x-aws-operation-name: DeleteOptionGroup
-      operationId: GET DeleteOptionGroup
+      operationId: GET_DeleteOptionGroup
       description: Deletes an existing option group.
       responses:
         '200':
@@ -6706,7 +6706,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteOptionGroup
-      operationId: POST DeleteOptionGroup
+      operationId: POST_DeleteOptionGroup
       description: Deletes an existing option group.
       responses:
         '200':
@@ -6746,7 +6746,7 @@ paths:
   '/#Action=DeregisterDBProxyTargets':
     get:
       x-aws-operation-name: DeregisterDBProxyTargets
-      operationId: GET DeregisterDBProxyTargets
+      operationId: GET_DeregisterDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -6832,7 +6832,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeregisterDBProxyTargets
-      operationId: POST DeregisterDBProxyTargets
+      operationId: POST_DeregisterDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -6888,7 +6888,7 @@ paths:
   '/#Action=DescribeAccountAttributes':
     get:
       x-aws-operation-name: DescribeAccountAttributes
-      operationId: GET DescribeAccountAttributes
+      operationId: GET_DescribeAccountAttributes
       description: '<p>Lists all of the attributes for a customer account. The attributes include Amazon RDS quotas for the account, such as the number of DB instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota''s maximum value.</p> <p>This command doesn''t take any parameters.</p>'
       responses:
         '200':
@@ -6922,7 +6922,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAccountAttributes
-      operationId: POST DescribeAccountAttributes
+      operationId: POST_DescribeAccountAttributes
       description: '<p>Lists all of the attributes for a customer account. The attributes include Amazon RDS quotas for the account, such as the number of DB instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota''s maximum value.</p> <p>This command doesn''t take any parameters.</p>'
       responses:
         '200':
@@ -6954,7 +6954,7 @@ paths:
   '/#Action=DescribeCertificates':
     get:
       x-aws-operation-name: DescribeCertificates
-      operationId: GET DescribeCertificates
+      operationId: GET_DescribeCertificates
       description: Lists the set of CA certificates provided by Amazon RDS for this AWS account.
       responses:
         '200':
@@ -7020,7 +7020,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCertificates
-      operationId: POST DescribeCertificates
+      operationId: POST_DescribeCertificates
       description: Lists the set of CA certificates provided by Amazon RDS for this AWS account.
       responses:
         '200':
@@ -7058,7 +7058,7 @@ paths:
   '/#Action=DescribeCustomAvailabilityZones':
     get:
       x-aws-operation-name: DescribeCustomAvailabilityZones
-      operationId: GET DescribeCustomAvailabilityZones
+      operationId: GET_DescribeCustomAvailabilityZones
       description: '<p>Returns information about custom Availability Zones (AZs).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -7124,7 +7124,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCustomAvailabilityZones
-      operationId: POST DescribeCustomAvailabilityZones
+      operationId: POST_DescribeCustomAvailabilityZones
       description: '<p>Returns information about custom Availability Zones (AZs).</p> <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p> <p>For more information about RDS on VMware, see the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html"> <i>RDS on VMware User Guide.</i> </a> </p>'
       responses:
         '200':
@@ -7174,7 +7174,7 @@ paths:
   '/#Action=DescribeDBClusterBacktracks':
     get:
       x-aws-operation-name: DescribeDBClusterBacktracks
-      operationId: GET DescribeDBClusterBacktracks
+      operationId: GET_DescribeDBClusterBacktracks
       description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7252,7 +7252,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterBacktracks
-      operationId: POST DescribeDBClusterBacktracks
+      operationId: POST_DescribeDBClusterBacktracks
       description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7296,7 +7296,7 @@ paths:
   '/#Action=DescribeDBClusterEndpoints':
     get:
       x-aws-operation-name: DescribeDBClusterEndpoints
-      operationId: GET DescribeDBClusterEndpoints
+      operationId: GET_DescribeDBClusterEndpoints
       description: <p>Returns information about endpoints for an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -7368,7 +7368,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterEndpoints
-      operationId: POST DescribeDBClusterEndpoints
+      operationId: POST_DescribeDBClusterEndpoints
       description: <p>Returns information about endpoints for an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -7406,7 +7406,7 @@ paths:
   '/#Action=DescribeDBClusterParameterGroups':
     get:
       x-aws-operation-name: DescribeDBClusterParameterGroups
-      operationId: GET DescribeDBClusterParameterGroups
+      operationId: GET_DescribeDBClusterParameterGroups
       description: '<p> Returns a list of <code>DBClusterParameterGroup</code> descriptions. If a <code>DBClusterParameterGroupName</code> parameter is specified, the list will contain only the description of the specified DB cluster parameter group. </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7472,7 +7472,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterParameterGroups
-      operationId: POST DescribeDBClusterParameterGroups
+      operationId: POST_DescribeDBClusterParameterGroups
       description: '<p> Returns a list of <code>DBClusterParameterGroup</code> descriptions. If a <code>DBClusterParameterGroupName</code> parameter is specified, the list will contain only the description of the specified DB cluster parameter group. </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7510,7 +7510,7 @@ paths:
   '/#Action=DescribeDBClusterParameters':
     get:
       x-aws-operation-name: DescribeDBClusterParameters
-      operationId: GET DescribeDBClusterParameters
+      operationId: GET_DescribeDBClusterParameters
       description: '<p>Returns the detailed parameter list for a particular DB cluster parameter group.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7582,7 +7582,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterParameters
-      operationId: POST DescribeDBClusterParameters
+      operationId: POST_DescribeDBClusterParameters
       description: '<p>Returns the detailed parameter list for a particular DB cluster parameter group.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7620,7 +7620,7 @@ paths:
   '/#Action=DescribeDBClusterSnapshotAttributes':
     get:
       x-aws-operation-name: DescribeDBClusterSnapshotAttributes
-      operationId: GET DescribeDBClusterSnapshotAttributes
+      operationId: GET_DescribeDBClusterSnapshotAttributes
       description: '<p>Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When sharing snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.</p> <p>To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the <code>ModifyDBClusterSnapshotAttribute</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7666,7 +7666,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterSnapshotAttributes
-      operationId: POST DescribeDBClusterSnapshotAttributes
+      operationId: POST_DescribeDBClusterSnapshotAttributes
       description: '<p>Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When sharing snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.</p> <p>To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the <code>ModifyDBClusterSnapshotAttribute</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7704,7 +7704,7 @@ paths:
   '/#Action=DescribeDBClusterSnapshots':
     get:
       x-aws-operation-name: DescribeDBClusterSnapshots
-      operationId: GET DescribeDBClusterSnapshots
+      operationId: GET_DescribeDBClusterSnapshots
       description: '<p>Returns information about DB cluster snapshots. This API action supports pagination.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7794,7 +7794,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterSnapshots
-      operationId: POST DescribeDBClusterSnapshots
+      operationId: POST_DescribeDBClusterSnapshots
       description: '<p>Returns information about DB cluster snapshots. This API action supports pagination.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -7832,7 +7832,7 @@ paths:
   '/#Action=DescribeDBClusters':
     get:
       x-aws-operation-name: DescribeDBClusters
-      operationId: GET DescribeDBClusters
+      operationId: GET_DescribeDBClusters
       description: '<p>Returns information about provisioned Aurora DB clusters. This API supports pagination.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This operation can also return information for Amazon Neptune DB instances and Amazon DocumentDB instances.</p> </note>'
       responses:
         '200':
@@ -7904,7 +7904,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusters
-      operationId: POST DescribeDBClusters
+      operationId: POST_DescribeDBClusters
       description: '<p>Returns information about provisioned Aurora DB clusters. This API supports pagination.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This operation can also return information for Amazon Neptune DB instances and Amazon DocumentDB instances.</p> </note>'
       responses:
         '200':
@@ -7954,7 +7954,7 @@ paths:
   '/#Action=DescribeDBEngineVersions':
     get:
       x-aws-operation-name: DescribeDBEngineVersions
-      operationId: GET DescribeDBEngineVersions
+      operationId: GET_DescribeDBEngineVersions
       description: Returns a list of the available DB engines.
       responses:
         '200':
@@ -8050,7 +8050,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBEngineVersions
-      operationId: POST DescribeDBEngineVersions
+      operationId: POST_DescribeDBEngineVersions
       description: Returns a list of the available DB engines.
       responses:
         '200':
@@ -8094,7 +8094,7 @@ paths:
   '/#Action=DescribeDBInstanceAutomatedBackups':
     get:
       x-aws-operation-name: DescribeDBInstanceAutomatedBackups
-      operationId: GET DescribeDBInstanceAutomatedBackups
+      operationId: GET_DescribeDBInstanceAutomatedBackups
       description: '<p>Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the <code>DescribeDBInstanceAutomatedBackups</code> and <code>DescribeDBInstances</code> operations.</p> <p>All parameters are optional.</p>'
       responses:
         '200':
@@ -8166,7 +8166,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBInstanceAutomatedBackups
-      operationId: POST DescribeDBInstanceAutomatedBackups
+      operationId: POST_DescribeDBInstanceAutomatedBackups
       description: '<p>Displays backups for both current and deleted instances. For example, use this operation to find details about automated backups for previously deleted instances. Current instances with retention periods greater than zero (0) are returned for both the <code>DescribeDBInstanceAutomatedBackups</code> and <code>DescribeDBInstances</code> operations.</p> <p>All parameters are optional.</p>'
       responses:
         '200':
@@ -8216,7 +8216,7 @@ paths:
   '/#Action=DescribeDBInstances':
     get:
       x-aws-operation-name: DescribeDBInstances
-      operationId: GET DescribeDBInstances
+      operationId: GET_DescribeDBInstances
       description: <p>Returns information about provisioned RDS instances. This API supports pagination.</p> <note> <p>This operation can also return information for Amazon Neptune DB instances and Amazon DocumentDB instances.</p> </note>
       responses:
         '200':
@@ -8282,7 +8282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBInstances
-      operationId: POST DescribeDBInstances
+      operationId: POST_DescribeDBInstances
       description: <p>Returns information about provisioned RDS instances. This API supports pagination.</p> <note> <p>This operation can also return information for Amazon Neptune DB instances and Amazon DocumentDB instances.</p> </note>
       responses:
         '200':
@@ -8332,7 +8332,7 @@ paths:
   '/#Action=DescribeDBLogFiles':
     get:
       x-aws-operation-name: DescribeDBLogFiles
-      operationId: GET DescribeDBLogFiles
+      operationId: GET_DescribeDBLogFiles
       description: Returns a list of DB log files for the DB instance.
       responses:
         '200':
@@ -8416,7 +8416,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBLogFiles
-      operationId: POST DescribeDBLogFiles
+      operationId: POST_DescribeDBLogFiles
       description: Returns a list of DB log files for the DB instance.
       responses:
         '200':
@@ -8466,7 +8466,7 @@ paths:
   '/#Action=DescribeDBParameterGroups':
     get:
       x-aws-operation-name: DescribeDBParameterGroups
-      operationId: GET DescribeDBParameterGroups
+      operationId: GET_DescribeDBParameterGroups
       description: ' Returns a list of <code>DBParameterGroup</code> descriptions. If a <code>DBParameterGroupName</code> is specified, the list will contain only the description of the specified DB parameter group. '
       responses:
         '200':
@@ -8532,7 +8532,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBParameterGroups
-      operationId: POST DescribeDBParameterGroups
+      operationId: POST_DescribeDBParameterGroups
       description: ' Returns a list of <code>DBParameterGroup</code> descriptions. If a <code>DBParameterGroupName</code> is specified, the list will contain only the description of the specified DB parameter group. '
       responses:
         '200':
@@ -8582,7 +8582,7 @@ paths:
   '/#Action=DescribeDBParameters':
     get:
       x-aws-operation-name: DescribeDBParameters
-      operationId: GET DescribeDBParameters
+      operationId: GET_DescribeDBParameters
       description: Returns the detailed parameter list for a particular DB parameter group.
       responses:
         '200':
@@ -8654,7 +8654,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBParameters
-      operationId: POST DescribeDBParameters
+      operationId: POST_DescribeDBParameters
       description: Returns the detailed parameter list for a particular DB parameter group.
       responses:
         '200':
@@ -8704,7 +8704,7 @@ paths:
   '/#Action=DescribeDBProxies':
     get:
       x-aws-operation-name: DescribeDBProxies
-      operationId: GET DescribeDBProxies
+      operationId: GET_DescribeDBProxies
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>
       responses:
         '200':
@@ -8772,7 +8772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBProxies
-      operationId: POST DescribeDBProxies
+      operationId: POST_DescribeDBProxies
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>
       responses:
         '200':
@@ -8822,7 +8822,7 @@ paths:
   '/#Action=DescribeDBProxyTargetGroups':
     get:
       x-aws-operation-name: DescribeDBProxyTargetGroups
-      operationId: GET DescribeDBProxyTargetGroups
+      operationId: GET_DescribeDBProxyTargetGroups
       description: '<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>'
       responses:
         '200':
@@ -8908,7 +8908,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBProxyTargetGroups
-      operationId: POST DescribeDBProxyTargetGroups
+      operationId: POST_DescribeDBProxyTargetGroups
       description: '<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>'
       responses:
         '200':
@@ -8970,7 +8970,7 @@ paths:
   '/#Action=DescribeDBProxyTargets':
     get:
       x-aws-operation-name: DescribeDBProxyTargets
-      operationId: GET DescribeDBProxyTargets
+      operationId: GET_DescribeDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>
       responses:
         '200':
@@ -9062,7 +9062,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBProxyTargets
-      operationId: POST DescribeDBProxyTargets
+      operationId: POST_DescribeDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>
       responses:
         '200':
@@ -9130,7 +9130,7 @@ paths:
   '/#Action=DescribeDBSecurityGroups':
     get:
       x-aws-operation-name: DescribeDBSecurityGroups
-      operationId: GET DescribeDBSecurityGroups
+      operationId: GET_DescribeDBSecurityGroups
       description: ' Returns a list of <code>DBSecurityGroup</code> descriptions. If a <code>DBSecurityGroupName</code> is specified, the list will contain only the descriptions of the specified DB security group. '
       responses:
         '200':
@@ -9196,7 +9196,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBSecurityGroups
-      operationId: POST DescribeDBSecurityGroups
+      operationId: POST_DescribeDBSecurityGroups
       description: ' Returns a list of <code>DBSecurityGroup</code> descriptions. If a <code>DBSecurityGroupName</code> is specified, the list will contain only the descriptions of the specified DB security group. '
       responses:
         '200':
@@ -9246,7 +9246,7 @@ paths:
   '/#Action=DescribeDBSnapshotAttributes':
     get:
       x-aws-operation-name: DescribeDBSnapshotAttributes
-      operationId: GET DescribeDBSnapshotAttributes
+      operationId: GET_DescribeDBSnapshotAttributes
       description: '<p>Returns a list of DB snapshot attribute names and values for a manual DB snapshot.</p> <p>When sharing snapshots with other AWS accounts, <code>DescribeDBSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB snapshot is public and can be copied or restored by all AWS accounts.</p> <p>To add or remove access for an AWS account to copy or restore a manual DB snapshot, or to make the manual DB snapshot public or private, use the <code>ModifyDBSnapshotAttribute</code> API action.</p>'
       responses:
         '200':
@@ -9292,7 +9292,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBSnapshotAttributes
-      operationId: POST DescribeDBSnapshotAttributes
+      operationId: POST_DescribeDBSnapshotAttributes
       description: '<p>Returns a list of DB snapshot attribute names and values for a manual DB snapshot.</p> <p>When sharing snapshots with other AWS accounts, <code>DescribeDBSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB snapshot is public and can be copied or restored by all AWS accounts.</p> <p>To add or remove access for an AWS account to copy or restore a manual DB snapshot, or to make the manual DB snapshot public or private, use the <code>ModifyDBSnapshotAttribute</code> API action.</p>'
       responses:
         '200':
@@ -9330,7 +9330,7 @@ paths:
   '/#Action=DescribeDBSnapshots':
     get:
       x-aws-operation-name: DescribeDBSnapshots
-      operationId: GET DescribeDBSnapshots
+      operationId: GET_DescribeDBSnapshots
       description: Returns information about DB snapshots. This API action supports pagination.
       responses:
         '200':
@@ -9426,7 +9426,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBSnapshots
-      operationId: POST DescribeDBSnapshots
+      operationId: POST_DescribeDBSnapshots
       description: Returns information about DB snapshots. This API action supports pagination.
       responses:
         '200':
@@ -9476,7 +9476,7 @@ paths:
   '/#Action=DescribeDBSubnetGroups':
     get:
       x-aws-operation-name: DescribeDBSubnetGroups
-      operationId: GET DescribeDBSubnetGroups
+      operationId: GET_DescribeDBSubnetGroups
       description: '<p>Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.</p> <p>For an overview of CIDR ranges, go to the <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Wikipedia Tutorial</a>. </p>'
       responses:
         '200':
@@ -9542,7 +9542,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBSubnetGroups
-      operationId: POST DescribeDBSubnetGroups
+      operationId: POST_DescribeDBSubnetGroups
       description: '<p>Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.</p> <p>For an overview of CIDR ranges, go to the <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Wikipedia Tutorial</a>. </p>'
       responses:
         '200':
@@ -9592,7 +9592,7 @@ paths:
   '/#Action=DescribeEngineDefaultClusterParameters':
     get:
       x-aws-operation-name: DescribeEngineDefaultClusterParameters
-      operationId: GET DescribeEngineDefaultClusterParameters
+      operationId: GET_DescribeEngineDefaultClusterParameters
       description: '<p>Returns the default engine and system parameter information for the cluster database engine.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>'
       responses:
         '200':
@@ -9652,7 +9652,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEngineDefaultClusterParameters
-      operationId: POST DescribeEngineDefaultClusterParameters
+      operationId: POST_DescribeEngineDefaultClusterParameters
       description: '<p>Returns the default engine and system parameter information for the cluster database engine.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p>'
       responses:
         '200':
@@ -9684,7 +9684,7 @@ paths:
   '/#Action=DescribeEngineDefaultParameters':
     get:
       x-aws-operation-name: DescribeEngineDefaultParameters
-      operationId: GET DescribeEngineDefaultParameters
+      operationId: GET_DescribeEngineDefaultParameters
       description: Returns the default engine and system parameter information for the specified database engine.
       responses:
         '200':
@@ -9744,7 +9744,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEngineDefaultParameters
-      operationId: POST DescribeEngineDefaultParameters
+      operationId: POST_DescribeEngineDefaultParameters
       description: Returns the default engine and system parameter information for the specified database engine.
       responses:
         '200':
@@ -9788,7 +9788,7 @@ paths:
   '/#Action=DescribeEventCategories':
     get:
       x-aws-operation-name: DescribeEventCategories
-      operationId: GET DescribeEventCategories
+      operationId: GET_DescribeEventCategories
       description: 'Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html"> Events</a> topic in the <i>Amazon RDS User Guide.</i> '
       responses:
         '200':
@@ -9836,7 +9836,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEventCategories
-      operationId: POST DescribeEventCategories
+      operationId: POST_DescribeEventCategories
       description: 'Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html"> Events</a> topic in the <i>Amazon RDS User Guide.</i> '
       responses:
         '200':
@@ -9868,7 +9868,7 @@ paths:
   '/#Action=DescribeEventSubscriptions':
     get:
       x-aws-operation-name: DescribeEventSubscriptions
-      operationId: GET DescribeEventSubscriptions
+      operationId: GET_DescribeEventSubscriptions
       description: '<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.</p> <p>If you specify a SubscriptionName, lists the description for that subscription.</p>'
       responses:
         '200':
@@ -9934,7 +9934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEventSubscriptions
-      operationId: POST DescribeEventSubscriptions
+      operationId: POST_DescribeEventSubscriptions
       description: '<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.</p> <p>If you specify a SubscriptionName, lists the description for that subscription.</p>'
       responses:
         '200':
@@ -9984,7 +9984,7 @@ paths:
   '/#Action=DescribeEvents':
     get:
       x-aws-operation-name: DescribeEvents
-      operationId: GET DescribeEvents
+      operationId: GET_DescribeEvents
       description: 'Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
       responses:
         '200':
@@ -10085,7 +10085,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEvents
-      operationId: POST DescribeEvents
+      operationId: POST_DescribeEvents
       description: 'Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
       responses:
         '200':
@@ -10129,7 +10129,7 @@ paths:
   '/#Action=DescribeExportTasks':
     get:
       x-aws-operation-name: DescribeExportTasks
-      operationId: GET DescribeExportTasks
+      operationId: GET_DescribeExportTasks
       description: 'Returns information about a snapshot export to Amazon S3. This API operation supports pagination. '
       responses:
         '200':
@@ -10203,7 +10203,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeExportTasks
-      operationId: POST DescribeExportTasks
+      operationId: POST_DescribeExportTasks
       description: 'Returns information about a snapshot export to Amazon S3. This API operation supports pagination. '
       responses:
         '200':
@@ -10253,7 +10253,7 @@ paths:
   '/#Action=DescribeGlobalClusters':
     get:
       x-aws-operation-name: DescribeGlobalClusters
-      operationId: GET DescribeGlobalClusters
+      operationId: GET_DescribeGlobalClusters
       description: '<p> Returns information about Aurora global database clusters. This API supports pagination. </p> <p> For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -10319,7 +10319,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeGlobalClusters
-      operationId: POST DescribeGlobalClusters
+      operationId: POST_DescribeGlobalClusters
       description: '<p> Returns information about Aurora global database clusters. This API supports pagination. </p> <p> For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -10369,7 +10369,7 @@ paths:
   '/#Action=DescribeInstallationMedia':
     get:
       x-aws-operation-name: DescribeInstallationMedia
-      operationId: GET DescribeInstallationMedia
+      operationId: GET_DescribeInstallationMedia
       description: 'Describes the available installation media for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.'
       responses:
         '200':
@@ -10435,7 +10435,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeInstallationMedia
-      operationId: POST DescribeInstallationMedia
+      operationId: POST_DescribeInstallationMedia
       description: 'Describes the available installation media for a DB engine that requires an on-premises customer provided license, such as Microsoft SQL Server.'
       responses:
         '200':
@@ -10485,7 +10485,7 @@ paths:
   '/#Action=DescribeOptionGroupOptions':
     get:
       x-aws-operation-name: DescribeOptionGroupOptions
-      operationId: GET DescribeOptionGroupOptions
+      operationId: GET_DescribeOptionGroupOptions
       description: Describes all available options.
       responses:
         '200':
@@ -10551,7 +10551,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeOptionGroupOptions
-      operationId: POST DescribeOptionGroupOptions
+      operationId: POST_DescribeOptionGroupOptions
       description: Describes all available options.
       responses:
         '200':
@@ -10595,7 +10595,7 @@ paths:
   '/#Action=DescribeOptionGroups':
     get:
       x-aws-operation-name: DescribeOptionGroups
-      operationId: GET DescribeOptionGroups
+      operationId: GET_DescribeOptionGroups
       description: Describes the available option groups.
       responses:
         '200':
@@ -10673,7 +10673,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeOptionGroups
-      operationId: POST DescribeOptionGroups
+      operationId: POST_DescribeOptionGroups
       description: Describes the available option groups.
       responses:
         '200':
@@ -10723,7 +10723,7 @@ paths:
   '/#Action=DescribeOrderableDBInstanceOptions':
     get:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
-      operationId: GET DescribeOrderableDBInstanceOptions
+      operationId: GET_DescribeOrderableDBInstanceOptions
       description: Returns a list of orderable DB instance options for the specified engine.
       responses:
         '200':
@@ -10807,7 +10807,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
-      operationId: POST DescribeOrderableDBInstanceOptions
+      operationId: POST_DescribeOrderableDBInstanceOptions
       description: Returns a list of orderable DB instance options for the specified engine.
       responses:
         '200':
@@ -10851,7 +10851,7 @@ paths:
   '/#Action=DescribePendingMaintenanceActions':
     get:
       x-aws-operation-name: DescribePendingMaintenanceActions
-      operationId: GET DescribePendingMaintenanceActions
+      operationId: GET_DescribePendingMaintenanceActions
       description: 'Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.'
       responses:
         '200':
@@ -10917,7 +10917,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribePendingMaintenanceActions
-      operationId: POST DescribePendingMaintenanceActions
+      operationId: POST_DescribePendingMaintenanceActions
       description: 'Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.'
       responses:
         '200':
@@ -10955,7 +10955,7 @@ paths:
   '/#Action=DescribeReservedDBInstances':
     get:
       x-aws-operation-name: DescribeReservedDBInstances
-      operationId: GET DescribeReservedDBInstances
+      operationId: GET_DescribeReservedDBInstances
       description: 'Returns information about reserved DB instances for this account, or about a specified reserved DB instance.'
       responses:
         '200':
@@ -11063,7 +11063,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedDBInstances
-      operationId: POST DescribeReservedDBInstances
+      operationId: POST_DescribeReservedDBInstances
       description: 'Returns information about reserved DB instances for this account, or about a specified reserved DB instance.'
       responses:
         '200':
@@ -11113,7 +11113,7 @@ paths:
   '/#Action=DescribeReservedDBInstancesOfferings':
     get:
       x-aws-operation-name: DescribeReservedDBInstancesOfferings
-      operationId: GET DescribeReservedDBInstancesOfferings
+      operationId: GET_DescribeReservedDBInstancesOfferings
       description: Lists available reserved DB instance offerings.
       responses:
         '200':
@@ -11209,7 +11209,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedDBInstancesOfferings
-      operationId: POST DescribeReservedDBInstancesOfferings
+      operationId: POST_DescribeReservedDBInstancesOfferings
       description: Lists available reserved DB instance offerings.
       responses:
         '200':
@@ -11259,7 +11259,7 @@ paths:
   '/#Action=DescribeSourceRegions':
     get:
       x-aws-operation-name: DescribeSourceRegions
-      operationId: GET DescribeSourceRegions
+      operationId: GET_DescribeSourceRegions
       description: Returns a list of the source AWS Regions where the current AWS Region can create a Read Replica or copy a DB snapshot from. This API action supports pagination.
       responses:
         '200':
@@ -11319,7 +11319,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSourceRegions
-      operationId: POST DescribeSourceRegions
+      operationId: POST_DescribeSourceRegions
       description: Returns a list of the source AWS Regions where the current AWS Region can create a Read Replica or copy a DB snapshot from. This API action supports pagination.
       responses:
         '200':
@@ -11351,7 +11351,7 @@ paths:
   '/#Action=DescribeValidDBInstanceModifications':
     get:
       x-aws-operation-name: DescribeValidDBInstanceModifications
-      operationId: GET DescribeValidDBInstanceModifications
+      operationId: GET_DescribeValidDBInstanceModifications
       description: 'You can call <code>DescribeValidDBInstanceModifications</code> to learn what modifications you can make to your DB instance. You can use this information when you call <code>ModifyDBInstance</code>. '
       responses:
         '200':
@@ -11403,7 +11403,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeValidDBInstanceModifications
-      operationId: POST DescribeValidDBInstanceModifications
+      operationId: POST_DescribeValidDBInstanceModifications
       description: 'You can call <code>DescribeValidDBInstanceModifications</code> to learn what modifications you can make to your DB instance. You can use this information when you call <code>ModifyDBInstance</code>. '
       responses:
         '200':
@@ -11447,7 +11447,7 @@ paths:
   '/#Action=DownloadDBLogFilePortion':
     get:
       x-aws-operation-name: DownloadDBLogFilePortion
-      operationId: GET DownloadDBLogFilePortion
+      operationId: GET_DownloadDBLogFilePortion
       description: 'Downloads all or a portion of the specified log file, up to 1 MB in size.'
       responses:
         '200':
@@ -11517,7 +11517,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DownloadDBLogFilePortion
-      operationId: POST DownloadDBLogFilePortion
+      operationId: POST_DownloadDBLogFilePortion
       description: 'Downloads all or a portion of the specified log file, up to 1 MB in size.'
       responses:
         '200':
@@ -11573,7 +11573,7 @@ paths:
   '/#Action=FailoverDBCluster':
     get:
       x-aws-operation-name: FailoverDBCluster
-      operationId: GET FailoverDBCluster
+      operationId: GET_FailoverDBCluster
       description: '<p>Forces a failover for a DB cluster.</p> <p>A failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer).</p> <p>Amazon Aurora will automatically fail over to an Aurora Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -11637,7 +11637,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: FailoverDBCluster
-      operationId: POST FailoverDBCluster
+      operationId: POST_FailoverDBCluster
       description: '<p>Forces a failover for a DB cluster.</p> <p>A failover for a DB cluster promotes one of the Aurora Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer).</p> <p>Amazon Aurora will automatically fail over to an Aurora Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -11687,7 +11687,7 @@ paths:
   '/#Action=ImportInstallationMedia':
     get:
       x-aws-operation-name: ImportInstallationMedia
-      operationId: GET ImportInstallationMedia
+      operationId: GET_ImportInstallationMedia
       description: 'Imports the installation media for a DB engine that requires an on-premises customer provided license, such as SQL Server.'
       responses:
         '200':
@@ -11763,7 +11763,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ImportInstallationMedia
-      operationId: POST ImportInstallationMedia
+      operationId: POST_ImportInstallationMedia
       description: 'Imports the installation media for a DB engine that requires an on-premises customer provided license, such as SQL Server.'
       responses:
         '200':
@@ -11807,7 +11807,7 @@ paths:
   '/#Action=ListTagsForResource':
     get:
       x-aws-operation-name: ListTagsForResource
-      operationId: GET ListTagsForResource
+      operationId: GET_ListTagsForResource
       description: '<p>Lists all tags on an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>.</p>'
       responses:
         '200':
@@ -11873,7 +11873,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTagsForResource
-      operationId: POST ListTagsForResource
+      operationId: POST_ListTagsForResource
       description: '<p>Lists all tags on an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>.</p>'
       responses:
         '200':
@@ -11923,7 +11923,7 @@ paths:
   '/#Action=ModifyCertificates':
     get:
       x-aws-operation-name: ModifyCertificates
-      operationId: GET ModifyCertificates
+      operationId: GET_ModifyCertificates
       description: '<p>Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances temporarily, or remove the override.</p> <p>By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS.</p> <p>You might need to override the default certificate in the following situations:</p> <ul> <li> <p>You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified AWS Region.</p> </li> <li> <p>RDS has already moved to a new default CA certificate for the specified AWS Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.</p> </li> </ul> <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       responses:
         '200':
@@ -11975,7 +11975,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCertificates
-      operationId: POST ModifyCertificates
+      operationId: POST_ModifyCertificates
       description: '<p>Override the system-default Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificate for Amazon RDS for new DB instances temporarily, or remove the override.</p> <p>By using this operation, you can specify an RDS-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS.</p> <p>You might need to override the default certificate in the following situations:</p> <ul> <li> <p>You already migrated your applications to support the latest certificate authority (CA) certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified AWS Region.</p> </li> <li> <p>RDS has already moved to a new default CA certificate for the specified AWS Region, but you are still in the process of supporting the new CA certificate. In this case, you temporarily need additional time to finish your application changes.</p> </li> </ul> <p>For more information about rotating your SSL/TLS certificate for RDS DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about rotating your SSL/TLS certificate for Aurora DB engines, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html"> Rotating Your SSL/TLS Certificate</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       responses:
         '200':
@@ -12013,7 +12013,7 @@ paths:
   '/#Action=ModifyCurrentDBClusterCapacity':
     get:
       x-aws-operation-name: ModifyCurrentDBClusterCapacity
-      operationId: GET ModifyCurrentDBClusterCapacity
+      operationId: GET_ModifyCurrentDBClusterCapacity
       description: '<p>Set the capacity of an Aurora Serverless DB cluster to a specific value.</p> <p>Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions. Call <code>ModifyCurrentDBClusterCapacity</code> to set the capacity explicitly.</p> <p>After this call sets the DB cluster capacity, Aurora Serverless can automatically scale the DB cluster based on the cooldown period for scaling up and the cooldown period for scaling down.</p> <p>For more information about Aurora Serverless, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p> <important> <p>If you call <code>ModifyCurrentDBClusterCapacity</code> with the default <code>TimeoutAction</code>, connections that prevent Aurora Serverless from finding a scaling point might be dropped. For more information about scaling points, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling"> Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p> </important> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12089,7 +12089,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCurrentDBClusterCapacity
-      operationId: POST ModifyCurrentDBClusterCapacity
+      operationId: POST_ModifyCurrentDBClusterCapacity
       description: '<p>Set the capacity of an Aurora Serverless DB cluster to a specific value.</p> <p>Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale fast enough to meet a sudden change in workload, such as a large number of new transactions. Call <code>ModifyCurrentDBClusterCapacity</code> to set the capacity explicitly.</p> <p>After this call sets the DB cluster capacity, Aurora Serverless can automatically scale the DB cluster based on the cooldown period for scaling up and the cooldown period for scaling down.</p> <p>For more information about Aurora Serverless, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p> <important> <p>If you call <code>ModifyCurrentDBClusterCapacity</code> with the default <code>TimeoutAction</code>, connections that prevent Aurora Serverless from finding a scaling point might be dropped. For more information about scaling points, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling"> Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p> </important> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12139,7 +12139,7 @@ paths:
   '/#Action=ModifyDBCluster':
     get:
       x-aws-operation-name: ModifyDBCluster
-      operationId: GET ModifyDBCluster
+      operationId: GET_ModifyDBCluster
       description: '<p>Modify a setting for an Amazon Aurora DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12410,7 +12410,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBCluster
-      operationId: POST ModifyDBCluster
+      operationId: POST_ModifyDBCluster
       description: '<p>Modify a setting for an Amazon Aurora DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12514,7 +12514,7 @@ paths:
   '/#Action=ModifyDBClusterEndpoint':
     get:
       x-aws-operation-name: ModifyDBClusterEndpoint
-      operationId: GET ModifyDBClusterEndpoint
+      operationId: GET_ModifyDBClusterEndpoint
       description: <p>Modifies the properties of an endpoint in an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -12606,7 +12606,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBClusterEndpoint
-      operationId: POST ModifyDBClusterEndpoint
+      operationId: POST_ModifyDBClusterEndpoint
       description: <p>Modifies the properties of an endpoint in an Amazon Aurora DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -12668,7 +12668,7 @@ paths:
   '/#Action=ModifyDBClusterParameterGroup':
     get:
       x-aws-operation-name: ModifyDBClusterParameterGroup
-      operationId: GET ModifyDBClusterParameterGroup
+      operationId: GET_ModifyDBClusterParameterGroup
       description: '<p> Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <code>DescribeDBClusterParameters</code> action to verify that your DB cluster parameter group has been created or modified.</p> <p>If the modified DB cluster parameter group is used by an Aurora Serverless cluster, Aurora applies the update immediately. The cluster restart might interrupt your workload. In that case, your application must reopen any connections and retry any transactions that were active when the parameter changes took effect.</p> </important> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12728,7 +12728,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBClusterParameterGroup
-      operationId: POST ModifyDBClusterParameterGroup
+      operationId: POST_ModifyDBClusterParameterGroup
       description: '<p> Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <code>DescribeDBClusterParameters</code> action to verify that your DB cluster parameter group has been created or modified.</p> <p>If the modified DB cluster parameter group is used by an Aurora Serverless cluster, Aurora applies the update immediately. The cluster restart might interrupt your workload. In that case, your application must reopen any connections and retry any transactions that were active when the parameter changes took effect.</p> </important> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12772,7 +12772,7 @@ paths:
   '/#Action=ModifyDBClusterSnapshotAttribute':
     get:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
-      operationId: GET ModifyDBClusterSnapshotAttribute
+      operationId: GET_ModifyDBClusterSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the <code>DescribeDBClusterSnapshotAttributes</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12852,7 +12852,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
-      operationId: POST ModifyDBClusterSnapshotAttribute
+      operationId: POST_ModifyDBClusterSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the <code>DescribeDBClusterSnapshotAttributes</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -12902,7 +12902,7 @@ paths:
   '/#Action=ModifyDBInstance':
     get:
       x-aws-operation-name: ModifyDBInstance
-      operationId: GET ModifyDBInstance
+      operationId: GET_ModifyDBInstance
       description: 'Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call <code>DescribeValidDBInstanceModifications</code> before you call <code>ModifyDBInstance</code>. '
       responses:
         '200':
@@ -13304,7 +13304,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBInstance
-      operationId: POST ModifyDBInstance
+      operationId: POST_ModifyDBInstance
       description: 'Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call <code>DescribeValidDBInstanceModifications</code> before you call <code>ModifyDBInstance</code>. '
       responses:
         '200':
@@ -13438,7 +13438,7 @@ paths:
   '/#Action=ModifyDBParameterGroup':
     get:
       x-aws-operation-name: ModifyDBParameterGroup
-      operationId: GET ModifyDBParameterGroup
+      operationId: GET_ModifyDBParameterGroup
       description: '<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>'
       responses:
         '200':
@@ -13498,7 +13498,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBParameterGroup
-      operationId: POST ModifyDBParameterGroup
+      operationId: POST_ModifyDBParameterGroup
       description: '<p> Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.</p> </note> <important> <p>After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the <code>character_set_database</code> parameter. You can use the <i>Parameter Groups</i> option of the <a href="https://console.aws.amazon.com/rds/">Amazon RDS console</a> or the <i>DescribeDBParameters</i> command to verify that your DB parameter group has been created or modified.</p> </important>'
       responses:
         '200':
@@ -13542,7 +13542,7 @@ paths:
   '/#Action=ModifyDBProxy':
     get:
       x-aws-operation-name: ModifyDBProxy
-      operationId: GET ModifyDBProxy
+      operationId: GET_ModifyDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>
       responses:
         '200':
@@ -13646,7 +13646,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBProxy
-      operationId: POST ModifyDBProxy
+      operationId: POST_ModifyDBProxy
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>
       responses:
         '200':
@@ -13696,7 +13696,7 @@ paths:
   '/#Action=ModifyDBProxyTargetGroup':
     get:
       x-aws-operation-name: ModifyDBProxyTargetGroup
-      operationId: GET ModifyDBProxyTargetGroup
+      operationId: GET_ModifyDBProxyTargetGroup
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -13789,7 +13789,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBProxyTargetGroup
-      operationId: POST ModifyDBProxyTargetGroup
+      operationId: POST_ModifyDBProxyTargetGroup
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -13839,7 +13839,7 @@ paths:
   '/#Action=ModifyDBSnapshot':
     get:
       x-aws-operation-name: ModifyDBSnapshot
-      operationId: GET ModifyDBSnapshot
+      operationId: GET_ModifyDBSnapshot
       description: '<p>Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version. </p> <p>Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and PostgreSQL. </p>'
       responses:
         '200':
@@ -13897,7 +13897,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBSnapshot
-      operationId: POST ModifyDBSnapshot
+      operationId: POST_ModifyDBSnapshot
       description: '<p>Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version. </p> <p>Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and PostgreSQL. </p>'
       responses:
         '200':
@@ -13935,7 +13935,7 @@ paths:
   '/#Action=ModifyDBSnapshotAttribute':
     get:
       x-aws-operation-name: ModifyDBSnapshotAttribute
-      operationId: GET ModifyDBSnapshotAttribute
+      operationId: GET_ModifyDBSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts. If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <code>DescribeDBSnapshotAttributes</code> API action.</p>'
       responses:
         '200':
@@ -14015,7 +14015,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBSnapshotAttribute
-      operationId: POST ModifyDBSnapshotAttribute
+      operationId: POST_ModifyDBSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts. If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <code>DescribeDBSnapshotAttributes</code> API action.</p>'
       responses:
         '200':
@@ -14065,7 +14065,7 @@ paths:
   '/#Action=ModifyDBSubnetGroup':
     get:
       x-aws-operation-name: ModifyDBSubnetGroup
-      operationId: GET ModifyDBSubnetGroup
+      operationId: GET_ModifyDBSubnetGroup
       description: Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
       responses:
         '200':
@@ -14149,7 +14149,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBSubnetGroup
-      operationId: POST ModifyDBSubnetGroup
+      operationId: POST_ModifyDBSubnetGroup
       description: Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
       responses:
         '200':
@@ -14211,7 +14211,7 @@ paths:
   '/#Action=ModifyEventSubscription':
     get:
       x-aws-operation-name: ModifyEventSubscription
-      operationId: GET ModifyEventSubscription
+      operationId: GET_ModifyEventSubscription
       description: '<p>Modifies an existing RDS event notification subscription. You can''t modify the source identifiers using this call. To change source identifiers for a subscription, use the <code>AddSourceIdentifierToSubscription</code> and <code>RemoveSourceIdentifierFromSubscription</code> calls.</p> <p>You can see a list of the event categories for a given SourceType in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html">Events</a> topic in the <i>Amazon RDS User Guide</i> or by using the <b>DescribeEventCategories</b> action.</p>'
       responses:
         '200':
@@ -14313,7 +14313,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyEventSubscription
-      operationId: POST ModifyEventSubscription
+      operationId: POST_ModifyEventSubscription
       description: '<p>Modifies an existing RDS event notification subscription. You can''t modify the source identifiers using this call. To change source identifiers for a subscription, use the <code>AddSourceIdentifierToSubscription</code> and <code>RemoveSourceIdentifierFromSubscription</code> calls.</p> <p>You can see a list of the event categories for a given SourceType in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html">Events</a> topic in the <i>Amazon RDS User Guide</i> or by using the <b>DescribeEventCategories</b> action.</p>'
       responses:
         '200':
@@ -14381,7 +14381,7 @@ paths:
   '/#Action=ModifyGlobalCluster':
     get:
       x-aws-operation-name: ModifyGlobalCluster
-      operationId: GET ModifyGlobalCluster
+      operationId: GET_ModifyGlobalCluster
       description: '<p> Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -14445,7 +14445,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyGlobalCluster
-      operationId: POST ModifyGlobalCluster
+      operationId: POST_ModifyGlobalCluster
       description: '<p> Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -14489,7 +14489,7 @@ paths:
   '/#Action=ModifyOptionGroup':
     get:
       x-aws-operation-name: ModifyOptionGroup
-      operationId: GET ModifyOptionGroup
+      operationId: GET_ModifyOptionGroup
       description: Modifies an existing option group.
       responses:
         '200':
@@ -14563,7 +14563,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyOptionGroup
-      operationId: POST ModifyOptionGroup
+      operationId: POST_ModifyOptionGroup
       description: Modifies an existing option group.
       responses:
         '200':
@@ -14607,7 +14607,7 @@ paths:
   '/#Action=PromoteReadReplica':
     get:
       x-aws-operation-name: PromoteReadReplica
-      operationId: GET PromoteReadReplica
+      operationId: GET_PromoteReadReplica
       description: '<p>Promotes a Read Replica DB instance to a standalone DB instance.</p> <note> <ul> <li> <p>Backup duration is a function of the amount of changes to the database since the previous backup. If you plan to promote a Read Replica to a standalone instance, we recommend that you enable backups and complete at least one backup prior to promotion. In addition, a Read Replica cannot be promoted to a standalone instance when it is in the <code>backing-up</code> status. If you have enabled backups on your Read Replica, configure the automated backup window so that daily backups do not interfere with Read Replica promotion.</p> </li> <li> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL.</p> </li> </ul> </note>'
       responses:
         '200':
@@ -14671,7 +14671,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PromoteReadReplica
-      operationId: POST PromoteReadReplica
+      operationId: POST_PromoteReadReplica
       description: '<p>Promotes a Read Replica DB instance to a standalone DB instance.</p> <note> <ul> <li> <p>Backup duration is a function of the amount of changes to the database since the previous backup. If you plan to promote a Read Replica to a standalone instance, we recommend that you enable backups and complete at least one backup prior to promotion. In addition, a Read Replica cannot be promoted to a standalone instance when it is in the <code>backing-up</code> status. If you have enabled backups on your Read Replica, configure the automated backup window so that daily backups do not interfere with Read Replica promotion.</p> </li> <li> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL.</p> </li> </ul> </note>'
       responses:
         '200':
@@ -14715,7 +14715,7 @@ paths:
   '/#Action=PromoteReadReplicaDBCluster':
     get:
       x-aws-operation-name: PromoteReadReplicaDBCluster
-      operationId: GET PromoteReadReplicaDBCluster
+      operationId: GET_PromoteReadReplicaDBCluster
       description: <p>Promotes a Read Replica DB cluster to a standalone DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -14767,7 +14767,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PromoteReadReplicaDBCluster
-      operationId: POST PromoteReadReplicaDBCluster
+      operationId: POST_PromoteReadReplicaDBCluster
       description: <p>Promotes a Read Replica DB cluster to a standalone DB cluster.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -14811,7 +14811,7 @@ paths:
   '/#Action=PurchaseReservedDBInstancesOffering':
     get:
       x-aws-operation-name: PurchaseReservedDBInstancesOffering
-      operationId: GET PurchaseReservedDBInstancesOffering
+      operationId: GET_PurchaseReservedDBInstancesOffering
       description: Purchases a reserved DB instance offering.
       responses:
         '200':
@@ -14890,7 +14890,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PurchaseReservedDBInstancesOffering
-      operationId: POST PurchaseReservedDBInstancesOffering
+      operationId: POST_PurchaseReservedDBInstancesOffering
       description: Purchases a reserved DB instance offering.
       responses:
         '200':
@@ -14940,7 +14940,7 @@ paths:
   '/#Action=RebootDBInstance':
     get:
       x-aws-operation-name: RebootDBInstance
-      operationId: GET RebootDBInstance
+      operationId: GET_RebootDBInstance
       description: '<p>You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. </p> <p>For more information about rebooting, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">Rebooting a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -14998,7 +14998,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RebootDBInstance
-      operationId: POST RebootDBInstance
+      operationId: POST_RebootDBInstance
       description: '<p>You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. </p> <p>For more information about rebooting, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">Rebooting a DB Instance</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -15042,7 +15042,7 @@ paths:
   '/#Action=RegisterDBProxyTargets':
     get:
       x-aws-operation-name: RegisterDBProxyTargets
-      operationId: GET RegisterDBProxyTargets
+      operationId: GET_RegisterDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -15152,7 +15152,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RegisterDBProxyTargets
-      operationId: POST RegisterDBProxyTargets
+      operationId: POST_RegisterDBProxyTargets
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>
       responses:
         '200':
@@ -15232,7 +15232,7 @@ paths:
   '/#Action=RemoveFromGlobalCluster':
     get:
       x-aws-operation-name: RemoveFromGlobalCluster
-      operationId: GET RemoveFromGlobalCluster
+      operationId: GET_RemoveFromGlobalCluster
       description: <p> Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -15296,7 +15296,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveFromGlobalCluster
-      operationId: POST RemoveFromGlobalCluster
+      operationId: POST_RemoveFromGlobalCluster
       description: <p> Detaches an Aurora secondary cluster from an Aurora global database cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary cluster in a different region. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>
       responses:
         '200':
@@ -15346,7 +15346,7 @@ paths:
   '/#Action=RemoveRoleFromDBCluster':
     get:
       x-aws-operation-name: RemoveRoleFromDBCluster
-      operationId: GET RemoveRoleFromDBCluster
+      operationId: GET_RemoveRoleFromDBCluster
       description: '<p>Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -15412,7 +15412,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveRoleFromDBCluster
-      operationId: POST RemoveRoleFromDBCluster
+      operationId: POST_RemoveRoleFromDBCluster
       description: '<p>Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -15458,7 +15458,7 @@ paths:
   '/#Action=RemoveRoleFromDBInstance':
     get:
       x-aws-operation-name: RemoveRoleFromDBInstance
-      operationId: GET RemoveRoleFromDBInstance
+      operationId: GET_RemoveRoleFromDBInstance
       description: Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.
       responses:
         '200':
@@ -15524,7 +15524,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveRoleFromDBInstance
-      operationId: POST RemoveRoleFromDBInstance
+      operationId: POST_RemoveRoleFromDBInstance
       description: Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.
       responses:
         '200':
@@ -15570,7 +15570,7 @@ paths:
   '/#Action=RemoveSourceIdentifierFromSubscription':
     get:
       x-aws-operation-name: RemoveSourceIdentifierFromSubscription
-      operationId: GET RemoveSourceIdentifierFromSubscription
+      operationId: GET_RemoveSourceIdentifierFromSubscription
       description: Removes a source identifier from an existing RDS event notification subscription.
       responses:
         '200':
@@ -15628,7 +15628,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveSourceIdentifierFromSubscription
-      operationId: POST RemoveSourceIdentifierFromSubscription
+      operationId: POST_RemoveSourceIdentifierFromSubscription
       description: Removes a source identifier from an existing RDS event notification subscription.
       responses:
         '200':
@@ -15672,7 +15672,7 @@ paths:
   '/#Action=RemoveTagsFromResource':
     get:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: GET RemoveTagsFromResource
+      operationId: GET_RemoveTagsFromResource
       description: '<p>Removes metadata tags from an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -15734,7 +15734,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: POST RemoveTagsFromResource
+      operationId: POST_RemoveTagsFromResource
       description: '<p>Removes metadata tags from an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
@@ -15780,7 +15780,7 @@ paths:
   '/#Action=ResetDBClusterParameterGroup':
     get:
       x-aws-operation-name: ResetDBClusterParameterGroup
-      operationId: GET ResetDBClusterParameterGroup
+      operationId: GET_ResetDBClusterParameterGroup
       description: '<p> Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire DB cluster parameter group, specify the <code>DBClusterParameterGroupName</code> and <code>ResetAllParameters</code> parameters. </p> <p> When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance restart or <code>RebootDBInstance</code> request. You must call <code>RebootDBInstance</code> for every DB instance in your DB cluster that you want the updated static parameter to apply to.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -15846,7 +15846,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResetDBClusterParameterGroup
-      operationId: POST ResetDBClusterParameterGroup
+      operationId: POST_ResetDBClusterParameterGroup
       description: '<p> Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire DB cluster parameter group, specify the <code>DBClusterParameterGroupName</code> and <code>ResetAllParameters</code> parameters. </p> <p> When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance restart or <code>RebootDBInstance</code> request. You must call <code>RebootDBInstance</code> for every DB instance in your DB cluster that you want the updated static parameter to apply to.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -15890,7 +15890,7 @@ paths:
   '/#Action=ResetDBParameterGroup':
     get:
       x-aws-operation-name: ResetDBParameterGroup
-      operationId: GET ResetDBParameterGroup
+      operationId: GET_ResetDBParameterGroup
       description: 'Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire DB parameter group, specify the <code>DBParameterGroup</code> name and <code>ResetAllParameters</code> parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance restart or <code>RebootDBInstance</code> request. '
       responses:
         '200':
@@ -15956,7 +15956,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResetDBParameterGroup
-      operationId: POST ResetDBParameterGroup
+      operationId: POST_ResetDBParameterGroup
       description: 'Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire DB parameter group, specify the <code>DBParameterGroup</code> name and <code>ResetAllParameters</code> parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance restart or <code>RebootDBInstance</code> request. '
       responses:
         '200':
@@ -16000,7 +16000,7 @@ paths:
   '/#Action=RestoreDBClusterFromS3':
     get:
       x-aws-operation-name: RestoreDBClusterFromS3
-      operationId: GET RestoreDBClusterFromS3
+      operationId: GET_RestoreDBClusterFromS3
       description: '<p>Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be created using the Percona XtraBackup utility as described in <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html"> Migrating Data to an Amazon Aurora MySQL DB Cluster</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -16313,7 +16313,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBClusterFromS3
-      operationId: POST RestoreDBClusterFromS3
+      operationId: POST_RestoreDBClusterFromS3
       description: '<p>Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket. Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be created using the Percona XtraBackup utility as described in <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html"> Migrating Data to an Amazon Aurora MySQL DB Cluster</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -16429,7 +16429,7 @@ paths:
   '/#Action=RestoreDBClusterFromSnapshot':
     get:
       x-aws-operation-name: RestoreDBClusterFromSnapshot
-      operationId: GET RestoreDBClusterFromSnapshot
+      operationId: GET_RestoreDBClusterFromSnapshot
       description: '<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster. If you don''t specify a security group, the new DB cluster is associated with the default security group.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -16735,7 +16735,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBClusterFromSnapshot
-      operationId: POST RestoreDBClusterFromSnapshot
+      operationId: POST_RestoreDBClusterFromSnapshot
       description: '<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster. If you don''t specify a security group, the new DB cluster is associated with the default security group.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -16881,7 +16881,7 @@ paths:
   '/#Action=RestoreDBClusterToPointInTime':
     get:
       x-aws-operation-name: RestoreDBClusterToPointInTime
-      operationId: GET RestoreDBClusterToPointInTime
+      operationId: GET_RestoreDBClusterToPointInTime
       description: '<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. </p> <note> <p>This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> action has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -17145,7 +17145,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBClusterToPointInTime
-      operationId: POST RestoreDBClusterToPointInTime
+      operationId: POST_RestoreDBClusterToPointInTime
       description: '<p>Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. </p> <note> <p>This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the <code>CreateDBInstance</code> action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after the <code>RestoreDBClusterToPointInTime</code> action has completed and the DB cluster is available.</p> </note> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -17285,7 +17285,7 @@ paths:
   '/#Action=RestoreDBInstanceFromDBSnapshot':
     get:
       x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
-      operationId: GET RestoreDBInstanceFromDBSnapshot
+      operationId: GET_RestoreDBInstanceFromDBSnapshot
       description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment.</p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
       responses:
         '200':
@@ -17616,7 +17616,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
-      operationId: POST RestoreDBInstanceFromDBSnapshot
+      operationId: POST_RestoreDBInstanceFromDBSnapshot
       description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment.</p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
       responses:
         '200':
@@ -17768,7 +17768,7 @@ paths:
   '/#Action=RestoreDBInstanceFromS3':
     get:
       x-aws-operation-name: RestoreDBInstanceFromS3
-      operationId: GET RestoreDBInstanceFromS3
+      operationId: GET_RestoreDBInstanceFromS3
       description: 'Amazon Relational Database Service (Amazon RDS) supports importing MySQL databases by using backup files. You can create a backup of your on-premises database, store it on Amazon Simple Storage Service (Amazon S3), and then restore the backup file onto a new Amazon RDS DB instance running MySQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html">Importing Data into an Amazon RDS MySQL DB Instance</a> in the <i>Amazon RDS User Guide.</i> '
       responses:
         '200':
@@ -18173,7 +18173,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBInstanceFromS3
-      operationId: POST RestoreDBInstanceFromS3
+      operationId: POST_RestoreDBInstanceFromS3
       description: 'Amazon Relational Database Service (Amazon RDS) supports importing MySQL databases by using backup files. You can create a backup of your on-premises database, store it on Amazon Simple Storage Service (Amazon S3), and then restore the backup file onto a new Amazon RDS DB instance running MySQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html">Importing Data into an Amazon RDS MySQL DB Instance</a> in the <i>Amazon RDS User Guide.</i> '
       responses:
         '200':
@@ -18307,7 +18307,7 @@ paths:
   '/#Action=RestoreDBInstanceToPointInTime':
     get:
       x-aws-operation-name: RestoreDBInstanceToPointInTime
-      operationId: GET RestoreDBInstanceToPointInTime
+      operationId: GET_RestoreDBInstanceToPointInTime
       description: '<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterToPointInTime</code>.</p> </note>'
       responses:
         '200':
@@ -18669,7 +18669,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBInstanceToPointInTime
-      operationId: POST RestoreDBInstanceToPointInTime
+      operationId: POST_RestoreDBInstanceToPointInTime
       description: '<p>Restores a DB instance to an arbitrary point in time. You can restore to any point in time before the time identified by the LatestRestorableTime property. You can restore to a point up to the number of days specified by the BackupRetentionPeriod property.</p> <p>The target database is created with most of the original configuration, but in a system-selected Availability Zone, with the default security group, the default subnet group, and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored deployment and not a single-AZ deployment.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterToPointInTime</code>.</p> </note>'
       responses:
         '200':
@@ -18833,7 +18833,7 @@ paths:
   '/#Action=RevokeDBSecurityGroupIngress':
     get:
       x-aws-operation-name: RevokeDBSecurityGroupIngress
-      operationId: GET RevokeDBSecurityGroupIngress
+      operationId: GET_RevokeDBSecurityGroupIngress
       description: 'Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId).'
       responses:
         '200':
@@ -18915,7 +18915,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RevokeDBSecurityGroupIngress
-      operationId: POST RevokeDBSecurityGroupIngress
+      operationId: POST_RevokeDBSecurityGroupIngress
       description: 'Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId).'
       responses:
         '200':
@@ -18965,7 +18965,7 @@ paths:
   '/#Action=StartActivityStream':
     get:
       x-aws-operation-name: StartActivityStream
-      operationId: GET StartActivityStream
+      operationId: GET_StartActivityStream
       description: 'Starts a database activity stream to monitor activity on the database. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.'
       responses:
         '200':
@@ -19062,7 +19062,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartActivityStream
-      operationId: POST StartActivityStream
+      operationId: POST_StartActivityStream
       description: 'Starts a database activity stream to monitor activity on the database. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.'
       responses:
         '200':
@@ -19130,7 +19130,7 @@ paths:
   '/#Action=StartDBCluster':
     get:
       x-aws-operation-name: StartDBCluster
-      operationId: GET StartDBCluster
+      operationId: GET_StartDBCluster
       description: '<p>Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -19188,7 +19188,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartDBCluster
-      operationId: POST StartDBCluster
+      operationId: POST_StartDBCluster
       description: '<p>Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -19238,7 +19238,7 @@ paths:
   '/#Action=StartDBInstance':
     get:
       x-aws-operation-name: StartDBInstance
-      operationId: GET StartDBInstance
+      operationId: GET_StartDBInstance
       description: '<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html"> Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <code>StartDBCluster</code> instead. </p> </note>'
       responses:
         '200':
@@ -19344,7 +19344,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartDBInstance
-      operationId: POST StartDBInstance
+      operationId: POST_StartDBInstance
       description: '<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html"> Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <code>StartDBCluster</code> instead. </p> </note>'
       responses:
         '200':
@@ -19442,7 +19442,7 @@ paths:
   '/#Action=StartExportTask':
     get:
       x-aws-operation-name: StartExportTask
-      operationId: GET StartExportTask
+      operationId: GET_StartExportTask
       description: 'Starts an export of a snapshot to Amazon S3. The provided IAM role must have access to the S3 bucket. '
       responses:
         '200':
@@ -19574,7 +19574,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartExportTask
-      operationId: POST StartExportTask
+      operationId: POST_StartExportTask
       description: 'Starts an export of a snapshot to Amazon S3. The provided IAM role must have access to the S3 bucket. '
       responses:
         '200':
@@ -19660,7 +19660,7 @@ paths:
   '/#Action=StopActivityStream':
     get:
       x-aws-operation-name: StopActivityStream
-      operationId: GET StopActivityStream
+      operationId: GET_StopActivityStream
       description: '<p>Stops a database activity stream that was started using the AWS console, the <code>start-activity-stream</code> AWS CLI command, or the <code>StartActivityStream</code> action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       responses:
         '200':
@@ -19736,7 +19736,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StopActivityStream
-      operationId: POST StopActivityStream
+      operationId: POST_StopActivityStream
       description: '<p>Stops a database activity stream that was started using the AWS console, the <code>start-activity-stream</code> AWS CLI command, or the <code>StartActivityStream</code> action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       responses:
         '200':
@@ -19798,7 +19798,7 @@ paths:
   '/#Action=StopDBCluster':
     get:
       x-aws-operation-name: StopDBCluster
-      operationId: GET StopDBCluster
+      operationId: GET_StopDBCluster
       description: '<p> Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster''s metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -19856,7 +19856,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StopDBCluster
-      operationId: POST StopDBCluster
+      operationId: POST_StopDBCluster
       description: '<p> Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster''s metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html"> Stopping and Starting an Aurora Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
@@ -19906,7 +19906,7 @@ paths:
   '/#Action=StopDBInstance':
     get:
       x-aws-operation-name: StopDBInstance
-      operationId: GET StopDBInstance
+      operationId: GET_StopDBInstance
       description: '<p> Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS retains the DB instance''s metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html"> Stopping an Amazon RDS DB Instance Temporarily</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora clusters, use <code>StopDBCluster</code> instead. </p> </note>'
       responses:
         '200':
@@ -19982,7 +19982,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StopDBInstance
-      operationId: POST StopDBInstance
+      operationId: POST_StopDBInstance
       description: '<p> Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS retains the DB instance''s metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html"> Stopping an Amazon RDS DB Instance Temporarily</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora clusters, use <code>StopDBCluster</code> instead. </p> </note>'
       responses:
         '200':

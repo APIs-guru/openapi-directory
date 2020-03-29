@@ -115,7 +115,7 @@ paths:
   '/#Action=AddTagsToResource':
     get:
       x-aws-operation-name: AddTagsToResource
-      operationId: GET AddTagsToResource
+      operationId: GET_AddTagsToResource
       description: Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a <code>Condition</code> statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
       responses:
         '200':
@@ -177,7 +177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddTagsToResource
-      operationId: POST AddTagsToResource
+      operationId: POST_AddTagsToResource
       description: Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a <code>Condition</code> statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
       responses:
         '200':
@@ -223,7 +223,7 @@ paths:
   '/#Action=ApplyPendingMaintenanceAction':
     get:
       x-aws-operation-name: ApplyPendingMaintenanceAction
-      operationId: GET ApplyPendingMaintenanceAction
+      operationId: GET_ApplyPendingMaintenanceAction
       description: 'Applies a pending maintenance action to a resource (for example, to a DB instance).'
       responses:
         '200':
@@ -293,7 +293,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ApplyPendingMaintenanceAction
-      operationId: POST ApplyPendingMaintenanceAction
+      operationId: POST_ApplyPendingMaintenanceAction
       description: 'Applies a pending maintenance action to a resource (for example, to a DB instance).'
       responses:
         '200':
@@ -343,7 +343,7 @@ paths:
   '/#Action=CopyDBClusterParameterGroup':
     get:
       x-aws-operation-name: CopyDBClusterParameterGroup
-      operationId: GET CopyDBClusterParameterGroup
+      operationId: GET_CopyDBClusterParameterGroup
       description: Copies the specified cluster parameter group.
       responses:
         '200':
@@ -421,7 +421,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBClusterParameterGroup
-      operationId: POST CopyDBClusterParameterGroup
+      operationId: POST_CopyDBClusterParameterGroup
       description: Copies the specified cluster parameter group.
       responses:
         '200':
@@ -471,7 +471,7 @@ paths:
   '/#Action=CopyDBClusterSnapshot':
     get:
       x-aws-operation-name: CopyDBClusterSnapshot
-      operationId: GET CopyDBClusterSnapshot
+      operationId: GET_CopyDBClusterSnapshot
       description: '<p>Copies a snapshot of a cluster.</p> <p>To copy a cluster snapshot from a shared manual cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared cluster snapshot.</p> <p>To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in the <i>copying</i> status.</p>'
       responses:
         '200':
@@ -579,7 +579,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyDBClusterSnapshot
-      operationId: POST CopyDBClusterSnapshot
+      operationId: POST_CopyDBClusterSnapshot
       description: '<p>Copies a snapshot of a cluster.</p> <p>To copy a cluster snapshot from a shared manual cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared cluster snapshot.</p> <p>To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in the <i>copying</i> status.</p>'
       responses:
         '200':
@@ -647,7 +647,7 @@ paths:
   '/#Action=CreateDBCluster':
     get:
       x-aws-operation-name: CreateDBCluster
-      operationId: GET CreateDBCluster
+      operationId: GET_CreateDBCluster
       description: Creates a new Amazon DocumentDB cluster.
       responses:
         '200':
@@ -887,7 +887,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBCluster
-      operationId: POST CreateDBCluster
+      operationId: POST_CreateDBCluster
       description: Creates a new Amazon DocumentDB cluster.
       responses:
         '200':
@@ -1009,7 +1009,7 @@ paths:
   '/#Action=CreateDBClusterParameterGroup':
     get:
       x-aws-operation-name: CreateDBClusterParameterGroup
-      operationId: GET CreateDBClusterParameterGroup
+      operationId: GET_CreateDBClusterParameterGroup
       description: '<p>Creates a new cluster parameter group.</p> <p>Parameters in a cluster parameter group apply to all of the instances in a DB cluster.</p> <p>A cluster parameter group is initially created with the default parameters for the database engine used by instances in the cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the instances in the cluster without failover.</p> <important> <p>After you create a cluster parameter group, you should wait at least 5 minutes before creating your first cluster that uses that cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the cluster parameter group is used as the default for a new cluster. This step is especially important for parameters that are critical when creating the default database for a cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
       responses:
         '200':
@@ -1081,7 +1081,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBClusterParameterGroup
-      operationId: POST CreateDBClusterParameterGroup
+      operationId: POST_CreateDBClusterParameterGroup
       description: '<p>Creates a new cluster parameter group.</p> <p>Parameters in a cluster parameter group apply to all of the instances in a DB cluster.</p> <p>A cluster parameter group is initially created with the default parameters for the database engine used by instances in the cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the instances in the cluster without failover.</p> <important> <p>After you create a cluster parameter group, you should wait at least 5 minutes before creating your first cluster that uses that cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the cluster parameter group is used as the default for a new cluster. This step is especially important for parameters that are critical when creating the default database for a cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
       responses:
         '200':
@@ -1125,7 +1125,7 @@ paths:
   '/#Action=CreateDBClusterSnapshot':
     get:
       x-aws-operation-name: CreateDBClusterSnapshot
-      operationId: GET CreateDBClusterSnapshot
+      operationId: GET_CreateDBClusterSnapshot
       description: 'Creates a snapshot of a cluster. '
       responses:
         '200':
@@ -1209,7 +1209,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBClusterSnapshot
-      operationId: POST CreateDBClusterSnapshot
+      operationId: POST_CreateDBClusterSnapshot
       description: 'Creates a snapshot of a cluster. '
       responses:
         '200':
@@ -1271,7 +1271,7 @@ paths:
   '/#Action=CreateDBInstance':
     get:
       x-aws-operation-name: CreateDBInstance
-      operationId: GET CreateDBInstance
+      operationId: GET_CreateDBInstance
       description: Creates a new instance.
       responses:
         '200':
@@ -1451,7 +1451,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBInstance
-      operationId: POST CreateDBInstance
+      operationId: POST_CreateDBInstance
       description: Creates a new instance.
       responses:
         '200':
@@ -1573,7 +1573,7 @@ paths:
   '/#Action=CreateDBSubnetGroup':
     get:
       x-aws-operation-name: CreateDBSubnetGroup
-      operationId: GET CreateDBSubnetGroup
+      operationId: GET_CreateDBSubnetGroup
       description: Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
       responses:
         '200':
@@ -1665,7 +1665,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDBSubnetGroup
-      operationId: POST CreateDBSubnetGroup
+      operationId: POST_CreateDBSubnetGroup
       description: Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
       responses:
         '200':
@@ -1727,7 +1727,7 @@ paths:
   '/#Action=DeleteDBCluster':
     get:
       x-aws-operation-name: DeleteDBCluster
-      operationId: GET DeleteDBCluster
+      operationId: GET_DeleteDBCluster
       description: '<p>Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified cluster are not deleted.</p> <p/>'
       responses:
         '200':
@@ -1809,7 +1809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBCluster
-      operationId: POST DeleteDBCluster
+      operationId: POST_DeleteDBCluster
       description: '<p>Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified cluster are not deleted.</p> <p/>'
       responses:
         '200':
@@ -1871,7 +1871,7 @@ paths:
   '/#Action=DeleteDBClusterParameterGroup':
     get:
       x-aws-operation-name: DeleteDBClusterParameterGroup
-      operationId: GET DeleteDBClusterParameterGroup
+      operationId: GET_DeleteDBClusterParameterGroup
       description: Deletes a specified cluster parameter group. The cluster parameter group to be deleted can't be associated with any clusters.
       responses:
         '200':
@@ -1919,7 +1919,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBClusterParameterGroup
-      operationId: POST DeleteDBClusterParameterGroup
+      operationId: POST_DeleteDBClusterParameterGroup
       description: Deletes a specified cluster parameter group. The cluster parameter group to be deleted can't be associated with any clusters.
       responses:
         '200':
@@ -1959,7 +1959,7 @@ paths:
   '/#Action=DeleteDBClusterSnapshot':
     get:
       x-aws-operation-name: DeleteDBClusterSnapshot
-      operationId: GET DeleteDBClusterSnapshot
+      operationId: GET_DeleteDBClusterSnapshot
       description: '<p>Deletes a cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The cluster snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
       responses:
         '200':
@@ -2011,7 +2011,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBClusterSnapshot
-      operationId: POST DeleteDBClusterSnapshot
+      operationId: POST_DeleteDBClusterSnapshot
       description: '<p>Deletes a cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The cluster snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
       responses:
         '200':
@@ -2055,7 +2055,7 @@ paths:
   '/#Action=DeleteDBInstance':
     get:
       x-aws-operation-name: DeleteDBInstance
-      operationId: GET DeleteDBInstance
+      operationId: GET_DeleteDBInstance
       description: 'Deletes a previously provisioned instance. '
       responses:
         '200':
@@ -2125,7 +2125,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBInstance
-      operationId: POST DeleteDBInstance
+      operationId: POST_DeleteDBInstance
       description: 'Deletes a previously provisioned instance. '
       responses:
         '200':
@@ -2187,7 +2187,7 @@ paths:
   '/#Action=DeleteDBSubnetGroup':
     get:
       x-aws-operation-name: DeleteDBSubnetGroup
-      operationId: GET DeleteDBSubnetGroup
+      operationId: GET_DeleteDBSubnetGroup
       description: <p>Deletes a subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -2241,7 +2241,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDBSubnetGroup
-      operationId: POST DeleteDBSubnetGroup
+      operationId: POST_DeleteDBSubnetGroup
       description: <p>Deletes a subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>
       responses:
         '200':
@@ -2287,7 +2287,7 @@ paths:
   '/#Action=DescribeCertificates':
     get:
       x-aws-operation-name: DescribeCertificates
-      operationId: GET DescribeCertificates
+      operationId: GET_DescribeCertificates
       description: Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
       responses:
         '200':
@@ -2353,7 +2353,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCertificates
-      operationId: POST DescribeCertificates
+      operationId: POST_DescribeCertificates
       description: Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
       responses:
         '200':
@@ -2391,7 +2391,7 @@ paths:
   '/#Action=DescribeDBClusterParameterGroups':
     get:
       x-aws-operation-name: DescribeDBClusterParameterGroups
-      operationId: GET DescribeDBClusterParameterGroups
+      operationId: GET_DescribeDBClusterParameterGroups
       description: 'Returns a list of <code>DBClusterParameterGroup</code> descriptions. If a <code>DBClusterParameterGroupName</code> parameter is specified, the list contains only the description of the specified cluster parameter group. '
       responses:
         '200':
@@ -2457,7 +2457,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterParameterGroups
-      operationId: POST DescribeDBClusterParameterGroups
+      operationId: POST_DescribeDBClusterParameterGroups
       description: 'Returns a list of <code>DBClusterParameterGroup</code> descriptions. If a <code>DBClusterParameterGroupName</code> parameter is specified, the list contains only the description of the specified cluster parameter group. '
       responses:
         '200':
@@ -2495,7 +2495,7 @@ paths:
   '/#Action=DescribeDBClusterParameters':
     get:
       x-aws-operation-name: DescribeDBClusterParameters
-      operationId: GET DescribeDBClusterParameters
+      operationId: GET_DescribeDBClusterParameters
       description: Returns the detailed parameter list for a particular cluster parameter group.
       responses:
         '200':
@@ -2567,7 +2567,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterParameters
-      operationId: POST DescribeDBClusterParameters
+      operationId: POST_DescribeDBClusterParameters
       description: Returns the detailed parameter list for a particular cluster parameter group.
       responses:
         '200':
@@ -2605,7 +2605,7 @@ paths:
   '/#Action=DescribeDBClusterSnapshotAttributes':
     get:
       x-aws-operation-name: DescribeDBClusterSnapshotAttributes
-      operationId: GET DescribeDBClusterSnapshotAttributes
+      operationId: GET_DescribeDBClusterSnapshotAttributes
       description: '<p>Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When you share snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all AWS accounts.</p>'
       responses:
         '200':
@@ -2651,7 +2651,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterSnapshotAttributes
-      operationId: POST DescribeDBClusterSnapshotAttributes
+      operationId: POST_DescribeDBClusterSnapshotAttributes
       description: '<p>Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When you share snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all AWS accounts.</p>'
       responses:
         '200':
@@ -2689,7 +2689,7 @@ paths:
   '/#Action=DescribeDBClusterSnapshots':
     get:
       x-aws-operation-name: DescribeDBClusterSnapshots
-      operationId: GET DescribeDBClusterSnapshots
+      operationId: GET_DescribeDBClusterSnapshots
       description: Returns information about cluster snapshots. This API operation supports pagination.
       responses:
         '200':
@@ -2779,7 +2779,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusterSnapshots
-      operationId: POST DescribeDBClusterSnapshots
+      operationId: POST_DescribeDBClusterSnapshots
       description: Returns information about cluster snapshots. This API operation supports pagination.
       responses:
         '200':
@@ -2817,7 +2817,7 @@ paths:
   '/#Action=DescribeDBClusters':
     get:
       x-aws-operation-name: DescribeDBClusters
-      operationId: GET DescribeDBClusters
+      operationId: GET_DescribeDBClusters
       description: 'Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
       responses:
         '200':
@@ -2883,7 +2883,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBClusters
-      operationId: POST DescribeDBClusters
+      operationId: POST_DescribeDBClusters
       description: 'Returns information about provisioned Amazon DocumentDB clusters. This API operation supports pagination. For certain management features such as cluster and instance lifecycle management, Amazon DocumentDB leverages operational technology that is shared with Amazon RDS and Amazon Neptune. Use the <code>filterName=engine,Values=docdb</code> filter parameter to return only Amazon DocumentDB clusters.'
       responses:
         '200':
@@ -2933,7 +2933,7 @@ paths:
   '/#Action=DescribeDBEngineVersions':
     get:
       x-aws-operation-name: DescribeDBEngineVersions
-      operationId: GET DescribeDBEngineVersions
+      operationId: GET_DescribeDBEngineVersions
       description: Returns a list of the available engines.
       responses:
         '200':
@@ -3023,7 +3023,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBEngineVersions
-      operationId: POST DescribeDBEngineVersions
+      operationId: POST_DescribeDBEngineVersions
       description: Returns a list of the available engines.
       responses:
         '200':
@@ -3067,7 +3067,7 @@ paths:
   '/#Action=DescribeDBInstances':
     get:
       x-aws-operation-name: DescribeDBInstances
-      operationId: GET DescribeDBInstances
+      operationId: GET_DescribeDBInstances
       description: Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
       responses:
         '200':
@@ -3133,7 +3133,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBInstances
-      operationId: POST DescribeDBInstances
+      operationId: POST_DescribeDBInstances
       description: Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
       responses:
         '200':
@@ -3183,7 +3183,7 @@ paths:
   '/#Action=DescribeDBSubnetGroups':
     get:
       x-aws-operation-name: DescribeDBSubnetGroups
-      operationId: GET DescribeDBSubnetGroups
+      operationId: GET_DescribeDBSubnetGroups
       description: 'Returns a list of <code>DBSubnetGroup</code> descriptions. If a <code>DBSubnetGroupName</code> is specified, the list will contain only the descriptions of the specified <code>DBSubnetGroup</code>.'
       responses:
         '200':
@@ -3249,7 +3249,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDBSubnetGroups
-      operationId: POST DescribeDBSubnetGroups
+      operationId: POST_DescribeDBSubnetGroups
       description: 'Returns a list of <code>DBSubnetGroup</code> descriptions. If a <code>DBSubnetGroupName</code> is specified, the list will contain only the descriptions of the specified <code>DBSubnetGroup</code>.'
       responses:
         '200':
@@ -3299,7 +3299,7 @@ paths:
   '/#Action=DescribeEngineDefaultClusterParameters':
     get:
       x-aws-operation-name: DescribeEngineDefaultClusterParameters
-      operationId: GET DescribeEngineDefaultClusterParameters
+      operationId: GET_DescribeEngineDefaultClusterParameters
       description: Returns the default engine and system parameter information for the cluster database engine.
       responses:
         '200':
@@ -3359,7 +3359,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEngineDefaultClusterParameters
-      operationId: POST DescribeEngineDefaultClusterParameters
+      operationId: POST_DescribeEngineDefaultClusterParameters
       description: Returns the default engine and system parameter information for the cluster database engine.
       responses:
         '200':
@@ -3391,7 +3391,7 @@ paths:
   '/#Action=DescribeEventCategories':
     get:
       x-aws-operation-name: DescribeEventCategories
-      operationId: GET DescribeEventCategories
+      operationId: GET_DescribeEventCategories
       description: 'Displays a list of categories for all event source types, or, if specified, for a specified source type. '
       responses:
         '200':
@@ -3439,7 +3439,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEventCategories
-      operationId: POST DescribeEventCategories
+      operationId: POST_DescribeEventCategories
       description: 'Displays a list of categories for all event source types, or, if specified, for a specified source type. '
       responses:
         '200':
@@ -3471,7 +3471,7 @@ paths:
   '/#Action=DescribeEvents':
     get:
       x-aws-operation-name: DescribeEvents
-      operationId: GET DescribeEvents
+      operationId: GET_DescribeEvents
       description: 'Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.'
       responses:
         '200':
@@ -3572,7 +3572,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEvents
-      operationId: POST DescribeEvents
+      operationId: POST_DescribeEvents
       description: 'Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.'
       responses:
         '200':
@@ -3616,7 +3616,7 @@ paths:
   '/#Action=DescribeOrderableDBInstanceOptions':
     get:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
-      operationId: GET DescribeOrderableDBInstanceOptions
+      operationId: GET_DescribeOrderableDBInstanceOptions
       description: Returns a list of orderable instance options for the specified engine.
       responses:
         '200':
@@ -3700,7 +3700,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeOrderableDBInstanceOptions
-      operationId: POST DescribeOrderableDBInstanceOptions
+      operationId: POST_DescribeOrderableDBInstanceOptions
       description: Returns a list of orderable instance options for the specified engine.
       responses:
         '200':
@@ -3744,7 +3744,7 @@ paths:
   '/#Action=DescribePendingMaintenanceActions':
     get:
       x-aws-operation-name: DescribePendingMaintenanceActions
-      operationId: GET DescribePendingMaintenanceActions
+      operationId: GET_DescribePendingMaintenanceActions
       description: 'Returns a list of resources (for example, instances) that have at least one pending maintenance action.'
       responses:
         '200':
@@ -3810,7 +3810,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribePendingMaintenanceActions
-      operationId: POST DescribePendingMaintenanceActions
+      operationId: POST_DescribePendingMaintenanceActions
       description: 'Returns a list of resources (for example, instances) that have at least one pending maintenance action.'
       responses:
         '200':
@@ -3848,7 +3848,7 @@ paths:
   '/#Action=FailoverDBCluster':
     get:
       x-aws-operation-name: FailoverDBCluster
-      operationId: GET FailoverDBCluster
+      operationId: GET_FailoverDBCluster
       description: '<p>Forces a failover for a cluster.</p> <p>A failover for a cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the cluster to be the primary instance (the cluster writer).</p> <p>If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.</p>'
       responses:
         '200':
@@ -3912,7 +3912,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: FailoverDBCluster
-      operationId: POST FailoverDBCluster
+      operationId: POST_FailoverDBCluster
       description: '<p>Forces a failover for a cluster.</p> <p>A failover for a cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the cluster to be the primary instance (the cluster writer).</p> <p>If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.</p>'
       responses:
         '200':
@@ -3962,7 +3962,7 @@ paths:
   '/#Action=ListTagsForResource':
     get:
       x-aws-operation-name: ListTagsForResource
-      operationId: GET ListTagsForResource
+      operationId: GET_ListTagsForResource
       description: Lists all tags on an Amazon DocumentDB resource.
       responses:
         '200':
@@ -4028,7 +4028,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTagsForResource
-      operationId: POST ListTagsForResource
+      operationId: POST_ListTagsForResource
       description: Lists all tags on an Amazon DocumentDB resource.
       responses:
         '200':
@@ -4078,7 +4078,7 @@ paths:
   '/#Action=ModifyDBCluster':
     get:
       x-aws-operation-name: ModifyDBCluster
-      operationId: GET ModifyDBCluster
+      operationId: GET_ModifyDBCluster
       description: 'Modifies a setting for an Amazon DocumentDB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. '
       responses:
         '200':
@@ -4266,7 +4266,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBCluster
-      operationId: POST ModifyDBCluster
+      operationId: POST_ModifyDBCluster
       description: 'Modifies a setting for an Amazon DocumentDB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. '
       responses:
         '200':
@@ -4364,7 +4364,7 @@ paths:
   '/#Action=ModifyDBClusterParameterGroup':
     get:
       x-aws-operation-name: ModifyDBClusterParameterGroup
-      operationId: GET ModifyDBClusterParameterGroup
+      operationId: GET_ModifyDBClusterParameterGroup
       description: '<p> Modifies the parameters of a cluster parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.</p> </note> <important> <p>After you create a cluster parameter group, you should wait at least 5 minutes before creating your first cluster that uses that cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new cluster. This step is especially important for parameters that are critical when creating the default database for a cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
       responses:
         '200':
@@ -4424,7 +4424,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBClusterParameterGroup
-      operationId: POST ModifyDBClusterParameterGroup
+      operationId: POST_ModifyDBClusterParameterGroup
       description: '<p> Modifies the parameters of a cluster parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.</p> </note> <important> <p>After you create a cluster parameter group, you should wait at least 5 minutes before creating your first cluster that uses that cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new cluster. This step is especially important for parameters that are critical when creating the default database for a cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
       responses:
         '200':
@@ -4468,7 +4468,7 @@ paths:
   '/#Action=ModifyDBClusterSnapshotAttribute':
     get:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
-      operationId: GET ModifyDBClusterSnapshotAttribute
+      operationId: GET_ModifyDBClusterSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p>'
       responses:
         '200':
@@ -4548,7 +4548,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
-      operationId: POST ModifyDBClusterSnapshotAttribute
+      operationId: POST_ModifyDBClusterSnapshotAttribute
       description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p>'
       responses:
         '200':
@@ -4598,7 +4598,7 @@ paths:
   '/#Action=ModifyDBInstance':
     get:
       x-aws-operation-name: ModifyDBInstance
-      operationId: GET ModifyDBInstance
+      operationId: GET_ModifyDBInstance
       description: Modifies settings for an instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
       responses:
         '200':
@@ -4758,7 +4758,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBInstance
-      operationId: POST ModifyDBInstance
+      operationId: POST_ModifyDBInstance
       description: Modifies settings for an instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
       responses:
         '200':
@@ -4868,7 +4868,7 @@ paths:
   '/#Action=ModifyDBSubnetGroup':
     get:
       x-aws-operation-name: ModifyDBSubnetGroup
-      operationId: GET ModifyDBSubnetGroup
+      operationId: GET_ModifyDBSubnetGroup
       description: Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
       responses:
         '200':
@@ -4952,7 +4952,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyDBSubnetGroup
-      operationId: POST ModifyDBSubnetGroup
+      operationId: POST_ModifyDBSubnetGroup
       description: Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
       responses:
         '200':
@@ -5014,7 +5014,7 @@ paths:
   '/#Action=RebootDBInstance':
     get:
       x-aws-operation-name: RebootDBInstance
-      operationId: GET RebootDBInstance
+      operationId: GET_RebootDBInstance
       description: '<p>You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to <i>rebooting</i>. </p>'
       responses:
         '200':
@@ -5072,7 +5072,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RebootDBInstance
-      operationId: POST RebootDBInstance
+      operationId: POST_RebootDBInstance
       description: '<p>You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to <i>rebooting</i>. </p>'
       responses:
         '200':
@@ -5116,7 +5116,7 @@ paths:
   '/#Action=RemoveTagsFromResource':
     get:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: GET RemoveTagsFromResource
+      operationId: GET_RemoveTagsFromResource
       description: Removes metadata tags from an Amazon DocumentDB resource.
       responses:
         '200':
@@ -5178,7 +5178,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: POST RemoveTagsFromResource
+      operationId: POST_RemoveTagsFromResource
       description: Removes metadata tags from an Amazon DocumentDB resource.
       responses:
         '200':
@@ -5224,7 +5224,7 @@ paths:
   '/#Action=ResetDBClusterParameterGroup':
     get:
       x-aws-operation-name: ResetDBClusterParameterGroup
-      operationId: GET ResetDBClusterParameterGroup
+      operationId: GET_ResetDBClusterParameterGroup
       description: '<p> Modifies the parameters of a cluster parameter group to the default value. To reset specific parameters, submit a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire cluster parameter group, specify the <code>DBClusterParameterGroupName</code> and <code>ResetAllParameters</code> parameters. </p> <p> When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance reboot.</p>'
       responses:
         '200':
@@ -5290,7 +5290,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResetDBClusterParameterGroup
-      operationId: POST ResetDBClusterParameterGroup
+      operationId: POST_ResetDBClusterParameterGroup
       description: '<p> Modifies the parameters of a cluster parameter group to the default value. To reset specific parameters, submit a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire cluster parameter group, specify the <code>DBClusterParameterGroupName</code> and <code>ResetAllParameters</code> parameters. </p> <p> When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance reboot.</p>'
       responses:
         '200':
@@ -5334,7 +5334,7 @@ paths:
   '/#Action=RestoreDBClusterFromSnapshot':
     get:
       x-aws-operation-name: RestoreDBClusterFromSnapshot
-      operationId: GET RestoreDBClusterFromSnapshot
+      operationId: GET_RestoreDBClusterFromSnapshot
       description: '<p>Creates a new cluster from a snapshot or cluster snapshot.</p> <p>If a snapshot is specified, the target cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a cluster snapshot is specified, the target cluster is created from the source cluster restore point with the same configuration as the original source DB cluster, except that the new cluster is created with the default security group.</p>'
       responses:
         '200':
@@ -5544,7 +5544,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBClusterFromSnapshot
-      operationId: POST RestoreDBClusterFromSnapshot
+      operationId: POST_RestoreDBClusterFromSnapshot
       description: '<p>Creates a new cluster from a snapshot or cluster snapshot.</p> <p>If a snapshot is specified, the target cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a cluster snapshot is specified, the target cluster is created from the source cluster restore point with the same configuration as the original source DB cluster, except that the new cluster is created with the default security group.</p>'
       responses:
         '200':
@@ -5672,7 +5672,7 @@ paths:
   '/#Action=RestoreDBClusterToPointInTime':
     get:
       x-aws-operation-name: RestoreDBClusterToPointInTime
-      operationId: GET RestoreDBClusterToPointInTime
+      operationId: GET_RestoreDBClusterToPointInTime
       description: 'Restores a cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target cluster is created from the source cluster with the same configuration as the original cluster, except that the new cluster is created with the default security group. '
       responses:
         '200':
@@ -5869,7 +5869,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreDBClusterToPointInTime
-      operationId: POST RestoreDBClusterToPointInTime
+      operationId: POST_RestoreDBClusterToPointInTime
       description: 'Restores a cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target cluster is created from the source cluster with the same configuration as the original cluster, except that the new cluster is created with the default security group. '
       responses:
         '200':
@@ -5991,7 +5991,7 @@ paths:
   '/#Action=StartDBCluster':
     get:
       x-aws-operation-name: StartDBCluster
-      operationId: GET StartDBCluster
+      operationId: GET_StartDBCluster
       description: 'Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
       responses:
         '200':
@@ -6049,7 +6049,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartDBCluster
-      operationId: POST StartDBCluster
+      operationId: POST_StartDBCluster
       description: 'Restarts the stopped cluster that is specified by <code>DBClusterIdentifier</code>. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
       responses:
         '200':
@@ -6099,7 +6099,7 @@ paths:
   '/#Action=StopDBCluster':
     get:
       x-aws-operation-name: StopDBCluster
-      operationId: GET StopDBCluster
+      operationId: GET_StopDBCluster
       description: 'Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The cluster must be in the <i>available</i> state. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
       responses:
         '200':
@@ -6157,7 +6157,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StopDBCluster
-      operationId: POST StopDBCluster
+      operationId: POST_StopDBCluster
       description: 'Stops the running cluster that is specified by <code>DBClusterIdentifier</code>. The cluster must be in the <i>available</i> state. For more information, see <a href="https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html">Stopping and Starting an Amazon DocumentDB Cluster</a>.'
       responses:
         '200':

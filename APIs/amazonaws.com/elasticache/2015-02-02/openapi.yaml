@@ -109,7 +109,7 @@ paths:
   '/#Action=AddTagsToResource':
     get:
       x-aws-operation-name: AddTagsToResource
-      operationId: GET AddTagsToResource
+      operationId: GET_AddTagsToResource
       description: '<p>Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':
@@ -181,7 +181,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AddTagsToResource
-      operationId: POST AddTagsToResource
+      operationId: POST_AddTagsToResource
       description: '<p>Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':
@@ -237,7 +237,7 @@ paths:
   '/#Action=AuthorizeCacheSecurityGroupIngress':
     get:
       x-aws-operation-name: AuthorizeCacheSecurityGroupIngress
-      operationId: GET AuthorizeCacheSecurityGroupIngress
+      operationId: GET_AuthorizeCacheSecurityGroupIngress
       description: '<p>Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p> <note> <p>You cannot authorize ingress from an Amazon EC2 security group in one region to an ElastiCache cluster in another region.</p> </note>'
       responses:
         '200':
@@ -319,7 +319,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AuthorizeCacheSecurityGroupIngress
-      operationId: POST AuthorizeCacheSecurityGroupIngress
+      operationId: POST_AuthorizeCacheSecurityGroupIngress
       description: '<p>Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p> <note> <p>You cannot authorize ingress from an Amazon EC2 security group in one region to an ElastiCache cluster in another region.</p> </note>'
       responses:
         '200':
@@ -381,7 +381,7 @@ paths:
   '/#Action=BatchApplyUpdateAction':
     get:
       x-aws-operation-name: BatchApplyUpdateAction
-      operationId: GET BatchApplyUpdateAction
+      operationId: GET_BatchApplyUpdateAction
       description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html">Applying Service Updates</a>.'
       responses:
         '200':
@@ -451,7 +451,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchApplyUpdateAction
-      operationId: POST BatchApplyUpdateAction
+      operationId: POST_BatchApplyUpdateAction
       description: 'Apply the service update. For more information on service updates and applying them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html">Applying Service Updates</a>.'
       responses:
         '200':
@@ -495,7 +495,7 @@ paths:
   '/#Action=BatchStopUpdateAction':
     get:
       x-aws-operation-name: BatchStopUpdateAction
-      operationId: GET BatchStopUpdateAction
+      operationId: GET_BatchStopUpdateAction
       description: 'Stop the service update. For more information on service updates and stopping them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html">Stopping Service Updates</a>.'
       responses:
         '200':
@@ -565,7 +565,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchStopUpdateAction
-      operationId: POST BatchStopUpdateAction
+      operationId: POST_BatchStopUpdateAction
       description: 'Stop the service update. For more information on service updates and stopping them, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/stopping-self-service-updates.html">Stopping Service Updates</a>.'
       responses:
         '200':
@@ -609,7 +609,7 @@ paths:
   '/#Action=CompleteMigration':
     get:
       x-aws-operation-name: CompleteMigration
-      operationId: GET CompleteMigration
+      operationId: GET_CompleteMigration
       description: Complete the migration of data.
       responses:
         '200':
@@ -673,7 +673,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CompleteMigration
-      operationId: POST CompleteMigration
+      operationId: POST_CompleteMigration
       description: Complete the migration of data.
       responses:
         '200':
@@ -723,7 +723,7 @@ paths:
   '/#Action=CopySnapshot':
     get:
       x-aws-operation-name: CopySnapshot
-      operationId: GET CopySnapshot
+      operationId: GET_CopySnapshot
       description: '<p>Makes a copy of an existing snapshot.</p> <note> <p>This operation is valid for Redis only.</p> </note> <important> <p>Users or groups that have permissions to use the <code>CopySnapshot</code> operation can create their own Amazon S3 buckets and copy snapshots to it. To control access to your snapshots, use an IAM policy to control who has the ability to use the <code>CopySnapshot</code> operation. For more information about using IAM to control the use of ElastiCache operations, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html">Exporting Snapshots</a> and <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html">Authentication &amp; Access Control</a>.</p> </important> <p>You could receive the following error messages.</p> <p class="title"> <b>Error Messages</b> </p> <ul> <li> <p> <b>Error Message:</b> The S3 bucket %s is outside of the region.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s does not exist.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s is not owned by the authenticated user.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The authenticated user does not have sufficient permissions to perform the desired activity.</p> <p> <b>Solution:</b> Contact your system administrator to get the needed permissions.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s already contains an object with key %s.</p> <p> <b>Solution:</b> Give the <code>TargetSnapshotName</code> a new and unique value. If exporting a snapshot, you could alternatively create a new Amazon S3 bucket and use this same value for <code>TargetSnapshotName</code>.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add List and Read permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted WRITE permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add Upload/Delete permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ_ACP permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add View Permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> </ul>'
       responses:
         '200':
@@ -817,7 +817,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopySnapshot
-      operationId: POST CopySnapshot
+      operationId: POST_CopySnapshot
       description: '<p>Makes a copy of an existing snapshot.</p> <note> <p>This operation is valid for Redis only.</p> </note> <important> <p>Users or groups that have permissions to use the <code>CopySnapshot</code> operation can create their own Amazon S3 buckets and copy snapshots to it. To control access to your snapshots, use an IAM policy to control who has the ability to use the <code>CopySnapshot</code> operation. For more information about using IAM to control the use of ElastiCache operations, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html">Exporting Snapshots</a> and <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html">Authentication &amp; Access Control</a>.</p> </important> <p>You could receive the following error messages.</p> <p class="title"> <b>Error Messages</b> </p> <ul> <li> <p> <b>Error Message:</b> The S3 bucket %s is outside of the region.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s does not exist.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s is not owned by the authenticated user.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The authenticated user does not have sufficient permissions to perform the desired activity.</p> <p> <b>Solution:</b> Contact your system administrator to get the needed permissions.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s already contains an object with key %s.</p> <p> <b>Solution:</b> Give the <code>TargetSnapshotName</code> a new and unique value. If exporting a snapshot, you could alternatively create a new Amazon S3 bucket and use this same value for <code>TargetSnapshotName</code>.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add List and Read permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted WRITE permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add Upload/Delete permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ_ACP permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add View Permissions on the bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> </ul>'
       responses:
         '200':
@@ -885,7 +885,7 @@ paths:
   '/#Action=CreateCacheCluster':
     get:
       x-aws-operation-name: CreateCacheCluster
-      operationId: GET CreateCacheCluster
+      operationId: GET_CreateCacheCluster
       description: '<p>Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis.</p> <p>This operation is not supported for Redis (cluster mode enabled) clusters.</p>'
       responses:
         '200':
@@ -1154,7 +1154,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCacheCluster
-      operationId: POST CreateCacheCluster
+      operationId: POST_CreateCacheCluster
       description: '<p>Creates a cluster. All nodes in the cluster run the same protocol-compliant cache engine software, either Memcached or Redis.</p> <p>This operation is not supported for Redis (cluster mode enabled) clusters.</p>'
       responses:
         '200':
@@ -1270,7 +1270,7 @@ paths:
   '/#Action=CreateCacheParameterGroup':
     get:
       x-aws-operation-name: CreateCacheParameterGroup
-      operationId: GET CreateCacheParameterGroup
+      operationId: GET_CreateCacheParameterGroup
       description: '<p>Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster or replication group using the CacheParameterGroup.</p> <p>A newly created CacheParameterGroup is an exact duplicate of the default parameter group for the CacheParameterGroupFamily. To customize the newly created CacheParameterGroup you can change the values of specific parameters. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html">ModifyCacheParameterGroup</a> in the ElastiCache API Reference.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html">Parameters and Parameter Groups</a> in the ElastiCache User Guide.</p> </li> </ul>'
       responses:
         '200':
@@ -1352,7 +1352,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCacheParameterGroup
-      operationId: POST CreateCacheParameterGroup
+      operationId: POST_CreateCacheParameterGroup
       description: '<p>Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster or replication group using the CacheParameterGroup.</p> <p>A newly created CacheParameterGroup is an exact duplicate of the default parameter group for the CacheParameterGroupFamily. To customize the newly created CacheParameterGroup you can change the values of specific parameters. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html">ModifyCacheParameterGroup</a> in the ElastiCache API Reference.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html">Parameters and Parameter Groups</a> in the ElastiCache User Guide.</p> </li> </ul>'
       responses:
         '200':
@@ -1414,7 +1414,7 @@ paths:
   '/#Action=CreateCacheSecurityGroup':
     get:
       x-aws-operation-name: CreateCacheSecurityGroup
-      operationId: GET CreateCacheSecurityGroup
+      operationId: GET_CreateCacheSecurityGroup
       description: '<p>Creates a new cache security group. Use a cache security group to control access to one or more clusters.</p> <p>Cache security groups are only used when you are creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster inside of a VPC, use a cache subnet group instead. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html">CreateCacheSubnetGroup</a>.</p>'
       responses:
         '200':
@@ -1484,7 +1484,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCacheSecurityGroup
-      operationId: POST CreateCacheSecurityGroup
+      operationId: POST_CreateCacheSecurityGroup
       description: '<p>Creates a new cache security group. Use a cache security group to control access to one or more clusters.</p> <p>Cache security groups are only used when you are creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster inside of a VPC, use a cache subnet group instead. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html">CreateCacheSubnetGroup</a>.</p>'
       responses:
         '200':
@@ -1540,7 +1540,7 @@ paths:
   '/#Action=CreateCacheSubnetGroup':
     get:
       x-aws-operation-name: CreateCacheSubnetGroup
-      operationId: GET CreateCacheSubnetGroup
+      operationId: GET_CreateCacheSubnetGroup
       description: <p>Creates a new cache subnet group.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).</p>
       responses:
         '200':
@@ -1618,7 +1618,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCacheSubnetGroup
-      operationId: POST CreateCacheSubnetGroup
+      operationId: POST_CreateCacheSubnetGroup
       description: <p>Creates a new cache subnet group.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).</p>
       responses:
         '200':
@@ -1674,7 +1674,7 @@ paths:
   '/#Action=CreateGlobalReplicationGroup':
     get:
       x-aws-operation-name: CreateGlobalReplicationGroup
-      operationId: GET CreateGlobalReplicationGroup
+      operationId: GET_CreateGlobalReplicationGroup
       description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupId</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
@@ -1756,7 +1756,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateGlobalReplicationGroup
-      operationId: POST CreateGlobalReplicationGroup
+      operationId: POST_CreateGlobalReplicationGroup
       description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupId</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
@@ -1818,7 +1818,7 @@ paths:
   '/#Action=CreateReplicationGroup':
     get:
       x-aws-operation-name: CreateReplicationGroup
-      operationId: GET CreateReplicationGroup
+      operationId: GET_CreateReplicationGroup
       description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 90 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created. However, if you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' enhanced backup and restore. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html">Restoring From a Backup with Cluster Resizing</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -2146,7 +2146,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateReplicationGroup
-      operationId: POST CreateReplicationGroup
+      operationId: POST_CreateReplicationGroup
       description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore.</p> <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 90 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created. However, if you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' enhanced backup and restore. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html">Restoring From a Backup with Cluster Resizing</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -2280,7 +2280,7 @@ paths:
   '/#Action=CreateSnapshot':
     get:
       x-aws-operation-name: CreateSnapshot
-      operationId: GET CreateSnapshot
+      operationId: GET_CreateSnapshot
       description: <p>Creates a copy of an entire cluster or replication group at a specific moment in time.</p> <note> <p>This operation is valid for Redis only.</p> </note>
       responses:
         '200':
@@ -2392,7 +2392,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateSnapshot
-      operationId: POST CreateSnapshot
+      operationId: POST_CreateSnapshot
       description: <p>Creates a copy of an entire cluster or replication group at a specific moment in time.</p> <note> <p>This operation is valid for Redis only.</p> </note>
       responses:
         '200':
@@ -2478,7 +2478,7 @@ paths:
   '/#Action=DecreaseNodeGroupsInGlobalReplicationGroup':
     get:
       x-aws-operation-name: DecreaseNodeGroupsInGlobalReplicationGroup
-      operationId: GET DecreaseNodeGroupsInGlobalReplicationGroup
+      operationId: GET_DecreaseNodeGroupsInGlobalReplicationGroup
       description: Decreases the number of node groups in a Global Datastore
       responses:
         '200':
@@ -2570,7 +2570,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DecreaseNodeGroupsInGlobalReplicationGroup
-      operationId: POST DecreaseNodeGroupsInGlobalReplicationGroup
+      operationId: POST_DecreaseNodeGroupsInGlobalReplicationGroup
       description: Decreases the number of node groups in a Global Datastore
       responses:
         '200':
@@ -2626,7 +2626,7 @@ paths:
   '/#Action=DecreaseReplicaCount':
     get:
       x-aws-operation-name: DecreaseReplicaCount
-      operationId: GET DecreaseReplicaCount
+      operationId: GET_DecreaseReplicaCount
       description: Dynamically decreases the number of replicas in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
       responses:
         '200':
@@ -2766,7 +2766,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DecreaseReplicaCount
-      operationId: POST DecreaseReplicaCount
+      operationId: POST_DecreaseReplicaCount
       description: Dynamically decreases the number of replicas in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
       responses:
         '200':
@@ -2870,7 +2870,7 @@ paths:
   '/#Action=DeleteCacheCluster':
     get:
       x-aws-operation-name: DeleteCacheCluster
-      operationId: GET DeleteCacheCluster
+      operationId: GET_DeleteCacheCluster
       description: '<p>Deletes a previously provisioned cluster. <code>DeleteCacheCluster</code> deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation.</p> <p>This operation is not valid for:</p> <ul> <li> <p>Redis (cluster mode enabled) clusters</p> </li> <li> <p>A cluster that is the last read replica of a replication group</p> </li> <li> <p>A node group (shard) that has Multi-AZ mode enabled</p> </li> <li> <p>A cluster from a Redis (cluster mode enabled) replication group</p> </li> <li> <p>A cluster that is not in the <code>available</code> state</p> </li> </ul>'
       responses:
         '200':
@@ -2958,7 +2958,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCacheCluster
-      operationId: POST DeleteCacheCluster
+      operationId: POST_DeleteCacheCluster
       description: '<p>Deletes a previously provisioned cluster. <code>DeleteCacheCluster</code> deletes all associated cache nodes, node endpoints and the cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cluster; you cannot cancel or revert this operation.</p> <p>This operation is not valid for:</p> <ul> <li> <p>Redis (cluster mode enabled) clusters</p> </li> <li> <p>A cluster that is the last read replica of a replication group</p> </li> <li> <p>A node group (shard) that has Multi-AZ mode enabled</p> </li> <li> <p>A cluster from a Redis (cluster mode enabled) replication group</p> </li> <li> <p>A cluster that is not in the <code>available</code> state</p> </li> </ul>'
       responses:
         '200':
@@ -3032,7 +3032,7 @@ paths:
   '/#Action=DeleteCacheParameterGroup':
     get:
       x-aws-operation-name: DeleteCacheParameterGroup
-      operationId: GET DeleteCacheParameterGroup
+      operationId: GET_DeleteCacheParameterGroup
       description: Deletes the specified cache parameter group. You cannot delete a cache parameter group if it is associated with any cache clusters.
       responses:
         '200':
@@ -3092,7 +3092,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCacheParameterGroup
-      operationId: POST DeleteCacheParameterGroup
+      operationId: POST_DeleteCacheParameterGroup
       description: Deletes the specified cache parameter group. You cannot delete a cache parameter group if it is associated with any cache clusters.
       responses:
         '200':
@@ -3144,7 +3144,7 @@ paths:
   '/#Action=DeleteCacheSecurityGroup':
     get:
       x-aws-operation-name: DeleteCacheSecurityGroup
-      operationId: GET DeleteCacheSecurityGroup
+      operationId: GET_DeleteCacheSecurityGroup
       description: <p>Deletes a cache security group.</p> <note> <p>You cannot delete a cache security group if it is associated with any clusters.</p> </note>
       responses:
         '200':
@@ -3204,7 +3204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCacheSecurityGroup
-      operationId: POST DeleteCacheSecurityGroup
+      operationId: POST_DeleteCacheSecurityGroup
       description: <p>Deletes a cache security group.</p> <note> <p>You cannot delete a cache security group if it is associated with any clusters.</p> </note>
       responses:
         '200':
@@ -3256,7 +3256,7 @@ paths:
   '/#Action=DeleteCacheSubnetGroup':
     get:
       x-aws-operation-name: DeleteCacheSubnetGroup
-      operationId: GET DeleteCacheSubnetGroup
+      operationId: GET_DeleteCacheSubnetGroup
       description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any clusters.</p> </note>
       responses:
         '200':
@@ -3304,7 +3304,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCacheSubnetGroup
-      operationId: POST DeleteCacheSubnetGroup
+      operationId: POST_DeleteCacheSubnetGroup
       description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any clusters.</p> </note>
       responses:
         '200':
@@ -3344,7 +3344,7 @@ paths:
   '/#Action=DeleteGlobalReplicationGroup':
     get:
       x-aws-operation-name: DeleteGlobalReplicationGroup
-      operationId: GET DeleteGlobalReplicationGroup
+      operationId: GET_DeleteGlobalReplicationGroup
       description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3408,7 +3408,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteGlobalReplicationGroup
-      operationId: POST DeleteGlobalReplicationGroup
+      operationId: POST_DeleteGlobalReplicationGroup
       description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3458,7 +3458,7 @@ paths:
   '/#Action=DeleteReplicationGroup':
     get:
       x-aws-operation-name: DeleteReplicationGroup
-      operationId: GET DeleteReplicationGroup
+      operationId: GET_DeleteReplicationGroup
       description: '<p>Deletes an existing replication group. By default, this operation deletes the entire replication group, including the primary/primaries and all of the read replicas. If the replication group has only one primary, you can optionally delete only the read replicas, while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3552,7 +3552,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteReplicationGroup
-      operationId: POST DeleteReplicationGroup
+      operationId: POST_DeleteReplicationGroup
       description: '<p>Deletes an existing replication group. By default, this operation deletes the entire replication group, including the primary/primaries and all of the read replicas. If the replication group has only one primary, you can optionally delete only the read replicas, while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3626,7 +3626,7 @@ paths:
   '/#Action=DeleteSnapshot':
     get:
       x-aws-operation-name: DeleteSnapshot
-      operationId: GET DeleteSnapshot
+      operationId: GET_DeleteSnapshot
       description: '<p>Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3690,7 +3690,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteSnapshot
-      operationId: POST DeleteSnapshot
+      operationId: POST_DeleteSnapshot
       description: '<p>Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -3746,7 +3746,7 @@ paths:
   '/#Action=DescribeCacheClusters':
     get:
       x-aws-operation-name: DescribeCacheClusters
-      operationId: GET DescribeCacheClusters
+      operationId: GET_DescribeCacheClusters
       description: '<p>Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.</p> <p>By default, abbreviated information about the clusters is returned. You can use the optional <i>ShowCacheNodeInfo</i> flag to retrieve detailed information about the cache nodes associated with the clusters. These details include the DNS address and port for the cache node endpoint.</p> <p>If the cluster is in the <i>creating</i> state, only cluster-level information is displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the <i>deleting</i> state, only cluster-level information is displayed.</p> <p>If cache nodes are currently being added to the cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If cache nodes are currently being removed from the cluster, no endpoint information for the removed nodes is displayed.</p>'
       responses:
         '200':
@@ -3828,7 +3828,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheClusters
-      operationId: POST DescribeCacheClusters
+      operationId: POST_DescribeCacheClusters
       description: '<p>Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.</p> <p>By default, abbreviated information about the clusters is returned. You can use the optional <i>ShowCacheNodeInfo</i> flag to retrieve detailed information about the cache nodes associated with the clusters. These details include the DNS address and port for the cache node endpoint.</p> <p>If the cluster is in the <i>creating</i> state, only cluster-level information is displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the <i>deleting</i> state, only cluster-level information is displayed.</p> <p>If cache nodes are currently being added to the cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If cache nodes are currently being removed from the cluster, no endpoint information for the removed nodes is displayed.</p>'
       responses:
         '200':
@@ -3890,7 +3890,7 @@ paths:
   '/#Action=DescribeCacheEngineVersions':
     get:
       x-aws-operation-name: DescribeCacheEngineVersions
-      operationId: GET DescribeCacheEngineVersions
+      operationId: GET_DescribeCacheEngineVersions
       description: Returns a list of the available cache engines and their versions.
       responses:
         '200':
@@ -3960,7 +3960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheEngineVersions
-      operationId: POST DescribeCacheEngineVersions
+      operationId: POST_DescribeCacheEngineVersions
       description: Returns a list of the available cache engines and their versions.
       responses:
         '200':
@@ -4004,7 +4004,7 @@ paths:
   '/#Action=DescribeCacheParameterGroups':
     get:
       x-aws-operation-name: DescribeCacheParameterGroups
-      operationId: GET DescribeCacheParameterGroups
+      operationId: GET_DescribeCacheParameterGroups
       description: 'Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.'
       responses:
         '200':
@@ -4074,7 +4074,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheParameterGroups
-      operationId: POST DescribeCacheParameterGroups
+      operationId: POST_DescribeCacheParameterGroups
       description: 'Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.'
       responses:
         '200':
@@ -4136,7 +4136,7 @@ paths:
   '/#Action=DescribeCacheParameters':
     get:
       x-aws-operation-name: DescribeCacheParameters
-      operationId: GET DescribeCacheParameters
+      operationId: GET_DescribeCacheParameters
       description: Returns the detailed parameter list for a particular cache parameter group.
       responses:
         '200':
@@ -4212,7 +4212,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheParameters
-      operationId: POST DescribeCacheParameters
+      operationId: POST_DescribeCacheParameters
       description: Returns the detailed parameter list for a particular cache parameter group.
       responses:
         '200':
@@ -4274,7 +4274,7 @@ paths:
   '/#Action=DescribeCacheSecurityGroups':
     get:
       x-aws-operation-name: DescribeCacheSecurityGroups
-      operationId: GET DescribeCacheSecurityGroups
+      operationId: GET_DescribeCacheSecurityGroups
       description: 'Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group. This applicable only when you have ElastiCache in Classic setup '
       responses:
         '200':
@@ -4344,7 +4344,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheSecurityGroups
-      operationId: POST DescribeCacheSecurityGroups
+      operationId: POST_DescribeCacheSecurityGroups
       description: 'Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group. This applicable only when you have ElastiCache in Classic setup '
       responses:
         '200':
@@ -4406,7 +4406,7 @@ paths:
   '/#Action=DescribeCacheSubnetGroups':
     get:
       x-aws-operation-name: DescribeCacheSubnetGroups
-      operationId: GET DescribeCacheSubnetGroups
+      operationId: GET_DescribeCacheSubnetGroups
       description: 'Returns a list of cache subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group. This is applicable only when you have ElastiCache in VPC setup. All ElastiCache clusters now launch in VPC by default. '
       responses:
         '200':
@@ -4464,7 +4464,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeCacheSubnetGroups
-      operationId: POST DescribeCacheSubnetGroups
+      operationId: POST_DescribeCacheSubnetGroups
       description: 'Returns a list of cache subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group. This is applicable only when you have ElastiCache in VPC setup. All ElastiCache clusters now launch in VPC by default. '
       responses:
         '200':
@@ -4514,7 +4514,7 @@ paths:
   '/#Action=DescribeEngineDefaultParameters':
     get:
       x-aws-operation-name: DescribeEngineDefaultParameters
-      operationId: GET DescribeEngineDefaultParameters
+      operationId: GET_DescribeEngineDefaultParameters
       description: Returns the default engine and system parameter information for the specified cache engine.
       responses:
         '200':
@@ -4578,7 +4578,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEngineDefaultParameters
-      operationId: POST DescribeEngineDefaultParameters
+      operationId: POST_DescribeEngineDefaultParameters
       description: Returns the default engine and system parameter information for the specified cache engine.
       responses:
         '200':
@@ -4634,7 +4634,7 @@ paths:
   '/#Action=DescribeEvents':
     get:
       x-aws-operation-name: DescribeEvents
-      operationId: GET DescribeEvents
+      operationId: GET_DescribeEvents
       description: '<p>Returns events related to clusters, cache security groups, and cache parameter groups. You can obtain events specific to a particular cluster, cache security group, or cache parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.</p>'
       responses:
         '200':
@@ -4730,7 +4730,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEvents
-      operationId: POST DescribeEvents
+      operationId: POST_DescribeEvents
       description: '<p>Returns events related to clusters, cache security groups, and cache parameter groups. You can obtain events specific to a particular cluster, cache security group, or cache parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.</p>'
       responses:
         '200':
@@ -4786,7 +4786,7 @@ paths:
   '/#Action=DescribeGlobalReplicationGroups':
     get:
       x-aws-operation-name: DescribeGlobalReplicationGroups
-      operationId: GET DescribeGlobalReplicationGroups
+      operationId: GET_DescribeGlobalReplicationGroups
       description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. '
       responses:
         '200':
@@ -4862,7 +4862,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeGlobalReplicationGroups
-      operationId: POST DescribeGlobalReplicationGroups
+      operationId: POST_DescribeGlobalReplicationGroups
       description: 'Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. '
       responses:
         '200':
@@ -4924,7 +4924,7 @@ paths:
   '/#Action=DescribeReplicationGroups':
     get:
       x-aws-operation-name: DescribeReplicationGroups
-      operationId: GET DescribeReplicationGroups
+      operationId: GET_DescribeReplicationGroups
       description: '<p>Returns information about a particular replication group. If no identifier is specified, <code>DescribeReplicationGroups</code> returns information about all replication groups.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -4994,7 +4994,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReplicationGroups
-      operationId: POST DescribeReplicationGroups
+      operationId: POST_DescribeReplicationGroups
       description: '<p>Returns information about a particular replication group. If no identifier is specified, <code>DescribeReplicationGroups</code> returns information about all replication groups.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -5056,7 +5056,7 @@ paths:
   '/#Action=DescribeReservedCacheNodes':
     get:
       x-aws-operation-name: DescribeReservedCacheNodes
-      operationId: GET DescribeReservedCacheNodes
+      operationId: GET_DescribeReservedCacheNodes
       description: 'Returns information about reserved cache nodes for this account, or about a specified reserved cache node.'
       responses:
         '200':
@@ -5156,7 +5156,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedCacheNodes
-      operationId: POST DescribeReservedCacheNodes
+      operationId: POST_DescribeReservedCacheNodes
       description: 'Returns information about reserved cache nodes for this account, or about a specified reserved cache node.'
       responses:
         '200':
@@ -5218,7 +5218,7 @@ paths:
   '/#Action=DescribeReservedCacheNodesOfferings':
     get:
       x-aws-operation-name: DescribeReservedCacheNodesOfferings
-      operationId: GET DescribeReservedCacheNodesOfferings
+      operationId: GET_DescribeReservedCacheNodesOfferings
       description: Lists available reserved cache node offerings.
       responses:
         '200':
@@ -5312,7 +5312,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedCacheNodesOfferings
-      operationId: POST DescribeReservedCacheNodesOfferings
+      operationId: POST_DescribeReservedCacheNodesOfferings
       description: Lists available reserved cache node offerings.
       responses:
         '200':
@@ -5374,7 +5374,7 @@ paths:
   '/#Action=DescribeServiceUpdates':
     get:
       x-aws-operation-name: DescribeServiceUpdates
-      operationId: GET DescribeServiceUpdates
+      operationId: GET_DescribeServiceUpdates
       description: Returns details of the service updates
       responses:
         '200':
@@ -5453,7 +5453,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeServiceUpdates
-      operationId: POST DescribeServiceUpdates
+      operationId: POST_DescribeServiceUpdates
       description: Returns details of the service updates
       responses:
         '200':
@@ -5515,7 +5515,7 @@ paths:
   '/#Action=DescribeSnapshots':
     get:
       x-aws-operation-name: DescribeSnapshots
-      operationId: GET DescribeSnapshots
+      operationId: GET_DescribeSnapshots
       description: '<p>Returns information about cluster or replication group snapshots. By default, <code>DescribeSnapshots</code> lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cache cluster.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -5615,7 +5615,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSnapshots
-      operationId: POST DescribeSnapshots
+      operationId: POST_DescribeSnapshots
       description: '<p>Returns information about cluster or replication group snapshots. By default, <code>DescribeSnapshots</code> lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cache cluster.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -5683,7 +5683,7 @@ paths:
   '/#Action=DescribeUpdateActions':
     get:
       x-aws-operation-name: DescribeUpdateActions
-      operationId: GET DescribeUpdateActions
+      operationId: GET_DescribeUpdateActions
       description: 'Returns details of the update actions '
       responses:
         '200':
@@ -5809,7 +5809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeUpdateActions
-      operationId: POST DescribeUpdateActions
+      operationId: POST_DescribeUpdateActions
       description: 'Returns details of the update actions '
       responses:
         '200':
@@ -5865,7 +5865,7 @@ paths:
   '/#Action=DisassociateGlobalReplicationGroup':
     get:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
-      operationId: GET DisassociateGlobalReplicationGroup
+      operationId: GET_DisassociateGlobalReplicationGroup
       description: 'Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
       responses:
         '200':
@@ -5941,7 +5941,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
-      operationId: POST DisassociateGlobalReplicationGroup
+      operationId: POST_DisassociateGlobalReplicationGroup
       description: 'Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.'
       responses:
         '200':
@@ -5997,7 +5997,7 @@ paths:
   '/#Action=FailoverGlobalReplicationGroup':
     get:
       x-aws-operation-name: FailoverGlobalReplicationGroup
-      operationId: GET FailoverGlobalReplicationGroup
+      operationId: GET_FailoverGlobalReplicationGroup
       description: Used to failover the primary region to a selected secondary region.
       responses:
         '200':
@@ -6073,7 +6073,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: FailoverGlobalReplicationGroup
-      operationId: POST FailoverGlobalReplicationGroup
+      operationId: POST_FailoverGlobalReplicationGroup
       description: Used to failover the primary region to a selected secondary region.
       responses:
         '200':
@@ -6129,7 +6129,7 @@ paths:
   '/#Action=IncreaseNodeGroupsInGlobalReplicationGroup':
     get:
       x-aws-operation-name: IncreaseNodeGroupsInGlobalReplicationGroup
-      operationId: GET IncreaseNodeGroupsInGlobalReplicationGroup
+      operationId: GET_IncreaseNodeGroupsInGlobalReplicationGroup
       description: Increase the number of node groups in the Global Datastore
       responses:
         '200':
@@ -6207,7 +6207,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: IncreaseNodeGroupsInGlobalReplicationGroup
-      operationId: POST IncreaseNodeGroupsInGlobalReplicationGroup
+      operationId: POST_IncreaseNodeGroupsInGlobalReplicationGroup
       description: Increase the number of node groups in the Global Datastore
       responses:
         '200':
@@ -6257,7 +6257,7 @@ paths:
   '/#Action=IncreaseReplicaCount':
     get:
       x-aws-operation-name: IncreaseReplicaCount
-      operationId: GET IncreaseReplicaCount
+      operationId: GET_IncreaseReplicaCount
       description: Dynamically increases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
       responses:
         '200':
@@ -6389,7 +6389,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: IncreaseReplicaCount
-      operationId: POST IncreaseReplicaCount
+      operationId: POST_IncreaseReplicaCount
       description: Dynamically increases the number of replics in a Redis (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation is performed with no cluster down time.
       responses:
         '200':
@@ -6493,7 +6493,7 @@ paths:
   '/#Action=ListAllowedNodeTypeModifications':
     get:
       x-aws-operation-name: ListAllowedNodeTypeModifications
-      operationId: GET ListAllowedNodeTypeModifications
+      operationId: GET_ListAllowedNodeTypeModifications
       description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
       responses:
         '200':
@@ -6563,7 +6563,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListAllowedNodeTypeModifications
-      operationId: POST ListAllowedNodeTypeModifications
+      operationId: POST_ListAllowedNodeTypeModifications
       description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
       responses:
         '200':
@@ -6619,7 +6619,7 @@ paths:
   '/#Action=ListTagsForResource':
     get:
       x-aws-operation-name: ListTagsForResource
-      operationId: GET ListTagsForResource
+      operationId: GET_ListTagsForResource
       description: '<p>Lists all cost allocation tags currently on the named resource. A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p> <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Monitoring Costs with Tags</a>.</p>'
       responses:
         '200':
@@ -6677,7 +6677,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ListTagsForResource
-      operationId: POST ListTagsForResource
+      operationId: POST_ListTagsForResource
       description: '<p>Lists all cost allocation tags currently on the named resource. A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.</p> <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code> returns an error.</p> <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html">Monitoring Costs with Tags</a>.</p>'
       responses:
         '200':
@@ -6727,7 +6727,7 @@ paths:
   '/#Action=ModifyCacheCluster':
     get:
       x-aws-operation-name: ModifyCacheCluster
-      operationId: GET ModifyCacheCluster
+      operationId: GET_ModifyCacheCluster
       description: Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
       responses:
         '200':
@@ -6955,7 +6955,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCacheCluster
-      operationId: POST ModifyCacheCluster
+      operationId: POST_ModifyCacheCluster
       description: Modifies the settings for a cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
       responses:
         '200':
@@ -7053,7 +7053,7 @@ paths:
   '/#Action=ModifyCacheParameterGroup':
     get:
       x-aws-operation-name: ModifyCacheParameterGroup
-      operationId: GET ModifyCacheParameterGroup
+      operationId: GET_ModifyCacheParameterGroup
       description: Modifies the parameters of a cache parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
       responses:
         '200':
@@ -7131,7 +7131,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCacheParameterGroup
-      operationId: POST ModifyCacheParameterGroup
+      operationId: POST_ModifyCacheParameterGroup
       description: Modifies the parameters of a cache parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
       responses:
         '200':
@@ -7193,7 +7193,7 @@ paths:
   '/#Action=ModifyCacheSubnetGroup':
     get:
       x-aws-operation-name: ModifyCacheSubnetGroup
-      operationId: GET ModifyCacheSubnetGroup
+      operationId: GET_ModifyCacheSubnetGroup
       description: Modifies an existing cache subnet group.
       responses:
         '200':
@@ -7271,7 +7271,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCacheSubnetGroup
-      operationId: POST ModifyCacheSubnetGroup
+      operationId: POST_ModifyCacheSubnetGroup
       description: Modifies an existing cache subnet group.
       responses:
         '200':
@@ -7327,7 +7327,7 @@ paths:
   '/#Action=ModifyGlobalReplicationGroup':
     get:
       x-aws-operation-name: ModifyGlobalReplicationGroup
-      operationId: GET ModifyGlobalReplicationGroup
+      operationId: GET_ModifyGlobalReplicationGroup
       description: Modifies the settings for a Global Datastore.
       responses:
         '200':
@@ -7415,7 +7415,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyGlobalReplicationGroup
-      operationId: POST ModifyGlobalReplicationGroup
+      operationId: POST_ModifyGlobalReplicationGroup
       description: Modifies the settings for a Global Datastore.
       responses:
         '200':
@@ -7465,7 +7465,7 @@ paths:
   '/#Action=ModifyReplicationGroup':
     get:
       x-aws-operation-name: ModifyReplicationGroup
-      operationId: GET ModifyReplicationGroup
+      operationId: GET_ModifyReplicationGroup
       description: '<p>Modifies the settings for a replication group.</p> <p>For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster''s node type or engine version. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -7710,7 +7710,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyReplicationGroup
-      operationId: POST ModifyReplicationGroup
+      operationId: POST_ModifyReplicationGroup
       description: '<p>Modifies the settings for a replication group.</p> <p>For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster''s node type or engine version. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
@@ -7826,7 +7826,7 @@ paths:
   '/#Action=ModifyReplicationGroupShardConfiguration':
     get:
       x-aws-operation-name: ModifyReplicationGroupShardConfiguration
-      operationId: GET ModifyReplicationGroupShardConfiguration
+      operationId: GET_ModifyReplicationGroupShardConfiguration
       description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.'
       responses:
         '200':
@@ -7962,7 +7962,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyReplicationGroupShardConfiguration
-      operationId: POST ModifyReplicationGroupShardConfiguration
+      operationId: POST_ModifyReplicationGroupShardConfiguration
       description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.'
       responses:
         '200':
@@ -8054,7 +8054,7 @@ paths:
   '/#Action=PurchaseReservedCacheNodesOffering':
     get:
       x-aws-operation-name: PurchaseReservedCacheNodesOffering
-      operationId: GET PurchaseReservedCacheNodesOffering
+      operationId: GET_PurchaseReservedCacheNodesOffering
       description: Allows you to purchase a reserved cache node offering.
       responses:
         '200':
@@ -8136,7 +8136,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PurchaseReservedCacheNodesOffering
-      operationId: POST PurchaseReservedCacheNodesOffering
+      operationId: POST_PurchaseReservedCacheNodesOffering
       description: Allows you to purchase a reserved cache node offering.
       responses:
         '200':
@@ -8198,7 +8198,7 @@ paths:
   '/#Action=RebalanceSlotsInGlobalReplicationGroup':
     get:
       x-aws-operation-name: RebalanceSlotsInGlobalReplicationGroup
-      operationId: GET RebalanceSlotsInGlobalReplicationGroup
+      operationId: GET_RebalanceSlotsInGlobalReplicationGroup
       description: Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
       responses:
         '200':
@@ -8262,7 +8262,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RebalanceSlotsInGlobalReplicationGroup
-      operationId: POST RebalanceSlotsInGlobalReplicationGroup
+      operationId: POST_RebalanceSlotsInGlobalReplicationGroup
       description: Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
       responses:
         '200':
@@ -8312,7 +8312,7 @@ paths:
   '/#Action=RebootCacheCluster':
     get:
       x-aws-operation-name: RebootCacheCluster
-      operationId: GET RebootCacheCluster
+      operationId: GET_RebootCacheCluster
       description: '<p>Reboots some, or all, of the cache nodes within a provisioned cluster. This operation applies any modified cache parameter groups to the cluster. The reboot operation takes place as soon as possible, and results in a momentary outage to the cluster. During the reboot, the cluster status is set to REBOOTING.</p> <p>The reboot causes the contents of the cache (for each cache node being rebooted) to be lost.</p> <p>When the reboot is complete, a cluster event is created.</p> <p>Rebooting a cluster is currently supported on Memcached and Redis (cluster mode disabled) clusters. Rebooting is not supported on Redis (cluster mode enabled) clusters.</p> <p>If you make changes to parameters that require a Redis (cluster mode enabled) cluster reboot for the changes to be applied, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html">Rebooting a Cluster</a> for an alternate process.</p>'
       responses:
         '200':
@@ -8372,7 +8372,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RebootCacheCluster
-      operationId: POST RebootCacheCluster
+      operationId: POST_RebootCacheCluster
       description: '<p>Reboots some, or all, of the cache nodes within a provisioned cluster. This operation applies any modified cache parameter groups to the cluster. The reboot operation takes place as soon as possible, and results in a momentary outage to the cluster. During the reboot, the cluster status is set to REBOOTING.</p> <p>The reboot causes the contents of the cache (for each cache node being rebooted) to be lost.</p> <p>When the reboot is complete, a cluster event is created.</p> <p>Rebooting a cluster is currently supported on Memcached and Redis (cluster mode disabled) clusters. Rebooting is not supported on Redis (cluster mode enabled) clusters.</p> <p>If you make changes to parameters that require a Redis (cluster mode enabled) cluster reboot for the changes to be applied, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html">Rebooting a Cluster</a> for an alternate process.</p>'
       responses:
         '200':
@@ -8416,7 +8416,7 @@ paths:
   '/#Action=RemoveTagsFromResource':
     get:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: GET RemoveTagsFromResource
+      operationId: GET_RemoveTagsFromResource
       description: Removes the tags identified by the <code>TagKeys</code> list from the named resource.
       responses:
         '200':
@@ -8488,7 +8488,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RemoveTagsFromResource
-      operationId: POST RemoveTagsFromResource
+      operationId: POST_RemoveTagsFromResource
       description: Removes the tags identified by the <code>TagKeys</code> list from the named resource.
       responses:
         '200':
@@ -8544,7 +8544,7 @@ paths:
   '/#Action=ResetCacheParameterGroup':
     get:
       x-aws-operation-name: ResetCacheParameterGroup
-      operationId: GET ResetCacheParameterGroup
+      operationId: GET_ResetCacheParameterGroup
       description: 'Modifies the parameters of a cache parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire cache parameter group, specify the <code>ResetAllParameters</code> and <code>CacheParameterGroupName</code> parameters.'
       responses:
         '200':
@@ -8628,7 +8628,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResetCacheParameterGroup
-      operationId: POST ResetCacheParameterGroup
+      operationId: POST_ResetCacheParameterGroup
       description: 'Modifies the parameters of a cache parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire cache parameter group, specify the <code>ResetAllParameters</code> and <code>CacheParameterGroupName</code> parameters.'
       responses:
         '200':
@@ -8690,7 +8690,7 @@ paths:
   '/#Action=RevokeCacheSecurityGroupIngress':
     get:
       x-aws-operation-name: RevokeCacheSecurityGroupIngress
-      operationId: GET RevokeCacheSecurityGroupIngress
+      operationId: GET_RevokeCacheSecurityGroupIngress
       description: Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.
       responses:
         '200':
@@ -8772,7 +8772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RevokeCacheSecurityGroupIngress
-      operationId: POST RevokeCacheSecurityGroupIngress
+      operationId: POST_RevokeCacheSecurityGroupIngress
       description: Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.
       responses:
         '200':
@@ -8834,7 +8834,7 @@ paths:
   '/#Action=StartMigration':
     get:
       x-aws-operation-name: StartMigration
-      operationId: GET StartMigration
+      operationId: GET_StartMigration
       description: Start the migration of data.
       responses:
         '200':
@@ -8906,7 +8906,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: StartMigration
-      operationId: POST StartMigration
+      operationId: POST_StartMigration
       description: Start the migration of data.
       responses:
         '200':
@@ -8962,7 +8962,7 @@ paths:
   '/#Action=TestFailover':
     get:
       x-aws-operation-name: TestFailover
-      operationId: GET TestFailover
+      operationId: GET_TestFailover
       description: '<p>Represents the input of a <code>TestFailover</code> operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).</p> <p class="title"> <b>Note the following</b> </p> <ul> <li> <p>A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.</p> </li> <li> <p>If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.</p> <p> </p> </li> <li> <p>If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.</p> </li> <li> <p>To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:</p> <ol> <li> <p>Replication group message: <code>Test Failover API called for node group &lt;node-group-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Replication group message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Cache cluster message: <code>Recovering cache nodes &lt;node-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Finished recovery for cache nodes &lt;node-id&gt;</code> </p> </li> </ol> <p>For more information see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html">Viewing ElastiCache Events</a> in the <i>ElastiCache User Guide</i> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> in the ElastiCache API Reference</p> </li> </ul> </li> </ul> <p>Also see, <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test">Testing Multi-AZ with Automatic Failover</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':
@@ -9065,7 +9065,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: TestFailover
-      operationId: POST TestFailover
+      operationId: POST_TestFailover
       description: '<p>Represents the input of a <code>TestFailover</code> operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).</p> <p class="title"> <b>Note the following</b> </p> <ul> <li> <p>A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.</p> </li> <li> <p>If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.</p> <p> </p> </li> <li> <p>If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.</p> </li> <li> <p>To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:</p> <ol> <li> <p>Replication group message: <code>Test Failover API called for node group &lt;node-group-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Replication group message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Cache cluster message: <code>Recovering cache nodes &lt;node-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Finished recovery for cache nodes &lt;node-id&gt;</code> </p> </li> </ol> <p>For more information see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html">Viewing ElastiCache Events</a> in the <i>ElastiCache User Guide</i> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> in the ElastiCache API Reference</p> </li> </ul> </li> </ul> <p>Also see, <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test">Testing Multi-AZ with Automatic Failover</a> in the <i>ElastiCache User Guide</i>.</p>'
       responses:
         '200':

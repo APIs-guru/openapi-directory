@@ -115,7 +115,7 @@ paths:
   '/#Action=AttachInstances':
     get:
       x-aws-operation-name: AttachInstances
-      operationId: GET AttachInstances
+      operationId: GET_AttachInstances
       description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -174,7 +174,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AttachInstances
-      operationId: POST AttachInstances
+      operationId: POST_AttachInstances
       description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -214,7 +214,7 @@ paths:
   '/#Action=AttachLoadBalancerTargetGroups':
     get:
       x-aws-operation-name: AttachLoadBalancerTargetGroups
-      operationId: GET AttachLoadBalancerTargetGroups
+      operationId: GET_AttachLoadBalancerTargetGroups
       description: '<p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>To describe the target groups for an Auto Scaling group, use <a>DescribeLoadBalancerTargetGroups</a>. To detach the target group from the Auto Scaling group, use <a>DetachLoadBalancerTargetGroups</a>.</p> <p>With Application Load Balancers and Network Load Balancers, instances are registered as targets with a target group. With Classic Load Balancers, instances are registered with the load balancer. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -277,7 +277,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AttachLoadBalancerTargetGroups
-      operationId: POST AttachLoadBalancerTargetGroups
+      operationId: POST_AttachLoadBalancerTargetGroups
       description: '<p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>To describe the target groups for an Auto Scaling group, use <a>DescribeLoadBalancerTargetGroups</a>. To detach the target group from the Auto Scaling group, use <a>DetachLoadBalancerTargetGroups</a>.</p> <p>With Application Load Balancers and Network Load Balancers, instances are registered as targets with a target group. With Classic Load Balancers, instances are registered with the load balancer. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -321,7 +321,7 @@ paths:
   '/#Action=AttachLoadBalancers':
     get:
       x-aws-operation-name: AttachLoadBalancers
-      operationId: GET AttachLoadBalancers
+      operationId: GET_AttachLoadBalancers
       description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer or a Network Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -384,7 +384,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AttachLoadBalancers
-      operationId: POST AttachLoadBalancers
+      operationId: POST_AttachLoadBalancers
       description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer or a Network Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html">Attaching a Load Balancer to Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -428,7 +428,7 @@ paths:
   '/#Action=BatchDeleteScheduledAction':
     get:
       x-aws-operation-name: BatchDeleteScheduledAction
-      operationId: GET BatchDeleteScheduledAction
+      operationId: GET_BatchDeleteScheduledAction
       description: Deletes one or more scheduled actions for the specified Auto Scaling group.
       responses:
         '200':
@@ -485,7 +485,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchDeleteScheduledAction
-      operationId: POST BatchDeleteScheduledAction
+      operationId: POST_BatchDeleteScheduledAction
       description: Deletes one or more scheduled actions for the specified Auto Scaling group.
       responses:
         '200':
@@ -523,7 +523,7 @@ paths:
   '/#Action=BatchPutScheduledUpdateGroupAction':
     get:
       x-aws-operation-name: BatchPutScheduledUpdateGroupAction
-      operationId: GET BatchPutScheduledUpdateGroupAction
+      operationId: GET_BatchPutScheduledUpdateGroupAction
       description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
       responses:
         '200':
@@ -592,7 +592,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchPutScheduledUpdateGroupAction
-      operationId: POST BatchPutScheduledUpdateGroupAction
+      operationId: POST_BatchPutScheduledUpdateGroupAction
       description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
       responses:
         '200':
@@ -642,7 +642,7 @@ paths:
   '/#Action=CompleteLifecycleAction':
     get:
       x-aws-operation-name: CompleteLifecycleAction
-      operationId: GET CompleteLifecycleAction
+      operationId: GET_CompleteLifecycleAction
       description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, complete the lifecycle action.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -723,7 +723,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CompleteLifecycleAction
-      operationId: POST CompleteLifecycleAction
+      operationId: POST_CompleteLifecycleAction
       description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, complete the lifecycle action.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -761,7 +761,7 @@ paths:
   '/#Action=CreateAutoScalingGroup':
     get:
       x-aws-operation-name: CreateAutoScalingGroup
-      operationId: GET CreateAutoScalingGroup
+      operationId: GET_CreateAutoScalingGroup
       description: '<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1000,7 +1000,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateAutoScalingGroup
-      operationId: POST CreateAutoScalingGroup
+      operationId: POST_CreateAutoScalingGroup
       description: '<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1052,7 +1052,7 @@ paths:
   '/#Action=CreateLaunchConfiguration':
     get:
       x-aws-operation-name: CreateLaunchConfiguration
-      operationId: GET CreateLaunchConfiguration
+      operationId: GET_CreateLaunchConfiguration
       description: '<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1253,7 +1253,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateLaunchConfiguration
-      operationId: POST CreateLaunchConfiguration
+      operationId: POST_CreateLaunchConfiguration
       description: '<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, the call fails. For information about viewing this limit, see <a>DescribeAccountLimits</a>. For information about updating this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html">Launch Configurations</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1299,7 +1299,7 @@ paths:
   '/#Action=CreateOrUpdateTags':
     get:
       x-aws-operation-name: CreateOrUpdateTags
-      operationId: GET CreateOrUpdateTags
+      operationId: GET_CreateOrUpdateTags
       description: '<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1361,7 +1361,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateOrUpdateTags
-      operationId: POST CreateOrUpdateTags
+      operationId: POST_CreateOrUpdateTags
       description: '<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1413,7 +1413,7 @@ paths:
   '/#Action=DeleteAutoScalingGroup':
     get:
       x-aws-operation-name: DeleteAutoScalingGroup
-      operationId: GET DeleteAutoScalingGroup
+      operationId: GET_DeleteAutoScalingGroup
       description: '<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>'
       responses:
         '200':
@@ -1476,7 +1476,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteAutoScalingGroup
-      operationId: POST DeleteAutoScalingGroup
+      operationId: POST_DeleteAutoScalingGroup
       description: '<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>'
       responses:
         '200':
@@ -1522,7 +1522,7 @@ paths:
   '/#Action=DeleteLaunchConfiguration':
     get:
       x-aws-operation-name: DeleteLaunchConfiguration
-      operationId: GET DeleteLaunchConfiguration
+      operationId: GET_DeleteLaunchConfiguration
       description: '<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>'
       responses:
         '200':
@@ -1573,7 +1573,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteLaunchConfiguration
-      operationId: POST DeleteLaunchConfiguration
+      operationId: POST_DeleteLaunchConfiguration
       description: '<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>'
       responses:
         '200':
@@ -1613,7 +1613,7 @@ paths:
   '/#Action=DeleteLifecycleHook':
     get:
       x-aws-operation-name: DeleteLifecycleHook
-      operationId: GET DeleteLifecycleHook
+      operationId: GET_DeleteLifecycleHook
       description: '<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>'
       responses:
         '200':
@@ -1671,7 +1671,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteLifecycleHook
-      operationId: POST DeleteLifecycleHook
+      operationId: POST_DeleteLifecycleHook
       description: '<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>'
       responses:
         '200':
@@ -1709,7 +1709,7 @@ paths:
   '/#Action=DeleteNotificationConfiguration':
     get:
       x-aws-operation-name: DeleteNotificationConfiguration
-      operationId: GET DeleteNotificationConfiguration
+      operationId: GET_DeleteNotificationConfiguration
       description: Deletes the specified notification.
       responses:
         '200':
@@ -1763,7 +1763,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteNotificationConfiguration
-      operationId: POST DeleteNotificationConfiguration
+      operationId: POST_DeleteNotificationConfiguration
       description: Deletes the specified notification.
       responses:
         '200':
@@ -1797,7 +1797,7 @@ paths:
   '/#Action=DeletePolicy':
     get:
       x-aws-operation-name: DeletePolicy
-      operationId: GET DeletePolicy
+      operationId: GET_DeletePolicy
       description: '<p>Deletes the specified scaling policy.</p> <p>Deleting either a step scaling policy or a simple scaling policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html">Deleting a Scaling Policy</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1857,7 +1857,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeletePolicy
-      operationId: POST DeletePolicy
+      operationId: POST_DeletePolicy
       description: '<p>Deletes the specified scaling policy.</p> <p>Deleting either a step scaling policy or a simple scaling policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html">Deleting a Scaling Policy</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -1897,7 +1897,7 @@ paths:
   '/#Action=DeleteScheduledAction':
     get:
       x-aws-operation-name: DeleteScheduledAction
-      operationId: GET DeleteScheduledAction
+      operationId: GET_DeleteScheduledAction
       description: Deletes the specified scheduled action.
       responses:
         '200':
@@ -1951,7 +1951,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteScheduledAction
-      operationId: POST DeleteScheduledAction
+      operationId: POST_DeleteScheduledAction
       description: Deletes the specified scheduled action.
       responses:
         '200':
@@ -1985,7 +1985,7 @@ paths:
   '/#Action=DeleteTags':
     get:
       x-aws-operation-name: DeleteTags
-      operationId: GET DeleteTags
+      operationId: GET_DeleteTags
       description: Deletes the specified tags.
       responses:
         '200':
@@ -2035,7 +2035,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteTags
-      operationId: POST DeleteTags
+      operationId: POST_DeleteTags
       description: Deletes the specified tags.
       responses:
         '200':
@@ -2075,7 +2075,7 @@ paths:
   '/#Action=DescribeAccountLimits':
     get:
       x-aws-operation-name: DescribeAccountLimits
-      operationId: GET DescribeAccountLimits
+      operationId: GET_DescribeAccountLimits
       description: '<p>Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account.</p> <p>For information about requesting an increase, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2115,7 +2115,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAccountLimits
-      operationId: POST DescribeAccountLimits
+      operationId: POST_DescribeAccountLimits
       description: '<p>Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS account.</p> <p>For information about requesting an increase, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling Service Quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -2148,7 +2148,7 @@ paths:
   '/#Action=DescribeAdjustmentTypes':
     get:
       x-aws-operation-name: DescribeAdjustmentTypes
-      operationId: GET DescribeAdjustmentTypes
+      operationId: GET_DescribeAdjustmentTypes
       description: Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.
       responses:
         '200':
@@ -2188,7 +2188,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAdjustmentTypes
-      operationId: POST DescribeAdjustmentTypes
+      operationId: POST_DescribeAdjustmentTypes
       description: Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.
       responses:
         '200':
@@ -2221,7 +2221,7 @@ paths:
   '/#Action=DescribeAutoScalingGroups':
     get:
       x-aws-operation-name: DescribeAutoScalingGroups
-      operationId: GET DescribeAutoScalingGroups
+      operationId: GET_DescribeAutoScalingGroups
       description: Describes one or more Auto Scaling groups.
       responses:
         '200':
@@ -2288,7 +2288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAutoScalingGroups
-      operationId: POST DescribeAutoScalingGroups
+      operationId: POST_DescribeAutoScalingGroups
       description: Describes one or more Auto Scaling groups.
       responses:
         '200':
@@ -2344,7 +2344,7 @@ paths:
   '/#Action=DescribeAutoScalingInstances':
     get:
       x-aws-operation-name: DescribeAutoScalingInstances
-      operationId: GET DescribeAutoScalingInstances
+      operationId: GET_DescribeAutoScalingInstances
       description: Describes one or more Auto Scaling instances.
       responses:
         '200':
@@ -2411,7 +2411,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAutoScalingInstances
-      operationId: POST DescribeAutoScalingInstances
+      operationId: POST_DescribeAutoScalingInstances
       description: Describes one or more Auto Scaling instances.
       responses:
         '200':
@@ -2467,7 +2467,7 @@ paths:
   '/#Action=DescribeAutoScalingNotificationTypes':
     get:
       x-aws-operation-name: DescribeAutoScalingNotificationTypes
-      operationId: GET DescribeAutoScalingNotificationTypes
+      operationId: GET_DescribeAutoScalingNotificationTypes
       description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
       responses:
         '200':
@@ -2507,7 +2507,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAutoScalingNotificationTypes
-      operationId: POST DescribeAutoScalingNotificationTypes
+      operationId: POST_DescribeAutoScalingNotificationTypes
       description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
       responses:
         '200':
@@ -2540,7 +2540,7 @@ paths:
   '/#Action=DescribeLaunchConfigurations':
     get:
       x-aws-operation-name: DescribeLaunchConfigurations
-      operationId: GET DescribeLaunchConfigurations
+      operationId: GET_DescribeLaunchConfigurations
       description: Describes one or more launch configurations.
       responses:
         '200':
@@ -2607,7 +2607,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLaunchConfigurations
-      operationId: POST DescribeLaunchConfigurations
+      operationId: POST_DescribeLaunchConfigurations
       description: Describes one or more launch configurations.
       responses:
         '200':
@@ -2663,7 +2663,7 @@ paths:
   '/#Action=DescribeLifecycleHookTypes':
     get:
       x-aws-operation-name: DescribeLifecycleHookTypes
-      operationId: GET DescribeLifecycleHookTypes
+      operationId: GET_DescribeLifecycleHookTypes
       description: '<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>'
       responses:
         '200':
@@ -2703,7 +2703,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLifecycleHookTypes
-      operationId: POST DescribeLifecycleHookTypes
+      operationId: POST_DescribeLifecycleHookTypes
       description: '<p>Describes the available types of lifecycle hooks.</p> <p>The following hook types are supported:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>'
       responses:
         '200':
@@ -2736,7 +2736,7 @@ paths:
   '/#Action=DescribeLifecycleHooks':
     get:
       x-aws-operation-name: DescribeLifecycleHooks
-      operationId: GET DescribeLifecycleHooks
+      operationId: GET_DescribeLifecycleHooks
       description: Describes the lifecycle hooks for the specified Auto Scaling group.
       responses:
         '200':
@@ -2794,7 +2794,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLifecycleHooks
-      operationId: POST DescribeLifecycleHooks
+      operationId: POST_DescribeLifecycleHooks
       description: Describes the lifecycle hooks for the specified Auto Scaling group.
       responses:
         '200':
@@ -2832,7 +2832,7 @@ paths:
   '/#Action=DescribeLoadBalancerTargetGroups':
     get:
       x-aws-operation-name: DescribeLoadBalancerTargetGroups
-      operationId: GET DescribeLoadBalancerTargetGroups
+      operationId: GET_DescribeLoadBalancerTargetGroups
       description: Describes the target groups for the specified Auto Scaling group.
       responses:
         '200':
@@ -2894,7 +2894,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLoadBalancerTargetGroups
-      operationId: POST DescribeLoadBalancerTargetGroups
+      operationId: POST_DescribeLoadBalancerTargetGroups
       description: Describes the target groups for the specified Auto Scaling group.
       responses:
         '200':
@@ -2932,7 +2932,7 @@ paths:
   '/#Action=DescribeLoadBalancers':
     get:
       x-aws-operation-name: DescribeLoadBalancers
-      operationId: GET DescribeLoadBalancers
+      operationId: GET_DescribeLoadBalancers
       description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
       responses:
         '200':
@@ -2994,7 +2994,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLoadBalancers
-      operationId: POST DescribeLoadBalancers
+      operationId: POST_DescribeLoadBalancers
       description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>This operation describes only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
       responses:
         '200':
@@ -3032,7 +3032,7 @@ paths:
   '/#Action=DescribeMetricCollectionTypes':
     get:
       x-aws-operation-name: DescribeMetricCollectionTypes
-      operationId: GET DescribeMetricCollectionTypes
+      operationId: GET_DescribeMetricCollectionTypes
       description: <p>Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.</p> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>
       responses:
         '200':
@@ -3072,7 +3072,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeMetricCollectionTypes
-      operationId: POST DescribeMetricCollectionTypes
+      operationId: POST_DescribeMetricCollectionTypes
       description: <p>Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.</p> <p>The <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>
       responses:
         '200':
@@ -3105,7 +3105,7 @@ paths:
   '/#Action=DescribeNotificationConfigurations':
     get:
       x-aws-operation-name: DescribeNotificationConfigurations
-      operationId: GET DescribeNotificationConfigurations
+      operationId: GET_DescribeNotificationConfigurations
       description: Describes the notification actions associated with the specified Auto Scaling group.
       responses:
         '200':
@@ -3172,7 +3172,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeNotificationConfigurations
-      operationId: POST DescribeNotificationConfigurations
+      operationId: POST_DescribeNotificationConfigurations
       description: Describes the notification actions associated with the specified Auto Scaling group.
       responses:
         '200':
@@ -3228,7 +3228,7 @@ paths:
   '/#Action=DescribePolicies':
     get:
       x-aws-operation-name: DescribePolicies
-      operationId: GET DescribePolicies
+      operationId: GET_DescribePolicies
       description: Describes the policies for the specified Auto Scaling group.
       responses:
         '200':
@@ -3318,7 +3318,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribePolicies
-      operationId: POST DescribePolicies
+      operationId: POST_DescribePolicies
       description: Describes the policies for the specified Auto Scaling group.
       responses:
         '200':
@@ -3380,7 +3380,7 @@ paths:
   '/#Action=DescribeScalingActivities':
     get:
       x-aws-operation-name: DescribeScalingActivities
-      operationId: GET DescribeScalingActivities
+      operationId: GET_DescribeScalingActivities
       description: Describes one or more scaling activities for the specified Auto Scaling group.
       responses:
         '200':
@@ -3456,7 +3456,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeScalingActivities
-      operationId: POST DescribeScalingActivities
+      operationId: POST_DescribeScalingActivities
       description: Describes one or more scaling activities for the specified Auto Scaling group.
       responses:
         '200':
@@ -3512,7 +3512,7 @@ paths:
   '/#Action=DescribeScalingProcessTypes':
     get:
       x-aws-operation-name: DescribeScalingProcessTypes
-      operationId: GET DescribeScalingProcessTypes
+      operationId: GET_DescribeScalingProcessTypes
       description: Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.
       responses:
         '200':
@@ -3552,7 +3552,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeScalingProcessTypes
-      operationId: POST DescribeScalingProcessTypes
+      operationId: POST_DescribeScalingProcessTypes
       description: Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.
       responses:
         '200':
@@ -3585,7 +3585,7 @@ paths:
   '/#Action=DescribeScheduledActions':
     get:
       x-aws-operation-name: DescribeScheduledActions
-      operationId: GET DescribeScheduledActions
+      operationId: GET_DescribeScheduledActions
       description: 'Describes the actions scheduled for your Auto Scaling group that haven''t run or that have not reached their end time. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.'
       responses:
         '200':
@@ -3675,7 +3675,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeScheduledActions
-      operationId: POST DescribeScheduledActions
+      operationId: POST_DescribeScheduledActions
       description: 'Describes the actions scheduled for your Auto Scaling group that haven''t run or that have not reached their end time. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.'
       responses:
         '200':
@@ -3731,7 +3731,7 @@ paths:
   '/#Action=DescribeTags':
     get:
       x-aws-operation-name: DescribeTags
-      operationId: GET DescribeTags
+      operationId: GET_DescribeTags
       description: '<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there''s no match, no special message is returned.</p>'
       responses:
         '200':
@@ -3798,7 +3798,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeTags
-      operationId: POST DescribeTags
+      operationId: POST_DescribeTags
       description: '<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there''s no match, no special message is returned.</p>'
       responses:
         '200':
@@ -3854,7 +3854,7 @@ paths:
   '/#Action=DescribeTerminationPolicyTypes':
     get:
       x-aws-operation-name: DescribeTerminationPolicyTypes
-      operationId: GET DescribeTerminationPolicyTypes
+      operationId: GET_DescribeTerminationPolicyTypes
       description: '<p>Describes the termination policies supported by Amazon EC2 Auto Scaling.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Auto Scaling Instances Terminate During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3894,7 +3894,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeTerminationPolicyTypes
-      operationId: POST DescribeTerminationPolicyTypes
+      operationId: POST_DescribeTerminationPolicyTypes
       description: '<p>Describes the termination policies supported by Amazon EC2 Auto Scaling.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html">Controlling Which Auto Scaling Instances Terminate During Scale In</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3927,7 +3927,7 @@ paths:
   '/#Action=DetachInstances':
     get:
       x-aws-operation-name: DetachInstances
-      operationId: GET DetachInstances
+      operationId: GET_DetachInstances
       description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -3990,7 +3990,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetachInstances
-      operationId: POST DetachInstances
+      operationId: POST_DetachInstances
       description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4028,7 +4028,7 @@ paths:
   '/#Action=DetachLoadBalancerTargetGroups':
     get:
       x-aws-operation-name: DetachLoadBalancerTargetGroups
-      operationId: GET DetachLoadBalancerTargetGroups
+      operationId: GET_DetachLoadBalancerTargetGroups
       description: Detaches one or more target groups from the specified Auto Scaling group.
       responses:
         '200':
@@ -4085,7 +4085,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetachLoadBalancerTargetGroups
-      operationId: POST DetachLoadBalancerTargetGroups
+      operationId: POST_DetachLoadBalancerTargetGroups
       description: Detaches one or more target groups from the specified Auto Scaling group.
       responses:
         '200':
@@ -4123,7 +4123,7 @@ paths:
   '/#Action=DetachLoadBalancers':
     get:
       x-aws-operation-name: DetachLoadBalancers
-      operationId: GET DetachLoadBalancers
+      operationId: GET_DetachLoadBalancers
       description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. The instances remain running.</p>'
       responses:
         '200':
@@ -4180,7 +4180,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DetachLoadBalancers
-      operationId: POST DetachLoadBalancers
+      operationId: POST_DetachLoadBalancers
       description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>This operation detaches only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. The instances remain running.</p>'
       responses:
         '200':
@@ -4218,7 +4218,7 @@ paths:
   '/#Action=DisableMetricsCollection':
     get:
       x-aws-operation-name: DisableMetricsCollection
-      operationId: GET DisableMetricsCollection
+      operationId: GET_DisableMetricsCollection
       description: Disables group metrics for the specified Auto Scaling group.
       responses:
         '200':
@@ -4271,7 +4271,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DisableMetricsCollection
-      operationId: POST DisableMetricsCollection
+      operationId: POST_DisableMetricsCollection
       description: Disables group metrics for the specified Auto Scaling group.
       responses:
         '200':
@@ -4305,7 +4305,7 @@ paths:
   '/#Action=EnableMetricsCollection':
     get:
       x-aws-operation-name: EnableMetricsCollection
-      operationId: GET EnableMetricsCollection
+      operationId: GET_EnableMetricsCollection
       description: 'Enables group metrics for the specified Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
       responses:
         '200':
@@ -4367,7 +4367,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: EnableMetricsCollection
-      operationId: POST EnableMetricsCollection
+      operationId: POST_EnableMetricsCollection
       description: 'Enables group metrics for the specified Auto Scaling group. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.'
       responses:
         '200':
@@ -4401,7 +4401,7 @@ paths:
   '/#Action=EnterStandby':
     get:
       x-aws-operation-name: EnterStandby
-      operationId: GET EnterStandby
+      operationId: GET_EnterStandby
       description: '<p>Moves the specified instances into the standby state.</p> <p>If you choose to decrement the desired capacity of the Auto Scaling group, the instances can enter standby as long as the desired capacity of the Auto Scaling group after the instances are placed into standby is equal to or greater than the minimum capacity of the group.</p> <p>If you choose not to decrement the desired capacity of the Auto Scaling group, the Auto Scaling group launches new instances to replace the instances on standby.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4464,7 +4464,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: EnterStandby
-      operationId: POST EnterStandby
+      operationId: POST_EnterStandby
       description: '<p>Moves the specified instances into the standby state.</p> <p>If you choose to decrement the desired capacity of the Auto Scaling group, the instances can enter standby as long as the desired capacity of the Auto Scaling group after the instances are placed into standby is equal to or greater than the minimum capacity of the group.</p> <p>If you choose not to decrement the desired capacity of the Auto Scaling group, the Auto Scaling group launches new instances to replace the instances on standby.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4502,7 +4502,7 @@ paths:
   '/#Action=ExecutePolicy':
     get:
       x-aws-operation-name: ExecutePolicy
-      operationId: GET ExecutePolicy
+      operationId: GET_ExecutePolicy
       description: Executes the specified policy.
       responses:
         '200':
@@ -4582,7 +4582,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ExecutePolicy
-      operationId: POST ExecutePolicy
+      operationId: POST_ExecutePolicy
       description: Executes the specified policy.
       responses:
         '200':
@@ -4622,7 +4622,7 @@ paths:
   '/#Action=ExitStandby':
     get:
       x-aws-operation-name: ExitStandby
-      operationId: GET ExitStandby
+      operationId: GET_ExitStandby
       description: '<p>Moves the specified instances out of the standby state.</p> <p>After you put the instances back in service, the desired capacity is incremented.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4679,7 +4679,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ExitStandby
-      operationId: POST ExitStandby
+      operationId: POST_ExitStandby
       description: '<p>Moves the specified instances out of the standby state.</p> <p>After you put the instances back in service, the desired capacity is incremented.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4717,7 +4717,7 @@ paths:
   '/#Action=PutLifecycleHook':
     get:
       x-aws-operation-name: PutLifecycleHook
-      operationId: GET PutLifecycleHook
+      operationId: GET_PutLifecycleHook
       description: '<p>Creates or updates a lifecycle hook for the specified Auto Scaling group.</p> <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated).</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using <a>RecordLifecycleActionHeartbeat</a>.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action using <a>CompleteLifecycleAction</a>.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.</p> <p>You can view the lifecycle hooks for an Auto Scaling group using <a>DescribeLifecycleHooks</a>. If you are no longer using a lifecycle hook, you can delete it using <a>DeleteLifecycleHook</a>.</p>'
       responses:
         '200':
@@ -4826,7 +4826,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PutLifecycleHook
-      operationId: POST PutLifecycleHook
+      operationId: POST_PutLifecycleHook
       description: '<p>Creates or updates a lifecycle hook for the specified Auto Scaling group.</p> <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated).</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state using <a>RecordLifecycleActionHeartbeat</a>.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action using <a>CompleteLifecycleAction</a>.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling Lifecycle Hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.</p> <p>You can view the lifecycle hooks for an Auto Scaling group using <a>DescribeLifecycleHooks</a>. If you are no longer using a lifecycle hook, you can delete it using <a>DeleteLifecycleHook</a>.</p>'
       responses:
         '200':
@@ -4870,7 +4870,7 @@ paths:
   '/#Action=PutNotificationConfiguration':
     get:
       x-aws-operation-name: PutNotificationConfiguration
-      operationId: GET PutNotificationConfiguration
+      operationId: GET_PutNotificationConfiguration
       description: '<p>Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.</p> <p>This configuration overwrites any existing configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html">Getting Amazon SNS Notifications When Your Auto Scaling Group Scales</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4944,7 +4944,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PutNotificationConfiguration
-      operationId: POST PutNotificationConfiguration
+      operationId: POST_PutNotificationConfiguration
       description: '<p>Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.</p> <p>This configuration overwrites any existing configuration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html">Getting Amazon SNS Notifications When Your Auto Scaling Group Scales</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -4990,7 +4990,7 @@ paths:
   '/#Action=PutScalingPolicy':
     get:
       x-aws-operation-name: PutScalingPolicy
-      operationId: GET PutScalingPolicy
+      operationId: GET_PutScalingPolicy
       description: '<p>Creates or updates a scaling policy for an Auto Scaling group.</p> <p>For more information about using scaling policies to scale your Auto Scaling group automatically, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html">Dynamic Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5154,7 +5154,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PutScalingPolicy
-      operationId: POST PutScalingPolicy
+      operationId: POST_PutScalingPolicy
       description: '<p>Creates or updates a scaling policy for an Auto Scaling group.</p> <p>For more information about using scaling policies to scale your Auto Scaling group automatically, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html">Dynamic Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5204,7 +5204,7 @@ paths:
   '/#Action=PutScheduledUpdateGroupAction':
     get:
       x-aws-operation-name: PutScheduledUpdateGroupAction
-      operationId: GET PutScheduledUpdateGroupAction
+      operationId: GET_PutScheduledUpdateGroupAction
       description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5318,7 +5318,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PutScheduledUpdateGroupAction
-      operationId: POST PutScheduledUpdateGroupAction
+      operationId: POST_PutScheduledUpdateGroupAction
       description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5364,7 +5364,7 @@ paths:
   '/#Action=RecordLifecycleActionHeartbeat':
     get:
       x-aws-operation-name: RecordLifecycleActionHeartbeat
-      operationId: GET RecordLifecycleActionHeartbeat
+      operationId: GET_RecordLifecycleActionHeartbeat
       description: '<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using <a>PutLifecycleHook</a>.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5439,7 +5439,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RecordLifecycleActionHeartbeat
-      operationId: POST RecordLifecycleActionHeartbeat
+      operationId: POST_RecordLifecycleActionHeartbeat
       description: '<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using <a>PutLifecycleHook</a>.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5477,7 +5477,7 @@ paths:
   '/#Action=ResumeProcesses':
     get:
       x-aws-operation-name: ResumeProcesses
-      operationId: GET ResumeProcesses
+      operationId: GET_ResumeProcesses
       description: '<p>Resumes the specified suspended automatic scaling processes, or all suspended process, for the specified Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5536,7 +5536,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResumeProcesses
-      operationId: POST ResumeProcesses
+      operationId: POST_ResumeProcesses
       description: '<p>Resumes the specified suspended automatic scaling processes, or all suspended process, for the specified Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5576,7 +5576,7 @@ paths:
   '/#Action=SetDesiredCapacity':
     get:
       x-aws-operation-name: SetDesiredCapacity
-      operationId: GET SetDesiredCapacity
+      operationId: GET_SetDesiredCapacity
       description: '<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">What Is Amazon EC2 Auto Scaling?</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5639,7 +5639,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SetDesiredCapacity
-      operationId: POST SetDesiredCapacity
+      operationId: POST_SetDesiredCapacity
       description: '<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">What Is Amazon EC2 Auto Scaling?</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5679,7 +5679,7 @@ paths:
   '/#Action=SetInstanceHealth':
     get:
       x-aws-operation-name: SetInstanceHealth
-      operationId: GET SetInstanceHealth
+      operationId: GET_SetInstanceHealth
       description: '<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5739,7 +5739,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SetInstanceHealth
-      operationId: POST SetInstanceHealth
+      operationId: POST_SetInstanceHealth
       description: '<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5773,7 +5773,7 @@ paths:
   '/#Action=SetInstanceProtection':
     get:
       x-aws-operation-name: SetInstanceProtection
-      operationId: GET SetInstanceProtection
+      operationId: GET_SetInstanceProtection
       description: '<p>Updates the instance protection settings of the specified instances.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5842,7 +5842,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SetInstanceProtection
-      operationId: POST SetInstanceProtection
+      operationId: POST_SetInstanceProtection
       description: '<p>Updates the instance protection settings of the specified instances.</p> <p>For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5886,7 +5886,7 @@ paths:
   '/#Action=SuspendProcesses':
     get:
       x-aws-operation-name: SuspendProcesses
-      operationId: GET SuspendProcesses
+      operationId: GET_SuspendProcesses
       description: '<p>Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group.</p> <p>If you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5945,7 +5945,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: SuspendProcesses
-      operationId: POST SuspendProcesses
+      operationId: POST_SuspendProcesses
       description: '<p>Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group.</p> <p>If you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html">Suspending and Resuming Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -5985,7 +5985,7 @@ paths:
   '/#Action=TerminateInstanceInAutoScalingGroup':
     get:
       x-aws-operation-name: TerminateInstanceInAutoScalingGroup
-      operationId: GET TerminateInstanceInAutoScalingGroup
+      operationId: GET_TerminateInstanceInAutoScalingGroup
       description: '<p>Terminates the specified instance and optionally adjusts the desired group size. This call simply makes a termination request. The instance is not terminated immediately. When an instance is terminated, the instance status changes to <code>terminated</code>. You can''t connect to or start an instance after you''ve terminated it.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are terminated. </p> <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage">Rebalancing Activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -6046,7 +6046,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: TerminateInstanceInAutoScalingGroup
-      operationId: POST TerminateInstanceInAutoScalingGroup
+      operationId: POST_TerminateInstanceInAutoScalingGroup
       description: '<p>Terminates the specified instance and optionally adjusts the desired group size. This call simply makes a termination request. The instance is not terminated immediately. When an instance is terminated, the instance status changes to <code>terminated</code>. You can''t connect to or start an instance after you''ve terminated it.</p> <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches instances to replace the ones that are terminated. </p> <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you decrement the desired capacity, your Auto Scaling group can become unbalanced between Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might terminate instances in other zones. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage">Rebalancing Activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
@@ -6090,7 +6090,7 @@ paths:
   '/#Action=UpdateAutoScalingGroup':
     get:
       x-aws-operation-name: UpdateAutoScalingGroup
-      operationId: GET UpdateAutoScalingGroup
+      operationId: GET_UpdateAutoScalingGroup
       description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don''t specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns. </p> <p>If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application.</p> <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>, or <code>MinSize</code>:</p> <ul> <li> <p>If a scale-in event occurs as a result of a new <code>DesiredCapacity</code> value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.</p> </li> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, this sets the group''s <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, this sets the group''s <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p> </li> </ul> <p>To see which parameters have been set, use <a>DescribeAutoScalingGroups</a>. You can also view the scaling policies for an Auto Scaling group using <a>DescribePolicies</a>. If the group has scaling policies, you can update them using <a>PutScalingPolicy</a>.</p>'
       responses:
         '200':
@@ -6282,7 +6282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateAutoScalingGroup
-      operationId: POST UpdateAutoScalingGroup
+      operationId: POST_UpdateAutoScalingGroup
       description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want to change. Any parameters that you don''t specify are not changed by this update request. The new settings take effect on any scaling activities after this call returns. </p> <p>If you associate a new launch configuration or template with an Auto Scaling group, all new instances will get the updated configuration. Existing instances continue to run with the configuration that they were originally launched with. When you update a group to specify a mixed instances policy instead of a launch configuration or template, existing instances may be replaced to match the new purchasing options that you specified in the policy. For example, if the group currently has 100% On-Demand capacity and the policy specifies 50% Spot capacity, this means that half of your instances will be gradually terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches new instances before terminating the old ones, so that updating your group does not compromise the performance or availability of your application.</p> <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>, or <code>MinSize</code>:</p> <ul> <li> <p>If a scale-in event occurs as a result of a new <code>DesiredCapacity</code> value that is lower than the current size of the group, the Auto Scaling group uses its termination policy to determine which instances to terminate.</p> </li> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, this sets the group''s <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, this sets the group''s <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p> </li> </ul> <p>To see which parameters have been set, use <a>DescribeAutoScalingGroups</a>. You can also view the scaling policies for an Auto Scaling group using <a>DescribePolicies</a>. If the group has scaling policies, you can update them using <a>PutScalingPolicy</a>.</p>'
       responses:
         '200':

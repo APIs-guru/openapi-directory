@@ -109,7 +109,7 @@ paths:
   '/#Action=AcceptReservedNodeExchange':
     get:
       x-aws-operation-name: AcceptReservedNodeExchange
-      operationId: GET AcceptReservedNodeExchange
+      operationId: GET_AcceptReservedNodeExchange
       description: 'Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. '
       responses:
         '200':
@@ -197,7 +197,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AcceptReservedNodeExchange
-      operationId: POST AcceptReservedNodeExchange
+      operationId: POST_AcceptReservedNodeExchange
       description: 'Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. '
       responses:
         '200':
@@ -271,7 +271,7 @@ paths:
   '/#Action=AuthorizeClusterSecurityGroupIngress':
     get:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
-      operationId: GET AuthorizeClusterSecurityGroupIngress
+      operationId: GET_AuthorizeClusterSecurityGroupIngress
       description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -353,7 +353,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
-      operationId: POST AuthorizeClusterSecurityGroupIngress
+      operationId: POST_AuthorizeClusterSecurityGroupIngress
       description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -409,7 +409,7 @@ paths:
   '/#Action=AuthorizeSnapshotAccess':
     get:
       x-aws-operation-name: AuthorizeSnapshotAccess
-      operationId: GET AuthorizeSnapshotAccess
+      operationId: GET_AuthorizeSnapshotAccess
       description: '<p>Authorizes the specified AWS customer account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -497,7 +497,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: AuthorizeSnapshotAccess
-      operationId: POST AuthorizeSnapshotAccess
+      operationId: POST_AuthorizeSnapshotAccess
       description: '<p>Authorizes the specified AWS customer account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -565,7 +565,7 @@ paths:
   '/#Action=BatchDeleteClusterSnapshots':
     get:
       x-aws-operation-name: BatchDeleteClusterSnapshots
-      operationId: GET BatchDeleteClusterSnapshots
+      operationId: GET_BatchDeleteClusterSnapshots
       description: Deletes a set of cluster snapshots.
       responses:
         '200':
@@ -613,7 +613,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchDeleteClusterSnapshots
-      operationId: POST BatchDeleteClusterSnapshots
+      operationId: POST_BatchDeleteClusterSnapshots
       description: Deletes a set of cluster snapshots.
       responses:
         '200':
@@ -651,7 +651,7 @@ paths:
   '/#Action=BatchModifyClusterSnapshots':
     get:
       x-aws-operation-name: BatchModifyClusterSnapshots
-      operationId: GET BatchModifyClusterSnapshots
+      operationId: GET_BatchModifyClusterSnapshots
       description: Modifies the settings for a set of cluster snapshots.
       responses:
         '200':
@@ -717,7 +717,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: BatchModifyClusterSnapshots
-      operationId: POST BatchModifyClusterSnapshots
+      operationId: POST_BatchModifyClusterSnapshots
       description: Modifies the settings for a set of cluster snapshots.
       responses:
         '200':
@@ -761,7 +761,7 @@ paths:
   '/#Action=CancelResize':
     get:
       x-aws-operation-name: CancelResize
-      operationId: GET CancelResize
+      operationId: GET_CancelResize
       description: Cancels a resize operation for a cluster.
       responses:
         '200':
@@ -825,7 +825,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CancelResize
-      operationId: POST CancelResize
+      operationId: POST_CancelResize
       description: Cancels a resize operation for a cluster.
       responses:
         '200':
@@ -881,7 +881,7 @@ paths:
   '/#Action=CopyClusterSnapshot':
     get:
       x-aws-operation-name: CopyClusterSnapshot
-      operationId: GET CopyClusterSnapshot
+      operationId: GET_CopyClusterSnapshot
       description: '<p>Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state.</p> <p>When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -969,7 +969,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CopyClusterSnapshot
-      operationId: POST CopyClusterSnapshot
+      operationId: POST_CopyClusterSnapshot
       description: '<p>Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state.</p> <p>When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1031,7 +1031,7 @@ paths:
   '/#Action=CreateCluster':
     get:
       x-aws-operation-name: CreateCluster
-      operationId: GET CreateCluster
+      operationId: GET_CreateCluster
       description: '<p>Creates a new cluster with the specified parameters.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1385,7 +1385,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateCluster
-      operationId: POST CreateCluster
+      operationId: POST_CreateCluster
       description: '<p>Creates a new cluster with the specified parameters.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1549,7 +1549,7 @@ paths:
   '/#Action=CreateClusterParameterGroup':
     get:
       x-aws-operation-name: CreateClusterParameterGroup
-      operationId: GET CreateClusterParameterGroup
+      operationId: GET_CreateClusterParameterGroup
       description: '<p>Creates an Amazon Redshift parameter group.</p> <p>Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using <a>ModifyCluster</a>. </p> <p>Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1633,7 +1633,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateClusterParameterGroup
-      operationId: POST CreateClusterParameterGroup
+      operationId: POST_CreateClusterParameterGroup
       description: '<p>Creates an Amazon Redshift parameter group.</p> <p>Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using <a>ModifyCluster</a>. </p> <p>Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1689,7 +1689,7 @@ paths:
   '/#Action=CreateClusterSecurityGroup':
     get:
       x-aws-operation-name: CreateClusterSecurityGroup
-      operationId: GET CreateClusterSecurityGroup
+      operationId: GET_CreateClusterSecurityGroup
       description: '<p>Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters.</p> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1767,7 +1767,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateClusterSecurityGroup
-      operationId: POST CreateClusterSecurityGroup
+      operationId: POST_CreateClusterSecurityGroup
       description: '<p>Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters.</p> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1823,7 +1823,7 @@ paths:
   '/#Action=CreateClusterSnapshot':
     get:
       x-aws-operation-name: CreateClusterSnapshot
-      operationId: GET CreateClusterSnapshot
+      operationId: GET_CreateClusterSnapshot
       description: '<p>Creates a manual snapshot of the specified cluster. The cluster must be in the <code>available</code> state. </p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1925,7 +1925,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateClusterSnapshot
-      operationId: POST CreateClusterSnapshot
+      operationId: POST_CreateClusterSnapshot
       description: '<p>Creates a manual snapshot of the specified cluster. The cluster must be in the <code>available</code> state. </p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -1999,7 +1999,7 @@ paths:
   '/#Action=CreateClusterSubnetGroup':
     get:
       x-aws-operation-name: CreateClusterSubnetGroup
-      operationId: GET CreateClusterSubnetGroup
+      operationId: GET_CreateClusterSubnetGroup
       description: '<p>Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.</p> <p> For information about subnet groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html">Amazon Redshift Cluster Subnet Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -2109,7 +2109,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateClusterSubnetGroup
-      operationId: POST CreateClusterSubnetGroup
+      operationId: POST_CreateClusterSubnetGroup
       description: '<p>Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.</p> <p> For information about subnet groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html">Amazon Redshift Cluster Subnet Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -2189,7 +2189,7 @@ paths:
   '/#Action=CreateEventSubscription':
     get:
       x-aws-operation-name: CreateEventSubscription
-      operationId: GET CreateEventSubscription
+      operationId: GET_CreateEventSubscription
       description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.</p>'
       responses:
         '200':
@@ -2343,7 +2343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateEventSubscription
-      operationId: POST CreateEventSubscription
+      operationId: POST_CreateEventSubscription
       description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.</p>'
       responses:
         '200':
@@ -2441,7 +2441,7 @@ paths:
   '/#Action=CreateHsmClientCertificate':
     get:
       x-aws-operation-name: CreateHsmClientCertificate
-      operationId: GET CreateHsmClientCertificate
+      operationId: GET_CreateHsmClientCertificate
       description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
       responses:
         '200':
@@ -2513,7 +2513,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateHsmClientCertificate
-      operationId: POST CreateHsmClientCertificate
+      operationId: POST_CreateHsmClientCertificate
       description: '<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client''s HSM in order to store and retrieve the keys used to encrypt the cluster databases.</p> <p>The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
       responses:
         '200':
@@ -2569,7 +2569,7 @@ paths:
   '/#Action=CreateHsmConfiguration':
     get:
       x-aws-operation-name: CreateHsmConfiguration
-      operationId: GET CreateHsmConfiguration
+      operationId: GET_CreateHsmConfiguration
       description: '<p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM.</p> <p>In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
       responses:
         '200':
@@ -2671,7 +2671,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateHsmConfiguration
-      operationId: POST CreateHsmConfiguration
+      operationId: POST_CreateHsmConfiguration
       description: '<p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM.</p> <p>In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>'
       responses:
         '200':
@@ -2727,7 +2727,7 @@ paths:
   '/#Action=CreateScheduledAction':
     get:
       x-aws-operation-name: CreateScheduledAction
-      operationId: GET CreateScheduledAction
+      operationId: GET_CreateScheduledAction
       description: 'Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. '
       responses:
         '200':
@@ -2858,7 +2858,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateScheduledAction
-      operationId: POST CreateScheduledAction
+      operationId: POST_CreateScheduledAction
       description: 'Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the <code>ResizeCluster</code> API operation. '
       responses:
         '200':
@@ -2926,7 +2926,7 @@ paths:
   '/#Action=CreateSnapshotCopyGrant':
     get:
       x-aws-operation-name: CreateSnapshotCopyGrant
-      operationId: GET CreateSnapshotCopyGrant
+      operationId: GET_CreateSnapshotCopyGrant
       description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
@@ -3016,7 +3016,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateSnapshotCopyGrant
-      operationId: POST CreateSnapshotCopyGrant
+      operationId: POST_CreateSnapshotCopyGrant
       description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
@@ -3084,7 +3084,7 @@ paths:
   '/#Action=CreateSnapshotSchedule':
     get:
       x-aws-operation-name: CreateSnapshotSchedule
-      operationId: GET CreateSnapshotSchedule
+      operationId: GET_CreateSnapshotSchedule
       description: Creates a snapshot schedule with the rate of every 12 hours.
       responses:
         '200':
@@ -3188,7 +3188,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateSnapshotSchedule
-      operationId: POST CreateSnapshotSchedule
+      operationId: POST_CreateSnapshotSchedule
       description: Creates a snapshot schedule with the rate of every 12 hours.
       responses:
         '200':
@@ -3250,7 +3250,7 @@ paths:
   '/#Action=CreateTags':
     get:
       x-aws-operation-name: CreateTags
-      operationId: GET CreateTags
+      operationId: GET_CreateTags
       description: '<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
       responses:
         '200':
@@ -3312,7 +3312,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateTags
-      operationId: POST CreateTags
+      operationId: POST_CreateTags
       description: '<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>'
       responses:
         '200':
@@ -3358,7 +3358,7 @@ paths:
   '/#Action=DeleteCluster':
     get:
       x-aws-operation-name: DeleteCluster
-      operationId: GET DeleteCluster
+      operationId: GET_DeleteCluster
       description: '<p>Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -3446,7 +3446,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteCluster
-      operationId: POST DeleteCluster
+      operationId: POST_DeleteCluster
       description: '<p>Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use <a>DescribeClusters</a> to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you want to shut down the cluster and retain it for future use, set <i>SkipFinalClusterSnapshot</i> to <code>false</code> and specify a name for <i>FinalClusterSnapshotIdentifier</i>. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it''s "deleting" once Amazon Redshift begins deleting the cluster. </p> <p> For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -3508,7 +3508,7 @@ paths:
   '/#Action=DeleteClusterParameterGroup':
     get:
       x-aws-operation-name: DeleteClusterParameterGroup
-      operationId: GET DeleteClusterParameterGroup
+      operationId: GET_DeleteClusterParameterGroup
       description: <p>Deletes a specified Amazon Redshift parameter group.</p> <note> <p>You cannot delete a parameter group if it is associated with a cluster.</p> </note>
       responses:
         '200':
@@ -3556,7 +3556,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteClusterParameterGroup
-      operationId: POST DeleteClusterParameterGroup
+      operationId: POST_DeleteClusterParameterGroup
       description: <p>Deletes a specified Amazon Redshift parameter group.</p> <note> <p>You cannot delete a parameter group if it is associated with a cluster.</p> </note>
       responses:
         '200':
@@ -3596,7 +3596,7 @@ paths:
   '/#Action=DeleteClusterSecurityGroup':
     get:
       x-aws-operation-name: DeleteClusterSecurityGroup
-      operationId: GET DeleteClusterSecurityGroup
+      operationId: GET_DeleteClusterSecurityGroup
       description: '<p>Deletes an Amazon Redshift security group.</p> <note> <p>You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.</p> </note> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -3644,7 +3644,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteClusterSecurityGroup
-      operationId: POST DeleteClusterSecurityGroup
+      operationId: POST_DeleteClusterSecurityGroup
       description: '<p>Deletes an Amazon Redshift security group.</p> <note> <p>You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.</p> </note> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -3684,7 +3684,7 @@ paths:
   '/#Action=DeleteClusterSnapshot':
     get:
       x-aws-operation-name: DeleteClusterSnapshot
-      operationId: GET DeleteClusterSnapshot
+      operationId: GET_DeleteClusterSnapshot
       description: '<p>Deletes the specified manual snapshot. The snapshot must be in the <code>available</code> state, with no other users authorized to access the snapshot. </p> <p>Unlike automated snapshots, manual snapshots are retained even after you delete your cluster. Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot explicitly to avoid getting charged. If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.</p>'
       responses:
         '200':
@@ -3742,7 +3742,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteClusterSnapshot
-      operationId: POST DeleteClusterSnapshot
+      operationId: POST_DeleteClusterSnapshot
       description: '<p>Deletes the specified manual snapshot. The snapshot must be in the <code>available</code> state, with no other users authorized to access the snapshot. </p> <p>Unlike automated snapshots, manual snapshots are retained even after you delete your cluster. Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot explicitly to avoid getting charged. If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.</p>'
       responses:
         '200':
@@ -3786,7 +3786,7 @@ paths:
   '/#Action=DeleteClusterSubnetGroup':
     get:
       x-aws-operation-name: DeleteClusterSubnetGroup
-      operationId: GET DeleteClusterSubnetGroup
+      operationId: GET_DeleteClusterSubnetGroup
       description: Deletes the specified cluster subnet group.
       responses:
         '200':
@@ -3840,7 +3840,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteClusterSubnetGroup
-      operationId: POST DeleteClusterSubnetGroup
+      operationId: POST_DeleteClusterSubnetGroup
       description: Deletes the specified cluster subnet group.
       responses:
         '200':
@@ -3886,7 +3886,7 @@ paths:
   '/#Action=DeleteEventSubscription':
     get:
       x-aws-operation-name: DeleteEventSubscription
-      operationId: GET DeleteEventSubscription
+      operationId: GET_DeleteEventSubscription
       description: Deletes an Amazon Redshift event notification subscription.
       responses:
         '200':
@@ -3934,7 +3934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteEventSubscription
-      operationId: POST DeleteEventSubscription
+      operationId: POST_DeleteEventSubscription
       description: Deletes an Amazon Redshift event notification subscription.
       responses:
         '200':
@@ -3974,7 +3974,7 @@ paths:
   '/#Action=DeleteHsmClientCertificate':
     get:
       x-aws-operation-name: DeleteHsmClientCertificate
-      operationId: GET DeleteHsmClientCertificate
+      operationId: GET_DeleteHsmClientCertificate
       description: Deletes the specified HSM client certificate.
       responses:
         '200':
@@ -4022,7 +4022,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteHsmClientCertificate
-      operationId: POST DeleteHsmClientCertificate
+      operationId: POST_DeleteHsmClientCertificate
       description: Deletes the specified HSM client certificate.
       responses:
         '200':
@@ -4062,7 +4062,7 @@ paths:
   '/#Action=DeleteHsmConfiguration':
     get:
       x-aws-operation-name: DeleteHsmConfiguration
-      operationId: GET DeleteHsmConfiguration
+      operationId: GET_DeleteHsmConfiguration
       description: Deletes the specified Amazon Redshift HSM configuration.
       responses:
         '200':
@@ -4110,7 +4110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteHsmConfiguration
-      operationId: POST DeleteHsmConfiguration
+      operationId: POST_DeleteHsmConfiguration
       description: Deletes the specified Amazon Redshift HSM configuration.
       responses:
         '200':
@@ -4150,7 +4150,7 @@ paths:
   '/#Action=DeleteScheduledAction':
     get:
       x-aws-operation-name: DeleteScheduledAction
-      operationId: GET DeleteScheduledAction
+      operationId: GET_DeleteScheduledAction
       description: 'Deletes a scheduled action. '
       responses:
         '200':
@@ -4198,7 +4198,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteScheduledAction
-      operationId: POST DeleteScheduledAction
+      operationId: POST_DeleteScheduledAction
       description: 'Deletes a scheduled action. '
       responses:
         '200':
@@ -4238,7 +4238,7 @@ paths:
   '/#Action=DeleteSnapshotCopyGrant':
     get:
       x-aws-operation-name: DeleteSnapshotCopyGrant
-      operationId: GET DeleteSnapshotCopyGrant
+      operationId: GET_DeleteSnapshotCopyGrant
       description: Deletes the specified snapshot copy grant.
       responses:
         '200':
@@ -4286,7 +4286,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteSnapshotCopyGrant
-      operationId: POST DeleteSnapshotCopyGrant
+      operationId: POST_DeleteSnapshotCopyGrant
       description: Deletes the specified snapshot copy grant.
       responses:
         '200':
@@ -4326,7 +4326,7 @@ paths:
   '/#Action=DeleteSnapshotSchedule':
     get:
       x-aws-operation-name: DeleteSnapshotSchedule
-      operationId: GET DeleteSnapshotSchedule
+      operationId: GET_DeleteSnapshotSchedule
       description: Deletes a snapshot schedule.
       responses:
         '200':
@@ -4374,7 +4374,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteSnapshotSchedule
-      operationId: POST DeleteSnapshotSchedule
+      operationId: POST_DeleteSnapshotSchedule
       description: Deletes a snapshot schedule.
       responses:
         '200':
@@ -4414,7 +4414,7 @@ paths:
   '/#Action=DeleteTags':
     get:
       x-aws-operation-name: DeleteTags
-      operationId: GET DeleteTags
+      operationId: GET_DeleteTags
       description: Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
       responses:
         '200':
@@ -4470,7 +4470,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteTags
-      operationId: POST DeleteTags
+      operationId: POST_DeleteTags
       description: Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
       responses:
         '200':
@@ -4510,7 +4510,7 @@ paths:
   '/#Action=DescribeAccountAttributes':
     get:
       x-aws-operation-name: DescribeAccountAttributes
-      operationId: GET DescribeAccountAttributes
+      operationId: GET_DescribeAccountAttributes
       description: Returns a list of attributes attached to an account
       responses:
         '200':
@@ -4552,7 +4552,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAccountAttributes
-      operationId: POST DescribeAccountAttributes
+      operationId: POST_DescribeAccountAttributes
       description: Returns a list of attributes attached to an account
       responses:
         '200':
@@ -4584,7 +4584,7 @@ paths:
   '/#Action=DescribeClusterDbRevisions':
     get:
       x-aws-operation-name: DescribeClusterDbRevisions
-      operationId: GET DescribeClusterDbRevisions
+      operationId: GET_DescribeClusterDbRevisions
       description: Returns an array of <code>ClusterDbRevision</code> objects.
       responses:
         '200':
@@ -4648,7 +4648,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterDbRevisions
-      operationId: POST DescribeClusterDbRevisions
+      operationId: POST_DescribeClusterDbRevisions
       description: Returns an array of <code>ClusterDbRevision</code> objects.
       responses:
         '200':
@@ -4692,7 +4692,7 @@ paths:
   '/#Action=DescribeClusterParameterGroups':
     get:
       x-aws-operation-name: DescribeClusterParameterGroups
-      operationId: GET DescribeClusterParameterGroups
+      operationId: GET_DescribeClusterParameterGroups
       description: '<p>Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all parameter groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all parameter groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, parameter groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -4772,7 +4772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterParameterGroups
-      operationId: POST DescribeClusterParameterGroups
+      operationId: POST_DescribeClusterParameterGroups
       description: '<p>Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all parameter groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all parameter groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, parameter groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -4828,7 +4828,7 @@ paths:
   '/#Action=DescribeClusterParameters':
     get:
       x-aws-operation-name: DescribeClusterParameters
-      operationId: GET DescribeClusterParameters
+      operationId: GET_DescribeClusterParameters
       description: '<p>Returns a detailed list of parameters contained within the specified Amazon Redshift parameter group. For each parameter the response includes information such as parameter name, description, data type, value, whether the parameter value is modifiable, and so on.</p> <p>You can specify <i>source</i> filter to retrieve parameters of only specific type. For example, to retrieve parameters that were modified by a user action such as from <a>ModifyClusterParameterGroup</a>, you can specify <i>source</i> equal to <i>user</i>.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -4892,7 +4892,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterParameters
-      operationId: POST DescribeClusterParameters
+      operationId: POST_DescribeClusterParameters
       description: '<p>Returns a detailed list of parameters contained within the specified Amazon Redshift parameter group. For each parameter the response includes information such as parameter name, description, data type, value, whether the parameter value is modifiable, and so on.</p> <p>You can specify <i>source</i> filter to retrieve parameters of only specific type. For example, to retrieve parameters that were modified by a user action such as from <a>ModifyClusterParameterGroup</a>, you can specify <i>source</i> equal to <i>user</i>.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -4942,7 +4942,7 @@ paths:
   '/#Action=DescribeClusterSecurityGroups':
     get:
       x-aws-operation-name: DescribeClusterSecurityGroups
-      operationId: GET DescribeClusterSecurityGroups
+      operationId: GET_DescribeClusterSecurityGroups
       description: '<p>Returns information about Amazon Redshift security groups. If the name of a security group is specified, the response will contain only information about only that security group.</p> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all security groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all security groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, security groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5022,7 +5022,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterSecurityGroups
-      operationId: POST DescribeClusterSecurityGroups
+      operationId: POST_DescribeClusterSecurityGroups
       description: '<p>Returns information about Amazon Redshift security groups. If the name of a security group is specified, the response will contain only information about only that security group.</p> <p> For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all security groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all security groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, security groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5078,7 +5078,7 @@ paths:
   '/#Action=DescribeClusterSnapshots':
     get:
       x-aws-operation-name: DescribeClusterSnapshots
-      operationId: GET DescribeClusterSnapshots
+      operationId: GET_DescribeClusterSnapshots
       description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5210,7 +5210,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterSnapshots
-      operationId: POST DescribeClusterSnapshots
+      operationId: POST_DescribeClusterSnapshots
       description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5272,7 +5272,7 @@ paths:
   '/#Action=DescribeClusterSubnetGroups':
     get:
       x-aws-operation-name: DescribeClusterSubnetGroups
-      operationId: GET DescribeClusterSubnetGroups
+      operationId: GET_DescribeClusterSubnetGroups
       description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5352,7 +5352,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterSubnetGroups
-      operationId: POST DescribeClusterSubnetGroups
+      operationId: POST_DescribeClusterSubnetGroups
       description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5408,7 +5408,7 @@ paths:
   '/#Action=DescribeClusterTracks':
     get:
       x-aws-operation-name: DescribeClusterTracks
-      operationId: GET DescribeClusterTracks
+      operationId: GET_DescribeClusterTracks
       description: Returns a list of all the available maintenance tracks.
       responses:
         '200':
@@ -5472,7 +5472,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterTracks
-      operationId: POST DescribeClusterTracks
+      operationId: POST_DescribeClusterTracks
       description: Returns a list of all the available maintenance tracks.
       responses:
         '200':
@@ -5516,7 +5516,7 @@ paths:
   '/#Action=DescribeClusterVersions':
     get:
       x-aws-operation-name: DescribeClusterVersions
-      operationId: GET DescribeClusterVersions
+      operationId: GET_DescribeClusterVersions
       description: 'Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
@@ -5574,7 +5574,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusterVersions
-      operationId: POST DescribeClusterVersions
+      operationId: POST_DescribeClusterVersions
       description: 'Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
@@ -5618,7 +5618,7 @@ paths:
   '/#Action=DescribeClusters':
     get:
       x-aws-operation-name: DescribeClusters
-      operationId: GET DescribeClusters
+      operationId: GET_DescribeClusters
       description: '<p>Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all clusters that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5698,7 +5698,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeClusters
-      operationId: POST DescribeClusters
+      operationId: POST_DescribeClusters
       description: '<p>Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all clusters that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -5754,7 +5754,7 @@ paths:
   '/#Action=DescribeDefaultClusterParameters':
     get:
       x-aws-operation-name: DescribeDefaultClusterParameters
-      operationId: GET DescribeDefaultClusterParameters
+      operationId: GET_DescribeDefaultClusterParameters
       description: '<p>Returns a list of parameter settings for the specified parameter group family.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -5806,7 +5806,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDefaultClusterParameters
-      operationId: POST DescribeDefaultClusterParameters
+      operationId: POST_DescribeDefaultClusterParameters
       description: '<p>Returns a list of parameter settings for the specified parameter group family.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -5850,7 +5850,7 @@ paths:
   '/#Action=DescribeEventCategories':
     get:
       x-aws-operation-name: DescribeEventCategories
-      operationId: GET DescribeEventCategories
+      operationId: GET_DescribeEventCategories
       description: 'Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html">Amazon Redshift Event Notifications</a>.'
       responses:
         '200':
@@ -5890,7 +5890,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEventCategories
-      operationId: POST DescribeEventCategories
+      operationId: POST_DescribeEventCategories
       description: 'Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html">Amazon Redshift Event Notifications</a>.'
       responses:
         '200':
@@ -5922,7 +5922,7 @@ paths:
   '/#Action=DescribeEventSubscriptions':
     get:
       x-aws-operation-name: DescribeEventSubscriptions
-      operationId: GET DescribeEventSubscriptions
+      operationId: GET_DescribeEventSubscriptions
       description: '<p>Lists descriptions of all the Amazon Redshift event notification subscriptions for a customer account. If you specify a subscription name, lists the description for that subscription.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all event notification subscriptions that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subscriptions that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subscriptions are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6002,7 +6002,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEventSubscriptions
-      operationId: POST DescribeEventSubscriptions
+      operationId: POST_DescribeEventSubscriptions
       description: '<p>Lists descriptions of all the Amazon Redshift event notification subscriptions for a customer account. If you specify a subscription name, lists the description for that subscription.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all event notification subscriptions that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subscriptions that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subscriptions are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6058,7 +6058,7 @@ paths:
   '/#Action=DescribeEvents':
     get:
       x-aws-operation-name: DescribeEvents
-      operationId: GET DescribeEvents
+      operationId: GET_DescribeEvents
       description: 'Returns events related to clusters, security groups, snapshots, and parameter groups for the past 14 days. Events specific to a particular cluster, security group, snapshot or parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
       responses:
         '200':
@@ -6142,7 +6142,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeEvents
-      operationId: POST DescribeEvents
+      operationId: POST_DescribeEvents
       description: 'Returns events related to clusters, security groups, snapshots, and parameter groups for the past 14 days. Events specific to a particular cluster, security group, snapshot or parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
       responses:
         '200':
@@ -6186,7 +6186,7 @@ paths:
   '/#Action=DescribeHsmClientCertificates':
     get:
       x-aws-operation-name: DescribeHsmClientCertificates
-      operationId: GET DescribeHsmClientCertificates
+      operationId: GET_DescribeHsmClientCertificates
       description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6266,7 +6266,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeHsmClientCertificates
-      operationId: POST DescribeHsmClientCertificates
+      operationId: POST_DescribeHsmClientCertificates
       description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6322,7 +6322,7 @@ paths:
   '/#Action=DescribeHsmConfigurations':
     get:
       x-aws-operation-name: DescribeHsmConfigurations
-      operationId: GET DescribeHsmConfigurations
+      operationId: GET_DescribeHsmConfigurations
       description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6402,7 +6402,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeHsmConfigurations
-      operationId: POST DescribeHsmConfigurations
+      operationId: POST_DescribeHsmConfigurations
       description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -6458,7 +6458,7 @@ paths:
   '/#Action=DescribeLoggingStatus':
     get:
       x-aws-operation-name: DescribeLoggingStatus
-      operationId: GET DescribeLoggingStatus
+      operationId: GET_DescribeLoggingStatus
       description: 'Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -6504,7 +6504,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeLoggingStatus
-      operationId: POST DescribeLoggingStatus
+      operationId: POST_DescribeLoggingStatus
       description: 'Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -6542,7 +6542,7 @@ paths:
   '/#Action=DescribeNodeConfigurationOptions':
     get:
       x-aws-operation-name: DescribeNodeConfigurationOptions
-      operationId: GET DescribeNodeConfigurationOptions
+      operationId: GET_DescribeNodeConfigurationOptions
       description: 'Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.'
       responses:
         '200':
@@ -6648,7 +6648,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeNodeConfigurationOptions
-      operationId: POST DescribeNodeConfigurationOptions
+      operationId: POST_DescribeNodeConfigurationOptions
       description: 'Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.'
       responses:
         '200':
@@ -6716,7 +6716,7 @@ paths:
   '/#Action=DescribeOrderableClusterOptions':
     get:
       x-aws-operation-name: DescribeOrderableClusterOptions
-      operationId: GET DescribeOrderableClusterOptions
+      operationId: GET_DescribeOrderableClusterOptions
       description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
@@ -6774,7 +6774,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeOrderableClusterOptions
-      operationId: POST DescribeOrderableClusterOptions
+      operationId: POST_DescribeOrderableClusterOptions
       description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
@@ -6818,7 +6818,7 @@ paths:
   '/#Action=DescribeReservedNodeOfferings':
     get:
       x-aws-operation-name: DescribeReservedNodeOfferings
-      operationId: GET DescribeReservedNodeOfferings
+      operationId: GET_DescribeReservedNodeOfferings
       description: '<p>Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to <a>PurchaseReservedNodeOffering</a> to reserve one or more nodes for your Amazon Redshift cluster. </p> <p> For more information about reserved node offerings, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -6888,7 +6888,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedNodeOfferings
-      operationId: POST DescribeReservedNodeOfferings
+      operationId: POST_DescribeReservedNodeOfferings
       description: '<p>Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to <a>PurchaseReservedNodeOffering</a> to reserve one or more nodes for your Amazon Redshift cluster. </p> <p> For more information about reserved node offerings, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -6950,7 +6950,7 @@ paths:
   '/#Action=DescribeReservedNodes':
     get:
       x-aws-operation-name: DescribeReservedNodes
-      operationId: GET DescribeReservedNodes
+      operationId: GET_DescribeReservedNodes
       description: Returns the descriptions of the reserved nodes.
       responses:
         '200':
@@ -7014,7 +7014,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeReservedNodes
-      operationId: POST DescribeReservedNodes
+      operationId: POST_DescribeReservedNodes
       description: Returns the descriptions of the reserved nodes.
       responses:
         '200':
@@ -7070,7 +7070,7 @@ paths:
   '/#Action=DescribeResize':
     get:
       x-aws-operation-name: DescribeResize
-      operationId: GET DescribeResize
+      operationId: GET_DescribeResize
       description: '<p>Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned. If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until the next resize. </p> <p>A resize operation can be requested using <a>ModifyCluster</a> and specifying a different number or type of nodes for the cluster. </p>'
       responses:
         '200':
@@ -7122,7 +7122,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeResize
-      operationId: POST DescribeResize
+      operationId: POST_DescribeResize
       description: '<p>Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a <code>HTTP 404</code> error is returned. If a resize operation was initiated and completed, the status of the resize remains as <code>SUCCEEDED</code> until the next resize. </p> <p>A resize operation can be requested using <a>ModifyCluster</a> and specifying a different number or type of nodes for the cluster. </p>'
       responses:
         '200':
@@ -7166,7 +7166,7 @@ paths:
   '/#Action=DescribeScheduledActions':
     get:
       x-aws-operation-name: DescribeScheduledActions
-      operationId: GET DescribeScheduledActions
+      operationId: GET_DescribeScheduledActions
       description: 'Describes properties of scheduled actions. '
       responses:
         '200':
@@ -7268,7 +7268,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeScheduledActions
-      operationId: POST DescribeScheduledActions
+      operationId: POST_DescribeScheduledActions
       description: 'Describes properties of scheduled actions. '
       responses:
         '200':
@@ -7324,7 +7324,7 @@ paths:
   '/#Action=DescribeSnapshotCopyGrants':
     get:
       x-aws-operation-name: DescribeSnapshotCopyGrants
-      operationId: GET DescribeSnapshotCopyGrants
+      operationId: GET_DescribeSnapshotCopyGrants
       description: '<p>Returns a list of snapshot copy grants owned by the AWS account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
@@ -7404,7 +7404,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSnapshotCopyGrants
-      operationId: POST DescribeSnapshotCopyGrants
+      operationId: POST_DescribeSnapshotCopyGrants
       description: '<p>Returns a list of snapshot copy grants owned by the AWS account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
@@ -7448,7 +7448,7 @@ paths:
   '/#Action=DescribeSnapshotSchedules':
     get:
       x-aws-operation-name: DescribeSnapshotSchedules
-      operationId: GET DescribeSnapshotSchedules
+      operationId: GET_DescribeSnapshotSchedules
       description: 'Returns a list of snapshot schedules. '
       responses:
         '200':
@@ -7522,7 +7522,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSnapshotSchedules
-      operationId: POST DescribeSnapshotSchedules
+      operationId: POST_DescribeSnapshotSchedules
       description: 'Returns a list of snapshot schedules. '
       responses:
         '200':
@@ -7554,7 +7554,7 @@ paths:
   '/#Action=DescribeStorage':
     get:
       x-aws-operation-name: DescribeStorage
-      operationId: GET DescribeStorage
+      operationId: GET_DescribeStorage
       description: Returns account level backups storage size and provisional storage.
       responses:
         '200':
@@ -7588,7 +7588,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStorage
-      operationId: POST DescribeStorage
+      operationId: POST_DescribeStorage
       description: Returns account level backups storage size and provisional storage.
       responses:
         '200':
@@ -7615,7 +7615,7 @@ paths:
   '/#Action=DescribeTableRestoreStatus':
     get:
       x-aws-operation-name: DescribeTableRestoreStatus
-      operationId: GET DescribeTableRestoreStatus
+      operationId: GET_DescribeTableRestoreStatus
       description: 'Lists the status of one or more table restore requests made using the <a>RestoreTableFromClusterSnapshot</a> API action. If you don''t specify a value for the <code>TableRestoreRequestId</code> parameter, then <code>DescribeTableRestoreStatus</code> returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise <code>DescribeTableRestoreStatus</code> returns the status of the table specified by <code>TableRestoreRequestId</code>.'
       responses:
         '200':
@@ -7685,7 +7685,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeTableRestoreStatus
-      operationId: POST DescribeTableRestoreStatus
+      operationId: POST_DescribeTableRestoreStatus
       description: 'Lists the status of one or more table restore requests made using the <a>RestoreTableFromClusterSnapshot</a> API action. If you don''t specify a value for the <code>TableRestoreRequestId</code> parameter, then <code>DescribeTableRestoreStatus</code> returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise <code>DescribeTableRestoreStatus</code> returns the status of the table specified by <code>TableRestoreRequestId</code>.'
       responses:
         '200':
@@ -7729,7 +7729,7 @@ paths:
   '/#Action=DescribeTags':
     get:
       x-aws-operation-name: DescribeTags
-      operationId: GET DescribeTags
+      operationId: GET_DescribeTags
       description: '<p>Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on.</p> <p>The following are limitations for <code>DescribeTags</code>: </p> <ul> <li> <p>You cannot specify an ARN and a resource-type value together in the same request.</p> </li> <li> <p>You cannot use the <code>MaxRecords</code> and <code>Marker</code> parameters together with the ARN parameter.</p> </li> <li> <p>The <code>MaxRecords</code> parameter can be a range from 10 to 50 results to return in a request.</p> </li> </ul> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all resources that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -7815,7 +7815,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeTags
-      operationId: POST DescribeTags
+      operationId: POST_DescribeTags
       description: '<p>Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on.</p> <p>The following are limitations for <code>DescribeTags</code>: </p> <ul> <li> <p>You cannot specify an ARN and a resource-type value together in the same request.</p> </li> <li> <p>You cannot use the <code>MaxRecords</code> and <code>Marker</code> parameters together with the ARN parameter.</p> </li> <li> <p>The <code>MaxRecords</code> parameter can be a range from 10 to 50 results to return in a request.</p> </li> </ul> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all resources that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
@@ -7859,7 +7859,7 @@ paths:
   '/#Action=DisableLogging':
     get:
       x-aws-operation-name: DisableLogging
-      operationId: GET DisableLogging
+      operationId: GET_DisableLogging
       description: 'Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -7905,7 +7905,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DisableLogging
-      operationId: POST DisableLogging
+      operationId: POST_DisableLogging
       description: 'Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -7943,7 +7943,7 @@ paths:
   '/#Action=DisableSnapshotCopy':
     get:
       x-aws-operation-name: DisableSnapshotCopy
-      operationId: GET DisableSnapshotCopy
+      operationId: GET_DisableSnapshotCopy
       description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>'
       responses:
         '200':
@@ -8007,7 +8007,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DisableSnapshotCopy
-      operationId: POST DisableSnapshotCopy
+      operationId: POST_DisableSnapshotCopy
       description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>'
       responses:
         '200':
@@ -8063,7 +8063,7 @@ paths:
   '/#Action=EnableLogging':
     get:
       x-aws-operation-name: EnableLogging
-      operationId: GET EnableLogging
+      operationId: GET_EnableLogging
       description: 'Starts logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -8151,7 +8151,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: EnableLogging
-      operationId: POST EnableLogging
+      operationId: POST_EnableLogging
       description: 'Starts logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.'
       responses:
         '200':
@@ -8219,7 +8219,7 @@ paths:
   '/#Action=EnableSnapshotCopy':
     get:
       x-aws-operation-name: EnableSnapshotCopy
-      operationId: GET EnableSnapshotCopy
+      operationId: GET_EnableSnapshotCopy
       description: Enables the automatic copy of snapshots from one region to another region for a specified cluster.
       responses:
         '200':
@@ -8349,7 +8349,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: EnableSnapshotCopy
-      operationId: POST EnableSnapshotCopy
+      operationId: POST_EnableSnapshotCopy
       description: Enables the automatic copy of snapshots from one region to another region for a specified cluster.
       responses:
         '200':
@@ -8447,7 +8447,7 @@ paths:
   '/#Action=GetClusterCredentials':
     get:
       x-aws-operation-name: GetClusterCredentials
-      operationId: GET GetClusterCredentials
+      operationId: GET_GetClusterCredentials
       description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
       responses:
         '200':
@@ -8531,7 +8531,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: GetClusterCredentials
-      operationId: POST GetClusterCredentials
+      operationId: POST_GetClusterCredentials
       description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
       responses:
         '200':
@@ -8575,7 +8575,7 @@ paths:
   '/#Action=GetReservedNodeExchangeOfferings':
     get:
       x-aws-operation-name: GetReservedNodeExchangeOfferings
-      operationId: GET GetReservedNodeExchangeOfferings
+      operationId: GET_GetReservedNodeExchangeOfferings
       description: 'Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.'
       responses:
         '200':
@@ -8663,7 +8663,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: GetReservedNodeExchangeOfferings
-      operationId: POST GetReservedNodeExchangeOfferings
+      operationId: POST_GetReservedNodeExchangeOfferings
       description: 'Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.'
       responses:
         '200':
@@ -8731,7 +8731,7 @@ paths:
   '/#Action=ModifyCluster':
     get:
       x-aws-operation-name: ModifyCluster
-      operationId: GET ModifyCluster
+      operationId: GET_ModifyCluster
       description: '<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -9015,7 +9015,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyCluster
-      operationId: POST ModifyCluster
+      operationId: POST_ModifyCluster
       description: '<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -9161,7 +9161,7 @@ paths:
   '/#Action=ModifyClusterDbRevision':
     get:
       x-aws-operation-name: ModifyClusterDbRevision
-      operationId: GET ModifyClusterDbRevision
+      operationId: GET_ModifyClusterDbRevision
       description: Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
       responses:
         '200':
@@ -9225,7 +9225,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterDbRevision
-      operationId: POST ModifyClusterDbRevision
+      operationId: POST_ModifyClusterDbRevision
       description: Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
       responses:
         '200':
@@ -9275,7 +9275,7 @@ paths:
   '/#Action=ModifyClusterIamRoles':
     get:
       x-aws-operation-name: ModifyClusterIamRoles
-      operationId: GET ModifyClusterIamRoles
+      operationId: GET_ModifyClusterIamRoles
       description: <p>Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
       responses:
         '200':
@@ -9343,7 +9343,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterIamRoles
-      operationId: POST ModifyClusterIamRoles
+      operationId: POST_ModifyClusterIamRoles
       description: <p>Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
       responses:
         '200':
@@ -9387,7 +9387,7 @@ paths:
   '/#Action=ModifyClusterMaintenance':
     get:
       x-aws-operation-name: ModifyClusterMaintenance
-      operationId: GET ModifyClusterMaintenance
+      operationId: GET_ModifyClusterMaintenance
       description: Modifies the maintenance settings of a cluster.
       responses:
         '200':
@@ -9471,7 +9471,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterMaintenance
-      operationId: POST ModifyClusterMaintenance
+      operationId: POST_ModifyClusterMaintenance
       description: Modifies the maintenance settings of a cluster.
       responses:
         '200':
@@ -9515,7 +9515,7 @@ paths:
   '/#Action=ModifyClusterParameterGroup':
     get:
       x-aws-operation-name: ModifyClusterParameterGroup
-      operationId: GET ModifyClusterParameterGroup
+      operationId: GET_ModifyClusterParameterGroup
       description: '<p>Modifies the parameters of a parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -9575,7 +9575,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterParameterGroup
-      operationId: POST ModifyClusterParameterGroup
+      operationId: POST_ModifyClusterParameterGroup
       description: '<p>Modifies the parameters of a parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -9619,7 +9619,7 @@ paths:
   '/#Action=ModifyClusterSnapshot':
     get:
       x-aws-operation-name: ModifyClusterSnapshot
-      operationId: GET ModifyClusterSnapshot
+      operationId: GET_ModifyClusterSnapshot
       description: <p>Modifies the settings for a snapshot.</p> <p>This exanmple modifies the manual retention period setting for a cluster snapshot.</p>
       responses:
         '200':
@@ -9689,7 +9689,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterSnapshot
-      operationId: POST ModifyClusterSnapshot
+      operationId: POST_ModifyClusterSnapshot
       description: <p>Modifies the settings for a snapshot.</p> <p>This exanmple modifies the manual retention period setting for a cluster snapshot.</p>
       responses:
         '200':
@@ -9739,7 +9739,7 @@ paths:
   '/#Action=ModifyClusterSnapshotSchedule':
     get:
       x-aws-operation-name: ModifyClusterSnapshotSchedule
-      operationId: GET ModifyClusterSnapshotSchedule
+      operationId: GET_ModifyClusterSnapshotSchedule
       description: Modifies a snapshot schedule for a cluster.
       responses:
         '200':
@@ -9805,7 +9805,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterSnapshotSchedule
-      operationId: POST ModifyClusterSnapshotSchedule
+      operationId: POST_ModifyClusterSnapshotSchedule
       description: Modifies a snapshot schedule for a cluster.
       responses:
         '200':
@@ -9851,7 +9851,7 @@ paths:
   '/#Action=ModifyClusterSubnetGroup':
     get:
       x-aws-operation-name: ModifyClusterSubnetGroup
-      operationId: GET ModifyClusterSubnetGroup
+      operationId: GET_ModifyClusterSubnetGroup
       description: Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets.
       responses:
         '200':
@@ -9941,7 +9941,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyClusterSubnetGroup
-      operationId: POST ModifyClusterSubnetGroup
+      operationId: POST_ModifyClusterSubnetGroup
       description: Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets.
       responses:
         '200':
@@ -10009,7 +10009,7 @@ paths:
   '/#Action=ModifyEventSubscription':
     get:
       x-aws-operation-name: ModifyEventSubscription
-      operationId: GET ModifyEventSubscription
+      operationId: GET_ModifyEventSubscription
       description: Modifies an existing Amazon Redshift event notification subscription.
       responses:
         '200':
@@ -10143,7 +10143,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyEventSubscription
-      operationId: POST ModifyEventSubscription
+      operationId: POST_ModifyEventSubscription
       description: Modifies an existing Amazon Redshift event notification subscription.
       responses:
         '200':
@@ -10229,7 +10229,7 @@ paths:
   '/#Action=ModifyScheduledAction':
     get:
       x-aws-operation-name: ModifyScheduledAction
-      operationId: GET ModifyScheduledAction
+      operationId: GET_ModifyScheduledAction
       description: 'Modifies a scheduled action. '
       responses:
         '200':
@@ -10354,7 +10354,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifyScheduledAction
-      operationId: POST ModifyScheduledAction
+      operationId: POST_ModifyScheduledAction
       description: 'Modifies a scheduled action. '
       responses:
         '200':
@@ -10416,7 +10416,7 @@ paths:
   '/#Action=ModifySnapshotCopyRetentionPeriod':
     get:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
-      operationId: GET ModifySnapshotCopyRetentionPeriod
+      operationId: GET_ModifySnapshotCopyRetentionPeriod
       description: 'Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
       responses:
         '200':
@@ -10498,7 +10498,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
-      operationId: POST ModifySnapshotCopyRetentionPeriod
+      operationId: POST_ModifySnapshotCopyRetentionPeriod
       description: 'Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
       responses:
         '200':
@@ -10560,7 +10560,7 @@ paths:
   '/#Action=ModifySnapshotSchedule':
     get:
       x-aws-operation-name: ModifySnapshotSchedule
-      operationId: GET ModifySnapshotSchedule
+      operationId: GET_ModifySnapshotSchedule
       description: Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
       responses:
         '200':
@@ -10626,7 +10626,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ModifySnapshotSchedule
-      operationId: POST ModifySnapshotSchedule
+      operationId: POST_ModifySnapshotSchedule
       description: Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
       responses:
         '200':
@@ -10676,7 +10676,7 @@ paths:
   '/#Action=PauseCluster':
     get:
       x-aws-operation-name: PauseCluster
-      operationId: GET PauseCluster
+      operationId: GET_PauseCluster
       description: Pauses a cluster.
       responses:
         '200':
@@ -10728,7 +10728,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PauseCluster
-      operationId: POST PauseCluster
+      operationId: POST_PauseCluster
       description: Pauses a cluster.
       responses:
         '200':
@@ -10772,7 +10772,7 @@ paths:
   '/#Action=PurchaseReservedNodeOffering':
     get:
       x-aws-operation-name: PurchaseReservedNodeOffering
-      operationId: GET PurchaseReservedNodeOffering
+      operationId: GET_PurchaseReservedNodeOffering
       description: '<p>Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve. </p> <p> For more information about reserved node offerings, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -10842,7 +10842,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: PurchaseReservedNodeOffering
-      operationId: POST PurchaseReservedNodeOffering
+      operationId: POST_PurchaseReservedNodeOffering
       description: '<p>Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve. </p> <p> For more information about reserved node offerings, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html">Purchasing Reserved Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -10898,7 +10898,7 @@ paths:
   '/#Action=RebootCluster':
     get:
       x-aws-operation-name: RebootCluster
-      operationId: GET RebootCluster
+      operationId: GET_RebootCluster
       description: 'Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to <code>rebooting</code>. A cluster event is created when the reboot is completed. Any pending cluster modifications (see <a>ModifyCluster</a>) are applied at this reboot. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. '
       responses:
         '200':
@@ -10950,7 +10950,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RebootCluster
-      operationId: POST RebootCluster
+      operationId: POST_RebootCluster
       description: 'Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to <code>rebooting</code>. A cluster event is created when the reboot is completed. Any pending cluster modifications (see <a>ModifyCluster</a>) are applied at this reboot. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. '
       responses:
         '200':
@@ -10994,7 +10994,7 @@ paths:
   '/#Action=ResetClusterParameterGroup':
     get:
       x-aws-operation-name: ResetClusterParameterGroup
-      operationId: GET ResetClusterParameterGroup
+      operationId: GET_ResetClusterParameterGroup
       description: 'Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the <i>ResetAllParameters</i> parameter. For parameter changes to take effect you must reboot any associated clusters. '
       responses:
         '200':
@@ -11060,7 +11060,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResetClusterParameterGroup
-      operationId: POST ResetClusterParameterGroup
+      operationId: POST_ResetClusterParameterGroup
       description: 'Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the <i>ResetAllParameters</i> parameter. For parameter changes to take effect you must reboot any associated clusters. '
       responses:
         '200':
@@ -11104,7 +11104,7 @@ paths:
   '/#Action=ResizeCluster':
     get:
       x-aws-operation-name: ResizeCluster
-      operationId: GET ResizeCluster
+      operationId: GET_ResizeCluster
       description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
@@ -11222,7 +11222,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResizeCluster
-      operationId: POST ResizeCluster
+      operationId: POST_ResizeCluster
       description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
@@ -11308,7 +11308,7 @@ paths:
   '/#Action=RestoreFromClusterSnapshot':
     get:
       x-aws-operation-name: RestoreFromClusterSnapshot
-      operationId: GET RestoreFromClusterSnapshot
+      operationId: GET_RestoreFromClusterSnapshot
       description: '<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -11654,7 +11654,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreFromClusterSnapshot
-      operationId: POST RestoreFromClusterSnapshot
+      operationId: POST_RestoreFromClusterSnapshot
       description: '<p>Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the <a>ModifyCluster</a> API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore.</p> <p>If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -11836,7 +11836,7 @@ paths:
   '/#Action=RestoreTableFromClusterSnapshot':
     get:
       x-aws-operation-name: RestoreTableFromClusterSnapshot
-      operationId: GET RestoreTableFromClusterSnapshot
+      operationId: GET_RestoreTableFromClusterSnapshot
       description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p>'
       responses:
         '200':
@@ -11960,7 +11960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RestoreTableFromClusterSnapshot
-      operationId: POST RestoreTableFromClusterSnapshot
+      operationId: POST_RestoreTableFromClusterSnapshot
       description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p>'
       responses:
         '200':
@@ -12034,7 +12034,7 @@ paths:
   '/#Action=ResumeCluster':
     get:
       x-aws-operation-name: ResumeCluster
-      operationId: GET ResumeCluster
+      operationId: GET_ResumeCluster
       description: Resumes a paused cluster.
       responses:
         '200':
@@ -12086,7 +12086,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: ResumeCluster
-      operationId: POST ResumeCluster
+      operationId: POST_ResumeCluster
       description: Resumes a paused cluster.
       responses:
         '200':
@@ -12130,7 +12130,7 @@ paths:
   '/#Action=RevokeClusterSecurityGroupIngress':
     get:
       x-aws-operation-name: RevokeClusterSecurityGroupIngress
-      operationId: GET RevokeClusterSecurityGroupIngress
+      operationId: GET_RevokeClusterSecurityGroupIngress
       description: 'Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see <a>AuthorizeClusterSecurityGroupIngress</a>. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>. '
       responses:
         '200':
@@ -12206,7 +12206,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RevokeClusterSecurityGroupIngress
-      operationId: POST RevokeClusterSecurityGroupIngress
+      operationId: POST_RevokeClusterSecurityGroupIngress
       description: 'Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see <a>AuthorizeClusterSecurityGroupIngress</a>. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Amazon Redshift Cluster Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>. '
       responses:
         '200':
@@ -12256,7 +12256,7 @@ paths:
   '/#Action=RevokeSnapshotAccess':
     get:
       x-aws-operation-name: RevokeSnapshotAccess
-      operationId: GET RevokeSnapshotAccess
+      operationId: GET_RevokeSnapshotAccess
       description: '<p>Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -12326,7 +12326,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RevokeSnapshotAccess
-      operationId: POST RevokeSnapshotAccess
+      operationId: POST_RevokeSnapshotAccess
       description: '<p>Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
@@ -12376,7 +12376,7 @@ paths:
   '/#Action=RotateEncryptionKey':
     get:
       x-aws-operation-name: RotateEncryptionKey
-      operationId: GET RotateEncryptionKey
+      operationId: GET_RotateEncryptionKey
       description: Rotates the encryption keys for a cluster.
       responses:
         '200':
@@ -12434,7 +12434,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: RotateEncryptionKey
-      operationId: POST RotateEncryptionKey
+      operationId: POST_RotateEncryptionKey
       description: Rotates the encryption keys for a cluster.
       responses:
         '200':

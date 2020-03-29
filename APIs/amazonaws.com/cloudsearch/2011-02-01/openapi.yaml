@@ -109,7 +109,7 @@ paths:
   '/#Action=CreateDomain':
     get:
       x-aws-operation-name: CreateDomain
-      operationId: GET CreateDomain
+      operationId: GET_CreateDomain
       description: Creates a new search domain.
       responses:
         '200':
@@ -174,7 +174,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: CreateDomain
-      operationId: POST CreateDomain
+      operationId: POST_CreateDomain
       description: Creates a new search domain.
       responses:
         '200':
@@ -227,7 +227,7 @@ paths:
   '/#Action=DefineIndexField':
     get:
       x-aws-operation-name: DefineIndexField
-      operationId: GET DefineIndexField
+      operationId: GET_DefineIndexField
       description: 'Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.'
       responses:
         '200':
@@ -321,7 +321,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineIndexField
-      operationId: POST DefineIndexField
+      operationId: POST_DefineIndexField
       description: 'Configures an <code>IndexField</code> for the search domain. Used to create new fields and modify existing ones. If the field exists, the new configuration replaces the old one. You can configure a maximum of 200 index fields.'
       responses:
         '200':
@@ -374,7 +374,7 @@ paths:
   '/#Action=DefineRankExpression':
     get:
       x-aws-operation-name: DefineRankExpression
-      operationId: GET DefineRankExpression
+      operationId: GET_DefineRankExpression
       description: 'Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.'
       responses:
         '200':
@@ -456,7 +456,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DefineRankExpression
-      operationId: POST DefineRankExpression
+      operationId: POST_DefineRankExpression
       description: 'Configures a <code>RankExpression</code> for the search domain. Used to create new rank expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. You can configure a maximum of 50 rank expressions.'
       responses:
         '200':
@@ -509,7 +509,7 @@ paths:
   '/#Action=DeleteDomain':
     get:
       x-aws-operation-name: DeleteDomain
-      operationId: GET DeleteDomain
+      operationId: GET_DeleteDomain
       description: Permanently deletes a search domain and all of its data.
       responses:
         '200':
@@ -567,7 +567,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteDomain
-      operationId: POST DeleteDomain
+      operationId: POST_DeleteDomain
       description: Permanently deletes a search domain and all of its data.
       responses:
         '200':
@@ -613,7 +613,7 @@ paths:
   '/#Action=DeleteIndexField':
     get:
       x-aws-operation-name: DeleteIndexField
-      operationId: GET DeleteIndexField
+      operationId: GET_DeleteIndexField
       description: Removes an <code>IndexField</code> from the search domain.
       responses:
         '200':
@@ -688,7 +688,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteIndexField
-      operationId: POST DeleteIndexField
+      operationId: POST_DeleteIndexField
       description: Removes an <code>IndexField</code> from the search domain.
       responses:
         '200':
@@ -741,7 +741,7 @@ paths:
   '/#Action=DeleteRankExpression':
     get:
       x-aws-operation-name: DeleteRankExpression
-      operationId: GET DeleteRankExpression
+      operationId: GET_DeleteRankExpression
       description: Removes a <code>RankExpression</code> from the search domain.
       responses:
         '200':
@@ -816,7 +816,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DeleteRankExpression
-      operationId: POST DeleteRankExpression
+      operationId: POST_DeleteRankExpression
       description: Removes a <code>RankExpression</code> from the search domain.
       responses:
         '200':
@@ -869,7 +869,7 @@ paths:
   '/#Action=DescribeAvailabilityOptions':
     get:
       x-aws-operation-name: DescribeAvailabilityOptions
-      operationId: GET DescribeAvailabilityOptions
+      operationId: GET_DescribeAvailabilityOptions
       description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -934,7 +934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeAvailabilityOptions
-      operationId: POST DescribeAvailabilityOptions
+      operationId: POST_DescribeAvailabilityOptions
       description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -987,7 +987,7 @@ paths:
   '/#Action=DescribeDefaultSearchField':
     get:
       x-aws-operation-name: DescribeDefaultSearchField
-      operationId: GET DescribeDefaultSearchField
+      operationId: GET_DescribeDefaultSearchField
       description: Gets the default search field configured for the search domain.
       responses:
         '200':
@@ -1052,7 +1052,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDefaultSearchField
-      operationId: POST DescribeDefaultSearchField
+      operationId: POST_DescribeDefaultSearchField
       description: Gets the default search field configured for the search domain.
       responses:
         '200':
@@ -1105,7 +1105,7 @@ paths:
   '/#Action=DescribeDomains':
     get:
       x-aws-operation-name: DescribeDomains
-      operationId: GET DescribeDomains
+      operationId: GET_DescribeDomains
       description: Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.
       responses:
         '200':
@@ -1162,7 +1162,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeDomains
-      operationId: POST DescribeDomains
+      operationId: POST_DescribeDomains
       description: Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default.
       responses:
         '200':
@@ -1208,7 +1208,7 @@ paths:
   '/#Action=DescribeIndexFields':
     get:
       x-aws-operation-name: DescribeIndexFields
-      operationId: GET DescribeIndexFields
+      operationId: GET_DescribeIndexFields
       description: Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.
       responses:
         '200':
@@ -1281,7 +1281,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeIndexFields
-      operationId: POST DescribeIndexFields
+      operationId: POST_DescribeIndexFields
       description: Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. Shows all fields by default.
       responses:
         '200':
@@ -1334,7 +1334,7 @@ paths:
   '/#Action=DescribeRankExpressions':
     get:
       x-aws-operation-name: DescribeRankExpressions
-      operationId: GET DescribeRankExpressions
+      operationId: GET_DescribeRankExpressions
       description: 'Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default. '
       responses:
         '200':
@@ -1407,7 +1407,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeRankExpressions
-      operationId: POST DescribeRankExpressions
+      operationId: POST_DescribeRankExpressions
       description: 'Gets the rank expressions configured for the search domain. Can be limited to specific rank expressions by name. Shows all rank expressions by default. '
       responses:
         '200':
@@ -1460,7 +1460,7 @@ paths:
   '/#Action=DescribeServiceAccessPolicies':
     get:
       x-aws-operation-name: DescribeServiceAccessPolicies
-      operationId: GET DescribeServiceAccessPolicies
+      operationId: GET_DescribeServiceAccessPolicies
       description: Gets information about the resource-based policies that control access to the domain's document and search services.
       responses:
         '200':
@@ -1525,7 +1525,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeServiceAccessPolicies
-      operationId: POST DescribeServiceAccessPolicies
+      operationId: POST_DescribeServiceAccessPolicies
       description: Gets information about the resource-based policies that control access to the domain's document and search services.
       responses:
         '200':
@@ -1578,7 +1578,7 @@ paths:
   '/#Action=DescribeStemmingOptions':
     get:
       x-aws-operation-name: DescribeStemmingOptions
-      operationId: GET DescribeStemmingOptions
+      operationId: GET_DescribeStemmingOptions
       description: Gets the stemming dictionary configured for the search domain.
       responses:
         '200':
@@ -1643,7 +1643,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStemmingOptions
-      operationId: POST DescribeStemmingOptions
+      operationId: POST_DescribeStemmingOptions
       description: Gets the stemming dictionary configured for the search domain.
       responses:
         '200':
@@ -1696,7 +1696,7 @@ paths:
   '/#Action=DescribeStopwordOptions':
     get:
       x-aws-operation-name: DescribeStopwordOptions
-      operationId: GET DescribeStopwordOptions
+      operationId: GET_DescribeStopwordOptions
       description: Gets the stopwords configured for the search domain.
       responses:
         '200':
@@ -1761,7 +1761,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeStopwordOptions
-      operationId: POST DescribeStopwordOptions
+      operationId: POST_DescribeStopwordOptions
       description: Gets the stopwords configured for the search domain.
       responses:
         '200':
@@ -1814,7 +1814,7 @@ paths:
   '/#Action=DescribeSynonymOptions':
     get:
       x-aws-operation-name: DescribeSynonymOptions
-      operationId: GET DescribeSynonymOptions
+      operationId: GET_DescribeSynonymOptions
       description: Gets the synonym dictionary configured for the search domain.
       responses:
         '200':
@@ -1879,7 +1879,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: DescribeSynonymOptions
-      operationId: POST DescribeSynonymOptions
+      operationId: POST_DescribeSynonymOptions
       description: Gets the synonym dictionary configured for the search domain.
       responses:
         '200':
@@ -1932,7 +1932,7 @@ paths:
   '/#Action=IndexDocuments':
     get:
       x-aws-operation-name: IndexDocuments
-      operationId: GET IndexDocuments
+      operationId: GET_IndexDocuments
       description: Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.
       responses:
         '200':
@@ -1997,7 +1997,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: IndexDocuments
-      operationId: POST IndexDocuments
+      operationId: POST_IndexDocuments
       description: Tells the search domain to start indexing its documents using the latest text processing options and <code>IndexFields</code>. This operation must be invoked to make options whose <a>OptionStatus</a> has <code>OptionState</code> of <code>RequiresIndexDocuments</code> visible in search results.
       responses:
         '200':
@@ -2050,7 +2050,7 @@ paths:
   '/#Action=UpdateAvailabilityOptions':
     get:
       x-aws-operation-name: UpdateAvailabilityOptions
-      operationId: GET UpdateAvailabilityOptions
+      operationId: GET_UpdateAvailabilityOptions
       description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2121,7 +2121,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateAvailabilityOptions
-      operationId: POST UpdateAvailabilityOptions
+      operationId: POST_UpdateAvailabilityOptions
       description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
       responses:
         '200':
@@ -2174,7 +2174,7 @@ paths:
   '/#Action=UpdateDefaultSearchField':
     get:
       x-aws-operation-name: UpdateDefaultSearchField
-      operationId: GET UpdateDefaultSearchField
+      operationId: GET_UpdateDefaultSearchField
       description: 'Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain''s text fields. '
       responses:
         '200':
@@ -2245,7 +2245,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateDefaultSearchField
-      operationId: POST UpdateDefaultSearchField
+      operationId: POST_UpdateDefaultSearchField
       description: 'Configures the default search field for the search domain. The default search field is the text field that is searched when a search request does not specify which fields to search. By default, it is configured to include the contents of all of the domain''s text fields. '
       responses:
         '200':
@@ -2298,7 +2298,7 @@ paths:
   '/#Action=UpdateServiceAccessPolicies':
     get:
       x-aws-operation-name: UpdateServiceAccessPolicies
-      operationId: GET UpdateServiceAccessPolicies
+      operationId: GET_UpdateServiceAccessPolicies
       description: Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.
       responses:
         '200':
@@ -2370,7 +2370,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateServiceAccessPolicies
-      operationId: POST UpdateServiceAccessPolicies
+      operationId: POST_UpdateServiceAccessPolicies
       description: Configures the policies that control access to the domain's document and search services. The maximum size of an access policy document is 100 KB.
       responses:
         '200':
@@ -2423,7 +2423,7 @@ paths:
   '/#Action=UpdateStemmingOptions':
     get:
       x-aws-operation-name: UpdateStemmingOptions
-      operationId: GET UpdateStemmingOptions
+      operationId: GET_UpdateStemmingOptions
       description: Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.
       responses:
         '200':
@@ -2495,7 +2495,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateStemmingOptions
-      operationId: POST UpdateStemmingOptions
+      operationId: POST_UpdateStemmingOptions
       description: Configures a stemming dictionary for the search domain. The stemming dictionary is used during indexing and when processing search requests. The maximum size of the stemming dictionary is 500 KB.
       responses:
         '200':
@@ -2548,7 +2548,7 @@ paths:
   '/#Action=UpdateStopwordOptions':
     get:
       x-aws-operation-name: UpdateStopwordOptions
-      operationId: GET UpdateStopwordOptions
+      operationId: GET_UpdateStopwordOptions
       description: Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.
       responses:
         '200':
@@ -2620,7 +2620,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateStopwordOptions
-      operationId: POST UpdateStopwordOptions
+      operationId: POST_UpdateStopwordOptions
       description: Configures stopwords for the search domain. Stopwords are used during indexing and when processing search requests. The maximum size of the stopwords dictionary is 10 KB.
       responses:
         '200':
@@ -2673,7 +2673,7 @@ paths:
   '/#Action=UpdateSynonymOptions':
     get:
       x-aws-operation-name: UpdateSynonymOptions
-      operationId: GET UpdateSynonymOptions
+      operationId: GET_UpdateSynonymOptions
       description: 'Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB. '
       responses:
         '200':
@@ -2745,7 +2745,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       x-aws-operation-name: UpdateSynonymOptions
-      operationId: POST UpdateSynonymOptions
+      operationId: POST_UpdateSynonymOptions
       description: 'Configures a synonym dictionary for the search domain. The synonym dictionary is used during indexing to configure mappings for terms that occur in text fields. The maximum size of the synonym dictionary is 100 KB. '
       responses:
         '200':
