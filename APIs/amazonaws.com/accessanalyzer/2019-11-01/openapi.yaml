@@ -188,6 +188,7 @@ paths:
                   type: string
                   enum:
                     - ACCOUNT
+                    - ORGANIZATION
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -251,6 +252,7 @@ paths:
             type: string
             enum:
               - ACCOUNT
+              - ORGANIZATION
   '/analyzer/{analyzerName}/archive-rule':
     put:
       operationId: CreateArchiveRule
@@ -1574,6 +1576,7 @@ components:
         - createdAt
         - isPublic
         - resourceArn
+        - resourceOwnerAccount
         - resourceType
         - updatedAt
       properties:
@@ -1595,6 +1598,9 @@ components:
         resourceArn:
           $ref: '#/components/schemas/ResourceArn'
           description: The ARN of the resource that was analyzed.
+        resourceOwnerAccount:
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of the resource that was analyzed.
@@ -1612,11 +1618,15 @@ components:
       type: object
       required:
         - resourceArn
+        - resourceOwnerAccount
         - resourceType
       properties:
         resourceArn:
           $ref: '#/components/schemas/ResourceArn'
           description: The ARN of the analyzed resource.
+        resourceOwnerAccount:
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of resource that was analyzed.
@@ -1628,11 +1638,27 @@ components:
     AnalyzerArn:
       type: string
       pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+    AnalyzerStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - CREATING
+        - DISABLED
+        - FAILED
     Name:
       type: string
       pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
       minLength: 1
       maxLength: 255
+    StatusReason:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          $ref: '#/components/schemas/ReasonCode'
+          description: The reason code for the current status of the analyzer.
+      description: 'Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
     TagsMap:
       type: object
       additionalProperties:
@@ -1641,12 +1667,14 @@ components:
       type: string
       enum:
         - ACCOUNT
+        - ORGANIZATION
     AnalyzerSummary:
       type: object
       required:
         - arn
         - createdAt
         - name
+        - status
         - type
       properties:
         arn:
@@ -1664,6 +1692,12 @@ components:
         name:
           $ref: '#/components/schemas/Name'
           description: The name of the analyzer.
+        status:
+          $ref: '#/components/schemas/AnalyzerStatus'
+          description: 'The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. '
+        statusReason:
+          $ref: '#/components/schemas/StatusReason'
+          description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
         tags:
           $ref: '#/components/schemas/TagsMap'
           description: The tags added to the analyzer.
@@ -1779,6 +1813,7 @@ components:
         - condition
         - createdAt
         - id
+        - resourceOwnerAccount
         - resourceType
         - status
         - updatedAt
@@ -1810,6 +1845,9 @@ components:
         resource:
           $ref: '#/components/schemas/String'
           description: The resource that an external principal has access to.
+        resourceOwnerAccount:
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of the resource reported in the finding.
@@ -1836,6 +1874,7 @@ components:
         - condition
         - createdAt
         - id
+        - resourceOwnerAccount
         - resourceType
         - status
         - updatedAt
@@ -1867,6 +1906,9 @@ components:
         resource:
           $ref: '#/components/schemas/String'
           description: The resource that the external principal has access to.
+        resourceOwnerAccount:
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID that owns the resource.
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of the resource that the external principal has access to.
@@ -1971,6 +2013,13 @@ components:
       title: ListTagsForResourceRequest
       properties: {}
       description: Retrieves a list of tags applied to the specified resource.
+    ReasonCode:
+      type: string
+      enum:
+        - AWS_SERVICE_ACCESS_DISABLED
+        - DELEGATED_ADMINISTRATOR_DEREGISTERED
+        - ORGANIZATION_DELETED
+        - SERVICE_LINKED_ROLE_CREATION_FAILED
     StartResourceScanRequest:
       type: object
       required:
