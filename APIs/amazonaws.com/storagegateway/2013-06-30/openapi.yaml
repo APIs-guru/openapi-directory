@@ -4010,7 +4010,7 @@ components:
           description: A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-          description: The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+          description: The ARN of the file gateway on which you want to create a file share.
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
           description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
@@ -4050,6 +4050,9 @@ components:
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
           description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+        AuditDestinationARN:
+          $ref: '#/components/schemas/AuditDestinationARN'
+          description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
         Authentication:
           $ref: '#/components/schemas/Authentication'
           description: <p>The authentication method that users use to access the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
@@ -5763,6 +5766,9 @@ components:
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
           description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+        AuditDestinationARN:
+          $ref: '#/components/schemas/AuditDestinationARN'
+          description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
       description: UpdateSMBFileShareInput
     UpdateSMBSecurityStrategyOutput:
       type: object
@@ -5922,6 +5928,9 @@ components:
       type: string
       minLength: 50
       maxLength: 800
+    AuditDestinationARN:
+      type: string
+      maxLength: 1024
     Authentication:
       type: string
       description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
@@ -6631,6 +6640,9 @@ components:
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
           description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+        AuditDestinationARN:
+          $ref: '#/components/schemas/AuditDestinationARN'
+          description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
         Authentication:
           $ref: '#/components/schemas/Authentication'
         Tags:

@@ -379,6 +379,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.DeleteMetricPolicy':
+    post:
+      operationId: DeleteMetricPolicy
+      description: 'Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn''t send metrics to CloudWatch.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMetricPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerNotFoundException'
+        '482':
+          description: PolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyNotFoundException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMetricPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - MediaStore_20170901.DeleteMetricPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=MediaStore_20170901.DescribeContainer':
     post:
       operationId: DescribeContainer
@@ -587,6 +644,63 @@ paths:
             type: string
             enum:
               - MediaStore_20170901.GetLifecyclePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.GetMetricPolicy':
+    post:
+      operationId: GetMetricPolicy
+      description: 'Returns the metric policy for the specified container. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricPolicyOutput'
+        '480':
+          description: ContainerNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerNotFoundException'
+        '481':
+          description: PolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyNotFoundException'
+        '482':
+          description: ContainerInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerInUseException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMetricPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - MediaStore_20170901.GetMetricPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -842,6 +956,57 @@ paths:
             type: string
             enum:
               - MediaStore_20170901.PutLifecyclePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=MediaStore_20170901.PutMetricPolicy':
+    post:
+      operationId: PutMetricPolicy
+      description: The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutMetricPolicyOutput'
+        '480':
+          description: ContainerInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerNotFoundException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMetricPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - MediaStore_20170901.PutMetricPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1180,6 +1345,18 @@ components:
         ContainerName:
           $ref: '#/components/schemas/ContainerName'
           description: The name of the container that holds the object lifecycle policy.
+    DeleteMetricPolicyOutput:
+      type: object
+      properties: {}
+    DeleteMetricPolicyInput:
+      type: object
+      required:
+        - ContainerName
+      title: DeleteMetricPolicyInput
+      properties:
+        ContainerName:
+          $ref: '#/components/schemas/ContainerName'
+          description: The name of the container that is associated with the metric policy that you want to delete.
     DescribeContainerOutput:
       type: object
       properties:
@@ -1244,6 +1421,23 @@ components:
         ContainerName:
           $ref: '#/components/schemas/ContainerName'
           description: The name of the container that the object lifecycle policy is assigned to.
+    GetMetricPolicyOutput:
+      type: object
+      required:
+        - MetricPolicy
+      properties:
+        MetricPolicy:
+          $ref: '#/components/schemas/MetricPolicy'
+          description: The metric policy that is associated with the specific container.
+    GetMetricPolicyInput:
+      type: object
+      required:
+        - ContainerName
+      title: GetMetricPolicyInput
+      properties:
+        ContainerName:
+          $ref: '#/components/schemas/ContainerName'
+          description: The name of the container that is associated with the metric policy.
     ListContainersOutput:
       type: object
       required:
@@ -1328,6 +1522,22 @@ components:
         LifecyclePolicy:
           $ref: '#/components/schemas/LifecyclePolicy'
           description: The object lifecycle policy to apply to the container.
+    PutMetricPolicyOutput:
+      type: object
+      properties: {}
+    PutMetricPolicyInput:
+      type: object
+      required:
+        - ContainerName
+        - MetricPolicy
+      title: PutMetricPolicyInput
+      properties:
+        ContainerName:
+          $ref: '#/components/schemas/ContainerName'
+          description: The name of the container that you want to add the metric policy to.
+        MetricPolicy:
+          $ref: '#/components/schemas/MetricPolicy'
+          description: '<p>The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for. If you include rules in the policy, construct each rule with both of the following:</p> <ul> <li> <p>An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can''t have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.</p> </li> <li> <p>An object group name that allows you to refer to the object group. The name can''t have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).</p> </li> </ul>'
     StartAccessLoggingOutput:
       type: object
       properties: {}
@@ -1469,6 +1679,11 @@ components:
           $ref: '#/components/schemas/ContainerAccessLoggingEnabled'
           description: 'The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.'
       description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
+    ContainerLevelMetrics:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     ContainerList:
       type: array
       items:
@@ -1525,22 +1740,67 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 200
     LifecyclePolicy:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
       minLength: 0
       maxLength: 8192
+    MetricPolicy:
+      type: object
+      required:
+        - ContainerLevelMetrics
+      properties:
+        ContainerLevelMetrics:
+          $ref: '#/components/schemas/ContainerLevelMetrics'
+          description: A setting to enable or disable metrics at the container level.
+        MetricPolicyRules:
+          $ref: '#/components/schemas/MetricPolicyRules'
+          description: 'A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.'
+      description: '<p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p> <p>To view examples of how to construct a metric policy for your use case, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html">Example Metric Policies</a>.</p>'
     PaginationToken:
       type: string
       pattern: '[0-9A-Za-z=/+]+'
       minLength: 1
       maxLength: 1024
+    MetricPolicyRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricPolicyRule'
+      minItems: 1
+      maxItems: 300
+    ObjectGroup:
+      type: string
+      pattern: '/?(?:[A-Za-z0-9_=:\.\-\~\*]+/){0,10}(?:[A-Za-z0-9_=:\.\-\~\*]+)?/?'
+      minLength: 1
+      maxLength: 900
+    ObjectGroupName:
+      type: string
+      pattern: '[a-zA-Z0-9_]+'
+      minLength: 1
+      maxLength: 30
+    MetricPolicyRule:
+      type: object
+      required:
+        - ObjectGroup
+        - ObjectGroupName
+      properties:
+        ObjectGroup:
+          $ref: '#/components/schemas/ObjectGroup'
+          description: A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.
+        ObjectGroupName:
+          $ref: '#/components/schemas/ObjectGroupName'
+          description: A name that allows you to refer to the object group.
+      description: 'A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.'
     TagKey:
       type: string
+      pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
       minLength: 1
       maxLength: 128
     TagValue:
       type: string
+      pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
       minLength: 0
       maxLength: 256
     Tag:

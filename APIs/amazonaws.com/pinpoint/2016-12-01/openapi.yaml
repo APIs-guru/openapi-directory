@@ -12397,6 +12397,9 @@ components:
         Keyword:
           $ref: '#/components/schemas/__string'
           description: The SMS program name that you provided to AWS Support when you requested your dedicated number.
+        MediaUrl:
+          $ref: '#/components/schemas/__string'
+          description: The URL of an image or video to display in the SMS message.
         MessageType:
           $ref: '#/components/schemas/MessageType'
           description: 'The SMS message type. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message is not critical or time-sensitive, such as a marketing message.'

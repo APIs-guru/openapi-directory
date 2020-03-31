@@ -3,7 +3,7 @@ info:
   version: '2019-07-29'
   x-release: v4
   title: AWS WAFV2
-  description: '<note> <p>This is the latest version of the <b>AWS WAF</b> API, released in November, 2019. The names of the entities that you use to access this API, like endpoints and namespaces, all have the versioning information added, like "V2" or "v2", to distinguish from the prior version. We recommend migrating your resources to this version, because it has a number of significant improvements.</p> <p>If you used AWS WAF prior to this release, you can''t use this AWS WAFV2 API to access any AWS WAF resources that you created before. You can access your old rules, web ACLs, and other AWS WAF resources only through the AWS WAF Classic APIs. The AWS WAF Classic APIs have retained the prior names, endpoints, and namespaces. </p> <p>For information, including how to migrate your AWS WAF resources to this version, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to Amazon CloudFront, an Amazon API Gateway API, or an Application Load Balancer. AWS WAF also lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, API Gateway, CloudFront, or the Application Load Balancer responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You also can configure CloudFront to return a custom error page when a request is blocked.</p> <p>This API guide is for developers who need detailed information about AWS WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to use AWS WAF, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF Developer Guide</a>.</p> <p>You can make API calls using the endpoints listed in <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#waf_region">AWS Service Endpoints for AWS WAF</a>. </p> <ul> <li> <p>For regional applications, you can use any of the endpoints in the list. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> </li> <li> <p>For AWS CloudFront applications, you must use the API endpoint listed for US East (N. Virginia): us-east-1.</p> </li> </ul> <p>Alternatively, you can use one of the AWS SDKs to access an API that''s tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p> <p>We currently provide two versions of the AWS WAF API: this API and the prior versions, the classic AWS WAF APIs. This new API provides the same functionality as the older versions, with the following major improvements:</p> <ul> <li> <p>You use one API for both global and regional applications. Where you need to distinguish the scope, you specify a <code>Scope</code> parameter and set it to <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p> </li> <li> <p>You can define a Web ACL or rule group with a single API call, and update it with a single call. You define all rule specifications in JSON format, and pass them to your rule group or Web ACL API calls.</p> </li> <li> <p>The limits AWS WAF places on the use of rules more closely reflects the cost of running each type of rule. Rule groups include capacity settings, so you know the maximum cost of a rule group when you use it.</p> </li> </ul>'
+  description: '<note> <p>This is the latest version of the <b>AWS WAF</b> API, released in November, 2019. The names of the entities that you use to access this API, like endpoints and namespaces, all have the versioning information added, like "V2" or "v2", to distinguish from the prior version. We recommend migrating your resources to this version, because it has a number of significant improvements.</p> <p>If you used AWS WAF prior to this release, you can''t use this AWS WAFV2 API to access any AWS WAF resources that you created before. You can access your old rules, web ACLs, and other AWS WAF resources only through the AWS WAF Classic APIs. The AWS WAF Classic APIs have retained the prior names, endpoints, and namespaces. </p> <p>For information, including how to migrate your AWS WAF resources to this version, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to Amazon CloudFront, an Amazon API Gateway API, or an Application Load Balancer. AWS WAF also lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, API Gateway, CloudFront, or the Application Load Balancer responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You also can configure CloudFront to return a custom error page when a request is blocked.</p> <p>This API guide is for developers who need detailed information about AWS WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to use AWS WAF, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF Developer Guide</a>.</p> <p>You can make calls using the endpoints listed in <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#waf_region">AWS Service Endpoints for AWS WAF</a>. </p> <ul> <li> <p>For regional applications, you can use any of the endpoints in the list. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> </li> <li> <p>For AWS CloudFront applications, you must use the API endpoint listed for US East (N. Virginia): us-east-1.</p> </li> </ul> <p>Alternatively, you can use one of the AWS SDKs to access an API that''s tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p> <p>We currently provide two versions of the AWS WAF API: this API and the prior versions, the classic AWS WAF APIs. This new API provides the same functionality as the older versions, with the following major improvements:</p> <ul> <li> <p>You use one API for both global and regional applications. Where you need to distinguish the scope, you specify a <code>Scope</code> parameter and set it to <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p> </li> <li> <p>You can define a Web ACL or rule group with a single call, and update it with a single call. You define all rule specifications in JSON format, and pass them to your rule group or Web ACL calls.</p> </li> <li> <p>The limits AWS WAF places on the use of rules more closely reflects the cost of running each type of rule. Rule groups include capacity settings, so you know the maximum cost of a rule group when you use it.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -109,7 +109,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.AssociateWebACL':
     post:
       operationId: AssociateWebACL
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can associate the Web ACL by providing the <code>ARN</code> of the <a>WebACL</a> to the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Associates a Web ACL with a regional application resource, to protect the resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, don''t use this call. Instead, use your CloudFront distribution configuration. To associate a Web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID to the Amazon Resource Name (ARN) of the Web ACL. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
       responses:
         '200':
           description: Success
@@ -141,6 +141,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFUnavailableEntityException'
+        '484':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -291,6 +297,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -366,6 +378,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -453,6 +471,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFSubscriptionNotFoundException'
+        '489':
+          description: WAFNonexistentItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFNonexistentItemException'
+        '490':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -552,6 +582,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFSubscriptionNotFoundException'
+        '491':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -566,6 +602,69 @@ paths:
             type: string
             enum:
               - AWSWAF_20190729.CreateWebACL
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20190729.DeleteFirewallManagerRuleGroups':
+    post:
+      operationId: DeleteFirewallManagerRuleGroups
+      description: <p>Deletes all rule groups that are managed by AWS Firewall Manager for the specified web ACL. </p> <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the specified <a>WebACL</a>. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFirewallManagerRuleGroupsResponse'
+        '480':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '481':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFNonexistentItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFOptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFOptimisticLockException'
+        '484':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFirewallManagerRuleGroupsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.DeleteFirewallManagerRuleGroups
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -627,6 +726,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -678,6 +783,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFOptimisticLockException'
+        '483':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '484':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -692,6 +809,57 @@ paths:
             type: string
             enum:
               - AWSWAF_20190729.DeleteLoggingConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20190729.DeletePermissionPolicy':
+    post:
+      operationId: DeletePermissionPolicy
+      description: <p>Permanently deletes an IAM policy from the specified rule group.</p> <p>You must be the owner of the rule group to perform this operation.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePermissionPolicyResponse'
+        '480':
+          description: WAFNonexistentItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFNonexistentItemException'
+        '481':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '482':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePermissionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.DeletePermissionPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -753,6 +921,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -828,6 +1002,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -853,7 +1033,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.DeleteWebACL':
     post:
       operationId: DeleteWebACL
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Deletes the specified <a>WebACL</a>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Deletes the specified <a>WebACL</a>.</p> <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the specified <a>WebACL</a>. </p>'
       responses:
         '200':
           description: Success
@@ -903,6 +1083,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '487':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -960,6 +1146,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '484':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -985,7 +1177,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.DisassociateWebACL':
     post:
       operationId: DisassociateWebACL
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, you can disassociate the Web ACL by providing an empty web ACL ARN in the CloudFront API call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Disassociates a Web ACL from a regional application resource. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>For AWS CloudFront, don''t use this call. Instead, use your CloudFront distribution configuration. To disassociate a Web ACL, provide an empty web ACL ID in the CloudFront call <code>UpdateDistribution</code>. For information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1011,6 +1203,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1062,6 +1260,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1107,6 +1311,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '482':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1121,6 +1337,57 @@ paths:
             type: string
             enum:
               - AWSWAF_20190729.GetLoggingConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20190729.GetPermissionPolicy':
+    post:
+      operationId: GetPermissionPolicy
+      description: <p>Returns the IAM policy that is attached to the specified rule group.</p> <p>You must be the owner of the rule group to perform this operation.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPermissionPolicyResponse'
+        '480':
+          description: WAFNonexistentItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFNonexistentItemException'
+        '481':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '482':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPermissionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.GetPermissionPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1158,6 +1425,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1209,6 +1482,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1260,6 +1539,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1362,6 +1647,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFNonexistentItemException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1419,6 +1710,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFUnavailableEntityException'
+        '484':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1464,6 +1761,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1509,6 +1812,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1554,6 +1863,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1599,6 +1914,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1650,6 +1971,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '483':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1695,6 +2022,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1758,6 +2091,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '485':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1803,6 +2142,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '482':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1828,7 +2173,7 @@ paths:
   '/#X-Amz-Target=AWSWAF_20190729.PutLoggingConfiguration':
     post:
       operationId: PutLoggingConfiguration
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a web ACL, according to the configuration provided.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose. </p> <p>Create the data firehose with a PUT source and in the region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p> <note> <p>Do not create the data firehose using a <code>Kinesis stream</code> as your source.</p> </note> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a web ACL, according to the configuration provided.</p> <p>You can access information about all traffic that AWS WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose. </p> <p>Create the data firehose with a PUT source and in the Region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p> <note> <p>Do not create the data firehose using a <code>Kinesis stream</code> as your source.</p> </note> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1866,6 +2211,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFInvalidParameterException'
+        '485':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1880,6 +2231,63 @@ paths:
             type: string
             enum:
               - AWSWAF_20190729.PutLoggingConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSWAF_20190729.PutPermissionPolicy':
+    post:
+      operationId: PutPermissionPolicy
+      description: '<p>Attaches an IAM policy to the specified resource. Use this to share a rule group across accounts.</p> <p>You must be the owner of the rule group to perform this operation.</p> <p>This action is subject to the following restrictions:</p> <ul> <li> <p>You can attach only one policy with each <code>PutPermissionPolicy</code> request.</p> </li> <li> <p>The ARN in the request must be a valid WAF <a>RuleGroup</a> ARN and the rule group must exist in the same region.</p> </li> <li> <p>The user making the request must be the owner of the rule group.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPermissionPolicyResponse'
+        '480':
+          description: WAFNonexistentItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFNonexistentItemException'
+        '481':
+          description: WAFInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInternalErrorException'
+        '482':
+          description: WAFInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidParameterException'
+        '483':
+          description: WAFInvalidPermissionPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidPermissionPolicyException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPermissionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSWAF_20190729.PutPermissionPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1935,6 +2343,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '486':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -1998,6 +2412,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFTagOperationInternalErrorException'
+        '485':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -2067,6 +2487,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFLimitsExceededException'
+        '486':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -2136,6 +2562,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFLimitsExceededException'
+        '486':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -2217,6 +2649,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFSubscriptionNotFoundException'
+        '488':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -2304,6 +2742,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WAFSubscriptionNotFoundException'
+        '489':
+          description: WAFInvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WAFInvalidOperationException'
       requestBody:
         required: true
         content:
@@ -2398,6 +2842,7 @@ components:
     WAFInvalidParameterException: {}
     WAFNonexistentItemException: {}
     WAFUnavailableEntityException: {}
+    WAFInvalidOperationException: {}
     CheckCapacityResponse:
       type: object
       properties:
@@ -2413,7 +2858,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'An array of <a>Rule</a> that you''re configuring to use in a rule group or web ACL. '
@@ -2437,13 +2882,13 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+          description: A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
         IPAddressVersion:
           $ref: '#/components/schemas/IPAddressVersion'
           description: 'Specify IPV4 or IPV6. '
@@ -2473,13 +2918,13 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the set. You cannot change the name after you create the set.
+          description: The name of the set. You cannot change the name after you create the set.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the set. You cannot change the description of a set after you create it.
+          description: A description of the set that helps with identification. You cannot change the description of a set after you create it.
         RegularExpressionList:
           $ref: '#/components/schemas/RegularExpressionList'
           description: 'Array of regular expression strings. '
@@ -2503,16 +2948,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Capacity:
           $ref: '#/components/schemas/CapacityUnit'
           description: '<p>The web ACL capacity units (WCUs) required for this rule group.</p> <p>When you create your own rule group, you define this, and you cannot change it after creation. When you add or modify the rules in a rule group, AWS WAF enforces this limit. You can check the capacity for a set of rules using <a>CheckCapacity</a>.</p> <p>AWS WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. AWS WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. </p>'
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+          description: A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -2539,16 +2984,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         DefaultAction:
           $ref: '#/components/schemas/DefaultAction'
           description: 'The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. '
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+          description: A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -2558,6 +3003,25 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: 'An array of key:value pairs to associate with the resource.'
+    DeleteFirewallManagerRuleGroupsResponse:
+      type: object
+      properties:
+        NextWebACLLockToken:
+          $ref: '#/components/schemas/LockToken'
+          description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
+    DeleteFirewallManagerRuleGroupsRequest:
+      type: object
+      required:
+        - WebACLArn
+        - WebACLLockToken
+      title: DeleteFirewallManagerRuleGroupsRequest
+      properties:
+        WebACLArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the web ACL.
+        WebACLLockToken:
+          $ref: '#/components/schemas/LockToken'
+          description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
     DeleteIPSetResponse:
       type: object
       properties: {}
@@ -2572,10 +3036,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2595,6 +3059,18 @@ components:
         ResourceArn:
           $ref: '#/components/schemas/ResourceArn'
           description: The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.
+    DeletePermissionPolicyResponse:
+      type: object
+      properties: {}
+    DeletePermissionPolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DeletePermissionPolicyRequest
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: <p>The Amazon Resource Name (ARN) of the rule group from which you want to delete the policy.</p> <p>You must be the owner of the rule group to perform this operation.</p>
     DeleteRegexPatternSetResponse:
       type: object
       properties: {}
@@ -2609,10 +3085,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the set. You cannot change the name after you create the set.
+          description: The name of the set. You cannot change the name after you create the set.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2633,10 +3109,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2657,10 +3133,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: The unique identifier for the Web ACL. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2692,7 +3168,7 @@ components:
           description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
     DisassociateWebACLResponse:
       type: object
       properties: {}
@@ -2724,10 +3200,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2746,6 +3222,21 @@ components:
         ResourceArn:
           $ref: '#/components/schemas/ResourceArn'
           description: The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.
+    GetPermissionPolicyResponse:
+      type: object
+      properties:
+        Policy:
+          $ref: '#/components/schemas/PolicyString'
+          description: The IAM policy that is attached to the specified rule group.
+    GetPermissionPolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: GetPermissionPolicyRequest
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the rule group for which you want to get the policy.
     GetRateBasedStatementManagedKeysResponse:
       type: object
       properties:
@@ -2766,10 +3257,10 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         WebACLName:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         WebACLId:
           $ref: '#/components/schemas/EntityId'
           description: The unique identifier for the Web ACL. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2795,10 +3286,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the set. You cannot change the name after you create the set.
+          description: The name of the set. You cannot change the name after you create the set.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2821,10 +3312,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2858,7 +3349,7 @@ components:
           description: The metric name assigned to the <code>Rule</code> or <code>RuleGroup</code> for which you want a sample of requests.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         TimeWindow:
           $ref: '#/components/schemas/TimeWindow'
           description: 'The start date and time and the end date and time of the range for which you want <code>GetSampledRequests</code> to return a sample of requests. Specify the date and time in the following format: <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.'
@@ -2884,10 +3375,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: The unique identifier for the Web ACL. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2923,7 +3414,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -2947,7 +3438,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -2969,7 +3460,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -2993,7 +3484,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -3035,7 +3526,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -3083,7 +3574,7 @@ components:
       properties:
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         NextMarker:
           $ref: '#/components/schemas/NextMarker'
           description: 'When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, AWS WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
@@ -3106,6 +3597,23 @@ components:
           $ref: '#/components/schemas/LoggingConfiguration'
           description: <p/>
     WAFServiceLinkedRoleErrorException: {}
+    PutPermissionPolicyResponse:
+      type: object
+      properties: {}
+    PutPermissionPolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Policy
+      title: PutPermissionPolicyRequest
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the <a>RuleGroup</a> to which you want to attach the policy.
+        Policy:
+          $ref: '#/components/schemas/PolicyString'
+          description: '<p>The policy to attach to the specified rule group. </p> <p>The policy specifications must conform to the following:</p> <ul> <li> <p>The policy must be composed using IAM Policy version 2012-10-17 or version 2015-01-01.</p> </li> <li> <p>The policy must include specifications for <code>Effect</code>, <code>Action</code>, and <code>Principal</code>.</p> </li> <li> <p> <code>Effect</code> must specify <code>Allow</code>.</p> </li> <li> <p> <code>Action</code> must specify <code>wafv2:CreateWebACL</code>, <code>wafv2:UpdateWebACL</code>, and <code>wafv2:PutFirewallManagerRuleGroups</code>. AWS WAF rejects any extra actions or wildcard actions in the policy.</p> </li> <li> <p>The policy must not include a <code>Resource</code> parameter.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html">IAM Policies</a>. </p>'
+    WAFInvalidPermissionPolicyException: {}
     TagResourceResponse:
       type: object
       properties: {}
@@ -3156,16 +3664,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+          description: A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
         Addresses:
           $ref: '#/components/schemas/IPAddresses'
           description: '<p>Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6. </p> <p>Examples: </p> <ul> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p> </li> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify <code>192.0.2.0/24</code>.</p> </li> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p> </li> <li> <p>To configure AWS WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p> </li> </ul> <p>For more information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>.</p>'
@@ -3190,16 +3698,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the set. You cannot change the name after you create the set.
+          description: The name of the set. You cannot change the name after you create the set.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the set. You cannot change the description of a set after you create it.
+          description: A description of the set that helps with identification. You cannot change the description of a set after you create it.
         RegularExpressionList:
           $ref: '#/components/schemas/RegularExpressionList'
           description: <p/>
@@ -3224,16 +3732,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+          description: A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -3262,10 +3770,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Scope:
           $ref: '#/components/schemas/Scope'
-          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
+          description: '<p>Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB) or an API Gateway stage. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>'
         Id:
           $ref: '#/components/schemas/EntityId'
           description: The unique identifier for the Web ACL. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -3274,7 +3782,7 @@ components:
           description: 'The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. '
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+          description: A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -3348,7 +3856,7 @@ components:
         Method:
           $ref: '#/components/schemas/Method'
           description: 'Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. '
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The part of a web request that you want AWS WAF to inspect. Include the <code>FieldToMatch</code> types that you want to inspect, with additional specifications as needed, according to the type. </p>'
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The part of a web request that you want AWS WAF to inspect. Include the single <code>FieldToMatch</code> type that you want to inspect, with additional specifications as needed, according to the type. You specify a single request component in <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than one component of a web request, create a separate rule statement for each component.</p>'
     TextTransformations:
       type: array
       items:
@@ -3372,13 +3880,13 @@ components:
       properties:
         SearchString:
           $ref: '#/components/schemas/SearchString'
-          description: '<p>A string value that you want AWS WAF to search for. AWS WAF searches only in the part of web requests that you designate for inspection in <a>FieldToMatch</a>. The maximum length of the value is 50 bytes.</p> <p>Valid values depend on the areas that you specify for inspection in <code>FieldToMatch</code>:</p> <ul> <li> <p> <code>Method</code>: The HTTP method that you want AWS WAF to search for. This indicates the type of operation specified in the request. </p> </li> <li> <p> <code>UriPath</code>: The value that you want AWS WAF to search for in the URI path, for example, <code>/images/daily-ad.jpg</code>. </p> </li> </ul> <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the value is case sensitive.</p> <p> <b>If you''re using the AWS WAF API</b> </p> <p>Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes.</p> <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value of <code>Data</code> is <code>User-Agent</code>. If you want to search the <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode <code>BadBot</code> using MIME base64-encoding and include the resulting value, <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p> <p> <b>If you''re using the AWS CLI or one of the AWS SDKs</b> </p> <p>The value that you want AWS WAF to search for. The SDK automatically base64 encodes the value.</p>'
+          description: '<p>A string value that you want AWS WAF to search for. AWS WAF searches only in the part of web requests that you designate for inspection in <a>FieldToMatch</a>. The maximum length of the value is 50 bytes.</p> <p>Valid values depend on the component that you specify for inspection in <code>FieldToMatch</code>:</p> <ul> <li> <p> <code>Method</code>: The HTTP method that you want AWS WAF to search for. This indicates the type of operation specified in the request. </p> </li> <li> <p> <code>UriPath</code>: The value that you want AWS WAF to search for in the URI path, for example, <code>/images/daily-ad.jpg</code>. </p> </li> </ul> <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the value is case sensitive.</p> <p> <b>If you''re using the AWS WAF API</b> </p> <p>Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 50 bytes.</p> <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value of <code>Data</code> is <code>User-Agent</code>. If you want to search the <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode <code>BadBot</code> using MIME base64-encoding and include the resulting value, <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p> <p> <b>If you''re using the AWS CLI or one of the AWS SDKs</b> </p> <p>The value that you want AWS WAF to search for. The SDK automatically base64 encodes the value.</p>'
         FieldToMatch:
           $ref: '#/components/schemas/FieldToMatch'
           description: 'The part of a web request that you want AWS WAF to inspect. For more information, see <a>FieldToMatch</a>. '
         TextTransformations:
           $ref: '#/components/schemas/TextTransformations'
-          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
+          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
         PositionalConstraint:
           $ref: '#/components/schemas/PositionalConstraint'
           description: '<p>The area within the portion of a web request that you want AWS WAF to search for <code>SearchString</code>. Valid values include the following:</p> <p> <b>CONTAINS</b> </p> <p>The specified part of the web request must include the value of <code>SearchString</code>, but the location doesn''t matter.</p> <p> <b>CONTAINS_WORD</b> </p> <p>The specified part of the web request must include the value of <code>SearchString</code>, and <code>SearchString</code> must contain only alphanumeric characters or underscore (A-Z, a-z, 0-9, or _). In addition, <code>SearchString</code> must be a word, which means that both of the following are true:</p> <ul> <li> <p> <code>SearchString</code> is at the beginning of the specified part of the web request or is preceded by a character other than an alphanumeric character or underscore (_). Examples include the value of a header and <code>;BadBot</code>.</p> </li> <li> <p> <code>SearchString</code> is at the end of the specified part of the web request or is followed by a character other than an alphanumeric character or underscore (_), for example, <code>BadBot;</code> and <code>-BadBot;</code>.</p> </li> </ul> <p> <b>EXACTLY</b> </p> <p>The value of the specified part of the web request must exactly match the value of <code>SearchString</code>.</p> <p> <b>STARTS_WITH</b> </p> <p>The value of <code>SearchString</code> must appear at the beginning of the specified part of the web request.</p> <p> <b>ENDS_WITH</b> </p> <p>The value of <code>SearchString</code> must appear at the end of the specified part of the web request.</p>'
@@ -3699,13 +4207,13 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+          description: A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
         LockToken:
           $ref: '#/components/schemas/LockToken'
           description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
@@ -3717,19 +4225,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Regex'
-      minItems: 1
     RegexPatternSetSummary:
       type: object
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the data type instance. You cannot change the name after you create the instance.
+          description: The name of the data type instance. You cannot change the name after you create the instance.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the set. You cannot change the description of a set after you create it.
+          description: A description of the set that helps with identification. You cannot change the description of a set after you create it.
         LockToken:
           $ref: '#/components/schemas/LockToken'
           description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
@@ -3752,20 +4259,20 @@ components:
           description: 'A boolean indicating whether the associated resource sends metrics to CloudWatch. For the list of available metrics, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics">AWS WAF Metrics</a>.'
         MetricName:
           $ref: '#/components/schemas/MetricName'
-          description: 'A friendly name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with length from one to 128 characters. It can''t contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." You can''t change a <code>MetricName</code> after you create a <code>VisibilityConfig</code>.'
+          description: 'A name of the CloudWatch metric. The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with length from one to 128 characters. It can''t contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." You can''t change a <code>MetricName</code> after you create a <code>VisibilityConfig</code>.'
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Defines and enables Amazon CloudWatch metrics and web request sample collection. </p>'
     RuleGroupSummary:
       type: object
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the data type instance. You cannot change the name after you create the instance.
+          description: The name of the data type instance. You cannot change the name after you create the instance.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+          description: A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
         LockToken:
           $ref: '#/components/schemas/LockToken'
           description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
@@ -3788,13 +4295,13 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: The unique identifier for the Web ACL. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+          description: A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
         LockToken:
           $ref: '#/components/schemas/LockToken'
           description: 'A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. '
@@ -3802,12 +4309,12 @@ components:
           $ref: '#/components/schemas/ResourceArn'
           description: The Amazon Resource Name (ARN) of the entity.
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>High-level information about a <a>WebACL</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>WebACL</code>, and the ARN, that you provide to operations like <a>AssociateWebACL</a>.</p>'
-    EntityId:
+    LockToken:
       type: string
       pattern: '^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$'
       minLength: 1
       maxLength: 36
-    LockToken:
+    EntityId:
       type: string
       pattern: '^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$'
       minLength: 1
@@ -3869,6 +4376,82 @@ components:
       pattern: .*\S.*
       minLength: 1
       maxLength: 64
+    RulePriority:
+      type: integer
+      minimum: 0
+    FirewallManagerStatement:
+      type: object
+      properties:
+        ManagedRuleGroupStatement:
+          $ref: '#/components/schemas/ManagedRuleGroupStatement'
+        RuleGroupReferenceStatement:
+          $ref: '#/components/schemas/RuleGroupReferenceStatement'
+      description: 'The processing guidance for an AWS Firewall Manager rule. This is like a regular rule <a>Statement</a>, but it can only contain a rule group reference.'
+    OverrideAction:
+      type: object
+      properties:
+        Count:
+          $ref: '#/components/schemas/CountAction'
+          description: Override the rule action setting to count.
+        None:
+          $ref: '#/components/schemas/NoneAction'
+          description: Don't override the rule action setting.
+      description: '<p>The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like <code>RuleGroupReferenceStatement</code> and <code>ManagedRuleGroupStatement</code>. </p> <p>Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings. </p> <p>In a <a>Rule</a>, you must specify either this <code>OverrideAction</code> setting or the rule <code>Action</code> setting, but not both:</p> <ul> <li> <p>If the rule statement references a rule group, use this override action setting and not the action setting. </p> </li> <li> <p>If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting. </p> </li> </ul>'
+    FirewallManagerRuleGroup:
+      type: object
+      required:
+        - Name
+        - Priority
+        - FirewallManagerStatement
+        - OverrideAction
+        - VisibilityConfig
+      properties:
+        Name:
+          $ref: '#/components/schemas/EntityName'
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
+        Priority:
+          $ref: '#/components/schemas/RulePriority'
+          description: 'If you define more than one rule group in the first or last Firewall Manager rule groups, AWS WAF evaluates each request against the rule groups in order, starting from the lowest priority setting. The priorities don''t need to be consecutive, but they must all be different.'
+        FirewallManagerStatement:
+          $ref: '#/components/schemas/FirewallManagerStatement'
+          description: 'The processing guidance for an AWS Firewall Manager rule. This is like a regular rule <a>Statement</a>, but it can only contain a rule group reference.'
+        OverrideAction:
+          $ref: '#/components/schemas/OverrideAction'
+        VisibilityConfig:
+          $ref: '#/components/schemas/VisibilityConfig'
+      description: A rule group that's defined for an AWS Firewall Manager WAF policy.
+    FirewallManagerRuleGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallManagerRuleGroup'
+    ManagedRuleGroupStatement:
+      type: object
+      required:
+        - VendorName
+        - Name
+      properties:
+        VendorName:
+          $ref: '#/components/schemas/VendorName'
+          description: 'The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+          description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
+        ExcludedRules:
+          $ref: '#/components/schemas/ExcludedRules'
+          description: 'The rules whose actions are set to <code>COUNT</code> by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. '
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p> <p>You can''t nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
+    RuleGroupReferenceStatement:
+      type: object
+      required:
+        - ARN
+      properties:
+        ARN:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) of the entity.
+        ExcludedRules:
+          $ref: '#/components/schemas/ExcludedRules'
+          description: 'The names of rules that are in the referenced rule group, but that you want AWS WAF to exclude from processing for this rule statement. '
+      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p> <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
     GeoMatchStatement:
       type: object
       properties:
@@ -3887,7 +4470,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
+          description: The name of the IP set. You cannot change the name of an <code>IPSet</code> after you create it.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -3896,7 +4479,7 @@ components:
           description: The Amazon Resource Name (ARN) of the entity.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the IP set. You cannot change the description of an IP set after you create it.
+          description: A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.
         IPAddressVersion:
           $ref: '#/components/schemas/IPAddressVersion'
           description: 'Specify IPV4 or IPV6. '
@@ -3920,6 +4503,9 @@ components:
           $ref: '#/components/schemas/RedactedFields'
           description: 'The parts of the request that you want to keep out of the logs. For example, if you redact the cookie field, the cookie field in the firehose will be <code>xxx</code>. '
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for logging from AWS WAF. As part of the association, you can specify parts of the standard logging fields to keep out of the logs. </p>'
+    PolicyString:
+      type: string
+      minLength: 1
     RateBasedStatementManagedKeysIPSet:
       type: object
       properties:
@@ -3934,7 +4520,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the set. You cannot change the name after you create the set.
+          description: The name of the set. You cannot change the name after you create the set.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -3943,7 +4529,7 @@ components:
           description: The Amazon Resource Name (ARN) of the entity.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the set. You cannot change the description of a set after you create it.
+          description: A description of the set that helps with identification. You cannot change the description of a set after you create it.
         RegularExpressionList:
           $ref: '#/components/schemas/RegularExpressionList'
           description: The regular expression patterns in the set.
@@ -3959,7 +4545,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the rule group. You cannot change the name of a rule group after you create it.
+          description: The name of the rule group. You cannot change the name of a rule group after you create it.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -3971,7 +4557,7 @@ components:
           description: The Amazon Resource Name (ARN) of the entity.
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the rule group. You cannot change the description of a rule group after you create it.
+          description: A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -4018,7 +4604,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: A friendly name of the Web ACL. You cannot change the name of a Web ACL after you create it.
+          description: The name of the Web ACL. You cannot change the name of a Web ACL after you create it.
         Id:
           $ref: '#/components/schemas/EntityId'
           description: 'A unique identifier for the <code>WebACL</code>. This ID is returned in the responses to create and list commands. You use this ID to do things like get, update, and delete a <code>WebACL</code>.'
@@ -4030,7 +4616,7 @@ components:
           description: 'The action to perform if none of the <code>Rules</code> contained in the <code>WebACL</code> match. '
         Description:
           $ref: '#/components/schemas/EntityDescription'
-          description: A friendly description of the Web ACL. You cannot change the description of a Web ACL after you create it.
+          description: A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.
         Rules:
           $ref: '#/components/schemas/Rules'
           description: 'The <a>Rule</a> statements used to identify the web requests that you want to allow, block, or count. Each rule includes one top-level statement that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. '
@@ -4040,6 +4626,15 @@ components:
         Capacity:
           $ref: '#/components/schemas/ConsumedCapacity'
           description: '<p>The web ACL capacity units (WCUs) currently being used by this web ACL. </p> <p>AWS WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. AWS WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. </p>'
+        PreProcessFirewallManagerRuleGroups:
+          $ref: '#/components/schemas/FirewallManagerRuleGroups'
+          description: '<p>The first set of rules for AWS WAF to process in the web ACL. This is defined in an AWS Firewall Manager WAF policy and contains only rule group references. You can''t alter these. Any rules and rule groups that you define for the web ACL are prioritized after these. </p> <p>In the Firewall Manager WAF policy, the Firewall Manager administrator can define a set of rule groups to run first in the web ACL and a set of rule groups to run last. Within each set, the administrator prioritizes the rule groups, to determine their relative processing order.</p>'
+        PostProcessFirewallManagerRuleGroups:
+          $ref: '#/components/schemas/FirewallManagerRuleGroups'
+          description: '<p>The last set of rules for AWS WAF to process in the web ACL. This is defined in an AWS Firewall Manager WAF policy and contains only rule group references. You can''t alter these. Any rules and rule groups that you define for the web ACL are prioritized before these. </p> <p>In the Firewall Manager WAF policy, the Firewall Manager administrator can define a set of rule groups to run first in the web ACL and a set of rule groups to run last. Within each set, the administrator prioritizes the rule groups, to determine their relative processing order.</p>'
+        ManagedByFirewallManager:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. '
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p> A Web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the Web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a Web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a Web ACL with one or more AWS resources to protect. The resources can be Amazon CloudFront, an Amazon API Gateway API, or an Application Load Balancer. </p>'
     HeaderName:
       type: string
@@ -4166,22 +4761,6 @@ components:
       items:
         $ref: '#/components/schemas/FieldToMatch'
       maxItems: 100
-    ManagedRuleGroupStatement:
-      type: object
-      required:
-        - VendorName
-        - Name
-      properties:
-        VendorName:
-          $ref: '#/components/schemas/VendorName'
-          description: 'The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.'
-        Name:
-          $ref: '#/components/schemas/EntityName'
-          description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
-        ExcludedRules:
-          $ref: '#/components/schemas/ExcludedRules'
-          description: 'The rules whose actions are set to <code>COUNT</code> by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. '
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p> <p>You can''t nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
     ManagedRuleGroupSummary:
       type: object
       properties:
@@ -4260,16 +4839,6 @@ components:
           $ref: '#/components/schemas/Statements'
           description: The statements to combine with OR logic. You can use any statements that can be nested.
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A logical rule statement used to combine other rule statements with OR logic. You provide more than one <a>Statement</a> within the <code>OrStatement</code>. </p>'
-    OverrideAction:
-      type: object
-      properties:
-        Count:
-          $ref: '#/components/schemas/CountAction'
-          description: Override the rule action setting to count.
-        None:
-          $ref: '#/components/schemas/NoneAction'
-          description: Don't override the rule action setting.
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>The action to use to override the rule''s <code>Action</code> setting. You can use no override action, in which case the rule action is in effect, or count, in which case, if the rule matches a web request, it only counts the match.</p>'
     RateLimit:
       type: integer
       minimum: 100
@@ -4321,11 +4890,8 @@ components:
           description: 'The part of a web request that you want AWS WAF to inspect. For more information, see <a>FieldToMatch</a>. '
         TextTransformations:
           $ref: '#/components/schemas/TextTransformations'
-          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
+          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement used to search web request components for matches with regular expressions. To use this, create a <a>RegexPatternSet</a> that specifies the expressions that you want to detect, then use the ARN of that set in this statement. A web request matches the pattern set rule statement if the request component matches any of the patterns in the set. To create a regex pattern set, see <a>CreateRegexPatternSet</a>.</p> <p>Each regex pattern set rule statement references a regex pattern set. You create and maintain the set independent of your rules. This allows you to use the single set in multiple rules. When you update the referenced set, AWS WAF automatically updates all rules that reference it.</p>'
-    RulePriority:
-      type: integer
-      minimum: 0
     RuleAction:
       type: object
       properties:
@@ -4349,7 +4915,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/EntityName'
-          description: 'A friendly name of the rule. You can''t change the name of a <code>Rule</code> after you create it. '
+          description: 'The name of the rule. You can''t change the name of a <code>Rule</code> after you create it. '
         Priority:
           $ref: '#/components/schemas/RulePriority'
           description: 'If you define more than one <code>Rule</code> in a <code>WebACL</code>, AWS WAF evaluates each request against the <code>Rules</code> in order based on the value of <code>Priority</code>. AWS WAF processes rules with lower priority first. The priorities don''t need to be consecutive, but they must all be different.'
@@ -4358,26 +4924,14 @@ components:
           description: 'The AWS WAF processing statement for the rule, for example <a>ByteMatchStatement</a> or <a>SizeConstraintStatement</a>. '
         Action:
           $ref: '#/components/schemas/RuleAction'
-          description: 'The action that AWS WAF should take on a web request when it matches the rule''s statement. Settings at the web ACL level can override the rule action setting. '
+          description: '<p>The action that AWS WAF should take on a web request when it matches the rule statement. Settings at the web ACL level can override the rule action setting. </p> <p>This is used only for rules whose statements do not reference a rule group. Rule statements that reference a rule group include <code>RuleGroupReferenceStatement</code> and <code>ManagedRuleGroupStatement</code>. </p> <p>You must specify either this <code>Action</code> setting or the rule <code>OverrideAction</code> setting, but not both:</p> <ul> <li> <p>If the rule statement does not reference a rule group, use this rule action setting and not the rule override action setting. </p> </li> <li> <p>If the rule statement references a rule group, use the override action setting and not this action setting. </p> </li> </ul>'
         OverrideAction:
           $ref: '#/components/schemas/OverrideAction'
-          description: 'The action to use to override the rule''s <code>Action</code> setting. You can use no override action, in which case the rule action is in effect, or count action, in which case, if the rule matches a web request, it only counts the match.'
+          description: '<p>The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like <code>RuleGroupReferenceStatement</code> and <code>ManagedRuleGroupStatement</code>. </p> <p>Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings. </p> <p>In a <a>Rule</a>, you must specify either this <code>OverrideAction</code> setting or the rule <code>Action</code> setting, but not both:</p> <ul> <li> <p>If the rule statement references a rule group, use this override action setting and not the action setting. </p> </li> <li> <p>If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting. </p> </li> </ul>'
         VisibilityConfig:
           $ref: '#/components/schemas/VisibilityConfig'
           description: 'Defines and enables Amazon CloudWatch metrics and web request sample collection. '
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A single rule, which you can use in a <a>WebACL</a> or <a>RuleGroup</a> to identify web requests that you want to allow, block, or count. Each rule includes one top-level <a>Statement</a> that AWS WAF uses to identify matching web requests, and parameters that govern how AWS WAF handles them. </p>'
-    RuleGroupReferenceStatement:
-      type: object
-      required:
-        - ARN
-      properties:
-        ARN:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the entity.
-        ExcludedRules:
-          $ref: '#/components/schemas/ExcludedRules'
-          description: 'The names of rules that are in the referenced rule group, but that you want AWS WAF to exclude from processing for this rule statement. '
-      description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p> <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
     RuleSummary:
       type: object
       properties:
@@ -4438,7 +4992,7 @@ components:
           description: 'The size, in byte, to compare to the request part, after any transformations.'
         TextTransformations:
           $ref: '#/components/schemas/TextTransformations'
-          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
+          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (&gt;) or less than (&lt;). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p> <p>If you configure AWS WAF to inspect the request body, AWS WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you can create a size constraint condition and block requests that have a request body greater than 8192 bytes.</p> <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>'
     SqliMatchStatement:
       type: object
@@ -4451,7 +5005,7 @@ components:
           description: 'The part of a web request that you want AWS WAF to inspect. For more information, see <a>FieldToMatch</a>. '
         TextTransformations:
           $ref: '#/components/schemas/TextTransformations'
-          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
+          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>Attackers sometimes insert malicious SQL code into web requests in an effort to extract data from your database. To allow or block web requests that appear to contain malicious SQL code, create one or more SQL injection match conditions. An SQL injection match condition identifies the part of web requests, such as the URI or the query string, that you want AWS WAF to inspect. Later in the process, when you create a web ACL, you specify whether to allow or block requests that appear to contain malicious SQL code.</p>'
     XssMatchStatement:
       type: object
@@ -4464,7 +5018,7 @@ components:
           description: 'The part of a web request that you want AWS WAF to inspect. For more information, see <a>FieldToMatch</a>. '
         TextTransformations:
           $ref: '#/components/schemas/TextTransformations'
-          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
+          description: 'Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, AWS WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.'
       description: '<note> <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> </note> <p>A rule statement that defines a cross-site scripting (XSS) match search for AWS WAF to apply to web requests. XSS attacks are those where the attacker uses vulnerabilities in a benign website as a vehicle to inject malicious client-site scripts into other legitimate web browsers. The XSS match statement provides the location in requests that you want AWS WAF to search and text transformations to use on the search area before AWS WAF searches for character sequences that are likely to be malicious strings. </p>'
     TagKey:
       type: string

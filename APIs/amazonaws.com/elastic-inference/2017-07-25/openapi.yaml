@@ -34,7 +34,7 @@ externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/elastic-inference/'
 servers:
-  - url: 'http://api.elastic-inference.{region}.amazonaws.com'
+  - url: 'http://elastic-inference.{region}.amazonaws.com'
     variables:
       region:
         description: The AWS region
@@ -60,7 +60,7 @@ servers:
           - sa-east-1
         default: us-east-1
     description: The Amazon Elastic Inference multi-region endpoint
-  - url: 'https://api.elastic-inference.{region}.amazonaws.com'
+  - url: 'https://elastic-inference.{region}.amazonaws.com'
     variables:
       region:
         description: The AWS region
@@ -86,7 +86,7 @@ servers:
           - sa-east-1
         default: us-east-1
     description: The Amazon Elastic Inference multi-region endpoint
-  - url: 'http://api.elastic-inference.{region}.amazonaws.com.cn'
+  - url: 'http://elastic-inference.{region}.amazonaws.com.cn'
     variables:
       region:
         description: The AWS region
@@ -95,7 +95,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Elastic Inference endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://api.elastic-inference.{region}.amazonaws.com.cn'
+  - url: 'https://elastic-inference.{region}.amazonaws.com.cn'
     variables:
       region:
         description: The AWS region

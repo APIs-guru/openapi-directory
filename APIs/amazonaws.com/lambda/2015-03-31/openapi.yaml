@@ -271,7 +271,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/policy':
     post:
       operationId: AddPermission
-      description: '<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN or owning account of the associated resource as the <code>SourceArn</code> or <code>SourceAccount</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
+      description: '<p>Grants an AWS service or another account permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name (ARN) of that version or alias to invoke the function.</p> <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. For AWS services, the principal is a domain-style identifier defined by the service, like <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For AWS services, you can also specify the ARN of the associated resource as the <code>SourceArn</code>. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function.</p> <p>This action adds a statement to a resource-based permissions policy for the function. For more information about function policies, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Lambda Function Policies</a>. </p>'
       responses:
         '201':
           description: Success
@@ -370,7 +370,7 @@ paths:
                   type: string
                   pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
                 SourceAccount:
-                  description: 'For AWS services, the ID of the account that owns the resource. Use this instead of <code>SourceArn</code> to grant permission to resources that are owned by another account (for example, all of an account''s Amazon S3 buckets). Or use it together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.'
+                  description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
                   type: string
                   pattern: '\d{12}'
                 EventSourceToken:
@@ -674,7 +674,7 @@ paths:
                   minimum: 1
                   maximum: 10000
                 MaximumBatchingWindowInSeconds:
-                  description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+                  description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
                   type: integer
                   minimum: 0
                   maximum: 300
@@ -876,6 +876,7 @@ paths:
                     - dotnetcore1.0
                     - dotnetcore2.0
                     - dotnetcore2.1
+                    - dotnetcore3.1
                     - nodejs4.3-edge
                     - go1.x
                     - ruby2.5
@@ -1352,7 +1353,7 @@ paths:
                   minimum: 1
                   maximum: 10000
                 MaximumBatchingWindowInSeconds:
-                  description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+                  description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
                   type: integer
                   minimum: 0
                   maximum: 300
@@ -2447,6 +2448,7 @@ paths:
                     - dotnetcore1.0
                     - dotnetcore2.0
                     - dotnetcore2.1
+                    - dotnetcore3.1
                     - nodejs4.3-edge
                     - go1.x
                     - ruby2.5
@@ -3008,6 +3010,7 @@ paths:
               - dotnetcore1.0
               - dotnetcore2.0
               - dotnetcore2.1
+              - dotnetcore3.1
               - nodejs4.3-edge
               - go1.x
               - ruby2.5
@@ -3186,6 +3189,7 @@ paths:
               - dotnetcore1.0
               - dotnetcore2.0
               - dotnetcore2.1
+              - dotnetcore3.1
               - nodejs4.3-edge
               - go1.x
               - ruby2.5
@@ -3993,7 +3997,7 @@ components:
           description: The maximum number of items to retrieve in a single batch.
         MaximumBatchingWindowInSeconds:
           $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-          description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+          description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
         ParallelizationFactor:
           $ref: '#/components/schemas/ParallelizationFactor'
           description: (Streams) The number of batches to process from each shard concurrently.
@@ -4502,6 +4506,7 @@ components:
         - dotnetcore1.0
         - dotnetcore2.0
         - dotnetcore2.1
+        - dotnetcore3.1
         - nodejs4.3-edge
         - go1.x
         - ruby2.5
@@ -4664,7 +4669,7 @@ components:
           description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
         SourceAccount:
           $ref: '#/components/schemas/SourceOwner'
-          description: 'For AWS services, the ID of the account that owns the resource. Use this instead of <code>SourceArn</code> to grant permission to resources that are owned by another account (for example, all of an account''s Amazon S3 buckets). Or use it together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.'
+          description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
         EventSourceToken:
           $ref: '#/components/schemas/EventSourceToken'
           description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
@@ -4804,7 +4809,7 @@ components:
           description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-          description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+          description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
         ParallelizationFactor:
           $ref: '#/components/schemas/ParallelizationFactor'
           description: (Streams) The number of batches to process from each shard concurrently.
@@ -5518,7 +5523,7 @@ components:
           description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-          description: 'The maximum amount of time to gather records before invoking the function, in seconds.'
+          description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
         DestinationConfig:
           $ref: '#/components/schemas/DestinationConfig'
           description: (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.

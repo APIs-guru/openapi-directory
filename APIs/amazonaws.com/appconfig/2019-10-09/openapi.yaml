@@ -2051,6 +2051,9 @@ components:
         State:
           $ref: '#/components/schemas/DeploymentState'
           description: The state of the deployment.
+        EventLog:
+          $ref: '#/components/schemas/DeploymentEvents'
+          description: A list containing all events related to a deployment. The most recent events are displayed first.
         PercentageComplete:
           $ref: '#/components/schemas/Percentage'
           description: The percentage of targets for which the deployment is available.
@@ -2344,9 +2347,45 @@ components:
         - COMPLETE
         - ROLLING_BACK
         - ROLLED_BACK
+    DeploymentEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentEvent'
     Iso8601DateTime:
       type: string
       format: date-time
+    DeploymentEventType:
+      type: string
+      enum:
+        - PERCENTAGE_UPDATED
+        - ROLLBACK_STARTED
+        - ROLLBACK_COMPLETED
+        - BAKE_TIME_STARTED
+        - DEPLOYMENT_STARTED
+        - DEPLOYMENT_COMPLETED
+    TriggeredBy:
+      type: string
+      enum:
+        - USER
+        - APPCONFIG
+        - CLOUDWATCH_ALARM
+        - INTERNAL_ERROR
+    DeploymentEvent:
+      type: object
+      properties:
+        EventType:
+          $ref: '#/components/schemas/DeploymentEventType'
+          description: 'The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.'
+        TriggeredBy:
+          $ref: '#/components/schemas/TriggeredBy'
+          description: 'The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.'
+        Description:
+          $ref: '#/components/schemas/Description'
+          description: 'A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.'
+        OccurredAt:
+          $ref: '#/components/schemas/Iso8601DateTime'
+          description: The date and time the event occurred.
+      description: An object that describes a deployment event.
     DeploymentSummary:
       type: object
       properties:
