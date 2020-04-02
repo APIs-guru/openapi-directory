@@ -264,6 +264,82 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/flows/{flowArn}/vpcInterfaces':
+    post:
+      operationId: AddFlowVpcInterfaces
+      description: Adds VPC interfaces to flow
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddFlowVpcInterfacesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to mutate.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vpcInterfaces
+              properties:
+                vpcInterfaces:
+                  description: A list of VPC interfaces that you want to add.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VpcInterfaceRequest'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /v1/flows:
     post:
       operationId: CreateFlow
@@ -368,6 +444,9 @@ paths:
                     StreamId:
                       $ref: '#/components/schemas/__string'
                       description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+                    VpcInterfaceName:
+                      $ref: '#/components/schemas/__string'
+                      description: The name of the VPC interface to use for this source.
                     WhitelistCidr:
                       $ref: '#/components/schemas/__string'
                       description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
@@ -385,6 +464,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SetSourceRequest'
+                vpcInterfaces:
+                  description: The VPC interfaces you want on the flow.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/VpcInterfaceRequest'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1271,9 +1355,80 @@ paths:
                 streamId:
                   description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   type: string
+                vpcInterfaceName:
+                  description: The name of the VPC Interface to configure this Source with.
+                  type: string
                 whitelistCidr:
                   description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                   type: string
+  '/v1/flows/{flowArn}/vpcInterfaces/{vpcInterfaceName}':
+    delete:
+      operationId: RemoveFlowVpcInterface
+      description: 'Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveFlowVpcInterfaceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: flowArn
+          in: path
+          required: true
+          description: The flow that you want to remove a VPC interface from.
+          schema:
+            type: string
+        - name: vpcInterfaceName
+          in: path
+          required: true
+          description: The name of the VPC interface that you want to remove.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/flows/{flowArn}/entitlements/{entitlementArn}':
     delete:
       operationId: RevokeFlowEntitlement
@@ -1765,10 +1920,43 @@ components:
         StreamId:
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+        VpcInterfaceName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC interface to use for this source.
         WhitelistCidr:
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: The settings for the source of the flow.
+    AddFlowVpcInterfacesResponse:
+      type: object
+      properties:
+        FlowArn:
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the flow that these VPC interfaces were added to.
+        VpcInterfaces:
+          $ref: '#/components/schemas/__listOfVpcInterface'
+          description: The details of the newly added VPC interfaces.
+    VpcInterfaceRequest:
+      type: object
+      required:
+        - SubnetId
+        - SecurityGroupIds
+        - RoleArn
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC Interface. This value must be unique within the current flow.
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+          description: Role Arn MediaConnect can assumes to create ENIs in customer's account
+        SecurityGroupIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: Security Group IDs to be used on ENI.
+        SubnetId:
+          $ref: '#/components/schemas/__string'
+          description: Subnet must be in the AZ of the Flow
+      description: Desired VPC Interface for a Flow
     CreateFlowResponse:
       type: object
       properties:
@@ -1915,6 +2103,18 @@ components:
         SourceArn:
           $ref: '#/components/schemas/__string'
           description: The ARN of the source that was removed.
+    RemoveFlowVpcInterfaceResponse:
+      type: object
+      properties:
+        FlowArn:
+          $ref: '#/components/schemas/__string'
+          description: The ARN of the flow that is associated with the VPC interface you removed.
+        NonDeletedNetworkInterfaceIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: IDs of network interfaces associated with the removed VPC interface that Media Connect was unable to remove.
+        VpcInterfaceName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC interface that was removed.
     RevokeFlowEntitlementResponse:
       type: object
       properties:
@@ -2019,6 +2219,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Source'
+    __listOfVpcInterfaceRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcInterfaceRequest'
+    AddFlowVpcInterfacesRequest:
+      type: object
+      required:
+        - VpcInterfaces
+      title: AddFlowVpcInterfacesRequest
+      properties:
+        VpcInterfaces:
+          $ref: '#/components/schemas/__listOfVpcInterfaceRequest'
+          description: A list of VPC interfaces that you want to add.
+      description: A request to add VPC interfaces to the flow.
+    __listOfVpcInterface:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcInterface'
     __listOf__string:
       type: array
       items:
@@ -2060,6 +2278,9 @@ components:
           $ref: '#/components/schemas/FailoverConfig'
         Sources:
           $ref: '#/components/schemas/__listOfSetSourceRequest'
+        VpcInterfaces:
+          $ref: '#/components/schemas/__listOfVpcInterfaceRequest'
+          description: The VPC interfaces you want on the flow.
       description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
     Flow:
       type: object
@@ -2102,6 +2323,9 @@ components:
         Status:
           $ref: '#/components/schemas/Status'
           description: The current status of the flow.
+        VpcInterfaces:
+          $ref: '#/components/schemas/__listOfVpcInterface'
+          description: The VPC Interfaces for this flow.
       description: 'The settings for a flow, including its source, outputs, and entitlements.'
     DeleteFlowRequest:
       type: object
@@ -2193,6 +2417,9 @@ components:
         Transport:
           $ref: '#/components/schemas/Transport'
           description: Attributes related to the transport stream that are used in the source.
+        VpcInterfaceName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC Interface this Source is configured with.
         WhitelistCidr:
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
@@ -2357,6 +2584,10 @@ components:
       type: object
       title: RemoveFlowSourceRequest
       properties: {}
+    RemoveFlowVpcInterfaceRequest:
+      type: object
+      title: RemoveFlowVpcInterfaceRequest
+      properties: {}
     RevokeFlowEntitlementRequest:
       type: object
       title: RevokeFlowEntitlementRequest
@@ -2507,9 +2738,37 @@ components:
         StreamId:
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+        VpcInterfaceName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC Interface to configure this Source with.
         WhitelistCidr:
           $ref: '#/components/schemas/__string'
           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: A request to update the source of a flow.
+    VpcInterface:
+      type: object
+      required:
+        - NetworkInterfaceIds
+        - SubnetId
+        - SecurityGroupIds
+        - RoleArn
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+          description: Immutable and has to be a unique against other VpcInterfaces in this Flow
+        NetworkInterfaceIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: IDs of the network interfaces created in customer's account by MediaConnect.
+        RoleArn:
+          $ref: '#/components/schemas/__string'
+          description: Role Arn MediaConnect can assumes to create ENIs in customer's account
+        SecurityGroupIds:
+          $ref: '#/components/schemas/__listOf__string'
+          description: Security Group IDs to be used on ENI.
+        SubnetId:
+          $ref: '#/components/schemas/__string'
+          description: Subnet must be in the AZ of the Flow
+      description: The settings for a VPC Source.
 security:
   - hmac: []

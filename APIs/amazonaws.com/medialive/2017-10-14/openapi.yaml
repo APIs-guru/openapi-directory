@@ -3951,6 +3951,9 @@ components:
     InputAttachment:
       type: object
       properties:
+        AutomaticInputFailoverSettings:
+          $ref: '#/components/schemas/AutomaticInputFailoverSettings'
+          description: User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input.
         InputAttachmentName:
           $ref: '#/components/schemas/__string'
           description: User-specified name for the attachment. This is required if the user wants to use this input in an input switch action.
@@ -5554,6 +5557,27 @@ components:
         - AKAMAI
         - COMMON
       description: Authentication Scheme
+    InputPreference:
+      type: string
+      enum:
+        - EQUAL_INPUT_PREFERENCE
+        - PRIMARY_INPUT_PREFERRED
+      description: |
+        Input preference when deciding which input to make active when a previously failed input has recovered.
+        If \"EQUAL_INPUT_PREFERENCE\", then the active input will stay active as long as it is healthy.
+        If \"PRIMARY_INPUT_PREFERRED\", then always switch back to the primary input when it is healthy.
+    AutomaticInputFailoverSettings:
+      type: object
+      required:
+        - SecondaryInputId
+      properties:
+        InputPreference:
+          $ref: '#/components/schemas/InputPreference'
+          description: Input preference when deciding which input to make active when a previously failed input has recovered.
+        SecondaryInputId:
+          $ref: '#/components/schemas/__string'
+          description: The input ID of the secondary input in the automatic input failover pair.
+      description: The settings for Automatic Input Failover.
     AvailBlankingState:
       type: string
       enum:
@@ -7271,6 +7295,12 @@ components:
         - DISABLED
         - ENABLED
       description: H264 Flicker Aq
+    H264ForceFieldPictures:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: H264 Force Field Pictures
     H264FramerateControl:
       type: string
       enum:
@@ -7450,6 +7480,12 @@ components:
         FlickerAq:
           $ref: '#/components/schemas/H264FlickerAq'
           description: 'If set to enabled, adjust quantization within each frame to reduce flicker or ''pop'' on I-frames.'
+        ForceFieldPictures:
+          $ref: '#/components/schemas/H264ForceFieldPictures'
+          description: |-
+            This setting applies only when scan type is "interlaced." It controls whether coding is on a field basis or a frame basis. (When the video is progressive, the coding is always on a frame basis.)
+            enabled: Always code on a field basis, so that odd and even sets of fields are coded separately.
+            disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis, using PAFF or MBAFF), depending on what is most appropriate for the content.
         FramerateControl:
           $ref: '#/components/schemas/H264FramerateControl'
           description: 'This field indicates how the output video frame rate is specified.  If "specified" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if "initializeFromSource" is selected then the output video frame rate will be set equal to the input video frame rate of the first input.'

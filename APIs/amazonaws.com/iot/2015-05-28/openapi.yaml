@@ -3,7 +3,7 @@ info:
   version: '2015-05-28'
   x-release: v4
   title: AWS IoT
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html">Authorizing Direct Calls to AWS Services</a>.</p>'
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>The service endpoints that expose this API are listed in <a href="https://docs.aws.amazon.com/general/latest/gr/iot-core.html">AWS IoT Core Endpoints and Quotas</a>. You must use the endpoint for the region that has the resources you want to access.</p> <p>The service name used by <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">AWS Signature Version 4</a> to sign the request is: <i>execute-api</i>.</p> <p>For more information about how AWS IoT works, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html">Authorizing Direct Calls to AWS Services</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -2174,6 +2174,241 @@ paths:
           description: 'Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.'
           schema:
             type: boolean
+  '/dimensions/{name}':
+    post:
+      operationId: CreateDimension
+      description: 'Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDimensionResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+                - stringValues
+                - clientRequestToken
+              properties:
+                type:
+                  description: 'Specifies the type of dimension. Supported types: <code>TOPIC_FILTER.</code> '
+                  type: string
+                  enum:
+                    - TOPIC_FILTER
+                stringValues:
+                  description: 'Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DimensionStringValue'
+                  minItems: 1
+                  maxItems: 100
+                tags:
+                  description: Metadata that can be used to manage the dimension.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                clientRequestToken:
+                  description: 'Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.'
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDimension
+      description: Removes the specified dimension from your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDimensionResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The unique identifier for the dimension that you want to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+    get:
+      operationId: DescribeDimension
+      description: Provides details about a dimension that is defined in your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDimensionResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The unique identifier for the dimension.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+    patch:
+      operationId: UpdateDimension
+      description: Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDimensionResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - stringValues
+              properties:
+                stringValues:
+                  description: 'Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DimensionStringValue'
+                  minItems: 1
+                  maxItems: 100
   '/domainConfigurations/{domainConfigurationName}':
     post:
       operationId: CreateDomainConfiguration
@@ -4983,10 +5218,15 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+                  description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
+                additionalMetricsToRetainV2:
+                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MetricToRetain'
                 tags:
                   description: Metadata that can be used to manage the security profile.
                   type: array
@@ -5174,10 +5414,15 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+                  description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
+                additionalMetricsToRetainV2:
+                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MetricToRetain'
                 deleteBehaviors:
                   description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation, an exception occurs.'
                   type: boolean
@@ -10307,6 +10552,58 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /dimensions:
+    get:
+      operationId: ListDimensions
+      description: List the set of dimensions that are defined for your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDimensionsResponse'
+        '480':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to retrieve at one time.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /domainConfigurations:
     get:
       operationId: ListDomainConfigurations
@@ -11387,6 +11684,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
       parameters:
         - name: nextToken
           in: query
@@ -11402,6 +11705,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+        - name: dimensionName
+          in: query
+          required: false
+          description: A filter to limit results to the security profiles that use the defined dimension.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -14287,6 +14599,19 @@ components:
           $ref: '#/components/schemas/CertificatePem'
           description: 'The certificate data, in PEM format.'
       description: The output from the CreateCertificateFromCsr operation.
+    CreateDimensionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/DimensionName'
+          description: A unique identifier for the dimension.
+        arn:
+          $ref: '#/components/schemas/DimensionArn'
+          description: The ARN (Amazon resource name) of the created dimension.
+    DimensionStringValue:
+      type: string
+      minLength: 1
+      maxLength: 256
     CreateDomainConfigurationResponse:
       type: object
       properties:
@@ -14644,6 +14969,9 @@ components:
         metric:
           $ref: '#/components/schemas/BehaviorMetric'
           description: What is measured by the behavior.
+        metricDimension:
+          $ref: '#/components/schemas/MetricDimension'
+          description: 'The dimension for a metric in your behavior. For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.'
         criteria:
           $ref: '#/components/schemas/BehaviorCriteria'
           description: The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.
@@ -14663,6 +14991,18 @@ components:
       description: A structure containing the alert target ARN and the role ARN.
     BehaviorMetric:
       type: string
+    MetricToRetain:
+      type: object
+      required:
+        - metric
+      properties:
+        metric:
+          $ref: '#/components/schemas/BehaviorMetric'
+          description: What is measured by the behavior.
+        metricDimension:
+          $ref: '#/components/schemas/MetricDimension'
+          description: The dimension of a metric.
+      description: The metric you want to retain. Dimensions are optional.
     CreateStreamResponse:
       type: object
       properties:
@@ -14792,7 +15132,7 @@ components:
           description: Change the state of a CloudWatch alarm.
         cloudwatchLogs:
           $ref: '#/components/schemas/CloudwatchLogsAction'
-          description: Send data to CloudWatch logs.
+          description: Send data to CloudWatch Logs.
         elasticsearch:
           $ref: '#/components/schemas/ElasticsearchAction'
           description: Write data to an Amazon Elasticsearch Service domain.
@@ -14846,6 +15186,9 @@ components:
       properties: {}
       description: The output for the DeleteCACertificate operation.
     CertificateStateException: {}
+    DeleteDimensionResponse:
+      type: object
+      properties: {}
     DeleteDomainConfigurationResponse:
       type: object
       properties: {}
@@ -15010,6 +15353,27 @@ components:
         authorizerDescription:
           $ref: '#/components/schemas/AuthorizerDescription'
           description: The default authorizer's description.
+    DescribeDimensionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/DimensionName'
+          description: The unique identifier for the dimension.
+        arn:
+          $ref: '#/components/schemas/DimensionArn'
+          description: The ARN (Amazon resource name) for the dimension.
+        type:
+          $ref: '#/components/schemas/DimensionType'
+          description: The type of the dimension.
+        stringValues:
+          $ref: '#/components/schemas/DimensionStringValues'
+          description: 'The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date the dimension was created.
+        lastModifiedDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date the dimension was last modified.
     DescribeDomainConfigurationResponse:
       type: object
       properties:
@@ -15201,8 +15565,12 @@ components:
           $ref: '#/components/schemas/AlertTargets'
           description: Where the alerts are sent. (Alerts are always sent to the console.)
         additionalMetricsToRetain:
+          deprecated: true
           $ref: '#/components/schemas/AdditionalMetricsToRetainList'
-          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+          description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+        additionalMetricsToRetainV2:
+          $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
+          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
         version:
           $ref: '#/components/schemas/Version'
           description: The version of the security profile. A new version is generated whenever the security profile is updated.
@@ -15625,6 +15993,15 @@ components:
           $ref: '#/components/schemas/Marker'
           description: 'The marker for the next set of results, or null if there are no additional results.'
       description: The output of the ListCertificatesByCA operation.
+    ListDimensionsResponse:
+      type: object
+      properties:
+        dimensionNames:
+          $ref: '#/components/schemas/DimensionNames'
+          description: A list of the names of the defined dimensions. Use <code>DescribeDimension</code> to get details for a dimension.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.'
     ListDomainConfigurationsResponse:
       type: object
       properties:
@@ -16195,6 +16572,27 @@ components:
         version:
           $ref: '#/components/schemas/Version'
           description: The latest version of the billing group.
+    UpdateDimensionResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/DimensionName'
+          description: A unique identifier for the dimension.
+        arn:
+          $ref: '#/components/schemas/DimensionArn'
+          description: The ARN (Amazon resource name) of the created dimension.
+        type:
+          $ref: '#/components/schemas/DimensionType'
+          description: The type of the dimension.
+        stringValues:
+          $ref: '#/components/schemas/DimensionStringValues'
+          description: 'The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time, in milliseconds since epoch, when the dimension was initially created.'
+        lastModifiedDate:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The date and time, in milliseconds since epoch, when the dimension was most recently updated.'
     UpdateDomainConfigurationResponse:
       type: object
       properties:
@@ -16289,8 +16687,12 @@ components:
           $ref: '#/components/schemas/AlertTargets'
           description: Where the alerts are sent. (Alerts are always sent to the console.)
         additionalMetricsToRetain:
+          deprecated: true
           $ref: '#/components/schemas/AdditionalMetricsToRetainList'
-          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+          description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+        additionalMetricsToRetainV2:
+          $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
+          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
         version:
           $ref: '#/components/schemas/Version'
           description: The updated version of the security profile.
@@ -16622,7 +17024,7 @@ components:
         logGroupName:
           $ref: '#/components/schemas/LogGroupName'
           description: The CloudWatch log group to which the action sends data.
-      description: Describes an action that sends data to CloudWatch logs.
+      description: Describes an action that sends data to CloudWatch Logs.
     ElasticsearchAction:
       type: object
       required:
@@ -16729,7 +17131,7 @@ components:
           description: 'The endpoint URL. If substitution templates are used in the URL, you must also specify a <code>confirmationUrl</code>. If this is a new destination, a new <code>TopicRuleDestination</code> is created if possible.'
         confirmationUrl:
           $ref: '#/components/schemas/Url'
-          description: 'The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substituion template before traffic is allowed to your endpoint URL.'
+          description: 'The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substitution template before traffic is allowed to your endpoint URL.'
         headers:
           $ref: '#/components/schemas/HeaderList'
           description: The HTTP headers to send with the message data.
@@ -16866,6 +17268,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BehaviorMetric'
+    AdditionalMetricsToRetainV2List:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricToRetain'
     AdditionalParameterMap:
       type: object
       additionalProperties:
@@ -17507,6 +17913,18 @@ components:
       pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
       maxLength: 128
+    MetricDimension:
+      type: object
+      required:
+        - dimensionName
+      properties:
+        dimensionName:
+          $ref: '#/components/schemas/DimensionName'
+          description: A unique identifier for the dimension.
+        operator:
+          $ref: '#/components/schemas/DimensionValueOperator'
+          description: 'Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for DimensionType TOPIC_FILTER, with <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> Operator, a message will be counted only if it doesn''t match any of the topic filters. The operator is optional: if it''s not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.'
+      description: The dimension of a metric.
     BehaviorCriteria:
       type: object
       properties:
@@ -18004,6 +18422,43 @@ components:
           $ref: '#/components/schemas/CertificateSigningRequest'
           description: The certificate signing request (CSR).
       description: The input for the CreateCertificateFromCsr operation.
+    DimensionName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    DimensionType:
+      type: string
+      enum:
+        - TOPIC_FILTER
+    DimensionStringValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionStringValue'
+      minItems: 1
+      maxItems: 100
+    CreateDimensionRequest:
+      type: object
+      required:
+        - type
+        - stringValues
+        - clientRequestToken
+      title: CreateDimensionRequest
+      properties:
+        type:
+          $ref: '#/components/schemas/DimensionType'
+          description: 'Specifies the type of dimension. Supported types: <code>TOPIC_FILTER.</code> '
+        stringValues:
+          $ref: '#/components/schemas/DimensionStringValues'
+          description: 'Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: Metadata that can be used to manage the dimension.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.'
+    DimensionArn:
+      type: string
     DomainConfigurationName:
       type: string
       pattern: '[\w.-]+'
@@ -18464,7 +18919,11 @@ components:
           $ref: '#/components/schemas/AlertTargets'
           description: Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
         additionalMetricsToRetain:
+          deprecated: true
           $ref: '#/components/schemas/AdditionalMetricsToRetainList'
+          description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+        additionalMetricsToRetainV2:
+          $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
           description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
         tags:
           $ref: '#/components/schemas/TagList'
@@ -18683,6 +19142,10 @@ components:
       title: DeleteCertificateRequest
       properties: {}
       description: The input for the DeleteCertificate operation.
+    DeleteDimensionRequest:
+      type: object
+      title: DeleteDimensionRequest
+      properties: {}
     DeleteDomainConfigurationRequest:
       type: object
       title: DeleteDomainConfigurationRequest
@@ -18886,6 +19349,10 @@ components:
     DescribeDefaultAuthorizerRequest:
       type: object
       title: DescribeDefaultAuthorizerRequest
+      properties: {}
+    DescribeDimensionRequest:
+      type: object
+      title: DescribeDimensionRequest
       properties: {}
     ReservedDomainConfigurationName:
       type: string
@@ -19258,6 +19725,15 @@ components:
       type: string
       enum:
         - DEACTIVATE
+    DimensionNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionName'
+    DimensionValueOperator:
+      type: string
+      enum:
+        - IN
+        - NOT_IN
     DisableAllLogs:
       type: boolean
     DisableTopicRuleRequest:
@@ -20125,6 +20601,10 @@ components:
       title: ListCertificatesRequest
       properties: {}
       description: The input for the ListCertificates operation.
+    ListDimensionsRequest:
+      type: object
+      title: ListDimensionsRequest
+      properties: {}
     ListDomainConfigurationsRequest:
       type: object
       title: ListDomainConfigurationsRequest
@@ -21394,6 +21874,15 @@ components:
       title: UpdateCertificateRequest
       properties: {}
       description: The input for the UpdateCertificate operation.
+    UpdateDimensionRequest:
+      type: object
+      required:
+        - stringValues
+      title: UpdateDimensionRequest
+      properties:
+        stringValues:
+          $ref: '#/components/schemas/DimensionStringValues'
+          description: 'Specifies the value or list of values for the dimension. For <code>TOPIC_FILTER</code> dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").'
     UpdateDomainConfigurationRequest:
       type: object
       title: UpdateDomainConfigurationRequest
@@ -21530,8 +22019,12 @@ components:
           $ref: '#/components/schemas/AlertTargets'
           description: Where the alerts are sent. (Alerts are always sent to the console.)
         additionalMetricsToRetain:
+          deprecated: true
           $ref: '#/components/schemas/AdditionalMetricsToRetainList'
-          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+          description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+        additionalMetricsToRetainV2:
+          $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
+          description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
         deleteBehaviors:
           $ref: '#/components/schemas/DeleteBehaviors'
           description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation, an exception occurs.'

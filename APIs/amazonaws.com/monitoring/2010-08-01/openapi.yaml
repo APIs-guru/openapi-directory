@@ -254,6 +254,7 @@ paths:
           description: The statistic associated with the anomaly detection model to delete.
           schema:
             type: string
+            pattern: '(SampleCount|Average|Sum|Minimum|Maximum|p(\d{1,2}|100)(\.\d{0,2})?|[ou]\d+(\.\d*)?)(_E|_L|_H)?'
         - name: Action
           in: query
           required: true
@@ -2523,7 +2524,7 @@ paths:
     get:
       x-aws-operation-name: ListTagsForResource
       operationId: GET_ListTagsForResource
-      description: Displays the tags associated with a CloudWatch resource. Alarms support tagging.
+      description: 'Displays the tags associated with a CloudWatch resource. Currently, alarms and Contributor Insights rules support tagging.'
       responses:
         '200':
           description: Success
@@ -2553,7 +2554,7 @@ paths:
         - name: ResourceARN
           in: query
           required: true
-          description: 'The ARN of the CloudWatch resource that you want to view tags for. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          description: '<p>The ARN of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
           schema:
             type: string
             minLength: 1
@@ -2583,7 +2584,7 @@ paths:
     post:
       x-aws-operation-name: ListTagsForResource
       operationId: POST_ListTagsForResource
-      description: Displays the tags associated with a CloudWatch resource. Alarms support tagging.
+      description: 'Displays the tags associated with a CloudWatch resource. Currently, alarms and Contributor Insights rules support tagging.'
       responses:
         '200':
           description: Success
@@ -2698,6 +2699,7 @@ paths:
           description: The statistic to use for the metric and the anomaly detection model.
           schema:
             type: string
+            pattern: '(SampleCount|Average|Sum|Minimum|Maximum|p(\d{1,2}|100)(\.\d{0,2})?|[ou]\d+(\.\d*)?)(_E|_L|_H)?'
         - name: Configuration
           in: query
           required: false
@@ -3084,6 +3086,14 @@ paths:
             pattern: '[\x00-\x7F]+'
             minLength: 1
             maxLength: 8192
+        - name: Tags
+          in: query
+          required: false
+          description: '<p>A list of key-value pairs to associate with the Contributor Insights rule. You can associate as many as 50 tags with a rule.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p> <p>To be able to associate tags with a rule, you must have the <code>cloudwatch:TagResource</code> permission in addition to the <code>cloudwatch:PutInsightRule</code> permission.</p> <p>If you are using this operation to update an existing Contributor Insights rule, any tags you specify in this parameter are ignored. To change the tags of an existing rule, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Tag'
         - name: Action
           in: query
           required: true
@@ -3678,7 +3688,7 @@ paths:
     get:
       x-aws-operation-name: TagResource
       operationId: GET_TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a CloudWatch resource.</p>'
       responses:
         '200':
           description: Success
@@ -3714,7 +3724,7 @@ paths:
         - name: ResourceARN
           in: query
           required: true
-          description: 'The ARN of the CloudWatch alarm that you''re adding tags to. The ARN format is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> '
+          description: '<p>The ARN of the CloudWatch resource that you''re adding tags to.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
           schema:
             type: string
             minLength: 1
@@ -3752,7 +3762,7 @@ paths:
     post:
       x-aws-operation-name: TagResource
       operationId: POST_TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource.</p>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a CloudWatch resource.</p>'
       responses:
         '200':
           description: Success
@@ -3844,7 +3854,7 @@ paths:
         - name: ResourceARN
           in: query
           required: true
-          description: 'The ARN of the CloudWatch resource that you''re removing tags from. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          description: '<p>The ARN of the CloudWatch resource that you''re removing tags from.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
           schema:
             type: string
             minLength: 1
@@ -4238,6 +4248,8 @@ components:
         $ref: '#/components/schemas/Range'
     AnomalyDetectorMetricTimezone:
       type: string
+      pattern: .*
+      maxLength: 50
     ResourceName:
       type: string
       minLength: 1
@@ -4403,8 +4415,9 @@ components:
       items:
         $ref: '#/components/schemas/Dimension'
       maxItems: 10
-    Stat:
+    AnomalyDetectorMetricStat:
       type: string
+      pattern: '(SampleCount|Average|Sum|Minimum|Maximum|p(\d{1,2}|100)(\.\d{0,2})?|[ou]\d+(\.\d*)?)(_E|_L|_H)?'
     AnomalyDetectorConfiguration:
       type: object
       properties:
@@ -4434,7 +4447,7 @@ components:
           $ref: '#/components/schemas/Dimensions'
           description: The metric dimensions associated with the anomaly detection model.
         Stat:
-          $ref: '#/components/schemas/Stat'
+          $ref: '#/components/schemas/AnomalyDetectorMetricStat'
           description: The statistic associated with the anomaly detection model.
         Configuration:
           $ref: '#/components/schemas/AnomalyDetectorConfiguration'
@@ -4716,7 +4729,7 @@ components:
           $ref: '#/components/schemas/Dimensions'
           description: The metric dimensions associated with the anomaly detection model to delete.
         Stat:
-          $ref: '#/components/schemas/Stat'
+          $ref: '#/components/schemas/AnomalyDetectorMetricStat'
           description: The statistic associated with the anomaly detection model to delete.
     DeleteDashboardsInput:
       type: object
@@ -5270,7 +5283,7 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The ARN of the CloudWatch resource that you want to view tags for. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          description: '<p>The ARN of the CloudWatch resource that you want to view tags for.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
     TagList:
       type: array
       items:
@@ -5488,6 +5501,8 @@ components:
     StorageResolution:
       type: integer
       minimum: 1
+    Stat:
+      type: string
     PutAnomalyDetectorInput:
       type: object
       required:
@@ -5506,7 +5521,7 @@ components:
           $ref: '#/components/schemas/Dimensions'
           description: The metric dimensions to create the anomaly detection model for.
         Stat:
-          $ref: '#/components/schemas/Stat'
+          $ref: '#/components/schemas/AnomalyDetectorMetricStat'
           description: The statistic to use for the metric and the anomaly detection model.
         Configuration:
           $ref: '#/components/schemas/AnomalyDetectorConfiguration'
@@ -5571,6 +5586,9 @@ components:
         RuleDefinition:
           $ref: '#/components/schemas/InsightRuleDefinition'
           description: 'The definition of the rule, as a JSON object. For details on the valid syntax, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html">Contributor Insights Rule Syntax</a>.'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>A list of key-value pairs to associate with the Contributor Insights rule. You can associate as many as 50 tags with a rule.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p> <p>To be able to associate tags with a rule, you must have the <code>cloudwatch:TagResource</code> permission in addition to the <code>cloudwatch:PutInsightRule</code> permission.</p> <p>If you are using this operation to update an existing Contributor Insights rule, any tags you specify in this parameter are ignored. To change the tags of an existing rule, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html">TagResource</a>.</p>'
     PutMetricAlarmInput:
       type: object
       required:
@@ -5695,7 +5713,7 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The ARN of the CloudWatch alarm that you''re adding tags to. The ARN format is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> '
+          description: '<p>The ARN of the CloudWatch resource that you''re adding tags to.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The list of key-value pairs to associate with the alarm.
@@ -5708,7 +5726,7 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The ARN of the CloudWatch resource that you''re removing tags from. For more information on ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch">Example ARNs</a> in the <i>Amazon Web Services General Reference</i>.'
+          description: '<p>The ARN of the CloudWatch resource that you''re removing tags from.</p> <p>The ARN format of an alarm is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:alarm:<i>alarm-name</i> </code> </p> <p>The ARN format of a Contributor Insights rule is <code>arn:aws:cloudwatch:<i>Region</i>:<i>account-id</i>:insight-rule:<i>insight-rule-name</i> </code> </p> <p>For more information on ARN format, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies"> Resource Types Defined by Amazon CloudWatch</a> in the <i>Amazon Web Services General Reference</i>.</p>'
         TagKeys:
           $ref: '#/components/schemas/TagKeyList'
           description: The list of tag keys to remove from the resource.
