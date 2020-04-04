@@ -1107,6 +1107,13 @@ paths:
                     assignPublicIp:
                       $ref: '#/components/schemas/Boolean'
                       description: A boolean indicating whether to assign a public IP address.
+                compute:
+                  description: Compute information for the simulation job.
+                  type: object
+                  properties:
+                    simulationUnitLimit:
+                      $ref: '#/components/schemas/SimulationUnit'
+                      description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3443,6 +3450,9 @@ components:
         vpcConfig:
           $ref: '#/components/schemas/VPCConfigResponse'
           description: Information about the vpc configuration.
+        compute:
+          $ref: '#/components/schemas/ComputeResponse'
+          description: Compute information for the simulation job.
     S3Bucket:
       type: string
       pattern: '[a-z0-9][a-z0-9.\-]*[a-z0-9]'
@@ -3518,6 +3528,10 @@ components:
       maxItems: 5
     Boolean:
       type: boolean
+    SimulationUnit:
+      type: integer
+      minimum: 1
+      maximum: 15
     ServiceUnavailableException: {}
     DeleteFleetResponse:
       type: object
@@ -3756,6 +3770,9 @@ components:
         networkInterface:
           $ref: '#/components/schemas/NetworkInterface'
           description: The network interface information for the simulation job.
+        compute:
+          $ref: '#/components/schemas/ComputeResponse'
+          description: Compute information for the simulation job.
     DescribeSimulationJobBatchResponse:
       type: object
       properties:
@@ -3960,6 +3977,9 @@ components:
           description: <p>Specify data sources to mount read-only files from S3 into your simulation. These files are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p> <note> <p>There is a limit of 100 files and a combined size of 25GB for all <code>DataSourceConfig</code> objects. </p> </note>
         vpcConfig:
           $ref: '#/components/schemas/VPCConfig'
+        compute:
+          $ref: '#/components/schemas/Compute'
+          description: Compute information for the simulation job
         tags:
           $ref: '#/components/schemas/TagMap'
           description: A map that contains tag keys and tag values that are attached to the simulation job request.
@@ -4128,6 +4148,20 @@ components:
       pattern: '[a-zA-Z0-9_.\-]*'
       minLength: 1
       maxLength: 1024
+    Compute:
+      type: object
+      properties:
+        simulationUnitLimit:
+          $ref: '#/components/schemas/SimulationUnit'
+          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
+      description: Compute information for the simulation job.
+    ComputeResponse:
+      type: object
+      properties:
+        simulationUnitLimit:
+          $ref: '#/components/schemas/SimulationUnit'
+          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
+      description: Compute information for the simulation job
     DeploymentConfig:
       type: object
       properties:
@@ -4487,6 +4521,9 @@ components:
         vpcConfig:
           $ref: '#/components/schemas/VPCConfig'
           description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
+        compute:
+          $ref: '#/components/schemas/Compute'
+          description: Compute information for the simulation job.
     CreateSimulationJobRequests:
       type: array
       items:
@@ -5341,6 +5378,9 @@ components:
         networkInterface:
           $ref: '#/components/schemas/NetworkInterface'
           description: Information about a network interface.
+        compute:
+          $ref: '#/components/schemas/ComputeResponse'
+          description: Compute information for the simulation job
       description: Information about a simulation job.
     SimulationJobBatchSummary:
       type: object

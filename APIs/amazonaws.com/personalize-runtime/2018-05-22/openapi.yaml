@@ -155,7 +155,7 @@ paths:
                   type: string
                   maxLength: 256
                 context:
-                  description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type. For more information, see Contextual Metadata.'
+                  description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
                   type: object
                   maxProperties: 150
                   additionalProperties:
@@ -219,7 +219,7 @@ paths:
                   type: integer
                   minimum: 0
                 context:
-                  description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type. For more information, see Contextual Metadata.'
+                  description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
                   type: object
                   maxProperties: 150
                   additionalProperties:
@@ -344,7 +344,7 @@ components:
           description: The user for which you want the campaign to provide a personalized ranking.
         context:
           $ref: '#/components/schemas/Context'
-          description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type. For more information, see Contextual Metadata.'
+          description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
     ItemList:
       type: array
       items:
@@ -372,13 +372,19 @@ components:
           description: The number of results to return. The default is 25. The maximum is 500.
         context:
           $ref: '#/components/schemas/Context'
-          description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type. For more information, see Contextual Metadata.'
+          description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
     PredictedItem:
       type: object
       properties:
         itemId:
           $ref: '#/components/schemas/ItemID'
           description: The recommended item ID.
+        score:
+          $ref: '#/components/schemas/Score'
+          description: 'A numeric representation of the model''s certainty in the item''s suitability. For more information on scoring logic, see <a>how-scores-work</a>.'
       description: <p>An object that identifies an item.</p> <p>The and APIs return a list of <code>PredictedItem</code>s.</p>
+    Score:
+      type: number
+      format: double
 security:
   - hmac: []
