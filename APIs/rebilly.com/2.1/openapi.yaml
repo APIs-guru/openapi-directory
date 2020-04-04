@@ -32,9 +32,9 @@ info:
     Rebilly offers three forms of authentication:  secret key, publishable key, JSON Web Tokens, and public signature key.
     - [Secret API key](#section/Authentication/SecretApiKey): used for requests made
       from the server side. Never share these keys. Keep them guarded and secure.
-    - [Publishable API key](#section/Authentication/PublishableApiKey): used for 
-      requests from the client side. For now can only be used to create 
-      a [Payment Token](#operation/PostToken) and 
+    - [Publishable API key](#section/Authentication/PublishableApiKey): used for
+      requests from the client side. For now can only be used to create
+      a [Payment Token](#operation/PostToken) and
       a [File token](#operation/PostFile).
     - [JWT](#section/Authentication/JWT): short lifetime tokens that can be assigned a specific expiration time.
 
@@ -55,7 +55,7 @@ info:
 
     ## Javascript SDK
 
-    The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained 
+    The [Javascript SDK](https://github.com/Rebilly/rebilly-js-sdk) is maintained
     within Github, and contains the installation and usage instructions.
 
     ## PHP SDK
@@ -89,14 +89,14 @@ info:
     - You can create some [predefined values lists](https://user-api-docs.rebilly.com/#tag/Lists) and use them in filter: `?filter=firstName:@yourListName`. You can also exclude list values: `?filter=firstName:!@yourListName`
 
     # Expand to Include Embedded Objects
-    Rebilly provides the ability to pre-load additional 
-    objects with a request. 
+    Rebilly provides the ability to pre-load additional
+    objects with a request.
 
     You can use `?expand` param on most requests to expand
     and include embedded objects within the
     `_embedded` property of the response.
 
-    The `_embedded` property contains an array of 
+    The `_embedded` property contains an array of
     objects keyed by the expand parameter value(s).
 
     You may expand multiple objects by passing them
@@ -119,8 +119,8 @@ info:
 
     # Getting Started Guide
 
-    Rebilly's API has over 300 operations.  That's more than you'll 
-    need to implement your use cases.  If you have a use 
+    Rebilly's API has over 300 operations.  That's more than you'll
+    need to implement your use cases.  If you have a use
     case you would like to implement, please consult us for
     feedback on the best API operations for the task.
 
@@ -141,9 +141,6 @@ info:
   version: '2.1'
   x-apisguru-categories:
     - developer_tools
-  x-logo:
-    backgroundColor: '#0033A0'
-    url: 'https://rebilly-api.redoc.ly/rb_apiLogo.svg'
   x-origin:
     - format: openapi
       url: 'https://api-reference.rebilly.com/openapi.json'
@@ -1467,14 +1464,14 @@ paths:
     post:
       deprecated: true
       description: |
-        Contacts are created automatically by data passed to the 
+        Contacts are created automatically by data passed to the
         contact-related hashes within the customer, invoice,
         payment instrument (like payment card), subscriptions,
-        and more.    
+        and more.
         <div class="alert alert-warning">
           Note: This method should almost never be used.
           Please check with us on your use case before using it.
-        </div>  
+        </div>
       operationId: PostContact
       requestBody:
         $ref: '#/components/requestBodies/Contact'
@@ -2641,14 +2638,14 @@ paths:
       - $ref: '#/components/parameters/organizationId'
     post:
       description: |
-        Create a customer without a predefined ID.  
+        Create a customer without a predefined ID.
         The customer's primary address
         will be used as the default address for payment
         instruments, subscriptions and invoices if none
         are provided.
 
         If you wish to create the customer with a predefined
-        ID (which we recommend to prevent duplication), you 
+        ID (which we recommend to prevent duplication), you
         may use our `PUT` request described below.
 
         Read our guide to [preventing duplicates](https://api-guides.rebilly.com/core-concepts/preventing-duplicates)
@@ -7551,9 +7548,9 @@ paths:
     post:
       description: |
         [FramePay](https://rebilly.github.io/framepay-docs/)
-        is the recommended way to 
+        is the recommended way to
         create a payment token because it minimizes
-        PCI DSS compliance.  Once a payment token 
+        PCI DSS compliance.  Once a payment token
         is created, it can only be used once.
 
         A payment token expires upon first use
@@ -7764,18 +7761,18 @@ paths:
         However, many transactions, especially those for alternative
         methods, require the user to interact with a 3rd party.  You
         may be able to envision PayPal, for example, the user must
-        give permission to complete the payment (or accept the 
-        billing agreement).  
+        give permission to complete the payment (or accept the
+        billing agreement).
 
         Even payment cards may require user approval in the case of
-        3D secure authentication.  In the event that approval is 
+        3D secure authentication.  In the event that approval is
         required, you will receive a response back and notice
         that the `result` is `unknown`.  You will find that the
         `status` is `waiting-approval`. And you will find in the
         `_links` section of the response a link for the `approvalUrl`.
 
-        In this case you would either open the `approvalUrl` in an 
-        iframe or in a pop (better workflow for mobile).  
+        In this case you would either open the `approvalUrl` in an
+        iframe or in a pop (better workflow for mobile).
       operationId: PostTransaction
       requestBody:
         $ref: '#/components/requestBodies/TransactionRequest'
@@ -8116,8 +8113,8 @@ components:
   parameters:
     collectionExpand:
       description: |
-        Expand a response to get a full related object included inside 
-        of the `_embedded` path in the response. 
+        Expand a response to get a full related object included inside
+        of the `_embedded` path in the response.
 
         It accepts a comma-separated list of objects to expand.
 
@@ -8215,10 +8212,10 @@ components:
         type: string
     subscriptionExpand:
       description: |
-        Expand a response to get a full related object included inside 
-        of the `_embedded` path in the response. 
+        Expand a response to get a full related object included inside
+        of the `_embedded` path in the response.
 
-        To expand multiple objects, it accepts a comma-separated 
+        To expand multiple objects, it accepts a comma-separated
         list of objects (example: `expand=recentInvoice,initialInvoice`).
 
         Available arguments are:
@@ -14950,7 +14947,7 @@ components:
         Products include digital goods, services, and physical goods.
         Products appear on invoice line items. If you set a tax category identifier,
         taxes will be calculated upon invoice generation.  If it is shippable,
-        shipping will be calculated upon invoice generation.  Pricing and 
+        shipping will be calculated upon invoice generation.  Pricing and
         variations are set within Plans.
       properties:
         _links:
