@@ -485,10 +485,12 @@ components:
         - Disassociating
     Name:
       type: string
+      pattern: '^\S[\w.-]*$'
       minLength: 1
       maxLength: 100
     Owner:
       type: string
+      pattern: ^\S(.*\S)?$
       minLength: 1
       maxLength: 100
     Arn:

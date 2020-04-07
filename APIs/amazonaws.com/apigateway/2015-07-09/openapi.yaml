@@ -171,7 +171,7 @@ paths:
                   description: Specifies whether the <a>ApiKey</a> can be used by callers.
                   type: boolean
                 generateDistinctId:
-                  description: Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value.
+                  description: Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.
                   type: boolean
                 value:
                   description: Specifies a value of the API key.
@@ -472,7 +472,7 @@ paths:
                   description: '[Required] The string identifier of the associated <a>RestApi</a>.'
                   type: string
                 stage:
-                  description: The name of the API's stage that you want to use for this mapping. Specify '(none)' if you do not want callers to explicitly specify the stage name after any base path name.
+                  description: The name of the API's stage that you want to use for this mapping. Specify '(none)' if you want callers to explicitly specify the stage name after any base path name.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2225,7 +2225,7 @@ paths:
                   description: The description of the VPC link.
                   type: string
                 targetArns:
-                  description: '[Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.'
+                  description: '[Required] The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -7238,7 +7238,7 @@ paths:
         - name: resource_arn
           in: path
           required: true
-          description: '[Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.'
+          description: '[Required] The ARN of a resource that can be tagged.'
           schema:
             type: string
         - name: position
@@ -7307,7 +7307,7 @@ paths:
         - name: resource_arn
           in: path
           required: true
-          description: '[Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.'
+          description: '[Required] The ARN of a resource that can be tagged.'
           schema:
             type: string
       requestBody:
@@ -7617,7 +7617,7 @@ paths:
         - name: resource_arn
           in: path
           required: true
-          description: '[Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.'
+          description: '[Required] The ARN of a resource that can be tagged.'
           schema:
             type: string
         - name: tagKeys
@@ -8212,7 +8212,7 @@ components:
           description: The description of the VPC link.
         targetArns:
           $ref: '#/components/schemas/ListOfString'
-          description: The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+          description: The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
         status:
           $ref: '#/components/schemas/VpcLinkStatus'
           description: 'The status of the VPC link. The valid values are <code>AVAILABLE</code>, <code>PENDING</code>, <code>DELETING</code>, or <code>FAILED</code>. Deploying an API will wait if the status is <code>PENDING</code> and will fail if the status is <code>DELETING</code>. '
@@ -8222,7 +8222,7 @@ components:
         tags:
           $ref: '#/components/schemas/MapOfStringToString'
           description: The collection of tags. Each tag element is associated with a given resource.
-      description: '<p>A API Gateway VPC link for a <a>RestApi</a> to access resources in an Amazon Virtual Private Cloud (VPC).</p> <div class="remarks"> <p><p>To enable access to a resource in an Amazon Virtual Private Cloud through Amazon API Gateway, you, as an API developer, create a <a>VpcLink</a> resource targeted for one or more network load balancers of the VPC and then integrate an API method with a private integration that uses the <a>VpcLink</a>. The private integration has an integration type of <code>HTTP</code> or <code>HTTP_PROXY</code> and has a connection type of <code>VPC_LINK</code>. The integration uses the <code>connectionId</code> property to identify the <a>VpcLink</a> used.</p> </p> </div>'
+      description: '<p>An API Gateway VPC link for a <a>RestApi</a> to access resources in an Amazon Virtual Private Cloud (VPC).</p> <div class="remarks"> <p><p>To enable access to a resource in an Amazon Virtual Private Cloud through Amazon API Gateway, you, as an API developer, create a <a>VpcLink</a> resource targeted for one or more network load balancers of the VPC and then integrate an API method with a private integration that uses the <a>VpcLink</a>. The private integration has an integration type of <code>HTTP</code> or <code>HTTP_PROXY</code> and has a connection type of <code>VPC_LINK</code>. The integration uses the <code>connectionId</code> property to identify the <a>VpcLink</a> used.</p> </p> </div>'
     ClientCertificate:
       type: object
       properties:
@@ -8712,7 +8712,7 @@ components:
           description: 'A single line format of the access logs of data, as specified by selected <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference">$context variables</a>. The format must include at least <code>$context.requestId</code>.'
         destinationArn:
           $ref: '#/components/schemas/String'
-          description: The ARN of the CloudWatch Logs log group to receive access logs.
+          description: 'The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with <code>amazon-apigateway-</code>.'
       description: 'Access log settings, including the access log format and access log destination ARN.'
     ThrottleSettings:
       type: object
@@ -8837,7 +8837,7 @@ components:
           description: Specifies whether the <a>ApiKey</a> can be used by callers.
         generateDistinctId:
           $ref: '#/components/schemas/Boolean'
-          description: Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value.
+          description: Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.
         value:
           $ref: '#/components/schemas/String'
           description: Specifies a value of the API key.
@@ -8900,7 +8900,7 @@ components:
           description: '[Required] The string identifier of the associated <a>RestApi</a>.'
         stage:
           $ref: '#/components/schemas/String'
-          description: The name of the API's stage that you want to use for this mapping. Specify '(none)' if you do not want callers to explicitly specify the stage name after any base path name.
+          description: The name of the API's stage that you want to use for this mapping. Specify '(none)' if you want callers to explicitly specify the stage name after any base path name.
       description: Requests API Gateway to create a new <a>BasePathMapping</a> resource.
     DeploymentCanarySettings:
       type: object
@@ -9240,7 +9240,7 @@ components:
           description: The description of the VPC link.
         targetArns:
           $ref: '#/components/schemas/ListOfString'
-          description: '[Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.'
+          description: '[Required] The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.'
         tags:
           $ref: '#/components/schemas/MapOfStringToString'
           description: 'The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
@@ -9812,7 +9812,7 @@ components:
           description: 'Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is <code>/{method_setting_key}/metrics/enabled</code>, and the value is a Boolean.'
         loggingLevel:
           $ref: '#/components/schemas/String'
-          description: 'Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>.'
+          description: 'Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/loglevel</code>, and the available levels are <code>OFF</code>, <code>ERROR</code>, and <code>INFO</code>. Choose <code>ERROR</code> to write only error-level entries to CloudWatch Logs, or choose <code>INFO</code> to include all <code>ERROR</code> events as well as extra informational events.'
         dataTraceEnabled:
           $ref: '#/components/schemas/Boolean'
           description: 'Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.'

@@ -1163,6 +1163,13 @@ paths:
                 streamId:
                   description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   type: string
+                vpcInterfaceAttachment:
+                  description: The settings for attaching a VPC interface to an output.
+                  type: object
+                  properties:
+                    VpcInterfaceName:
+                      $ref: '#/components/schemas/__string'
+                      description: The name of the VPC interface to use for this output.
   '/v1/flows/{flowArn}/source/{sourceArn}':
     delete:
       operationId: RemoveFlowSource
@@ -1873,6 +1880,9 @@ components:
         StreamId:
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+        VpcInterfaceAttachment:
+          $ref: '#/components/schemas/VpcInterfaceAttachment'
+          description: The name of the VPC interface attachment to use for this output.
       description: The output that you want to add to this flow.
     AddFlowOutputs420Exception: {}
     BadRequestException: {}
@@ -2241,6 +2251,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/__string'
+    VpcInterfaceAttachment:
+      type: object
+      properties:
+        VpcInterfaceName:
+          $ref: '#/components/schemas/__string'
+          description: The name of the VPC interface to use for this output.
+      description: The settings for attaching a VPC interface to an output.
     __listOfGrantEntitlementRequest:
       type: array
       items:
@@ -2575,6 +2592,9 @@ components:
         Transport:
           $ref: '#/components/schemas/Transport'
           description: Attributes related to the transport stream that are used in the output.
+        VpcInterfaceAttachment:
+          $ref: '#/components/schemas/VpcInterfaceAttachment'
+          description: The name of the VPC interface attachment to use for this output.
       description: The settings for an output.
     RemoveFlowOutputRequest:
       type: object
@@ -2702,6 +2722,9 @@ components:
         StreamId:
           $ref: '#/components/schemas/__string'
           description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+        VpcInterfaceAttachment:
+          $ref: '#/components/schemas/VpcInterfaceAttachment'
+          description: The name of the VPC interface attachment to use for this output.
       description: The fields that you want to update in the output.
     UpdateFlowRequest:
       type: object
