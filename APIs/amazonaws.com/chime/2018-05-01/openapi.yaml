@@ -2034,6 +2034,227 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/voice-connectors/{voiceConnectorId}/proxy-sessions':
+    post:
+      operationId: CreateProxySession
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProxySessionResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ParticipantPhoneNumbers
+                - Capabilities
+              properties:
+                ParticipantPhoneNumbers:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/E164PhoneNumber'
+                  minItems: 2
+                  maxItems: 2
+                Name:
+                  description: ''
+                  type: string
+                  pattern: '^$|^[a-zA-Z0-9 ]{0,30}$'
+                  format: password
+                ExpiryMinutes:
+                  description: ''
+                  type: integer
+                  minimum: 1
+                Capabilities:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Capability'
+                NumberSelectionBehavior:
+                  description: ''
+                  type: string
+                  enum:
+                    - PreferSticky
+                    - AvoidSticky
+                GeoMatchLevel:
+                  description: ''
+                  type: string
+                  enum:
+                    - Country
+                    - AreaCode
+                GeoMatchParams:
+                  description: ''
+                  type: object
+                  properties:
+                    Country:
+                      $ref: '#/components/schemas/Country'
+                    AreaCode:
+                      $ref: '#/components/schemas/AreaCode'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProxySessions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProxySessionsResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: status
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            enum:
+              - Open
+              - InProgress
+              - Closed
+        - name: next-token
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            maxLength: 65535
+        - name: max-results
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 99
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/accounts/{accountId}/rooms':
     post:
       operationId: CreateRoom
@@ -3736,6 +3957,242 @@ paths:
                   type: string
                   pattern: '^$|^[a-zA-Z0-9 ]{2,15}$'
                   format: password
+  '/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}':
+    delete:
+      operationId: DeleteProxySession
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: proxySessionId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetProxySession
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProxySessionResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: proxySessionId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+    post:
+      operationId: UpdateProxySession
+      description: ''
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProxySessionResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+        - name: proxySessionId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Capabilities
+              properties:
+                Capabilities:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Capability'
+                ExpiryMinutes:
+                  description: ''
+                  type: integer
+                  minimum: 1
   '/accounts/{accountId}/rooms/{roomId}':
     delete:
       operationId: DeleteRoom
@@ -4749,6 +5206,231 @@ paths:
                     Disabled:
                       $ref: '#/components/schemas/Boolean'
                       description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+  '/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy':
+    delete:
+      operationId: DeleteVoiceConnectorProxy
+      description: ''
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorProxy
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoiceConnectorProxyResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+    put:
+      operationId: PutVoiceConnectorProxy
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutVoiceConnectorProxyResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DefaultSessionExpiryMinutes
+                - PhoneNumberPoolCountries
+              properties:
+                DefaultSessionExpiryMinutes:
+                  description: ''
+                  type: integer
+                PhoneNumberPoolCountries:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Country'
+                  minItems: 1
+                  maxItems: 100
+                FallBackPhoneNumber:
+                  description: ''
+                  type: string
+                  pattern: '^\+?[1-9]\d{1,14}$'
+                  format: password
+                Disabled:
+                  description: ''
+                  type: boolean
   '/voice-connectors/{voiceConnectorId}/streaming-configuration':
     delete:
       operationId: DeleteVoiceConnectorStreamingConfiguration
@@ -7801,6 +8483,22 @@ components:
         PhoneNumberOrder:
           $ref: '#/components/schemas/PhoneNumberOrder'
           description: The phone number order details.
+    CreateProxySessionResponse:
+      type: object
+      properties:
+        ProxySession:
+          $ref: '#/components/schemas/ProxySession'
+    Capability:
+      type: string
+      enum:
+        - Voice
+        - SMS
+    Country:
+      type: string
+      pattern: '^$|^[A-Z]{2,2}$'
+    AreaCode:
+      type: string
+      pattern: '^$|^[0-9]{3,3}$'
     CreateRoomResponse:
       type: object
       properties:
@@ -7935,6 +8633,11 @@ components:
         CallingNameUpdatedTimestamp:
           $ref: '#/components/schemas/Iso8601Timestamp'
           description: 'The updated outbound calling name timestamp, in ISO 8601 format.'
+    GetProxySessionResponse:
+      type: object
+      properties:
+        ProxySession:
+          $ref: '#/components/schemas/ProxySession'
     GetRoomResponse:
       type: object
       properties:
@@ -7977,6 +8680,11 @@ components:
         Origination:
           $ref: '#/components/schemas/Origination'
           description: The origination setting details.
+    GetVoiceConnectorProxyResponse:
+      type: object
+      properties:
+        Proxy:
+          $ref: '#/components/schemas/Proxy'
     GetVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
@@ -8059,6 +8767,13 @@ components:
         NextToken:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results.
+    ListProxySessionsResponse:
+      type: object
+      properties:
+        ProxySessions:
+          $ref: '#/components/schemas/ProxySessions'
+        NextToken:
+          $ref: '#/components/schemas/NextTokenString'
     ListRoomMembershipsResponse:
       type: object
       properties:
@@ -8136,6 +8851,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/OriginationRoute'
+    PutVoiceConnectorProxyResponse:
+      type: object
+      properties:
+        Proxy:
+          $ref: '#/components/schemas/Proxy'
     PutVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
@@ -8216,6 +8936,11 @@ components:
         PhoneNumber:
           $ref: '#/components/schemas/PhoneNumber'
           description: The updated phone number details.
+    UpdateProxySessionResponse:
+      type: object
+      properties:
+        ProxySession:
+          $ref: '#/components/schemas/ProxySession'
     UpdateRoomResponse:
       type: object
       properties:
@@ -8602,12 +9327,22 @@ components:
         - UpdateFailed
     CallingRegion:
       type: string
+    CapabilityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Capability'
     ClientRequestToken:
       type: string
       pattern: '[-_a-zA-Z0-9]*'
       minLength: 2
       maxLength: 64
       format: password
+    CountryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Country'
+      minItems: 1
+      maxItems: 100
     CreateAccountRequest:
       type: object
       required:
@@ -8719,6 +9454,94 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
           description: 'The updated phone number order timestamp, in ISO 8601 format.'
       description: The details of a phone number order created for Amazon Chime.
+    NonEmptyString128:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 128
+    ParticipantPhoneNumberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/E164PhoneNumber'
+      minItems: 2
+      maxItems: 2
+    ProxySessionNameString:
+      type: string
+      pattern: '^$|^[a-zA-Z0-9 ]{0,30}$'
+      format: password
+    PositiveInteger:
+      type: integer
+      minimum: 1
+    NumberSelectionBehavior:
+      type: string
+      enum:
+        - PreferSticky
+        - AvoidSticky
+    GeoMatchLevel:
+      type: string
+      enum:
+        - Country
+        - AreaCode
+    GeoMatchParams:
+      type: object
+      required:
+        - Country
+        - AreaCode
+      properties:
+        Country:
+          $ref: '#/components/schemas/Country'
+        AreaCode:
+          $ref: '#/components/schemas/AreaCode'
+    CreateProxySessionRequest:
+      type: object
+      required:
+        - ParticipantPhoneNumbers
+        - Capabilities
+      title: CreateProxySessionRequest
+      properties:
+        ParticipantPhoneNumbers:
+          $ref: '#/components/schemas/ParticipantPhoneNumberList'
+        Name:
+          $ref: '#/components/schemas/ProxySessionNameString'
+        ExpiryMinutes:
+          $ref: '#/components/schemas/PositiveInteger'
+        Capabilities:
+          $ref: '#/components/schemas/CapabilityList'
+        NumberSelectionBehavior:
+          $ref: '#/components/schemas/NumberSelectionBehavior'
+        GeoMatchLevel:
+          $ref: '#/components/schemas/GeoMatchLevel'
+        GeoMatchParams:
+          $ref: '#/components/schemas/GeoMatchParams'
+    ProxySession:
+      type: object
+      properties:
+        VoiceConnectorId:
+          $ref: '#/components/schemas/NonEmptyString128'
+        ProxySessionId:
+          $ref: '#/components/schemas/NonEmptyString128'
+        Name:
+          $ref: '#/components/schemas/String128'
+        Status:
+          $ref: '#/components/schemas/ProxySessionStatus'
+        ExpiryMinutes:
+          $ref: '#/components/schemas/PositiveInteger'
+        Capabilities:
+          $ref: '#/components/schemas/CapabilityList'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        UpdatedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        EndedTimestamp:
+          $ref: '#/components/schemas/Iso8601Timestamp'
+        Participants:
+          $ref: '#/components/schemas/Participants'
+        NumberSelectionBehavior:
+          $ref: '#/components/schemas/NumberSelectionBehavior'
+        GeoMatchLevel:
+          $ref: '#/components/schemas/GeoMatchLevel'
+        GeoMatchParams:
+          $ref: '#/components/schemas/GeoMatchParams'
     RoomMembershipRole:
       type: string
       enum:
@@ -8964,6 +9787,10 @@ components:
       type: object
       title: DeletePhoneNumberRequest
       properties: {}
+    DeleteProxySessionRequest:
+      type: object
+      title: DeleteProxySessionRequest
+      properties: {}
     DeleteRoomMembershipRequest:
       type: object
       title: DeleteRoomMembershipRequest
@@ -8979,6 +9806,10 @@ components:
     DeleteVoiceConnectorOriginationRequest:
       type: object
       title: DeleteVoiceConnectorOriginationRequest
+      properties: {}
+    DeleteVoiceConnectorProxyRequest:
+      type: object
+      title: DeleteVoiceConnectorProxyRequest
       properties: {}
     DeleteVoiceConnectorRequest:
       type: object
@@ -9145,6 +9976,10 @@ components:
           $ref: '#/components/schemas/Iso8601Timestamp'
           description: 'The deleted phone number timestamp, in ISO 8601 format.'
       description: A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice Connector.
+    GetProxySessionRequest:
+      type: object
+      title: GetProxySessionRequest
+      properties: {}
     GetRoomRequest:
       type: object
       title: GetRoomRequest
@@ -9195,6 +10030,21 @@ components:
           $ref: '#/components/schemas/Boolean'
           description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
       description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
+    GetVoiceConnectorProxyRequest:
+      type: object
+      title: GetVoiceConnectorProxyRequest
+      properties: {}
+    Proxy:
+      type: object
+      properties:
+        DefaultSessionExpiryMinutes:
+          $ref: '#/components/schemas/Integer'
+        Disabled:
+          $ref: '#/components/schemas/Boolean'
+        FallBackPhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+        PhoneNumberCountries:
+          $ref: '#/components/schemas/StringList'
     GetVoiceConnectorRequest:
       type: object
       title: GetVoiceConnectorRequest
@@ -9252,6 +10102,8 @@ components:
           $ref: '#/components/schemas/Boolean'
           description: 'When termination settings are disabled, outbound calls can not be made.'
       description: Termination settings enable your SIP hosts to make outbound calls using your Amazon Chime Voice Connector.
+    Integer:
+      type: integer
     InviteStatus:
       type: string
       enum:
@@ -9357,6 +10209,23 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PhoneNumber'
+    ProxySessionStatus:
+      type: string
+      enum:
+        - Open
+        - InProgress
+        - Closed
+    NextTokenString:
+      type: string
+      maxLength: 65535
+    ListProxySessionsRequest:
+      type: object
+      title: ListProxySessionsRequest
+      properties: {}
+    ProxySessions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProxySession'
     ListRoomMembershipsRequest:
       type: object
       title: ListRoomMembershipsRequest
@@ -9527,6 +10396,17 @@ components:
           $ref: '#/components/schemas/OriginationRouteWeight'
           description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
       description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.'
+    Participant:
+      type: object
+      properties:
+        PhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+        ProxyPhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+    Participants:
+      type: array
+      items:
+        $ref: '#/components/schemas/Participant'
     PhoneNumberType:
       type: string
       enum:
@@ -9595,6 +10475,9 @@ components:
         - Successful
         - Failed
         - Partial
+    String128:
+      type: string
+      maxLength: 128
     PutEventsConfigurationRequest:
       type: object
       title: PutEventsConfigurationRequest
@@ -9623,6 +10506,21 @@ components:
         Origination:
           $ref: '#/components/schemas/Origination'
           description: The origination setting details to add.
+    PutVoiceConnectorProxyRequest:
+      type: object
+      required:
+        - DefaultSessionExpiryMinutes
+        - PhoneNumberPoolCountries
+      title: PutVoiceConnectorProxyRequest
+      properties:
+        DefaultSessionExpiryMinutes:
+          $ref: '#/components/schemas/Integer'
+        PhoneNumberPoolCountries:
+          $ref: '#/components/schemas/CountryList'
+        FallBackPhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+        Disabled:
+          $ref: '#/components/schemas/Boolean'
     PutVoiceConnectorStreamingConfigurationRequest:
       type: object
       required:
@@ -9730,6 +10628,16 @@ components:
         CallingName:
           $ref: '#/components/schemas/CallingName'
           description: The default outbound calling name for the account.
+    UpdateProxySessionRequest:
+      type: object
+      required:
+        - Capabilities
+      title: UpdateProxySessionRequest
+      properties:
+        Capabilities:
+          $ref: '#/components/schemas/CapabilityList'
+        ExpiryMinutes:
+          $ref: '#/components/schemas/PositiveInteger'
     UpdateRoomMembershipRequest:
       type: object
       title: UpdateRoomMembershipRequest
