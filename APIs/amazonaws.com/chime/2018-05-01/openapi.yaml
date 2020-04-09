@@ -1430,6 +1430,13 @@ paths:
                   minLength: 2
                   maxLength: 64
                   format: password
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 10
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1772,6 +1779,12 @@ paths:
                   minLength: 2
                   maxLength: 64
                   format: password
+                ExternalMeetingId:
+                  description: The external meeting ID.
+                  type: string
+                  minLength: 2
+                  maxLength: 64
+                  format: password
                 MeetingHostId:
                   description: Reserved.
                   type: string
@@ -1781,6 +1794,13 @@ paths:
                 MediaRegion:
                   description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
                   type: string
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
                 NotificationsConfiguration:
                   description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
                   type: object
@@ -2037,7 +2057,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/proxy-sessions':
     post:
       operationId: CreateProxySession
-      description: ''
+      description: Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
       responses:
         '201':
           description: Success
@@ -2091,7 +2111,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -2108,46 +2128,48 @@ paths:
                 - Capabilities
               properties:
                 ParticipantPhoneNumbers:
-                  description: ''
+                  description: The participant phone numbers.
                   type: array
                   items:
                     $ref: '#/components/schemas/E164PhoneNumber'
                   minItems: 2
                   maxItems: 2
                 Name:
-                  description: ''
+                  description: The name of the proxy session.
                   type: string
                   pattern: '^$|^[a-zA-Z0-9 ]{0,30}$'
                   format: password
                 ExpiryMinutes:
-                  description: ''
+                  description: The number of minutes allowed for the proxy session.
                   type: integer
                   minimum: 1
                 Capabilities:
-                  description: ''
+                  description: The proxy session capabilities.
                   type: array
                   items:
                     $ref: '#/components/schemas/Capability'
                 NumberSelectionBehavior:
-                  description: ''
+                  description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
                   type: string
                   enum:
                     - PreferSticky
                     - AvoidSticky
                 GeoMatchLevel:
-                  description: ''
+                  description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
                   type: string
                   enum:
                     - Country
                     - AreaCode
                 GeoMatchParams:
-                  description: ''
+                  description: The country and area code for a proxy phone number in a proxy phone session.
                   type: object
                   properties:
                     Country:
                       $ref: '#/components/schemas/Country'
+                      description: The country.
                     AreaCode:
                       $ref: '#/components/schemas/AreaCode'
+                      description: The area code.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2158,7 +2180,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListProxySessions
-      description: ''
+      description: Lists the proxy sessions for the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -2212,7 +2234,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -2221,7 +2243,7 @@ paths:
         - name: status
           in: query
           required: false
-          description: ''
+          description: The proxy session status.
           schema:
             type: string
             enum:
@@ -2231,14 +2253,14 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: ''
+          description: The token to use to retrieve the next page of results.
           schema:
             type: string
             maxLength: 65535
         - name: max-results
           in: query
           required: false
-          description: ''
+          description: The maximum number of results to return in a single call.
           schema:
             type: integer
             minimum: 1
@@ -3960,7 +3982,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}':
     delete:
       operationId: DeleteProxySession
-      description: ''
+      description: Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
       responses:
         '204':
           description: Success
@@ -4010,7 +4032,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4019,7 +4041,7 @@ paths:
         - name: proxySessionId
           in: path
           required: true
-          description: ''
+          description: The proxy session ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4035,7 +4057,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetProxySession
-      description: ''
+      description: Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -4089,7 +4111,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4098,7 +4120,7 @@ paths:
         - name: proxySessionId
           in: path
           required: true
-          description: ''
+          description: The proxy session ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4106,7 +4128,7 @@ paths:
             maxLength: 128
     post:
       operationId: UpdateProxySession
-      description: ''
+      description: 'Updates the specified proxy session details, such as voice or SMS capabilities.'
       responses:
         '201':
           description: Success
@@ -4160,7 +4182,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4169,7 +4191,7 @@ paths:
         - name: proxySessionId
           in: path
           required: true
-          description: ''
+          description: The proxy session ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -4185,12 +4207,12 @@ paths:
                 - Capabilities
               properties:
                 Capabilities:
-                  description: ''
+                  description: The proxy session capabilities.
                   type: array
                   items:
                     $ref: '#/components/schemas/Capability'
                 ExpiryMinutes:
-                  description: ''
+                  description: The number of minutes allowed for the proxy session.
                   type: integer
                   minimum: 1
   '/accounts/{accountId}/rooms/{roomId}':
@@ -5209,7 +5231,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy':
     delete:
       operationId: DeleteVoiceConnectorProxy
-      description: ''
+      description: Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
       responses:
         '204':
           description: Success
@@ -5259,7 +5281,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime Voice Connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -5275,7 +5297,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetVoiceConnectorProxy
-      description: ''
+      description: Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -5329,7 +5351,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -5337,7 +5359,7 @@ paths:
             maxLength: 128
     put:
       operationId: PutVoiceConnectorProxy
-      description: ''
+      description: Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
       responses:
         '200':
           description: Success
@@ -5397,7 +5419,7 @@ paths:
         - name: voiceConnectorId
           in: path
           required: true
-          description: ''
+          description: The Amazon Chime voice connector ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -5414,22 +5436,22 @@ paths:
                 - PhoneNumberPoolCountries
               properties:
                 DefaultSessionExpiryMinutes:
-                  description: ''
+                  description: The default number of minutes allowed for proxy sessions.
                   type: integer
                 PhoneNumberPoolCountries:
-                  description: ''
+                  description: The countries for proxy phone numbers to be selected from.
                   type: array
                   items:
                     $ref: '#/components/schemas/Country'
                   minItems: 1
                   maxItems: 100
                 FallBackPhoneNumber:
-                  description: ''
+                  description: The phone number to route calls to after a proxy session expires.
                   type: string
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
                 Disabled:
-                  description: ''
+                  description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
                   type: boolean
   '/voice-connectors/{voiceConnectorId}/streaming-configuration':
     delete:
@@ -7532,6 +7554,151 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/attendees/{attendeeId}/tags':
+    get:
+      operationId: ListAttendeeTags
+      description: Lists the tags applied to an Amazon Chime SDK attendee resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAttendeeTagsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: attendeeId
+          in: path
+          required: true
+          description: The Amazon Chime SDK attendee ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/tags':
+    get:
+      operationId: ListMeetingTags
+      description: Lists the tags applied to an Amazon Chime SDK meeting resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMeetingTagsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /phone-numbers:
     get:
       operationId: ListPhoneNumbers
@@ -7647,6 +7814,72 @@ paths:
             type: string
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags#arn':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags applied to an Amazon Chime SDK meeting resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: arn
+          in: query
+          required: true
+          description: The resource ARN.
+          schema:
+            type: string
+            pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+            minLength: 1
+            maxLength: 1024
+            format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8255,6 +8488,550 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/attendees/{attendeeId}/tags#operation=add':
+    post:
+      operationId: TagAttendee
+      description: Applies the specified tags to the specified Amazon Chime SDK attendee.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: attendeeId
+          in: path
+          required: true
+          description: The Amazon Chime SDK attendee ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - add
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/tags#operation=add':
+    post:
+      operationId: TagMeeting
+      description: Applies the specified tags to the specified Amazon Chime SDK meeting.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - add
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags#operation=tag-resource':
+    post:
+      operationId: TagResource
+      description: Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - tag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/attendees/{attendeeId}/tags#operation=delete':
+    post:
+      operationId: UntagAttendee
+      description: Untags the specified tags from the specified Amazon Chime SDK attendee.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: attendeeId
+          in: path
+          required: true
+          description: The Amazon Chime SDK attendee ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - delete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TagKeys
+              properties:
+                TagKeys:
+                  description: The tag keys.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/tags#operation=delete':
+    post:
+      operationId: UntagMeeting
+      description: Untags the specified tags from the specified Amazon Chime SDK meeting.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The Amazon Chime SDK meeting ID.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - delete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TagKeys
+              properties:
+                TagKeys:
+                  description: The tag keys.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags#operation=untag-resource':
+    post:
+      operationId: UntagResource
+      description: Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - untag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                TagKeys:
+                  description: The tag keys.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -8361,6 +9138,9 @@ components:
         ExternalUserId:
           $ref: '#/components/schemas/ExternalUserIdType'
           description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+        Tags:
+          $ref: '#/components/schemas/AttendeeTagList'
+          description: The tag key-value pairs.
       description: 'The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.'
     ResourceLimitExceededException: {}
     BatchCreateRoomMembershipResponse:
@@ -8459,6 +9239,19 @@ components:
         Attendee:
           $ref: '#/components/schemas/Attendee'
           description: 'The attendee information, including attendee ID and join token.'
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: The key of the tag.
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: The value of the tag.
+      description: Describes a tag applied to a resource.
     CreateBotResponse:
       type: object
       properties:
@@ -8488,6 +9281,7 @@ components:
       properties:
         ProxySession:
           $ref: '#/components/schemas/ProxySession'
+          description: The proxy session details.
     Capability:
       type: string
       enum:
@@ -8638,6 +9432,7 @@ components:
       properties:
         ProxySession:
           $ref: '#/components/schemas/ProxySession'
+          description: The proxy session details.
     GetRoomResponse:
       type: object
       properties:
@@ -8685,6 +9480,7 @@ components:
       properties:
         Proxy:
           $ref: '#/components/schemas/Proxy'
+          description: The proxy configuration details.
     GetVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
@@ -8722,6 +9518,12 @@ components:
         NextToken:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results.
+    ListAttendeeTagsResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag key-value pairs.
     ListAttendeesResponse:
       type: object
       properties:
@@ -8740,6 +9542,12 @@ components:
         NextToken:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results.
+    ListMeetingTagsResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag key-value pairs.
     ListMeetingsResponse:
       type: object
       properties:
@@ -8772,8 +9580,10 @@ components:
       properties:
         ProxySessions:
           $ref: '#/components/schemas/ProxySessions'
+          description: The proxy session details.
         NextToken:
           $ref: '#/components/schemas/NextTokenString'
+          description: The token to use to retrieve the next page of results.
     ListRoomMembershipsResponse:
       type: object
       properties:
@@ -8792,6 +9602,12 @@ components:
         NextToken:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag-key value pairs.
     ListUsersResponse:
       type: object
       properties:
@@ -8856,6 +9672,7 @@ components:
       properties:
         Proxy:
           $ref: '#/components/schemas/Proxy'
+          description: The proxy configuration details.
     PutVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
@@ -8915,6 +9732,11 @@ components:
         E164PhoneNumbers:
           $ref: '#/components/schemas/E164PhoneNumberList'
           description: 'List of phone numbers, in E.164 format.'
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
     UpdateAccountResponse:
       type: object
       properties:
@@ -8941,6 +9763,7 @@ components:
       properties:
         ProxySession:
           $ref: '#/components/schemas/ProxySession'
+          description: The proxy session details.
     UpdateRoomResponse:
       type: object
       properties:
@@ -9152,6 +9975,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Attendee'
+    AttendeeTagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 10
+    AttendeeTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 10
     CreateAttendeeError:
       type: object
       properties:
@@ -9361,6 +10196,9 @@ components:
         ExternalUserId:
           $ref: '#/components/schemas/ExternalUserIdType'
           description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+        Tags:
+          $ref: '#/components/schemas/AttendeeTagList'
+          description: The tag key-value pairs.
     CreateBotRequest:
       type: object
       required:
@@ -9373,6 +10211,17 @@ components:
         Domain:
           $ref: '#/components/schemas/NonEmptyString'
           description: The domain of the Amazon Chime Enterprise account.
+    ExternalMeetingIdType:
+      type: string
+      minLength: 2
+      maxLength: 64
+      format: password
+    MeetingTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
     MeetingNotificationConfiguration:
       type: object
       properties:
@@ -9392,12 +10241,18 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
           description: The unique identifier for the client request. Use a different token for different meetings.
+        ExternalMeetingId:
+          $ref: '#/components/schemas/ExternalMeetingIdType'
+          description: The external meeting ID.
         MeetingHostId:
           $ref: '#/components/schemas/ExternalUserIdType'
           description: Reserved.
         MediaRegion:
           $ref: '#/components/schemas/String'
           description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
+        Tags:
+          $ref: '#/components/schemas/MeetingTagList'
+          description: The tag key-value pairs.
         NotificationsConfiguration:
           $ref: '#/components/schemas/MeetingNotificationConfiguration'
           description: The configuration for resource targets to receive notifications when meeting and attendee events occur.
@@ -9407,6 +10262,9 @@ components:
         MeetingId:
           $ref: '#/components/schemas/GuidString'
           description: The Amazon Chime SDK meeting ID.
+        ExternalMeetingId:
+          $ref: '#/components/schemas/ExternalMeetingIdType'
+          description: The external meeting ID.
         MediaPlacement:
           $ref: '#/components/schemas/MediaPlacement'
           description: The media placement for the meeting.
@@ -9490,8 +10348,11 @@ components:
       properties:
         Country:
           $ref: '#/components/schemas/Country'
+          description: The country.
         AreaCode:
           $ref: '#/components/schemas/AreaCode'
+          description: The area code.
+      description: The country and area code for a proxy phone number in a proxy phone session.
     CreateProxySessionRequest:
       type: object
       required:
@@ -9501,47 +10362,68 @@ components:
       properties:
         ParticipantPhoneNumbers:
           $ref: '#/components/schemas/ParticipantPhoneNumberList'
+          description: The participant phone numbers.
         Name:
           $ref: '#/components/schemas/ProxySessionNameString'
+          description: The name of the proxy session.
         ExpiryMinutes:
           $ref: '#/components/schemas/PositiveInteger'
+          description: The number of minutes allowed for the proxy session.
         Capabilities:
           $ref: '#/components/schemas/CapabilityList'
+          description: The proxy session capabilities.
         NumberSelectionBehavior:
           $ref: '#/components/schemas/NumberSelectionBehavior'
+          description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
         GeoMatchLevel:
           $ref: '#/components/schemas/GeoMatchLevel'
+          description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
         GeoMatchParams:
           $ref: '#/components/schemas/GeoMatchParams'
+          description: The country and area code for the proxy phone number.
     ProxySession:
       type: object
       properties:
         VoiceConnectorId:
           $ref: '#/components/schemas/NonEmptyString128'
+          description: The Amazon Chime voice connector ID.
         ProxySessionId:
           $ref: '#/components/schemas/NonEmptyString128'
+          description: The proxy session ID.
         Name:
           $ref: '#/components/schemas/String128'
+          description: The name of the proxy session.
         Status:
           $ref: '#/components/schemas/ProxySessionStatus'
+          description: The status of the proxy session.
         ExpiryMinutes:
           $ref: '#/components/schemas/PositiveInteger'
+          description: The number of minutes allowed for the proxy session.
         Capabilities:
           $ref: '#/components/schemas/CapabilityList'
+          description: The proxy session capabilities.
         CreatedTimestamp:
           $ref: '#/components/schemas/Iso8601Timestamp'
+          description: 'The created timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
           $ref: '#/components/schemas/Iso8601Timestamp'
+          description: 'The updated timestamp, in ISO 8601 format.'
         EndedTimestamp:
           $ref: '#/components/schemas/Iso8601Timestamp'
+          description: 'The ended timestamp, in ISO 8601 format.'
         Participants:
           $ref: '#/components/schemas/Participants'
+          description: The proxy session participants.
         NumberSelectionBehavior:
           $ref: '#/components/schemas/NumberSelectionBehavior'
+          description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
         GeoMatchLevel:
           $ref: '#/components/schemas/GeoMatchLevel'
+          description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
         GeoMatchParams:
           $ref: '#/components/schemas/GeoMatchParams'
+          description: The country and area code for the proxy phone number.
+      description: The proxy session for an Amazon Chime Voice Connector.
     RoomMembershipRole:
       type: string
       enum:
@@ -10039,12 +10921,17 @@ components:
       properties:
         DefaultSessionExpiryMinutes:
           $ref: '#/components/schemas/Integer'
+          description: The default number of minutes allowed for proxy sessions.
         Disabled:
           $ref: '#/components/schemas/Boolean'
+          description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
         FallBackPhoneNumber:
           $ref: '#/components/schemas/E164PhoneNumber'
+          description: The phone number to route calls to after a proxy session expires.
         PhoneNumberCountries:
           $ref: '#/components/schemas/StringList'
+          description: The countries for proxy phone numbers to be selected from.
+      description: The proxy configuration for an Amazon Chime Voice Connector.
     GetVoiceConnectorRequest:
       type: object
       title: GetVoiceConnectorRequest
@@ -10155,6 +11042,16 @@ components:
       type: object
       title: ListAccountsRequest
       properties: {}
+    ListAttendeeTagsRequest:
+      type: object
+      title: ListAttendeeTagsRequest
+      properties: {}
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
     ResultMax:
       type: integer
       minimum: 1
@@ -10166,6 +11063,10 @@ components:
     ListBotsRequest:
       type: object
       title: ListBotsRequest
+      properties: {}
+    ListMeetingTagsRequest:
+      type: object
+      title: ListMeetingTagsRequest
       properties: {}
     ListMeetingsRequest:
       type: object
@@ -10242,6 +11143,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Room'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     ListUsersRequest:
       type: object
       title: ListUsersRequest
@@ -10302,6 +11207,12 @@ components:
           $ref: '#/components/schemas/UriType'
           description: The turn control URL.
       description: A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.
+    MeetingTagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
     MemberType:
       type: string
       enum:
@@ -10401,8 +11312,11 @@ components:
       properties:
         PhoneNumber:
           $ref: '#/components/schemas/E164PhoneNumber'
+          description: The participant's phone number.
         ProxyPhoneNumber:
           $ref: '#/components/schemas/E164PhoneNumber'
+          description: The participant's proxy phone number.
+      description: The phone number and proxy phone number for a participant in an Amazon Chime Voice Connector proxy session.
     Participants:
       type: array
       items:
@@ -10515,12 +11429,16 @@ components:
       properties:
         DefaultSessionExpiryMinutes:
           $ref: '#/components/schemas/Integer'
+          description: The default number of minutes allowed for proxy sessions.
         PhoneNumberPoolCountries:
           $ref: '#/components/schemas/CountryList'
+          description: The countries for proxy phone numbers to be selected from.
         FallBackPhoneNumber:
           $ref: '#/components/schemas/E164PhoneNumber'
+          description: The phone number to route calls to after a proxy session expires.
         Disabled:
           $ref: '#/components/schemas/Boolean'
+          description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
     PutVoiceConnectorStreamingConfigurationRequest:
       type: object
       required:
@@ -10573,6 +11491,79 @@ components:
       type: object
       title: SearchAvailablePhoneNumbersRequest
       properties: {}
+    TagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    TagAttendeeRequest:
+      type: object
+      required:
+        - Tags
+      title: TagAttendeeRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/AttendeeTagList'
+          description: The tag key-value pairs.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagMeetingRequest:
+      type: object
+      required:
+        - Tags
+      title: TagMeetingRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/MeetingTagList'
+          description: The tag key-value pairs.
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+          description: The resource ARN.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tag key-value pairs.
+    UntagAttendeeRequest:
+      type: object
+      required:
+        - TagKeys
+      title: UntagAttendeeRequest
+      properties:
+        TagKeys:
+          $ref: '#/components/schemas/AttendeeTagKeyList'
+          description: The tag keys.
+    UntagMeetingRequest:
+      type: object
+      required:
+        - TagKeys
+      title: UntagMeetingRequest
+      properties:
+        TagKeys:
+          $ref: '#/components/schemas/MeetingTagKeyList'
+          description: The tag keys.
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/Arn'
+          description: The resource ARN.
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+          description: The tag keys.
     UpdateAccountRequest:
       type: object
       title: UpdateAccountRequest
@@ -10636,8 +11627,10 @@ components:
       properties:
         Capabilities:
           $ref: '#/components/schemas/CapabilityList'
+          description: The proxy session capabilities.
         ExpiryMinutes:
           $ref: '#/components/schemas/PositiveInteger'
+          description: The number of minutes allowed for the proxy session.
     UpdateRoomMembershipRequest:
       type: object
       title: UpdateRoomMembershipRequest

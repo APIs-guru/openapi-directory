@@ -416,6 +416,53 @@ paths:
                     profilingEnabled:
                       $ref: '#/components/schemas/Boolean'
                       description: <p/>
+  '/profilingGroups/{profilingGroupName}/policy':
+    get:
+      operationId: GetPolicy
+      description: Gets the profiling group policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: profilingGroupName
+          in: path
+          required: true
+          description: The name of the profiling group.
+          schema:
+            type: string
+            pattern: '^[\w-]+$'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/profilingGroups/{profilingGroupName}/profile':
     get:
       operationId: GetProfile
@@ -743,6 +790,167 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profilingGroups/{profilingGroupName}/policy/{actionGroup}':
+    put:
+      operationId: PutPermission
+      description: 'Provides permission to the principals. This overwrites the existing permissions, and is not additive.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPermissionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: actionGroup
+          in: path
+          required: true
+          description: The list of actions that the users and roles can perform on the profiling group.
+          schema:
+            type: string
+            enum:
+              - agentPermissions
+        - name: profilingGroupName
+          in: path
+          required: true
+          description: The name of the profiling group.
+          schema:
+            type: string
+            pattern: '^[\w-]+$'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - principals
+              properties:
+                principals:
+                  description: The list of role and user ARNs or the accountId that needs access (wildcards are not allowed).
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Principal'
+                  minItems: 1
+                  maxItems: 50
+                revisionId:
+                  description: 'A unique identifier for the current revision of the policy. This is required, if a policy exists for the profiling group. This is not required when creating the policy for the first time.'
+                  type: string
+                  pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profilingGroups/{profilingGroupName}/policy/{actionGroup}#revisionId':
+    delete:
+      operationId: RemovePermission
+      description: Removes statement for the provided action group from the policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemovePermissionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: actionGroup
+          in: path
+          required: true
+          description: The list of actions that the users and roles can perform on the profiling group.
+          schema:
+            type: string
+            enum:
+              - agentPermissions
+        - name: profilingGroupName
+          in: path
+          required: true
+          description: The name of the profiling group.
+          schema:
+            type: string
+            pattern: '^[\w-]+$'
+            minLength: 1
+            maxLength: 255
+        - name: revisionId
+          in: query
+          required: true
+          description: A unique identifier for the current revision of the policy.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -834,6 +1042,19 @@ components:
           $ref: '#/components/schemas/ProfilingGroupDescription'
           description: Information about a profiling group.
       description: The structure representing the describeProfilingGroupResponse.
+    GetPolicyResponse:
+      type: object
+      required:
+        - policy
+        - revisionId
+      properties:
+        policy:
+          $ref: '#/components/schemas/String'
+          description: The resource-based policy attached to the <code>ProfilingGroup</code>.
+        revisionId:
+          $ref: '#/components/schemas/RevisionId'
+          description: A unique identifier for the current revision of the policy.
+      description: The structure representing the getPolicyResponse.
     GetProfileResponse:
       type: object
       required:
@@ -874,6 +1095,34 @@ components:
       type: object
       properties: {}
       description: The structure representing the postAgentProfileResponse.
+    PutPermissionResponse:
+      type: object
+      required:
+        - policy
+        - revisionId
+      properties:
+        policy:
+          $ref: '#/components/schemas/String'
+          description: The resource-based policy.
+        revisionId:
+          $ref: '#/components/schemas/RevisionId'
+          description: A unique identifier for the current revision of the policy.
+      description: The structure representing the putPermissionResponse.
+    Principal:
+      type: string
+    RemovePermissionResponse:
+      type: object
+      required:
+        - policy
+        - revisionId
+      properties:
+        policy:
+          $ref: '#/components/schemas/String'
+          description: The resource-based policy.
+        revisionId:
+          $ref: '#/components/schemas/RevisionId'
+          description: A unique identifier for the current revision of the policy.
+      description: The structure representing the removePermissionResponse.
     UpdateProfilingGroupResponse:
       type: object
       required:
@@ -883,6 +1132,10 @@ components:
           $ref: '#/components/schemas/ProfilingGroupDescription'
           description: Updated information about the profiling group.
       description: The structure representing the updateProfilingGroupResponse.
+    ActionGroup:
+      type: string
+      enum:
+        - agentPermissions
     Integer:
       type: integer
     AgentConfiguration:
@@ -998,8 +1251,16 @@ components:
       title: DescribeProfilingGroupRequest
       properties: {}
       description: The structure representing the describeProfilingGroupRequest.
+    GetPolicyRequest:
+      type: object
+      title: GetPolicyRequest
+      properties: {}
+      description: The structure representing the getPolicyRequest.
     String:
       type: string
+    RevisionId:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
     MaxDepth:
       type: integer
       minimum: 1
@@ -1059,6 +1320,12 @@ components:
           $ref: '#/components/schemas/AgentProfile'
           description: <p/>
       description: The structure representing the postAgentProfileRequest.
+    Principals:
+      type: array
+      items:
+        $ref: '#/components/schemas/Principal'
+      minItems: 1
+      maxItems: 50
     ProfileTime:
       type: object
       properties:
@@ -1081,6 +1348,24 @@ components:
           $ref: '#/components/schemas/AggregatedProfileTime'
           description: The latest aggregated profile
       description: Information about the profiling status.
+    PutPermissionRequest:
+      type: object
+      required:
+        - principals
+      title: PutPermissionRequest
+      properties:
+        principals:
+          $ref: '#/components/schemas/Principals'
+          description: The list of role and user ARNs or the accountId that needs access (wildcards are not allowed).
+        revisionId:
+          $ref: '#/components/schemas/RevisionId'
+          description: 'A unique identifier for the current revision of the policy. This is required, if a policy exists for the profiling group. This is not required when creating the policy for the first time.'
+      description: The structure representing the putPermissionRequest.
+    RemovePermissionRequest:
+      type: object
+      title: RemovePermissionRequest
+      properties: {}
+      description: The structure representing the removePermissionRequest.
     UpdateProfilingGroupRequest:
       type: object
       required:

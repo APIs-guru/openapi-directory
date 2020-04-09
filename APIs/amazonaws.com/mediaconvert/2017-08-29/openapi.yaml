@@ -347,14 +347,14 @@ paths:
                 - settings
               properties:
                 accelerationSettings:
-                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
+                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content.'
                   type: object
                   properties:
                     Mode:
                       $ref: '#/components/schemas/AccelerationMode'
                       description: Specify the conditions when the service will run your job with accelerated transcoding.
                 billingTagsSource:
-                  description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
+                  description: The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up.
                   type: string
                   enum:
                     - QUEUE
@@ -362,13 +362,18 @@ paths:
                     - JOB_TEMPLATE
                     - JOB
                 clientRequestToken:
-                  description: Idempotency token for CreateJob operation.
+                  description: Optional. Idempotency token for CreateJob operation.
                   type: string
+                hopDestinations:
+                  description: 'Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/HopDestination'
                 jobTemplate:
-                  description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
+                  description: 'Optional. When you create a job, you can either specify a job template or specify the transcoding settings individually.'
                   type: string
                 priority:
-                  description: 'Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
+                  description: 'Optional. Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
                   type: integer
                   minimum: -50
                   maximum: 50
@@ -435,12 +440,12 @@ paths:
                     - SECONDS_540
                     - SECONDS_600
                 tags:
-                  description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+                  description: Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 userMetadata:
-                  description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+                  description: Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
@@ -510,29 +515,29 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'Use this string, provided with the response to a previous request, to request the next batch of jobs.'
+          description: 'Optional. Use this string, provided with the response to a previous request, to request the next batch of jobs.'
           schema:
             type: string
         - name: order
           in: query
           required: false
-          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
           schema:
             type: string
             enum:
               - ASCENDING
               - DESCENDING
-            description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+            description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
         - name: queue
           in: query
           required: false
-          description: Provide a queue name to get back only jobs from that queue.
+          description: Optional. Provide a queue name to get back only jobs from that queue.
           schema:
             type: string
         - name: status
           in: query
           required: false
-          description: 'A job''s status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.'
+          description: 'Optional. A job''s status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.'
           schema:
             type: string
             enum:
@@ -613,7 +618,7 @@ paths:
                 - settings
               properties:
                 accelerationSettings:
-                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
+                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content.'
                   type: object
                   properties:
                     Mode:
@@ -625,6 +630,11 @@ paths:
                 description:
                   description: Optional. A description of the job template you are creating.
                   type: string
+                hopDestinations:
+                  description: 'Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/HopDestination'
                 name:
                   description: The name of the job template you are creating.
                   type: string
@@ -780,13 +790,13 @@ paths:
         - name: order
           in: query
           required: false
-          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
           schema:
             type: string
             enum:
               - ASCENDING
               - DESCENDING
-            description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+            description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
         - name: MaxResults
           in: query
           schema:
@@ -976,13 +986,13 @@ paths:
         - name: order
           in: query
           required: false
-          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
           schema:
             type: string
             enum:
               - ASCENDING
               - DESCENDING
-            description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+            description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
         - name: MaxResults
           in: query
           schema:
@@ -1170,13 +1180,13 @@ paths:
         - name: order
           in: query
           required: false
-          description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+          description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
           schema:
             type: string
             enum:
               - ASCENDING
               - DESCENDING
-            description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+            description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
         - name: MaxResults
           in: query
           schema:
@@ -1365,7 +1375,7 @@ paths:
               type: object
               properties:
                 accelerationSettings:
-                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
+                  description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content.'
                   type: object
                   properties:
                     Mode:
@@ -1377,6 +1387,11 @@ paths:
                 description:
                   description: 'The new description for the job template, if you are changing it.'
                   type: string
+                hopDestinations:
+                  description: Optional list of hop destinations.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/HopDestination'
                 priority:
                   description: 'Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
                   type: integer
@@ -2256,6 +2271,19 @@ components:
         - ENABLED
         - PREFERRED
       description: Specify whether the service runs your job with accelerated transcoding. Choose DISABLED if you don't want accelerated transcoding. Choose ENABLED if you want your job to run with accelerated transcoding and to fail if your input files or your job settings aren't compatible with accelerated transcoding. Choose PREFERRED if you want your job to run with accelerated transcoding if the job is compatible with the feature and to run at standard speed if it's not.
+    HopDestination:
+      type: object
+      properties:
+        Priority:
+          $ref: '#/components/schemas/__integerMinNegative50Max50'
+          description: 'Optional. When you set up a job to use queue hopping, you can specify a different relative priority for the job in the destination queue. If you don''t specify, the relative priority will remain the same as in the previous queue.'
+        Queue:
+          $ref: '#/components/schemas/__string'
+          description: 'Optional unless the job is submitted on the default queue. When you set up a job to use queue hopping, you can specify a destination queue. This queue cannot be the original queue to which the job is submitted. If the original queue isn''t the default queue and you don''t specify the destination queue, the job will move to the default queue.'
+        WaitMinutes:
+          $ref: '#/components/schemas/__integer'
+          description: 'Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 1440 minutes, inclusive.'
+      description: Optional. Configuration for a destination queue to which the job can hop once a customer-defined minimum wait time has passed.
     __integerMinNegative1000Max1000:
       type: integer
       minimum: -1000
@@ -2749,7 +2777,7 @@ components:
         Mode:
           $ref: '#/components/schemas/AccelerationMode'
           description: Specify the conditions when the service will run your job with accelerated transcoding.
-      description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
+      description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content.'
     AccelerationStatus:
       type: string
       enum:
@@ -3571,7 +3599,7 @@ components:
         - PRESET
         - JOB_TEMPLATE
         - JOB
-      description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
+      description: The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up.
     BurninSubtitleAlignment:
       type: string
       enum:
@@ -4602,6 +4630,10 @@ components:
           $ref: '#/components/schemas/MpdScte35Source'
           description: Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
       description: Settings for MP4 segments in DASH
+    __listOfHopDestination:
+      type: array
+      items:
+        $ref: '#/components/schemas/HopDestination'
     __integerMinNegative50Max50:
       type: integer
       minimum: -50
@@ -4675,19 +4707,22 @@ components:
       properties:
         AccelerationSettings:
           $ref: '#/components/schemas/AccelerationSettings'
-          description: 'Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
+          description: 'Optional. Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.'
         BillingTagsSource:
           $ref: '#/components/schemas/BillingTagsSource'
           description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
         ClientRequestToken:
           $ref: '#/components/schemas/__string'
-          description: Idempotency token for CreateJob operation.
+          description: Optional. Idempotency token for CreateJob operation.
+        HopDestinations:
+          $ref: '#/components/schemas/__listOfHopDestination'
+          description: 'Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.'
         JobTemplate:
           $ref: '#/components/schemas/__string'
-          description: 'When you create a job, you can either specify a job template or specify the transcoding settings individually'
+          description: 'Optional. When you create a job, you can either specify a job template or specify the transcoding settings individually.'
         Priority:
           $ref: '#/components/schemas/__integerMinNegative50Max50'
-          description: 'Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
+          description: 'Optional. Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
         Queue:
           $ref: '#/components/schemas/__string'
           description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
@@ -4699,16 +4734,16 @@ components:
           description: JobSettings contains all the transcode settings for a job.
         SimulateReservedQueue:
           $ref: '#/components/schemas/SimulateReservedQueue'
-          description: 'Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.'
+          description: 'Optional. Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.'
         StatusUpdateInterval:
           $ref: '#/components/schemas/StatusUpdateInterval'
-          description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
+          description: 'Optional. Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
         Tags:
           $ref: '#/components/schemas/__mapOf__string'
-          description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+          description: Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
         UserMetadata:
           $ref: '#/components/schemas/__mapOf__string'
-          description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+          description: Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
     Job:
       type: object
       required:
@@ -4726,7 +4761,7 @@ components:
           description: An identifier for this resource that is unique within all of AWS.
         BillingTagsSource:
           $ref: '#/components/schemas/BillingTagsSource'
-          description: 'Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don''t have an associated tag will appear in your billing report unsorted. If you don''t choose a valid value for this field, your job outputs will appear on the billing report unsorted.'
+          description: The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up.
         CreatedAt:
           $ref: '#/components/schemas/__timestampUnix'
           description: 'The time, in Unix epoch format in seconds, when the job got created.'
@@ -4739,6 +4774,9 @@ components:
         ErrorMessage:
           $ref: '#/components/schemas/__string'
           description: Error message of Job
+        HopDestinations:
+          $ref: '#/components/schemas/__listOfHopDestination'
+          description: Optional list of hop destinations.
         Id:
           $ref: '#/components/schemas/__string'
           description: 'A portion of the job''s ARN, unique within your AWS Elemental MediaConvert resources'
@@ -4759,7 +4797,10 @@ components:
           description: Relative priority on the job.
         Queue:
           $ref: '#/components/schemas/__string'
-          description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+          description: 'When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+        QueueTransitions:
+          $ref: '#/components/schemas/__listOfQueueTransition'
+          description: The job's queue hopping history.
         RetryCount:
           $ref: '#/components/schemas/__integer'
           description: The number of times that the service automatically attempted to process your job after encountering an error.
@@ -4832,6 +4873,9 @@ components:
         Description:
           $ref: '#/components/schemas/__string'
           description: Optional. A description of the job template you are creating.
+        HopDestinations:
+          $ref: '#/components/schemas/__listOfHopDestination'
+          description: 'Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.'
         Name:
           $ref: '#/components/schemas/__string'
           description: The name of the job template you are creating.
@@ -4871,6 +4915,9 @@ components:
         Description:
           $ref: '#/components/schemas/__string'
           description: An optional description you create for each job template.
+        HopDestinations:
+          $ref: '#/components/schemas/__listOfHopDestination'
+          description: Optional list of hop destinations.
         LastUpdated:
           $ref: '#/components/schemas/__timestampUnix'
           description: The timestamp in epoch seconds when the Job template was last updated.
@@ -7010,6 +7057,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/OutputGroupDetail'
+    __listOfQueueTransition:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueueTransition'
     JobStatus:
       type: string
       enum:
@@ -7057,7 +7108,7 @@ components:
       enum:
         - ASCENDING
         - DESCENDING
-      description: 'When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
+      description: 'Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.'
     ListJobTemplatesRequest:
       type: object
       title: ListJobTemplatesRequest
@@ -8022,6 +8073,19 @@ components:
           $ref: '#/components/schemas/ReservationPlanStatus'
           description: Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
       description: Details about the pricing plan for your reserved queue. Required for reserved queues and not applicable to on-demand queues.
+    QueueTransition:
+      type: object
+      properties:
+        DestinationQueue:
+          $ref: '#/components/schemas/__string'
+          description: The queue that the job was on after the transition.
+        SourceQueue:
+          $ref: '#/components/schemas/__string'
+          description: The queue that the job was on before the transition.
+        Timestamp:
+          $ref: '#/components/schemas/__timestampUnix'
+          description: 'The time, in Unix epoch format, that the job moved from the source queue to the destination queue.'
+      description: 'Description of the source and destination queues between which the job has moved, along with the timestamp of the move'
     __integerMin2Max2147483647:
       type: integer
       minimum: 2
@@ -8218,6 +8282,9 @@ components:
         Description:
           $ref: '#/components/schemas/__string'
           description: 'The new description for the job template, if you are changing it.'
+        HopDestinations:
+          $ref: '#/components/schemas/__listOfHopDestination'
+          description: Optional list of hop destinations.
         Priority:
           $ref: '#/components/schemas/__integerMinNegative50Max50'
           description: 'Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don''t specify a priority, the service uses the default value 0.'
