@@ -2543,7 +2543,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/invocations':
     post:
       operationId: Invoke
-      description: '<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">execution log</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Retry Behavior</a>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a>.</p> <p>The status code in the API response doesn''t reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limit errors</a>, or issues with your function''s code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <code>lambda:InvokeFunction</code> action.</p>'
+      description: '<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">execution log</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Retry Behavior</a>.</p> <p>For <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a>.</p> <p>The status code in the API response doesn''t reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">limit errors</a>, or issues with your function''s code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if executing the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html">lambda:InvokeFunction</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -3924,6 +3924,9 @@ components:
   schemas:
     AddLayerVersionPermissionResponse:
       type: object
+      example:
+        RevisionId: 35d87451-f796-4a3f-a618-95a3671b0a0c
+        Statement: '{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::223456789012:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1"}'
       properties:
         Statement:
           $ref: '#/components/schemas/String'
@@ -3941,7 +3944,7 @@ components:
     AddPermissionResponse:
       type: object
       example:
-        Statement: ID-1
+        Statement: '{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::223456789012:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}'
       properties:
         Statement:
           $ref: '#/components/schemas/String'
@@ -3949,10 +3952,14 @@ components:
     AliasConfiguration:
       type: object
       example:
-        AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:functionAlias'
-        Description: ''
-        FunctionVersion: '1'
-        Name: functionAlias
+        AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE'
+        Description: Production environment BLUE.
+        FunctionVersion: '2'
+        Name: BLUE
+        RevisionId: 594f41fb-xmpl-4c20-95c7-6ca5f2a92c93
+        RoutingConfig:
+          AdditionalVersionWeights:
+            '1': 0.7
       properties:
         AliasArn:
           $ref: '#/components/schemas/FunctionArn'
@@ -4049,19 +4056,21 @@ components:
     FunctionConfiguration:
       type: object
       example:
-        CodeSha256: LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=
-        CodeSize: 123
+        CodeSha256: PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=
+        CodeSize: 308
         Description: ''
-        FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
-        FunctionName: myFunction
+        FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function'
+        FunctionName: my-function
         Handler: index.handler
-        LastModified: '2016-11-21T19:49:20.006+0000'
-        MemorySize: 128
-        Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
-        Runtime: python2.7
-        Timeout: 123
-        Version: '1'
-        VpcConfig: {}
+        LastModified: '2019-08-14T22:26:11.234+0000'
+        MemorySize: 256
+        RevisionId: 873282ed-xmpl-4dc8-a069-d0c647e470c6
+        Role: 'arn:aws:iam::123456789012:role/lambda-role'
+        Runtime: nodejs12.x
+        Timeout: 3
+        TracingConfig:
+          Mode: PassThrough
+        Version: $LATEST
       properties:
         FunctionName:
           $ref: '#/components/schemas/NamespacedFunctionName'
@@ -4192,8 +4201,15 @@ components:
     GetAccountSettingsResponse:
       type: object
       example:
-        AccountLimit: {}
-        AccountUsage: {}
+        AccountLimit:
+          CodeSizeUnzipped: 262144000
+          CodeSizeZipped: 52428800
+          ConcurrentExecutions: 1000
+          TotalCodeSize: 80530636800
+          UnreservedConcurrentExecutions: 1000
+        AccountUsage:
+          FunctionCount: 4
+          TotalCodeSize: 9426
       properties:
         AccountLimit:
           $ref: '#/components/schemas/AccountLimit'
@@ -4205,27 +4221,33 @@ components:
       type: object
       example:
         Code:
-          Location: somelocation
+          Location: 'https://awslambda-us-west-2-tasks.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-function-e7d9d1ed-xmpl-4f79-904a-4b87f2681f30?versionId=sH3TQwBOaUy...'
           RepositoryType: S3
         Configuration:
-          CodeSha256: LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=
-          CodeSize: 262
-          Description: A starter AWS Lambda function.
+          CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
+          CodeSize: 5797206
+          Description: Process image objects from Amazon S3.
           Environment:
             Variables:
-              S3_BUCKET: test
-          FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:myFunction'
-          FunctionName: myFunction
+              BUCKET: my-bucket-1xpuxmplzrlbh
+              PREFIX: inbound
+          FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
+          FunctionName: my-function
           Handler: index.handler
-          LastModified: '2016-11-21T19:49:20.006+0000'
-          MemorySize: 128
-          Role: 'arn:aws:iam::123456789012:role/lambda_basic_execution'
+          KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
+          LastModified: '2020-04-10T19:06:32.563+0000'
+          LastUpdateStatus: Successful
+          MemorySize: 256
+          RevisionId: b75dcd81-xmpl-48a8-a75a-93ba8b5b9727
+          Role: 'arn:aws:iam::123456789012:role/lambda-role'
           Runtime: nodejs12.x
-          Timeout: 3
+          State: Active
+          Timeout: 15
+          TracingConfig:
+            Mode: Active
           Version: $LATEST
-          VpcConfig:
-            SecurityGroupIds: []
-            SubnetIds: []
+        Tags:
+          DEPARTMENT: Assets
       properties:
         Configuration:
           $ref: '#/components/schemas/FunctionConfiguration'
@@ -4241,12 +4263,23 @@ components:
           description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
     GetFunctionConcurrencyResponse:
       type: object
+      example:
+        ReservedConcurrentExecutions: 250
       properties:
         ReservedConcurrentExecutions:
           $ref: '#/components/schemas/ReservedConcurrentExecutions'
           description: The number of simultaneous executions that are reserved for the function.
     FunctionEventInvokeConfig:
       type: object
+      example:
+        DestinationConfig:
+          OnFailure:
+            Destination: 'arn:aws:sqs:us-east-2:123456789012:destination'
+          OnSuccess: {}
+        FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST'
+        LastModified: 1573687896.493
+        MaximumEventAgeInSeconds: 3600
+        MaximumRetryAttempts: 0
       properties:
         LastModified:
           $ref: '#/components/schemas/Date'
@@ -4265,6 +4298,18 @@ components:
           description: <p>A destination for events after they have been sent to a function for processing.</p> <p class="title"> <b>Destinations</b> </p> <ul> <li> <p> <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p> </li> <li> <p> <b>Queue</b> - The ARN of an SQS queue.</p> </li> <li> <p> <b>Topic</b> - The ARN of an SNS topic.</p> </li> <li> <p> <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p> </li> </ul>
     GetLayerVersionResponse:
       type: object
+      example:
+        CompatibleRuntimes:
+          - python3.8
+        Content:
+          CodeSha256: 6x+xmpl/M3BnQUk7gS9sGmfeFsR/npojXoA3fZUv4eU=
+          CodeSize: 9529009
+          Location: 'https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/blank-python-lib-e5212378-xmpl-44ee-8398-9d8ec5113949?versionId=WbZnvf...'
+        CreatedDate: '2020-03-31T00:35:18.949+0000'
+        Description: Dependencies for the blank-python sample app.
+        LayerArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib'
+        LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib:3'
+        Version: 3
       properties:
         Content:
           $ref: '#/components/schemas/LayerVersionContentOutput'
@@ -4302,7 +4347,8 @@ components:
     GetPolicyResponse:
       type: object
       example:
-        Policy: ''
+        Policy: '{"Version":"2012-10-17","Id":"default","Statement":[{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::123456789012:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function:1"}]}'
+        RevisionId: 4843f2f6-7c59-4fda-b484-afd0bc0e22b8
       properties:
         Policy:
           $ref: '#/components/schemas/String'
@@ -4312,6 +4358,12 @@ components:
           description: A unique identifier for the current revision of the policy.
     GetProvisionedConcurrencyConfigResponse:
       type: object
+      example:
+        AllocatedProvisionedConcurrentExecutions: 100
+        AvailableProvisionedConcurrentExecutions: 100
+        LastModified: '2019-12-31T20:28:49+0000'
+        RequestedProvisionedConcurrentExecutions: 100
+        Status: READY
       properties:
         RequestedProvisionedConcurrentExecutions:
           $ref: '#/components/schemas/PositiveInteger'
@@ -4335,10 +4387,8 @@ components:
     InvocationResponse:
       type: object
       example:
-        FunctionError: ''
-        LogResult: ''
-        Payload: '?'
-        StatusCode: 123
+        Payload: ''
+        StatusCode: 202
       properties:
         StatusCode:
           $ref: '#/components/schemas/Integer'
@@ -4367,7 +4417,7 @@ components:
       type: object
       deprecated: true
       example:
-        Status: 123
+        Status: 202
       properties:
         Status:
           $ref: '#/components/schemas/HttpStatus'
@@ -4376,8 +4426,20 @@ components:
     ListAliasesResponse:
       type: object
       example:
-        Aliases: []
-        NextMarker: ''
+        Aliases:
+          - AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:BETA'
+            Description: Production environment BLUE.
+            FunctionVersion: '2'
+            Name: BLUE
+            RevisionId: a410117f-xmpl-494e-8035-7e204bb7933b
+            RoutingConfig:
+              AdditionalVersionWeights:
+                '1': 0.7
+          - AliasArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function:LIVE'
+            Description: Production environment GREEN.
+            FunctionVersion: '1'
+            Name: GREEN
+            RevisionId: 21d40116-xmpl-40ba-9360-3ea284da1bb5
       properties:
         NextMarker:
           $ref: '#/components/schemas/String'
@@ -4387,6 +4449,15 @@ components:
           description: A list of aliases.
     ListEventSourceMappingsResponse:
       type: object
+      example:
+        EventSourceMappings:
+          - BatchSize: 5
+            EventSourceArn: 'arn:aws:sqs:us-west-2:123456789012:mySQSqueue'
+            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
+            LastModified: 1569284520.333
+            State: Enabled
+            StateTransitionReason: USER_INITIATED
+            UUID: a1b2c3d4-5678-90ab-cdef-11111EXAMPLE
       properties:
         NextMarker:
           $ref: '#/components/schemas/String'
@@ -4396,6 +4467,16 @@ components:
           description: A list of event source mappings.
     ListFunctionEventInvokeConfigsResponse:
       type: object
+      example:
+        FunctionEventInvokeConfigs:
+          - FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN'
+            LastModified: 1577824406.719
+            MaximumEventAgeInSeconds: 1800
+            MaximumRetryAttempts: 2
+          - FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE'
+            LastModified: 1577824396.653
+            MaximumEventAgeInSeconds: 3600
+            MaximumRetryAttempts: 0
       properties:
         FunctionEventInvokeConfigs:
           $ref: '#/components/schemas/FunctionEventInvokeConfigList'
@@ -4406,7 +4487,41 @@ components:
     ListFunctionsResponse:
       type: object
       example:
-        Functions: []
+        Functions:
+          - CodeSha256: dBG9m8SGdmlEjw/JYXlhhvCrAv5TxvXsbL/RMr0fT/I=
+            CodeSize: 294
+            Description: ''
+            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:helloworld'
+            FunctionName: helloworld
+            Handler: helloworld.handler
+            LastModified: '2019-09-23T18:32:33.857+0000'
+            MemorySize: 128
+            RevisionId: 1718e831-badf-4253-9518-d0644210af7b
+            Role: 'arn:aws:iam::123456789012:role/service-role/MyTestFunction-role-zgur6bf4'
+            Runtime: nodejs10.x
+            Timeout: 3
+            TracingConfig:
+              Mode: PassThrough
+            Version: $LATEST
+          - CodeSha256: sU0cJ2/hOZevwV/lTxCuQqK3gDZP3i8gUoqUUVRmY6E=
+            CodeSize: 266
+            Description: ''
+            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
+            FunctionName: my-function
+            Handler: index.handler
+            LastModified: '2019-10-01T16:47:28.490+0000'
+            MemorySize: 256
+            RevisionId: 93017fc9-59cb-41dc-901b-4845ce4bf668
+            Role: 'arn:aws:iam::123456789012:role/service-role/helloWorldPython-role-uy3l9qyq'
+            Runtime: nodejs10.x
+            Timeout: 3
+            TracingConfig:
+              Mode: PassThrough
+            Version: $LATEST
+            VpcConfig:
+              SecurityGroupIds: []
+              SubnetIds: []
+              VpcId: ''
         NextMarker: ''
       properties:
         NextMarker:
@@ -4418,6 +4533,20 @@ components:
       description: A list of Lambda functions.
     ListLayerVersionsResponse:
       type: object
+      example:
+        LayerVersions:
+          - CompatibleRuntimes:
+              - java8
+            CreatedDate: '2020-03-18T23:38:42.284+0000'
+            Description: Dependencies for the blank-java sample app.
+            LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:7'
+            Version: 7
+          - CompatibleRuntimes:
+              - java8
+            CreatedDate: '2020-03-17T07:24:21.960+0000'
+            Description: Dependencies for the blank-java sample app.
+            LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:6'
+            Version: 6
       properties:
         NextMarker:
           $ref: '#/components/schemas/String'
@@ -4427,6 +4556,18 @@ components:
           description: A list of versions.
     ListLayersResponse:
       type: object
+      example:
+        Layers:
+          - LatestMatchingVersion:
+              CompatibleRuntimes:
+                - python3.6
+                - python3.7
+              CreatedDate: '2018-11-15T00:37:46.592+0000'
+              Description: My layer
+              LayerVersionArn: 'arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2'
+              Version: 2
+            LayerArn: 'arn:aws:lambda:us-east-2:123456789012:layer:my-layer'
+            LayerName: my-layer
       properties:
         NextMarker:
           $ref: '#/components/schemas/String'
@@ -4436,6 +4577,20 @@ components:
           description: A list of function layers.
     ListProvisionedConcurrencyConfigsResponse:
       type: object
+      example:
+        ProvisionedConcurrencyConfigs:
+          - AllocatedProvisionedConcurrentExecutions: 100
+            AvailableProvisionedConcurrentExecutions: 100
+            FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN'
+            LastModified: '2019-12-31T20:29:00+0000'
+            RequestedProvisionedConcurrentExecutions: 100
+            Status: READY
+          - AllocatedProvisionedConcurrentExecutions: 100
+            AvailableProvisionedConcurrentExecutions: 100
+            FunctionArn: 'arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE'
+            LastModified: '2019-12-31T20:28:49+0000'
+            RequestedProvisionedConcurrentExecutions: 100
+            Status: READY
       properties:
         ProvisionedConcurrencyConfigs:
           $ref: '#/components/schemas/ProvisionedConcurrencyConfigList'
@@ -4445,6 +4600,10 @@ components:
           description: The pagination token that's included if more results are available.
     ListTagsResponse:
       type: object
+      example:
+        Tags:
+          Category: Web Tools
+          Department: Sales
       properties:
         Tags:
           $ref: '#/components/schemas/Tags'
@@ -4452,8 +4611,47 @@ components:
     ListVersionsByFunctionResponse:
       type: object
       example:
-        NextMarker: ''
-        Versions: []
+        Versions:
+          - CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
+            CodeSize: 5797206
+            Description: Process image objects from Amazon S3.
+            Environment:
+              Variables:
+                BUCKET: my-bucket-1xpuxmplzrlbh
+                PREFIX: inbound
+            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
+            FunctionName: my-function
+            Handler: index.handler
+            KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
+            LastModified: '2020-04-10T19:06:32.563+0000'
+            MemorySize: 256
+            RevisionId: 850ca006-2d98-4ff4-86db-8766e9d32fe9
+            Role: 'arn:aws:iam::123456789012:role/lambda-role'
+            Runtime: nodejs12.x
+            Timeout: 15
+            TracingConfig:
+              Mode: Active
+            Version: $LATEST
+          - CodeSha256: YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=
+            CodeSize: 5797206
+            Description: Process image objects from Amazon S3.
+            Environment:
+              Variables:
+                BUCKET: my-bucket-1xpuxmplzrlbh
+                PREFIX: inbound
+            FunctionArn: 'arn:aws:lambda:us-west-2:123456789012:function:my-function'
+            FunctionName: my-function
+            Handler: index.handler
+            KMSKeyArn: 'arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966'
+            LastModified: '2020-04-10T19:06:32.563+0000'
+            MemorySize: 256
+            RevisionId: b75dcd81-xmpl-48a8-a75a-93ba8b5b9727
+            Role: 'arn:aws:iam::123456789012:role/lambda-role'
+            Runtime: nodejs12.x
+            Timeout: 5
+            TracingConfig:
+              Mode: Active
+            Version: '1'
       properties:
         NextMarker:
           $ref: '#/components/schemas/String'
@@ -4463,6 +4661,20 @@ components:
           description: A list of Lambda function versions.
     PublishLayerVersionResponse:
       type: object
+      example:
+        CompatibleRuntimes:
+          - python3.6
+          - python3.7
+        Content:
+          CodeSha256: tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=
+          CodeSize: 169
+          Location: 'https://awslambda-us-west-2-layers.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...'
+        CreatedDate: '2018-11-14T23:03:52.894+0000'
+        Description: My Python layer
+        LayerArn: 'arn:aws:lambda:us-west-2:123456789012:layer:my-layer'
+        LayerVersionArn: 'arn:aws:lambda:us-west-2:123456789012:layer:my-layer:1'
+        LicenseInfo: MIT
+        Version: 1
       properties:
         Content:
           $ref: '#/components/schemas/LayerVersionContentOutput'
@@ -4514,12 +4726,19 @@ components:
         - provided
     Concurrency:
       type: object
+      example:
+        ReservedConcurrentExecutions: 100
       properties:
         ReservedConcurrentExecutions:
           $ref: '#/components/schemas/ReservedConcurrentExecutions'
           description: 'The number of concurrent executions that are reserved for this function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a>.'
     PutProvisionedConcurrencyConfigResponse:
       type: object
+      example:
+        AllocatedProvisionedConcurrentExecutions: 0
+        LastModified: '2019-11-21T19:32:12+0000'
+        RequestedProvisionedConcurrentExecutions: 100
+        Status: IN_PROGRESS
       properties:
         RequestedProvisionedConcurrentExecutions:
           $ref: '#/components/schemas/PositiveInteger'

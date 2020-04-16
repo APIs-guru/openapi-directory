@@ -3,7 +3,7 @@ info:
   version: '2017-07-24'
   x-release: v4
   title: Amazon SageMaker Service
-  description: Provides APIs for creating and managing Amazon SageMaker resources.
+  description: '<p>Provides APIs for creating and managing Amazon SageMaker resources. </p> <p>Other Resources:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#first-time-user">Amazon SageMaker Developer Guide</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/augmented-ai/2019-11-07/APIReference/Welcome.html">Amazon Augmented AI Runtime API Reference</a> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -4459,7 +4459,7 @@ paths:
   '/#X-Amz-Target=SageMaker.Search':
     post:
       operationId: Search
-      description: '<p>Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of <code>SearchResult</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p>'
+      description: '<p>Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of <code>SearchRecord</code> objects in the response. You can sort the search results by any resource property in a ascending or descending order.</p> <p>You can query against the following value types: numeric, text, Boolean, and timestamp.</p>'
       responses:
         '200':
           description: Success
@@ -5822,6 +5822,7 @@ components:
           description: The name of your flow definition.
         HumanLoopRequestSource:
           $ref: '#/components/schemas/HumanLoopRequestSource'
+          description: Container for configuring the source of human task requests. Use to specify if Amazon Rekognition or Amazon Textract is used as an integration source.
         HumanLoopActivationConfig:
           $ref: '#/components/schemas/HumanLoopActivationConfig'
           description: An object containing information about the events that trigger a human workflow.
@@ -7144,6 +7145,7 @@ components:
           description: The timestamp when the flow definition was created.
         HumanLoopRequestSource:
           $ref: '#/components/schemas/HumanLoopRequestSource'
+          description: Container for configuring the source of human task requests. Used to specify if Amazon Rekognition or Amazon Textract is used as an integration source.
         HumanLoopActivationConfig:
           $ref: '#/components/schemas/HumanLoopActivationConfig'
           description: An object containing information about what triggers a human review workflow.
@@ -8085,7 +8087,7 @@ components:
       properties:
         Resource:
           $ref: '#/components/schemas/ResourceType'
-          description: The name of the Amazon SageMaker resource to Search for.
+          description: The name of the Amazon SageMaker resource to search for.
         SuggestionQuery:
           $ref: '#/components/schemas/SuggestionQuery'
           description: Limits the property names that are included in the response.
@@ -9302,7 +9304,7 @@ components:
       properties:
         Results:
           $ref: '#/components/schemas/SearchResultsList'
-          description: A list of <code>SearchResult</code> objects.
+          description: A list of <code>SearchRecord</code> objects.
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'If the result of the previous <code>Search</code> request was truncated, the response includes a NextToken. To retrieve the next set of results, use the token in the next request.'
@@ -9317,7 +9319,7 @@ components:
           description: The name of the Amazon SageMaker resource to search for.
         SearchExpression:
           $ref: '#/components/schemas/SearchExpression'
-          description: 'A Boolean conditional statement. Resource objects must satisfy this condition to be included in search results. You must provide at least one subexpression, filter, or nested filter. The maximum number of recursive <code>SubExpressions</code>, <code>NestedFilters</code>, and <code>Filters</code> that can be included in a <code>SearchExpression</code> object is 50.'
+          description: 'A Boolean conditional statement. Resources must satisfy this condition to be included in search results. You must provide at least one subexpression, filter, or nested filter. The maximum number of recursive <code>SubExpressions</code>, <code>NestedFilters</code>, and <code>Filters</code> that can be included in a <code>SearchExpression</code> object is 50.'
         SortBy:
           $ref: '#/components/schemas/ResourcePropertyName'
           description: The name of the resource property used to sort the <code>SearchResults</code>. The default is <code>LastModifiedTime</code>.
@@ -9326,10 +9328,10 @@ components:
           description: How <code>SearchResults</code> are ordered. Valid values are <code>Ascending</code> or <code>Descending</code>. The default is <code>Descending</code>.
         NextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'If more than <code>MaxResults</code> resource objects match the specified <code>SearchExpression</code>, the <code>SearchResponse</code> includes a <code>NextToken</code>. The <code>NextToken</code> can be passed to the next <code>SearchRequest</code> to continue retrieving results for the specified <code>SearchExpression</code> and <code>Sort</code> parameters.'
+          description: 'If more than <code>MaxResults</code> resources match the specified <code>SearchExpression</code>, the response includes a <code>NextToken</code>. The <code>NextToken</code> can be passed to the next <code>SearchRequest</code> to continue retrieving results.'
         MaxResults:
           $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to return in a <code>SearchResponse</code>.
+          description: The maximum number of results to return.
     StartMonitoringScheduleRequest:
       type: object
       required:
@@ -12792,11 +12794,11 @@ components:
       properties:
         SourceArn:
           $ref: '#/components/schemas/TrialComponentSourceArn'
-          description: The Amazon Resource Name (ARN) of the source.
+          description: The source ARN.
         SourceType:
           $ref: '#/components/schemas/SourceType'
           description: The source job type.
-      description: The source of the trial component.
+      description: The Amazon Resource Name (ARN) and job type of the source of a trial component.
     TrialComponentMetricSummaries:
       type: array
       items:
@@ -13070,7 +13072,7 @@ components:
         $ref: '#/components/schemas/EndpointSummary'
     EnvironmentArn:
       type: string
-      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:environment/[a-z0-9](-*[a-z0-9]){0,62}$'
+      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:environment/[a-z0-9]([-.]?[a-z0-9])*$'
       maxLength: 256
     EnvironmentKey:
       type: string
@@ -13120,7 +13122,7 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The list of tags that are associated with the experiment. You can use <a>Search</a> API to search on the tags.
-      description: A summary of the properties of an experiment as returned by the <a>Search</a> API.
+      description: The properties of an experiment as returned by the <a>Search</a> API.
     ExperimentSourceArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:.*'
@@ -13197,14 +13199,14 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/ResourcePropertyName'
-          description: 'A property name. For example, <code>TrainingJobName</code>. For the list of valid property names returned in a search result for each supported resource, see <a>TrainingJob</a> properties. You must specify a valid property name for the resource.'
+          description: 'A resource property name. For example, <code>TrainingJobName</code>. For valid property names, see <a>SearchRecord</a>. You must specify a valid property for the resource.'
         Operator:
           $ref: '#/components/schemas/Operator'
-          description: '<p>A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:</p> <dl> <dt>Equals</dt> <dd> <p>The specified resource in <code>Name</code> equals the specified <code>Value</code>.</p> </dd> <dt>NotEquals</dt> <dd> <p>The specified resource in <code>Name</code> does not equal the specified <code>Value</code>.</p> </dd> <dt>GreaterThan</dt> <dd> <p>The specified resource in <code>Name</code> is greater than the specified <code>Value</code>. Not supported for text-based properties.</p> </dd> <dt>GreaterThanOrEqualTo</dt> <dd> <p>The specified resource in <code>Name</code> is greater than or equal to the specified <code>Value</code>. Not supported for text-based properties.</p> </dd> <dt>LessThan</dt> <dd> <p>The specified resource in <code>Name</code> is less than the specified <code>Value</code>. Not supported for text-based properties.</p> </dd> <dt>LessThanOrEqualTo</dt> <dd> <p>The specified resource in <code>Name</code> is less than or equal to the specified <code>Value</code>. Not supported for text-based properties.</p> </dd> <dt>Contains</dt> <dd> <p>Only supported for text-based properties. The word-list of the property contains the specified <code>Value</code>. A <code>SearchExpression</code> can include only one <code>Contains</code> operator.</p> </dd> </dl> <p>If you have specified a filter <code>Value</code>, the default is <code>Equals</code>.</p>'
+          description: '<p>A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:</p> <dl> <dt>Equals</dt> <dd> <p>The value of <code>Name</code> equals <code>Value</code>.</p> </dd> <dt>NotEquals</dt> <dd> <p>The value of <code>Name</code> doesn''t equal <code>Value</code>.</p> </dd> <dt>GreaterThan</dt> <dd> <p>The value of <code>Name</code> is greater than <code>Value</code>. Not supported for text properties.</p> </dd> <dt>GreaterThanOrEqualTo</dt> <dd> <p>The value of <code>Name</code> is greater than or equal to <code>Value</code>. Not supported for text properties.</p> </dd> <dt>LessThan</dt> <dd> <p>The value of <code>Name</code> is less than <code>Value</code>. Not supported for text properties.</p> </dd> <dt>LessThanOrEqualTo</dt> <dd> <p>The value of <code>Name</code> is less than or equal to <code>Value</code>. Not supported for text properties.</p> </dd> <dt>Contains</dt> <dd> <p>The value of <code>Name</code> contains the string <code>Value</code>. A <code>SearchExpression</code> can include only one <code>Contains</code> operator. Only supported for text properties.</p> </dd> <dt>Exists</dt> <dd> <p>The <code>Name</code> property exists.</p> </dd> <dt>NotExists</dt> <dd> <p>The <code>Name</code> property does not exist.</p> </dd> <dt>In</dt> <dd> <p>The value of <code>Name</code> is one of the comma delimited strings in <code>Value</code>. Only supported for text properties.</p> </dd> </dl>'
         Value:
           $ref: '#/components/schemas/FilterValue'
-          description: 'A value used with <code>Resource</code> and <code>Operator</code> to determine if objects satisfy the filter''s condition. For numerical properties, <code>Value</code> must be an integer or floating-point decimal. For timestamp properties, <code>Value</code> must be an ISO 8601 date-time string of the following format: <code>YYYY-mm-dd''T''HH:MM:SS</code>.'
-      description: '<p>A conditional statement for a search expression that includes a resource property, a Boolean operator, and a value.</p> <p>If you don''t specify an <code>Operator</code> and a <code>Value</code>, the filter searches for only the specified property. For example, defining a <code>Filter</code> for the <code>FailureReason</code> for the <code>TrainingJob</code> <code>Resource</code> searches for training job objects that have a value in the <code>FailureReason</code> field.</p> <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the equals operator as the default.</p> <p>In search, there are several property types:</p> <dl> <dt>Metrics</dt> <dd> <p>To define a metric filter, enter a value using the form <code>"Metrics.&lt;name&gt;"</code>, where <code>&lt;name&gt;</code> is a metric name. For example, the following filter searches for training jobs with an <code>"accuracy"</code> metric greater than <code>"0.9"</code>:</p> <p> <code>{</code> </p> <p> <code>"Name": "Metrics.accuracy",</code> </p> <p> <code>"Operator": "GREATER_THAN",</code> </p> <p> <code>"Value": "0.9"</code> </p> <p> <code>}</code> </p> </dd> <dt>HyperParameters</dt> <dd> <p>To define a hyperparameter filter, enter a value with the form <code>"HyperParameters.&lt;name&gt;"</code>. Decimal hyperparameter values are treated as a decimal in a comparison if the specified <code>Value</code> is also a decimal value. If the specified <code>Value</code> is an integer, the decimal hyperparameter values are treated as integers. For example, the following filter is satisfied by training jobs with a <code>"learning_rate"</code> hyperparameter that is less than <code>"0.5"</code>:</p> <p> <code> {</code> </p> <p> <code> "Name": "HyperParameters.learning_rate",</code> </p> <p> <code> "Operator": "LESS_THAN",</code> </p> <p> <code> "Value": "0.5"</code> </p> <p> <code> }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value with the form <code>"Tags.&lt;key&gt;"</code>.</p> </dd> </dl>'
+          description: 'A value used with <code>Name</code> and <code>Operator</code> to determine which resources satisfy the filter''s condition. For numerical properties, <code>Value</code> must be an integer or floating-point decimal. For timestamp properties, <code>Value</code> must be an ISO 8601 date-time string of the following format: <code>YYYY-mm-dd''T''HH:MM:SS</code>.'
+      description: '<p>A conditional statement for a search expression that includes a resource property, a Boolean operator, and a value. Resources that match the statement are returned in the results from the <a>Search</a> API.</p> <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the equals operator.</p> <p>In search, there are several property types:</p> <dl> <dt>Metrics</dt> <dd> <p>To define a metric filter, enter a value using the form <code>"Metrics.&lt;name&gt;"</code>, where <code>&lt;name&gt;</code> is a metric name. For example, the following filter searches for training jobs with an <code>"accuracy"</code> metric greater than <code>"0.9"</code>:</p> <p> <code>{</code> </p> <p> <code>"Name": "Metrics.accuracy",</code> </p> <p> <code>"Operator": "GreaterThan",</code> </p> <p> <code>"Value": "0.9"</code> </p> <p> <code>}</code> </p> </dd> <dt>HyperParameters</dt> <dd> <p>To define a hyperparameter filter, enter a value with the form <code>"HyperParameters.&lt;name&gt;"</code>. Decimal hyperparameter values are treated as a decimal in a comparison if the specified <code>Value</code> is also a decimal value. If the specified <code>Value</code> is an integer, the decimal hyperparameter values are treated as integers. For example, the following filter is satisfied by training jobs with a <code>"learning_rate"</code> hyperparameter that is less than <code>"0.5"</code>:</p> <p> <code> {</code> </p> <p> <code> "Name": "HyperParameters.learning_rate",</code> </p> <p> <code> "Operator": "LessThan",</code> </p> <p> <code> "Value": "0.5"</code> </p> <p> <code> }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value with the form <code>Tags.&lt;key&gt;</code>.</p> </dd> </dl>'
     FilterList:
       type: array
       items:
@@ -13326,6 +13328,7 @@ components:
         - ONNX
         - PYTORCH
         - XGBOOST
+        - TFLITE
     ResourceType:
       type: string
       enum:
@@ -14481,7 +14484,7 @@ components:
         Filters:
           $ref: '#/components/schemas/FilterList'
           description: 'A list of filters. Each filter acts on a property. Filters must contain at least one <code>Filters</code> value. For example, a <code>NestedFilters</code> call might include a filter on the <code>PropertyName</code> parameter of the <code>InputDataConfig</code> property: <code>InputDataConfig.DataSource.S3DataSource.S3Uri</code>.'
-      description: '<p>Defines a list of <code>NestedFilters</code> objects. To satisfy the conditions specified in the <code>NestedFilters</code> call, a resource must satisfy the conditions of all of the filters.</p> <p>For example, you could define a <code>NestedFilters</code> using the training job''s <code>InputDataConfig</code> property to filter on <code>Channel</code> objects. </p> <p>A <code>NestedFilters</code> object contains multiple filters. For example, to find all training jobs whose name contains <code>train</code> and that have <code>cat/data</code> in their <code>S3Uri</code> (specified in <code>InputDataConfig</code>), you need to create a <code>NestedFilters</code> object that specifies the <code>InputDataConfig</code> property with the following <code>Filter</code> objects:</p> <ul> <li> <p> <code>''{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS", "Value":"train"}'',</code> </p> </li> <li> <p> <code>''{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"CONTAINS", "Value":"cat/data"}''</code> </p> </li> </ul>'
+      description: '<p>A list of nested <a>Filter</a> objects. A resource must satisfy the conditions of all filters to be included in the results returned from the <a>Search</a> API.</p> <p>For example, to filter on a training job''s <code>InputDataConfig</code> property with a specific channel name and <code>S3Uri</code> prefix, define the following filters:</p> <ul> <li> <p> <code>''{Name:"InputDataConfig.ChannelName", "Operator":"Equals", "Value":"train"}'',</code> </p> </li> <li> <p> <code>''{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains", "Value":"mybucket/catdata"}''</code> </p> </li> </ul>'
     NestedFiltersList:
       type: array
       items:
@@ -14645,13 +14648,13 @@ components:
           description: 'Whether you use an <code>S3Prefix</code> or a <code>ManifestFile</code> for the data type. If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job. If you choose <code>ManifestFile</code>, <code>S3Uri</code> identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for the processing job.'
         S3InputMode:
           $ref: '#/components/schemas/ProcessingS3InputMode'
-          description: 'Wether to use <code>File</code> or <code>Pipe</code> input mode. In <code>File</code> mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.'
+          description: 'Whether to use <code>File</code> or <code>Pipe</code> input mode. In <code>File</code> mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In <code>Pipe</code> mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.'
         S3DataDistributionType:
           $ref: '#/components/schemas/ProcessingS3DataDistributionType'
           description: Whether the data stored in Amazon S3 is <code>FullyReplicated</code> or <code>ShardedByS3Key</code>.
         S3CompressionType:
           $ref: '#/components/schemas/ProcessingS3CompressionType'
-          description: Whether to use <code>Gzip</code> compresion for Amazon S3 storage.
+          description: Whether to use <code>Gzip</code> compression for Amazon S3 storage.
       description: Information about where and how you want to obtain the inputs for an processing job.
     ProcessingInput:
       type: object
@@ -14666,6 +14669,70 @@ components:
           $ref: '#/components/schemas/ProcessingS3Input'
           description: 'The S3 inputs for the processing job. '
       description: The inputs for a processing job.
+    ProcessingJob:
+      type: object
+      properties:
+        ProcessingInputs:
+          $ref: '#/components/schemas/ProcessingInputs'
+          description: 'For each input, data is downloaded from S3 into the processing container before the processing job begins running if "S3InputMode" is set to <code>File</code>.'
+        ProcessingOutputConfig:
+          $ref: '#/components/schemas/ProcessingOutputConfig'
+        ProcessingJobName:
+          $ref: '#/components/schemas/ProcessingJobName'
+          description: The name of the processing job.
+        ProcessingResources:
+          $ref: '#/components/schemas/ProcessingResources'
+        StoppingCondition:
+          $ref: '#/components/schemas/ProcessingStoppingCondition'
+        AppSpecification:
+          $ref: '#/components/schemas/AppSpecification'
+        Environment:
+          $ref: '#/components/schemas/ProcessingEnvironmentMap'
+          description: Sets the environment variables in the Docker container.
+        NetworkConfig:
+          $ref: '#/components/schemas/NetworkConfig'
+        RoleArn:
+          $ref: '#/components/schemas/RoleArn'
+          description: The ARN of the role used to create the processing job.
+        ExperimentConfig:
+          $ref: '#/components/schemas/ExperimentConfig'
+        ProcessingJobArn:
+          $ref: '#/components/schemas/ProcessingJobArn'
+          description: The ARN of the processing job.
+        ProcessingJobStatus:
+          $ref: '#/components/schemas/ProcessingJobStatus'
+          description: The status of the processing job.
+        ExitMessage:
+          $ref: '#/components/schemas/ExitMessage'
+          description: 'A string, up to one KB in size, that contains metadata from the processing container when the processing job exits.'
+        FailureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: 'A string, up to one KB in size, that contains the reason a processing job failed, if it failed.'
+        ProcessingEndTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the processing job ended.
+        ProcessingStartTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the processing job started.
+        LastModifiedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time the processing job was last modified.
+        CreationTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time the processing job was created.
+        MonitoringScheduleArn:
+          $ref: '#/components/schemas/MonitoringScheduleArn'
+          description: The ARN of a monitoring schedule for an endpoint associated with this processing job.
+        AutoMLJobArn:
+          $ref: '#/components/schemas/AutoMLJobArn'
+          description: The Amazon Resource Name (ARN) of the AutoML job associated with this processing job.
+        TrainingJobArn:
+          $ref: '#/components/schemas/TrainingJobArn'
+          description: The ARN of the training job associated with this processing job.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+      description: 'An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html">Process Data and Evaluate Models</a>.'
     ProcessingJobSummary:
       type: object
       required:
@@ -14983,6 +15050,11 @@ components:
         - ml.c5.4xlarge
         - ml.c5.9xlarge
         - ml.c5.18xlarge
+        - ml.c5n.xlarge
+        - ml.c5n.2xlarge
+        - ml.c5n.4xlarge
+        - ml.c5n.9xlarge
+        - ml.c5n.18xlarge
     TrainingInstanceCount:
       type: integer
       minimum: 1
@@ -15173,7 +15245,7 @@ components:
         TrialComponentSummaries:
           $ref: '#/components/schemas/TrialComponentSimpleSummaries'
           description: 'A list of the components associated with the trial. For each component, a summary of the component''s properties is included.'
-      description: A summary of the properties of a trial as returned by the <a>Search</a> API.
+      description: The properties of a trial as returned by the <a>Search</a> API.
     TrialComponent:
       type: object
       properties:
@@ -15188,6 +15260,7 @@ components:
           description: The Amazon Resource Name (ARN) of the trial component.
         Source:
           $ref: '#/components/schemas/TrialComponentSource'
+          description: The Amazon Resource Name (ARN) and job type of the source of the component.
         Status:
           $ref: '#/components/schemas/TrialComponentStatus'
         StartTime:
@@ -15220,30 +15293,30 @@ components:
           description: The metrics for the component.
         SourceDetail:
           $ref: '#/components/schemas/TrialComponentSourceDetail'
-          description: The source of the trial component.&gt;
+          description: Details of the source of the component.
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The list of tags that are associated with the component. You can use <a>Search</a> API to search on the tags.
         Parents:
           $ref: '#/components/schemas/Parents'
           description: An array of the parents of the component. A parent is a trial the component is associated with and the experiment the trial is part of. A component might not have any parents.
-      description: A summary of the properties of a trial component as returned by the <a>Search</a> API.
+      description: The properties of a trial component as returned by the <a>Search</a> API.
     SearchRecord:
       type: object
       properties:
         TrainingJob:
           $ref: '#/components/schemas/TrainingJob'
-          description: A <code>TrainingJob</code> object that is returned as part of a <code>Search</code> request.
+          description: The properties of a training job.
         Experiment:
           $ref: '#/components/schemas/Experiment'
-          description: A summary of the properties of an experiment.
+          description: The properties of an experiment.
         Trial:
           $ref: '#/components/schemas/Trial'
-          description: A summary of the properties of a trial.
+          description: The properties of a trial.
         TrialComponent:
           $ref: '#/components/schemas/TrialComponent'
-          description: A summary of the properties of a trial component.
-      description: An individual search result record that contains a single resource object.
+          description: The properties of a trial component.
+      description: A single resource returned as part of the <a>Search</a> API response.
     SearchSortOrder:
       type: string
       enum:
@@ -15524,7 +15597,11 @@ components:
           description: The Amazon Resource Name (ARN) of the source.
         TrainingJob:
           $ref: '#/components/schemas/TrainingJob'
-      description: Detailed information about the source of a trial component.
+          description: Information about a training job that's the source of a trial component.
+        ProcessingJob:
+          $ref: '#/components/schemas/ProcessingJob'
+          description: Information about a processing job that's the source of a trial component.
+      description: Detailed information about the source of a trial component. Either <code>ProcessingJob</code> or <code>TrainingJob</code> is returned.
     TrialComponentArtifactValue:
       type: string
       pattern: .*
@@ -15596,6 +15673,8 @@ components:
         - InProgress
         - Completed
         - Failed
+        - Stopping
+        - Stopped
     TrialComponentSimpleSummary:
       type: object
       properties:

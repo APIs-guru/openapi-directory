@@ -3,7 +3,7 @@ info:
   version: '2018-07-27'
   x-release: v4
   title: AWS IoT Events
-  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API commands to create, read, update, and delete inputs and detector models, and to list their versions.'
+  description: 'AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events API operations to create, read, update, and delete inputs and detector models, and to list their versions.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1414,6 +1414,9 @@ components:
         targetArn:
           $ref: '#/components/schemas/AmazonResourceName'
           description: The ARN of the Amazon SNS target where the message is sent.
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you send a message as an Amazon SNS push notification.
       description: Information required to publish the Amazon SNS message.
     IotTopicPublishAction:
       type: object
@@ -1423,6 +1426,9 @@ components:
         mqttTopic:
           $ref: '#/components/schemas/MQTTTopic'
           description: The MQTT topic of the message. You can use a string expression that includes variables (<code>$variable.&lt;variable-name&gt;</code>) and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the topic string.
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you publish a message to an AWS IoT Core topic.
       description: Information required to publish the MQTT message through the AWS IoT message broker.
     SetTimerAction:
       type: object
@@ -1435,7 +1441,7 @@ components:
         seconds:
           deprecated: true
           $ref: '#/components/schemas/Seconds'
-          description: The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression.
+          description: The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. seconds is deprecated. You can use durationExpression for SetTimerAction. The value of seconds can be used as a string expression for durationExpression.
         durationExpression:
           $ref: '#/components/schemas/VariableValue'
           description: 'The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (<code>$variable.&lt;variable-name&gt;</code>), and input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number. '
@@ -1457,7 +1463,7 @@ components:
         timerName:
           $ref: '#/components/schemas/TimerName'
           description: The name of the timer to reset.
-      description: 'Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. '
+      description: Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer.
     LambdaAction:
       type: object
       required:
@@ -1466,6 +1472,9 @@ components:
         functionArn:
           $ref: '#/components/schemas/AmazonResourceName'
           description: The ARN of the Lambda function that is executed.
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you send a message to a Lambda function.
       description: 'Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.'
     IotEventsAction:
       type: object
@@ -1475,6 +1484,9 @@ components:
         inputName:
           $ref: '#/components/schemas/InputName'
           description: The name of the AWS IoT Events input where the data is sent.
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you send a message to an AWS IoT Events input.
       description: 'Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
     SqsAction:
       type: object
@@ -1486,7 +1498,10 @@ components:
           description: The URL of the SQS queue where the data is written.
         useBase64:
           $ref: '#/components/schemas/UseBase64'
-          description: Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue.
+          description: 'Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.'
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you send a message to an Amazon SQS queue.
       description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
     FirehoseAction:
       type: object
@@ -1499,7 +1514,58 @@ components:
         separator:
           $ref: '#/components/schemas/FirehoseSeparator'
           description: 'A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: ''\n'' (newline), ''\t'' (tab), ''\r\n'' (Windows newline), '','' (comma).'
+        payload:
+          $ref: '#/components/schemas/Payload'
+          description: You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream.
       description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+    DynamoDBAction:
+      type: object
+      required:
+        - hashKeyField
+        - hashKeyValue
+        - tableName
+      properties:
+        hashKeyType:
+          $ref: '#/components/schemas/DynamoKeyType'
+          description: '<p>The data type for the hash key (also called the partition key). You can specify the following values:</p> <ul> <li> <p> <code>STRING</code> - The hash key is a string.</p> </li> <li> <p> <code>NUMBER</code> - The hash key is a number.</p> </li> </ul> <p>If you don''t specify <code>hashKeyType</code>, the default value is <code>STRING</code>.</p>'
+        hashKeyField:
+          $ref: '#/components/schemas/DynamoKeyField'
+          description: The name of the hash key (also called the partition key).
+        hashKeyValue:
+          $ref: '#/components/schemas/DynamoKeyValue'
+          description: The value of the hash key (also called the partition key).
+        rangeKeyType:
+          $ref: '#/components/schemas/DynamoKeyType'
+          description: '<p>The data type for the range key (also called the sort key), You can specify the following values:</p> <ul> <li> <p> <code>STRING</code> - The range key is a string.</p> </li> <li> <p> <code>NUMBER</code> - The range key is number.</p> </li> </ul> <p>If you don''t specify <code>rangeKeyField</code>, the default value is <code>STRING</code>.</p>'
+        rangeKeyField:
+          $ref: '#/components/schemas/DynamoKeyField'
+          description: The name of the range key (also called the sort key).
+        rangeKeyValue:
+          $ref: '#/components/schemas/DynamoKeyValue'
+          description: The value of the range key (also called the sort key).
+        operation:
+          $ref: '#/components/schemas/DynamoOperation'
+          description: '<p>The type of operation to perform. You can specify the following values: </p> <ul> <li> <p> <code>INSERT</code> - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.</p> </li> <li> <p> <code>UPDATE</code> - Update an existing item of the DynamoDB table with new data. This item''s partition key must match the specified hash key. If you specified a range key, the range key must match the item''s sort key.</p> </li> <li> <p> <code>DELETE</code> - Delete an existing item of the DynamoDB table. This item''s partition key must match the specified hash key. If you specified a range key, the range key must match the item''s sort key.</p> </li> </ul> <p>If you don''t specify this parameter, AWS IoT Events triggers the <code>INSERT</code> operation.</p>'
+        payloadField:
+          $ref: '#/components/schemas/DynamoKeyField'
+          description: '<p>The name of the DynamoDB column that receives the action payload.</p> <p>If you don''t specify this parameter, the name of the DynamoDB column is <code>payload</code>.</p>'
+        tableName:
+          $ref: '#/components/schemas/DynamoTableName'
+          description: The name of the DynamoDB table.
+        payload:
+          $ref: '#/components/schemas/Payload'
+      description: '<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify.</p> <p>The <code>tableName</code> and <code>hashKeyField</code> values must match the table name and the partition key of the DynamoDB table. </p> <note> <p>If the DynamoDB table also has a sort key, you must specify <code>rangeKeyField</code>. The <code>rangeKeyField</code> value must match the sort key.</p> </note> <p/> <p>The <code>hashKeyValue</code> and <code>rangeKeyValue</code> use substitution templates. These templates provide data at runtime. The syntax is <code>${sql-expression}</code>.</p> <p>You can use expressions for parameters that are string data type. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p> <note> <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text. The <code>payloadField</code> is <code>&lt;payload-field&gt;_raw</code>.</p> </note>'
+    DynamoDBv2Action:
+      type: object
+      required:
+        - tableName
+      properties:
+        tableName:
+          $ref: '#/components/schemas/DynamoTableName'
+          description: The name of the DynamoDB table.
+        payload:
+          $ref: '#/components/schemas/Payload'
+      description: '<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.</p> <important> <p>The <code>type</code> value for <code>Payload</code> must be <code>JSON</code>.</p> </important> <p>You can use expressions for parameters that are strings. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>'
     Action:
       type: object
       properties:
@@ -1526,13 +1592,19 @@ components:
           description: 'Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.'
         iotEvents:
           $ref: '#/components/schemas/IotEventsAction'
-          description: 'Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.'
+          description: 'Sends AWS IoT Events input, which passes information about the detector model instance and the event that triggered the action.'
         sqs:
           $ref: '#/components/schemas/SqsAction'
           description: Sends information about the detector model instance and the event that triggered the action to an Amazon SQS queue.
         firehose:
           $ref: '#/components/schemas/FirehoseAction'
           description: Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
+        dynamoDB:
+          $ref: '#/components/schemas/DynamoDBAction'
+          description: 'Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html">Actions</a> in <i>AWS IoT Events Developer Guide</i>.'
+        dynamoDBv2:
+          $ref: '#/components/schemas/DynamoDBv2Action'
+          description: 'Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html">Actions</a> in <i>AWS IoT Events Developer Guide</i>.'
       description: An action to be performed when the <code>condition</code> is TRUE.
     Actions:
       type: array
@@ -1559,6 +1631,9 @@ components:
     Condition:
       type: string
       maxLength: 512
+    ContentExpression:
+      type: string
+      minLength: 1
     DetectorModelName:
       type: string
       pattern: '^[a-zA-Z0-9_-]+$'
@@ -1647,7 +1722,7 @@ components:
           description: The status of the detector model.
         key:
           $ref: '#/components/schemas/AttributeJsonPath'
-          description: The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input.
+          description: '<p>The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information. </p> <p>This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.</p>'
         evaluationMethod:
           $ref: '#/components/schemas/EvaluationMethod'
           description: 'Information about the order in which events are evaluated and how actions are executed. '
@@ -1863,6 +1938,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DetectorModelVersionSummary'
+    DynamoKeyType:
+      type: string
+    DynamoKeyField:
+      type: string
+    DynamoKeyValue:
+      type: string
+    DynamoOperation:
+      type: string
+    DynamoTableName:
+      type: string
+    Payload:
+      type: object
+      required:
+        - contentExpression
+        - type
+      properties:
+        contentExpression:
+          $ref: '#/components/schemas/ContentExpression'
+          description: 'The content of the payload. You can use a string expression that includes quoted strings (<code>''&lt;string&gt;''</code>), variables (<code>$variable.&lt;variable-name&gt;</code>), input values (<code>$input.&lt;input-name&gt;.&lt;path-to-datum&gt;</code>), string concatenations, and quoted strings that contain <code>${}</code> as the content. The recommended maximum size of a content expression is 1 KB.'
+        type:
+          $ref: '#/components/schemas/PayloadType'
+          description: The value of the payload type can be either <code>STRING</code> or <code>JSON</code>.
+      description: '<p>Information needed to configure the payload.</p> <p>By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use <code>contentExpression</code>.</p>'
     EventName:
       type: string
       maxLength: 128
@@ -1954,15 +2052,15 @@ components:
       properties:
         events:
           $ref: '#/components/schemas/Events'
-          description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is TRUE.
+          description: Specifies the actions that are performed when the state is entered and the <code>condition</code> is <code>TRUE</code>.
       description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
     OnExitLifecycle:
       type: object
       properties:
         events:
           $ref: '#/components/schemas/Events'
-          description: Specifies the <code>actions</code> that are performed when the state is exited and the <code>condition</code> is TRUE.
-      description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
+          description: Specifies the <code>actions</code> that are performed when the state is exited and the <code>condition</code> is <code>TRUE</code>.
+      description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.'
     TransitionEvents:
       type: array
       items:
@@ -1977,6 +2075,11 @@ components:
           $ref: '#/components/schemas/TransitionEvents'
           description: 'Specifies the actions performed, and the next state entered, when a <code>condition</code> evaluates to TRUE.'
       description: Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
+    PayloadType:
+      type: string
+      enum:
+        - STRING
+        - JSON
     PutLoggingOptionsRequest:
       type: object
       required:
@@ -2019,7 +2122,7 @@ components:
           description: 'When entering this state, perform these <code>actions</code> if the <code>condition</code> is TRUE.'
         onExit:
           $ref: '#/components/schemas/OnExitLifecycle'
-          description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is TRUE.'
+          description: 'When exiting this state, perform these <code>actions</code> if the specified <code>condition</code> is <code>TRUE</code>.'
       description: Information that defines a state of a detector.
     TagValue:
       type: string

@@ -477,17 +477,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/DBInstanceNotFoundFault'
         '481':
-          description: DBSnapshotNotFoundFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
-        '482':
           description: DBClusterNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '482':
+          description: DBSnapshotNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       parameters:
         - name: ResourceName
           in: query
@@ -540,17 +552,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/DBInstanceNotFoundFault'
         '481':
-          description: DBSnapshotNotFoundFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
-        '482':
           description: DBClusterNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '482':
+          description: DBSnapshotNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBSnapshotNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       requestBody:
         content:
           text/xml:
@@ -4097,11 +4121,12 @@ paths:
         - name: EngineFamily
           in: query
           required: true
-          description: 'The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.'
+          description: The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
           schema:
             type: string
             enum:
               - MYSQL
+              - POSTGRESQL
         - name: Auth
           in: query
           required: true
@@ -11834,6 +11859,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       parameters:
         - name: ResourceName
           in: query
@@ -11900,6 +11937,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       requestBody:
         content:
           text/xml:
@@ -13757,7 +13806,7 @@ paths:
                 description: '<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior.</p> <p>Default: no session pinning filters</p>'
               InitQuery:
                 $ref: '#/components/schemas/String'
-                description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>'
+                description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>'
             description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>
         - name: NewName
           in: query
@@ -15695,6 +15744,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       parameters:
         - name: ResourceName
           in: query
@@ -15757,6 +15818,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '484':
+          description: DBProxyTargetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyTargetGroupNotFoundFault'
       requestBody:
         content:
           text/xml:
@@ -19545,7 +19618,7 @@ paths:
         - name: ExportOnly
           in: query
           required: false
-          description: '<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data of the snapshot.</p> </li> <li> <p> <code>database.table [table-name]</code> - Export a table of the snapshot.</p> </li> <li> <p> <code>database.schema [schema-name]</code> - Export a database schema of the snapshot. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> <li> <p> <code>database.schema.table [table-name]</code> - Export a table of the database schema. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> </ul>'
+          description: '<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data from a specified database.</p> </li> <li> <p> <code>database.table</code> <i>table-name</i> - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.</p> </li> <li> <p> <code>database.schema</code> <i>schema-name</i> - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> <li> <p> <code>database.schema.table</code> <i>table-name</i> - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -20119,6 +20192,8 @@ components:
           description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
       description: Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
     DBSnapshotNotFoundFault: {}
+    DBProxyNotFoundFault: {}
+    DBProxyTargetGroupNotFoundFault: {}
     ApplyPendingMaintenanceActionResult:
       type: object
       properties:
@@ -20167,7 +20242,7 @@ components:
           description: The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
         ExportOnly:
           $ref: '#/components/schemas/StringList'
-          description: '<p>The data exported from the snapshot. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data of the snapshot.</p> </li> <li> <p> <code>database.table [table-name]</code> - Export a table of the snapshot.</p> </li> <li> <p> <code>database.schema [schema-name]</code> - Export a database schema of the snapshot. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> <li> <p> <code>database.schema.table [table-name]</code> - Export a table of the database schema. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> </ul>'
+          description: '<p>The data exported from the snapshot. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data from a specified database.</p> </li> <li> <p> <code>database.table</code> <i>table-name</i> - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.</p> </li> <li> <p> <code>database.schema</code> <i>schema-name</i> - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> <li> <p> <code>database.schema.table</code> <i>table-name</i> - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> </ul>'
         SnapshotTime:
           $ref: '#/components/schemas/TStamp'
           description: The time that the snapshot was created.
@@ -20465,7 +20540,6 @@ components:
         DBProxy:
           $ref: '#/components/schemas/DBProxy'
           description: The data structure representing the details of the DB proxy that you delete.
-    DBProxyNotFoundFault: {}
     InvalidDBProxyStateFault: {}
     DeleteDBSnapshotResult:
       type: object
@@ -20518,7 +20592,6 @@ components:
       type: object
       properties: {}
     DBProxyTargetNotFoundFault: {}
-    DBProxyTargetGroupNotFoundFault: {}
     AccountAttributesMessage:
       type: object
       properties:
@@ -21569,7 +21642,7 @@ components:
           description: '<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior.</p> <p>Default: no session pinning filters</p>'
         InitQuery:
           $ref: '#/components/schemas/String'
-          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>'
+          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>'
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>
     Integer:
       type: integer
@@ -21590,7 +21663,7 @@ components:
           description: 'Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is <code>EXCLUDE_VARIABLE_SETS</code>.'
         InitQuery:
           $ref: '#/components/schemas/String'
-          description: ' One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. '
+          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p>'
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>
     CopyDBClusterParameterGroupMessage:
       type: object
@@ -22769,6 +22842,7 @@ components:
       type: string
       enum:
         - MYSQL
+        - POSTGRESQL
     UserAuthConfigList:
       type: array
       items:
@@ -22788,7 +22862,7 @@ components:
           description: 'The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.'
         EngineFamily:
           $ref: '#/components/schemas/EngineFamily'
-          description: 'The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.'
+          description: The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
         Auth:
           $ref: '#/components/schemas/UserAuthConfigList'
           description: The authorization mechanism that the proxy uses.
@@ -22827,7 +22901,7 @@ components:
           description: 'The current status of this proxy. A status of <code>available</code> means the proxy is ready to handle requests. Other values indicate that you must wait for the proxy to be ready, or take some action to resolve an issue.'
         EngineFamily:
           $ref: '#/components/schemas/String'
-          description: 'Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.'
+          description: The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
         VpcSecurityGroupIds:
           $ref: '#/components/schemas/StringList'
           description: Provides a list of VPC security groups that the proxy belongs to.
@@ -23521,6 +23595,9 @@ components:
         - insufficient-resource-limits
         - creating
         - deleting
+        - suspended
+        - suspending
+        - reactivating
     UserAuthConfigInfoList:
       type: array
       items:
@@ -23535,6 +23612,19 @@ components:
         - RDS_INSTANCE
         - RDS_SERVERLESS_ENDPOINT
         - TRACKED_CLUSTER
+    TargetHealth:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/TargetState'
+          description: '<p>The current state of the connection health lifecycle for the RDS Proxy target. The following is a typical lifecycle example for the states of an RDS Proxy target: </p> <p> <code>registering</code> &gt; <code>unavailable</code> &gt; <code>available</code> &gt; <code>unavailable</code> &gt; <code>available</code> </p>'
+        Reason:
+          $ref: '#/components/schemas/TargetHealthReason'
+          description: The reason for the current health <code>State</code> of the RDS Proxy target.
+        Description:
+          $ref: '#/components/schemas/String'
+          description: 'A description of the health of the RDS Proxy target. If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.'
+      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Information about the connection health of an RDS Proxy target.</p>
     DBProxyTarget:
       type: object
       properties:
@@ -23556,6 +23646,9 @@ components:
         Type:
           $ref: '#/components/schemas/TargetType'
           description: 'Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.'
+        TargetHealth:
+          $ref: '#/components/schemas/TargetHealth'
+          description: Information about the connection health of the RDS Proxy target.
       description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>
     DBProxyTargetGroup:
       type: object
@@ -26697,7 +26790,7 @@ components:
           description: The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
         ExportOnly:
           $ref: '#/components/schemas/StringList'
-          description: '<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data of the snapshot.</p> </li> <li> <p> <code>database.table [table-name]</code> - Export a table of the snapshot.</p> </li> <li> <p> <code>database.schema [schema-name]</code> - Export a database schema of the snapshot. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> <li> <p> <code>database.schema.table [table-name]</code> - Export a table of the database schema. This value isn''t valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> </ul>'
+          description: '<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data from a specified database.</p> </li> <li> <p> <code>database.table</code> <i>table-name</i> - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.</p> </li> <li> <p> <code>database.schema</code> <i>schema-name</i> - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> <li> <p> <code>database.schema.table</code> <i>table-name</i> - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> </ul>'
     StopActivityStreamRequest:
       type: object
       required:
@@ -26753,6 +26846,19 @@ components:
           $ref: '#/components/schemas/String'
           description: The name of the time zone.
       description: 'A time zone associated with a <code>DBInstance</code> or a <code>DBSnapshot</code>. This data type is an element in the response to the <code>DescribeDBInstances</code>, the <code>DescribeDBSnapshots</code>, and the <code>DescribeDBEngineVersions</code> actions. '
+    TargetState:
+      type: string
+      enum:
+        - REGISTERING
+        - AVAILABLE
+        - UNAVAILABLE
+    TargetHealthReason:
+      type: string
+      enum:
+        - UNREACHABLE
+        - CONNECTION_FAILED
+        - AUTH_FAILURE
+        - PENDING_PROXY_CAPACITY
     UpgradeTarget:
       type: object
       properties:

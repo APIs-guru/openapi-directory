@@ -338,7 +338,7 @@ paths:
   /findings/import:
     post:
       operationId: BatchImportFindings
-      description: <p>Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p>
+      description: '<p>Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p> <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -385,6 +385,127 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsSecurityFinding'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /findings/batchupdate:
+    patch:
+      operationId: BatchUpdateFindings
+      description: <p>Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Master accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>Member accounts can only use <code>BatchUpdateFindings</code> to update the Note object.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchUpdateFindingsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FindingIdentifiers
+              properties:
+                FindingIdentifiers:
+                  description: '<p>The list of findings to update. <code>BatchUpdateFindings</code> can be used to update up to 100 findings at a time.</p> <p>For each finding, the list provides the finding identifier and the ARN of the finding provider.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AwsSecurityFindingIdentifier'
+                Note:
+                  description: The updated note.
+                  type: object
+                  properties:
+                    Text:
+                      $ref: '#/components/schemas/NonEmptyString'
+                      description: The updated note text.
+                    UpdatedBy:
+                      $ref: '#/components/schemas/NonEmptyString'
+                      description: The principal that updated the note.
+                Severity:
+                  description: Updates to the severity information for a finding.
+                  type: object
+                  properties:
+                    Normalized:
+                      $ref: '#/components/schemas/RatioScale'
+                      description: '<p>The normalized severity for the finding. This attribute is to be deprecated in favor of <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows.</p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
+                    Product:
+                      $ref: '#/components/schemas/Double'
+                      description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+                    Label:
+                      $ref: '#/components/schemas/SeverityLabel'
+                      description: <p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>
+                VerificationState:
+                  description: '<p>Indicates the veracity of a finding.</p> <p>The available values for <code>VerificationState</code> are as follows.</p> <ul> <li> <p> <code>UNKNOWN</code> – The default disposition of a security finding</p> </li> <li> <p> <code>TRUE_POSITIVE</code> – The security finding is confirmed</p> </li> <li> <p> <code>FALSE_POSITIVE</code> – The security finding was determined to be a false alarm</p> </li> <li> <p> <code>BENIGN_POSITIVE</code> – A special case of <code>TRUE_POSITIVE</code> where the finding doesn''t pose any threat, is expected, or both</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - UNKNOWN
+                    - TRUE_POSITIVE
+                    - FALSE_POSITIVE
+                    - BENIGN_POSITIVE
+                Confidence:
+                  description: '<p>The updated value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                Criticality:
+                  description: '<p>The updated value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                Types:
+                  description: <p>One or more finding types in the format of namespace/category/classifier that classify a finding.</p> <p>Valid namespace values are as follows.</p> <ul> <li> <p>Software and Configuration Checks</p> </li> <li> <p>TTPs</p> </li> <li> <p>Effects</p> </li> <li> <p>Unusual Behaviors</p> </li> <li> <p>Sensitive Data Identifications </p> </li> </ul>
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NonEmptyString'
+                UserDefinedFields:
+                  description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/NonEmptyString'
+                Workflow:
+                  description: Used to update information about the investigation into the finding.
+                  type: object
+                  properties:
+                    Status:
+                      $ref: '#/components/schemas/WorkflowStatus'
+                      description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+                RelatedFindings:
+                  description: A list of findings that are related to the updated findings.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RelatedFinding'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2670,7 +2791,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateFindings
-      description: Updates the <code>Note</code> and <code>RecordState</code> of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
+      description: '<p> <code>UpdateFindings</code> is deprecated. Instead of <code>UpdateFindings</code>, use <code>BatchUpdateFindings</code>.</p> <p>Updates the <code>Note</code> and <code>RecordState</code> of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.</p>'
       responses:
         '200':
           description: Success
@@ -3789,6 +3910,66 @@ components:
           $ref: '#/components/schemas/Note'
           description: A user-defined note added to a finding.
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
+    BatchUpdateFindingsResponse:
+      type: object
+      required:
+        - ProcessedFindings
+        - UnprocessedFindings
+      properties:
+        ProcessedFindings:
+          $ref: '#/components/schemas/AwsSecurityFindingIdentifierList'
+          description: The list of findings that were updated successfully.
+        UnprocessedFindings:
+          $ref: '#/components/schemas/BatchUpdateFindingsUnprocessedFindingsList'
+          description: The list of findings that were not updated.
+    AwsSecurityFindingIdentifier:
+      type: object
+      required:
+        - Id
+        - ProductArn
+      properties:
+        Id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the finding that was specified by the finding provider.
+        ProductArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The ARN generated by Security Hub that uniquely identifies a product that generates findings. This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for a custom integration.'
+      description: Identifies a finding to update using <code>BatchUpdateFindings</code>.
+    RatioScale:
+      type: integer
+      minimum: 0
+      maximum: 100
+    Double:
+      type: number
+      format: double
+    SeverityLabel:
+      type: string
+      enum:
+        - INFORMATIONAL
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
+    WorkflowStatus:
+      type: string
+      enum:
+        - NEW
+        - NOTIFIED
+        - RESOLVED
+        - SUPPRESSED
+    RelatedFinding:
+      type: object
+      required:
+        - ProductArn
+        - Id
+      properties:
+        ProductArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the product that generated a related finding.
+        Id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The product-generated identifier for a related finding.
+      description: Details about a related finding.
     CreateActionTargetResponse:
       type: object
       required:
@@ -4682,9 +4863,6 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The path to the role.
       description: 'Contains information about an IAM role, including all of the role''s policies.'
-    Double:
-      type: number
-      format: double
     AwsKmsKeyDetails:
       type: object
       properties:
@@ -5439,6 +5617,10 @@ components:
           $ref: '#/components/schemas/KeywordFilterList'
           description: A keyword for a finding.
       description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+    AwsSecurityFindingIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsSecurityFindingIdentifier'
     AwsSecurityFindingList:
       type: array
       items:
@@ -5596,6 +5778,95 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImportFindingsError'
+    NoteUpdate:
+      type: object
+      required:
+        - Text
+        - UpdatedBy
+      properties:
+        Text:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The updated note text.
+        UpdatedBy:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The principal that updated the note.
+      description: The updated note.
+    SeverityUpdate:
+      type: object
+      properties:
+        Normalized:
+          $ref: '#/components/schemas/RatioScale'
+          description: '<p>The normalized severity for the finding. This attribute is to be deprecated in favor of <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows.</p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
+        Product:
+          $ref: '#/components/schemas/Double'
+          description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+        Label:
+          $ref: '#/components/schemas/SeverityLabel'
+          description: <p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>
+      description: Updates to the severity information for a finding.
+    WorkflowUpdate:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/WorkflowStatus'
+          description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+      description: Used to update information about the investigation into the finding.
+    BatchUpdateFindingsRequest:
+      type: object
+      required:
+        - FindingIdentifiers
+      title: BatchUpdateFindingsRequest
+      properties:
+        FindingIdentifiers:
+          $ref: '#/components/schemas/AwsSecurityFindingIdentifierList'
+          description: '<p>The list of findings to update. <code>BatchUpdateFindings</code> can be used to update up to 100 findings at a time.</p> <p>For each finding, the list provides the finding identifier and the ARN of the finding provider.</p>'
+        Note:
+          $ref: '#/components/schemas/NoteUpdate'
+        Severity:
+          $ref: '#/components/schemas/SeverityUpdate'
+          description: Used to update the finding severity.
+        VerificationState:
+          $ref: '#/components/schemas/VerificationState'
+          description: '<p>Indicates the veracity of a finding.</p> <p>The available values for <code>VerificationState</code> are as follows.</p> <ul> <li> <p> <code>UNKNOWN</code> – The default disposition of a security finding</p> </li> <li> <p> <code>TRUE_POSITIVE</code> – The security finding is confirmed</p> </li> <li> <p> <code>FALSE_POSITIVE</code> – The security finding was determined to be a false alarm</p> </li> <li> <p> <code>BENIGN_POSITIVE</code> – A special case of <code>TRUE_POSITIVE</code> where the finding doesn''t pose any threat, is expected, or both</p> </li> </ul>'
+        Confidence:
+          $ref: '#/components/schemas/RatioScale'
+          description: '<p>The updated value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+        Criticality:
+          $ref: '#/components/schemas/RatioScale'
+          description: '<p>The updated value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+        Types:
+          $ref: '#/components/schemas/TypeList'
+          description: <p>One or more finding types in the format of namespace/category/classifier that classify a finding.</p> <p>Valid namespace values are as follows.</p> <ul> <li> <p>Software and Configuration Checks</p> </li> <li> <p>TTPs</p> </li> <li> <p>Effects</p> </li> <li> <p>Unusual Behaviors</p> </li> <li> <p>Sensitive Data Identifications </p> </li> </ul>
+        UserDefinedFields:
+          $ref: '#/components/schemas/FieldMap'
+          description: 'A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.'
+        Workflow:
+          $ref: '#/components/schemas/WorkflowUpdate'
+          description: <p>Used to update the workflow status of a finding.</p> <p>The workflow status indicates the progress of the investigation into the finding. </p>
+        RelatedFindings:
+          $ref: '#/components/schemas/RelatedFindingList'
+          description: A list of findings that are related to the updated findings.
+    BatchUpdateFindingsUnprocessedFindingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchUpdateFindingsUnprocessedFinding'
+    BatchUpdateFindingsUnprocessedFinding:
+      type: object
+      required:
+        - FindingIdentifier
+        - ErrorCode
+        - ErrorMessage
+      properties:
+        FindingIdentifier:
+          $ref: '#/components/schemas/AwsSecurityFindingIdentifier'
+          description: The identifier of the finding that was not updated.
+        ErrorCode:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The code associated with the error.
+        ErrorMessage:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The message associated with the error.
+      description: A finding from a <code>BatchUpdateFindings</code> request that Security Hub was unable to update.
     CategoryList:
       type: array
       items:
@@ -6137,19 +6408,6 @@ components:
       enum:
         - IN
         - OUT
-    NoteUpdate:
-      type: object
-      required:
-        - Text
-        - UpdatedBy
-      properties:
-        Text:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The updated note text.
-        UpdatedBy:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The principal that updated the note.
-      description: The updated note.
     NumberFilter:
       type: object
       properties:
@@ -6212,19 +6470,6 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: A URL to a page or site that contains information about how to remediate a finding.
       description: A recommendation on how to remediate the issue identified in a finding.
-    RelatedFinding:
-      type: object
-      required:
-        - ProductArn
-        - Id
-      properties:
-        ProductArn:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The ARN of the product that generated a related finding.
-        Id:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The product-generated identifier for a related finding.
-      description: Details about a related finding.
     ResourceDetails:
       type: object
       properties:
@@ -6324,14 +6569,6 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The reason that the account was not processed.
       description: Details about the account that was not processed.
-    SeverityLabel:
-      type: string
-      enum:
-        - INFORMATIONAL
-        - LOW
-        - MEDIUM
-        - HIGH
-        - CRITICAL
     SeverityRating:
       type: string
       enum:
@@ -6561,12 +6798,5 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The unique identifier for the rule to exclude from the rule group.
       description: Details about a rule to exclude from a rule group.
-    WorkflowStatus:
-      type: string
-      enum:
-        - NEW
-        - NOTIFIED
-        - RESOLVED
-        - SUPPRESSED
 security:
   - hmac: []

@@ -3967,6 +3967,24 @@ components:
           $ref: '#/components/schemas/CaptionSourceSettings'
           description: 'If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
       description: Set up captions in your outputs by first selecting them from your input here.
+    __integerMin1Max1001:
+      type: integer
+      minimum: 1
+      maximum: 1001
+    __integerMin1Max60000:
+      type: integer
+      minimum: 1
+      maximum: 60000
+    CaptionSourceFramerate:
+      type: object
+      properties:
+        FramerateDenominator:
+          $ref: '#/components/schemas/__integerMin1Max1001'
+          description: Specify the denominator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate numerator (framerateNumerator).
+        FramerateNumerator:
+          $ref: '#/components/schemas/__integerMin1Max60000'
+          description: Specify the numerator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate denominator (framerateDenominator).
+      description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
     DvbSubSourceSettings:
       type: object
       properties:
@@ -3996,6 +4014,9 @@ components:
         Convert608To708:
           $ref: '#/components/schemas/FileSourceConvert608To708'
           description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
+        Framerate:
+          $ref: '#/components/schemas/CaptionSourceFramerate'
+          description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
         SourceFile:
           $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI'
           description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', and ''smi''.'
@@ -7536,10 +7557,6 @@ components:
       type: integer
       minimum: 1000
       maximum: 288000000
-    __integerMin1Max1001:
-      type: integer
-      minimum: 1
-      maximum: 1001
     __integerMin24Max60000:
       type: integer
       minimum: 24
