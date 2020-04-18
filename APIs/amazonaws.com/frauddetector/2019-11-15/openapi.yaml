@@ -283,12 +283,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '482':
+        '483':
           description: ThrottlingException
           content:
             application/json:
@@ -418,10 +424,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetector':
+    post:
+      operationId: DeleteDetector
+      description: 'Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDetectorResult'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDetectorRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteDetector
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetectorVersion':
     post:
       operationId: DeleteDetectorVersion
-      description: Deletes the detector version.
+      description: Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.
       responses:
         '200':
           description: Success
@@ -453,6 +516,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -512,6 +581,63 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.DeleteEvent
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRuleVersion':
+    post:
+      operationId: DeleteRuleVersion
+      description: Deletes the rule version. You cannot delete a rule version if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRuleVersionResult'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRuleVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteRuleVersion
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1950,6 +2076,9 @@ components:
         modelVersions:
           $ref: '#/components/schemas/ListOfModelVersions'
           description: The model versions to include in the detector version.
+        ruleExecutionMode:
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
     ResourceNotFoundException: {}
     CreateModelVersionResult:
       type: object
@@ -2046,6 +2175,19 @@ components:
         variableType:
           $ref: '#/components/schemas/string'
           description: The variable type.
+    DeleteDetectorResult:
+      type: object
+      properties: {}
+    DeleteDetectorRequest:
+      type: object
+      required:
+        - detectorId
+      title: DeleteDetectorRequest
+      properties:
+        detectorId:
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the detector to delete.
+    ConflictException: {}
     DeleteDetectorVersionResult:
       type: object
       properties: {}
@@ -2074,6 +2216,26 @@ components:
         eventId:
           $ref: '#/components/schemas/string'
           description: The ID of the event to delete.
+    DeleteRuleVersionResult:
+      type: object
+      properties: {}
+    DeleteRuleVersionRequest:
+      type: object
+      required:
+        - detectorId
+        - ruleId
+        - ruleVersion
+      title: DeleteRuleVersionRequest
+      properties:
+        detectorId:
+          $ref: '#/components/schemas/identifier'
+          description: The ID of the detector that includes the rule version to delete.
+        ruleId:
+          $ref: '#/components/schemas/identifier'
+          description: The rule ID of the rule version to delete.
+        ruleVersion:
+          $ref: '#/components/schemas/nonEmptyString'
+          description: The rule version to delete.
     DescribeDetectorResult:
       type: object
       properties:
@@ -2159,6 +2321,9 @@ components:
         createdTime:
           $ref: '#/components/schemas/time'
           description: 'The timestamp when the detector version was created. '
+        ruleExecutionMode:
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>'
     GetDetectorVersionRequest:
       type: object
       required:
@@ -2307,6 +2472,9 @@ components:
         modelScores:
           $ref: '#/components/schemas/ListOfModelScores'
           description: The model scores for models used in the detector version.
+        ruleResults:
+          $ref: '#/components/schemas/ListOfRuleResults'
+          description: The rule results in the prediction.
     GetPredictionRequest:
       type: object
       required:
@@ -2504,6 +2672,9 @@ components:
         modelVersions:
           $ref: '#/components/schemas/ListOfModelVersions'
           description: The model versions to include in the detector version.
+        ruleExecutionMode:
+          $ref: '#/components/schemas/RuleExecutionMode'
+          description: '<p>The rule execution mode to add to the detector.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>'
     UpdateDetectorVersionMetadataResult:
       type: object
       properties: {}
@@ -2714,6 +2885,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ModelVersion'
+    RuleExecutionMode:
+      type: string
+      enum:
+        - ALL_MATCHED
+        - FIRST_MATCHED
     nonEmptyString:
       type: string
       minLength: 1
@@ -2962,6 +3138,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ModelScores'
+    ListOfRuleResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuleResult'
     RulesMaxResults:
       type: integer
       minimum: 50
@@ -3024,6 +3204,16 @@ components:
           $ref: '#/components/schemas/nonEmptyString'
           description: The model version.
       description: The model version.
+    RuleResult:
+      type: object
+      properties:
+        ruleId:
+          $ref: '#/components/schemas/string'
+          description: 'The rule ID that was matched, based on the rule execution mode.'
+        outcomes:
+          $ref: '#/components/schemas/ListOfStrings'
+          description: 'The outcomes of the matched rule, based on the rule execution mode.'
+      description: The rule results.
     MetricsMap:
       type: object
       additionalProperties:
@@ -3210,7 +3400,7 @@ components:
       description: The details of the rule.
     s3BucketLocation:
       type: string
-      pattern: '^s3:\/\/[^\s]+$'
+      pattern: '^s3:\/\/(.+)$'
       minLength: 1
       maxLength: 512
     iamRoleArn:
