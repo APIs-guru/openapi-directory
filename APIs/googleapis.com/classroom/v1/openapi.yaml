@@ -129,17 +129,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a course.
@@ -235,17 +235,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an alias for a course.
@@ -336,17 +336,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/courses/{courseId}/announcements':
     get:
       description: |-
@@ -437,17 +437,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an announcement.
@@ -587,17 +587,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates one or more fields of an announcement.
@@ -633,7 +633,7 @@ paths:
             fields are specified. If a field supports empty values, it can be cleared
             by specifying it in the update mask and not in the Announcement object. If
             a field that does not support empty values is included in the update mask
-            and not set in the Announcement object, an `INVALID_ARGUMENT` error will be
+            and not set in the Announcement object, an `INVALID_ARGUMENT` error is
             returned.
 
             The following fields may be specified by teachers:
@@ -666,17 +666,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/announcements/{id}:modifyAssignees':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Modifies assignee mode and options of an announcement.
@@ -825,17 +825,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates course work.
@@ -1020,17 +1020,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}':
     get:
       description: |-
@@ -1100,17 +1100,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates one or more fields of a student submission.
@@ -1192,17 +1192,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:modifyAttachments':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Modifies attachments of student submission.
@@ -1271,17 +1271,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:reclaim':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Reclaims a student submission on behalf of the student that owns it.
@@ -1349,17 +1349,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:return':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Returns a student submission.
@@ -1428,17 +1428,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{courseWorkId}/studentSubmissions/{id}:turnIn':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Turns in a student submission.
@@ -1607,17 +1607,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates one or more fields of a course work.
@@ -1663,7 +1663,7 @@ paths:
             fields are specified. If a field supports empty values, it can be cleared
             by specifying it in the update mask and not in the CourseWork object. If a
             field that does not support empty values is included in the update mask and
-            not set in the CourseWork object, an `INVALID_ARGUMENT` error will be
+            not set in the CourseWork object, an `INVALID_ARGUMENT` error is
             returned.
 
             The following fields may be specified by teachers:
@@ -1702,17 +1702,17 @@ paths:
         - courses
   '/v1/courses/{courseId}/courseWork/{id}:modifyAssignees':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Modifies assignee mode and options of a coursework.
@@ -1830,17 +1830,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Adds a user as a student of a course.
@@ -2012,17 +2012,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/courses/{courseId}/teachers':
     get:
       description: |-
@@ -2091,17 +2091,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a teacher of a course.
@@ -2267,17 +2267,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/courses/{courseId}/topics':
     get:
       description: |-
@@ -2340,17 +2340,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a topic.
@@ -2478,17 +2478,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates one or more fields of a topic.
@@ -2522,7 +2522,7 @@ paths:
             fields are specified. If a field supports empty values, it can be cleared
             by specifying it in the update mask and not in the Topic object. If a
             field that does not support empty values is included in the update mask and
-            not set in the Topic object, an `INVALID_ARGUMENT` error will be
+            not set in the Topic object, an `INVALID_ARGUMENT` error is
             returned.
 
             The following fields may be specified:
@@ -2625,17 +2625,17 @@ paths:
       tags:
         - courses
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates one or more fields in a course.
@@ -2815,17 +2815,17 @@ paths:
       tags:
         - invitations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates an invitation. Only one invitation for a user and course may exist
@@ -2928,30 +2928,30 @@ paths:
       tags:
         - invitations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/invitations/{id}:accept':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Accepts an invitation, removing it and adding the invited user to the
@@ -2992,17 +2992,17 @@ paths:
         - invitations
   /v1/registrations:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a `Registration`, causing Classroom to start sending notifications
@@ -3084,17 +3084,17 @@ paths:
       tags:
         - registrations
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/userProfiles/{studentId}/guardianInvitations':
     get:
       description: |-
@@ -3133,7 +3133,7 @@ paths:
             type: string
         - description: |-
             If specified, only results with the specified `invited_email_address`
-            will be returned.
+            are returned.
           in: query
           name: invitedEmailAddress
           schema:
@@ -3150,18 +3150,18 @@ paths:
         - description: |-
             nextPageToken
             value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
+            list
+            call, indicating that the subsequent page of results should be returned.
 
-            The list request
-            must be otherwise identical to the one that resulted in this token.
+            The list
+            request must be otherwise identical to the one that resulted in this token.
           in: query
           name: pageToken
           schema:
             type: string
         - description: |-
-            If specified, only results with the specified `state` values will be
-            returned. Otherwise, results with a `state` of `PENDING` will be returned.
+            If specified, only results with the specified `state` values are
+            returned. Otherwise, results with a `state` of `PENDING` are returned.
           explode: true
           in: query
           name: states
@@ -3192,17 +3192,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a guardian invitation, and sends an email to the guardian asking
@@ -3312,17 +3312,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Modifies a guardian invitation.
@@ -3359,7 +3359,7 @@ paths:
             type: string
         - description: |-
             Mask that identifies which fields on the course to update.
-            This field is required to do an update. The update will fail if invalid
+            This field is required to do an update. The update fails if invalid
             fields are specified. The following fields are valid:
 
             * `state`
@@ -3481,17 +3481,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/userProfiles/{studentId}/guardians/{guardianId}':
     delete:
       description: |-
@@ -3605,17 +3605,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
   '/v1/userProfiles/{userId}':
     get:
       description: |-
@@ -3667,17 +3667,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     _.xgafv:
@@ -3832,7 +3832,7 @@ components:
             Identifiers of students with access to the announcement.
             This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
             If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students
-            specified in this field will be able to see the announcement.
+            specified in this field can see the announcement.
         materials:
           description: |-
             Additional materials.
@@ -3890,7 +3890,7 @@ components:
 
             Some attachment metadata is only populated if the requesting user has
             permission to access it. Identifier and alternate_link fields are always
-            available, but others (e.g. title) may not be.
+            available, but others (for example, title) may not be.
           items:
             $ref: '#/components/schemas/Attachment'
           type: array
@@ -4184,7 +4184,7 @@ components:
             Whether this course work item is associated with the Developer Console
             project making the request.
 
-            See google.classroom.Work.CreateCourseWork for more
+            See CreateCourseWork for more
             details.
 
             Read-only.
@@ -4237,7 +4237,7 @@ components:
             Identifiers of students with access to the coursework.
             This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
             If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students
-            specified in this field will be assigned the coursework.
+            specified in this field are assigned the coursework.
         materials:
           description: |-
             Additional materials.
@@ -4795,8 +4795,8 @@ components:
         link:
           $ref: '#/components/schemas/Link'
           description: |-
-            Link material. On creation, will be upgraded to a more appropriate type
-            if possible, and this will be reflected in the response.
+            Link material. On creation, this is upgraded to a more appropriate type
+            if possible, and this is reflected in the response.
         youtubeVideo:
           $ref: '#/components/schemas/YouTubeVideo'
           description: YouTube video material.
@@ -4806,7 +4806,7 @@ components:
       properties:
         assigneeMode:
           description: |-
-            Mode of the announcement describing whether it will be accessible by all
+            Mode of the announcement describing whether it is accessible by all
             students or specified individual students.
           enum:
             - ASSIGNEE_MODE_UNSPECIFIED
@@ -4857,14 +4857,14 @@ components:
       properties:
         addStudentIds:
           description: |-
-            Ids of students to be added as having access to this
+            IDs of students to be added as having access to this
             coursework/announcement.
           items:
             type: string
           type: array
         removeStudentIds:
           description: |-
-            Ids of students to be removed from having access to this
+            IDs of students to be removed from having access to this
             coursework/announcement.
           items:
             type: string
@@ -4970,7 +4970,7 @@ components:
       description: The history of each state this submission has been in.
       properties:
         actorUserId:
-          description: The teacher or student who made the change
+          description: The teacher or student who made the change.
           type: string
         state:
           description: The workflow pipeline stage.
@@ -5039,8 +5039,8 @@ components:
         assignedGrade:
           description: |-
             Optional grade. If unset, no grade was set.
-            This value must be non-negative. Decimal (i.e. non-integer) values are
-            allowed, but will be rounded to two decimal places.
+            This value must be non-negative. Decimal (that is, non-integer) values are
+            allowed, but are rounded to two decimal places.
 
             This may be modified only by course teachers.
           format: double
@@ -5051,13 +5051,13 @@ components:
             Submission content when course_work_type is ASSIGNMENT.
 
             Students can modify this content using
-            google.classroom.Work.ModifyAttachments.
+            ModifyAttachments.
         associatedWithDeveloper:
           description: |-
             Whether this student submission is associated with the Developer Console
             project making the request.
 
-            See google.classroom.Work.CreateCourseWork for more
+            See CreateCourseWork for more
             details.
 
             Read-only.
@@ -5096,8 +5096,8 @@ components:
         draftGrade:
           description: |-
             Optional pending grade. If unset, no grade was set.
-            This value must be non-negative. Decimal (i.e. non-integer) values are
-            allowed, but will be rounded to two decimal places.
+            This value must be non-negative. Decimal (that is, non-integer) values are
+            allowed, but are rounded to two decimal places.
 
             This is only visible to and modifiable by course teachers.
           format: double
@@ -5235,8 +5235,8 @@ components:
         name:
           description: |-
             The name of the topic, generated by the user.
-            Leading and trailing whitespaces, if any, will be trimmed. Also, multiple
-            consecutive whitespaces will be collapsed into one inside the name. The
+            Leading and trailing whitespaces, if any, are trimmed. Also, multiple
+            consecutive whitespaces are collapsed into one inside the name. The
             result must be a non-empty string. Topic names are case sensitive, and must
             be no longer than 100 characters.
           type: string
@@ -5297,7 +5297,7 @@ components:
           description: |-
             Represents whether a G Suite for Education user's domain administrator has
             explicitly verified them as being a teacher. If the user is not a member of
-            a G Suite for Education domain, than this field will always be false.
+            a G Suite for Education domain, than this field is always false.
 
             Read-only
           type: boolean

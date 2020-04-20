@@ -65,13 +65,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}':
     get:
       description: Get information about the selected associated AdSense account.
@@ -98,13 +98,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}/adclients':
     get:
       description: List all hosted ad clients in the specified hosted account.
@@ -143,13 +143,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}/adclients/{adClientId}':
     get:
       description: Get information about one of the ad clients in the specified publisher's AdSense account.
@@ -182,13 +182,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}/adclients/{adClientId}/adunits':
     get:
       description: List all ad units in the specified publisher's AdSense account.
@@ -238,13 +238,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: Update the supplied ad unit in the specified publisher AdSense account. This method supports patch semantics.
       operationId: adsensehost.accounts.adunits.patch
@@ -430,13 +430,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode':
     get:
       description: 'Get ad code for the specified ad unit, attaching the specified host custom channels.'
@@ -483,13 +483,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/accounts/{accountId}/reports':
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -579,13 +579,13 @@ paths:
       tags:
         - accounts
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   /adclients:
     get:
       description: List all host ad clients in this AdSense account.
@@ -618,13 +618,13 @@ paths:
       tags:
         - adclients
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/adclients/{adClientId}':
     get:
       description: Get information about one of the ad clients in the Host AdSense account.
@@ -651,13 +651,13 @@ paths:
       tags:
         - adclients
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/adclients/{adClientId}/customchannels':
     get:
       description: List all host custom channels in this AdSense account.
@@ -696,13 +696,13 @@ paths:
       tags:
         - customchannels
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: Update a custom channel in the host AdSense account. This method supports patch semantics.
       operationId: adsensehost.customchannels.patch
@@ -858,13 +858,13 @@ paths:
       tags:
         - customchannels
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/adclients/{adClientId}/urlchannels':
     get:
       description: List all host URL channels in the host AdSense account.
@@ -903,13 +903,13 @@ paths:
       tags:
         - urlchannels
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Add a new URL channel to the host AdSense account.
       operationId: adsensehost.urlchannels.insert
@@ -971,13 +971,13 @@ paths:
       tags:
         - urlchannels
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   /associationsessions/start:
     get:
       description: Create an association session for initiating an association with an AdSense user.
@@ -1034,13 +1034,13 @@ paths:
       tags:
         - associationsessions
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   /associationsessions/verify:
     get:
       description: Verify an association session after the association callback returns from AdSense signup.
@@ -1067,13 +1067,13 @@ paths:
       tags:
         - associationsessions
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   /reports:
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
@@ -1157,13 +1157,13 @@ paths:
       tags:
         - reports
     parameters:
+      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/userIp'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
 components:
   parameters:
     alt:

@@ -76,17 +76,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Create an `AccessPolicy`. Fails if this organization already has a
@@ -196,17 +196,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Update an Access Level. The longrunning
@@ -219,7 +219,8 @@ paths:
         - description: |-
             Required. Resource name for the Access Level. The `short_name` component
             must begin with a letter and only include alphanumeric and '_'. Format:
-            `accessPolicies/{policy_id}/accessLevels/{short_name}`
+            `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length
+             // of the `short_name` component is 50 characters.
           in: path
           name: name
           required: true
@@ -309,17 +310,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Create an Access Level. The longrunning
@@ -406,20 +407,20 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        Create an Service Perimeter. The
+        Create a Service Perimeter. The
         longrunning operation from this RPC will have a successful status once the
         Service Perimeter has
         propagated to long-lasting storage. Service Perimeters containing
@@ -549,10 +550,6 @@ components:
         basic:
           $ref: '#/components/schemas/BasicLevel'
           description: A `BasicLevel` composed of `Conditions`.
-        createTime:
-          description: Output only. Time the `AccessLevel` was created in UTC.
-          format: google-datetime
-          type: string
         custom:
           $ref: '#/components/schemas/CustomLevel'
           description: A `CustomLevel` written in the Common Expression Language.
@@ -563,14 +560,11 @@ components:
           description: |-
             Required. Resource name for the Access Level. The `short_name` component
             must begin with a letter and only include alphanumeric and '_'. Format:
-            `accessPolicies/{policy_id}/accessLevels/{short_name}`
+            `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length
+             // of the `short_name` component is 50 characters.
           type: string
         title:
           description: Human readable title. Must be unique within the Policy.
-          type: string
-        updateTime:
-          description: Output only. Time the `AccessLevel` was updated in UTC.
-          format: google-datetime
           type: string
       type: object
     AccessPolicy:
@@ -581,10 +575,6 @@ components:
         access policy is globally visible within an organization, and the
         restrictions it specifies apply to all projects within an organization.
       properties:
-        createTime:
-          description: Output only. Time the `AccessPolicy` was created in UTC.
-          format: google-datetime
-          type: string
         name:
           description: |-
             Output only. Resource name of the `AccessPolicy`. Format:
@@ -598,10 +588,6 @@ components:
           type: string
         title:
           description: Required. Human readable title. Does not affect behavior.
-          type: string
-        updateTime:
-          description: Output only. Time the `AccessPolicy` was updated in UTC.
-          format: google-datetime
           type: string
       type: object
     BasicLevel:
@@ -928,10 +914,6 @@ components:
         a single Google Cloud project may belong to multiple Service Perimeter
         Bridges.
       properties:
-        createTime:
-          description: Output only. Time the `ServicePerimeter` was created in UTC.
-          format: google-datetime
-          type: string
         description:
           description: |-
             Description of the `ServicePerimeter` and its use. Does not affect
@@ -963,10 +945,6 @@ components:
             content and boundaries.
         title:
           description: Human readable title. Must be unique within the Policy.
-          type: string
-        updateTime:
-          description: Output only. Time the `ServicePerimeter` was updated in UTC.
-          format: google-datetime
           type: string
       type: object
     ServicePerimeterConfig:

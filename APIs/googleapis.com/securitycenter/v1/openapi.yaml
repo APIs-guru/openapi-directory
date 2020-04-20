@@ -5,12 +5,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Cloud Security Command Center API provides access to temporal views of assets and findings within an organization.
+  description: Security Command Center API provides access to temporal views of assets and findings within an organization.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Security Command Center
+  title: Security Command Center
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -90,28 +90,27 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     patch:
-      description: |-
-        Creates or updates a finding. The corresponding source must exist for a
-        finding creation to succeed.
-      operationId: securitycenter.organizations.sources.findings.patch
+      description: Updates security marks.
+      operationId: securitycenter.organizations.sources.findings.updateSecurityMarks
       parameters:
         - description: |-
-            The relative resource name of this finding. See:
+            The relative resource name of the SecurityMarks. See:
             https://cloud.google.com/apis/design/resource_names#relative_resource_name
-            Example:
-            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
+            Examples:
+            "organizations/{organization_id}/assets/{asset_id}/securityMarks"
+            "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".
           in: path
           name: name
           required: true
@@ -119,15 +118,11 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
-            The FieldMask to use when updating the finding resource. This field should
-            not be specified when creating a finding.
-
-            When updating a finding, an empty mask is treated as updating all mutable
-            fields and replacing source_properties.  Individual source_properties can
-            be added/updated by using "source_properties.<property key>" in the field
-            mask.
+            The time at which the updated SecurityMarks take effect.
+            If not set uses current server time.  Updates will be applied to the
+            SecurityMarks that are active immediately preceding this time.
           in: query
-          name: updateMask
+          name: startTime
           schema:
             type: string
         - description: |-
@@ -144,13 +139,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Finding'
+              $ref: '#/components/schemas/SecurityMarks'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Finding'
+                $ref: '#/components/schemas/SecurityMarks'
           description: Successful response
       security:
         - Oauth2:
@@ -161,17 +156,17 @@ paths:
         - organizations
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -209,17 +204,17 @@ paths:
         - organizations
   '/v1/{name}:setState':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Updates the state of a finding.
       operationId: securitycenter.organizations.sources.findings.setState
@@ -437,30 +432,30 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
   '/v1/{parent}/assets:group':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Filters an organization's assets and  groups them by their specified
@@ -497,17 +492,17 @@ paths:
         - organizations
   '/v1/{parent}/assets:runDiscovery':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Runs asset discovery. The discovery is tracked with a long-running
@@ -724,17 +719,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Creates a finding. The corresponding source must exist for finding creation
@@ -779,17 +774,17 @@ paths:
         - organizations
   '/v1/{parent}/findings:group':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Filters an organization or source's findings and  groups them by their
@@ -873,17 +868,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Creates a notification config.
       operationId: securitycenter.organizations.notificationConfigs.create
@@ -969,17 +964,17 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Creates a source.
       operationId: securitycenter.organizations.sources.create
@@ -1014,17 +1009,17 @@ paths:
         - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Gets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.getIamPolicy
@@ -1059,17 +1054,17 @@ paths:
         - organizations
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Sets the access control policy on the specified Source.
       operationId: securitycenter.organizations.sources.setIamPolicy
@@ -1104,17 +1099,17 @@ paths:
         - organizations
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: Returns the permissions that a caller has on the specified source.
       operationId: securitycenter.organizations.sources.testIamPermissions
@@ -1224,32 +1219,28 @@ components:
       name: upload_protocol
       schema:
         type: string
-  requestBodies:
-    Finding:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Finding'
   schemas:
     Asset:
       description: |-
-        Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
-        Platform (GCP) resource.
+        Security Command Center representation of a Google Cloud
+        resource.
 
-        The Asset is a Cloud SCC resource that captures information about a single
-        GCP resource. All modifications to an Asset are only within the context of
-        Cloud SCC and don't affect the referenced GCP resource.
+        The Asset is a Security Command Center resource that captures information
+        about a single Google Cloud resource. All modifications to an Asset are only
+        within the context of Security Command Center and don't affect the referenced
+        Google Cloud resource.
       properties:
         createTime:
-          description: The time at which the asset was created in Cloud SCC.
+          description: The time at which the asset was created in Security Command Center.
           format: google-datetime
           type: string
         iamPolicy:
           $ref: '#/components/schemas/IamPolicy'
           description: |-
-            IAM Policy information associated with the GCP resource described by the
-            Cloud SCC asset. This information is managed and defined by the GCP
-            resource and cannot be modified by the user.
+            Cloud IAM Policy information associated with the Google Cloud resource
+            described by the Security Command Center asset. This information is managed
+            and defined by the Google Cloud resource and cannot be modified by the
+            user.
         name:
           description: |-
             The relative resource name of this asset. See:
@@ -1261,13 +1252,13 @@ components:
           additionalProperties: {}
           description: |-
             Resource managed properties. These properties are managed and defined by
-            the GCP resource and cannot be modified by the user.
+            the Google Cloud resource and cannot be modified by the user.
           type: object
         securityCenterProperties:
           $ref: '#/components/schemas/SecurityCenterProperties'
           description: |-
-            Cloud SCC managed properties. These properties are managed by
-            Cloud SCC and cannot be modified by the user.
+            Security Command Center managed properties. These properties are managed by
+            Security Command Center and cannot be modified by the user.
         securityMarks:
           $ref: '#/components/schemas/SecurityMarks'
           description: |-
@@ -1275,8 +1266,8 @@ components:
             and come from the SecurityMarks resource that belongs to the asset.
         updateTime:
           description: |-
-            The time at which the asset was last updated, added, or deleted in Cloud
-            SCC.
+            The time at which the asset was last updated, added, or deleted in Security
+            Command Center.
           format: google-datetime
           type: string
       type: object
@@ -1536,11 +1527,11 @@ components:
       type: object
     Finding:
       description: |-
-        Cloud Security Command Center (Cloud SCC) finding.
+        Security Command Center finding.
 
         A finding is a record of assessment data like security, risk, health, or
-        privacy, that is ingested into Cloud SCC for presentation, notification,
-        analysis, policy testing, and enforcement. For example, a
+        privacy, that is ingested into Security Command Center for presentation,
+        notification, analysis, policy testing, and enforcement. For example, a
         cross-site scripting (XSS) vulnerability in an App Engine application is a
         finding.
       properties:
@@ -1551,7 +1542,7 @@ components:
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
-          description: The time at which the finding was created in Cloud SCC.
+          description: The time at which the finding was created in Security Command Center.
           format: google-datetime
           type: string
         eventTime:
@@ -1563,9 +1554,9 @@ components:
           type: string
         externalUri:
           description: |-
-            The URI that, if available, points to a web page outside of Cloud SCC
-            where additional information about the finding can be found. This field is
-            guaranteed to be either empty or a well formed URL.
+            The URI that, if available, points to a web page outside of Security
+            Command Center where additional information about the finding can be found.
+            This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
           description: |-
@@ -1584,12 +1575,12 @@ components:
           type: string
         resourceName:
           description: |-
-            For findings on Google Cloud Platform (GCP) resources, the full resource
-            name of the GCP resource this finding is for. See:
+            For findings on Google Cloud resources, the full resource
+            name of the Google Cloud resource this finding is for. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
-            When the finding is for a non-GCP resource, the resourceName can be a
-            customer or partner defined string.
-            This field is immutable after creation time.
+            When the finding is for a non-Google Cloud resource, the resourceName can
+            be a customer or partner defined string. This field is immutable after
+            creation time.
           type: string
         securityMarks:
           $ref: '#/components/schemas/SecurityMarks'
@@ -1684,23 +1675,25 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1Asset:
       description: |-
-        Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
-        Platform (GCP) resource.
+        Security Command Center representation of a Google Cloud
+        resource.
 
-        The Asset is a Cloud SCC resource that captures information about a single
-        GCP resource. All modifications to an Asset are only within the context of
-        Cloud SCC and don't affect the referenced GCP resource.
+        The Asset is a Security Command Center resource that captures information
+        about a single Google Cloud resource. All modifications to an Asset are only
+        within the context of Security Command Center and don't affect the referenced
+        Google Cloud resource.
       properties:
         createTime:
-          description: The time at which the asset was created in Cloud SCC.
+          description: The time at which the asset was created in Security Command Center.
           format: google-datetime
           type: string
         iamPolicy:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy'
           description: |-
-            IAM Policy information associated with the GCP resource described by the
-            Cloud SCC asset. This information is managed and defined by the GCP
-            resource and cannot be modified by the user.
+            Cloud IAM Policy information associated with the Google Cloud resource
+            described by the Security Command Center asset. This information is managed
+            and defined by the Google Cloud resource and cannot be modified by the
+            user.
         name:
           description: |-
             The relative resource name of this asset. See:
@@ -1712,13 +1705,13 @@ components:
           additionalProperties: {}
           description: |-
             Resource managed properties. These properties are managed and defined by
-            the GCP resource and cannot be modified by the user.
+            the Google Cloud resource and cannot be modified by the user.
           type: object
         securityCenterProperties:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
           description: |-
-            Cloud SCC managed properties. These properties are managed by
-            Cloud SCC and cannot be modified by the user.
+            Security Command Center managed properties. These properties are managed by
+            Security Command Center and cannot be modified by the user.
         securityMarks:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
           description: |-
@@ -1733,12 +1726,12 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1Finding:
       description: |-
-        Cloud Security Command Center (Cloud SCC) finding.
+        Security Command Center finding.
 
         A finding is a record of assessment data (security, risk, health or privacy)
-        ingested into Cloud SCC for presentation, notification, analysis,
-        policy testing, and enforcement. For example, an XSS vulnerability in an
-        App Engine application is a finding.
+        ingested into Security Command Center for presentation, notification,
+        analysis, policy testing, and enforcement. For example, an XSS vulnerability
+        in an App Engine application is a finding.
       properties:
         category:
           description: |-
@@ -1747,7 +1740,7 @@ components:
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
-          description: The time at which the finding was created in Cloud SCC.
+          description: The time at which the finding was created in Security Command Center.
           format: google-datetime
           type: string
         eventTime:
@@ -1759,9 +1752,9 @@ components:
           type: string
         externalUri:
           description: |-
-            The URI that, if available, points to a web page outside of Cloud SCC
-            where additional information about the finding can be found. This field is
-            guaranteed to be either empty or a well formed URL.
+            The URI that, if available, points to a web page outside of Security
+            Command Center where additional information about the finding can be found.
+            This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
           description: |-
@@ -1780,12 +1773,12 @@ components:
           type: string
         resourceName:
           description: |-
-            For findings on Google Cloud Platform (GCP) resources, the full resource
-            name of the GCP resource this finding is for. See:
+            For findings on Google Cloud resources, the full resource
+            name of the Google Cloud resource this finding is for. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
-            When the finding is for a non-GCP resource, the resourceName can be a
-            customer or partner defined string.
-            This field is immutable after creation time.
+            When the finding is for a non-Google Cloud resource, the resourceName can
+            be a customer or partner defined string. This field is immutable after
+            creation time.
           type: string
         securityMarks:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
@@ -1811,19 +1804,20 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1IamPolicy:
       description: |-
-        IAM Policy information associated with the GCP resource described by the
-        Cloud SCC asset. This information is managed and defined by the GCP
-        resource and cannot be modified by the user.
+        Cloud IAM Policy information associated with the Google Cloud resource
+        described by the Security Command Center asset. This information is managed
+        and defined by the Google Cloud resource and cannot be modified by the
+        user.
       properties:
         policyBlob:
           description: |-
             The JSON representation of the Policy associated with the asset.
-            See https://cloud.google.com/iam/reference/rest/v1p1beta1/Policy for
+            See https://cloud.google.com/iam/docs/reference/rest/v1/Policy for
             format details.
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1NotificationMessage:
-      description: Cloud SCC's Notification
+      description: Security Command Center's Notification
       properties:
         finding:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding'
@@ -1857,15 +1851,15 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
       description: |-
-        Cloud SCC managed properties. These properties are managed by Cloud SCC and
-        cannot be modified by the user.
+        Security Command Center managed properties. These properties are managed by
+        Security Command Center and cannot be modified by the user.
       properties:
         resourceDisplayName:
           description: The user defined display name for this resource.
           type: string
         resourceName:
           description: |-
-            The full resource name of the GCP resource this asset
+            The full resource name of the Google Cloud resource this asset
             represents. This field is immutable after create time. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
@@ -1892,17 +1886,17 @@ components:
           type: string
         resourceType:
           description: |-
-            The type of the GCP resource. Examples include: APPLICATION,
+            The type of the Google Cloud resource. Examples include: APPLICATION,
             PROJECT, and ORGANIZATION. This is a case insensitive field defined by
-            Cloud SCC and/or the producer of the resource and is immutable
-            after create time.
+            Security Command Center and/or the producer of the resource and is
+            immutable after create time.
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
       description: |-
-        User specified security marks that are attached to the parent Cloud Security
-        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
-        SCC organization -- they can be modified and viewed by all users who have
+        User specified security marks that are attached to the parent Security
+        Command Center resource. Security marks are scoped within a Security Command
+        Center organization -- they can be modified and viewed by all users who have
         proper permissions on the organization.
       properties:
         marks:
@@ -2278,9 +2272,10 @@ components:
       type: object
     IamPolicy:
       description: |-
-        IAM Policy information associated with the GCP resource described by the
-        Cloud SCC asset. This information is managed and defined by the GCP
-        resource and cannot be modified by the user.
+        Cloud IAM Policy information associated with the Google Cloud resource
+        described by the Security Command Center asset. This information is managed
+        and defined by the Google Cloud resource and cannot be modified by the
+        user.
       properties:
         policyBlob:
           description: |-
@@ -2483,8 +2478,8 @@ components:
       type: object
     OrganizationSettings:
       description: |-
-        User specified settings that are attached to the Cloud Security Command
-        Center (Cloud SCC) organization.
+        User specified settings that are attached to the Security Command
+        Center organization.
       properties:
         assetDiscoveryConfig:
           $ref: '#/components/schemas/AssetDiscoveryConfig'
@@ -2627,7 +2622,7 @@ components:
       type: object
     Resource:
       description: |-
-        Information related to the Google Cloud Platform (GCP) resource that is
+        Information related to the Google Cloud resource that is
         associated with this finding.
       properties:
         name:
@@ -2654,15 +2649,15 @@ components:
       type: object
     SecurityCenterProperties:
       description: |-
-        Cloud SCC managed properties. These properties are managed by Cloud SCC and
-        cannot be modified by the user.
+        Security Command Center managed properties. These properties are managed by
+        Security Command Center and cannot be modified by the user.
       properties:
         resourceDisplayName:
           description: The user defined display name for this resource.
           type: string
         resourceName:
           description: |-
-            The full resource name of the GCP resource this asset
+            The full resource name of the Google Cloud resource this asset
             represents. This field is immutable after create time. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
@@ -2689,17 +2684,17 @@ components:
           type: string
         resourceType:
           description: |-
-            The type of the GCP resource. Examples include: APPLICATION,
+            The type of the Google Cloud resource. Examples include: APPLICATION,
             PROJECT, and ORGANIZATION. This is a case insensitive field defined by
-            Cloud SCC and/or the producer of the resource and is immutable
-            after create time.
+            Security Command Center and/or the producer of the resource and is
+            immutable after create time.
           type: string
       type: object
     SecurityMarks:
       description: |-
-        User specified security marks that are attached to the parent Cloud Security
-        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
-        SCC organization -- they can be modified and viewed by all users who have
+        User specified security marks that are attached to the parent Security
+        Command Center resource. Security marks are scoped within a Security Command
+        Center organization -- they can be modified and viewed by all users who have
         proper permissions on the organization.
       properties:
         marks:
@@ -2761,7 +2756,7 @@ components:
       type: object
     Source:
       description: |-
-        Cloud Security Command Center's (Cloud SCC) finding source. A finding source
+        Security Command Center finding source. A finding source
         is an entity or a mechanism that can produce a finding. A source is like a
         container of findings that come from the same scanner, logger, monitor, and
         other tools.

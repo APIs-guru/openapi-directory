@@ -32,20 +32,20 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/vision/'
 tags:
-  - name: projects
   - name: files
   - name: images
+  - name: projects
 paths:
   '/v1p1beta1/files:annotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -84,14 +84,14 @@ paths:
         - files
   '/v1p1beta1/files:asyncBatchAnnotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -129,14 +129,14 @@ paths:
         - files
   '/v1p1beta1/images:annotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -168,14 +168,14 @@ paths:
         - images
   '/v1p1beta1/images:asyncBatchAnnotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -216,14 +216,14 @@ paths:
         - images
   '/v1p1beta1/{parent}/files:annotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -236,7 +236,7 @@ paths:
         AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
         file provided and perform detection and annotation for each image
         extracted.
-      operationId: vision.projects.files.annotate
+      operationId: vision.projects.locations.files.annotate
       parameters:
         - description: |-
             Optional. Target project and location to make a call.
@@ -282,14 +282,14 @@ paths:
         - projects
   '/v1p1beta1/{parent}/files:asyncBatchAnnotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -301,7 +301,7 @@ paths:
         `google.longrunning.Operations` interface.
         `Operation.metadata` contains `OperationMetadata` (metadata).
         `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
-      operationId: vision.projects.files.asyncBatchAnnotate
+      operationId: vision.projects.locations.files.asyncBatchAnnotate
       parameters:
         - description: |-
             Optional. Target project and location to make a call.
@@ -347,20 +347,20 @@ paths:
         - projects
   '/v1p1beta1/{parent}/images:annotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Run image detection and annotation for a batch of images.
-      operationId: vision.projects.images.annotate
+      operationId: vision.projects.locations.images.annotate
       parameters:
         - description: |-
             Optional. Target project and location to make a call.
@@ -406,14 +406,14 @@ paths:
         - projects
   '/v1p1beta1/{parent}/images:asyncBatchAnnotate':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -428,7 +428,7 @@ paths:
 
         This service will write image annotation outputs to json files in customer
         GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
-      operationId: vision.projects.images.asyncBatchAnnotate
+      operationId: vision.projects.locations.images.asyncBatchAnnotate
       parameters:
         - description: |-
             Optional. Target project and location to make a call.
@@ -2049,7 +2049,7 @@ components:
             setting a hint will help get better results (although it will be a
             significant hindrance if the hint is wrong). Text detection returns an
             error if one or more of the specified languages is not one of the
-            [supported languages](/vision/docs/languages).
+            [supported languages](https://cloud.google.com/vision/docs/languages).
           items:
             type: string
           type: array

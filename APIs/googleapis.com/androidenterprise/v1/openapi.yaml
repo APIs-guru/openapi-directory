@@ -3154,7 +3154,7 @@ components:
       description: Represents the list of app restrictions available to be pre-configured for the product.
       properties:
         kind:
-          default: 'androidenterprise#appRestrictionsSchema'
+          description: Deprecated.
           type: string
         restrictions:
           description: The set of restrictions that make up this schema.
@@ -4204,7 +4204,7 @@ components:
           description: 'An opaque token that will be required, along with the Enterprise Token, for obtaining the enterprise resource from CompleteSignup.'
           type: string
         kind:
-          default: 'androidenterprise#signupInfo'
+          description: Deprecated.
           type: string
         url:
           description: A URL under which the Admin can sign up for an enterprise. The page pointed to cannot be rendered in an iframe.

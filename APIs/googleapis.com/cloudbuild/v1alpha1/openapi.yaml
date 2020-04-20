@@ -88,16 +88,16 @@ paths:
         - projects
     parameters:
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     patch:
       description: Update a `WorkerPool`.
       operationId: cloudbuild.projects.workerPools.patch
@@ -158,16 +158,16 @@ paths:
         - projects
     parameters:
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: 'Creates a `WorkerPool` to run the builds, and returns the new worker pool.'
       operationId: cloudbuild.projects.workerPools.create

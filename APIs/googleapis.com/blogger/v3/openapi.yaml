@@ -1,16 +1,18 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/blogger/v3'
+  - url: 'https://blogger.googleapis.com/'
 info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for access to the data within Blogger.
+  description: |-
+    The Blogger API provides access to posts, comments and pages of a
+        Blogger blog.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Blogger
+  title: Blogger API v3
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -32,33 +34,32 @@ externalDocs:
   url: 'https://developers.google.com/blogger/docs/3.0/getting_started'
 tags:
   - name: blogUserInfos
-  - name: blogs
-  - name: comments
-  - name: pageViews
-  - name: pages
   - name: postUserInfos
-  - name: posts
+  - name: comments
   - name: users
+  - name: pages
+  - name: posts
+  - name: blogs
+  - name: pageViews
 paths:
-  /blogs/byurl:
+  /v3/blogs/byurl:
     get:
-      description: Retrieve a Blog by URL.
+      description: Gets a blog by url.
       operationId: blogger.blogs.getByUrl
       parameters:
-        - description: The URL of the blog to retrieve.
-          in: query
+        - in: query
           name: url
           required: true
           schema:
             type: string
-        - description: Access level with which to view the blog. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -79,37 +80,39 @@ paths:
       tags:
         - blogs
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}':
     get:
-      description: Gets one blog by ID.
+      description: Gets a blog by id.
       operationId: blogger.blogs.get
       parameters:
-        - description: The ID of the blog to get.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: Maximum number of posts to pull back with the blog.
-          in: query
+        - in: query
           name: maxPosts
           schema:
             type: integer
-        - description: Access level with which to view the blog. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -130,46 +133,44 @@ paths:
       tags:
         - blogs
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/comments':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/comments':
     get:
-      description: 'Retrieves the comments for a blog, across all posts, possibly filtered.'
+      description: Lists comments by blog.
       operationId: blogger.comments.listByBlog
       parameters:
-        - description: ID of the blog to fetch comments from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: 'Latest date of comment to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: endDate
           schema:
             type: string
-        - description: Whether the body content of the comments is included.
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             type: boolean
-        - description: Maximum number of comments to include in the result.
-          in: query
+        - in: query
           name: maxResults
           schema:
             type: integer
-        - description: Continuation token if request is paged.
-          in: query
+        - in: query
           name: pageToken
           schema:
             type: string
-        - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: startDate
           schema:
             type: string
@@ -179,10 +180,10 @@ paths:
           schema:
             items:
               enum:
-                - emptied
-                - live
-                - pending
-                - spam
+                - LIVE
+                - EMPTIED
+                - PENDING
+                - SPAM
               type: string
             type: array
       responses:
@@ -204,36 +205,36 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/pages':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/pages':
     get:
-      description: 'Retrieves the pages for a blog, optionally including non-LIVE statuses.'
+      description: Lists pages.
       operationId: blogger.pages.list
       parameters:
-        - description: ID of the blog to fetch Pages from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: Whether to retrieve the Page bodies.
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             type: boolean
-        - description: Maximum number of Pages to fetch.
-          in: query
+        - in: query
           name: maxResults
           schema:
             type: integer
-        - description: Continuation token if the request is paged.
-          in: query
+        - in: query
           name: pageToken
           schema:
             type: string
@@ -243,18 +244,18 @@ paths:
           schema:
             items:
               enum:
-                - draft
-                - live
+                - LIVE
+                - DRAFT
               type: string
             type: array
-        - description: Access level with which to view the returned result. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -275,25 +276,27 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Add a page.
+      description: Inserts a page.
       operationId: blogger.pages.insert
       parameters:
-        - description: ID of the blog to add the page to.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: 'Whether to create the page as a draft (default: false).'
-          in: query
+        - in: query
           name: isDraft
           schema:
             type: boolean
@@ -316,19 +319,17 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
-  '/blogs/{blogId}/pages/{pageId}':
+  '/v3/blogs/{blogId}/pages/{pageId}':
     delete:
-      description: Delete a page by ID.
+      description: Deletes a page by blog id and page id.
       operationId: blogger.pages.delete
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Page.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
@@ -344,17 +345,15 @@ paths:
       tags:
         - pages
     get:
-      description: Gets one blog page by ID.
+      description: Gets a page by blog id and page id.
       operationId: blogger.pages.get
       parameters:
-        - description: ID of the blog containing the page.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the page to get.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
@@ -363,9 +362,10 @@ paths:
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -386,36 +386,36 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
-      description: Update a page. This method supports patch semantics.
+      description: Patches a page.
       operationId: blogger.pages.patch
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Page.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
             type: string
-        - description: 'Whether a publish action should be performed when the page is updated (default: false).'
-          in: query
+        - in: query
           name: publish
           schema:
             type: boolean
-        - description: 'Whether a revert action should be performed when the page is updated (default: false).'
-          in: query
+        - in: query
           name: revert
           schema:
             type: boolean
@@ -439,28 +439,24 @@ paths:
       tags:
         - pages
     put:
-      description: Update a page.
+      description: Updates a page by blog id and page id.
       operationId: blogger.pages.update
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Page.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
             type: string
-        - description: 'Whether a publish action should be performed when the page is updated (default: false).'
-          in: query
+        - in: query
           name: publish
           schema:
             type: boolean
-        - description: 'Whether a revert action should be performed when the page is updated (default: false).'
-          in: query
+        - in: query
           name: revert
           schema:
             type: boolean
@@ -483,27 +479,29 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
-  '/blogs/{blogId}/pages/{pageId}/publish':
+  '/v3/blogs/{blogId}/pages/{pageId}/publish':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Publishes a draft page.
+      description: Publishes a page.
       operationId: blogger.pages.publish
       parameters:
-        - description: The ID of the blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the page.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
@@ -522,27 +520,29 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
-  '/blogs/{blogId}/pages/{pageId}/revert':
+  '/v3/blogs/{blogId}/pages/{pageId}/revert':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Revert a published or scheduled page to draft state.
+      description: Reverts a published or scheduled page to draft state.
       operationId: blogger.pages.revert
       parameters:
-        - description: The ID of the blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the page.
-          in: path
+        - in: path
           name: pageId
           required: true
           schema:
@@ -561,13 +561,12 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - pages
-  '/blogs/{blogId}/pageviews':
+  '/v3/blogs/{blogId}/pageviews':
     get:
-      description: Retrieve pageview stats for a Blog.
+      description: Gets page views by blog id.
       operationId: blogger.pageViews.get
       parameters:
-        - description: The ID of the blog to get.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
@@ -578,9 +577,9 @@ paths:
           schema:
             items:
               enum:
+                - all
                 - 30DAYS
                 - 7DAYS
-                - all
               type: string
             type: array
       responses:
@@ -598,89 +597,84 @@ paths:
       tags:
         - pageViews
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/posts':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/posts':
     get:
-      description: 'Retrieves a list of posts, possibly filtered.'
+      description: Lists posts.
       operationId: blogger.posts.list
       parameters:
-        - description: ID of the blog to fetch posts from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: 'Latest post date to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: endDate
           schema:
             type: string
-        - description: 'Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.'
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             default: true
             type: boolean
-        - description: Whether image URL metadata for each post is included.
-          in: query
+        - in: query
           name: fetchImages
           schema:
             type: boolean
-        - description: Comma-separated list of labels to search for.
-          in: query
+        - in: query
           name: labels
           schema:
             type: string
-        - description: Maximum number of posts to fetch.
-          in: query
+        - in: query
           name: maxResults
           schema:
             type: integer
-        - description: Sort search results
-          in: query
+        - in: query
           name: orderBy
           schema:
-            default: published
+            default: PUBLISHED
             enum:
-              - published
-              - updated
+              - ORDER_BY_UNSPECIFIED
+              - PUBLISHED
+              - UPDATED
             type: string
-        - description: Continuation token if the request is paged.
-          in: query
+        - in: query
           name: pageToken
           schema:
             type: string
-        - description: 'Earliest post date to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: startDate
           schema:
             type: string
-        - description: Statuses to include in the results.
-          explode: true
+        - explode: true
           in: query
           name: status
           schema:
             items:
               enum:
-                - draft
-                - live
-                - scheduled
+                - LIVE
+                - DRAFT
+                - SCHEDULED
               type: string
             type: array
-        - description: Access level with which to view the returned result. Note that some fields require escalated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -701,36 +695,36 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Add a post.
+      description: Inserts a post.
       operationId: blogger.posts.insert
       parameters:
-        - description: ID of the blog to add the post to.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: 'Whether the body content of the post is included with the result (default: true).'
-          in: query
+        - in: query
           name: fetchBody
           schema:
             default: true
             type: boolean
-        - description: 'Whether image URL metadata for each post is included in the returned result (default: false).'
-          in: query
+        - in: query
           name: fetchImages
           schema:
             type: boolean
-        - description: 'Whether to create the post as a draft (default: false).'
-          in: query
+        - in: query
           name: isDraft
           schema:
             type: boolean
@@ -753,36 +747,33 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
-  '/blogs/{blogId}/posts/bypath':
+  '/v3/blogs/{blogId}/posts/bypath':
     get:
-      description: Retrieve a Post by Path.
+      description: Gets a post by path.
       operationId: blogger.posts.getByPath
       parameters:
-        - description: ID of the blog to fetch the post from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: Path of the Post to retrieve.
-          in: query
+        - in: query
           name: path
           required: true
           schema:
             type: string
-        - description: Maximum number of comments to pull back on a post.
-          in: query
+        - in: query
           name: maxComments
           schema:
             type: integer
-        - description: Access level with which to view the returned result. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -803,44 +794,45 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/posts/search':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/posts/search':
     get:
-      description: Search for a post.
+      description: Searches for posts matching given query terms in the specified blog.
       operationId: blogger.posts.search
       parameters:
-        - description: ID of the blog to fetch the post from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: Query terms to search this blog for matching posts.
-          in: query
+        - in: query
           name: q
           required: true
           schema:
             type: string
-        - description: 'Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.'
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             default: true
             type: boolean
-        - description: Sort search results
-          in: query
+        - in: query
           name: orderBy
           schema:
-            default: published
+            default: PUBLISHED
             enum:
-              - published
-              - updated
+              - ORDER_BY_UNSPECIFIED
+              - PUBLISHED
+              - UPDATED
             type: string
       responses:
         '200':
@@ -861,26 +853,28 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/posts/{postId}':
     delete:
-      description: Delete a post by ID.
+      description: Deletes a post by blog id and post id.
       operationId: blogger.posts.delete
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
@@ -896,45 +890,40 @@ paths:
       tags:
         - posts
     get:
-      description: Get a post by ID.
+      description: Gets a post by blog id and post id
       operationId: blogger.posts.get
       parameters:
-        - description: ID of the blog to fetch the post from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the post
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: 'Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.'
-          in: query
+        - in: query
           name: fetchBody
           schema:
             default: true
             type: boolean
-        - description: 'Whether image URL metadata for each post is included (default: false).'
-          in: query
+        - in: query
           name: fetchImages
           schema:
             type: boolean
-        - description: Maximum number of comments to pull back on a post.
-          in: query
+        - in: query
           name: maxComments
           schema:
             type: integer
-        - description: Access level with which to view the returned result. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -955,52 +944,49 @@ paths:
       tags:
         - posts
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
-      description: Update a post. This method supports patch semantics.
+      description: Patches a post.
       operationId: blogger.posts.patch
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: 'Whether the body content of the post is included with the result (default: true).'
-          in: query
+        - in: query
           name: fetchBody
           schema:
             default: true
             type: boolean
-        - description: 'Whether image URL metadata for each post is included in the returned result (default: false).'
-          in: query
+        - in: query
           name: fetchImages
           schema:
             type: boolean
-        - description: Maximum number of comments to retrieve with the returned post.
-          in: query
+        - in: query
           name: maxComments
           schema:
             type: integer
-        - description: 'Whether a publish action should be performed when the post is updated (default: false).'
-          in: query
+        - in: query
           name: publish
           schema:
             type: boolean
-        - description: 'Whether a revert action should be performed when the post is updated (default: false).'
-          in: query
+        - in: query
           name: revert
           schema:
             type: boolean
@@ -1024,44 +1010,37 @@ paths:
       tags:
         - posts
     put:
-      description: Update a post.
+      description: Updates a post by blog id and post id.
       operationId: blogger.posts.update
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: 'Whether the body content of the post is included with the result (default: true).'
-          in: query
+        - in: query
           name: fetchBody
           schema:
             default: true
             type: boolean
-        - description: 'Whether image URL metadata for each post is included in the returned result (default: false).'
-          in: query
+        - in: query
           name: fetchImages
           schema:
             type: boolean
-        - description: Maximum number of comments to retrieve with the returned post.
-          in: query
+        - in: query
           name: maxComments
           schema:
             type: integer
-        - description: 'Whether a publish action should be performed when the post is updated (default: false).'
-          in: query
+        - in: query
           name: publish
           schema:
             type: boolean
-        - description: 'Whether a revert action should be performed when the post is updated (default: false).'
-          in: query
+        - in: query
           name: revert
           schema:
             type: boolean
@@ -1084,68 +1063,58 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
-  '/blogs/{blogId}/posts/{postId}/comments':
+  '/v3/blogs/{blogId}/posts/{postId}/comments':
     get:
-      description: 'Retrieves the comments for a post, possibly filtered.'
+      description: Lists comments.
       operationId: blogger.comments.list
       parameters:
-        - description: ID of the blog to fetch comments from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: ID of the post to fetch posts from.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: 'Latest date of comment to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: endDate
           schema:
             type: string
-        - description: Whether the body content of the comments is included.
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             type: boolean
-        - description: Maximum number of comments to include in the result.
-          in: query
+        - in: query
           name: maxResults
           schema:
             type: integer
-        - description: Continuation token if request is paged.
-          in: query
+        - in: query
           name: pageToken
           schema:
             type: string
-        - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: startDate
           schema:
             type: string
-        - explode: true
-          in: query
+        - in: query
           name: status
           schema:
-            items:
-              enum:
-                - emptied
-                - live
-                - pending
-                - spam
-              type: string
-            type: array
-        - description: Access level with which to view the returned result. Note that some fields require elevated access.
-          in: query
+            enum:
+              - LIVE
+              - EMPTIED
+              - PENDING
+              - SPAM
+            type: string
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -1166,32 +1135,33 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}/comments/{commentId}':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}':
     delete:
-      description: Delete a comment by ID.
+      description: 'Deletes a comment by blog id, post id and comment id.'
       operationId: blogger.comments.delete
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: The ID of the comment to delete.
-          in: path
+        - in: path
           name: commentId
           required: true
           schema:
@@ -1207,35 +1177,32 @@ paths:
       tags:
         - comments
     get:
-      description: Gets one comment by ID.
+      description: Gets a comment by id.
       operationId: blogger.comments.get
       parameters:
-        - description: ID of the blog to containing the comment.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: ID of the post to fetch posts from.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: The ID of the comment to get.
-          in: path
+        - in: path
           name: commentId
           required: true
           schema:
             type: string
-        - description: 'Access level for the requested comment (default: READER). Note that some comments will require elevated permissions, for example comments where the parent posts which is in a draft state, or comments that are pending moderation.'
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -1256,40 +1223,45 @@ paths:
       tags:
         - comments
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Marks a comment as not spam.
+      description: 'Marks a comment as not spam by blog id, post id and comment id.'
       operationId: blogger.comments.approve
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: The ID of the comment to mark as not spam.
-          in: path
+        - in: path
           name: commentId
           required: true
           schema:
@@ -1308,33 +1280,34 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
-  '/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent':
+  '/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Removes the content of a comment.
+      description: 'Removes the content of a comment by blog id, post id and comment id.'
       operationId: blogger.comments.removeContent
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: The ID of the comment to delete content from.
-          in: path
+        - in: path
           name: commentId
           required: true
           schema:
@@ -1353,33 +1326,34 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
-  '/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam':
+  '/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Marks a comment as spam.
+      description: 'Marks a comment as spam by blog id, post id and comment id.'
       operationId: blogger.comments.markAsSpam
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: The ID of the comment to mark as spam.
-          in: path
+        - in: path
           name: commentId
           required: true
           schema:
@@ -1398,33 +1372,34 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - comments
-  '/blogs/{blogId}/posts/{postId}/publish':
+  '/v3/blogs/{blogId}/posts/{postId}/publish':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: 'Publishes a draft post, optionally at the specific time of the given publishDate parameter.'
+      description: Publishes a post.
       operationId: blogger.posts.publish
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: 'Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is given, the post is either published at the a previously saved schedule date (if present), or the current time. If a future date is given, the post will be scheduled to be published.'
-          in: query
+        - in: query
           name: publishDate
           schema:
             type: string
@@ -1442,27 +1417,29 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
-  '/blogs/{blogId}/posts/{postId}/revert':
+  '/v3/blogs/{blogId}/posts/{postId}/revert':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
-      description: Revert a published or scheduled post to draft state.
+      description: Reverts a published or scheduled post to draft state.
       operationId: blogger.posts.revert
       parameters:
-        - description: The ID of the Blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the Post.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
@@ -1481,13 +1458,12 @@ paths:
             - 'https://www.googleapis.com/auth/blogger'
       tags:
         - posts
-  '/users/{userId}':
+  '/v3/users/{userId}':
     get:
-      description: Gets one user by ID.
+      description: Gets one user by user_id.
       operationId: blogger.users.get
       parameters:
-        - description: The ID of the user to get.
-          in: path
+        - in: path
           name: userId
           required: true
           schema:
@@ -1511,42 +1487,44 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/users/{userId}/blogs':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/users/{userId}/blogs':
     get:
-      description: 'Retrieves a list of blogs, possibly filtered.'
+      description: Lists blogs by user.
       operationId: blogger.blogs.listByUser
       parameters:
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
-          in: path
+        - in: path
           name: userId
           required: true
           schema:
             type: string
-        - description: Whether the response is a list of blogs with per-user information instead of just blogs.
-          in: query
+        - in: query
           name: fetchUserInfo
           schema:
             type: boolean
-        - description: 'User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.'
-          explode: true
+        - explode: true
           in: query
           name: role
           schema:
             items:
               enum:
-                - ADMIN
-                - AUTHOR
+                - VIEW_TYPE_UNSPECIFIED
                 - READER
+                - AUTHOR
+                - ADMIN
               type: string
             type: array
-        - description: 'Blog statuses to include in the result (default: Live blogs only). Note that ADMIN access is required to view deleted blogs.'
+        - description: Default value of status is LIVE.
           explode: true
           in: query
           name: status
@@ -1554,18 +1532,18 @@ paths:
             default: LIVE
             items:
               enum:
-                - DELETED
                 - LIVE
+                - DELETED
               type: string
             type: array
-        - description: Access level with which to view the blogs. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -1586,32 +1564,33 @@ paths:
       tags:
         - blogs
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/users/{userId}/blogs/{blogId}':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/users/{userId}/blogs/{blogId}':
     get:
-      description: Gets one blog and user info pair by blogId and userId.
+      description: Gets one blog and user info pair by blog id and user id.
       operationId: blogger.blogUserInfos.get
       parameters:
-        - description: ID of the user whose blogs are to be fetched. Either the word 'self' or the user's profile identifier.
-          in: path
+        - in: path
           name: userId
           required: true
           schema:
             type: string
-        - description: The ID of the blog to get.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: Maximum number of posts to pull back with the blog.
-          in: query
+        - in: query
           name: maxPosts
           schema:
             type: integer
@@ -1634,67 +1613,63 @@ paths:
       tags:
         - blogUserInfos
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/users/{userId}/blogs/{blogId}/posts':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/users/{userId}/blogs/{blogId}/posts':
     get:
-      description: 'Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.'
+      description: Lists post and user info pairs.
       operationId: blogger.postUserInfos.list
       parameters:
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
-          in: path
+        - in: path
           name: userId
           required: true
           schema:
             type: string
-        - description: ID of the blog to fetch posts from.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: 'Latest post date to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: endDate
           schema:
             type: string
-        - description: Whether the body content of posts is included. Default is false.
-          in: query
+        - in: query
           name: fetchBodies
           schema:
             default: false
             type: boolean
-        - description: Comma-separated list of labels to search for.
-          in: query
+        - in: query
           name: labels
           schema:
             type: string
-        - description: Maximum number of posts to fetch.
-          in: query
+        - in: query
           name: maxResults
           schema:
             type: integer
-        - description: Sort order applied to search results. Default is published.
-          in: query
+        - in: query
           name: orderBy
           schema:
-            default: published
+            default: PUBLISHED
             enum:
-              - published
-              - updated
+              - ORDER_BY_UNSPECIFIED
+              - PUBLISHED
+              - UPDATED
             type: string
-        - description: Continuation token if the request is paged.
-          in: query
+        - in: query
           name: pageToken
           schema:
             type: string
-        - description: 'Earliest post date to fetch, a date-time with RFC 3339 formatting.'
-          in: query
+        - in: query
           name: startDate
           schema:
             type: string
@@ -1704,19 +1679,19 @@ paths:
           schema:
             items:
               enum:
-                - draft
-                - live
-                - scheduled
+                - LIVE
+                - DRAFT
+                - SCHEDULED
               type: string
             type: array
-        - description: Access level with which to view the returned result. Note that some fields require elevated access.
-          in: query
+        - in: query
           name: view
           schema:
             enum:
-              - ADMIN
-              - AUTHOR
+              - VIEW_TYPE_UNSPECIFIED
               - READER
+              - AUTHOR
+              - ADMIN
             type: string
       responses:
         '200':
@@ -1737,38 +1712,38 @@ paths:
       tags:
         - postUserInfos
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
-  '/users/{userId}/blogs/{blogId}/posts/{postId}':
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+  '/v3/users/{userId}/blogs/{blogId}/posts/{postId}':
     get:
-      description: 'Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.'
+      description: 'Gets one post and user info pair, by post_id and user_id.'
       operationId: blogger.postUserInfos.get
       parameters:
-        - description: ID of the user for the per-user information to be fetched. Either the word 'self' or the user's profile identifier.
-          in: path
+        - in: path
           name: userId
           required: true
           schema:
             type: string
-        - description: The ID of the blog.
-          in: path
+        - in: path
           name: blogId
           required: true
           schema:
             type: string
-        - description: The ID of the post to get.
-          in: path
+        - in: path
           name: postId
           required: true
           schema:
             type: string
-        - description: Maximum number of comments to pull back on a post.
-          in: query
+        - in: query
           name: maxComments
           schema:
             type: integer
@@ -1791,23 +1766,50 @@ paths:
       tags:
         - postUserInfos
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - '1'
+          - '2'
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
         default: json
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -1835,15 +1837,21 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
       schema:
         type: string
   requestBodies:
@@ -1861,7 +1869,7 @@ components:
     Blog:
       properties:
         customMetaData:
-          description: The JSON custom meta-data for the Blog
+          description: The JSON custom meta-data for the Blog.
           type: string
         description:
           description: The description of this blog. This is displayed underneath the title.
@@ -1870,8 +1878,7 @@ components:
           description: The identifier for this resource.
           type: string
         kind:
-          default: 'blogger#blog'
-          description: 'The kind of this entry. Always blogger#blog'
+          description: 'The kind of this entry. Always blogger#blog.'
           type: string
         locale:
           description: The locale this Blog is set to.
@@ -1918,17 +1925,18 @@ components:
           type: object
         published:
           description: RFC 3339 date-time when this blog was published.
-          format: date-time
           type: string
         selfLink:
           description: The API REST URL to fetch this resource from.
           type: string
         status:
           description: The status of the blog.
+          enum:
+            - LIVE
+            - DELETED
           type: string
         updated:
           description: RFC 3339 date-time when this blog was last updated.
-          format: date-time
           type: string
         url:
           description: The URL where this blog is published.
@@ -1937,7 +1945,7 @@ components:
     BlogList:
       properties:
         blogUserInfos:
-          description: Admin level list of blog per-user information
+          description: Admin level list of blog per-user information.
           items:
             $ref: '#/components/schemas/BlogUserInfo'
           type: array
@@ -1947,30 +1955,35 @@ components:
             $ref: '#/components/schemas/Blog'
           type: array
         kind:
-          default: 'blogger#blogList'
-          description: 'The kind of this entity. Always blogger#blogList'
+          description: 'The kind of this entity. Always blogger#blogList.'
           type: string
       type: object
     BlogPerUserInfo:
       properties:
         blogId:
-          description: ID of the Blog resource
+          description: ID of the Blog resource.
           type: string
         hasAdminAccess:
           description: True if the user has Admin level access to the blog.
           type: boolean
         kind:
-          default: 'blogger#blogPerUserInfo'
-          description: 'The kind of this entity. Always blogger#blogPerUserInfo'
+          description: 'The kind of this entity. Always blogger#blogPerUserInfo.'
           type: string
         photosAlbumKey:
-          description: The Photo Album Key for the user when adding photos to the blog
+          description: The Photo Album Key for the user when adding photos to the blog.
           type: string
         role:
-          description: 'Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER).'
+          description: |-
+            Access permissions that the user has for the blog (ADMIN, AUTHOR, or
+            READER).
+          enum:
+            - VIEW_TYPE_UNSPECIFIED
+            - READER
+            - AUTHOR
+            - ADMIN
           type: string
         userId:
-          description: ID of the User
+          description: ID of the User.
           type: string
       type: object
     BlogUserInfo:
@@ -1982,8 +1995,7 @@ components:
           $ref: '#/components/schemas/BlogPerUserInfo'
           description: Information about a User for the Blog.
         kind:
-          default: 'blogger#blogUserInfo'
-          description: 'The kind of this entity. Always blogger#blogUserInfo'
+          description: 'The kind of this entity. Always blogger#blogUserInfo.'
           type: string
       type: object
     Comment:
@@ -1995,17 +2007,17 @@ components:
               description: The display name.
               type: string
             id:
-              description: The identifier of the Comment creator.
+              description: The identifier of the creator.
               type: string
             image:
-              description: The comment creator's avatar.
+              description: The creator's avatar.
               properties:
                 url:
-                  description: The comment creator's avatar URL.
+                  description: The creator's avatar URL.
                   type: string
               type: object
             url:
-              description: The URL of the Comment creator's Profile page.
+              description: The URL of the creator's Profile page.
               type: string
           type: object
         blog:
@@ -2029,8 +2041,7 @@ components:
               type: string
           type: object
         kind:
-          default: 'blogger#comment'
-          description: 'The kind of this entry. Always blogger#comment'
+          description: 'The kind of this entry. Always blogger#comment.'
           type: string
         post:
           description: Data about the post containing this comment.
@@ -2041,17 +2052,20 @@ components:
           type: object
         published:
           description: RFC 3339 date-time when this comment was published.
-          format: date-time
           type: string
         selfLink:
           description: The API REST URL to fetch this resource from.
           type: string
         status:
-          description: The status of the comment (only populated for admin users)
+          description: The status of the comment (only populated for admin users).
+          enum:
+            - LIVE
+            - EMPTIED
+            - PENDING
+            - SPAM
           type: string
         updated:
           description: RFC 3339 date-time when this comment was last updated.
-          format: date-time
           type: string
       type: object
     CommentList:
@@ -2065,8 +2079,7 @@ components:
             $ref: '#/components/schemas/Comment'
           type: array
         kind:
-          default: 'blogger#commentList'
-          description: 'The kind of this entry. Always blogger#commentList'
+          description: 'The kind of this entry. Always blogger#commentList.'
           type: string
         nextPageToken:
           description: 'Pagination token to fetch the next page, if one exists.'
@@ -2084,17 +2097,17 @@ components:
               description: The display name.
               type: string
             id:
-              description: The identifier of the Page creator.
+              description: The identifier of the creator.
               type: string
             image:
-              description: The page author's avatar.
+              description: The creator's avatar.
               properties:
                 url:
-                  description: The page author's avatar URL.
+                  description: The creator's avatar URL.
                   type: string
               type: object
             url:
-              description: The URL of the Page creator's Profile page.
+              description: The URL of the creator's Profile page.
               type: string
           type: object
         blog:
@@ -2114,25 +2127,27 @@ components:
           description: The identifier for this resource.
           type: string
         kind:
-          default: 'blogger#page'
-          description: 'The kind of this entity. Always blogger#page'
+          description: 'The kind of this entity. Always blogger#page.'
           type: string
         published:
           description: RFC 3339 date-time when this Page was published.
-          format: date-time
           type: string
         selfLink:
           description: The API REST URL to fetch this resource from.
           type: string
         status:
           description: The status of the page for admin resources (either LIVE or DRAFT).
+          enum:
+            - LIVE
+            - DRAFT
           type: string
         title:
-          description: The title of this entity. This is the name displayed in the Admin user interface.
+          description: |-
+            The title of this entity. This is the name displayed in the Admin user
+            interface.
           type: string
         updated:
           description: RFC 3339 date-time when this Page was last updated.
-          format: date-time
           type: string
         url:
           description: The URL that this Page is displayed at.
@@ -2149,8 +2164,7 @@ components:
             $ref: '#/components/schemas/Page'
           type: array
         kind:
-          default: 'blogger#pageList'
-          description: 'The kind of this entity. Always blogger#pageList'
+          description: 'The kind of this entity. Always blogger#pageList.'
           type: string
         nextPageToken:
           description: 'Pagination token to fetch the next page, if one exists.'
@@ -2159,24 +2173,27 @@ components:
     Pageviews:
       properties:
         blogId:
-          description: Blog Id
+          description: Blog Id.
           type: string
         counts:
           description: The container of posts in this blog.
           items:
             properties:
               count:
-                description: Count of page views for the given time range
+                description: Count of page views for the given time range.
                 format: int64
                 type: string
               timeRange:
-                description: Time range the given count applies to
+                description: Time range the given count applies to.
+                enum:
+                  - ALL_TIME
+                  - THIRTY_DAYS
+                  - SEVEN_DAYS
                 type: string
             type: object
           type: array
         kind:
-          default: 'blogger#page_views'
-          description: 'The kind of this entry. Always blogger#page_views'
+          description: 'The kind of this entry. Always blogger#page_views.'
           type: string
       type: object
     Post:
@@ -2188,17 +2205,17 @@ components:
               description: The display name.
               type: string
             id:
-              description: The identifier of the Post creator.
+              description: The identifier of the creator.
               type: string
             image:
-              description: The Post author's avatar.
+              description: The creator's avatar.
               properties:
                 url:
-                  description: The Post author's avatar URL.
+                  description: The creator's avatar URL.
                   type: string
               type: object
             url:
-              description: The URL of the Post creator's Profile page.
+              description: The URL of the creator's Profile page.
               type: string
           type: object
         blog:
@@ -2229,8 +2246,7 @@ components:
             type: object
           type: array
         kind:
-          default: 'blogger#post'
-          description: 'The kind of this entity. Always blogger#post'
+          description: 'The kind of this entity. Always blogger#post.'
           type: string
         labels:
           description: The list of labels this Post was tagged with.
@@ -2257,10 +2273,13 @@ components:
           type: object
         published:
           description: RFC 3339 date-time when this Post was published.
-          format: date-time
           type: string
         readerComments:
           description: Comment control and display setting for readers of this post.
+          enum:
+            - ALLOW
+            - DONT_ALLOW_SHOW_EXISTING
+            - DONT_ALLOW_HIDE_EXISTING
           type: string
         replies:
           description: The container of comments on this Post.
@@ -2282,7 +2301,11 @@ components:
           description: The API REST URL to fetch this resource from.
           type: string
         status:
-          description: Status of the post. Only set for admin-level requests
+          description: Status of the post. Only set for admin-level requests.
+          enum:
+            - LIVE
+            - DRAFT
+            - SCHEDULED
           type: string
         title:
           description: The title of the Post.
@@ -2292,7 +2315,6 @@ components:
           type: string
         updated:
           description: RFC 3339 date-time when this Post was last updated.
-          format: date-time
           type: string
         url:
           description: The URL where this Post is displayed.
@@ -2309,11 +2331,13 @@ components:
             $ref: '#/components/schemas/Post'
           type: array
         kind:
-          default: 'blogger#postList'
-          description: 'The kind of this entity. Always blogger#postList'
+          description: 'The kind of this entity. Always blogger#postList.'
           type: string
         nextPageToken:
           description: 'Pagination token to fetch the next page, if one exists.'
+          type: string
+        prevPageToken:
+          description: 'Pagination token to fetch the previous page, if one exists.'
           type: string
       type: object
     PostPerUserInfo:
@@ -2325,8 +2349,7 @@ components:
           description: True if the user has Author level access to the post.
           type: boolean
         kind:
-          default: 'blogger#postPerUserInfo'
-          description: 'The kind of this entity. Always blogger#postPerUserInfo'
+          description: 'The kind of this entity. Always blogger#postPerUserInfo.'
           type: string
         postId:
           description: ID of the Post resource.
@@ -2338,8 +2361,7 @@ components:
     PostUserInfo:
       properties:
         kind:
-          default: 'blogger#postUserInfo'
-          description: 'The kind of this entity. Always blogger#postUserInfo'
+          description: 'The kind of this entity. Always blogger#postUserInfo.'
           type: string
         post:
           $ref: '#/components/schemas/Post'
@@ -2356,8 +2378,7 @@ components:
             $ref: '#/components/schemas/PostUserInfo'
           type: array
         kind:
-          default: 'blogger#postUserInfosList'
-          description: 'The kind of this entity. Always blogger#postList'
+          description: 'The kind of this entity. Always blogger#postList.'
           type: string
         nextPageToken:
           description: 'Pagination token to fetch the next page, if one exists.'
@@ -2377,7 +2398,6 @@ components:
           type: object
         created:
           description: 'The timestamp of when this profile was created, in seconds since epoch.'
-          format: date-time
           type: string
         displayName:
           description: The display name.
@@ -2386,20 +2406,19 @@ components:
           description: The identifier for this User.
           type: string
         kind:
-          default: 'blogger#user'
-          description: 'The kind of this entity. Always blogger#user'
+          description: 'The kind of this entity. Always blogger#user.'
           type: string
         locale:
           description: This user's locale
           properties:
             country:
-              description: The user's country setting.
+              description: The country this blog's locale is set to.
               type: string
             language:
-              description: The user's language setting.
+              description: The language this blog is authored in.
               type: string
             variant:
-              description: The user's language variant setting.
+              description: The language variant this blog is authored in.
               type: string
           type: object
         selfLink:

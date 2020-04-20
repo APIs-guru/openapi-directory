@@ -29,7 +29,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: oauth2
 externalDocs:
-  url: 'https://developers.google.com/accounts/docs/OAuth2'
+  url: 'https://developers.google.com/identity/protocols/oauth2/'
 tags:
   - name: userinfo
 paths:
@@ -53,10 +53,6 @@ paths:
           name: id_token
           schema:
             type: string
-        - in: query
-          name: token_handle
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -72,13 +68,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Userinfoplus'
+                $ref: '#/components/schemas/Userinfo'
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - openid
           Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - openid
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -105,13 +101,13 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Userinfoplus'
+                $ref: '#/components/schemas/Userinfo'
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - openid
           Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
+            - openid
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
           Oauth2c:
@@ -181,9 +177,6 @@ components:
   schemas:
     Tokeninfo:
       properties:
-        access_type:
-          description: The access type granted with this token. It can be offline or online.
-          type: string
         audience:
           description: Who is the intended audience for this token. In general the same as issued_to.
           type: string
@@ -200,9 +193,6 @@ components:
         scope:
           description: The space separated list of scopes granted to this token.
           type: string
-        token_handle:
-          description: The token handle associated with this token.
-          type: string
         user_id:
           description: The obfuscated user id.
           type: string
@@ -210,7 +200,7 @@ components:
           description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
           type: boolean
       type: object
-    Userinfoplus:
+    Userinfo:
       properties:
         email:
           description: The user's email address.
@@ -254,9 +244,9 @@ components:
         implicit:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
-            'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
             'https://www.googleapis.com/auth/userinfo.email': View your email address
             'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+            openid: Associate you with your personal info on Google
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 accessCode authentication
@@ -264,8 +254,8 @@ components:
         authorizationCode:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
-            'https://www.googleapis.com/auth/plus.me': Associate you with your personal info on Google
             'https://www.googleapis.com/auth/userinfo.email': View your email address
             'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
+            openid: Associate you with your personal info on Google
           tokenUrl: 'https://accounts.google.com/o/oauth2/token'
       type: oauth2

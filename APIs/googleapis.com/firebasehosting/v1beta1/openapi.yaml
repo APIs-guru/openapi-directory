@@ -34,10 +34,12 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the existing domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.delete
+      description: Deletes the specified version.
+      operationId: firebasehosting.sites.versions.delete
       parameters:
-        - description: Required. The name of the domain association to delete.
+        - description: |-
+            Required. The name of the version to be deleted, in the format:
+            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
           in: path
           name: name
           required: true
@@ -100,17 +102,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     patch:
       description: |-
         Updates the specified metadata for a version. Note that this method will
@@ -254,17 +256,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a domain mapping on the specified site.
       operationId: firebasehosting.sites.domains.create
@@ -363,21 +365,21 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
   '/v1beta1/{parent}/releases':
     get:
       description: Lists the releases that have been created on the specified site.
-      operationId: firebasehosting.sites.channels.releases.list
+      operationId: firebasehosting.sites.releases.list
       parameters:
         - description: |-
             Required. The parent for which to list files, in the format:
@@ -425,25 +427,25 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Creates a new release which makes the content of the specified version
         actively display on the appropriate URL(s).
-      operationId: firebasehosting.sites.channels.releases.create
+      operationId: firebasehosting.sites.releases.create
       parameters:
         - description: |-
-            The site that the release belongs to, in the format:
+            Required. The site that the release belongs to, in the format:
             <code>sites/<var>site-name</var></code>
           in: path
           name: parent
@@ -535,17 +537,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a new version for a site.
       operationId: firebasehosting.sites.versions.create
@@ -598,17 +600,17 @@ paths:
         - sites
   '/v1beta1/{parent}/versions:clone':
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Creates a new version on the target site using the content
@@ -640,17 +642,17 @@ paths:
         - sites
   '/v1beta1/{parent}:populateFiles':
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Adds content files to a version.
       operationId: firebasehosting.sites.versions.populateFiles
@@ -992,6 +994,7 @@ components:
           type: string
       type: object
     ListDomainsResponse:
+      description: The response to listing Domains.
       properties:
         domains:
           description: 'The list of domains, if any exist.'
@@ -1003,6 +1006,7 @@ components:
           type: string
       type: object
     ListReleasesResponse:
+      description: The response when listing Releases.
       properties:
         nextPageToken:
           description: |-
@@ -1018,6 +1022,7 @@ components:
           type: array
       type: object
     ListVersionFilesResponse:
+      description: The response when listing a Version's Files..
       properties:
         files:
           description: The list path/hashes in the specified version.
@@ -1029,6 +1034,7 @@ components:
           type: string
       type: object
     ListVersionsResponse:
+      description: The response when listing Versions.
       properties:
         nextPageToken:
           description: 'The pagination token, if more results exist'
@@ -1092,6 +1098,7 @@ components:
           type: array
       type: object
     PopulateVersionFilesRequest:
+      description: The request to populate a Version's Files.
       properties:
         files:
           additionalProperties:
@@ -1104,6 +1111,7 @@ components:
           type: object
       type: object
     PopulateVersionFilesResponse:
+      description: The response to a PopulateVersionFilesRequest.
       properties:
         uploadRequiredHashes:
           description: |-

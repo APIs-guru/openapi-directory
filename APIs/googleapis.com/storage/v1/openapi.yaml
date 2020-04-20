@@ -2860,6 +2860,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any.'
+          in: query
+          name: destinationKmsKeyName
+          schema:
+            type: string
         - description: Apply a predefined set of access controls to the destination object.
           in: query
           name: destinationPredefinedAcl
@@ -3772,11 +3777,14 @@ components:
               description: 'If the requested object path is missing, and any mainPageSuffix object is missing, if applicable, the service will return the named object from this bucket as the content for a 404 Not Found result.'
               type: string
           type: object
-        zone_affinity:
-          description: The zone or zones from which the bucket is intended to use zonal quota. Requests for data from outside the specified affinities are still allowed but won’t be able to use zonal quota. The zone or zones need to be within the bucket location otherwise the requests will fail with a 400 Bad Request response.
+        zoneAffinity:
+          description: The zone or zones from which the bucket is intended to use zonal quota. Requests for data from outside the specified affinities are still allowed but won't be able to use zonal quota. The zone or zones need to be within the bucket location otherwise the requests will fail with a 400 Bad Request response.
           items:
             type: string
           type: array
+        zoneSeparation:
+          description: 'If set, objects placed in this bucket are required to be separated by disaster domain.'
+          type: boolean
       type: object
     BucketAccessControl:
       description: An access-control entry.

@@ -76,6 +76,9 @@ paths:
       tags:
         - subscriptions
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -84,9 +87,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Creates a subscription on a given topic for a given subscriber.
@@ -121,6 +121,9 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/acknowledge:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -129,9 +132,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Acknowledges a particular received message: the Pub/Sub system can remove
@@ -165,6 +165,9 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyAckDeadline:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -173,9 +176,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: Modifies the Ack deadline for a message received from a pull request.
       operationId: pubsub.subscriptions.modifyAckDeadline
@@ -204,6 +204,9 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyPushConfig:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -212,9 +215,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Modifies the <code>PushConfig</code> for a specified subscription.
@@ -248,6 +248,9 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pull:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -256,9 +259,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Pulls a single message from the server.
@@ -292,6 +292,9 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pullBatch:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -300,9 +303,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Pulls messages from the server. Returns an empty list if there are no
@@ -395,6 +395,9 @@ paths:
       tags:
         - subscriptions
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -403,9 +406,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
   /v1beta1a/topics:
     get:
       description: Lists matching topics.
@@ -447,6 +447,9 @@ paths:
       tags:
         - topics
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -455,9 +458,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: Creates the given topic with the given name.
       operationId: pubsub.topics.create
@@ -486,6 +486,9 @@ paths:
         - topics
   /v1beta1a/topics/publish:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -494,9 +497,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Adds a message to the topic.  Returns NOT_FOUND if the topic does not
@@ -527,6 +527,9 @@ paths:
         - topics
   /v1beta1a/topics/publishBatch:
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -535,9 +538,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Adds one or more messages to the topic. Returns NOT_FOUND if the topic does
@@ -632,6 +632,9 @@ paths:
       tags:
         - topics
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
@@ -640,9 +643,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
 components:
   parameters:
     _.xgafv:

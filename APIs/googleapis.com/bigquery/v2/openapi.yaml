@@ -31,13 +31,13 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/bigquery/'
 tags:
-  - name: tables
-  - name: tabledata
   - name: routines
   - name: datasets
   - name: models
   - name: jobs
   - name: projects
+  - name: tabledata
+  - name: tables
 paths:
   /projects:
     get:
@@ -81,13 +81,13 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
   '/projects/{projectId}/datasets':
     get:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
@@ -146,13 +146,13 @@ paths:
       tags:
         - datasets
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new empty dataset.
       operationId: bigquery.datasets.insert
@@ -265,13 +265,13 @@ paths:
       tags:
         - datasets
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     patch:
       description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.'
       operationId: bigquery.datasets.patch
@@ -412,13 +412,13 @@ paths:
       tags:
         - models
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
   '/projects/{projectId}/datasets/{datasetId}/models/{modelId}':
     delete:
       description: Deletes the model specified by modelId from the dataset.
@@ -511,13 +511,13 @@ paths:
       tags:
         - models
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     patch:
       description: Patch specific fields in the specified model.
       operationId: bigquery.models.patch
@@ -647,13 +647,13 @@ paths:
       tags:
         - routines
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new routine in the dataset.
       operationId: bigquery.routines.insert
@@ -794,13 +794,13 @@ paths:
       tags:
         - routines
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     put:
       description: |-
         Updates information in an existing routine. The update method replaces the
@@ -905,13 +905,13 @@ paths:
       tags:
         - tables
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: 'Creates a new, empty table in the dataset.'
       operationId: bigquery.tables.insert
@@ -1042,13 +1042,13 @@ paths:
       tags:
         - tables
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     patch:
       description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.'
       operationId: bigquery.tables.patch
@@ -1209,22 +1209,22 @@ paths:
       tags:
         - tabledata
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
   '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll':
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
       operationId: bigquery.tabledata.insertAll
@@ -1362,13 +1362,13 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Starts a new asynchronous job. Requires the Can View project role.
       operationId: bigquery.jobs.insert
@@ -1463,22 +1463,22 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
   '/projects/{projectId}/jobs/{jobId}/cancel':
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
       operationId: bigquery.jobs.cancel
@@ -1520,13 +1520,13 @@ paths:
         - jobs
   '/projects/{projectId}/queries':
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
     post:
       description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
       operationId: bigquery.jobs.query
@@ -1637,13 +1637,13 @@ paths:
       tags:
         - jobs
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
   '/projects/{projectId}/serviceAccount':
     get:
       description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
@@ -1682,13 +1682,13 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     alt:
@@ -2449,6 +2449,11 @@ components:
         multiClassClassificationMetrics:
           $ref: '#/components/schemas/MultiClassClassificationMetrics'
           description: Populated for multi-class classification/classifier models.
+        rankingMetrics:
+          $ref: '#/components/schemas/RankingMetrics'
+          description: |-
+            [Alpha] Populated for implicit feedback type matrix factorization
+            models.
         regressionMetrics:
           $ref: '#/components/schemas/RegressionMetrics'
           description: |-
@@ -2829,10 +2834,10 @@ components:
     JobConfigurationExtract:
       properties:
         compression:
-          description: '[Optional] The compression type to use for exported files. Possible values include GZIP, DEFLATE, SNAPPY, and NONE. The default value is NONE. DEFLATE and SNAPPY are only supported for Avro.'
+          description: '[Optional] The compression type to use for exported files. Possible values include GZIP, DEFLATE, SNAPPY, and NONE. The default value is NONE. DEFLATE and SNAPPY are only supported for Avro. Not applicable when extracting models.'
           type: string
         destinationFormat:
-          description: '[Optional] The exported file format. Possible values include CSV, NEWLINE_DELIMITED_JSON and AVRO. The default value is CSV. Tables with nested or repeated fields cannot be exported as CSV.'
+          description: '[Optional] The exported file format. Possible values include CSV, NEWLINE_DELIMITED_JSON or AVRO for tables and ML_TF_SAVED_MODEL or ML_XGBOOST_BOOSTER for models. The default value for tables is CSV. Tables with nested or repeated fields cannot be exported as CSV. The default value for models is ML_TF_SAVED_MODEL.'
           type: string
         destinationUri:
           description: '[Pick one] DEPRECATED: Use destinationUris instead, passing only one URI as necessary. The fully-qualified Google Cloud Storage URI where the extracted table should be written.'
@@ -2843,11 +2848,11 @@ components:
             type: string
           type: array
         fieldDelimiter:
-          description: '[Optional] Delimiter to use between fields in the exported data. Default is '','''
+          description: '[Optional] Delimiter to use between fields in the exported data. Default is '',''. Not applicable when extracting models.'
           type: string
         printHeader:
           default: true
-          description: '[Optional] Whether to print out a header row in the results. Default is true.'
+          description: '[Optional] Whether to print out a header row in the results. Default is true. Not applicable when extracting models.'
           type: boolean
         sourceModel:
           $ref: '#/components/schemas/ModelReference'
@@ -2856,7 +2861,7 @@ components:
           $ref: '#/components/schemas/TableReference'
           description: A reference to the table being exported.
         useAvroLogicalTypes:
-          description: '[Optional] If destinationFormat is set to "AVRO", this flag indicates whether to enable extracting applicable column types (such as TIMESTAMP) to their corresponding AVRO logical types (timestamp-micros), instead of only using their raw types (avro-long).'
+          description: '[Optional] If destinationFormat is set to "AVRO", this flag indicates whether to enable extracting applicable column types (such as TIMESTAMP) to their corresponding AVRO logical types (timestamp-micros), instead of only using their raw types (avro-long). Not applicable when extracting models.'
           type: boolean
       type: object
     JobConfigurationLoad:
@@ -2965,6 +2970,10 @@ components:
         clustering:
           $ref: '#/components/schemas/Clustering'
           description: '[Beta] Clustering specification for the destination table. Must be specified with time-based partitioning, data in the table will be first partitioned and subsequently clustered.'
+        connectionProperties:
+          description: Connection properties.
+          items: {}
+          type: array
         createDisposition:
           description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
           type: string
@@ -3173,6 +3182,9 @@ components:
         reservation_id:
           description: '[Output-only] Name of the primary reservation assigned to this job. Note that this could be different than reservations reported in the reservation usage field if parent reservations were used to execute this job.'
           type: string
+        rowLevelSecurityStatistics:
+          $ref: '#/components/schemas/RowLevelSecurityStatistics'
+          description: '[Output-only] [Preview] Statistics for row-level security. Present only for query and extract jobs.'
         scriptStatistics:
           $ref: '#/components/schemas/ScriptStatistics'
           description: '[Output-only] Statistics for a child job of a script.'
@@ -3198,15 +3210,22 @@ components:
         cacheHit:
           description: '[Output-only] Whether the query result was fetched from the query cache.'
           type: boolean
+        ddlAffectedRowAccessPolicyCount:
+          description: '[Output-only] [Preview] The number of row access policies affected by a DDL statement. Present only for DROP ALL ROW ACCESS POLICIES queries.'
+          format: int64
+          type: string
         ddlOperationPerformed:
           description: 'The DDL operation performed, possibly dependent on the pre-existence of the DDL target. Possible values (new values might be added in the future): "CREATE": The query created the DDL target. "SKIP": No-op. Example cases: the query is CREATE TABLE IF NOT EXISTS while the table already exists, or the query is DROP TABLE IF EXISTS while the table does not exist. "REPLACE": The query replaced the DDL target. Example case: the query is CREATE OR REPLACE TABLE, and the table already exists. "DROP": The query deleted the DDL target.'
           type: string
         ddlTargetRoutine:
           $ref: '#/components/schemas/RoutineReference'
           description: The DDL target routine. Present only for CREATE/DROP FUNCTION/PROCEDURE queries.
+        ddlTargetRowAccessPolicy:
+          $ref: '#/components/schemas/RowAccessPolicyReference'
+          description: '[Output-only] [Preview] The DDL target row access policy. Present only for CREATE/DROP ROW ACCESS POLICY queries.'
         ddlTargetTable:
           $ref: '#/components/schemas/TableReference'
-          description: The DDL target table. Present only for CREATE/DROP TABLE/VIEW queries.
+          description: '[Output-only] The DDL target table. Present only for CREATE/DROP TABLE/VIEW and DROP ALL ROW ACCESS POLICIES queries.'
         estimatedBytesProcessed:
           description: '[Output-only] The original estimate of bytes processed for the job.'
           format: int64
@@ -3477,7 +3496,14 @@ components:
             - LINEAR_REGRESSION
             - LOGISTIC_REGRESSION
             - KMEANS
+            - MATRIX_FACTORIZATION
+            - DNN_CLASSIFIER
             - TENSORFLOW
+            - DNN_REGRESSOR
+            - BOOSTED_TREE_REGRESSOR
+            - BOOSTED_TREE_CLASSIFIER
+            - AUTOML_REGRESSOR
+            - AUTOML_CLASSIFIER
           type: string
         trainingRuns:
           description: Output only. Information for all training runs in increasing order of start_time.
@@ -3629,6 +3655,10 @@ components:
       type: object
     QueryRequest:
       properties:
+        connectionProperties:
+          description: Connection properties.
+          items: {}
+          type: array
         defaultDataset:
           $ref: '#/components/schemas/DatasetReference'
           description: '[Optional] Specifies the default datasetId and projectId to assume for any unqualified table names in the query. If not set, all table names in the query string must be qualified in the format ''datasetId.tableId''.'
@@ -3761,6 +3791,39 @@ components:
               format: int64
               type: string
           type: object
+      type: object
+    RankingMetrics:
+      description: |-
+        Evaluation metrics used by weighted-ALS models specified by
+        feedback_type=implicit.
+      properties:
+        averageRank:
+          description: |-
+            Determines the goodness of a ranking by computing the percentile rank
+            from the predicted confidence and dividing it by the original rank.
+          format: double
+          type: number
+        meanAveragePrecision:
+          description: |-
+            Calculates a precision per user for all the items by ranking them and
+            then averages all the precisions across all the users.
+          format: double
+          type: number
+        meanSquaredError:
+          description: |-
+            Similar to the mean squared error computed in regression and explicit
+            recommendation models except instead of computing the rating directly,
+            the output from evaluate is computed against a preference which is 1 or 0
+            depending on if the rating exists or not.
+          format: double
+          type: number
+        normalizedDiscountedCumulativeGain:
+          description: |-
+            A metric to determine the goodness of a ranking calculated from the
+            predicted confidence by comparing it to an ideal rank measured by the
+            original ratings.
+          format: double
+          type: number
       type: object
     RegressionMetrics:
       description: |-
@@ -3913,6 +3976,27 @@ components:
           items:
             $ref: '#/components/schemas/Entry'
           type: array
+      type: object
+    RowAccessPolicyReference:
+      properties:
+        datasetId:
+          description: '[Required] The ID of the dataset containing this row access policy.'
+          type: string
+        policyId:
+          description: '[Required] The ID of the row access policy. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.'
+          type: string
+        projectId:
+          description: '[Required] The ID of the project containing this row access policy.'
+          type: string
+        tableId:
+          description: '[Required] The ID of the table containing this row access policy.'
+          type: string
+      type: object
+    RowLevelSecurityStatistics:
+      properties:
+        rowLevelSecurityApplied:
+          description: '[Output-only] [Preview] Whether any accessed data was protected by row access policies.'
+          type: boolean
       type: object
     ScriptStackFrame:
       properties:
@@ -4349,6 +4433,10 @@ components:
       type: object
     TrainingOptions:
       properties:
+        batchSize:
+          description: Batch size for dnn models.
+          format: int64
+          type: string
         dataSplitColumn:
           description: |-
             The column to split data with. This column won't be used as a
@@ -4387,12 +4475,31 @@ components:
             - EUCLIDEAN
             - COSINE
           type: string
+        dropout:
+          description: Dropout probability for dnn models.
+          format: double
+          type: number
         earlyStop:
           description: |-
             Whether to stop early when the loss doesn't improve significantly
             any more (compared to min_relative_progress). Used only for iterative
             training algorithms.
           type: boolean
+        feedbackType:
+          description: |-
+            Feedback type that specifies which algorithm to run for matrix
+            factorization.
+          enum:
+            - FEEDBACK_TYPE_UNSPECIFIED
+            - IMPLICIT
+            - EXPLICIT
+          type: string
+        hiddenUnits:
+          description: Hidden units for dnn models.
+          items:
+            format: int64
+            type: string
+          type: array
         initialLearnRate:
           description: |-
             Specifies the initial learning rate for the line search learn rate
@@ -4404,6 +4511,9 @@ components:
           items:
             type: string
           type: array
+        itemColumn:
+          description: Item column specified for matrix factorization models.
+          type: string
         kmeansInitializationColumn:
           description: |-
             The column used to provide the initial centroids for kmeans algorithm
@@ -4457,11 +4567,19 @@ components:
             training algorithms.
           format: int64
           type: string
+        maxTreeDepth:
+          description: Maximum depth of a tree for boosted tree models.
+          format: int64
+          type: string
         minRelativeProgress:
           description: |-
             When early_stop is true, stops training when accuracy improvement is
             less than 'min_relative_progress'. Used only for iterative training
             algorithms.
+          format: double
+          type: number
+        minSplitLoss:
+          description: Minimum split loss for boosted tree models.
           format: double
           type: number
         modelUri:
@@ -4473,6 +4591,10 @@ components:
           description: Number of clusters for clustering models.
           format: int64
           type: string
+        numFactors:
+          description: Num factors specified for matrix factorization models.
+          format: int64
+          type: string
         optimizationStrategy:
           description: Optimization strategy for training linear regression models.
           enum:
@@ -4480,6 +4602,21 @@ components:
             - BATCH_GRADIENT_DESCENT
             - NORMAL_EQUATION
           type: string
+        subsample:
+          description: |-
+            Subsample fraction of the training data to grow tree to prevent
+            overfitting for boosted tree models.
+          format: double
+          type: number
+        userColumn:
+          description: User column specified for matrix factorization models.
+          type: string
+        walsAlpha:
+          description: |-
+            Hyperparameter for matrix factoration when implicit feedback type is
+            specified.
+          format: double
+          type: number
         warmStart:
           description: Whether to train a model from the last checkpoint.
           type: boolean

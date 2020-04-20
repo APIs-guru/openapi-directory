@@ -66,17 +66,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
   /v2/folders:
     get:
       description: |-
@@ -138,17 +138,17 @@ paths:
       tags:
         - folders
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Creates a Folder in the resource hierarchy.
@@ -205,17 +205,17 @@ paths:
         - folders
   '/v2/folders:search':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Search for folders that match specific filter criteria.
@@ -322,17 +322,17 @@ paths:
       tags:
         - folders
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     patch:
       description: |-
         Updates a Folder, changing its display_name.
@@ -389,17 +389,17 @@ paths:
         - folders
   '/v2/{name}:move':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Moves a Folder under a new resource parent.
@@ -451,17 +451,17 @@ paths:
         - folders
   '/v2/{name}:undelete':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Cancels the deletion request for a Folder. This method may only be
@@ -506,17 +506,17 @@ paths:
         - folders
   '/v2/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Gets the access control policy for a Folder. The returned policy may be
@@ -560,17 +560,17 @@ paths:
         - folders
   '/v2/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Sets the access control policy on a Folder, replacing any existing policy.
@@ -610,17 +610,17 @@ paths:
         - folders
   '/v2/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Returns permissions that a caller has on the specified Folder.
@@ -1058,7 +1058,7 @@ components:
           $ref: '#/components/schemas/GetPolicyOptions'
           description: |-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            `GetIamPolicy`. This field is only used by Cloud IAM.
+            `GetIamPolicy`.
       type: object
     GetPolicyOptions:
       description: Encapsulates settings provided to GetIamPolicy.
@@ -1356,8 +1356,8 @@ components:
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
             the fields in the mask will be modified. If no mask is provided, the
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object

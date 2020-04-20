@@ -35,8 +35,6 @@ tags:
 paths:
   '/v1/urlTestingTools/mobileFriendlyTest:run':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
@@ -46,6 +44,8 @@ paths:
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Runs Mobile-Friendly Test for a given URL.
       operationId: searchconsole.urlTestingTools.mobileFriendlyTest.run

@@ -33,17 +33,17 @@ tags:
 paths:
   '/v2/activity:query':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Query past activity in Google Drive.
       operationId: driveactivity.activity.query
@@ -711,7 +711,7 @@ components:
           $ref: '#/components/schemas/ConsolidationStrategy'
           description: |-
             Details on how to consolidate related actions that make up the activity. If
-            not set, then related actions will not be consolidated.
+            not set, then related actions are not consolidated.
         filter:
           description: |-
             The filtering for items returned from this query request. The format of the
@@ -741,8 +741,8 @@ components:
           type: string
         pageSize:
           description: |-
-            The requested number of activity to return. If not set, a default value
-            will be used.
+            The requested number of activities to return. If not set, a default value
+            is used.
           format: int32
           type: integer
         pageToken:

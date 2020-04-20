@@ -59,17 +59,17 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{name}':
     delete:
       description: Deletes a message.
@@ -120,17 +120,17 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     put:
       description: Updates a message.
       operationId: chat.spaces.messages.update
@@ -209,30 +209,30 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
   '/v1/{parent}/messages':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Creates a message.
       operationId: chat.spaces.messages.create
@@ -595,7 +595,7 @@ components:
             The aspect ratio of this image (width/height). This field allows clients
             to reserve the right height for the image while waiting for it to load.
             It's not meant to override the native aspect ratio of the image.
-            If unset, server will fill it by prefetching the image.
+            If unset, the server fills it by prefetching the image.
           format: double
           type: number
         imageUrl:

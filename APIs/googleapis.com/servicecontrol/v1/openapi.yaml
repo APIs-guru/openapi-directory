@@ -35,8 +35,6 @@ tags:
 paths:
   '/v1/services/{serviceName}:allocateQuota':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -46,6 +44,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Attempts to allocate quota for the specified consumer. It should be called
@@ -96,8 +96,6 @@ paths:
         - services
   '/v1/services/{serviceName}:check':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -107,6 +105,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Checks whether an operation on a service should be allowed to proceed
@@ -164,8 +164,6 @@ paths:
         - services
   '/v1/services/{serviceName}:report':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -175,6 +173,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: |-
         Reports operation results to Google Service Control, such as logs and
@@ -790,7 +790,7 @@ components:
           description: The actual config id used to process the request.
           type: string
         serviceRolloutId:
-          description: Unimplemented. The current service rollout id used to process the request.
+          description: The current service rollout id used to process the request.
           type: string
       type: object
     ConsumerInfo:
@@ -1624,6 +1624,7 @@ components:
             - BEST_EFFORT
             - CHECK_ONLY
             - QUERY_ONLY
+            - ADJUST_ONLY
           type: string
       type: object
     QuotaProperties:
@@ -1724,7 +1725,7 @@ components:
           description: The actual config id used to process the request.
           type: string
         serviceRolloutId:
-          description: Unimplemented. The current service rollout id used to process the request.
+          description: The current service rollout id used to process the request.
           type: string
       type: object
     Request:

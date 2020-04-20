@@ -29,8 +29,8 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/resource-manager'
 tags:
-  - name: projects
   - name: organizations
+  - name: projects
 paths:
   /v1beta1/organizations:
     get:
@@ -92,17 +92,17 @@ paths:
       tags:
         - organizations
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   /v1beta1/projects:
     get:
       description: |-
@@ -200,17 +200,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Creates a Project resource.
@@ -337,17 +337,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     put:
       description: |-
         Updates the attributes of the Project identified by the specified
@@ -386,17 +386,17 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:getAncestry':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Gets a list of ancestors in the resource hierarchy for the Project
@@ -439,17 +439,17 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}:undelete':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Restores the Project identified by the specified
@@ -491,17 +491,17 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Returns the IAM access control policy for the specified Project.
@@ -544,17 +544,17 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Sets the IAM access control policy for the specified Project. Overwrites
@@ -631,17 +631,17 @@ paths:
         - projects
   '/v1beta1/projects/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Returns permissions that a caller has on the specified Project.
       operationId: cloudresourcemanager.projects.testIamPermissions
@@ -718,17 +718,17 @@ paths:
       tags:
         - organizations
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     put:
       description: Updates an Organization resource identified by the specified resource name.
       operationId: cloudresourcemanager.organizations.update
@@ -764,17 +764,17 @@ paths:
         - organizations
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Gets the access control policy for an Organization resource. May be empty
@@ -816,17 +816,17 @@ paths:
         - organizations
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Sets the access control policy on an Organization resource. Replaces any
@@ -864,17 +864,17 @@ paths:
         - organizations
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Returns permissions that a caller has on the specified Organization.
@@ -1326,7 +1326,7 @@ components:
           $ref: '#/components/schemas/GetPolicyOptions'
           description: |-
             OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            `GetIamPolicy`. This field is only used by Cloud IAM.
+            `GetIamPolicy`.
       type: object
     GetPolicyOptions:
       description: Encapsulates settings provided to GetIamPolicy.
@@ -1705,8 +1705,8 @@ components:
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
             the fields in the mask will be modified. If no mask is provided, the
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object

@@ -31,9 +31,9 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/billing/'
 tags:
-  - name: projects
   - name: billingAccounts
   - name: services
+  - name: projects
 paths:
   /v1/billingAccounts:
     get:
@@ -84,17 +84,17 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a billing account.
@@ -157,17 +157,17 @@ paths:
       tags:
         - services
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{name}':
     get:
       description: |-
@@ -200,17 +200,17 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     patch:
       description: |-
         Updates a billing account's fields.
@@ -287,17 +287,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     put:
       description: |-
         Sets or updates the billing account associated with a project. You specify
@@ -409,17 +409,17 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{parent}/skus':
     get:
       description: Lists all publicly available SKUs for a given cloud service.
@@ -492,17 +492,17 @@ paths:
       tags:
         - services
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{resource}:getIamPolicy':
     get:
       description: |-
@@ -549,30 +549,30 @@ paths:
       tags:
         - billingAccounts
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
   '/v1/{resource}:setIamPolicy':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Sets the access control policy for a billing account. Replaces any existing
@@ -612,17 +612,17 @@ paths:
         - billingAccounts
   '/v1/{resource}:testIamPermissions':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Tests the access control policy for a billing account. This method takes

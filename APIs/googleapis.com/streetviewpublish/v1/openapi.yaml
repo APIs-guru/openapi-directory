@@ -32,18 +32,18 @@ info:
 externalDocs:
   url: 'https://developers.google.com/streetview/publish/'
 tags:
-  - name: photo
   - name: photos
+  - name: photo
 paths:
   /v1/photo:
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -88,13 +88,13 @@ paths:
         - photo
   '/v1/photo/{id}':
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -264,26 +264,26 @@ paths:
       tags:
         - photo
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
   '/v1/photo:startUpload':
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -403,26 +403,26 @@ paths:
       tags:
         - photos
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
   '/v1/photos:batchDelete':
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
@@ -532,26 +532,26 @@ paths:
       tags:
         - photos
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
   '/v1/photos:batchUpdate':
     parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'

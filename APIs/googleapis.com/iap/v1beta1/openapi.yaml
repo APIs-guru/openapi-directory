@@ -33,17 +33,17 @@ tags:
 paths:
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Gets the access control policy for an Identity-Aware Proxy protected
@@ -82,17 +82,17 @@ paths:
         - v1beta1
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Sets the access control policy for an Identity-Aware Proxy protected
@@ -131,17 +131,17 @@ paths:
         - v1beta1
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Returns permissions that a caller has on the Identity-Aware Proxy protected

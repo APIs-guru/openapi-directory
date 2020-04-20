@@ -1208,7 +1208,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Advertiser group ID.
+          in: query
           name: id
           required: true
           schema:
@@ -1468,7 +1469,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Landing page ID.
+          in: query
           name: id
           required: true
           schema:
@@ -1715,7 +1717,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Advertiser ID.
+          in: query
           name: id
           required: true
           schema:
@@ -2000,7 +2003,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Campaign ID.
+          in: query
           name: id
           required: true
           schema:
@@ -2631,7 +2635,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Content category ID.
+          in: query
           name: id
           required: true
           schema:
@@ -3065,7 +3070,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Creative Field ID
+          in: query
           name: id
           required: true
           schema:
@@ -3231,7 +3237,7 @@ paths:
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
     patch:
-      description: Updates an existing creative field. This method supports patch semantics.
+      description: Updates an existing creative field value. This method supports patch semantics.
       operationId: dfareporting.creativeFieldValues.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -3246,7 +3252,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Creative Field Value ID
+          in: query
           name: id
           required: true
           schema:
@@ -3584,7 +3591,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Creative group ID.
+          in: query
           name: id
           required: true
           schema:
@@ -3883,7 +3891,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Creative ID.
+          in: query
           name: id
           required: true
           schema:
@@ -4478,7 +4487,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Event tag ID.
+          in: query
           name: id
           required: true
           schema:
@@ -4827,7 +4837,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Floodlight activity ID.
+          in: query
           name: id
           required: true
           schema:
@@ -5117,7 +5128,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Floodlight activity Group ID.
+          in: query
           name: id
           required: true
           schema:
@@ -5289,7 +5301,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Floodlight configuration ID.
+          in: query
           name: id
           required: true
           schema:
@@ -5956,7 +5969,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Placement group ID.
+          in: query
           name: id
           required: true
           schema:
@@ -6164,7 +6178,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Placement strategy ID.
+          in: query
           name: id
           required: true
           schema:
@@ -6525,7 +6540,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Placement ID.
+          in: query
           name: id
           required: true
           schema:
@@ -7480,7 +7496,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Remarketing list ID.
+          in: query
           name: remarketingListId
           required: true
           schema:
@@ -7667,7 +7684,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Remarketing list ID.
+          in: query
           name: id
           required: true
           schema:
@@ -8069,13 +8087,13 @@ paths:
       description: Lists files for a report.
       operationId: dfareporting.reports.files.list
       parameters:
-        - description: The DFA profile ID.
+        - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
           schema:
             type: string
-        - description: The ID of the parent report.
+        - description: The ID of the report.
           in: path
           name: reportId
           required: true
@@ -8136,10 +8154,10 @@ paths:
       - $ref: '#/components/parameters/userIp'
   '/userprofiles/{profileId}/reports/{reportId}/files/{fileId}':
     get:
-      description: Retrieves a report file. This method supports media download.
+      description: Retrieves a report file by its report ID and file ID. This method supports media download.
       operationId: dfareporting.reports.files.get
       parameters:
-        - description: The DFA profile ID.
+        - description: The DFA user profile ID.
           in: path
           name: profileId
           required: true
@@ -8362,7 +8380,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Site ID.
+          in: query
           name: id
           required: true
           schema:
@@ -8698,7 +8717,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Subaccount ID.
+          in: query
           name: id
           required: true
           schema:
@@ -9030,7 +9050,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: Targeting template ID.
+          in: query
           name: id
           required: true
           schema:
@@ -9400,7 +9421,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: User role ID.
+          in: query
           name: id
           required: true
           schema:
@@ -13170,18 +13192,14 @@ components:
       properties:
         dateRange:
           $ref: '#/components/schemas/DateRange'
-          description: The date range for which the file has report data. The date range will always be the absolute date range for which the report is run.
         etag:
-          description: The eTag of this response for caching purposes.
+          description: Etag of this resource.
           type: string
         fileName:
           description: The filename of the file.
           type: string
         format:
           description: The output format of the report. Only available once the file is available.
-          enum:
-            - CSV
-            - EXCEL
           type: string
         id:
           description: The unique ID of this report file.
@@ -13189,7 +13207,7 @@ components:
           type: string
         kind:
           default: 'dfareporting#file'
-          description: 'The kind of resource this is, in this case dfareporting#file.'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#file".'
           type: string
         lastModifiedTime:
           description: The timestamp in milliseconds since epoch when this file was last modified.
@@ -13201,11 +13219,6 @@ components:
           type: string
         status:
           description: The status of the report file.
-          enum:
-            - CANCELLED
-            - FAILED
-            - PROCESSING
-            - REPORT_AVAILABLE
           type: string
         urls:
           description: The URLs where the completed report file can be downloaded.
@@ -13219,19 +13232,17 @@ components:
           type: object
       type: object
     FileList:
-      description: Represents the list of File resources.
       properties:
         etag:
-          description: The eTag of this response for caching purposes.
+          description: Etag of this resource.
           type: string
         items:
-          description: The files returned in this response.
           items:
             $ref: '#/components/schemas/File'
           type: array
         kind:
           default: 'dfareporting#fileList'
-          description: 'The kind of list this is, in this case dfareporting#fileList.'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#fileList".'
           type: string
         nextPageToken:
           description: 'Continuation token used to page through files. To retrieve the next page of results, set the next request''s "pageToken" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted.'

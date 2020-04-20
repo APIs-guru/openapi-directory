@@ -33,13 +33,13 @@ tags:
 paths:
   '/v1/{parent}/messages:send':
     parameters:
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'

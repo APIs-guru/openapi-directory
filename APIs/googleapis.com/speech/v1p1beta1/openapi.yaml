@@ -31,9 +31,9 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/speech-to-text/docs/quickstart-protocol'
 tags:
-  - name: projects
   - name: operations
   - name: speech
+  - name: projects
 paths:
   /v1p1beta1/operations:
     get:
@@ -85,17 +85,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
   '/v1p1beta1/operations/{name}':
     get:
       description: |-
@@ -126,30 +126,30 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
   '/v1p1beta1/speech:longrunningrecognize':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Performs asynchronous speech recognition: receive results via the
@@ -180,17 +180,17 @@ paths:
         - speech
   '/v1p1beta1/speech:recognize':
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Performs synchronous speech recognition: receive results after all audio
@@ -245,17 +245,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
   '/v1p1beta1/{name}/operations':
     get:
       description: |-
@@ -308,17 +308,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
 components:
   parameters:
     _.xgafv:
@@ -397,6 +397,33 @@ components:
       schema:
         type: string
   schemas:
+    ClassItem:
+      description: An item of the class.
+      properties:
+        value:
+          description: The class item's value.
+          type: string
+      type: object
+    CustomClass:
+      description: |-
+        A set of words or phrases that represents a common concept likely to appear
+        in your audio, for example a list of passenger ship names. CustomClass items
+        can be substituted into placeholders that you set in PhraseSet phrases.
+      properties:
+        customClassId:
+          description: |-
+            If this custom class is a resource, the custom_class_id is the resource id
+            of the CustomClass.
+          type: string
+        items:
+          description: A collection of class items.
+          items:
+            $ref: '#/components/schemas/ClassItem'
+          type: array
+        name:
+          description: The resource name of the custom class.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -428,6 +455,11 @@ components:
         startTime:
           description: Time when the request was received.
           format: google-datetime
+          type: string
+        uri:
+          description: |-
+            Output only. The URI of the audio file being transcribed. Empty if the audio was sent
+            as byte content. 
           type: string
       type: object
     LongRunningRecognizeRequest:
@@ -503,6 +535,74 @@ components:
             `TakeSnapshotResponse`.
           type: object
       type: object
+    Phrase:
+      description: |-
+        A phrases containing words and phrase "hints" so that
+        the speech recognition is more likely to recognize them. This can be used
+        to improve the accuracy for specific words and phrases, for example, if
+        specific commands are typically spoken by the user. This can also be used
+        to add additional words to the vocabulary of the recognizer. See
+        [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
+
+        List items can also include pre-built or custom classes containing groups
+        of words that represent common concepts that occur in natural language. For
+        example, rather than providing a phrase hint for every month of the
+        year (e.g. "i was born in january", "i was born in febuary", ...), use the
+        pre-built $MONTH class improves the likelihood of correctly transcribing
+        audio that includes months (e.g. "i was born in $month").
+        To refer to pre-built classes, use the class' symbol prepended with $ e.g.
+        $MONTH. To refer to custom classes that were defined inline in the request,
+        set the class's `custom_class_id` to a string unique to all class resources
+        and inline classes. Then use the class' id wrapped in ${...} e.g.
+        "${my-months}". To refer to custom classes resources, use the class' id
+        wrapped in ${} (e.g.
+        ${my-months}).
+      properties:
+        boost:
+          description: |-
+            Hint Boost. Overrides the boost set at the phrase set level.
+            Positive value will increase the probability that a specific phrase will
+            be recognized over other similar sounding phrases. The higher the boost,
+            the higher the chance of false positive recognition as well. Negative
+            boost values would correspond to anti-biasing. Anti-biasing is not
+            enabled, so negative boost will simply be ignored. Though `boost` can
+            accept a wide range of positive values, most use cases are best served
+            with values between 0 and 20. We recommend using a binary search approach
+            to finding the optimal value for your use case. Speech recognition
+            will skip PhraseSets with a boost value of 0.
+          format: float
+          type: number
+        value:
+          description: The phrase itself.
+          type: string
+      type: object
+    PhraseSet:
+      description: |-
+        Provides "hints" to the speech recognizer to favor specific words and phrases
+        in the results.
+      properties:
+        boost:
+          description: |-
+            Hint Boost. Positive value will increase the probability that a specific
+            phrase will be recognized over other similar sounding phrases. The higher
+            the boost, the higher the chance of false positive recognition as well.
+            Negative boost values would correspond to anti-biasing. Anti-biasing is not
+            enabled, so negative boost will simply be ignored. Though `boost` can
+            accept a wide range of positive values, most use cases are best served with
+            values between 0 (exclusive) and 20. We recommend using a binary search
+            approach to finding the optimal value for your use case. Speech recognition
+            will skip PhraseSets with a boost value of 0.
+          format: float
+          type: number
+        name:
+          description: The resource name of the phrase set.
+          type: string
+        phrases:
+          description: A list of word and phrases.
+          items:
+            $ref: '#/components/schemas/Phrase'
+          type: array
+      type: object
     RecognitionAudio:
       description: |-
         Contains audio data in the encoding specified in the `RecognitionConfig`.
@@ -533,6 +633,14 @@ components:
         Provides information to the recognizer that specifies how to process the
         request.
       properties:
+        adaptation:
+          $ref: '#/components/schemas/SpeechAdaptation'
+          description: |-
+            Speech adaptation configuration improves the accuracy of speech
+            recognition. When speech adaptation is set it supersedes the
+            `speech_contexts` field. For more information, see the [speech
+            adaptation](https://cloud.google.com/speech-to-text/docs/context-strength)
+            documentation.
         alternativeLanguageCodes:
           description: |-
             A list of up to 3 additional
@@ -587,9 +695,6 @@ components:
             This feature is only available in select languages. Setting this for
             requests in other languages has no effect at all.
             The default 'false' value does not add punctuation to result hypotheses.
-            Note: This is currently offered as an experimental service, complimentary
-            to all users. In the future this may be exclusively available as a
-            premium feature.
           type: boolean
         enableSeparateRecognitionPerChannel:
           description: |-
@@ -861,6 +966,27 @@ components:
           description: Output only. Unused.
           format: int32
           type: integer
+      type: object
+    SpeechAdaptation:
+      description: Speech adaptation configuration.
+      properties:
+        customClasses:
+          description: |-
+            A collection of custom classes. To specify the classes inline, leave the
+            class' `name` blank and fill in the rest of its fields, giving it a unique
+            `custom_class_id`. Refer to the inline defined class in phrase hints by its
+            `custom_class_id`.
+          items:
+            $ref: '#/components/schemas/CustomClass'
+          type: array
+        phraseSets:
+          description: |-
+            A collection of phrase sets. To specify the hints inline, leave the
+            phrase set's `name` blank and fill in the rest of its fields. Any
+            phrase set can use any custom class.
+          items:
+            $ref: '#/components/schemas/PhraseSet'
+          type: array
       type: object
     SpeechContext:
       description: |-

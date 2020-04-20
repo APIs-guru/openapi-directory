@@ -91,17 +91,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         Updates the metadata and configuration of a specific Redis instance.
@@ -201,17 +201,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -264,30 +264,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -325,17 +325,17 @@ paths:
         - projects
   '/v1beta1/{name}:export':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Export Redis instance data into a Redis RDB format file in Cloud Storage.
@@ -377,17 +377,17 @@ paths:
         - projects
   '/v1beta1/{name}:failover':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Initiates a failover of the master node to current replica node for a
@@ -425,17 +425,17 @@ paths:
         - projects
   '/v1beta1/{name}:import':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
@@ -479,17 +479,17 @@ paths:
         - projects
   '/v1beta1/{name}:upgrade':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Upgrades Redis instance to the newer Redis version specified in the
@@ -583,17 +583,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a Redis instance based on the specified tier and memory size.
@@ -871,9 +871,8 @@ components:
           type: string
         connectMode:
           description: |-
-            Optional. The connect mode of Redis instance.
-            If not provided, default one will be used.
-            Current default: DIRECT_PEERING.
+            Optional. The network connect mode of the Redis instance.
+            If not provided, the connect mode defaults to DIRECT_PEERING.
           enum:
             - CONNECT_MODE_UNSPECIFIED
             - DIRECT_PEERING
@@ -948,16 +947,22 @@ components:
             http://redis.io/topics/config. Currently, the only supported parameters
             are:
 
-             Redis 3.2 and above:
+             Redis version 3.2 and newer:
 
              *   maxmemory-policy
              *   notify-keyspace-events
 
-             Redis 4.0 and above:
+             Redis version 4.0 and newer:
 
              *   activedefrag
-             *   lfu-log-factor
              *   lfu-decay-time
+             *   lfu-log-factor
+             *   maxmemory-gb
+
+             Redis version 5.0 and newer:
+
+             *   stream-node-max-bytes
+             *   stream-node-max-entries
           type: object
         redisVersion:
           description: |-
@@ -965,8 +970,9 @@ components:
             If not provided, latest supported version will be used. Currently, the
             supported values are:
 
-             *   `REDIS_4_0` for Redis 4.0 compatibility (default)
              *   `REDIS_3_2` for Redis 3.2 compatibility
+             *   `REDIS_4_0` for Redis 4.0 compatibility (default)
+             *   `REDIS_5_0` for Redis 5.0 compatibility
           type: string
         reservedIpRange:
           description: |-

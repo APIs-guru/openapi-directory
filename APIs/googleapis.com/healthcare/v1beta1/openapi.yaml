@@ -33,12 +33,10 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: |-
-        Deletes the specified DICOM store and removes all images that are contained
-        within it.
-      operationId: healthcare.projects.locations.datasets.dicomStores.delete
+      description: Deletes an HL7v2 message.
+      operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.delete
       parameters:
-        - description: The resource name of the DICOM store to delete.
+        - description: The resource name of the HL7v2 message to delete.
           in: path
           name: name
           required: true
@@ -60,10 +58,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified DICOM store.
-      operationId: healthcare.projects.locations.datasets.dicomStores.get
+      description: Gets an HL7v2 message.
+      operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.get
       parameters:
-        - description: The resource name of the DICOM store to get.
+        - description: The resource name of the HL7v2 message to retrieve.
           in: path
           name: name
           required: true
@@ -88,7 +86,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/DicomStore'
+                $ref: '#/components/schemas/Message'
           description: Successful response
       security:
         - Oauth2:
@@ -98,24 +96,32 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
-      description: Updates the specified DICOM store.
-      operationId: healthcare.projects.locations.datasets.dicomStores.patch
+      description: |-
+        Update the message.
+
+        The contents of the message in Message.data and data extracted from
+        the contents such as Message.create_time cannot be altered. Only the
+        Message.labels field is allowed to be updated. The labels in the
+        request are merged with the existing set of labels. Existing labels with
+        the same keys are updated.
+      operationId: healthcare.projects.locations.datasets.hl7V2Stores.messages.patch
       parameters:
         - description: |-
-            Output only. Resource name of the DICOM store, of the form
-            `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores/{dicom_store_id}`.
+            Resource name of the Message, of the form
+            `projects/{project_id}/datasets/{dataset_id}/hl7V2Stores/{hl7_v2_store_id}/messages/{message_id}`.
+            Assigned by the server.
           in: path
           name: name
           required: true
@@ -134,13 +140,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DicomStore'
+              $ref: '#/components/schemas/Message'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/DicomStore'
+                $ref: '#/components/schemas/Message'
           description: Successful response
       security:
         - Oauth2:
@@ -267,17 +273,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/$purge':
     delete:
       description: |-
@@ -310,17 +316,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/_history':
     get:
       description: |-
@@ -405,17 +411,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/fhir/metadata':
     get:
       description: |-
@@ -460,17 +466,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/locations':
     get:
       description: Lists information about the supported locations for this service.
@@ -513,17 +519,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{name}/operations':
     get:
       description: |-
@@ -576,34 +582,89 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+  '/v1beta1/{name}:cancel':
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: healthcare.projects.locations.datasets.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOperationRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1beta1/{name}:export':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Exports data to the specified destination by copying it from the DICOM
         store.
+        Errors are also logged to Stackdriver Logging. For more information,
+        see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging).
         The metadata field type is
         OperationMetadata.
       operationId: healthcare.projects.locations.datasets.dicomStores.export
@@ -639,17 +700,17 @@ paths:
         - projects
   '/v1beta1/{name}:import':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Imports data into the DICOM store by copying it from the specified source.
@@ -732,17 +793,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a new health dataset. Results are returned through the
@@ -836,17 +897,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new DICOM store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.dicomStores.create
@@ -965,17 +1026,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         StoreInstances stores DICOM instances associated with study instance unique
@@ -1021,18 +1082,112 @@ paths:
       tags:
         - projects
   '/v1beta1/{parent}/fhir':
+    get:
+      description: |-
+        Searches for resources in the given FHIR store according to criteria
+        specified as query parameters.
+
+        Implements the FHIR standard search interaction
+        ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/http.html#search),
+        [STU3](http://hl7.org/implement/standards/fhir/STU3/http.html#search),
+        [R4](http://hl7.org/implement/standards/fhir/R4/http.html#search))
+        using the search semantics described in the FHIR Search specification
+        ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/search.html),
+        [STU3](http://hl7.org/implement/standards/fhir/STU3/search.html),
+        [R4](http://hl7.org/implement/standards/fhir/R4/search.html)).
+
+        Supports three methods of search defined by the specification:
+
+        *  `GET [base]?[parameters]` to search across all resources.
+        *  `GET [base]/[type]?[parameters]` to search resources of a specified
+        type.
+        *  `POST [base]/[type]/_search?[parameters]` as an alternate form having
+        the same semantics as the `GET` method.
+
+        The `GET` methods do not support compartment searches. The `POST` method
+        does not support `application/x-www-form-urlencoded` search parameters.
+
+        On success, the response body will contain a JSON-encoded representation
+        of a `Bundle` resource of type `searchset`, containing the results of the
+        search.
+        Errors generated by the FHIR store will contain a JSON-encoded
+        `OperationOutcome` resource describing the reason for the error. If the
+        request cannot be mapped to a valid API method on a FHIR store, a generic
+        GCP error might be returned instead.
+
+        The server's capability statement, retrieved through
+        capabilities, indicates what search parameters
+        are supported on each FHIR resource. A list of all search parameters
+        defined by the specification can be found in the FHIR Search Parameter
+        Registry
+        ([STU3](http://hl7.org/implement/standards/fhir/STU3/searchparameter-registry.html),
+        [R4](http://hl7.org/implement/standards/fhir/R4/searchparameter-registry.html)).
+        FHIR search parameters for DSTU2 can be found on each resource's definition
+        page.
+
+        Supported search modifiers: `:missing`, `:exact`, `:contains`, `:text`,
+        `:in`, `:not-in`, `:above`, `:below`, `:[type]`, `:not`, and `:recurse`.
+
+        Supported search result parameters: `_sort`, `_count`, `_include`,
+        `_revinclude`, `_summary=text`, `_summary=data`, and `_elements`.
+
+        The maximum number of search results returned defaults to 100, which can
+        be overridden by the `_count` parameter up to a maximum limit of 1000. If
+        there are additional results, the returned `Bundle` will contain
+        pagination links.
+
+        Resources with a total size larger than 5MB or a field count larger than
+        50,000 might not be fully searchable as the server might trim its generated
+        search index in those cases.
+
+        Note: FHIR resources are indexed asynchronously, so there might be a slight
+        delay between the time a resource is created or changes and when the change
+        is reflected in search results.
+      operationId: healthcare.projects.locations.datasets.fhirStores.search
+      parameters:
+        - description: Name of the FHIR store to retrieve resources from.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            The FHIR resource type to search, such as Patient or Observation. For a
+            complete list, see the FHIR Resource Index
+            ([DSTU2](http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html),
+            [STU3](http://hl7.org/implement/standards/fhir/STU3/resourcelist.html),
+            [R4](http://hl7.org/implement/standards/fhir/R4/resourcelist.html)).
+          in: query
+          name: resourceType
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/HttpBody'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Executes all the requests in the given Bundle.
@@ -1155,30 +1310,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{parent}/fhir/_search':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Searches for resources in the given FHIR store according to criteria
@@ -1324,17 +1479,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: |-
         If a resource is found based on the search criteria specified in the query
@@ -1592,17 +1747,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new FHIR store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.fhirStores.create
@@ -1687,17 +1842,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Creates a new HL7v2 store within the parent dataset.
       operationId: healthcare.projects.locations.datasets.hl7V2Stores.create
@@ -1775,21 +1930,6 @@ paths:
             Message.labels
             map. For example, `labels."priority"="high"`. The operator `:*` can be used
             to assert the existence of a label. For example, `labels."priority":*`.
-
-            Limitations on conjunctions:
-
-            *  Negation on the patient ID function or the labels field is not
-            supported. For example, these queries are invalid:
-            `NOT PatientId("123456", "MRN")`, `NOT labels."tag1":*`,
-            `NOT labels."tag2"="val2"`.
-            *  Conjunction of multiple patient ID functions is not supported, for
-            example this query is invalid:
-            `PatientId("123456", "MRN") AND PatientId("456789", "MRN")`.
-            *  Conjunction of multiple labels fields is also not supported, for
-            example this query is invalid: `labels."tag1":* AND labels."tag2"="val2"`.
-            *  Conjunction of one patient ID function, one labels field and conditions
-            on other fields is supported. For example, this query is valid:
-            `PatientId("123456", "MRN") AND labels."tag1":* AND message_type = "ADT"`.
           in: query
           name: filter
           schema:
@@ -1819,7 +1959,9 @@ paths:
             type: string
         - description: |-
             Specifies the parts of the Message to return in the response.
-            When unspecified, equivalent to BASIC.
+            When unspecified, equivalent to BASIC. Setting this to anything other than
+            BASIC with a `page_size` larger than the default can generate a large
+            response, which impacts the performance of this method.
           in: query
           name: view
           schema:
@@ -1845,17 +1987,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a message and sends a notification to the Cloud Pub/Sub topic. If
@@ -1894,17 +2036,17 @@ paths:
         - projects
   '/v1beta1/{parent}/messages:ingest':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Ingests a new HL7v2 message from the hospital and sends a notification to
@@ -1944,7 +2086,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: healthcare.projects.locations.datasets.dicomStores.getIamPolicy
+      operationId: healthcare.projects.locations.datasets.annotationStores.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -1983,37 +2125,37 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
 
         Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
-      operationId: healthcare.projects.locations.datasets.dicomStores.setIamPolicy
+      operationId: healthcare.projects.locations.datasets.annotationStores.setIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
@@ -2045,17 +2187,17 @@ paths:
         - projects
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
@@ -2065,7 +2207,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: healthcare.projects.locations.datasets.dicomStores.testIamPermissions
+      operationId: healthcare.projects.locations.datasets.annotationStores.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -2097,17 +2239,17 @@ paths:
         - projects
   '/v1beta1/{sourceDataset}:deidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a new dataset containing de-identified data from the source
@@ -2120,7 +2262,11 @@ paths:
         error
         details field type is
         DeidentifyErrorDetails.
-        Errors are also logged to Stackdriver Logging. For more information,
+        The LRO result may still be successful if de-identification fails for some
+        DICOM instances. The new de-identified dataset will not contain these
+        failed resources. Failed resource totals are tracked in
+        DeidentifySummary.failure_resource_count.
+        Error details are also logged to Stackdriver Logging. For more information,
         see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging).
       operationId: healthcare.projects.locations.datasets.deidentify
       parameters:
@@ -2154,17 +2300,17 @@ paths:
         - projects
   '/v1beta1/{sourceStore}:deidentify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         De-identifies data from the source store and writes it to the destination
@@ -2176,7 +2322,11 @@ paths:
         error
         details field type is
         DeidentifyErrorDetails.
-        Errors are also logged to Stackdriver
+        The LRO result may still be successful if de-identification fails for some
+        DICOM instances. The output DICOM store will not contain
+        these failed resources. Failed resource totals are tracked in
+        DeidentifySummary.failure_resource_count.
+        Error details are also logged to Stackdriver
         (see [Viewing logs](/healthcare/docs/how-tos/stackdriver-logging)).
       operationId: healthcare.projects.locations.datasets.dicomStores.deidentify
       parameters:
@@ -2286,11 +2436,6 @@ components:
       schema:
         type: string
   requestBodies:
-    DicomStore:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DicomStore'
     HttpBody:
       content:
         application/json:
@@ -2465,6 +2610,10 @@ components:
             Role that is assigned to `members`.
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
       type: object
     CharacterMaskConfig:
       description: Mask a string by replacing its characters with a fixed character.
@@ -2789,6 +2938,10 @@ components:
             The Cloud Storage location requires the `roles/storage.objectAdmin` Cloud
             IAM role.
       type: object
+    ExportDicomDataResponse:
+      description: Returns additional information in regards to a completed DICOM store export.
+      properties: {}
+      type: object
     ExportResourcesRequest:
       description: Request to export resources.
       properties:
@@ -2896,6 +3049,16 @@ components:
     FhirStore:
       description: Represents a FHIR store.
       properties:
+        defaultSearchHandlingStrict:
+          description: |-
+            If true, overrides the default search behavior for this FHIR store to
+            `handling=strict` which returns an error for unrecognized search
+            parameters. If false, uses the FHIR specification default
+            `handling=lenient` which ignores unrecognized search parameters.
+            The handling can always be changed from the default on an individual API
+            call by setting the HTTP header `Prefer: handling=strict` or
+            `Prefer: handling=lenient`.
+          type: boolean
         disableReferentialIntegrity:
           description: |-
             Whether to disable referential integrity in this FHIR store. This field is
@@ -2959,6 +3122,24 @@ components:
             this destination. The Cloud Pub/Sub message attributes contain a map
             with a string describing the action that has triggered the notification.
             For example, "action":"CreateResource".
+        streamConfigs:
+          description: |-
+            A list of streaming configs that configure the destinations of streaming
+            export for every resource mutation in this FHIR store. Each store is
+            allowed to have up to 10 streaming configs.
+            After a new config is added, the next resource mutation is streamed to
+            the new location in addition to the existing ones.
+            When a location is removed from the list, the server stops
+            streaming to that location. Before adding a new config, you must add the
+            required
+            [`bigquery.dataEditor`](https://cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+            role to your project's **Cloud Healthcare Service Agent**
+            [service account](https://cloud.google.com/iam/docs/service-accounts).
+            Some lag (typically on the order of dozens of seconds) is expected before
+            the results show up in the streaming destination.
+          items:
+            $ref: '#/components/schemas/StreamConfig'
+          type: array
         version:
           description: |-
             The FHIR specification version that this FHIR store supports natively. This
@@ -2970,6 +3151,33 @@ components:
             - DSTU2
             - STU3
             - R4
+          type: string
+      type: object
+    Field:
+      description: A (sub) field of a type.
+      properties:
+        maxOccurs:
+          description: |-
+            The maximum number of times this field can be repeated. 0 or -1 means
+            unbounded.
+          format: int32
+          type: integer
+        minOccurs:
+          description: The minimum number of times this field must be present/repeated.
+          format: int32
+          type: integer
+        name:
+          description: 'The name of the field. For example, "PID-1" or just "1".'
+          type: string
+        table:
+          description: |-
+            The HL7v2 table this field refers to. For example, PID-15 (Patient's
+            Primary Language) usually refers to table "0296".
+          type: string
+        type:
+          description: |-
+            The type of this field. A Type with this name must be defined in an
+            Hl7TypesConfig.
           type: string
       type: object
     FieldMetadata:
@@ -3054,16 +3262,37 @@ components:
             `.../{study_id}/{series_id}/{instance_id}[/{frame_number}].{extension}`
             The frame_number component exists only for multi-frame instances.
 
-            Refer to the DICOM conformance statement for permissible MIME types:
-            https://cloud.google.com/healthcare/docs/dicom#retrieve_transaction
+            Supported MIME types are consistent with supported formats in DICOMweb:
+            https://cloud.google.com/healthcare/docs/dicom#retrieve_transaction.
+            Specifically, the following are supported:
+
+              - application/dicom; transfer-syntax=1.2.840.10008.1.2.1
+                (uncompressed DICOM)
+              - application/dicom; transfer-syntax=1.2.840.10008.1.2.4.50
+                (DICOM with embedded JPEG Baseline)
+              - application/dicom; transfer-syntax=1.2.840.10008.1.2.4.90
+                (DICOM with embedded JPEG 2000 Lossless Only)
+              - application/dicom; transfer-syntax=1.2.840.10008.1.2.4.91
+                (DICOM with embedded JPEG 2000)h
+              - application/dicom; transfer-syntax=*
+                (DICOM with no transcoding)
+              - application/octet-stream; transfer-syntax=1.2.840.10008.1.2.1
+                (raw uncompressed PixelData)
+              - application/octet-stream; transfer-syntax=*
+                (raw PixelData in whatever format it was uploaded in)
+              - image/jpeg; transfer-syntax=1.2.840.10008.1.2.4.50
+                (Consumer JPEG)
+              - image/png
 
             The following extensions are used for output files:
-              application/dicom -> .dcm
-              image/jpeg -> .jpg
-              image/png -> .png
 
-            If unspecified, the instances are exported in their original
-            DICOM format.
+             - application/dicom -> .dcm
+             - image/jpeg -> .jpg
+             - image/png -> .png
+             - application/octet-stream -> no extension
+
+            If unspecified, the instances are exported in the original
+            DICOM format they were uploaded in.
           type: string
         uriPrefix:
           description: |-
@@ -3248,6 +3477,106 @@ components:
           format: int64
           type: string
       type: object
+    GroupOrSegment:
+      description: Construct representing a logical group or a segment.
+      properties:
+        group:
+          $ref: '#/components/schemas/SchemaGroup'
+        segment:
+          $ref: '#/components/schemas/SchemaSegment'
+      type: object
+    Hl7SchemaConfig:
+      description: |-
+        Root config message for HL7v2 schema. This contains a schema structure of
+        groups and segments, and filters that determine which messages to apply the
+        schema structure to.
+      properties:
+        messageSchemaConfigs:
+          additionalProperties:
+            $ref: '#/components/schemas/SchemaGroup'
+          description: |-
+            Map from each HL7v2 message type and trigger event pair, such as ADT_A04,
+            to its schema configuration root group.
+          type: object
+        version:
+          description: |-
+            Each VersionSource is tested and only if they all match is the schema used
+            for the message.
+          items:
+            $ref: '#/components/schemas/VersionSource'
+          type: array
+      type: object
+    Hl7TypesConfig:
+      description: Root config for HL7v2 datatype definitions for a specific HL7v2 version.
+      properties:
+        type:
+          description: The HL7v2 type definitions.
+          items:
+            $ref: '#/components/schemas/Type'
+          type: array
+        version:
+          description: |-
+            The version selectors that this config applies to. A message must match
+            ALL version sources to apply.
+          items:
+            $ref: '#/components/schemas/VersionSource'
+          type: array
+      type: object
+    Hl7V2NotificationConfig:
+      description: |-
+        Specifies where and whether to send notifications upon changes to a
+        data store.
+      properties:
+        filter:
+          description: |-
+            Restricts notifications sent for messages matching a filter. If this is
+            empty, all messages are matched. Syntax:
+            https://cloud.google.com/appengine/docs/standard/python/search/query_strings
+
+            Fields/functions available for filtering are:
+
+            *  `message_type`, from the MSH-9.1 field. For example,
+            `NOT message_type = "ADT"`.
+            *  `send_date` or `sendDate`, the YYYY-MM-DD date the message was sent in
+            the dataset's time_zone, from the MSH-7 segment. For example,
+            `send_date < "2017-01-02"`.
+            *  `send_time`, the timestamp when the message was sent, using the
+            RFC3339 time format for comparisons, from the MSH-7 segment. For example,
+            `send_time < "2017-01-02T00:00:00-05:00"`.
+            *  `send_facility`, the care center that the message came from, from the
+            MSH-4 segment. For example, `send_facility = "ABC"`.
+            *  `PatientId(value, type)`, which matches if the message lists a patient
+            having an ID of the given value and type in the PID-2, PID-3, or PID-4
+            segments. For example, `PatientId("123456", "MRN")`.
+            *  `labels.x`, a string value of the label with key `x` as set using the
+            Message.labels
+            map. For example, `labels."priority"="high"`. The operator `:*` can be
+            used to assert the existence of a label. For example,
+            `labels."priority":*`.
+          type: string
+        pubsubTopic:
+          description: |-
+            The [Cloud Pubsub](https://cloud.google.com/pubsub/docs/) topic that
+            notifications of changes are published on. Supplied by the client. The
+            notification is a `PubsubMessage` with the following fields:
+
+            *  `PubsubMessage.Data` contains the resource name.
+            *  `PubsubMessage.MessageId` is the ID of this notification. It is
+            guaranteed to be unique within the topic.
+            *  `PubsubMessage.PublishTime` is the time at which the message was
+            published.
+
+            Note that notifications are only sent if the topic is non-empty. [Topic
+            names](https://cloud.google.com/pubsub/docs/overview#names) must be
+            scoped to a project. cloud-healthcare@system.gserviceaccount.com must
+            have publisher permissions on the given Pubsub topic. Not having adequate
+            permissions causes the calls that send notifications to fail.
+
+            If a notification cannot be published to Cloud Pub/Sub, errors will be
+            logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-
+            tos/stackdriver-logging)).
+          type: string
+      type: object
     Hl7V2Store:
       description: Represents an HL7v2 store.
       properties:
@@ -3279,6 +3608,15 @@ components:
             The notification destination all messages (both Ingest & Create) are
             published on. Only the message name is sent as part of the notification. If
             this is unset, no notifications are sent. Supplied by the client.
+        notificationConfigs:
+          description: |-
+            A list of notification configs. Each configuration uses a filter to
+            determine whether to publish a message (both Ingest & Create) on
+            the corresponding notification destination. Only the message name is sent
+            as part of the notification. Supplied by the client.
+          items:
+            $ref: '#/components/schemas/Hl7V2NotificationConfig'
+          type: array
         parserConfig:
           $ref: '#/components/schemas/ParserConfig'
           description: |-
@@ -3397,6 +3735,10 @@ components:
 
             The Cloud Storage location requires the `roles/storage.objectViewer`
             Cloud IAM role.
+      type: object
+    ImportDicomDataResponse:
+      description: Returns additional information in regards to a completed DICOM store import.
+      properties: {}
       type: object
     ImportResourcesRequest:
       description: Request to import resources.
@@ -3658,6 +4000,11 @@ components:
           items:
             $ref: '#/components/schemas/PatientId'
           type: array
+        schematizedData:
+          $ref: '#/components/schemas/SchematizedData'
+          description: |-
+            The parsed version of the raw message data schematized according to this
+            store's schemas and type definitions.
         sendFacility:
           description: The hospital that this message came from. MSH-4.
           type: string
@@ -3741,6 +4088,9 @@ components:
         apiMethodName:
           description: The name of the API method that initiated the operation.
           type: string
+        cancelRequested:
+          description: Specifies if cancellation was requested for the operation.
+          type: boolean
         counter:
           $ref: '#/components/schemas/ProgressCounter'
         createTime:
@@ -3751,9 +4101,15 @@ components:
           description: The time at which execution was completed.
           format: google-datetime
           type: string
+        logsUrl:
+          description: |-
+            A link to audit and error logs in the log viewer. Error logs are generated
+            only by some operations, listed at
+            https://cloud.google.com/healthcare/docs/how-tos/stackdriver-logging.
+          type: string
       type: object
     ParsedData:
-      description: The content of a HL7v2 message in a structured format.
+      description: The content of an HL7v2 message in a structured format.
       properties:
         segments:
           items:
@@ -3768,10 +4124,16 @@ components:
         allowNullHeader:
           description: Determines whether messages with no header are allowed.
           type: boolean
+        schema:
+          $ref: '#/components/schemas/SchemaPackage'
+          description: |-
+            Schemas used to parse messages in this store, if schematized parsing is
+            desired.
         segmentTerminator:
           description: |-
             Byte(s) to use as the segment terminator. If this is unset, '\r' is
-            used as segment terminator.
+            used as segment terminator, matching the HL7 version 2
+            specification.
           format: byte
           type: string
       type: object
@@ -3972,6 +4334,97 @@ components:
             - ANALYTICS
           type: string
       type: object
+    SchemaGroup:
+      description: An HL7v2 logical group construct.
+      properties:
+        choice:
+          description: |-
+            True indicates that this is a choice group, meaning that only one of its
+            segments can exist in a given message.
+          type: boolean
+        maxOccurs:
+          description: |-
+            The maximum number of times this group can be repeated. 0 or -1 means
+            unbounded.
+          format: int32
+          type: integer
+        members:
+          description: Nested groups and/or segments.
+          items:
+            $ref: '#/components/schemas/GroupOrSegment'
+          type: array
+        minOccurs:
+          description: The minimum number of times this group must be present/repeated.
+          format: int32
+          type: integer
+        name:
+          description: 'The name of this group. For example, "ORDER_DETAIL".'
+          type: string
+      type: object
+    SchemaPackage:
+      description: A schema package contains a set of schemas and type definitions.
+      properties:
+        ignoreMinOccurs:
+          description: |-
+            Flag to ignore all min_occurs restrictions in the schema. This means that
+            incoming messages can omit any group, segment, field, component, or
+            subcomponent.
+          type: boolean
+        schemas:
+          description: |-
+            Schema configs that are layered based on their VersionSources that
+            match the incoming message. Schema configs present in higher indices
+            override those in lower indices with the same message type and trigger
+            event if their VersionSources all match an incoming message.
+          items:
+            $ref: '#/components/schemas/Hl7SchemaConfig'
+          type: array
+        schematizedParsingType:
+          description: Determines how messages that don't parse successfully are handled.
+          enum:
+            - SCHEMATIZED_PARSING_TYPE_UNSPECIFIED
+            - SOFT_FAIL
+            - HARD_FAIL
+          type: string
+        types:
+          description: |-
+            Schema type definitions that are layered based on their VersionSources
+            that match the incoming message. Type definitions present in higher indices
+            override those in lower indices with the same type name if their
+            VersionSources all match an incoming message.
+          items:
+            $ref: '#/components/schemas/Hl7TypesConfig'
+          type: array
+      type: object
+    SchemaSegment:
+      description: An HL7v2 Segment.
+      properties:
+        maxOccurs:
+          description: |-
+            The maximum number of times this segment can be present in this group.
+            0 or -1 means unbounded.
+          format: int32
+          type: integer
+        minOccurs:
+          description: The minimum number of times this segment can be present in this group.
+          format: int32
+          type: integer
+        type:
+          description: 'The Segment type. For example, "PID".'
+          type: string
+      type: object
+    SchematizedData:
+      description: |-
+        The content of an HL7v2 message in a structured format as specified by a
+        schema.
+      properties:
+        data:
+          description: JSON output of the parser.
+          type: string
+        error:
+          description: The error output of the parser.
+          type: string
+      type: object
     SearchResourcesRequest:
       description: Request to search the resources in the specified FHIR store.
       properties:
@@ -4067,6 +4520,55 @@ components:
             google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    StreamConfig:
+      description: This structure contains configuration for streaming FHIR export.
+      properties:
+        bigqueryDestination:
+          $ref: '#/components/schemas/GoogleCloudHealthcareV1beta1FhirBigQueryDestination'
+          description: |-
+            The destination BigQuery structure that contains both the dataset
+            location and corresponding schema config.
+
+            The output is organized in one table per resource type. The server
+            reuses the existing tables (if any) that are named after the resource
+            types, e.g. "Patient", "Observation". When there is no existing table
+            for a given resource type, the server attempts to create one.
+
+            When a table schema doesn't align with the schema config, either
+            because of existing incompatible schema or out of band incompatible
+            modification, the server does not stream in new data.
+
+            One resolution in this case is to delete the incompatible
+            table and let the server recreate one, though the newly created table
+            only contains data after the table recreation.
+
+            BigQuery imposes a 1 MB limit on streaming insert row size, therefore
+            any resource mutation that generates more than 1 MB of BigQuery data
+            will not be streamed.
+
+            Results are appended to the corresponding BigQuery tables. Different
+            versions of the same resource are distinguishable by the meta.versionId
+            and meta.lastUpdated columns. The operation (CREATE/UPDATE/DELETE) that
+            results in the new version is recorded in the meta.tag.
+
+            The tables contain all historical resource versions since streaming was
+            enabled. For query convenience, the server also creates one view per
+            table of the same name containing only the current resource version.
+
+            If a resource mutation cannot be streamed to BigQuery, errors will be
+            logged to Stackdriver (see [Viewing logs](/healthcare/docs/how-
+            tos/stackdriver-logging)).
+        resourceTypes:
+          description: |-
+            Supply a FHIR resource type (such as "Patient" or "Observation").
+            See https://www.hl7.org/fhir/valueset-resource-types.html for a list of
+            all FHIR resource types.
+            The server treats an empty list as an intent to stream all the
+            supported resource types in this FHIR store.
+          items:
+            type: string
+          type: array
+      type: object
     TagFilterList:
       description: List of tags to be filtered.
       properties:
@@ -4112,6 +4614,42 @@ components:
           items:
             $ref: '#/components/schemas/InfoTypeTransformation'
           type: array
+      type: object
+    Type:
+      description: A type definition for some HL7v2 type (incl. Segments and Datatypes).
+      properties:
+        fields:
+          description: The (sub) fields this type has (if not primitive).
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+        name:
+          description: |-
+            The name of this type. This would be the segment or datatype name.
+            For example, "PID" or "XPN".
+          type: string
+        primitive:
+          description: |-
+            If this is a primitive type then this field is the type of the primitive
+            For example, STRING. Leave unspecified for composite types.
+          enum:
+            - PRIMITIVE_UNSPECIFIED
+            - STRING
+            - VARIES
+            - UNESCAPED_STRING
+          type: string
+      type: object
+    VersionSource:
+      description: Describes a selector for extracting and matching an MSH field to a value.
+      properties:
+        mshField:
+          description: 'The field to extract from the MSH segment. For example, "3.1" or "18[1].1".'
+          type: string
+        value:
+          description: |-
+            The value to match with the field. For example, "My Application Name" or
+            "2.3".
+          type: string
       type: object
   securitySchemes:
     Oauth2:

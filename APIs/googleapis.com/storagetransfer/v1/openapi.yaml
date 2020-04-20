@@ -32,8 +32,8 @@ externalDocs:
   url: 'https://cloud.google.com/storage-transfer/docs'
 tags:
   - name: googleServiceAccounts
-  - name: transferJobs
   - name: transferOperations
+  - name: transferJobs
 paths:
   '/v1/googleServiceAccounts/{projectId}':
     get:
@@ -71,17 +71,17 @@ paths:
       tags:
         - googleServiceAccounts
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   /v1/transferJobs:
     get:
       description: Lists transfer jobs.
@@ -128,17 +128,17 @@ paths:
       tags:
         - transferJobs
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Creates a transfer job that runs periodically.
       operationId: storagetransfer.transferJobs.create
@@ -195,17 +195,17 @@ paths:
       tags:
         - transferJobs
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates a transfer job. Updating a job's transfer spec does not affect
@@ -275,30 +275,30 @@ paths:
       tags:
         - transferOperations
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Cancels a transfer. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
       operationId: storagetransfer.transferOperations.cancel
@@ -326,17 +326,17 @@ paths:
         - transferOperations
   '/v1/{name}:pause':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Pauses a transfer operation.
       operationId: storagetransfer.transferOperations.pause
@@ -369,17 +369,17 @@ paths:
         - transferOperations
   '/v1/{name}:resume':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: Resumes a transfer operation that is paused.
       operationId: storagetransfer.transferOperations.resume

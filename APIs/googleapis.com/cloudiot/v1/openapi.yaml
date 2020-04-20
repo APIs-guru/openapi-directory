@@ -108,14 +108,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     patch:
       description: Updates a device.
       operationId: cloudiot.projects.locations.registries.devices.patch
@@ -211,14 +211,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v1/{name}/states':
     get:
       description: |-
@@ -266,27 +266,27 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v1/{name}:modifyCloudToDeviceConfig':
     parameters:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Modifies the configuration for the device, which is eventually sent from
@@ -332,14 +332,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Sends a command to the specified device. In order for a device to be able
@@ -393,7 +393,7 @@ paths:
   '/v1/{parent}/devices':
     get:
       description: List devices in a device registry.
-      operationId: cloudiot.projects.locations.registries.groups.devices.list
+      operationId: cloudiot.projects.locations.registries.devices.list
       parameters:
         - description: |-
             Required. The device registry path. Required. For example,
@@ -501,14 +501,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Creates a device in a device registry.
       operationId: cloudiot.projects.locations.registries.devices.create
@@ -599,14 +599,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Creates a device registry that contains devices.
       operationId: cloudiot.projects.locations.registries.create
@@ -648,14 +648,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Associates the device with the gateway.
       operationId: cloudiot.projects.locations.registries.bindDeviceToGateway
@@ -697,14 +697,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Deletes the association between the device and the gateway.
       operationId: cloudiot.projects.locations.registries.unbindDeviceFromGateway
@@ -746,14 +746,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Gets the access control policy for a resource.
@@ -798,14 +798,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -849,14 +849,14 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.

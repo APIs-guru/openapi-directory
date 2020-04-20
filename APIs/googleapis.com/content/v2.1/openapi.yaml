@@ -49,6 +49,8 @@ tags:
   - name: regionalinventory
   - name: returnaddress
   - name: returnpolicy
+  - name: settlementreports
+  - name: settlementtransactions
   - name: shippingsettings
 paths:
   /accounts/authinfo:
@@ -3637,6 +3639,155 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/settlementreports':
+    get:
+      description: Retrieves a list of settlement reports from your Merchant Center account.
+      operationId: content.settlementreports.list
+      parameters:
+        - description: The Merchant Center account to list settlements for.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of settlements to return in the response, used for paging. The default value is 200 returns per page, and the maximum allowed value is 5000 returns per page.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'Obtains settlements which have transactions before this date (inclusively), in ISO 8601 format.'
+          in: query
+          name: transferEndDate
+          schema:
+            type: string
+        - description: 'Obtains settlements which have transactions after this date (inclusively), in ISO 8601 format.'
+          in: query
+          name: transferStartDate
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SettlementreportsListResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - settlementreports
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/settlementreports/{settlementId}':
+    get:
+      description: Retrieves a settlement report from your Merchant Center account.
+      operationId: content.settlementreports.get
+      parameters:
+        - description: The Merchant Center account of the settlement report.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The Google-provided ID of the settlement.
+          in: path
+          name: settlementId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SettlementReport'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - settlementreports
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{merchantId}/settlementreports/{settlementId}/transactions':
+    get:
+      description: Retrieves a list of transactions for the settlement.
+      operationId: content.settlementtransactions.list
+      parameters:
+        - description: The Merchant Center account to list transactions for.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The Google-provided ID of the settlement.
+          in: path
+          name: settlementId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of transactions to return in the response, used for paging. The default value is 200 transactions per page, and the maximum allowed value is 5000 transactions per page.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'The list of transactions to return. If not set, all transactions will be returned.'
+          explode: true
+          in: query
+          name: transactionIds
+          schema:
+            items:
+              type: string
+            type: array
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SettlementtransactionsListResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - settlementtransactions
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
   '/{merchantId}/shippingsettings':
     get:
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
@@ -4088,7 +4239,7 @@ components:
       description: 'Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.'
       properties:
         adsLinks:
-          description: 'List of linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.'
+          description: 'List of linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.'
           items:
             $ref: '#/components/schemas/AccountAdsLink'
           type: array
@@ -4102,15 +4253,15 @@ components:
           $ref: '#/components/schemas/AccountGoogleMyBusinessLink'
           description: The GMB account which is linked or in the process of being linked with the Merchant Center account.
         id:
-          description: Merchant Center account ID.
+          description: Required for update. Merchant Center account ID.
           format: uint64
           type: string
         kind:
           default: 'content#account'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#account".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`"'
           type: string
         name:
-          description: Display name for the account.
+          description: Required. Display name for the account.
           type: string
         sellerId:
           description: 'Client-specific, locally-unique, internal ID for the child account.'
@@ -4124,7 +4275,7 @@ components:
           description: The merchant's website.
           type: string
         youtubeChannelLinks:
-          description: 'List of linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.'
+          description: 'List of linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.'
           items:
             $ref: '#/components/schemas/AccountYouTubeChannelLink'
           type: array
@@ -4154,7 +4305,12 @@ components:
           format: uint64
           type: string
         status:
-          description: 'Status of the link between this Merchant Center account and the Ads account. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in Google Ads or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
+          description: |-
+            Status of the link between this Merchant Center account and the Ads account. Upon retrieval, it represents the actual status of the link and can be either `active` if it was approved in Google Ads or `pending` if it's pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status `active` when it's still pending or with status `pending` when it's already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status `inactive` is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`pending`"
           type: string
       type: object
     AccountBusinessInformation:
@@ -4187,7 +4343,12 @@ components:
           description: 'The GMB email address of which a specific account within a GMB account. A sample account within a GMB account could be a business account with set of locations, managed under the GMB account.'
           type: string
         status:
-          description: Status of the link between this Merchant Center account and the GMB account.
+          description: |-
+            Status of the link between this Merchant Center account and the GMB account.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`pending`"
           type: string
       type: object
     AccountIdentifier:
@@ -4214,7 +4375,7 @@ components:
           type: array
         kind:
           default: 'content#accountStatus'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountStatus".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountStatus`"'
           type: string
         products:
           description: 'List of product-related data by channel, destination, and country. Data in this field may be delayed by up to 30 minutes.'
@@ -4243,7 +4404,13 @@ components:
           description: Issue identifier.
           type: string
         severity:
-          description: Severity of the issue.
+          description: |-
+            Severity of the issue.
+
+            Acceptable values are:  
+            - "`critical`" 
+            - "`error`" 
+            - "`suggestion`"
           type: string
         title:
           description: Short description of the issue.
@@ -4280,7 +4447,12 @@ components:
     AccountStatusProducts:
       properties:
         channel:
-          description: The channel the data applies to.
+          description: |-
+            The channel the data applies to.
+
+            Acceptable values are:  
+            - "`local`" 
+            - "`online`"
           type: string
         country:
           description: The country the data applies to.
@@ -4320,7 +4492,7 @@ components:
       description: The tax settings of a merchant account. All methods require the admin role.
       properties:
         accountId:
-          description: The ID of the account to which these account tax settings belong.
+          description: Required. The ID of the account to which these account tax settings belong.
           format: uint64
           type: string
         kind:
@@ -4340,7 +4512,7 @@ components:
           description: Country code in which tax is applicable.
           type: string
         locationId:
-          description: 'State (or province) is which the tax is applicable, described by its location ID (also called criteria ID).'
+          description: 'Required. State (or province) is which the tax is applicable, described by its location ID (also called criteria ID).'
           format: uint64
           type: string
         ratePercent:
@@ -4377,7 +4549,7 @@ components:
           description: Channel ID.
           type: string
         status:
-          description: 'Status of the link between this Merchant Center account and the YouTube channel. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in YT Creator Studio or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
+          description: 'Status of the link between this Merchant Center account and the YouTube channel. Upon retrieval, it represents the actual status of the link and can be either `active` if it was approved in YT Creator Studio or `pending` if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status `active` when it''s still pending or with status `pending` when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status `inactive` is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
           type: string
       type: object
     AccountsAuthInfoResponse:
@@ -4416,9 +4588,9 @@ components:
       properties:
         account:
           $ref: '#/components/schemas/Account'
-          description: The account to create or update. Only defined if the method is insert or update.
+          description: The account to create or update. Only defined if the method is `insert` or `update`.
         accountId:
-          description: The ID of the targeted account. Only defined if the method is not insert.
+          description: The ID of the targeted account. Only defined if the method is not `insert`.
           format: uint64
           type: string
         batchId:
@@ -4426,29 +4598,49 @@ components:
           format: uint32
           type: integer
         force:
-          description: Whether the account should be deleted if the account has offers. Only applicable if the method is delete.
+          description: Whether the account should be deleted if the account has offers. Only applicable if the method is `delete`.
           type: boolean
         linkRequest:
           $ref: '#/components/schemas/AccountsCustomBatchRequestEntryLinkRequest'
-          description: Details about the link request.
+          description: Details about the `link` request.
         merchantId:
           description: The ID of the managing account.
           format: uint64
           type: string
         method:
-          description: The method of the batch entry.
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`claimWebsite`" 
+            - "`delete`" 
+            - "`get`" 
+            - "`insert`" 
+            - "`link`" 
+            - "`update`"
           type: string
         overwrite:
-          description: Only applicable if the method is claimwebsite. Indicates whether or not to take the claim from another account in case there is a conflict.
+          description: Only applicable if the method is `claimwebsite`. Indicates whether or not to take the claim from another account in case there is a conflict.
           type: boolean
       type: object
     AccountsCustomBatchRequestEntryLinkRequest:
       properties:
         action:
-          description: Action to perform for this link. The "request" action is only available to select merchants.
+          description: |-
+            Action to perform for this link. The `"request"` action is only available to select merchants.
+
+            Acceptable values are:  
+            - "`approve`" 
+            - "`remove`" 
+            - "`request`"
           type: string
         linkType:
-          description: Type of the link between the two accounts.
+          description: |-
+            Type of the link between the two accounts.
+
+            Acceptable values are:  
+            - "`channelPartner`" 
+            - "`eCommercePlatform`"
           type: string
         linkedAccountId:
           description: The ID of the linked account.
@@ -4476,7 +4668,7 @@ components:
       properties:
         account:
           $ref: '#/components/schemas/Account'
-          description: 'The retrieved, created, or updated account. Not defined if the method was delete, claimwebsite or link.'
+          description: 'The retrieved, created, or updated account. Not defined if the method was `delete`, `claimwebsite` or `link`.'
         batchId:
           description: The ID of the request entry this entry responds to.
           format: uint32
@@ -4486,16 +4678,27 @@ components:
           description: A list of errors defined if and only if the request failed.
         kind:
           default: 'content#accountsCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsCustomBatchResponseEntry`"'
           type: string
       type: object
     AccountsLinkRequest:
       properties:
         action:
-          description: Action to perform for this link. The "request" action is only available to select merchants.
+          description: |-
+            Action to perform for this link. The `"request"` action is only available to select merchants.
+
+            Acceptable values are:  
+            - "`approve`" 
+            - "`remove`" 
+            - "`request`"
           type: string
         linkType:
-          description: Type of the link between the two accounts.
+          description: |-
+            Type of the link between the two accounts.
+
+            Acceptable values are:  
+            - "`channelPartner`" 
+            - "`eCommercePlatform`"
           type: string
         linkedAccountId:
           description: The ID of the linked account.
@@ -4571,7 +4774,11 @@ components:
           format: uint64
           type: string
         method:
-          description: The method (get).
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`"
           type: string
       type: object
     AccountstatusesCustomBatchResponse:
@@ -4631,7 +4838,7 @@ components:
           type: string
         accountTax:
           $ref: '#/components/schemas/AccountTax'
-          description: The account tax settings to update. Only defined if the method is update.
+          description: The account tax settings to update. Only defined if the method is `update`.
         batchId:
           description: 'An entry ID, unique within the batch request.'
           format: uint32
@@ -4641,6 +4848,12 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`" 
+            - "`update`"
           type: string
       type: object
     AccounttaxCustomBatchResponse:
@@ -4670,7 +4883,7 @@ components:
           description: A list of errors defined if and only if the request failed.
         kind:
           default: 'content#accounttaxCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accounttaxCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accounttaxCustomBatchResponseEntry`"'
           type: string
       type: object
     AccounttaxListResponse:
@@ -4707,14 +4920,14 @@ components:
     CarrierRate:
       properties:
         carrierName:
-          description: 'Carrier service, such as "UPS" or "Fedex". The list of supported carriers can be retrieved via the getSupportedCarriers method. Required.'
+          description: 'Carrier service, such as `"UPS"` or `"Fedex"`. The list of supported carriers can be retrieved via the `getSupportedCarriers` method. Required.'
           type: string
         carrierService:
-          description: 'Carrier service, such as "ground" or "2 days". The list of supported services for a carrier can be retrieved via the getSupportedCarriers method. Required.'
+          description: 'Carrier service, such as `"ground"` or `"2 days"`. The list of supported services for a carrier can be retrieved via the `getSupportedCarriers` method. Required.'
           type: string
         flatAdjustment:
           $ref: '#/components/schemas/Price'
-          description: 'Additive shipping rate modifier. Can be negative. For example { "value": "1", "currency" : "USD" } adds $1 to the rate, { "value": "-3", "currency" : "USD" } removes $3 from the rate. Optional.'
+          description: 'Additive shipping rate modifier. Can be negative. For example `{ "value": "1", "currency" : "USD" }` adds $1 to the rate, `{ "value": "-3", "currency" : "USD" }` removes $3 from the rate. Optional.'
         name:
           description: Name of the carrier rate. Must be unique per rate group. Required.
           type: string
@@ -4722,7 +4935,7 @@ components:
           description: Shipping origin for this carrier rate. Required.
           type: string
         percentageAdjustment:
-          description: 'Multiplicative shipping rate modifier as a number in decimal notation. Can be negative. For example "5.4" increases the rate by 5.4%, "-3" decreases the rate by 3%. Optional.'
+          description: 'Multiplicative shipping rate modifier as a number in decimal notation. Can be negative. For example `"5.4"` increases the rate by 5.4%, `"-3"` decreases the rate by 3%. Optional.'
           type: string
       type: object
     CarriersCarrier:
@@ -4731,10 +4944,10 @@ components:
           description: 'The CLDR country code of the carrier (e.g., "US"). Always present.'
           type: string
         name:
-          description: 'The name of the carrier (e.g., "UPS"). Always present.'
+          description: 'The name of the carrier (e.g., `"UPS"`). Always present.'
           type: string
         services:
-          description: 'A list of supported services (e.g., "ground") for that carrier. Contains at least one service.'
+          description: 'A list of supported services (e.g., `"ground"`) for that carrier. Contains at least one service.'
           items:
             type: string
           type: array
@@ -4759,7 +4972,24 @@ components:
           description: Description of the reason.
           type: string
         reasonCode:
-          description: Code of the return reason.
+          description: |-
+            Code of the return reason.
+
+            Acceptable values are:  
+            - "`betterPriceFound`" 
+            - "`changedMind`" 
+            - "`damagedOrDefectiveItem`" 
+            - "`didNotMatchDescription`" 
+            - "`doesNotFit`" 
+            - "`expiredItem`" 
+            - "`incorrectItemReceived`" 
+            - "`noLongerNeeded`" 
+            - "`notSpecified`" 
+            - "`orderedWrongItem`" 
+            - "`other`" 
+            - "`qualityNotExpected`" 
+            - "`receivedTooLate`" 
+            - "`undeliverable`"
           type: string
       type: object
     CutoffTime:
@@ -4783,27 +5013,33 @@ components:
           description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
           type: string
         contentType:
-          description: 'The type of data feed. For product inventory feeds, only feeds for local stores, not online stores, are supported.'
+          description: |-
+            Required. The type of data feed. For product inventory feeds, only feeds for local stores, not online stores, are supported.
+
+            Acceptable values are:  
+            - "`local products`" 
+            - "`product inventory`" 
+            - "`products`"
           type: string
         fetchSchedule:
           $ref: '#/components/schemas/DatafeedFetchSchedule'
           description: Fetch schedule for the feed file.
         fileName:
-          description: The filename of the feed. All feeds must have a unique file name.
+          description: Required. The filename of the feed. All feeds must have a unique file name.
           type: string
         format:
           $ref: '#/components/schemas/DatafeedFormat'
           description: Format of the feed file.
         id:
-          description: The ID of the data feed.
+          description: Required for update. The ID of the data feed.
           format: int64
           type: string
         kind:
           default: 'content#datafeed'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeed".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeed`"'
           type: string
         name:
-          description: A descriptive name of the data feed.
+          description: Required for insert. A descriptive name of the data feed.
           type: string
         targets:
           description: 'The targets this feed should apply to (country, language, destinations).'
@@ -4842,19 +5078,48 @@ components:
           description: An optional user name for fetch_url.
           type: string
         weekday:
-          description: The day of the week the feed file should be fetched.
+          description: |-
+            The day of the week the feed file should be fetched.
+
+            Acceptable values are:  
+            - "`monday`" 
+            - "`tuesday`" 
+            - "`wednesday`" 
+            - "`thursday`" 
+            - "`friday`" 
+            - "`saturday`" 
+            - "`sunday`"
           type: string
       type: object
     DatafeedFormat:
       properties:
         columnDelimiter:
-          description: 'Delimiter for the separation of values in a delimiter-separated values feed. If not specified, the delimiter will be auto-detected. Ignored for non-DSV data feeds.'
+          description: |-
+            Delimiter for the separation of values in a delimiter-separated values feed. If not specified, the delimiter will be auto-detected. Ignored for non-DSV data feeds.
+
+            Acceptable values are:  
+            - "`pipe`" 
+            - "`tab`" 
+            - "`tilde`"
           type: string
         fileEncoding:
-          description: 'Character encoding scheme of the data feed. If not specified, the encoding will be auto-detected.'
+          description: |-
+            Character encoding scheme of the data feed. If not specified, the encoding will be auto-detected.
+
+            Acceptable values are:  
+            - "`latin-1`" 
+            - "`utf-16be`" 
+            - "`utf-16le`" 
+            - "`utf-8`" 
+            - "`windows-1252`"
           type: string
         quotingMode:
-          description: 'Specifies how double quotes are interpreted. If not specified, the mode will be auto-detected. Ignored for non-DSV data feeds.'
+          description: |-
+            Specifies how double quotes are interpreted. If not specified, the mode will be auto-detected. Ignored for non-DSV data feeds.
+
+            Acceptable values are:  
+            - "`normal character`" 
+            - "`value quoting`"
           type: string
       type: object
     DatafeedStatus:
@@ -4882,7 +5147,7 @@ components:
           type: string
         kind:
           default: 'content#datafeedStatus'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedStatus".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedStatus`"'
           type: string
         language:
           description: The two-letter ISO 639-1 language for which the status is reported.
@@ -4891,7 +5156,14 @@ components:
           description: The last date at which the feed was uploaded.
           type: string
         processingStatus:
-          description: The processing status of the feed.
+          description: |-
+            The processing status of the feed.
+
+            Acceptable values are:  
+            - "`"`failure`": The feed could not be processed or all items had errors.`" 
+            - "`in progress`": The feed is being processed. 
+            - "`none`": The feed has not yet been processed. For example, a feed that has never been uploaded will have this processing status. 
+            - "`success`": The feed was processed successfully, though some items might have had errors.
           type: string
         warnings:
           description: The list of errors occurring in the feed.
@@ -4944,7 +5216,7 @@ components:
           type: array
         includedDestinations:
           description: |-
-            The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+            The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in `excludedDestinations`.
 
             List of supported destinations (if available to the account):  
             - DisplayAds 
@@ -4955,7 +5227,7 @@ components:
             type: string
           type: array
         language:
-          description: 'The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targets[].country.'
+          description: 'The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for `targets[].country`.'
           type: string
       type: object
     DatafeedsCustomBatchRequest:
@@ -4985,6 +5257,15 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`delete`" 
+            - "`fetchNow`" 
+            - "`get`" 
+            - "`insert`" 
+            - "`update`"
           type: string
       type: object
     DatafeedsCustomBatchResponse:
@@ -5064,6 +5345,11 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`"
           type: string
       type: object
     DatafeedstatusesCustomBatchResponse:
@@ -5120,11 +5406,11 @@ components:
             $ref: '#/components/schemas/HolidayCutoff'
           type: array
         maxHandlingTimeInDays:
-          description: 'Maximum number of business days spent before an order is shipped. 0 means same day shipped, 1 means next day shipped. Must be greater than or equal to minHandlingTimeInDays.'
+          description: 'Maximum number of business days spent before an order is shipped. 0 means same day shipped, 1 means next day shipped. Must be greater than or equal to `minHandlingTimeInDays`.'
           format: uint32
           type: integer
         maxTransitTimeInDays:
-          description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays.'
+          description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to `minTransitTimeInDays`.'
           format: uint32
           type: integer
         minHandlingTimeInDays:
@@ -5132,7 +5418,7 @@ components:
           format: uint32
           type: integer
         minTransitTimeInDays:
-          description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Either {min,max}TransitTimeInDays or transitTimeTable must be set, but not both.'
+          description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Either `{min,max}TransitTimeInDays` or `transitTimeTable` must be set, but not both.'
           format: uint32
           type: integer
         transitBusinessDayConfig:
@@ -5140,7 +5426,7 @@ components:
           description: 'The business days during which orders can be in-transit. If not provided, Monday to Friday business days will be assumed.'
         transitTimeTable:
           $ref: '#/components/schemas/TransitTable'
-          description: 'Transit time table, number of business days spent in transit based on row and column dimensions. Either {min,max}TransitTimeInDays or transitTimeTable can be set, but not both.'
+          description: 'Transit time table, number of business days spent in transit based on row and column dimensions. Either `{min,max}TransitTimeInDays` or `transitTimeTable` can be set, but not both.'
       type: object
     Error:
       description: An error returned by the API.
@@ -5159,7 +5445,7 @@ components:
       description: A list of errors returned by a failed batch entry.
       properties:
         code:
-          description: The HTTP status of the first error in errors.
+          description: The HTTP status of the first error in `errors`.
           format: uint32
           type: integer
         errors:
@@ -5168,7 +5454,7 @@ components:
             $ref: '#/components/schemas/Error'
           type: array
         message:
-          description: The message of the first error in errors.
+          description: The message of the first error in `errors`.
           type: string
       type: object
     GmbAccounts:
@@ -5200,7 +5486,7 @@ components:
           type: string
       type: object
     Headers:
-      description: 'A non-empty list of row or column headers for a table. Exactly one of prices, weights, numItems, postalCodeGroupNames, or location must be set.'
+      description: 'A non-empty list of row or column headers for a table. Exactly one of `prices`, `weights`, `numItems`, `postalCodeGroupNames`, or `location` must be set.'
       properties:
         locations:
           description: A list of location ID sets. Must be non-empty. Can only be set if all other fields are not set.
@@ -5208,22 +5494,22 @@ components:
             $ref: '#/components/schemas/LocationIdSet'
           type: array
         numberOfItems:
-          description: 'A list of inclusive number of items upper bounds. The last value can be "infinity". For example ["10", "50", "infinity"] represents the headers "<= 10 items", " 50 items". Must be non-empty. Can only be set if all other fields are not set.'
+          description: 'A list of inclusive number of items upper bounds. The last value can be `"infinity"`. For example `["10", "50", "infinity"]` represents the headers "<= 10 items", " 50 items". Must be non-empty. Can only be set if all other fields are not set.'
           items:
             type: string
           type: array
         postalCodeGroupNames:
-          description: 'A list of postal group names. The last value can be "all other locations". Example: ["zone 1", "zone 2", "all other locations"]. The referred postal code groups must match the delivery country of the service. Must be non-empty. Can only be set if all other fields are not set.'
+          description: 'A list of postal group names. The last value can be `"all other locations"`. Example: `["zone 1", "zone 2", "all other locations"]`. The referred postal code groups must match the delivery country of the service. Must be non-empty. Can only be set if all other fields are not set.'
           items:
             type: string
           type: array
         prices:
-          description: 'A list of inclusive order price upper bounds. The last price''s value can be "infinity". For example [{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}] represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
+          description: 'A list of inclusive order price upper bounds. The last price''s value can be `"infinity"`. For example `[{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}]` represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
           items:
             $ref: '#/components/schemas/Price'
           type: array
         weights:
-          description: 'A list of inclusive order weight upper bounds. The last weight''s value can be "infinity". For example [{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}] represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
+          description: 'A list of inclusive order weight upper bounds. The last weight''s value can be `"infinity"`. For example `[{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}]` represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
           items:
             $ref: '#/components/schemas/Weight'
           type: array
@@ -5266,7 +5552,18 @@ components:
           description: Unique identifier for the holiday to be used when configuring holiday cutoffs. Always present.
           type: string
         type:
-          description: The holiday type. Always present.
+          description: |-
+            The holiday type. Always present.
+
+            Acceptable values are:  
+            - "`Christmas`" 
+            - "`Easter`" 
+            - "`Father's Day`" 
+            - "`Halloween`" 
+            - "`Independence Day (USA)`" 
+            - "`Mother's Day`" 
+            - "`Thanksgiving`" 
+            - "`Valentine's Day`"
           type: string
       type: object
     Installment:
@@ -5296,13 +5593,23 @@ components:
           $ref: '#/components/schemas/Amount'
           description: '[required] Total additional charge for this type.'
         type:
-          description: '[required] Type of the additional charge.'
+          description: |-
+            [required] Type of the additional charge.
+
+            Acceptable values are:  
+            - "`shipping`"
           type: string
       type: object
     LiaAboutPageSettings:
       properties:
         status:
-          description: The status of the verification process for the About page.
+          description: |-
+            The status of the verification process for the About page.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`inactive`" 
+            - "`pending`"
           type: string
         url:
           description: The URL for the About page.
@@ -5314,7 +5621,7 @@ components:
           $ref: '#/components/schemas/LiaAboutPageSettings'
           description: The settings for the About page.
         country:
-          description: CLDR country code (e.g. "US").
+          description: Required. CLDR country code (e.g. "US").
           type: string
         hostedLocalStorefrontActive:
           description: The status of the "Merchant hosted local storefront" feature.
@@ -5341,10 +5648,22 @@ components:
           description: The name of the contact for the inventory verification process.
           type: string
         inventoryVerificationContactStatus:
-          description: The status of the verification contact.
+          description: |-
+            The status of the verification contact.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`inactive`" 
+            - "`pending`"
           type: string
         status:
-          description: The status of the inventory verification process.
+          description: |-
+            The status of the inventory verification process.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`inactive`" 
+            - "`pending`"
           type: string
       type: object
     LiaOnDisplayToOrderSettings:
@@ -5353,7 +5672,13 @@ components:
           description: Shipping cost and policy URL.
           type: string
         status:
-          description: The status of the ?On display to order? feature.
+          description: |-
+            The status of the ?On display to order? feature.
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`inactive`" 
+            - "`pending`"
           type: string
       type: object
     LiaPosDataProvider:
@@ -5380,7 +5705,7 @@ components:
           type: array
         kind:
           default: 'content#liaSettings'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liaSettings".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liaSettings`"'
           type: string
       type: object
     LiasettingsCustomBatchRequest:
@@ -5415,12 +5740,22 @@ components:
           type: string
         liaSettings:
           $ref: '#/components/schemas/LiaSettings'
-          description: The account Lia settings to update. Only defined if the method is update.
+          description: The account Lia settings to update. Only defined if the method is `update`.
         merchantId:
           description: The ID of the managing account.
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`" 
+            - "`getAccessibleGmbAccounts`" 
+            - "`requestGmbAccess`" 
+            - "`requestInventoryVerification`" 
+            - "`setInventoryVerificationContact`" 
+            - "`update`"
           type: string
         posDataProviderId:
           description: The ID of POS data provider. Required only for SetPosProvider.
@@ -5456,7 +5791,7 @@ components:
           description: The the list of accessible GMB accounts.
         kind:
           default: 'content#liasettingsCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsCustomBatchResponseEntry`"'
           type: string
         liaSettings:
           $ref: '#/components/schemas/LiaSettings'
@@ -5540,10 +5875,22 @@ components:
     LinkService:
       properties:
         service:
-          description: Service provided to or by the linked account.
+          description: |-
+            Service provided to or by the linked account.
+
+            Acceptable values are:  
+            - "`shoppingActionsOrderManagement`" 
+            - "`shoppingActionsProductManagement`" 
+            - "`shoppingAdsProductManagement`"
           type: string
         status:
-          description: Status of the link
+          description: |-
+            Status of the link
+
+            Acceptable values are:  
+            - "`active`" 
+            - "`inactive`" 
+            - "`pending`"
           type: string
       type: object
     LinkedAccount:
@@ -5568,13 +5915,13 @@ components:
           type: string
         kind:
           default: 'content#localInventory'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localInventory".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#localInventory`"'
           type: string
         pickupMethod:
-          description: 'Supported pickup method for this offer. Unless the value is "not supported", this field must be submitted together with pickupSla.'
+          description: 'Supported pickup method for this offer. Unless the value is "not supported", this field must be submitted together with `pickupSla`.'
           type: string
         pickupSla:
-          description: Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with pickupMethod.
+          description: Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with `pickupMethod`.
           type: string
         price:
           $ref: '#/components/schemas/Price'
@@ -5585,12 +5932,12 @@ components:
           type: integer
         salePrice:
           $ref: '#/components/schemas/Price'
-          description: Sale price of the product. Mandatory if sale_price_effective_date is defined.
+          description: Sale price of the product. Mandatory if `sale_price_effective_date` is defined.
         salePriceEffectiveDate:
           description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates may be specified as ''null'' if undecided.'
           type: string
         storeCode:
-          description: Store code of this local inventory resource.
+          description: Required. Store code of this local inventory resource.
           type: string
       type: object
     LocalinventoryCustomBatchRequest:
@@ -5616,7 +5963,11 @@ components:
           format: uint64
           type: string
         method:
-          description: Method of the batch request entry.
+          description: |-
+            Method of the batch request entry.
+
+            Acceptable values are:  
+            - "`insert`"
           type: string
         productId:
           description: The ID of the product for which to update local inventory.
@@ -5646,7 +5997,7 @@ components:
           description: A list of errors defined if and only if the request failed.
         kind:
           default: 'content#localinventoryCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localinventoryCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#localinventoryCustomBatchResponseEntry`"'
           type: string
       type: object
     LocationIdSet:
@@ -5717,11 +6068,38 @@ components:
             type: string
           type: array
         state:
-          description: State of the item.
+          description: |-
+            State of the item.
+
+            Acceptable values are:  
+            - "`canceled`" 
+            - "`new`" 
+            - "`received`" 
+            - "`refunded`" 
+            - "`rejected`"
           type: string
       type: object
+    MinimumOrderValueTable:
+      properties:
+        storeCodeSetWithMovs:
+          items:
+            $ref: '#/components/schemas/MinimumOrderValueTableStoreCodeSetWithMov'
+          type: array
+      type: object
+    MinimumOrderValueTableStoreCodeSetWithMov:
+      description: 'A list of store code sets sharing the same minimum order value. At least two sets are required and the last one must be empty, which signifies ''MOV for all other stores''. Each store code can only appear once across all the sets. All prices within a service must have the same currency.'
+      properties:
+        storeCodes:
+          description: A list of unique store codes or empty for the catch all.
+          items:
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/Price'
+          description: The minimum order value for the given stores.
+      type: object
     Order:
-      description: Order. Production access (all methods) requires the order manager role. Sandbox access does not.
+      description: Order. Production access (all methods) requires the order manager role. Sandbox access does not. (== resource_for v2.orders ==) (== resource_for v2.1.orders ==)
       properties:
         acknowledged:
           description: Whether the order was acknowledged.
@@ -5734,13 +6112,13 @@ components:
           description: The details of the customer who placed the order.
         deliveryDetails:
           $ref: '#/components/schemas/OrderDeliveryDetails'
-          description: Delivery details for shipments of type delivery.
+          description: Delivery details for shipments of type `delivery`.
         id:
           description: The REST ID of the order. Globally unique.
           type: string
         kind:
           default: 'content#order'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#order".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#order`"'
           type: string
         lineItems:
           description: Line items that are ordered.
@@ -5758,13 +6136,20 @@ components:
           description: 'The net amount for the order (price part). For example, if an order was originally for $100 and a refund was issued for $20, the net amount will be $80.'
         netTaxAmount:
           $ref: '#/components/schemas/Price'
-          description: The net amount for the order (tax part). Note that in certain cases due to taxable base adjustment netTaxAmount might not match to a sum of tax field across all lineItems and refunds.
+          description: The net amount for the order (tax part). Note that in certain cases due to taxable base adjustment `netTaxAmount` might not match to a sum of tax field across all lineItems and refunds.
         paymentStatus:
-          description: The status of the payment.
+          description: |-
+            The status of the payment.
+
+            Acceptable values are:  
+            - "`paymentCaptured`" 
+            - "`paymentRejected`" 
+            - "`paymentSecured`" 
+            - "`pendingAuthorization`"
           type: string
         pickupDetails:
           $ref: '#/components/schemas/OrderPickupDetails'
-          description: Pickup details for shipments of type pickup.
+          description: Pickup details for shipments of type `pickup`.
         placedDate:
           description: 'The date when the order was placed, in ISO 8601 format.'
           type: string
@@ -5772,11 +6157,11 @@ components:
           description: |-
             Promotions associated with the order.
 
-            To determine which promotions apply to which products, check the Promotions[].appliedItems[].lineItemId field against the LineItems[].id field for each promotion. If a promotion is applied to more than 1 offerId, divide the discount value by the number of affected offers to determine how much discount to apply to each offerId.
+            To determine which promotions apply to which products, check the `Promotions[].appliedItems[].lineItemId` field against the `LineItems[].id` field for each promotion. If a promotion is applied to more than 1 offerId, divide the discount value by the number of affected offers to determine how much discount to apply to each offerId.
 
             Examples:  
-            - To calculate price paid by the customer for a single line item including the discount: For each promotion, subtract the LineItems[].adjustments[].priceAdjustment.value amount from the LineItems[].Price.value. 
-            - To calculate price paid by the customer for a single line item including the discount in case of multiple quantity: For each promotion, divide the LineItems[].adjustments[].priceAdjustment.value by the quantity of products then subtract the resulting value from the LineItems[].Product.Price.value for each quantity item.  
+            - To calculate price paid by the customer for a single line item including the discount: For each promotion, subtract the `LineItems[].adjustments[].priceAdjustment.value` amount from the `LineItems[].Price.value`. 
+            - To calculate price paid by the customer for a single line item including the discount in case of multiple quantity: For each promotion, divide the `LineItems[].adjustments[].priceAdjustment.value` by the quantity of products then subtract the resulting value from the `LineItems[].Product.Price.value` for each quantity item.  
 
             Only 1 promotion can be applied to an offerId in a given order. To refund an item which had a promotion applied to it, make sure to refund the amount after first subtracting the promotion discount from the item price.
 
@@ -5801,10 +6186,27 @@ components:
           $ref: '#/components/schemas/Price'
           description: The tax for the total shipping cost.
         status:
-          description: The status of the order.
+          description: |-
+            The status of the order.
+
+            Acceptable values are:  
+            - "`canceled`" 
+            - "`delivered`" 
+            - "`inProgress`" 
+            - "`partiallyDelivered`" 
+            - "`partiallyReturned`" 
+            - "`partiallyShipped`" 
+            - "`pendingShipment`" 
+            - "`returned`" 
+            - "`shipped`"
           type: string
         taxCollector:
-          description: The party responsible for collecting and remitting taxes.
+          description: |-
+            The party responsible for collecting and remitting taxes.
+
+            Acceptable values are:  
+            - "`marketplaceFacilitator`" 
+            - "`merchant`"
           type: string
       type: object
     OrderAddress:
@@ -5846,7 +6248,16 @@ components:
     OrderCancellation:
       properties:
         actor:
-          description: The actor that created the cancellation.
+          description: |-
+            The actor that created the cancellation.
+
+            Acceptable values are:  
+            - "`customer`" 
+            - "`googleBot`" 
+            - "`googleCustomerService`" 
+            - "`googlePayments`" 
+            - "`googleSabre`" 
+            - "`merchant`"
           type: string
         creationDate:
           description: 'Date on which the cancellation has been created, in ISO 8601 format.'
@@ -5856,7 +6267,38 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the cancellation. Orders that are canceled with a noInventory reason will lead to the removal of the product from Shopping Actions until you make an update to that product. This will not affect your Shopping ads.
+          description: |-
+            The reason for the cancellation. Orders that are canceled with a noInventory reason will lead to the removal of the product from Shopping Actions until you make an update to that product. This will not affect your Shopping ads.
+
+            Acceptable values are:  
+            - "`autoPostInternal`" 
+            - "`autoPostInvalidBillingAddress`" 
+            - "`autoPostNoInventory`" 
+            - "`autoPostPriceError`" 
+            - "`autoPostUndeliverableShippingAddress`" 
+            - "`couponAbuse`" 
+            - "`customerCanceled`" 
+            - "`customerInitiatedCancel`" 
+            - "`customerSupportRequested`" 
+            - "`failToPushOrderGoogleError`" 
+            - "`failToPushOrderMerchantError`" 
+            - "`failToPushOrderMerchantFulfillmentError`" 
+            - "`failToPushOrderToMerchant`" 
+            - "`failToPushOrderToMerchantOutOfStock`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`merchantDidNotShipOnTime`" 
+            - "`noInventory`" 
+            - "`orderTimeout`" 
+            - "`other`" 
+            - "`paymentAbuse`" 
+            - "`paymentDeclined`" 
+            - "`priceError`" 
+            - "`returnRefundAbuse`" 
+            - "`shippingPriceError`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -5868,7 +6310,6 @@ components:
           description: Full name of the customer.
           type: string
         invoiceReceivingEmail:
-          description: Email address for the merchant to send value-added tax or invoice documentation of the order. This documentation is made available to the customer.
           type: string
         loyaltyInfo:
           $ref: '#/components/schemas/OrderCustomerLoyaltyInfo'
@@ -5889,13 +6330,18 @@ components:
     OrderCustomerMarketingRightsInfo:
       properties:
         explicitMarketingPreference:
-          description: 'Last known customer selection regarding marketing preferences. In certain cases this selection might not be known, so this field would be empty. If a customer selected granted in their most recent order, they can be subscribed to marketing emails. Customers who have chosen denied must not be subscribed, or must be unsubscribed if already opted-in.'
+          description: |-
+            Last known customer selection regarding marketing preferences. In certain cases this selection might not be known, so this field would be empty. If a customer selected `granted` in their most recent order, they can be subscribed to marketing emails. Customers who have chosen `denied` must not be subscribed, or must be unsubscribed if already opted-in.
+
+            Acceptable values are:  
+            - "`denied`" 
+            - "`granted`"
           type: string
         lastUpdatedTimestamp:
           description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
           type: string
         marketingEmailAddress:
-          description: Email address that can be used for marketing purposes. The field may be empty even if explicitMarketingPreference is 'granted'. This happens when retrieving an old order from the customer who deleted their account.
+          description: Email address that can be used for marketing purposes. The field may be empty even if `explicitMarketingPreference` is 'granted'. This happens when retrieving an old order from the customer who deleted their account.
           type: string
       type: object
     OrderDeliveryDetails:
@@ -5989,7 +6435,11 @@ components:
           $ref: '#/components/schemas/Price'
           description: Adjustment for total tax of the line item.
         type:
-          description: Type of this adjustment.
+          description: |-
+            Type of this adjustment.
+
+            Acceptable values are:  
+            - "`promotion`"
           type: string
       type: object
     OrderLineItemProduct:
@@ -5998,7 +6448,13 @@ components:
           description: Brand of the item.
           type: string
         condition:
-          description: Condition or state of the item.
+          description: |-
+            Condition or state of the item.
+
+            Acceptable values are:  
+            - "`new`" 
+            - "`refurbished`" 
+            - "`used`"
           type: string
         contentLanguage:
           description: The two-letter ISO 639-1 language code for the item.
@@ -6065,45 +6521,50 @@ components:
     OrderLineItemReturnInfo:
       properties:
         daysToReturn:
-          description: How many days later the item can be returned.
+          description: Required. How many days later the item can be returned.
           format: int32
           type: integer
         isReturnable:
-          description: Whether the item is returnable.
+          description: Required. Whether the item is returnable.
           type: boolean
         policyUrl:
-          description: URL of the item return policy.
+          description: Required. URL of the item return policy.
           type: string
       type: object
     OrderLineItemShippingDetails:
       properties:
         deliverByDate:
-          description: 'The delivery by date, in ISO 8601 format.'
+          description: 'Required. The delivery by date, in ISO 8601 format.'
           type: string
         method:
           $ref: '#/components/schemas/OrderLineItemShippingDetailsMethod'
-          description: Details of the shipping method.
+          description: Required. Details of the shipping method.
         shipByDate:
-          description: 'The ship by date, in ISO 8601 format.'
+          description: 'Required. The ship by date, in ISO 8601 format.'
           type: string
         type:
-          description: Type of shipment. Indicates whether deliveryDetails or pickupDetails is applicable for this shipment.
+          description: |-
+            Type of shipment. Indicates whether `deliveryDetails` or `pickupDetails` is applicable for this shipment.
+
+            Acceptable values are:  
+            - "`delivery`" 
+            - "`pickup`"
           type: string
       type: object
     OrderLineItemShippingDetailsMethod:
       properties:
         carrier:
-          description: 'The carrier for the shipping. Optional. See shipments[].carrier for a list of acceptable values.'
+          description: 'The carrier for the shipping. Optional. See `shipments[].carrier` for a list of acceptable values.'
           type: string
         maxDaysInTransit:
-          description: Maximum transit time.
+          description: Required. Maximum transit time.
           format: uint32
           type: integer
         methodName:
-          description: The name of the shipping method.
+          description: Required. The name of the shipping method.
           type: string
         minDaysInTransit:
-          description: Minimum transit time.
+          description: Required. Minimum transit time.
           format: uint32
           type: integer
       type: object
@@ -6120,7 +6581,7 @@ components:
       properties:
         address:
           $ref: '#/components/schemas/OrderAddress'
-          description: Address of the pickup location where the shipment should be sent. Note that recipientName in the address is the name of the business at the pickup location.
+          description: Address of the pickup location where the shipment should be sent. Note that `recipientName` in the address is the name of the business at the pickup location.
         collectors:
           description: Collectors authorized to pick up shipment from the pickup location.
           items:
@@ -6147,7 +6608,7 @@ components:
             $ref: '#/components/schemas/OrderPromotionItem'
           type: array
         appliedItems:
-          description: Items which this promotion have been applied to. Do not provide for orders.createtestorder.
+          description: Items which this promotion have been applied to. Do not provide for `orders.createtestorder`.
           items:
             $ref: '#/components/schemas/OrderPromotionItem'
           type: array
@@ -6155,53 +6616,89 @@ components:
           description: 'Promotion end time in ISO 8601 format. Date, time, and offset required, e.g., "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z".'
           type: string
         funder:
-          description: The party funding the promotion. Only merchant is supported for orders.createtestorder.
+          description: |-
+            Required. The party funding the promotion. Only `merchant` is supported for `orders.createtestorder`.
+
+            Acceptable values are:  
+            - "`google`" 
+            - "`merchant`"
           type: string
         merchantPromotionId:
-          description: This field is used to identify promotions within merchants' own systems.
+          description: Required. This field is used to identify promotions within merchants' own systems.
           type: string
         priceValue:
           $ref: '#/components/schemas/Price'
           description: Estimated discount applied to price. Amount is pre-tax or post-tax depending on location of order.
         shortTitle:
-          description: A short title of the promotion to be shown on the checkout page. Do not provide for orders.createtestorder.
+          description: A short title of the promotion to be shown on the checkout page. Do not provide for `orders.createtestorder`.
           type: string
         startTime:
           description: 'Promotion start time in ISO 8601 format. Date, time, and offset required, e.g., "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z".'
           type: string
         subtype:
-          description: The category of the promotion. Only moneyOff is supported for orders.createtestorder.
+          description: |-
+            Required. The category of the promotion. Only `moneyOff` is supported for `orders.createtestorder`.
+
+            Acceptable values are:  
+            - "`buyMGetMoneyOff`" 
+            - "`buyMGetNMoneyOff`" 
+            - "`buyMGetNPercentOff`" 
+            - "`buyMGetPercentOff`" 
+            - "`freeGift`" 
+            - "`freeGiftWithItemId`" 
+            - "`freeGiftWithValue`" 
+            - "`freeShippingOvernight`" 
+            - "`freeShippingStandard`" 
+            - "`freeShippingTwoDay`" 
+            - "`moneyOff`" 
+            - "`percentOff`" 
+            - "`rewardPoints`" 
+            - "`salePrice`"
           type: string
         taxValue:
           $ref: '#/components/schemas/Price'
-          description: Estimated discount applied to tax (if allowed by law). Do not provide for orders.createtestorder.
+          description: Estimated discount applied to tax (if allowed by law). Do not provide for `orders.createtestorder`.
         title:
-          description: The title of the promotion.
+          description: Required. The title of the promotion.
           type: string
         type:
-          description: The scope of the promotion. Only product is supported for orders.createtestorder.
+          description: |-
+            Required. The scope of the promotion. Only `product` is supported for `orders.createtestorder`.
+
+            Acceptable values are:  
+            - "`product`" 
+            - "`shipping`"
           type: string
       type: object
     OrderPromotionItem:
       properties:
         lineItemId:
-          description: The line item ID of a product. Do not provide for orders.createtestorder.
+          description: The line item ID of a product. Do not provide for `orders.createtestorder`.
           type: string
         offerId:
-          description: Offer ID of a product. Only for orders.createtestorder.
+          description: Required. Offer ID of a product. Only for `orders.createtestorder`.
           type: string
         productId:
-          description: orders.createtestorder.
+          description: '`orders.createtestorder`.'
           type: string
         quantity:
-          description: The quantity of the associated product. Do not provide for orders.createtestorder.
+          description: The quantity of the associated product. Do not provide for `orders.createtestorder`.
           format: int32
           type: integer
       type: object
     OrderRefund:
       properties:
         actor:
-          description: The actor that created the refund.
+          description: |-
+            The actor that created the refund.
+
+            Acceptable values are:  
+            - "`customer`" 
+            - "`googleBot`" 
+            - "`googleCustomerService`" 
+            - "`googlePayments`" 
+            - "`googleSabre`" 
+            - "`merchant`"
           type: string
         amount:
           $ref: '#/components/schemas/Price'
@@ -6210,14 +6707,61 @@ components:
           description: 'Date on which the item has been created, in ISO 8601 format.'
           type: string
         reason:
-          description: The reason for the refund.
+          description: |-
+            The reason for the refund.
+
+            Acceptable values are:  
+            - "`adjustment`" 
+            - "`autoPostInternal`" 
+            - "`autoPostInvalidBillingAddress`" 
+            - "`autoPostNoInventory`" 
+            - "`autoPostPriceError`" 
+            - "`autoPostUndeliverableShippingAddress`" 
+            - "`couponAbuse`" 
+            - "`courtesyAdjustment`" 
+            - "`customerCanceled`" 
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`customerSupportRequested`" 
+            - "`deliveredLateByCarrier`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`failToPushOrderGoogleError`" 
+            - "`failToPushOrderMerchantError`" 
+            - "`failToPushOrderMerchantFulfillmentError`" 
+            - "`failToPushOrderToMerchant`" 
+            - "`failToPushOrderToMerchantOutOfStock`" 
+            - "`feeAdjustment`" 
+            - "`invalidCoupon`" 
+            - "`lateShipmentCredit`" 
+            - "`malformedShippingAddress`" 
+            - "`merchantDidNotShipOnTime`" 
+            - "`noInventory`" 
+            - "`orderTimeout`" 
+            - "`other`" 
+            - "`paymentAbuse`" 
+            - "`paymentDeclined`" 
+            - "`priceAdjustment`" 
+            - "`priceError`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`promoReallocation`" 
+            - "`qualityNotAsExpected`" 
+            - "`returnRefundAbuse`" 
+            - "`shippingCostAdjustment`" 
+            - "`shippingPriceError`" 
+            - "`taxAdjustment`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
         reasonText:
           description: The explanation of the reason.
           type: string
       type: object
     OrderReportDisbursement:
-      description: Order disbursement. All methods require the payment analyst role.
+      description: Order disbursement. All methods require the payment analyst role. (== resource_for v2.orderreports ==) (== resource_for v2.1.orderreports ==)
       properties:
         disbursementAmount:
           $ref: '#/components/schemas/Price'
@@ -6270,7 +6814,16 @@ components:
     OrderReturn:
       properties:
         actor:
-          description: The actor that created the refund.
+          description: |-
+            The actor that created the refund.
+
+            Acceptable values are:  
+            - "`customer`" 
+            - "`googleBot`" 
+            - "`googleCustomerService`" 
+            - "`googlePayments`" 
+            - "`googleSabre`" 
+            - "`merchant`"
           type: string
         creationDate:
           description: 'Date on which the item has been created, in ISO 8601 format.'
@@ -6280,7 +6833,23 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the return.
+          description: |-
+            The reason for the return.
+
+            Acceptable values are:  
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`other`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`qualityNotAsExpected`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6294,48 +6863,48 @@ components:
 
             For supported carriers, Google includes the carrier name and tracking URL in emails to customers. For select supported carriers, Google also automatically updates the shipment status based on the provided shipment ID. Note: You can also use unsupported carriers, but emails to customers will not include the carrier name or tracking URL, and there will be no automatic order status updates. 
             Supported carriers for US are:  
-            - "ups" (United Parcel Service) automatic status updates 
-            - "usps" (United States Postal Service) automatic status updates 
-            - "fedex" (FedEx) automatic status updates  
-            - "dhl" (DHL eCommerce) automatic status updates (US only) 
-            - "ontrac" (OnTrac) automatic status updates  
-            - "dhl express" (DHL Express)
-            - "deliv" (Deliv) 
-            - "dynamex" (TForce) 
-            - "lasership" (LaserShip) 
-            - "mpx" (Military Parcel Xpress) 
-            - "uds" (United Delivery Service) 
-            - "efw" (Estes Forwarding Worldwide) 
-            - "jd logistics" (JD Logistics) 
-            - "yunexpress" (YunExpress) 
-            - "china post" (China Post) 
-            - "china ems" (China Post Express Mail Service) 
-            - "singapore post" (Singapore Post) 
-            - "pos malaysia" (Pos Malaysia) 
-            - "postnl" (PostNL) 
-            - "ptt" (PTT Turkish Post) 
-            - "eub" (ePacket) 
-            - "chukou1" (Chukou1 Logistics)  
+            - "`ups`" (United Parcel Service) automatic status updates 
+            - "`usps`" (United States Postal Service) automatic status updates 
+            - "`fedex`" (FedEx) automatic status updates  
+            - "`dhl`" (DHL eCommerce) automatic status updates (US only) 
+            - "`ontrac`" (OnTrac) automatic status updates  
+            - "`dhl express`" (DHL Express)
+            - "`deliv`" (Deliv) 
+            - "`dynamex`" (TForce) 
+            - "`lasership`" (LaserShip) 
+            - "`mpx`" (Military Parcel Xpress) 
+            - "`uds`" (United Delivery Service) 
+            - "`efw`" (Estes Forwarding Worldwide) 
+            - "`jd logistics`" (JD Logistics) 
+            - "`yunexpress`" (YunExpress) 
+            - "`china post`" (China Post) 
+            - "`china ems`" (China Post Express Mail Service) 
+            - "`singapore post`" (Singapore Post) 
+            - "`pos malaysia`" (Pos Malaysia) 
+            - "`postnl`" (PostNL) 
+            - "`ptt`" (PTT Turkish Post) 
+            - "`eub`" (ePacket) 
+            - "`chukou1`" (Chukou1 Logistics)  
             Supported carriers for FR are:  
-            - "la poste" (La Poste) automatic status updates  
-            - "colissimo" (Colissimo by La Poste) automatic status updates 
-            - "ups" (United Parcel Service) automatic status updates  
-            - "chronopost" (Chronopost by La Poste) 
-            - "gls" (General Logistics Systems France) 
-            - "dpd" (DPD Group by GeoPost) 
-            - "bpost" (Belgian Post Group) 
-            - "colis prive" (Colis Privé) 
-            - "boxtal" (Boxtal) 
-            - "geodis" (GEODIS) 
-            - "tnt" (TNT) 
-            - "db schenker" (DB Schenker) 
-            - "aramex" (Aramex)
+            - "`la poste`" (La Poste) automatic status updates  
+            - "`colissimo`" (Colissimo by La Poste) automatic status updates 
+            - "`ups`" (United Parcel Service) automatic status updates  
+            - "`chronopost`" (Chronopost by La Poste) 
+            - "`gls`" (General Logistics Systems France) 
+            - "`dpd`" (DPD Group by GeoPost) 
+            - "`bpost`" (Belgian Post Group) 
+            - "`colis prive`" (Colis Privé) 
+            - "`boxtal`" (Boxtal) 
+            - "`geodis`" (GEODIS) 
+            - "`tnt`" (TNT) 
+            - "`db schenker`" (DB Schenker) 
+            - "`aramex`" (Aramex)
           type: string
         creationDate:
           description: 'Date on which the shipment has been created, in ISO 8601 format.'
           type: string
         deliveryDate:
-          description: 'Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delivered'
+          description: 'Date on which the shipment has been delivered, in ISO 8601 format. Present only if `status` is `delivered`'
           type: string
         id:
           description: The ID of the shipment.
@@ -6349,7 +6918,14 @@ components:
           description: The shipment group ID of the shipment. This is set in shiplineitems request.
           type: string
         status:
-          description: The status of the shipment.
+          description: |-
+            The status of the shipment.
+
+            Acceptable values are:  
+            - "`delivered`" 
+            - "`readyForPickup`" 
+            - "`shipped`" 
+            - "`undeliverable`"
           type: string
         trackingId:
           description: The tracking ID for the shipment.
@@ -6385,13 +6961,18 @@ components:
           description: '[required] The ID of the operation, unique across all operations for a given order.'
           type: string
         shipmentGroupId:
-          description: '[required] ID of the shipment group. It is assigned by the merchant in the shipLineItems method and is used to group multiple line items that have the same kind of shipping charges.'
+          description: '[required] ID of the shipment group. It is assigned by the merchant in the `shipLineItems` method and is used to group multiple line items that have the same kind of shipping charges.'
           type: string
       type: object
     OrderinvoicesCreateChargeInvoiceResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#orderinvoicesCreateChargeInvoiceResponse'
@@ -6408,10 +6989,10 @@ components:
           type: string
         refundOnlyOption:
           $ref: '#/components/schemas/OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption'
-          description: Option to create a refund-only invoice. Exactly one of refundOnlyOption or returnOption must be provided.
+          description: Option to create a refund-only invoice. Exactly one of `refundOnlyOption` or `returnOption` must be provided.
         returnOption:
           $ref: '#/components/schemas/OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption'
-          description: Option to create an invoice for a refund and mark all items within the invoice as returned. Exactly one of refundOnlyOption or returnOption must be provided.
+          description: Option to create an invoice for a refund and mark all items within the invoice as returned. Exactly one of `refundOnlyOption` or `returnOption` must be provided.
         shipmentInvoices:
           description: Invoice details for different shipment groups.
           items:
@@ -6421,7 +7002,12 @@ components:
     OrderinvoicesCreateRefundInvoiceResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#orderinvoicesCreateRefundInvoiceResponse'
@@ -6434,7 +7020,54 @@ components:
           description: Optional description of the refund reason.
           type: string
         reason:
-          description: '[required] Reason for the refund.'
+          description: |-
+            [required] Reason for the refund.
+
+            Acceptable values are:  
+            - "`adjustment`" 
+            - "`autoPostInternal`" 
+            - "`autoPostInvalidBillingAddress`" 
+            - "`autoPostNoInventory`" 
+            - "`autoPostPriceError`" 
+            - "`autoPostUndeliverableShippingAddress`" 
+            - "`couponAbuse`" 
+            - "`courtesyAdjustment`" 
+            - "`customerCanceled`" 
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`customerSupportRequested`" 
+            - "`deliveredLateByCarrier`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`failToPushOrderGoogleError`" 
+            - "`failToPushOrderMerchantError`" 
+            - "`failToPushOrderMerchantFulfillmentError`" 
+            - "`failToPushOrderToMerchant`" 
+            - "`failToPushOrderToMerchantOutOfStock`" 
+            - "`feeAdjustment`" 
+            - "`invalidCoupon`" 
+            - "`lateShipmentCredit`" 
+            - "`malformedShippingAddress`" 
+            - "`merchantDidNotShipOnTime`" 
+            - "`noInventory`" 
+            - "`orderTimeout`" 
+            - "`other`" 
+            - "`paymentAbuse`" 
+            - "`paymentDeclined`" 
+            - "`priceAdjustment`" 
+            - "`priceError`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`promoReallocation`" 
+            - "`qualityNotAsExpected`" 
+            - "`returnRefundAbuse`" 
+            - "`shippingCostAdjustment`" 
+            - "`shippingPriceError`" 
+            - "`taxAdjustment`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
       type: object
     OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption:
@@ -6443,7 +7076,23 @@ components:
           description: Optional description of the return reason.
           type: string
         reason:
-          description: '[required] Reason for the return.'
+          description: |-
+            [required] Reason for the return.
+
+            Acceptable values are:  
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`other`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`qualityNotAsExpected`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
       type: object
     OrderreportsListDisbursementsResponse:
@@ -6499,7 +7148,12 @@ components:
     OrdersAcknowledgeResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersAcknowledgeResponse'
@@ -6529,7 +7183,20 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the cancellation.
+          description: |-
+            The reason for the cancellation.
+
+            Acceptable values are:  
+            - "`customerInitiatedCancel`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`noInventory`" 
+            - "`other`" 
+            - "`priceError`" 
+            - "`shippingPriceError`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6538,7 +7205,12 @@ components:
     OrdersCancelLineItemResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersCancelLineItemResponse'
@@ -6551,7 +7223,20 @@ components:
           description: The ID of the operation. Unique across all operations for a given order.
           type: string
         reason:
-          description: The reason for the cancellation.
+          description: |-
+            The reason for the cancellation.
+
+            Acceptable values are:  
+            - "`customerInitiatedCancel`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`noInventory`" 
+            - "`other`" 
+            - "`priceError`" 
+            - "`shippingPriceError`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6560,7 +7245,12 @@ components:
     OrdersCancelResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersCancelResponse'
@@ -6570,7 +7260,13 @@ components:
     OrdersCancelTestOrderByCustomerRequest:
       properties:
         reason:
-          description: The reason for the cancellation.
+          description: |-
+            The reason for the cancellation.
+
+            Acceptable values are:  
+            - "`changedMind`" 
+            - "`orderedWrongItem`" 
+            - "`other`"
           type: string
       type: object
     OrdersCancelTestOrderByCustomerResponse:
@@ -6584,14 +7280,22 @@ components:
       properties:
         country:
           description: |-
-            The  CLDR territory code of the country of the test order to create. Affects the currency and addresses of orders created via template_name, or the addresses of orders created via test_order.
+            The  CLDR territory code of the country of the test order to create. Affects the currency and addresses of orders created via `template_name`, or the addresses of orders created via `test_order`.
 
             Acceptable values are:  
-            - "US" 
-            - "FR"  Defaults to US.
+            - "`US`" 
+            - "`FR`"  Defaults to `US`.
           type: string
         templateName:
-          description: The test order template to use. Specify as an alternative to testOrder as a shortcut for retrieving a template and then creating an order using that template.
+          description: |-
+            The test order template to use. Specify as an alternative to `testOrder` as a shortcut for retrieving a template and then creating an order using that template.
+
+            Acceptable values are:  
+            - "`template1`" 
+            - "`template1a`" 
+            - "`template1b`" 
+            - "`template2`" 
+            - "`template3`"
           type: string
         testOrder:
           $ref: '#/components/schemas/TestOrder'
@@ -6638,10 +7342,10 @@ components:
     OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
       properties:
         carrier:
-          description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
+          description: 'The carrier handling the shipment. See `shipments[].carrier` in the  Orders resource representation for a list of acceptable values.'
           type: string
         shipmentId:
-          description: The ID of the shipment. This is assigned by the merchant and is unique to each shipment.
+          description: Required. The ID of the shipment. This is assigned by the merchant and is unique to each shipment.
           type: string
         trackingId:
           description: The tracking ID for the shipment.
@@ -6686,7 +7390,23 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the return.
+          description: |-
+            The reason for the return.
+
+            Acceptable values are:  
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`other`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`qualityNotAsExpected`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6698,7 +7418,12 @@ components:
     OrdersInStoreRefundLineItemResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersInStoreRefundLineItemResponse'
@@ -6735,7 +7460,15 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the return.
+          description: |-
+            The reason for the return.
+
+            Acceptable values are:  
+            - "`damagedOrUsed`" 
+            - "`missingComponent`" 
+            - "`notEligible`" 
+            - "`other`" 
+            - "`outOfReturnWindow`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6744,7 +7477,12 @@ components:
     OrdersRejectReturnLineItemResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersRejectReturnLineItemResponse'
@@ -6770,7 +7508,23 @@ components:
           format: uint32
           type: integer
         reason:
-          description: The reason for the return.
+          description: |-
+            The reason for the return.
+
+            Acceptable values are:  
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`invalidCoupon`" 
+            - "`malformedShippingAddress`" 
+            - "`other`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`qualityNotAsExpected`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
         reasonText:
           description: The explanation of the reason.
@@ -6782,7 +7536,12 @@ components:
     OrdersReturnRefundLineItemResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersReturnRefundLineItemResponse'
@@ -6808,7 +7567,12 @@ components:
     OrdersSetLineItemMetadataResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersSetLineItemMetadataResponse'
@@ -6837,7 +7601,12 @@ components:
     OrdersShipLineItemsResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersShipLineItemsResponse'
@@ -6871,7 +7640,12 @@ components:
     OrdersUpdateLineItemShippingDetailsResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersUpdateLineItemShippingDetailsResponse'
@@ -6890,7 +7664,12 @@ components:
     OrdersUpdateMerchantOrderIdResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersUpdateMerchantOrderIdResponse'
@@ -6900,10 +7679,10 @@ components:
     OrdersUpdateShipmentRequest:
       properties:
         carrier:
-          description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
+          description: 'The carrier handling the shipment. Not updated if missing. See `shipments[].carrier` in the  Orders resource representation for a list of acceptable values.'
           type: string
         deliveryDate:
-          description: 'Date on which the shipment has been delivered, in ISO 8601 format. Optional and can be provided only if status is delivered.'
+          description: 'Date on which the shipment has been delivered, in ISO 8601 format. Optional and can be provided only if `status` is `delivered`.'
           type: string
         operationId:
           description: The ID of the operation. Unique across all operations for a given order.
@@ -6912,7 +7691,12 @@ components:
           description: The ID of the shipment.
           type: string
         status:
-          description: New status for the shipment. Not updated if missing.
+          description: |-
+            New status for the shipment. Not updated if missing.
+
+            Acceptable values are:  
+            - "`delivered`" 
+            - "`undeliverable`"
           type: string
         trackingId:
           description: The tracking ID for the shipment. Not updated if missing.
@@ -6921,7 +7705,12 @@ components:
     OrdersUpdateShipmentResponse:
       properties:
         executionStatus:
-          description: The status of the execution.
+          description: |-
+            The status of the execution.
+
+            Acceptable values are:  
+            - "duplicate" 
+            - "executed"
           type: string
         kind:
           default: 'content#ordersUpdateShipmentResponse'
@@ -6931,22 +7720,22 @@ components:
     PickupCarrierService:
       properties:
         carrierName:
-          description: 'The name of the pickup carrier (e.g., "UPS"). Required.'
+          description: 'The name of the pickup carrier (e.g., `"UPS"`). Required.'
           type: string
         serviceName:
-          description: 'The name of the pickup service (e.g., "Access point"). Required.'
+          description: 'The name of the pickup service (e.g., `"Access point"`). Required.'
           type: string
       type: object
     PickupServicesPickupService:
       properties:
         carrierName:
-          description: 'The name of the carrier (e.g., "UPS"). Always present.'
+          description: 'The name of the carrier (e.g., `"UPS"`). Always present.'
           type: string
         country:
           description: 'The CLDR country code of the carrier (e.g., "US"). Always present.'
           type: string
         serviceName:
-          description: 'The name of the pickup service (e.g., "Access point"). Always present.'
+          description: 'The name of the pickup service (e.g., `"Access point"`). Always present.'
           type: string
       type: object
     PosCustomBatchRequest:
@@ -6965,21 +7754,30 @@ components:
           type: integer
         inventory:
           $ref: '#/components/schemas/PosInventory'
-          description: The inventory to submit. Set this only if the method is inventory.
+          description: The inventory to submit. Set this only if the method is `inventory`.
         merchantId:
           description: The ID of the POS data provider.
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`delete`" 
+            - "`get`" 
+            - "`insert`" 
+            - "`inventory`" 
+            - "`sale`"
           type: string
         sale:
           $ref: '#/components/schemas/PosSale'
-          description: The sale information to submit. Set this only if the method is sale.
+          description: The sale information to submit. Set this only if the method is `sale`.
         store:
           $ref: '#/components/schemas/PosStore'
-          description: The store information to submit. Set this only if the method is insert.
+          description: The store information to submit. Set this only if the method is `insert`.
         storeCode:
-          description: The store code. Set this only if the method is delete or get.
+          description: The store code. Set this only if the method is `delete` or `get`.
           type: string
         targetMerchantId:
           description: The ID of the account for which to get/submit data.
@@ -7012,7 +7810,7 @@ components:
           description: The updated inventory information.
         kind:
           default: 'content#posCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posCustomBatchResponseEntry`"'
           type: string
         sale:
           $ref: '#/components/schemas/PosSale'
@@ -7049,73 +7847,73 @@ components:
       description: The absolute quantity of an item available at the given store.
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         kind:
           default: 'content#posInventory'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posInventory".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posInventory`"'
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The current price of the item.
+          description: Required. The current price of the item.
         quantity:
-          description: The available quantity of the item.
+          description: Required. The available quantity of the item.
           format: int64
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosInventoryRequest:
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The current price of the item.
+          description: Required. The current price of the item.
         quantity:
-          description: The available quantity of the item.
+          description: Required. The available quantity of the item.
           format: int64
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosInventoryResponse:
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         kind:
           default: 'content#posInventoryResponse'
@@ -7123,19 +7921,19 @@ components:
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The current price of the item.
+          description: Required. The current price of the item.
         quantity:
-          description: The available quantity of the item.
+          description: Required. The available quantity of the item.
           format: int64
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosListResponse:
@@ -7153,79 +7951,79 @@ components:
       description: The change of the available quantity of an item at the given store.
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         kind:
           default: 'content#posSale'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posSale".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posSale`"'
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The price of the item.
+          description: Required. The price of the item.
         quantity:
-          description: The relative change of the available quantity. Negative for items returned.
+          description: Required. The relative change of the available quantity. Negative for items returned.
           format: int64
           type: string
         saleId:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosSaleRequest:
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The price of the item.
+          description: Required. The price of the item.
         quantity:
-          description: The relative change of the available quantity. Negative for items returned.
+          description: Required. The relative change of the available quantity. Negative for items returned.
           format: int64
           type: string
         saleId:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosSaleResponse:
       properties:
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         gtin:
           description: Global Trade Item Number.
           type: string
         itemId:
-          description: A unique identifier for the item.
+          description: Required. A unique identifier for the item.
           type: string
         kind:
           default: 'content#posSaleResponse'
@@ -7233,22 +8031,22 @@ components:
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: The price of the item.
+          description: Required. The price of the item.
         quantity:
-          description: The relative change of the available quantity. Negative for items returned.
+          description: Required. The relative change of the available quantity. Negative for items returned.
           format: int64
           type: string
         saleId:
           description: A unique ID to group items from the same sale event.
           type: string
         storeCode:
-          description: The identifier of the merchant's store. Either a storeCode inserted via the API or the code of the store in Google My Business.
+          description: Required. The identifier of the merchant's store. Either a `storeCode` inserted via the API or the code of the store in Google My Business.
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         timestamp:
-          description: 'The inventory timestamp, in ISO 8601 format.'
+          description: 'Required. The inventory timestamp, in ISO 8601 format.'
           type: string
       type: object
     PosStore:
@@ -7256,13 +8054,13 @@ components:
       properties:
         kind:
           default: 'content#posStore'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posStore".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posStore`"'
           type: string
         storeAddress:
-          description: The street address of the store.
+          description: Required. The street address of the store.
           type: string
         storeCode:
-          description: A store identifier that is unique for the given merchant.
+          description: Required. A store identifier that is unique for the given merchant.
           type: string
       type: object
     PostalCodeGroup:
@@ -7282,10 +8080,10 @@ components:
     PostalCodeRange:
       properties:
         postalCodeRangeBegin:
-          description: 'A postal code or a pattern of the form prefix* denoting the inclusive lower bound of the range defining the area. Examples values: "94108", "9410*", "9*". Required.'
+          description: 'A postal code or a pattern of the form `prefix*` denoting the inclusive lower bound of the range defining the area. Examples values: `"94108"`, `"9410*"`, `"9*"`. Required.'
           type: string
         postalCodeRangeEnd:
-          description: 'A postal code or a pattern of the form prefix* denoting the inclusive upper bound of the range defining the area. It must have the same length as postalCodeRangeBegin: if postalCodeRangeBegin is a postal code then postalCodeRangeEnd must be a postal code too; if postalCodeRangeBegin is a pattern then postalCodeRangeEnd must be a pattern with the same prefix length. Optional: if not set, then the area is defined as being all the postal codes matching postalCodeRangeBegin.'
+          description: 'A postal code or a pattern of the form `prefix*` denoting the inclusive upper bound of the range defining the area. It must have the same length as `postalCodeRangeBegin`: if `postalCodeRangeBegin` is a postal code then `postalCodeRangeEnd` must be a postal code too; if `postalCodeRangeBegin` is a pattern then `postalCodeRangeEnd` must be a pattern with the same prefix length. Optional: if not set, then the area is defined as being all the postal codes matching `postalCodeRangeBegin`.'
           type: string
       type: object
     Price:
@@ -7298,7 +8096,12 @@ components:
           type: string
       type: object
     Product:
-      description: 'Product data. After inserting, updating, or deleting a product, it may take several minutes before changes take effect.'
+      description: |-
+        Required product attributes are primarily defined by the products data specification. See the  Products Data Specification Help Center article for information.
+
+        Some attributes are country-specific, so make sure you select the appropriate country in the drop-down selector at the top of the page.  
+
+        Product data. After inserting, updating, or deleting a product, it may take several minutes before changes take effect.
       properties:
         additionalImageLinks:
           description: Additional URLs of images of the item.
@@ -7332,7 +8135,12 @@ components:
           description: Brand of the item.
           type: string
         channel:
-          description: The item's channel (online or local).
+          description: |-
+            Required. The item's channel (online or local).
+
+            Acceptable values are:  
+            - "`local`" 
+            - "`online`"
           type: string
         color:
           description: Color of the item.
@@ -7341,13 +8149,13 @@ components:
           description: Condition or state of the item.
           type: string
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: Required. The two-letter ISO 639-1 language code for the item.
           type: string
         costOfGoodsSold:
           $ref: '#/components/schemas/Price'
           description: Cost of goods sold. Used for gross profit reporting.
         customAttributes:
-          description: 'A list of custom (merchant-provided) attributes. It can also be used for submitting any attribute of the feed specification in its generic form (e.g., { "name": "size type", "value": "regular" }). This is useful for submitting attributes not explicitly exposed by the API, such as additional attributes used for Shopping Actions.'
+          description: 'A list of custom (merchant-provided) attributes. It can also be used for submitting any attribute of the feed specification in its generic form (e.g., `{ "name": "size type", "value": "regular" }`). This is useful for submitting attributes not explicitly exposed by the API, such as additional attributes used for Shopping Actions.'
           items:
             $ref: '#/components/schemas/CustomAttribute'
           type: array
@@ -7396,7 +8204,7 @@ components:
             type: string
           type: array
         expirationDate:
-          description: 'Date on which the item should expire, as specified upon insertion, in ISO 8601 format. The actual expiration date in Google Shopping is exposed in productstatuses as googleExpirationDate and might be earlier if expirationDate is too far in the future.'
+          description: 'Date on which the item should expire, as specified upon insertion, in ISO 8601 format. The actual expiration date in Google Shopping is exposed in `productstatuses` as `googleExpirationDate` and might be earlier if `expirationDate` is too far in the future.'
           type: string
         gender:
           description: Target gender of the item.
@@ -7409,7 +8217,7 @@ components:
           type: string
         id:
           description: |-
-            The REST ID of the product. Content API methods that operate on products take this as their productId parameter.
+            The REST ID of the product. Content API methods that operate on products take this as their `productId` parameter.
             The REST ID for a product is of the form channel:contentLanguage:targetCountry:offerId.
           type: string
         identifierExists:
@@ -7419,7 +8227,7 @@ components:
           description: URL of an image of the item.
           type: string
         includedDestinations:
-          description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in excludedDestinations.
+          description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in `excludedDestinations`.
           items:
             type: string
           type: array
@@ -7434,7 +8242,7 @@ components:
           type: string
         kind:
           default: 'content#product'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#product".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#product`"'
           type: string
         link:
           description: URL directly linking to your item's page on your website.
@@ -7471,7 +8279,7 @@ components:
           type: string
         offerId:
           description: |-
-            A unique identifier for the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
+            Required. A unique identifier for the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
             Note: Content API methods that operate on products take the REST ID of the product, not this identifier.
           type: string
         pattern:
@@ -7527,15 +8335,21 @@ components:
           description: The cut of the item. Recommended for apparel items.
           type: string
         sizes:
-          description: 'Size of the item. Only one value is allowed. For variants with different sizes, insert a separate product for each size with the same itemGroupId value (see size definition).'
+          description: 'Size of the item. Only one value is allowed. For variants with different sizes, insert a separate product for each size with the same `itemGroupId` value (see size definition).'
           items:
             type: string
           type: array
         source:
-          description: 'The source of the offer, i.e., how the offer was created.'
+          description: |-
+            The source of the offer, i.e., how the offer was created.
+
+            Acceptable values are:  
+            - "`api`" 
+            - "`crawl`" 
+            - "`feed`"
           type: string
         targetCountry:
-          description: The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item.
           type: string
         taxCategory:
           description: 'The tax category of the product, used to configure detailed tax nexus in account-level tax settings.'
@@ -7636,7 +8450,7 @@ components:
           type: array
         kind:
           default: 'content#productStatus'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productStatus".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productStatus`"'
           type: string
         lastUpdateDate:
           description: 'Date on which the item has been last updated, in ISO 8601 format.'
@@ -7753,12 +8567,19 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`delete`" 
+            - "`get`" 
+            - "`insert`"
           type: string
         product:
           $ref: '#/components/schemas/Product'
-          description: The product to insert. Only required if the method is insert.
+          description: The product to insert. Only required if the method is `insert`.
         productId:
-          description: The ID of the product to get or delete. Only defined if the method is get or delete.
+          description: The ID of the product to get or delete. Only defined if the method is `get` or `delete`.
           type: string
       type: object
     ProductsCustomBatchResponse:
@@ -7785,11 +8606,11 @@ components:
           description: A list of errors defined if and only if the request failed.
         kind:
           default: 'content#productsCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productsCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productsCustomBatchResponseEntry`"'
           type: string
         product:
           $ref: '#/components/schemas/Product'
-          description: The inserted product. Only defined if the method is insert and if the request was successful.
+          description: The inserted product. Only defined if the method is `insert` and if the request was successful.
       type: object
     ProductsListResponse:
       properties:
@@ -7832,6 +8653,11 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`"
           type: string
         productId:
           description: The ID of the product whose status to get.
@@ -7861,7 +8687,7 @@ components:
           description: 'A list of errors, if the request failed.'
         kind:
           default: 'content#productstatusesCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productstatusesCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productstatusesCustomBatchResponseEntry`"'
           type: string
         productStatus:
           $ref: '#/components/schemas/ProductStatus'
@@ -7882,17 +8708,21 @@ components:
           type: array
       type: object
     PubsubNotificationSettings:
-      description: 'Settings for Pub/Sub notifications, all methods require that the caller is a direct user of the merchant center account.'
+      description: 'Settings for Pub/Sub notifications, all methods require that the caller is a direct user of the merchant center account. (== resource_for v2.1.pubsubnotificationsettings ==)'
       properties:
         cloudTopicName:
           description: Cloud pub/sub topic to which notifications are sent (read-only).
           type: string
         kind:
           default: 'content#pubsubNotificationSettings'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#pubsubNotificationSettings".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#pubsubNotificationSettings`"'
           type: string
         registeredEvents:
-          description: 'List of event types. Supported event types: orderPendingShipment.'
+          description: |-
+            List of event types.
+
+            Acceptable values are:  
+            - "`orderPendingShipment`"
           items:
             type: string
           type: array
@@ -7905,21 +8735,21 @@ components:
             type: string
           type: array
         carrierRates:
-          description: A list of carrier rates that can be referred to by mainTable or singleValue.
+          description: A list of carrier rates that can be referred to by `mainTable` or `singleValue`.
           items:
             $ref: '#/components/schemas/CarrierRate'
           type: array
         mainTable:
           $ref: '#/components/schemas/Table'
-          description: 'A table defining the rate group, when singleValue is not expressive enough. Can only be set if singleValue is not set.'
+          description: 'A table defining the rate group, when `singleValue` is not expressive enough. Can only be set if `singleValue` is not set.'
         name:
           description: Name of the rate group. Optional. If set has to be unique within shipping service.
           type: string
         singleValue:
           $ref: '#/components/schemas/Value'
-          description: The value of the rate group (e.g. flat rate $10). Can only be set if mainTable and subtables are not set.
+          description: The value of the rate group (e.g. flat rate $10). Can only be set if `mainTable` and `subtables` are not set.
         subtables:
-          description: A list of subtables referred to by mainTable. Can only be set if mainTable is set.
+          description: A list of subtables referred to by `mainTable`. Can only be set if `mainTable` is set.
           items:
             $ref: '#/components/schemas/Table'
           type: array
@@ -7930,7 +8760,54 @@ components:
           description: Description of the reason.
           type: string
         reasonCode:
-          description: Code of the refund reason.
+          description: |-
+            Code of the refund reason.
+
+            Acceptable values are:  
+            - "`adjustment`" 
+            - "`autoPostInternal`" 
+            - "`autoPostInvalidBillingAddress`" 
+            - "`autoPostNoInventory`" 
+            - "`autoPostPriceError`" 
+            - "`autoPostUndeliverableShippingAddress`" 
+            - "`couponAbuse`" 
+            - "`courtesyAdjustment`" 
+            - "`customerCanceled`" 
+            - "`customerDiscretionaryReturn`" 
+            - "`customerInitiatedMerchantCancel`" 
+            - "`customerSupportRequested`" 
+            - "`deliveredLateByCarrier`" 
+            - "`deliveredTooLate`" 
+            - "`expiredItem`" 
+            - "`failToPushOrderGoogleError`" 
+            - "`failToPushOrderMerchantError`" 
+            - "`failToPushOrderMerchantFulfillmentError`" 
+            - "`failToPushOrderToMerchant`" 
+            - "`failToPushOrderToMerchantOutOfStock`" 
+            - "`feeAdjustment`" 
+            - "`invalidCoupon`" 
+            - "`lateShipmentCredit`" 
+            - "`malformedShippingAddress`" 
+            - "`merchantDidNotShipOnTime`" 
+            - "`noInventory`" 
+            - "`orderTimeout`" 
+            - "`other`" 
+            - "`paymentAbuse`" 
+            - "`paymentDeclined`" 
+            - "`priceAdjustment`" 
+            - "`priceError`" 
+            - "`productArrivedDamaged`" 
+            - "`productNotAsDescribed`" 
+            - "`promoReallocation`" 
+            - "`qualityNotAsExpected`" 
+            - "`returnRefundAbuse`" 
+            - "`shippingCostAdjustment`" 
+            - "`shippingPriceError`" 
+            - "`taxAdjustment`" 
+            - "`taxError`" 
+            - "`undeliverableShippingAddress`" 
+            - "`unsupportedPoBoxAddress`" 
+            - "`wrongProductShipped`"
           type: string
       type: object
     RegionalInventory:
@@ -7956,7 +8833,7 @@ components:
           type: string
         salePrice:
           $ref: '#/components/schemas/Price'
-          description: The sale price of the product. Mandatory if sale_price_effective_date is defined.
+          description: The sale price of the product. Mandatory if `sale_price_effective_date` is defined.
         salePriceEffectiveDate:
           description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as ''null'' if undecided.'
           type: string
@@ -7981,6 +8858,11 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            Method of the batch request entry.
+
+            Acceptable values are:  
+            - "`insert`"
           type: string
         productId:
           description: The ID of the product for which to update price and availability.
@@ -8024,19 +8906,19 @@ components:
       properties:
         address:
           $ref: '#/components/schemas/ReturnAddressAddress'
-          description: The address.
+          description: Required. The address.
         country:
-          description: The country of sale where the return address is applicable.
+          description: Required. The country of sale where the return address is applicable.
           type: string
         kind:
           default: 'content#returnAddress'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnAddress".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnAddress`"'
           type: string
         label:
-          description: 'The user-defined label of the return address. For the default address, use the label "default".'
+          description: 'Required. The user-defined label of the return address. For the default address, use the label "default".'
           type: string
         phoneNumber:
-          description: The merchant's contact phone number regarding the return.
+          description: Required. The merchant's contact phone number regarding the return.
           type: string
         returnAddressId:
           description: Return address ID generated by Google.
@@ -8069,17 +8951,17 @@ components:
       description: Return policy resource.
       properties:
         country:
-          description: The country of sale where the return policy is applicable.
+          description: Required. The country of sale where the return policy is applicable.
           type: string
         kind:
           default: 'content#returnPolicy'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnPolicy".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnPolicy`"'
           type: string
         label:
-          description: 'The user-defined label of the return policy. For the default policy, use the label "default".'
+          description: 'Required. The user-defined label of the return policy. For the default policy, use the label "default".'
           type: string
         name:
-          description: The name of the policy as shown in Merchant Center.
+          description: Required. The name of the policy as shown in Merchant Center.
           type: string
         nonFreeReturnReasons:
           description: Return reasons that will incur return fees.
@@ -8088,7 +8970,7 @@ components:
           type: array
         policy:
           $ref: '#/components/schemas/ReturnPolicyPolicy'
-          description: The policy.
+          description: Required. The policy.
         returnPolicyId:
           description: Return policy ID generated by Google.
           type: string
@@ -8101,29 +8983,36 @@ components:
     ReturnPolicyPolicy:
       properties:
         lastReturnDate:
-          description: 'Last day for returning the items. In ISO 8601 format. When specifying the return window like this, set the policy type to "lastReturnDate". Use this for seasonal overrides only.'
+          description: 'Required. Last day for returning the items. In ISO 8601 format. When specifying the return window like this, set the policy type to "lastReturnDate". Use this for seasonal overrides only.'
           type: string
         numberOfDays:
           description: 'The number of days items can be returned after delivery, where one day is defined to be 24 hours after the delivery timestamp. When specifying the return window like this, set the policy type to "numberOfDaysAfterDelivery". Acceptable values are 30, 45, 60, 90, 100, 180, 270 and 365 for the default policy. Additional policies further allow 14, 15, 21 and 28 days, but note that for most items a minimum of 30 days is required for returns. Exceptions may be made for electronics. A policy of less than 30 days can only be applied to those items.'
           format: int64
           type: string
         type:
-          description: 'Policy type. Use "lastReturnDate" for seasonal overrides only. Note that for most items a minimum of 30 days is required for returns. Exceptions may be made for electronics or non-returnable items such as food, perishables, and living things. A policy of less than 30 days can only be applied to those items.'
+          description: |-
+            Policy type. Use "lastReturnDate" for seasonal overrides only. Note that for most items a minimum of 30 days is required for returns. Exceptions may be made for electronics or non-returnable items such as food, perishables, and living things. A policy of less than 30 days can only be applied to those items.
+
+            Acceptable values are:  
+            - "`lastReturnDate`" 
+            - "`lifetimeReturns`" 
+            - "`noReturns`" 
+            - "`numberOfDaysAfterDelivery`"
           type: string
       type: object
     ReturnPolicySeasonalOverride:
       properties:
         endDate:
-          description: Last day on which the override applies. In ISO 8601 format.
+          description: Required. Last day on which the override applies. In ISO 8601 format.
           type: string
         name:
-          description: The name of the seasonal override as shown in Merchant Center.
+          description: Required. The name of the seasonal override as shown in Merchant Center.
           type: string
         policy:
           $ref: '#/components/schemas/ReturnPolicyPolicy'
-          description: The policy which is in effect during that time.
+          description: Required. The policy which is in effect during that time.
         startDate:
-          description: First day on which the override applies. In ISO 8601 format.
+          description: Required. First day on which the override applies. In ISO 8601 format.
           type: string
       type: object
     ReturnShipment:
@@ -8135,7 +9024,13 @@ components:
           description: 'The date of delivery of the shipment, in ISO 8601 format.'
           type: string
         returnMethodType:
-          description: Type of the return method.
+          description: |-
+            Type of the return method.
+
+            Acceptable values are:  
+            - "`byMail`" 
+            - "`contactCustomerSupport`" 
+            - "`returnless`"
           type: string
         shipmentId:
           description: Shipment ID generated by Google.
@@ -8149,7 +9044,14 @@ components:
           description: 'The date of shipping of the shipment, in ISO 8601 format.'
           type: string
         state:
-          description: State of the shipment.
+          description: |-
+            State of the shipment.
+
+            Acceptable values are:  
+            - "`completed`" 
+            - "`new`" 
+            - "`shipped`" 
+            - "`undeliverable`"
           type: string
       type: object
     ReturnaddressCustomBatchRequest:
@@ -8171,12 +9073,19 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            Method of the batch request entry.
+
+            Acceptable values are:  
+            - "`delete`" 
+            - "`get`" 
+            - "`insert`"
           type: string
         returnAddress:
           $ref: '#/components/schemas/ReturnAddress'
-          description: The return address to submit. Set this only if the method is insert.
+          description: The return address to submit. Set this only if the method is `insert`.
         returnAddressId:
-          description: The return address ID. Set this only if the method is delete or get.
+          description: The return address ID. Set this only if the method is `delete` or `get`.
           type: string
       type: object
     ReturnaddressCustomBatchResponse:
@@ -8202,7 +9111,7 @@ components:
           description: 'A list of errors defined if, and only if, the request failed.'
         kind:
           default: 'content#returnaddressCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnaddressCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnaddressCustomBatchResponseEntry`"'
           type: string
         returnAddress:
           $ref: '#/components/schemas/ReturnAddress'
@@ -8241,12 +9150,19 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            Method of the batch request entry.
+
+            Acceptable values are:  
+            - "`delete`" 
+            - "`get`" 
+            - "`insert`"
           type: string
         returnPolicy:
           $ref: '#/components/schemas/ReturnPolicy'
-          description: The return policy to submit. Set this only if the method is insert.
+          description: The return policy to submit. Set this only if the method is `insert`.
         returnPolicyId:
-          description: The return policy ID. Set this only if the method is delete or get.
+          description: The return policy ID. Set this only if the method is `delete` or `get`.
           type: string
       type: object
     ReturnpolicyCustomBatchResponse:
@@ -8272,7 +9188,7 @@ components:
           description: 'A list of errors defined if, and only if, the request failed.'
         kind:
           default: 'content#returnpolicyCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnpolicyCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnpolicyCustomBatchResponseEntry`"'
           type: string
         returnPolicy:
           $ref: '#/components/schemas/ReturnPolicy'
@@ -8292,7 +9208,7 @@ components:
     Row:
       properties:
         cells:
-          description: 'The list of cells that constitute the row. Must have the same length as columnHeaders for two-dimensional tables, a length of 1 for one-dimensional tables. Required.'
+          description: 'The list of cells that constitute the row. Must have the same length as `columnHeaders` for two-dimensional tables, a length of 1 for one-dimensional tables. Required.'
           items:
             $ref: '#/components/schemas/Value'
           type: array
@@ -8312,25 +9228,279 @@ components:
           $ref: '#/components/schemas/DeliveryTime'
           description: Time spent in various aspects from order to the delivery of the product. Required.
         eligibility:
-          description: Eligibility for this service.
+          description: |-
+            Eligibility for this service.
+
+            Acceptable values are:  
+            - "`All scenarios`" 
+            - "`All scenarios except Shopping Actions`" 
+            - "`Shopping Actions`"
           type: string
         minimumOrderValue:
           $ref: '#/components/schemas/Price'
-          description: 'Minimum order value for this service. If set, indicates that customers will have to spend at least this amount. All prices within a service must have the same currency.'
+          description: 'Minimum order value for this service. If set, indicates that customers will have to spend at least this amount. All prices within a service must have the same currency. Cannot be set together with minimum_order_value_table.'
+        minimumOrderValueTable:
+          $ref: '#/components/schemas/MinimumOrderValueTable'
+          description: Table of per store minimum order values for the pickup fulfillment type. Cannot be set together with minimum_order_value.
         name:
           description: Free-form name of the service. Must be unique within target account. Required.
           type: string
         pickupService:
           $ref: '#/components/schemas/PickupCarrierService'
-          description: The carrier-service pair delivering items to collection points. The list of supported pickup services can be retrieved via the getSupportedPickupServices method. Required if and only if the service delivery type is pickup.
+          description: The carrier-service pair delivering items to collection points. The list of supported pickup services can be retrieved via the `getSupportedPickupServices` method. Required if and only if the service delivery type is `pickup`.
         rateGroups:
-          description: 'Shipping rate group definitions. Only the last one is allowed to have an empty applicableShippingLabels, which means "everything else". The other applicableShippingLabels must not overlap.'
+          description: 'Shipping rate group definitions. Only the last one is allowed to have an empty `applicableShippingLabels`, which means "everything else". The other `applicableShippingLabels` must not overlap.'
           items:
             $ref: '#/components/schemas/RateGroup'
           type: array
         shipmentType:
-          description: Type of locations this service ships orders to.
+          description: |-
+            Type of locations this service ships orders to.
+
+            Acceptable values are:  
+            - "`delivery`" 
+            - "`pickup`"
           type: string
+      type: object
+    SettlementReport:
+      description: Settlement reports detail order-level and item-level credits and debits between you and Google.
+      properties:
+        endDate:
+          description: 'The end date on which all transactions are included in the report, in ISO 8601 format.'
+          type: string
+        kind:
+          default: 'content#settlementReport'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#settlementReport`"'
+          type: string
+        previousBalance:
+          $ref: '#/components/schemas/Price'
+          description: The residual amount from the previous invoice. This is set only if the previous invoices are not paid because of negative balance.
+        settlementId:
+          description: The ID of the settlement report.
+          type: string
+        startDate:
+          description: 'The start date on which all transactions are included in the report, in ISO 8601 format.'
+          type: string
+        transferAmount:
+          $ref: '#/components/schemas/Price'
+          description: The money due to the merchant.
+        transferDate:
+          description: 'Date on which transfer for this payment was initiated by Google, in ISO 8601 format.'
+          type: string
+        transferIds:
+          description: The list of bank identifiers used for the transfer. e.g. Trace ID for Federal Automated Clearing House (ACH). This may also be known as the Wire ID.
+          items:
+            type: string
+          type: array
+      type: object
+    SettlementTransaction:
+      description: Settlement transactions give a detailed breakdown of the  settlement report.
+      properties:
+        amount:
+          $ref: '#/components/schemas/SettlementTransactionAmount'
+          description: The amount for the transaction.
+        identifiers:
+          $ref: '#/components/schemas/SettlementTransactionIdentifiers'
+          description: Identifiers of the transaction.
+        kind:
+          default: 'content#settlementTransaction'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#settlementTransaction`"'
+          type: string
+        transaction:
+          $ref: '#/components/schemas/SettlementTransactionTransaction'
+          description: Details of the transaction.
+      type: object
+    SettlementTransactionAmount:
+      properties:
+        commission:
+          $ref: '#/components/schemas/SettlementTransactionAmountCommission'
+        description:
+          description: |-
+            The description of the event.
+
+            Acceptable values are:  
+            - "`taxWithhold`" 
+            - "`principal`" 
+            - "`principalAdjustment`" 
+            - "`shippingFee`" 
+            - "`merchantRemittedSalesTax`" 
+            - "`googleRemittedSalesTax`" 
+            - "`merchantCoupon`" 
+            - "`merchantCouponTax`" 
+            - "`merchantRemittedDisposalTax`" 
+            - "`googleRemittedDisposalTax`" 
+            - "`merchantRemittedRedemptionFee`" 
+            - "`googleRemittedRedemptionFee`" 
+            - "`eeeEcoFee`" 
+            - "`furnitureEcoFee`" 
+            - "`copyPrivateFee`" 
+            - "`eeeEcoFeeCommission`" 
+            - "`furnitureEcoFeeCommission`" 
+            - "`copyPrivateFeeCommission`" 
+            - "`principalRefund`" 
+            - "`principalRefundTax`" 
+            - "`itemCommission`" 
+            - "`adjustmentCommission`" 
+            - "`shippingFeeCommission`" 
+            - "`commissionRefund`" 
+            - "`damaged`" 
+            - "`damagedOrDefectiveItem`" 
+            - "`expiredItem`" 
+            - "`faultyItem`" 
+            - "`incorrectItemReceived`" 
+            - "`itemMissing`" 
+            - "`qualityNotExpected`" 
+            - "`receivedTooLate`" 
+            - "`storePackageMissing`" 
+            - "`transitPackageMissing`" 
+            - "`unsuccessfulDeliveryUndeliverable`" 
+            - "`wrongChargeInStore`" 
+            - "`wrongItem`" 
+            - "`returns`" 
+            - "`undeliverable`" 
+            - "`refundFromMerchant`" 
+            - "`returnLabelShippingFee`"
+          type: string
+        transactionAmount:
+          $ref: '#/components/schemas/Price'
+          description: The amount that contributes to the line item price.
+        type:
+          description: |-
+            The type of the amount.
+
+            Acceptable values are:  
+            - "`itemPrice`" 
+            - "`orderPrice`" 
+            - "`refund`" 
+            - "`earlyRefund`" 
+            - "`courtesyRefund`" 
+            - "`returnRefund`" 
+            - "`returnLabelShippingFeeAmount`"
+          type: string
+      type: object
+    SettlementTransactionAmountCommission:
+      properties:
+        category:
+          description: |-
+            The category of the commission.
+
+            Acceptable values are:  
+            - "`animalsAndPetSupplies`" 
+            - "`dogCatFoodAndCatLitter`" 
+            - "`apparelAndAccessories`" 
+            - "`shoesHandbagsAndSunglasses`" 
+            - "`costumesAndAccessories`" 
+            - "`jewelry`" 
+            - "`watches`" 
+            - "`hobbiesArtsAndCrafts`" 
+            - "`homeAndGarden`" 
+            - "`entertainmentCollectibles`" 
+            - "`collectibleCoins`" 
+            - "`sportsCollectibles`" 
+            - "`sportingGoods`" 
+            - "`toysAndGames`" 
+            - "`musicalInstruments`" 
+            - "`giftCards`" 
+            - "`babyAndToddler`" 
+            - "`babyFoodWipesAndDiapers`" 
+            - "`businessAndIndustrial`" 
+            - "`camerasOpticsAndPhotography`" 
+            - "`consumerElectronics`" 
+            - "`electronicsAccessories`" 
+            - "`personalComputers`" 
+            - "`videoGameConsoles`" 
+            - "`foodAndGrocery`" 
+            - "`beverages`" 
+            - "`tobaccoProducts`" 
+            - "`furniture`" 
+            - "`hardware`" 
+            - "`buildingMaterials`" 
+            - "`tools`" 
+            - "`healthAndPersonalCare`" 
+            - "`beauty`" 
+            - "`householdSupplies`" 
+            - "`kitchenAndDining`" 
+            - "`majorAppliances`" 
+            - "`luggageAndBags`" 
+            - "`media`" 
+            - "`officeSupplies`" 
+            - "`softwareAndVideoGames`" 
+            - "`vehiclePartsAndAccessories`" 
+            - "`vehicleTiresAndWheels`" 
+            - "`vehicles`" 
+            - "`everythingElse`"
+          type: string
+        rate:
+          description: Rate of the commission in percentage.
+          type: string
+      type: object
+    SettlementTransactionIdentifiers:
+      properties:
+        adjustmentId:
+          description: 'The identifier of the adjustments, if it is available.'
+          type: string
+        merchantOrderId:
+          description: The merchant provided order ID.
+          type: string
+        settlementEntryId:
+          description: The unique ID of the settlement transaction entry.
+          type: string
+        shipmentIds:
+          description: The shipment ids for the item.
+          items:
+            type: string
+          type: array
+        transactionId:
+          description: The Google transaction ID.
+          type: string
+      type: object
+    SettlementTransactionTransaction:
+      properties:
+        postDate:
+          description: The time on which the event occurred in ISO 8601 format.
+          type: string
+        type:
+          description: |-
+            The type of the transaction that occurred.
+
+            Acceptable values are:  
+            - "`order`" 
+            - "`reversal`" 
+            - "`orderRefund`" 
+            - "`reversalRefund`" 
+            - "`issueRelatedRefundAndReplacement`" 
+            - "`returnLabelShippingFeeTransaction`" 
+            - "`reversalIssueRelatedRefundAndReplacement`" 
+            - "`reversalReturnLabelShippingFeeTransaction`"
+          type: string
+      type: object
+    SettlementreportsListResponse:
+      properties:
+        kind:
+          default: 'content#settlementreportsListResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#settlementreportsListResponse".'
+          type: string
+        nextPageToken:
+          description: The token for the retrieval of the next page of returns.
+          type: string
+        resources:
+          items:
+            $ref: '#/components/schemas/SettlementReport'
+          type: array
+      type: object
+    SettlementtransactionsListResponse:
+      properties:
+        kind:
+          default: 'content#settlementtransactionsListResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#settlementtransactionsListResponse".'
+          type: string
+        nextPageToken:
+          description: The token for the retrieval of the next page of returns.
+          type: string
+        resources:
+          items:
+            $ref: '#/components/schemas/SettlementTransaction'
+          type: array
       type: object
     ShipmentInvoice:
       properties:
@@ -8343,7 +9513,7 @@ components:
             $ref: '#/components/schemas/ShipmentInvoiceLineItemInvoice'
           type: array
         shipmentGroupId:
-          description: '[required] ID of the shipment group. It is assigned by the merchant in the shipLineItems method and is used to group multiple line items that have the same kind of shipping charges.'
+          description: '[required] ID of the shipment group. It is assigned by the merchant in the `shipLineItems` method and is used to group multiple line items that have the same kind of shipping charges.'
           type: string
       type: object
     ShipmentInvoiceLineItemInvoice:
@@ -8366,7 +9536,40 @@ components:
     ShipmentTrackingInfo:
       properties:
         carrier:
-          description: The shipping carrier that handles the package.
+          description: |-
+            The shipping carrier that handles the package.
+
+            Acceptable values are:  
+            - "`boxtal`" 
+            - "`bpost`" 
+            - "`chronopost`" 
+            - "`colisPrive`" 
+            - "`colissimo`" 
+            - "`cxt`" 
+            - "`deliv`" 
+            - "`dhl`" 
+            - "`dpd`" 
+            - "`dynamex`" 
+            - "`eCourier`" 
+            - "`easypost`" 
+            - "`efw`" 
+            - "`fedex`" 
+            - "`fedexSmartpost`" 
+            - "`geodis`" 
+            - "`gls`" 
+            - "`googleCourier`" 
+            - "`gsx`" 
+            - "`jdLogistics`" 
+            - "`laPoste`" 
+            - "`lasership`" 
+            - "`manual`" 
+            - "`mpx`" 
+            - "`onTrac`" 
+            - "`other`" 
+            - "`tnt`" 
+            - "`uds`" 
+            - "`ups`" 
+            - "`usps`"
           type: string
         trackingNumber:
           description: The tracking number for the package.
@@ -8380,7 +9583,7 @@ components:
           format: uint64
           type: string
         postalCodeGroups:
-          description: A list of postal code groups that can be referred to in services. Optional.
+          description: A list of postal code groups that can be referred to in `services`. Optional.
           items:
             $ref: '#/components/schemas/PostalCodeGroup'
           type: array
@@ -8414,10 +9617,16 @@ components:
           format: uint64
           type: string
         method:
+          description: |-
+            The method of the batch entry.
+
+            Acceptable values are:  
+            - "`get`" 
+            - "`update`"
           type: string
         shippingSettings:
           $ref: '#/components/schemas/ShippingSettings'
-          description: The account shipping settings to update. Only defined if the method is update.
+          description: The account shipping settings to update. Only defined if the method is `update`.
       type: object
     ShippingsettingsCustomBatchResponse:
       properties:
@@ -8443,7 +9652,7 @@ components:
           description: 'A list of errors defined if, and only if, the request failed.'
         kind:
           default: 'content#shippingsettingsCustomBatchResponseEntry'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsCustomBatchResponseEntry`"'
           type: string
         shippingSettings:
           $ref: '#/components/schemas/ShippingSettings'
@@ -8511,7 +9720,7 @@ components:
           $ref: '#/components/schemas/Headers'
           description: Headers of the table's rows. Required.
         rows:
-          description: The list of rows that constitute the table. Must have the same length as rowHeaders. Required.
+          description: The list of rows that constitute the table. Must have the same length as `rowHeaders`. Required.
           items:
             $ref: '#/components/schemas/Row'
           type: array
@@ -8523,27 +9732,51 @@ components:
           type: boolean
         kind:
           default: 'content#testOrder'
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#testOrder".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#testOrder`"'
           type: string
         lineItems:
-          description: Line items that are ordered. At least one line item must be provided.
+          description: Required. Line items that are ordered. At least one line item must be provided.
           items:
             $ref: '#/components/schemas/TestOrderLineItem'
           type: array
         notificationMode:
-          description: Determines if test order must be pulled by merchant or pushed to merchant via push integration.
+          description: Restricted. Do not use.
           type: string
         predefinedBillingAddress:
-          description: The billing address.
+          description: |-
+            Required. The billing address.
+
+            Acceptable values are:  
+            - "`dwight`" 
+            - "`jim`" 
+            - "`pam`"
           type: string
         predefinedDeliveryAddress:
-          description: Identifier of one of the predefined delivery addresses for the delivery.
+          description: |-
+            Required. Identifier of one of the predefined delivery addresses for the delivery.
+
+            Acceptable values are:  
+            - "`dwight`" 
+            - "`jim`" 
+            - "`pam`"
           type: string
         predefinedEmail:
-          description: Email address of the customer.
+          description: |-
+            Required. Email address of the customer.
+
+            Acceptable values are:  
+            - "`pog.dwight.schrute@gmail.com`" 
+            - "`pog.jim.halpert@gmail.com`" 
+            - "`penpog.pam.beesly@gmail.comding`"
           type: string
         predefinedPickupDetails:
-          description: Identifier of one of the predefined pickup details. Required for orders containing line items with shipping type pickup.
+          description: |-
+            Identifier of one of the predefined pickup details. Required for orders containing line items with shipping type `pickup`.
+
+            Acceptable values are:  
+            - "`dwight`" 
+            - "`jim`" 
+            - "`pam`"
           type: string
         promotions:
           description: Promotions associated with the order.
@@ -8552,37 +9785,55 @@ components:
           type: array
         shippingCost:
           $ref: '#/components/schemas/Price'
-          description: 'The price of shipping for all items. Shipping tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
+          description: 'Required. The price of shipping for all items. Shipping tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
         shippingOption:
-          description: The requested shipping option.
+          description: |-
+            Required. The requested shipping option.
+
+            Acceptable values are:  
+            - "`economy`" 
+            - "`expedited`" 
+            - "`oneDay`" 
+            - "`sameDay`" 
+            - "`standard`" 
+            - "`twoDay`"
           type: string
       type: object
     TestOrderLineItem:
       properties:
         product:
           $ref: '#/components/schemas/TestOrderLineItemProduct'
-          description: Product data from the time of the order placement.
+          description: Required. Product data from the time of the order placement.
         quantityOrdered:
-          description: Number of items ordered.
+          description: Required. Number of items ordered.
           format: uint32
           type: integer
         returnInfo:
           $ref: '#/components/schemas/OrderLineItemReturnInfo'
-          description: Details of the return policy for the line item.
+          description: Required. Details of the return policy for the line item.
         shippingDetails:
           $ref: '#/components/schemas/OrderLineItemShippingDetails'
-          description: Details of the requested shipping for the line item.
+          description: Required. Details of the requested shipping for the line item.
       type: object
     TestOrderLineItemProduct:
       properties:
         brand:
-          description: Brand of the item.
+          description: Required. Brand of the item.
           type: string
         condition:
-          description: Condition or state of the item.
+          description: |-
+            Required. Condition or state of the item.
+
+            Acceptable values are:  
+            - "`new`"
           type: string
         contentLanguage:
-          description: The two-letter ISO 639-1 language code for the item.
+          description: |-
+            Required. The two-letter ISO 639-1 language code for the item.
+
+            Acceptable values are:  
+            - "`en`" 
+            - "`fr`"
           type: string
         fees:
           description: Fees for the item. Optional.
@@ -8593,7 +9844,7 @@ components:
           description: Global Trade Item Number (GTIN) of the item. Optional.
           type: string
         imageLink:
-          description: URL of an image of the item.
+          description: Required. URL of an image of the item.
           type: string
         itemGroupId:
           description: Shared identifier for all variants of the same product. Optional.
@@ -8602,16 +9853,16 @@ components:
           description: Manufacturer Part Number (MPN) of the item. Optional.
           type: string
         offerId:
-          description: An identifier of the item.
+          description: Required. An identifier of the item.
           type: string
         price:
           $ref: '#/components/schemas/Price'
-          description: 'The price for the product. Tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied.'
+          description: 'Required. The price for the product. Tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied.'
         targetCountry:
-          description: The CLDR territory code of the target country of the product.
+          description: Required. The CLDR territory code of the target country of the product.
           type: string
         title:
-          description: The title of the product.
+          description: Required. The title of the product.
           type: string
         variantAttributes:
           description: Variant attributes for the item. Optional.
@@ -8622,7 +9873,7 @@ components:
     TransitTable:
       properties:
         postalCodeGroupNames:
-          description: 'A list of postal group names. The last value can be "all other locations". Example: ["zone 1", "zone 2", "all other locations"]. The referred postal code groups must match the delivery country of the service.'
+          description: 'A list of postal group names. The last value can be `"all other locations"`. Example: `["zone 1", "zone 2", "all other locations"]`. The referred postal code groups must match the delivery country of the service.'
           items:
             type: string
           type: array
@@ -8631,7 +9882,7 @@ components:
             $ref: '#/components/schemas/TransitTableTransitTimeRow'
           type: array
         transitTimeLabels:
-          description: 'A list of transit time labels. The last value can be "all other labels". Example: ["food", "electronics", "all other labels"].'
+          description: 'A list of transit time labels. The last value can be `"all other labels"`. Example: `["food", "electronics", "all other labels"]`.'
           items:
             type: string
           type: array
@@ -8646,7 +9897,7 @@ components:
     TransitTableTransitTimeRowTransitTimeValue:
       properties:
         maxTransitTimeInDays:
-          description: Must be greater than or equal to minTransitTimeInDays.
+          description: Must be greater than or equal to `minTransitTimeInDays`.
           format: uint32
           type: integer
         minTransitTimeInDays:
@@ -8676,7 +9927,11 @@ components:
           $ref: '#/components/schemas/Amount'
           description: '[required] Amount of the additional charge.'
         type:
-          description: '[required] Type of the additional charge.'
+          description: |-
+            [required] Type of the additional charge.
+
+            Acceptable values are:  
+            - "`shipping`"
           type: string
       type: object
     UnitInvoiceTaxLine:
@@ -8685,14 +9940,20 @@ components:
           $ref: '#/components/schemas/Price'
           description: '[required] Tax amount for the tax type.'
         taxName:
-          description: Optional name of the tax type. This should only be provided if taxType is otherFeeTax.
+          description: Optional name of the tax type. This should only be provided if `taxType` is `otherFeeTax`.
           type: string
         taxType:
-          description: '[required] Type of the tax.'
+          description: |-
+            [required] Type of the tax.
+
+            Acceptable values are:  
+            - "`otherFee`" 
+            - "`otherFeeTax`" 
+            - "`sales`"
           type: string
       type: object
     Value:
-      description: 'The single value of a rate group or the value of a rate group table''s cell. Exactly one of noShipping, flatRate, pricePercentage, carrierRateName, subtableName must be set.'
+      description: 'The single value of a rate group or the value of a rate group table''s cell. Exactly one of `noShipping`, `flatRate`, `pricePercentage`, `carrierRateName`, `subtableName` must be set.'
       properties:
         carrierRateName:
           description: The name of a carrier rate referring to a carrier rate defined in the same rate group. Can only be set if all other fields are not set.
@@ -8704,7 +9965,7 @@ components:
           description: 'If true, then the product can''t ship. Must be true when set, can only be set if all other fields are not set.'
           type: boolean
         pricePercentage:
-          description: 'A percentage of the price represented as a number in decimal notation (e.g., "5.4"). Can only be set if all other fields are not set.'
+          description: 'A percentage of the price represented as a number in decimal notation (e.g., `"5.4"`). Can only be set if all other fields are not set.'
           type: string
         subtableName:
           description: 'The name of a subtable. Can only be set in table cells (i.e., not for single values), and only if all other fields are not set.'
@@ -8713,10 +9974,15 @@ components:
     Weight:
       properties:
         unit:
-          description: The weight unit.
+          description: |-
+            Required. The weight unit.
+
+            Acceptable values are:  
+            - "`kg`" 
+            - "`lb`"
           type: string
         value:
-          description: The weight represented as a number.
+          description: Required. The weight represented as a number.
           type: string
       type: object
   securitySchemes:

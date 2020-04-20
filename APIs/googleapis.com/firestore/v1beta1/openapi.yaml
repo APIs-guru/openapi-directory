@@ -36,8 +36,6 @@ tags:
 paths:
   '/v1beta1/{database}/documents:batchGet':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -47,6 +45,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Gets multiple documents.
@@ -89,8 +89,6 @@ paths:
         - projects
   '/v1beta1/{database}/documents:beginTransaction':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -100,6 +98,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Starts a new transaction.
       operationId: firestore.projects.databases.documents.beginTransaction
@@ -138,8 +138,6 @@ paths:
         - projects
   '/v1beta1/{database}/documents:commit':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -149,6 +147,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: 'Commits a transaction, while optionally updating documents.'
       operationId: firestore.projects.databases.documents.commit
@@ -187,8 +187,6 @@ paths:
         - projects
   '/v1beta1/{database}/documents:listen':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -198,6 +196,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Listens to changes.
       operationId: firestore.projects.databases.documents.listen
@@ -236,8 +236,6 @@ paths:
         - projects
   '/v1beta1/{database}/documents:rollback':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -247,6 +245,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Rolls back a transaction.
       operationId: firestore.projects.databases.documents.rollback
@@ -285,8 +285,6 @@ paths:
         - projects
   '/v1beta1/{database}/documents:write':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -296,6 +294,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: 'Streams batches of document updates and deletes, in order.'
       operationId: firestore.projects.databases.documents.write
@@ -433,8 +433,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -444,6 +442,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: Updates or inserts a document.
       operationId: firestore.projects.databases.documents.patch
@@ -516,8 +516,6 @@ paths:
         - projects
   '/v1beta1/{name}:exportDocuments':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -527,6 +525,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Exports a copy of all or a subset of documents from Google Cloud Firestore
@@ -573,8 +573,6 @@ paths:
         - projects
   '/v1beta1/{name}:importDocuments':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -584,6 +582,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Imports documents into Google Cloud Firestore. Existing documents with the
@@ -672,8 +672,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -683,6 +681,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Creates the specified index.
@@ -826,8 +826,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -837,6 +835,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Creates a new document.
       operationId: firestore.projects.databases.documents.createDocument
@@ -900,8 +900,6 @@ paths:
         - projects
   '/v1beta1/{parent}:listCollectionIds':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -911,6 +909,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Lists all the collection IDs underneath a document.
       operationId: firestore.projects.databases.documents.listCollectionIds
@@ -951,8 +951,6 @@ paths:
         - projects
   '/v1beta1/{parent}:runQuery':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -962,6 +960,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Runs a query.
       operationId: firestore.projects.databases.documents.runQuery

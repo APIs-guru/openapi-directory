@@ -35,17 +35,17 @@ tags:
 paths:
   '/v1/documents:analyzeEntities':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Finds named entities (currently proper names and common nouns) in the text
@@ -77,17 +77,17 @@ paths:
         - documents
   '/v1/documents:analyzeEntitySentiment':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Finds entities, similar to AnalyzeEntities in the text and analyzes
@@ -118,17 +118,17 @@ paths:
         - documents
   '/v1/documents:analyzeSentiment':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Analyzes the sentiment of the provided text.
       operationId: language.documents.analyzeSentiment
@@ -157,17 +157,17 @@ paths:
         - documents
   '/v1/documents:analyzeSyntax':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Analyzes the syntax of the text and provides sentence boundaries and
@@ -199,17 +199,17 @@ paths:
         - documents
   '/v1/documents:annotateText':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         A convenience method that provides all the features that analyzeSentiment,
@@ -240,17 +240,17 @@ paths:
         - documents
   '/v1/documents:classifyText':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: Classifies a document into categories.
       operationId: language.documents.classifyText
@@ -558,7 +558,7 @@ components:
         name:
           description: |-
             The name of the category representing the document, from the [predefined
-            taxonomy](/natural-language/docs/categories).
+            taxonomy](https://cloud.google.com/natural-language/docs/categories).
           type: string
       type: object
     ClassifyTextRequest:
@@ -703,11 +703,11 @@ components:
             The language of the document (if not specified, the language is
             automatically detected). Both ISO and BCP-47 language codes are
             accepted.<br>
-            [Language Support](/natural-language/docs/languages)
-            lists currently supported languages for each API method.
-            If the language (either specified by the caller or automatically detected)
-            is not supported by the called API method, an `INVALID_ARGUMENT` error
-            is returned.
+            [Language
+            Support](https://cloud.google.com/natural-language/docs/languages) lists
+            currently supported languages for each API method. If the language (either
+            specified by the caller or automatically detected) is not supported by the
+            called API method, an `INVALID_ARGUMENT` error is returned.
           type: string
         type:
           description: |-

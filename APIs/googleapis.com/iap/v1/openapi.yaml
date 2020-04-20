@@ -29,8 +29,8 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/iap'
 tags:
-  - name: v1
   - name: projects
+  - name: v1
 paths:
   '/v1/{name}':
     delete:
@@ -95,17 +95,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
   '/v1/{name}:iapSettings':
     get:
       description: Gets the IAP settings on a particular IAP protected resource.
@@ -136,17 +136,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     patch:
       description: |-
         Updates the IAP settings on a particular IAP protected resource. It
@@ -189,17 +189,17 @@ paths:
         - v1
   '/v1/{name}:resetSecret':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Resets an Identity Aware Proxy (IAP) OAuth client secret. Useful if the
@@ -264,17 +264,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Constructs a new OAuth brand for the project if one does not exist.
@@ -363,17 +363,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned
@@ -413,17 +413,17 @@ paths:
         - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Gets the access control policy for an Identity-Aware Proxy protected
@@ -462,17 +462,17 @@ paths:
         - v1
   '/v1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Sets the access control policy for an Identity-Aware Proxy protected
@@ -511,17 +511,17 @@ paths:
         - v1
   '/v1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
     post:
       description: |-
         Returns permissions that a caller has on the Identity-Aware Proxy protected
@@ -636,6 +636,17 @@ components:
       schema:
         type: string
   schemas:
+    AccessDeniedPageSettings:
+      description: |-
+        Custom content configuration for access denied page.
+        IAP allows customers to define a custom URI to use as the error page when
+        access is denied to users. If IAP prevents access to this page, the default
+        IAP error page will be displayed instead.
+      properties:
+        accessDeniedPageUri:
+          description: The URI to be redirected to when access is denied.
+          type: string
+      type: object
     AccessSettings:
       description: Access related settings for IAP protected apps.
       properties:
@@ -648,10 +659,18 @@ components:
         oauthSettings:
           $ref: '#/components/schemas/OAuthSettings'
           description: Settings to configure IAP's OAuth behavior.
+        policyDelegationSettings:
+          $ref: '#/components/schemas/PolicyDelegationSettings'
+          description: |-
+            Settings to configure Policy delegation for apps hosted in tenant projects.
+            INTERNAL_ONLY.
       type: object
     ApplicationSettings:
       description: Wrapper over application specific settings for IAP.
       properties:
+        accessDeniedPageSettings:
+          $ref: '#/components/schemas/AccessDeniedPageSettings'
+          description: Customization for Access Denied page.
         csmSettings:
           $ref: '#/components/schemas/CsmSettings'
           description: Settings to configure IAP's behavior for a CSM mesh.
@@ -1071,9 +1090,107 @@ components:
           format: int32
           type: integer
       type: object
+    PolicyDelegationSettings:
+      description: |-
+        PolicyDelegationConfig allows google-internal teams to use IAP for apps
+        hosted in a tenant project. Using these settings, the app can delegate
+        permission check to happen against the linked customer project.
+        This is only ever supposed to be used by google internal teams, hence the
+        restriction on the proto.
+      properties:
+        iamPermission:
+          description: Permission to check in IAM.
+          type: string
+        iamServiceName:
+          description: |-
+            The DNS name of the service (e.g. "resourcemanager.googleapis.com").
+            This should be the domain name part of the full resource names (see
+            https://aip.dev/122#full-resource-names), which is usually
+            the same as IamServiceSpec.service of the service where the resource type
+            is defined.
+          type: string
+        policyName:
+          $ref: '#/components/schemas/PolicyName'
+          description: Policy name to be checked
+        resource:
+          $ref: '#/components/schemas/Resource'
+          description: IAM resource to check permission on
+      type: object
+    PolicyName:
+      properties:
+        id:
+          type: string
+        region:
+          description: |-
+            For Cloud IAM:
+            The location of the Policy.
+            Must be empty or "global" for Policies owned by global IAM.  Must name a
+            region from prodspec/cloud-iam-cloudspec for Regional IAM Policies, see
+            http://go/iam-faq#where-is-iam-currently-deployed.
+
+            For Local IAM:
+            This field should be set to "local".
+          type: string
+        type:
+          description: 'Valid values for type might be ''gce'', ''gcs'', ''project'', ''account'' etc.'
+          type: string
+      type: object
     ResetIdentityAwareProxyClientSecretRequest:
       description: The request sent to ResetIdentityAwareProxyClientSecret.
       properties: {}
+      type: object
+    Resource:
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: |-
+            The service defined labels of the resource on which the conditions will be
+            evaluated. The semantics - including the key names - are vague to IAM.
+            If the effective condition has a reference to a `resource.labels[foo]`
+            construct, IAM consults with this map to retrieve the values associated
+            with `foo` key for Conditions evaluation. If the provided key is not found
+            in the labels map, the condition would evaluate to false.
+
+            This field is in limited use. If your intended use case is not expected
+            to express resource.labels attribute in IAM Conditions, leave this field
+            empty. Before planning on using this attribute please:
+            * Read go/iam-conditions-labels-comm and ensure your service can meet the
+              data availability and management requirements.
+            * Talk to iam-conditions-eng@ about your use case.
+          type: object
+        name:
+          description: |-
+            Name of the resource on which conditions will be evaluated.
+            Must use the Relative Resource Name of the resource, which is the URI
+            path of the resource without the leading "/". Examples are
+            "projects/_/buckets/[BUCKET-ID]" for storage buckets or
+            "projects/[PROJECT-ID]/global/firewalls/[FIREWALL-ID]" for a firewall.
+
+            This field is required for evaluating conditions with rules on resource
+            names. For a `list` permission check, the resource.name value must be set
+            to the parent resource. If the parent resource is a project, this field
+            should be left unset.
+          type: string
+        service:
+          description: |-
+            The name of the service this resource belongs to. It is configured using
+            the official_service_name of the Service as defined in service
+            configurations under //configs/cloud/resourcetypes.
+            For example, the official_service_name of cloud resource manager service
+            is set as 'cloudresourcemanager.googleapis.com' according to
+            //configs/cloud/resourcetypes/google/cloud/resourcemanager/prod.yaml
+          type: string
+        type:
+          description: |-
+            The public resource type name of the resource on which conditions will be
+            evaluated. It is configured using the official_name of the ResourceType as
+            defined in service configurations under //configs/cloud/resourcetypes.
+            For example, the official_name for GCP projects is set as
+            'cloudresourcemanager.googleapis.com/Project' according to
+            //configs/cloud/resourcetypes/google/cloud/resourcemanager/prod.yaml
+            For details see go/iam-conditions-integration-guide.
+          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.

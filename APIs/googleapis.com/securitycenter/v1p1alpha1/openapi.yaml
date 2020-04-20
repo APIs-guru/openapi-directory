@@ -5,12 +5,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Cloud Security Command Center API provides access to temporal views of assets and findings within an organization.
+  description: Security Command Center API provides access to temporal views of assets and findings within an organization.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Cloud Security Command Center
+  title: Security Command Center
   version: v1p1alpha1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -90,7 +90,6 @@ paths:
       tags:
         - organizations
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
@@ -101,9 +100,9 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
   '/v1p1alpha1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
@@ -114,6 +113,7 @@ paths:
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -242,11 +242,11 @@ components:
       type: object
     Finding:
       description: |-
-        Cloud Security Command Center (Cloud SCC) finding.
+        Security Command Center finding.
 
         A finding is a record of assessment data like security, risk, health, or
-        privacy, that is ingested into Cloud SCC for presentation, notification,
-        analysis, policy testing, and enforcement. For example, a
+        privacy, that is ingested into Security Command Center for presentation,
+        notification, analysis, policy testing, and enforcement. For example, a
         cross-site scripting (XSS) vulnerability in an App Engine application is a
         finding.
       properties:
@@ -257,7 +257,7 @@ components:
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
-          description: The time at which the finding was created in Cloud SCC.
+          description: The time at which the finding was created in Security Command Center.
           format: google-datetime
           type: string
         eventTime:
@@ -269,9 +269,9 @@ components:
           type: string
         externalUri:
           description: |-
-            The URI that, if available, points to a web page outside of Cloud SCC
-            where additional information about the finding can be found. This field is
-            guaranteed to be either empty or a well formed URL.
+            The URI that, if available, points to a web page outside of Security
+            Command Center where additional information about the finding can be found.
+            This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
           description: |-
@@ -290,12 +290,12 @@ components:
           type: string
         resourceName:
           description: |-
-            For findings on Google Cloud Platform (GCP) resources, the full resource
-            name of the GCP resource this finding is for. See:
+            For findings on Google Cloud resources, the full resource
+            name of the Google Cloud resource this finding is for. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
-            When the finding is for a non-GCP resource, the resourceName can be a
-            customer or partner defined string.
-            This field is immutable after creation time.
+            When the finding is for a non-Google Cloud resource, the resourceName can
+            be a customer or partner defined string. This field is immutable after
+            creation time.
           type: string
         securityMarks:
           $ref: '#/components/schemas/SecurityMarks'
@@ -365,23 +365,25 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1Asset:
       description: |-
-        Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
-        Platform (GCP) resource.
+        Security Command Center representation of a Google Cloud
+        resource.
 
-        The Asset is a Cloud SCC resource that captures information about a single
-        GCP resource. All modifications to an Asset are only within the context of
-        Cloud SCC and don't affect the referenced GCP resource.
+        The Asset is a Security Command Center resource that captures information
+        about a single Google Cloud resource. All modifications to an Asset are only
+        within the context of Security Command Center and don't affect the referenced
+        Google Cloud resource.
       properties:
         createTime:
-          description: The time at which the asset was created in Cloud SCC.
+          description: The time at which the asset was created in Security Command Center.
           format: google-datetime
           type: string
         iamPolicy:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1IamPolicy'
           description: |-
-            IAM Policy information associated with the GCP resource described by the
-            Cloud SCC asset. This information is managed and defined by the GCP
-            resource and cannot be modified by the user.
+            Cloud IAM Policy information associated with the Google Cloud resource
+            described by the Security Command Center asset. This information is managed
+            and defined by the Google Cloud resource and cannot be modified by the
+            user.
         name:
           description: |-
             The relative resource name of this asset. See:
@@ -393,13 +395,13 @@ components:
           additionalProperties: {}
           description: |-
             Resource managed properties. These properties are managed and defined by
-            the GCP resource and cannot be modified by the user.
+            the Google Cloud resource and cannot be modified by the user.
           type: object
         securityCenterProperties:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties'
           description: |-
-            Cloud SCC managed properties. These properties are managed by
-            Cloud SCC and cannot be modified by the user.
+            Security Command Center managed properties. These properties are managed by
+            Security Command Center and cannot be modified by the user.
         securityMarks:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
           description: |-
@@ -414,12 +416,12 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1Finding:
       description: |-
-        Cloud Security Command Center (Cloud SCC) finding.
+        Security Command Center finding.
 
         A finding is a record of assessment data (security, risk, health or privacy)
-        ingested into Cloud SCC for presentation, notification, analysis,
-        policy testing, and enforcement. For example, an XSS vulnerability in an
-        App Engine application is a finding.
+        ingested into Security Command Center for presentation, notification,
+        analysis, policy testing, and enforcement. For example, an XSS vulnerability
+        in an App Engine application is a finding.
       properties:
         category:
           description: |-
@@ -428,7 +430,7 @@ components:
             Example: "XSS_FLASH_INJECTION"
           type: string
         createTime:
-          description: The time at which the finding was created in Cloud SCC.
+          description: The time at which the finding was created in Security Command Center.
           format: google-datetime
           type: string
         eventTime:
@@ -440,9 +442,9 @@ components:
           type: string
         externalUri:
           description: |-
-            The URI that, if available, points to a web page outside of Cloud SCC
-            where additional information about the finding can be found. This field is
-            guaranteed to be either empty or a well formed URL.
+            The URI that, if available, points to a web page outside of Security
+            Command Center where additional information about the finding can be found.
+            This field is guaranteed to be either empty or a well formed URL.
           type: string
         name:
           description: |-
@@ -461,12 +463,12 @@ components:
           type: string
         resourceName:
           description: |-
-            For findings on Google Cloud Platform (GCP) resources, the full resource
-            name of the GCP resource this finding is for. See:
+            For findings on Google Cloud resources, the full resource
+            name of the Google Cloud resource this finding is for. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
-            When the finding is for a non-GCP resource, the resourceName can be a
-            customer or partner defined string.
-            This field is immutable after creation time.
+            When the finding is for a non-Google Cloud resource, the resourceName can
+            be a customer or partner defined string. This field is immutable after
+            creation time.
           type: string
         securityMarks:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1SecurityMarks'
@@ -492,19 +494,20 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1IamPolicy:
       description: |-
-        IAM Policy information associated with the GCP resource described by the
-        Cloud SCC asset. This information is managed and defined by the GCP
-        resource and cannot be modified by the user.
+        Cloud IAM Policy information associated with the Google Cloud resource
+        described by the Security Command Center asset. This information is managed
+        and defined by the Google Cloud resource and cannot be modified by the
+        user.
       properties:
         policyBlob:
           description: |-
             The JSON representation of the Policy associated with the asset.
-            See https://cloud.google.com/iam/reference/rest/v1p1beta1/Policy for
+            See https://cloud.google.com/iam/docs/reference/rest/v1/Policy for
             format details.
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1NotificationMessage:
-      description: Cloud SCC's Notification
+      description: Security Command Center's Notification
       properties:
         finding:
           $ref: '#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Finding'
@@ -538,15 +541,15 @@ components:
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
       description: |-
-        Cloud SCC managed properties. These properties are managed by Cloud SCC and
-        cannot be modified by the user.
+        Security Command Center managed properties. These properties are managed by
+        Security Command Center and cannot be modified by the user.
       properties:
         resourceDisplayName:
           description: The user defined display name for this resource.
           type: string
         resourceName:
           description: |-
-            The full resource name of the GCP resource this asset
+            The full resource name of the Google Cloud resource this asset
             represents. This field is immutable after create time. See:
             https://cloud.google.com/apis/design/resource_names#full_resource_name
           type: string
@@ -573,17 +576,17 @@ components:
           type: string
         resourceType:
           description: |-
-            The type of the GCP resource. Examples include: APPLICATION,
+            The type of the Google Cloud resource. Examples include: APPLICATION,
             PROJECT, and ORGANIZATION. This is a case insensitive field defined by
-            Cloud SCC and/or the producer of the resource and is immutable
-            after create time.
+            Security Command Center and/or the producer of the resource and is
+            immutable after create time.
           type: string
       type: object
     GoogleCloudSecuritycenterV1p1beta1SecurityMarks:
       description: |-
-        User specified security marks that are attached to the parent Cloud Security
-        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
-        SCC organization -- they can be modified and viewed by all users who have
+        User specified security marks that are attached to the parent Security
+        Command Center resource. Security marks are scoped within a Security Command
+        Center organization -- they can be modified and viewed by all users who have
         proper permissions on the organization.
       properties:
         marks:
@@ -682,9 +685,9 @@ components:
       type: object
     SecurityMarks:
       description: |-
-        User specified security marks that are attached to the parent Cloud Security
-        Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
-        SCC organization -- they can be modified and viewed by all users who have
+        User specified security marks that are attached to the parent Security
+        Command Center resource. Security marks are scoped within a Security Command
+        Center organization -- they can be modified and viewed by all users who have
         proper permissions on the organization.
       properties:
         marks:

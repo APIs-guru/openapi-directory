@@ -237,6 +237,10 @@ paths:
       tags:
         - assetlinks
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -244,10 +248,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
   '/v1/statements:list':
     get:
       description: |-
@@ -372,6 +372,10 @@ paths:
       tags:
         - statements
     parameters:
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -379,10 +383,6 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
 components:
   parameters:
     _.xgafv:

@@ -67,12 +67,12 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the metadata and configuration for a Field.
-      operationId: firestore.projects.databases.collectionGroups.fields.get
+      description: Gets a composite index.
+      operationId: firestore.projects.databases.collectionGroups.indexes.get
       parameters:
         - description: |-
             A name of the form
-            `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_id}`
+            `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -84,7 +84,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleFirestoreAdminV1beta2Field'
+                $ref: '#/components/schemas/GoogleFirestoreAdminV1beta2Index'
           description: Successful response
       security:
         - Oauth2:
@@ -98,17 +98,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     patch:
       description: |-
         Updates a field configuration. Currently, field updates apply only to
@@ -191,17 +191,17 @@ paths:
         - projects
   '/v1beta2/{name}:exportDocuments':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Exports a copy of all or a subset of documents from Google Cloud Firestore
@@ -248,17 +248,17 @@ paths:
         - projects
   '/v1beta2/{name}:importDocuments':
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Imports documents into Google Cloud Firestore. Existing documents with the
@@ -362,17 +362,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
   '/v1beta2/{parent}/indexes':
     get:
       description: Lists composite indexes.
@@ -424,17 +424,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
     post:
       description: |-
         Creates a composite index. This returns a google.longrunning.Operation

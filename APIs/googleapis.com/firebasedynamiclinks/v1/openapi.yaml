@@ -37,6 +37,7 @@ tags:
 paths:
   /v1/installAttribution:
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -47,7 +48,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Get iOS strong/weak-match info for post-install attribution.
       operationId: firebasedynamiclinks.installAttribution
@@ -72,6 +72,7 @@ paths:
         - v1
   '/v1/managedShortLinks:create':
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -82,7 +83,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Creates a managed short Dynamic Link given either a valid long Dynamic Link
@@ -120,6 +120,7 @@ paths:
         - managedShortLinks
   /v1/reopenAttribution:
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -130,7 +131,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Get iOS reopen attribution for app universal link open deeplinking.
       operationId: firebasedynamiclinks.reopenAttribution
@@ -155,6 +155,7 @@ paths:
         - v1
   /v1/shortLinks:
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -165,7 +166,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Creates a short Dynamic Link given either a valid long Dynamic Link or
@@ -236,6 +236,7 @@ paths:
       tags:
         - v1
     parameters:
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
@@ -246,7 +247,6 @@ paths:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/upload_protocol'
 components:
   parameters:
     _.xgafv:

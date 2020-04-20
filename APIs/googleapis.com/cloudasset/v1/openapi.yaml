@@ -92,17 +92,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     patch:
       description: Updates an asset feed configuration.
       operationId: cloudasset.feeds.patch
@@ -170,17 +170,17 @@ paths:
       tags:
         - feeds
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Creates a feed in a parent project/folder/organization to listen to its
@@ -296,30 +296,30 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
   '/v1/{parent}:exportAssets':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
     post:
       description: |-
         Exports assets with time and resource types to a given Cloud Storage
@@ -627,14 +627,14 @@ components:
             Required. The BigQuery dataset in format
             "projects/projectId/datasets/datasetId", to which the snapshot result
             should be exported. If this dataset does not exist, the export call returns
-            an error.
+            an INVALID_ARGUMENT error.
           type: string
         force:
           description: |-
             If the destination table already exists and this flag is `TRUE`, the
             table will be overwritten by the contents of assets snapshot. If the flag
-            is not set and the destination table already exists, the export call
-            returns an error.
+            is `FALSE` or unset and the destination table already exists, the export
+            call returns an INVALID_ARGUMEMT error.
           type: boolean
         table:
           description: |-
@@ -1210,10 +1210,6 @@ components:
         basic:
           $ref: '#/components/schemas/GoogleIdentityAccesscontextmanagerV1BasicLevel'
           description: A `BasicLevel` composed of `Conditions`.
-        createTime:
-          description: Output only. Time the `AccessLevel` was created in UTC.
-          format: google-datetime
-          type: string
         custom:
           $ref: '#/components/schemas/GoogleIdentityAccesscontextmanagerV1CustomLevel'
           description: A `CustomLevel` written in the Common Expression Language.
@@ -1230,10 +1226,6 @@ components:
         title:
           description: Human readable title. Must be unique within the Policy.
           type: string
-        updateTime:
-          description: Output only. Time the `AccessLevel` was updated in UTC.
-          format: google-datetime
-          type: string
       type: object
     GoogleIdentityAccesscontextmanagerV1AccessPolicy:
       description: |-
@@ -1243,10 +1235,6 @@ components:
         access policy is globally visible within an organization, and the
         restrictions it specifies apply to all projects within an organization.
       properties:
-        createTime:
-          description: Output only. Time the `AccessPolicy` was created in UTC.
-          format: google-datetime
-          type: string
         etag:
           description: |-
             Output only. An opaque identifier for the current version of the
@@ -1267,10 +1255,6 @@ components:
           type: string
         title:
           description: Required. Human readable title. Does not affect behavior.
-          type: string
-        updateTime:
-          description: Output only. Time the `AccessPolicy` was updated in UTC.
-          format: google-datetime
           type: string
       type: object
     GoogleIdentityAccesscontextmanagerV1BasicLevel:
@@ -1456,10 +1440,6 @@ components:
         a single Google Cloud project may belong to multiple Service Perimeter
         Bridges.
       properties:
-        createTime:
-          description: Output only. Time the `ServicePerimeter` was created in UTC.
-          format: google-datetime
-          type: string
         description:
           description: |-
             Description of the `ServicePerimeter` and its use. Does not affect
@@ -1498,10 +1478,6 @@ components:
             content and boundaries.
         title:
           description: Human readable title. Must be unique within the Policy.
-          type: string
-        updateTime:
-          description: Output only. Time the `ServicePerimeter` was updated in UTC.
-          format: google-datetime
           type: string
         useExplicitDryRunSpec:
           description: |-

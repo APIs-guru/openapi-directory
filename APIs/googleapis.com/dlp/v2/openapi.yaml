@@ -81,8 +81,6 @@ paths:
       tags:
         - infoTypes
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -92,6 +90,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v2/locations/{locationId}/infoTypes':
     get:
       description: |-
@@ -138,8 +138,6 @@ paths:
       tags:
         - locations
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -149,18 +147,18 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.delete
+        Deletes a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.locations.jobTriggers.delete
       parameters:
         - description: |-
-            Required. Resource name of the organization and deidentify template to be deleted,
-            for example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Required. Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -183,15 +181,13 @@ paths:
         - projects
     get:
       description: |-
-        Gets a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.get
+        Gets a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.locations.jobTriggers.get
       parameters:
         - description: |-
-            Required. Resource name of the organization and deidentify template to be read, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Required. Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -203,7 +199,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate'
+                $ref: '#/components/schemas/GooglePrivacyDlpV2JobTrigger'
           description: Successful response
       security:
         - Oauth2:
@@ -213,8 +209,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -224,17 +218,17 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     patch:
       description: |-
-        Updates the DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.patch
+        Updates a job trigger.
+        See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+      operationId: dlp.projects.locations.jobTriggers.patch
       parameters:
         - description: |-
-            Required. Resource name of organization and deidentify template to be updated, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Required. Resource name of the project and the triggeredJob, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -245,13 +239,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+              $ref: '#/components/schemas/GooglePrivacyDlpV2UpdateJobTriggerRequest'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate'
+                $ref: '#/components/schemas/GooglePrivacyDlpV2JobTrigger'
           description: Successful response
       security:
         - Oauth2:
@@ -262,8 +256,6 @@ paths:
         - projects
   '/v2/{name}:activate':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -273,11 +265,13 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Activate a job trigger. Causes the immediate execute of a trigger
         instead of waiting on the trigger event to occur.
-      operationId: dlp.projects.jobTriggers.activate
+      operationId: dlp.projects.locations.jobTriggers.activate
       parameters:
         - description: |-
             Required. Resource name of the trigger to activate, for example
@@ -309,8 +303,6 @@ paths:
         - projects
   '/v2/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -320,6 +312,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running DlpJob. The server
@@ -357,8 +351,6 @@ paths:
         - projects
   '/v2/{name}:finish':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -368,6 +360,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Finish a running hybrid DlpJob. Triggers the finalization steps and running
@@ -405,8 +399,6 @@ paths:
         - projects
   '/v2/{name}:hybridInspect':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -416,19 +408,21 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
-        Inspect hybrid content and store findings to a job.
-        To review the findings inspect the job. Inspection will occur
-        asynchronously.
+        Inspect hybrid content and store findings to a trigger. The inspection
+        will be processed asynchronously. To review the findings monitor the
+        jobs within the trigger.
         Early access feature is in a pre-release state and might change or have
         limited support. For more information, see
         https://cloud.google.com/products#product-launch-stages.
-      operationId: dlp.projects.locations.dlpJobs.hybridInspect
+      operationId: dlp.projects.locations.jobTriggers.hybridInspect
       parameters:
         - description: |-
-            Required. Resource name of the job to execute a hybrid inspect on, for example
-            `projects/dlp-test-project/dlpJob/53234423`.
+            Required. Resource name of the trigger to execute a hybrid inspect on, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
           in: path
           name: name
           required: true
@@ -439,7 +433,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GooglePrivacyDlpV2HybridInspectDlpJobRequest'
+              $ref: '#/components/schemas/GooglePrivacyDlpV2HybridInspectJobTriggerRequest'
       responses:
         '200':
           content:
@@ -456,8 +450,6 @@ paths:
         - projects
   '/v2/{parent}/content:deidentify':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -467,6 +459,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         De-identifies potentially sensitive info from a ContentItem.
@@ -507,8 +501,6 @@ paths:
         - projects
   '/v2/{parent}/content:inspect':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -518,6 +510,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Finds potentially sensitive info in content.
@@ -559,8 +553,6 @@ paths:
         - projects
   '/v2/{parent}/content:reidentify':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -570,6 +562,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Re-identifies content that has been de-identified.
@@ -675,8 +669,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -686,6 +678,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a DeidentifyTemplate for re-using frequently used configuration
@@ -829,8 +823,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -840,6 +832,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a new job to inspect storage or calculate risk metrics.
@@ -879,8 +873,6 @@ paths:
         - projects
   '/v2/{parent}/image:redact':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -890,6 +882,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Redacts potentially sensitive info from an image.
@@ -998,8 +992,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1009,6 +1001,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates an InspectTemplate for re-using frequently used configuration
@@ -1142,8 +1136,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1153,6 +1145,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a job trigger to run DLP actions such as scanning storage for
@@ -1188,8 +1182,6 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:deidentify':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1199,6 +1191,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         De-identifies potentially sensitive info from a ContentItem.
@@ -1247,8 +1241,6 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:inspect':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1258,6 +1250,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Finds potentially sensitive info in content.
@@ -1281,6 +1275,8 @@ paths:
         - description: |-
             The geographic location to process content inspection. Reserved for future
             extensions.
+            When inspecting images location is restricted to 'global', 'us', 'asia',
+            and 'europe'.
           in: path
           name: locationId
           required: true
@@ -1307,8 +1303,6 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/content:reidentify':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1318,6 +1312,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Re-identifies content that has been de-identified.
@@ -1432,8 +1428,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1443,6 +1437,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a DeidentifyTemplate for re-using frequently used configuration
@@ -1595,8 +1591,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1606,6 +1600,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a new job to inspect storage or calculate risk metrics.
@@ -1653,8 +1649,6 @@ paths:
         - projects
   '/v2/{parent}/locations/{locationId}/image:redact':
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1664,6 +1658,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Redacts potentially sensitive info from an image.
@@ -1686,6 +1682,7 @@ paths:
         - description: |-
             The geographic location to process the request. Reserved for future
             extensions.
+            Location is restricted to 'global', 'us', 'asia', and 'europe'.
           in: path
           name: locationId
           required: true
@@ -1781,8 +1778,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1792,6 +1787,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates an InspectTemplate for re-using frequently used configuration
@@ -1934,8 +1931,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -1945,6 +1940,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a job trigger to run DLP actions such as scanning storage for
@@ -2059,8 +2056,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -2070,6 +2065,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a pre-built stored infoType to be used for inspection.
@@ -2185,8 +2182,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
@@ -2196,6 +2191,8 @@ paths:
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a pre-built stored infoType to be used for inspection.
@@ -2759,6 +2756,9 @@ components:
             If empty, all files are scanned and available data format processors
             are applied. In addition, the binary content of the selected files
             is always scanned as well.
+            Images are scanned only as binary if the specified region
+            does not support image inspection and no file_types were specified.
+            Image inspection is restricted to 'global', 'us', 'asia', and 'europe'.
           items:
             enum:
               - FILE_TYPE_UNSPECIFIED
@@ -3950,15 +3950,16 @@ components:
             The labels associated with this `Finding`.
 
             Label keys must be between 1 and 63 characters long and must conform
-            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+            to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
 
             Label values must be between 0 and 63 characters long and must conform
-            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+            to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
 
             No more than 10 labels can be associated with a given finding.
 
-            Example: <code>"environment" : "production"</code>
-            Example: <code>"pipeline" : "etl"</code>
+            Examples:
+            * `"environment" : "production"`
+            * `"pipeline" : "etl"`
           type: object
         likelihood:
           description: Confidence of how likely it is that the `info_type` is correct.
@@ -4127,15 +4128,16 @@ components:
             inspection.
 
             Label keys must be between 1 and 63 characters long and must conform
-            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+            to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
 
             Label values must be between 0 and 63 characters long and must conform
-            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+            to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
 
             No more than 10 labels can be associated with a given finding.
 
-            Example: <code>"environment" : "production"</code>
-            Example: <code>"pipeline" : "etl"</code>
+            Examples:
+            * `"environment" : "production"`
+            * `"pipeline" : "etl"`
           type: object
         rowOffset:
           description: |-
@@ -4211,15 +4213,16 @@ components:
             To organize findings, these labels will be added to each finding.
 
             Label keys must be between 1 and 63 characters long and must conform
-            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+            to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
 
             Label values must be between 0 and 63 characters long and must conform
-            to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+            to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
 
             No more than 10 labels can be associated with a given finding.
 
-            Example: <code>"environment" : "production"</code>
-            Example: <code>"pipeline" : "etl"</code>
+            Examples:
+            * `"environment" : "production"`
+            * `"pipeline" : "etl"`
           type: object
         requiredFindingLabelKeys:
           description: |-
@@ -4228,7 +4231,7 @@ components:
             these will be rejected.
 
             Label keys must be between 1 and 63 characters long and must conform
-            to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
+            to the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
 
             No more than 10 keys can be required.
           items:
@@ -4279,7 +4282,7 @@ components:
             creating a CustomInfoType, or one of the names listed
             at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
             a built-in type. InfoType names should conform to the pattern
-            [a-zA-Z0-9_]{1,64}.
+            `[a-zA-Z0-9_]{1,64}`.
           type: string
       type: object
     GooglePrivacyDlpV2InfoTypeDescription:
@@ -4462,6 +4465,8 @@ components:
           description: |-
             The geographic location to process content inspection. Reserved for future
             extensions.
+            When inspecting images location is restricted to 'global', 'us', 'asia',
+            and 'europe'.
           type: string
       type: object
     GooglePrivacyDlpV2InspectContentResponse:
@@ -5556,6 +5561,7 @@ components:
           description: |-
             The geographic location to process the request. Reserved for future
             extensions.
+            Location is restricted to 'global', 'us', 'asia', and 'europe'.
           type: string
       type: object
     GooglePrivacyDlpV2RedactImageResponse:

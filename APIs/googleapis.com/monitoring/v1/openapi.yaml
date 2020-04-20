@@ -5,12 +5,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Stackdriver Monitoring documentation.'
+  description: 'Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Stackdriver Monitoring
+  title: Cloud Monitoring
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -106,10 +106,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -117,11 +113,15 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: 'Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
       operationId: monitoring.projects.dashboards.patch
       parameters:
-        - description: The resource name of the dashboard.
+        - description: Immutable. The resource name of the dashboard.
           in: path
           name: name
           required: true
@@ -202,10 +202,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
@@ -213,6 +209,10 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
     post:
       description: 'Creates a new custom dashboard.This method requires the monitoring.dashboards.create permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).'
       operationId: monitoring.projects.dashboards.create
@@ -339,7 +339,7 @@ components:
             $ref: '#/components/schemas/Dashboard'
   schemas:
     Aggregation:
-      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Aggregating Time Series.'
+      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https://cloud.google.com/monitoring/api/v3/aggregation).'
       properties:
         alignmentPeriod:
           description: 'The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.'
@@ -447,7 +447,7 @@ components:
           $ref: '#/components/schemas/ColumnLayout'
           description: The content is divided into equally spaced columns and the widgets are arranged vertically.
         displayName:
-          description: 'The mutable, human-readable name.'
+          description: 'Required. The mutable, human-readable name.'
           type: string
         etag:
           description: 'etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. An etag is returned in the response to GetDashboard, and users are expected to put that etag in the request to UpdateDashboard to ensure that their change will be applied to the same version of the Dashboard configuration. The field should not be passed during dashboard creation.'
@@ -456,7 +456,7 @@ components:
           $ref: '#/components/schemas/GridLayout'
           description: Content is arranged with a basic layout that re-flows a simple list of informational elements like widgets or tiles.
         name:
-          description: The resource name of the dashboard.
+          description: Immutable. The resource name of the dashboard.
           type: string
         rowLayout:
           $ref: '#/components/schemas/RowLayout'
@@ -483,7 +483,7 @@ components:
           type: string
         timeSeriesQuery:
           $ref: '#/components/schemas/TimeSeriesQuery'
-          description: Fields for querying time series data from the Stackdriver metrics API.
+          description: Required. Fields for querying time series data from the Stackdriver metrics API.
       type: object
     DroppedLabels:
       description: 'A set of (label, value) pairs which were dropped during aggregation, attached to google.api.Distribution.Exemplars in google.api.Distribution values during aggregation.These values are used in combination with the label values that remain on the aggregated Distribution timeseries to construct the full label set for the exemplar values. The resulting full label set may be used to identify the specific task/job/instance (for example) which may be contributing to a long-tail, while allowing the storage savings of only storing aggregated distribution values for a large group.Note that there are no guarantees on ordering of the labels from exemplar-to-exemplar and from distribution-to-distribution in the same stream, and there may be duplicates. It is up to clients to resolve any ambiguities.'
@@ -647,7 +647,7 @@ components:
           $ref: '#/components/schemas/Aggregation'
           description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
         filter:
-          description: 'Required. The monitoring filter that identifies the metric types, resources, and projects to query.'
+          description: 'Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.'
           type: string
       type: object
     Row:
@@ -688,7 +688,7 @@ components:
           type: array
         timeSeriesQuery:
           $ref: '#/components/schemas/TimeSeriesQuery'
-          description: Fields for querying time series data from the Stackdriver metrics API.
+          description: Required. Fields for querying time series data from the Stackdriver metrics API.
       type: object
     SourceContext:
       description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
@@ -717,7 +717,7 @@ components:
           format: google-duration
           type: string
         sparkChartType:
-          description: The type of sparkchart to show in this chartView.
+          description: Required. The type of sparkchart to show in this chartView.
           enum:
             - SPARK_CHART_TYPE_UNSPECIFIED
             - SPARK_LINE
@@ -764,17 +764,20 @@ components:
           type: number
       type: object
     TimeSeriesFilter:
-      description: A filter that defines a subset of time series data that is displayed in a widget. Time series data is fetched using the ListTimeSeries method.
+      description: 'A filter that defines a subset of time series data that is displayed in a widget. Time series data is fetched using the ListTimeSeries (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) method.'
       properties:
         aggregation:
           $ref: '#/components/schemas/Aggregation'
           description: 'By default, the raw time series data is returned. Use this field to combine multiple time series for different views of the data.'
         filter:
-          description: 'Required. The monitoring filter that identifies the metric types, resources, and projects to query.'
+          description: 'Required. The monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies the metric types, resources, and projects to query.'
           type: string
         pickTimeSeriesFilter:
           $ref: '#/components/schemas/PickTimeSeriesFilter'
           description: Ranking based time series filter.
+        secondaryAggregation:
+          $ref: '#/components/schemas/Aggregation'
+          description: Apply a second aggregation after aggregation is applied.
       type: object
     TimeSeriesFilterRatio:
       description: A pair of time series filters that define a ratio computation. The output time series is the pair-wise division of each aligned element from the numerator and denominator time series.
@@ -801,8 +804,11 @@ components:
         timeSeriesFilterRatio:
           $ref: '#/components/schemas/TimeSeriesFilterRatio'
           description: Parameters to fetch a ratio between two time series filters.
+        timeSeriesQueryLanguage:
+          description: A query used to fetch time series.
+          type: string
         unitOverride:
-          description: 'The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit field in MetricDescriptor.'
+          description: 'The unit of data contained in fetched time series. If non-empty, this unit will override any unit that accompanies fetched data. The format is the same as the unit (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors) field in MetricDescriptor.'
           type: string
       type: object
     Type:
@@ -862,7 +868,7 @@ components:
           $ref: '#/components/schemas/ChartOptions'
           description: Display options for the chart.
         dataSets:
-          description: The data displayed in this chart.
+          description: Required. The data displayed in this chart.
           items:
             $ref: '#/components/schemas/DataSet'
           type: array

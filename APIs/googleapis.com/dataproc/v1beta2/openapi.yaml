@@ -78,8 +78,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -213,8 +213,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -331,8 +331,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:diagnose':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -385,8 +385,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:start':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -439,8 +439,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/clusters/{clusterName}:stop':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -552,8 +552,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -637,8 +637,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -696,8 +696,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -750,8 +750,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs:submit':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -798,8 +798,8 @@ paths:
         - projects
   '/v1beta2/projects/{projectId}/regions/{region}/jobs:submitAsOperation':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -847,7 +847,7 @@ paths:
   '/v1beta2/{name}':
     delete:
       description: Deletes a workflow template. It does not cancel in-progress workflows.
-      operationId: dataproc.projects.regions.workflowTemplates.delete
+      operationId: dataproc.projects.locations.workflowTemplates.delete
       parameters:
         - description: |-
             Required. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
@@ -880,7 +880,7 @@ paths:
         - projects
     get:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
-      operationId: dataproc.projects.regions.workflowTemplates.get
+      operationId: dataproc.projects.locations.workflowTemplates.get
       parameters:
         - description: |-
             Required. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
@@ -897,16 +897,6 @@ paths:
           name: version
           schema:
             type: integer
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
       responses:
         '200':
           content:
@@ -922,8 +912,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -935,7 +925,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
-      operationId: dataproc.projects.regions.workflowTemplates.update
+      operationId: dataproc.projects.locations.workflowTemplates.update
       parameters:
         - description: |-
             Output only. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
@@ -968,8 +958,8 @@ paths:
         - projects
   '/v1beta2/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1006,8 +996,8 @@ paths:
         - projects
   '/v1beta2/{name}:instantiate':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1019,7 +1009,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#workflowmetadata). Also see Using WorkflowMetadata (https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.regions.workflowTemplates.instantiate
+      operationId: dataproc.projects.locations.workflowTemplates.instantiate
       parameters:
         - description: |-
             Required. The resource name of the workflow template, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1053,7 +1043,7 @@ paths:
   '/v1beta2/{parent}/autoscalingPolicies':
     get:
       description: Lists autoscaling policies in the project.
-      operationId: dataproc.projects.regions.autoscalingPolicies.list
+      operationId: dataproc.projects.locations.autoscalingPolicies.list
       parameters:
         - description: |-
             Required. The "resource name" of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1090,8 +1080,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1103,7 +1093,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Creates new autoscaling policy.
-      operationId: dataproc.projects.regions.autoscalingPolicies.create
+      operationId: dataproc.projects.locations.autoscalingPolicies.create
       parameters:
         - description: |-
             Required. The "resource name" of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1137,7 +1127,7 @@ paths:
   '/v1beta2/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.regions.workflowTemplates.list
+      operationId: dataproc.projects.locations.workflowTemplates.list
       parameters:
         - description: |-
             Required. The resource name of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1174,8 +1164,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1187,7 +1177,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.regions.workflowTemplates.create
+      operationId: dataproc.projects.locations.workflowTemplates.create
       parameters:
         - description: |-
             Required. The resource name of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1220,8 +1210,8 @@ paths:
         - projects
   '/v1beta2/{parent}/workflowTemplates:instantiateInline':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1233,7 +1223,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata). Also see Using WorkflowMetadata (https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
       parameters:
         - description: |-
             Required. The resource name of the region or location, as described in https://cloud.google.com/apis/design/resource_names.
@@ -1277,7 +1267,7 @@ paths:
   '/v1beta2/{resource}:getIamPolicy':
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.regions.workflowTemplates.getIamPolicy
+      operationId: dataproc.projects.locations.workflowTemplates.getIamPolicy
       parameters:
         - description: 'REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.'
           in: path
@@ -1306,8 +1296,8 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1319,8 +1309,8 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
   '/v1beta2/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1332,7 +1322,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: 'Sets the access control policy on the specified resource. Replaces any existing policy.Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED'
-      operationId: dataproc.projects.regions.workflowTemplates.setIamPolicy
+      operationId: dataproc.projects.locations.workflowTemplates.setIamPolicy
       parameters:
         - description: 'REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.'
           in: path
@@ -1362,8 +1352,8 @@ paths:
         - projects
   '/v1beta2/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -1375,7 +1365,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.regions.workflowTemplates.testIamPermissions
+      operationId: dataproc.projects.locations.workflowTemplates.testIamPermissions
       parameters:
         - description: 'REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.'
           in: path
@@ -1498,14 +1488,14 @@ components:
             $ref: '#/components/schemas/WorkflowTemplate'
   schemas:
     AcceleratorConfig:
-      description: Specifies the type and number of accelerator cards attached to the instances of an instance group (see GPUs on Compute Engine).
+      description: 'Specifies the type and number of accelerator cards attached to the instances of an instance group (see GPUs on Compute Engine (https://cloud.google.com/compute/docs/gpus/)).'
       properties:
         acceleratorCount:
           description: The number of the accelerator cards of this type exposed to this instance.
           format: int32
           type: integer
         acceleratorTypeUri:
-          description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypesExamples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.'
+          description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Compute Engine AcceleratorTypes (https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes)Examples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement) feature, you must use the short name of the accelerator type resource, for example, nvidia-tesla-k80.'
           type: string
       type: object
     AutoscalingConfig:
@@ -1642,7 +1632,7 @@ components:
           $ref: '#/components/schemas/AutoscalingConfig'
           description: Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
         configBucket:
-          description: 'Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging bucket).'
+          description: 'Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging bucket (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).'
           type: string
         encryptionConfig:
           $ref: '#/components/schemas/EncryptionConfig'
@@ -1653,6 +1643,9 @@ components:
         gceClusterConfig:
           $ref: '#/components/schemas/GceClusterConfig'
           description: Optional. The shared Compute Engine config settings for all instances in a cluster.
+        gkeClusterConfig:
+          $ref: '#/components/schemas/GkeClusterConfig'
+          description: 'Optional. The Kubernetes Engine config for Dataproc clusters deployed to Kubernetes. Setting this is considered mutually exclusive with Compute Engine-based options such as gce_cluster_config, master_config, worker_config, secondary_worker_config, and autoscaling_config.'
         initializationActions:
           description: |
             Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's <code>role</code> metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget):
@@ -1797,6 +1790,9 @@ components:
             - ERROR
             - DELETING
             - UPDATING
+            - STOPPING
+            - STOPPED
+            - STARTING
           type: string
         stateStartTime:
           description: 'Output only. Time when this state was entered (see JSON representation of Timestamp (https://developers.google.com/protocol-buffers/docs/proto3#json)).'
@@ -1910,7 +1906,7 @@ components:
           type: object
         networkUri:
           description: |-
-            Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
+            Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks (https://cloud.google.com/compute/docs/subnetworks) for more information).A full URL, partial URI, or short name are valid. Examples:
             https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default
             projects/[project_id]/regions/global/default
             default
@@ -1919,7 +1915,7 @@ components:
           $ref: '#/components/schemas/ReservationAffinity'
           description: Optional. Reservation Affinity for consuming Zonal reservation.
         serviceAccount:
-          description: 'Optional. The Dataproc service account (also see VM Data Plane identity) used by Dataproc cluster VM instances to access Google Cloud Platform services.If not specified, the Compute Engine default service account is used.'
+          description: 'Optional. The Dataproc service account (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc) (also see VM Data Plane identity (https://cloud.google.com/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity)) used by Dataproc cluster VM instances to access Google Cloud Platform services.If not specified, the Compute Engine default service account (https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.'
           type: string
         serviceAccountScopes:
           description: |-
@@ -1942,7 +1938,7 @@ components:
             sub0
           type: string
         tags:
-          description: The Compute Engine tags to add to all instances (see Tagging instances).
+          description: 'The Compute Engine tags to add to all instances (see Tagging instances (https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).'
           items:
             type: string
           type: array
@@ -1968,6 +1964,13 @@ components:
           description: 'Optional. The policy format version to be returned.Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected.Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset.'
           format: int32
           type: integer
+      type: object
+    GkeClusterConfig:
+      description: The GKE config for this cluster.
+      properties:
+        namespacedGkeDeploymentTarget:
+          $ref: '#/components/schemas/NamespacedGkeDeploymentTarget'
+          description: Optional. A target for the deployment.
       type: object
     HadoopJob:
       description: 'A Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).'
@@ -2063,7 +2066,13 @@ components:
           $ref: '#/components/schemas/DiskConfig'
           description: Optional. Disk option config settings.
         imageUri:
-          description: Optional. The Compute Engine image resource used for cluster instances. It can be specified or may be inferred from SoftwareConfig.image_version.
+          description: |-
+            Optional. The Compute Engine image resource used for cluster instances.The URI can represent an image or image family.Image examples:
+            https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]
+            projects/[project_id]/global/images/[image-id]
+            image-idImage family examples. Dataproc will use the most recent image from the family:
+            https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]
+            projects/[project_id]/global/images/family/[custom-image-family-name]If the URI is unspecified, it will be inferred from SoftwareConfig.image_version or the system default.
           type: string
         instanceNames:
           description: 'Output only. The list of instance names. Dataproc derives the names from cluster_name, num_instances, and the instance group.'
@@ -2071,27 +2080,27 @@ components:
             type: string
           type: array
         isPreemptible:
-          description: Optional. Specifies that this instance group contains preemptible instances.
+          description: Output only. Specifies that this instance group contains preemptible instances.
           type: boolean
         machineTypeUri:
           description: |-
             Optional. The Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
             https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
             projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
-            n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto Zone Placement feature, you must use the short name of the machine type resource, for example, n1-standard-2.
+            n1-standard-2Auto Zone Exception: If you are using the Dataproc Auto Zone Placement (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement) feature, you must use the short name of the machine type resource, for example, n1-standard-2.
           type: string
         managedGroupConfig:
           $ref: '#/components/schemas/ManagedGroupConfig'
           description: Output only. The config for Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
         minCpuPlatform:
-          description: Specifies the minimum cpu platform for the Instance Group. See Dataproc&rarr;Minimum CPU Platform.
+          description: 'Specifies the minimum cpu platform for the Instance Group. See Dataproc -&gt; Minimum CPU Platform (https://cloud.google.com/dataproc/docs/concepts/compute/dataproc-min-cpu).'
           type: string
         numInstances:
           description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
           format: int32
           type: integer
         preemptibility:
-          description: Optional. Specifies the preemptibility of the instance group.
+          description: Optional. Specifies the preemptibility of the instance group.The default value for master and worker groups is NON_PREEMPTIBLE. This default cannot be changed.The default value for secondary instances is PREEMPTIBLE.
           enum:
             - PREEMPTIBILITY_UNSPECIFIED
             - NON_PREEMPTIBLE
@@ -2131,8 +2140,10 @@ components:
           type: string
         hadoopJob:
           $ref: '#/components/schemas/HadoopJob'
+          description: Optional. Job is a Hadoop job.
         hiveJob:
           $ref: '#/components/schemas/HiveJob'
+          description: Optional. Job is a Hive job.
         jobUuid:
           description: Output only. A UUID that uniquely identifies a job within the project over time. This is in contrast to a user-settable reference.job_id that may be reused over time.
           type: string
@@ -2143,13 +2154,16 @@ components:
           type: object
         pigJob:
           $ref: '#/components/schemas/PigJob'
+          description: Optional. Job is a Pig job.
         placement:
           $ref: '#/components/schemas/JobPlacement'
           description: 'Required. Job information, including how, when, and where to run the job.'
         prestoJob:
           $ref: '#/components/schemas/PrestoJob'
+          description: Optional. Job is a Presto job.
         pysparkJob:
           $ref: '#/components/schemas/PySparkJob'
+          description: Optional. Job is a PySpark job.
         reference:
           $ref: '#/components/schemas/JobReference'
           description: 'Optional. The fully qualified reference to the job, which can be used to obtain the equivalent REST path of the job resource. If this property is not specified when a job is created, the server generates a <code>job_id</code>.'
@@ -2158,10 +2172,13 @@ components:
           description: Optional. Job scheduling configuration.
         sparkJob:
           $ref: '#/components/schemas/SparkJob'
+          description: Optional. Job is a Spark job.
         sparkRJob:
           $ref: '#/components/schemas/SparkRJob'
+          description: Optional. Job is a SparkR job.
         sparkSqlJob:
           $ref: '#/components/schemas/SparkSqlJob'
+          description: Optional. Job is a SparkSql job.
         status:
           $ref: '#/components/schemas/JobStatus'
           description: Output only. The job status. Additional application-specific status information may be contained in the <code>type_job</code> and <code>yarn_applications</code> fields.
@@ -2273,7 +2290,7 @@ components:
           description: 'Optional. The Cloud Storage URI of a KMS encrypted file containing the shared password between the on-cluster Kerberos realm and the remote trusted realm, in a cross realm trust relationship.'
           type: string
         enableKerberos:
-          description: Optional. Flag to indicate whether to Kerberize the cluster.
+          description: 'Optional. Flag to indicate whether to Kerberize the cluster (default: false). Set this field to true to enable Kerberos on a cluster.'
           type: boolean
         kdcDbKeyUri:
           description: Optional. The Cloud Storage URI of a KMS encrypted file containing the master key of the KDC database.
@@ -2431,6 +2448,16 @@ components:
           description: Output only. The name of the Instance Template used for the Managed Instance Group.
           type: string
       type: object
+    NamespacedGkeDeploymentTarget:
+      description: 'A full, namespace-isolated deployment target for an existing GKE cluster.'
+      properties:
+        clusterNamespace:
+          description: Optional. A namespace within the GKE cluster to deploy into.
+          type: string
+        targetGkeCluster:
+          description: 'Optional. The target GKE cluster to deploy to. Format: ''projects/{project}/locations/{location}/clusters/{cluster_id}'''
+          type: string
+      type: object
     NodeInitializationAction:
       description: Specifies an executable to run on a fully configured node and a timeout period for executable completion.
       properties:
@@ -2470,8 +2497,10 @@ components:
       properties:
         hadoopJob:
           $ref: '#/components/schemas/HadoopJob'
+          description: Optional. Job is a Hadoop job.
         hiveJob:
           $ref: '#/components/schemas/HiveJob'
+          description: Optional. Job is a Hive job.
         labels:
           additionalProperties:
             type: string
@@ -2479,20 +2508,30 @@ components:
           type: object
         pigJob:
           $ref: '#/components/schemas/PigJob'
+          description: Optional. Job is a Pig job.
         prerequisiteStepIds:
           description: 'Optional. The optional list of prerequisite job step_ids. If not specified, the job will start at the beginning of workflow.'
           items:
             type: string
           type: array
+        prestoJob:
+          $ref: '#/components/schemas/PrestoJob'
+          description: Optional. Job is a Presto job.
         pysparkJob:
           $ref: '#/components/schemas/PySparkJob'
+          description: Optional. Job is a PySpark job.
         scheduling:
           $ref: '#/components/schemas/JobScheduling'
           description: Optional. Job scheduling configuration.
         sparkJob:
           $ref: '#/components/schemas/SparkJob'
+          description: Optional. Job is a Spark job.
+        sparkRJob:
+          $ref: '#/components/schemas/SparkRJob'
+          description: Optional. Job is a SparkR job.
         sparkSqlJob:
           $ref: '#/components/schemas/SparkSqlJob'
+          description: Optional. Job is a SparkSql job.
         stepId:
           description: 'Required. The step id. The id must be unique among all jobs within the template.The step id is used as prefix for job id, as job goog-dataproc-workflow-step-id label, and in prerequisiteStepIds field from other steps.The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of between 3 and 50 characters.'
           type: string
@@ -2604,7 +2643,7 @@ components:
           type: integer
       type: object
     PrestoJob:
-      description: 'A Dataproc job for running Presto (https://prestosql.io/) queries'
+      description: 'A Dataproc job for running Presto (https://prestosql.io/) queries. IMPORTANT: The Dataproc Presto Optional Component (https://cloud.google.com/dataproc/docs/concepts/components/presto) must be enabled when the cluster is created to submit a Presto job to the cluster.'
       properties:
         clientTags:
           description: Optional. Presto client tags to attach to this query
@@ -2738,7 +2777,7 @@ components:
       description: Specifies the selection and config of software inside the cluster.
       properties:
         imageVersion:
-          description: 'Optional. The version of software inside the cluster. It must be one of the supported Dataproc Versions, such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version. If unspecified, it defaults to the latest Debian version.'
+          description: 'Optional. The version of software inside the cluster. It must be one of the supported Dataproc Versions (https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions), such as "1.2" (including a subminor version, such as "1.2.29"), or the "preview" version (https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions). If unspecified, it defaults to the latest Debian version.'
           type: string
         optionalComponents:
           description: The set of optional components to activate on the cluster.
@@ -2746,16 +2785,18 @@ components:
             enum:
               - COMPONENT_UNSPECIFIED
               - ANACONDA
+              - DOCKER
               - DRUID
+              - FLINK
+              - HBASE
               - HIVE_WEBHCAT
               - JUPYTER
               - KERBEROS
               - PRESTO
+              - RANGER
+              - SOLR
               - ZEPPELIN
               - ZOOKEEPER
-              - SOLR
-              - HBASE
-              - RANGER
             type: string
           type: array
         properties:
@@ -2771,7 +2812,7 @@ components:
             mapred: mapred-site.xml
             pig: pig.properties
             spark: spark-defaults.conf
-            yarn: yarn-site.xmlFor more information, see Cluster properties.
+            yarn: yarn-site.xmlFor more information, see Cluster properties (https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
           type: object
       type: object
     SparkJob:

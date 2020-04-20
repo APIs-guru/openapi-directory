@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/toolresults/v1beta3/projects'
+  - url: 'https://www.googleapis.com/toolresults/v1beta3'
 info:
   contact:
     name: Google
@@ -33,7 +33,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  '/{projectId}/histories':
+  '/projects/{projectId}/histories':
     get:
       description: |-
         Lists Histories for a given Project.
@@ -149,7 +149,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}':
+  '/projects/{projectId}/histories/{historyId}':
     get:
       description: |-
         Gets a History.
@@ -199,7 +199,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions':
+  '/projects/{projectId}/histories/{historyId}/executions':
     get:
       description: |-
         Lists Executions for a given History.
@@ -325,7 +325,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}':
     get:
       description: |-
         Gets an Execution.
@@ -438,7 +438,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/clusters':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/clusters':
     get:
       description: |-
         Lists Screenshot Clusters
@@ -490,7 +490,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/clusters/{clusterId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/clusters/{clusterId}':
     get:
       description: Retrieves a single screenshot cluster by its ID
       operationId: toolresults.projects.histories.executions.clusters.get
@@ -548,7 +548,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/environments':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/environments':
     get:
       description: |-
         Lists Environments for a given Execution.
@@ -613,7 +613,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/environments/{environmentId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/environments/{environmentId}':
     get:
       description: |-
         Gets an Environment.
@@ -669,7 +669,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps':
     get:
       description: |-
         Lists Steps for a given Execution.
@@ -804,7 +804,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}':
     get:
       description: |-
         Gets a Step.
@@ -944,7 +944,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfMetricsSummary':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfMetricsSummary':
     get:
       description: |-
         Retrieves a PerfMetricsSummary.
@@ -1048,7 +1048,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries':
     get:
       description: |-
         Lists PerfSampleSeries for a given Step.
@@ -1168,7 +1168,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}':
     get:
       description: |-
         Gets a PerfSampleSeries.
@@ -1228,7 +1228,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples':
     get:
       description: |-
         Lists the Performance Samples of a given Sample Series - The list results are sorted by timestamps ascending - The default page size is 500 samples; and maximum size allowed 5000 - The response token indicates the last returned PerfSample timestamp - When the results size exceeds the page size, submit a subsequent request including the page token to return the rest of the samples up to the page limit
@@ -1298,7 +1298,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples:batchCreate':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/perfSampleSeries/{sampleSeriesId}/samples:batchCreate':
     parameters:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/fields'
@@ -1363,7 +1363,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases':
     get:
       description: |-
         Lists Test Cases attached to a Step. Experimental test cases API. Still in active development.
@@ -1449,7 +1449,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases/{testCaseId}':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/testCases/{testCaseId}':
     get:
       description: |-
         Gets details of a Test Case for a Step. Experimental test cases API. Still in active development.
@@ -1526,7 +1526,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails':
     get:
       description: |-
         Lists thumbnails of images attached to a step.
@@ -1610,7 +1610,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}:publishXunitXmlFiles':
+  '/projects/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}:publishXunitXmlFiles':
     parameters:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/fields'
@@ -1683,7 +1683,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/{projectId}/settings':
+  '/projects/{projectId}/settings':
     get:
       description: |-
         Gets the Tool Results settings for a project.
@@ -1724,7 +1724,7 @@ paths:
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
-  '/{projectId}:initializeSettings':
+  '/projects/{projectId}:initializeSettings':
     parameters:
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/fields'
@@ -1771,6 +1771,56 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/{name}:accessibilityClusters':
+    get:
+      description: |-
+        Lists accessibility clusters for a given Step
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if the locale format is incorrect - NOT_FOUND - if the containing Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.accessibilityClusters
+      parameters:
+        - description: |-
+            A full resource name of the step. For example, projects/my-project/histories/bh.1234567890abcdef/executions/ 1234567890123456789/steps/bs.1234567890abcdef
+
+            Required.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+        - description: |-
+            The accepted format is the canonical Unicode format with hyphen as a delimiter. Language must be lowercase, Language Script - Capitalized, Region - UPPERCASE. See http://www.unicode.org/reports/tr35/#Unicode_locale_identifier for details.
+
+            Required.
+          in: query
+          name: locale
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListStepAccessibilityClustersResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
 components:
   parameters:
     alt:
@@ -2485,6 +2535,21 @@ components:
             $ref: '#/components/schemas/ScreenshotCluster'
           type: array
       type: object
+    ListStepAccessibilityClustersResponse:
+      description: Response message for AccessibilityService.ListStepAccessibilityClusters.
+      properties:
+        clusters:
+          description: 'A sequence of accessibility suggestions, grouped into clusters. Within the sequence, clusters that belong to the same SuggestionCategory should be adjacent. Within each category, clusters should be ordered by their SuggestionPriority (ERRORs first). The categories should be ordered by their highest priority cluster.'
+          items:
+            $ref: '#/components/schemas/SuggestionClusterProto'
+          type: array
+        name:
+          description: |-
+            A full resource name of the step. For example, projects/my-project/histories/bh.1234567890abcdef/executions/ 1234567890123456789/steps/bs.1234567890abcdef
+
+            Always presents.
+          type: string
+      type: object
     ListStepThumbnailsResponse:
       description: A response containing the thumbnails in a step.
       properties:
@@ -2762,6 +2827,26 @@ components:
             $ref: '#/components/schemas/FileReference'
           type: array
       type: object
+    RegionProto:
+      description: A rectangular region.
+      properties:
+        heightPx:
+          description: 'The height, in pixels. Always set.'
+          format: int32
+          type: integer
+        leftPx:
+          description: 'The left side of the rectangle, in pixels. Always set.'
+          format: int32
+          type: integer
+        topPx:
+          description: 'The top of the rectangle, in pixels. Always set.'
+          format: int32
+          type: integer
+        widthPx:
+          description: 'The width, in pixels. Always set.'
+          format: int32
+          type: integer
+      type: object
     ResultsStorage:
       description: The storage for test results.
       properties:
@@ -2771,6 +2856,13 @@ components:
         xunitXmlFile:
           $ref: '#/components/schemas/FileReference'
           description: The path to the Xunit XML file.
+      type: object
+    SafeHtmlProto:
+      description: 'IMPORTANT: It is unsafe to accept this message from an untrusted source, since it''s trivial for an attacker to forge serialized messages that don''t fulfill the type''s safety contract -- for example, it could contain attacker controlled script. A system which receives a SafeHtmlProto implicitly trusts the producer of the SafeHtmlProto. So, it''s generally safe to return this message in RPC responses, but generally unsafe to accept it in RPC requests.'
+      properties:
+        privateDoNotAccessOrElseSafeHtmlWrappedValue:
+          description: 'IMPORTANT: Never set or read this field, even from tests, it is private. See documentation at the top of .proto file for programming language packages with which to create or read this message.'
+          type: string
       type: object
     Screen:
       properties:
@@ -3022,6 +3114,66 @@ components:
         otherNativeCrash:
           description: If a native process other than the app crashed.
           type: boolean
+      type: object
+    SuggestionClusterProto:
+      description: |-
+        A set of similar suggestions that we suspect are closely related.
+
+        This proto and most of the nested protos are branched from foxandcrown.prelaunchreport.service.SuggestionClusterProto, replacing PLR's dependencies with FTL's.
+      properties:
+        category:
+          description: Category in which these types of suggestions should appear. Always set.
+          enum:
+            - contentLabeling
+            - implementation
+            - lowContrast
+            - touchTargetSize
+            - unknownCategory
+          type: string
+        suggestions:
+          description: A sequence of suggestions. All of the suggestions within a cluster must have the same SuggestionPriority and belong to the same SuggestionCategory. Suggestions with the same screenshot URL should be adjacent.
+          items:
+            $ref: '#/components/schemas/SuggestionProto'
+          type: array
+      type: object
+    SuggestionProto:
+      properties:
+        helpUrl:
+          description: Reference to a help center article concerning this type of suggestion. Always set.
+          type: string
+        longMessage:
+          $ref: '#/components/schemas/SafeHtmlProto'
+          description: 'Message, in the user''s language, explaining the suggestion, which may contain markup. Always set.'
+        priority:
+          description: Relative importance of a suggestion. Always set.
+          enum:
+            - error
+            - info
+            - unknownPriority
+            - warning
+          type: string
+        pseudoResourceId:
+          description: 'A somewhat human readable identifier of the source view, if it does not have a resource_name. This is a path within the accessibility hierarchy, an element with resource name; similar to an XPath.'
+          type: string
+        region:
+          $ref: '#/components/schemas/RegionProto'
+          description: Region within the screenshot that is relevant to this suggestion. Optional.
+        resourceName:
+          description: 'Reference to a view element, identified by its resource name, if it has one.'
+          type: string
+        screenId:
+          description: 'ID of the screen for the suggestion. It is used for getting the corresponding screenshot path. For example, screen_id "1" corresponds to "1.png" file in GCS. Always set.'
+          type: string
+        secondaryPriority:
+          description: 'Relative importance of a suggestion as compared with other suggestions that have the same priority and category. This is a meaningless value that can be used to order suggestions that are in the same category and have the same priority. The larger values have higher priority (i.e., are more important). Optional.'
+          format: double
+          type: number
+        shortMessage:
+          $ref: '#/components/schemas/SafeHtmlProto'
+          description: 'Concise message, in the user''s language, representing the suggestion, which may contain markup. Always set.'
+        title:
+          description: 'General title for the suggestion, in the user''s language, without markup. Always set.'
+          type: string
       type: object
     TestCase:
       properties:

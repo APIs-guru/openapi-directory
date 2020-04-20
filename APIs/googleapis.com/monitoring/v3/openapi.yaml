@@ -5,12 +5,12 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Stackdriver Monitoring documentation.'
+  description: 'Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages. The table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the Cloud Monitoring documentation.'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Stackdriver Monitoring
+  title: Cloud Monitoring
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -73,17 +73,17 @@ paths:
       tags:
         - uptimeCheckIps
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
   '/v3/{name}':
     delete:
       description: 'Deletes a metric descriptor. Only user-created custom metrics (https://cloud.google.com/monitoring/custom-metrics) can be deleted.'
@@ -123,7 +123,7 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      description: Gets a single metric descriptor. This method does not require a Workspace.
       operationId: monitoring.projects.metricDescriptors.get
       parameters:
         - description: |-
@@ -172,17 +172,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     patch:
       description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
       operationId: monitoring.projects.alertPolicies.patch
@@ -328,17 +328,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a new alerting policy.
       operationId: monitoring.projects.alertPolicies.create
@@ -378,17 +378,17 @@ paths:
         - projects
   '/v3/{name}/collectdTimeSeries':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
       operationId: monitoring.projects.collectdTimeSeries.create
@@ -500,17 +500,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
@@ -616,20 +616,20 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
   '/v3/{name}/metricDescriptors':
     get:
-      description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+      description: Lists metric descriptors that match a filter. This method does not require a Workspace.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
         - description: |
@@ -685,17 +685,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates a new metric descriptor. User-created metric descriptors define custom metrics (https://cloud.google.com/monitoring/custom-metrics).'
       operationId: monitoring.projects.metricDescriptors.create
@@ -738,7 +738,7 @@ paths:
         - projects
   '/v3/{name}/monitoredResourceDescriptors':
     get:
-      description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+      description: Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
         - description: |
@@ -794,17 +794,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
   '/v3/{name}/notificationChannelDescriptors':
     get:
       description: Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.
@@ -853,17 +853,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
   '/v3/{name}/notificationChannels':
     get:
       description: Lists the notification channels that have been created for the project.
@@ -922,17 +922,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.'
       operationId: monitoring.projects.notificationChannels.create
@@ -972,7 +972,7 @@ paths:
         - projects
   '/v3/{name}/timeSeries':
     get:
-      description: Lists time series that match a filter. This method does not require a Stackdriver account.
+      description: Lists time series that match a filter. This method does not require a Workspace.
       operationId: monitoring.projects.timeSeries.list
       parameters:
         - description: |
@@ -1106,17 +1106,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
@@ -1157,19 +1157,72 @@ paths:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
-  '/v3/{name}:getVerificationCode':
+  '/v3/{name}/timeSeries:query':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+    post:
+      description: Queries time series using the time series query language. This method does not require a Workspace.
+      operationId: monitoring.projects.timeSeries.query
+      parameters:
+        - description: |
+            Required. The project on which to execute the request. The format is:
+            projects/[PROJECT_ID_OR_NUMBER]
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryTimeSeriesRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/QueryTimeSeriesResponse'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+  '/v3/{name}:getVerificationCode':
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: 'Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as "G-123456") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.'
       operationId: monitoring.projects.notificationChannels.getVerificationCode
@@ -1206,17 +1259,17 @@ paths:
         - projects
   '/v3/{name}:sendVerificationCode':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.
       operationId: monitoring.projects.notificationChannels.sendVerificationCode
@@ -1253,17 +1306,17 @@ paths:
         - projects
   '/v3/{name}:verify':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
       operationId: monitoring.projects.notificationChannels.verify
@@ -1304,8 +1357,9 @@ paths:
       operationId: monitoring.services.serviceLevelObjectives.list
       parameters:
         - description: |
-            Required. Resource name of the parent Service. The format is:
+            Required. Resource name of the parent containing the listed SLOs, either a project or a Monitoring Workspace. The formats are:
             projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+            workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
           in: path
           name: parent
           required: true
@@ -1359,17 +1413,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Create a ServiceLevelObjective for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.create
@@ -1417,9 +1471,9 @@ paths:
       operationId: monitoring.services.list
       parameters:
         - description: |
-            Required. Resource name of the parent containing the listed services, either a project or Stackdriver Account (workspace). The formats are:
+            Required. Resource name of the parent containing the listed services, either a project or a Monitoring Workspace. The formats are:
             projects/[PROJECT_ID_OR_NUMBER]
-            workspaces/[HOST_PROJECT_ID]
+            workspaces/[HOST_PROJECT_ID_OR_NUMBER]
           in: path
           name: parent
           required: true
@@ -1473,17 +1527,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Create a Service.
       operationId: monitoring.services.create
@@ -1572,17 +1626,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
     post:
       description: Creates a new Uptime check configuration.
       operationId: monitoring.projects.uptimeCheckConfigs.create
@@ -1709,7 +1763,7 @@ components:
             $ref: '#/components/schemas/Group'
   schemas:
     Aggregation:
-      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Aggregating Time Series.'
+      description: 'Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per_series_aligner operation to each time series after its data has been divided into regular alignment_period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross_series_reducer to all the time series, optionally sorting the time series into subsets with group_by_fields, and applying the reducer to each subset.The raw time series data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example "the 95% latency across the average of all tasks in a cluster". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https://cloud.google.com/monitoring/api/v3/aggregation).'
       properties:
         alignmentPeriod:
           description: 'The alignment_period specifies a time interval, in seconds, that is used to divide the data in all the time series into consistent blocks of time. This will be done before the per-series aligner can be applied to the data.The value must be at least 60 seconds. If a per-series aligner other than ALIGN_NONE is specified, this field is required or an error is returned. If no per-series aligner is specified, or the aligner ALIGN_NONE is specified, then this field is ignored.'
@@ -1763,7 +1817,7 @@ components:
           type: string
       type: object
     AlertPolicy:
-      description: 'A description of the conditions under which some aspect of your system is considered to be "unhealthy" and the ways to notify people or services about this state. For an overview of alert policies, see Introduction to Alerting.'
+      description: 'A description of the conditions under which some aspect of your system is considered to be "unhealthy" and the ways to notify people or services about this state. For an overview of alert policies, see Introduction to Alerting (https://cloud.google.com/monitoring/alerts/).'
       properties:
         combiner:
           description: 'How to combine the results of multiple conditions to determine if an incident should be opened. If condition_time_series_query_language is present, this must be COMBINE_UNSPECIFIED.'
@@ -2073,14 +2127,14 @@ components:
       description: 'Distribution contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values. The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by formulas for buckets of fixed or exponentially increasing widths.Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the mean and sum_of_squared_deviation fields meaningless.'
       properties:
         bucketCounts:
-          description: 'Required in the Stackdriver Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.'
+          description: 'Required in the Cloud Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.'
           items:
             format: int64
             type: string
           type: array
         bucketOptions:
           $ref: '#/components/schemas/BucketOptions'
-          description: Required in the Stackdriver Monitoring API v3. Defines the histogram bucket boundaries.
+          description: Required in the Cloud Monitoring API v3. Defines the histogram bucket boundaries.
         count:
           description: The number of values in the population. Must be non-negative. This value must equal the sum of the values in bucket_counts if a histogram is provided.
           format: int64
@@ -2096,7 +2150,7 @@ components:
           type: number
         range:
           $ref: '#/components/schemas/Range'
-          description: 'If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Stackdriver Monitoring API v3.'
+          description: 'If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Cloud Monitoring API v3.'
         sumOfSquaredDeviation:
           description: |-
             The sum of squared deviations from the mean of the values in the population. For values x_i this is:
@@ -2401,6 +2455,20 @@ components:
             - INT64
           type: string
       type: object
+    LabelValue:
+      description: A label value.
+      properties:
+        boolValue:
+          description: A bool label value.
+          type: boolean
+        int64Value:
+          description: An int64 label value.
+          format: int64
+          type: string
+        stringValue:
+          description: A string label value.
+          type: string
+      type: object
     LatencyCriteria:
       description: Parameters for a latency threshold SLI.
       properties:
@@ -2611,7 +2679,7 @@ components:
       description: A condition type that checks that monitored resources are reporting data. The configuration defines a metric and a set of monitored resources. The predicate is considered in violation when a time series for the specified metric of a monitored resource does not include any data in the specified duration.
       properties:
         aggregations:
-          description: Specifies the alignment of data points in individual time series as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resrouces). Multiple aggregations are applied in the order specified.This field is similar to the one in the ListTimeSeries request. It is advisable to use the ListTimeSeries method when debugging this field.
+          description: 'Specifies the alignment of data points in individual time series as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resrouces). Multiple aggregations are applied in the order specified.This field is similar to the one in the ListTimeSeries request (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It is advisable to use the ListTimeSeries method when debugging this field.'
           items:
             $ref: '#/components/schemas/Aggregation'
           type: array
@@ -2620,7 +2688,7 @@ components:
           format: google-duration
           type: string
         filter:
-          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
+          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
           type: string
         trigger:
           $ref: '#/components/schemas/Trigger'
@@ -2644,6 +2712,8 @@ components:
           description: Optional. The launch stage of the metric definition.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2746,6 +2816,8 @@ components:
           description: Deprecated. Must use the MetricDescriptor.launch_stage instead.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2771,7 +2843,7 @@ components:
       description: A condition type that compares a collection of time series against a threshold.
       properties:
         aggregations:
-          description: Specifies the alignment of data points in individual time series as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resrouces). Multiple aggregations are applied in the order specified.This field is similar to the one in the ListTimeSeries request. It is advisable to use the ListTimeSeries method when debugging this field.
+          description: 'Specifies the alignment of data points in individual time series as well as how to combine the retrieved time series together (such as when aggregating multiple streams on each resource to a single stream for each resource or when aggregating streams across all members of a group of resrouces). Multiple aggregations are applied in the order specified.This field is similar to the one in the ListTimeSeries request (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It is advisable to use the ListTimeSeries method when debugging this field.'
           items:
             $ref: '#/components/schemas/Aggregation'
           type: array
@@ -2799,7 +2871,7 @@ components:
           format: google-duration
           type: string
         filter:
-          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
+          description: 'A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that call is useful to verify the time series that will be retrieved / processed) and must specify the metric type and optionally may contain restrictions on resource type, resource labels, and metric labels. This field may not exceed 2048 Unicode characters in length.'
           type: string
         thresholdValue:
           description: A value against which to compare the time series.
@@ -2843,6 +2915,8 @@ components:
           description: Optional. The launch stage of the monitored resource definition.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2942,6 +3016,8 @@ components:
           description: The product launch stage for channels of this type.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2994,6 +3070,52 @@ components:
           $ref: '#/components/schemas/TypedValue'
           description: The value of the data point.
       type: object
+    PointData:
+      description: A point's value columns and time interval. Each point has one or more point values corresponding to the entries in point_descriptors field in the TimeSeriesDescriptor associated with this object.
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+          description: The time interval associated with the point.
+        values:
+          description: The values that make up the point.
+          items:
+            $ref: '#/components/schemas/TypedValue'
+          type: array
+      type: object
+    QueryTimeSeriesRequest:
+      description: The QueryTimeSeries request.
+      properties:
+        pageSize:
+          description: A positive number that is the maximum number of time_series_data to return.
+          format: int32
+          type: integer
+        pageToken:
+          description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          type: string
+        query:
+          description: Required. The query in the monitoring query language format. The default time zone is in UTC.
+          type: string
+      type: object
+    QueryTimeSeriesResponse:
+      description: The QueryTimeSeries response.
+      properties:
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.'
+          type: string
+        partialErrors:
+          description: Query execution errors that may have caused the time series data returned to be incomplete. The available data will be available in the response.
+          items:
+            $ref: '#/components/schemas/Status'
+          type: array
+        timeSeriesData:
+          description: The time series data.
+          items:
+            $ref: '#/components/schemas/TimeSeriesData'
+          type: array
+        timeSeriesDescriptor:
+          $ref: '#/components/schemas/TimeSeriesDescriptor'
+          description: The descriptor for the time series data.
+      type: object
     Range:
       description: The range of the population values.
       properties:
@@ -3035,7 +3157,7 @@ components:
       properties: {}
       type: object
     Service:
-      description: 'A Service is a discrete, autonomous, and network-accessible unit, designed to solve an individual concern (Wikipedia (https://en.wikipedia.org/wiki/Service-orientation)). In Stackdriver Monitoring, a Service acts as the root resource under which operational aspects of the service are accessible.'
+      description: 'A Service is a discrete, autonomous, and network-accessible unit, designed to solve an individual concern (Wikipedia (https://en.wikipedia.org/wiki/Service-orientation)). In Cloud Monitoring, a Service acts as the root resource under which operational aspects of the service are accessible.'
       properties:
         appEngine:
           $ref: '#/components/schemas/AppEngine'
@@ -3058,7 +3180,7 @@ components:
         name:
           description: |
             Resource name for this Service. The format is:
-            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID}
+            projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
           type: string
         telemetry:
           $ref: '#/components/schemas/Telemetry'
@@ -3219,6 +3341,34 @@ components:
             - MONEY
           type: string
       type: object
+    TimeSeriesData:
+      description: Represents the values of a time series associated with a TimeSeriesDescriptor.
+      properties:
+        labelValues:
+          description: 'The values of the labels in the time series identifier, given in the same order as the label_descriptors field of the TimeSeriesDescriptor associated with this object. Each value must have a value of the type given in the corresponding entry of label_descriptors.'
+          items:
+            $ref: '#/components/schemas/LabelValue'
+          type: array
+        pointData:
+          description: The points in the time series.
+          items:
+            $ref: '#/components/schemas/PointData'
+          type: array
+      type: object
+    TimeSeriesDescriptor:
+      description: A descriptor for the labels and points in a timeseries.
+      properties:
+        labelDescriptors:
+          description: Descriptors for the labels.
+          items:
+            $ref: '#/components/schemas/LabelDescriptor'
+          type: array
+        pointDescriptors:
+          description: Descriptors for the point data value columns.
+          items:
+            $ref: '#/components/schemas/ValueDescriptor'
+          type: array
+      type: object
     TimeSeriesRatio:
       description: |-
         A TimeSeriesRatio specifies two TimeSeries to use for computing the good_service / total_service ratio. The specified TimeSeries must have ValueType = DOUBLE or ValueType = INT64 and must have MetricKind =
@@ -3377,6 +3527,32 @@ components:
             - EUROPE
             - SOUTH_AMERICA
             - ASIA_PACIFIC
+          type: string
+      type: object
+    ValueDescriptor:
+      description: A descriptor for the value columns in a data point.
+      properties:
+        key:
+          description: The value key.
+          type: string
+        metricKind:
+          description: The value stream kind.
+          enum:
+            - METRIC_KIND_UNSPECIFIED
+            - GAUGE
+            - DELTA
+            - CUMULATIVE
+          type: string
+        valueType:
+          description: The value type.
+          enum:
+            - VALUE_TYPE_UNSPECIFIED
+            - BOOL
+            - INT64
+            - DOUBLE
+            - STRING
+            - DISTRIBUTION
+            - MONEY
           type: string
       type: object
     VerifyNotificationChannelRequest:

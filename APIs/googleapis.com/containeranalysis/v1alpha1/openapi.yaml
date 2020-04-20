@@ -29,13 +29,13 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/container-analysis/api/reference/rest/'
 tags:
-  - name: projects
   - name: providers
+  - name: projects
 paths:
   '/v1alpha1/{name}':
     delete:
       description: Deletes the given `Note` from the system.
-      operationId: containeranalysis.providers.notes.delete
+      operationId: containeranalysis.projects.notes.delete
       parameters:
         - description: |-
             The name of the note in the form of
@@ -59,14 +59,14 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     get:
-      description: Returns the requested `Note`.
-      operationId: containeranalysis.providers.notes.get
+      description: Gets a specific scan configuration for a project.
+      operationId: containeranalysis.projects.scanConfigs.get
       parameters:
         - description: |-
-            The name of the note in the form of
-            "providers/{provider_id}/notes/{NOTE_ID}"
+            The name of the ScanConfig in the form
+            projects/{project_id}/scanConfigs/{scan_config_id}
           in: path
           name: name
           required: true
@@ -78,7 +78,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Note'
+                $ref: '#/components/schemas/ScanConfig'
           description: Successful response
       security:
         - Oauth2:
@@ -86,26 +86,26 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     patch:
-      description: Updates an existing `Note`.
-      operationId: containeranalysis.providers.notes.patch
+      description: Updates the scan configuration to a new value.
+      operationId: containeranalysis.projects.scanConfigs.patch
       parameters:
         - description: |-
-            The name of the note.
-            Should be of the form "projects/{provider_id}/notes/{note_id}".
+            The scan config to update of the form
+            projects/{project_id}/scanConfigs/{scan_config_id}.
           in: path
           name: name
           required: true
@@ -121,13 +121,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/ScanConfig'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Note'
+                $ref: '#/components/schemas/ScanConfig'
           description: Successful response
       security:
         - Oauth2:
@@ -135,16 +135,15 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{name}/notes':
     get:
-      description: Lists all `Notes` for a given project.
-      operationId: containeranalysis.providers.notes.list
+      description: Gets the `Note` attached to the given `Occurrence`.
+      operationId: containeranalysis.projects.occurrences.getNotes
       parameters:
         - description: |-
-            The name field will contain the project Id for example:
-            "providers/{provider_id}
-            @Deprecated
+            The name of the occurrence in the form
+            "projects/{project_id}/occurrences/{OCCURRENCE_ID}"
           in: path
           name: name
           required: true
@@ -176,7 +175,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ListNotesResponse'
+                $ref: '#/components/schemas/Note'
           description: Successful response
       security:
         - Oauth2:
@@ -184,19 +183,19 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Creates a new `Note`.
       operationId: containeranalysis.providers.notes.create
@@ -248,7 +247,7 @@ paths:
         Lists `Occurrences` referencing the specified `Note`. Use this method to
         get all occurrences referencing your `Note` across all your customer
         projects.
-      operationId: containeranalysis.providers.notes.occurrences.list
+      operationId: containeranalysis.projects.notes.occurrences.list
       parameters:
         - description: |-
             The name field will contain the note name for example:
@@ -287,19 +286,19 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v1alpha1/{parent}/notes':
     get:
       description: Lists all `Notes` for a given project.
@@ -350,17 +349,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Creates a new `Note`.
       operationId: containeranalysis.projects.notes.create
@@ -471,17 +470,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Creates a new `Occurrence`. Use this method to create `Occurrences`
@@ -553,30 +552,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v1alpha1/{parent}/operations':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: Creates a new `Operation`.
       operationId: containeranalysis.projects.operations.create
@@ -649,30 +648,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
   '/v1alpha1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Gets the access control policy for a note or an `Occurrence` resource.
@@ -686,7 +685,7 @@ paths:
         error otherwise. The resource takes the following formats:
         `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for occurrences and
         projects/{PROJECT_ID}/notes/{NOTE_ID} for notes
-      operationId: containeranalysis.providers.notes.getIamPolicy
+      operationId: containeranalysis.projects.notes.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -715,20 +714,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Sets the access control policy on the specified `Note` or `Occurrence`.
@@ -743,7 +742,7 @@ paths:
         a `PERMISSION_DENIED` error otherwise. The resource takes the following
         formats: `projects/{projectid}/occurrences/{occurrenceid}` for occurrences
         and projects/{projectid}/notes/{noteid} for notes
-      operationId: containeranalysis.providers.notes.setIamPolicy
+      operationId: containeranalysis.projects.notes.setIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being specified.
@@ -772,20 +771,20 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
   '/v1alpha1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
     post:
       description: |-
         Returns the permissions that a caller has on the specified note or
@@ -796,7 +795,7 @@ paths:
         project, or a `PERMISSION_DENIED` error otherwise. The resource takes the
         following formats: `projects/{PROJECT_ID}/occurrences/{OCCURRENCE_ID}` for
         `Occurrences` and `projects/{PROJECT_ID}/notes/{NOTE_ID}` for `Notes`
-      operationId: containeranalysis.providers.notes.testIamPermissions
+      operationId: containeranalysis.projects.notes.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -825,7 +824,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - providers
+        - projects
 components:
   parameters:
     _.xgafv:

@@ -30,22 +30,22 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/debugger'
 tags:
-  - name: debugger
   - name: controller
+  - name: debugger
 paths:
   /v2/controller/debuggees/register:
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Registers the debuggee with the controller service.
@@ -107,6 +107,13 @@ paths:
           schema:
             type: string
         - description: |-
+            Identifies the agent.
+            This is the ID returned in the RegisterDebuggee response.
+          in: query
+          name: agentId
+          schema:
+            type: string
+        - description: |-
             If set to `true` (recommended), returns `google.rpc.Code.OK` status and
             sets the `wait_expired` response field to `true` when the server-selected
             timeout has expired.
@@ -145,30 +152,30 @@ paths:
       tags:
         - controller
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     put:
       description: |-
         Updates the breakpoint state or mutable fields.
@@ -259,17 +266,17 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
     get:
       description: Lists all breakpoints for the debuggee.
@@ -346,30 +353,30 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints/set':
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -379,6 +386,15 @@ paths:
           name: debuggeeId
           required: true
           schema:
+            type: string
+        - description: The canary option set by the user upon setting breakpoint.
+          in: query
+          name: canaryOption
+          schema:
+            enum:
+              - CANARY_OPTION_UNSPECIFIED
+              - CANARY_OPTION_TRY_ENABLE
+              - CANARY_OPTION_TRY_DISABLE
             type: string
         - description: |-
             Required. The client version making the call.
@@ -494,17 +510,17 @@ paths:
       tags:
         - debugger
     parameters:
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
 components:
   parameters:
     _.xgafv:
@@ -613,6 +629,12 @@ components:
             - CAPTURE
             - LOG
           type: string
+        canaryExpireTime:
+          description: |-
+            The deadline for the breakpoint to stay in CANARY_ACTIVE state. The value
+            is meaningless when the breakpoint is not in CANARY_ACTIVE state.
+          format: google-datetime
+          type: string
         condition:
           description: |-
             Condition that triggers the breakpoint.
@@ -693,6 +715,15 @@ components:
           items:
             $ref: '#/components/schemas/StackFrame'
           type: array
+        state:
+          description: The current state of the breakpoint.
+          enum:
+            - STATE_UNSPECIFIED
+            - STATE_CANARY_PENDING_AGENTS
+            - STATE_CANARY_ACTIVE
+            - STATE_ROLLING_TO_ALL
+            - STATE_IS_FINAL
+          type: string
         status:
           $ref: '#/components/schemas/StatusMessage'
           description: |-
@@ -790,6 +821,15 @@ components:
             Version ID of the agent.
             Schema: `domain/language-platform/vmajor.minor` (for example
             `google.com/java-gcp/v1.1`).
+          type: string
+        canaryMode:
+          description: Used when setting breakpoint canary for this debuggee.
+          enum:
+            - CANARY_MODE_UNSPECIFIED
+            - CANARY_MODE_ALWAYS_ENABLED
+            - CANARY_MODE_ALWAYS_DISABLED
+            - CANARY_MODE_DEFAULT_ENABLED
+            - CANARY_MODE_DEFAULT_DISABLED
           type: string
         description:
           description: |-
@@ -1023,6 +1063,11 @@ components:
     RegisterDebuggeeResponse:
       description: Response for registering a debuggee.
       properties:
+        agentId:
+          description: |-
+            A unique ID generated for the agent.
+            Each RegisterDebuggee request will generate a new agent ID.
+          type: string
         debuggee:
           $ref: '#/components/schemas/Debuggee'
           description: |-
@@ -1133,6 +1178,7 @@ components:
             - BREAKPOINT_CONDITION
             - BREAKPOINT_EXPRESSION
             - BREAKPOINT_AGE
+            - BREAKPOINT_CANARY_FAILED
             - VARIABLE_NAME
             - VARIABLE_VALUE
           type: string

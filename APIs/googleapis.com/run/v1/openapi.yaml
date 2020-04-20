@@ -29,9 +29,9 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/run/'
 tags:
-  - name: projects
   - name: namespaces
   - name: api
+  - name: projects
 paths:
   '/api/v1/{name}':
     get:
@@ -453,11 +453,14 @@ paths:
         - namespaces
   '/apis/serving.knative.dev/v1/{name}':
     delete:
-      description: Delete a revision.
-      operationId: run.namespaces.revisions.delete
+      description: |-
+        Delete a service.
+        This will cause the Service to stop serving traffic and will delete the
+        child entities like Routes, Configurations and Revisions.
+      operationId: run.namespaces.services.delete
       parameters:
         - description: |-
-            The name of the revision to delete.
+            The name of the service to delete.
             For Cloud Run (fully managed), replace {namespace_id} with the project ID
             or number.
           in: path
@@ -500,11 +503,11 @@ paths:
       tags:
         - namespaces
     get:
-      description: Get information about a revision.
-      operationId: run.namespaces.revisions.get
+      description: Get information about a service.
+      operationId: run.namespaces.services.get
       parameters:
         - description: |-
-            The name of the revision to retrieve.
+            The name of the service to retrieve.
             For Cloud Run (fully managed), replace {namespace_id} with the project ID
             or number.
           in: path
@@ -518,7 +521,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Revision'
+                $ref: '#/components/schemas/Service'
           description: Successful response
       security:
         - Oauth2:
@@ -2523,16 +2526,12 @@ components:
           description: |-
             (Optional)
 
-            Cloud Run fully managed: not supported
+            List of ports to expose from the container. Only a single port can be
+            specified. The specified ports must be listening on all interfaces
+            (0.0.0.0) within the container to be accessible.
 
-            Cloud Run for Anthos: supported
-
-            List of ports to expose from the container. Exposing a port here gives
-            the system additional information about the network connections a
-            container uses, but is primarily informational. Not specifying a port here
-            DOES NOT prevent that port from being exposed. Any port which is
-            listening on the default "0.0.0.0" address inside a container will be
-            accessible from the network.
+            If omitted, a port number will be chosen and passed to the container
+            through the PORT environment variable for the container to listen on.
           items:
             $ref: '#/components/schemas/ContainerPort'
           type: array
@@ -2630,20 +2629,11 @@ components:
           type: string
       type: object
     ContainerPort:
-      description: |-
-        Cloud Run fully managed: not supported
-
-        Cloud Run for Anthos: supported
-
-        ContainerPort represents a network port in a single container.
+      description: ContainerPort represents a network port in a single container.
       properties:
         containerPort:
           description: |-
             (Optional)
-
-            Cloud Run fully managed: supported
-
-            Cloud Run for Anthos: supported
 
             Port number the container listens on.
             This must be a valid port number, 0 < x < 65536.
@@ -2668,7 +2658,7 @@ components:
 
             Cloud Run for Anthos: supported
 
-            Protocol for port. Must be TCP.
+            Protocol for port. Must be "TCP".
             Defaults to "TCP".
           type: string
       type: object
@@ -3031,47 +3021,6 @@ components:
 
             The header field value
           type: string
-      type: object
-    Handler:
-      description: |-
-        Cloud Run fully managed: not supported
-
-        Cloud Run for Anthos: supported
-
-        Handler defines a specific action that should be taken
-      properties:
-        exec:
-          $ref: '#/components/schemas/ExecAction'
-          description: |-
-            (Optional)
-
-            Cloud Run fully managed: not supported
-
-            Cloud Run for Anthos: supported
-
-            One and only one of the following should be specified.
-            Exec specifies the action to take.
-        httpGet:
-          $ref: '#/components/schemas/HTTPGetAction'
-          description: |-
-            (Optional)
-
-            Cloud Run fully managed: not supported
-
-            Cloud Run for Anthos: supported
-
-            HTTPGet specifies the http request to perform.
-        tcpSocket:
-          $ref: '#/components/schemas/TCPSocketAction'
-          description: |-
-            (Optional)
-
-            Cloud Run fully managed: not supported
-
-            Cloud Run for Anthos: supported
-
-            TCPSocket specifies an action involving a TCP port.
-            TCP hooks not yet supported
       type: object
     IntOrString:
       description: |-
@@ -3813,6 +3762,19 @@ components:
         Probe describes a health check to be performed against a container to
         determine whether it is alive or ready to receive traffic.
       properties:
+        exec:
+          $ref: '#/components/schemas/ExecAction'
+          description: |-
+            (Optional)
+
+            Cloud Run fully managed: not supported
+
+            Cloud Run for Anthos: supported
+
+            One and only one of the following should be specified.
+            Exec specifies the action to take.
+
+            A field inlined from the Handler message.
         failureThreshold:
           description: |-
             (Optional)
@@ -3825,14 +3787,18 @@ components:
             having succeeded. Defaults to 3. Minimum value is 1.
           format: int32
           type: integer
-        handler:
-          $ref: '#/components/schemas/Handler'
+        httpGet:
+          $ref: '#/components/schemas/HTTPGetAction'
           description: |-
+            (Optional)
+
             Cloud Run fully managed: not supported
 
             Cloud Run for Anthos: supported
 
-            The action taken to determine the health of a container
+            HTTPGet specifies the http request to perform.
+
+            A field inlined from the Handler message.
         initialDelaySeconds:
           description: |-
             (Optional)
@@ -3871,6 +3837,19 @@ components:
             is 1.
           format: int32
           type: integer
+        tcpSocket:
+          $ref: '#/components/schemas/TCPSocketAction'
+          description: |-
+            (Optional)
+
+            Cloud Run fully managed: not supported
+
+            Cloud Run for Anthos: supported
+
+            TCPSocket specifies an action involving a TCP port.
+            TCP hooks not yet supported
+
+            A field inlined from the Handler message.
         timeoutSeconds:
           description: |-
             (Optional)
@@ -4511,8 +4490,8 @@ components:
             OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
             the fields in the mask will be modified. If no mask is provided, the
             following default mask is used:
-            paths: "bindings, etag"
-            This field is only used by Cloud IAM.
+
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object

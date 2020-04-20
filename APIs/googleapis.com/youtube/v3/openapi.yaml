@@ -2466,7 +2466,7 @@ paths:
           name: maxResults
           schema:
             default: 5
-            maximum: 50000
+            maximum: 1000
             minimum: 0
             type: integer
         - description: The mode parameter specifies which channel members to return.
@@ -2495,6 +2495,10 @@ paths:
             - 'https://www.googleapis.com/auth/youtube'
           Oauth2c:
             - 'https://www.googleapis.com/auth/youtube'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
           Oauth2c:
@@ -2540,6 +2544,10 @@ paths:
             - 'https://www.googleapis.com/auth/youtube'
           Oauth2c:
             - 'https://www.googleapis.com/auth/youtube'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
         - Oauth2:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
           Oauth2c:
@@ -6938,6 +6946,8 @@ components:
         enableAutoStart:
           description: This setting indicates whether auto start is enabled for this broadcast.
           type: boolean
+        enableAutoStop:
+          type: boolean
         enableClosedCaptions:
           description: 'This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.'
           type: boolean
@@ -9471,6 +9481,7 @@ components:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://www.googleapis.com/auth/youtube': Manage your YouTube account
+            'https://www.googleapis.com/auth/youtube.channel-memberships.creator': 'See a list of your current active channel members, their current level, and when they became a member'
             'https://www.googleapis.com/auth/youtube.force-ssl': 'See, edit, and permanently delete your YouTube videos, ratings, comments and captions'
             'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
             'https://www.googleapis.com/auth/youtube.upload': Manage your YouTube videos
@@ -9484,6 +9495,7 @@ components:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://www.googleapis.com/auth/youtube': Manage your YouTube account
+            'https://www.googleapis.com/auth/youtube.channel-memberships.creator': 'See a list of your current active channel members, their current level, and when they became a member'
             'https://www.googleapis.com/auth/youtube.force-ssl': 'See, edit, and permanently delete your YouTube videos, ratings, comments and captions'
             'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
             'https://www.googleapis.com/auth/youtube.upload': Manage your YouTube videos

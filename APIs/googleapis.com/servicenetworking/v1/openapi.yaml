@@ -29,8 +29,8 @@ info:
 externalDocs:
   url: 'https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started'
 tags:
-  - name: operations
   - name: services
+  - name: operations
 paths:
   '/v1/{name}':
     delete:
@@ -99,22 +99,19 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
-      description: |-
-        Updates the allocated ranges that are assigned to a connection.
-        The response from the `get` operation will be of type `Connection` if the
-        operation successfully completes.
+      description: Updates the allocated ranges that are assigned to a connection.
       operationId: servicenetworking.services.connections.patch
       parameters:
         - description: |-
@@ -169,17 +166,17 @@ paths:
         - services
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Starts asynchronous cancellation on a long-running operation.  The server
@@ -274,17 +271,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Creates a private connection that establishes a VPC Network Peering
@@ -293,9 +290,7 @@ paths:
         method. The administrator must assign one or more allocated IP ranges for
         provisioning subnetworks in the service producer's VPC network. This
         connection is used for all supported services in the service producer's
-        organization, so it only needs to be invoked once. The response from the
-        `get` operation will be of type `Connection` if the operation successfully
-        completes.
+        organization, so it only needs to be invoked once.
       operationId: servicenetworking.services.connections.create
       parameters:
         - description: |-
@@ -331,30 +326,83 @@ paths:
             - 'https://www.googleapis.com/auth/service.management'
       tags:
         - services
-  '/v1/{parent}:addSubnetwork':
+  '/v1/{parent}/roles:add':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
-        For service producers, provisions a new subnet in a
-        peered service's shared VPC network in the requested region and with the
-        requested size that's expressed as a CIDR range (number of leading bits of
-        ipV4 network mask). The method checks against the assigned allocated ranges
-        to find a non-conflicting IP address range. The method will reuse a subnet
-        if subsequent calls contain the same subnet name, region, and prefix
-        length. This method will make producer's tenant project to be a shared VPC
-        service project as needed. The response from the `get` operation will be of
-        type `Subnetwork` if the operation successfully completes.
+        Service producers can use this method to add roles in the shared VPC host
+        project. Each role is bound to the provided member. Each role must be
+        selected from within a whitelisted set of roles. Each role is applied at
+        only the granularity specified in the whitelist.
+      operationId: servicenetworking.services.roles.add
+      parameters:
+        - description: |-
+            Required. This is in a form services/{service} where {service} is the name of the
+            private access management service. For example
+            'service-peering.example.com'.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+          x-reservedExpansion: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRolesRequest'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Operation'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
+  '/v1/{parent}:addSubnetwork':
+    parameters:
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+    post:
+      description: |-
+        For service producers, provisions a new subnet in a peered service's shared
+        VPC network in the requested region and with the requested size that's
+        expressed as a CIDR range (number of leading bits of ipV4 network mask).
+        The method checks against the assigned allocated ranges to find a
+        non-conflicting IP address range. The method will reuse a subnet if
+        subsequent calls contain the same subnet name, region, and prefix length.
+        This method will make producer's tenant project to be a shared VPC service
+        project as needed.
       operationId: servicenetworking.services.addSubnetwork
       parameters:
         - description: |-
@@ -397,17 +445,17 @@ paths:
         - services
   '/v1/{parent}:disableVpcServiceControls':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: Disables VPC service controls for a connection.
       operationId: servicenetworking.services.disableVpcServiceControls
@@ -447,17 +495,17 @@ paths:
         - services
   '/v1/{parent}:enableVpcServiceControls':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     patch:
       description: Enables VPC service controls for a connection.
       operationId: servicenetworking.services.enableVpcServiceControls
@@ -497,27 +545,25 @@ paths:
         - services
   '/v1/{parent}:searchRange':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Service producers can use this method to find a currently unused range
-        within consumer allocated ranges.   This returned range is not reserved,
-        and not guaranteed to remain unused.
-        It will validate previously provided allocated ranges, find
-        non-conflicting sub-range of requested size (expressed in
-        number of leading bits of ipv4 network mask, as in CIDR range
+        within consumer allocated ranges. This returned range is not reserved,
+        and not guaranteed to remain unused. It will validate previously provided
+        allocated ranges, find non-conflicting sub-range of requested size
+        (expressed in number of leading bits of ipv4 network mask, as in CIDR range
         notation).
-        Operation<response: Range>
       operationId: servicenetworking.services.searchRange
       parameters:
         - description: |-
@@ -554,21 +600,21 @@ paths:
         - services
   '/v1/{parent}:validate':
     parameters:
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
     post:
       description: |-
         Service producers use this method to validate if the consumer provided
-        network, project and the requested range is valid. This allows them to use
+        network, project and requested range are valid. This allows them to use
         a fail-fast mechanism for consumer requests, and not have to wait for
         AddSubnetwork operation completion to determine if user request is invalid.
       operationId: servicenetworking.services.validate
@@ -690,6 +736,39 @@ components:
           schema:
             $ref: '#/components/schemas/Connection'
   schemas:
+    AddRolesMetadata:
+      description: |-
+        Metadata provided through GetOperation request for the LRO generated by
+        AddRoles API
+      properties: {}
+      type: object
+    AddRolesRequest:
+      description: |-
+        Request for AddRoles to allow Service Producers to add roles in the shared
+        VPC host project for them to use.
+      properties:
+        consumerNetwork:
+          description: |-
+            Required. The network that the consumer is using to connect with services. Must be in
+            the form of projects/{project}/global/networks/{network}
+            {project} is a project number, as in '12345'
+            {network} is a network name.
+          type: string
+        policyBinding:
+          description: Required. List of policy bindings to add to shared VPC host project.
+          items:
+            $ref: '#/components/schemas/PolicyBinding'
+          type: array
+      type: object
+    AddRolesResponse:
+      description: Represents IAM roles added to the shared VPC host project.
+      properties:
+        policyBinding:
+          description: Required. List of policy bindings that were added to the shared VPC host project.
+          items:
+            $ref: '#/components/schemas/PolicyBinding'
+          type: array
+      type: object
     AddSubnetworkRequest:
       description: Request to create a subnetwork in a previously peered service network.
       properties:
@@ -832,11 +911,15 @@ components:
             The list of JWT
             [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
             that are allowed to access. A JWT containing any of these audiences will
-            be accepted. When this setting is absent, only JWTs with audience
-            "https://Service_name/API_name"
-            will be accepted. For example, if no audiences are in the setting,
-            LibraryService API will only accept JWTs with the following audience
-            "https://library-example.googleapis.com/google.example.library.v1.LibraryService".
+            be accepted. When this setting is absent, JWTs with audiences:
+              - "https://[service.name]/[google.protobuf.Api.name]"
+              - "https://[service.name]/"
+            will be accepted.
+            For example, if no audiences are in the setting, LibraryService API will
+            accept JWTs with the following audiences:
+              -
+              https://library-example.googleapis.com/google.example.library.v1.LibraryService
+              - https://library-example.googleapis.com/
 
             Example:
 
@@ -1095,6 +1178,42 @@ components:
             See
             https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
             for more details on the supported values.
+          type: string
+        renameTo:
+          description: |-
+            Unimplemented. Do not use.
+
+            The new name the selected proto elements should be renamed to.
+
+            The package, the service and the method can all be renamed.
+            The backend server should implement the renamed proto. However, clients
+            should call the original method, and ESF routes the traffic to the renamed
+            method.
+
+            HTTP clients should call the URL mapped to the original method.
+            gRPC and Stubby clients should call the original method with package name.
+
+            For legacy reasons, ESF allows Stubby clients to call with the
+            short name (without the package name). However, for API Versioning(or
+            multiple methods mapped to the same short name), all Stubby clients must
+            call the method's full name with the package name, otherwise the first one
+            (selector) wins.
+
+            If this `rename_to` is specified with a trailing `*`, the `selector` must
+            be specified with a trailing `*` as well. The all element short names
+            matched by the `*` in the selector will be kept in the `rename_to`.
+
+            For example,
+                rename_rules:
+                - selector: |-
+                    google.example.library.v1.*
+                  rename_to: google.example.library.*
+
+            The selector matches `google.example.library.v1.Library.CreateShelf` and
+            `google.example.library.v1.Library.CreateBook`, they will be renamed to
+            `google.example.library.Library.CreateShelf` and
+            `google.example.library.Library.CreateBook`. It essentially renames the
+            proto package name section of the matched proto service and methods.
           type: string
         selector:
           description: |-
@@ -2293,6 +2412,8 @@ components:
           description: Optional. The launch stage of the metric definition.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2468,6 +2589,8 @@ components:
           description: Deprecated. Must use the MetricDescriptor.launch_stage instead.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2633,6 +2756,8 @@ components:
           description: Optional. The launch stage of the monitored resource definition.
           enum:
             - LAUNCH_STAGE_UNSPECIFIED
+            - UNIMPLEMENTED
+            - PRELAUNCH
             - EARLY_ACCESS
             - ALPHA
             - BETA
@@ -2868,6 +2993,25 @@ components:
             $ref: '#/components/schemas/Page'
           type: array
       type: object
+    PolicyBinding:
+      description: Grouping of IAM role and IAM member.
+      properties:
+        member:
+          description: |-
+            Required. Member to bind the role with. See
+            /iam/docs/reference/rest/v1/Policy#Binding for how to format each member.
+            Eg.
+              - user:myuser@mydomain.com
+              - serviceAccount:my-service-account@app.gserviceaccount.com
+          type: string
+        role:
+          description: |-
+            Required. Role to apply. Only whitelisted roles can be used at the specified
+            granularity. The role must be one of the following:
+              - 'roles/container.hostServiceAgentUser' applied on the shared VPC host
+                project
+          type: string
+      type: object
     Quota:
       description: |+
         Quota configuration helps to achieve fairness and budgeting in service
@@ -3072,6 +3216,30 @@ components:
             format: int32
             type: integer
           type: array
+      type: object
+    Route:
+      description: |-
+        Represents a route that was created or discovered by a private access
+        management service.
+      properties:
+        destRange:
+          description: Destination CIDR range that this route applies to.
+          type: string
+        name:
+          description: 'Route name. See https://cloud.google.com/vpc/docs/routes'
+          type: string
+        network:
+          description: |-
+            Fully-qualified URL of the VPC network in the producer host tenant project
+            that this route applies to. For example:
+            `projects/123456/global/networks/host-network`
+          type: string
+        nextHopGateway:
+          description: |-
+            Fully-qualified URL of the gateway that should handle matching packets that
+            this route applies to. For example:
+            `projects/123456/global/gateways/default-internet-gateway`
+          type: string
       type: object
     SearchRangeRequest:
       description: Request to search for an unused range within allocated ranges.
@@ -3617,6 +3785,7 @@ components:
             - RANGES_EXHAUSTED
             - RANGES_NOT_RESERVED
             - RANGES_DELETED_LATER
+            - COMPUTE_API_NOT_ENABLED
           type: string
       type: object
   securitySchemes:

@@ -82,17 +82,17 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Create a new contact group owned by the authenticated user.
       operationId: people.contactGroups.create
@@ -156,17 +156,17 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1/people:batchGet':
     get:
       description: |-
@@ -185,7 +185,6 @@ paths:
             * ageRanges
             * biographies
             * birthdays
-            * braggingRights
             * coverPhotos
             * emailAddresses
             * events
@@ -202,12 +201,9 @@ paths:
             * phoneNumbers
             * photos
             * relations
-            * relationshipInterests
-            * relationshipStatuses
             * residences
             * sipAddresses
             * skills
-            * taglines
             * urls
             * userDefined
           in: query
@@ -287,30 +283,30 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1/people:createContact':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Create a new contact and return the person resource for that contact.
       operationId: people.people.createContact
@@ -441,17 +437,17 @@ paths:
       tags:
         - contactGroups
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     put:
       description: |-
         Update the name of an existing contact group owned by the authenticated
@@ -527,7 +523,6 @@ paths:
             * ageRanges
             * biographies
             * birthdays
-            * braggingRights
             * coverPhotos
             * emailAddresses
             * events
@@ -544,12 +539,9 @@ paths:
             * phoneNumbers
             * photos
             * relations
-            * relationshipInterests
-            * relationshipStatuses
             * residences
             * sipAddresses
             * skills
-            * taglines
             * urls
             * userDefined
           in: query
@@ -615,30 +607,30 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1/{resourceName}/members:modify':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: |-
         Modify the members of a contact group owned by the authenticated user.
@@ -701,17 +693,17 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1/{resourceName}:deleteContactPhoto':
     delete:
       description: Delete a contact's photo.
@@ -733,7 +725,6 @@ paths:
             * ageRanges
             * biographies
             * birthdays
-            * braggingRights
             * coverPhotos
             * emailAddresses
             * events
@@ -750,12 +741,9 @@ paths:
             * phoneNumbers
             * photos
             * relations
-            * relationshipInterests
-            * relationshipStatuses
             * residences
             * sipAddresses
             * skills
-            * taglines
             * urls
             * userDefined
           in: query
@@ -777,30 +765,30 @@ paths:
       tags:
         - people
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
   '/v1/{resourceName}:updateContact':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     patch:
       description: |-
         Update contact data for an existing contact person. Any non-contact data
@@ -878,17 +866,17 @@ paths:
         - people
   '/v1/{resourceName}:updateContactPhoto':
     parameters:
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
     patch:
       description: Update a contact's photo.
       operationId: people.people.updateContactPhoto
@@ -1115,7 +1103,9 @@ components:
           type: string
       type: object
     BraggingRights:
-      description: A person's bragging rights.
+      description: |-
+        **DEPRECATED**: No data will be returned
+        A person's bragging rights.
       properties:
         metadata:
           $ref: '#/components/schemas/FieldMetadata'
@@ -1374,10 +1364,20 @@ components:
     Gender:
       description: A person's gender.
       properties:
+        addressMeAs:
+          description: |-
+            The type of pronouns that should be used to address the person. The value
+            can be custom or one of these predefined values:
+
+            * `male`
+            * `female`
+            * `other`
+          type: string
         formattedValue:
           description: |-
-            Output only. The value of the gender translated and formatted in the viewer's
-            account locale or the `Accept-Language` HTTP header locale.
+            Output only. The value of the gender translated and formatted in the viewer's account
+            locale or the `Accept-Language` HTTP header locale. Unspecified or custom
+            value are not localized.
           type: string
         metadata:
           $ref: '#/components/schemas/FieldMetadata'
@@ -1389,8 +1389,7 @@ components:
 
             * `male`
             * `female`
-            * `other`
-            * `unknown`
+            * `unspecified`
           type: string
       type: object
     GetPeopleResponse:
@@ -1755,7 +1754,9 @@ components:
             $ref: '#/components/schemas/Birthday'
           type: array
         braggingRights:
-          description: The person's bragging rights.
+          description: |-
+            **DEPRECATED**: No data will be returned
+            The person's bragging rights.
           items:
             $ref: '#/components/schemas/BraggingRights'
           type: array
@@ -1843,12 +1844,16 @@ components:
             $ref: '#/components/schemas/Relation'
           type: array
         relationshipInterests:
-          description: Output only. The person's relationship interests.
+          description: |-
+            Output only. **DEPRECATED**: No data will be returned
+            The person's relationship interests.
           items:
             $ref: '#/components/schemas/RelationshipInterest'
           type: array
         relationshipStatuses:
-          description: Output only. The person's relationship statuses.
+          description: |-
+            Output only. **DEPRECATED**: No data will be returned
+            The person's relationship statuses.
           items:
             $ref: '#/components/schemas/RelationshipStatus'
           type: array
@@ -1874,7 +1879,9 @@ components:
             $ref: '#/components/schemas/Skill'
           type: array
         taglines:
-          description: Output only. The person's taglines.
+          description: |-
+            Output only. **DEPRECATED**: No data will be returned
+            The person's taglines.
           items:
             $ref: '#/components/schemas/Tagline'
           type: array
@@ -2076,7 +2083,9 @@ components:
           type: string
       type: object
     RelationshipInterest:
-      description: A person's relationship interest .
+      description: |-
+        **DEPRECATED**: No data will be returned
+        A person's relationship interest .
       properties:
         formattedValue:
           description: |-
@@ -2099,7 +2108,9 @@ components:
           type: string
       type: object
     RelationshipStatus:
-      description: A person's relationship status.
+      description: |-
+        **DEPRECATED**: No data will be returned
+        A person's relationship status.
       properties:
         formattedValue:
           description: |-
@@ -2247,7 +2258,9 @@ components:
           type: string
       type: object
     Tagline:
-      description: A brief one-line description of the person.
+      description: |-
+        **DEPRECATED**: No data will be returned
+        A brief one-line description of the person.
       properties:
         metadata:
           $ref: '#/components/schemas/FieldMetadata'
@@ -2280,7 +2293,6 @@ components:
             * ageRanges
             * biographies
             * birthdays
-            * braggingRights
             * coverPhotos
             * emailAddresses
             * events
@@ -2297,12 +2309,9 @@ components:
             * phoneNumbers
             * photos
             * relations
-            * relationshipInterests
-            * relationshipStatuses
             * residences
             * sipAddresses
             * skills
-            * taglines
             * urls
             * userDefined
           format: google-fieldmask

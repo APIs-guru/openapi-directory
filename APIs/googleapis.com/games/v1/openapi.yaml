@@ -3547,6 +3547,9 @@ components:
     ProfileSettings:
       description: This is a JSON template for profile settings
       properties:
+        friendsListVisibility:
+          description: Whether the player's friends list is visible to the game.
+          type: string
         kind:
           default: 'games#profileSettings'
           description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#profileSettings.'

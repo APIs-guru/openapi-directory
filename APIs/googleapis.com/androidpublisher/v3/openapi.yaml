@@ -329,10 +329,10 @@ paths:
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/userIp'
     post:
-      description: 'Uploads the deobfuscation file of the specified APK. If a deobfuscation file already exists, it will be replaced.'
+      description: 'Uploads the deobfuscation file of the specified APK. If a deobfuscation or symbolication file already exists, it will be replaced. See https://developer.android.com/studio/build/shrink-code to learn more about deobfuscation files.'
       operationId: androidpublisher.edits.deobfuscationfiles.upload
       parameters:
-        - description: 'Unique identifier of the Android app for which the deobfuscatiuon files are being uploaded; for example, "com.spiffygame".'
+        - description: 'Unique identifier of the Android app for which the deobfuscation files are being uploaded; for example, "com.spiffygame".'
           in: path
           name: packageName
           required: true
@@ -355,6 +355,7 @@ paths:
           required: true
           schema:
             enum:
+              - nativeCode
               - proguard
             type: string
       responses:
@@ -2961,7 +2962,7 @@ components:
           $ref: '#/components/schemas/Price'
           description: Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency.
         gracePeriod:
-          description: 'Grace period of the subscription, specified in ISO 8601 format. It will allow developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values = "P3D" (three days) and "P7D" (seven days)'
+          description: 'Grace period of the subscription, specified in ISO 8601 format. It will allow developers to give their subscribers a grace period when the payment for the new recurrence period is declined. Acceptable values = "P3D" (three days), "P7D" (seven days), "P14D" (fourteen days), and "P30D" (thirty days)'
           type: string
         listings:
           additionalProperties:
@@ -3510,7 +3511,7 @@ components:
         countryTargeting:
           $ref: '#/components/schemas/CountryTargeting'
         inAppUpdatePriority:
-          description: 'In-app update priority of the release. All newly added APKs in the release will be considered at this priority. in_app_update_priority can take values between [0, 5]. 5 is the highest priority. Default priority is 0. See https://developer.android.com/guide/playcore/in-app-updates.'
+          description: 'In-app update priority of the release. All newly added APKs in the release will be considered at this priority. in_app_update_priority can take values between [0, 5]. 5 is the highest priority. Default priority is 0. in_app_update_priority can not be updated once the release is rolled out. See https://developer.android.com/guide/playcore/in-app-updates.'
           format: int32
           type: integer
         name:

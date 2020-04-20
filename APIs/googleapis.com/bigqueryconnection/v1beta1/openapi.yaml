@@ -95,8 +95,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -106,6 +104,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     patch:
       description: Sets the credential for the specified connection.
       operationId: bigqueryconnection.projects.locations.connections.updateCredential
@@ -185,8 +185,6 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -196,6 +194,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: Creates a new connection.
       operationId: bigqueryconnection.projects.locations.connections.create
@@ -239,8 +239,6 @@ paths:
         - projects
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -250,6 +248,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Gets the access control policy for a resource.
@@ -291,8 +291,6 @@ paths:
         - projects
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -302,6 +300,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
@@ -344,8 +344,6 @@ paths:
         - projects
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/callback'
@@ -355,6 +353,8 @@ paths:
       - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/prettyPrint'
     post:
       description: |-
         Returns permissions that a caller has on the specified resource.
