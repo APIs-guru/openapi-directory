@@ -13,7 +13,7 @@ info:
     url: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   termsOfService: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   title: Tweets and Users
-  version: '1.7'
+  version: '1.12'
   x-apisguru-categories:
     - social
   x-logo:
@@ -22,6 +22,7 @@ info:
     - format: openapi
       url: 'https://api.twitter.com/labs/1/openapi.json'
       version: '3.0'
+  x-preferred: false
   x-providerName: twitter.com
   x-serviceName: labs
 externalDocs:
@@ -38,6 +39,11 @@ tags:
       description: Find out more
       url: 'https://developer.twitter.com/en/docs/labs/filtered-stream/api-reference'
     name: Rules
+  - description: APIs related to Recent Search
+    externalDocs:
+      description: Find out more
+      url: 'https://developer.twitter.com/en/docs/labs/recent-search/overview'
+    name: Search
   - description: APIs related to Tweets
     externalDocs:
       description: Find out more
@@ -132,6 +138,85 @@ paths:
           $ref: '#/components/responses/HttpErrorResponse'
       summary: Returns private metrics corresponding to a Tweet
       tags:
+        - Tweets
+  /labs/1/tweets/search:
+    get:
+      description: Returns Tweets from the last 7 days that match a search query.
+      operationId: tweetsRecentSearch
+      parameters:
+        - description: One query/rule/filter for matching Tweets. Up to 512 characters.
+          in: query
+          name: query
+          required: true
+          schema:
+            maxLength: 512
+            minLength: 1
+            type: string
+        - description: 'YYYY-MM-DDTHH:mm:ssZ. The oldest UTC timestamp (from most recent 7 days) from which the Tweets will be provided. Timestamp is in second granularity and is inclusive (i.e. 12:00:01 includes the first second of the minute).'
+          in: query
+          name: start_time
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: 'YYYY-MM-DDTHH:mm:ssZ. The newest, most recent UTC timestamp to which the Tweets will be provided. Timestamp is in second granularity and is exclusive (i.e. 12:00:01 excludes the first second of the minute).'
+          in: query
+          name: end_time
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: 'Returns results with a Tweet ID greater than (that is, more recent than) the specified ID.'
+          in: query
+          name: since_id
+          required: false
+          schema:
+            $ref: '#/components/schemas/TweetID'
+        - description: 'Returns results with a Tweet ID less than (that is, older than) the specified ID.'
+          in: query
+          name: until_id
+          required: false
+          schema:
+            $ref: '#/components/schemas/TweetID'
+        - description: The maximum number of search results to be returned by a request.
+          in: query
+          name: max_results
+          required: false
+          schema:
+            default: 10
+            format: int32
+            maximum: 100
+            minimum: 10
+            type: integer
+        - description: 'This parameter is used to get the next ''page'' of results. The value used with the parameter is pulled directly from the response provided by the API, and should not be modified.'
+          in: query
+          name: next_token
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/DefaultFormat'
+        - $ref: '#/components/parameters/TweetFormat'
+        - $ref: '#/components/parameters/UserFormat'
+        - $ref: '#/components/parameters/PlaceFormat'
+        - description: A comma separated list of fields to expand.
+          explode: false
+          in: query
+          name: expansions
+          schema:
+            $ref: '#/components/schemas/TweetExpansionsParamType'
+          style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TweetSearchResponse'
+          description: Tweets recent search response
+        default:
+          $ref: '#/components/responses/HttpErrorResponse'
+      summary: Returns Tweets from the last 7 days that match a search query.
+      tags:
+        - Search
         - Tweets
   /labs/1/tweets/stream/filter:
     get:
@@ -287,6 +372,34 @@ paths:
       summary: Streams a deterministic 1% of public tweets.
       tags:
         - Tweets
+  '/labs/1/tweets/{id}/hidden':
+    put:
+      description: Tweet ID in the path is that of the reply to hide.
+      operationId: hideReplyById
+      parameters:
+        - description: The ID of the reply that you want to hide.
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/TweetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HideReplyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HideReplyResponse'
+          description: A successful response. The reply has been hidden.
+        default:
+          $ref: '#/components/responses/HttpErrorResponse'
+      summary: Hides a reply to an owned conversation.
+      tags:
+        - Tweets
   /labs/1/users:
     get:
       description: 'This endpoint returns information about users. You can specify users by their ID or screen name, or by a combination of the two.'
@@ -339,40 +452,6 @@ paths:
       summary: Return details for the specified users
       tags:
         - Users
-  '/labs/2/tweets/{id}':
-    get:
-      description: Returns a variety of information about the Tweet specified by the requested ID
-      operationId: findTweetById
-      parameters:
-        - description: A single Tweet ID.
-          in: path
-          name: id
-          required: true
-          schema:
-            $ref: '#/components/schemas/TweetID'
-        - $ref: '#/components/parameters/DefaultFormat'
-        - $ref: '#/components/parameters/TweetFormat'
-        - $ref: '#/components/parameters/UserFormat'
-        - $ref: '#/components/parameters/PlaceFormat'
-        - description: A comma separated list of fields to expand.
-          explode: false
-          in: query
-          name: expansions
-          schema:
-            $ref: '#/components/schemas/TweetExpansionsParamType'
-          style: form
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SingleTweetLookupResponse'
-          description: The request was successful
-        default:
-          $ref: '#/components/responses/HttpErrorResponse'
-      summary: Returns hydrated Tweet objects
-      tags:
-        - Tweets
 components:
   parameters:
     DefaultFormat:
@@ -824,7 +903,7 @@ components:
     DetailedTweetFields:
       description: This is the list of fields for a Tweet object when `format` or `tweet.format` are set to `detailed`.
       properties:
-        context_annotation:
+        context_annotations:
           items:
             $ref: '#/components/schemas/ContextAnnotation'
           minItems: 1
@@ -1093,6 +1172,23 @@ components:
           type: string
       required:
         - tag
+      type: object
+    HideReplyRequest:
+      properties:
+        hidden:
+          enum:
+            - true
+          type: boolean
+      type: object
+    HideReplyResponse:
+      properties:
+        data:
+          properties:
+            hidden:
+              enum:
+                - true
+              type: boolean
+          type: object
       type: object
     InvalidRequestProblem:
       allOf:
@@ -1596,6 +1692,39 @@ components:
             $ref: '#/components/schemas/Problem'
           minItems: 1
           type: array
+      type: object
+    TweetSearchResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Tweet'
+          minItems: 1
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/Problem'
+          minItems: 1
+          type: array
+        includes:
+          $ref: '#/components/schemas/Expansions'
+        meta:
+          properties:
+            newest_id:
+              description: Most recent Tweet Id returned by search query
+              pattern: '^[0-9]{1,19}$'
+              type: string
+            next_token:
+              description: This value is used to get the next 'page' of results by providing it to the next_token parameter.
+              type: string
+            oldest_id:
+              description: Oldest Tweet Id returned by search query
+              pattern: '^[0-9]{1,19}$'
+              type: string
+            result_count:
+              description: Number of search query results
+              format: int32
+              type: integer
+          type: object
       type: object
     TweetWithheld:
       description: 'Indicates withholding details for [withheld content](https://help.twitter.com/en/rules-and-policies/tweet-withheld-by-country).'
