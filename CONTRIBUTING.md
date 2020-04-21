@@ -11,10 +11,10 @@ browse the APIs in [GitHub](https://github.com/APIs-guru/openapi-directory/tree/
 
 Please also check the API isn't in the process of being added, by checking the [list of open issues](https://github.com/APIs-guru/openapi-directory/issues).
 
-The API should meet the following critera:
+The API should meet the following criteria:
 
 * Public - anyone can access it as long as they follow some clearly defined steps (subscribe, pay fees, etc.).
-* Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
+* Persistent - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
 * Useful - API should provide useful functionality not only for its owner.
 
 The easiest way to request an API to be added is to use the [web form](https://apis.guru/add-api/).
@@ -23,22 +23,23 @@ The easiest way to request an API to be added is to use the [web form](https://a
 
 Clone the repo locally, if you haven't already done so, and run the following
 
+* run `npm install` to install the dependencies for the utility script
 * create a new branch for the PR
 * change into the APIs directory
-* run `../scripts/collection add -c {category} [-l {logo-url}|-t {twitter handle}] {format} {url-to-definition}`
+* run `../scripts/collection.js add -c {category} [-l {logo-url}|-t {twitter handle}] {format} {url-to-definition}`
 
-Run `../scripts/collection add --help` for a complete list of options.
+Run `../scripts/collection.js add --help` for a complete list of options.
 
 `{category}` should be one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` be one of:
 
-  * `openapi_3`
-  * `swagger_2`
-  * `swagger_1`
-  * `api_blueprint`
-  * `raml`
-  * `io_docs`
-  * `google`
-  * `wadl`
+* `openapi_3`
+* `swagger_2`
+* `swagger_1`
+* `api_blueprint`
+* `raml`
+* `io_docs`
+* `google`
+* `wadl`
 
 If your API definition is unofficial, also specify the `--unofficial` flag.
 
@@ -52,7 +53,7 @@ If there are no validation errors:
 
 ### Adding information
 
-If you wish to only add information to the API definition, such as a description, category, logo, tag etc, you can amend the `patch.yaml` file found in the API's directory. The file is merged with the `swagger.yaml` or `openapi.yaml` file, so the structure should follow that of an OpenAPI definition, including only those properties necessary to place your addition correctly.
+If you wish to only add information to the API definition, such as a description, category, logo, tag etc, you can amend the `patch.yaml` file found in the APIs directory. The file is merged with the `swagger.yaml` or `openapi.yaml` file, so the structure should follow that of an OpenAPI definition, including only those properties necessary to place your addition correctly.
 
 For example:
 
