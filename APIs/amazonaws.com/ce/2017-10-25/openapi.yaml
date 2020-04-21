@@ -109,7 +109,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.CreateCostCategoryDefinition':
     post:
       operationId: CreateCostCategoryDefinition
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Creates a new Cost Category with the requested name and rules.</p>'
+      description: Creates a new Cost Category with the requested name and rules.
       responses:
         '200':
           description: Success
@@ -154,7 +154,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.DeleteCostCategoryDefinition':
     post:
       operationId: DeleteCostCategoryDefinition
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.</p>'
+      description: Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.
       responses:
         '200':
           description: Success
@@ -199,7 +199,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.DescribeCostCategoryDefinition':
     post:
       operationId: DescribeCostCategoryDefinition
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Returns the name, ARN, rules, definition, and effective dates of a Cost Category that''s defined in the account.</p> <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that is active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
+      description: '<p>Returns the name, ARN, rules, definition, and effective dates of a Cost Category that''s defined in the account.</p> <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that is active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
       responses:
         '200':
           description: Success
@@ -307,7 +307,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.GetCostAndUsageWithResources':
     post:
       operationId: GetCostAndUsageWithResources
-      description: '<p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Master accounts in an organization in AWS Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p> <note> <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html">Controlling Access for Cost Explorer</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> </note>'
+      description: '<p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Master accounts in an organization in AWS Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p> <note> <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html">Controlling Access for Cost Explorer</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -478,7 +478,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.GetReservationCoverage':
     post:
       operationId: GetReservationCoverage
-      description: '<p>Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s master account can see the coverage of the associated member accounts. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
+      description: '<p>Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
       responses:
         '200':
           description: Success
@@ -676,7 +676,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.GetSavingsPlansCoverage':
     post:
       operationId: GetSavingsPlansCoverage
-      description: '<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. For any time period, you can filter data for Savings Plans usage with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>INSTANCE_FAMILY</code> </p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation.</p>'
+      description: '<p>Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>INSTANCE_FAMILY</code> </p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1006,7 +1006,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.ListCostCategoryDefinitions':
     post:
       operationId: ListCostCategoryDefinitions
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Returns the name, ARN and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
+      description: 'Returns the name, ARN, <code>NumberOfRules</code> and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.'
       responses:
         '200':
           description: Success
@@ -1027,6 +1027,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListCostCategoryDefinitionsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1045,7 +1057,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.UpdateCostCategoryDefinition':
     post:
       operationId: UpdateCostCategoryDefinition
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.</p>'
+      description: Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.
       responses:
         '200':
           description: Success
@@ -1168,7 +1180,7 @@ components:
           $ref: '#/components/schemas/CostCategoryRuleVersion'
         Rules:
           $ref: '#/components/schemas/CostCategoryRulesList'
-          description: '<p> <code>CreateCostCategoryDefinition</code> supports dimensions, Tags, and nested expressions. Currently the only dimensions supported is <code>LINKED_ACCOUNT</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend you create a separate rule instead.</p> <p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. </p>'
+          description: 'The Cost Category rules used to categorize costs. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule</a>.'
     ServiceQuotaExceededException: {}
     LimitExceededException: {}
     DeleteCostCategoryDefinitionResponse:
@@ -1273,10 +1285,10 @@ components:
           description: 'Sets the AWS cost granularity to <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn''t set, the response object doesn''t include the <code>Granularity</code>, <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. '
         Filter:
           $ref: '#/components/schemas/Expression'
-          description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>.</p>'
+          description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>.</p>'
         Metrics:
           $ref: '#/components/schemas/MetricNames'
-          description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking the units into account. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, the results aren''t meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsageWithResources</code> requests.</p>'
+          description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking the units into account. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, the results aren''t meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsageWithResources</code> requests.</p>'
         GroupBy:
           $ref: '#/components/schemas/GroupDefinitions'
           description: 'You can group Amazon Web Services costs using up to two different groups: either dimensions, tag keys, or both.'
@@ -1387,7 +1399,7 @@ components:
           description: '<p>The granularity of the AWS cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p> <p>If <code>GroupBy</code> is set, <code>Granularity</code> can''t be set. If <code>Granularity</code> isn''t set, the response object doesn''t include <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>.</p> <p>The <code>GetReservationCoverage</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>'
         Filter:
           $ref: '#/components/schemas/Expression'
-          description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p> <p>If you don''t provide a <code>SERVICE</code> filter, Cost Explorer defaults to EC2.</p>'
+          description: '<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p> <code>GetReservationCoverage</code> uses the same <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR''d together.</p> <p>If you don''t provide a <code>SERVICE</code> filter, Cost Explorer defaults to EC2.</p> <p>Cost category is also supported.</p>'
         Metrics:
           $ref: '#/components/schemas/MetricNames'
           description: '<p>The measurement that you want your reservation coverage reported in.</p> <p>Valid values are <code>Hour</code>, <code>Unit</code>, and <code>Cost</code>. You can use multiple values in a request.</p>'
@@ -1535,7 +1547,7 @@ components:
           description: <p>The granularity of the Amazon Web Services cost data for your Savings Plans. <code>Granularity</code> can't be set if <code>GroupBy</code> is set.</p> <p>The <code>GetSavingsPlansCoverage</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>
         Filter:
           $ref: '#/components/schemas/Expression'
-          description: '<p>Filters Savings Plans coverage data by dimensions. You can filter data for Savings Plans usage with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>INSTANCE_FAMILY</code> </p> </li> </ul> <p> <code>GetSavingsPlansCoverage</code> uses the same <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension. If there are multiple values for a dimension, they are OR''d together.</p>'
+          description: '<p>Filters Savings Plans coverage data by dimensions. You can filter data for Savings Plans usage with the following dimensions:</p> <ul> <li> <p> <code>LINKED_ACCOUNT</code> </p> </li> <li> <p> <code>REGION</code> </p> </li> <li> <p> <code>SERVICE</code> </p> </li> <li> <p> <code>INSTANCE_FAMILY</code> </p> </li> </ul> <p> <code>GetSavingsPlansCoverage</code> uses the same <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object as the other operations, but only <code>AND</code> is supported among each dimension. If there are multiple values for a dimension, they are OR''d together.</p> <p>Cost category is also supported.</p>'
         Metrics:
           $ref: '#/components/schemas/MetricNames'
           description: The measurement that you want your Savings Plans coverage reported in. The only valid value is <code>SpendCoveredBySavingsPlans</code>.
@@ -1739,7 +1751,10 @@ components:
           description: ' The date when the Cost Category was effective. '
         NextToken:
           $ref: '#/components/schemas/NextPageToken'
-          description: <p> The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. </p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>
+          description: ' The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+        MaxResults:
+          $ref: '#/components/schemas/CostCategoryMaxResults'
+          description: ' The number of entries a paginated response contains. '
     UpdateCostCategoryDefinitionResponse:
       type: object
       properties:
@@ -1764,7 +1779,7 @@ components:
           $ref: '#/components/schemas/CostCategoryRuleVersion'
         Rules:
           $ref: '#/components/schemas/CostCategoryRulesList'
-          description: '<p> <code>UpdateCostCategoryDefinition</code> supports dimensions, Tags, and nested expressions. Currently the only dimensions supported is <code>LINKED_ACCOUNT</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend you create a separate rule instead.</p> <p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. </p>'
+          description: 'The <code>Expression</code> object used to categorize costs. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule </a>. '
     AccountScope:
       type: string
       enum:
@@ -1841,13 +1856,20 @@ components:
         Rules:
           $ref: '#/components/schemas/CostCategoryRulesList'
           description: ' Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. '
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>'
+      description: The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.
+    CostCategoryMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NonNegativeInteger:
+      type: integer
+      minimum: 0
     CostCategoryReference:
       type: object
       properties:
         CostCategoryArn:
           $ref: '#/components/schemas/Arn'
-          description: ' The unique identifier for your Cost Category Reference. '
+          description: ' The unique identifier for your Cost Category. '
         Name:
           $ref: '#/components/schemas/CostCategoryName'
         EffectiveStart:
@@ -1856,7 +1878,10 @@ components:
         EffectiveEnd:
           $ref: '#/components/schemas/ZonedDateTime'
           description: ' The Cost Category''s effective end date.'
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>'
+        NumberOfRules:
+          $ref: '#/components/schemas/NonNegativeInteger'
+          description: ' The number of rules associated with a specific Cost Category. '
+      description: <p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>
     CostCategoryReferencesList:
       type: array
       items:
@@ -1887,7 +1912,7 @@ components:
           description: The specific <code>Tag</code> to use for <code>Expression</code>.
         CostCategories:
           $ref: '#/components/schemas/CostCategoryValues'
-          description: '<p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> <p>The specific <code>CostCategory</code> used for <code>Expression</code>.</p>'
+          description: The filter based on <code>CostCategory</code> values.
       description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>'
     CostCategoryRule:
       type: object
@@ -1899,8 +1924,8 @@ components:
           $ref: '#/components/schemas/CostCategoryValue'
         Rule:
           $ref: '#/components/schemas/Expression'
-          description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported is <code>LINKED_ACCOUNT</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend you create a separate rule instead.</p>'
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.</p>'
+          description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
+      description: 'Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.'
     Values:
       type: array
       items:
@@ -1913,7 +1938,7 @@ components:
         Values:
           $ref: '#/components/schemas/Values'
           description: The specific value of the Cost Category.
-      description: '<important> <p> <i> <b>Cost Category is in public beta for AWS Billing and Cost Management and is subject to change. Your use of Cost Categories is subject to the Beta Service Participation terms of the <a href="http://aws.amazon.com/service-terms/">AWS Service Terms</a> (Section 1.10).</b> </i> </p> </important> <p>The values that are available for Cost Categories.</p>'
+      description: The Cost Categories values used for filtering the costs.
     CoverageHours:
       type: object
       properties:
@@ -1951,8 +1976,8 @@ components:
       properties:
         OnDemandCost:
           $ref: '#/components/schemas/OnDemandCost'
-          description: How much an On-Demand instance cost.
-      description: How much it cost to run an instance.
+          description: How much an On-Demand Instance costs.
+      description: How much it costs to run an instance.
     Coverage:
       type: object
       properties:
@@ -2020,6 +2045,9 @@ components:
         $ref: '#/components/schemas/CoverageByTime'
     GenericString:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     TagValuesList:
       type: array
       items:
@@ -2075,16 +2103,20 @@ components:
     YearMonthDay:
       type: string
       pattern: '(\d{4}-\d{2}-\d{2})(T\d{2}:\d{2}:\d{2}Z)?'
+      minLength: 0
+      maxLength: 40
     Dimension:
       type: string
       enum:
         - AZ
         - INSTANCE_TYPE
         - LINKED_ACCOUNT
+        - LINKED_ACCOUNT_NAME
         - OPERATION
         - PURCHASE_TYPE
         - REGION
         - SERVICE
+        - SERVICE_CODE
         - USAGE_TYPE
         - USAGE_TYPE_GROUP
         - RECORD_TYPE
@@ -2105,6 +2137,10 @@ components:
         - SAVINGS_PLANS_TYPE
         - SAVINGS_PLAN_ARN
         - PAYMENT_OPTION
+    MatchOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchOption'
     DimensionValues:
       type: object
       properties:
@@ -2113,10 +2149,16 @@ components:
           description: 'The names of the metadata types that you can use to filter and group your results. For example, <code>AZ</code> returns a list of Availability Zones.'
         Values:
           $ref: '#/components/schemas/Values'
-          description: '<p>The metadata values that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.</p> <p>Valid values for the <code>SERVICE</code> dimension are <code>Amazon Elastic Compute Cloud - Compute</code>, <code>Amazon Elasticsearch Service</code>, <code>Amazon ElastiCache</code>, <code>Amazon Redshift</code>, and <code>Amazon Relational Database Service</code>.</p>'
+          description: The metadata values that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
+        MatchOptions:
+          $ref: '#/components/schemas/MatchOptions'
+          description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
       description: The metadata that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
     Value:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     DimensionValuesWithAttributes:
       type: object
       properties:
@@ -2275,6 +2317,9 @@ components:
         Values:
           $ref: '#/components/schemas/Values'
           description: The specific value of the tag.
+        MatchOptions:
+          $ref: '#/components/schemas/MatchOptions'
+          description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
       description: The values that are available for a tag.
     ForecastResult:
       type: object
@@ -2312,6 +2357,9 @@ components:
         $ref: '#/components/schemas/GroupDefinition'
     NextPageToken:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 8192
     ResultsByTime:
       type: array
       items:
@@ -2342,6 +2390,9 @@ components:
       description: The aggregated value for a metric.
     SearchString:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     PageSize:
       type: integer
     LookbackPeriodInDays:
@@ -2371,9 +2422,6 @@ components:
           $ref: '#/components/schemas/EC2Specification'
           description: The Amazon EC2 hardware specifications that you want AWS to provide recommendations for.
       description: Hardware specifications for the service that you want recommendations for.
-    NonNegativeInteger:
-      type: integer
-      minimum: 0
     ReservationPurchaseRecommendationMetadata:
       type: object
       properties:
@@ -2382,8 +2430,8 @@ components:
           description: The ID for this specific recommendation.
         GenerationTimestamp:
           $ref: '#/components/schemas/GenericString'
-          description: The time stamp for when AWS made this recommendation.
-      description: 'Information about this specific recommendation, such as the time stamp for when AWS made a specific recommendation.'
+          description: The timestamp for when AWS made this recommendation.
+      description: 'Information about this specific recommendation, such as the timestamp for when AWS made a specific recommendation.'
     ReservationPurchaseRecommendations:
       type: array
       items:
@@ -2513,7 +2561,7 @@ components:
           description: 'The lookback period in days, used to generate the recommendation.'
         SavingsPlansPurchaseRecommendationDetails:
           $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationDetailList'
-          description: 'Details for the Savings Plans we recommend you to purchase to cover existing, Savings Plans eligible workloads.'
+          description: Details for the Savings Plans we recommend that you purchase to cover existing Savings Plans eligible workloads.
         SavingsPlansPurchaseRecommendationSummary:
           $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationSummary'
           description: 'Summary metrics for your Savings Plans Recommendations. '
@@ -2543,6 +2591,9 @@ components:
         $ref: '#/components/schemas/SavingsPlansUtilizationByTime'
     TagKey:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     TagList:
       type: array
       items:
@@ -2573,6 +2624,9 @@ components:
         - COST_CATEGORY
     GroupDefinitionKey:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     GroupDefinition:
       type: object
       properties:
@@ -2658,10 +2712,22 @@ components:
       description: Details about the instances that AWS recommends that you purchase.
     Key:
       type: string
+    MatchOption:
+      type: string
+      enum:
+        - EQUALS
+        - STARTS_WITH
+        - ENDS_WITH
+        - CONTAINS
+        - CASE_SENSITIVE
+        - CASE_INSENSITIVE
     MetricAmount:
       type: string
     MetricName:
       type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
     MetricUnit:
       type: string
     TargetInstancesList:
@@ -2915,7 +2981,7 @@ components:
           description: 'The total cost of your Amazon Web Services usage, regardless of your purchase option.'
         CoveragePercentage:
           $ref: '#/components/schemas/GenericString'
-          description: 'The percentage of your existing Savings Planscovered usage, divided by all of your eligible Savings Plans usage in an account(or set of accounts).'
+          description: 'The percentage of your existing Savings Plans covered usage, divided by all of your eligible Savings Plans usage in an account(or set of accounts).'
       description: 'Specific coverage percentage, On-Demand costs, and spend covered by Savings Plans, and total Savings Plans costs for an account.'
     SavingsPlansCoverage:
       type: object
