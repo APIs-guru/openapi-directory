@@ -3,7 +3,7 @@ info:
   version: '2017-11-28'
   x-release: v4
   title: Amazon GuardDuty
-  description: 'Amazon GuardDuty is a continuous security monitoring service that analyzes and processes the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses threat intelligence feeds, such as lists of malicious IPs and domains, and machine learning to identify unexpected and potentially unauthorized and malicious activity within your AWS environment. This can include issues like escalations of privileges, uses of exposed credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect compromised EC2 instances serving malware or mining bitcoin. It also monitors AWS account access behavior for signs of compromise, such as unauthorized infrastructure deployments, like instances deployed in a region that has never been used, or unusual API calls, like a password policy change to reduce password strength. GuardDuty informs you of the status of your AWS environment by producing security findings that you can view in the GuardDuty console or through Amazon CloudWatch events. For more information, see <a href="https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html">Amazon GuardDuty User Guide</a>. '
+  description: '<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to identify unexpected, potentially unauthorized, and malicious activity within your AWS environment. This can include issues like escalations of privileges, uses of exposed credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect compromised EC2 instances that serve malware or mine bitcoin. </p> <p>GuardDuty also monitors AWS account access behavior for signs of compromise. Some examples of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region that has never been used, or unusual API calls like a password policy change to reduce password strength. </p> <p>GuardDuty informs you of the status of your AWS environment by producing security findings that you can view in the GuardDuty console or through Amazon CloudWatch events. For more information, see the <i> <a href="https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html">Amazon GuardDuty User Guide</a> </i>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -152,7 +152,7 @@ paths:
                   description: The account ID of the master GuardDuty account whose invitation you're accepting.
                   type: string
                 invitationId:
-                  description: This value is used to validate the master account to the member account.
+                  description: The value that is used to validate the master account to the member account.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -196,7 +196,7 @@ paths:
   '/detector/{detectorId}/findings/archive':
     post:
       operationId: ArchiveFindings
-      description: <p>Archives GuardDuty findings specified by the list of finding IDs.</p> <note> <p>Only the master account can archive findings. Member accounts do not have permission to archive findings from their accounts.</p> </note>
+      description: <p>Archives GuardDuty findings that are specified by the list of finding IDs.</p> <note> <p>Only the master account can archive findings. Member accounts don't have permission to archive findings from their accounts.</p> </note>
       responses:
         '200':
           description: Success
@@ -235,7 +235,7 @@ paths:
                 - findingIds
               properties:
                 findingIds:
-                  description: IDs of the findings that you want to archive.
+                  description: The IDs of the findings that you want to archive.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingId'
@@ -252,7 +252,7 @@ paths:
   /detector:
     post:
       operationId: CreateDetector
-      description: 'Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each region that you enable the service. You can have only one detector per account per region.'
+      description: 'Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.'
       responses:
         '200':
           description: Success
@@ -283,7 +283,7 @@ paths:
                 - enable
               properties:
                 enable:
-                  description: A boolean value that specifies whether the detector is to be enabled.
+                  description: A Boolean value that specifies whether the detector is to be enabled.
                   type: boolean
                 clientToken:
                   description: The idempotency token for the create request.
@@ -291,7 +291,7 @@ paths:
                   minLength: 0
                   maxLength: 64
                 findingPublishingFrequency:
-                  description: A enum value that specifies how frequently customer got Finding updates published.
+                  description: An enum value that specifies how frequently updated findings are exported.
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -338,7 +338,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+          description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
           schema:
             type: integer
             minimum: 1
@@ -346,7 +346,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
           schema:
             type: string
         - name: MaxResults
@@ -388,7 +388,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account for which you want to create a filter.
+          description: The unique ID of the detector of the GuardDuty account that you want to create a filter for.
           schema:
             type: string
             minLength: 1
@@ -479,7 +479,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the filter is associated with.
+          description: The unique ID of the detector that the filter is associated with.
           schema:
             type: string
             minLength: 1
@@ -487,7 +487,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+          description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
           schema:
             type: integer
             minimum: 1
@@ -495,7 +495,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
           schema:
             type: string
         - name: MaxResults
@@ -513,7 +513,7 @@ paths:
   '/detector/{detectorId}/ipset':
     post:
       operationId: CreateIPSet
-      description: 'Creates a new IPSet, called Trusted IP list in the consoler user interface. An IPSet is a list IP addresses trusted for secure communication with AWS infrastructure and applications. GuardDuty does not generate findings for IP addresses included in IPSets. Only users from the master account can use this operation.'
+      description: 'Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn''t generate findings for IP addresses that are included in IPSets. Only users from the master account can use this operation.'
       responses:
         '200':
           description: Success
@@ -537,7 +537,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.
+          description: The unique ID of the detector of the GuardDuty account that you want to create an IPSet for.
           schema:
             type: string
             minLength: 1
@@ -555,7 +555,7 @@ paths:
                 - activate
               properties:
                 name:
-                  description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+                  description: '<p>The user-friendly name to identify the IPSet.</p> <p> Allowed characters are alphanumerics, spaces, hyphens (-), and underscores (_).</p>'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -572,12 +572,12 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+                  description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
                 activate:
-                  description: A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
+                  description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
                   type: boolean
                 clientToken:
                   description: The idempotency token for the create request.
@@ -625,7 +625,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the ipSet is associated with.
+          description: The unique ID of the detector that the IPSet is associated with.
           schema:
             type: string
             minLength: 1
@@ -641,7 +641,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
           schema:
             type: string
         - name: MaxResults
@@ -683,7 +683,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account with which you want to associate member accounts.
+          description: The unique ID of the detector of the GuardDuty account that you want to associate member accounts with.
           schema:
             type: string
             minLength: 1
@@ -714,7 +714,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about all member accounts for the current GuardDuty master account.
+      description: Lists details about associated member accounts for the current GuardDuty master account.
       responses:
         '200':
           description: Success
@@ -754,13 +754,13 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
           schema:
             type: string
         - name: onlyAssociated
           in: query
           required: false
-          description: Specifies whether to only return associated members or to return all members (including members which haven't been invited yet or have been disassociated).
+          description: Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
           schema:
             type: string
         - name: MaxResults
@@ -778,7 +778,7 @@ paths:
   '/detector/{detectorId}/publishingDestination':
     post:
       operationId: CreatePublishingDestination
-      description: Creates a publishing destination to send findings to. The resource to send findings to must exist before you use this operation.
+      description: Creates a publishing destination to export findings to. The resource to export findings to must exist before you use this operation.
       responses:
         '200':
           description: Success
@@ -818,14 +818,14 @@ paths:
                 - destinationProperties
               properties:
                 destinationType:
-                  description: The type of resource for the publishing destination. Currently only S3 is supported.
+                  description: The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.
                   type: string
                   enum:
                     - S3
                   minLength: 1
                   maxLength: 300
                 destinationProperties:
-                  description: 'Contains the ARN of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
+                  description: 'Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
                   type: object
                   properties:
                     DestinationArn:
@@ -889,7 +889,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'A token to use for paginating results returned in the repsonse. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
           schema:
             type: string
         - name: MaxResults
@@ -944,7 +944,7 @@ paths:
               type: object
               properties:
                 findingTypes:
-                  description: Types of sample findings to generate.
+                  description: The types of sample findings to generate.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingType'
@@ -961,7 +961,7 @@ paths:
   '/detector/{detectorId}/threatintelset':
     post:
       operationId: CreateThreatIntelSet
-      description: Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the master account can use this operation.
+      description: Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the master account can use this operation.
       responses:
         '200':
           description: Success
@@ -985,7 +985,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account for which you want to create a threatIntelSet.
+          description: The unique ID of the detector of the GuardDuty account that you want to create a threatIntelSet for.
           schema:
             type: string
             minLength: 1
@@ -1003,7 +1003,7 @@ paths:
                 - activate
               properties:
                 name:
-                  description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+                  description: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1020,12 +1020,12 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+                  description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
                 activate:
-                  description: A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+                  description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
                   type: boolean
                 clientToken:
                   description: The idempotency token for the create request.
@@ -1033,7 +1033,7 @@ paths:
                   minLength: 0
                   maxLength: 64
                 tags:
-                  description: The tags to be added to a new Threat List resource.
+                  description: The tags to be added to a new threat list resource.
                   type: object
                   minProperties: 1
                   maxProperties: 200
@@ -1073,7 +1073,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the threatIntelSet is associated with.
+          description: The unique ID of the detector that the threatIntelSet is associated with.
           schema:
             type: string
             minLength: 1
@@ -1081,7 +1081,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+          description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
           schema:
             type: integer
             minimum: 1
@@ -1089,7 +1089,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter to paginate results in the response. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter to paginate results in the response. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
           schema:
             type: string
         - name: MaxResults
@@ -1107,7 +1107,7 @@ paths:
   /invitation/decline:
     post:
       operationId: DeclineInvitations
-      description: Declines invitations sent to the current member account by AWS account specified by their account IDs.
+      description: Declines invitations sent to the current member account by AWS accounts specified by their account IDs.
       responses:
         '200':
           description: Success
@@ -1155,7 +1155,7 @@ paths:
   '/detector/{detectorId}':
     delete:
       operationId: DeleteDetector
-      description: Deletes a Amazon GuardDuty detector specified by the detector ID.
+      description: Deletes an Amazon GuardDuty detector that is specified by the detector ID.
       responses:
         '200':
           description: Success
@@ -1265,7 +1265,7 @@ paths:
                   description: Specifies whether the detector is enabled or not enabled.
                   type: boolean
                 findingPublishingFrequency:
-                  description: 'A enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
+                  description: 'An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -1298,7 +1298,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the filter is associated with.
+          description: The unique ID of the detector that the filter is associated with.
           schema:
             type: string
             minLength: 1
@@ -1306,7 +1306,7 @@ paths:
         - name: filterName
           in: path
           required: true
-          description: The name of the filter you want to delete.
+          description: The name of the filter that you want to delete.
           schema:
             type: string
     parameters:
@@ -1343,7 +1343,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the filter is associated with.
+          description: The unique ID of the detector that the filter is associated with.
           schema:
             type: string
             minLength: 1
@@ -1426,7 +1426,7 @@ paths:
   '/detector/{detectorId}/ipset/{ipSetId}':
     delete:
       operationId: DeleteIPSet
-      description: Deletes the IPSet specified by the <code>ipSetId</code>. IPSets are called Trusted IP lists in the console user interface.
+      description: Deletes the IPSet specified by the <code>ipSetId</code>. IPSets are called trusted IP lists in the console user interface.
       responses:
         '200':
           description: Success
@@ -1495,7 +1495,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the ipSet is associated with.
+          description: The unique ID of the detector that the IPSet is associated with.
           schema:
             type: string
             minLength: 1
@@ -1556,12 +1556,12 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+                  description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
                 activate:
-                  description: The updated boolean value that specifies whether the IPSet is active or not.
+                  description: The updated Boolean value that specifies whether the IPSet is active or not.
                   type: boolean
   /invitation/delete:
     post:
@@ -1776,7 +1776,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: 'The ID of the '
+          description: The ID of the detector associated with the publishing destinations to update.
           schema:
             type: string
             minLength: 1
@@ -1784,7 +1784,7 @@ paths:
         - name: destinationId
           in: path
           required: true
-          description: The ID of the detector associated with the publishing destinations to update.
+          description: The ID of the publishing destination to update.
           schema:
             type: string
       requestBody:
@@ -1795,7 +1795,7 @@ paths:
               type: object
               properties:
                 destinationProperties:
-                  description: 'Contains the ARN of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
+                  description: 'Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
                   type: object
                   properties:
                     DestinationArn:
@@ -1807,7 +1807,7 @@ paths:
   '/detector/{detectorId}/threatintelset/{threatIntelSetId}':
     delete:
       operationId: DeleteThreatIntelSet
-      description: Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
+      description: Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
       responses:
         '200':
           description: Success
@@ -1831,7 +1831,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the threatIntelSet is associated with.
+          description: The unique ID of the detector that the threatIntelSet is associated with.
           schema:
             type: string
             minLength: 1
@@ -1839,7 +1839,7 @@ paths:
         - name: threatIntelSetId
           in: path
           required: true
-          description: The unique ID of the threatIntelSet you want to delete.
+          description: The unique ID of the threatIntelSet that you want to delete.
           schema:
             type: string
     parameters:
@@ -1876,7 +1876,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector the threatIntelSet is associated with.
+          description: The unique ID of the detector that the threatIntelSet is associated with.
           schema:
             type: string
             minLength: 1
@@ -1884,12 +1884,12 @@ paths:
         - name: threatIntelSetId
           in: path
           required: true
-          description: The unique ID of the threatIntelSet you want to get.
+          description: The unique ID of the threatIntelSet that you want to get.
           schema:
             type: string
     post:
       operationId: UpdateThreatIntelSet
-      description: Updates the ThreatIntelSet specified by ThreatIntelSet ID.
+      description: Updates the ThreatIntelSet specified by the ThreatIntelSet ID.
       responses:
         '200':
           description: Success
@@ -1937,13 +1937,140 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
                 activate:
-                  description: The updated boolean value that specifies whether the ThreateIntelSet is active or not.
+                  description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
                   type: boolean
+  '/detector/{detectorId}/admin':
+    get:
+      operationId: DescribeOrganizationConfiguration
+      description: Returns information about the account selected as the delegated administrator for GuardDuty.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOrganizationConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: detectorId
+          in: path
+          required: true
+          description: The ID of the detector to retrieve information about the delegated administrator from.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 300
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateOrganizationConfiguration
+      description: Updates the delegated administrator account with the values provided.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOrganizationConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: detectorId
+          in: path
+          required: true
+          description: The ID of the detector to update the delegated administrator for.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 300
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - autoEnable
+              properties:
+                autoEnable:
+                  description: Indicates whether to automatically enable member accounts in the organization.
+                  type: boolean
+  /admin/disable:
+    post:
+      operationId: DisableOrganizationAdminAccount
+      description: Disables GuardDuty administrator permissions for an AWS account within the Organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableOrganizationAdminAccountResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - adminAccountId
+              properties:
+                adminAccountId:
+                  description: The AWS Account ID for the Organizations account to be disabled as a GuardDuty delegated administrator.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/detector/{detectorId}/master/disassociate':
     post:
       operationId: DisassociateFromMasterAccount
@@ -2011,7 +2138,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from master.
+          description: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the master account.
           schema:
             type: string
             minLength: 1
@@ -2026,12 +2153,56 @@ paths:
                 - accountIds
               properties:
                 accountIds:
-                  description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
+                  description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountId'
                   minItems: 1
                   maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /admin/enable:
+    post:
+      operationId: EnableOrganizationAdminAccount
+      description: Enables GuardDuty administrator permissions for an AWS account within the organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableOrganizationAdminAccountResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - adminAccountId
+              properties:
+                adminAccountId:
+                  description: The AWS Account ID for the Organizations account to be enabled as a GuardDuty delegated administrator.
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2082,7 +2253,7 @@ paths:
                 - findingIds
               properties:
                 findingIds:
-                  description: IDs of the findings that you want to retrieve.
+                  description: The IDs of the findings that you want to retrieve.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingId'
@@ -2094,10 +2265,10 @@ paths:
                   properties:
                     AttributeName:
                       $ref: '#/components/schemas/String'
-                      description: 'Represents the finding attribute (for example, accountId) by which to sort findings.'
+                      description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
                     OrderBy:
                       $ref: '#/components/schemas/OrderBy'
-                      description: Order by which the sorted findings are to be displayed.
+                      description: The order by which the sorted findings are to be displayed.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2109,7 +2280,7 @@ paths:
   '/detector/{detectorId}/findings/statistics':
     post:
       operationId: GetFindingsStatistics
-      description: Lists Amazon GuardDuty findings' statistics for the specified detector ID.
+      description: Lists Amazon GuardDuty findings statistics for the specified detector ID.
       responses:
         '200':
           description: Success
@@ -2148,7 +2319,7 @@ paths:
                 - findingStatisticTypes
               properties:
                 findingStatisticTypes:
-                  description: Types of finding statistics to retrieve.
+                  description: The types of finding statistics to retrieve.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingStatisticType'
@@ -2260,7 +2431,7 @@ paths:
   '/detector/{detectorId}/member/invite':
     post:
       operationId: InviteMembers
-      description: Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
+      description: 'Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts'' GuardDuty findings on their behalf as the master account.'
       responses:
         '200':
           description: Success
@@ -2284,7 +2455,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account with which you want to invite members.
+          description: The unique ID of the detector of the GuardDuty account that you want to invite members with.
           schema:
             type: string
             minLength: 1
@@ -2306,7 +2477,7 @@ paths:
                   minItems: 1
                   maxItems: 50
                 disableEmailNotification:
-                  description: A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+                  description: A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
                   type: boolean
                 message:
                   description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
@@ -2383,17 +2554,17 @@ paths:
                   properties:
                     AttributeName:
                       $ref: '#/components/schemas/String'
-                      description: 'Represents the finding attribute (for example, accountId) by which to sort findings.'
+                      description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
                     OrderBy:
                       $ref: '#/components/schemas/OrderBy'
-                      description: Order by which the sorted findings are to be displayed.
+                      description: The order by which the sorted findings are to be displayed.
                 maxResults:
                   description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
                   type: integer
                   minimum: 1
                   maximum: 50
                 nextToken:
-                  description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+                  description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2430,7 +2601,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+          description: You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
           schema:
             type: integer
             minimum: 1
@@ -2438,7 +2609,65 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /admin:
+    get:
+      operationId: ListOrganizationAdminAccounts
+      description: Lists the accounts configured as AWS Organization delegated administrators.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrganizationAdminAccountsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
           schema:
             type: string
         - name: MaxResults
@@ -2464,7 +2693,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: 'Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource..'
+      description: 'Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.'
       responses:
         '200':
           description: Success
@@ -2488,7 +2717,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) for the given GuardDuty resource '
+          description: 'The Amazon Resource Name (ARN) for the given GuardDuty resource. '
           schema:
             type: string
             pattern: '^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\d+:detector/[A-Za-z0-9_/.-]{32,264}$'
@@ -2605,7 +2834,7 @@ paths:
   '/detector/{detectorId}/member/stop':
     post:
       operationId: StopMonitoringMembers
-      description: Stops GuardDuty monitoring for the specified member accounnts. Use the <code>StartMonitoringMembers</code> to restart monitoring for those accounts.
+      description: Stops GuardDuty monitoring for the specified member accounts. Use the <code>StartMonitoringMembers</code> operation to restart monitoring for those accounts.
       responses:
         '200':
           description: Success
@@ -2629,7 +2858,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account that you want to stop from monitor members' findings.
+          description: The unique ID of the detector associated with the GuardDuty master account that is monitoring member accounts.
           schema:
             type: string
             minLength: 1
@@ -2644,7 +2873,7 @@ paths:
                 - accountIds
               properties:
                 accountIds:
-                  description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
+                  description: A list of account IDs for the member accounts to stop monitoring.
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountId'
@@ -2700,7 +2929,7 @@ paths:
                 - findingIds
               properties:
                 findingIds:
-                  description: IDs of the findings to unarchive.
+                  description: The IDs of the findings to unarchive.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingId'
@@ -2806,7 +3035,7 @@ paths:
                 - feedback
               properties:
                 findingIds:
-                  description: IDs of the findings that you want to mark as useful or not useful.
+                  description: The IDs of the findings that you want to mark as useful or not useful.
                   type: array
                   items:
                     $ref: '#/components/schemas/FindingId'
@@ -2929,7 +3158,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that include the <code>accountIds</code> of the unprocessed accounts and a result string that explains why each was unprocessed.
     AccountDetail:
       type: object
       required:
@@ -2938,10 +3167,10 @@ components:
       properties:
         AccountId:
           $ref: '#/components/schemas/AccountId'
-          description: Member account ID.
+          description: The member account ID.
         Email:
           $ref: '#/components/schemas/Email'
-          description: Member account's email address.
+          description: The email address of the member account.
       description: Contains information about the account.
     CreatePublishingDestinationResponse:
       type: object
@@ -2950,7 +3179,7 @@ components:
       properties:
         DestinationId:
           $ref: '#/components/schemas/String'
-          description: The ID of the publishing destination created.
+          description: The ID of the publishing destination that is created.
     String:
       type: string
     CreateSampleFindingsResponse:
@@ -2975,7 +3204,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     AccountId:
       type: string
       minLength: 12
@@ -2996,7 +3225,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     DeleteMembersResponse:
       type: object
       required:
@@ -3011,6 +3240,18 @@ components:
     DeleteThreatIntelSetResponse:
       type: object
       properties: {}
+    DescribeOrganizationConfigurationResponse:
+      type: object
+      required:
+        - AutoEnable
+        - MemberAccountLimitReached
+      properties:
+        AutoEnable:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether GuardDuty is automatically enabled for accounts added to the organization.
+        MemberAccountLimitReached:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
     DescribePublishingDestinationResponse:
       type: object
       required:
@@ -3025,7 +3266,7 @@ components:
           description: The ID of the publishing destination.
         DestinationType:
           $ref: '#/components/schemas/DestinationType'
-          description: 'The type of the publishing destination. Currently, only S3 is supported.'
+          description: 'The type of publishing destination. Currently, only Amazon S3 buckets are supported.'
         Status:
           $ref: '#/components/schemas/PublishingStatus'
           description: The status of the publishing destination.
@@ -3035,6 +3276,9 @@ components:
         DestinationProperties:
           $ref: '#/components/schemas/DestinationProperties'
           description: A <code>DestinationProperties</code> object that includes the <code>DestinationArn</code> and <code>KmsKeyArn</code> of the publishing destination.
+    DisableOrganizationAdminAccountResponse:
+      type: object
+      properties: {}
     DisassociateFromMasterAccountResponse:
       type: object
       properties: {}
@@ -3045,7 +3289,10 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
+    EnableOrganizationAdminAccountResponse:
+      type: object
+      properties: {}
     GetDetectorResponse:
       type: object
       required:
@@ -3054,10 +3301,10 @@ components:
       properties:
         CreatedAt:
           $ref: '#/components/schemas/String'
-          description: Detector creation timestamp.
+          description: The timestamp of when the detector was created.
         FindingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: Finding publishing frequency.
+          description: The publishing frequency of the finding.
         ServiceRole:
           $ref: '#/components/schemas/String'
           description: The GuardDuty service role.
@@ -3066,7 +3313,7 @@ components:
           description: The detector status.
         UpdatedAt:
           $ref: '#/components/schemas/String'
-          description: Detector last update timestamp.
+          description: The last-updated timestamp for the detector.
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the detector resource.
@@ -3115,7 +3362,7 @@ components:
       properties:
         FindingStatistics:
           $ref: '#/components/schemas/FindingStatistics'
-          description: Finding statistics object.
+          description: The finding statistics object.
     FindingStatisticType:
       type: string
       enum:
@@ -3130,19 +3377,19 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/Name'
-          description: The user friendly name for the IPSet.
+          description: The user-friendly name for the IPSet.
         Format:
           $ref: '#/components/schemas/IpSetFormat'
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/IpSetStatus'
-          description: The status of ipSet file uploaded.
+          description: The status of IPSet file that was uploaded.
         Tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags of the IP set resource.
+          description: The tags of the IPSet resource.
     GetInvitationsCountResponse:
       type: object
       properties:
@@ -3156,7 +3403,7 @@ components:
       properties:
         Master:
           $ref: '#/components/schemas/Master'
-          description: Master account details.
+          description: The master account details.
     GetMembersResponse:
       type: object
       required:
@@ -3168,7 +3415,7 @@ components:
           description: A list of members.
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     GetThreatIntelSetResponse:
       type: object
       required:
@@ -3179,19 +3426,19 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/Name'
-          description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+          description: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
         Format:
           $ref: '#/components/schemas/ThreatIntelSetFormat'
           description: The format of the threatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/ThreatIntelSetStatus'
           description: The status of threatIntelSet file uploaded.
         Tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags of the Threat List resource.
+          description: The tags of the threat list resource.
     InviteMembersResponse:
       type: object
       required:
@@ -3199,7 +3446,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     ListDetectorsResponse:
       type: object
       required:
@@ -3207,10 +3454,10 @@ components:
       properties:
         DetectorIds:
           $ref: '#/components/schemas/DetectorIds'
-          description: A list of detector Ids.
+          description: A list of detector IDs.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListFiltersResponse:
       type: object
       required:
@@ -3218,10 +3465,10 @@ components:
       properties:
         FilterNames:
           $ref: '#/components/schemas/FilterNames'
-          description: A list of filter names
+          description: A list of filter names.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListFindingsResponse:
       type: object
       required:
@@ -3229,10 +3476,10 @@ components:
       properties:
         FindingIds:
           $ref: '#/components/schemas/FindingIds'
-          description: The IDs of the findings you are listing.
+          description: The IDs of the findings that you're listing.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListIPSetsResponse:
       type: object
       required:
@@ -3243,7 +3490,7 @@ components:
           description: The IDs of the IPSet resources.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListInvitationsResponse:
       type: object
       properties:
@@ -3252,7 +3499,7 @@ components:
           description: A list of invitation descriptions.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListMembersResponse:
       type: object
       properties:
@@ -3261,7 +3508,16 @@ components:
           description: A list of members.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
+    ListOrganizationAdminAccountsResponse:
+      type: object
+      properties:
+        AdminAccounts:
+          $ref: '#/components/schemas/AdminAccounts'
+          description: An AdminAccounts object that includes a list of accounts configured as GuardDuty delegated administrators.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     ListPublishingDestinationsResponse:
       type: object
       required:
@@ -3269,10 +3525,10 @@ components:
       properties:
         Destinations:
           $ref: '#/components/schemas/Destinations'
-          description: A <code>Destinations</code> obect that includes information about each publishing destination returned.
+          description: A <code>Destinations</code> object that includes information about each publishing destination returned.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: 'A token to use for paginating results returned in the repsonse. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3289,7 +3545,7 @@ components:
           description: The IDs of the ThreatIntelSet resources.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: Pagination parameter to be used on the next list operation to retrieve more items.
+          description: The pagination parameter to be used on the next list operation to retrieve more items.
     StartMonitoringMembersResponse:
       type: object
       required:
@@ -3297,7 +3553,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
     StopMonitoringMembersResponse:
       type: object
       required:
@@ -3305,7 +3561,7 @@ components:
       properties:
         UnprocessedAccounts:
           $ref: '#/components/schemas/UnprocessedAccounts'
-          description: A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
+          description: 'A list of objects that contain an accountId for each account that could not be processed, and a result string that indicates why the account was not processed. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -3337,6 +3593,9 @@ components:
     UpdateIPSetResponse:
       type: object
       properties: {}
+    UpdateOrganizationConfigurationResponse:
+      type: object
+      properties: {}
     UpdatePublishingDestinationResponse:
       type: object
       properties: {}
@@ -3359,13 +3618,13 @@ components:
           description: The account ID of the master GuardDuty account whose invitation you're accepting.
         InvitationId:
           $ref: '#/components/schemas/String'
-          description: This value is used to validate the master account to the member account.
+          description: The value that is used to validate the master account to the member account.
     AccessKeyDetails:
       type: object
       properties:
         AccessKeyId:
           $ref: '#/components/schemas/String'
-          description: Access key ID of the user.
+          description: The access key ID of the user.
         PrincipalId:
           $ref: '#/components/schemas/String'
           description: The principal ID of the user.
@@ -3397,68 +3656,68 @@ components:
       properties:
         Api:
           $ref: '#/components/schemas/String'
-          description: AWS API name.
+          description: The AWS API name.
         CallerType:
           $ref: '#/components/schemas/String'
-          description: AWS API caller type.
+          description: The AWS API caller type.
         DomainDetails:
           $ref: '#/components/schemas/DomainDetails'
-          description: Domain information for the AWS API call.
+          description: The domain information for the AWS API call.
         RemoteIpDetails:
           $ref: '#/components/schemas/RemoteIpDetails'
-          description: Remote IP information of the connection.
+          description: The remote IP information of the connection.
         ServiceName:
           $ref: '#/components/schemas/String'
-          description: AWS service name whose API was invoked.
+          description: The AWS service name whose API was invoked.
       description: Contains information about the API operation.
     DnsRequestAction:
       type: object
       properties:
         Domain:
           $ref: '#/components/schemas/String'
-          description: Domain information for the API request.
+          description: The domain information for the API request.
       description: Contains information about the DNS_REQUEST action described in this finding.
     NetworkConnectionAction:
       type: object
       properties:
         Blocked:
           $ref: '#/components/schemas/Boolean'
-          description: Network connection blocked information.
+          description: Indicates whether EC2 blocked the network connection to your instance.
         ConnectionDirection:
           $ref: '#/components/schemas/String'
-          description: Network connection direction.
+          description: The network connection direction.
         LocalPortDetails:
           $ref: '#/components/schemas/LocalPortDetails'
-          description: Local port information of the connection.
+          description: The local port information of the connection.
         Protocol:
           $ref: '#/components/schemas/String'
-          description: Network connection protocol.
+          description: The network connection protocol.
         LocalIpDetails:
           $ref: '#/components/schemas/LocalIpDetails'
-          description: Local IP information of the connection.
+          description: The local IP information of the connection.
         RemoteIpDetails:
           $ref: '#/components/schemas/RemoteIpDetails'
-          description: Remote IP information of the connection.
+          description: The remote IP information of the connection.
         RemotePortDetails:
           $ref: '#/components/schemas/RemotePortDetails'
-          description: Remote port information of the connection.
+          description: The remote port information of the connection.
       description: Contains information about the NETWORK_CONNECTION action described in the finding.
     PortProbeAction:
       type: object
       properties:
         Blocked:
           $ref: '#/components/schemas/Boolean'
-          description: Port probe blocked information.
+          description: 'Indicates whether EC2 blocked the port probe to the instance, such as with an ACL.'
         PortProbeDetails:
           $ref: '#/components/schemas/PortProbeDetails'
-          description: A list of port probe details objects.
+          description: A list of objects related to port probe details.
       description: Contains information about the PORT_PROBE action described in the finding.
     Action:
       type: object
       properties:
         ActionType:
           $ref: '#/components/schemas/String'
-          description: GuardDuty Finding activity type.
+          description: The GuardDuty finding activity type.
         AwsApiCallAction:
           $ref: '#/components/schemas/AwsApiCallAction'
           description: Information about the AWS_API_CALL action described in this finding.
@@ -3471,7 +3730,30 @@ components:
         PortProbeAction:
           $ref: '#/components/schemas/PortProbeAction'
           description: Information about the PORT_PROBE action described in this finding.
-      description: Contains information about action.
+      description: Contains information about actions.
+    AdminStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLE_IN_PROGRESS
+      minLength: 1
+      maxLength: 300
+    AdminAccount:
+      type: object
+      properties:
+        AdminAccountId:
+          $ref: '#/components/schemas/String'
+          description: The AWS account ID for the account.
+        AdminStatus:
+          $ref: '#/components/schemas/AdminStatus'
+          description: Indicates whether the account is enabled as the delegated administrator.
+      description: The account within the organization specified as the GuardDuty delegated administrator.
+    AdminAccounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdminAccount'
+      minItems: 0
+      maxItems: 1
     FindingIds:
       type: array
       items:
@@ -3486,33 +3768,33 @@ components:
       properties:
         FindingIds:
           $ref: '#/components/schemas/FindingIds'
-          description: IDs of the findings that you want to archive.
+          description: The IDs of the findings that you want to archive.
     DomainDetails:
       type: object
       properties:
         Domain:
           $ref: '#/components/schemas/String'
-          description: Domain information for the AWS API call.
+          description: The domain information for the AWS API call.
       description: Contains information about the domain.
     RemoteIpDetails:
       type: object
       properties:
         City:
           $ref: '#/components/schemas/City'
-          description: City information of the remote IP address.
+          description: The city information of the remote IP address.
         Country:
           $ref: '#/components/schemas/Country'
-          description: Country code of the remote IP address.
+          description: The country code of the remote IP address.
         GeoLocation:
           $ref: '#/components/schemas/GeoLocation'
-          description: Location information of the remote IP address.
+          description: The location information of the remote IP address.
         IpAddressV4:
           $ref: '#/components/schemas/String'
-          description: IPV4 remote address of the connection.
+          description: The IPv4 remote address of the connection.
         Organization:
           $ref: '#/components/schemas/Organization'
-          description: ISP Organization information of the remote IP address.
-      description: Continas information about the remote IP address of the connection.
+          description: The ISP organization information of the remote IP address.
+      description: Contains information about the remote IP address of the connection.
     Boolean:
       type: boolean
     City:
@@ -3520,7 +3802,7 @@ components:
       properties:
         CityName:
           $ref: '#/components/schemas/String'
-          description: City name of the remote IP address.
+          description: The city name of the remote IP address.
       description: Contains information about the city associated with the IP address.
     ClientToken:
       type: string
@@ -3552,45 +3834,45 @@ components:
         Eq:
           deprecated: true
           $ref: '#/components/schemas/Eq'
-          description: Represents the equal condition to be applied to a single field when querying for findings.
+          description: Represents the <i>equal</i> condition to be applied to a single field when querying for findings.
         Neq:
           deprecated: true
           $ref: '#/components/schemas/Neq'
-          description: Represents the not equal condition to be applied to a single field when querying for findings.
+          description: Represents the <i>not equal</i> condition to be applied to a single field when querying for findings.
         Gt:
           deprecated: true
           $ref: '#/components/schemas/Integer'
-          description: Represents a greater than condition to be applied to a single field when querying for findings.
+          description: Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.
         Gte:
           deprecated: true
           $ref: '#/components/schemas/Integer'
-          description: Represents a greater than equal condition to be applied to a single field when querying for findings.
+          description: Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.
         Lt:
           deprecated: true
           $ref: '#/components/schemas/Integer'
-          description: Represents a less than condition to be applied to a single field when querying for findings.
+          description: Represents a <i>less than</i> condition to be applied to a single field when querying for findings.
         Lte:
           deprecated: true
           $ref: '#/components/schemas/Integer'
-          description: Represents a less than equal condition to be applied to a single field when querying for findings.
+          description: Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.
         Equals:
           $ref: '#/components/schemas/Equals'
-          description: Represents an <b>equal</b> condition to be applied to a single field when querying for findings.
+          description: Represents an <i>equal</i> <b/> condition to be applied to a single field when querying for findings.
         NotEquals:
           $ref: '#/components/schemas/NotEquals'
-          description: Represents an <b>not equal</b> condition to be applied to a single field when querying for findings.
+          description: Represents a <i>not equal</i> <b/> condition to be applied to a single field when querying for findings.
         GreaterThan:
           $ref: '#/components/schemas/Long'
-          description: Represents a greater than condition to be applied to a single field when querying for findings.
+          description: Represents a <i>greater than</i> condition to be applied to a single field when querying for findings.
         GreaterThanOrEqual:
           $ref: '#/components/schemas/Long'
-          description: Represents a greater than equal condition to be applied to a single field when querying for findings.
+          description: Represents a <i>greater than or equal</i> condition to be applied to a single field when querying for findings.
         LessThan:
           $ref: '#/components/schemas/Long'
-          description: Represents a less than condition to be applied to a single field when querying for findings.
+          description: Represents a <i>less than</i> condition to be applied to a single field when querying for findings.
         LessThanOrEqual:
           $ref: '#/components/schemas/Long'
-          description: Represents a less than equal condition to be applied to a single field when querying for findings.
+          description: Represents a <i>less than or equal</i> condition to be applied to a single field when querying for findings.
       description: Contains information about the condition.
     CountBySeverity:
       type: object
@@ -3601,11 +3883,11 @@ components:
       properties:
         CountryCode:
           $ref: '#/components/schemas/String'
-          description: Country code of the remote IP address.
+          description: The country code of the remote IP address.
         CountryName:
           $ref: '#/components/schemas/String'
-          description: Country name of the remote IP address.
-      description: Contains information about the country in which the remote IP address is located.
+          description: The country name of the remote IP address.
+      description: Contains information about the country where the remote IP address is located.
     FindingPublishingFrequency:
       type: string
       enum:
@@ -3626,13 +3908,13 @@ components:
       properties:
         Enable:
           $ref: '#/components/schemas/Boolean'
-          description: A boolean value that specifies whether the detector is to be enabled.
+          description: A Boolean value that specifies whether the detector is to be enabled.
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         FindingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: A enum value that specifies how frequently customer got Finding updates published.
+          description: An enum value that specifies how frequently updated findings are exported.
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags to be added to a new detector resource.
@@ -3683,7 +3965,7 @@ components:
           description: Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: Represents the criteria to be used in the filter for querying findings.
+          description: '<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to TRUE, only archived findings are listed. When it''s set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> </ul>'
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
@@ -3720,16 +4002,16 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/Name'
-          description: The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+          description: '<p>The user-friendly name to identify the IPSet.</p> <p> Allowed characters are alphanumerics, spaces, hyphens (-), and underscores (_).</p>'
         Format:
           $ref: '#/components/schemas/IpSetFormat'
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
-          description: A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
+          description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
@@ -3766,7 +4048,7 @@ components:
         KmsKeyArn:
           $ref: '#/components/schemas/String'
           description: The ARN of the KMS key to use for encryption.
-      description: 'Contains the ARN of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
+      description: 'Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.'
     CreatePublishingDestinationRequest:
       type: object
       required:
@@ -3776,10 +4058,10 @@ components:
       properties:
         DestinationType:
           $ref: '#/components/schemas/DestinationType'
-          description: The type of resource for the publishing destination. Currently only S3 is supported.
+          description: The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.
         DestinationProperties:
           $ref: '#/components/schemas/DestinationProperties'
-          description: 'Properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.'
+          description: 'The properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.'
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the request.
@@ -3795,7 +4077,7 @@ components:
       properties:
         FindingTypes:
           $ref: '#/components/schemas/FindingTypes'
-          description: Types of sample findings to generate.
+          description: The types of sample findings to generate.
     ThreatIntelSetFormat:
       type: string
       enum:
@@ -3818,22 +4100,22 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/Name'
-          description: A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+          description: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
         Format:
           $ref: '#/components/schemas/ThreatIntelSetFormat'
           description: The format of the file that contains the ThreatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
-          description: A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+          description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: The idempotency token for the create request.
         Tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags to be added to a new Threat List resource.
+          description: The tags to be added to a new threat list resource.
     DeclineInvitationsRequest:
       type: object
       required:
@@ -3881,6 +4163,10 @@ components:
       type: object
       title: DeleteThreatIntelSetRequest
       properties: {}
+    DescribeOrganizationConfigurationRequest:
+      type: object
+      title: DescribeOrganizationConfigurationRequest
+      properties: {}
     DescribePublishingDestinationRequest:
       type: object
       title: DescribePublishingDestinationRequest
@@ -3906,11 +4192,11 @@ components:
           description: The unique ID of the publishing destination.
         DestinationType:
           $ref: '#/components/schemas/DestinationType'
-          description: 'The type of resource used for the publishing destination. Currently, only S3 is supported.'
+          description: 'The type of resource used for the publishing destination. Currently, only Amazon S3 buckets are supported.'
         Status:
           $ref: '#/components/schemas/PublishingStatus'
           description: The status of the publishing destination.
-      description: 'Contains information about a publishing destination, including the ID, type, and status.'
+      description: 'Contains information about the publishing destination, including the ID, type, and status.'
     Destinations:
       type: array
       items:
@@ -3928,6 +4214,15 @@ components:
         - DISABLED
       minLength: 1
       maxLength: 300
+    DisableOrganizationAdminAccountRequest:
+      type: object
+      required:
+        - AdminAccountId
+      title: DisableOrganizationAdminAccountRequest
+      properties:
+        AdminAccountId:
+          $ref: '#/components/schemas/String'
+          description: The AWS Account ID for the Organizations account to be disabled as a GuardDuty delegated administrator.
     DisassociateFromMasterAccountRequest:
       type: object
       title: DisassociateFromMasterAccountRequest
@@ -3940,10 +4235,19 @@ components:
       properties:
         AccountIds:
           $ref: '#/components/schemas/AccountIds'
-          description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
+          description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
     Double:
       type: number
       format: double
+    EnableOrganizationAdminAccountRequest:
+      type: object
+      required:
+        - AdminAccountId
+      title: EnableOrganizationAdminAccountRequest
+      properties:
+        AdminAccountId:
+          $ref: '#/components/schemas/String'
+          description: The AWS Account ID for the Organizations account to be enabled as a GuardDuty delegated administrator.
     ThreatIntelligenceDetails:
       type: array
       items:
@@ -3977,14 +4281,14 @@ components:
           description: The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
         ResourceType:
           $ref: '#/components/schemas/String'
-          description: The type of the AWS resource.
+          description: The type of AWS resource.
       description: Contains information about the AWS resource associated with the activity that prompted GuardDuty to generate a finding.
     Service:
       type: object
       properties:
         Action:
           $ref: '#/components/schemas/Action'
-          description: Information about the activity described in a finding.
+          description: Information about the activity that is described in a finding.
         Evidence:
           $ref: '#/components/schemas/Evidence'
           description: An evidence object associated with the service.
@@ -3993,25 +4297,25 @@ components:
           description: Indicates whether this finding is archived.
         Count:
           $ref: '#/components/schemas/Integer'
-          description: Total count of the occurrences of this finding type.
+          description: The total count of the occurrences of this finding type.
         DetectorId:
           $ref: '#/components/schemas/DetectorId'
-          description: Detector ID for the GuardDuty service.
+          description: The detector ID for the GuardDuty service.
         EventFirstSeen:
           $ref: '#/components/schemas/String'
-          description: First seen timestamp of the activity that prompted GuardDuty to generate this finding.
+          description: The first-seen timestamp of the activity that prompted GuardDuty to generate this finding.
         EventLastSeen:
           $ref: '#/components/schemas/String'
-          description: Last seen timestamp of the activity that prompted GuardDuty to generate this finding.
+          description: The last-seen timestamp of the activity that prompted GuardDuty to generate this finding.
         ResourceRole:
           $ref: '#/components/schemas/String'
-          description: Resource role information for this finding.
+          description: The resource role information for this finding.
         ServiceName:
           $ref: '#/components/schemas/String'
           description: The name of the AWS service (GuardDuty) that generated a finding.
         UserFeedback:
           $ref: '#/components/schemas/String'
-          description: Feedback left about the finding.
+          description: Feedback that was submitted about the finding.
       description: Contains additional information about the generated finding.
     Finding:
       type: object
@@ -4032,13 +4336,13 @@ components:
           description: The ID of the account in which the finding was generated.
         Arn:
           $ref: '#/components/schemas/String'
-          description: The ARN for the finding.
+          description: The ARN of the finding.
         Confidence:
           $ref: '#/components/schemas/Double'
           description: The confidence score for the finding.
         CreatedAt:
           $ref: '#/components/schemas/String'
-          description: The time and date at which the finding was created.
+          description: The time and date when the finding was created.
         Description:
           $ref: '#/components/schemas/String'
           description: The description of the finding.
@@ -4050,7 +4354,7 @@ components:
           description: The partition associated with the finding.
         Region:
           $ref: '#/components/schemas/String'
-          description: The Region in which the finding was generated.
+          description: The Region where the finding was generated.
         Resource:
           $ref: '#/components/schemas/Resource'
         SchemaVersion:
@@ -4063,13 +4367,13 @@ components:
           description: The severity of the finding.
         Title:
           $ref: '#/components/schemas/String'
-          description: The title for the finding.
+          description: The title of the finding.
         Type:
           $ref: '#/components/schemas/FindingType'
-          description: The type of the finding.
+          description: The type of finding.
         UpdatedAt:
           $ref: '#/components/schemas/String'
-          description: The time and date at which the finding was laste updated.
+          description: The time and date when the finding was last updated.
       description: 'Contains information about the finding, which is generated when abnormal or suspicious activity is detected.'
     FindingStatisticTypes:
       type: array
@@ -4082,7 +4386,7 @@ components:
       properties:
         CountBySeverity:
           $ref: '#/components/schemas/CountBySeverity'
-          description: Represents a map of severity to count statistic for a set of findings
+          description: Represents a map of severity to count statistics for a set of findings.
       description: Contains information about finding statistics.
     Findings:
       type: array
@@ -4095,10 +4399,10 @@ components:
       properties:
         Lat:
           $ref: '#/components/schemas/Double'
-          description: Latitude information of remote IP address.
+          description: The latitude information of the remote IP address.
         Lon:
           $ref: '#/components/schemas/Double'
-          description: Longitude information of remote IP address.
+          description: The longitude information of the remote IP address.
       description: Contains information about the location of the remote IP address.
     GetDetectorRequest:
       type: object
@@ -4113,10 +4417,10 @@ components:
       properties:
         AttributeName:
           $ref: '#/components/schemas/String'
-          description: 'Represents the finding attribute (for example, accountId) by which to sort findings.'
+          description: 'Represents the finding attribute (for example, accountId) to sort findings by.'
         OrderBy:
           $ref: '#/components/schemas/OrderBy'
-          description: Order by which the sorted findings are to be displayed.
+          description: The order by which the sorted findings are to be displayed.
       description: Contains information about the criteria used for sorting findings.
     GetFindingsRequest:
       type: object
@@ -4126,7 +4430,7 @@ components:
       properties:
         FindingIds:
           $ref: '#/components/schemas/FindingIds'
-          description: IDs of the findings that you want to retrieve.
+          description: The IDs of the findings that you want to retrieve.
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -4138,10 +4442,10 @@ components:
       properties:
         FindingStatisticTypes:
           $ref: '#/components/schemas/FindingStatisticTypes'
-          description: Types of finding statistics to retrieve.
+          description: The types of finding statistics to retrieve.
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: Represents the criteria used for querying findings.
+          description: Represents the criteria that is used for querying findings.
     GetIPSetRequest:
       type: object
       title: GetIPSetRequest
@@ -4171,17 +4475,17 @@ components:
       properties:
         AccountId:
           $ref: '#/components/schemas/AccountId'
-          description: The ID of the account used as the Master account.
+          description: The ID of the account used as the master account.
         InvitationId:
           $ref: '#/components/schemas/String'
-          description: This value is used to validate the master account to the member account.
+          description: The value used to validate the master account to the member account.
         RelationshipStatus:
           $ref: '#/components/schemas/String'
           description: The status of the relationship between the master and member accounts.
         InvitedAt:
           $ref: '#/components/schemas/String'
-          description: Timestamp at which the invitation was sent.
-      description: Contains information about the Master account and invitation.
+          description: The timestamp when the invitation was sent.
+      description: Contains information about the master account and invitation.
     GetMembersRequest:
       type: object
       required:
@@ -4221,10 +4525,10 @@ components:
       properties:
         Arn:
           $ref: '#/components/schemas/String'
-          description: AWS EC2 instance profile ARN.
+          description: The profile ARN of the EC2 instance.
         Id:
           $ref: '#/components/schemas/String'
-          description: AWS EC2 instance profile ID.
+          description: The profile ID of the EC2 instance.
       description: Contains information about the EC2 instance profile.
     NetworkInterfaces:
       type: array
@@ -4243,7 +4547,7 @@ components:
       properties:
         AvailabilityZone:
           $ref: '#/components/schemas/String'
-          description: The availability zone of the EC2 instance.
+          description: The Availability Zone of the EC2 instance.
         IamInstanceProfile:
           $ref: '#/components/schemas/IamInstanceProfile'
           description: The profile information of the EC2 instance.
@@ -4270,7 +4574,7 @@ components:
           description: The launch time of the EC2 instance.
         NetworkInterfaces:
           $ref: '#/components/schemas/NetworkInterfaces'
-          description: The network interface information of the EC2 instance.
+          description: The elastic network interface information of the EC2 instance.
         Platform:
           $ref: '#/components/schemas/String'
           description: The platform of the EC2 instance.
@@ -4286,7 +4590,7 @@ components:
       properties:
         AccountId:
           $ref: '#/components/schemas/AccountId'
-          description: The ID of the account from which the invitations was sent.
+          description: The ID of the account that the invitation was sent from.
         InvitationId:
           $ref: '#/components/schemas/String'
           description: The ID of the invitation. This value is used to validate the inviter account to the member account.
@@ -4295,7 +4599,7 @@ components:
           description: The status of the relationship between the inviter and invitee accounts.
         InvitedAt:
           $ref: '#/components/schemas/String'
-          description: Timestamp at which the invitation was sent.
+          description: The timestamp when the invitation was sent.
       description: Contains information about the invitation to become a member account.
     Invitations:
       type: array
@@ -4314,7 +4618,7 @@ components:
           description: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
         DisableEmailNotification:
           $ref: '#/components/schemas/Boolean'
-          description: A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+          description: A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
         Message:
           $ref: '#/components/schemas/String'
           description: The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
@@ -4346,7 +4650,7 @@ components:
       properties:
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
+          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -4355,7 +4659,7 @@ components:
           description: You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
         NextToken:
           $ref: '#/components/schemas/String'
-          description: You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+          description: 'You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.'
     ListIPSetsRequest:
       type: object
       title: ListIPSetsRequest
@@ -4367,6 +4671,10 @@ components:
     ListMembersRequest:
       type: object
       title: ListMembersRequest
+      properties: {}
+    ListOrganizationAdminAccountsRequest:
+      type: object
+      title: ListOrganizationAdminAccountsRequest
       properties: {}
     ListPublishingDestinationsRequest:
       type: object
@@ -4391,17 +4699,17 @@ components:
       properties:
         IpAddressV4:
           $ref: '#/components/schemas/String'
-          description: IPV4 remote address of the connection.
+          description: The IPv4 local address of the connection.
       description: Contains information about the local IP address of the connection.
     LocalPortDetails:
       type: object
       properties:
         Port:
           $ref: '#/components/schemas/Integer'
-          description: Port number of the local connection.
+          description: The port number of the local connection.
         PortName:
           $ref: '#/components/schemas/String'
-          description: Port name of the local connection.
+          description: The port name of the local connection.
       description: Contains information about the port for the local connection.
     Member:
       type: object
@@ -4414,35 +4722,35 @@ components:
       properties:
         AccountId:
           $ref: '#/components/schemas/AccountId'
-          description: Member account ID.
+          description: The ID of the member account.
         DetectorId:
           $ref: '#/components/schemas/DetectorId'
-          description: Member account's detector ID.
+          description: The detector ID of the member account.
         MasterId:
           $ref: '#/components/schemas/String'
-          description: Master account ID.
+          description: The master account ID.
         Email:
           $ref: '#/components/schemas/Email'
-          description: Member account's email address.
+          description: The email address of the member account.
         RelationshipStatus:
           $ref: '#/components/schemas/String'
           description: The status of the relationship between the member and the master.
         InvitedAt:
           $ref: '#/components/schemas/String'
-          description: Timestamp at which the invitation was sent
+          description: The timestamp when the invitation was sent.
         UpdatedAt:
           $ref: '#/components/schemas/String'
-          description: Member last updated timestamp.
-      description: 'Continas information about the member account '
+          description: The last-updated timestamp of the member.
+      description: 'Contains information about the member account. '
     RemotePortDetails:
       type: object
       properties:
         Port:
           $ref: '#/components/schemas/Integer'
-          description: Port number of the remote connection.
+          description: The port number of the remote connection.
         PortName:
           $ref: '#/components/schemas/String'
-          description: Port name of the remote connection.
+          description: The port name of the remote connection.
       description: Contains information about the remote port.
     PrivateIpAddresses:
       type: array
@@ -4457,51 +4765,51 @@ components:
       properties:
         Ipv6Addresses:
           $ref: '#/components/schemas/Ipv6Addresses'
-          description: A list of EC2 instance IPv6 address information.
+          description: A list of IPv6 addresses for the EC2 instance.
         NetworkInterfaceId:
           $ref: '#/components/schemas/String'
-          description: The ID of the network interface
+          description: The ID of the network interface.
         PrivateDnsName:
           $ref: '#/components/schemas/String'
-          description: Private DNS name of the EC2 instance.
+          description: The private DNS name of the EC2 instance.
         PrivateIpAddress:
           $ref: '#/components/schemas/String'
-          description: Private IP address of the EC2 instance.
+          description: The private IP address of the EC2 instance.
         PrivateIpAddresses:
           $ref: '#/components/schemas/PrivateIpAddresses'
           description: Other private IP address information of the EC2 instance.
         PublicDnsName:
           $ref: '#/components/schemas/String'
-          description: Public DNS name of the EC2 instance.
+          description: The public DNS name of the EC2 instance.
         PublicIp:
           $ref: '#/components/schemas/String'
-          description: Public IP address of the EC2 instance.
+          description: The public IP address of the EC2 instance.
         SecurityGroups:
           $ref: '#/components/schemas/SecurityGroups'
-          description: Security groups associated with the EC2 instance.
+          description: The security groups associated with the EC2 instance.
         SubnetId:
           $ref: '#/components/schemas/String'
           description: The subnet ID of the EC2 instance.
         VpcId:
           $ref: '#/components/schemas/String'
           description: The VPC ID of the EC2 instance.
-      description: Contains information about the network interface of the Ec2 instance.
+      description: Contains information about the elastic network interface of the EC2 instance.
     Organization:
       type: object
       properties:
         Asn:
           $ref: '#/components/schemas/String'
-          description: Autonomous system number of the internet provider of the remote IP address.
+          description: The Autonomous System Number (ASN) of the internet provider of the remote IP address.
         AsnOrg:
           $ref: '#/components/schemas/String'
-          description: Organization that registered this ASN.
+          description: The organization that registered this ASN.
         Isp:
           $ref: '#/components/schemas/String'
-          description: ISP information for the internet provider.
+          description: The ISP information for the internet provider.
         Org:
           $ref: '#/components/schemas/String'
-          description: Name of the internet provider.
-      description: Continas information about the ISP organization of the remote IP address.
+          description: The name of the internet provider.
+      description: Contains information about the ISP organization of the remote IP address.
     PortProbeDetails:
       type: array
       items:
@@ -4511,43 +4819,43 @@ components:
       properties:
         LocalPortDetails:
           $ref: '#/components/schemas/LocalPortDetails'
-          description: Local port information of the connection.
+          description: The local port information of the connection.
         LocalIpDetails:
           $ref: '#/components/schemas/LocalIpDetails'
-          description: Local IP information of the connection.
+          description: The local IP information of the connection.
         RemoteIpDetails:
           $ref: '#/components/schemas/RemoteIpDetails'
-          description: Remote IP information of the connection.
+          description: The remote IP information of the connection.
       description: Contains information about the port probe details.
     PrivateIpAddressDetails:
       type: object
       properties:
         PrivateDnsName:
           $ref: '#/components/schemas/String'
-          description: Private DNS name of the EC2 instance.
+          description: The private DNS name of the EC2 instance.
         PrivateIpAddress:
           $ref: '#/components/schemas/String'
-          description: Private IP address of the EC2 instance.
+          description: The private IP address of the EC2 instance.
       description: Contains other private IP address information of the EC2 instance.
     ProductCode:
       type: object
       properties:
         Code:
           $ref: '#/components/schemas/String'
-          description: Product code information.
+          description: The product code information.
         ProductType:
           $ref: '#/components/schemas/String'
-          description: Product code type.
-      description: Contains information about the product code for the Ec2 instance.
+          description: The product code type.
+      description: Contains information about the product code for the EC2 instance.
     SecurityGroup:
       type: object
       properties:
         GroupId:
           $ref: '#/components/schemas/String'
-          description: EC2 instance's security group ID.
+          description: The security group ID of the EC2 instance.
         GroupName:
           $ref: '#/components/schemas/String'
-          description: EC2 instance's security group name.
+          description: The security group name of the EC2 instance.
       description: Contains information about the security groups associated with the EC2 instance.
     StartMonitoringMembersRequest:
       type: object
@@ -4566,17 +4874,17 @@ components:
       properties:
         AccountIds:
           $ref: '#/components/schemas/AccountIds'
-          description: A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
+          description: A list of account IDs for the member accounts to stop monitoring.
     Tag:
       type: object
       properties:
         Key:
           $ref: '#/components/schemas/String'
-          description: EC2 instance tag key.
+          description: The EC2 instance tag key.
         Value:
           $ref: '#/components/schemas/String'
-          description: EC2 instance tag value.
-      description: Contains information about a tag associated with the Ec2 instance.
+          description: The EC2 instance tag value.
+      description: Contains information about a tag associated with the EC2 instance.
     TagKeyList:
       type: array
       items:
@@ -4614,7 +4922,7 @@ components:
       properties:
         FindingIds:
           $ref: '#/components/schemas/FindingIds'
-          description: IDs of the findings to unarchive.
+          description: The IDs of the findings to unarchive.
     UnprocessedAccount:
       type: object
       required:
@@ -4623,11 +4931,11 @@ components:
       properties:
         AccountId:
           $ref: '#/components/schemas/AccountId'
-          description: AWS Account ID.
+          description: The AWS account ID.
         Result:
           $ref: '#/components/schemas/String'
           description: A reason why the account hasn't been processed.
-      description: Contains information about the accounts that were not processed.
+      description: Contains information about the accounts that weren't processed.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -4641,7 +4949,7 @@ components:
           description: Specifies whether the detector is enabled or not enabled.
         FindingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: 'A enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
+          description: 'An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.'
     UpdateFilterRequest:
       type: object
       title: UpdateFilterRequest
@@ -4667,7 +4975,7 @@ components:
       properties:
         FindingIds:
           $ref: '#/components/schemas/FindingIds'
-          description: IDs of the findings that you want to mark as useful or not useful.
+          description: The IDs of the findings that you want to mark as useful or not useful.
         Feedback:
           $ref: '#/components/schemas/Feedback'
           description: The feedback for the finding.
@@ -4683,10 +4991,19 @@ components:
           description: The unique ID that specifies the IPSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).'
+          description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
-          description: The updated boolean value that specifies whether the IPSet is active or not.
+          description: The updated Boolean value that specifies whether the IPSet is active or not.
+    UpdateOrganizationConfigurationRequest:
+      type: object
+      required:
+        - AutoEnable
+      title: UpdateOrganizationConfigurationRequest
+      properties:
+        AutoEnable:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether to automatically enable member accounts in the organization.
     UpdatePublishingDestinationRequest:
       type: object
       title: UpdatePublishingDestinationRequest
@@ -4703,9 +5020,9 @@ components:
           description: The unique ID that specifies the ThreatIntelSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)'
+          description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
-          description: The updated boolean value that specifies whether the ThreateIntelSet is active or not.
+          description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
 security:
   - hmac: []

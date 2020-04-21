@@ -1502,6 +1502,9 @@ components:
         NextPageToken:
           $ref: '#/components/schemas/NextPageToken'
           description: The token to retrieve the next set of results.
+        Configuration:
+          $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
+          description: 'Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
     GetRightsizingRecommendationRequest:
       type: object
       required:
@@ -1510,6 +1513,9 @@ components:
       properties:
         Filter:
           $ref: '#/components/schemas/Expression'
+        Configuration:
+          $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
+          description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
         Service:
           $ref: '#/components/schemas/GenericString'
           description: The specific service that you want recommendations for. The only valid value for <code>GetRightsizingRecommendation</code> is "<code>AmazonEC2</code>".
@@ -2486,6 +2492,19 @@ components:
           $ref: '#/components/schemas/TotalAmortizedFee'
           description: 'The total cost of your reservation, amortized over the reservation period.'
       description: The aggregated numbers for your reservation usage.
+    RightsizingRecommendationConfiguration:
+      type: object
+      required:
+        - RecommendationTarget
+        - BenefitsConsidered
+      properties:
+        RecommendationTarget:
+          $ref: '#/components/schemas/RecommendationTarget'
+          description: ' The option to see recommendations within the same instance family, or recommendations for instances across other families. The default value is <code>SAME_INSTANCE_FAMILY</code>. '
+        BenefitsConsidered:
+          $ref: '#/components/schemas/GenericBoolean'
+          description: ' The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>. '
+      description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
     RightsizingRecommendationMetadata:
       type: object
       properties:
@@ -2749,6 +2768,11 @@ components:
       type: string
     PurchasedUnits:
       type: string
+    RecommendationTarget:
+      type: string
+      enum:
+        - SAME_INSTANCE_FAMILY
+        - CROSS_INSTANCE_FAMILY
     UtilizationPercentage:
       type: string
     UtilizationPercentageInUnits:

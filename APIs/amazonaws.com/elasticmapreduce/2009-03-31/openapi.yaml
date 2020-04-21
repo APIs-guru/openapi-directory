@@ -635,6 +635,39 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ElasticMapReduce.GetManagedScalingPolicy':
+    post:
+      operationId: GetManagedScalingPolicy
+      description: ' Fetches the attached managed scaling policy for an Amazon EMR cluster. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetManagedScalingPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetManagedScalingPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.GetManagedScalingPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ElasticMapReduce.ListBootstrapActions':
     post:
       operationId: ListBootstrapActions
@@ -1191,6 +1224,39 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ElasticMapReduce.PutManagedScalingPolicy':
+    post:
+      operationId: PutManagedScalingPolicy
+      description: ' Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutManagedScalingPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutManagedScalingPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.PutManagedScalingPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ElasticMapReduce.RemoveAutoScalingPolicy':
     post:
       operationId: RemoveAutoScalingPolicy
@@ -1216,6 +1282,39 @@ paths:
             type: string
             enum:
               - ElasticMapReduce.RemoveAutoScalingPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ElasticMapReduce.RemoveManagedScalingPolicy':
+    post:
+      operationId: RemoveManagedScalingPolicy
+      description: ' Removes a managed scaling policy from a specified EMR cluster. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveManagedScalingPolicyOutput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveManagedScalingPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.RemoveManagedScalingPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1711,7 +1810,7 @@ components:
       properties:
         BlockPublicAccessConfiguration:
           $ref: '#/components/schemas/BlockPublicAccessConfiguration'
-          description: 'A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.'
+          description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
         BlockPublicAccessConfigurationMetadata:
           $ref: '#/components/schemas/BlockPublicAccessConfigurationMetadata'
           description: 'Properties that describe the AWS principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.'
@@ -1719,6 +1818,21 @@ components:
       type: object
       title: GetBlockPublicAccessConfigurationInput
       properties: {}
+    GetManagedScalingPolicyOutput:
+      type: object
+      properties:
+        ManagedScalingPolicy:
+          $ref: '#/components/schemas/ManagedScalingPolicy'
+          description: ' Specifies the managed scaling policy that is attached to an Amazon EMR cluster. '
+    GetManagedScalingPolicyInput:
+      type: object
+      required:
+        - ClusterId
+      title: GetManagedScalingPolicyInput
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+          description: ' Specifies the ID of the cluster for which the managed scaling policy will be fetched. '
     ListBootstrapActionsOutput:
       type: object
       properties:
@@ -1981,7 +2095,23 @@ components:
       properties:
         BlockPublicAccessConfiguration:
           $ref: '#/components/schemas/BlockPublicAccessConfiguration'
-          description: 'A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.'
+          description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
+    PutManagedScalingPolicyOutput:
+      type: object
+      properties: {}
+    PutManagedScalingPolicyInput:
+      type: object
+      required:
+        - ClusterId
+        - ManagedScalingPolicy
+      title: PutManagedScalingPolicyInput
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+          description: ' Specifies the ID of an EMR cluster where the managed scaling policy is attached. '
+        ManagedScalingPolicy:
+          $ref: '#/components/schemas/ManagedScalingPolicy'
+          description: ' Specifies the constraints for the managed scaling policy. '
     RemoveAutoScalingPolicyOutput:
       type: object
       properties: {}
@@ -1998,6 +2128,18 @@ components:
         InstanceGroupId:
           $ref: '#/components/schemas/InstanceGroupId'
           description: Specifies the ID of the instance group to which the scaling policy is applied.
+    RemoveManagedScalingPolicyOutput:
+      type: object
+      properties: {}
+    RemoveManagedScalingPolicyInput:
+      type: object
+      required:
+        - ClusterId
+      title: RemoveManagedScalingPolicyInput
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+          description: ' Specifies the ID of the cluster from which the managed scaling policy will be removed. '
     RemoveTagsOutput:
       type: object
       properties: {}
@@ -2105,6 +2247,9 @@ components:
         StepConcurrencyLevel:
           $ref: '#/components/schemas/Integer'
           description: Specifies the number of steps that can be executed concurrently. The default value is <code>1</code>. The maximum value is <code>256</code>.
+        ManagedScalingPolicy:
+          $ref: '#/components/schemas/ManagedScalingPolicy'
+          description: ' The specified managed scaling policy for an Amazon EMR cluster. '
       description: ' Input to the <a>RunJobFlow</a> operation. '
     SetTerminationProtectionInput:
       type: object
@@ -2701,12 +2846,12 @@ components:
         ClusterArn:
           $ref: '#/components/schemas/ArnType'
           description: The Amazon Resource Name of the cluster.
-        StepConcurrencyLevel:
-          $ref: '#/components/schemas/Integer'
-          description: Specifies the number of steps that can be executed concurrently.
         OutpostArn:
           $ref: '#/components/schemas/OptionalArnType'
           description: ' The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. '
+        StepConcurrencyLevel:
+          $ref: '#/components/schemas/Integer'
+          description: Specifies the number of steps that can be executed concurrently.
       description: The detailed description of the cluster.
     ClusterState:
       type: string
@@ -2799,6 +2944,32 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Command'
+    ComputeLimitsUnitType:
+      type: string
+      enum:
+        - InstanceFleetUnits
+        - Instances
+        - VCPU
+    ComputeLimits:
+      type: object
+      required:
+        - UnitType
+        - MinimumCapacityUnits
+        - MaximumCapacityUnits
+      properties:
+        UnitType:
+          $ref: '#/components/schemas/ComputeLimitsUnitType'
+          description: ' The unit type used for specifying a managed scaling policy. '
+        MinimumCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: ' The lower boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+        MaximumCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: ' The upper boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+        MaximumOnDemandCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: ' The upper boundary of on-demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The on-demand units are not allowed to scale beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+      description: ' The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
     Configuration:
       type: object
       properties:
@@ -2940,6 +3111,13 @@ components:
           $ref: '#/components/schemas/String'
           description: The path to the log file where the step failure root cause was originally recorded.
       description: The details of the step failure. The service attempts to detect the root cause for many common failures.
+    ManagedScalingPolicy:
+      type: object
+      properties:
+        ComputeLimits:
+          $ref: '#/components/schemas/ComputeLimits'
+          description: ' The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+      description: ' Managed scaling policy for an Amazon EMR cluster. The policy specifies the limits for resources that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
     KeyValueList:
       type: array
       items:
