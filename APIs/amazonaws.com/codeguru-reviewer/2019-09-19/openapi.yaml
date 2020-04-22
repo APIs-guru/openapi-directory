@@ -108,7 +108,7 @@ paths:
   /associations:
     post:
       operationId: AssociateRepository
-      description: '<p>Associates an AWS CodeCommit repository with Amazon CodeGuru Reviewer. When you associate an AWS CodeCommit repository with Amazon CodeGuru Reviewer, Amazon CodeGuru Reviewer will provide recommendations for each pull request. You can view recommendations in the AWS CodeCommit repository.</p> <p>You can associate a GitHub repository using the Amazon CodeGuru Reviewer console.</p>'
+      description: '<p>Associates an AWS CodeCommit repository with Amazon CodeGuru Reviewer. When you associate an AWS CodeCommit repository with Amazon CodeGuru Reviewer, Amazon CodeGuru Reviewer will provide recommendations for each pull request raised within the repository. You can view recommendations in the AWS CodeCommit repository.</p> <p>You can associate a GitHub repository using the Amazon CodeGuru Reviewer console.</p>'
       responses:
         '200':
           description: Success
@@ -164,7 +164,7 @@ paths:
                       $ref: '#/components/schemas/CodeCommitRepository'
                       description: Information about an AWS CodeCommit repository.
                 ClientRequestToken:
-                  description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>If you want to add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically only need to interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
+                  description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>To add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDKs to call this operation, you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
                   type: string
                   pattern: '^[\w-]+$'
                   minLength: 1
@@ -229,7 +229,7 @@ paths:
         - name: Name
           in: query
           required: false
-          description: List of names to use as a filter.
+          description: List of repository names to use as a filter.
           schema:
             type: array
             items:
@@ -239,7 +239,7 @@ paths:
         - name: Owner
           in: query
           required: false
-          description: 'List of owners to use as a filter. For AWS CodeCommit, the owner is the AWS account id. For GitHub, it is the GitHub account name.'
+          description: 'List of owners to use as a filter. For GitHub, this is name of the GitHub account that was used to associate the repository. For AWS CodeCommit, it is the name of the CodeCommit account that was used to associate the repository.'
           schema:
             type: array
             items:
@@ -249,7 +249,7 @@ paths:
         - name: MaxResults
           in: query
           required: false
-          description: 'The maximum number of repository association results returned by <code>ListRepositoryAssociations</code> in paginated output. When this parameter is used, <code>ListRepositoryAssociations</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRepositoryAssociations</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRepositoryAssociations</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+          description: 'The maximum number of repository association results returned by <code>ListRepositoryAssociations</code> in paginated output. When this parameter is used, <code>ListRepositoryAssociations</code> only returns <code>maxResults</code> results in a single page with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRepositoryAssociations</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 25. If this parameter is not used, <code>ListRepositoryAssociations</code> returns up to 25 results and a <code>nextToken</code> value if applicable. '
           schema:
             type: integer
             minimum: 1
@@ -257,11 +257,145 @@ paths:
         - name: NextToken
           in: query
           required: false
-          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRepositoryAssociations</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRepositoryAssociations</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>Treat this token as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
           schema:
             type: string
             minLength: 1
             maxLength: 2048
+  '/codereviews/{CodeReviewArn}':
+    get:
+      operationId: DescribeCodeReview
+      description: ' Returns the metadaata associated with the code review along with its status.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCodeReviewResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: CodeReviewArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the code review to describe. '
+          schema:
+            type: string
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
+            minLength: 1
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/feedback/{CodeReviewArn}#RecommendationId':
+    get:
+      operationId: DescribeRecommendationFeedback
+      description: ' Describes the customer feedback for a CodeGuru Reviewer recommendation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRecommendationFeedbackResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: CodeReviewArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) that identifies the code review. '
+          schema:
+            type: string
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
+            minLength: 1
+            maxLength: 1600
+        - name: RecommendationId
+          in: query
+          required: true
+          description: ' The recommendation ID that can be used to track the provided recommendations and then to collect the feedback. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+        - name: UserId
+          in: query
+          required: false
+          description: ' Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/associations/{AssociationArn}':
     get:
       operationId: DescribeRepositoryAssociation
@@ -307,10 +441,10 @@ paths:
         - name: AssociationArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) identifying the association.
+          description: The Amazon Resource Name (ARN) identifying the association. You can retrieve this ARN by calling <code>ListRepositories</code>.
           schema:
             type: string
-            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
             minLength: 1
             maxLength: 1600
     parameters:
@@ -374,9 +508,356 @@ paths:
           description: The Amazon Resource Name (ARN) identifying the association.
           schema:
             type: string
-            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
             minLength: 1
             maxLength: 1600
+  '/codereviews#Type':
+    get:
+      operationId: ListCodeReviews
+      description: ' Lists all the code reviews that the customer has created in the past 90 days. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCodeReviewsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ProviderTypes
+          in: query
+          required: false
+          description: ' List of provider types for filtering that needs to be applied before displaying the result. For example, "providerTypes=[GitHub]" will list code reviews from GitHub. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProviderType'
+            minItems: 1
+            maxItems: 3
+        - name: States
+          in: query
+          required: false
+          description: ' List of states for filtering that needs to be applied before displaying the result. For example, "states=[Pending]" will list code reviews in the Pending state. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/JobState'
+            minItems: 1
+            maxItems: 3
+        - name: RepositoryNames
+          in: query
+          required: false
+          description: ' List of repository names for filtering that needs to be applied before displaying the result. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Name'
+            minItems: 1
+            maxItems: 100
+        - name: Type
+          in: query
+          required: true
+          description: ' The type of code reviews to list in the response. '
+          schema:
+            type: string
+            enum:
+              - PullRequest
+        - name: MaxResults
+          in: query
+          required: false
+          description: ' The maximum number of results that are returned per call. The default is 100. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: ' If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/feedback/{CodeReviewArn}/RecommendationFeedback':
+    get:
+      operationId: ListRecommendationFeedback
+      description: ' Lists the customer feedback for a CodeGuru Reviewer recommendation for all users. This API will be used from the console to extract the previously given feedback by the user to pre-populate the feedback emojis for all recommendations. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationFeedbackResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ' If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ' The maximum number of results that are returned per call. The default is 100. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: CodeReviewArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) that identifies the code review. '
+          schema:
+            type: string
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
+            minLength: 1
+            maxLength: 1600
+        - name: UserIds
+          in: query
+          required: false
+          description: ' Filter on userIds that need to be applied before displaying the result. This can be used to query all the recommendation feedback for a code review from a given user. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserId'
+            minItems: 1
+            maxItems: 100
+        - name: RecommendationIds
+          in: query
+          required: false
+          description: ' Filter on recommendationIds that need to be applied before displaying the result. This can be used to query all the recommendation feedback for a given recommendation. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RecommendationId'
+            minItems: 1
+            maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/codereviews/{CodeReviewArn}/Recommendations':
+    get:
+      operationId: ListRecommendations
+      description: ' Returns the list of all recommendations for a completed code review. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ' Pagination token. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          required: false
+          description: ' The maximum number of results that are returned per call. The default is 100. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: CodeReviewArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the code review to describe. '
+          schema:
+            type: string
+            pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
+            minLength: 1
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /feedback:
+    put:
+      operationId: PutRecommendationFeedback
+      description: ' Stores customer feedback for a CodeGuru-Reviewer recommendation. When this API is called again with different reactions the previous feedback is overwritten. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRecommendationFeedbackResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CodeReviewArn
+                - RecommendationId
+                - Reactions
+              properties:
+                CodeReviewArn:
+                  description: ' The Amazon Resource Name (ARN) that identifies the code review. '
+                  type: string
+                  pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
+                  minLength: 1
+                  maxLength: 1600
+                RecommendationId:
+                  description: ' The recommendation ID that can be used to track the provided recommendations and then to collect the feedback. '
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                Reactions:
+                  description: ' List for storing reactions. Reactions are utf-8 text code for emojis. If you send an empty list it clears all your feedback. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Reaction'
+                  minItems: 0
+                  maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -449,6 +930,19 @@ components:
     AccessDeniedException: {}
     ConflictException: {}
     ThrottlingException: {}
+    DescribeCodeReviewResponse:
+      type: object
+      properties:
+        CodeReview:
+          $ref: '#/components/schemas/CodeReview'
+          description: ' Information about the code review. '
+    ResourceNotFoundException: {}
+    DescribeRecommendationFeedbackResponse:
+      type: object
+      properties:
+        RecommendationFeedback:
+          $ref: '#/components/schemas/RecommendationFeedback'
+          description: ' The recommendation feedback given by the user. '
     DescribeRepositoryAssociationResponse:
       type: object
       properties:
@@ -462,6 +956,58 @@ components:
         RepositoryAssociation:
           $ref: '#/components/schemas/RepositoryAssociation'
           description: Information about the disassociated repository.
+    ListCodeReviewsResponse:
+      type: object
+      properties:
+        CodeReviewSummaries:
+          $ref: '#/components/schemas/CodeReviewSummaries'
+          description: ' A list of code reviews that meet the criteria of the request. '
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' Pagination token. '
+    ProviderType:
+      type: string
+      enum:
+        - CodeCommit
+        - GitHub
+    JobState:
+      type: string
+      enum:
+        - Completed
+        - Pending
+        - Failed
+        - Deleting
+    Name:
+      type: string
+      pattern: '^\S[\w.-]*$'
+      minLength: 1
+      maxLength: 100
+    ListRecommendationFeedbackResponse:
+      type: object
+      properties:
+        RecommendationFeedbackSummaries:
+          $ref: '#/components/schemas/RecommendationFeedbackSummaries'
+          description: ' Recommendation feedback summaries corresponding to the code reivew ARN. '
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    UserId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    RecommendationId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ListRecommendationsResponse:
+      type: object
+      properties:
+        RecommendationSummaries:
+          $ref: '#/components/schemas/RecommendationSummaries'
+          description: ' List of recommendations for the requested code review. '
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' Pagination token. '
     ListRepositoryAssociationsResponse:
       type: object
       properties:
@@ -471,11 +1017,6 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The <code>nextToken</code> value to include in a future <code>ListRecommendations</code> request. When the results of a <code>ListRecommendations</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
-    ProviderType:
-      type: string
-      enum:
-        - CodeCommit
-        - GitHub
     RepositoryAssociationState:
       type: string
       enum:
@@ -483,19 +1024,22 @@ components:
         - Associating
         - Failed
         - Disassociating
-    Name:
-      type: string
-      pattern: '^\S[\w.-]*$'
-      minLength: 1
-      maxLength: 100
     Owner:
       type: string
       pattern: ^\S(.*\S)?$
       minLength: 1
       maxLength: 100
+    PutRecommendationFeedbackResponse:
+      type: object
+      properties: {}
+    Reaction:
+      type: string
+      enum:
+        - ThumbsUp
+        - ThumbsDown
     Arn:
       type: string
-      pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z]+:[\w-]+$'
+      pattern: '^arn:aws[^:\s]*:codeguru-reviewer:[^:\s]+:[\d]{12}:[a-z-]+:[\w-]+$'
       minLength: 1
       maxLength: 1600
     Repository:
@@ -521,13 +1065,13 @@ components:
           description: The repository to associate.
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
-          description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>If you want to add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically only need to interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
+          description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>To add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDKs to call this operation, you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
     RepositoryAssociation:
       type: object
       properties:
         AssociationId:
           $ref: '#/components/schemas/AssociationId'
-          description: The id of the repository association.
+          description: The ID of the repository association.
         AssociationArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) identifying the repository association.
@@ -557,6 +1101,176 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    StateReason:
+      type: string
+      minLength: 0
+      maxLength: 256
+    TimeStamp:
+      type: string
+      format: date-time
+    Type:
+      type: string
+      enum:
+        - PullRequest
+    PullRequestId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    SourceCodeType:
+      type: object
+      properties:
+        CommitDiff:
+          $ref: '#/components/schemas/CommitDiffSourceCodeType'
+          description: ' The commit diff for the pull request. '
+      description: ' Information about the source code type. '
+    Metrics:
+      type: object
+      properties:
+        MeteredLinesOfCodeCount:
+          $ref: '#/components/schemas/MeteredLinesOfCodeCount'
+          description: ' Lines of code metered in the code review. '
+        FindingsCount:
+          $ref: '#/components/schemas/FindingsCount'
+          description: ' Total number of recommendations found in the code review. '
+      description: ' Information about the statistics from the code review. '
+    CodeReview:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+          description: ' The name of the code review. '
+        CodeReviewArn:
+          $ref: '#/components/schemas/Arn'
+          description: ' The Amazon Resource Name (ARN) of the code review to describe. '
+        RepositoryName:
+          $ref: '#/components/schemas/Name'
+          description: ' The name of the repository. '
+        Owner:
+          $ref: '#/components/schemas/Owner'
+          description: ' The owner of the repository. '
+        ProviderType:
+          $ref: '#/components/schemas/ProviderType'
+          description: ' The provider type of the repository association. '
+        State:
+          $ref: '#/components/schemas/JobState'
+          description: ' The state of the code review. '
+        StateReason:
+          $ref: '#/components/schemas/StateReason'
+          description: ' The reason for the state of the code review. '
+        CreatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time, in milliseconds since the epoch, when the code review was created. '
+        LastUpdatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
+        Type:
+          $ref: '#/components/schemas/Type'
+          description: ' The type of code review. '
+        PullRequestId:
+          $ref: '#/components/schemas/PullRequestId'
+          description: ' The pull request ID for the code review. '
+        SourceCodeType:
+          $ref: '#/components/schemas/SourceCodeType'
+          description: ' The type of the source code for the code review. '
+        Metrics:
+          $ref: '#/components/schemas/Metrics'
+          description: ' The statistics from the code review. '
+      description: ' Information about a code review. '
+    CodeReviewSummary:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+          description: ' The name of the code review. '
+        CodeReviewArn:
+          $ref: '#/components/schemas/Arn'
+          description: ' The Amazon Resource Name (ARN) of the code review to describe. '
+        RepositoryName:
+          $ref: '#/components/schemas/Name'
+          description: ' The name of the repository. '
+        Owner:
+          $ref: '#/components/schemas/Owner'
+          description: ' The owner of the repository. '
+        ProviderType:
+          $ref: '#/components/schemas/ProviderType'
+          description: ' The provider type of the repository association. '
+        State:
+          $ref: '#/components/schemas/JobState'
+          description: ' The state of the code review. '
+        CreatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time, in milliseconds since the epoch, when the code review was created. '
+        LastUpdatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
+        Type:
+          $ref: '#/components/schemas/Type'
+          description: ' The type of the code review. '
+        PullRequestId:
+          $ref: '#/components/schemas/PullRequestId'
+          description: ' The pull request ID for the code review. '
+        MetricsSummary:
+          $ref: '#/components/schemas/MetricsSummary'
+          description: ' The statistics from the code review. '
+      description: ' Information about the summary of the code review. '
+    CodeReviewSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeReviewSummary'
+    MetricsSummary:
+      type: object
+      properties:
+        MeteredLinesOfCodeCount:
+          $ref: '#/components/schemas/MeteredLinesOfCodeCount'
+          description: ' Lines of code metered in the code review. '
+        FindingsCount:
+          $ref: '#/components/schemas/FindingsCount'
+          description: ' Total number of recommendations found in the code review. '
+      description: ' Information about metrics summaries. '
+    CommitId:
+      type: string
+      minLength: 6
+      maxLength: 64
+    CommitDiffSourceCodeType:
+      type: object
+      properties:
+        SourceCommit:
+          $ref: '#/components/schemas/CommitId'
+          description: ' Source Commit SHA. '
+        DestinationCommit:
+          $ref: '#/components/schemas/CommitId'
+          description: ' Destination Commit SHA '
+      description: ' The commit diff for the pull request. '
+    DescribeCodeReviewRequest:
+      type: object
+      title: DescribeCodeReviewRequest
+      properties: {}
+    DescribeRecommendationFeedbackRequest:
+      type: object
+      title: DescribeRecommendationFeedbackRequest
+      properties: {}
+    RecommendationFeedback:
+      type: object
+      properties:
+        CodeReviewArn:
+          $ref: '#/components/schemas/Arn'
+          description: ' The Amazon Resource Name (ARN) that identifies the code review. '
+        RecommendationId:
+          $ref: '#/components/schemas/RecommendationId'
+          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+        Reactions:
+          $ref: '#/components/schemas/Reactions'
+          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. You can send an empty list to clear off all your feedback. '
+        UserId:
+          $ref: '#/components/schemas/UserId'
+          description: ' The user principal that made the API call. '
+        CreatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time at which the feedback was created. '
+        LastUpdatedTimeStamp:
+          $ref: '#/components/schemas/TimeStamp'
+          description: ' The time at which the feedback was last updated. '
+      description: ' Information about the recommendation feedback. '
     DescribeRepositoryAssociationRequest:
       type: object
       title: DescribeRepositoryAssociationRequest
@@ -565,12 +1279,76 @@ components:
       type: object
       title: DisassociateRepositoryRequest
       properties: {}
+    FilePath:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    FindingsCount:
+      type: integer
+    JobStates:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobState'
+      minItems: 1
+      maxItems: 3
+    LineNumber:
+      type: integer
+    ListCodeReviewsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
     ProviderTypes:
       type: array
       items:
         $ref: '#/components/schemas/ProviderType'
       minItems: 1
       maxItems: 3
+    RepositoryNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/Name'
+      minItems: 1
+      maxItems: 100
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ListCodeReviewsRequest:
+      type: object
+      title: ListCodeReviewsRequest
+      properties: {}
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    UserIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserId'
+      minItems: 1
+      maxItems: 100
+    RecommendationIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationId'
+      minItems: 1
+      maxItems: 100
+    ListRecommendationFeedbackRequest:
+      type: object
+      title: ListRecommendationFeedbackRequest
+      properties: {}
+    RecommendationFeedbackSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationFeedbackSummary'
+    ListRecommendationsRequest:
+      type: object
+      title: ListRecommendationsRequest
+      properties: {}
+    RecommendationSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationSummary'
     RepositoryAssociationStates:
       type: array
       items:
@@ -589,14 +1367,6 @@ components:
         $ref: '#/components/schemas/Owner'
       minItems: 1
       maxItems: 3
-    MaxResults:
-      type: integer
-      minimum: 1
-      maximum: 100
-    NextToken:
-      type: string
-      minLength: 1
-      maxLength: 2048
     ListRepositoryAssociationsRequest:
       type: object
       title: ListRepositoryAssociationsRequest
@@ -605,13 +1375,67 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RepositoryAssociationSummary'
-    StateReason:
+    MeteredLinesOfCodeCount:
+      type: integer
+    Reactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Reaction'
+      minItems: 0
+      maxItems: 1
+    PutRecommendationFeedbackRequest:
+      type: object
+      required:
+        - CodeReviewArn
+        - RecommendationId
+        - Reactions
+      title: PutRecommendationFeedbackRequest
+      properties:
+        CodeReviewArn:
+          $ref: '#/components/schemas/Arn'
+          description: ' The Amazon Resource Name (ARN) that identifies the code review. '
+        RecommendationId:
+          $ref: '#/components/schemas/RecommendationId'
+          description: ' The recommendation ID that can be used to track the provided recommendations and then to collect the feedback. '
+        Reactions:
+          $ref: '#/components/schemas/Reactions'
+          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. If you send an empty list it clears all your feedback. '
+    RecommendationFeedbackSummary:
+      type: object
+      properties:
+        RecommendationId:
+          $ref: '#/components/schemas/RecommendationId'
+          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+        Reactions:
+          $ref: '#/components/schemas/Reactions'
+          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. '
+        UserId:
+          $ref: '#/components/schemas/UserId'
+          description: ' The identifier for the user that gave the feedback. '
+      description: ' Information about recommendation feedback summaries. '
+    RecommendationSummary:
+      type: object
+      properties:
+        FilePath:
+          $ref: '#/components/schemas/FilePath'
+          description: Name of the file on which a recommendation is provided.
+        RecommendationId:
+          $ref: '#/components/schemas/RecommendationId'
+          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+        StartLine:
+          $ref: '#/components/schemas/LineNumber'
+          description: ' Start line from where the recommendation is applicable in the source commit or source branch. '
+        EndLine:
+          $ref: '#/components/schemas/LineNumber'
+          description: ' Last line where the recommendation is applicable in the source commit or source branch. For a single line comment the start line and end line values will be the same. '
+        Description:
+          $ref: '#/components/schemas/Text'
+          description: ' A description of the recommendation generated by CodeGuru Reviewer for the lines of code between the start line and the end line. '
+      description: ' Information about recommendations. '
+    Text:
       type: string
-      minLength: 0
-      maxLength: 256
-    TimeStamp:
-      type: string
-      format: date-time
+      minLength: 1
+      maxLength: 2048
     RepositoryAssociationSummary:
       type: object
       properties:
@@ -635,7 +1459,7 @@ components:
           description: The provider type of the repository association.
         State:
           $ref: '#/components/schemas/RepositoryAssociationState'
-          description: '<p>The state of the repository association.</p> <dl> <dt>Associated</dt> <dd> <p>Amazon CodeGuru Reviewer is associated with the repository. </p> </dd> <dt>Associating</dt> <dd> <p>The association is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The association failed. For more information about troubleshooting (or why it failed), see [troubleshooting topic]. </p> </dd> <dt>Disassociating</dt> <dd> <p>Amazon CodeGuru Reviewer is in the process of disassociating with the repository. </p> </dd> </dl>'
+          description: <p>The state of the repository association.</p> <dl> <dt>Associated</dt> <dd> <p>Amazon CodeGuru Reviewer is associated with the repository. </p> </dd> <dt>Associating</dt> <dd> <p>The association is in progress. </p> </dd> <dt>Failed</dt> <dd> <p>The association failed. </p> </dd> <dt>Disassociating</dt> <dd> <p>Amazon CodeGuru Reviewer is in the process of disassociating with the repository. </p> </dd> </dl>
       description: Information about a repository association.
 security:
   - hmac: []

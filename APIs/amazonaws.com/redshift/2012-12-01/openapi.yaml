@@ -3355,6 +3355,214 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  '/#Action=CreateUsageLimit':
+    get:
+      x-aws-operation-name: CreateUsageLimit
+      operationId: GET_CreateUsageLimit
+      description: Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimit'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '483':
+          description: UsageLimitAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitAlreadyExistsFault'
+        '484':
+          description: InvalidUsageLimitFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageLimitFault'
+        '485':
+          description: TagLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededFault'
+        '486':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The identifier of the cluster that you want to limit usage.
+          schema:
+            type: string
+        - name: FeatureType
+          in: query
+          required: true
+          description: The Amazon Redshift feature that you want to limit.
+          schema:
+            type: string
+            enum:
+              - spectrum
+              - concurrency-scaling
+        - name: LimitType
+          in: query
+          required: true
+          description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. '
+          schema:
+            type: string
+            enum:
+              - time
+              - data-scanned
+        - name: Amount
+          in: query
+          required: true
+          description: 'The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number. '
+          schema:
+            type: integer
+        - name: Period
+          in: query
+          required: false
+          description: 'The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. '
+          schema:
+            type: string
+            enum:
+              - daily
+              - weekly
+              - monthly
+        - name: BreachAction
+          in: query
+          required: false
+          description: 'The action that Amazon Redshift takes when the limit is reached. The default is log. For more information about this parameter, see <a>UsageLimit</a>.'
+          schema:
+            type: string
+            enum:
+              - log
+              - emit-metric
+              - disable
+        - name: Tags
+          in: query
+          required: false
+          description: A list of tag instances.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Tag'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateUsageLimit
+      operationId: POST_CreateUsageLimit
+      description: Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimit'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '483':
+          description: UsageLimitAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitAlreadyExistsFault'
+        '484':
+          description: InvalidUsageLimitFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageLimitFault'
+        '485':
+          description: TagLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededFault'
+        '486':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateUsageLimitMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   '/#Action=DeleteCluster':
     get:
       x-aws-operation-name: DeleteCluster
@@ -4500,6 +4708,94 @@ paths:
             type: string
             enum:
               - DeleteTags
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  '/#Action=DeleteUsageLimit':
+    get:
+      x-aws-operation-name: DeleteUsageLimit
+      operationId: GET_DeleteUsageLimit
+      description: Deletes a usage limit from a cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UsageLimitNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: UsageLimitId
+          in: query
+          required: true
+          description: The identifier of the usage limit to delete.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteUsageLimit
+      operationId: POST_DeleteUsageLimit
+      description: Deletes a usage limit from a cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UsageLimitNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteUsageLimitMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUsageLimit
         - name: Version
           in: query
           required: true
@@ -7856,6 +8152,157 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  '/#Action=DescribeUsageLimits':
+    get:
+      x-aws-operation-name: DescribeUsageLimits
+      operationId: GET_DescribeUsageLimits
+      description: '<p>Shows usage limits on a cluster. Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:</p> <ul> <li> <p>If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.</p> </li> <li> <p>If usage limit identifier is provided, then the corresponding usage limit object is returned.</p> </li> <li> <p>If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.</p> </li> <li> <p>If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: UsageLimitId
+          in: query
+          required: false
+          description: The identifier of the usage limit to describe.
+          schema:
+            type: string
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The identifier of the cluster for which you want to describe usage limits.
+          schema:
+            type: string
+        - name: FeatureType
+          in: query
+          required: false
+          description: The feature type for which you want to describe usage limits.
+          schema:
+            type: string
+            enum:
+              - spectrum
+              - concurrency-scaling
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          schema:
+            type: string
+        - name: TagKeys
+          in: query
+          required: false
+          description: 'A tag key or keys for which you want to return all matching usage limit objects that are associated with the specified key or keys. For example, suppose that you have parameter groups that are tagged with keys called <code>owner</code> and <code>environment</code>. If you specify both of these tag keys in the request, Amazon Redshift returns a response with the usage limit objects have either or both of these tag keys associated with them.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: TagValues
+          in: query
+          required: false
+          description: 'A tag value or values for which you want to return all matching usage limit objects that are associated with the specified tag value or values. For example, suppose that you have parameter groups that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the usage limit objects that have either or both of these tag values associated with them.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUsageLimits
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeUsageLimits
+      operationId: POST_DescribeUsageLimits
+      description: '<p>Shows usage limits on a cluster. Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:</p> <ul> <li> <p>If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.</p> </li> <li> <p>If usage limit identifier is provided, then the corresponding usage limit object is returned.</p> </li> <li> <p>If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.</p> </li> <li> <p>If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeUsageLimitsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUsageLimits
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   '/#Action=DisableLogging':
     get:
       x-aws-operation-name: DisableLogging
@@ -10673,6 +11120,130 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  '/#Action=ModifyUsageLimit':
+    get:
+      x-aws-operation-name: ModifyUsageLimit
+      operationId: GET_ModifyUsageLimit
+      description: Modifies a usage limit in a cluster. You can't modify the feature type or period of a usage limit.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimit'
+        '480':
+          description: InvalidUsageLimitFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageLimitFault'
+        '481':
+          description: UsageLimitNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitNotFoundFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: UsageLimitId
+          in: query
+          required: true
+          description: The identifier of the usage limit to modify.
+          schema:
+            type: string
+        - name: Amount
+          in: query
+          required: false
+          description: 'The new limit amount. For more information about this parameter, see <a>UsageLimit</a>. '
+          schema:
+            type: integer
+        - name: BreachAction
+          in: query
+          required: false
+          description: 'The new action that Amazon Redshift takes when the limit is reached. For more information about this parameter, see <a>UsageLimit</a>. '
+          schema:
+            type: string
+            enum:
+              - log
+              - emit-metric
+              - disable
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyUsageLimit
+      operationId: POST_ModifyUsageLimit
+      description: Modifies a usage limit in a cluster. You can't modify the feature type or period of a usage limit.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimit'
+        '480':
+          description: InvalidUsageLimitFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageLimitFault'
+        '481':
+          description: UsageLimitNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UsageLimitNotFoundFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyUsageLimitMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   '/#Action=PauseCluster':
     get:
       x-aws-operation-name: PauseCluster
@@ -11589,7 +12160,7 @@ paths:
         - name: NodeType
           in: query
           required: false
-          description: '<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can''t restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+          description: '<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can''t restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
           schema:
             type: string
         - name: EnhancedVpcRouting
@@ -12861,6 +13432,36 @@ components:
     SnapshotScheduleQuotaExceededFault: {}
     ScheduleDefinitionTypeUnsupportedFault: {}
     ResourceNotFoundFault: {}
+    UsageLimit:
+      type: object
+      properties:
+        UsageLimitId:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the usage limit.
+        ClusterIdentifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the cluster with a usage limit.
+        FeatureType:
+          $ref: '#/components/schemas/UsageLimitFeatureType'
+          description: The Amazon Redshift feature to which the limit applies.
+        LimitType:
+          $ref: '#/components/schemas/UsageLimitLimitType'
+          description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size.'
+        Amount:
+          $ref: '#/components/schemas/Long'
+          description: 'The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB).'
+        Period:
+          $ref: '#/components/schemas/UsageLimitPeriod'
+          description: 'The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. '
+        BreachAction:
+          $ref: '#/components/schemas/UsageLimitBreachAction'
+          description: '<p>The action that Amazon Redshift takes when the limit is reached. Possible values are: </p> <ul> <li> <p> <b>log</b> - To log an event in a system table. The default is log.</p> </li> <li> <p> <b>emit-metric</b> - To emit CloudWatch metrics.</p> </li> <li> <p> <b>disable</b> - To disable the feature until the next usage period begins.</p> </li> </ul>'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag instances.
+      description: 'Describes a usage limit object for a cluster. '
+    UsageLimitAlreadyExistsFault: {}
+    InvalidUsageLimitFault: {}
     DeleteClusterResult:
       type: object
       properties:
@@ -12881,6 +13482,7 @@ components:
     InvalidSnapshotCopyGrantStateFault: {}
     SnapshotCopyGrantNotFoundFault: {}
     InvalidClusterSnapshotScheduleStateFault: {}
+    UsageLimitNotFoundFault: {}
     AccountAttributeList:
       type: object
       properties:
@@ -13185,6 +13787,15 @@ components:
           $ref: '#/components/schemas/String'
           description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
       description: <p/>
+    UsageLimitList:
+      type: object
+      properties:
+        UsageLimits:
+          $ref: '#/components/schemas/UsageLimits'
+          description: 'Contains the output from the <a>DescribeUsageLimits</a> action. '
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. '
     DisableSnapshotCopyResult:
       type: object
       properties:
@@ -14723,6 +15334,58 @@ components:
           $ref: '#/components/schemas/TagList'
           description: 'One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter <code>Key</code> and the corresponding value is passed in with the parameter <code>Value</code>. The <code>Key</code> and <code>Value</code> parameters are separated by a comma (,). Separate multiple tags with a space. For example, <code>--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"</code>. '
       description: 'Contains the output from the <code>CreateTags</code> action. '
+    UsageLimitFeatureType:
+      type: string
+      enum:
+        - spectrum
+        - concurrency-scaling
+    UsageLimitLimitType:
+      type: string
+      enum:
+        - time
+        - data-scanned
+    UsageLimitPeriod:
+      type: string
+      enum:
+        - daily
+        - weekly
+        - monthly
+    UsageLimitBreachAction:
+      type: string
+      enum:
+        - log
+        - emit-metric
+        - disable
+    CreateUsageLimitMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+        - FeatureType
+        - LimitType
+        - Amount
+      title: CreateUsageLimitMessage
+      properties:
+        ClusterIdentifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the cluster that you want to limit usage.
+        FeatureType:
+          $ref: '#/components/schemas/UsageLimitFeatureType'
+          description: The Amazon Redshift feature that you want to limit.
+        LimitType:
+          $ref: '#/components/schemas/UsageLimitLimitType'
+          description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. '
+        Amount:
+          $ref: '#/components/schemas/Long'
+          description: 'The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number. '
+        Period:
+          $ref: '#/components/schemas/UsageLimitPeriod'
+          description: 'The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. '
+        BreachAction:
+          $ref: '#/components/schemas/UsageLimitBreachAction'
+          description: 'The action that Amazon Redshift takes when the limit is reached. The default is log. For more information about this parameter, see <a>UsageLimit</a>.'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag instances.
     Double:
       type: number
       format: double
@@ -14886,6 +15549,15 @@ components:
           $ref: '#/components/schemas/TagKeyList'
           description: The tag key that you want to delete.
       description: 'Contains the output from the <code>DeleteTags</code> action. '
+    DeleteUsageLimitMessage:
+      type: object
+      required:
+        - UsageLimitId
+      title: DeleteUsageLimitMessage
+      properties:
+        UsageLimitId:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the usage limit to delete.
     DescribeAccountAttributesMessage:
       type: object
       title: DescribeAccountAttributesMessage
@@ -15422,6 +16094,31 @@ components:
           $ref: '#/components/schemas/TagValueList'
           description: 'A tag value or values for which you want to return all matching resources that are associated with the specified value or values. For example, suppose that you have resources tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with all resources that have either or both of these tag values associated with them.'
       description: <p/>
+    DescribeUsageLimitsMessage:
+      type: object
+      title: DescribeUsageLimitsMessage
+      properties:
+        UsageLimitId:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the usage limit to describe.
+        ClusterIdentifier:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the cluster for which you want to describe usage limits.
+        FeatureType:
+          $ref: '#/components/schemas/UsageLimitFeatureType'
+          description: The feature type for which you want to describe usage limits.
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
+        Marker:
+          $ref: '#/components/schemas/String'
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+          description: 'A tag key or keys for which you want to return all matching usage limit objects that are associated with the specified key or keys. For example, suppose that you have parameter groups that are tagged with keys called <code>owner</code> and <code>environment</code>. If you specify both of these tag keys in the request, Amazon Redshift returns a response with the usage limit objects have either or both of these tag keys associated with them.'
+        TagValues:
+          $ref: '#/components/schemas/TagValueList'
+          description: 'A tag value or values for which you want to return all matching usage limit objects that are associated with the specified tag value or values. For example, suppose that you have parameter groups that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the usage limit objects that have either or both of these tag values associated with them.'
     DisableLoggingMessage:
       type: object
       required:
@@ -15954,6 +16651,21 @@ components:
         ScheduleDefinitions:
           $ref: '#/components/schemas/ScheduleDefinitionList'
           description: 'An updated list of schedule definitions. A schedule definition is made up of schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".'
+    ModifyUsageLimitMessage:
+      type: object
+      required:
+        - UsageLimitId
+      title: ModifyUsageLimitMessage
+      properties:
+        UsageLimitId:
+          $ref: '#/components/schemas/String'
+          description: The identifier of the usage limit to modify.
+        Amount:
+          $ref: '#/components/schemas/LongOptional'
+          description: 'The new limit amount. For more information about this parameter, see <a>UsageLimit</a>. '
+        BreachAction:
+          $ref: '#/components/schemas/UsageLimitBreachAction'
+          description: 'The new action that Amazon Redshift takes when the limit is reached. For more information about this parameter, see <a>UsageLimit</a>. '
     NodeConfigurationOption:
       type: object
       properties:
@@ -16183,7 +16895,7 @@ components:
           description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
         NodeType:
           $ref: '#/components/schemas/String'
-          description: '<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can''t restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+          description: '<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can''t restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
         EnhancedVpcRouting:
           $ref: '#/components/schemas/BooleanOptional'
           description: '<p>An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html">Enhanced VPC Routing</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If this option is <code>true</code>, enhanced VPC routing is enabled. </p> <p>Default: false</p>'
@@ -16448,6 +17160,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MaintenanceTrack'
+    UsageLimits:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageLimit'
     VpcSecurityGroupMembership:
       type: object
       properties:

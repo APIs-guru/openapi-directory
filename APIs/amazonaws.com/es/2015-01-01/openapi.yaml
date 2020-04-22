@@ -3088,6 +3088,9 @@ components:
         AutomatedUpdateDate:
           $ref: '#/components/schemas/DeploymentCloseDateTimeStamp'
           description: 'Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.'
+        OptionalDeployment:
+          $ref: '#/components/schemas/Boolean'
+          description: '<code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>. '
       description: The current options of an Elasticsearch domain service software options.
     CloudWatchLogsLogGroupArn:
       type: string
