@@ -3,7 +3,7 @@ info:
   version: '2013-06-30'
   x-release: v4
   title: AWS Storage Gateway
-  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
+  description: '<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization''s on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href="https://aws.amazon.com/ec2/faqs/#longer-ids">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href="https://forums.aws.amazon.com/ann.jspa?annID=3557">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -334,7 +334,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.AssignTapePool':
     post:
       operationId: AssignTapePool
-      description: '<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+      description: '<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
       responses:
         '200':
           description: Success
@@ -559,7 +559,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.CreateNFSFileShare':
     post:
       operationId: CreateNFSFileShare
-      description: '<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a NFS interface. This operation is only supported for file gateways.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in the AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an NFS interface. This operation is only supported for file gateways.</p> <important> <p>File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in the AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. </p> <p>File gateway does not support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -604,7 +604,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.CreateSMBFileShare':
     post:
       operationId: CreateSMBFileShare
-      description: '<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using an SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -649,7 +649,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.CreateSnapshot':
     post:
       operationId: CreateSnapshot
-      description: '<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a Snapshot Schedule</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html">EC2 API reference</a>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
+      description: '<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage Service (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot">Editing a Snapshot Schedule</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html">EC2 API reference</a>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href="https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html">Welcome</a> page.</p> </important>'
       responses:
         '200':
           description: Success
@@ -796,7 +796,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.CreateTapeWithBarcode':
     post:
       operationId: CreateTapeWithBarcode
-      description: <p>Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.</p> <note> <p>Cache storage must be allocated to the gateway before you can create a virtual tape. Use the <a>AddCache</a> operation to add cache storage to a gateway.</p> </note>
+      description: <p>Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and cannot be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.</p> <note> <p>Cache storage must be allocated to the gateway before you can create a virtual tape. Use the <a>AddCache</a> operation to add cache storage to a gateway.</p> </note>
       responses:
         '200':
           description: Success
@@ -875,6 +875,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.CreateTapes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.DeleteAutomaticTapeCreationPolicy':
+    post:
+      operationId: DeleteAutomaticTapeCreationPolicy
+      description: 'Deletes the automatic tape creation policy of a gateway. If you delete this policy, new virtual tapes must be created manually. Use the Amazon Resource Name (ARN) of the gateway in your request to remove the policy. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAutomaticTapeCreationPolicyOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAutomaticTapeCreationPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.DeleteAutomaticTapeCreationPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1066,7 +1111,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DeleteSnapshotSchedule':
     post:
       operationId: DeleteSnapshotSchedule
-      description: '<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html">Working with Snapshots</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. in <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>'
+      description: '<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html">Working with Snapshots</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1336,7 +1381,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DescribeCache':
     post:
       operationId: DescribeCache
-      description: '<p>Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape and file gateway types.</p> <p>The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.</p>'
+      description: '<p>Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape, and file gateway types.</p> <p>The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.</p>'
       responses:
         '200':
           description: Success
@@ -1381,7 +1426,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DescribeCachediSCSIVolumes':
     post:
       operationId: DescribeCachediSCSIVolumes
-      description: <p>Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.</p> <p>The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).</p>
+      description: '<p>Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.</p> <p>The list of gateway volumes in the request must be from one gateway. In the response, AWS Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).</p>'
       responses:
         '200':
           description: Success
@@ -1741,7 +1786,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DescribeStorediSCSIVolumes':
     post:
       operationId: DescribeStorediSCSIVolumes
-      description: Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.
+      description: Returns the description of the gateway volumes specified in the request. The list of gateway volumes in the request must be from one gateway. In the response AWS Storage Gateway returns volume information sorted by volume ARNs. This operation is only supported in stored volume gateway type.
       responses:
         '200':
           description: Success
@@ -2149,7 +2194,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.DisableGateway':
     post:
       operationId: DisableGateway
-      description: '<p>Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes.</p> <p>Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.</p> <important> <p>Once a gateway is disabled it cannot be enabled.</p> </important>'
+      description: '<p>Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes.</p> <p>Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.</p> <important> <p>After a gateway is disabled, it cannot be enabled.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2228,6 +2273,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.JoinDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.ListAutomaticTapeCreationPolicies':
+    post:
+      operationId: ListAutomaticTapeCreationPolicies
+      description: '<p>Lists the automatic tape creation policies for a gateway. If there are no automatic tape creation policies for the gateway, it returns an empty list. </p> <p>This operation is only supported for tape gateways.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAutomaticTapeCreationPoliciesOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAutomaticTapeCreationPoliciesInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.ListAutomaticTapeCreationPolicies
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2794,7 +2884,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.ResetCache':
     post:
       operationId: ResetCache
-      description: '<p>Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
+      description: '<p>Resets all cache disks that have encountered an error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters an error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point, you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.</p> <important> <p>If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3019,7 +3109,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.ShutdownGateway':
     post:
       operationId: ShutdownGateway
-      description: '<p>Shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource Name (ARN) of the gateway in the body of your request.</p> <p>The operation shuts down the gateway service component running in the gateway''s virtual machine (VM) and not the host VM.</p> <note> <p>If you want to shut down the VM, it is recommended that you first shut down the gateway component in the VM to avoid unpredictable conditions.</p> </note> <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a>, and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>. Your applications cannot read from or write to the gateway''s storage volumes, and there are no snapshots taken.</p> <note> <p>When you make a shutdown request, you will get a <code>200 OK</code> success response immediately. However, it might take some time for the gateway to shut down. You can call the <a>DescribeGatewayInformation</a> API to check the status. For more information, see <a>ActivateGateway</a>.</p> </note> <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the gateway.</p>'
+      description: '<p>Shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource Name (ARN) of the gateway in the body of your request.</p> <p>The operation shuts down the gateway service component running in the gateway''s virtual machine (VM) and not the host VM.</p> <note> <p>If you want to shut down the VM, it is recommended that you first shut down the gateway component in the VM to avoid unpredictable conditions.</p> </note> <p>After the gateway is shutdown, you cannot call any other API except <a>StartGateway</a>, <a>DescribeGatewayInformation</a> and <a>ListGateways</a>. For more information, see <a>ActivateGateway</a>. Your applications cannot read from or write to the gateway''s storage volumes, and there are no snapshots taken.</p> <note> <p>When you make a shutdown request, you will get a <code>200 OK</code> success response immediately. However, it might take some time for the gateway to shut down. You can call the <a>DescribeGatewayInformation</a> API to check the status. For more information, see <a>ActivateGateway</a>.</p> </note> <p>If do not intend to use the gateway again, you must delete the gateway (using <a>DeleteGateway</a>) to no longer pay software charges associated with the gateway.</p>'
       responses:
         '200':
           description: Success
@@ -3143,6 +3233,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.StartGateway
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=StorageGateway_20130630.UpdateAutomaticTapeCreationPolicy':
+    post:
+      operationId: UpdateAutomaticTapeCreationPolicy
+      description: '<p>Updates the automatic tape creation policy of a gateway. Use this to update the policy with a new set of automatic tape creation rules. This is only supported for tape gateways.</p> <p>By default, there is no automatic tape creation policy.</p> <note> <p>A gateway can have only one automatic tape creation policy.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAutomaticTapeCreationPolicyOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAutomaticTapeCreationPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.UpdateAutomaticTapeCreationPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3715,7 +3850,7 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         DiskIds:
           $ref: '#/components/schemas/DiskIds'
-          description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
+          description: An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
     AddTagsToResourceOutput:
       type: object
       example:
@@ -3757,7 +3892,7 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         DiskIds:
           $ref: '#/components/schemas/DiskIds'
-          description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
+          description: An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
     AddWorkingStorageOutput:
       type: object
       example:
@@ -3765,7 +3900,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway for which working storage was configured.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway for which working storage was configured.
     AddWorkingStorageInput:
       type: object
       required:
@@ -3777,7 +3912,7 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         DiskIds:
           $ref: '#/components/schemas/DiskIds'
-          description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
+          description: An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
       description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>AddWorkingStorageInput$DiskIds</a> </p> </li> </ul>'
     AssignTapePoolOutput:
       type: object
@@ -3797,7 +3932,7 @@ components:
           description: The unique Amazon Resource Name (ARN) of the virtual tape that you want to add to the tape pool.
         PoolId:
           $ref: '#/components/schemas/PoolId'
-          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
     AttachVolumeOutput:
       type: object
       properties:
@@ -3920,10 +4055,10 @@ components:
           description: 'A unique identifier that you use to retry a request. If you retry a request, use the same <code>ClientToken</code> you specified in the initial request.'
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that you can assign to a cached volume. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers that you can represent in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256 characters.</p> </note>'
@@ -3954,10 +4089,10 @@ components:
           description: The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         Role:
           $ref: '#/components/schemas/Role'
           description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
@@ -4013,10 +4148,10 @@ components:
           description: The ARN of the file gateway on which you want to create a file share.
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         Role:
           $ref: '#/components/schemas/Role'
           description: 'The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. '
@@ -4049,7 +4184,7 @@ components:
           description: A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+          description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           $ref: '#/components/schemas/AuditDestinationARN'
           description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
@@ -4169,10 +4304,10 @@ components:
           description: '<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>'
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that can be assigned to a stored volume. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256.</p> </note>'
@@ -4199,19 +4334,19 @@ components:
           description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
         TapeSizeInBytes:
           $ref: '#/components/schemas/TapeSize'
-          description: '<p>The size, in bytes, of the virtual tape that you want to create.</p> <note> <p>The size must be aligned by gigabyte (1024*1024*1024 byte).</p> </note>'
+          description: '<p>The size, in bytes, of the virtual tape that you want to create.</p> <note> <p>The size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>'
         TapeBarcode:
           $ref: '#/components/schemas/TapeBarcode'
           description: <p>The barcode that you want to assign to the tape.</p> <note> <p>Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted.</p> </note>
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         PoolId:
           $ref: '#/components/schemas/PoolId'
-          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that can be assigned to a virtual tape that has a barcode. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256.</p> </note>'
@@ -4243,7 +4378,7 @@ components:
           description: The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tapes with. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
         TapeSizeInBytes:
           $ref: '#/components/schemas/TapeSize'
-          description: '<p>The size, in bytes, of the virtual tapes that you want to create.</p> <note> <p>The size must be aligned by gigabyte (1024*1024*1024 byte).</p> </note>'
+          description: '<p>The size, in bytes, of the virtual tapes that you want to create.</p> <note> <p>The size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>'
         ClientToken:
           $ref: '#/components/schemas/ClientToken'
           description: '<p>A unique identifier that you use to retry a request. If you retry a request, use the same <code>ClientToken</code> you specified in the initial request.</p> <note> <p>Using the same <code>ClientToken</code> prevents creating the tape multiple times.</p> </note>'
@@ -4255,17 +4390,30 @@ components:
           description: <p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         PoolId:
           $ref: '#/components/schemas/PoolId'
-          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256.</p> </note>'
       description: CreateTapesInput
+    DeleteAutomaticTapeCreationPolicyOutput:
+      type: object
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+    DeleteAutomaticTapeCreationPolicyInput:
+      type: object
+      required:
+        - GatewayARN
+      title: DeleteAutomaticTapeCreationPolicyInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
     DeleteBandwidthRateLimitOutput:
       type: object
       example:
@@ -4273,7 +4421,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway whose bandwidth rate information was deleted.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway whose bandwidth rate information was deleted.
     DeleteBandwidthRateLimitInput:
       type: object
       required:
@@ -4418,7 +4566,7 @@ components:
         VolumeARN:
           $ref: '#/components/schemas/VolumeARN'
           description: The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
-      description: A JSON object containing the of the storage volume that was deleted
+      description: A JSON object containing the Amazon Resource Name (ARN) of the storage volume that was deleted
     DeleteVolumeInput:
       type: object
       required:
@@ -4472,7 +4620,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway.
     DescribeCacheOutput:
       type: object
       example:
@@ -4490,10 +4638,10 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         DiskIds:
           $ref: '#/components/schemas/DiskIds'
-          description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
+          description: An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
         CacheAllocatedInBytes:
           $ref: '#/components/schemas/long'
-          description: The amount of cache in bytes allocated to the a gateway.
+          description: The amount of cache in bytes allocated to a gateway.
         CacheUsedPercentage:
           $ref: '#/components/schemas/double'
           description: Percent use of the gateway's cache storage. This metric applies only to the gateway-cached volume setup. The sample is taken at the end of the reporting period.
@@ -4542,7 +4690,7 @@ components:
       properties:
         VolumeARNs:
           $ref: '#/components/schemas/VolumeARNs'
-          description: An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
+          description: An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must be from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
     DescribeChapCredentialsOutput:
       type: object
       example:
@@ -4669,7 +4817,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway.
     DescribeNFSFileSharesOutput:
       type: object
       properties:
@@ -4794,7 +4942,7 @@ components:
       properties:
         VolumeARNs:
           $ref: '#/components/schemas/VolumeARNs'
-          description: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume. All of the specified stored volumes must from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
+          description: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume. All of the specified stored volumes must be from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.
       description: A JSON object containing a list of <a>DescribeStorediSCSIVolumesInput$VolumeARNs</a>.
     DescribeTapeArchivesOutput:
       type: object
@@ -4831,7 +4979,7 @@ components:
           description: An opaque string that indicates the position at which to begin describing virtual tapes.
         Limit:
           $ref: '#/components/schemas/PositiveIntObject'
-          description: Specifies that the number of virtual tapes descried be limited to the specified number.
+          description: Specifies that the number of virtual tapes described be limited to the specified number.
       description: DescribeTapeArchivesInput
     DescribeTapeRecoveryPointsOutput:
       type: object
@@ -4974,7 +5122,7 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         VTLDevices:
           $ref: '#/components/schemas/VTLDevices'
-          description: An array of VTL device objects composed of the Amazon Resource Name(ARN) of the VTL devices.
+          description: An array of VTL device objects composed of the Amazon Resource Name (ARN) of the VTL devices.
         Marker:
           $ref: '#/components/schemas/Marker'
           description: 'An opaque string that indicates the position at which the VTL devices that were fetched for description ended. Use the marker in your next request to fetch the next set of VTL devices in the list. If there are no more VTL devices to describe, this field does not appear in the response.'
@@ -5027,7 +5175,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway.
     DetachVolumeOutput:
       type: object
       properties:
@@ -5107,6 +5255,18 @@ components:
           $ref: '#/components/schemas/DomainUserPassword'
           description: Sets the password of the user who has permission to add the gateway to the Active Directory domain.
       description: JoinDomainInput
+    ListAutomaticTapeCreationPoliciesOutput:
+      type: object
+      properties:
+        AutomaticTapeCreationPolicyInfos:
+          $ref: '#/components/schemas/AutomaticTapeCreationPolicyInfos'
+          description: 'Gets a listing of information about the gateway''s automatic tape creation policies, including the automatic tape creation rules and the gateway that is using the policies.'
+    ListAutomaticTapeCreationPoliciesInput:
+      type: object
+      title: ListAutomaticTapeCreationPoliciesInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
     ListFileSharesOutput:
       type: object
       properties:
@@ -5126,7 +5286,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-          description: 'The Amazon resource Name (ARN) of the gateway whose file shares you want to list. If this field is not present, all file shares under your account are listed.'
+          description: 'The Amazon Resource Name (ARN) of the gateway whose file shares you want to list. If this field is not present, all file shares under your account are listed.'
         Limit:
           $ref: '#/components/schemas/PositiveIntObject'
           description: The maximum number of file shares to return in the response. The value must be an integer with a value greater than zero. Optional.
@@ -5191,7 +5351,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway.
     ListTagsForResourceOutput:
       type: object
       example:
@@ -5389,7 +5549,7 @@ components:
           description: The Amazon Resource Name (ARN) of the resource you want to remove the tags from.
         TagKeys:
           $ref: '#/components/schemas/TagKeys'
-          description: The keys of the tags you want to remove from the specified resource. A tag is composed of a key/value pair.
+          description: The keys of the tags you want to remove from the specified resource. A tag is composed of a key-value pair.
       description: RemoveTagsFromResourceInput
     ResetCacheOutput:
       type: object
@@ -5497,7 +5657,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway that was shut down.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway that was shut down.
     ShutdownGatewayInput:
       type: object
       required:
@@ -5506,7 +5666,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway to shut down.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway to shut down.
     StartAvailabilityMonitorTestOutput:
       type: object
       properties:
@@ -5527,7 +5687,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway that was restarted.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway that was restarted.
     StartGatewayInput:
       type: object
       required:
@@ -5536,7 +5696,24 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway to start.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.
+    UpdateAutomaticTapeCreationPolicyOutput:
+      type: object
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+    UpdateAutomaticTapeCreationPolicyInput:
+      type: object
+      required:
+        - AutomaticTapeCreationRules
+        - GatewayARN
+      title: UpdateAutomaticTapeCreationPolicyInput
+      properties:
+        AutomaticTapeCreationRules:
+          $ref: '#/components/schemas/AutomaticTapeCreationRules'
+          description: ' An automatic tape creation policy consists of a list of automatic tape creation rules. The rules determine when and how to automatically create new tapes. '
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
     UpdateBandwidthRateLimitOutput:
       type: object
       example:
@@ -5544,7 +5721,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway whose throttle information was updated.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway whose throttle information was updated.
     UpdateBandwidthRateLimitInput:
       type: object
       required:
@@ -5629,7 +5806,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway that was updated.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway that was updated.
     UpdateGatewaySoftwareNowInput:
       type: object
       required:
@@ -5638,7 +5815,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway to update.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway to update.
     UpdateMaintenanceStartTimeOutput:
       type: object
       example:
@@ -5646,7 +5823,7 @@ components:
       properties:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
-      description: A JSON object containing the of the gateway whose maintenance start time is updated.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the gateway whose maintenance start time is updated.
     UpdateMaintenanceStartTimeInput:
       type: object
       required:
@@ -5688,10 +5865,10 @@ components:
           description: 'The Amazon Resource Name (ARN) of the file share to be updated. '
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: 'The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. '
+          description: 'The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional. '
         NFSFileShareDefaults:
           $ref: '#/components/schemas/NFSFileShareDefaults'
           description: The default values for the file share. Optional.
@@ -5735,10 +5912,10 @@ components:
           description: The Amazon Resource Name (ARN) of the SMB file share that you want to update.
         KMSEncrypted:
           $ref: '#/components/schemas/Boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.'
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
-          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+          description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
         DefaultStorageClass:
           $ref: '#/components/schemas/StorageClass'
           description: 'The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are <code>S3_STANDARD</code>, <code>S3_STANDARD_IA</code>, or <code>S3_ONEZONE_IA</code>. If this field is not populated, the default value <code>S3_STANDARD</code> is used. Optional.'
@@ -5795,7 +5972,7 @@ components:
         VolumeARN:
           $ref: '#/components/schemas/VolumeARN'
           description: The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.
-      description: A JSON object containing the of the updated storage volume.
+      description: A JSON object containing the Amazon Resource Name (ARN) of the updated storage volume.
     UpdateSnapshotScheduleInput:
       type: object
       required:
@@ -5936,6 +6113,57 @@ components:
       description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
       minLength: 5
       maxLength: 15
+    AutomaticTapeCreationRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutomaticTapeCreationRule'
+      minItems: 1
+      maxItems: 10
+    AutomaticTapeCreationPolicyInfo:
+      type: object
+      properties:
+        AutomaticTapeCreationRules:
+          $ref: '#/components/schemas/AutomaticTapeCreationRules'
+          description: An automatic tape creation policy consists of a list of automatic tape creation rules. This returns the rules that determine when and how to automatically create new tapes.
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+      description: 'Information about the gateway''s automatic tape creation policies, including the automatic tape creation rules and the gateway that is using the policies.'
+    AutomaticTapeCreationPolicyInfos:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutomaticTapeCreationPolicyInfo'
+    TapeBarcodePrefix:
+      type: string
+      pattern: '^[A-Z]*$'
+      minLength: 1
+      maxLength: 4
+    TapeSize:
+      type: integer
+    MinimumNumTapes:
+      type: integer
+      minimum: 1
+      maximum: 10
+    AutomaticTapeCreationRule:
+      type: object
+      required:
+        - TapeBarcodePrefix
+        - PoolId
+        - TapeSizeInBytes
+        - MinimumNumTapes
+      properties:
+        TapeBarcodePrefix:
+          $ref: '#/components/schemas/TapeBarcodePrefix'
+          description: <p>A prefix that you append to the barcode of the virtual tape that you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1-4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>
+        PoolId:
+          $ref: '#/components/schemas/PoolId'
+          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the Amazon S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+        TapeSizeInBytes:
+          $ref: '#/components/schemas/TapeSize'
+          description: 'The size, in bytes, of the virtual tape capacity.'
+        MinimumNumTapes:
+          $ref: '#/components/schemas/MinimumNumTapes'
+          description: 'The minimum number of available virtual tapes that the gateway maintains at all times. If the number of tapes on the gateway goes below this value, the gateway creates as many new tapes as are needed to have <code>MinimumNumTapes</code> on the gateway.'
+      description: An automatic tape creation policy consists of automatic tape creation rules where each rule defines when and how to create new tapes.
     AvailabilityMonitorTestStatus:
       type: string
       enum:
@@ -6004,7 +6232,7 @@ components:
       type: integer
     KMSKey:
       type: string
-      description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+      description: The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
       minLength: 7
       maxLength: 2048
     CachediSCSIVolume:
@@ -6163,8 +6391,6 @@ components:
       type: string
     boolean:
       type: boolean
-    TapeSize:
-      type: integer
     TapeBarcode:
       type: string
       pattern: '^[A-Z0-9]*$'
@@ -6174,11 +6400,6 @@ components:
       type: integer
       minimum: 1
       maximum: 10
-    TapeBarcodePrefix:
-      type: string
-      pattern: '^[A-Z]*$'
-      minLength: 1
-      maxLength: 4
     TapeARNs:
       type: array
       description: 'The Amazon Resource Name (ARN) of each of the tapes you want to list. If you don''t specify a tape ARN, the response lists all tapes in both your VTL and VTS.'
@@ -6507,7 +6728,7 @@ components:
       maximum: 3600
     TapeInfos:
       type: array
-      description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
+      description: 'An array of <a>TapeInfo</a> objects, where each object describes a single tape. If there are no tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
       items:
         $ref: '#/components/schemas/TapeInfo'
     VolumeRecoveryPointInfos:
@@ -6551,7 +6772,7 @@ components:
           $ref: '#/components/schemas/GatewayARN'
         KMSEncrypted:
           $ref: '#/components/schemas/boolean'
-          description: 'True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
+          description: 'True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. '
         KMSKey:
           $ref: '#/components/schemas/KMSKey'
         Path:
@@ -6763,7 +6984,7 @@ components:
           $ref: '#/components/schemas/KMSKey'
         PoolId:
           $ref: '#/components/schemas/PoolId'
-          description: '<p>The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+          description: '<p>The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S# Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
       description: Describes a virtual tape object.
     TapeArchiveStatus:
       type: string
@@ -6820,7 +7041,7 @@ components:
           description: The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a> operation to return a list of gateways for your account and AWS Region.
         PoolId:
           $ref: '#/components/schemas/PoolId'
-          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
+          description: '<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid values: "GLACIER", "DEEP_ARCHIVE"</p>'
       description: Describes a virtual tape.
     TapeRecoveryPointStatus:
       type: string

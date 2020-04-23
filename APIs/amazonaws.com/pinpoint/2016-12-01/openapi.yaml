@@ -243,7 +243,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -328,6 +328,9 @@ paths:
                     AdditionalTreatments:
                       $ref: '#/components/schemas/ListOfWriteTreatmentResource'
                       description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
+                    CustomDeliveryConfiguration:
+                      $ref: '#/components/schemas/CustomDeliveryConfiguration'
+                      description: The delivery configuration settings for sending the campaign through a custom channel. This object is required if the MessageConfiguration object for the campaign specifies a CustomMessage object.
                     Description:
                       $ref: '#/components/schemas/__string'
                       description: A custom description of the campaign.
@@ -336,10 +339,10 @@ paths:
                       description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
                     Hook:
                       $ref: '#/components/schemas/CampaignHook'
-                      description: The settings for the AWS Lambda function to use as a code hook for the campaign.
+                      description: The settings for the AWS Lambda function to invoke as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
                     IsPaused:
                       $ref: '#/components/schemas/__boolean'
-                      description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.
+                      description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.
                     Limits:
                       $ref: '#/components/schemas/CampaignLimits'
                       description: The messaging limits for the campaign.
@@ -366,10 +369,10 @@ paths:
                       description: The message template to use for the campaign.
                     TreatmentDescription:
                       $ref: '#/components/schemas/__string'
-                      description: A custom description of a variation of the campaign to use for A/B testing.
+                      description: A custom description of the default treatment for the campaign.
                     TreatmentName:
                       $ref: '#/components/schemas/__string'
-                      description: A custom name for a variation of the campaign to use for A/B testing.
+                      description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -440,7 +443,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -929,7 +932,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -1105,7 +1108,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -1293,7 +1296,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -1708,16 +1711,16 @@ paths:
                   properties:
                     Attributes:
                       $ref: '#/components/schemas/MapOf__string'
-                      description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
+                      description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
                     Description:
                       $ref: '#/components/schemas/__string'
-                      description: A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+                      description: 'A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.'
                     Name:
                       $ref: '#/components/schemas/__string'
                       description: 'A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).'
                     RecommendationProviderIdType:
                       $ref: '#/components/schemas/__string'
-                      description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
+                      description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
                     RecommendationProviderRoleArn:
                       $ref: '#/components/schemas/__string'
                       description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
@@ -1729,10 +1732,10 @@ paths:
                       description: The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
                     RecommendationsDisplayName:
                       $ref: '#/components/schemas/__string'
-                      description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
+                      description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
                     RecommendationsPerMessage:
                       $ref: '#/components/schemas/__integer'
-                      description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+                      description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1797,7 +1800,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -1961,7 +1964,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -4257,6 +4260,9 @@ paths:
                     AdditionalTreatments:
                       $ref: '#/components/schemas/ListOfWriteTreatmentResource'
                       description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
+                    CustomDeliveryConfiguration:
+                      $ref: '#/components/schemas/CustomDeliveryConfiguration'
+                      description: The delivery configuration settings for sending the campaign through a custom channel. This object is required if the MessageConfiguration object for the campaign specifies a CustomMessage object.
                     Description:
                       $ref: '#/components/schemas/__string'
                       description: A custom description of the campaign.
@@ -4265,10 +4271,10 @@ paths:
                       description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
                     Hook:
                       $ref: '#/components/schemas/CampaignHook'
-                      description: The settings for the AWS Lambda function to use as a code hook for the campaign.
+                      description: The settings for the AWS Lambda function to invoke as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
                     IsPaused:
                       $ref: '#/components/schemas/__boolean'
-                      description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.
+                      description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.
                     Limits:
                       $ref: '#/components/schemas/CampaignLimits'
                       description: The messaging limits for the campaign.
@@ -4295,10 +4301,10 @@ paths:
                       description: The message template to use for the campaign.
                     TreatmentDescription:
                       $ref: '#/components/schemas/__string'
-                      description: A custom description of a variation of the campaign to use for A/B testing.
+                      description: A custom description of the default treatment for the campaign.
                     TreatmentName:
                       $ref: '#/components/schemas/__string'
-                      description: A custom name for a variation of the campaign to use for A/B testing.
+                      description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
   '/v1/apps/{application-id}/channels/email':
     delete:
       operationId: DeleteEmailChannel
@@ -4500,7 +4506,7 @@ paths:
                   properties:
                     ConfigurationSet:
                       $ref: '#/components/schemas/__string'
-                      description: The configuration set that you want to apply to email that you send through the channel by using the <a href="emailAPIreference.html">Amazon Pinpoint Email API</a>.
+                      description: 'The <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html">Amazon SES configuration set</a> that you want to apply to messages that you send through the channel.'
                     Enabled:
                       $ref: '#/components/schemas/__boolean'
                       description: Specifies whether to enable the email channel for the application.
@@ -4654,7 +4660,7 @@ paths:
             type: string
     put:
       operationId: UpdateEndpoint
-      description: 'Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.'
+      description: 'Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.'
       responses:
         '202':
           description: Success
@@ -4762,7 +4768,7 @@ paths:
                       description: The unique identifier for the most recent request to update the endpoint.
                     User:
                       $ref: '#/components/schemas/EndpointUser'
-                      description: One or more custom user attributes that describe the user who's associated with the endpoint.
+                      description: One or more custom attributes that describe the user who's associated with the endpoint.
   '/v1/apps/{application-id}/eventstream':
     delete:
       operationId: DeleteEventStream
@@ -5630,16 +5636,16 @@ paths:
                   properties:
                     Attributes:
                       $ref: '#/components/schemas/MapOf__string'
-                      description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
+                      description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
                     Description:
                       $ref: '#/components/schemas/__string'
-                      description: A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+                      description: 'A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.'
                     Name:
                       $ref: '#/components/schemas/__string'
                       description: 'A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).'
                     RecommendationProviderIdType:
                       $ref: '#/components/schemas/__string'
-                      description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
+                      description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
                     RecommendationProviderRoleArn:
                       $ref: '#/components/schemas/__string'
                       description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
@@ -5651,10 +5657,10 @@ paths:
                       description: The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
                     RecommendationsDisplayName:
                       $ref: '#/components/schemas/__string'
-                      description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
+                      description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
                     RecommendationsPerMessage:
                       $ref: '#/components/schemas/__integer'
-                      description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+                      description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
   '/v1/apps/{application-id}/segments/{segment-id}':
     delete:
       operationId: DeleteSegment
@@ -6503,19 +6509,19 @@ paths:
         - name: kpi-name
           in: path
           required: true
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
           schema:
             type: string
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: start-time
@@ -6675,13 +6681,13 @@ paths:
                   properties:
                     CampaignHook:
                       $ref: '#/components/schemas/CampaignHook'
-                      description: 'The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application. To override these settings for a specific campaign, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource to define custom Lambda function settings for the campaign.'
+                      description: '<p>The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.</p> <p>To override these settings and define custom settings for a specific campaign, use the CampaignHook object of the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource.</p>'
                     CloudWatchMetricsEnabled:
                       $ref: '#/components/schemas/__boolean'
                       description: Specifies whether to enable application-related alarms in Amazon CloudWatch.
                     Limits:
                       $ref: '#/components/schemas/CampaignLimits'
-                      description: 'The default sending limits for campaigns in the application. To override these limits for a specific campaign, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource to define custom limits for the campaign.'
+                      description: 'The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource, respectively.'
                     QuietTime:
                       $ref: '#/components/schemas/QuietTime'
                       description: '<p>The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>'
@@ -6754,7 +6760,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -6847,19 +6853,19 @@ paths:
         - name: kpi-name
           in: path
           required: true
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
           schema:
             type: string
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: start-time
@@ -7026,7 +7032,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: token
@@ -7335,19 +7341,19 @@ paths:
         - name: kpi-name
           in: path
           required: true
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
           schema:
             type: string
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: start-time
@@ -7440,13 +7446,13 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
     parameters:
@@ -7526,13 +7532,13 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
     parameters:
@@ -7606,7 +7612,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: segment-id
@@ -7692,7 +7698,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: segment-id
@@ -7858,7 +7864,7 @@ paths:
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: segment-id
@@ -7993,13 +7999,13 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: template-name
@@ -8067,13 +8073,13 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: page-size
           in: query
           required: false
-          description: 'The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.'
+          description: 'The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.'
           schema:
             type: string
         - name: prefix
@@ -8579,7 +8585,7 @@ paths:
   '/v1/apps/{application-id}/endpoints':
     put:
       operationId: UpdateEndpointsBatch
-      description: ' <p>Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.</p>'
+      description: 'Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.'
       responses:
         '202':
           description: Success
@@ -8923,6 +8929,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WriteTreatmentResource'
+    CustomDeliveryConfiguration:
+      type: object
+      required:
+        - DeliveryUri
+      properties:
+        DeliveryUri:
+          $ref: '#/components/schemas/__string'
+          description: '<p>The destination to send the campaign or treatment to. This value can be one of the following:</p> <ul><li><p>The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment.</p></li> <li><p>The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.</p></li></ul> '
+        EndpointTypes:
+          $ref: '#/components/schemas/ListOf__EndpointTypesElement'
+          description: The types of endpoints to send the campaign or treatment to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.
+      description: Specifies the delivery configuration settings for sending a campaign or campaign treatment through a custom channel. This object is required if you use the CampaignCustomMessage object to define the message to send for the campaign or campaign treatment.
     __integer:
       type: integer
     CampaignHook:
@@ -8930,14 +8948,14 @@ components:
       properties:
         LambdaFunctionName:
           $ref: '#/components/schemas/__string'
-          description: The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to send messages for a campaign.
+          description: The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to customize a segment for a campaign.
         Mode:
           $ref: '#/components/schemas/Mode'
-          description: Specifies which Lambda mode to use when invoking the AWS Lambda function.
+          description: '<p>The mode that Amazon Pinpoint uses to invoke the AWS Lambda function. Possible values are:</p> <ul><li><p>FILTER - Invoke the function to customize the segment that''s used by a campaign.</p></li> <li><p>DELIVERY - (Deprecated) Previously, invoked the function to send a campaign through a custom channel. This functionality is not supported anymore. To send a campaign through a custom channel, use the CustomDeliveryConfiguration and CampaignCustomMessage objects of the campaign.</p></li></ul>'
         WebUrl:
           $ref: '#/components/schemas/__string'
           description: ' <p>The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over HTTPS.</p>'
-      description: Specifies the AWS Lambda function to use as a code hook for a campaign.
+      description: Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.
     __boolean:
       type: boolean
     CampaignLimits:
@@ -8945,41 +8963,44 @@ components:
       properties:
         Daily:
           $ref: '#/components/schemas/__integer'
-          description: The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. The maximum value is 100.
+          description: 'The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.'
         MaximumDuration:
           $ref: '#/components/schemas/__integer'
           description: 'The maximum amount of time, in seconds, that a campaign can attempt to deliver a message after the scheduled start time for the campaign. The minimum value is 60 seconds.'
         MessagesPerSecond:
           $ref: '#/components/schemas/__integer'
-          description: 'The maximum number of messages that a campaign can send each second. The minimum value is 50. The maximum value is 20,000.'
+          description: 'The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.'
         Total:
           $ref: '#/components/schemas/__integer'
-          description: The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. The maximum value is 100.
-      description: Specifies limits on the messages that a campaign can send.
+          description: 'The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.'
+      description: 'For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns and journeys in the application can send.'
     MessageConfiguration:
       type: object
       properties:
         ADMMessage:
           $ref: '#/components/schemas/Message'
-          description: The message that the campaign sends through the ADM (Amazon Device Messaging) channel. This message overrides the default message.
+          description: 'The message that the campaign sends through the ADM (Amazon Device Messaging) channel. If specified, this message overrides the default message.'
         APNSMessage:
           $ref: '#/components/schemas/Message'
-          description: The message that the campaign sends through the APNs (Apple Push Notification service) channel. This message overrides the default message.
+          description: 'The message that the campaign sends through the APNs (Apple Push Notification service) channel. If specified, this message overrides the default message.'
         BaiduMessage:
           $ref: '#/components/schemas/Message'
-          description: The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. This message overrides the default message.
+          description: 'The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. If specified, this message overrides the default message.'
+        CustomMessage:
+          $ref: '#/components/schemas/CampaignCustomMessage'
+          description: '<p>The message that the campaign sends through a custom channel, as specified by the delivery configuration (CustomDeliveryConfiguration) settings for the campaign. If specified, this message overrides the default message.</p> '
         DefaultMessage:
           $ref: '#/components/schemas/Message'
           description: The default message that the campaign sends through all the channels that are configured for the campaign.
         EmailMessage:
           $ref: '#/components/schemas/CampaignEmailMessage'
-          description: The message that the campaign sends through the email channel.
+          description: 'The message that the campaign sends through the email channel. If specified, this message overrides the default message.'
         GCMMessage:
           $ref: '#/components/schemas/Message'
-          description: 'The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides the default message.'
+          description: 'The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this message overrides the default message.'
         SMSMessage:
           $ref: '#/components/schemas/CampaignSmsMessage'
-          description: The message that the campaign sends through the SMS channel.
+          description: 'The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.'
       description: Specifies the message configuration settings for a campaign.
     Schedule:
       type: object
@@ -10754,7 +10775,7 @@ components:
           description: 'The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
         KpiName:
           $ref: '#/components/schemas/__string'
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
         KpiResult:
           $ref: '#/components/schemas/BaseKpiResult'
           description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
@@ -10795,13 +10816,13 @@ components:
           description: The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.
         CampaignHook:
           $ref: '#/components/schemas/CampaignHook'
-          description: The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application.
+          description: The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.
         LastModifiedDate:
           $ref: '#/components/schemas/__string'
           description: 'The date and time, in ISO 8601 format, when the application''s settings were last modified.'
         Limits:
           $ref: '#/components/schemas/CampaignLimits'
-          description: The default sending limits for campaigns in the application.
+          description: The default sending limits for campaigns and journeys in the application.
         QuietTime:
           $ref: '#/components/schemas/QuietTime'
           description: '<p>The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>'
@@ -10959,6 +10980,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResultRow'
+    CampaignCustomMessage:
+      type: object
+      properties:
+        Data:
+          $ref: '#/components/schemas/__string'
+          description: 'The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.'
+      description: Specifies the contents of a message that's sent through a custom channel to recipients of a campaign.
     CampaignDateRangeKpiResponse:
       type: object
       required:
@@ -10980,7 +11008,7 @@ components:
           description: 'The last date and time of the date range that was used to filter the query results, in extended ISO 8601 format. The date range is inclusive.'
         KpiName:
           $ref: '#/components/schemas/__string'
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
         KpiResult:
           $ref: '#/components/schemas/BaseKpiResult'
           description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
@@ -11052,7 +11080,7 @@ components:
       properties:
         CampaignStatus:
           $ref: '#/components/schemas/CampaignStatus'
-          description: 'The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign. If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED.'
+          description: '<p>The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign.</p> <p>If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED. If you delete the segment that''s associated with a campaign, the campaign fails and has a status of DELETED.</p>'
       description: Provides information about the status of a campaign.
     CampaignResponse:
       type: object
@@ -11077,9 +11105,12 @@ components:
         CreationDate:
           $ref: '#/components/schemas/__string'
           description: 'The date, in ISO 8601 format, when the campaign was created.'
+        CustomDeliveryConfiguration:
+          $ref: '#/components/schemas/CustomDeliveryConfiguration'
+          description: The delivery configuration settings for sending the campaign through a custom channel.
         DefaultState:
           $ref: '#/components/schemas/CampaignState'
-          description: 'The current status of the campaign''s default treatment. This value exists only for campaigns that have more than one treatment, to support A/B testing.'
+          description: The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment.
         Description:
           $ref: '#/components/schemas/__string'
           description: The custom description of the campaign.
@@ -11088,7 +11119,7 @@ components:
           description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
         Hook:
           $ref: '#/components/schemas/CampaignHook'
-          description: The settings for the AWS Lambda function to use as a code hook for the campaign.
+          description: The settings for the AWS Lambda function to use as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
         Id:
           $ref: '#/components/schemas/__string'
           description: The unique identifier for the campaign.
@@ -11127,10 +11158,10 @@ components:
           description: The message template that’s used for the campaign.
         TreatmentDescription:
           $ref: '#/components/schemas/__string'
-          description: The custom description of a variation of the campaign that's used for A/B testing.
+          description: The custom description of the default treatment for the campaign.
         TreatmentName:
           $ref: '#/components/schemas/__string'
-          description: The custom name of a variation of the campaign that's used for A/B testing.
+          description: 'The custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
         Version:
           $ref: '#/components/schemas/__integer'
           description: The version number of the campaign.
@@ -11277,6 +11308,9 @@ components:
         AdditionalTreatments:
           $ref: '#/components/schemas/ListOfWriteTreatmentResource'
           description: 'An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.'
+        CustomDeliveryConfiguration:
+          $ref: '#/components/schemas/CustomDeliveryConfiguration'
+          description: The delivery configuration settings for sending the campaign through a custom channel. This object is required if the MessageConfiguration object for the campaign specifies a CustomMessage object.
         Description:
           $ref: '#/components/schemas/__string'
           description: A custom description of the campaign.
@@ -11285,10 +11319,10 @@ components:
           description: The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.
         Hook:
           $ref: '#/components/schemas/CampaignHook'
-          description: The settings for the AWS Lambda function to use as a code hook for the campaign.
+          description: The settings for the AWS Lambda function to invoke as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
         IsPaused:
           $ref: '#/components/schemas/__boolean'
-          description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.
+          description: Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.
         Limits:
           $ref: '#/components/schemas/CampaignLimits'
           description: The messaging limits for the campaign.
@@ -11315,10 +11349,10 @@ components:
           description: The message template to use for the campaign.
         TreatmentDescription:
           $ref: '#/components/schemas/__string'
-          description: A custom description of a variation of the campaign to use for A/B testing.
+          description: A custom description of the default treatment for the campaign.
         TreatmentName:
           $ref: '#/components/schemas/__string'
-          description: A custom name for a variation of the campaign to use for A/B testing.
+          description: 'A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that''s used for A/B testing.'
       description: Specifies the configuration and other settings for a campaign.
     CreateCampaignRequest:
       type: object
@@ -11691,16 +11725,16 @@ components:
       properties:
         Attributes:
           $ref: '#/components/schemas/MapOf__string'
-          description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
+          description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
         Description:
           $ref: '#/components/schemas/__string'
-          description: A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+          description: 'A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.'
         Name:
           $ref: '#/components/schemas/__string'
           description: 'A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).'
         RecommendationProviderIdType:
           $ref: '#/components/schemas/__string'
-          description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
+          description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
         RecommendationProviderRoleArn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
@@ -11712,10 +11746,10 @@ components:
           description: The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
         RecommendationsDisplayName:
           $ref: '#/components/schemas/__string'
-          description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
+          description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
         RecommendationsPerMessage:
           $ref: '#/components/schemas/__integer'
-          description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+          description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
       description: Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.
     CreateRecommenderConfigurationRequest:
       type: object
@@ -11736,7 +11770,7 @@ components:
       properties:
         Attributes:
           $ref: '#/components/schemas/MapOf__string'
-          description: '<p>A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>This value is null if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+          description: '<p>A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>This value is null if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
         CreationDate:
           $ref: '#/components/schemas/__string'
           description: 'The date, in extended ISO 8601 format, when the configuration was created for the recommender model.'
@@ -11766,10 +11800,10 @@ components:
           description: The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to perform additional processing of recommendation data that it retrieves from the recommender model.
         RecommendationsDisplayName:
           $ref: '#/components/schemas/__string'
-          description: '<p>The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console.</p> <p>This value is null if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+          description: '<p>The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console.</p> <p>This value is null if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
         RecommendationsPerMessage:
           $ref: '#/components/schemas/__integer'
-          description: 'The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates.'
+          description: 'The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables.'
       description: Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.
     WriteSegmentRequest:
       type: object
@@ -11898,6 +11932,10 @@ components:
       properties:
         VoiceTemplateRequest:
           $ref: '#/components/schemas/VoiceTemplateRequest'
+    ListOf__EndpointTypesElement:
+      type: array
+      items:
+        $ref: '#/components/schemas/__EndpointTypesElement'
     DefaultMessage:
       type: object
       properties:
@@ -11979,7 +12017,7 @@ components:
           description: The unique identifier for the application that the email channel applies to.
         ConfigurationSet:
           $ref: '#/components/schemas/__string'
-          description: The configuration set that's applied to email that's sent through the channel by using the <a href="emailAPIreference.html">Amazon Pinpoint Email API</a>.
+          description: 'The <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html">Amazon SES configuration set</a> that''s applied to messages that are sent through the channel.'
         CreationDate:
           $ref: '#/components/schemas/__string'
           description: 'The date and time, in ISO 8601 format, when the email channel was enabled.'
@@ -11988,7 +12026,7 @@ components:
           description: Specifies whether the email channel is enabled for the application.
         FromAddress:
           $ref: '#/components/schemas/__string'
-          description: The verified email address that you send email from when you send email through the channel.
+          description: The verified email address that email is sent from when you send email through the channel.
         HasCredential:
           $ref: '#/components/schemas/__boolean'
           description: (Not used) This property is retained only for backward compatibility.
@@ -11997,7 +12035,7 @@ components:
           description: (Deprecated) An identifier for the email channel. This property is retained only for backward compatibility.
         Identity:
           $ref: '#/components/schemas/__string'
-          description: ' <p>The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that you use when you send email through the channel.</p>'
+          description: ' <p>The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that''s used when you send email through the channel.</p>'
         IsArchived:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether the email channel is archived.
@@ -12009,7 +12047,7 @@ components:
           description: 'The date and time, in ISO 8601 format, when the email channel was last modified.'
         MessagesPerSecond:
           $ref: '#/components/schemas/__integer'
-          description: The maximum number of emails that you can send through the channel each second.
+          description: The maximum number of emails that can be sent through the channel each second.
         Platform:
           $ref: '#/components/schemas/__string'
           description: 'The type of messaging or notification platform for the channel. For the email channel, this value is EMAIL.'
@@ -12447,7 +12485,7 @@ components:
       properties:
         ConfigurationSet:
           $ref: '#/components/schemas/__string'
-          description: The configuration set that you want to apply to email that you send through the channel by using the <a href="emailAPIreference.html">Amazon Pinpoint Email API</a>.
+          description: 'The <a href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html">Amazon SES configuration set</a> that you want to apply to messages that you send through the channel.'
         Enabled:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether to enable the email channel for the application.
@@ -12581,7 +12619,7 @@ components:
           description: The unique identifier for the request to create or update the endpoint.
         User:
           $ref: '#/components/schemas/EndpointUser'
-          description: One or more custom user attributes that describe the user who's associated with the endpoint.
+          description: One or more custom attributes that describe the user who's associated with the endpoint.
       description: Specifies an endpoint to create or update and the settings and attributes to set or change for the endpoint.
     EndpointBatchRequest:
       type: object
@@ -12665,7 +12703,7 @@ components:
           description: The unique identifier for the most recent request to update the endpoint.
         User:
           $ref: '#/components/schemas/EndpointUser'
-          description: One or more custom user attributes that describe the user who's associated with the endpoint.
+          description: One or more custom attributes that describe the user who's associated with the endpoint.
       description: Specifies the channel type and other settings for an endpoint.
     EndpointSendConfiguration:
       type: object
@@ -12748,8 +12786,6 @@ components:
       description: Specifies information about an event that reports data to Amazon Pinpoint.
     EventCondition:
       type: object
-      required:
-        - Dimensions
       properties:
         Dimensions:
           $ref: '#/components/schemas/EventDimensions'
@@ -13096,7 +13132,7 @@ components:
           description: The unique identifier for the journey that the metric applies to.
         KpiName:
           $ref: '#/components/schemas/__string'
-          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
         KpiResult:
           $ref: '#/components/schemas/BaseKpiResult'
           description: An array of objects that contains the results of the query. Each object contains the value for the metric and metadata about that value.
@@ -13138,7 +13174,7 @@ components:
           description: 'The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity and updated the data for the metric.'
         Metrics:
           $ref: '#/components/schemas/MapOf__string'
-          description: 'A JSON object that contains the results of the query. The results vary depending on the type of activity (ActivityType). For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'A JSON object that contains the results of the query. The results vary depending on the type of activity (ActivityType). For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
       description: 'Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity, and provides information about that query.'
     GetJourneyExecutionMetricsRequest:
       type: object
@@ -13163,7 +13199,7 @@ components:
           description: 'The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey and updated the data for the metric.'
         Metrics:
           $ref: '#/components/schemas/MapOf__string'
-          description: 'A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html">Amazon Pinpoint Developer Guide</a>.'
+          description: 'A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html">Amazon Pinpoint Developer Guide</a>.'
       description: 'Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.'
     GetJourneyRequest:
       type: object
@@ -14187,6 +14223,9 @@ components:
         - Id
         - SizePercent
       properties:
+        CustomDeliveryConfiguration:
+          $ref: '#/components/schemas/CustomDeliveryConfiguration'
+          description: The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.
         Id:
           $ref: '#/components/schemas/__string'
           description: The unique identifier for the treatment.
@@ -14210,8 +14249,8 @@ components:
           description: The custom description of the treatment.
         TreatmentName:
           $ref: '#/components/schemas/__string'
-          description: The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
-      description: Specifies the settings for a campaign treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+          description: The custom name of the treatment.
+      description: Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -14261,13 +14300,13 @@ components:
       properties:
         CampaignHook:
           $ref: '#/components/schemas/CampaignHook'
-          description: 'The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application. To override these settings for a specific campaign, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource to define custom Lambda function settings for the campaign.'
+          description: '<p>The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.</p> <p>To override these settings and define custom settings for a specific campaign, use the CampaignHook object of the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource.</p>'
         CloudWatchMetricsEnabled:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether to enable application-related alarms in Amazon CloudWatch.
         Limits:
           $ref: '#/components/schemas/CampaignLimits'
-          description: 'The default sending limits for campaigns in the application. To override these limits for a specific campaign, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource to define custom limits for the campaign.'
+          description: 'The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource, respectively.'
         QuietTime:
           $ref: '#/components/schemas/QuietTime'
           description: '<p>The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>'
@@ -14368,16 +14407,16 @@ components:
       properties:
         Attributes:
           $ref: '#/components/schemas/MapOf__string'
-          description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
+          description: '<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that''s retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don''t include this object in your request.</p>'
         Description:
           $ref: '#/components/schemas/__string'
-          description: A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+          description: 'A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.'
         Name:
           $ref: '#/components/schemas/__string'
           description: 'A custom name of the configuration for the recommender model. The name must start with a letter or number and it can contain up to 128 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).'
         RecommendationProviderIdType:
           $ref: '#/components/schemas/__string'
-          description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
+          description: '<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user''s endpoint.</p></li></ul>'
         RecommendationProviderRoleArn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon Pinpoint to retrieve recommendation data from the recommender model.
@@ -14389,10 +14428,10 @@ components:
           description: The name or Amazon Resource Name (ARN) of the AWS Lambda function to invoke for additional processing of recommendation data that's retrieved from the recommender model.
         RecommendationsDisplayName:
           $ref: '#/components/schemas/__string'
-          description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
+          description: '<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn''t invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don''t apply to attribute values.</p>'
         RecommendationsPerMessage:
           $ref: '#/components/schemas/__integer'
-          description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>'
+          description: '<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>'
       description: Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.
     UpdateRecommenderConfigurationRequest:
       type: object
@@ -14462,6 +14501,9 @@ components:
       required:
         - SizePercent
       properties:
+        CustomDeliveryConfiguration:
+          $ref: '#/components/schemas/CustomDeliveryConfiguration'
+          description: The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.
         MessageConfiguration:
           $ref: '#/components/schemas/MessageConfiguration'
           description: The message configuration settings for the treatment.
@@ -14479,7 +14521,21 @@ components:
           description: A custom description of the treatment.
         TreatmentName:
           $ref: '#/components/schemas/__string'
-          description: A custom name for the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
-      description: Specifies the settings for a campaign treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+          description: A custom name for the treatment.
+      description: Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.
+    __EndpointTypesElement:
+      type: string
+      enum:
+        - GCM
+        - APNS
+        - APNS_SANDBOX
+        - APNS_VOIP
+        - APNS_VOIP_SANDBOX
+        - ADM
+        - SMS
+        - VOICE
+        - EMAIL
+        - BAIDU
+        - CUSTOM
 security:
   - hmac: []

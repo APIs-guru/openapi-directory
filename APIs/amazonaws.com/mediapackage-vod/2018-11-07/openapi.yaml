@@ -104,6 +104,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The MediaPackage Vod endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /assets:
     post:
@@ -180,6 +181,11 @@ paths:
                 sourceRoleArn:
                   description: The IAM role ARN used to access the source S3 bucket.
                   type: string
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -398,6 +404,11 @@ paths:
                 packagingGroupId:
                   description: The ID of a PackagingGroup.
                   type: string
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -545,6 +556,11 @@ paths:
                 id:
                   description: The ID of the PackagingGroup.
                   type: string
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -971,6 +987,89 @@ paths:
           description: The ID of a MediaPackage VOD PackagingGroup resource.
           schema:
             type: string
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: List tags for a given MediaPackage VOD resource
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Set tags for a given MediaPackage VOD resource
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: ''
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Delete tags for a given MediaPackage VOD resource
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key(s) of tag to be deleted
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1050,6 +1149,10 @@ components:
         SourceRoleArn:
           description: The IAM role_arn used to access the source S3 bucket.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    __string:
+      type: string
     UnprocessableEntityException: {}
     InternalServerErrorException: {}
     ForbiddenException: {}
@@ -1076,6 +1179,8 @@ components:
         PackagingGroupId:
           description: The ID of a PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     CmafEncryption:
       required:
         - SpekeKeyProvider
@@ -1154,6 +1259,8 @@ components:
         Id:
           description: The ID of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     DeleteAssetResponse:
       type: object
       properties: {}
@@ -1190,6 +1297,8 @@ components:
         SourceRoleArn:
           description: The IAM role_arn used to access the source S3 bucket.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     DescribePackagingConfigurationResponse:
       type: object
       properties:
@@ -1210,6 +1319,8 @@ components:
         PackagingGroupId:
           description: The ID of a PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     DescribePackagingGroupResponse:
       type: object
       properties:
@@ -1222,6 +1333,8 @@ components:
         Id:
           description: The ID of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     ListAssetsResponse:
       type: object
       properties:
@@ -1249,14 +1362,22 @@ components:
         PackagingGroups:
           description: A list of MediaPackage VOD PackagingGroup resources.
           $ref: '#/components/schemas/__listOfPackagingGroup'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
     AdMarkers:
       enum:
         - NONE
         - SCTE35_ENHANCED
         - PASSTHROUGH
       type: string
-    __string:
-      type: string
+    Tags:
+      type: object
+      description: A collection of tags associated with a resource
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
     AssetShallow:
       type: object
       properties:
@@ -1281,6 +1402,8 @@ components:
         SourceRoleArn:
           description: The IAM role ARN used to access the source S3 bucket.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A MediaPackage VOD Asset resource.
     SpekeKeyProvider:
       required:
@@ -1341,6 +1464,8 @@ components:
         SourceRoleArn:
           description: The IAM role ARN used to access the source S3 bucket.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A new MediaPackage VOD Asset configuration.
     __listOfEgressEndpoint:
       type: array
@@ -1426,6 +1551,8 @@ components:
         PackagingGroupId:
           description: The ID of a PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A new MediaPackage VOD PackagingConfiguration resource configuration.
     CreatePackagingGroupRequest:
       required:
@@ -1436,6 +1563,8 @@ components:
         Id:
           description: The ID of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A new MediaPackage VOD PackagingGroup resource configuration.
     ManifestLayout:
       enum:
@@ -1581,6 +1710,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PackagingGroup'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    __mapOf__string:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
     MssManifest:
       type: object
       properties:
@@ -1610,6 +1747,8 @@ components:
         PackagingGroupId:
           description: The ID of a PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A MediaPackage VOD PackagingConfiguration resource.
     PackagingGroup:
       type: object
@@ -1623,6 +1762,8 @@ components:
         Id:
           description: The ID of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
       description: A MediaPackage VOD PackagingGroup resource.
     __listOf__string:
       type: array
@@ -1634,6 +1775,18 @@ components:
         - VIDEO_BITRATE_ASCENDING
         - VIDEO_BITRATE_DESCENDING
       type: string
+    TagResourceRequest:
+      required:
+        - Tags
+      type: object
+      title: TagResourceRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/__mapOf__string'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     __PeriodTriggersElement:
       enum:
         - ADS

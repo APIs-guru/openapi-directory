@@ -936,12 +936,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
         '483':
+          description: ResourceArnNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceArnNotFoundException'
+        '484':
           description: ServerInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerInternalException'
-        '484':
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -1140,24 +1146,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/MalformedArnException'
         '483':
+          description: UnknownResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownResourceException'
+        '484':
           description: InvalidNextTokenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidNextTokenException'
-        '484':
+        '485':
           description: InvalidParameterException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '485':
+        '486':
           description: ServerInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerInternalException'
-        '486':
+        '487':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -1580,7 +1592,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/String'
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> I <code>resource-groups:Group</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
                   type: string
                 resourceShareArns:
                   description: The Amazon Resource Names (ARN) of the resource shares.
@@ -1685,6 +1697,65 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listresourcetypes:
+    post:
+      operationId: ListResourceTypes
+      description: Lists the shareable resource types supported by AWS RAM.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourceTypesResponse'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: The token for the next page of results.
+                  type: string
+                maxResults:
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  type: integer
+                  minimum: 1
+                  maximum: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listresources:
     post:
       operationId: ListResources
@@ -1770,7 +1841,7 @@ paths:
                   description: The principal.
                   type: string
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> | <code>resource-groups:Group</code> </p>'
+                  description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
                   type: string
                 resourceArns:
                   description: The Amazon Resource Names (ARN) of the resources.
@@ -1845,6 +1916,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: UnknownResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownResourceException'
       parameters:
         - name: resourceShareArn
           in: query
@@ -2350,6 +2427,7 @@ components:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     InvalidNextTokenException: {}
+    ResourceArnNotFoundException: {}
     GetResourceShareAssociationsResponse:
       type: object
       properties:
@@ -2425,6 +2503,15 @@ components:
         nextToken:
           $ref: '#/components/schemas/String'
           description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListResourceTypesResponse:
+      type: object
+      properties:
+        resourceTypes:
+          $ref: '#/components/schemas/ServiceNameAndResourceTypeList'
+          description: The shareable resource types supported by AWS RAM.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListResourcesResponse:
       type: object
       properties:
@@ -2454,7 +2541,6 @@ components:
       type: object
       properties: {}
     TagLimitExceededException: {}
-    ResourceArnNotFoundException: {}
     UntagResourceResponse:
       type: object
       properties: {}
@@ -2912,7 +2998,7 @@ components:
           description: The principals.
         resourceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> I <code>resource-groups:Group</code> </p>'
+          description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceShareArns:
           $ref: '#/components/schemas/ResourceShareArnList'
           description: The Amazon Resource Names (ARN) of the resource shares.
@@ -2941,6 +3027,20 @@ components:
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+    ListResourceTypesRequest:
+      type: object
+      title: ListResourceTypesRequest
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: The token for the next page of results.
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+    ServiceNameAndResourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceNameAndResourceType'
     ListResourcesRequest:
       type: object
       required:
@@ -2955,7 +3055,7 @@ components:
           description: The principal.
         resourceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The resource type.</p> <p>Valid values: <code>ec2:CapacityReservation</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>license-manager:LicenseConfiguration</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> | <code>resource-groups:Group</code> </p>'
+          description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceArns:
           $ref: '#/components/schemas/ResourceArnList'
           description: The Amazon Resource Names (ARN) of the resources.
@@ -3113,6 +3213,16 @@ components:
           $ref: '#/components/schemas/DateTime'
           description: The date and time when the permission was last updated.
       description: Information about a permission that is associated with a resource share.
+    ServiceNameAndResourceType:
+      type: object
+      properties:
+        resourceType:
+          $ref: '#/components/schemas/String'
+          description: The shareable resource types.
+        serviceName:
+          $ref: '#/components/schemas/String'
+          description: The name of the AWS services to which the resources belong.
+      description: Information about the shareable resource types and the AWS services to which they belong.
     TagValue:
       type: string
     TagValueList:
