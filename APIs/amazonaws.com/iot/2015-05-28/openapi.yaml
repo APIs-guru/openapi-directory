@@ -13011,6 +13011,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
       parameters: []
       requestBody:
         required: true

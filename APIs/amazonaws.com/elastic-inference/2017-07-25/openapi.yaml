@@ -3,7 +3,7 @@ info:
   version: '2017-07-25'
   x-release: v4
   title: Amazon Elastic  Inference
-  description: Elastic Inference public APIs.
+  description: ' Elastic Inference public APIs. '
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -34,7 +34,7 @@ externalDocs:
   description: Amazon Web Services documentation
   url: 'https://docs.aws.amazon.com/elastic-inference/'
 servers:
-  - url: 'http://elastic-inference.{region}.amazonaws.com'
+  - url: 'http://api.elastic-inference.{region}.amazonaws.com'
     variables:
       region:
         description: The AWS region
@@ -60,7 +60,7 @@ servers:
           - sa-east-1
         default: us-east-1
     description: The Amazon Elastic Inference multi-region endpoint
-  - url: 'https://elastic-inference.{region}.amazonaws.com'
+  - url: 'https://api.elastic-inference.{region}.amazonaws.com'
     variables:
       region:
         description: The AWS region
@@ -86,7 +86,7 @@ servers:
           - sa-east-1
         default: us-east-1
     description: The Amazon Elastic Inference multi-region endpoint
-  - url: 'http://elastic-inference.{region}.amazonaws.com.cn'
+  - url: 'http://api.elastic-inference.{region}.amazonaws.com.cn'
     variables:
       region:
         description: The AWS region
@@ -95,7 +95,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Elastic Inference endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://elastic-inference.{region}.amazonaws.com.cn'
+  - url: 'https://api.elastic-inference.{region}.amazonaws.com.cn'
     variables:
       region:
         description: The AWS region
@@ -106,10 +106,181 @@ servers:
     description: The Amazon Elastic Inference endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /describe-accelerator-offerings:
+    post:
+      operationId: DescribeAcceleratorOfferings
+      description: ' Describes the locations in which a given accelerator type or set of types is present in a given region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAcceleratorOfferingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - locationType
+              properties:
+                locationType:
+                  description: ' The location type that you want to describe accelerator type offerings for. It can assume the following values: region: will return the accelerator type offering at the regional level. availability-zone: will return the accelerator type offering at the availability zone level. availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id. '
+                  type: string
+                  enum:
+                    - region
+                    - availability-zone
+                    - availability-zone-id
+                  minLength: 1
+                  maxLength: 256
+                acceleratorTypes:
+                  description: ' The list of accelerator types to describe. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AcceleratorTypeName'
+                  minItems: 0
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describe-accelerator-types:
+    get:
+      operationId: DescribeAcceleratorTypes
+      description: ' Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAcceleratorTypesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describe-accelerators:
+    post:
+      operationId: DescribeAccelerators
+      description: ' Describes information over a provided set of accelerators belonging to an account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAcceleratorsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                acceleratorIds:
+                  description: ' The IDs of the accelerators to describe. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AcceleratorId'
+                  minItems: 0
+                  maxItems: 1000
+                filters:
+                  description: ' One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 0
+                  maxItems: 100
+                maxResults:
+                  description: ' The total number of items to return in the command''s output. If the total number of items available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the AWS CLI. '
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                nextToken:
+                  description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  type: string
+                  pattern: '^[A-Za-z0-9+/]+={0,2}$'
+                  minLength: 1
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Returns all tags of an Elastic Inference Accelerator.
+      description: ' Returns all tags of an Elastic Inference Accelerator. '
       responses:
         '200':
           description: Success
@@ -139,9 +310,10 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The ARN of the Elastic Inference Accelerator to list the tags for.
+          description: ' The ARN of the Elastic Inference Accelerator to list the tags for. '
           schema:
             type: string
+            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
     parameters:
@@ -154,7 +326,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Adds the specified tag(s) to an Elastic Inference Accelerator.
+      description: ' Adds the specified tags to an Elastic Inference Accelerator. '
       responses:
         '200':
           description: Success
@@ -184,9 +356,10 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The ARN of the Elastic Inference Accelerator to tag.
+          description: ' The ARN of the Elastic Inference Accelerator to tag. '
           schema:
             type: string
+            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
       requestBody:
@@ -199,7 +372,7 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: The tags to add to the Elastic Inference Accelerator.
+                  description: ' The tags to add to the Elastic Inference Accelerator. '
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -208,7 +381,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Removes the specified tag(s) from an Elastic Inference Accelerator.
+      description: ' Removes the specified tags from an Elastic Inference Accelerator. '
       responses:
         '200':
           description: Success
@@ -238,15 +411,16 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The ARN of the Elastic Inference Accelerator to untag.
+          description: ' The ARN of the Elastic Inference Accelerator to untag. '
           schema:
             type: string
+            pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
             minLength: 1
             maxLength: 1011
         - name: tagKeys
           in: query
           required: true
-          description: The list of tags to remove from the Elastic Inference Accelerator.
+          description: ' The list of tags to remove from the Elastic Inference Accelerator. '
           schema:
             type: array
             items:
@@ -313,15 +487,56 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    DescribeAcceleratorOfferingsResponse:
+      type: object
+      properties:
+        acceleratorTypeOfferings:
+          $ref: '#/components/schemas/AcceleratorTypeOfferingList'
+          description: ' The list of accelerator type offerings for a specific location. '
+    AcceleratorTypeName:
+      type: string
+      pattern: ^\S+$
+      minLength: 1
+      maxLength: 256
+    BadRequestException: {}
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    DescribeAcceleratorTypesResponse:
+      type: object
+      properties:
+        acceleratorTypes:
+          $ref: '#/components/schemas/AcceleratorTypeList'
+          description: ' The available accelerator types. '
+    DescribeAcceleratorsResponse:
+      type: object
+      properties:
+        acceleratorSet:
+          $ref: '#/components/schemas/ElasticInferenceAcceleratorSet'
+          description: ' The details of the Elastic Inference Accelerators. '
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+    AcceleratorId:
+      type: string
+      pattern: '^eia-[0-9a-f]+$'
+      minLength: 1
+      maxLength: 256
+    Filter:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FilterName'
+          description: ' The filter name for the Elastic Inference Accelerator list. It can assume the following values: accelerator-type: the type of Elastic Inference Accelerator to filter for. instance-id: an EC2 instance id to filter for. '
+        values:
+          $ref: '#/components/schemas/ValueStringList'
+          description: ' The values for the filter of the Elastic Inference Accelerator list. '
+      description: ' A filter expression for the Elastic Inference Accelerator list. '
     ListTagsForResourceResult:
       type: object
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags of the Elastic Inference Accelerator.
-    BadRequestException: {}
-    ResourceNotFoundException: {}
-    InternalServerException: {}
+          description: ' The tags of the Elastic Inference Accelerator. '
     TagResourceResult:
       type: object
       properties: {}
@@ -333,10 +548,206 @@ components:
       properties: {}
     TagKey:
       type: string
+      pattern: ^\S$
       minLength: 1
       maxLength: 128
+    AcceleratorHealthStatus:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AcceleratorIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AcceleratorId'
+      minItems: 0
+      maxItems: 1000
+    MemoryInfo:
+      type: object
+      properties:
+        sizeInMiB:
+          $ref: '#/components/schemas/Integer'
+          description: ' The size in mebibytes of the Elastic Inference Accelerator type. '
+      description: ' The memory information of an Elastic Inference Accelerator type. '
+    ThroughputInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyValuePair'
+      minItems: 0
+      maxItems: 100
+    AcceleratorType:
+      type: object
+      properties:
+        acceleratorTypeName:
+          $ref: '#/components/schemas/AcceleratorTypeName'
+          description: ' The name of the Elastic Inference Accelerator type. '
+        memoryInfo:
+          $ref: '#/components/schemas/MemoryInfo'
+          description: ' The memory information of the Elastic Inference Accelerator type. '
+        throughputInfo:
+          $ref: '#/components/schemas/ThroughputInfoList'
+          description: ' The throughput information of the Elastic Inference Accelerator type. '
+      description: ' The details of an Elastic Inference Accelerator type. '
+    AcceleratorTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AcceleratorType'
+      minItems: 0
+      maxItems: 100
+    AcceleratorTypeNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AcceleratorTypeName'
+      minItems: 0
+      maxItems: 100
+    LocationType:
+      type: string
+      enum:
+        - region
+        - availability-zone
+        - availability-zone-id
+      minLength: 1
+      maxLength: 256
+    Location:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AcceleratorTypeOffering:
+      type: object
+      properties:
+        acceleratorType:
+          $ref: '#/components/schemas/AcceleratorTypeName'
+          description: ' The name of the Elastic Inference Accelerator type. '
+        locationType:
+          $ref: '#/components/schemas/LocationType'
+          description: ' The location type for the offering. It can assume the following values: region: defines that the offering is at the regional level. availability-zone: defines that the offering is at the availability zone level. availability-zone-id: defines that the offering is at the availability zone level, defined by the availability zone id. '
+        location:
+          $ref: '#/components/schemas/Location'
+          description: ' The location for the offering. It will return either the region, availability zone or availability zone id for the offering depending on the locationType value. '
+      description: ' The offering for an Elastic Inference Accelerator type. '
+    AcceleratorTypeOfferingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AcceleratorTypeOffering'
+      minItems: 0
+      maxItems: 100
+    AvailabilityZone:
+      type: string
+      minLength: 1
+      maxLength: 256
+    DescribeAcceleratorOfferingsRequest:
+      type: object
+      required:
+        - locationType
+      title: DescribeAcceleratorOfferingsRequest
+      properties:
+        locationType:
+          $ref: '#/components/schemas/LocationType'
+          description: ' The location type that you want to describe accelerator type offerings for. It can assume the following values: region: will return the accelerator type offering at the regional level. availability-zone: will return the accelerator type offering at the availability zone level. availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id. '
+        acceleratorTypes:
+          $ref: '#/components/schemas/AcceleratorTypeNameList'
+          description: ' The list of accelerator types to describe. '
+    DescribeAcceleratorTypesRequest:
+      type: object
+      title: DescribeAcceleratorTypesRequest
+      properties: {}
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+      minItems: 0
+      maxItems: 100
+    MaxResults:
+      type: integer
+      minimum: 0
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: '^[A-Za-z0-9+/]+={0,2}$'
+      minLength: 1
+      maxLength: 2048
+    DescribeAcceleratorsRequest:
+      type: object
+      title: DescribeAcceleratorsRequest
+      properties:
+        acceleratorIds:
+          $ref: '#/components/schemas/AcceleratorIdList'
+          description: ' The IDs of the accelerators to describe. '
+        filters:
+          $ref: '#/components/schemas/FilterList'
+          description: ' One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: ' The total number of items to return in the command''s output. If the total number of items available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the AWS CLI. '
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+    ElasticInferenceAcceleratorSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/ElasticInferenceAccelerator'
+    ElasticInferenceAcceleratorHealth:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/AcceleratorHealthStatus'
+          description: ' The health status of the Elastic Inference Accelerator. '
+      description: ' The health details of an Elastic Inference Accelerator. '
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1283
+    ElasticInferenceAccelerator:
+      type: object
+      properties:
+        acceleratorHealth:
+          $ref: '#/components/schemas/ElasticInferenceAcceleratorHealth'
+          description: ' The health of the Elastic Inference Accelerator. '
+        acceleratorType:
+          $ref: '#/components/schemas/AcceleratorTypeName'
+          description: ' The type of the Elastic Inference Accelerator. '
+        acceleratorId:
+          $ref: '#/components/schemas/AcceleratorId'
+          description: ' The ID of the Elastic Inference Accelerator. '
+        availabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+          description: ' The availability zone where the Elastic Inference Accelerator is present. '
+        attachedResource:
+          $ref: '#/components/schemas/ResourceArn'
+          description: ' The ARN of the resource that the Elastic Inference Accelerator is attached to. '
+      description: ' The details of an Elastic Inference Accelerator. '
+    FilterName:
+      type: string
+      pattern: ^\S+$
+      minLength: 1
+      maxLength: 128
+    ValueStringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 0
+      maxItems: 100
+    Integer:
+      type: integer
+    Key:
+      type: string
+      pattern: ^\S+$
+      minLength: 1
+      maxLength: 256
+    Value:
+      type: integer
+    KeyValuePair:
+      type: object
+      properties:
+        key:
+          $ref: '#/components/schemas/Key'
+          description: ' The throughput value of the Elastic Inference Accelerator type. It can assume the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS. TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS. '
+        value:
+          $ref: '#/components/schemas/Value'
+          description: ' The throughput value of the Elastic Inference Accelerator type. '
+      description: ' A throughput entry for an Elastic Inference Accelerator type. '
     ResourceARN:
       type: string
+      pattern: '^arn:aws\S*:elastic-inference:\S+:\d{12}:elastic-inference-accelerator/eia-[0-9a-f]+$'
       minLength: 1
       maxLength: 1011
     ListTagsForResourceRequest:
@@ -349,6 +760,10 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    String:
+      type: string
+      pattern: ^.*$
+      maxLength: 500000
     TagKeyList:
       type: array
       items:
@@ -363,7 +778,7 @@ components:
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags to add to the Elastic Inference Accelerator.
+          description: ' The tags to add to the Elastic Inference Accelerator. '
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
