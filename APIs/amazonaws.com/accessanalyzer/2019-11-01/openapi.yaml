@@ -1606,7 +1606,7 @@ components:
           description: The type of the resource that was analyzed.
         sharedVia:
           $ref: '#/components/schemas/SharedViaList'
-          description: Indicates how the access that generated the finding is granted.
+          description: Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
         status:
           $ref: '#/components/schemas/FindingStatus'
           description: The current status of the finding generated from the analyzed resource.
@@ -1806,6 +1806,10 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/String'
+    FindingSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingSource'
     Finding:
       type: object
       required:
@@ -1851,6 +1855,9 @@ components:
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of the resource reported in the finding.
+        sources:
+          $ref: '#/components/schemas/FindingSourceList'
+          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
           $ref: '#/components/schemas/FindingStatus'
           description: The current status of the finding.
@@ -1862,6 +1869,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FindingId'
+    FindingSourceDetail:
+      type: object
+      properties:
+        accessPointArn:
+          $ref: '#/components/schemas/String'
+          description: The ARN of the access point that generated the finding.
+      description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+    FindingSourceType:
+      type: string
+      enum:
+        - BUCKET_ACL
+        - POLICY
+        - S3_ACCESS_POINT
+    FindingSource:
+      type: object
+      required:
+        - type
+      properties:
+        detail:
+          $ref: '#/components/schemas/FindingSourceDetail'
+          description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+        type:
+          $ref: '#/components/schemas/FindingSourceType'
+          description: Indicates the type of access that generated the finding.
+      description: The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
     FindingStatusUpdate:
       type: string
       enum:
@@ -1912,6 +1944,9 @@ components:
         resourceType:
           $ref: '#/components/schemas/ResourceType'
           description: The type of the resource that the external principal has access to.
+        sources:
+          $ref: '#/components/schemas/FindingSourceList'
+          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
           $ref: '#/components/schemas/FindingStatus'
           description: The status of the finding.

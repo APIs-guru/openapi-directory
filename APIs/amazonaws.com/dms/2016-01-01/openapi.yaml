@@ -2778,16 +2778,19 @@ components:
           description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible settings include the following:</p> <ul> <li> <p> <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>BucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>CompressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value.</p> </li> </ul> <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these settings is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
         MongoDbSettings:
           $ref: '#/components/schemas/MongoDbSettings'
-          description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html">Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
+          description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration">Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KinesisSettings:
           $ref: '#/components/schemas/KinesisSettings'
-          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
         KafkaSettings:
           $ref: '#/components/schemas/KafkaSettings'
-          description: 'Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping">Using Object Mapping to Migrate Data to Apache Kafka</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
         ElasticsearchSettings:
           $ref: '#/components/schemas/ElasticsearchSettings'
           description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+        NeptuneSettings:
+          $ref: '#/components/schemas/NeptuneSettings'
+          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
       description: <p/>
@@ -3012,10 +3015,10 @@ components:
           description: 'The migration type. Valid values: <code>full-load</code> | <code>cdc</code> | <code>full-load-and-cdc</code> '
         TableMappings:
           $ref: '#/components/schemas/String'
-          description: 'The table mappings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Table Mapping</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'The table mappings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Using Table Mapping to Specify Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
         ReplicationTaskSettings:
           $ref: '#/components/schemas/String'
-          description: 'Overall settings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Overall settings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Specifying Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
         CdcStartTime:
           $ref: '#/components/schemas/TStamp'
           description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
@@ -3028,6 +3031,9 @@ components:
         Tags:
           $ref: '#/components/schemas/TagList'
           description: One or more tags to be assigned to the replication task.
+        TaskData:
+          $ref: '#/components/schemas/String'
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
       description: <p/>
     DeleteCertificateResponse:
       type: object
@@ -3577,7 +3583,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: Filters applied to the describe action.
+          description: '<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-subnet-group-id</p>'
         MaxRecords:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
@@ -3824,13 +3830,16 @@ components:
           description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KinesisSettings:
           $ref: '#/components/schemas/KinesisSettings'
-          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
         KafkaSettings:
           $ref: '#/components/schemas/KafkaSettings'
-          description: 'Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping">Using Object Mapping to Migrate Data to Apache Kafka</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
         ElasticsearchSettings:
           $ref: '#/components/schemas/ElasticsearchSettings'
           description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+        NeptuneSettings:
+          $ref: '#/components/schemas/NeptuneSettings'
+          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
       description: <p/>
@@ -4000,7 +4009,7 @@ components:
           description: 'When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with <code>file://</code>. When working with the DMS API, provide the JSON as the parameter value, for example: <code>--table-mappings file://mappingfile.json</code> '
         ReplicationTaskSettings:
           $ref: '#/components/schemas/String'
-          description: 'JSON file that contains settings for the task, such as target metadata settings.'
+          description: 'JSON file that contains settings for the task, such as task metadata settings.'
         CdcStartTime:
           $ref: '#/components/schemas/TStamp'
           description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
@@ -4010,6 +4019,9 @@ components:
         CdcStopPosition:
           $ref: '#/components/schemas/String'
           description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
+        TaskData:
+          $ref: '#/components/schemas/String'
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
       description: <p/>
     RebootReplicationInstanceResponse:
       type: object
@@ -4539,6 +4551,34 @@ components:
           $ref: '#/components/schemas/IntegerOptional'
           description: The maximum number of seconds for which DMS retries failed API requests to the Elasticsearch cluster.
       description: Provides information that defines an Elasticsearch endpoint.
+    NeptuneSettings:
+      type: object
+      required:
+        - S3BucketName
+        - S3BucketFolder
+      properties:
+        ServiceAccessRoleArn:
+          $ref: '#/components/schemas/String'
+          description: 'The ARN of the service role you have created for the Neptune target endpoint. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        S3BucketName:
+          $ref: '#/components/schemas/String'
+          description: The name of the S3 bucket for AWS DMS to temporarily store migrated graph data in CSV files before bulk-loading it to the Neptune target database. AWS DMS maps the SQL source data to graph data before storing it in these CSV files.
+        S3BucketFolder:
+          $ref: '#/components/schemas/String'
+          description: 'A folder path where you where you want AWS DMS to store migrated graph data in the S3 bucket specified by <code>S3BucketName</code> '
+        ErrorRetryDuration:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.
+        MaxFileSize:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: 'The maximum size in KB of migrated graph data stored in a CSV file before AWS DMS bulk-loads the data to the Neptune target database. The default is 1048576 KB. If successful, AWS DMS clears the bucket, ready to store the next batch of migrated graph data.'
+        MaxRetryCount:
+          $ref: '#/components/schemas/IntegerOptional'
+          description: The number of times for AWS DMS to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 5.
+        IamAuthEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'If you want IAM authorization enabled for this endpoint, set this parameter to <code>true</code> and attach the appropriate role policy document to your service role specified by <code>ServiceAccessRoleArn</code>. The default is <code>false</code>.'
+      description: Provides information that defines an Amazon Neptune endpoint.
     RedshiftSettings:
       type: object
       properties:
@@ -4693,6 +4733,9 @@ components:
         ElasticsearchSettings:
           $ref: '#/components/schemas/ElasticsearchSettings'
           description: 'The settings for the Elasticsearch source endpoint. For more information, see the <code>ElasticsearchSettings</code> structure.'
+        NeptuneSettings:
+          $ref: '#/components/schemas/NeptuneSettings'
+          description: 'The settings for the MongoDB source endpoint. For more information, see the <code>NeptuneSettings</code> structure.'
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
           description: Settings for the Amazon Redshift endpoint.
@@ -4898,6 +4941,9 @@ components:
         ReplicationTaskStats:
           $ref: '#/components/schemas/ReplicationTaskStats'
           description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
+        TaskData:
+          $ref: '#/components/schemas/String'
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
       description: Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.
     DataFormatValue:
       type: string
@@ -5279,6 +5325,9 @@ components:
         EndpointType:
           $ref: '#/components/schemas/ReplicationEndpointTypeValue'
           description: The type of endpoint. Valid values are <code>source</code> and <code>target</code>.
+        ReplicationInstanceEngineMinimumVersion:
+          $ref: '#/components/schemas/String'
+          description: The earliest AWS DMS engine version that supports this endpoint engine. Note that endpoint engines released with AWS DMS versions earlier than 3.1.1 do not return a value for this parameter.
         EngineDisplayName:
           $ref: '#/components/schemas/String'
           description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'

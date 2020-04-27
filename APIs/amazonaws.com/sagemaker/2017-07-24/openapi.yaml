@@ -11237,13 +11237,13 @@ components:
     ResourceSpec:
       type: object
       properties:
-        EnvironmentArn:
-          $ref: '#/components/schemas/EnvironmentArn'
-          description: The Amazon Resource Name (ARN) of the environment.
+        SageMakerImageArn:
+          $ref: '#/components/schemas/SageMakerImageArn'
+          description: The Amazon Resource Name (ARN) of the image created on the instance.
         InstanceType:
           $ref: '#/components/schemas/AppInstanceType'
           description: The instance type.
-      description: The instance type and quantity.
+      description: The instance type and the Amazon Resource Name (ARN) of the image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.
     ProblemType:
       type: string
       enum:
@@ -13070,10 +13070,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EndpointSummary'
-    EnvironmentArn:
-      type: string
-      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:environment/[a-z0-9]([-.]?[a-z0-9])*$'
-      maxLength: 256
     EnvironmentKey:
       type: string
       pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
@@ -15061,6 +15057,10 @@ components:
     VolumeSizeInGB:
       type: integer
       minimum: 1
+    SageMakerImageArn:
+      type: string
+      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$'
+      maxLength: 256
     ResponseMIMEType:
       type: string
       pattern: '^[-\w]+\/.+$'
