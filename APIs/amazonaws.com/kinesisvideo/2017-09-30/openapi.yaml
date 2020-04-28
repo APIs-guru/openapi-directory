@@ -163,7 +163,7 @@ paths:
                 - ChannelName
               properties:
                 ChannelName:
-                  description: A name for the signaling channel that you are creating. It must be unique for each account and region.
+                  description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
                   type: string
                   pattern: '[a-zA-Z0-9_.-]+'
                   minLength: 1
@@ -181,7 +181,7 @@ paths:
                       $ref: '#/components/schemas/MessageTtlSeconds'
                       description: The period of time a signaling channel retains underlivered messages before they are discarded.
                 Tags:
-                  description: A set of tags (key/value pairs) that you want to associate with this channel.
+                  description: A set of tags (key-value pairs) that you want to associate with this channel.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -279,6 +279,7 @@ paths:
                 KmsKeyId:
                   description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
                   type: string
+                  pattern: .+
                   minLength: 1
                   maxLength: 2048
                 DataRetentionInHours:
@@ -341,6 +342,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VersionMismatchException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
       parameters: []
       requestBody:
         required: true
@@ -352,13 +359,13 @@ paths:
                 - ChannelARN
               properties:
                 ChannelARN:
-                  description: The ARN of the signaling channel that you want to delete.
+                  description: The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
-                  description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> APIs.
+                  description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> API operations.
                   type: string
                   pattern: '[a-zA-Z0-9]+'
                   minLength: 1
@@ -412,6 +419,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VersionMismatchException'
+        '485':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
       parameters: []
       requestBody:
         required: true
@@ -445,7 +458,7 @@ paths:
   /describeSignalingChannel:
     post:
       operationId: DescribeSignalingChannel
-      description: Returns the most current information about the signaling channel. You must specify either the name or the ARN of the channel that you want to describe.
+      description: Returns the most current information about the signaling channel. You must specify either the name or the Amazon Resource Name (ARN) of the channel that you want to describe.
       responses:
         '200':
           description: Success
@@ -635,6 +648,7 @@ paths:
                     - GET_MEDIA_FOR_FRAGMENT_LIST
                     - GET_HLS_STREAMING_SESSION_URL
                     - GET_DASH_STREAMING_SESSION_URL
+                    - GET_CLIP
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -646,7 +660,7 @@ paths:
   /getSignalingChannelEndpoint:
     post:
       operationId: GetSignalingChannelEndpoint
-      description: '<p>Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter, which consists of the <code>Protocols</code> and <code>Role</code> properties.</p> <p> <code>Protocols</code> is used to determine the communication mechanism. For example, specifying <code>WSS</code> as the protocol, results in this API producing a secure websocket endpoint, and specifying <code>HTTPS</code> as the protocol, results in this API generating an HTTPS endpoint. </p> <p> <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A <code>VIEWER</code> role results in this API generating an endpoint that a client can use to communicate only with a <code>MASTER</code>. </p>'
+      description: '<p>Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter, which consists of the <code>Protocols</code> and <code>Role</code> properties.</p> <p> <code>Protocols</code> is used to determine the communication mechanism. For example, if you specify <code>WSS</code> as the protocol, this API produces a secure websocket endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS endpoint. </p> <p> <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A <code>VIEWER</code> role results in this API generating an endpoint that a client can use to communicate only with a <code>MASTER</code>. </p>'
       responses:
         '200':
           description: Success
@@ -695,7 +709,7 @@ paths:
                 - ChannelARN
               properties:
                 ChannelARN:
-                  description: The ARN of the signalling channel for which you want to get an endpoint.
+                  description: The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
@@ -914,13 +928,13 @@ paths:
                 - ResourceARN
               properties:
                 NextToken:
-                  description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
+                  description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
                   type: string
                   pattern: '[a-zA-Z0-9+/=]*'
                   minLength: 0
                   maxLength: 512
                 ResourceARN:
-                  description: The ARN of the signaling channel for which you want to list tags.
+                  description: The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
@@ -1061,7 +1075,7 @@ paths:
                 - Tags
               properties:
                 ResourceARN:
-                  description: The ARN of the signaling channel to which you want to add tags.
+                  description: The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
@@ -1212,7 +1226,7 @@ paths:
                 - TagKeyList
               properties:
                 ResourceARN:
-                  description: The ARN of the signaling channel from which you want to remove tags.
+                  description: The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
@@ -1408,7 +1422,7 @@ paths:
   /updateSignalingChannel:
     post:
       operationId: UpdateSignalingChannel
-      description: '<p>Updates the existing signaling channel. This is an asynchronous operation and takes time to complete. </p> <p>If the <code>MessageTtlSeconds</code> value is updated (either increased or reduced), then it only applies to new messages sent via this channel after it''s been updated. Existing messages are still expire as per the previous <code>MessageTtlSeconds</code> value.</p>'
+      description: '<p>Updates the existing signaling channel. This is an asynchronous operation and takes time to complete. </p> <p>If the <code>MessageTtlSeconds</code> value is updated (either increased or reduced), it only applies to new messages sent via this channel after it''s been updated. Existing messages are still expired as per the previous <code>MessageTtlSeconds</code> value.</p>'
       responses:
         '200':
           description: Success
@@ -1464,7 +1478,7 @@ paths:
                 - CurrentVersion
               properties:
                 ChannelARN:
-                  description: The ARN of the signaling channel that you want to update.
+                  description: The Amazon Resource Name (ARN) of the signaling channel that you want to update.
                   type: string
                   pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
@@ -1642,7 +1656,7 @@ components:
       properties:
         ChannelARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the created channel.
+          description: The Amazon Resource Name (ARN) of the created channel.
     MessageTtlSeconds:
       type: integer
       minimum: 5
@@ -1761,7 +1775,7 @@ components:
       properties:
         NextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags. '
+          description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags. '
         Tags:
           $ref: '#/components/schemas/ResourceTags'
           description: A map of tag keys and values associated with the specified signaling channel.
@@ -1810,6 +1824,7 @@ components:
         - GET_MEDIA_FOR_FRAGMENT_LIST
         - GET_HLS_STREAMING_SESSION_URL
         - GET_DASH_STREAMING_SESSION_URL
+        - GET_CLIP
     ResourceARN:
       type: string
       pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
@@ -1849,7 +1864,7 @@ components:
           description: The name of the signaling channel.
         ChannelARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel.
+          description: The Amazon Resource Name (ARN) of the signaling channel.
         ChannelType:
           $ref: '#/components/schemas/ChannelType'
           description: The type of the signaling channel.
@@ -1899,7 +1914,7 @@ components:
       properties:
         ChannelName:
           $ref: '#/components/schemas/ChannelName'
-          description: A name for the signaling channel that you are creating. It must be unique for each account and region.
+          description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
         ChannelType:
           $ref: '#/components/schemas/ChannelType'
           description: 'A type of the signaling channel that you are creating. Currently, <code>SINGLE_MASTER</code> is the only supported channel type. '
@@ -1908,7 +1923,7 @@ components:
           description: 'A structure containing the configuration for the <code>SINGLE_MASTER</code> channel type. '
         Tags:
           $ref: '#/components/schemas/TagOnCreateList'
-          description: A set of tags (key/value pairs) that you want to associate with this channel.
+          description: A set of tags (key-value pairs) that you want to associate with this channel.
     DeviceName:
       type: string
       pattern: '[a-zA-Z0-9_.-]+'
@@ -1921,6 +1936,7 @@ components:
       maxLength: 128
     KmsKeyId:
       type: string
+      pattern: .+
       minLength: 1
       maxLength: 2048
     DataRetentionInHours:
@@ -1969,10 +1985,10 @@ components:
       properties:
         ChannelARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel that you want to delete.
+          description: The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
         CurrentVersion:
           $ref: '#/components/schemas/Version'
-          description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> APIs.
+          description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> API operations.
     DeleteStreamInput:
       type: object
       required:
@@ -2069,7 +2085,7 @@ components:
       properties:
         ChannelARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signalling channel for which you want to get an endpoint.
+          description: The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
         SingleMasterChannelEndpointConfiguration:
           $ref: '#/components/schemas/SingleMasterChannelEndpointConfiguration'
           description: A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code> channel type.
@@ -2134,10 +2150,10 @@ components:
       properties:
         NextToken:
           $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a ListTagsForResource call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
+          description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
         ResourceARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel for which you want to list tags.
+          description: The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
     ListTagsForStreamInput:
       type: object
       title: ListTagsForStreamInput
@@ -2184,7 +2200,7 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel to which you want to add tags.
+          description: The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
         Tags:
           $ref: '#/components/schemas/TagList'
           description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
@@ -2212,7 +2228,7 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel from which you want to remove tags.
+          description: The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
         TagKeyList:
           $ref: '#/components/schemas/TagKeyList'
           description: A list of the keys of the tags that you want to remove.
@@ -2268,7 +2284,7 @@ components:
       properties:
         ChannelARN:
           $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel that you want to update.
+          description: The Amazon Resource Name (ARN) of the signaling channel that you want to update.
         CurrentVersion:
           $ref: '#/components/schemas/Version'
           description: The current version of the signaling channel that you want to update.

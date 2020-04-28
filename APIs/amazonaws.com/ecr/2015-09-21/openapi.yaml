@@ -109,7 +109,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability':
     post:
       operationId: BatchCheckLayerAvailability
-      description: '<p>Checks the availability of one or more image layers in a repository.</p> <p>When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it is, then the image layer is skipped.</p> <p>When an image is pulled from a repository, each image layer is checked once to verify it is available to be pulled.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Checks the availability of one or more image layers in a repository.</p> <p>When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -262,7 +262,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload':
     post:
       operationId: CompleteLayerUpload
-      description: '<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -835,7 +835,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer':
     post:
       operationId: GetDownloadUrlForLayer
-      description: '<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer that is not already cached.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1081,7 +1081,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload':
     post:
       operationId: InitiateLayerUpload
-      description: '<p>Notifies Amazon ECR that you intend to upload an image layer.</p> <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether an image layer has been uploaded before is determined by the <a>BatchCheckLayerAvailability</a> API action.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Notifies Amazon ECR that you intend to upload an image layer.</p> <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1246,7 +1246,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImage':
     post:
       operationId: PutImage
-      description: '<p>Creates or updates the image manifest and tags associated with an image.</p> <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and tags associated with the image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Creates or updates the image manifest and tags associated with an image.</p> <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1285,12 +1285,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/LayersNotFoundException'
         '485':
+          description: ReferencedImagesNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferencedImagesNotFoundException'
+        '486':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '486':
+        '487':
           description: ImageTagAlreadyExistsException
           content:
             application/json:
@@ -1546,12 +1552,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
         '482':
+          description: UnsupportedImageTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedImageTypeException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
           description: RepositoryNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepositoryNotFoundException'
-        '483':
+        '485':
           description: ImageNotFoundException
           content:
             application/json:
@@ -1771,7 +1789,7 @@ paths:
   '/#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.UploadLayerPart':
     post:
       operationId: UploadLayerPart
-      description: '<p>Uploads an image layer part to Amazon ECR.</p> <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      description: '<p>Uploads an image layer part to Amazon ECR.</p> <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2512,6 +2530,7 @@ components:
           $ref: '#/components/schemas/ImageTag'
           description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
     ImageAlreadyExistsException: {}
+    ReferencedImagesNotFoundException: {}
     ImageTagAlreadyExistsException: {}
     PutImageScanningConfigurationResponse:
       type: object
@@ -2657,6 +2676,7 @@ components:
           description: The name of the repository that contains the images to scan.
         imageId:
           $ref: '#/components/schemas/ImageIdentifier'
+    UnsupportedImageTypeException: {}
     StartLifecyclePolicyPreviewResponse:
       type: object
       properties:
@@ -3125,7 +3145,7 @@ components:
           description: The list of tags associated with this image.
         imageSizeInBytes:
           $ref: '#/components/schemas/ImageSizeInBytes'
-          description: '<p>The size, in bytes, of the image in the repository.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
+          description: '<p>The size, in bytes, of the image in the repository.</p> <p>If the image is a manifest list, this will be the max size of all manifests in the list.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
         imagePushedAt:
           $ref: '#/components/schemas/PushTimestamp'
           description: 'The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. '
@@ -3144,6 +3164,7 @@ components:
         - ImageTagDoesNotMatchDigest
         - ImageNotFound
         - MissingDigestAndTag
+        - ImageReferencedByManifestList
     ImageFailureReason:
       type: string
     ImageFailure:

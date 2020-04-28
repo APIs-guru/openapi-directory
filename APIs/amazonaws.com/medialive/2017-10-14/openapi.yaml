@@ -5538,6 +5538,8 @@ components:
           $ref: '#/components/schemas/AudioLanguageSelection'
         AudioPidSelection:
           $ref: '#/components/schemas/AudioPidSelection'
+        AudioTrackSelection:
+          $ref: '#/components/schemas/AudioTrackSelection'
       description: Audio Selector Settings
     AudioSelector:
       type: object
@@ -5551,6 +5553,29 @@ components:
           $ref: '#/components/schemas/AudioSelectorSettings'
           description: The audio selector settings.
       description: Audio Selector
+    AudioTrackSelection:
+      type: object
+      required:
+        - Tracks
+      properties:
+        Tracks:
+          $ref: '#/components/schemas/__listOfAudioTrack'
+          description: Selects one or more unique audio tracks from within an mp4 source.
+      description: Audio Track Selection
+    AudioTrack:
+      type: object
+      required:
+        - Track
+      properties:
+        Track:
+          $ref: '#/components/schemas/__integerMin1'
+          description: 1-based integer value that maps to a specific audio track
+      description: Audio Track
+    __listOfAudioTrack:
+      type: array
+      description: Placeholder documentation for __listOfAudioTrack
+      items:
+        $ref: '#/components/schemas/AudioTrack'
     AuthenticationScheme:
       type: string
       enum:
@@ -7136,12 +7161,30 @@ components:
           $ref: '#/components/schemas/__string'
           description: 'Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".'
       description: Start time for the action.
+    Fmp4NielsenId3Behavior:
+      type: string
+      enum:
+        - NO_PASSTHROUGH
+        - PASSTHROUGH
+      description: Fmp4 Nielsen Id3 Behavior
+    Fmp4TimedMetadataBehavior:
+      type: string
+      enum:
+        - NO_PASSTHROUGH
+        - PASSTHROUGH
+      description: Fmp4 Timed Metadata Behavior
     Fmp4HlsSettings:
       type: object
       properties:
         AudioRenditionSets:
           $ref: '#/components/schemas/__string'
           description: 'List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by '',''.'
+        NielsenId3Behavior:
+          $ref: '#/components/schemas/Fmp4NielsenId3Behavior'
+          description: 'If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.'
+        TimedMetadataBehavior:
+          $ref: '#/components/schemas/Fmp4TimedMetadataBehavior'
+          description: 'When set to passthrough, timed metadata is passed through from input to output.'
       description: Fmp4 Hls Settings
     FollowPoint:
       type: string
@@ -7289,6 +7332,22 @@ components:
         - CABAC
         - CAVLC
       description: H264 Entropy Encoding
+    TemporalFilterSettings:
+      type: object
+      properties:
+        PostFilterSharpening:
+          $ref: '#/components/schemas/TemporalFilterPostFilterSharpening'
+          description: 'If set to "ENABLED," applies post-filter sharpening to improve visual quality. This is most beneficial when using a noisy or compressed input source and low output bitrates.'
+        Strength:
+          $ref: '#/components/schemas/TemporalFilterStrength'
+          description: Filter strength. A higher value produces stronger filtering.
+      description: Temporal Filter Settings
+    H264FilterSettings:
+      type: object
+      properties:
+        TemporalFilterSettings:
+          $ref: '#/components/schemas/TemporalFilterSettings'
+      description: H264 Filter Settings
     H264FlickerAq:
       type: string
       enum:
@@ -7363,6 +7422,12 @@ components:
         - HIGH_422_10BIT
         - MAIN
       description: H264 Profile
+    H264QualityLevel:
+      type: string
+      enum:
+        - ENHANCED_QUALITY
+        - STANDARD_QUALITY
+      description: H264 Quality Level
     H264RateControlMode:
       type: string
       enum:
@@ -7474,6 +7539,9 @@ components:
         EntropyEncoding:
           $ref: '#/components/schemas/H264EntropyEncoding'
           description: Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc.
+        FilterSettings:
+          $ref: '#/components/schemas/H264FilterSettings'
+          description: Settings associated with the specified filter.
         FixedAfd:
           $ref: '#/components/schemas/FixedAfd'
           description: Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
@@ -7483,9 +7551,9 @@ components:
         ForceFieldPictures:
           $ref: '#/components/schemas/H264ForceFieldPictures'
           description: |-
-            This setting applies only when scan type is "interlaced." It controls whether coding is on a field basis or a frame basis. (When the video is progressive, the coding is always on a frame basis.)
-            enabled: Always code on a field basis, so that odd and even sets of fields are coded separately.
-            disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis, using PAFF or MBAFF), depending on what is most appropriate for the content.
+            This setting applies only when scan type is "interlaced." It controls whether coding is performed on a field basis or on a frame basis. (When the video is progressive, the coding is always performed on a frame basis.)
+            enabled: Force MediaLive to code on a field basis, so that odd and even sets of fields are coded separately.
+            disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis using PAFF), depending on what is most appropriate for the content.
         FramerateControl:
           $ref: '#/components/schemas/H264FramerateControl'
           description: 'This field indicates how the output video frame rate is specified.  If "specified" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if "initializeFromSource" is selected then the output video frame rate will be set equal to the input video frame rate of the first input.'
@@ -7543,6 +7611,9 @@ components:
         Profile:
           $ref: '#/components/schemas/H264Profile'
           description: H.264 Profile.
+        QualityLevel:
+          $ref: '#/components/schemas/H264QualityLevel'
+          description: 'If set to "ENHANCEDQUALITY," improves visual quality at an increased output cost. If this video is being delivered to a MediaLive Multiplex, "ENHANCEDQUALITY" is always used.'
         QvbrQualityLevel:
           $ref: '#/components/schemas/__integerMin1Max10'
           description: |-
@@ -8238,6 +8309,8 @@ components:
           description: |-
             MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
 
+            VARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this output group, but not a master manifest.
+
             SEGMENTSONLY: Does not generate any manifests for this output group.
         ProgramDateTime:
           $ref: '#/components/schemas/HlsProgramDateTime'
@@ -8376,7 +8449,7 @@ components:
     ImmediateModeScheduleActionStartSettings:
       type: object
       properties: {}
-      description: Settings to configure an action so that it occurs immediately. This is only supported for input switch actions currently.
+      description: Settings to configure an action so that it occurs as soon as possible.
     InputSettings:
       type: object
       properties:
@@ -9011,6 +9084,7 @@ components:
       enum:
         - NONE
         - SCTE_35
+        - SCTE_35_WITHOUT_SEGMENTATION
       description: Smooth Group Sparse Track Type
     SmoothGroupStreamManifestBehavior:
       type: string
@@ -9085,7 +9159,7 @@ components:
           description: Number of milliseconds to delay the output from the second pipeline.
         SparseTrackType:
           $ref: '#/components/schemas/SmoothGroupSparseTrackType'
-          description: 'If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs.'
+          description: 'If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs. scte35WithoutSegmentation is the same as scte35, except EML will not start a new segment at a SCTE-35 marker. It will still encode an IDR frame at a SCTE-35 marker.'
         StreamManifestBehavior:
           $ref: '#/components/schemas/SmoothGroupStreamManifestBehavior'
           description: 'When set to send, send stream manifest so publishing point doesn''t start until all streams start.'
@@ -9994,6 +10068,34 @@ components:
       title: StopMultiplexRequest
       properties: {}
       description: Placeholder documentation for StopMultiplexRequest
+    TemporalFilterPostFilterSharpening:
+      type: string
+      enum:
+        - AUTO
+        - DISABLED
+        - ENABLED
+      description: Temporal Filter Post Filter Sharpening
+    TemporalFilterStrength:
+      type: string
+      enum:
+        - AUTO
+        - STRENGTH_1
+        - STRENGTH_10
+        - STRENGTH_11
+        - STRENGTH_12
+        - STRENGTH_13
+        - STRENGTH_14
+        - STRENGTH_15
+        - STRENGTH_16
+        - STRENGTH_2
+        - STRENGTH_3
+        - STRENGTH_4
+        - STRENGTH_5
+        - STRENGTH_6
+        - STRENGTH_7
+        - STRENGTH_8
+        - STRENGTH_9
+      description: Temporal Filter Strength
     TimecodeConfigSource:
       type: string
       enum:
