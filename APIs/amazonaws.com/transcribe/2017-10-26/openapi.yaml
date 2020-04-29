@@ -106,6 +106,63 @@ servers:
     description: The Amazon Transcribe Service endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/#X-Amz-Target=Transcribe.CreateMedicalVocabulary':
+    post:
+      operationId: CreateMedicalVocabulary
+      description: Creates a new custom vocabulary that you can use to change how Amazon Transcribe Medical transcribes your audio file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMedicalVocabularyResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMedicalVocabularyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.CreateMedicalVocabulary
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Transcribe.CreateVocabulary':
     post:
       operationId: CreateVocabulary
@@ -259,6 +316,59 @@ paths:
             type: string
             enum:
               - Transcribe.DeleteMedicalTranscriptionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.DeleteMedicalVocabulary':
+    post:
+      operationId: DeleteMedicalVocabulary
+      description: Deletes a vocabulary from Amazon Transcribe Medical.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMedicalVocabularyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.DeleteMedicalVocabulary
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -469,6 +579,63 @@ paths:
             type: string
             enum:
               - Transcribe.GetMedicalTranscriptionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.GetMedicalVocabulary':
+    post:
+      operationId: GetMedicalVocabulary
+      description: Retrieve information about a medical vocabulary.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMedicalVocabularyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMedicalVocabularyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.GetMedicalVocabulary
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -703,6 +870,69 @@ paths:
             type: string
             enum:
               - Transcribe.ListMedicalTranscriptionJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.ListMedicalVocabularies':
+    post:
+      operationId: ListMedicalVocabularies
+      description: Returns a list of vocabularies that match the specified criteria. You get the entire list of vocabularies if you don't enter a value in any of the request parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMedicalVocabulariesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMedicalVocabulariesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.ListMedicalVocabularies
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1014,6 +1244,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Transcribe.UpdateMedicalVocabulary':
+    post:
+      operationId: UpdateMedicalVocabulary
+      description: Updates an existing vocabulary with new values in a different text file. The <code>UpdateMedicalVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMedicalVocabularyResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMedicalVocabularyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.UpdateMedicalVocabulary
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Transcribe.UpdateVocabulary':
     post:
       operationId: UpdateVocabulary
@@ -1186,6 +1479,45 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateMedicalVocabularyResponse:
+      type: object
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the vocabulary. The name must be unique within an AWS account. It is also case-sensitive.
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language code you chose to describe the entries in your custom vocabulary. US English (en-US) is the only valid language code for Amazon Transcribe Medical.
+        VocabularyState:
+          $ref: '#/components/schemas/VocabularyState'
+          description: The processing state of your custom vocabulary in Amazon Transcribe Medical. If the state is <code>READY</code> you can use the vocabulary in a <code>StartMedicalTranscriptionJob</code> request.
+        LastModifiedTime:
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time you created the vocabulary.
+        FailureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the <code>VocabularyState</code> field is <code>FAILED</code>, this field contains information about why the job failed.'
+    CreateMedicalVocabularyRequest:
+      type: object
+      required:
+        - VocabularyName
+        - LanguageCode
+        - VocabularyFileUri
+      title: CreateMedicalVocabularyRequest
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the custom vocabulary. This case-sensitive name must be unique within an AWS account. If you try to create a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language code used for the entries within your custom vocabulary. The language code of your custom vocabulary must match the language code of your transcription job. US English (en-US) is the only language code available for Amazon Transcribe Medical.
+        VocabularyFileUri:
+          $ref: '#/components/schemas/Uri'
+          description: '<p>The Amazon S3 location of the text file you use to define your custom vocabulary. The URI must be in the same AWS region as the API endpoint you''re calling. Enter information about your <code>VocabularyFileUri</code> in the following format:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>This is an example of a vocabulary file uri location in Amazon S3:</p> <p> <code>https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med">Medical Custom Vocabularies</a>.</p>'
+    BadRequestException: {}
+    LimitExceededException: {}
+    InternalFailureException: {}
+    ConflictException: {}
     CreateVocabularyResponse:
       type: object
       properties:
@@ -1213,7 +1545,7 @@ components:
       properties:
         VocabularyName:
           $ref: '#/components/schemas/VocabularyName'
-          description: The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive.
+          description: The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive. If you try to create a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
           description: The language code of the vocabulary entries.
@@ -1223,10 +1555,6 @@ components:
         VocabularyFileUri:
           $ref: '#/components/schemas/Uri'
           description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
-    BadRequestException: {}
-    LimitExceededException: {}
-    InternalFailureException: {}
-    ConflictException: {}
     CreateVocabularyFilterResponse:
       type: object
       properties:
@@ -1248,7 +1576,7 @@ components:
       properties:
         VocabularyFilterName:
           $ref: '#/components/schemas/VocabularyFilterName'
-          description: The vocabulary filter name. The name must be unique within the account that contains it.
+          description: The vocabulary filter name. The name must be unique within the account that contains it.If you try to create a vocabulary filter with the same name as a previous vocabulary filter you will receive a <code>ConflictException</code> error.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
           description: The language code of the words in the vocabulary filter. All words in the filter must be in the same language. The vocabulary filter can only be used with transcription jobs in the specified language.
@@ -1267,6 +1595,16 @@ components:
         MedicalTranscriptionJobName:
           $ref: '#/components/schemas/TranscriptionJobName'
           description: The name you provide to the <code>DeleteMedicalTranscriptionJob</code> object to delete a transcription job.
+    DeleteMedicalVocabularyRequest:
+      type: object
+      required:
+        - VocabularyName
+      title: DeleteMedicalVocabularyRequest
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the vocabulary you are choosing to delete.
+    NotFoundException: {}
     DeleteTranscriptionJobRequest:
       type: object
       required:
@@ -1285,7 +1623,6 @@ components:
         VocabularyName:
           $ref: '#/components/schemas/VocabularyName'
           description: 'The name of the vocabulary to delete. '
-    NotFoundException: {}
     DeleteVocabularyFilterRequest:
       type: object
       required:
@@ -1310,6 +1647,36 @@ components:
         MedicalTranscriptionJobName:
           $ref: '#/components/schemas/TranscriptionJobName'
           description: The name of the medical transcription job.
+    GetMedicalVocabularyResponse:
+      type: object
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The valid name that Amazon Transcribe Medical returns.
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+          description: The valid language code returned for your vocabulary entries.
+        VocabularyState:
+          $ref: '#/components/schemas/VocabularyState'
+          description: The processing state of the vocabulary.
+        LastModifiedTime:
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time the vocabulary was last modified with a text file different from what was previously used.
+        FailureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the <code>VocabularyState</code> is <code>FAILED</code>, this field contains information about why the job failed.'
+        DownloadUri:
+          $ref: '#/components/schemas/Uri'
+          description: The Amazon S3 location where the vocabulary is stored. Use this URI to get the contents of the vocabulary. You can download your vocabulary from the URI for a limited time.
+    GetMedicalVocabularyRequest:
+      type: object
+      required:
+        - VocabularyName
+      title: GetMedicalVocabularyRequest
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: 'The name of the vocabulary you are trying to get information about. The value you enter for this request is case-sensitive. '
     GetTranscriptionJobResponse:
       type: object
       properties:
@@ -1407,6 +1774,34 @@ components:
         MaxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'The maximum number of medical transcription jobs to return in the response. IF there are fewer results in the list, this response contains only the actual results.'
+    ListMedicalVocabulariesResponse:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/VocabularyState'
+          description: The requested vocabulary state.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'The <code>ListMedicalVocabularies</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe Medical returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListMedicalVocabularies</code> operation to return the next page of jobs.'
+        Vocabularies:
+          $ref: '#/components/schemas/Vocabularies'
+          description: A list of objects that describe the vocabularies that match the search criteria in the request.
+    ListMedicalVocabulariesRequest:
+      type: object
+      title: ListMedicalVocabulariesRequest
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'If the result of your previous request to <code>ListMedicalVocabularies</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of vocabularies to return in the response.
+        StateEquals:
+          $ref: '#/components/schemas/VocabularyState'
+          description: 'When specified, only returns vocabularies with the <code>VocabularyState</code> equal to the specified vocabulary state.'
+        NameContains:
+          $ref: '#/components/schemas/VocabularyName'
+          description: 'Returns vocabularies in the list whose name contains the specified string. The search is case-insensitive, <code>ListMedicalVocabularies</code> returns both "vocabularyname" and "VocabularyName" in the response list.'
     ListTranscriptionJobsResponse:
       type: object
       properties:
@@ -1439,7 +1834,7 @@ components:
       type: object
       properties:
         Status:
-          $ref: '#/components/schemas/TranscriptionJobStatus'
+          $ref: '#/components/schemas/VocabularyState'
           description: The requested vocabulary state.
         NextToken:
           $ref: '#/components/schemas/NextToken'
@@ -1504,7 +1899,7 @@ components:
       properties:
         MedicalTranscriptionJobName:
           $ref: '#/components/schemas/TranscriptionJobName'
-          description: The name of the medical transcription job. You can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account.
+          description: The name of the medical transcription job. You can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account. If you try to create a medical transcription job with the same name as a previous medical transcription job you will receive a <code>ConflictException</code> error.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
           description: The language code for the language spoken in the input media file. US English (en-US) is the valid value for medical transcription jobs. Any other value you enter for language code results in a <code>BadRequestException</code> error.
@@ -1530,7 +1925,7 @@ components:
           description: The medical specialty of any clinician speaking in the input media.
         Type:
           $ref: '#/components/schemas/Type'
-          description: The speech of clinician in the input audio. <code>CONVERSATION</code> refers to conversations clinicians have with patients. <code>DICTATION</code> refers to medical professionals dictating their notes about a patient encounter.
+          description: 'The type of speech in the input audio. <code>CONVERSATION</code> refers to conversations between two or more speakers, e.g., a conversations between doctors and patients. <code>DICTATION</code> refers to single-speaker dictated speech, e.g., for clinical notes.'
     StartTranscriptionJobResponse:
       type: object
       properties:
@@ -1547,7 +1942,7 @@ components:
       properties:
         TranscriptionJobName:
           $ref: '#/components/schemas/TranscriptionJobName'
-          description: The name of the job. Note that you can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account.
+          description: The name of the job. Note that you can't use the strings "." or ".." by themselves as the job name. The name must also be unique within an AWS account. If you try to create a transcription job with the same name as a previous transcription job you will receive a <code>ConflictException</code> error.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
           description: The language code for the language used in the input media file.
@@ -1575,6 +1970,37 @@ components:
         ContentRedaction:
           $ref: '#/components/schemas/ContentRedaction'
           description: An object that contains the request parameters for content redaction.
+    UpdateMedicalVocabularyResponse:
+      type: object
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the updated vocabulary.
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language code for the text file used to update the custom vocabulary. US English (en-US) is the only language supported in Amazon Transcribe Medical.
+        LastModifiedTime:
+          $ref: '#/components/schemas/DateTime'
+          description: The date and time the vocabulary was updated.
+        VocabularyState:
+          $ref: '#/components/schemas/VocabularyState'
+          description: The processing state of the update to the vocabulary. When the <code>VocabularyState</code> field is <code>READY</code> the vocabulary is ready to be used in a <code>StartMedicalTranscriptionJob</code> request.
+    UpdateMedicalVocabularyRequest:
+      type: object
+      required:
+        - VocabularyName
+        - LanguageCode
+      title: UpdateMedicalVocabularyRequest
+      properties:
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the vocabulary to update. The name is case-sensitive. If you try to update a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
+        LanguageCode:
+          $ref: '#/components/schemas/LanguageCode'
+          description: The language code of the entries in the updated vocabulary. US English (en-US) is the only valid language code in Amazon Transcribe Medical.
+        VocabularyFileUri:
+          $ref: '#/components/schemas/Uri'
+          description: '<p>The Amazon S3 location of the text file containing the definition of the custom vocabulary. The URI must be in the same AWS region as the API endpoint you are calling. You can see the fields you need to enter for you Amazon S3 location in the example URI here:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies in Amazon Transcribe Medical, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Medical Custom Vocabularies</a>.</p>'
     UpdateVocabularyResponse:
       type: object
       properties:
@@ -1599,7 +2025,7 @@ components:
       properties:
         VocabularyName:
           $ref: '#/components/schemas/VocabularyName'
-          description: The name of the vocabulary to update. The name is case-sensitive.
+          description: The name of the vocabulary to update. The name is case-sensitive. If you try to update a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
           description: The language code of the vocabulary entries.
@@ -1629,7 +2055,7 @@ components:
       properties:
         VocabularyFilterName:
           $ref: '#/components/schemas/VocabularyFilterName'
-          description: The name of the vocabulary filter to update.
+          description: The name of the vocabulary filter to update. If you try to update a vocabulary filter with the same name as a previous vocabulary filter you will receive a <code>ConflictException</code> error.
         Words:
           $ref: '#/components/schemas/Words'
           description: '<p>The words to use in the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>If you provide a list of words in the <code>Words</code> parameter, you can''t use the <code>VocabularyFilterFileUri</code> parameter.</p>'
@@ -1660,7 +2086,7 @@ components:
           $ref: '#/components/schemas/RedactionOutput'
           description: <p>The output transcript file stored in either the default S3 bucket or in a bucket you specify.</p> <p>When you choose <code>redacted</code> Amazon Transcribe outputs only the redacted transcript.</p> <p>When you choose <code>redacted_and_unredacted</code> Amazon Transcribe outputs both the redacted and unredacted transcripts.</p>
       description: Settings for content redaction within a transcription job.
-    VocabularyFilterName:
+    VocabularyName:
       type: string
       pattern: '^[0-9a-zA-Z._-]+'
       minLength: 1
@@ -1699,36 +2125,36 @@ components:
         - ms-MY
         - ja-JP
         - ar-AE
-    Words:
-      type: array
-      items:
-        $ref: '#/components/schemas/Word'
-      minItems: 1
     Uri:
       type: string
       pattern: '(s3://|http(s*)://).+'
       minLength: 1
       maxLength: 2000
-    DateTime:
-      type: string
-      format: date-time
-    VocabularyName:
-      type: string
-      pattern: '^[0-9a-zA-Z._-]+'
-      minLength: 1
-      maxLength: 200
-    Phrases:
-      type: array
-      items:
-        $ref: '#/components/schemas/Phrase'
     VocabularyState:
       type: string
       enum:
         - PENDING
         - READY
         - FAILED
+    DateTime:
+      type: string
+      format: date-time
     FailureReason:
       type: string
+    VocabularyFilterName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    Words:
+      type: array
+      items:
+        $ref: '#/components/schemas/Word'
+      minItems: 1
+    Phrases:
+      type: array
+      items:
+        $ref: '#/components/schemas/Phrase'
     DataAccessRoleArn:
       type: string
       pattern: '^arn:aws:iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1023}$'
@@ -1862,14 +2288,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MedicalTranscriptionJobSummary'
-    TranscriptionJobSummaries:
-      type: array
-      items:
-        $ref: '#/components/schemas/TranscriptionJobSummary'
     Vocabularies:
       type: array
       items:
         $ref: '#/components/schemas/VocabularyInfo'
+    TranscriptionJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TranscriptionJobSummary'
     VocabularyFilters:
       type: array
       items:
@@ -1925,6 +2351,9 @@ components:
         MaxAlternatives:
           $ref: '#/components/schemas/MaxAlternatives'
           description: 'The maximum number of alternatives that you tell the service to return. If you specify the <code>MaxAlternatives</code> field, you must set the <code>ShowAlternatives</code> field to true.'
+        VocabularyName:
+          $ref: '#/components/schemas/VocabularyName'
+          description: The name of the vocabulary to use when processing a medical transcription job.
       description: Optional settings for the <a>StartMedicalTranscriptionJob</a> operation.
     Specialty:
       type: string
