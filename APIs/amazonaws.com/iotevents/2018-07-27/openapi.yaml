@@ -1196,76 +1196,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /internal/tags/resource-status:
-    get:
-      operationId: VerifyResourcesExistForTagris
-      description: ''
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisVerifyResourcesExistOutput'
-        '480':
-          description: TagrisAccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisAccessDeniedException'
-        '481':
-          description: TagrisInternalServiceException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisInternalServiceException'
-        '482':
-          description: TagrisInvalidArnException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisInvalidArnException'
-        '483':
-          description: TagrisInvalidParameterException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisInvalidParameterException'
-        '484':
-          description: TagrisPartialResourcesExistResultsException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisPartialResourcesExistResultsException'
-        '485':
-          description: TagrisThrottledException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagrisThrottledException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - TagrisSweepList
-              properties:
-                TagrisSweepList:
-                  description: ''
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/TagrisSweepListItem'
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1463,30 +1393,6 @@ components:
         inputConfiguration:
           $ref: '#/components/schemas/InputConfiguration'
           description: Information about the configuration of the input.
-    TagrisVerifyResourcesExistOutput:
-      type: object
-      required:
-        - TagrisSweepListResult
-      properties:
-        TagrisSweepListResult:
-          $ref: '#/components/schemas/TagrisSweepListResult'
-    TagrisSweepListItem:
-      type: object
-      properties:
-        TagrisAccountId:
-          $ref: '#/components/schemas/TagrisAccountId'
-        TagrisAmazonResourceName:
-          $ref: '#/components/schemas/TagrisAmazonResourceName'
-        TagrisInternalId:
-          $ref: '#/components/schemas/TagrisInternalId'
-        TagrisVersion:
-          $ref: '#/components/schemas/TagrisVersion'
-    TagrisAccessDeniedException: {}
-    TagrisInternalServiceException: {}
-    TagrisInvalidArnException: {}
-    TagrisInvalidParameterException: {}
-    TagrisPartialResourcesExistResultsException: {}
-    TagrisThrottledException: {}
     SetVariableAction:
       type: object
       required:
@@ -1722,7 +1628,7 @@ components:
           description: 'Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html">payload</a>. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html">Actions</a> in <i>AWS IoT Events Developer Guide</i>.'
         iotSiteWise:
           $ref: '#/components/schemas/IotSiteWiseAction'
-          description: Sends information about the detector model instance and the event that triggered the action to an AWS IoT SiteWise asset property.
+          description: Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise .
       description: An action to be performed when the <code>condition</code> is TRUE.
     Actions:
       type: array
@@ -2324,41 +2230,6 @@ components:
         tags:
           $ref: '#/components/schemas/Tags'
           description: The new or modified tags for the resource.
-    TagrisAccountId:
-      type: string
-      minLength: 12
-      maxLength: 12
-    TagrisAmazonResourceName:
-      type: string
-      minLength: 1
-      maxLength: 1011
-    TagrisInternalId:
-      type: string
-      minLength: 0
-      maxLength: 64
-    TagrisStatus:
-      type: string
-      enum:
-        - ACTIVE
-        - NOT_ACTIVE
-    TagrisSweepList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TagrisSweepListItem'
-    TagrisVersion:
-      type: integer
-    TagrisSweepListResult:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagrisStatus'
-    TagrisVerifyResourcesExistInput:
-      type: object
-      required:
-        - TagrisSweepList
-      title: TagrisVerifyResourcesExistInput
-      properties:
-        TagrisSweepList:
-          $ref: '#/components/schemas/TagrisSweepList'
     TransitionEvent:
       type: object
       required:

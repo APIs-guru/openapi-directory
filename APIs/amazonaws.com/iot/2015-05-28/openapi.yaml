@@ -1590,6 +1590,11 @@ paths:
                   enum:
                     - ACTIVE
                     - INACTIVE
+                tags:
+                  description: '<p>Metadata which can be used to manage the custom authorizer.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
                 signingDisabled:
                   description: Specifies whether AWS IoT validates the token signature in an authorization request.
                   type: boolean
@@ -2514,12 +2519,17 @@ paths:
                       $ref: '#/components/schemas/AllowAuthorizerOverride'
                       description: A Boolean that specifies whether the domain configuration's authorization service can be overridden.
                 serviceType:
-                  description: The type of service delivered by the endpoint.
+                  description: <p>The type of service delivered by the endpoint.</p> <note> <p>AWS IoT Core currently supports only the <code>DATA</code> service type.</p> </note>
                   type: string
                   enum:
                     - DATA
                     - CREDENTIAL_PROVIDER
                     - JOBS
+                tags:
+                  description: '<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2607,18 +2617,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '484':
+        '485':
           description: InternalFailureException
           content:
             application/json:
@@ -3964,6 +3980,11 @@ paths:
                 policyDocument:
                   description: 'The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.'
                   type: string
+                tags:
+                  description: '<p>Metadata which can be used to manage the policy.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4384,6 +4405,16 @@ paths:
                   type: string
                   minLength: 20
                   maxLength: 2048
+                preProvisioningHook:
+                  description: Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
+                  type: object
+                  properties:
+                    payloadVersion:
+                      $ref: '#/components/schemas/PayloadVersion'
+                      description: '<p>The payload that was sent to the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
+                    targetArn:
+                      $ref: '#/components/schemas/TargetArn'
+                      description: '<p>The ARN of the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
                 tags:
                   description: '<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
                   type: array
@@ -4681,6 +4712,11 @@ paths:
                   type: integer
                   minimum: 900
                   maximum: 3600
+                tags:
+                  description: '<p>Metadata which can be used to manage the role alias.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5796,7 +5832,7 @@ paths:
         - name: thingName
           in: path
           required: true
-          description: The name of the thing to create.
+          description: '<p>The name of the thing to create.</p> <p>You can''t change a thing''s name after you create it. To change a thing''s name, you must create a new thing, give it the new name, and then delete the old thing.</p>'
           schema:
             type: string
             pattern: '[a-zA-Z0-9:_-]+'
@@ -6019,7 +6055,7 @@ paths:
         - name: thingName
           in: path
           required: true
-          description: The name of the thing to update.
+          description: '<p>The name of the thing to update.</p> <p>You can''t change a thing''s name. To change a thing''s name, you must create a new thing, give it the new name, and then delete the old thing.</p>'
           schema:
             type: string
             pattern: '[a-zA-Z0-9:_-]+'
@@ -7885,6 +7921,19 @@ paths:
                   type: string
                   minLength: 20
                   maxLength: 2048
+                preProvisioningHook:
+                  description: Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
+                  type: object
+                  properties:
+                    payloadVersion:
+                      $ref: '#/components/schemas/PayloadVersion'
+                      description: '<p>The payload that was sent to the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
+                    targetArn:
+                      $ref: '#/components/schemas/TargetArn'
+                      description: '<p>The ARN of the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
+                removePreProvisioningHook:
+                  description: Removes pre-provisioning hook template.
+                  type: boolean
   '/provisioning-templates/{templateName}/versions/{versionId}':
     delete:
       operationId: DeleteProvisioningTemplateVersion
@@ -12712,7 +12761,7 @@ paths:
                   description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html">Provisioning Devices That Have Device Certificates</a> for more information.'
                   type: string
                 parameters:
-                  description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+                  description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html">Provisioning Templates</a> for more information.'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/Value'
@@ -13011,12 +13060,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '484':
-          description: LimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LimitExceededException'
       parameters: []
       requestBody:
         required: true
@@ -13238,6 +13281,11 @@ paths:
                     roleArn:
                       $ref: '#/components/schemas/RoleArn'
                       description: The ARN of the role.
+                tags:
+                  description: '<p>Metadata which can be used to manage the CA certificate.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -13333,6 +13381,98 @@ paths:
                   minLength: 1
                   maxLength: 65536
                 caCertificatePem:
+                  description: The PEM of a certificate.
+                  type: string
+                  minLength: 1
+                  maxLength: 65536
+                status:
+                  description: The status of the register certificate request.
+                  type: string
+                  enum:
+                    - ACTIVE
+                    - INACTIVE
+                    - REVOKED
+                    - PENDING_TRANSFER
+                    - REGISTER_INACTIVE
+                    - PENDING_ACTIVATION
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /certificate/register-no-ca:
+    post:
+      operationId: RegisterCertificateWithoutCA
+      description: Register a certificate that does not have a certificate authority (CA).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterCertificateWithoutCAResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: CertificateStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateStateException'
+        '483':
+          description: CertificateValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - certificatePem
+              properties:
+                certificatePem:
                   description: The PEM of a certificate.
                   type: string
                   minLength: 1
@@ -14028,7 +14168,7 @@ paths:
                   minLength: 1
                   maxLength: 6144
                 tokenSignature:
-                  description: The signature made with the token and your custom authentication service's private key.
+                  description: The signature made with the token and your custom authentication service's private key. This value must be Base-64-encoded.
                   type: string
                   pattern: '[A-Za-z0-9+/]+={0,2}'
                   minLength: 1
@@ -14512,6 +14652,7 @@ components:
           description: A short text description of the job.
     TargetArn:
       type: string
+      maxLength: 2048
     LimitExceededException: {}
     AttachSecurityProfileResponse:
       type: object
@@ -14565,6 +14706,18 @@ components:
     KeyValue:
       type: string
       maxLength: 5120
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: The tag's key.
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: The tag's value.
+      description: A set of key/value pairs that are used to manage the resource.
     ResourceAlreadyExistsException: {}
     CreateBillingGroupResponse:
       type: object
@@ -14582,16 +14735,6 @@ components:
       type: string
       pattern: '[\p{Graph}\x20]*'
       maxLength: 2028
-    Tag:
-      type: object
-      properties:
-        Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The tag's key.
-        Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The tag's value.
-      description: A set of key/value pairs that are used to manage the resource.
     CreateCertificateFromCsrResponse:
       type: object
       properties:
@@ -14699,6 +14842,7 @@ components:
     MaxJobExecutionsPerMin:
       type: integer
       minimum: 1
+      maximum: 1000
     ExponentialRolloutRate:
       type: object
       required:
@@ -14922,6 +15066,11 @@ components:
         defaultVersionId:
           $ref: '#/components/schemas/TemplateVersionId'
           description: The default version of the fleet provisioning template.
+    PayloadVersion:
+      type: string
+      pattern: '^[0-9-]+$'
+      minLength: 10
+      maxLength: 32
     CreateProvisioningTemplateVersionResponse:
       type: object
       properties:
@@ -15510,6 +15659,9 @@ components:
         provisioningRoleArn:
           $ref: '#/components/schemas/RoleArn'
           description: The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+        preProvisioningHook:
+          $ref: '#/components/schemas/ProvisioningHook'
+          description: Gets information about a pre-provisioned hook.
     DescribeProvisioningTemplateVersionResponse:
       type: object
       properties:
@@ -15597,7 +15749,7 @@ components:
       properties:
         defaultClientId:
           $ref: '#/components/schemas/ClientId'
-          description: The default client ID.
+          description: '<p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing''s registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p> <p>This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>'
         thingName:
           $ref: '#/components/schemas/ThingName'
           description: The name of the thing.
@@ -16363,12 +16515,21 @@ components:
           description: The certificate identifier.
       description: The output from the RegisterCertificate operation.
     CertificateConflictException: {}
+    RegisterCertificateWithoutCAResponse:
+      type: object
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/CertificateArn'
+          description: The Amazon Resource Name (ARN) of the registered certificate.
+        certificateId:
+          $ref: '#/components/schemas/CertificateId'
+          description: The ID of the registered certificate. (The last part of the certificate ARN contains the certificate ID.
     RegisterThingResponse:
       type: object
       properties:
         certificatePem:
           $ref: '#/components/schemas/CertificatePem'
-          description: .
+          description: 'The certificate data, in PEM format.'
         resourceArns:
           $ref: '#/components/schemas/ResourceArns'
           description: ARNs for the generated resources.
@@ -16471,6 +16632,8 @@ components:
           description: The authentication results.
     AuthInfo:
       type: object
+      required:
+        - resources
       properties:
         actionType:
           $ref: '#/components/schemas/ActionType'
@@ -16540,6 +16703,9 @@ components:
       properties: {}
     TagKey:
       type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
     UpdateAccountAuditConfigurationResponse:
       type: object
       properties: {}
@@ -17929,7 +18095,7 @@ components:
           description: A unique identifier for the dimension.
         operator:
           $ref: '#/components/schemas/DimensionValueOperator'
-          description: 'Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for DimensionType TOPIC_FILTER, with <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> Operator, a message will be counted only if it doesn''t match any of the topic filters. The operator is optional: if it''s not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.'
+          description: 'Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> operator, a message will be counted only if it doesn''t match any of the topic filters. The operator is optional: if it''s not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.'
       description: The dimension of a metric.
     BehaviorCriteria:
       type: object
@@ -18185,6 +18351,11 @@ components:
         - PENDING_TRANSFER
         - REGISTER_INACTIVE
         - PENDING_ACTIVATION
+    CertificateMode:
+      type: string
+      enum:
+        - DEFAULT
+        - SNI_ONLY
     Certificate:
       type: object
       properties:
@@ -18197,6 +18368,9 @@ components:
         status:
           $ref: '#/components/schemas/CertificateStatus'
           description: <p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+        certificateMode:
+          $ref: '#/components/schemas/CertificateMode'
+          description: The mode of the certificate.
         creationDate:
           $ref: '#/components/schemas/DateType'
           description: The date and time the certificate was created.
@@ -18262,6 +18436,9 @@ components:
         validity:
           $ref: '#/components/schemas/CertificateValidity'
           description: When the certificate is valid.
+        certificateMode:
+          $ref: '#/components/schemas/CertificateMode'
+          description: The mode of the certificate.
       description: Describes a certificate.
     CertificateName:
       type: string
@@ -18383,6 +18560,10 @@ components:
       type: integer
     Count:
       type: integer
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
     CreateAuthorizerRequest:
       type: object
       required:
@@ -18401,13 +18582,12 @@ components:
         status:
           $ref: '#/components/schemas/AuthorizerStatus'
           description: The status of the create authorizer request.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>Metadata which can be used to manage the custom authorizer.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
         signingDisabled:
           $ref: '#/components/schemas/BooleanKey'
           description: Specifies whether AWS IoT validates the token signature in an authorization request.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     CreateBillingGroupRequest:
       type: object
       title: CreateBillingGroupRequest
@@ -18504,7 +18684,10 @@ components:
           description: An object that specifies the authorization service for a domain.
         serviceType:
           $ref: '#/components/schemas/ServiceType'
-          description: The type of service delivered by the endpoint.
+          description: <p>The type of service delivered by the endpoint.</p> <note> <p>AWS IoT Core currently supports only the <code>DATA</code> service type.</p> </note>
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
     DomainConfigurationArn:
       type: string
     ThingGroupProperties:
@@ -18767,6 +18950,9 @@ components:
         policyDocument:
           $ref: '#/components/schemas/PolicyDocument'
           description: 'The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.'
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>Metadata which can be used to manage the policy.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
       description: The input for the CreatePolicy operation.
     PolicyArn:
       type: string
@@ -18801,6 +18987,18 @@ components:
       pattern: '[^\p{C}]*'
       minLength: 0
       maxLength: 500
+    ProvisioningHook:
+      type: object
+      required:
+        - targetArn
+      properties:
+        payloadVersion:
+          $ref: '#/components/schemas/PayloadVersion'
+          description: '<p>The payload that was sent to the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
+        targetArn:
+          $ref: '#/components/schemas/TargetArn'
+          description: '<p>The ARN of the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>'
+      description: Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
     CreateProvisioningTemplateRequest:
       type: object
       required:
@@ -18824,6 +19022,9 @@ components:
         provisioningRoleArn:
           $ref: '#/components/schemas/RoleArn'
           description: The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.
+        preProvisioningHook:
+          $ref: '#/components/schemas/ProvisioningHook'
+          description: Creates a pre-provisioning hook template.
         tags:
           $ref: '#/components/schemas/TagList'
           description: '<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
@@ -18861,6 +19062,9 @@ components:
         credentialDurationSeconds:
           $ref: '#/components/schemas/CredentialDurationSeconds'
           description: How long (in seconds) the credentials will be valid.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>Metadata which can be used to manage the role alias.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
     DayOfMonth:
       type: string
       pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
@@ -21196,6 +21400,9 @@ components:
         registrationConfig:
           $ref: '#/components/schemas/RegistrationConfig'
           description: Information about the registration configuration.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: '<p>Metadata which can be used to manage the CA certificate.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
       description: The input to the RegisterCACertificate operation.
     SetAsActiveFlag:
       type: boolean
@@ -21215,6 +21422,18 @@ components:
           $ref: '#/components/schemas/CertificateStatus'
           description: The status of the register certificate request.
       description: The input to the RegisterCertificate operation.
+    RegisterCertificateWithoutCARequest:
+      type: object
+      required:
+        - certificatePem
+      title: RegisterCertificateWithoutCARequest
+      properties:
+        certificatePem:
+          $ref: '#/components/schemas/CertificatePem'
+          description: 'The certificate data, in PEM format.'
+        status:
+          $ref: '#/components/schemas/CertificateStatus'
+          description: The status of the register certificate request.
     RegisterThingRequest:
       type: object
       required:
@@ -21226,7 +21445,7 @@ components:
           description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html">Provisioning Devices That Have Device Certificates</a> for more information.'
         parameters:
           $ref: '#/components/schemas/Parameters'
-          description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+          description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html">Provisioning Templates</a> for more information.'
     ResourceArns:
       type: object
       additionalProperties:
@@ -21255,6 +21474,8 @@ components:
     RemoveAuthorizerConfig:
       type: boolean
     RemoveAutoRegistration:
+      type: boolean
+    RemoveHook:
       type: boolean
     RemoveThingFromBillingGroupRequest:
       type: object
@@ -21584,6 +21805,8 @@ components:
       type: integer
     TagValue:
       type: string
+      minLength: 1
+      maxLength: 256
     TagKeyList:
       type: array
       items:
@@ -21653,7 +21876,7 @@ components:
           description: The token returned by your custom authentication service.
         tokenSignature:
           $ref: '#/components/schemas/TokenSignature'
-          description: The signature made with the token and your custom authentication service's private key.
+          description: The signature made with the token and your custom authentication service's private key. This value must be Base-64-encoded.
         httpContext:
           $ref: '#/components/schemas/HttpContext'
           description: Specifies a test HTTP authorization request.
@@ -21985,6 +22208,12 @@ components:
         provisioningRoleArn:
           $ref: '#/components/schemas/RoleArn'
           description: The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
+        preProvisioningHook:
+          $ref: '#/components/schemas/ProvisioningHook'
+          description: Updates the pre-provisioning hook template.
+        removePreProvisioningHook:
+          $ref: '#/components/schemas/RemoveHook'
+          description: Removes pre-provisioning hook template.
     UpdateRoleAliasRequest:
       type: object
       title: UpdateRoleAliasRequest

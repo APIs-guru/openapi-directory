@@ -3,7 +3,7 @@ info:
   version: '2019-12-02'
   x-release: v4
   title: Schemas
-  description: AWS EventBridge Schemas
+  description: Amazon EventBridge Schema Registry
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -230,7 +230,7 @@ paths:
         - name: discovererIdPrefix
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
           schema:
             type: string
         - name: limit
@@ -242,13 +242,13 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
           schema:
             type: string
         - name: sourceArnPrefix
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only those ARNs that start with the specified prefix.
           schema:
             type: string
         - name: Limit
@@ -314,7 +314,7 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
       requestBody:
@@ -388,7 +388,7 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
     get:
@@ -441,7 +441,7 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
     put:
@@ -494,7 +494,7 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
       requestBody:
@@ -512,7 +512,7 @@ paths:
   '/v1/registries/name/{registryName}/schemas/name/{schemaName}':
     post:
       operationId: CreateSchema
-      description: Creates a schema definition.
+      description: <p>Creates a schema definition.</p> <note><p>Inactive schemas will be deleted after two years.</p></note>
       responses:
         '201':
           description: Success
@@ -548,13 +548,13 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
       requestBody:
@@ -568,7 +568,7 @@ paths:
                 - Type
               properties:
                 Content:
-                  description: ''
+                  description: The source of the schema definition.
                   type: string
                   minLength: 1
                   maxLength: 100000
@@ -583,7 +583,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 Type:
-                  description: ''
+                  description: The type of schema.
                   type: string
                   enum:
                     - OpenApi3
@@ -641,13 +641,13 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
     get:
@@ -700,24 +700,24 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: schemaVersion
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only this schema version.
           schema:
             type: string
     put:
       operationId: UpdateSchema
-      description: Updates the schema definition
+      description: <p>Updates the schema definition</p> <note><p>Inactive schemas will be deleted after two years.</p></note>
       responses:
         '200':
           description: Success
@@ -759,13 +759,13 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
       requestBody:
@@ -842,7 +842,7 @@ paths:
         - name: discovererId
           in: path
           required: true
-          description: ''
+          description: The ID of the discoverer.
           schema:
             type: string
     parameters:
@@ -903,7 +903,7 @@ paths:
         - name: discovererId
           in: path
           required: true
-          description: ''
+          description: The ID of the discoverer.
           schema:
             type: string
     put:
@@ -956,7 +956,7 @@ paths:
         - name: discovererId
           in: path
           required: true
-          description: ''
+          description: The ID of the discoverer.
           schema:
             type: string
       requestBody:
@@ -971,6 +971,191 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 256
+  /v1/policy:
+    delete:
+      operationId: DeleteResourcePolicy
+      description: Delete the resource-based policy attached to the specified registry.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: query
+          required: false
+          description: The name of the registry.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetResourcePolicy
+      description: Retrieves the resource-based policy attached to a given registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourcePolicyResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: query
+          required: false
+          description: The name of the registry.
+          schema:
+            type: string
+    put:
+      operationId: PutResourcePolicy
+      description: The name of the policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePolicyResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: registryName
+          in: query
+          required: false
+          description: The name of the registry.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  description: The resource-based policy.
+                  type: string
+                RevisionId:
+                  description: The revision ID of the policy.
+                  type: string
   '/v1/registries/name/{registryName}/schemas/name/{schemaName}/version/{schemaVersion}':
     delete:
       operationId: DeleteSchemaVersion
@@ -1018,19 +1203,19 @@ paths:
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: schemaVersion
           in: path
           required: true
-          description: ''
+          description: The version number of the schema
           schema:
             type: string
     parameters:
@@ -1092,25 +1277,25 @@ paths:
         - name: language
           in: path
           required: true
-          description: ''
+          description: The language of the code binding.
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: schemaVersion
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only this schema version.
           schema:
             type: string
     parameters:
@@ -1177,25 +1362,25 @@ paths:
         - name: language
           in: path
           required: true
-          description: ''
+          description: The language of the code binding.
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: schemaVersion
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only this schema version.
           schema:
             type: string
   '/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}/source':
@@ -1249,25 +1434,25 @@ paths:
         - name: language
           in: path
           required: true
-          description: ''
+          description: The language of the code binding.
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: schemaVersion
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only this schema version.
           schema:
             type: string
     parameters:
@@ -1331,7 +1516,7 @@ paths:
                 - Type
               properties:
                 Events:
-                  description: An array of strings that
+                  description: An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
                   type: array
                   items:
                     $ref: '#/components/schemas/GetDiscoveredSchemaVersionItemInput'
@@ -1401,19 +1586,19 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
           schema:
             type: string
         - name: registryNamePrefix
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only those registry names that start with the specified prefix.
           schema:
             type: string
         - name: scope
           in: query
           required: false
-          description: ''
+          description: 'Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.'
           schema:
             type: string
         - name: Limit
@@ -1493,19 +1678,19 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaName
           in: path
           required: true
-          description: ''
+          description: The name of the schema.
           schema:
             type: string
         - name: Limit
@@ -1579,19 +1764,19 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: schemaNamePrefix
           in: query
           required: false
-          description: ''
+          description: Specifying this limits the results to only those schema names that start with the specified prefix.
           schema:
             type: string
         - name: Limit
@@ -1653,7 +1838,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The ARN of the resource.
           schema:
             type: string
     parameters:
@@ -1698,7 +1883,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The ARN of the resource.
           schema:
             type: string
       requestBody:
@@ -1715,76 +1900,6 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
-  /slr-deletion/lock:
-    post:
-      operationId: LockServiceLinkedRole
-      description: ''
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LockServiceLinkedRoleResponse'
-        '480':
-          description: ServiceUnavailableException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceUnavailableException'
-        '481':
-          description: BadRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestException'
-        '482':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '483':
-          description: InternalServerErrorException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerErrorException'
-        '484':
-          description: ForbiddenException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ForbiddenException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - RoleArn
-                - Timeout
-              properties:
-                RoleArn:
-                  description: ''
-                  type: string
-                  minLength: 1
-                  maxLength: 1600
-                Timeout:
-                  description: ''
-                  type: integer
-                  minimum: 1
-                  maximum: 29000
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/registries/name/{registryName}/schemas/search#keywords':
     get:
       operationId: SearchSchemas
@@ -1830,7 +1945,7 @@ paths:
         - name: keywords
           in: query
           required: true
-          description: ''
+          description: Specifying this limits the results to only schemas that include the provided keywords.
           schema:
             type: string
         - name: limit
@@ -1842,13 +1957,13 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ''
+          description: 'The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.'
           schema:
             type: string
         - name: registryName
           in: path
           required: true
-          description: ''
+          description: The name of the registry.
           schema:
             type: string
         - name: Limit
@@ -1922,7 +2037,7 @@ paths:
         - name: discovererId
           in: path
           required: true
-          description: ''
+          description: The ID of the discoverer.
           schema:
             type: string
     parameters:
@@ -1984,73 +2099,9 @@ paths:
         - name: discovererId
           in: path
           required: true
-          description: ''
+          description: The ID of the discoverer.
           schema:
             type: string
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /slr-deletion/unlock:
-    post:
-      operationId: UnlockServiceLinkedRole
-      description: ''
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnlockServiceLinkedRoleResponse'
-        '480':
-          description: ServiceUnavailableException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceUnavailableException'
-        '481':
-          description: BadRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestException'
-        '482':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '483':
-          description: InternalServerErrorException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerErrorException'
-        '484':
-          description: ForbiddenException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ForbiddenException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - RoleArn
-              properties:
-                RoleArn:
-                  description: ''
-                  type: string
-                  minLength: 1
-                  maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2094,13 +2145,13 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The ARN of the resource.
           schema:
             type: string
         - name: tagKeys
           in: query
           required: true
-          description: ''
+          description: Keys of key-value pairs.
           schema:
             type: array
             items:
@@ -2293,6 +2344,7 @@ components:
       properties:
         Content:
           $ref: '#/components/schemas/__string'
+          description: The source of the schema definition.
         Description:
           $ref: '#/components/schemas/__string'
           description: The description of the schema.
@@ -2327,10 +2379,20 @@ components:
       properties:
         Content:
           $ref: '#/components/schemas/__string'
+          description: The source of the schema definition.
     GetDiscoveredSchemaVersionItemInput:
       type: string
       minLength: 1
       maxLength: 100000
+    GetResourcePolicyResponse:
+      type: object
+      properties:
+        Policy:
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
+        RevisionId:
+          $ref: '#/components/schemas/__string'
+          description: The revision ID.
     ListDiscoverersResponse:
       type: object
       properties:
@@ -2369,20 +2431,9 @@ components:
           description: An array of schema summaries.
     ListTagsForResourceResponse:
       type: object
-      required:
-        - Tags
       properties:
         Tags:
           $ref: '#/components/schemas/Tags'
-    LockServiceLinkedRoleResponse:
-      type: object
-      properties:
-        CanBeDeleted:
-          $ref: '#/components/schemas/__boolean'
-        ReasonOfFailure:
-          $ref: '#/components/schemas/__stringMin1Max1600'
-        RelatedResources:
-          $ref: '#/components/schemas/__listOfDiscovererSummary'
     PutCodeBindingResponse:
       type: object
       properties:
@@ -2399,6 +2450,16 @@ components:
           $ref: '#/components/schemas/CodeGenerationStatus'
           description: The current status of code binding generation.
     GoneException: {}
+    PutResourcePolicyResponse:
+      type: object
+      properties:
+        Policy:
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
+        RevisionId:
+          $ref: '#/components/schemas/__string'
+          description: The revision ID of the policy.
+    PreconditionFailedException: {}
     SearchSchemasResponse:
       type: object
       properties:
@@ -2426,9 +2487,6 @@ components:
         State:
           $ref: '#/components/schemas/DiscovererState'
           description: The state of the discoverer.
-    UnlockServiceLinkedRoleResponse:
-      type: object
-      properties: {}
     UpdateDiscovererResponse:
       type: object
       properties:
@@ -2525,6 +2583,7 @@ components:
         Tags:
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
+      description: ''
     DiscovererState:
       type: string
       enum:
@@ -2557,6 +2616,7 @@ components:
       properties:
         Content:
           $ref: '#/components/schemas/__stringMin1Max100000'
+          description: The source of the schema definition.
         Description:
           $ref: '#/components/schemas/__stringMin0Max256'
           description: A description of the schema.
@@ -2565,6 +2625,7 @@ components:
           description: Tags associated with the schema.
         Type:
           $ref: '#/components/schemas/Type'
+          description: The type of schema.
     __timestampIso8601:
       type: string
       format: date-time
@@ -2575,6 +2636,10 @@ components:
     DeleteRegistryRequest:
       type: object
       title: DeleteRegistryRequest
+      properties: {}
+    DeleteResourcePolicyRequest:
+      type: object
+      title: DeleteResourcePolicyRequest
       properties: {}
     DeleteSchemaRequest:
       type: object
@@ -2614,6 +2679,7 @@ components:
           description: The ARN of the event bus.
         State:
           $ref: '#/components/schemas/DiscovererState'
+          description: The state of the discoverer.
         Tags:
           $ref: '#/components/schemas/Tags'
           description: Tags associated with the resource.
@@ -2638,10 +2704,14 @@ components:
       properties:
         Events:
           $ref: '#/components/schemas/__listOfGetDiscoveredSchemaVersionItemInput'
-          description: An array of strings that
+          description: An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
         Type:
           $ref: '#/components/schemas/Type'
           description: The type of event.
+    GetResourcePolicyRequest:
+      type: object
+      title: GetResourcePolicyRequest
+      properties: {}
     __integer:
       type: integer
     ListDiscoverersRequest:
@@ -2680,31 +2750,23 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
-    __stringMin1Max1600:
-      type: string
-      minLength: 1
-      maxLength: 1600
-    __integerMin1Max29000:
-      type: integer
-      minimum: 1
-      maximum: 29000
-    LockServiceLinkedRoleRequest:
-      type: object
-      required:
-        - Timeout
-        - RoleArn
-      title: LockServiceLinkedRoleRequest
-      properties:
-        RoleArn:
-          $ref: '#/components/schemas/__stringMin1Max1600'
-        Timeout:
-          $ref: '#/components/schemas/__integerMin1Max29000'
-    __boolean:
-      type: boolean
     PutCodeBindingRequest:
       type: object
       title: PutCodeBindingRequest
       properties: {}
+    PutResourcePolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: PutResourcePolicyRequest
+      properties:
+        Policy:
+          $ref: '#/components/schemas/__string'
+          description: The resource-based policy.
+        RevisionId:
+          $ref: '#/components/schemas/__string'
+          description: The revision ID of the policy.
+      description: The name of the policy.
     RegistrySummary:
       type: object
       properties:
@@ -2774,6 +2836,7 @@ components:
       properties:
         CreatedDate:
           $ref: '#/components/schemas/__timestampIso8601'
+          description: The date the schema version was created.
         SchemaVersion:
           $ref: '#/components/schemas/__string'
           description: The version number of the schema
@@ -2801,14 +2864,8 @@ components:
       properties:
         Tags:
           $ref: '#/components/schemas/Tags'
-    UnlockServiceLinkedRoleRequest:
-      type: object
-      required:
-        - RoleArn
-      title: UnlockServiceLinkedRoleRequest
-      properties:
-        RoleArn:
-          $ref: '#/components/schemas/__stringMin1Max1600'
+          description: Tags associated with the resource.
+      description: ''
     __listOf__string:
       type: array
       items:
@@ -2831,6 +2888,7 @@ components:
         Description:
           $ref: '#/components/schemas/__stringMin0Max256'
           description: The description of the registry to update.
+      description: Updates the registry.
     __stringMin0Max36:
       type: string
       minLength: 0

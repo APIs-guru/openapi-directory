@@ -2424,6 +2424,9 @@ components:
         MpdSettings:
           $ref: '#/components/schemas/MpdSettings'
           description: Settings for MP4 segments in DASH
+        MxfSettings:
+          $ref: '#/components/schemas/MxfSettings'
+          description: MXF settings
       description: Container specific settings.
     VideoDescription:
       type: object
@@ -3903,7 +3906,7 @@ components:
       properties:
         StylePassthrough:
           $ref: '#/components/schemas/ImscStylePassthrough'
-          description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
+          description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
       description: Settings specific to IMSC caption outputs.
     SccDestinationSettings:
       type: object
@@ -3927,7 +3930,7 @@ components:
       properties:
         StylePassthrough:
           $ref: '#/components/schemas/TtmlStylePassthrough'
-          description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.'
+          description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.'
       description: 'Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).'
     CaptionSourceSettings:
       type: object
@@ -4651,6 +4654,13 @@ components:
           $ref: '#/components/schemas/MpdScte35Source'
           description: Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output.
       description: Settings for MP4 segments in DASH
+    MxfSettings:
+      type: object
+      properties:
+        AfdSignaling:
+          $ref: '#/components/schemas/MxfAfdSignaling'
+          description: 'Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don''t copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output''s video encoding settings.'
+      description: MXF settings
     __listOfHopDestination:
       type: array
       items:
@@ -6737,7 +6747,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
-      description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
+      description: 'Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.'
     __mapOfAudioSelectorGroup:
       type: object
       additionalProperties:
@@ -7758,6 +7768,12 @@ components:
           $ref: '#/components/schemas/MsSmoothManifestEncoding'
           description: Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16.
       description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS.
+    MxfAfdSignaling:
+      type: string
+      enum:
+        - NO_COPY
+        - COPY_FROM_VIDEO
+      description: 'Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don''t copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output''s video encoding settings.'
     __integerMin0Max0:
       type: integer
       minimum: 0
@@ -8278,7 +8294,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
-      description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.'
+      description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
