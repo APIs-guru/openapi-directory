@@ -13,7 +13,7 @@ info:
     url: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   termsOfService: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   title: Tweets and Users
-  version: '2.3'
+  version: '2.4'
   x-apisguru-categories:
     - social
   x-logo:
@@ -661,6 +661,7 @@ components:
         resource_type:
           enum:
             - tweet
+            - media
           type: string
         section:
           enum:
@@ -1030,6 +1031,7 @@ components:
           enum:
             - user
             - tweet
+            - media
           type: string
         type:
           enum:
@@ -1052,6 +1054,7 @@ components:
         resource_type:
           enum:
             - tweet
+            - media
           type: string
         section:
           enum:
