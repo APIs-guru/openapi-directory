@@ -104,6 +104,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The EFS endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /2015-02-01/access-points:
     post:
@@ -1441,6 +1442,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
+  '/2015-02-01/resource-tags/{ResourceId}#tagKeys':
     delete:
       operationId: UntagResource
       description: '<p>Removes tags from an EFS resource. You can remove tags from EFS file systems and access points using this API operation.</p> <p>This operation requires permissions for the <code>elasticfilesystem:UntagResource</code> action.</p>'
@@ -1478,20 +1480,24 @@ paths:
           description: Specifies the EFS resource that you want to remove tags from.
           schema:
             type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                TagKeys:
-                  description: 'The keys of the key:value tag pairs that you want to remove from the specified EFS resource.'
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/TagKey'
-                  minItems: 1
-                  maxItems: 50
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'The keys of the key:value tag pairs that you want to remove from the specified EFS resource.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2260,10 +2266,7 @@ components:
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
-      properties:
-        TagKeys:
-          $ref: '#/components/schemas/TagKeys'
-          description: 'The keys of the key:value tag pairs that you want to remove from the specified EFS resource.'
+      properties: {}
     UpdateFileSystemRequest:
       type: object
       title: UpdateFileSystemRequest
