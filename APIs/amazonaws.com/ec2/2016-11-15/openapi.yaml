@@ -4553,7 +4553,7 @@ paths:
         - name: LogFormat
           in: query
           required: false
-          description: '<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow Log Records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the AWS CLI, use single quotation marks ('' '') to surround the parameter value.</p> <p>Only applicable to flow logs that are published to an Amazon S3 bucket.</p>'
+          description: '<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow Log Records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the AWS CLI, use single quotation marks ('' '') to surround the parameter value.</p>'
           schema:
             type: string
         - name: TagSpecification
@@ -24682,7 +24682,7 @@ paths:
     get:
       x-aws-operation-name: DisableVpcClassicLinkDnsSupport
       operationId: GET_DisableVpcClassicLinkDnsSupport
-      description: 'Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it''s linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: '<p>Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it''s linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>'
       responses:
         '200':
           description: Success
@@ -24719,7 +24719,7 @@ paths:
     post:
       x-aws-operation-name: DisableVpcClassicLinkDnsSupport
       operationId: POST_DisableVpcClassicLinkDnsSupport
-      description: 'Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it''s linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: '<p>Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it''s linked. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>'
       responses:
         '200':
           description: Success
@@ -24956,7 +24956,7 @@ paths:
     get:
       x-aws-operation-name: DisassociateRouteTable
       operationId: GET_DisassociateRouteTable
-      description: '<p>Disassociates a subnet from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC''s main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Disassociates a subnet or gateway from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC''s main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -24964,7 +24964,7 @@ paths:
         - name: AssociationId
           in: query
           required: true
-          description: The association ID representing the current association between the route table and subnet.
+          description: The association ID representing the current association between the route table and subnet or gateway.
           schema:
             type: string
         - name: DryRun
@@ -24998,7 +24998,7 @@ paths:
     post:
       x-aws-operation-name: DisassociateRouteTable
       operationId: POST_DisassociateRouteTable
-      description: '<p>Disassociates a subnet from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC''s main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Disassociates a subnet or gateway from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC''s main route table. For more information about route tables, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -25733,7 +25733,7 @@ paths:
     get:
       x-aws-operation-name: EnableVpcClassicLinkDnsSupport
       operationId: GET_EnableVpcClassicLinkDnsSupport
-      description: 'Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it''s linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: '<p>Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it''s linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>'
       responses:
         '200':
           description: Success
@@ -25770,7 +25770,7 @@ paths:
     post:
       x-aws-operation-name: EnableVpcClassicLinkDnsSupport
       operationId: POST_EnableVpcClassicLinkDnsSupport
-      description: 'Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it''s linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: '<p>Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it''s linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify a VPC ID in the request.</p>'
       responses:
         '200':
           description: Success
@@ -45328,7 +45328,7 @@ components:
           description: '<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for <code>LogDestinationType</code>.</p> <p>If <code>LogDestinationType</code> is not specified or <code>cloud-watch-logs</code>, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For example, to publish to a log group called <code>my-logs</code>, specify <code>arn:aws:logs:us-east-1:123456789012:log-group:my-logs</code>. Alternatively, use <code>LogGroupName</code> instead.</p> <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>'
         LogFormat:
           $ref: '#/components/schemas/String'
-          description: '<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow Log Records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the AWS CLI, use single quotation marks ('' '') to surround the parameter value.</p> <p>Only applicable to flow logs that are published to an Amazon S3 bucket.</p>'
+          description: '<p>The fields to include in the flow log record, in the order in which they should appear. For a list of available fields, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records">Flow Log Records</a>. If you omit this parameter, the flow log is created using the default format. If you specify this parameter, you must specify at least one field.</p> <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For the AWS CLI, use single quotation marks ('' '') to surround the parameter value.</p>'
         TagSpecifications:
           $ref: '#/components/schemas/TagSpecificationList'
           description: The tags to apply to the flow logs.
@@ -51747,7 +51747,7 @@ components:
       properties:
         AssociationId:
           $ref: '#/components/schemas/RouteTableAssociationId'
-          description: The association ID representing the current association between the route table and subnet.
+          description: The association ID representing the current association between the route table and subnet or gateway.
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
