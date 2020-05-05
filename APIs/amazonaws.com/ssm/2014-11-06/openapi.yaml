@@ -109,7 +109,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.AddTagsToResource':
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging your Amazon EC2 resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to and are interpreted strictly as a string of characters. </p> <p>For more information about using tags with EC2 instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging your Amazon EC2 resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -7249,7 +7249,7 @@ components:
           description: 'One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.'
         Source:
           $ref: '#/components/schemas/OpsItemSource'
-          description: '<p>The origin of the OpsItem, such as EC2 or Systems Manager.</p> <note> <p>The source name can''t contain the following strings: aws, amazon, and amzn. </p> </note>'
+          description: '<p>The origin of the OpsItem, such as Amazon EC2 or Systems Manager.</p> <note> <p>The source name can''t contain the following strings: aws, amazon, and amzn. </p> </note>'
         Title:
           $ref: '#/components/schemas/OpsItemTitle'
           description: A short heading that describes the nature of the OpsItem and the impacted resource.
@@ -9649,7 +9649,6 @@ components:
       required:
         - Name
         - Value
-        - Type
       title: PutParameterRequest
       properties:
         Name:
@@ -9682,6 +9681,9 @@ components:
         Policies:
           $ref: '#/components/schemas/ParameterPolicies'
           description: '<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types:</p> <p>Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the <i>parameter</i> does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter.</p> <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours.</p> <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed.</p> <p>All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html">Assigning parameter policies</a>. </p>'
+        DataType:
+          $ref: '#/components/schemas/ParameterDataType'
+          description: '<p>The data type for a String parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a String parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value you provide against that data type. The required format is <code>ami-12345abcdeEXAMPLE</code>. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
     ParameterLimitExceeded: {}
     ParameterAlreadyExists: {}
     HierarchyLevelLimitExceededException: {}
@@ -13463,6 +13465,9 @@ components:
         ARN:
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) of the parameter.
+        DataType:
+          $ref: '#/components/schemas/ParameterDataType'
+          description: 'The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The default is <code>text</code>.'
       description: An Systems Manager parameter in Parameter Store.
     GetParametersByPathMaxResults:
       type: integer
@@ -14844,6 +14849,10 @@ components:
         - String
         - StringList
         - SecureString
+    ParameterDataType:
+      type: string
+      minLength: 0
+      maxLength: 128
     ParameterDescription:
       type: string
       minLength: 0
@@ -14902,6 +14911,9 @@ components:
         Policies:
           $ref: '#/components/schemas/ParameterPolicyList'
           description: '<p>Information about the policies assigned to a parameter.</p> <p> <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html">Assigning parameter policies</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        DataType:
+          $ref: '#/components/schemas/ParameterDataType'
+          description: 'The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The default is <code>text</code>.'
       description: Information about parameter usage.
     ParameterInlinePolicy:
       type: object
@@ -14953,6 +14965,9 @@ components:
         Policies:
           $ref: '#/components/schemas/ParameterPolicyList'
           description: A list of policies associated with a parameter.
+        DataType:
+          $ref: '#/components/schemas/ParameterDataType'
+          description: 'The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The default is <code>text</code>.'
       description: Metadata includes information like the ARN of the last user and the date/time the parameter was last used.
     ParameterName:
       type: string
@@ -14962,7 +14977,7 @@ components:
       maxLength: 4096
     ParameterStringFilterKey:
       type: string
-      pattern: 'tag:.+|Name|Type|KeyId|Path|Label|Tier'
+      pattern: 'tag:.+|Name|Type|KeyId|Path|Label|Tier|DataType'
       minLength: 1
       maxLength: 132
     ParameterStringQueryOption:
