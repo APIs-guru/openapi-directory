@@ -268,6 +268,129 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Gets the set of key-value pairs (metadata) that are used to manage the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - com.amazonaws.codestar.connections.CodeStar_connections_20191201.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.TagResource':
+    post:
+      operationId: TagResource
+      description: Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - com.amazonaws.codestar.connections.CodeStar_connections_20191201.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes tags from an AWS resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - com.amazonaws.codestar.connections.CodeStar_connections_20191201.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -328,6 +451,9 @@ components:
         ConnectionArn:
           $ref: '#/components/schemas/ConnectionArn'
           description: <p>The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.</p> <note> <p>The ARN is never reused if the connection is deleted.</p> </note>
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Specifies the tags applied to the resource.
     CreateConnectionInput:
       type: object
       required:
@@ -341,6 +467,9 @@ components:
         ConnectionName:
           $ref: '#/components/schemas/ConnectionName'
           description: The name of the connection to be created. The name must be unique in the calling AWS account.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The key-value pair to use when tagging the resource.
     LimitExceededException: {}
     DeleteConnectionOutput:
       type: object
@@ -392,11 +521,62 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The token that was returned from the previous <code>ListConnections</code> call, which can be used to return the next set of connections in the list.'
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of tag key and value pairs associated with the specified resource.
+    ListTagsForResourceInput:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceInput
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: 'The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.'
+    TagResourceOutput:
+      type: object
+      properties: {}
+    TagResourceInput:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      title: TagResourceInput
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tags you want to modify or add to the resource.
+    UntagResourceOutput:
+      type: object
+      properties: {}
+    UntagResourceInput:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      title: UntagResourceInput
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource to remove tags from.
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+          description: The list of keys for the tags to be removed from the resource.
     AccountId:
       type: string
       pattern: '[0-9]{12}'
       minLength: 12
       maxLength: 12
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
     ConnectionName:
       type: string
       minLength: 1
@@ -430,23 +610,55 @@ components:
           description: 'The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.'
         OwnerAccountId:
           $ref: '#/components/schemas/AccountId'
-          description: 'The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.'
+          description: 'The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.'
         ConnectionStatus:
           $ref: '#/components/schemas/ConnectionStatus'
           description: 'The current status of the connection. '
-      description: The configuration that allows a service such as CodePipeline to connect to a third-party code repository.
+      description: '<p>The AWS::CodeStarConnections::Connection resource can be used to connect external source providers with services like AWS CodePipeline.</p> <p>Note: A connection created through CloudFormation is in `PENDING` status by default. You can make its status `AVAILABLE` by editing the connection in the CodePipeline console.</p>'
     ConnectionList:
       type: array
       items:
         $ref: '#/components/schemas/Connection'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     MaxResults:
       type: integer
-      minimum: 1
-      maximum: 50
+      minimum: 0
+      maximum: 5000
     NextToken:
       type: string
-      pattern: '[a-zA-Z0-9=\-\\/]+'
       minLength: 1
       maxLength: 1024
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: The tag's key.
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: The tag's value.
+      description: <p>A tag is a key-value pair that is used to manage the resource.</p> <p>This tag is available for use by AWS services that support tags.</p>
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
 security:
   - hmac: []
