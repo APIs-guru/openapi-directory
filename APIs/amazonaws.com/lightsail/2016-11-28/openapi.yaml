@@ -484,7 +484,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.CloseInstancePublicPorts':
     post:
       operationId: CloseInstancePublicPorts
-      description: '<p>Closes the public ports on a specific Amazon Lightsail instance.</p> <p>The <code>close instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Closes ports for a specific Amazon Lightsail instance.</p> <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4705,7 +4705,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.GetInstancePortStates':
     post:
       operationId: GetInstancePortStates
-      description: 'Returns the port states for a specific virtual private server, or <i>instance</i>.'
+      description: 'Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.'
       responses:
         '200':
           description: Success
@@ -7030,7 +7030,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.OpenInstancePublicPorts':
     post:
       operationId: OpenInstancePublicPorts
-      description: '<p>Adds public ports to an Amazon Lightsail instance.</p> <p>The <code>open instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol.</p> <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -7249,7 +7249,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.PutInstancePublicPorts':
     post:
       operationId: PutInstancePublicPorts
-      description: '<p>Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.</p> <p>The <code>put instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open ports.</p> <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -7549,7 +7549,7 @@ paths:
   '/#X-Amz-Target=Lightsail_20161128.SendContactMethodVerification':
     post:
       operationId: SendContactMethodVerification
-      description: '<p>Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p> <p>A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.</p> <important> <p>Notifications are not sent to an email contact method until after it is verified, and confirmed as valid.</p> </important>'
+      description: '<p>Sends a verification request to an email contact method to ensure it''s owned by the requester. SMS contact methods don''t need to be verified.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p> <p>A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.</p> <important> <p>Notifications are not sent to an email contact method until after it is verified, and confirmed as valid.</p> </important>'
       responses:
         '200':
           description: Success
@@ -8566,7 +8566,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     AllocateStaticIpRequest:
       type: object
       required:
@@ -8588,7 +8588,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     AttachDiskRequest:
       type: object
       required:
@@ -8611,7 +8611,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     AttachInstancesToLoadBalancerRequest:
       type: object
       required:
@@ -8630,7 +8630,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: '<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p> <p>These SSL/TLS certificates are only usable by Lightsail load balancers. You can''t get the certificate and use it for another purpose.</p>'
+          description: '<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p> <p>These SSL/TLS certificates are only usable by Lightsail load balancers. You can''t get the certificate and use it for another purpose.</p>'
     AttachLoadBalancerTlsCertificateRequest:
       type: object
       required:
@@ -8649,7 +8649,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     AttachStaticIpRequest:
       type: object
       required:
@@ -8668,7 +8668,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CloseInstancePublicPortsRequest:
       type: object
       required:
@@ -8678,16 +8678,16 @@ components:
       properties:
         portInfo:
           $ref: '#/components/schemas/PortInfo'
-          description: Information about the public port you are trying to close.
+          description: An object to describe the ports to close for the specified instance.
         instanceName:
           $ref: '#/components/schemas/ResourceName'
-          description: The name of the instance on which you're attempting to close the public ports.
+          description: The name of the instance for which to close ports.
     CopySnapshotResult:
       type: object
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CopySnapshotRequest:
       type: object
       required:
@@ -8718,7 +8718,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateCloudFormationStackRequest:
       type: object
       required:
@@ -8733,7 +8733,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateContactMethodRequest:
       type: object
       required:
@@ -8746,13 +8746,13 @@ components:
           description: '<p>The protocol of the contact method, such as <code>Email</code> or <code>SMS</code> (text messaging).</p> <p>The <code>SMS</code> protocol is supported only in the following AWS Regions.</p> <ul> <li> <p>US East (N. Virginia) (<code>us-east-1</code>)</p> </li> <li> <p>US West (Oregon) (<code>us-west-2</code>)</p> </li> <li> <p>Europe (Ireland) (<code>eu-west-1</code>)</p> </li> <li> <p>Asia Pacific (Tokyo) (<code>ap-northeast-1</code>)</p> </li> <li> <p>Asia Pacific (Singapore) (<code>ap-southeast-1</code>)</p> </li> <li> <p>Asia Pacific (Sydney) (<code>ap-southeast-2</code>)</p> </li> </ul> <p>For a list of countries/regions where SMS text messages can be sent, and the latest AWS Regions where SMS text messaging is supported, see <a href="https://docs.aws.amazon.com/sns/latest/dg/sns-supported-regions-countries.html">Supported Regions and Countries</a> in the <i>Amazon SNS Developer Guide</i>.</p> <p>For more information about notifications in Amazon Lightsail, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>'
         contactEndpoint:
           $ref: '#/components/schemas/StringMax256'
-          description: '<p>The destination of the contact method, such as an email address or a mobile phone number.</p> <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> in Wikipedia.</p>'
+          description: '<p>The destination of the contact method, such as an email address or a mobile phone number.</p> <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> on <i>Wikipedia</i>.</p>'
     CreateDiskResult:
       type: object
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateDiskRequest:
       type: object
       required:
@@ -8781,7 +8781,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateDiskFromSnapshotRequest:
       type: object
       required:
@@ -8822,7 +8822,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateDiskSnapshotRequest:
       type: object
       required:
@@ -8846,7 +8846,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateDomainRequest:
       type: object
       required:
@@ -8864,7 +8864,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateDomainEntryRequest:
       type: object
       required:
@@ -8883,7 +8883,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateInstanceSnapshotRequest:
       type: object
       required:
@@ -8905,7 +8905,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateInstancesRequest:
       type: object
       required:
@@ -8948,7 +8948,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateInstancesFromSnapshotRequest:
       type: object
       required:
@@ -9007,7 +9007,7 @@ components:
           description: A base64-encoded RSA private key.
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateKeyPairRequest:
       type: object
       required:
@@ -9025,7 +9025,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateLoadBalancerRequest:
       type: object
       required:
@@ -9059,7 +9059,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateLoadBalancerTlsCertificateRequest:
       type: object
       required:
@@ -9088,7 +9088,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateRelationalDatabaseRequest:
       type: object
       required:
@@ -9137,7 +9137,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateRelationalDatabaseFromSnapshotRequest:
       type: object
       required:
@@ -9176,7 +9176,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     CreateRelationalDatabaseSnapshotRequest:
       type: object
       required:
@@ -9198,7 +9198,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteAlarmRequest:
       type: object
       required:
@@ -9213,7 +9213,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteAutoSnapshotRequest:
       type: object
       required:
@@ -9232,7 +9232,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteContactMethodRequest:
       type: object
       required:
@@ -9247,7 +9247,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteDiskRequest:
       type: object
       required:
@@ -9265,7 +9265,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteDiskSnapshotRequest:
       type: object
       required:
@@ -9280,7 +9280,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteDomainRequest:
       type: object
       required:
@@ -9295,7 +9295,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteDomainEntryRequest:
       type: object
       required:
@@ -9314,7 +9314,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteInstanceRequest:
       type: object
       required:
@@ -9332,7 +9332,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteInstanceSnapshotRequest:
       type: object
       required:
@@ -9347,7 +9347,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteKeyPairRequest:
       type: object
       required:
@@ -9362,7 +9362,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteKnownHostKeysRequest:
       type: object
       required:
@@ -9377,7 +9377,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteLoadBalancerRequest:
       type: object
       required:
@@ -9392,7 +9392,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteLoadBalancerTlsCertificateRequest:
       type: object
       required:
@@ -9414,7 +9414,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteRelationalDatabaseRequest:
       type: object
       required:
@@ -9435,7 +9435,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DeleteRelationalDatabaseSnapshotRequest:
       type: object
       required:
@@ -9450,7 +9450,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DetachDiskRequest:
       type: object
       required:
@@ -9465,7 +9465,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DetachInstancesFromLoadBalancerRequest:
       type: object
       required:
@@ -9484,7 +9484,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DetachStaticIpRequest:
       type: object
       required:
@@ -9499,7 +9499,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     DisableAddOnRequest:
       type: object
       required:
@@ -9531,7 +9531,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     EnableAddOnRequest:
       type: object
       required:
@@ -9550,7 +9550,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     ExportSnapshotRequest:
       type: object
       required:
@@ -9854,7 +9854,7 @@ components:
           description: The name of the instance for which you want to get metrics data.
         metricName:
           $ref: '#/components/schemas/InstanceMetricName'
-          description: '<p>The metric for which you want to return information.</p> <p>Valid instance metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> — The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>NetworkIn</code> </b> — The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkOut</code> </b> — The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed</code> </b> — Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_Instance</code> </b> — Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_System</code> </b> — Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>'
+          description: '<p>The metric for which you want to return information.</p> <p>Valid instance metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> - The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>NetworkIn</code> </b> - The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkOut</code> </b> - The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed</code> </b> - Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_System</code> </b> - Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>'
         period:
           $ref: '#/components/schemas/MetricPeriod'
           description: '<p>The granularity, in seconds, of the returned data points.</p> <p>The <code>StatusCheckFailed</code>, <code>StatusCheckFailed_Instance</code>, and <code>StatusCheckFailed_System</code> instance metric data is available in 1-minute (60 seconds) granularity. All other instance metric data is available in 5-minute (300 seconds) granularity.</p>'
@@ -9866,16 +9866,16 @@ components:
           description: The end time of the time period.
         unit:
           $ref: '#/components/schemas/MetricUnit'
-          description: 'The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the <code>metricName</code> parameter.'
+          description: 'The unit for the metric data request. Valid units depend on the metric data being requested. For the valid units to specify with each available metric, see the <code>metricName</code> parameter.'
         statistics:
           $ref: '#/components/schemas/MetricStatisticList'
-          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
     GetInstancePortStatesResult:
       type: object
       properties:
         portStates:
           $ref: '#/components/schemas/InstancePortStateList'
-          description: Information about the port states resulting from your request.
+          description: An array of objects that describe the firewall port states for the specified instance.
     GetInstancePortStatesRequest:
       type: object
       required:
@@ -9884,7 +9884,7 @@ components:
       properties:
         instanceName:
           $ref: '#/components/schemas/ResourceName'
-          description: The name of the instance.
+          description: The name of the instance for which to return firewall port states.
     GetInstanceSnapshotResult:
       type: object
       properties:
@@ -10019,7 +10019,7 @@ components:
           description: The name of the load balancer.
         metricName:
           $ref: '#/components/schemas/LoadBalancerMetricName'
-          description: '<p>The metric for which you want to return information.</p> <p>Valid load balancer metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> — The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> — The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> — The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> — The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> — The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> — The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> — The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> — The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> — The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Seconds</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> — The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> — The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> — The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>'
+          description: '<p>The metric for which you want to return information.</p> <p>Valid load balancer metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Seconds</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>'
         period:
           $ref: '#/components/schemas/MetricPeriod'
           description: 'The granularity, in seconds, of the returned data points.'
@@ -10034,7 +10034,7 @@ components:
           description: 'The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the <code>metricName</code> parameter.'
         statistics:
           $ref: '#/components/schemas/MetricStatisticList'
-          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
     GetLoadBalancerTlsCertificatesResult:
       type: object
       properties:
@@ -10071,7 +10071,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     GetOperationRequest:
       type: object
       required:
@@ -10086,7 +10086,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
         nextPageToken:
           $ref: '#/components/schemas/string'
           description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperations</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
@@ -10102,7 +10102,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
         nextPageCount:
           deprecated: true
           $ref: '#/components/schemas/string'
@@ -10308,7 +10308,7 @@ components:
           description: The name of your database from which to get metric data.
         metricName:
           $ref: '#/components/schemas/RelationalDatabaseMetricName'
-          description: '<p>The metric for which you want to return information.</p> <p>Valid relational database metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value. All relational database metric data is available in 1-minute (60 seconds) granularity.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> — The percentage of CPU utilization currently in use on the database.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>DatabaseConnections</code> </b> — The number of database connections in use.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>DiskQueueDepth</code> </b> — The number of outstanding IOs (read/write requests) that are waiting to access the disk.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>FreeStorageSpace</code> </b> — The amount of available storage space.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkReceiveThroughput</code> </b> — The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> <li> <p> <b> <code>NetworkTransmitThroughput</code> </b> — The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> </ul>'
+          description: '<p>The metric for which you want to return information.</p> <p>Valid relational database metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value. All relational database metric data is available in 1-minute (60 seconds) granularity.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> - The percentage of CPU utilization currently in use on the database.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>DatabaseConnections</code> </b> - The number of database connections in use.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>DiskQueueDepth</code> </b> - The number of outstanding IOs (read/write requests) that are waiting to access the disk.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>FreeStorageSpace</code> </b> - The amount of available storage space.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkReceiveThroughput</code> </b> - The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> <li> <p> <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> </ul>'
         period:
           $ref: '#/components/schemas/MetricPeriod'
           description: '<p>The granularity, in seconds, of the returned data points.</p> <p>All relational database metric data is available in 1-minute (60 seconds) granularity.</p>'
@@ -10323,7 +10323,7 @@ components:
           description: 'The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the <code>metricName</code> parameter.'
         statistics:
           $ref: '#/components/schemas/MetricStatisticList'
-          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+          description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
     GetRelationalDatabaseParametersResult:
       type: object
       properties:
@@ -10428,7 +10428,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     ImportKeyPairRequest:
       type: object
       required:
@@ -10457,7 +10457,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     OpenInstancePublicPortsRequest:
       type: object
       required:
@@ -10467,16 +10467,16 @@ components:
       properties:
         portInfo:
           $ref: '#/components/schemas/PortInfo'
-          description: An array of key-value pairs containing information about the port mappings.
+          description: An object to describe the ports to open for the specified instance.
         instanceName:
           $ref: '#/components/schemas/ResourceName'
-          description: The name of the instance for which you want to open the public ports.
+          description: The name of the instance for which to open ports.
     PeerVpcResult:
       type: object
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     PeerVpcRequest:
       type: object
       title: PeerVpcRequest
@@ -10486,7 +10486,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     PutAlarmRequest:
       type: object
       required:
@@ -10521,13 +10521,13 @@ components:
           description: 'The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an "M out of N" alarm, this value (<code>datapointsToAlarm</code>) is the M.'
         treatMissingData:
           $ref: '#/components/schemas/TreatMissingData'
-          description: '<p>Sets how this alarm will handle missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> — Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> — Missing data is treated as missing.</p> </li> </ul> <p>If <code>treatMissingData</code> is not specified, the default behavior of <code>missing</code> is used.</p>'
+          description: '<p>Sets how this alarm will handle missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> - Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> - Missing data is treated as missing.</p> </li> </ul> <p>If <code>treatMissingData</code> is not specified, the default behavior of <code>missing</code> is used.</p>'
         contactProtocols:
           $ref: '#/components/schemas/ContactProtocolsList'
           description: '<p>The contact protocols to use for the alarm, such as <code>Email</code>, <code>SMS</code> (text messaging), or both.</p> <p>A notification is sent via the specified contact protocol if notifications are enabled for the alarm, and when the alarm is triggered.</p> <p>A notification is not sent if a contact protocol is not specified, if the specified contact protocol is not configured in the AWS Region, or if notifications are not enabled for the alarm using the <code>notificationEnabled</code> paramater.</p> <p>Use the <code>CreateContactMethod</code> action to configure a contact protocol in an AWS Region.</p>'
         notificationTriggers:
           $ref: '#/components/schemas/NotificationTriggerList'
-          description: '<p>The alarm states that trigger a notification.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul> <p>When you specify a notification trigger, the <code>ALARM</code> state must be specified. The <code>INSUFFICIENT_DATA</code> and <code>OK</code> states can be specified in addition to the <code>ALARM</code> state.</p> <ul> <li> <p>If you specify <code>OK</code> as an alarm trigger, a notification is sent when the alarm switches from an <code>ALARM</code> or <code>INSUFFICIENT_DATA</code> alarm state to an <code>OK</code> state. This can be thought of as an <i>all clear</i> alarm notification.</p> </li> <li> <p>If you specify <code>INSUFFICIENT_DATA</code> as the alarm trigger, a notification is sent when the alarm switches from an <code>OK</code> or <code>ALARM</code> alarm state to an <code>INSUFFICIENT_DATA</code> state.</p> </li> </ul> <p>The notification trigger defaults to <code>ALARM</code> if you don''t specify this parameter.</p>'
+          description: '<p>The alarm states that trigger a notification.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul> <p>When you specify a notification trigger, the <code>ALARM</code> state must be specified. The <code>INSUFFICIENT_DATA</code> and <code>OK</code> states can be specified in addition to the <code>ALARM</code> state.</p> <ul> <li> <p>If you specify <code>OK</code> as an alarm trigger, a notification is sent when the alarm switches from an <code>ALARM</code> or <code>INSUFFICIENT_DATA</code> alarm state to an <code>OK</code> state. This can be thought of as an <i>all clear</i> alarm notification.</p> </li> <li> <p>If you specify <code>INSUFFICIENT_DATA</code> as the alarm trigger, a notification is sent when the alarm switches from an <code>OK</code> or <code>ALARM</code> alarm state to an <code>INSUFFICIENT_DATA</code> state.</p> </li> </ul> <p>The notification trigger defaults to <code>ALARM</code> if you don''t specify this parameter.</p>'
         notificationEnabled:
           $ref: '#/components/schemas/boolean'
           description: <p>Indicates whether the alarm is enabled.</p> <p>Notifications are enabled by default if you don't specify this parameter.</p>
@@ -10536,7 +10536,7 @@ components:
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     PutInstancePublicPortsRequest:
       type: object
       required:
@@ -10546,16 +10546,16 @@ components:
       properties:
         portInfos:
           $ref: '#/components/schemas/PortInfoList'
-          description: Specifies information about the public port(s).
+          description: An array of objects to describe the ports to open for the specified instance.
         instanceName:
           $ref: '#/components/schemas/ResourceName'
-          description: The Lightsail instance name of the public port(s) you are setting.
+          description: The name of the instance for which to open ports.
     RebootInstanceResult:
       type: object
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     RebootInstanceRequest:
       type: object
       required:
@@ -10570,7 +10570,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     RebootRelationalDatabaseRequest:
       type: object
       required:
@@ -10585,7 +10585,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     ReleaseStaticIpRequest:
       type: object
       required:
@@ -10600,7 +10600,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     SendContactMethodVerificationRequest:
       type: object
       required:
@@ -10615,7 +10615,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     StartInstanceRequest:
       type: object
       required:
@@ -10630,7 +10630,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     StartRelationalDatabaseRequest:
       type: object
       required:
@@ -10645,7 +10645,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     StopInstanceRequest:
       type: object
       required:
@@ -10663,7 +10663,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     StopRelationalDatabaseRequest:
       type: object
       required:
@@ -10681,7 +10681,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     TagResourceRequest:
       type: object
       required:
@@ -10703,7 +10703,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     TestAlarmRequest:
       type: object
       required:
@@ -10716,13 +10716,13 @@ components:
           description: The name of the alarm to test.
         state:
           $ref: '#/components/schemas/AlarmState'
-          description: '<p>The alarm state to test.</p> <p>An alarm has the following possible states that can be tested:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul>'
+          description: '<p>The alarm state to test.</p> <p>An alarm has the following possible states that can be tested:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul>'
     UnpeerVpcResult:
       type: object
       properties:
         operation:
           $ref: '#/components/schemas/Operation'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UnpeerVpcRequest:
       type: object
       title: UnpeerVpcRequest
@@ -10732,7 +10732,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UntagResourceRequest:
       type: object
       required:
@@ -10754,7 +10754,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UpdateDomainEntryRequest:
       type: object
       required:
@@ -10773,7 +10773,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UpdateLoadBalancerAttributeRequest:
       type: object
       required:
@@ -10796,7 +10796,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UpdateRelationalDatabaseRequest:
       type: object
       required:
@@ -10838,7 +10838,7 @@ components:
       properties:
         operations:
           $ref: '#/components/schemas/OperationList'
-          description: 'An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.'
+          description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
     UpdateRelationalDatabaseParametersRequest:
       type: object
       required:
@@ -11104,16 +11104,16 @@ components:
           description: The number of data points that must not within the specified threshold to trigger the alarm.
         treatMissingData:
           $ref: '#/components/schemas/TreatMissingData'
-          description: '<p>Specifies how the alarm handles missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> — Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> — Missing data is treated as missing.</p> </li> </ul>'
+          description: '<p>Specifies how the alarm handles missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> - Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> - Missing data is treated as missing.</p> </li> </ul>'
         statistic:
           $ref: '#/components/schemas/MetricStatistic'
-          description: '<p>The statistic for the metric associated with the alarm.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+          description: '<p>The statistic for the metric associated with the alarm.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
         metricName:
           $ref: '#/components/schemas/MetricName'
           description: The name of the metric associated with the alarm.
         state:
           $ref: '#/components/schemas/AlarmState'
-          description: '<p>The current state of the alarm.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul>'
+          description: '<p>The current state of the alarm.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul>'
         unit:
           $ref: '#/components/schemas/MetricUnit'
           description: The unit of the metric associated with the alarm.
@@ -11314,14 +11314,20 @@ components:
       properties:
         fromPort:
           $ref: '#/components/schemas/Port'
-          description: The first port in the range.
+          description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         toPort:
           $ref: '#/components/schemas/Port'
-          description: The last port in the range.
+          description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         protocol:
           $ref: '#/components/schemas/NetworkProtocol'
-          description: 'The protocol. '
-      description: Describes information about the ports on your virtual private server (or <i>instance</i>).
+          description: '<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
+        cidrs:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>Examples:</p> <ul> <li> <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or <code>192.0.2.44/32</code>. </p> </li> <li> <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify <code>192.0.2.0/24</code>.</p> </li> </ul> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        cidrListAliases:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>'
+      description: 'Describes ports to open on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.'
     Operation:
       type: object
       properties:
@@ -11450,7 +11456,7 @@ components:
           description: 'The destination of the contact method, such as an email address or a mobile phone number.'
         status:
           $ref: '#/components/schemas/ContactMethodStatus'
-          description: '<p>The current status of the contact method.</p> <p>A contact method has the following possible status:</p> <ul> <li> <p> <code>PendingVerification</code> — The contact method has not yet been verified, and the verification has not yet expired.</p> </li> <li> <p> <code>Valid</code> — The contact method has been verified.</p> </li> <li> <p> <code>InValid</code> — An attempt was made to verify the contact method, but the verification has expired.</p> </li> </ul>'
+          description: '<p>The current status of the contact method.</p> <p>A contact method has the following possible status:</p> <ul> <li> <p> <code>PendingVerification</code> - The contact method has not yet been verified, and the verification has not yet expired.</p> </li> <li> <p> <code>Valid</code> - The contact method has been verified.</p> </li> <li> <p> <code>InValid</code> - An attempt was made to verify the contact method, but the verification has expired.</p> </li> </ul>'
         protocol:
           $ref: '#/components/schemas/ContactProtocol'
           description: 'The protocol of the contact method, such as email or SMS (text messaging).'
@@ -11568,7 +11574,7 @@ components:
       description: Describes the SSH key pair.
     Port:
       type: integer
-      minimum: 0
+      minimum: -1
       maximum: 65535
     DomainNameList:
       type: array
@@ -12445,7 +12451,7 @@ components:
           description: 'The instance type (e.g., <code>t2.micro</code>) to use for the new Amazon EC2 instance.'
         portInfoSource:
           $ref: '#/components/schemas/PortInfoSourceType'
-          description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p>DEFAULT — Use the default firewall settings from the image.</p> </li> <li> <p>INSTANCE — Use the firewall settings from the source Lightsail instance.</p> </li> <li> <p>NONE — Default to Amazon EC2.</p> </li> <li> <p>CLOSED — All ports closed.</p> </li> </ul>'
+          description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p> <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance blueprint.</p> </li> <li> <p> <code>INSTANCE</code> - Use the configured firewall settings from the source Lightsail instance.</p> </li> <li> <p> <code>NONE</code> - Use the default Amazon EC2 security group.</p> </li> <li> <p> <code>CLOSED</code> - All ports closed.</p> </li> </ul> <note> <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance.</p> </note>'
         userData:
           $ref: '#/components/schemas/string'
           description: '<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>.</p> </note>'
@@ -12510,6 +12516,7 @@ components:
         - tcp
         - all
         - udp
+        - icmp
     PortAccessType:
       type: string
       enum:
@@ -12520,26 +12527,32 @@ components:
       properties:
         fromPort:
           $ref: '#/components/schemas/Port'
-          description: The first port in the range.
+          description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         toPort:
           $ref: '#/components/schemas/Port'
-          description: The last port in the range.
+          description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         protocol:
           $ref: '#/components/schemas/NetworkProtocol'
-          description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
+          description: '<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         accessFrom:
           $ref: '#/components/schemas/string'
-          description: 'The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).'
+          description: 'The location from which access is allowed. For example, <code>Anywhere (0.0.0.0/0)</code>, or <code>Custom</code> if a specific IP address or range of IP addresses is allowed.'
         accessType:
           $ref: '#/components/schemas/PortAccessType'
           description: The type of access (<code>Public</code> or <code>Private</code>).
         commonName:
           $ref: '#/components/schemas/string'
-          description: The common name.
+          description: The common name of the port information.
         accessDirection:
           $ref: '#/components/schemas/AccessDirection'
-          description: The access direction (<code>inbound</code> or <code>outbound</code>).
-      description: Describes information about the instance ports.
+          description: <p>The access direction (<code>inbound</code> or <code>outbound</code>).</p> <note> <p>Lightsail currently supports only <code>inbound</code> access direction.</p> </note>
+        cidrs:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        cidrListAliases:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>'
+      description: Describes information about ports for an Amazon Lightsail instance.
     PortState:
       type: string
       enum:
@@ -12550,17 +12563,23 @@ components:
       properties:
         fromPort:
           $ref: '#/components/schemas/Port'
-          description: The first port in the range.
+          description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         toPort:
           $ref: '#/components/schemas/Port'
-          description: The last port in the range.
+          description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         protocol:
           $ref: '#/components/schemas/NetworkProtocol'
-          description: '<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>'
+          description: '<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn''t require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href="https://en.wikipedia.org/wiki/Transport_layer">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don''t require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>'
         state:
           $ref: '#/components/schemas/PortState'
-          description: Specifies whether the instance port is <code>open</code> or <code>closed</code>.
-      description: Describes the port state.
+          description: <p>Specifies whether the instance port is <code>open</code> or <code>closed</code>.</p> <note> <p>The port state for Lightsail instances is always <code>open</code>.</p> </note>
+        cidrs:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        cidrListAliases:
+          $ref: '#/components/schemas/StringList'
+          description: '<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>'
+      description: 'Describes open ports on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.'
     InstanceSnapshotState:
       type: string
       enum:

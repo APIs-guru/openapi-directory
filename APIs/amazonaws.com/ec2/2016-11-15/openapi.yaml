@@ -5072,7 +5072,7 @@ paths:
     get:
       x-aws-operation-name: CreateLaunchTemplate
       operationId: GET_CreateLaunchTemplate
-      description: 'Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request.'
+      description: 'Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">Launching an instance from a launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -5225,7 +5225,7 @@ paths:
     post:
       x-aws-operation-name: CreateLaunchTemplate
       operationId: POST_CreateLaunchTemplate
-      description: 'Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request.'
+      description: 'Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">Launching an instance from a launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -5251,7 +5251,7 @@ paths:
     get:
       x-aws-operation-name: CreateLaunchTemplateVersion
       operationId: GET_CreateLaunchTemplateVersion
-      description: '<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p>'
+      description: '<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions">Managing launch template versions</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -5408,7 +5408,7 @@ paths:
     post:
       x-aws-operation-name: CreateLaunchTemplateVersion
       operationId: POST_CreateLaunchTemplateVersion
-      description: '<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p>'
+      description: '<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions">Managing launch template versions</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -37940,6 +37940,9 @@ components:
         LaunchTemplate:
           $ref: '#/components/schemas/LaunchTemplate'
           description: Information about the launch template.
+        Warning:
+          $ref: '#/components/schemas/ValidationWarning'
+          description: 'If the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that''s found.'
     KernelId:
       type: string
     LaunchTemplateIamInstanceProfileSpecificationRequest:
@@ -38387,6 +38390,9 @@ components:
         LaunchTemplateVersion:
           $ref: '#/components/schemas/LaunchTemplateVersion'
           description: Information about the launch template version.
+        Warning:
+          $ref: '#/components/schemas/ValidationWarning'
+          description: 'If the new version of the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that''s found.'
     CreateLocalGatewayRouteResult:
       type: object
       properties:
@@ -45658,6 +45664,13 @@ components:
           $ref: '#/components/schemas/TagList'
           description: The tags for the launch template.
       description: Describes a launch template.
+    ValidationWarning:
+      type: object
+      properties:
+        Errors:
+          $ref: '#/components/schemas/ErrorSet'
+          description: The error codes and error messages.
+      description: The error codes and error messages that are returned for the parameters or parameter combinations that are not valid when a new launch template or new version of a launch template is created.
     CreateLaunchTemplateVersionRequest:
       type: object
       required:
@@ -52266,6 +52279,20 @@ components:
         VpcId:
           $ref: '#/components/schemas/VpcId'
           description: The ID of the VPC.
+    ValidationError:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/String'
+          description: 'The error code that indicates why the parameter or parameter combination is not valid. For more information about error codes, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+        Message:
+          $ref: '#/components/schemas/String'
+          description: 'The error message that describes why the parameter or parameter combination is not valid. For more information about error messages, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html">Error Codes</a>.'
+      description: The error code and error message that is returned for a parameter or parameter combination that is not valid when a new launch template or new version of a launch template is created.
+    ErrorSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationError'
     EventCode:
       type: string
       enum:

@@ -215,7 +215,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.CreateExportTask':
     post:
       operationId: CreateExportTask
-      description: '<p>Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket.</p> <p>This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use <a>DescribeExportTasks</a> to get the status of the export task. Each account can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time. To cancel an export task, use <a>CancelExportTask</a>.</p> <p>You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.</p> <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with SSE-KMS is not supported. </p>'
+      description: '<p>Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket.</p> <p>This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html">DescribeExportTasks</a> to get the status of the export task. Each account can only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time. To cancel an export task, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html">CancelExportTask</a>.</p> <p>You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.</p> <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets encrypted with SSE-KMS is not supported. </p>'
       responses:
         '200':
           description: Success
@@ -597,6 +597,57 @@ paths:
             type: string
             enum:
               - Logs_20140328.DeleteMetricFilter
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Logs_20140328.DeleteQueryDefinition':
+    post:
+      operationId: DeleteQueryDefinition
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteQueryDefinitionResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteQueryDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Logs_20140328.DeleteQueryDefinition
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1094,6 +1145,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Logs_20140328.DescribeQueryDefinitions':
+    post:
+      operationId: DescribeQueryDefinitions
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeQueryDefinitionsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeQueryDefinitionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Logs_20140328.DescribeQueryDefinitions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Logs_20140328.DescribeResourcePolicies':
     post:
       operationId: DescribeResourcePolicies
@@ -1384,7 +1480,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.GetLogGroupFields':
     post:
       operationId: GetLogGroupFields
-      description: '<p>Returns a list of the fields that are included in log events in the specified log group, along with the percentage of log events that contain each field. The search is limited to a time period that you specify.</p> <p>In the results, fields that start with @ are fields generated by CloudWatch Logs. For example, <code>@timestamp</code> is the timestamp of each log event.</p> <p>The response results are sorted by the frequency percentage, starting with the highest percentage.</p>'
+      description: '<p>Returns a list of the fields that are included in log events in the specified log group, along with the percentage of log events that contain each field. The search is limited to a time period that you specify.</p> <p>In the results, fields that start with @ are fields generated by CloudWatch Logs. For example, <code>@timestamp</code> is the timestamp of each log event. For more information about the fields that are generated by CloudWatch logs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html">Supported Logs and Discovered Fields</a>.</p> <p>The response results are sorted by the frequency percentage, starting with the highest percentage.</p>'
       responses:
         '200':
           description: Success
@@ -1498,7 +1594,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.GetQueryResults':
     post:
       operationId: GetQueryResults
-      description: '<p>Returns the results from the specified query.</p> <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field which is the identifier for the log record. You can use the value of <code>@ptr</code> in a operation to get the full log record.</p> <p> <code>GetQueryResults</code> does not start a query execution. To run a query, use .</p> <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, you can retry the operation later to see the final results. </p>'
+      description: '<p>Returns the results from the specified query.</p> <p>Only the fields requested in the query are returned, along with a <code>@ptr</code> field which is the identifier for the log record. You can use the value of <code>@ptr</code> in a <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html">GetLogRecord</a> operation to get the full log record.</p> <p> <code>GetQueryResults</code> does not start a query execution. To run a query, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html">StartQuery</a>.</p> <p>If the value of the <code>Status</code> field in the output is <code>Running</code>, this operation returns only partial results. If you see a value of <code>Scheduled</code> or <code>Running</code> for the status, you can retry the operation later to see the final results. </p>'
       responses:
         '200':
           description: Success
@@ -1594,7 +1690,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.PutDestination':
     post:
       operationId: PutDestination
-      description: '<p>Creates or updates a destination. This operation is used only to create destinations for cross-account subscriptions.</p> <p>A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using <a>PutLogEvents</a>.</p> <p>Through an access policy, a destination controls what is written to it. By default, <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user cannot call <a>PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call <a>PutDestinationPolicy</a> after <code>PutDestination</code>.</p>'
+      description: '<p>Creates or updates a destination. This operation is used only to create destinations for cross-account subscriptions.</p> <p>A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a>.</p> <p>Through an access policy, a destination controls what is written to it. By default, <code>PutDestination</code> does not set any access policy with the destination, which means a cross-account user cannot call <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html">PutSubscriptionFilter</a> against this destination. To enable this, the destination owner must call <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html">PutDestinationPolicy</a> after <code>PutDestination</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1761,7 +1857,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.PutMetricFilter':
     post:
       operationId: PutMetricFilter
-      description: <p>Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through <a>PutLogEvents</a>.</p> <p>The maximum number of metric filters that can be associated with a log group is 100.</p>
+      description: '<p>Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a>.</p> <p>The maximum number of metric filters that can be associated with a log group is 100.</p>'
       responses:
         '200':
           description: Success
@@ -1809,6 +1905,57 @@ paths:
             type: string
             enum:
               - Logs_20140328.PutMetricFilter
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Logs_20140328.PutQueryDefinition':
+    post:
+      operationId: PutQueryDefinition
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutQueryDefinitionResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutQueryDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Logs_20140328.PutQueryDefinition
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1924,7 +2071,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.PutSubscriptionFilter':
     post:
       operationId: PutSubscriptionFilter
-      description: '<p>Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through <a>PutLogEvents</a> and have them delivered to a specific destination. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination that belongs to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> </ul> <p>There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group.</p>'
+      description: '<p>Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html">PutLogEvents</a> and have them delivered to a specific destination. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination that belongs to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.</p> </li> </ul> <p>There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group.</p>'
       responses:
         '200':
           description: Success
@@ -2097,7 +2244,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.TagLogGroup':
     post:
       operationId: TagLogGroup
-      description: '<p>Adds or updates the specified tags for the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To remove tags, use <a>UntagLogGroup</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html">Tag Log Groups in Amazon CloudWatch Logs</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>'
+      description: '<p>Adds or updates the specified tags for the specified log group.</p> <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html">ListTagsLogGroup</a>. To remove tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html">UntagLogGroup</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging">Tag Log Groups in Amazon CloudWatch Logs</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2183,7 +2330,7 @@ paths:
   '/#X-Amz-Target=Logs_20140328.UntagLogGroup':
     post:
       operationId: UntagLogGroup
-      description: '<p>Removes the specified tags from the specified log group.</p> <p>To list the tags for a log group, use <a>ListTagsLogGroup</a>. To add tags, use <a>UntagLogGroup</a>.</p>'
+      description: '<p>Removes the specified tags from the specified log group.</p> <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html">ListTagsLogGroup</a>. To add tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html">TagLogGroup</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2404,6 +2551,19 @@ components:
         filterName:
           $ref: '#/components/schemas/FilterName'
           description: The name of the metric filter.
+    DeleteQueryDefinitionResponse:
+      type: object
+      properties:
+        success:
+          $ref: '#/components/schemas/Success'
+    DeleteQueryDefinitionRequest:
+      type: object
+      required:
+        - queryDefinitionId
+      title: DeleteQueryDefinitionRequest
+      properties:
+        queryDefinitionId:
+          $ref: '#/components/schemas/QueryId'
     DeleteResourcePolicyRequest:
       type: object
       title: DeleteResourcePolicyRequest
@@ -2582,6 +2742,23 @@ components:
         maxResults:
           $ref: '#/components/schemas/DescribeQueriesMaxResults'
           description: Limits the number of returned queries to the specified number.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeQueryDefinitionsResponse:
+      type: object
+      properties:
+        queryDefinitions:
+          $ref: '#/components/schemas/QueryDefinitionList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeQueryDefinitionsRequest:
+      type: object
+      title: DescribeQueryDefinitionsRequest
+      properties:
+        queryDefinitionNamePrefix:
+          $ref: '#/components/schemas/QueryDefinitionName'
+        maxResults:
+          $ref: '#/components/schemas/QueryListMaxResults'
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeResourcePoliciesResponse:
@@ -2855,7 +3032,7 @@ components:
           description: The log events.
         sequenceToken:
           $ref: '#/components/schemas/SequenceToken'
-          description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a>DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.'
+          description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html">DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls may be successful, or one may be rejected.'
     InvalidSequenceTokenException: {}
     DataAlreadyAcceptedException: {}
     UnrecognizedClientException: {}
@@ -2880,6 +3057,26 @@ components:
         metricTransformations:
           $ref: '#/components/schemas/MetricTransformations'
           description: A collection of information that defines how metric data gets emitted.
+    PutQueryDefinitionResponse:
+      type: object
+      properties:
+        queryDefinitionId:
+          $ref: '#/components/schemas/QueryId'
+    PutQueryDefinitionRequest:
+      type: object
+      required:
+        - name
+        - queryString
+      title: PutQueryDefinitionRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/QueryDefinitionName'
+        queryDefinitionId:
+          $ref: '#/components/schemas/QueryId'
+        logGroupNames:
+          $ref: '#/components/schemas/LogGroupNames'
+        queryString:
+          $ref: '#/components/schemas/QueryDefinitionString'
     PutResourcePolicyResponse:
       type: object
       properties:
@@ -2922,7 +3119,7 @@ components:
           description: The name of the log group.
         filterName:
           $ref: '#/components/schemas/FilterName'
-          description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a>DescribeSubscriptionFilters</a>.'
+          description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html">DescribeSubscriptionFilters</a>.'
         filterPattern:
           $ref: '#/components/schemas/FilterPattern'
           description: A filter pattern for subscribing to a filtered stream of log events.
@@ -3084,6 +3281,12 @@ components:
       pattern: '[^:*]*'
       minLength: 1
       maxLength: 512
+    QueryId:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Success:
+      type: boolean
     PolicyName:
       type: string
     Descending:
@@ -3155,6 +3358,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/QueryInfo'
+    QueryDefinitionName:
+      type: string
+      pattern: '^([^:*\/]+\/?)*[^:*\/]+$'
+      minLength: 1
+      maxLength: 255
+    QueryListMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    QueryDefinitionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueryDefinition'
     ResourcePolicies:
       type: array
       items:
@@ -3330,10 +3546,6 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Value'
-    QueryId:
-      type: string
-      minLength: 0
-      maxLength: 256
     QueryResults:
       type: array
       items:
@@ -3508,7 +3720,7 @@ components:
           description: The name of the CloudWatch metric.
         metricNamespace:
           $ref: '#/components/schemas/MetricNamespace'
-          description: The namespace of the CloudWatch metric.
+          description: 'A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace">Namespaces</a>.'
         metricValue:
           $ref: '#/components/schemas/MetricValue'
           description: The value to publish to the CloudWatch metric when a filter pattern matches a log event.
@@ -3546,6 +3758,10 @@ components:
           $ref: '#/components/schemas/LogEventIndex'
           description: The expired log events.
       description: Represents the rejected events.
+    QueryDefinitionString:
+      type: string
+      minLength: 1
+      maxLength: 10000
     ResourcePolicy:
       type: object
       properties:
@@ -3559,10 +3775,23 @@ components:
           $ref: '#/components/schemas/Timestamp'
           description: 'Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: A policy enabling one or more entities to put logs to a log group in this account.
+    QueryDefinition:
+      type: object
+      properties:
+        queryDefinitionId:
+          $ref: '#/components/schemas/QueryId'
+        name:
+          $ref: '#/components/schemas/QueryDefinitionName'
+        queryString:
+          $ref: '#/components/schemas/QueryDefinitionString'
+        lastModified:
+          $ref: '#/components/schemas/Timestamp'
+        logGroupNames:
+          $ref: '#/components/schemas/LogGroupNames'
     QueryString:
       type: string
       minLength: 0
-      maxLength: 2048
+      maxLength: 10000
     QueryInfo:
       type: object
       properties:
@@ -3598,7 +3827,7 @@ components:
         value:
           $ref: '#/components/schemas/Value'
           description: The value of this field.
-      description: 'Contains one field from one log event returned by a CloudWatch Logs Insights query, along with the value of that field.'
+      description: '<p>Contains one field from one log event returned by a CloudWatch Logs Insights query, along with the value of that field.</p> <p>For more information about the fields that are generated by CloudWatch logs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html">Supported Logs and Discovered Fields</a>.</p>'
     SearchedLogStream:
       type: object
       properties:
@@ -3609,8 +3838,6 @@ components:
           $ref: '#/components/schemas/LogStreamSearchedCompletely'
           description: Indicates whether all the events in this log stream were searched.
       description: Represents the search status of a log stream.
-    Success:
-      type: boolean
     SubscriptionFilter:
       type: object
       properties:
