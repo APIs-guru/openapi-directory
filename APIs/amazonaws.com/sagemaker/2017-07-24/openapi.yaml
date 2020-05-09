@@ -220,7 +220,7 @@ paths:
   '/#X-Amz-Target=SageMaker.CreateApp':
     post:
       operationId: CreateApp
-      description: 'Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.'
+      description: 'Creates a running App for the specified UserProfile. Supported Apps are <code>JupyterServer</code>, <code>KernelGateway</code>, and <code>TensorBoard</code>. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.'
       responses:
         '200':
           description: Success
@@ -388,7 +388,7 @@ paths:
   '/#X-Amz-Target=SageMaker.CreateDomain':
     post:
       operationId: CreateDomain
-      description: 'Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. '
+      description: 'Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. '
       responses:
         '200':
           description: Success
@@ -925,7 +925,7 @@ paths:
   '/#X-Amz-Target=SageMaker.CreatePresignedDomainUrl':
     post:
       operationId: CreatePresignedDomainUrl
-      description: 'Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. '
+      description: 'Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. '
       responses:
         '200':
           description: Success
@@ -1234,7 +1234,7 @@ paths:
   '/#X-Amz-Target=SageMaker.CreateUserProfile':
     post:
       operationId: CreateUserProfile
-      description: 'Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user''s private Amazon Elastic File System (EFS) home directory. '
+      description: '<p>Creates a user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from SSO, a UserProfile is automatically created. </p> <p> This entity is the primary holder of settings for an individual user and, through the domain, has a reference to the user''s private Amazon Elastic File System (EFS) home directory. </p>'
       responses:
         '200':
           description: Success
@@ -1423,7 +1423,7 @@ paths:
   '/#X-Amz-Target=SageMaker.DeleteDomain':
     post:
       operationId: DeleteDomain
-      description: 'Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. '
+      description: 'Used to delete a domain. Use with caution. If <code>RetentionPolicy</code> is set to <code>Delete</code>, all of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. '
       responses:
         '200':
           description: Success
@@ -5583,7 +5583,7 @@ components:
           description: Each tag consists of a key and an optional value. Tag keys must be unique per resource.
         ResourceSpec:
           $ref: '#/components/schemas/ResourceSpec'
-          description: The instance type and quantity.
+          description: The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
     ResourceInUse: {}
     CreateAutoMLJobResponse:
       type: object
@@ -5722,7 +5722,7 @@ components:
           description: Each tag consists of a key and an optional value. Tag keys must be unique per resource.
         HomeEfsFileSystemKmsKeyId:
           $ref: '#/components/schemas/KmsKeyId'
-          description: The AWS Key Management Service encryption key ID.
+          description: The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
     CreateEndpointOutput:
       type: object
       required:
@@ -6498,7 +6498,7 @@ components:
           description: The domain ID.
         RetentionPolicy:
           $ref: '#/components/schemas/RetentionPolicy'
-          description: 'The retention policy for this domain, which specifies which resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). '
+          description: 'The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). '
     DeleteEndpointInput:
       type: object
       required:
@@ -6752,7 +6752,7 @@ components:
           description: The failure reason.
         ResourceSpec:
           $ref: '#/components/schemas/ResourceSpec'
-          description: The instance type and quantity.
+          description: The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
     DescribeAppRequest:
       type: object
       required:
@@ -7982,7 +7982,7 @@ components:
           description: The user profile name.
         HomeEfsFileSystemUid:
           $ref: '#/components/schemas/EfsUid'
-          description: The homa Amazon Elastic File System (EFS) Uid.
+          description: The home Amazon Elastic File System (EFS) Uid.
         Status:
           $ref: '#/components/schemas/UserProfileStatus'
           description: The status.
@@ -9285,7 +9285,6 @@ components:
     RenderUiTemplateRequest:
       type: object
       required:
-        - UiTemplate
         - Task
         - RoleArn
       title: RenderUiTemplateRequest
@@ -11239,11 +11238,11 @@ components:
       properties:
         SageMakerImageArn:
           $ref: '#/components/schemas/SageMakerImageArn'
-          description: The Amazon Resource Name (ARN) of the image created on the instance.
+          description: The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
         InstanceType:
           $ref: '#/components/schemas/AppInstanceType'
           description: The instance type.
-      description: The instance type and the Amazon Resource Name (ARN) of the image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.
+      description: The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.
     ProblemType:
       type: string
       enum:
@@ -11904,6 +11903,9 @@ components:
     NetworkConfig:
       type: object
       properties:
+        EnableInterContainerTrafficEncryption:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Whether to encrypt all communications between distributed processing jobs. Choose <code>True</code> to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.'
         EnableNetworkIsolation:
           $ref: '#/components/schemas/Boolean'
           description: Whether to allow inbound and outbound network calls to and from the containers used for the processing job.
@@ -12384,8 +12386,8 @@ components:
       properties:
         HomeEfsFileSystem:
           $ref: '#/components/schemas/RetentionType'
-          description: The home Amazon Elastic File System (EFS).
-      description: The retention policy.
+          description: '<p>The default is <code>Retain</code>, which specifies to keep the data stored on the EFS volume.</p> <p>Specify <code>Delete</code> to delete the data stored on the EFS volume.</p>'
+      description: The retention policy for data stored on an Amazon Elastic File System (EFS) volume.
     TagKeyList:
       type: array
       items:
@@ -13379,8 +13381,6 @@ components:
       description: '<p>Defines the amount of money paid to an Amazon Mechanical Turk worker for each task performed. </p> <p>Use one of the following prices for bounding box tasks. Prices are in US dollars and should be based on the complexity of the task; the longer it takes in your initial testing, the more you should offer.</p> <ul> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for image classification, text classification, and custom tasks. Prices are in US dollars.</p> <ul> <li> <p>0.012</p> </li> <li> <p>0.024</p> </li> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for semantic segmentation tasks. Prices are in US dollars.</p> <ul> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for Textract AnalyzeDocument Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>2.400 </p> </li> <li> <p>2.280 </p> </li> <li> <p>2.160 </p> </li> <li> <p>2.040 </p> </li> <li> <p>1.920 </p> </li> <li> <p>1.800 </p> </li> <li> <p>1.680 </p> </li> <li> <p>1.560 </p> </li> <li> <p>1.440 </p> </li> <li> <p>1.320 </p> </li> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Amazon Augmented AI custom human review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul>'
     UiConfig:
       type: object
-      required:
-        - UiTemplateS3Uri
       properties:
         UiTemplateS3Uri:
           $ref: '#/components/schemas/S3Uri'
@@ -13727,14 +13727,14 @@ components:
       properties:
         DefaultResourceSpec:
           $ref: '#/components/schemas/ResourceSpec'
-          description: The instance type and quantity.
+          description: The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
       description: Jupyter server's app settings.
     KernelGatewayAppSettings:
       type: object
       properties:
         DefaultResourceSpec:
           $ref: '#/components/schemas/ResourceSpec'
-          description: The instance type and quantity.
+          description: The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
       description: The kernel gateway app settings.
     LabelCounter:
       type: integer
@@ -15453,7 +15453,7 @@ components:
       properties:
         DefaultResourceSpec:
           $ref: '#/components/schemas/ResourceSpec'
-          description: The instance type and quantity.
+          description: The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
       description: The TensorBoard app settings.
     TenthFractionsOfACent:
       type: integer
