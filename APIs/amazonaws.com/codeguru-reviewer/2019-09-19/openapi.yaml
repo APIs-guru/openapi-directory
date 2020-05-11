@@ -3,7 +3,7 @@ info:
   version: '2019-09-19'
   x-release: v4
   title: Amazon CodeGuru Reviewer
-  description: This section provides documentation for the Amazon CodeGuru Reviewer API operations.
+  description: '<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. Amazon CodeGuru Reviewer is a service that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends fixes in your Java code.</p> <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html">Amazon CodeGuru Reviewer User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -163,6 +163,9 @@ paths:
                     CodeCommit:
                       $ref: '#/components/schemas/CodeCommitRepository'
                       description: Information about an AWS CodeCommit repository.
+                    Bitbucket:
+                      $ref: '#/components/schemas/ThirdPartySourceRepository'
+                      description: ' Information about a Bitbucket Cloud repository. '
                 ClientRequestToken:
                   description: '<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p> <p>To add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency.</p> <p>If you use the AWS CLI or one of the AWS SDKs to call this operation, you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, you must generate a ClientRequestToken yourself for new versions and include that value in the request.</p> <p>You typically interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association.</p> <p>Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. </p>'
                   type: string
@@ -925,6 +928,23 @@ components:
           $ref: '#/components/schemas/Name'
           description: The name of the AWS CodeCommit repository.
       description: Information about an AWS CodeCommit repository.
+    ThirdPartySourceRepository:
+      type: object
+      required:
+        - Name
+        - ConnectionArn
+        - Owner
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+          description: ' The name of the third party source repository. '
+        ConnectionArn:
+          $ref: '#/components/schemas/ConnectionArn'
+          description: ' The Amazon Resource Name (ARN) identifying the repository connection. '
+        Owner:
+          $ref: '#/components/schemas/Owner'
+          description: ' The username of the owner of the repository. '
+      description: ' Information about a third party source repository connected through CodeStar Connections. '
     InternalServerException: {}
     ValidationException: {}
     AccessDeniedException: {}
@@ -970,6 +990,7 @@ components:
       enum:
         - CodeCommit
         - GitHub
+        - Bitbucket
     JobState:
       type: string
       enum:
@@ -1048,6 +1069,9 @@ components:
         CodeCommit:
           $ref: '#/components/schemas/CodeCommitRepository'
           description: Information about an AWS CodeCommit repository.
+        Bitbucket:
+          $ref: '#/components/schemas/ThirdPartySourceRepository'
+          description: ' Information about a Bitbucket Cloud repository. '
       description: Information about a repository.
     ClientRequestToken:
       type: string
@@ -1075,6 +1099,9 @@ components:
         AssociationArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) identifying the repository association.
+        ConnectionArn:
+          $ref: '#/components/schemas/ConnectionArn'
+          description: ' The Amazon Resource Name (ARN) identifying the repository connection. '
         Name:
           $ref: '#/components/schemas/Name'
           description: The name of the repository.
@@ -1241,6 +1268,11 @@ components:
           $ref: '#/components/schemas/CommitId'
           description: ' Destination Commit SHA '
       description: ' The commit diff for the pull request. '
+    ConnectionArn:
+      type: string
+      pattern: 'arn:aws(-[\w]+)*:.+:.+:[0-9]{12}:.+'
+      minLength: 0
+      maxLength: 256
     DescribeCodeReviewRequest:
       type: object
       title: DescribeCodeReviewRequest
@@ -1442,6 +1474,9 @@ components:
         AssociationArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) identifying the repository association.
+        ConnectionArn:
+          $ref: '#/components/schemas/ConnectionArn'
+          description: ' The Amazon Resource Name (ARN) identifying the repository connection. '
         LastUpdatedTimeStamp:
           $ref: '#/components/schemas/TimeStamp'
           description: 'The time, in milliseconds since the epoch, since the repository association was last updated. '
