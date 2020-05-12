@@ -1825,7 +1825,7 @@ paths:
   '/#X-Amz-Target=WorkMailService.ListOrganizations':
     post:
       operationId: ListOrganizations
-      description: Returns summaries of the customer's non-deleted organizations.
+      description: Returns summaries of the customer's organizations.
       responses:
         '200':
           description: Success
@@ -2978,6 +2978,7 @@ components:
     DeleteAccessControlRuleRequest:
       type: object
       required:
+        - OrganizationId
         - Name
       title: DeleteAccessControlRuleRequest
       properties:
