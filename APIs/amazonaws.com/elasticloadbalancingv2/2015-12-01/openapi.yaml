@@ -467,6 +467,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyUniqueTargetGroupsPerLoadBalancerException'
+        '496':
+          description: ALPNPolicyNotSupportedException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ALPNPolicyNotSupportedException'
       parameters:
         - name: LoadBalancerArn
           in: query
@@ -517,6 +523,14 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/Action'
+        - name: AlpnPolicy
+          in: query
+          required: false
+          description: '<p>[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You can specify one policy name. The following are the possible values:</p> <ul> <li> <p> <code>HTTP1Only</code> </p> </li> <li> <p> <code>HTTP2Only</code> </p> </li> <li> <p> <code>HTTP2Optional</code> </p> </li> <li> <p> <code>HTTP2Preferred</code> </p> </li> <li> <p> <code>None</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies">ALPN Policies</a> in the <i>Network Load Balancers Guide</i>.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AlpnPolicyValue'
         - name: Action
           in: query
           required: true
@@ -646,6 +660,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyUniqueTargetGroupsPerLoadBalancerException'
+        '496':
+          description: ALPNPolicyNotSupportedException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ALPNPolicyNotSupportedException'
       requestBody:
         content:
           text/xml:
@@ -3221,6 +3241,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyUniqueTargetGroupsPerLoadBalancerException'
+        '496':
+          description: ALPNPolicyNotSupportedException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ALPNPolicyNotSupportedException'
       parameters:
         - name: ListenerArn
           in: query
@@ -3271,6 +3297,14 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/Action'
+        - name: AlpnPolicy
+          in: query
+          required: false
+          description: '<p>[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You can specify one policy name. The following are the possible values:</p> <ul> <li> <p> <code>HTTP1Only</code> </p> </li> <li> <p> <code>HTTP2Only</code> </p> </li> <li> <p> <code>HTTP2Optional</code> </p> </li> <li> <p> <code>HTTP2Preferred</code> </p> </li> <li> <p> <code>None</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies">ALPN Policies</a> in the <i>Network Load Balancers Guide</i>.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AlpnPolicyValue'
         - name: Action
           in: query
           required: true
@@ -3400,6 +3434,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyUniqueTargetGroupsPerLoadBalancerException'
+        '496':
+          description: ALPNPolicyNotSupportedException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ALPNPolicyNotSupportedException'
       requestBody:
         content:
           text/xml:
@@ -5040,6 +5080,8 @@ components:
           $ref: '#/components/schemas/ForwardActionConfig'
           description: 'Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when <code>Type</code> is <code>forward</code>. If you specify both <code>ForwardConfig</code> and <code>TargetGroupArn</code>, you can specify only one target group using <code>ForwardConfig</code> and it must be the same target group specified in <code>TargetGroupArn</code>.'
       description: Information about an action.
+    AlpnPolicyValue:
+      type: string
     DuplicateListenerException: {}
     TooManyListenersException: {}
     TargetGroupAssociationLimitException: {}
@@ -5052,6 +5094,7 @@ components:
     TooManyActionsException: {}
     InvalidLoadBalancerActionException: {}
     TooManyUniqueTargetGroupsPerLoadBalancerException: {}
+    ALPNPolicyNotSupportedException: {}
     CreateLoadBalancerOutput:
       type: object
       example:
@@ -5562,7 +5605,7 @@ components:
       properties:
         Key:
           $ref: '#/components/schemas/TargetGroupAttributeKey'
-          description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The default value is 300 seconds. If the target is a Lambda function, this attribute is not supported.</p> </li> <li> <p> <code>stickiness.enabled</code> - Indicates whether sticky sessions are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>stickiness.type</code> - The type of sticky sessions. The possible values are <code>lb_cookie</code> for Application Load Balancers or <code>source_ip</code> for Network Load Balancers.</p> </li> </ul> <p>The following attributes are supported by Application Load Balancers if the target is not a Lambda function:</p> <ul> <li> <p> <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines how the load balancer selects targets when routing requests. The value is <code>round_robin</code> or <code>least_outstanding_requests</code>. The default is <code>round_robin</code>.</p> </li> <li> <p> <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a newly registered target receives a linearly increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled by default.</p> </li> <li> <p> <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).</p> </li> </ul> <p>The following attribute is supported only if the target is a Lambda function.</p> <ul> <li> <p> <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>. If the value is <code>false</code> and the request contains a duplicate header field name or query parameter key, the load balancer uses the last value sent by the client.</p> </li> </ul> <p>The following attribute is supported only by Network Load Balancers:</p> <ul> <li> <p> <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
+          description: '<p>The name of the attribute.</p> <p>The following attributes are supported by both Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p> <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds, for Elastic Load Balancing to wait before changing the state of a deregistering target from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The default value is 300 seconds. If the target is a Lambda function, this attribute is not supported.</p> </li> <li> <p> <code>stickiness.enabled</code> - Indicates whether sticky sessions are enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> <li> <p> <code>stickiness.type</code> - The type of sticky sessions. The possible values are <code>lb_cookie</code> for Application Load Balancers or <code>source_ip</code> for Network Load Balancers.</p> </li> </ul> <p>The following attributes are supported only if the load balancer is an Application Load Balancer and the target is an instance or an IP address:</p> <ul> <li> <p> <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines how the load balancer selects targets when routing requests. The value is <code>round_robin</code> or <code>least_outstanding_requests</code>. The default is <code>round_robin</code>.</p> </li> <li> <p> <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a newly registered target receives an increasing share of the traffic to the target group. After this time period ends, the target receives its full share of traffic. The range is 30-900 seconds (15 minutes). Slow start mode is disabled by default.</p> </li> <li> <p> <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).</p> </li> </ul> <p>The following attribute is supported only if the load balancer is an Application Load Balancer and the target is a Lambda function:</p> <ul> <li> <p> <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and response headers that are exchanged between the load balancer and the Lambda function include arrays of values or strings. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>. If the value is <code>false</code> and the request contains a duplicate header field name or query parameter key, the load balancer uses the last value sent by the client.</p> </li> </ul> <p>The following attribute is supported only by Network Load Balancers:</p> <ul> <li> <p> <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is enabled. The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p> </li> </ul>'
         Value:
           $ref: '#/components/schemas/TargetGroupAttributeValue'
           description: The value of the attribute.
@@ -5820,6 +5863,10 @@ components:
           description: The tags.
     AllocationId:
       type: string
+    AlpnPolicyName:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlpnPolicyValue'
     AuthenticateCognitoActionAuthenticationRequestParamValue:
       type: string
     AuthenticateCognitoActionAuthenticationRequestExtraParams:
@@ -5970,6 +6017,9 @@ components:
         DefaultActions:
           $ref: '#/components/schemas/Actions'
           description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+        AlpnPolicy:
+          $ref: '#/components/schemas/AlpnPolicyName'
+          description: '<p>[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You can specify one policy name. The following are the possible values:</p> <ul> <li> <p> <code>HTTP1Only</code> </p> </li> <li> <p> <code>HTTP2Only</code> </p> </li> <li> <p> <code>HTTP2Optional</code> </p> </li> <li> <p> <code>HTTP2Preferred</code> </p> </li> <li> <p> <code>None</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies">ALPN Policies</a> in the <i>Network Load Balancers Guide</i>.</p>'
     Listeners:
       type: array
       items:
@@ -6519,6 +6569,9 @@ components:
         DefaultActions:
           $ref: '#/components/schemas/Actions'
           description: The default actions for the listener.
+        AlpnPolicy:
+          $ref: '#/components/schemas/AlpnPolicyName'
+          description: '[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.'
       description: Information about a listener.
     LoadBalancerState:
       type: object
@@ -6625,6 +6678,9 @@ components:
         DefaultActions:
           $ref: '#/components/schemas/Actions'
           description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+        AlpnPolicy:
+          $ref: '#/components/schemas/AlpnPolicyName'
+          description: '<p>[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy. You can specify one policy name. The following are the possible values:</p> <ul> <li> <p> <code>HTTP1Only</code> </p> </li> <li> <p> <code>HTTP2Only</code> </p> </li> <li> <p> <code>HTTP2Optional</code> </p> </li> <li> <p> <code>HTTP2Preferred</code> </p> </li> <li> <p> <code>None</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies">ALPN Policies</a> in the <i>Network Load Balancers Guide</i>.</p>'
     ModifyLoadBalancerAttributesInput:
       type: object
       required:

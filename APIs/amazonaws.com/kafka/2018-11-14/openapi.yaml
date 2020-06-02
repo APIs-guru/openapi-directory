@@ -481,7 +481,6 @@ paths:
             schema:
               type: object
               required:
-                - kafkaVersions
                 - name
                 - serverProperties
               properties:
@@ -974,6 +973,80 @@ paths:
 
                         <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
                      
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/compatible-kafka-versions:
+    get:
+      operationId: GetCompatibleKafkaVersions
+      description: |2-
+
+                    <p>Gets the Apache Kafka versions to which you can update the MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCompatibleKafkaVersionsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster check.</p>
+                        
           schema:
             type: string
     parameters:
@@ -1795,6 +1868,121 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/version':
+    put:
+      operationId: UpdateClusterKafkaVersion
+      description: |2-
+
+                    <p>Updates the Apache Kafka version for the cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClusterKafkaVersionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>
+                        
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - currentVersion
+                - targetKafkaVersion
+              properties:
+                configurationInfo:
+                  description: |2-
+
+                                <p>Specifies the configuration to use for the brokers.</p>
+                             
+                  type: object
+                  properties:
+                    Arn:
+                      $ref: '#/components/schemas/__string'
+                      description: |2-
+
+                                    <p>ARN of the configuration to use.</p>
+                                 
+                    Revision:
+                      $ref: '#/components/schemas/__long'
+                      description: |2-
+
+                                    <p>The revision of the configuration to use.</p>
+                                 
+                currentVersion:
+                  description: |2-
+
+                                <p>Current cluster version.</p>
+                                
+                  type: string
+                targetKafkaVersion:
+                  description: |2-
+
+                                <p>Target Kafka version.</p>
+                                
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}/monitoring':
     put:
       operationId: UpdateMonitoring
@@ -2247,6 +2435,15 @@ components:
 
                         <p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>
                      
+    GetCompatibleKafkaVersionsResponse:
+      type: object
+      properties:
+        CompatibleKafkaVersions:
+          $ref: '#/components/schemas/__listOfCompatibleKafkaVersion'
+          description: |2-
+
+                        <p>A list of CompatibleKafkaVersion objects.</p>
+                        
     ListClusterOperationsResponse:
       type: object
       properties:
@@ -2408,6 +2605,21 @@ components:
 
                         <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                      
+    UpdateClusterKafkaVersionResponse:
+      type: object
+      properties:
+        ClusterArn:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                        
+        ClusterOperationArn:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                        
     UpdateMonitoringResponse:
       type: object
       properties:
@@ -2789,6 +3001,10 @@ components:
 
                     <p>Returns information about an error state of the cluster.</p>
                  
+    __listOfClusterOperationStep:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterOperationStep'
     MutableClusterInfo:
       type: object
       properties:
@@ -2822,6 +3038,12 @@ components:
 
                         <p>The settings for open monitoring.</p>
                      
+        KafkaVersion:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Kafka version.</p>
+                        
         LoggingInfo:
           $ref: '#/components/schemas/LoggingInfo'
       description: |2-
@@ -2873,6 +3095,12 @@ components:
 
                         <p>State of the cluster operation.</p>
                      
+        OperationSteps:
+          $ref: '#/components/schemas/__listOfClusterOperationStep'
+          description: |2-
+
+                        <p>Steps completed during the operation.</p>
+                     
         OperationType:
           $ref: '#/components/schemas/__string'
           description: |2-
@@ -2895,6 +3123,57 @@ components:
 
                     <p>Returns information about a cluster operation.</p>
                  
+    ClusterOperationStepInfo:
+      type: object
+      properties:
+        StepStatus:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The steps current status.</p>
+                     
+      description: |2-
+
+                    <p>State information about the operation step.</p>
+                 
+    ClusterOperationStep:
+      type: object
+      properties:
+        StepInfo:
+          $ref: '#/components/schemas/ClusterOperationStepInfo'
+          description: |2-
+
+                        <p>Information about the step and its status.</p>
+                     
+        StepName:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The name of the step.</p>
+                     
+      description: |2-
+
+                    <p>Step taken during a cluster operation.</p>
+                 
+    CompatibleKafkaVersion:
+      type: object
+      properties:
+        SourceVersion:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>A Kafka version.</p>
+                        
+        TargetVersions:
+          $ref: '#/components/schemas/__listOf__string'
+          description: |2-
+
+                        <p>A list of Kafka versions.</p>
+                        
+      description: |2-
+
+                    <p>Contains source Kafka versions and compatible target Kafka versions.</p>
+                
     ConfigurationRevision:
       type: object
       required:
@@ -3099,7 +3378,6 @@ components:
       type: object
       required:
         - ServerProperties
-        - KafkaVersions
         - Name
       title: CreateConfigurationRequest
       properties:
@@ -3169,6 +3447,14 @@ components:
       type: object
       title: GetBootstrapBrokersRequest
       properties: {}
+    GetCompatibleKafkaVersionsRequest:
+      type: object
+      title: GetCompatibleKafkaVersionsRequest
+      properties: {}
+    __listOfCompatibleKafkaVersion:
+      type: array
+      items:
+        $ref: '#/components/schemas/CompatibleKafkaVersion'
     KafkaVersionStatus:
       type: string
       enum:
@@ -3481,6 +3767,31 @@ components:
 
                         <p>The version of the cluster that needs to be updated.</p>
                      
+    UpdateClusterKafkaVersionRequest:
+      type: object
+      required:
+        - TargetKafkaVersion
+        - CurrentVersion
+      title: UpdateClusterKafkaVersionRequest
+      properties:
+        ConfigurationInfo:
+          $ref: '#/components/schemas/ConfigurationInfo'
+          description: |2-
+
+                        <p>The custom configuration that should be applied on the new version of cluster.</p>
+                        
+        CurrentVersion:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>Current cluster version.</p>
+                        
+        TargetKafkaVersion:
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>Target Kafka version.</p>
+                        
     UpdateMonitoringRequest:
       type: object
       required:

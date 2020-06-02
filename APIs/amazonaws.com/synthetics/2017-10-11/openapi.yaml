@@ -109,7 +109,7 @@ paths:
   /canary:
     post:
       operationId: CreateCanary
-      description: '<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a>UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security Considerations for Synthetics Canaries</a>.</p>'
+      description: '<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html">UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security Considerations for Synthetics Canaries</a>.</p>'
       responses:
         '200':
           description: Success
@@ -195,6 +195,9 @@ paths:
                     TimeoutInSeconds:
                       $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
                       description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+                    MemoryInMB:
+                      $ref: '#/components/schemas/MaxSize3008'
+                      description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
                 SuccessRetentionPeriodInDays:
                   description: 'The number of days to retain data about successful runs of this canary. If you omit this field, the default of 31 days is used. The valid range is 1 to 455 days.'
                   type: integer
@@ -274,7 +277,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: 'The name of the canary that you want to delete. To find the names of your canaries, use <a>DescribeCanaries</a>.'
+          description: 'The name of the canary that you want to delete. To find the names of your canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.'
           schema:
             type: string
             pattern: '^[0-9a-z_\-]+$'
@@ -358,7 +361,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: '<p>The name of the canary that you want to update. To find the names of your canaries, use <a>DescribeCanaries</a>.</p> <p>You cannot change the name of a canary that has already been created.</p>'
+          description: '<p>The name of the canary that you want to update. To find the names of your canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.</p> <p>You cannot change the name of a canary that has already been created.</p>'
           schema:
             type: string
             pattern: '^[0-9a-z_\-]+$'
@@ -416,6 +419,9 @@ paths:
                     TimeoutInSeconds:
                       $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
                       description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+                    MemoryInMB:
+                      $ref: '#/components/schemas/MaxSize3008'
+                      description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
                 SuccessRetentionPeriodInDays:
                   description: The number of days to retain data about successful runs of this canary.
                   type: integer
@@ -827,7 +833,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: 'The name of the canary that you want to run. To find canary names, use <a>DescribeCanaries</a>.'
+          description: 'The name of the canary that you want to run. To find canary names, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.'
           schema:
             type: string
             pattern: '^[0-9a-z_\-]+$'
@@ -880,7 +886,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: 'The name of the canary that you want to stop. To find the names of your canaries, use <a>DescribeCanaries</a>.'
+          description: 'The name of the canary that you want to stop. To find the names of your canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.'
           schema:
             type: string
             pattern: '^[0-9a-z_\-]+$'
@@ -1023,6 +1029,10 @@ components:
       type: integer
       minimum: 60
       maximum: 900
+    MaxSize3008:
+      type: integer
+      minimum: 960
+      maximum: 3008
     SubnetIds:
       type: array
       items:
@@ -1214,6 +1224,9 @@ components:
         TimeoutInSeconds:
           $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
           description: How long the canary is allowed to run before it must stop.
+        MemoryInMB:
+          $ref: '#/components/schemas/MaxSize3008'
+          description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.'
       description: A structure that contains information for a canary run.
     MaxSize1024:
       type: integer
@@ -1335,6 +1348,9 @@ components:
         TimeoutInSeconds:
           $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
           description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+        MemoryInMB:
+          $ref: '#/components/schemas/MaxSize3008'
+          description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
       description: A structure that contains input information for a canary run.
     CanaryRunState:
       type: string

@@ -572,7 +572,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the IPSet. For example: .'
+                  description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -714,7 +714,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about associated member accounts for the current GuardDuty master account.
+      description: Lists details about all member accounts for the current GuardDuty master account.
       responses:
         '200':
           description: Success
@@ -760,7 +760,7 @@ paths:
         - name: onlyAssociated
           in: query
           required: false
-          description: Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
+          description: Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
           schema:
             type: string
         - name: MaxResults
@@ -1020,7 +1020,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The URI of the file that contains the ThreatIntelSet. For example: .'
+                  description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1556,7 +1556,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the IPSet. For example: .'
+                  description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -1937,7 +1937,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: .'
+                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -3383,7 +3383,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example: .'
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/IpSetStatus'
           description: The status of IPSet file that was uploaded.
@@ -3432,7 +3432,7 @@ components:
           description: The format of the threatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example: .'
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Status:
           $ref: '#/components/schemas/ThreatIntelSetStatus'
           description: The status of threatIntelSet file uploaded.
@@ -3619,6 +3619,18 @@ components:
         InvitationId:
           $ref: '#/components/schemas/String'
           description: The value that is used to validate the master account to the member account.
+    Boolean:
+      type: boolean
+    AccessControlList:
+      type: object
+      properties:
+        AllowsPublicReadAccess:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether public read access for the bucket is enabled through an Access Control List (ACL).
+        AllowsPublicWriteAccess:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether public write access for the bucket is enabled through an Access Control List (ACL).
+      description: Contains information on the current access control policies for the bucket.
     AccessKeyDetails:
       type: object
       properties:
@@ -3651,6 +3663,29 @@ components:
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 50
+    BlockPublicAccess:
+      type: object
+      properties:
+        IgnorePublicAcls:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.
+        RestrictPublicBuckets:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if S3 Block Public Access is set to <code>RestrictPublicBuckets</code>.
+        BlockPublicAcls:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if S3 Block Public Access is set to <code>BlockPublicAcls</code>.
+        BlockPublicPolicy:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates if S3 Block Public Access is set to <code>BlockPublicPolicy</code>.
+      description: 'Contains information on how the bucker owner''s S3 Block Public Access settings are being applied to the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html">S3 Block Public Access</a> for more information. '
+    AccountLevelPermissions:
+      type: object
+      properties:
+        BlockPublicAccess:
+          $ref: '#/components/schemas/BlockPublicAccess'
+          description: Describes the S3 Block Public Access settings of the bucket's parent account.
+      description: Contains information about the account level permissions on the S3 bucket.
     AwsApiCallAction:
       type: object
       properties:
@@ -3795,8 +3830,29 @@ components:
           $ref: '#/components/schemas/Organization'
           description: The ISP organization information of the remote IP address.
       description: Contains information about the remote IP address of the connection.
-    Boolean:
-      type: boolean
+    BucketPolicy:
+      type: object
+      properties:
+        AllowsPublicReadAccess:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether public read access for the bucket is enabled through a bucket policy.
+        AllowsPublicWriteAccess:
+          $ref: '#/components/schemas/Boolean'
+          description: A value that indicates whether public write access for the bucket is enabled through a bucket policy.
+      description: Contains information on the current bucket policies for the S3 bucket.
+    BucketLevelPermissions:
+      type: object
+      properties:
+        AccessControlList:
+          $ref: '#/components/schemas/AccessControlList'
+          description: Contains information on how Access Control Policies are applied to the bucket.
+        BucketPolicy:
+          $ref: '#/components/schemas/BucketPolicy'
+          description: Contains information on the bucket policies for the S3 bucket.
+        BlockPublicAccess:
+          $ref: '#/components/schemas/BlockPublicAccess'
+          description: Contains information on which account level S3 Block Public Access settings are applied to the S3 bucket.
+      description: Contains information about the bucket level permissions for the S3 bucket.
     City:
       type: object
       properties:
@@ -4008,7 +4064,7 @@ components:
           description: The format of the file that contains the IPSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the IPSet. For example: .'
+          description: 'The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
@@ -4106,7 +4162,7 @@ components:
           description: The format of the file that contains the ThreatIntelSet.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The URI of the file that contains the ThreatIntelSet. For example: .'
+          description: 'The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
@@ -4125,6 +4181,16 @@ components:
         AccountIds:
           $ref: '#/components/schemas/AccountIds'
           description: A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
+    DefaultServerSideEncryption:
+      type: object
+      properties:
+        EncryptionType:
+          $ref: '#/components/schemas/String'
+          description: The type of encryption used for objects within the S3 bucket.
+        KmsMasterKeyArn:
+          $ref: '#/components/schemas/String'
+          description: 'The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket <code>EncryptionType</code> is <code>aws:kms</code>.'
+      description: 'Contains information on the server side encryption method used in the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html">S3 Server-Side Encryption</a> for more information.'
     DeleteDetectorRequest:
       type: object
       title: DeleteDetectorRequest
@@ -4276,6 +4342,9 @@ components:
         AccessKeyDetails:
           $ref: '#/components/schemas/AccessKeyDetails'
           description: The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
+        S3BucketDetails:
+          $ref: '#/components/schemas/S3BucketDetails'
+          description: Contains information on the S3 bucket.
         InstanceDetails:
           $ref: '#/components/schemas/InstanceDetails'
           description: The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
@@ -4650,7 +4719,7 @@ components:
       properties:
         FindingCriteria:
           $ref: '#/components/schemas/FindingCriteria'
-          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
+          description: '<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to ''true'', only archived findings are listed. When it''s set to ''false'', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>'
         SortCriteria:
           $ref: '#/components/schemas/SortCriteria'
           description: Represents the criteria used for sorting findings.
@@ -4810,6 +4879,23 @@ components:
           $ref: '#/components/schemas/String'
           description: The name of the internet provider.
       description: Contains information about the ISP organization of the remote IP address.
+    Owner:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/String'
+          description: 'The canonical user ID of the bucket owner. For information about locating your canonical user ID see <a href="https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId">Finding Your Account Canonical User ID.</a> '
+      description: Contains information on the owner of the bucket.
+    PermissionConfiguration:
+      type: object
+      properties:
+        BucketLevelPermissions:
+          $ref: '#/components/schemas/BucketLevelPermissions'
+          description: Contains information about the bucket level permissions for the S3 bucket.
+        AccountLevelPermissions:
+          $ref: '#/components/schemas/AccountLevelPermissions'
+          description: Contains information about the account level permissions on the S3 bucket.
+      description: Contains information about how permissions are configured for the S3 bucket.
     PortProbeDetails:
       type: array
       items:
@@ -4847,6 +4933,51 @@ components:
           $ref: '#/components/schemas/String'
           description: The product code type.
       description: Contains information about the product code for the EC2 instance.
+    PublicAccess:
+      type: object
+      properties:
+        PermissionConfiguration:
+          $ref: '#/components/schemas/PermissionConfiguration'
+          description: Contains information about how permissions are configured for the S3 bucket.
+        EffectivePermission:
+          $ref: '#/components/schemas/String'
+          description: Describes the effective permission on this bucket after factoring all attached policies.
+      description: Describes the public access policies that apply to the S3 bucket.
+    S3BucketDetails:
+      type: array
+      description: Contains information on the S3 bucket.
+      items:
+        $ref: '#/components/schemas/S3BucketDetail'
+    Timestamp:
+      type: string
+      format: date-time
+    S3BucketDetail:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/String'
+          description: The Amazon Resource Name (ARN) of the S3 bucket.
+        Name:
+          $ref: '#/components/schemas/String'
+          description: The name of the S3 bucket.
+        Type:
+          $ref: '#/components/schemas/String'
+          description: Describes whether the bucket is a source or destination bucket.
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time the bucket was created at.
+        Owner:
+          $ref: '#/components/schemas/Owner'
+          description: The owner of the S3 bucket.
+        Tags:
+          $ref: '#/components/schemas/Tags'
+          description: All tags attached to the S3 bucket
+        DefaultServerSideEncryption:
+          $ref: '#/components/schemas/DefaultServerSideEncryption'
+          description: Describes the server side encryption method used in the S3 bucket.
+        PublicAccess:
+          $ref: '#/components/schemas/PublicAccess'
+          description: Describes the public access policies that apply to the S3 bucket.
     SecurityGroup:
       type: object
       properties:
@@ -4991,7 +5122,7 @@ components:
           description: The unique ID that specifies the IPSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the IPSet. For example: .'
+          description: 'The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the IPSet is active or not.
@@ -5020,7 +5151,7 @@ components:
           description: The unique ID that specifies the ThreatIntelSet that you want to update.
         Location:
           $ref: '#/components/schemas/Location'
-          description: 'The updated URI of the file that contains the ThreateIntelSet. For example: .'
+          description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
         Activate:
           $ref: '#/components/schemas/Boolean'
           description: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.

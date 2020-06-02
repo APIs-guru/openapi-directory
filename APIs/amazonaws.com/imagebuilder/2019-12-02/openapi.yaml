@@ -301,6 +301,13 @@ paths:
                   enum:
                     - Windows
                     - Linux
+                supportedOsVersions:
+                  description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OsVersion'
+                  minItems: 1
+                  maxItems: 25
                 data:
                   description: The data of the component. Used to specify the data inline. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.
                   type: string
@@ -4010,6 +4017,9 @@ components:
         componentBuildVersionArn:
           $ref: '#/components/schemas/ComponentBuildVersionArn'
           description: The Amazon Resource Name (ARN) of the component that was created by this request.
+    OsVersion:
+      type: string
+      minLength: 1
     TagValue:
       type: string
       maxLength: 256
@@ -4624,6 +4634,12 @@ components:
       enum:
         - Windows
         - Linux
+    OsVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OsVersion'
+      minItems: 1
+      maxItems: 25
     ComponentData:
       type: string
     DateTime:
@@ -4652,6 +4668,9 @@ components:
         platform:
           $ref: '#/components/schemas/Platform'
           description: The platform of the component.
+        supportedOsVersions:
+          $ref: '#/components/schemas/OsVersionList'
+          description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
         owner:
           $ref: '#/components/schemas/NonEmptyString'
           description: The owner of the component.
@@ -4701,6 +4720,9 @@ components:
         platform:
           $ref: '#/components/schemas/Platform'
           description: The platform of the component.
+        supportedOsVersions:
+          $ref: '#/components/schemas/OsVersionList'
+          description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
         type:
           $ref: '#/components/schemas/ComponentType'
           description: The type of the component denotes whether the component is used to build the image or only to test it.
@@ -4742,6 +4764,9 @@ components:
         platform:
           $ref: '#/components/schemas/Platform'
           description: The platform of the component.
+        supportedOsVersions:
+          $ref: '#/components/schemas/OsVersionList'
+          description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
         type:
           $ref: '#/components/schemas/ComponentType'
           description: The type of the component denotes whether the component is used to build the image or only to test it.
@@ -4789,6 +4814,9 @@ components:
         platform:
           $ref: '#/components/schemas/Platform'
           description: The platform of the component.
+        supportedOsVersions:
+          $ref: '#/components/schemas/OsVersionList'
+          description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
         data:
           $ref: '#/components/schemas/InlineComponentData'
           description: The data of the component. Used to specify the data inline. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.
@@ -5414,9 +5442,6 @@ components:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the infrastructure configuration.
       description: Details of the infrastructure configuration.
-    OsVersion:
-      type: string
-      minLength: 1
     OutputResources:
       type: object
       properties:

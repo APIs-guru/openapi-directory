@@ -313,7 +313,7 @@ paths:
   '/#X-Amz-Target=AmazonSSM.CreateAssociation':
     post:
       operationId: CreateAssociation
-      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>'
+      description: '<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the <code>AssociationAlreadyExists</code> exception.</p>'
       responses:
         '200':
           description: Success
@@ -7146,7 +7146,7 @@ components:
           description: A list of key and value pairs that describe attachments to a version of a document.
         Name:
           $ref: '#/components/schemas/DocumentName'
-          description: '<p>A name for the Systems Manager document.</p> <important> <p>You can''t use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>'
+          description: '<p>A name for the Systems Manager document.</p> <important> <p>You can''t use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws-</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>'
         VersionName:
           $ref: '#/components/schemas/DocumentVersionName'
           description: 'An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.'
@@ -9683,7 +9683,7 @@ components:
           description: '<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types:</p> <p>Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the <i>parameter</i> does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter.</p> <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours.</p> <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed.</p> <p>All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html">Assigning parameter policies</a>. </p>'
         DataType:
           $ref: '#/components/schemas/ParameterDataType'
-          description: '<p>The data type for a String parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a String parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value you provide against that data type. The required format is <code>ami-12345abcdeEXAMPLE</code>. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+          description: '<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
     ParameterLimitExceeded: {}
     ParameterAlreadyExists: {}
     HierarchyLevelLimitExceededException: {}
@@ -13431,7 +13431,6 @@ components:
       items:
         $ref: '#/components/schemas/OpsResultAttribute'
       minItems: 1
-      maxItems: 1
     OpsEntityList:
       type: array
       items:

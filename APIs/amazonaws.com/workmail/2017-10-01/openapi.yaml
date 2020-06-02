@@ -883,6 +883,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.DeleteRetentionPolicy':
+    post:
+      operationId: DeleteRetentionPolicy
+      description: Deletes the specified retention policy from the specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRetentionPolicyResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRetentionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteRetentionPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=WorkMailService.DeleteUser':
     post:
       operationId: DeleteUser
@@ -1430,6 +1481,63 @@ paths:
             type: string
             enum:
               - WorkMailService.GetAccessControlEffect
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.GetDefaultRetentionPolicy':
+    post:
+      operationId: GetDefaultRetentionPolicy
+      description: Gets the default retention policy details for the specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDefaultRetentionPolicyResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDefaultRetentionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.GetDefaultRetentionPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2231,6 +2339,63 @@ paths:
             type: string
             enum:
               - WorkMailService.PutMailboxPermissions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=WorkMailService.PutRetentionPolicy':
+    post:
+      operationId: PutRetentionPolicy
+      description: Puts a retention policy to the specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRetentionPolicyResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRetentionPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.PutRetentionPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3060,6 +3225,22 @@ components:
         ResourceId:
           $ref: '#/components/schemas/ResourceId'
           description: The identifier of the resource to be deleted.
+    DeleteRetentionPolicyResponse:
+      type: object
+      properties: {}
+    DeleteRetentionPolicyRequest:
+      type: object
+      required:
+        - OrganizationId
+        - Id
+      title: DeleteRetentionPolicyRequest
+      properties:
+        OrganizationId:
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
+        Id:
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
     DeleteUserResponse:
       type: object
       properties: {}
@@ -3315,6 +3496,30 @@ components:
         UserId:
           $ref: '#/components/schemas/WorkMailIdentifier'
           description: The user ID.
+    GetDefaultRetentionPolicyResponse:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
+        Name:
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy name.
+        Description:
+          $ref: '#/components/schemas/String'
+          description: The retention policy description.
+        FolderConfigurations:
+          $ref: '#/components/schemas/FolderConfigurations'
+          description: The retention policy folder configurations.
+    GetDefaultRetentionPolicyRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: GetDefaultRetentionPolicyRequest
+      properties:
+        OrganizationId:
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
     GetMailboxDetailsResponse:
       type: object
       properties:
@@ -3637,6 +3842,32 @@ components:
         PermissionValues:
           $ref: '#/components/schemas/PermissionValues'
           description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+    PutRetentionPolicyResponse:
+      type: object
+      properties: {}
+    PutRetentionPolicyRequest:
+      type: object
+      required:
+        - OrganizationId
+        - Name
+        - FolderConfigurations
+      title: PutRetentionPolicyRequest
+      properties:
+        OrganizationId:
+          $ref: '#/components/schemas/OrganizationId'
+          description: The organization ID.
+        Id:
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy ID.
+        Name:
+          $ref: '#/components/schemas/ShortString'
+          description: The retention policy name.
+        Description:
+          $ref: '#/components/schemas/PolicyDescription'
+          description: The retention policy description.
+        FolderConfigurations:
+          $ref: '#/components/schemas/FolderConfigurations'
+          description: The retention policy folder configurations.
     RegisterToWorkMailResponse:
       type: object
       properties: {}
@@ -3948,6 +4179,11 @@ components:
           $ref: '#/components/schemas/MemberType'
           description: 'The type of the delegate: user or group.'
       description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
+    ShortString:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 64
     EntityState:
       type: string
       enum:
@@ -3965,6 +4201,44 @@ components:
         - USER
         - RESOURCE
         - SYSTEM_USER
+    FolderName:
+      type: string
+      enum:
+        - INBOX
+        - DELETED_ITEMS
+        - SENT_ITEMS
+        - DRAFTS
+        - JUNK_EMAIL
+    RetentionAction:
+      type: string
+      enum:
+        - NONE
+        - DELETE
+        - PERMANENTLY_DELETE
+    RetentionPeriod:
+      type: integer
+      minimum: 1
+      maximum: 730
+    FolderConfiguration:
+      type: object
+      required:
+        - Name
+        - Action
+      properties:
+        Name:
+          $ref: '#/components/schemas/FolderName'
+          description: The folder name.
+        Action:
+          $ref: '#/components/schemas/RetentionAction'
+          description: The action to take on the folder contents at the end of the folder configuration period.
+        Period:
+          $ref: '#/components/schemas/RetentionPeriod'
+          description: The period of time at which the folder configuration action is applied.
+      description: The configuration applied to an organization's folders by its retention policy.
+    FolderConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderConfiguration'
     IpAddress:
       type: string
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
@@ -4111,6 +4385,10 @@ components:
         - FULL_ACCESS
         - SEND_AS
         - SEND_ON_BEHALF
+    PolicyDescription:
+      type: string
+      pattern: '[\w\d\s\S\-!?=,.;:''_]+'
+      maxLength: 256
     Resource:
       type: object
       properties:

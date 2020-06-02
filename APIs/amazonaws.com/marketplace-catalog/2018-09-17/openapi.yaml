@@ -3,7 +3,7 @@ info:
   version: '2018-09-17'
   x-release: v4
   title: AWS Marketplace Catalog Service
-  description: '<p>Catalog API actions allow you to create, describe, list, and delete changes to your published entities. An entity is a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>'
+  description: '<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -392,7 +392,7 @@ paths:
                   minItems: 1
                   maxItems: 8
                 Sort:
-                  description: 'An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.'
+                  description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
                   type: object
                   properties:
                     SortBy:
@@ -504,7 +504,7 @@ paths:
                   minItems: 1
                   maxItems: 8
                 Sort:
-                  description: 'An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.'
+                  description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
                   type: object
                   properties:
                     SortBy:
@@ -535,7 +535,7 @@ paths:
   /StartChangeSet:
     post:
       operationId: StartChangeSet
-      description: This operation allows you to request changes in your entities.
+      description: '<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> below because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p>'
       responses:
         '200':
           description: Success
@@ -857,6 +857,9 @@ components:
         Entity:
           $ref: '#/components/schemas/Entity'
           description: The entity to be changed.
+        Details:
+          $ref: '#/components/schemas/Json'
+          description: This object contains details specific to the change type of the requested change.
         ErrorDetailList:
           $ref: '#/components/schemas/ErrorDetailList'
           description: An array of <code>ErrorDetail</code> objects associated with the change.
@@ -950,7 +953,7 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/StringValue'
-          description: The name for the entity. This value is not unique. It is defined by the provider.
+          description: The name for the entity. This value is not unique. It is defined by the seller.
         EntityType:
           $ref: '#/components/schemas/EntityType'
           description: The type of the entity.
@@ -965,7 +968,7 @@ components:
           description: 'The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).'
         Visibility:
           $ref: '#/components/schemas/StringValue'
-          description: 'The visibility status of the entity to subscribers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing subscribers can view it). '
+          description: 'The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). '
       description: 'This object is a container for common summary information about the entity. The summary doesn''t contain the whole entity structure, but it does contain information common across all entities.'
     EntitySummaryList:
       type: array
@@ -1007,7 +1010,7 @@ components:
         SortOrder:
           $ref: '#/components/schemas/SortOrder'
           description: The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.
-      description: 'An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.'
+      description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
     MaxResultInteger:
       type: integer
       minimum: 1
@@ -1031,7 +1034,7 @@ components:
           description: An array of filter objects.
         Sort:
           $ref: '#/components/schemas/Sort'
-          description: 'An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.'
+          description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
         MaxResults:
           $ref: '#/components/schemas/MaxResultInteger'
           description: 'The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.'
@@ -1056,7 +1059,7 @@ components:
           description: 'An array of filter objects. Each filter object contains two attributes, <code>filterName</code> and <code>filterValues</code>.'
         Sort:
           $ref: '#/components/schemas/Sort'
-          description: 'An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.'
+          description: 'An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.'
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The value of the next token, if it exists. Null if there are no more results.'

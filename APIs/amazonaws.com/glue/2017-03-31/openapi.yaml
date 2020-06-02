@@ -6715,6 +6715,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.StopWorkflowRun':
+    post:
+      operationId: StopWorkflowRun
+      description: Stops the execution of the specified workflow run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopWorkflowRunResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: IllegalWorkflowStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalWorkflowStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopWorkflowRunRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.StopWorkflowRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.TagResource':
     post:
       operationId: TagResource
@@ -10208,6 +10271,23 @@ components:
         Name:
           $ref: '#/components/schemas/NameString'
           description: The name of the trigger to stop.
+    StopWorkflowRunResponse:
+      type: object
+      properties: {}
+    StopWorkflowRunRequest:
+      type: object
+      required:
+        - Name
+        - RunId
+      title: StopWorkflowRunRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the workflow to stop.
+        RunId:
+          $ref: '#/components/schemas/IdString'
+          description: The ID of the workflow run to stop.
+    IllegalWorkflowStateException: {}
     TagResourceResponse:
       type: object
       properties: {}
@@ -11182,8 +11262,9 @@ components:
       type: string
       enum:
         - RUNNING
-        - SUCCEEDED
+        - CANCELLING
         - CANCELLED
+        - SUCCEEDED
         - FAILED
     Condition:
       type: object
@@ -11196,7 +11277,7 @@ components:
           description: 'The name of the job whose <code>JobRuns</code> this condition applies to, and on which this trigger waits.'
         State:
           $ref: '#/components/schemas/JobRunState'
-          description: 'The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.'
+          description: 'The condition state. Currently, the only job states that a trigger can listen for are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>FAILED</code>, and <code>TIMEOUT</code>. The only crawler states that a trigger can listen for are <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>CANCELLED</code>.'
         CrawlerName:
           $ref: '#/components/schemas/NameString'
           description: The name of the crawler to which this condition applies.
@@ -12408,7 +12489,7 @@ components:
           description: The date and time that this job run completed.
         JobRunState:
           $ref: '#/components/schemas/JobRunState'
-          description: The current state of the job run.
+          description: 'The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href="https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html">AWS Glue Job Run Statuses</a>.'
         Arguments:
           $ref: '#/components/schemas/GenericMap'
           description: '<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>'
@@ -13622,6 +13703,8 @@ components:
       enum:
         - RUNNING
         - COMPLETED
+        - STOPPING
+        - STOPPED
     WorkflowRunStatistics:
       type: object
       properties:

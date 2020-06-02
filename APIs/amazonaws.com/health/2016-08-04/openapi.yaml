@@ -698,6 +698,8 @@ components:
         affectedAccounts:
           $ref: '#/components/schemas/affectedAccountsList'
           description: A JSON set of elements of the affected accounts.
+        eventScopeCode:
+          $ref: '#/components/schemas/eventScopeCode'
         nextToken:
           $ref: '#/components/schemas/nextToken'
           description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
@@ -949,8 +951,8 @@ components:
       maxLength: 1600
     entityValue:
       type: string
-      pattern: '.{0,256}'
-      maxLength: 256
+      pattern: '.{0,1224}'
+      maxLength: 1224
     entityUrl:
       type: string
     accountId:
@@ -1022,6 +1024,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/accountId'
+    eventScopeCode:
+      type: string
+      enum:
+        - PUBLIC
+        - ACCOUNT_SPECIFIC
+        - NONE
     OrganizationAffectedEntitiesErrorItem:
       type: object
       properties:
@@ -1396,12 +1404,13 @@ components:
         statusCode:
           $ref: '#/components/schemas/eventStatusCode'
           description: 'The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.'
+        eventScopeCode:
+          $ref: '#/components/schemas/eventScopeCode'
       description: Summary information about an AWS Health event.
     EventAccountFilter:
       type: object
       required:
         - eventArn
-        - awsAccountId
       properties:
         eventArn:
           $ref: '#/components/schemas/eventArn'
@@ -1511,6 +1520,8 @@ components:
         eventTypeCategory:
           $ref: '#/components/schemas/eventTypeCategory'
           description: The category of the event type.
+        eventScopeCode:
+          $ref: '#/components/schemas/eventScopeCode'
         region:
           $ref: '#/components/schemas/region'
           description: The AWS Region name of the event.
@@ -1535,7 +1546,7 @@ components:
       maxItems: 50
     metadataValue:
       type: string
-      maxLength: 10240
+      maxLength: 32766
     eventType:
       type: string
       pattern: '[^:/]{3,100}'
@@ -1543,6 +1554,7 @@ components:
       maxLength: 100
     metadataKey:
       type: string
+      maxLength: 32766
     tagKey:
       type: string
       pattern: '.{0,127}'

@@ -559,7 +559,7 @@ paths:
         - name: identityType
           in: query
           required: false
-          description: The type of identity (user or group).
+          description: The type of identity (user or group). This parameter is required if you specify <code>identityId</code>.
           schema:
             type: string
             enum:
@@ -568,7 +568,7 @@ paths:
         - name: identityId
           in: query
           required: false
-          description: The ID of the identity.
+          description: The ID of the identity. This parameter is required if you specify <code>identityType</code>.
           schema:
             type: string
             pattern: \S+
@@ -577,7 +577,7 @@ paths:
         - name: resourceType
           in: query
           required: false
-          description: The type of resource (portal or project).
+          description: The type of resource (portal or project). This parameter is required if you specify <code>resourceId</code>.
           schema:
             type: string
             enum:
@@ -586,7 +586,7 @@ paths:
         - name: resourceId
           in: query
           required: false
-          description: The ID of the resource.
+          description: The ID of the resource. This parameter is required if you specify <code>resourceType</code>.
           schema:
             type: string
             pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
@@ -1233,10 +1233,10 @@ paths:
                   description: Contains an image file.
                   type: object
                   properties:
-                    encodedString:
+                    data:
                       $ref: '#/components/schemas/ImageFileData'
                       description: 'The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.'
-                    fileType:
+                    type:
                       $ref: '#/components/schemas/ImageFileType'
                       description: The file type of the image.
                 roleArn:
@@ -1400,7 +1400,7 @@ paths:
   '/access-policies/{accessPolicyId}':
     delete:
       operationId: DeleteAccessPolicy
-      description: Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this action to revoke access to an AWS IoT SiteWise Monitor resource.
+      description: Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
       responses:
         '204':
           description: Success
@@ -1893,7 +1893,7 @@ paths:
             maxLength: 36
     put:
       operationId: UpdateAssetModel
-      description: '<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model''s property and hierarchy definitions. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html">Updating Assets and Models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This action overwrites the existing model with the provided model. To avoid deleting your asset model''s properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model or update a property''s formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can''t change the type or data type of an existing property.</p> </important>'
+      description: '<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model''s property and hierarchy definitions. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html">Updating Assets and Models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model''s properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model or update a property''s formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can''t change the type or data type of an existing property.</p> </important>'
       responses:
         '202':
           description: Success
@@ -2519,16 +2519,15 @@ paths:
                   pattern: '[^@]+@[^@]+'
                   minLength: 1
                   maxLength: 255
-                portalLogoImageFile:
-                  description: Contains an image file.
+                portalLogoImage:
+                  description: '<p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>'
                   type: object
                   properties:
-                    encodedString:
-                      $ref: '#/components/schemas/ImageFileData'
-                      description: 'The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.'
-                    fileType:
-                      $ref: '#/components/schemas/ImageFileType'
-                      description: The file type of the image.
+                    id:
+                      $ref: '#/components/schemas/ID'
+                      description: The ID of an existing image. Specify this parameter to keep an existing image.
+                    file:
+                      $ref: '#/components/schemas/ImageFile'
                 roleArn:
                   description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of a service role that allows the portal''s users to access your AWS IoT SiteWise resources on your behalf. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html">Using service roles for AWS IoT SiteWise Monitor</a> in the <i>AWS IoT SiteWise User Guide</i>.'
                   type: string
@@ -4164,7 +4163,7 @@ components:
           description: '<p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the asset, which has the following format.</p> <p> <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code> </p>'
         assetStatus:
           $ref: '#/components/schemas/AssetStatus'
-          description: 'The status of the asset, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.'
     ResourceAlreadyExistsException: {}
     CreateAssetModelResponse:
       type: object
@@ -4181,7 +4180,7 @@ components:
           description: '<p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the asset model, which has the following format.</p> <p> <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}</code> </p>'
         assetModelStatus:
           $ref: '#/components/schemas/AssetModelStatus'
-          description: 'The status of the asset model, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset model, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.'
     AssetModelPropertyDefinition:
       type: object
       required:
@@ -4268,12 +4267,14 @@ components:
           description: The public URL for the AWS IoT SiteWise Monitor portal.
         portalStatus:
           $ref: '#/components/schemas/PortalStatus'
-          description: 'The status of the portal, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the portal, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.'
         ssoApplicationId:
           $ref: '#/components/schemas/SSOApplicationId'
           description: The associated AWS SSO application Id.
     ImageFileData:
       type: string
+      minLength: 1
+      maxLength: 1500000
     ImageFileType:
       type: string
       enum:
@@ -4300,7 +4301,7 @@ components:
       properties:
         assetStatus:
           $ref: '#/components/schemas/AssetStatus'
-          description: 'The status of the asset, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.'
     DeleteAssetModelResponse:
       type: object
       required:
@@ -4308,7 +4309,7 @@ components:
       properties:
         assetModelStatus:
           $ref: '#/components/schemas/AssetModelStatus'
-          description: 'The status of the asset model, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset model, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.'
     DeleteDashboardResponse:
       type: object
       properties: {}
@@ -4319,7 +4320,7 @@ components:
       properties:
         portalStatus:
           $ref: '#/components/schemas/PortalStatus'
-          description: 'The status of the portal, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the portal, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.'
     DeleteProjectResponse:
       type: object
       properties: {}
@@ -4592,9 +4593,9 @@ components:
         portalLastUpdateDate:
           $ref: '#/components/schemas/Timestamp'
           description: 'The date the portal was last updated, in Unix epoch time.'
-        portalLogoImage:
-          $ref: '#/components/schemas/Image'
-          description: The portal's logo image.
+        portalLogoImageLocation:
+          $ref: '#/components/schemas/ImageLocation'
+          description: 'The portal''s logo image, which is available at a URL.'
         roleArn:
           $ref: '#/components/schemas/ARN'
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the service role that allows the portal''s users to access your AWS IoT SiteWise resources on your behalf. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html">Using service roles for AWS IoT SiteWise Monitor</a> in the <i>AWS IoT SiteWise User Guide</i>.'
@@ -4648,6 +4649,7 @@ components:
         - MAXIMUM
         - MINIMUM
         - SUM
+        - STANDARD_DEVIATION
     Quality:
       type: string
       enum:
@@ -4804,7 +4806,7 @@ components:
       properties:
         assetStatus:
           $ref: '#/components/schemas/AssetStatus'
-          description: 'The status of the asset, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.'
     UpdateAssetModelResponse:
       type: object
       required:
@@ -4812,7 +4814,7 @@ components:
       properties:
         assetModelStatus:
           $ref: '#/components/schemas/AssetModelStatus'
-          description: 'The status of the asset model, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the asset model, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.'
     AssetModelProperty:
       type: object
       required:
@@ -4874,7 +4876,20 @@ components:
       properties:
         portalStatus:
           $ref: '#/components/schemas/PortalStatus'
-          description: 'The status of the portal, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.'
+          description: 'The status of the portal, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.'
+    ImageFile:
+      type: object
+      required:
+        - data
+        - type
+      properties:
+        data:
+          $ref: '#/components/schemas/ImageFileData'
+          description: 'The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.'
+        type:
+          $ref: '#/components/schemas/ImageFileType'
+          description: The file type of the image.
+      description: Contains an image file.
     UpdateProjectResponse:
       type: object
       properties: {}
@@ -4955,19 +4970,22 @@ components:
       properties:
         average:
           $ref: '#/components/schemas/AggregatedDoubleValue'
-          description: The average (mean) value of the time series for the last time interval window.
+          description: The average (mean) value of the time series over a time interval window.
         count:
           $ref: '#/components/schemas/AggregatedDoubleValue'
-          description: The count of data points in the time series for the last time interval window.
+          description: The count of data points in the time series over a time interval window.
         maximum:
           $ref: '#/components/schemas/AggregatedDoubleValue'
-          description: The maximum value of the time series for the last time interval window.
+          description: The maximum value of the time series over a time interval window.
         minimum:
           $ref: '#/components/schemas/AggregatedDoubleValue'
-          description: The minimum value of the time series for the last time interval window.
+          description: The minimum value of the time series over a time interval window.
         sum:
           $ref: '#/components/schemas/AggregatedDoubleValue'
-          description: The sum of the time series for the last time interval window.
+          description: The sum of the time series over a time interval window.
+        standardDeviation:
+          $ref: '#/components/schemas/AggregatedDoubleValue'
+          description: The standard deviation of the time series over a time interval window.
       description: Contains the (pre-calculated) aggregate values for an asset property.
     AggregatedValue:
       type: object
@@ -5661,19 +5679,6 @@ components:
       pattern: '[^@]+@[^@]+'
       minLength: 1
       maxLength: 255
-    ImageFile:
-      type: object
-      required:
-        - encodedString
-        - fileType
-      properties:
-        encodedString:
-          $ref: '#/components/schemas/ImageFileData'
-          description: 'The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.'
-        fileType:
-          $ref: '#/components/schemas/ImageFileType'
-          description: The file type of the image.
-      description: Contains an image file.
     CreatePortalRequest:
       type: object
       required:
@@ -5884,16 +5889,19 @@ components:
       pattern: '^[!-~]*'
       minLength: 1
       maxLength: 256
-    Image:
+    ImageLocation:
       type: object
+      required:
+        - id
+        - url
       properties:
-        locationUrl:
+        id:
+          $ref: '#/components/schemas/ID'
+          description: The ID of the image.
+        url:
           $ref: '#/components/schemas/Url'
-          description: A URL at which the image is available. The URL is valid for 15 minutes for you to view and download the image.
-        lastUpdateDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date the image was last updated, in Unix epoch time.'
-      description: Contains an image that is available at a URL.
+          description: The URL where the image is available. The URL is valid for 15 minutes so that you can view and download the image
+      description: Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.
     DescribeProjectRequest:
       type: object
       title: DescribeProjectRequest
@@ -6046,6 +6054,15 @@ components:
       enum:
         - USER
         - GROUP
+    Image:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+          description: The ID of an existing image. Specify this parameter to keep an existing image.
+        file:
+          $ref: '#/components/schemas/ImageFile'
+      description: '<p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>'
     Interval:
       type: string
       pattern: 1w|1d|1h|15m|5m|1m
@@ -6418,9 +6435,8 @@ components:
         portalContactEmail:
           $ref: '#/components/schemas/Email'
           description: The AWS administrator's contact email address.
-        portalLogoImageFile:
-          $ref: '#/components/schemas/ImageFile'
-          description: 'A logo image to display in the portal. Upload a square, high-resolution image. The image is displayed on a dark background.'
+        portalLogoImage:
+          $ref: '#/components/schemas/Image'
         roleArn:
           $ref: '#/components/schemas/ARN'
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of a service role that allows the portal''s users to access your AWS IoT SiteWise resources on your behalf. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html">Using service roles for AWS IoT SiteWise Monitor</a> in the <i>AWS IoT SiteWise User Guide</i>.'

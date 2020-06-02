@@ -175,7 +175,7 @@ paths:
                       description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                     ResourceTypes:
                       $ref: '#/components/schemas/ResourceTypeValuesList'
-                      description: The resource type.
+                      description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
                     TargetTags:
                       $ref: '#/components/schemas/TargetTagList'
                       description: The single tag that identifies targeted resources for this policy.
@@ -605,7 +605,7 @@ paths:
                       description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                     ResourceTypes:
                       $ref: '#/components/schemas/ResourceTypeValuesList'
-                      description: The resource type.
+                      description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
                     TargetTags:
                       $ref: '#/components/schemas/TargetTagList'
                       description: The single tag that identifies targeted resources for this policy.
@@ -815,7 +815,7 @@ components:
           description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
         ResourceTypes:
           $ref: '#/components/schemas/ResourceTypeValuesList'
-          description: The resource type.
+          description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
         TargetTags:
           $ref: '#/components/schemas/TargetTagList'
           description: The single tag that identifies targeted resources for this policy.
@@ -868,11 +868,13 @@ components:
       items:
         $ref: '#/components/schemas/Time'
       maxItems: 1
+    CronExpression:
+      type: string
+      pattern: 'cron\([^\n]{11,100}\)'
+      minLength: 17
+      maxLength: 106
     CreateRule:
       type: object
-      required:
-        - Interval
-        - IntervalUnit
       properties:
         Interval:
           $ref: '#/components/schemas/Interval'
@@ -882,8 +884,11 @@ components:
           description: The interval unit.
         Times:
           $ref: '#/components/schemas/TimesList'
-          description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time.</p>'
-      description: Specifies when to create snapshots of EBS volumes.
+          description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.</p>'
+        CronExpression:
+          $ref: '#/components/schemas/CronExpression'
+          description: 'The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron expressions</a> in the <i>Amazon CloudWatch User Guide</i>.'
+      description: '<p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>'
     RetentionIntervalUnitValues:
       type: string
       enum:

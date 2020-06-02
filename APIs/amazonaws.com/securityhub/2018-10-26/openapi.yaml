@@ -659,7 +659,7 @@ paths:
                       description: The security findings provider-specific identifier for a finding.
                     GeneratorId:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
                     Type:
                       $ref: '#/components/schemas/StringFilterList'
                       description: A finding type in the format of <code>namespace/category/classifier</code> that classifies a finding.
@@ -915,7 +915,7 @@ paths:
   /members:
     post:
       operationId: CreateMembers
-      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
+      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1332,7 +1332,7 @@ paths:
                       description: The security findings provider-specific identifier for a finding.
                     GeneratorId:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
                     Type:
                       $ref: '#/components/schemas/StringFilterList'
                       description: A finding type in the format of <code>namespace/category/classifier</code> that classifies a finding.
@@ -1873,7 +1873,7 @@ paths:
       parameters: []
     post:
       operationId: EnableSecurityHub
-      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards.</p> <ul> <li> <p>CIS AWS Foundations</p> </li> <li> <p>AWS Foundational Security Best Practices</p> </li> </ul> <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p> <p>To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1920,7 +1920,7 @@ paths:
               type: object
               properties:
                 Tags:
-                  description: The tags to add to the Hub resource when you enable Security Hub.
+                  description: The tags to add to the hub resource when you enable Security Hub.
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -2276,7 +2276,7 @@ paths:
   /productSubscriptions:
     post:
       operationId: EnableImportFindingsForProduct
-      description: '<p>Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub.</p> <p>When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.</p>'
+      description: '<p>Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub.</p> <p>When you enable a product integration, a permissions policy that grants permission for the product to send findings to Security Hub is applied.</p>'
       responses:
         '200':
           description: Success
@@ -2527,7 +2527,7 @@ paths:
                       description: The security findings provider-specific identifier for a finding.
                     GeneratorId:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
                     Type:
                       $ref: '#/components/schemas/StringFilterList'
                       description: A finding type in the format of <code>namespace/category/classifier</code> that classifies a finding.
@@ -2854,7 +2854,7 @@ paths:
                       description: The security findings provider-specific identifier for a finding.
                     GeneratorId:
                       $ref: '#/components/schemas/StringFilterList'
-                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+                      description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
                     Type:
                       $ref: '#/components/schemas/StringFilterList'
                       description: A finding type in the format of <code>namespace/category/classifier</code> that classifies a finding.
@@ -3827,7 +3827,7 @@ components:
           description: 'The ARN generated by Security Hub that uniquely identifies a product that generates findings. This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for a custom integration.'
         GeneratorId:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. '
+          description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. '
         AwsAccountId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The AWS account ID that a finding is generated in.
@@ -4391,7 +4391,7 @@ components:
         OriginPath:
           $ref: '#/components/schemas/NonEmptyString'
           description: An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
-      description: 'A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon MediaStore, or other server from which CloudFront gets your files.'
+      description: 'A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon Elemental MediaStore, or other server from which CloudFront gets your files.'
     AwsCloudFrontDistributionOriginItemList:
       type: array
       items:
@@ -4410,7 +4410,7 @@ components:
           description: The credentials for access to a private registry.
         Type:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>The type of build environment to use for related builds.</p> <p>The environment type <code>ARM_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p> <p>The environment type <code>LINUX_CONTAINER</code> with compute type build.general1.2xlarge is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).</p> <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> | <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code> </p>'
+          description: '<p>The type of build environment to use for related builds.</p> <p>The environment type <code>ARM_CONTAINER</code> is available only in Regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p> <p>The environment type <code>LINUX_CONTAINER</code> with compute type build.general1.2xlarge is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> | <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code> </p>'
       description: Information about the build environment for this build project.
     AwsCodeBuildProjectSource:
       type: object
@@ -4420,7 +4420,7 @@ components:
           description: '<p>The type of repository that contains the source code to be built. Valid values are:</p> <ul> <li> <p> <code>BITBUCKET</code> - The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code> - The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code> - The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code> - The source code is in a GitHub repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code> - The source code is in a GitHub Enterprise repository.</p> </li> <li> <p> <code>NO_SOURCE</code> - The project does not have input source code.</p> </li> <li> <p> <code>S3</code> - The source code is in an S3 input bucket. </p> </li> </ul>'
         Location:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. </p> </li> </ul>'
+          description: '<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file. </p> </li> </ul>'
         GitCloneDepth:
           $ref: '#/components/schemas/Integer'
           description: Information about the Git clone depth for the build project.
@@ -4641,14 +4641,14 @@ components:
       properties:
         CidrIp:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The IPv4 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.'
+          description: 'The IPv4 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.'
       description: A range of IPv4 addresses.
     AwsEc2SecurityGroupIpv6Range:
       type: object
       properties:
         CidrIpv6:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The IPv6 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.'
+          description: 'The IPv6 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.'
       description: A range of IPv6 addresses.
     AwsEc2SecurityGroupPrefixListId:
       type: object
@@ -5030,7 +5030,7 @@ components:
           description: The version number.
         CompatibleRuntimes:
           $ref: '#/components/schemas/NonEmptyStringList'
-          description: '<p>The layer''s compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>'
+          description: '<p>The layer''s compatible runtimes. Maximum number of five items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>'
         CreatedDate:
           $ref: '#/components/schemas/NonEmptyString'
           description: 'The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. '
@@ -5046,7 +5046,7 @@ components:
           description: The name of the feature associated with the IAM)role.
         Status:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf. </p> </li> </ul>'
+          description: '<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf. </p> </li> </ul>'
       description: An AWS Identity and Access Management (IAM) role associated with the DB instance.
     AwsRdsDbInstanceAssociatedRoles:
       type: array
@@ -5182,7 +5182,7 @@ components:
       properties:
         ApplyServerSideEncryptionByDefault:
           $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionByDefault'
-          description: 'Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> Object request doesn''t specify any server-side encryption, this default encryption is applied.'
+          description: 'Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> object request doesn''t specify any server-side encryption, this default encryption is applied.'
       description: An encryption rule to apply to the S3 bucket.
     AwsS3ObjectDetails:
       type: object
@@ -5205,7 +5205,7 @@ components:
         SSEKMSKeyId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
-      description: Details about an AWS S3 object.
+      description: Details about an Amazon S3 object.
     TypeList:
       type: array
       items:
@@ -5215,13 +5215,16 @@ components:
       properties:
         Product:
           $ref: '#/components/schemas/Double'
-          description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+          description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Product</code>, provide <code>Original</code>.</p> <p>The native severity as defined by the AWS service or integrated partner product that generated the finding.</p>'
         Label:
           $ref: '#/components/schemas/SeverityLabel'
           description: <p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>
         Normalized:
           $ref: '#/components/schemas/Integer'
           description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>'
+        Original:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The native severity from the finding product that generated the finding.
       description: The severity of the finding.
     Remediation:
       type: object
@@ -5306,11 +5309,14 @@ components:
       properties:
         Status:
           $ref: '#/components/schemas/ComplianceStatus'
-          description: The result of a standards check.
+          description: '<p>The result of a standards check.</p> <p>The valid values for <code>Status</code> are as follows.</p> <ul> <li> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported for your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
         RelatedRequirements:
           $ref: '#/components/schemas/RelatedRequirementsList'
-          description: List of requirements that are related to a standards control.
-      description: '<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
+          description: 'For a control, the industry or regulatory framework requirements that are related to the control. The check for that control is aligned with these requirements.'
+        StatusReasons:
+          $ref: '#/components/schemas/StatusReasonsList'
+          description: 'For findings generated from controls, a list of reasons behind the value of <code>Status</code>. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. '
+      description: Contains finding details that are specific to control-based findings. Only returned for findings generated from controls.
     VerificationState:
       type: string
       enum:
@@ -5375,7 +5381,7 @@ components:
           description: The security findings provider-specific identifier for a finding.
         GeneratorId:
           $ref: '#/components/schemas/StringFilterList'
-          description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.'
+          description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
         Type:
           $ref: '#/components/schemas/StringFilterList'
           description: A finding type in the format of <code>namespace/category/classifier</code> that classifies a finding.
@@ -5634,7 +5640,7 @@ components:
       properties:
         KmsMasterKeyId:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.
+          description: The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK.
         Subscription:
           $ref: '#/components/schemas/AwsSnsTopicSubscriptionList'
           description: Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.
@@ -5663,7 +5669,7 @@ components:
           description: 'The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.'
         KmsMasterKeyId:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK.
+          description: The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK.
         QueueName:
           $ref: '#/components/schemas/NonEmptyString'
           description: The name of the new queue.
@@ -5683,7 +5689,7 @@ components:
           description: A friendly name or description of the WebACL. You can't change the name of a WebACL after you create it.
         DefaultAction:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The action to perform if none of the Rules contained in the WebACL match.
+          description: The action to perform if none of the rules contained in the WebACL match.
         Rules:
           $ref: '#/components/schemas/AwsWafWebAclRuleList'
           description: 'An array that contains the action for each rule in a WebACL, the priority of the rule, and the ID of the rule.'
@@ -5696,8 +5702,8 @@ components:
       properties:
         Type:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p>Specifies how you want AWS WAF to respond to requests that match the settings in a Rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>'
-      description: 'Details about the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. '
+          description: '<p>Specifies how you want AWS WAF to respond to requests that match the settings in a rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>'
+      description: 'Details about the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. '
     WafExcludedRuleList:
       type: array
       items:
@@ -5707,14 +5713,14 @@ components:
       properties:
         Type:
           $ref: '#/components/schemas/NonEmptyString'
-          description: '<p> <code>COUNT</code> overrides the action specified by the individual rule within a RuleGroup .</p> <p>If set to <code>NONE</code>, the rule''s action takes place.</p>'
+          description: '<p> <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> .</p> <p>If set to <code>NONE</code>, the rule''s action takes place.</p>'
       description: Details about an override action for a rule.
     AwsWafWebAclRule:
       type: object
       properties:
         Action:
           $ref: '#/components/schemas/WafAction'
-          description: 'Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. '
+          description: 'Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. '
         ExcludedRules:
           $ref: '#/components/schemas/WafExcludedRuleList'
           description: Rules to exclude from a rule group.
@@ -5723,10 +5729,10 @@ components:
           description: '<p>Use the <code>OverrideAction</code> to test your RuleGroup.</p> <p>Any rule in a RuleGroup can potentially block a request. If you set the <code>OverrideAction</code> to <code>None</code>, the RuleGroup blocks a request if any individual rule in the RuleGroup matches the request and is configured to block that request.</p> <p>However, if you first want to test the RuleGroup, set the <code>OverrideAction</code> to <code>Count</code>. The RuleGroup then overrides any block action specified by individual rules contained within the group. Instead of blocking matching requests, those requests are counted.</p> <p> <code>ActivatedRule</code>|<code>OverrideAction</code> applies only when updating or adding a RuleGroup to a WebACL. In this case you do not use <code>ActivatedRule</code>|<code>Action</code>. For all other update requests, <code>ActivatedRule</code>|<code>Action</code> is used instead of <code>ActivatedRule</code>|<code>OverrideAction</code>. </p>'
         Priority:
           $ref: '#/components/schemas/Integer'
-          description: 'Specifies the order in which the Rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before Rules with a higher value. The value must be a unique integer. If you add multiple Rules to a WebACL, the values do not need to be consecutive.'
+          description: 'Specifies the order in which the rules in a WebACL are evaluated. Rules with a lower value for <code>Priority</code> are evaluated before rules with a higher value. The value must be a unique integer. If you add multiple rules to a WebACL, the values do not need to be consecutive.'
         RuleId:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The identifier for a Rule.
+          description: The identifier for a rule.
         Type:
           $ref: '#/components/schemas/NonEmptyString'
           description: '<p>The rule type.</p> <p>Valid values: <code>REGULAR</code> | <code>RATE_BASED</code> | <code>GROUP</code> </p> <p>The default is <code>REGULAR</code>.</p>'
@@ -5882,6 +5888,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    StatusReasonsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StatusReason'
     ContainerDetails:
       type: object
       properties:
@@ -6095,7 +6105,7 @@ components:
       properties:
         Tags:
           $ref: '#/components/schemas/TagMap'
-          description: The tags to add to the Hub resource when you enable Security Hub.
+          description: The tags to add to the hub resource when you enable Security Hub.
         EnableDefaultStandards:
           $ref: '#/components/schemas/Boolean'
           description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
@@ -6484,7 +6494,7 @@ components:
           description: Details about an Amazon EC2 instance related to a finding.
         AwsEc2NetworkInterface:
           $ref: '#/components/schemas/AwsEc2NetworkInterfaceDetails'
-          description: Details for an AWS EC2 network interface.
+          description: Details for an Amazon EC2 network interface.
         AwsEc2SecurityGroup:
           $ref: '#/components/schemas/AwsEc2SecurityGroupDetails'
           description: Details for an EC2 security group.
@@ -6496,7 +6506,7 @@ components:
           description: Details for an Elasticsearch domain.
         AwsS3Bucket:
           $ref: '#/components/schemas/AwsS3BucketDetails'
-          description: Details about an Amazon S3 Bucket related to a finding.
+          description: Details about an Amazon S3 bucket related to a finding.
         AwsS3Object:
           $ref: '#/components/schemas/AwsS3ObjectDetails'
           description: Details about an Amazon S3 object related to a finding.
@@ -6517,7 +6527,7 @@ components:
           description: Details for a Lambda layer version.
         AwsRdsDbInstance:
           $ref: '#/components/schemas/AwsRdsDbInstanceDetails'
-          description: Details for an RDS database instance.
+          description: Details for an Amazon RDS database instance.
         AwsSnsTopic:
           $ref: '#/components/schemas/AwsSnsTopicDetails'
           description: Details about an SNS topic.
@@ -6664,6 +6674,18 @@ components:
           $ref: '#/components/schemas/StandardsStatus'
           description: The status of the standards subscription.
       description: A resource that represents your subscription to a supported standard.
+    StatusReason:
+      type: object
+      required:
+        - ReasonCode
+      properties:
+        ReasonCode:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'A code that represents a reason for the control status. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. '
+        Description:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The corresponding description for the status reason code.
+      description: Provides additional context for the value of <code>Compliance.Status</code>.
     StringFilterComparison:
       type: string
       enum:

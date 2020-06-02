@@ -196,6 +196,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.CreateDataCatalog':
+    post:
+      operationId: CreateDataCatalog
+      description: Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataCatalogOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataCatalogInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.CreateDataCatalog
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonAthena.CreateNamedQuery':
     post:
       operationId: CreateNamedQuery
@@ -286,6 +331,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.DeleteDataCatalog':
+    post:
+      operationId: DeleteDataCatalog
+      description: Deletes a data catalog.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDataCatalogOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDataCatalogInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.DeleteDataCatalog
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonAthena.DeleteNamedQuery':
     post:
       operationId: DeleteNamedQuery
@@ -368,6 +458,102 @@ paths:
             type: string
             enum:
               - AmazonAthena.DeleteWorkGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.GetDataCatalog':
+    post:
+      operationId: GetDataCatalog
+      description: Returns the specified data catalog.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataCatalogOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDataCatalogInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetDataCatalog
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.GetDatabase':
+    post:
+      operationId: GetDatabase
+      description: Returns a database object for the specfied database and data catalog.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatabaseOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: MetadataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDatabaseInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetDatabase
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -523,6 +709,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.GetTableMetadata':
+    post:
+      operationId: GetTableMetadata
+      description: 'Returns table metadata for the specified catalog, database, and table.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTableMetadataOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: MetadataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTableMetadataInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetTableMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonAthena.GetWorkGroup':
     post:
       operationId: GetWorkGroup
@@ -568,10 +805,130 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.ListDataCatalogs':
+    post:
+      operationId: ListDataCatalogs
+      description: Lists the data catalogs in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDataCatalogsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDataCatalogsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListDataCatalogs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.ListDatabases':
+    post:
+      operationId: ListDatabases
+      description: Lists the databases in the specified data catalog.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatabasesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: MetadataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatabasesInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListDatabases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonAthena.ListNamedQueries':
     post:
       operationId: ListNamedQueries
-      description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      description: '<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -682,10 +1039,73 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.ListTableMetadata':
+    post:
+      operationId: ListTableMetadata
+      description: Lists the metadata for the tables in the specified data catalog database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTableMetadataOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: MetadataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTableMetadataInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListTableMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonAthena.ListTagsForResource':
     post:
       operationId: ListTagsForResource
-      description: Lists the tags associated with this workgroup.
+      description: Lists the tags associated with an Athena workgroup or data catalog resource.
       responses:
         '200':
           description: Success
@@ -718,6 +1138,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListTagsForResourceInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -793,7 +1225,7 @@ paths:
   '/#X-Amz-Target=AmazonAthena.StartQueryExecution':
     post:
       operationId: StartQueryExecution
-      description: '<p>Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>'
+      description: 'Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran. Running queries against an external catalog requires <a>GetDataCatalog</a> permission to the catalog. For code samples using the AWS SDK for Java, see <a href="http://docs.aws.amazon.com/athena/latest/ug/code-samples.html">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -889,7 +1321,7 @@ paths:
   '/#X-Amz-Target=AmazonAthena.TagResource':
     post:
       operationId: TagResource
-      description: 'Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.'
+      description: 'Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.'
       responses:
         '200':
           description: Success
@@ -940,7 +1372,7 @@ paths:
   '/#X-Amz-Target=AmazonAthena.UntagResource':
     post:
       operationId: UntagResource
-      description: 'Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.'
+      description: Removes one or more tags from a data catalog or workgroup resource.
       responses:
         '200':
           description: Success
@@ -980,6 +1412,51 @@ paths:
             type: string
             enum:
               - AmazonAthena.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonAthena.UpdateDataCatalog':
+    post:
+      operationId: UpdateDataCatalog
+      description: Updates the data catalog that has the specified name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDataCatalogOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDataCatalogInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.UpdateDataCatalog
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1123,6 +1600,31 @@ components:
         QueryExecutionIds:
           $ref: '#/components/schemas/QueryExecutionIdList'
           description: An array of query execution IDs.
+    CreateDataCatalogOutput:
+      type: object
+      properties: {}
+    CreateDataCatalogInput:
+      type: object
+      required:
+        - Name
+        - Type
+      title: CreateDataCatalogInput
+      properties:
+        Name:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: 'The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.'
+        Type:
+          $ref: '#/components/schemas/DataCatalogType'
+          description: 'The type of data catalog to create: <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+          description: A description of the data catalog to be created.
+        Parameters:
+          $ref: '#/components/schemas/ParametersMap'
+          description: '<p>Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: A list of comma separated tags to add to the data catalog that is created.
     CreateNamedQueryOutput:
       type: object
       properties:
@@ -1175,7 +1677,19 @@ components:
           description: The workgroup description.
         Tags:
           $ref: '#/components/schemas/TagList'
-          description: 'One or more tags, separated by commas, that you want to attach to the workgroup as you create it.'
+          description: A list of comma separated tags to add to the workgroup that is created.
+    DeleteDataCatalogOutput:
+      type: object
+      properties: {}
+    DeleteDataCatalogInput:
+      type: object
+      required:
+        - Name
+      title: DeleteDataCatalogInput
+      properties:
+        Name:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog to delete.
     DeleteNamedQueryOutput:
       type: object
       properties: {}
@@ -1203,6 +1717,41 @@ components:
         RecursiveDeleteOption:
           $ref: '#/components/schemas/BoxedBoolean'
           description: The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+    GetDataCatalogOutput:
+      type: object
+      properties:
+        DataCatalog:
+          $ref: '#/components/schemas/DataCatalog'
+          description: The data catalog returned.
+    GetDataCatalogInput:
+      type: object
+      required:
+        - Name
+      title: GetDataCatalogInput
+      properties:
+        Name:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog to return.
+    GetDatabaseOutput:
+      type: object
+      properties:
+        Database:
+          $ref: '#/components/schemas/Database'
+          description: The database returned.
+    GetDatabaseInput:
+      type: object
+      required:
+        - CatalogName
+        - DatabaseName
+      title: GetDatabaseInput
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog that contains the database to return.
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the database to return.
+    MetadataException: {}
     GetNamedQueryOutput:
       type: object
       properties:
@@ -1244,7 +1793,7 @@ components:
           description: The results of the query execution.
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: A token to be used by the next request if this request is truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
     GetQueryResultsInput:
       type: object
       required:
@@ -1256,10 +1805,33 @@ components:
           description: The unique ID of the query execution.
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: The token that specifies where to start pagination if a previous request was truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
         MaxResults:
           $ref: '#/components/schemas/MaxQueryResults'
           description: The maximum number of results (rows) to return in this request.
+    GetTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadata:
+          $ref: '#/components/schemas/TableMetadata'
+          description: An object that contains table metadata.
+    GetTableMetadataInput:
+      type: object
+      required:
+        - CatalogName
+        - DatabaseName
+        - TableName
+      title: GetTableMetadataInput
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog that contains the database and table metadata to return.
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the database that contains the table metadata to return.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the table for which metadata is returned.
     GetWorkGroupOutput:
       type: object
       properties:
@@ -1275,6 +1847,49 @@ components:
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
           description: The name of the workgroup.
+    ListDataCatalogsOutput:
+      type: object
+      properties:
+        DataCatalogsSummary:
+          $ref: '#/components/schemas/DataCatalogSummaryList'
+          description: A summary list of data catalogs.
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+    ListDataCatalogsInput:
+      type: object
+      title: ListDataCatalogsInput
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+        MaxResults:
+          $ref: '#/components/schemas/MaxDataCatalogsCount'
+          description: Specifies the maximum number of data catalogs to return.
+    ListDatabasesOutput:
+      type: object
+      properties:
+        DatabaseList:
+          $ref: '#/components/schemas/DatabaseList'
+          description: A list of databases from a data catalog.
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+    ListDatabasesInput:
+      type: object
+      required:
+        - CatalogName
+      title: ListDatabasesInput
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog that contains the databases to return.
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+        MaxResults:
+          $ref: '#/components/schemas/MaxDatabasesCount'
+          description: Specifies the maximum number of results to return.
     ListNamedQueriesOutput:
       type: object
       properties:
@@ -1283,20 +1898,20 @@ components:
           description: The list of unique query IDs.
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: A token to be used by the next request if this request is truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
     ListNamedQueriesInput:
       type: object
       title: ListNamedQueriesInput
       properties:
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: The token that specifies where to start pagination if a previous request was truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
         MaxResults:
           $ref: '#/components/schemas/MaxNamedQueriesCount'
           description: The maximum number of queries to return in this request.
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
-          description: 'The name of the workgroup from which the named queries are returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.'
+          description: 'The name of the workgroup from which the named queries are being returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.'
     ListQueryExecutionsOutput:
       type: object
       properties:
@@ -1312,19 +1927,50 @@ components:
       properties:
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: The token that specifies where to start pagination if a previous request was truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
         MaxResults:
           $ref: '#/components/schemas/MaxQueryExecutionsCount'
           description: The maximum number of query executions to return in this request.
         WorkGroup:
           $ref: '#/components/schemas/WorkGroupName'
-          description: 'The name of the workgroup from which queries are returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.'
+          description: 'The name of the workgroup from which queries are being returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.'
+    ListTableMetadataOutput:
+      type: object
+      properties:
+        TableMetadataList:
+          $ref: '#/components/schemas/TableMetadataList'
+          description: A list of table metadata.
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+    ListTableMetadataInput:
+      type: object
+      required:
+        - CatalogName
+        - DatabaseName
+      title: ListTableMetadataInput
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog for which table metadata should be returned.
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the database for which table metadata should be returned.
+        Expression:
+          $ref: '#/components/schemas/ExpressionString'
+          description: 'A regex filter that pattern-matches table names. If no expression is supplied, metadata for all tables are listed.'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+        MaxResults:
+          $ref: '#/components/schemas/MaxTableMetadataCount'
+          description: Specifies the maximum number of results to return.
     ListTagsForResourceOutput:
       type: object
       properties:
         Tags:
           $ref: '#/components/schemas/TagList'
-          description: The list of tags associated with this workgroup.
+          description: The list of tags associated with the specified resource.
         NextToken:
           $ref: '#/components/schemas/Token'
           description: A token to be used by the next request if this request is truncated.
@@ -1336,13 +1982,13 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: Lists the tags for the workgroup resource with the specified ARN.
+          description: Lists the tags for the resource with the specified ARN.
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: 'The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the workgroup resource with the specified ARN.'
+          description: 'The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the resource with the specified ARN.'
         MaxResults:
           $ref: '#/components/schemas/MaxTagsCount'
-          description: The maximum number of results to be returned per request that lists the tags for the workgroup resource.
+          description: The maximum number of results to be returned per request that lists the tags for the resource.
     ResourceNotFoundException: {}
     ListWorkGroupsOutput:
       type: object
@@ -1352,14 +1998,14 @@ components:
           description: 'The list of workgroups, including their names, descriptions, creation times, and states.'
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: A token to be used by the next request if this request is truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
     ListWorkGroupsInput:
       type: object
       title: ListWorkGroupsInput
       properties:
         NextToken:
           $ref: '#/components/schemas/Token'
-          description: A token to be used by the next request if this request is truncated.
+          description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
         MaxResults:
           $ref: '#/components/schemas/MaxWorkGroupsCount'
           description: The maximum number of workgroups to return in this request.
@@ -1415,10 +2061,10 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: Requests that one or more tags are added to the resource (such as a workgroup) for the specified ARN.
+          description: Specifies the ARN of the Athena resource (workgroup or data catalog) to which tags are to be added.
         Tags:
           $ref: '#/components/schemas/TagList'
-          description: 'One or more tags, separated by commas, to be added to the resource, such as a workgroup.'
+          description: 'A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.'
     UntagResourceOutput:
       type: object
       properties: {}
@@ -1431,10 +2077,32 @@ components:
       properties:
         ResourceARN:
           $ref: '#/components/schemas/AmazonResourceName'
-          description: Removes one or more tags from the workgroup resource for the specified ARN.
+          description: Specifies the ARN of the resource from which tags are to be removed.
         TagKeys:
           $ref: '#/components/schemas/TagKeyList'
-          description: Removes the tags associated with one or more tag keys from the workgroup resource.
+          description: A comma-separated list of one or more tag keys whose tags are to be removed from the specified resource.
+    UpdateDataCatalogOutput:
+      type: object
+      properties: {}
+    UpdateDataCatalogInput:
+      type: object
+      required:
+        - Name
+        - Type
+      title: UpdateDataCatalogInput
+      properties:
+        Name:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: 'The name of the data catalog to update. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.'
+        Type:
+          $ref: '#/components/schemas/DataCatalogType'
+          description: 'Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+          description: New or modified text that describes the data catalog.
+        Parameters:
+          $ref: '#/components/schemas/ParametersMap'
+          description: '<p>Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
     UpdateWorkGroupOutput:
       type: object
       properties: {}
@@ -1495,6 +2163,40 @@ components:
     BytesScannedCutoffValue:
       type: integer
       minimum: 10000000
+    CatalogNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    NameString:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TypeString:
+      type: string
+      minLength: 0
+      maxLength: 4096
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    CommentString:
+      type: string
+      minLength: 0
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    Column:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the column.
+        Type:
+          $ref: '#/components/schemas/TypeString'
+          description: The data type of the column.
+        Comment:
+          $ref: '#/components/schemas/CommentString'
+          description: Optional information about the column.
+      description: Contains metadata for a column in a table.
     String:
       type: string
     Integer:
@@ -1546,14 +2248,28 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ColumnInfo'
-    NameString:
+    ColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Column'
+    DataCatalogType:
       type: string
-      minLength: 1
-      maxLength: 128
+      enum:
+        - LAMBDA
+        - GLUE
+        - HIVE
     DescriptionString:
       type: string
       minLength: 1
       maxLength: 1024
+    ParametersMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ParametersMapValue'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
     DatabaseString:
       type: string
       minLength: 1
@@ -1568,7 +2284,7 @@ components:
       maxLength: 128
     WorkGroupName:
       type: string
-      pattern: '[a-zA-z0-9._-]{1,128}'
+      pattern: '[a-zA-Z0-9._-]{1,128}'
     NamedQueryId:
       type: string
     WorkGroupConfiguration:
@@ -1594,10 +2310,58 @@ components:
       type: string
       minLength: 0
       maxLength: 1024
-    TagList:
+    DataCatalog:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        Name:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: 'The name of the data catalog. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.'
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+          description: An optional description of the data catalog.
+        Type:
+          $ref: '#/components/schemas/DataCatalogType'
+          description: 'The type of data catalog: <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+        Parameters:
+          $ref: '#/components/schemas/ParametersMap'
+          description: '<p>Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
+      description: Contains information about a data catalog in an AWS account.
+    DataCatalogSummary:
+      type: object
+      properties:
+        CatalogName:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog.
+        Type:
+          $ref: '#/components/schemas/DataCatalogType'
+          description: The data catalog type.
+      description: 'The summary information for the data catalog, which includes its name and type.'
+    DataCatalogSummaryList:
       type: array
       items:
-        $ref: '#/components/schemas/Tag'
+        $ref: '#/components/schemas/DataCatalogSummary'
+    Database:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the database.
+        Description:
+          $ref: '#/components/schemas/DescriptionString'
+          description: An optional description of the database.
+        Parameters:
+          $ref: '#/components/schemas/ParametersMap'
+          description: A set of custom key/value pairs.
+      description: Contains metadata information for a database in a data catalog.
+    DatabaseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Database'
     Date:
       type: string
       format: date-time
@@ -1635,6 +2399,10 @@ components:
       maxLength: 256
     ErrorMessage:
       type: string
+    ExpressionString:
+      type: string
+      minLength: 0
+      maxLength: 256
     NamedQuery:
       type: object
       required:
@@ -1710,7 +2478,34 @@ components:
         ResultSetMetadata:
           $ref: '#/components/schemas/ResultSetMetadata'
           description: The metadata that describes the column structure and data types of a table of query results.
-      description: The metadata and rows that comprise a query result set. The metadata describes the column structure and data types.
+      description: 'The metadata and rows that comprise a query result set. The metadata describes the column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.'
+    TableMetadata:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the table.
+        CreateTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the table was created.
+        LastAccessTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The last time the table was accessed.
+        TableType:
+          $ref: '#/components/schemas/TableTypeString'
+          description: 'The type of table. In Athena, only <code>EXTERNAL_TABLE</code> is supported.'
+        Columns:
+          $ref: '#/components/schemas/ColumnList'
+          description: A list of the columns in the table.
+        PartitionKeys:
+          $ref: '#/components/schemas/ColumnList'
+          description: A list of the partition keys in the table.
+        Parameters:
+          $ref: '#/components/schemas/ParametersMap'
+          description: A set of custom key/value pairs for table properties.
+      description: Contains metadata for a table.
     WorkGroup:
       type: object
       required:
@@ -1732,6 +2527,19 @@ components:
           $ref: '#/components/schemas/Date'
           description: The date and time the workgroup was created.
       description: 'A workgroup, which contains a name, description, creation time, state, and other configuration, listed under <a>WorkGroup$Configuration</a>. Each workgroup enables you to isolate queries for you or your group of users from other queries in the same account, to configure the query results location and the encryption configuration (known as workgroup settings), to enable sending query metrics to Amazon CloudWatch, and to establish per-query data usage control limits for all queries in a workgroup. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.'
+    KeyString:
+      type: string
+      minLength: 1
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    MaxDataCatalogsCount:
+      type: integer
+      minimum: 2
+      maximum: 50
+    MaxDatabasesCount:
+      type: integer
+      minimum: 1
+      maximum: 50
     MaxNamedQueriesCount:
       type: integer
       minimum: 0
@@ -1740,6 +2548,14 @@ components:
       type: integer
       minimum: 0
       maximum: 50
+    MaxTableMetadataCount:
+      type: integer
+      minimum: 1
+      maximum: 50
+    TableMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableMetadata'
     MaxTagsCount:
       type: integer
       minimum: 75
@@ -1753,6 +2569,9 @@ components:
         $ref: '#/components/schemas/WorkGroupSummary'
       minItems: 0
       maxItems: 50
+    ParametersMapValue:
+      type: string
+      maxLength: 51200
     StatementType:
       type: string
       enum:
@@ -1774,14 +2593,17 @@ components:
       properties:
         Database:
           $ref: '#/components/schemas/DatabaseString'
-          description: The name of the database.
-      description: The database in which the query execution occurs.
+          description: The name of the database used in the query execution.
+        Catalog:
+          $ref: '#/components/schemas/CatalogNameString'
+          description: The name of the data catalog used in the query execution.
+      description: The database and data catalog context in which the query execution occurs.
     QueryExecutionStatus:
       type: object
       properties:
         State:
           $ref: '#/components/schemas/QueryExecutionState'
-          description: 'The state of query execution. <code>QUEUED</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>RUNNING</code> indicates that the query is in execution phase. <code>SUCCEEDED</code> indicates that the query completed without errors. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that a user input interrupted query execution. '
+          description: '<p>The state of query execution. <code>QUEUED</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>RUNNING</code> indicates that the query is in execution phase. <code>SUCCEEDED</code> indicates that the query completed without errors. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that a user input interrupted query execution.</p> <note> <p>Athena automatically retries your queries in cases of certain transient errors. As a result, you may see the query state transition from <code>RUNNING</code> or <code>FAILED</code> to <code>QUEUED</code>. </p> </note>'
         StateChangeReason:
           $ref: '#/components/schemas/String'
           description: Further detail about the status of the query.
@@ -1851,7 +2673,7 @@ components:
         ColumnInfo:
           $ref: '#/components/schemas/ColumnInfoList'
           description: Information about the columns returned in a query result metadata.
-      description: 'The metadata that describes the column structure and data types of a table of query results. '
+      description: 'The metadata that describes the column structure and data types of a table of query results. To return a <code>ResultSetMetadata</code> object, use <a>GetQueryResults</a>.'
     datumList:
       type: array
       items:
@@ -1863,6 +2685,12 @@ components:
           $ref: '#/components/schemas/datumList'
           description: The data that populates a row in a query result table.
       description: The rows that comprise a query result table.
+    Timestamp:
+      type: string
+      format: date-time
+    TableTypeString:
+      type: string
+      maxLength: 255
     TagKey:
       type: string
       minLength: 1
@@ -1880,7 +2708,7 @@ components:
         Value:
           $ref: '#/components/schemas/TagValue'
           description: 'A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag values are case-sensitive. '
-      description: 'A tag that you can add to a resource. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize workgroups in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. The maximum tag key length is 128 Unicode characters in UTF-8. The maximum tag value length is 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. '
+      description: 'A label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas. '
     TagKeyList:
       type: array
       items:

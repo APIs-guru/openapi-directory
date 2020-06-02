@@ -1889,6 +1889,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeAccountLimitsInput'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -3920,6 +3926,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ListChangeSetsInput'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -4200,6 +4212,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListStackInstancesInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -4407,6 +4431,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListStackSetOperationResultsInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -4507,6 +4543,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListStackSetOperationsInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -4598,6 +4646,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListStackSetsInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7129,6 +7189,9 @@ components:
         DefaultVersionId:
           $ref: '#/components/schemas/TypeVersionId'
           description: '<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>'
+        IsDefaultVersion:
+          $ref: '#/components/schemas/IsDefaultVersion'
+          description: Whether the specified type version is set as the default version.
         Description:
           $ref: '#/components/schemas/Description'
           description: The description of the registered type.
@@ -8512,6 +8575,8 @@ components:
         VersionId:
           $ref: '#/components/schemas/TypeVersionId'
           description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+    IsDefaultVersion:
+      type: boolean
     TypeSchema:
       type: string
       minLength: 1
@@ -9986,6 +10051,9 @@ components:
         VersionId:
           $ref: '#/components/schemas/TypeVersionId'
           description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+        IsDefaultVersion:
+          $ref: '#/components/schemas/IsDefaultVersion'
+          description: Whether the specified type version is set as the default version.
         Arn:
           $ref: '#/components/schemas/TypeArn'
           description: The Amazon Resource Name (ARN) of the type version.

@@ -3,7 +3,7 @@ info:
   version: '2018-09-25'
   x-release: v4
   title: Amazon WorkLink
-  description: 'Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user''s access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn''t download or store any internal web content on mobile devices.'
+  description: 'Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS and Android phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user''s access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn''t download or store any internal web content on mobile devices.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -104,6 +104,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The WorkLink endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /associateDomain:
     post:
@@ -424,6 +425,13 @@ paths:
                 OptimizeForEndUserLocation:
                   description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
                   type: boolean
+                Tags:
+                  description: ' The tags to add to the resource. A tag is a key-value pair.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -881,7 +889,7 @@ paths:
                 - FleetArn
               properties:
                 FleetArn:
-                  description: The ARN of the fleet.
+                  description: The Amazon Resource Name (ARN) of the fleet.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -1360,6 +1368,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
           description: TooManyRequestsException
           content:
             application/json:
@@ -1483,6 +1497,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Retrieves a list of tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the fleet.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the fleet.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tags to add to the resource. A tag is a key-value pair.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
   /listWebsiteAuthorizationProviders:
     post:
       operationId: ListWebsiteAuthorizationProviders
@@ -1861,6 +1950,50 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes one or more tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the fleet.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: The list of tag keys to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateAuditStreamConfiguration:
     post:
       operationId: UpdateAuditStreamConfiguration
@@ -1920,6 +2053,7 @@ paths:
                 AuditStreamArn:
                   description: The ARN of the Amazon Kinesis data stream that receives the audit events.
                   type: string
+                  pattern: '^arn:aws:kinesis:.+:[0-9]{12}:stream/AmazonWorkLink-.*$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2379,7 +2513,10 @@ components:
       properties:
         FleetArn:
           $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          description: The Amazon Resource Name (ARN) of the fleet.
+    TagValue:
+      type: string
+      maxLength: 256
     DeleteFleetResponse:
       type: object
       properties: {}
@@ -2479,6 +2616,9 @@ components:
         FleetStatus:
           $ref: '#/components/schemas/FleetStatus'
           description: The current state of the fleet.
+        Tags:
+          $ref: '#/components/schemas/TagMap'
+          description: The tags attached to the resource. A tag is a key-value pair.
     DescribeIdentityProviderConfigurationResponse:
       type: object
       properties:
@@ -2539,6 +2679,12 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagMap'
+          description: The tags attached to the resource. A tag is a key-value pair.
     ListWebsiteAuthorizationProvidersResponse:
       type: object
       properties:
@@ -2566,6 +2712,17 @@ components:
     SignOutUserResponse:
       type: object
       properties: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
     UpdateAuditStreamConfigurationResponse:
       type: object
       properties: {}
@@ -2672,6 +2829,7 @@ components:
           description: The certificate name to display.
     AuditStreamArn:
       type: string
+      pattern: '^arn:aws:kinesis:.+:[0-9]{12}:stream/AmazonWorkLink-.*$'
     Boolean:
       type: boolean
     CertificateChain:
@@ -2688,6 +2846,12 @@ components:
       pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
       minLength: 1
       maxLength: 48
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateFleetRequest:
       type: object
       required:
@@ -2703,6 +2867,9 @@ components:
         OptimizeForEndUserLocation:
           $ref: '#/components/schemas/Boolean'
           description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+        Tags:
+          $ref: '#/components/schemas/TagMap'
+          description: ' The tags to add to the resource. A tag is a key-value pair.'
     DateTime:
       type: string
       format: date-time
@@ -2828,7 +2995,7 @@ components:
       properties:
         FleetArn:
           $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          description: The Amazon Resource Name (ARN) of the fleet.
     FleetStatus:
       type: string
       enum:
@@ -2950,7 +3117,7 @@ components:
       properties:
         FleetArn:
           $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          description: The Amazon Resource Name (ARN) of the fleet.
         CreatedTime:
           $ref: '#/components/schemas/DateTime'
           description: The time when the fleet was created.
@@ -2962,13 +3129,16 @@ components:
           description: The name of the fleet.
         DisplayName:
           $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          description: The name of the fleet to display.
         CompanyCode:
           $ref: '#/components/schemas/CompanyCode'
           description: The identifier used by users to sign into the Amazon WorkLink app.
         FleetStatus:
           $ref: '#/components/schemas/FleetStatus'
           description: The status of the fleet.
+        Tags:
+          $ref: '#/components/schemas/TagMap'
+          description: The tags attached to the resource. A tag is a key-value pair.
       description: The summary of the fleet.
     FleetSummaryList:
       type: array
@@ -3022,6 +3192,10 @@ components:
         MaxResults:
           $ref: '#/components/schemas/MaxResults'
           description: The maximum number of results to be included in the next page.
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     ListWebsiteAuthorizationProvidersRequest:
       type: object
       required:
@@ -3099,6 +3273,25 @@ components:
         Username:
           $ref: '#/components/schemas/Username'
           description: The name of the user.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagMap'
+          description: The tags to add to the resource. A tag is a key-value pair.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpdateAuditStreamConfigurationRequest:
       type: object
       required:

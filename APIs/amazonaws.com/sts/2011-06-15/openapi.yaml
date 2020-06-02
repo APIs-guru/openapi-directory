@@ -340,6 +340,7 @@ paths:
             type: string
             minLength: 4
             maxLength: 100000
+            format: password
         - name: PolicyArns
           in: query
           required: false
@@ -535,6 +536,7 @@ paths:
             type: string
             minLength: 4
             maxLength: 2048
+            format: password
         - name: ProviderId
           in: query
           required: false
@@ -1519,6 +1521,7 @@ components:
       type: string
       minLength: 4
       maxLength: 100000
+      format: password
     AssumeRoleWithSAMLRequest:
       type: object
       required:
@@ -1559,6 +1562,7 @@ components:
       type: string
       minLength: 4
       maxLength: 2048
+      format: password
     urlType:
       type: string
       minLength: 4

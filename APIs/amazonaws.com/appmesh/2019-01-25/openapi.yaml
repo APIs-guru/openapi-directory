@@ -12,9 +12,9 @@ info:
              Kubernetes on AWS, and Amazon EC2.</p>
              <note>
                 <p>App Mesh supports microservice applications that use service discovery naming for their
-                components. For more information about service discovery on Amazon ECS, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the
-                   <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and
-                   <code>coredns</code> are supported. For more information, see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS
+                components. For more information about service discovery on Amazon ECS, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes
+                   <code>kube-dns</code> and <code>coredns</code> are supported. For more information,
+                see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS
                    for Services and Pods</a> in the Kubernetes documentation.</p>
              </note>
   x-logo:
@@ -122,11 +122,12 @@ paths:
     put:
       operationId: CreateMesh
       description: |-
-        <p>Creates a service mesh. A service mesh is a logical boundary for network traffic between
-                 the services that reside within it.</p>
-                 <p>After you create your service mesh, you can create virtual services, virtual nodes,
-                 virtual routers, and routes to distribute traffic between the applications in your
-                 mesh.</p>
+        <p>Creates a service mesh.</p>
+                 <p> A service mesh is a logical boundary for network traffic between services that are
+                 represented by resources within the mesh. After you create your service mesh, you can
+                 create virtual services, virtual nodes, virtual routers, and routes to distribute traffic
+                 between the applications in your mesh.</p>
+                 <p>For more information about service meshes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html">Service meshes</a>.</p>
       responses:
         '200':
           description: Success
@@ -310,13 +311,8 @@ paths:
       operationId: CreateRoute
       description: |-
         <p>Creates a route that is associated with a virtual router.</p>
-                 <p>You can use the <code>prefix</code> parameter in your route specification for path-based
-                 routing of requests. For example, if your virtual service name is
-                    <code>my-service.local</code> and you want the route to match requests to
-                    <code>my-service.local/metrics</code>, your prefix should be
-                 <code>/metrics</code>.</p>
-                 <p>If your route matches a request, you can distribute traffic to one or more target
-                 virtual nodes with relative weighting.</p>
+                 <p> You can route several different protocols and define a retry policy for a route.
+                 Traffic can be routed to one or more virtual nodes.</p>
                  <p>For more information about routes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html">Routes</a>.</p>
       responses:
         '200':
@@ -397,8 +393,8 @@ paths:
           in: path
           required: true
           description: |-
-            The name of the virtual router in which to create the route. If the virtual router is in a shared mesh,
-                     then you must be the owner of the virtual router resource.
+            The name of the virtual router in which to create the route. If the virtual router is in
+                     a shared mesh, then you must be the owner of the virtual router resource.
           schema:
             type: string
             minLength: 1
@@ -567,12 +563,13 @@ paths:
       operationId: CreateVirtualNode
       description: |-
         <p>Creates a virtual node within a service mesh.</p>
-                 <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
+                 <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
                  service or a Kubernetes deployment. When you create a virtual node, you can specify the
-                 service discovery information for your task group.</p>
-                 <p>Any inbound traffic that your virtual node expects should be specified as a
-                    <code>listener</code>. Any outbound traffic that your virtual node expects to reach
-                 should be specified as a <code>backend</code>.</p>
+                 service discovery information for your task group, and whether the proxy running in a task
+                 group will communicate with other proxies using Transport Layer Security (TLS).</p>
+                 <p>You define a <code>listener</code> for any inbound traffic that your virtual node
+                 expects. Any virtual service that your virtual node expects to communicate to is specified
+                 as a <code>backend</code>.</p>
                  <p>The response metadata for your new virtual node contains the <code>arn</code> that is
                  associated with the virtual node. Set this value (either the full ARN or the truncated
                  resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the
@@ -585,7 +582,7 @@ paths:
                        <code>APPMESH_VIRTUAL_NODE_NAME</code> with the
                        <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
                  </note>
-                 <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual Nodes</a>.</p>
+                 <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>.</p>
       responses:
         '200':
           description: Success
@@ -689,8 +686,8 @@ paths:
                     listeners:
                       $ref: '#/components/schemas/Listeners'
                       description: |-
-                        The listener that the virtual node is expected to receive inbound traffic from.
-                                 You can specify one listener.
+                        The listener that the virtual node is expected to receive inbound traffic from. You can
+                                 specify one listener.
                     logging:
                       $ref: '#/components/schemas/Logging'
                       description: The inbound and outbound access logging information for the virtual node.
@@ -698,8 +695,8 @@ paths:
                       $ref: '#/components/schemas/ServiceDiscovery'
                       description: |-
                         The service discovery information for the virtual node. If your virtual node does not
-                                 expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
-                                 then you must specify service discovery information.
+                                 expect ingress traffic, you can omit this parameter. If you specify a
+                                 <code>listener</code>, then you must specify service discovery information.
                 tags:
                   description: |-
                     Optional metadata that you can apply to the virtual node to assist with categorization
@@ -820,12 +817,12 @@ paths:
       operationId: CreateVirtualRouter
       description: |-
         <p>Creates a virtual router within a service mesh.</p>
-                 <p>Any inbound traffic that your virtual router expects should be specified as a
-                    <code>listener</code>. </p>
-                 <p>Virtual routers handle traffic for one or more virtual services within your mesh. After
-                 you create your virtual router, create and associate routes for your virtual router that
-                 direct incoming requests to different virtual nodes.</p>
-                 <p>For more information about virtual routers, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html">Virtual Routers</a>.</p>
+                 <p>Specify a <code>listener</code> for any inbound traffic that your virtual router
+                 receives. Create a virtual router for each protocol and port that you need to route.
+                 Virtual routers handle traffic for one or more virtual services within your mesh. After you
+                 create your virtual router, create and associate routes for your virtual router that direct
+                 incoming requests to different virtual nodes.</p>
+                 <p>For more information about virtual routers, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html">Virtual routers</a>.</p>
       responses:
         '200':
           description: Success
@@ -923,8 +920,8 @@ paths:
                     listeners:
                       $ref: '#/components/schemas/VirtualRouterListeners'
                       description: |-
-                        The listeners that the virtual router is expected to receive inbound traffic from.
-                                 You can specify one listener.
+                        The listeners that the virtual router is expected to receive inbound traffic from. You
+                                 can specify one listener.
                 tags:
                   description: |-
                     Optional metadata that you can apply to the virtual router to assist with categorization
@@ -1050,7 +1047,7 @@ paths:
                  service by its <code>virtualServiceName</code>, and those requests are routed to the
                  virtual node or virtual router that is specified as the provider for the virtual
                  service.</p>
-                 <p>For more information about virtual services, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html">Virtual Services</a>.</p>
+                 <p>For more information about virtual services, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html">Virtual services</a>.</p>
       responses:
         '200':
           description: Success
@@ -2062,8 +2059,8 @@ paths:
                     listeners:
                       $ref: '#/components/schemas/Listeners'
                       description: |-
-                        The listener that the virtual node is expected to receive inbound traffic from.
-                                 You can specify one listener.
+                        The listener that the virtual node is expected to receive inbound traffic from. You can
+                                 specify one listener.
                     logging:
                       $ref: '#/components/schemas/Logging'
                       description: The inbound and outbound access logging information for the virtual node.
@@ -2071,8 +2068,8 @@ paths:
                       $ref: '#/components/schemas/ServiceDiscovery'
                       description: |-
                         The service discovery information for the virtual node. If your virtual node does not
-                                 expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
-                                 then you must specify service discovery information.
+                                 expect ingress traffic, you can omit this parameter. If you specify a
+                                 <code>listener</code>, then you must specify service discovery information.
   '/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
@@ -2343,8 +2340,8 @@ paths:
                     listeners:
                       $ref: '#/components/schemas/VirtualRouterListeners'
                       description: |-
-                        The listeners that the virtual router is expected to receive inbound traffic from.
-                                 You can specify one listener.
+                        The listeners that the virtual router is expected to receive inbound traffic from. You
+                                 can specify one listener.
   '/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}':
     delete:
       operationId: DeleteVirtualService
@@ -2381,12 +2378,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
         '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '485':
+        '486':
           description: TooManyRequestsException
           content:
             application/json:
@@ -3413,7 +3416,7 @@ components:
         httpRetryEvents:
           $ref: '#/components/schemas/HttpRetryPolicyEvents'
           description: |-
-            <p>Specify at least one of the following values.</p>
+            <p>Specify at least one of the following values.</p> 
                      <ul>
                         <li>
                            <p>
@@ -3548,7 +3551,7 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
         uid:
           $ref: '#/components/schemas/String'
           description: The unique identifier for the resource.
@@ -3653,8 +3656,8 @@ components:
         path:
           $ref: '#/components/schemas/String'
           description: |-
-            The destination path for the health check request. This value is only used if the specified 
-                     protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+            The destination path for the health check request. This value is only used if the
+                     specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
         port:
           $ref: '#/components/schemas/PortNumber'
           description: |-
@@ -3662,7 +3665,10 @@ components:
                      in the <a>PortMapping</a> for the listener.
         protocol:
           $ref: '#/components/schemas/PortProtocol'
-          description: 'The protocol for the health check request. If you specify <code>grpc</code>, then your service must conform to the <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">GRPC Health Checking Protocol</a>.'
+          description: |-
+            The protocol for the health check request. If you specify <code>grpc</code>, then your
+                     service must conform to the <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">GRPC Health
+                        Checking Protocol</a>.
         timeoutMillis:
           $ref: '#/components/schemas/HealthCheckTimeoutMillis'
           description: |-
@@ -3683,14 +3689,21 @@ components:
       type: object
       required:
         - arn
+        - createdAt
+        - lastUpdatedAt
         - meshName
         - meshOwner
         - resourceOwner
+        - version
         - virtualServiceName
       properties:
         arn:
           $ref: '#/components/schemas/Arn'
           description: The full Amazon Resource Name (ARN) for the virtual service.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         meshName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the service mesh that the virtual service resides in.
@@ -3703,7 +3716,9 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
         virtualServiceName:
           $ref: '#/components/schemas/ServiceName'
           description: The name of the virtual service.
@@ -3719,10 +3734,12 @@ components:
       properties:
         enforce:
           $ref: '#/components/schemas/Boolean'
-          description: 'Whether the policy is enforced. The default is <code>True</code>, if a value isn''t specified.'
+          description: |-
+            Whether the policy is enforced. The default is <code>True</code>, if a value isn't
+                     specified.
         ports:
           $ref: '#/components/schemas/PortSet'
-          description: The range of ports that the policy is enforced for.
+          description: One or more ports that the policy is enforced for.
         validation:
           $ref: '#/components/schemas/TlsValidationContext'
           description: A reference to an object that represents a TLS validation context.
@@ -3831,8 +3848,8 @@ components:
         listeners:
           $ref: '#/components/schemas/Listeners'
           description: |-
-            The listener that the virtual node is expected to receive inbound traffic from.
-                     You can specify one listener.
+            The listener that the virtual node is expected to receive inbound traffic from. You can
+                     specify one listener.
         logging:
           $ref: '#/components/schemas/Logging'
           description: The inbound and outbound access logging information for the virtual node.
@@ -3840,8 +3857,8 @@ components:
           $ref: '#/components/schemas/ServiceDiscovery'
           description: |-
             The service discovery information for the virtual node. If your virtual node does not
-                     expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,
-                     then you must specify service discovery information.
+                     expect ingress traffic, you can omit this parameter. If you specify a
+                     <code>listener</code>, then you must specify service discovery information.
       description: An object that represents the specification of a virtual node.
     VirtualNodeStatus:
       type: object
@@ -3880,8 +3897,8 @@ components:
         listeners:
           $ref: '#/components/schemas/VirtualRouterListeners'
           description: |-
-            The listeners that the virtual router is expected to receive inbound traffic from.
-                     You can specify one listener.
+            The listeners that the virtual router is expected to receive inbound traffic from. You
+                     can specify one listener.
       description: An object that represents the specification of a virtual router.
     VirtualRouterStatus:
       type: object
@@ -3989,7 +4006,7 @@ components:
       properties:
         certificateArn:
           $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+          description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
       description: An object that represents an AWS Certicate Manager (ACM) certificate.
     ListenerTlsFileCertificate:
       type: object
@@ -4002,8 +4019,12 @@ components:
           description: The certificate chain for the certificate.
         privateKey:
           $ref: '#/components/schemas/FilePath'
-          description: The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
-      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+          description: |-
+            The private key for a certificate stored on the file system of the virtual node that the
+                     proxy is running on.
+      description: |-
+        An object that represents a local file certificate.
+                 The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.
     ListenerTlsCertificate:
       type: object
       properties:
@@ -4043,13 +4064,20 @@ components:
       type: object
       required:
         - arn
+        - createdAt
+        - lastUpdatedAt
         - meshName
         - meshOwner
         - resourceOwner
+        - version
       properties:
         arn:
           $ref: '#/components/schemas/Arn'
           description: The full Amazon Resource Name (ARN) of the service mesh.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         meshName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the service mesh.
@@ -4062,7 +4090,9 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
       description: An object that represents a service mesh returned by a list operation.
     TlsValidationContextAcmTrust:
       type: object
@@ -4072,7 +4102,9 @@ components:
         certificateAuthorityArns:
           $ref: '#/components/schemas/CertificateAuthorityArns'
           description: One or more ACM Amazon Resource Name (ARN)s.
-      description: An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+      description: |-
+        An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+                 certificate.
     TlsValidationContextFileTrust:
       type: object
       required:
@@ -4080,14 +4112,18 @@ components:
       properties:
         certificateChain:
           $ref: '#/components/schemas/FilePath'
-          description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
+          description: |-
+            The certificate trust chain for a certificate stored on the file system of the virtual
+                     node that the proxy is running on.
       description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
     TlsValidationContextTrust:
       type: object
       properties:
         acm:
           $ref: '#/components/schemas/TlsValidationContextAcmTrust'
-          description: A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+          description: |-
+            A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+                     certificate.
         file:
           $ref: '#/components/schemas/TlsValidationContextFileTrust'
           description: An object that represents a TLS validation context trust for a local file.
@@ -4114,23 +4150,30 @@ components:
           $ref: '#/components/schemas/PercentInt'
           description: The relative weight of the weighted target.
       description: |-
-        An object that represents a target and its relative weight. Traffic is distributed across
-                 targets according to their relative weight. For example, a weighted target with a relative
-                 weight of 50 receives five times as much traffic as one with a relative weight of
+        An object that represents a target and its relative weight. Traffic is distributed
+                 across targets according to their relative weight. For example, a weighted target with a
+                 relative weight of 50 receives five times as much traffic as one with a relative weight of
                  10. The total weight for all targets combined must be less than or equal to 100.
     RouteRef:
       type: object
       required:
         - arn
+        - createdAt
+        - lastUpdatedAt
         - meshName
         - meshOwner
         - resourceOwner
         - routeName
+        - version
         - virtualRouterName
       properties:
         arn:
           $ref: '#/components/schemas/Arn'
           description: The full Amazon Resource Name (ARN) for the route.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         meshName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the service mesh that the route resides in.
@@ -4143,10 +4186,12 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
         routeName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the route.
+        version:
+          $ref: '#/components/schemas/Long'
         virtualRouterName:
           $ref: '#/components/schemas/ResourceName'
           description: The virtual router that the route is associated with.
@@ -4288,7 +4333,9 @@ components:
           description: An object that represents the data to match from the request.
         methodName:
           $ref: '#/components/schemas/MethodName'
-          description: 'The method name to match from the request. If you specify a name, you must also specify a <code>serviceName</code>.'
+          description: |-
+            The method name to match from the request. If you specify a name, you must also specify
+                     a <code>serviceName</code>.
         serviceName:
           $ref: '#/components/schemas/ServiceName'
           description: The fully qualified domain name for the service to match from the request.
@@ -4430,15 +4477,18 @@ components:
                      <ul>
                         <li>
                            <p>
-                              <b/>STRICT – Listener only accepts connections with TLS enabled. </p>
+                              <b/>STRICT – Listener only accepts connections with TLS
+                           enabled. </p>
                         </li>
                         <li>
                            <p>
-                              <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p>
+                              <b/>PERMISSIVE – Listener accepts connections with or
+                           without TLS enabled.</p>
                         </li>
                         <li>
                            <p>
-                              <b/>DISABLED –  Listener only accepts connections without TLS. </p>
+                              <b/>DISABLED – Listener only accepts connections without
+                           TLS. </p>
                         </li>
                      </ul>
       description: An object that represents the Transport Layer Security (TLS) properties for a listener.
@@ -4584,14 +4634,21 @@ components:
       type: object
       required:
         - arn
+        - createdAt
+        - lastUpdatedAt
         - meshName
         - meshOwner
         - resourceOwner
+        - version
         - virtualRouterName
       properties:
         arn:
           $ref: '#/components/schemas/Arn'
           description: The full Amazon Resource Name (ARN) for the virtual router.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         meshName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the service mesh that the virtual router resides in.
@@ -4604,7 +4661,9 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
         virtualRouterName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the virtual router.
@@ -4647,14 +4706,21 @@ components:
       type: object
       required:
         - arn
+        - createdAt
+        - lastUpdatedAt
         - meshName
         - meshOwner
         - resourceOwner
+        - version
         - virtualNodeName
       properties:
         arn:
           $ref: '#/components/schemas/Arn'
           description: The full Amazon Resource Name (ARN) for the virtual node.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         meshName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the service mesh that the virtual node resides in.
@@ -4667,7 +4733,9 @@ components:
           $ref: '#/components/schemas/AccountId'
           description: |-
             The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-                           the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with Shared Meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
         virtualNodeName:
           $ref: '#/components/schemas/ResourceName'
           description: The name of the virtual node.
@@ -4812,8 +4880,8 @@ components:
           $ref: '#/components/schemas/HttpScheme'
           description: The client request scheme to match on. Specify only one.
       description: |-
-        An object that represents the requirements for a route to match HTTP requests for a virtual
-                 router.
+        An object that represents the requirements for a route to match HTTP requests for a
+                 virtual router.
     DescribeVirtualNodeInput:
       type: object
       title: DescribeVirtualNodeInput
@@ -4828,7 +4896,7 @@ components:
         httpRetryEvents:
           $ref: '#/components/schemas/HttpRetryPolicyEvents'
           description: |-
-            <p>Specify at least one of the following values.</p>
+            <p>Specify at least one of the following values.</p> 
                      <ul>
                         <li>
                            <p>

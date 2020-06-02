@@ -1675,7 +1675,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: GET_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupId</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1717,7 +1717,7 @@ paths:
         - name: GlobalReplicationGroupIdSuffix
           in: query
           required: true
-          description: The suffix for name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+          description: The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
           schema:
             type: string
         - name: GlobalReplicationGroupDescription
@@ -1757,7 +1757,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: POST_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupId</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1963,7 +1963,7 @@ paths:
         - name: NumCacheClusters
           in: query
           required: false
-          description: '<p>The number of clusters this replication group initially has.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>'
+          description: '<p>The number of nodes in the cluster.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>'
           schema:
             type: integer
         - name: PreferredCacheClusterAZs
@@ -1989,7 +1989,7 @@ paths:
         - name: NodeGroupConfiguration
           in: query
           required: false
-          description: '<p>A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>, and <code>Slots</code>.</p> <p>If you''re creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure each node group (shard) using this parameter because you must specify the slots for each node group.</p>'
+          description: '<p>A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>, and <code>Slots</code>.</p> <p>If you''re creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, it is required when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file. You must configure each node group (shard) using this parameter because you must specify the slots for each node group.</p>'
           schema:
             type: array
             items:
@@ -3345,7 +3345,7 @@ paths:
     get:
       x-aws-operation-name: DeleteGlobalReplicationGroup
       operationId: GET_DeleteGlobalReplicationGroup
-      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
       responses:
         '200':
           description: Success
@@ -3381,7 +3381,7 @@ paths:
         - name: RetainPrimaryReplicationGroup
           in: query
           required: true
-          description: 'If set to <code>true</code>, the primary replication is retained as a standalone replication group. '
+          description: 'The primary replication group is retained as a standalone replication group. '
           schema:
             type: boolean
         - name: Action
@@ -3409,7 +3409,7 @@ paths:
     post:
       x-aws-operation-name: DeleteGlobalReplicationGroup
       operationId: POST_DeleteGlobalReplicationGroup
-      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Deleting a Global Datastore is a two-step process: </p> <ul> <li> <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p> </li> <li> <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p> </li> </ul> <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p>'
       responses:
         '200':
           description: Success
@@ -5766,7 +5766,7 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/UpdateActionStatus'
-            maxItems: 6
+            maxItems: 9
         - name: ShowNodeLevelUpdateStatus
           in: query
           required: false
@@ -5998,7 +5998,7 @@ paths:
     get:
       x-aws-operation-name: FailoverGlobalReplicationGroup
       operationId: GET_FailoverGlobalReplicationGroup
-      description: Used to failover the primary region to a selected secondary region.
+      description: 'Used to failover the primary region to a selected secondary region. The selected secondary region will be come primary, and all other clusters will become secondary.'
       responses:
         '200':
           description: Success
@@ -6074,7 +6074,7 @@ paths:
     post:
       x-aws-operation-name: FailoverGlobalReplicationGroup
       operationId: POST_FailoverGlobalReplicationGroup
-      description: Used to failover the primary region to a selected secondary region.
+      description: 'Used to failover the primary region to a selected secondary region. The selected secondary region will be come primary, and all other clusters will become secondary.'
       responses:
         '200':
           description: Success
@@ -7364,7 +7364,7 @@ paths:
         - name: ApplyImmediately
           in: query
           required: true
-          description: 'If true, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow setting for the replication group. If false, changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. '
+          description: 'This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible. Modifications to Global Replication Groups cannot be requested to be applied in PreferredMaintenceWindow. '
           schema:
             type: boolean
         - name: CacheNodeType
@@ -7466,7 +7466,7 @@ paths:
     get:
       x-aws-operation-name: ModifyReplicationGroup
       operationId: GET_ModifyReplicationGroup
-      description: '<p>Modifies the settings for a replication group.</p> <p>For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster''s node type or engine version. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Modifies the settings for a replication group.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
           description: Success
@@ -7711,7 +7711,7 @@ paths:
     post:
       x-aws-operation-name: ModifyReplicationGroup
       operationId: POST_ModifyReplicationGroup
-      description: '<p>Modifies the settings for a replication group.</p> <p>For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster''s node type or engine version. For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
+      description: '<p>Modifies the settings for a replication group.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html">Scaling for Amazon ElastiCache for Redis (cluster mode enabled)</a> in the ElastiCache User Guide</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html">ModifyReplicationGroupShardConfiguration</a> in the ElastiCache API Reference</p> </li> </ul> <note> <p>This operation is valid for Redis only.</p> </note>'
       responses:
         '200':
           description: Success
@@ -8199,7 +8199,7 @@ paths:
     get:
       x-aws-operation-name: RebalanceSlotsInGlobalReplicationGroup
       operationId: GET_RebalanceSlotsInGlobalReplicationGroup
-      description: Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
+      description: Redistribute slots to ensure uniform distribution across existing shards in the cluster.
       responses:
         '200':
           description: Success
@@ -8263,7 +8263,7 @@ paths:
     post:
       x-aws-operation-name: RebalanceSlotsInGlobalReplicationGroup
       operationId: POST_RebalanceSlotsInGlobalReplicationGroup
-      description: Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
+      description: Redistribute slots to ensure uniform distribution across existing shards in the cluster.
       responses:
         '200':
           description: Success
@@ -9551,6 +9551,9 @@ components:
         - stopping
         - stopped
         - complete
+        - scheduling
+        - scheduled
+        - not-applicable
     DisassociateGlobalReplicationGroupResult:
       type: object
       properties:
@@ -9775,6 +9778,9 @@ components:
         EC2SecurityGroups:
           $ref: '#/components/schemas/EC2SecurityGroupList'
           description: A list of Amazon EC2 security groups that are associated with this cache security group.
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the cache security group.
       description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>'
     AutomaticFailoverStatus:
       type: string
@@ -9984,6 +9990,9 @@ components:
         AtRestEncryptionEnabled:
           $ref: '#/components/schemas/BooleanOptional'
           description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable at-rest encryption on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the cache cluster.
       description: Contains all of the attributes of a specific cluster.
     CacheClusterList:
       type: array
@@ -10156,6 +10165,9 @@ components:
         IsGlobal:
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether the parameter group is associated with a Global Datastore
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the cache parameter group.
       description: Represents the output of a <code>CreateCacheParameterGroup</code> operation.
     ParametersList:
       type: array
@@ -10206,6 +10218,9 @@ components:
         Subnets:
           $ref: '#/components/schemas/SubnetList'
           description: A list of subnets associated with the cache subnet group.
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the cache subnet group.
       description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>CreateCacheSubnetGroup</code> </p> </li> <li> <p> <code>ModifyCacheSubnetGroup</code> </p> </li> </ul>'
     CacheSubnetGroups:
       type: array
@@ -10287,6 +10302,9 @@ components:
         KmsKeyId:
           $ref: '#/components/schemas/String'
           description: The ID of the KMS key used to encrypt the disk in the cluster.
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the replication group.
       description: Contains all of the attributes of a specific Redis replication group.
     Integer:
       type: integer
@@ -10392,6 +10410,9 @@ components:
         KmsKeyId:
           $ref: '#/components/schemas/String'
           description: The ID of the KMS key used to encrypt the snapshot.
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the snapshot.
       description: Represents a copy of an entire Redis cluster as of the time when the snapshot was taken.
     SecurityGroupIdsList:
       type: array
@@ -10540,7 +10561,7 @@ components:
       properties:
         GlobalReplicationGroupIdSuffix:
           $ref: '#/components/schemas/String'
-          description: The suffix for name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+          description: The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
         GlobalReplicationGroupDescription:
           $ref: '#/components/schemas/String'
           description: Provides details of the Global Datastore
@@ -10564,7 +10585,7 @@ components:
           description: The cache node type of the Global Datastore
         Engine:
           $ref: '#/components/schemas/String'
-          description: 'The Elasticache engine. For preview, it is Redis only.'
+          description: The Elasticache engine. For Redis only.
         EngineVersion:
           $ref: '#/components/schemas/String'
           description: 'The Elasticache Redis engine version. For preview, it is Redis version 5.0.5 only.'
@@ -10586,7 +10607,10 @@ components:
         AtRestEncryptionEnabled:
           $ref: '#/components/schemas/BooleanOptional'
           description: '<p>A flag that enables encryption at rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created. To enable encryption at rest on a replication group you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the replication group. </p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p>'
-      description: '<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary cluster automatically replicates updates to the secondary cluster.</p> <ul> <li> <p>The <b>GlobalReplicationGroupId</b> represents the name of the Global Datastore, which is what you use to associate a secondary cluster.</p> </li> </ul>'
+        ARN:
+          $ref: '#/components/schemas/String'
+          description: The ARN (Amazon Resource Name) of the global replication group.
+      description: '<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary cluster automatically replicates updates to the secondary cluster.</p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global Datastore, which is what you use to associate a secondary cluster.</p> </li> </ul>'
     NodeGroupConfigurationList:
       type: array
       items:
@@ -10615,7 +10639,7 @@ components:
           description: '<p>Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails.</p> <p>If <code>true</code>, Multi-AZ is enabled for this replication group. If <code>false</code>, Multi-AZ is disabled for this replication group.</p> <p> <code>AutomaticFailoverEnabled</code> must be enabled for Redis (cluster mode enabled) replication groups.</p> <p>Default: false</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
         NumCacheClusters:
           $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The number of clusters this replication group initially has.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>'
+          description: '<p>The number of nodes in the cluster.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>'
         PreferredCacheClusterAZs:
           $ref: '#/components/schemas/AvailabilityZonesList'
           description: '<p>A list of EC2 Availability Zones in which the replication group''s clusters are created. The order of the Availability Zones in the list is the order in which clusters are allocated. The primary cluster is created in the first AZ in the list.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>NodeGroupConfiguration</code> instead.</p> <note> <p>If you are creating your replication group in an Amazon VPC (recommended), you can only locate clusters in Availability Zones associated with the subnets in the selected subnet group.</p> <p>The number of Availability Zones listed must equal the value of <code>NumCacheClusters</code>.</p> </note> <p>Default: system chosen Availability Zones.</p>'
@@ -10627,7 +10651,7 @@ components:
           description: An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.
         NodeGroupConfiguration:
           $ref: '#/components/schemas/NodeGroupConfigurationList'
-          description: '<p>A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>, and <code>Slots</code>.</p> <p>If you''re creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure each node group (shard) using this parameter because you must specify the slots for each node group.</p>'
+          description: '<p>A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>, and <code>Slots</code>.</p> <p>If you''re creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, it is required when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file. You must configure each node group (shard) using this parameter because you must specify the slots for each node group.</p>'
         CacheNodeType:
           $ref: '#/components/schemas/String'
           description: '<p>The compute and memory capacity of the nodes in the node group (shard).</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>M5 node types:</b> <code>cache.m5.large</code>, <code>cache.m5.xlarge</code>, <code>cache.m5.2xlarge</code>, <code>cache.m5.4xlarge</code>, <code>cache.m5.12xlarge</code>, <code>cache.m5.24xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> <p> <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code> </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R5 node types:</b> <code>cache.r5.large</code>, <code>cache.r5.xlarge</code>, <code>cache.r5.2xlarge</code>, <code>cache.r5.4xlarge</code>, <code>cache.r5.12xlarge</code>, <code>cache.r5.24xlarge</code> </p> <p> <b>R4 node types:</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Additional node type info</b> </p> <ul> <li> <p>All current generation instance types are created in Amazon VPC by default.</p> </li> <li> <p>Redis append-only files (AOF) are not supported for T1 or T2 instances.</p> </li> <li> <p>Redis Multi-AZ with automatic failover is not supported on T1 instances.</p> </li> <li> <p>Redis configuration variables <code>appendonly</code> and <code>appendfsync</code> are not supported on Redis version 2.8.22 and later.</p> </li> </ul>'
@@ -10824,7 +10848,7 @@ components:
           description: The name of the Global Datastore
         RetainPrimaryReplicationGroup:
           $ref: '#/components/schemas/Boolean'
-          description: 'If set to <code>true</code>, the primary replication is retained as a standalone replication group. '
+          description: 'The primary replication group is retained as a standalone replication group. '
     DeleteReplicationGroupMessage:
       type: object
       required:
@@ -11175,7 +11199,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UpdateActionStatus'
-      maxItems: 6
+      maxItems: 9
     DescribeUpdateActionsMessage:
       type: object
       title: DescribeUpdateActionsMessage
@@ -11505,7 +11529,7 @@ components:
           description: The name of the Global Datastore
         ApplyImmediately:
           $ref: '#/components/schemas/Boolean'
-          description: 'If true, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow setting for the replication group. If false, changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. '
+          description: 'This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible. Modifications to Global Replication Groups cannot be requested to be applied in PreferredMaintenceWindow. '
         CacheNodeType:
           $ref: '#/components/schemas/String'
           description: A valid cache node type that you want to scale this Global Datastore to.

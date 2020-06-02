@@ -157,7 +157,7 @@ paths:
                 - BackupPlan
               properties:
                 BackupPlan:
-                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
                   type: object
                   properties:
                     BackupPlanName:
@@ -515,7 +515,7 @@ paths:
         - name: backupVaultName
           in: path
           required: true
-          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and theAWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
+          description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
     get:
@@ -666,7 +666,7 @@ paths:
                 - BackupPlan
               properties:
                 BackupPlan:
-                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+                  description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
                   type: object
                   properties:
                     BackupPlanName:
@@ -1219,7 +1219,7 @@ paths:
               type: object
               properties:
                 Lifecycle:
-                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>'
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
@@ -1366,7 +1366,7 @@ paths:
         - name: copyJobId
           in: path
           required: true
-          description: Uniquely identifies a request to AWS Backup to copy a resource.
+          description: Uniquely identifies a copy job.
           schema:
             type: string
     parameters:
@@ -1380,7 +1380,7 @@ paths:
   '/resources/{resourceArn}':
     get:
       operationId: DescribeProtectedResource
-      description: 'Returns information about a saved resource, including the last time it was backed-up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.'
+      description: 'Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.'
       responses:
         '200':
           description: Success
@@ -1427,6 +1427,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /account-settings:
+    get:
+      operationId: DescribeRegionSettings
+      description: 'Returns the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service''s resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service''s resources in this region.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRegionSettingsOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateRegionSettings
+      description: 'Updates the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service''s resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service''s resources in this region.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ResourceTypeOptInPreference:
+                  description: Updates the list of services along with the opt-in preferences for the region.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/IsEnabled'
   '/restore-jobs/{restoreJobId}':
     get:
       operationId: DescribeRestoreJob
@@ -2184,14 +2247,14 @@ paths:
         - name: resourceType
           in: query
           required: false
-          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
+          description: '<p>Returns only backup jobs for the specified resources:</p> <ul> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for AWS Storage Gateway</p> </li> </ul>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
         - name: destinationVaultArn
           in: query
           required: false
-          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. '
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>. '
           schema:
             type: string
         - name: MaxResults
@@ -2531,7 +2594,7 @@ paths:
   '/tags/{resourceArn}/':
     get:
       operationId: ListTags
-      description: 'Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.'
+      description: '<p>Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.</p> <note> <p> <code>ListTags</code> are currently only supported with Amazon EFS backups.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2671,13 +2734,13 @@ paths:
                   description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
                   type: string
                 StartWindowMinutes:
-                  description: The amount of time in minutes before beginning a backup.
+                  description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
                   type: integer
                 CompleteWindowMinutes:
-                  description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+                  description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
                   type: integer
                 Lifecycle:
-                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>'
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
@@ -2757,20 +2820,20 @@ paths:
                   description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
                   type: string
                 SourceBackupVaultName:
-                  description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;'
+                  description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
                   type: string
                   pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
                 DestinationBackupVaultArn:
                   description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
                   type: string
                 IamRoleArn:
-                  description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+                  description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                   type: string
                 IdempotencyToken:
                   description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
                   type: string
                 Lifecycle:
-                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+                  description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>'
                   type: object
                   properties:
                     MoveToColdStorageAfterDays:
@@ -2838,7 +2901,7 @@ paths:
                   description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
                   type: string
                 Metadata:
-                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed-up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
+                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/MetadataValue'
@@ -3052,7 +3115,7 @@ components:
           description: 'The date and time that a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         VersionId:
           $ref: '#/components/schemas/string'
-          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1024 bytes long. They cannot be edited.'
+          description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
     BackupPlanName:
       type: string
     BackupRulesInput:
@@ -3164,7 +3227,7 @@ components:
           description: 'Contains identifying information about the creation of a backup job, including the <code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> of the backup plan that is used to create it.'
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: 'The type of AWS resource to be backed-up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         BytesTransferred:
           $ref: '#/components/schemas/Long'
           description: The size in bytes transferred to a backup vault at the time that the job status was queried.
@@ -3268,6 +3331,12 @@ components:
         LastRestoreTime:
           $ref: '#/components/schemas/timestamp'
           description: 'The date and time that a recovery point was last restored, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+    DescribeRegionSettingsOutput:
+      type: object
+      properties:
+        ResourceTypeOptInPreference:
+          $ref: '#/components/schemas/ResourceTypeOptInPreference'
+          description: Returns a list of all services along with the opt-in preferences in the region.
     DescribeRestoreJobOutput:
       type: object
       properties:
@@ -3557,10 +3626,10 @@ components:
       properties:
         CopyJobId:
           $ref: '#/components/schemas/string'
-          description: Uniquely identifies a request to AWS Backup to copy a resource.
+          description: Uniquely identifies a copy job.
         CreationDate:
           $ref: '#/components/schemas/timestamp'
-          description: 'The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. &gt;'
+          description: 'The date and time that a copy job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     StartRestoreJobOutput:
       type: object
       properties:
@@ -3601,6 +3670,8 @@ components:
         CalculatedLifecycle:
           $ref: '#/components/schemas/CalculatedLifecycle'
           description: A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.
+    IsEnabled:
+      type: boolean
     ARN:
       type: string
     BackupVaultName:
@@ -3689,7 +3760,7 @@ components:
           description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: 'The type of AWS resource to be backed-up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+          description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         BytesTransferred:
           $ref: '#/components/schemas/Long'
           description: The size in bytes transferred to a backup vault at the time that the job status was queried.
@@ -3713,7 +3784,7 @@ components:
           description: The display name of a backup plan.
         Rules:
           $ref: '#/components/schemas/BackupRules'
-          description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+          description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources. '
       description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
     BackupPlanInput:
       type: object
@@ -3727,7 +3798,7 @@ components:
         Rules:
           $ref: '#/components/schemas/BackupRulesInput'
           description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
-      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
+      description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
     BackupPlanTemplatesListMember:
       type: object
       properties:
@@ -3794,7 +3865,7 @@ components:
         DeleteAfterDays:
           $ref: '#/components/schemas/Long'
           description: Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.
-      description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+      description: '<p>Contains an array of <code>Transition</code> objects specifying how long in days before a recovery point transitions to cold storage or is deleted.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, on the console, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>'
     Tags:
       type: object
       additionalProperties:
@@ -3820,10 +3891,10 @@ components:
           description: A CRON expression specifying when AWS Backup initiates a backup job.
         StartWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: An optional value that specifies a period of time in minutes after a backup is scheduled before a job is canceled if it doesn't start successfully.
+          description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
         CompletionWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: A value in minutes after a backup job is successfully started before it must be completed or it is canceled by AWS Backup. This value is optional.
+          description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
           description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
@@ -3845,7 +3916,7 @@ components:
       properties:
         RuleName:
           $ref: '#/components/schemas/BackupRuleName'
-          description: '&gt;An optional display name for a backup rule.'
+          description: An optional display name for a backup rule.
         TargetBackupVaultName:
           $ref: '#/components/schemas/BackupVaultName'
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
@@ -3854,13 +3925,13 @@ components:
           description: A CRON expression specifying when AWS Backup initiates a backup job.
         StartWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: The amount of time in minutes before beginning a backup.
+          description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
         CompletionWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+          description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
-          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days”. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+          description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
         RecoveryPointTags:
           $ref: '#/components/schemas/Tags'
           description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
@@ -3956,7 +4027,7 @@ components:
         DeleteAt:
           $ref: '#/components/schemas/timestamp'
           description: A timestamp that specifies when to delete a recovery point.
-      description: '<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+      description: '<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which are used to specify a lifecycle for a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p>'
     ConditionType:
       type: string
       enum:
@@ -3991,7 +4062,7 @@ components:
           $ref: '#/components/schemas/Lifecycle'
         DestinationBackupVaultArn:
           $ref: '#/components/schemas/ARN'
-          description: 'An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup. For example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
       description: The details of the copy operation.
     CopyJobState:
       type: string
@@ -4005,45 +4076,45 @@ components:
       properties:
         CopyJobId:
           $ref: '#/components/schemas/string'
-          description: Uniquely identifies a request to AWS Backup to copy a resource.
+          description: Uniquely identifies a copy job.
         SourceBackupVaultArn:
           $ref: '#/components/schemas/ARN'
-          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. '
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>. '
         SourceRecoveryPointArn:
           $ref: '#/components/schemas/ARN'
-          description: 'An ARN that uniquely identifies a source recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+          description: 'An ARN that uniquely identifies a source recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         DestinationBackupVaultArn:
           $ref: '#/components/schemas/ARN'
-          description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.'
+          description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination copy vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         DestinationRecoveryPointArn:
           $ref: '#/components/schemas/ARN'
-          description: 'An ARN that uniquely identifies a destination recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
+          description: 'An ARN that uniquely identifies a destination recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         ResourceArn:
           $ref: '#/components/schemas/ARN'
-          description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
+          description: 'The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
         CreationDate:
           $ref: '#/components/schemas/timestamp'
           description: 'The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. '
         CompletionDate:
           $ref: '#/components/schemas/timestamp'
-          description: 'The date and time a job to create a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. '
+          description: 'The date and time a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. '
         State:
           $ref: '#/components/schemas/CopyJobState'
-          description: The current state of a resource recovery point.
+          description: The current state of a copy job.
         StatusMessage:
           $ref: '#/components/schemas/string'
-          description: A detailed message explaining the status of the job that to copy a resource.
+          description: A detailed message explaining the status of the job to copy a resource.
         BackupSizeInBytes:
           $ref: '#/components/schemas/Long'
           description: 'The size, in bytes, of a copy job.'
         IamRoleArn:
           $ref: '#/components/schemas/IAMRoleArn'
-          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         CreatedBy:
           $ref: '#/components/schemas/RecoveryPointCreator'
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
+          description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
       description: Contains detailed information about a copy job.
     CopyJobsList:
       type: array
@@ -4148,6 +4219,14 @@ components:
         - WARM
         - COLD
         - DELETED
+    DescribeRegionSettingsInput:
+      type: object
+      title: DescribeRegionSettingsInput
+      properties: {}
+    ResourceTypeOptInPreference:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/IsEnabled'
     RestoreJobId:
       type: string
     DescribeRestoreJobInput:
@@ -4445,10 +4524,10 @@ components:
           description: A customer chosen string that can be used to distinguish between calls to <code>StartBackupJob</code>.
         StartWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: The amount of time in minutes before beginning a backup.
+          description: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.
         CompleteWindowMinutes:
           $ref: '#/components/schemas/WindowMinutes'
-          description: The amount of time AWS Backup attempts a backup before canceling the job and returning an error.
+          description: A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
           description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
@@ -4469,13 +4548,13 @@ components:
           description: 'An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45. '
         SourceBackupVaultName:
           $ref: '#/components/schemas/BackupVaultName'
-          description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens. &gt;'
+          description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
         DestinationBackupVaultArn:
           $ref: '#/components/schemas/ARN'
           description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
         IamRoleArn:
           $ref: '#/components/schemas/IAMRoleArn'
-          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.'
+          description: 'Specifies the IAM role ARN used to copy the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         IdempotencyToken:
           $ref: '#/components/schemas/string'
           description: A customer chosen string that can be used to distinguish between calls to <code>StartCopyJob</code>.
@@ -4494,7 +4573,7 @@ components:
           description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
         Metadata:
           $ref: '#/components/schemas/Metadata'
-          description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed-up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
+          description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
         IamRoleArn:
           $ref: '#/components/schemas/IAMRoleArn'
           description: 'The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
@@ -4548,5 +4627,12 @@ components:
         Lifecycle:
           $ref: '#/components/schemas/Lifecycle'
           description: '<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p>'
+    UpdateRegionSettingsInput:
+      type: object
+      title: UpdateRegionSettingsInput
+      properties:
+        ResourceTypeOptInPreference:
+          $ref: '#/components/schemas/ResourceTypeOptInPreference'
+          description: Updates the list of services along with the opt-in preferences for the region.
 security:
   - hmac: []

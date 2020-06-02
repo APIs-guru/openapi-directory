@@ -188,7 +188,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: CreateIngestion
-      description: '<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href="https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>'
+      description: '<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>'
       responses:
         '200':
           description: Success
@@ -5919,7 +5919,7 @@ paths:
                   description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
                   type: string
                 SessionName:
-                  description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+                  description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
                   type: string
                   pattern: '[\w+=.@-]*'
                   minLength: 2
@@ -7181,7 +7181,7 @@ components:
       properties:
         DashboardSummaryList:
           $ref: '#/components/schemas/DashboardSummaryList'
-          description: A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.
+          description: A structure that contains all of the dashboards in your AWS account. This structure provides basic information about the dashboards.
         NextToken:
           $ref: '#/components/schemas/String'
           description: 'The token for the next set of results, or null if there are no more results.'
@@ -8468,6 +8468,9 @@ components:
         SourceEntityArn:
           $ref: '#/components/schemas/Arn'
           description: Source entity ARN.
+        DataSetArns:
+          $ref: '#/components/schemas/DataSetArnsList'
+          description: The Amazon Resource Numbers (ARNs) for the datasets that are associated with a version of the dashboard.
         Description:
           $ref: '#/components/schemas/VersionDescription'
           description: Description.
@@ -8486,7 +8489,7 @@ components:
           description: The Amazon Resource Name (ARN) of the resource.
         Name:
           $ref: '#/components/schemas/DashboardName'
-          description: A display name for the dataset.
+          description: A display name for the dashboard.
         Version:
           $ref: '#/components/schemas/DashboardVersion'
           description: Version.
@@ -8503,6 +8506,8 @@ components:
     DashboardErrorType:
       type: string
       enum:
+        - ACCESS_DENIED
+        - SOURCE_NOT_FOUND
         - DATA_SET_NOT_FOUND
         - INTERNAL_FAILURE
         - PARAMETER_VALUE_INCOMPATIBLE
@@ -8582,6 +8587,11 @@ components:
       enum:
         - EXPANDED
         - COLLAPSED
+    DataSetArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      maxItems: 100
     DashboardVersionSummary:
       type: object
       properties:
@@ -9523,7 +9533,7 @@ components:
           description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
         SessionName:
           $ref: '#/components/schemas/RoleSessionName'
-          description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
+          description: 'You need to use this parameter only when you register one or more users using an assumed IAM role. You don''t need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
         UserName:
           $ref: '#/components/schemas/UserName'
           description: The Amazon QuickSight user name that you want to create for the user you are registering.
@@ -9661,6 +9671,7 @@ components:
     TemplateErrorType:
       type: string
       enum:
+        - SOURCE_NOT_FOUND
         - DATA_SET_NOT_FOUND
         - INTERNAL_FAILURE
     TemplateError:
@@ -9705,7 +9716,7 @@ components:
       properties:
         Arn:
           $ref: '#/components/schemas/Arn'
-          description: The ARN of the template version.
+          description: The Amazon Resource Name (ARN) of the template version.
         VersionNumber:
           $ref: '#/components/schemas/VersionNumber'
           description: The version number of the template version.

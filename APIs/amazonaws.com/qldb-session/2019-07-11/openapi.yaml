@@ -3,7 +3,7 @@ info:
   version: '2019-07-11'
   x-release: v4
   title: Amazon QLDB Session
-  description: The transactional data APIs for Amazon QLDB
+  description: '<p>The transactional data APIs for Amazon QLDB</p> <note> <p>Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.</p> <ul> <li> <p>If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this <code>qldbsession</code> data plane and manages <code>SendCommand</code> API calls for you. For information and a list of supported programming languages, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html">Getting started with the driver</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> <li> <p>If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html">Accessing Amazon QLDB using the QLDB Shell</a>.</p> </li> </ul> </note>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -108,7 +108,7 @@ paths:
   '/#X-Amz-Target=QLDBSession.SendCommand':
     post:
       operationId: SendCommand
-      description: Sends a command to an Amazon QLDB ledger.
+      description: '<p>Sends a command to an Amazon QLDB ledger.</p> <note> <p>Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.</p> <ul> <li> <p>If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this <code>qldbsession</code> data plane and manages <code>SendCommand</code> API calls for you. For information and a list of supported programming languages, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html">Getting started with the driver</a> in the <i>Amazon QLDB Developer Guide</i>.</p> </li> <li> <p>If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see <a href="https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html">Accessing Amazon QLDB using the QLDB Shell</a>.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -300,7 +300,7 @@ components:
       properties:
         TransactionId:
           $ref: '#/components/schemas/TransactionId'
-          description: Specifies the transaction id of the transaction to commit.
+          description: Specifies the transaction ID of the transaction to commit.
         CommitDigest:
           $ref: '#/components/schemas/CommitDigest'
           description: 'Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates <code>CommitDigest</code> and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.'
@@ -310,7 +310,7 @@ components:
       properties:
         TransactionId:
           $ref: '#/components/schemas/TransactionId'
-          description: The transaction id of the committed transaction.
+          description: The transaction ID of the committed transaction.
         CommitDigest:
           $ref: '#/components/schemas/CommitDigest'
           description: The commit digest of the committed transaction.
@@ -339,7 +339,7 @@ components:
       properties:
         TransactionId:
           $ref: '#/components/schemas/TransactionId'
-          description: Specifies the transaction id of the request.
+          description: Specifies the transaction ID of the request.
         Statement:
           $ref: '#/components/schemas/Statement'
           description: Specifies the statement of the request.
@@ -377,7 +377,7 @@ components:
       properties:
         TransactionId:
           $ref: '#/components/schemas/TransactionId'
-          description: Specifies the transaction id of the page to be fetched.
+          description: Specifies the transaction ID of the page to be fetched.
         NextPageToken:
           $ref: '#/components/schemas/PageToken'
           description: Specifies the next page token of the page to be fetched.
@@ -419,7 +419,7 @@ components:
         LedgerName:
           $ref: '#/components/schemas/LedgerName'
           description: The name of the ledger to start a new session against.
-      description: Specifies a request to start a a new session.
+      description: Specifies a request to start a new session.
     StartTransactionRequest:
       type: object
       properties: {}
@@ -436,17 +436,17 @@ components:
       properties:
         TransactionId:
           $ref: '#/components/schemas/TransactionId'
-          description: The transaction id of the started transaction.
+          description: The transaction ID of the started transaction.
       description: Contains the details of the started transaction.
     ValueHolder:
       type: object
       properties:
         IonBinary:
           $ref: '#/components/schemas/IonBinary'
-          description: 'An Amazon Ion binary value contained in a <code>ValueHolder</code> structure. '
+          description: An Amazon Ion binary value contained in a <code>ValueHolder</code> structure.
         IonText:
           $ref: '#/components/schemas/IonText'
-          description: 'An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure. '
-      description: A structure that can contains values in multiple encoding formats.
+          description: An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.
+      description: A structure that can contain an Amazon Ion value in multiple encoding formats.
 security:
   - hmac: []
