@@ -3,6 +3,7 @@
 'use strict';
 
 var fs = require('fs');
+var fsp = require('fs').promises;
 var Path = require('path');
 var assert = require('assert');
 
@@ -60,9 +61,12 @@ buildApiList(specs)
 
 function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
+  var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
+  if (fs.existsSync(deployDir(logoFile))) {
+    return fsp.readFile(deployDir(logoFile));
+  }
   return makeRequest('get', url, {encoding: null, retries: 10})
     .spread(function(response, data) {
-      var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
 
       if (!URI(url).suffix()) {
         var mime = response.headers['content-type'];
@@ -86,7 +90,7 @@ async function buildApiList(specs) {
 
     var logoUrl = _.get(swagger, 'info["x-logo"].url');
     if (logoUrl) {
-      if ((!cachedLogo[logoUrl]) && (logoUrl.indexOf('apitore.com')<0))
+      if (!cachedLogo[logoUrl])
         cachedLogo[logoUrl] = await cacheLogo(logoUrl);
       if (cachedLogo[logoUrl])
         swagger.info['x-logo'].url = cachedLogo[logoUrl];
