@@ -1,0 +1,5617 @@
+swagger: '2.0'
+schemes:
+  - https
+host: connect.signl4.com
+basePath: /api
+x-hasEquivalentPaths: true
+info:
+  contact:
+    email: info@derdack.com
+    url: 'https://www.signl4.com/feedback-we-love-hear-from-you/'
+    x-twitter: signl4me
+  description: "With our API, you can easily access many SIGNL4 functions via HTTP requests. It is based on REST and fulfills a similar purpose for which SDKs were used very often in the past.<br />\r\nExample usage scenarios are the integration in third party systems for triggering alarms to your team or on-call duty based on shift planning systems.<br/></br>\r\nThe API is always used in the context of your SIGNL4 team, i. e. you must log in with your SIGNL4 account and give your API client the authorization to access your team programmatically on your behalf (constent grant).<br />\r\nAt the moment there are several certified API clients, e.g. [Microsoft Flow](https://emea.flow.microsoft.com/en-us/connectors/shared_signl4/signl4-derdack/) or [Amazon Alexa](https://www.amazon.com/Derdack-GmbH-SIGNL4/dp/B077BQ79T3). Registration of your personal API client is currently possible on request.<br />\r\nDon't hesitate to [contact us](https://www.signl4.com/feedback-we-love-hear-from-you/) and you'll get your client_id and client_secret required for accessing the SIGNL4 API after user login and consent grant.<br />\r\nAuthentication is based on OpenID Connect and the [Authorization Code Flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth).<br /><br />\r\nThe base URL of the API is [https://connect.signl4.com/api/](https://connect.signl4.com/api/).<br />\r\nCopyright © Derdack GmbH<br/>"
+  license:
+    name: Derdack GmbH
+    url: 'https://www.signl4.com'
+  title: SIGNL4
+  version: v1
+  x-apisguru-categories:
+    - messaging
+  x-logo:
+    url: 'https://twitter.com/signl4me/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://connect.signl4.com/api/docs/v1/swagger.json'
+      version: '2.0'
+  x-providerName: signl4.com
+produces:
+  - text/plain
+  - application/json
+  - text/json
+paths:
+  '/adoptions/{acceptCode}/accept':
+    post:
+      consumes: []
+      operationId: AcceptSubscriptionAdoption
+      parameters:
+        - description: ''
+          in: path
+          name: acceptCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              name: Developers
+              ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              planState: 0
+              referralEnabled: false
+              status: 0
+              teamIds:
+                - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+          schema:
+            $ref: '#/definitions/SubscriptionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Accept an existing subscription adoption.
+      tags:
+        - Adoptions
+  /alerts:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Triggers a new alert for your team. All team members on duty will receive alert notifications.
+      operationId: RaiseAlert
+      parameters:
+        - description: Alert to raise.
+          in: body
+          name: alertInfo
+          required: false
+          schema:
+            $ref: '#/definitions/RaiseAlertInfo'
+      responses:
+        '201':
+          description: Success
+          examples:
+            application/json:
+              annotations:
+                - text: example text
+                  timestamp: '0001-01-01T00:00:00'
+                  type: 1
+                  userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+              attachments:
+                - content: TG9yZW0gaXBzdW0gZG9sciBzaXI=
+                  contentType: text
+                  encoding: 1
+                  id: d91c619b-df2b-42e7-bffd-9484716f92fb
+                  name: Example Attachment
+              category: database
+              categoryId: adec5849-e6ee-4a06-809a-7473bfa1e668
+              eventSourceId: b05077e1-32b1-44b5-833a-00b855c7e0fb
+              eventSourceType: 2
+              externalId: 1f097db5-88aa-4015-8903-98e2b83a5ac5
+              flags: 3
+              history:
+                acknowledged: '2020-06-02T11:25:58.0656598+00:00'
+                acknowledgedgements:
+                  - 5acef6cb-94b1-404f-a997-89f508aedc0e
+                closed: '2020-06-02T11:25:58.0656598+00:00'
+                closedBy: 5acef6cb-94b1-404f-a997-89f508aedc0e
+                created: '2020-06-02T11:25:58.0656598+00:00'
+              id: 45f6546e-c582-4ef3-ac3d-5cd3bc818e77
+              lastModified: '2020-06-02T11:25:58.0656598+00:00'
+              parameters:
+                - name: ExampleParameterName
+                  type: 8
+                  value: ExampleParameterValue
+              severity: 0
+              status: 4
+              subscriptionId: e59d821e-511d-42c9-9195-d4c6c4ab21f3
+              teamId: c4c6c478-b3e2-423d-9ce6-ca56e18d01ef
+              text: Alert example text
+              title: Alert example title
+          schema:
+            $ref: '#/definitions/AlertInfo'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Trigger Alert
+      tags:
+        - Alerts
+  /alerts/acknowledgeAll:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: This method confirms all unhandled alerts your team currently has.
+      operationId: AcknowledgeAll
+      parameters:
+        - in: body
+          name: filterInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ChangeAlertStatusFilterInfo'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+      summary: Confirm all
+      tags:
+        - Alerts
+  /alerts/acknowledgeMultiple:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: This method confirms all alerts provided.
+      operationId: AcknowledgeMultiple
+      parameters:
+        - in: body
+          name: acknowledgeInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ChangeAlertStatusMultipleInfo'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Confirm multiple alerts
+      tags:
+        - Alerts
+  /alerts/closeAll:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: This method closes all acknowledged alerts your team currently has.
+      operationId: CloseAll
+      parameters:
+        - in: body
+          name: filterInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ChangeAlertStatusFilterInfo'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Close all acknowledged alerts.
+      tags:
+        - Alerts
+  /alerts/closeMultiple:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: This method closes all alerts provided.
+      operationId: CloseMultiple
+      parameters:
+        - in: body
+          name: statusChangeInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ChangeAlertStatusMultipleInfo'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Close multiple alerts
+      tags:
+        - Alerts
+  /alerts/paged:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: GetAlertsPaged
+      parameters:
+        - description: "Defines the limit of retrieved alert details per request. 1 to 100 are allowed per request.\r\n                Number of alerts could be less if filtered but at least 1."
+          format: int32
+          in: query
+          name: maxResults
+          required: false
+          type: integer
+        - description: The filter defines which alerts are supposed to be retrieved.
+          in: body
+          name: filter
+          required: false
+          schema:
+            $ref: '#/definitions/AlertFilterPublic'
+      responses:
+        '200':
+          description: Returns a paged result with found alerts and continuation token if more alerts are in the database.
+          examples:
+            application/json:
+              continuationToken:
+                nextPartitionKey: c7fdebf6-0e26-4d9e-b739-6a611669799f
+                nextRowKey: 931110e9-30cb-4ebf-a257-2583c8ecd50a_c7ff6-0e26-4d9e-b739-6a611669799f
+                nextTableName: Alerts
+              hasMore: true
+              results:
+                - categoryId: it
+                  detailedHistory:
+                    acknowledged: '2020-06-02T11:15:58.0500355Z'
+                    alertHistoryEntries:
+                      - timestamp: '2020-06-02T11:24:58.0500355+00:00'
+                        type: 2
+                        userId: afc2356a-9d85-4e4a-8cf3-6efcad4b391c
+                      - timestamp: '2020-06-02T11:24:58.0500355+00:00'
+                        type: 2
+                        userId: 48fee91e-905a-4b9b-8209-c8ff42f9fb75
+                      - timestamp: '2020-06-02T11:25:58.0500355+00:00'
+                        type: 3
+                        userId: afc2356a-9d85-4e4a-8cf3-6efcad4b391c
+                    created: '2020-06-02T10:25:58.0500355Z'
+                  flags: 0
+                  id: bc735d8c-7f42-4b08-b706-6d7ad078c31a
+                  lastModified: '2020-06-02T11:25:58.0500355Z'
+                  requiredAcknowledgements: 0
+                  status: 4
+                  subscriptionId: 825e5c3a-1c07-4989-a4ff-38cc671fff52
+                  teamId: e0ac9a12-f601-47c5-9fc2-ab6a08fe5607
+                  text: Example alert text
+                  title: Example alert
+                - categoryId: default
+                  detailedHistory:
+                    acknowledged: '2020-06-02T11:05:58.0500355Z'
+                    alertHistoryEntries:
+                      - timestamp: '2020-06-02T11:05:58.0500355Z'
+                        type: 2
+                        userId: afc2356a-9d85-4e4a-8cf3-6efcad4b391c
+                    created: '2020-06-02T10:25:58.0500355Z'
+                  flags: 0
+                  id: bc735d8c-7f42-4b08-b706-6d7ad078c31a
+                  lastModified: '2020-06-02T11:25:58.0500355Z'
+                  requiredAcknowledgements: 0
+                  status: 4
+                  subscriptionId: 825e5c3a-1c07-4989-a4ff-38cc671fff52
+                  teamId: e0ac9a12-f601-47c5-9fc2-ab6a08fe5607
+                  text: Example alert text 2
+                  title: Example alert 2
+          schema:
+            $ref: '#/definitions/PagedResultsPublic[OverviewAlert]'
+        '204':
+          description: There were no alerts found for the specified filter.
+        '400':
+          description: Required parameters could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Authorization failed
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets alerts paged
+      tags:
+        - Alerts
+  /alerts/report:
+    get:
+      consumes: []
+      description: "Returns information about the occurred alert volume in different time periods as well as information about the\r\nresponse behaviour (amount of confirmed and unhandled alerts) of your team members."
+      operationId: GetAlertReport
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              last24Hours:
+                acknowledged: 12
+                closed: 0
+                unhandled: 1
+              subscriptionId: 9cba4502-95b9-4052-8993-ec06905e21dc
+              teamCurrentDuty:
+                acknowledged: 34
+                closed: 0
+                start: '2020-05-31T11:25:58.0500355Z'
+                unhandled: 5
+              teamId: f15614df-a363-49a4-91d8-9d9ba18a8bbe
+              userId: 35c4e883-cc74-483e-9339-b4bd25d6c972
+          schema:
+            $ref: '#/definitions/AlertReport'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get Alert Report
+      tags:
+        - Alerts
+  '/alerts/{alertId}':
+    get:
+      consumes: []
+      description: Gets an alert by id.
+      operationId: GetAlert
+      parameters:
+        - description: Id of the requested Alert.
+          in: path
+          name: alertId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              annotations:
+                - text: example text
+                  timestamp: '0001-01-01T00:00:00'
+                  type: 1
+                  userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+              attachments:
+                - content: TG9yZW0gaXBzdW0gZG9sciBzaXI=
+                  contentType: text
+                  encoding: 1
+                  id: d91c619b-df2b-42e7-bffd-9484716f92fb
+                  name: Example Attachment
+              category: database
+              categoryId: adec5849-e6ee-4a06-809a-7473bfa1e668
+              eventSourceId: b05077e1-32b1-44b5-833a-00b855c7e0fb
+              eventSourceType: 2
+              externalId: 1f097db5-88aa-4015-8903-98e2b83a5ac5
+              flags: 3
+              history:
+                acknowledged: '2020-06-02T11:25:58.0500355+00:00'
+                acknowledgedgements:
+                  - 5acef6cb-94b1-404f-a997-89f508aedc0e
+                closed: '2020-06-02T11:25:58.0500355+00:00'
+                closedBy: 5acef6cb-94b1-404f-a997-89f508aedc0e
+                created: '2020-06-02T11:25:58.0500355+00:00'
+              id: 45f6546e-c582-4ef3-ac3d-5cd3bc818e77
+              lastModified: '2020-06-02T11:25:58.0500355+00:00'
+              parameters:
+                - name: ExampleParameterName
+                  type: 8
+                  value: ExampleParameterValue
+              severity: 0
+              status: 4
+              subscriptionId: e59d821e-511d-42c9-9195-d4c6c4ab21f3
+              teamId: c4c6c478-b3e2-423d-9ce6-ca56e18d01ef
+              text: Alert example text
+              title: Alert example title
+          schema:
+            $ref: '#/definitions/AlertInfo'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get Alert
+      tags:
+        - Alerts
+  '/alerts/{alertId}/annotate':
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Annotates an alert by given Annotation Info.
+      operationId: AnnotateAlert
+      parameters:
+        - description: Id of the alert to annotate.
+          in: path
+          name: alertId
+          required: true
+          type: string
+        - description: Annotation Information.
+          in: body
+          name: annotationInfo
+          required: false
+          schema:
+            $ref: '#/definitions/AlertAnnotationInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              text: example text
+              timestamp: '0001-01-01T00:00:00'
+              type: 1
+              userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+          schema:
+            $ref: '#/definitions/AlertAnnotationInfo'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Annotate Alert
+      tags:
+        - Alerts
+  '/alerts/{alertId}/annotations':
+    get:
+      consumes: []
+      description: Get annotations of an alert by id.
+      operationId: GetAlertAnnotations
+      parameters:
+        - description: Id of the requested Alert.
+          in: path
+          name: alertId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - text: example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+              - text: another example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 878d6619-23c2-402b-bdbc-26bc95fbb493
+          schema:
+            items:
+              $ref: '#/definitions/AlertAnnotationInfo'
+            type: array
+            uniqueItems: false
+        '204':
+          description: No annotations were found for the alert.
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get annotations of an alert
+      tags:
+        - Alerts
+  '/alerts/{alertId}/attachments':
+    get:
+      consumes: []
+      description: Get attachments of an alert by id.
+      operationId: GetAlertAttachmentsInfo
+      parameters:
+        - description: Id of the requested Alert.
+          in: path
+          name: alertId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - text: example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+              - text: another example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 878d6619-23c2-402b-bdbc-26bc95fbb493
+          schema:
+            items:
+              $ref: '#/definitions/AlertAttachmentInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get attachments of an alert
+      tags:
+        - Alerts
+  '/alerts/{alertId}/attachments/{attachmentId}':
+    get:
+      consumes: []
+      operationId: GetAttachment
+      parameters:
+        - description: Id of the alert that contains the wanted attachment.
+          in: path
+          name: alertId
+          required: true
+          type: string
+        - description: 'Id of the attachment, that you want to retrieve.'
+          in: path
+          name: attachmentId
+          required: true
+          type: string
+        - description: Optional parameter defining the wanted width of the picture that is retrieved.
+          format: int32
+          in: query
+          name: width
+          required: false
+          type: integer
+        - description: Optional parameter defining the wanted height of the picture that is retrieved.
+          format: int32
+          in: query
+          name: height
+          required: false
+          type: integer
+        - default: true
+          description: "Optional parameter defining whether it's wanted to scale the retrieved image. Default is set to\r\ntrue."
+          in: query
+          name: scale
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Returns the attachment image with additional meta information.
+          examples:
+            application/json:
+              - text: example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 52aa4471-2533-4826-8d69-97b82dfc706b
+              - text: another example text
+                timestamp: '0001-01-01T00:00:00'
+                type: 1
+                userId: 878d6619-23c2-402b-bdbc-26bc95fbb493
+          schema:
+            $ref: '#/definitions/FileContentResult'
+        '204':
+          description: The image of the attachment was not uploaded yet.
+        '400':
+          description: A passed parameter was either empty or invalid.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Authorization failed.
+        '404':
+          description: The attachment image was not found.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets a specified attachment of a specified alert.
+      tags:
+        - Alerts
+  '/alerts/{alertId}/notifications':
+    get:
+      consumes: []
+      description: Get notifications of all users by alert id.
+      operationId: GetAlertNotifications
+      parameters:
+        - description: Id of the requested Alert.
+          in: path
+          name: alertId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/AlertNotificationInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get alert notifications
+      tags:
+        - Alerts
+  '/alerts/{alertId}/overview':
+    get:
+      consumes: []
+      description: Get overview alert by id.
+      operationId: GetOverviewAlert
+      parameters:
+        - description: Id of the requested Alert.
+          in: path
+          name: alertId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns alert with all information attached.
+          examples:
+            application/json:
+              categoryId: it
+              detailedHistory:
+                acknowledged: '2020-06-02T11:15:58.0500355Z'
+                alertHistoryEntries:
+                  - timestamp: '2020-06-02T11:24:58.0500355+00:00'
+                    type: 2
+                    userId: afc2356a-9d85-4e4a-8cf3-6efcad4b391c
+                  - timestamp: '2020-06-02T11:24:58.0500355+00:00'
+                    type: 2
+                    userId: 48fee91e-905a-4b9b-8209-c8ff42f9fb75
+                  - timestamp: '2020-06-02T11:25:58.0500355+00:00'
+                    type: 3
+                    userId: afc2356a-9d85-4e4a-8cf3-6efcad4b391c
+                created: '2020-06-02T10:25:58.0500355Z'
+              flags: 0
+              id: bc735d8c-7f42-4b08-b706-6d7ad078c31a
+              lastModified: '2020-06-02T11:25:58.0500355Z'
+              requiredAcknowledgements: 0
+              status: 4
+              subscriptionId: 825e5c3a-1c07-4989-a4ff-38cc671fff52
+              teamId: e0ac9a12-f601-47c5-9fc2-ab6a08fe5607
+              text: Example alert text
+              title: Example alert
+          schema:
+            $ref: '#/definitions/OverviewAlert'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get an overview alert.
+      tags:
+        - Alerts
+  /availabilities/countries:
+    get:
+      consumes: []
+      operationId: GetAvailableCountries
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - DE
+              - FR
+              - UK
+              - US
+          schema:
+            items:
+              type: string
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets supported countries.
+      tags:
+        - Availabilities
+  /availabilities/preferredCurrency:
+    get:
+      consumes: []
+      operationId: GetPreferredCurrency
+      parameters:
+        - in: query
+          name: countryCode
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json: EUR
+          schema:
+            type: string
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets supported countries.
+      tags:
+        - Availabilities
+  /branches:
+    post:
+      consumes: []
+      operationId: CreateBranch
+      parameters: []
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/BranchInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Creates a branch with the user's subscription.
+      tags:
+        - Branches
+  '/branches/managers/invites/{inviteAcceptCode}':
+    post:
+      consumes: []
+      operationId: AcceptManagerInvite
+      parameters:
+        - in: path
+          name: inviteAcceptCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              displayName: Tim
+              isPending: false
+              mailAddress: manager2@yourcompany.com
+              managerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              subscriptionId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+          schema:
+            $ref: '#/definitions/BranchManagerInformation'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Accepts a pending manager invite
+      tags:
+        - Branches
+  '/branches/{branchId}':
+    get:
+      consumes: []
+      operationId: GetBranch
+      parameters:
+        - description: Id of the branch thats needed to be retrieved.
+          in: path
+          name: branchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              billingInterval: 0
+              created: '2020-06-02T11:25:58.0656598Z'
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              managerIds:
+                - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                - b75c70ef-73b1-4432-863f-8cd3eb413218
+              options: 0
+              ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              subscriptionIds:
+                - 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+                - 31f5db18-d6d0-4d40-a6c5-601374948cae
+                - 21ef8d73-1dec-47c6-934b-e500b952848b
+          schema:
+            $ref: '#/definitions/BranchInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information of the branch with the specified Id.
+      tags:
+        - Branches
+  '/branches/{branchId}/adoptions':
+    delete:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: DeleteSubscriptionAdoption
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: adoptionInfo
+          required: false
+          schema:
+            $ref: '#/definitions/SubscriptionAdoptionInfo'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Deletes an existing subscription adoption in the user's branch.
+      tags:
+        - Branches
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: AdoptSubscriptionForBranch
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: adoptionInfo
+          required: false
+          schema:
+            $ref: '#/definitions/SubscriptionAdoptionInfo'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/SubscriptionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Adopts an existing subscription in the user's branch.
+      tags:
+        - Branches
+  '/branches/{branchId}/features':
+    get:
+      consumes: []
+      operationId: GetBranchFeatures
+      parameters:
+        - description: Id of the branch from which the features need to be retrieved.
+          in: path
+          name: branchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - name: users
+                type: 2
+                value: '6'
+              - name: location
+                type: 1
+                value: 'true'
+          schema:
+            items:
+              $ref: '#/definitions/SubscriptionFeature'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns the features of a specified branch.
+      tags:
+        - Branches
+  '/branches/{branchId}/managers':
+    get:
+      consumes: []
+      operationId: GetBranchManagers
+      parameters:
+        - description: ID of the branch to get the managers for
+          in: path
+          name: branchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - displayName: Bob
+                isPending: false
+                mailAddress: manager1@yourcompany.com
+                managerId: f7bd1df3-b732-4919-be2d-1372787d2942
+                subscriptionId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+              - displayName: Tim
+                isPending: true
+                mailAddress: manager2@yourcompany.com
+                managerId: c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                subscriptionId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+          schema:
+            items:
+              $ref: '#/definitions/BranchManagerInformation'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets the managers of a branch
+      tags:
+        - Branches
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: InviteBranchManager
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: inviteInfos
+          required: false
+          schema:
+            $ref: '#/definitions/BranchManagerInviteInfos'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              displayName: Tim
+              isPending: false
+              mailAddress: manager2@yourcompany.com
+              managerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              subscriptionId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+          schema:
+            $ref: '#/definitions/BranchManagerInformation'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets the managers of a branch
+      tags:
+        - Branches
+  '/branches/{branchId}/managers/{managerId}':
+    delete:
+      consumes: []
+      operationId: DeleteBranchManager
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: path
+          name: managerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Deletes a specific manager of the branch
+      tags:
+        - Branches
+  '/branches/{branchId}/subscriptions':
+    get:
+      consumes: []
+      operationId: GetBranchSubscriptions
+      parameters:
+        - description: ID of the branch the subscriptions will be retrieved for.
+          in: path
+          name: branchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+                id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                name: Developers
+                ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+                planState: 0
+                referralEnabled: false
+                status: 0
+                teamIds:
+                  - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+              - branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+                id: b75c70ef-73b1-4432-863f-8cd3eb413218
+                name: DataBase
+                ownerId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+                planState: 0
+                referralEnabled: false
+                status: 0
+                teamIds:
+                  - 31f5db18-d6d0-4d40-a6c5-601374948cae
+          schema:
+            items:
+              $ref: '#/definitions/SubscriptionInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns subscription information of the branch with the specified Id.
+      tags:
+        - Branches
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: CreateBranchSubscription
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: creationInfo
+          required: false
+          schema:
+            $ref: '#/definitions/SubscriptionCreationInfo'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/SubscriptionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Creates a new subscription in the user's branch.
+      tags:
+        - Branches
+  '/branches/{branchId}/subscriptions/{subscriptionId}':
+    delete:
+      consumes: []
+      operationId: RemoveSubscriptionFromBranch
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Removes a subscription from the user's branch.
+      tags:
+        - Branches
+  '/branches/{branchId}/userLicenses':
+    get:
+      consumes: []
+      operationId: GetBranchUserLicenses
+      parameters:
+        - description: ID of the branch to get user license information for
+          in: path
+          name: branchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - currentUsers: 4
+                isFree: false
+                isTrial: true
+                licensedUsers: 10
+                planCode: '1'
+              - currentUsers: 3
+                isFree: false
+                isTrial: false
+                licensedUsers: 5
+                planCode: '2'
+          schema:
+            items:
+              $ref: '#/definitions/UserLicenseInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets user license information of a branch
+      tags:
+        - Branches
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: UpdateBranchUserLicenses
+      parameters:
+        - description: ID of the branch to update user license information for
+          in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: licenseUpdate
+          required: false
+          schema:
+            $ref: '#/definitions/UserLicenseUpdate'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              currentUsers: 4
+              isFree: false
+              isTrial: true
+              licensedUsers: 10
+              planCode: '1'
+          schema:
+            $ref: '#/definitions/UserLicenseInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Updates user license information of a branch
+      tags:
+        - Branches
+  '/branches/{branchId}/validateAdoption':
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: ValidateAdoptionRequirements
+      parameters:
+        - in: path
+          name: branchId
+          required: true
+          type: string
+        - in: body
+          name: adoptionInfo
+          required: false
+          schema:
+            $ref: '#/definitions/SubscriptionAdoptionInfo'
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdoptionValidationResult'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Check if there are enough user licenses to adopt an existing subscription in the user's branch.
+      tags:
+        - Branches
+  /categories/personalSettings:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: SetPersonalCategorySettings
+      parameters:
+        - in: body
+          name: categoryUpdates
+          required: false
+          schema:
+            $ref: '#/definitions/CategoryUpdates'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - categoryId: robot
+                hidden: false
+                mute: true
+              - categoryId: healthcare
+                hidden: true
+                mute: true
+          schema:
+            items:
+              $ref: '#/definitions/PersonalCategorySettings'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      tags:
+        - Categories
+  '/categories/{teamId}':
+    get:
+      consumes: []
+      operationId: GetCategories
+      parameters:
+        - description: Id of the team the categories belong to
+          in: path
+          name: teamId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - color: '#ffc107'
+                id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                imageName: bell.svg
+                isDefault: false
+                keywords:
+                  - Router
+                  - TCP
+                name: Network
+              - color: '#e91e63'
+                id: c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                imageName: database.svg
+                isDefault: false
+                keywords:
+                  - Table
+                  - SQL
+                name: Database
+          schema:
+            items:
+              $ref: '#/definitions/CategoryInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information about all categories that belong to the team.
+      tags:
+        - Categories
+  /events/paged:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: 'Get overview event paged. If there are more results, you also get a continuation token which you can add to the event filter.'
+      operationId: GetEventsPaged
+      parameters:
+        - description: "Defines the limit of retrieved alert details per request. 1 to 100 are allowed per request.\r\n                 Number of alerts could be less if filtered but at least 1."
+          format: int32
+          in: query
+          name: maxResults
+          required: false
+          type: integer
+        - description: The filter defines which alerts are supposed to be retrieved.
+          in: body
+          name: eventFilter
+          required: false
+          schema:
+            $ref: '#/definitions/EventFilter'
+      responses:
+        '200':
+          description: 'Returns paged result with found events and continuation token, if database holds more events.'
+          examples:
+            application/json:
+              continuationToken:
+                nextPartitionKey: 30c4f26c-484c-433d-94be-f300b038ee0b
+                nextRowKey: 07a90af0-dd07-4963-b471-30d6384f33ce
+                nextTableName: Example
+              hasMore: true
+              results:
+                - creationTime: '2020-06-02T11:25:58.0812834Z'
+                  eventSourceType: 2
+                  eventStatus: 3
+                  id: c9dd33eb-7ed6-433e-891a-e985803406a5
+                  lastModified: '2020-06-02T11:25:58.0812834Z'
+                  severity: 0
+                  text: Example text
+                  title: Example title
+                - alertId: 9e3e6198-714d-4f96-acb9-e5ae5f73baef
+                  categoryId: example
+                  creationTime: '2020-06-02T11:25:58.0812834Z'
+                  eventSourceType: 2
+                  eventStatus: 2
+                  id: 766d33aa-c595-49a3-a421-c29c526d296c
+                  lastModified: '2020-06-02T11:25:58.0812834Z'
+                  severity: 1
+                  text: Example text
+                  title: Example title
+          schema:
+            $ref: '#/definitions/PagedResultsPublic[OverviewEvent]'
+        '204':
+          description: No event could be found (with passed filter)
+        '400':
+          description: Required parameters could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get overview event paged.
+      tags:
+        - Events
+  '/events/{eventId}/overview':
+    get:
+      consumes: []
+      description: Get overview event by id.
+      operationId: GetOverviewEvent
+      parameters:
+        - description: Id of event to get.
+          in: path
+          name: eventId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns overview event with specific id.
+          examples:
+            application/json:
+              alertId: 9e3e6198-714d-4f96-acb9-e5ae5f73baef
+              categoryId: example
+              creationTime: '2020-06-02T11:25:58.0812834Z'
+              eventSourceType: 2
+              eventStatus: 2
+              id: 766d33aa-c595-49a3-a421-c29c526d296c
+              lastModified: '2020-06-02T11:25:58.0812834Z'
+              severity: 1
+              text: Example text
+              title: Example title
+          schema:
+            $ref: '#/definitions/OverviewEvent'
+        '400':
+          description: Required parameters could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Event with specified id could not be found.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get overview event
+      tags:
+        - Events
+  '/events/{eventId}/parameters':
+    get:
+      consumes: []
+      description: Get parameters of an event by id.
+      operationId: GetEventParameters
+      parameters:
+        - description: Event Id of the requested Alert.
+          in: path
+          name: eventId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - name: ParameterName1
+                type: 8
+                value: Parameter Value 1
+              - name: ParameterName2
+                type: 6
+                value: '1'
+          schema:
+            items:
+              $ref: '#/definitions/EventParameterInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get event parameters
+      tags:
+        - Events
+  /messages/confirmDeliveries:
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: 'Confirm delivery of messages by message id, channel id and subscription Id.'
+      operationId: ConfirmDeliveries
+      parameters:
+        - description: Object with subscription Id and list of messages that should be confirmed.
+          in: body
+          name: confirmation
+          required: false
+          schema:
+            $ref: '#/definitions/MessageDeliveryConfirmation'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request.
+        '500':
+          description: Internal general error occured.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Confirm delivery of messages
+      tags:
+        - Messages
+  /plans:
+    get:
+      consumes: []
+      operationId: GetPlans
+      parameters:
+        - description: Language of the plan infos. For example "en" or "de"
+          in: query
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - description: Alert notification service with commonly required baseline functionality to introduce clients to the true potential of notification management. Limited to 5 users and basic features.
+                features:
+                  - name: flood_protection
+                    value: 'false'
+                  - name: users
+                    value: '5'
+                id: '1'
+                name: Introductory (Limited)
+              - description: Notification management solution for teams improves transparency and facilitates collaboration for more effective incident resolution and more consistent service delivery.
+                features:
+                  - name: flood_protection
+                    value: 'true'
+                  - name: users
+                    value: '10'
+                id: '2'
+                name: Notify & Connect
+          schema:
+            $ref: '#/definitions/PlanInfo'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information about all available plans.
+      tags:
+        - Plans
+  '/plans/{planId}':
+    get:
+      consumes: []
+      operationId: GetPlan
+      parameters:
+        - description: Id of the plan thats needed to be retrieved.
+          in: path
+          name: planId
+          required: true
+          type: string
+        - description: Language of the plan infos. For example "en" or "de"
+          in: query
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              description: Alert notification service with commonly required baseline functionality to introduce clients to the true potential of notification management. Limited to 5 users and basic features.
+              features:
+                - name: flood_protection
+                  value: 'false'
+                - name: users
+                  value: '5'
+              id: '1'
+              name: Introductory (Limited)
+          schema:
+            $ref: '#/definitions/PlanInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information of the plan with the specified Id.
+      tags:
+        - Plans
+  '/plans/{planId}/channelPrices':
+    get:
+      consumes: []
+      operationId: GetPlanChannelPrices
+      parameters:
+        - description: Id of the plan thats needed to be retrieved.
+          in: path
+          name: planId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              sms: 15
+              voicePerMinute: 35
+          schema:
+            $ref: '#/definitions/ChannelPriceInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns the plan's channel price information.
+      tags:
+        - Plans
+  '/plans/{planId}/userPrices':
+    get:
+      consumes: []
+      operationId: GetPlanUserPrices
+      parameters:
+        - description: Id of the plan thats needed to be retrieved.
+          in: path
+          name: planId
+          required: true
+          type: string
+        - default: false
+          description: 'Gets annual user prices if set to TRUE, otherwise the prices are monthly.'
+          in: query
+          name: annual
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - currency: EUR
+                price: 995
+              - currency: USD
+                price: 995
+          schema:
+            items:
+              $ref: '#/definitions/PriceInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns the plan's user price information.
+      tags:
+        - Plans
+  /prepaid:
+    get:
+      consumes: []
+      operationId: GetPrepaidPackages
+      parameters:
+        - description: Language of the package infos. For example "en" or "de"
+          in: query
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - code: '1'
+                description: Text and voice call notifications in the value indicated below.
+                name: Text and Voice 10
+                prices:
+                  - currency: EUR
+                    price: 1000
+                  - currency: USD
+                    price: 1000
+              - code: '2'
+                description: Text and voice call notifications in the value indicated below.
+                name: Text and Voice 25
+                prices:
+                  - currency: EUR
+                    price: 2500
+                  - currency: USD
+                    price: 2500
+          schema:
+            $ref: '#/definitions/PrepaidPackageInfo'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information about all avialable prepaid packages.
+      tags:
+        - Prepaid
+  /prepaid/balance:
+    get:
+      consumes: []
+      operationId: GetPrepaidBalance
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              balance: 1435
+              latestTopUp: '2020-06-01T11:25:58.0812834Z'
+              pendingTransactions: true
+          schema:
+            $ref: '#/definitions/PrepaidBalanceInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get your subscription's current prepaid balance.
+      tags:
+        - Prepaid
+  /prepaid/settings:
+    get:
+      consumes: []
+      operationId: GetPrepaidSettings
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              topUpAmount: 2500
+              topUpEnabled: true
+              topUpLimit: 500
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get your subscription's current prepaid settings.
+      tags:
+        - Prepaid
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: UpdatePrepaidSettings
+      parameters:
+        - description: Settings object containing the new values.
+          in: body
+          name: settings
+          required: false
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              topUpAmount: 2500
+              topUpEnabled: true
+              topUpLimit: 500
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Update your subscription's current prepaid settings.
+      tags:
+        - Prepaid
+  /prepaid/transactions:
+    get:
+      consumes: []
+      operationId: GetPrepaidTransactions
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - amount: 1000
+                created: '2020-06-02T10:55:58.0812834Z'
+                createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+                currency: EUR
+                modified: '2020-06-02T11:15:58.0812834Z'
+                packageCode: '1'
+                status: Pending
+                statusCode: 10
+                subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                transactionId: dhgkjdfgmnW
+              - amount: 2000
+                created: '2020-06-02T09:25:58.0812834Z'
+                createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+                currency: EUR
+                modified: '2020-06-02T09:55:58.0812834Z'
+                packageCode: '2'
+                status: Compledted
+                statusCode: 30
+                subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                transactionId: sdfbGdsAfc
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get your subscription's prepaid transactions.
+      tags:
+        - Prepaid
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: CreatePrepaidTransaction
+      parameters:
+        - description: Information about the transaction to create
+          in: body
+          name: creationInfo
+          required: false
+          schema:
+            $ref: '#/definitions/PrepaidTransactionCreationInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              amount: 1000
+              created: '2020-06-02T10:55:58.0812834Z'
+              createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+              currency: EUR
+              modified: '2020-06-02T11:15:58.0812834Z'
+              packageCode: P25
+              status: Pending
+              statusCode: 10
+              subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              transactionId: dhgkjdfgmnW
+          schema:
+            $ref: '#/definitions/PrepaidTransactionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Creates a prepaid transaction for your subscription.
+      tags:
+        - Prepaid
+  '/prepaid/transactions/{transactionId}':
+    get:
+      consumes: []
+      operationId: GetPrepaidTransaction
+      parameters:
+        - description: ID of the transaction to get
+          in: path
+          name: transactionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              amount: 1000
+              created: '2020-06-02T10:55:58.096908Z'
+              createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+              currency: EUR
+              modified: '2020-06-02T11:15:58.096908Z'
+              packageCode: P25
+              status: Pending
+              statusCode: 10
+              subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              transactionId: dhgkjdfgmnW
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get your subscription's prepaid transaction.
+      tags:
+        - Prepaid
+  /scripts/instances:
+    get:
+      consumes: []
+      description: Returns all script instances in the subscription.
+      operationId: GetScriptInstances
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ScriptInstanceDetails'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns all script instances in the subscription
+      tags:
+        - Scripts
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Creates a new script instance of the script specified in the request body.
+      operationId: CreateScriptInstance
+      parameters:
+        - description: Script instance to be created.
+          in: body
+          name: instanceInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+      responses:
+        '200':
+          description: Existing script instance was updated as specified in body.
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '201':
+          description: New script instance was updated as specified in body.
+          examples:
+            application/json:
+              config: '{"Time":"13:23","Days":[[9],[{"name":"Monday","value":0},{"name":"Tuesday","value":1},{"name":"Wednesday","value":2},{"name":"Thursday","value":3},{"name":"Friday","value":4},{"name":"Saturday","value":5},{"name":"Sunday","value":6},{"name":"All","value":9}]],"Timezone":"Europe / Berlin","Title":"CONFIG VERSION: 1.6","Text":"Bitte jetzt den Keller aufräumen.","categoryS4":"Reminders"}'
+              customScriptDescription: This is a description of an example script that the user can see.
+              customScriptName: This is a custom script name to identify the script itself.
+              enabled: true
+              eventPattern: '{"BackgroundJobs":true,"SubscriptionEvents":false,"ExternalEventFiltering":false}'
+              instanceId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164_98b5e14e-f64c-4ba5-833a-0bdc58fd7dfb
+              scriptId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164
+              scriptName: AppAlertTimer
+              subscriptionId: 633e975d-b789-4219-992c-4a19234ba1d7
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: An internal error has occurred during instance creation.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Create script instance
+      tags:
+        - Scripts
+  '/scripts/instances/{instanceId}':
+    delete:
+      consumes: []
+      description: Gets the script instance specified by the passed instance id.
+      operationId: DeleteScriptInstance
+      parameters:
+        - description: Instance Id of script instance to be returned.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database or in memory.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Deletes a script instance
+      tags:
+        - Scripts
+    get:
+      consumes: []
+      description: Gets the script instance specified by the passed instance id.
+      operationId: GetScriptInstance
+      parameters:
+        - description: Instance Id of script instance to be returned.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database or in memory.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a script instance
+      tags:
+        - Scripts
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Updates the specified script instance.
+      operationId: UpdateScriptInstance
+      parameters:
+        - description: Script instance to be updated.
+          in: body
+          name: instanceInfo
+          required: false
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        - description: InstanceId of the script to be updated.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              config: '{"Time":"13:23","Days":[[9],[{"name":"Monday","value":0},{"name":"Tuesday","value":1},{"name":"Wednesday","value":2},{"name":"Thursday","value":3},{"name":"Friday","value":4},{"name":"Saturday","value":5},{"name":"Sunday","value":6},{"name":"All","value":9}]],"Timezone":"Europe / Berlin","Title":"CONFIG VERSION: 1.6","Text":"Bitte jetzt den Keller aufräumen.","categoryS4":"Reminders"}'
+              customScriptDescription: This is a description of an example script that the user can see.
+              customScriptName: This is a custom script name to identify the script itself.
+              enabled: true
+              eventPattern: '{"BackgroundJobs":true,"SubscriptionEvents":false,"ExternalEventFiltering":false}'
+              instanceId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164_98b5e14e-f64c-4ba5-833a-0bdc58fd7dfb
+              scriptId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164
+              scriptName: AppAlertTimer
+              subscriptionId: 633e975d-b789-4219-992c-4a19234ba1d7
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: An internal error has occurred during instance creation.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Update script instance
+      tags:
+        - Scripts
+  '/scripts/instances/{instanceId}/data':
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Updates the specified script instance.
+      operationId: UpdateScriptInstanceCustomData
+      parameters:
+        - description: Script instance to be updated.
+          in: body
+          name: instanceData
+          required: false
+          schema:
+            $ref: '#/definitions/ScriptInstanceCustomUserData'
+        - description: InstanceId of the script to be updated.
+          in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              config: '{"Time":"13:23","Days":[[9],[{"name":"Monday","value":0},{"name":"Tuesday","value":1},{"name":"Wednesday","value":2},{"name":"Thursday","value":3},{"name":"Friday","value":4},{"name":"Saturday","value":5},{"name":"Sunday","value":6},{"name":"All","value":9}]],"Timezone":"Europe / Berlin","Title":"CONFIG VERSION: 1.6","Text":"Bitte jetzt den Keller aufräumen.","categoryS4":"Reminders"}'
+              customScriptDescription: This is a description of an example script that the user can see.
+              customScriptName: This is a custom script name to identify the script itself.
+              enabled: true
+              eventPattern: '{"BackgroundJobs":true,"SubscriptionEvents":false,"ExternalEventFiltering":false}'
+              instanceId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164_98b5e14e-f64c-4ba5-833a-0bdc58fd7dfb
+              scriptId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164
+              scriptName: AppAlertTimer
+              subscriptionId: 633e975d-b789-4219-992c-4a19234ba1d7
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: An internal error has occurred during instance creation.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Update script instance custom data
+      tags:
+        - Scripts
+  '/scripts/instances/{instanceId}/disable':
+    post:
+      consumes: []
+      operationId: DisableInstance
+      parameters:
+        - in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              config: '{"Time":"13:23","Days":[[9],[{"name":"Monday","value":0},{"name":"Tuesday","value":1},{"name":"Wednesday","value":2},{"name":"Thursday","value":3},{"name":"Friday","value":4},{"name":"Saturday","value":5},{"name":"Sunday","value":6},{"name":"All","value":9}]],"Timezone":"Europe / Berlin","Title":"CONFIG VERSION: 1.6","Text":"Bitte jetzt den Keller aufräumen.","categoryS4":"Reminders"}'
+              customScriptDescription: This is a description of an example script that the user can see.
+              customScriptName: This is a custom script name to identify the script itself.
+              enabled: true
+              eventPattern: '{"BackgroundJobs":true,"SubscriptionEvents":false,"ExternalEventFiltering":false}'
+              instanceId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164_98b5e14e-f64c-4ba5-833a-0bdc58fd7dfb
+              scriptId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164
+              scriptName: AppAlertTimer
+              subscriptionId: 633e975d-b789-4219-992c-4a19234ba1d7
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      tags:
+        - Scripts
+  '/scripts/instances/{instanceId}/enable':
+    post:
+      consumes: []
+      operationId: EnableInstance
+      parameters:
+        - in: path
+          name: instanceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              config: '{"Time":"13:23","Days":[[9],[{"name":"Monday","value":0},{"name":"Tuesday","value":1},{"name":"Wednesday","value":2},{"name":"Thursday","value":3},{"name":"Friday","value":4},{"name":"Saturday","value":5},{"name":"Sunday","value":6},{"name":"All","value":9}]],"Timezone":"Europe / Berlin","Title":"CONFIG VERSION: 1.6","Text":"Bitte jetzt den Keller aufräumen.","categoryS4":"Reminders"}'
+              customScriptDescription: This is a description of an example script that the user can see.
+              customScriptName: This is a custom script name to identify the script itself.
+              enabled: true
+              eventPattern: '{"BackgroundJobs":true,"SubscriptionEvents":false,"ExternalEventFiltering":false}'
+              instanceId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164_98b5e14e-f64c-4ba5-833a-0bdc58fd7dfb
+              scriptId: 2fae7092-bffa-4fcf-9be6-f6efff6c7164
+              scriptName: AppAlertTimer
+              subscriptionId: 633e975d-b789-4219-992c-4a19234ba1d7
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      tags:
+        - Scripts
+  /scripts/inventory:
+    get:
+      consumes: []
+      description: Returns all script instances in the subscription.
+      operationId: GetInventoryScripts
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/InventoryScriptInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: An internal error orccurred while loading all inventory scripts.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns all available inventory scripts which can be added to a SIGNL4 subscription.
+      tags:
+        - Scripts
+  /scripts/inventory/parsed:
+    get:
+      consumes: []
+      operationId: GetParsedInventoryScripts
+      parameters:
+        - in: query
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/InventoryScriptInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      tags:
+        - Scripts
+  '/scripts/inventory/parsed/{scriptId}':
+    get:
+      consumes: []
+      description: Gets the script specified by the passed script id.
+      operationId: GetParsedInventoryScript
+      parameters:
+        - description: script Id of script to be returned.
+          in: path
+          name: scriptId
+          required: true
+          type: string
+        - in: query
+          name: language
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ScriptInstanceDetails'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database or in memory.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a script by id
+      tags:
+        - Scripts
+  /subscriptions:
+    get:
+      consumes: []
+      operationId: GetSubscriptions
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+                id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                name: Developers
+                ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+                planState: 0
+                referralEnabled: false
+                status: 0
+                teamIds:
+                  - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+              - branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+                id: b75c70ef-73b1-4432-863f-8cd3eb413218
+                name: DataBase
+                ownerId: 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+                planState: 0
+                referralEnabled: false
+                status: 0
+                teamIds:
+                  - 31f5db18-d6d0-4d40-a6c5-601374948cae
+          schema:
+            items:
+              $ref: '#/definitions/SubscriptionInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get infos of all available/managed subscriptions.
+      tags:
+        - Subscriptions
+  '/subscriptions/{subscriptionId}':
+    delete:
+      consumes: []
+      operationId: DeleteSubscription
+      parameters:
+        - description: ID of the subscription to be deleted.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Delete a specific subscription.
+      tags:
+        - Subscriptions
+    get:
+      consumes: []
+      operationId: GetSubscription
+      parameters:
+        - description: Id of the subscription thats to be retrieved.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              name: Developers
+              ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              planState: 0
+              referralEnabled: false
+              status: 0
+              teamIds:
+                - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+          schema:
+            $ref: '#/definitions/SubscriptionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get infos of a specific subscription.
+      tags:
+        - Subscriptions
+  '/subscriptions/{subscriptionId}/channelPrices':
+    get:
+      consumes: []
+      operationId: GetChannelPrices
+      parameters:
+        - description: Id of the subscription that needs to be retrieved.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              sms: 15
+              voicePerMinute: 35
+          schema:
+            $ref: '#/definitions/ChannelPriceInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns the subscription's channel price information.
+      tags:
+        - Subscriptions
+  '/subscriptions/{subscriptionId}/features':
+    get:
+      consumes: []
+      operationId: GetSubscriptionFeatures
+      parameters:
+        - description: Id of the subscription from which the features need to be retrieved.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - name: users
+                type: 2
+                value: '6'
+              - name: location
+                type: 1
+                value: 'true'
+          schema:
+            items:
+              $ref: '#/definitions/SubscriptionFeature'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns the features of a specified subscription.
+      tags:
+        - Subscriptions
+  '/subscriptions/{subscriptionId}/prepaidBalance':
+    get:
+      consumes: []
+      operationId: GetPrepaidBalanceForSubscription
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              balance: 1435
+              latestTopUp: '2020-06-01T11:25:58.0812834Z'
+              pendingTransactions: true
+          schema:
+            $ref: '#/definitions/PrepaidBalanceInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a subscription's current prepaid balance.
+      tags:
+        - Prepaid
+  '/subscriptions/{subscriptionId}/prepaidSettings':
+    get:
+      consumes: []
+      operationId: GetPrepaidSettingsForSubscription
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              topUpAmount: 2500
+              topUpEnabled: true
+              topUpLimit: 500
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a subscription's current prepaid settings.
+      tags:
+        - Prepaid
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: UpdatePrepaidSettingsForSubscription
+      parameters:
+        - description: ID of the subscription
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Settings object containing the new values.
+          in: body
+          name: settings
+          required: false
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              topUpAmount: 2500
+              topUpEnabled: true
+              topUpLimit: 500
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Update a subscription's current prepaid settings.
+      tags:
+        - Prepaid
+  '/subscriptions/{subscriptionId}/prepaidTransactions':
+    get:
+      consumes: []
+      parameters:
+        - description: ID of the subscription to get transactions for
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - amount: 1000
+                created: '2020-06-02T10:55:58.096908Z'
+                createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+                currency: EUR
+                modified: '2020-06-02T11:15:58.096908Z'
+                packageCode: '1'
+                status: Pending
+                statusCode: 10
+                subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                transactionId: dhgkjdfgmnW
+              - amount: 2000
+                created: '2020-06-02T09:25:58.096908Z'
+                createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+                currency: EUR
+                modified: '2020-06-02T09:55:58.096908Z'
+                packageCode: '2'
+                status: Compledted
+                statusCode: 30
+                subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                transactionId: sdfbGdsAfc
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a subscription's prepaid transactions.
+      tags:
+        - Prepaid
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      parameters:
+        - description: ID of the subscription to create transaction for
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - in: body
+          name: creationInfo
+          required: false
+          schema:
+            $ref: '#/definitions/PrepaidTransactionCreationInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              amount: 1000
+              created: '2020-06-02T10:55:58.096908Z'
+              createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+              currency: EUR
+              modified: '2020-06-02T11:15:58.096908Z'
+              packageCode: P25
+              status: Pending
+              statusCode: 10
+              subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              transactionId: dhgkjdfgmnW
+          schema:
+            $ref: '#/definitions/PrepaidTransactionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Creates a prepaid transaction for a subscription.
+      tags:
+        - Prepaid
+  '/subscriptions/{subscriptionId}/prepaidTransactions/{transactionId}':
+    get:
+      consumes: []
+      operationId: GetPrepaidTransactionForSubscription
+      parameters:
+        - description: ID of the subscription to get transactions for
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: ID of the transaction to get
+          in: path
+          name: transactionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              amount: 1000
+              created: '2020-06-02T10:55:58.096908Z'
+              createdBy: f7bd1df3-b732-4919-be2d-1372787d2942
+              currency: EUR
+              modified: '2020-06-02T11:15:58.096908Z'
+              packageCode: P25
+              status: Pending
+              statusCode: 10
+              subscriptionId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              transactionId: dhgkjdfgmnW
+          schema:
+            $ref: '#/definitions/PrepaidSettingsInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get a subscription's prepaid transaction.
+      tags:
+        - Prepaid
+  '/subscriptions/{subscriptionId}/profile':
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: UpdateSubscriptionProfile
+      parameters:
+        - description: ID of the subscription to be updated
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: Profile data to update subscription with
+          in: body
+          name: profile
+          required: false
+          schema:
+            $ref: '#/definitions/SubscriptionProfile'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              branchId: 2b30645e-769e-4ba3-9be9-c78fb26d3922
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              name: Developers
+              ownerId: f7bd1df3-b732-4919-be2d-1372787d2942
+              planState: 0
+              referralEnabled: false
+              status: 0
+              teamIds:
+                - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+          schema:
+            $ref: '#/definitions/SubscriptionInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Updates a subscriptions profile.
+      tags:
+        - Subscriptions
+  '/subscriptions/{subscriptionId}/teams':
+    get:
+      consumes: []
+      operationId: GetSubscriptionTeams
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - id: 21ef8d73-1dec-47c6-934b-e500b952848b
+                memberIds:
+                  - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                  - b75c70ef-73b1-4432-863f-8cd3eb413218
+                name: Network
+                subscriptionId: 09e0e817-f0e0-4453-b9c7-bf21e70f903f
+                timezone: Europe/Berlin
+              - id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                memberIds:
+                  - 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+                  - 31f5db18-d6d0-4d40-a6c5-601374948cae
+                  - 21ef8d73-1dec-47c6-934b-e500b952848b
+                name: Database
+                subscriptionId: f7bd1df3-b732-4919-be2d-1372787d2942
+                timezone: Europe/Berlin
+          schema:
+            items:
+              $ref: '#/definitions/TeamInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get infos for all teams of the subscription.
+      tags:
+        - Teams
+  '/subscriptions/{subscriptionId}/userLicenses':
+    get:
+      consumes: []
+      operationId: GetSubscriptionUserLicenses
+      parameters:
+        - description: ID of the subscription
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              currentUsers: 4
+              isFree: false
+              isTrial: true
+              licensedUsers: 10
+              planCode: '1'
+          schema:
+            $ref: '#/definitions/UserLicenseInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets a subscription's user licences.
+      tags:
+        - Subscriptions
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: UpdateSubscriptionUserLicenses
+      parameters:
+        - description: ID of the subscription to be updated
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: License information to update subscription with
+          in: body
+          name: licenseUpdate
+          required: false
+          schema:
+            $ref: '#/definitions/UserLicenseUpdate'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              currentUsers: 4
+              isFree: false
+              isTrial: true
+              licensedUsers: 10
+              planCode: '1'
+          schema:
+            $ref: '#/definitions/UserLicenseInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Updates a subscription's user licences.
+      tags:
+        - Subscriptions
+  /teams:
+    get:
+      consumes: []
+      operationId: GetTeams
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - id: 21ef8d73-1dec-47c6-934b-e500b952848b
+                memberIds:
+                  - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                  - b75c70ef-73b1-4432-863f-8cd3eb413218
+                name: Network
+                subscriptionId: 09e0e817-f0e0-4453-b9c7-bf21e70f903f
+                timezone: Europe/Berlin
+              - id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+                memberIds:
+                  - 6d370cd3-53b8-4c99-9fda-e4c8c2cfe935
+                  - 31f5db18-d6d0-4d40-a6c5-601374948cae
+                  - 21ef8d73-1dec-47c6-934b-e500b952848b
+                name: Database
+                subscriptionId: f7bd1df3-b732-4919-be2d-1372787d2942
+                timezone: Europe/Berlin
+          schema:
+            items:
+              $ref: '#/definitions/TeamInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get infos of all teams.
+      tags:
+        - Teams
+  '/teams/{teamId}':
+    get:
+      consumes: []
+      operationId: GetTeam
+      parameters:
+        - description: ID of the team that should be retrieved.
+          in: path
+          name: teamId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              id: 21ef8d73-1dec-47c6-934b-e500b952848b
+              memberIds:
+                - c4e1646f-68a1-4c69-b427-646cd3bfbfa3
+                - b75c70ef-73b1-4432-863f-8cd3eb413218
+              name: Network
+              subscriptionId: 09e0e817-f0e0-4453-b9c7-bf21e70f903f
+              timezone: Europe/Berlin
+          schema:
+            $ref: '#/definitions/TeamInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets infos of a specific team.
+      tags:
+        - Teams
+  '/teams/{teamId}/alertSettings':
+    get:
+      consumes: []
+      operationId: GetAlertSettings
+      parameters:
+        - description: ID of the team the settings should be retrieved for.
+          in: path
+          name: teamId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              filterAction: 0
+              filterMode: 1
+              optOut: 2
+              persNotMode: 1
+              responseMode: 4
+              responseTime: 10
+          schema:
+            $ref: '#/definitions/AlertSettings'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets alert settings of a specific team.
+      tags:
+        - Teams
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: SetAlertSettings
+      parameters:
+        - description: ID of the team the settings should be set for.
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - description: Alert settings to be set
+          in: body
+          name: settings
+          required: false
+          schema:
+            $ref: '#/definitions/AlertSettings'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              filterAction: 0
+              filterMode: 1
+              optOut: 2
+              persNotMode: 1
+              responseMode: 4
+              responseTime: 10
+          schema:
+            $ref: '#/definitions/AlertSettings'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Sets alert settings of a specific team.
+      tags:
+        - Teams
+  '/teams/{teamId}/dutysummary':
+    get:
+      consumes: []
+      operationId: GetTeamDutySummary
+      parameters:
+        - description: ID of the team the duty belongs to.
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - in: query
+          name: lastTwoDuties
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              dutyAssistEnabled: true
+              dutySummaries:
+                - dutyEnd: '2020-02-13T10:00:00'
+                  dutyId: 5186ed63-8b36-4c40-baf3-fa51c63bcd39
+                  dutyStart: '2020-02-13T18:00:00'
+                - dutyEnd: '2020-02-14T10:00:00'
+                  dutyId: ba8c7e3e-b8c5-4bac-9b39-19d79ae59dc0
+                  dutyStart: '2020-02-14T02:00:00'
+          schema:
+            $ref: '#/definitions/TeamDutySummaryInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get duty assistent info for a team
+      tags:
+        - Duties
+  '/teams/{teamId}/schedules':
+    get:
+      consumes: []
+      operationId: GetDutySchedules
+      parameters:
+        - description: Id of the team the schedules user belongs to
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - in: query
+          name: UserId
+          required: false
+          type: string
+        - format: date-time
+          in: query
+          name: MinDate
+          required: false
+          type: string
+        - format: int32
+          in: query
+          name: Limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              end: '2019-01-07T16:00:00'
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              options: 0
+              start: '2019-01-07T07:00:00'
+              userId: f7bd1df3-b732-4919-be2d-1372787d2942
+          schema:
+            items:
+              $ref: '#/definitions/ScheduleInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information about all duties that belong to the team.
+      tags:
+        - Duties
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: SetDutySchedule
+      parameters:
+        - description: Id of the team the duty is to be assigned to.
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - description: informations about the duty schedule to be created
+          in: body
+          name: schedule
+          required: false
+          schema:
+            $ref: '#/definitions/ScheduleInfo'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              end: '2019-01-07T16:00:00'
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              options: 0
+              start: '2019-01-07T07:00:00'
+              userId: f7bd1df3-b732-4919-be2d-1372787d2942
+          schema:
+            $ref: '#/definitions/ScheduleInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Create/Update given duty schedule.
+      tags:
+        - Duties
+  '/teams/{teamId}/schedules/{dutyId}':
+    delete:
+      consumes: []
+      operationId: DeleteDutySchedule
+      parameters:
+        - description: ID of the team the duty belongs to.
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - description: ID of the duty to be deleted.
+          in: path
+          name: dutyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Delete a specific duty.
+      tags:
+        - Duties
+  '/teams/{teamId}/schedules/{scheduleId}':
+    get:
+      consumes: []
+      operationId: GetDutySchedule
+      parameters:
+        - description: Id of the team the duty belongs to
+          in: path
+          name: teamId
+          required: true
+          type: string
+        - description: Id of the duty schedule thats needed to be retrieved.
+          in: path
+          name: scheduleId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              end: '2019-01-07T16:00:00'
+              id: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              options: 0
+              start: '2019-01-07T07:00:00'
+              userId: f7bd1df3-b732-4919-be2d-1372787d2942
+          schema:
+            $ref: '#/definitions/ScheduleInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information of the duty schedule with the specified Id.
+      tags:
+        - Duties
+  '/teams/{teamId}/setupProgress':
+    get:
+      consumes: []
+      parameters:
+        - description: ID of the team the progress should be retrieved for.
+          in: path
+          name: teamId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              completedSteps:
+                - MailAlertReceived
+                - WebhookAlertReceived
+                - TeamMemberInvited
+              teamId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+              timestamp: '2020-06-02T11:25:58.1125323Z'
+          schema:
+            $ref: '#/definitions/TeamSetupProgress'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets setup progress of a specific team.
+      tags:
+        - Teams
+  /users:
+    get:
+      consumes: []
+      description: "Returns a list of user objects with details such as their email address and duty information. Only users who\r\nare part of your team will be returned."
+      operationId: GetUsers
+      parameters: []
+      responses:
+        '200':
+          description: User could be successfully identified.
+          examples:
+            application/json:
+              - colorIndex: 0
+                dutyInfos:
+                  lastChange: '2017-09-22T05:30:00'
+                  onDuty: true
+                  onManagerDuty: false
+                  overdue: false
+                id: 21EF8D73-1DEC-47C6-934B-E500B952848B
+                isDeactivated: false
+                isInvite: false
+                mail: nelly@signl4.com
+                name: Nelly
+                subscriptionId: 09E0E817-F0E0-4453-B9C7-BF21E70F903F
+              - colorIndex: 0
+                dutyInfos:
+                  lastChange: '2017-09-23T08:14:59'
+                  onDuty: false
+                  onManagerDuty: false
+                  overdue: false
+                id: 88167B9E-BC60-451E-98C7-19AA8025FB5C
+                isDeactivated: false
+                isInvite: false
+                mail: frieda@signl4.com
+                name: Frieda
+                subscriptionId: 09E0E817-F0E0-4453-B9C7-BF21E70F903F
+          schema:
+            items:
+              $ref: '#/definitions/UserInfo'
+            type: array
+            uniqueItems: false
+        '400':
+          description: Required authentifaction info could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: You're not allowed to request the users with their information.
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get all Users
+      tags:
+        - Users
+  '/users/{userId}':
+    get:
+      consumes: []
+      description: Returns a user object with details such as his email address and duty information.
+      operationId: GetUser
+      parameters:
+        - default: 73eab4c6-206a-4ed0-9bb5-85fac1647dbc
+          description: "Identifier of the user to get. Use 'Me' to get information about the currently logged in user. Can\r\nalso be an email address of a user in the team or the unique id of an according user object.”"
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User could be successfully identified.
+          examples:
+            application/json:
+              colorIndex: 0
+              dutyInfos:
+                lastChange: '2017-09-22T05:30:00'
+                onDuty: true
+                onManagerDuty: false
+                overdue: false
+              id: 21EF8D73-1DEC-47C6-934B-E500B952848B
+              isDeactivated: false
+              isInvite: false
+              mail: nelly@signl4.com
+              name: Nelly
+              subscriptionId: 09E0E817-F0E0-4453-B9C7-BF21E70F903F
+          schema:
+            $ref: '#/definitions/UserInfo'
+        '400':
+          description: Required authentifaction info could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: You're not allowed to request that user's information.
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get User by Id
+      tags:
+        - Users
+  '/users/{userId}/branch':
+    get:
+      consumes: []
+      operationId: GetBranchInfosByUser
+      parameters:
+        - description: Id of branch manager.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              - branchId: 21EF8D73-1DEC-47C6-934B-E500B952848B
+                isBranchManager: true
+                isBranchMember: true
+              - branchId: ''
+                isBranchManager: false
+                isBranchMember: false
+          schema:
+            $ref: '#/definitions/UserBranchInfo'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Returns information of the branch that is managed by user with the specified Id.
+      tags:
+        - Users
+  '/users/{userId}/checkPermissions':
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      operationId: CheckPermissions
+      parameters:
+        - description: ID of the user to check permissions for.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - in: query
+          name: teamId
+          required: false
+          type: string
+        - description: List of permissions to check
+          in: body
+          name: permissions
+          required: false
+          schema:
+            $ref: '#/definitions/ItemsWrapper[String]'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              ExamplePermission: true
+              ExamplePermission2: false
+          schema:
+            $ref: '#/definitions/UserImage'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Checks if a user has the provided permission.
+      tags:
+        - Users
+  '/users/{userId}/dutyStatus':
+    get:
+      consumes: []
+      description: Returns a object with duty information.
+      operationId: GetUserDutyInfo
+      parameters:
+        - description: "Identifier of the user to get. Use 'Me' to get information about the currently logged in user. Can\r\nalso be an email address of a user in the team or the unique id of an according user object.”"
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Duty successfully loaded.
+          examples:
+            application/json:
+              colorIndex: 0
+              dutyInfos:
+                lastChange: '2017-09-22T05:30:00'
+                onDuty: true
+                onManagerDuty: false
+                overdue: false
+              id: 21EF8D73-1DEC-47C6-934B-E500B952848B
+              isDeactivated: false
+              isInvite: false
+              mail: nelly@signl4.com
+              name: Nelly
+              subscriptionId: 09E0E817-F0E0-4453-B9C7-BF21E70F903F
+          schema:
+            $ref: '#/definitions/UserInfo'
+        '400':
+          description: Required authentifaction info could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: You're not allowed to request that duty information.
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get duty status by user Id
+      tags:
+        - Users
+  '/users/{userId}/image':
+    get:
+      consumes: []
+      operationId: GetUserImage
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+        - format: int32
+          in: query
+          name: height
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: width
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              content: Q29udGVudA==
+              contentEncoding: Unicode (UTF-8)
+              contentType: image/jpeg
+              lastModified: '2020-05-26T11:25:58.1125323Z'
+              name: user1.jpg
+          schema:
+            $ref: '#/definitions/UserImage'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      tags:
+        - Users
+  '/users/{userId}/punchIn':
+    post:
+      consumes: []
+      description: The specified user will be punched in to duty.
+      operationId: PunchInUser
+      parameters:
+        - default: 73eab4c6-206a-4ed0-9bb5-85fac1647dbc
+          description: "Identifier of the user to punch in. Use 'Me' to get information about the currently logged in\r\nuser. Can also be an email address of a user in the team or the unique id of an according user object.”"
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              lastChange: '2017-09-22T05:30:00'
+              onDuty: true
+              onManagerDuty: false
+              overdue: false
+          schema:
+            $ref: '#/definitions/UserDutyInfo'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: The user tried to change the punch in a different user.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Punch User in
+      tags:
+        - Users
+  '/users/{userId}/punchInAsManager':
+    post:
+      consumes: []
+      description: The specified user will be punched in to duty as a manager.
+      operationId: PunchInUserAsManager
+      parameters:
+        - description: "Identifier of the user to punch in. Use 'Me' to get information about the currently logged in\r\nuser. Can also be an email address of a user in the team or the unique id of an according user object.”"
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              lastChange: '2017-09-22T05:30:00'
+              onDuty: true
+              onManagerDuty: false
+              overdue: false
+          schema:
+            $ref: '#/definitions/UserDutyInfo'
+        '400':
+          description: Required information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: The user tried to change the punch in a different user.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Required entities could not be found in the database.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Punch User in as Manager
+      tags:
+        - Users
+  '/users/{userId}/punchOut':
+    post:
+      consumes: []
+      description: The specified user will be punched out from duty.
+      operationId: PunchOutUser
+      parameters:
+        - default: 73eab4c6-206a-4ed0-9bb5-85fac1647dbc
+          description: "Identifier of the user to punch out. Use 'Me' to get information about the currently logged in\r\nuser. Can also be an email address of a user in the team or the unique id of an according user object.”"
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The user was punched out successfully.
+          examples:
+            application/json:
+              lastChange: '2017-09-22T05:30:00'
+              onDuty: true
+              onManagerDuty: false
+              overdue: false
+          schema:
+            $ref: '#/definitions/UserDutyInfo'
+        '400':
+          description: Required authentifaction information could not be found in the request/claims.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: 'The requesting user tried to punch out someone else, which is not allowed.'
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: The desired user was not found by passed id.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '409':
+          description: "The desired user was not punched out because it would violate  the minumum on-duty members setting\r\nfrom the team."
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Punch User out
+      tags:
+        - Users
+  '/users/{userId}/setupProgress':
+    get:
+      consumes: []
+      parameters:
+        - description: ID of the user the progress should be retrieved for.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json:
+              completedSteps:
+                - AppRegistered
+                - PhoneNumberRegistered
+              timestamp: '2020-06-02T11:25:58.1125323Z'
+              userId: 9afeff84-79f7-42d7-8c73-8071dcc23749
+          schema:
+            $ref: '#/definitions/UserSetupProgress'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Gets setup progress of a specific user.
+      tags:
+        - Users
+  /webhooks:
+    get:
+      consumes: []
+      description: Returns a collection of defined outbound webhooks in the system.
+      operationId: Get
+      parameters: []
+      responses:
+        '200':
+          description: Request was successful and response body conatins information about all outbound webhooks in the subscription.
+          examples:
+            application/json:
+              - extUrl: 'https://www.yourservice.com/handleSIGNL4Event'
+                id: 09E0E817-F0E0-4453-B9C7-BF21E70F903F
+                subId: 21EF8D73-1DEC-47C6-934B-E500B952848B
+              - extUrl: 'https://www.yourservice.com/handleSIGNL4Event'
+                id: 88167B9E-BC60-451E-98C7-19AA8025FB5C
+                subId: 21EF8D73-1DEC-47C6-934B-E500B952848B
+          schema:
+            items:
+              $ref: '#/definitions/WebhookInfo'
+            type: array
+            uniqueItems: false
+        '404':
+          description: The subscription does not have any outbound webhooks.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal has occured. The response body may contain more information.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get Webhooks
+      tags:
+        - Webhooks
+    post:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Creates a new outbound webhook that will be notified when certain events occur.
+      operationId: Create
+      parameters:
+        - description: Json object that contains the external URL of the webhook.
+          in: body
+          name: webhookBaseInfo
+          required: false
+          schema:
+            $ref: '#/definitions/WebhookBaseInfo'
+      responses:
+        '201':
+          description: Action was successful and response contains the id of the newly created webhook.
+          schema:
+            type: string
+        '400':
+          description: Either the webhook object or a necessary property was invalid or empty.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal has occured. The response body may contain more information.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Create Webhook
+      tags:
+        - Webhooks
+  '/webhooks/{webhookId}':
+    delete:
+      consumes: []
+      description: Deletes the specified webhook so that it will no longer be notified.
+      operationId: Delete
+      parameters:
+        - description: Id of the outbound webhook that will be deleted.
+          in: path
+          name: webhookId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Webhook was successfully deleted.
+        '400':
+          description: The passed webhook id was invalid or empty.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Webhook with specified id was not found.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal has occured. The response body may contain more information.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Delete Webhook by Id
+      tags:
+        - Webhooks
+    get:
+      consumes: []
+      description: Returns information of the webhook specified by the passed id.
+      operationId: GetWebhookById
+      parameters:
+        - description: Id of the outbound webhook to be retrieved.
+          in: path
+          name: webhookId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request was successful and response body contains information about the requested webhook.
+          schema:
+            type: string
+        '400':
+          description: The passed webhook id was either empty or null.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: The webhook was not found.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal has occured. The response body may contain more information.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Get Webhook by Id
+      tags:
+        - Webhooks
+    put:
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      description: Updates the specified webhook.
+      operationId: Update
+      parameters:
+        - description: Id of the outbound webhook to be updated.
+          in: path
+          name: webhookId
+          required: true
+          type: string
+        - description: Json object containing the updated URL of the webhook.
+          in: body
+          name: webhookUpdateInfo
+          required: false
+          schema:
+            $ref: '#/definitions/WebhookBaseInfo'
+      responses:
+        '200':
+          description: Update was successful and response body contains the updated webhook details.
+          schema:
+            $ref: '#/definitions/WebhookInfo'
+        '400':
+          description: A passed parameter was either empty or null.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '404':
+          description: Webhook with specified id was not found.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+        '500':
+          description: Internal has occured. The response body may contain more information.
+          schema:
+            $ref: '#/definitions/ErrorResponseContent'
+      summary: Update Webhook by Id
+      tags:
+        - Webhooks
+definitions:
+  AdoptionValidationResult:
+    properties:
+      availableLicenses:
+        format: int32
+        type: integer
+      isValid:
+        type: boolean
+      planCode:
+        type: string
+      requiredLicenses:
+        format: int32
+        type: integer
+    type: object
+  AlertAnnotationInfo:
+    properties:
+      text:
+        type: string
+      timestamp:
+        format: date-time
+        type: string
+      type:
+        format: int32
+        type: integer
+      userId:
+        type: string
+    type: object
+  AlertAttachment:
+    properties:
+      content:
+        type: string
+      contentType:
+        type: string
+      encoding:
+        enum:
+          - 0
+          - 1
+        format: int32
+        type: integer
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  AlertAttachmentInfo:
+    properties:
+      contentType:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  AlertCounts:
+    properties:
+      acknowledged:
+        format: int64
+        type: integer
+      closed:
+        format: int64
+        type: integer
+      end:
+        format: date-time
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+      unhandled:
+        format: int64
+        type: integer
+    required:
+      - acknowledged
+      - unhandled
+    type: object
+  AlertDeliveryStatusInfo:
+    properties:
+      alertDeliveryStatusCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 6
+          - 8
+          - 22
+          - 24
+          - 26
+          - 30
+          - 31
+        format: int32
+        type: integer
+      userDeliveryStatusInfos:
+        items:
+          $ref: '#/definitions/UserDeliveryStatusInfo'
+        type: array
+        uniqueItems: false
+    type: object
+  AlertFilterPublic:
+    properties:
+      afterid:
+        type: string
+      alertStatuscodes:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 8
+          - 16
+          - 32
+        format: int32
+        type: integer
+      alertids:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      categoryids:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      continuationtoken:
+        $ref: '#/definitions/PagedResultsPublicContinuationToken'
+      maxcreated:
+        format: date-time
+        type: string
+      mincreated:
+        format: date-time
+        type: string
+      modsince:
+        format: date-time
+        type: string
+      showpersonalhiddencategories:
+        type: boolean
+      textToSearch:
+        type: string
+    type: object
+  AlertHistoryInfo:
+    properties:
+      acknowledged:
+        format: date-time
+        type: string
+      acknowledgedgements:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      closed:
+        format: date-time
+        type: string
+      closedBy:
+        type: string
+      created:
+        format: date-time
+        type: string
+    type: object
+  AlertHistoryInfoDetailed:
+    properties:
+      acknowledged:
+        format: date-time
+        type: string
+      alertHistoryEntries:
+        items:
+          $ref: '#/definitions/AlertHistoryInfoEntry'
+        type: array
+        uniqueItems: false
+      created:
+        format: date-time
+        type: string
+    type: object
+  AlertHistoryInfoEntry:
+    properties:
+      timestamp:
+        format: date-time
+        type: string
+      type:
+        enum:
+          - 2
+          - 3
+        format: int32
+        type: integer
+      userId:
+        type: string
+    type: object
+  AlertInfo:
+    properties:
+      annotations:
+        items:
+          $ref: '#/definitions/AlertAnnotationInfo'
+        type: array
+        uniqueItems: false
+      attachments:
+        items:
+          $ref: '#/definitions/AlertAttachment'
+        type: array
+        uniqueItems: false
+      category:
+        type: string
+      categoryId:
+        type: string
+      eventSourceId:
+        type: string
+      eventSourceType:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      externalId:
+        type: string
+      flags:
+        format: int32
+        type: integer
+      history:
+        $ref: '#/definitions/AlertHistoryInfo'
+      id:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      parameters:
+        items:
+          $ref: '#/definitions/EventParameterInfo'
+        type: array
+        uniqueItems: false
+      severity:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      status:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 8
+          - 16
+          - 32
+        format: int32
+        type: integer
+      subscriptionId:
+        type: string
+      teamId:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  AlertNotificationInfo:
+    properties:
+      address:
+        type: string
+      deviceName:
+        type: string
+      lastUpdate:
+        format: date-time
+        type: string
+      messageStatus:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+        format: int32
+        type: integer
+      notificationChannelType:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 8
+          - 16
+        format: int32
+        type: integer
+      userId:
+        type: string
+      userStatus:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        format: int32
+        type: integer
+    type: object
+  AlertReport:
+    properties:
+      last24Hours:
+        $ref: '#/definitions/AlertCounts'
+      subscriptionId:
+        type: string
+      teamCurrentDuty:
+        $ref: '#/definitions/AlertCounts'
+      teamId:
+        type: string
+      teamLastDuty:
+        $ref: '#/definitions/AlertCounts'
+      userId:
+        type: string
+      userLastDutyChange:
+        $ref: '#/definitions/AlertCounts'
+    required:
+      - last24Hours
+      - subscriptionId
+      - teamId
+    type: object
+  AlertSettings:
+    properties:
+      filterAction:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      filterMode:
+        enum:
+          - 0
+          - 1
+        format: int32
+        type: integer
+      optOut:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      persNotMode:
+        enum:
+          - 0
+          - 1
+        format: int32
+        type: integer
+      responseMode:
+        enum:
+          - 2
+          - 4
+        format: int32
+        type: integer
+      responseTime:
+        format: int32
+        type: integer
+    type: object
+  BranchInfo:
+    properties:
+      billingInterval:
+        enum:
+          - 0
+          - 1
+          - 4
+        format: int32
+        type: integer
+      country:
+        type: string
+      created:
+        format: date-time
+        type: string
+      currency:
+        type: string
+      externalAccountId:
+        type: string
+      externalSubscriptionId:
+        type: string
+      id:
+        type: string
+      managerIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      options:
+        format: int32
+        type: integer
+      ownerId:
+        type: string
+      subscriptionIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+    type: object
+  BranchManagerInformation:
+    properties:
+      displayName:
+        type: string
+      isPending:
+        type: boolean
+      mailAddress:
+        type: string
+      managerId:
+        type: string
+      subscriptionId:
+        type: string
+    type: object
+  BranchManagerInviteInfos:
+    properties:
+      displayName:
+        type: string
+      mailAddress:
+        type: string
+    required:
+      - mailAddress
+      - displayName
+    type: object
+  CategoryInfo:
+    properties:
+      color:
+        type: string
+      id:
+        type: string
+      imageName:
+        type: string
+      isDefault:
+        readOnly: true
+        type: boolean
+      keywords:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      name:
+        type: string
+    type: object
+  CategoryUpdates:
+    properties:
+      settings:
+        items:
+          $ref: '#/definitions/PersonalCategorySettings'
+        type: array
+        uniqueItems: false
+      teamId:
+        type: string
+      userId:
+        type: string
+    type: object
+  ChangeAlertStatusFilterInfo:
+    properties:
+      categoryIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      maxDate:
+        format: date-time
+        type: string
+      minDate:
+        format: date-time
+        type: string
+    type: object
+  ChangeAlertStatusMultipleInfo:
+    properties:
+      alertIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      descr:
+        type: string
+      uid:
+        type: string
+    required:
+      - uid
+      - alertIds
+    type: object
+  ChannelPriceInfo:
+    properties:
+      sms:
+        format: int32
+        type: integer
+      voicePerMinute:
+        format: int32
+        type: integer
+    type: object
+  DutySummaryInfo:
+    properties:
+      dutyEnd:
+        format: date-time
+        type: string
+      dutyId:
+        type: string
+      dutyStart:
+        format: date-time
+        type: string
+    type: object
+  EntityTagHeaderValue:
+    properties:
+      isWeak:
+        readOnly: true
+        type: boolean
+      tag:
+        $ref: '#/definitions/StringSegment'
+        readOnly: true
+    type: object
+  ErrorResponseContent:
+    properties:
+      code:
+        format: int32
+        type: integer
+      details:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/ErrorResponseContentBase'
+        type: array
+        uniqueItems: false
+      message:
+        type: string
+      requestId:
+        type: string
+    required:
+      - message
+      - code
+    type: object
+  ErrorResponseContentBase:
+    properties:
+      details:
+        type: string
+      message:
+        type: string
+    required:
+      - message
+    type: object
+  EventFilter:
+    properties:
+      continuationToken:
+        $ref: '#/definitions/PagedResultsPublicContinuationToken'
+      eventStatusCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 1000
+        format: int32
+        type: integer
+      maxCreationDate:
+        format: date-time
+        type: string
+      minCreationDate:
+        format: date-time
+        type: string
+      modifiedSince:
+        format: date-time
+        type: string
+      textToSearch:
+        type: string
+    type: object
+  EventParameterInfo:
+    properties:
+      name:
+        type: string
+      type:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 100
+        format: int32
+        type: integer
+      value:
+        type: string
+    type: object
+  FileContentResult:
+    properties:
+      contentType:
+        readOnly: true
+        type: string
+      enableRangeProcessing:
+        type: boolean
+      entityTag:
+        $ref: '#/definitions/EntityTagHeaderValue'
+      fileContents:
+        format: byte
+        type: string
+      fileDownloadName:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+    type: object
+  InventoryScriptInfo:
+    properties:
+      config:
+        type: object
+      data:
+        $ref: '#/definitions/ScriptDescriptionData'
+      eventPattern:
+        type: object
+      localizationDetails:
+        items:
+          $ref: '#/definitions/ScriptLocalizationDetail'
+        type: array
+        uniqueItems: false
+      scriptId:
+        type: string
+      scriptName:
+        type: string
+      visibility:
+        type: string
+    type: object
+  'ItemsWrapper[String]':
+    properties:
+      items:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+    type: object
+  MessageDelivery:
+    properties:
+      channelId:
+        type: string
+      messageId:
+        type: string
+    type: object
+  MessageDeliveryConfirmation:
+    properties:
+      deliveries:
+        items:
+          $ref: '#/definitions/MessageDelivery'
+        type: array
+        uniqueItems: false
+      subscriptionId:
+        type: string
+    type: object
+  OverviewAlert:
+    properties:
+      alertDeliveryStatus:
+        $ref: '#/definitions/AlertDeliveryStatusInfo'
+      categoryId:
+        type: string
+      detailedHistory:
+        $ref: '#/definitions/AlertHistoryInfoDetailed'
+      externalId:
+        type: string
+      flags:
+        format: int32
+        type: integer
+      id:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      requiredAcknowledgements:
+        format: int32
+        type: integer
+      status:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 8
+          - 16
+          - 32
+        format: int32
+        type: integer
+      subscriptionId:
+        type: string
+      teamId:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  OverviewEvent:
+    properties:
+      alertId:
+        type: string
+      categoryId:
+        type: string
+      creationTime:
+        format: date-time
+        type: string
+      eventSourceType:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+        format: int32
+        type: integer
+      eventStatus:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 1000
+        format: int32
+        type: integer
+      id:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      severity:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  PagedResultsPublicContinuationToken:
+    properties:
+      nextPartitionKey:
+        type: string
+      nextRowKey:
+        type: string
+      nextTableName:
+        type: string
+    type: object
+  'PagedResultsPublic[OverviewAlert]':
+    properties:
+      continuationToken:
+        $ref: '#/definitions/PagedResultsPublicContinuationToken'
+      hasMore:
+        readOnly: true
+        type: boolean
+      results:
+        items:
+          $ref: '#/definitions/OverviewAlert'
+        type: array
+        uniqueItems: false
+    type: object
+  'PagedResultsPublic[OverviewEvent]':
+    properties:
+      continuationToken:
+        $ref: '#/definitions/PagedResultsPublicContinuationToken'
+      hasMore:
+        readOnly: true
+        type: boolean
+      results:
+        items:
+          $ref: '#/definitions/OverviewEvent'
+        type: array
+        uniqueItems: false
+    type: object
+  PersonalCategorySettings:
+    properties:
+      categoryId:
+        type: string
+      hidden:
+        type: boolean
+      mute:
+        type: boolean
+      ringtone:
+        type: string
+    type: object
+  PlanFeature:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  PlanInfo:
+    properties:
+      description:
+        type: string
+      display:
+        type: string
+      featureDescription:
+        type: string
+      features:
+        items:
+          $ref: '#/definitions/PlanFeature'
+        type: array
+        uniqueItems: false
+      id:
+        type: string
+      name:
+        type: string
+      upgradeDescription:
+        type: string
+      userAddonKey:
+        type: string
+    type: object
+  PrepaidBalanceInfo:
+    properties:
+      balance:
+        format: int32
+        type: integer
+      latestTopUp:
+        format: date-time
+        type: string
+      pendingTransactions:
+        type: boolean
+    type: object
+  PrepaidPackageInfo:
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      prices:
+        items:
+          $ref: '#/definitions/PriceInfo'
+        type: array
+        uniqueItems: false
+    type: object
+  PrepaidSettingsInfo:
+    properties:
+      topUpAmount:
+        format: int32
+        type: integer
+      topUpEnabled:
+        type: boolean
+      topUpLimit:
+        format: int32
+        type: integer
+    type: object
+  PrepaidTransactionCreationInfo:
+    properties:
+      packageCode:
+        type: string
+    type: object
+  PrepaidTransactionInfo:
+    properties:
+      amount:
+        format: int32
+        type: integer
+      autoTopUpId:
+        type: string
+      created:
+        format: date-time
+        type: string
+      createdBy:
+        type: string
+      currency:
+        type: string
+      modified:
+        format: date-time
+        type: string
+      packageCode:
+        type: string
+      status:
+        type: string
+      statusCode:
+        format: int32
+        type: integer
+      subscriptionId:
+        type: string
+      transactionId:
+        type: string
+    type: object
+  PriceInfo:
+    properties:
+      currency:
+        type: string
+      price:
+        format: int32
+        type: integer
+    type: object
+  RaiseAlertInfo:
+    properties:
+      attachments:
+        items:
+          $ref: '#/definitions/AlertAttachment'
+        type: array
+        uniqueItems: false
+      category:
+        type: string
+      externalId:
+        type: string
+      flags:
+        format: int32
+        type: integer
+      parameters:
+        items:
+          $ref: '#/definitions/EventParameterInfo'
+        type: array
+        uniqueItems: false
+      severity:
+        enum:
+          - 0
+          - 1
+          - 2
+        format: int32
+        type: integer
+      text:
+        type: string
+      title:
+        type: string
+    required:
+      - text
+      - title
+    type: object
+  ScheduleInfo:
+    properties:
+      end:
+        format: date-time
+        type: string
+      id:
+        type: string
+      options:
+        format: int32
+        type: integer
+      start:
+        format: date-time
+        type: string
+      userId:
+        type: string
+    type: object
+  ScriptDescriptionData:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      scriptType:
+        type: string
+      shortDescription:
+        type: string
+    type: object
+  ScriptInstanceCustomUserData:
+    properties:
+      customScriptDescription:
+        type: string
+      customScriptName:
+        type: string
+      instanceId:
+        type: string
+      scriptName:
+        type: string
+    type: object
+  ScriptInstanceDetails:
+    properties:
+      config:
+        type: object
+      customScriptDescription:
+        type: string
+      customScriptName:
+        type: string
+      enabled:
+        type: boolean
+      eventPattern:
+        type: object
+      instanceId:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      runtimeInformation:
+        $ref: '#/definitions/ScriptInstanceInfoRuntimeInformationModel'
+      scriptId:
+        type: string
+      scriptName:
+        type: string
+      subscriptionId:
+        type: string
+    type: object
+  ScriptInstanceInfoRuntimeInformationModel:
+    properties:
+      runtimeStatus:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - -1
+        format: int32
+        type: integer
+      runtimeStatusMessage:
+        type: string
+    type: object
+  ScriptLocalizationDetail:
+    properties:
+      config:
+        type: object
+      data:
+        $ref: '#/definitions/ScriptDescriptionData'
+      language:
+        type: string
+    type: object
+  StringSegment:
+    properties:
+      buffer:
+        readOnly: true
+        type: string
+      hasValue:
+        readOnly: true
+        type: boolean
+      length:
+        format: int32
+        readOnly: true
+        type: integer
+      offset:
+        format: int32
+        readOnly: true
+        type: integer
+      value:
+        readOnly: true
+        type: string
+    type: object
+  SubscriptionAdoptionInfo:
+    properties:
+      ownerEmail:
+        type: string
+    required:
+      - ownerEmail
+    type: object
+  SubscriptionCreationInfo:
+    properties:
+      language:
+        type: string
+      name:
+        type: string
+      ownerEmail:
+        type: string
+      timezone:
+        type: string
+    required:
+      - name
+      - ownerEmail
+    type: object
+  SubscriptionEndpointInfo:
+    properties:
+      address:
+        type: string
+      lastEvent:
+        format: date-time
+        type: string
+      type:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        format: int32
+        type: integer
+    type: object
+  SubscriptionFeature:
+    properties:
+      name:
+        type: string
+      type:
+        format: int32
+        type: integer
+      value:
+        type: string
+    type: object
+  SubscriptionInfo:
+    properties:
+      branchId:
+        type: string
+      country:
+        type: string
+      currency:
+        type: string
+      endpoints:
+        items:
+          $ref: '#/definitions/SubscriptionEndpointInfo'
+        type: array
+        uniqueItems: false
+      externalAccountId:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      nextBilling:
+        format: date-time
+        type: string
+      ownerId:
+        type: string
+      planCode:
+        type: string
+      planState:
+        format: int32
+        type: integer
+      referralEnabled:
+        type: boolean
+      status:
+        format: int32
+        type: integer
+      teamIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+    type: object
+  SubscriptionProfile:
+    properties:
+      name:
+        type: string
+    type: object
+  TeamDutySummaryInfo:
+    properties:
+      dutyAssistEnabled:
+        type: boolean
+      dutySummaries:
+        items:
+          $ref: '#/definitions/DutySummaryInfo'
+        type: array
+        uniqueItems: false
+    type: object
+  TeamInfo:
+    properties:
+      id:
+        type: string
+      memberIds:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      name:
+        type: string
+      subscriptionId:
+        type: string
+      timezone:
+        type: string
+    type: object
+  TeamSetupProgress:
+    properties:
+      completedSteps:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      teamId:
+        type: string
+      timestamp:
+        format: date-time
+        type: string
+    type: object
+  UserBranchInfo:
+    properties:
+      branchId:
+        type: string
+      isBranchManager:
+        type: boolean
+      isBranchMember:
+        type: boolean
+    type: object
+  UserDeliveryStatusInfo:
+    properties:
+      statusCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 6
+          - 8
+          - 24
+          - 26
+          - 30
+          - 31
+          - 32
+        format: int32
+        type: integer
+      userId:
+        type: string
+    type: object
+  UserDutyInfo:
+    properties:
+      lastChange:
+        format: date-time
+        type: string
+      onDuty:
+        type: boolean
+      onManagerDuty:
+        type: boolean
+      overdue:
+        type: boolean
+    type: object
+  UserImage:
+    properties:
+      content:
+        format: byte
+        type: string
+      contentDispostion:
+        type: string
+      contentEncoding:
+        type: string
+      contentType:
+        type: string
+      lastModified:
+        format: date-time
+        type: string
+      name:
+        type: string
+    type: object
+  UserInfo:
+    properties:
+      colorIndex:
+        format: int32
+        type: integer
+      dutyInfos:
+        $ref: '#/definitions/UserDutyInfo'
+      id:
+        type: string
+      isDeactivated:
+        type: boolean
+      isInvite:
+        type: boolean
+      mail:
+        type: string
+      name:
+        type: string
+      subscriptionId:
+        type: string
+    type: object
+  UserLicenseInfo:
+    properties:
+      currentUsers:
+        format: int32
+        type: integer
+      isFree:
+        type: boolean
+      isTrial:
+        type: boolean
+      licensedUsers:
+        format: int32
+        type: integer
+      planCode:
+        type: string
+    type: object
+  UserLicenseUpdate:
+    properties:
+      currency:
+        type: string
+      interval:
+        enum:
+          - 0
+          - 1
+          - 4
+        format: int32
+        type: integer
+      licensedUsers:
+        format: int32
+        type: integer
+      planId:
+        type: string
+    required:
+      - licensedUsers
+      - planId
+      - interval
+    type: object
+  UserSetupProgress:
+    properties:
+      completedSteps:
+        items:
+          type: string
+        type: array
+        uniqueItems: false
+      timestamp:
+        format: date-time
+        type: string
+      userId:
+        type: string
+    type: object
+  WebhookBaseInfo:
+    description: Basic external webhook model for update/creation.
+    properties:
+      extUrl:
+        description: Url to the external webhook. It will receive all outgoing events.
+        type: string
+    required:
+      - extUrl
+    type: object
+  WebhookInfo:
+    description: Basic information about an external webhook.
+    properties:
+      extUrl:
+        description: Url to the external webhook. It will receive all outgoing events.
+        type: string
+      id:
+        description: Id of the webhook in SIGNL4.
+        type: string
+      subId:
+        description: Id of the subscription that is owning the webhook.
+        type: string
+    required:
+      - extUrl
+    type: object
