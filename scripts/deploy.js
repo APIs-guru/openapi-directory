@@ -22,10 +22,10 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 sh.set('-e');
 sh.set('-v');
 
-sh.mkdir('deploy');
+sh.mkdir('-p','deploy');
 sh.touch('deploy/.nojekyll');
 sh.cp('resources/index.html', 'deploy/');
-sh.mkdir('deploy/v2');
+sh.mkdir('-p','deploy/v2');
 
 function deployDir(path) {
   assert(_.isString(path) && path[0] !== '/');
