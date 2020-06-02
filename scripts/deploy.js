@@ -65,6 +65,85 @@ function cacheLogo(url) {
   if (fs.existsSync(deployDir(logoFile)+'.jpeg')) {
     return fsp.readFile(deployDir(logoFile)+'.jpeg');
   }
+  if (fs.existsSync(deployDir(logoFile)+'.png')) {
+    return fsp.readFile(deployDir(logoFile)+'.png');
+  }
+  if (fs.existsSync(deployDir(logoFile)+'.svg')) {
+    return fsp.readFile(deployDir(logoFile)+'.svg');
+  }
+  return makeRequest('get', url, {encoding: null, retries: 10})
+    .spread(function(response, data) {
+
+      if (!URI(url).suffix()) {
+        var mime = response.headers['content-type'];
+        assert(mime.match('image/'));
+        var extension = MIME.extension(mime);
+        assert(extension);
+        logoFile += `.${extension}`;
+      }
+
+      util.saveFile(deployDir(logoFile), data);
+      return rootUrl(logoFile);
+    });
+}
+
+async function buildApiList(specs) {
+  var apiList = {};
+  var cachedLogo = {};
+
+  for (var filename in specs) {
+    var swagger = specs[filename];
+
+    var logoUrl = _.get(swagger, 'info["x-logo"].url');
+    if (logoUrl) {
+      if (!cachedLogo[logoUrl])
+        cachedLogo[logoUrl] = await cacheLogo(logoUrl);
+      if (cachedLogo[logoUrl])
+        swagger.info['x-logo'].url = cachedLogo[logoUrl];
+    }
+
+    _.defaults(swagger.info, {'x-preferred': true});
+
+    addSwagger(apiList, swagger, filename);
+  }
+  return apiList;
+}
+
+function addSwagger(apiList, swagger, filename) {
+  var id = util.getApiId(swagger);
+  var apiEntry = apiList[id] = apiList[id] || {versions: {}};
+  var versionEntry = buildVersionEntry(swagger, filename);
+
+  apiEntry.versions[versionEntry.info.version] = versionEntry;
+
+  if (versionEntry.info['x-preferred'])
+    apiEntry.preferred = versionEntry.info.version;
+
+  //FIXME: here we don't track deleted version, not a problem for right now :)
+  apiEntry.added = _([apiEntry.added, versionEntry.added]).compact().min();
+
+  return apiEntry;
+}
+
+function buildVersionEntry(swagger, filename) {
+  let target = 'swagger';
+  if (swagger.openapi) target = 'openapi';
+  var basename = 'specs/' + util.getSwaggerPath(swagger, target);
+  util.saveJson(deployDir(`${basename}.json`), swagger, true);
+  util.saveYaml(deployDir(`${basename}.yaml`), swagger, true);
+
+  var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
+  dates = _(dates).split('\n').compact();
+
+  return {
+    swaggerUrl: rootUrl(`${basename}.json`),
+    swaggerYamlUrl: rootUrl(`${basename}.yaml`),
+    info: swagger.info,
+    externalDocs: swagger.externalDocs,
+    added: new Date(dates.last()),
+    updated: new Date(dates.first())
+  };
+}
   return makeRequest('get', url, {encoding: null, retries: 10})
     .spread(function(response, data) {
 
