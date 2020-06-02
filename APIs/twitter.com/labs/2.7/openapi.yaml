@@ -13,7 +13,7 @@ info:
     url: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   termsOfService: 'https://developer.twitter.com/en/developer-terms/agreement-and-policy.html'
   title: Tweets and Users
-  version: '2.4'
+  version: '2.7'
   x-apisguru-categories:
     - social
   x-logo:
@@ -22,7 +22,6 @@ info:
     - format: openapi
       url: 'https://api.twitter.com/labs/2/openapi.json'
       version: '3.0'
-  x-preferred: true
   x-providerName: twitter.com
   x-serviceName: labs
 externalDocs:
@@ -392,6 +391,10 @@ components:
             - type
             - url
             - width
+            - public_metrics
+            - non_public_metrics
+            - organic_metrics
+            - promoted_metrics
           type: string
         minItems: 1
         type: array
@@ -491,6 +494,9 @@ components:
             - source
             - lang
             - context_annotations
+            - non_public_metrics
+            - promoted_metrics
+            - organic_metrics
           type: string
         minItems: 1
         type: array
@@ -1145,9 +1151,58 @@ components:
         lang:
           description: 'Language of the Tweet, if detected by Twitter. Returned as a BCP47 language tag.'
           type: string
+        non_public_metrics:
+          description: Nonpublic engagement metrics for the Tweet at the time of the request.
+          properties:
+            impression_count:
+              description: Number of times this Tweet has been viewed.
+              format: int32
+              type: integer
+          type: object
+        organic_metrics:
+          description: Organic nonpublic engagement metrics for the Tweet at the time of the request.
+          properties:
+            impression_count:
+              description: Number of times this Tweet has been viewed.
+              type: integer
+            like_count:
+              description: Number of times this Tweet has been liked.
+              type: integer
+            reply_count:
+              description: Number of times this Tweet has been replied to.
+              type: integer
+            retweet_count:
+              description: Number of times this Tweet has been Retweeted.
+              type: integer
+          required:
+            - impression_count
+            - retweet_count
+            - reply_count
+            - like_count
+          type: object
         possibly_sensitive:
           description: 'Indicates if this Tweet contains URLs marked as sensitive, for example content suitable for mature audiences.'
           type: boolean
+        promoted_metrics:
+          description: Promoted nonpublic engagement metrics for the Tweet at the time of the request.
+          properties:
+            impression_count:
+              description: Number of times this Tweet has been viewed.
+              format: int32
+              type: integer
+            like_count:
+              description: Number of times this Tweet has been liked.
+              format: int32
+              type: integer
+            reply_count:
+              description: Number of times this Tweet has been replied to.
+              format: int32
+              type: integer
+            retweet_count:
+              description: Number of times this Tweet has been Retweeted.
+              format: int32
+              type: integer
+          type: object
         public_metrics:
           description: Engagement metrics for the Tweet at the time of the request.
           properties:
@@ -1484,9 +1539,97 @@ components:
       properties:
         duration_ms:
           type: integer
+        non_public_metrics:
+          description: Nonpublic engagement metrics for the Media at the time of the request.
+          properties:
+            playback_0_count:
+              description: Number of users who made it through 0% of the video.
+              format: int32
+              type: integer
+            playback_100_count:
+              description: Number of users who made it through 100% of the video.
+              format: int32
+              type: integer
+            playback_25_count:
+              description: Number of users who made it through 25% of the video.
+              format: int32
+              type: integer
+            playback_50_count:
+              description: Number of users who made it through 50% of the video.
+              format: int32
+              type: integer
+            playback_75_count:
+              description: Number of users who made it through 75% of the video.
+              format: int32
+              type: integer
+          type: object
+        organic_metrics:
+          description: Organic nonpublic engagement metrics for the Media at the time of the request.
+          properties:
+            playback_0_count:
+              description: Number of users who made it through 0% of the video.
+              format: int32
+              type: integer
+            playback_100_count:
+              description: Number of users who made it through 100% of the video.
+              format: int32
+              type: integer
+            playback_25_count:
+              description: Number of users who made it through 25% of the video.
+              format: int32
+              type: integer
+            playback_50_count:
+              description: Number of users who made it through 50% of the video.
+              format: int32
+              type: integer
+            playback_75_count:
+              description: Number of users who made it through 75% of the video.
+              format: int32
+              type: integer
+            view_count:
+              description: Number of times this video has been viewed.
+              format: int32
+              type: integer
+          type: object
         preview_image_url:
           format: uri
           type: string
+        promoted_metrics:
+          description: Promoted nonpublic engagement metrics for the Media at the time of the request.
+          properties:
+            playback_0_count:
+              description: Number of users who made it through 0% of the video.
+              format: int32
+              type: integer
+            playback_100_count:
+              description: Number of users who made it through 100% of the video.
+              format: int32
+              type: integer
+            playback_25_count:
+              description: Number of users who made it through 25% of the video.
+              format: int32
+              type: integer
+            playback_50_count:
+              description: Number of users who made it through 50% of the video.
+              format: int32
+              type: integer
+            playback_75_count:
+              description: Number of users who made it through 75% of the video.
+              format: int32
+              type: integer
+            view_count:
+              description: Number of times this video has been viewed.
+              format: int32
+              type: integer
+          type: object
+        public_metrics:
+          description: Engagement metrics for the Media at the time of the request.
+          properties:
+            view_count:
+              description: Number of times this video has been viewed.
+              format: int32
+              type: integer
+          type: object
         type:
           enum:
             - video
