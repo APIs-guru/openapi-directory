@@ -63,13 +63,13 @@ function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
   var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
   if (fs.existsSync(deployDir(logoFile)+'.jpeg')) {
-    return fsp.readFile(deployDir(logoFile)+'.jpeg');
+    return rootUrl(logoFile+'.jpeg');
   }
   if (fs.existsSync(deployDir(logoFile)+'.png')) {
-    return fsp.readFile(deployDir(logoFile)+'.png');
+    return rootUrl(logoFile+'.png');
   }
   if (fs.existsSync(deployDir(logoFile)+'.svg')) {
-    return fsp.readFile(deployDir(logoFile)+'.svg');
+    return rootUrl(logoFile+'.svg');
   }
   return makeRequest('get', url, {encoding: null, retries: 10})
     .spread(function(response, data) {
