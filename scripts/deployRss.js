@@ -44,12 +44,15 @@ function finish(data) {
 
 			  if (p.info["x-logo"]) {
 				  i.enclosure = {};
-				  i.enclosure["@url"] = p.info["x-logo"].url || '';
+				  i.enclosure["@url"] = p.info["x-logo"].url;
 				  i.enclosure["@length"] = 15026;
 				  i.enclosure["@type"] = 'image/jpeg';
-          let tmp = i.enclosure["@url"].toLowerCase();
-          if (tmp.indexOf('.png')>=0) i.enclosure["@type"] = 'image/png';
-          if (tmp.indexOf('.svg')>=0) i.enclosure["@type"] = 'image/svg+xml';
+          if (typeof i.enclosure["@url"] === 'string') {
+            let tmp = i.enclosure["@url"].toLowerCase();
+            if (tmp.indexOf('.png')>=0) i.enclosure["@type"] = 'image/png';
+            if (tmp.indexOf('.svg')>=0) i.enclosure["@type"] = 'image/svg+xml';
+          }
+          else console.warn(api,i.enclosure["@url"]);
 			  }
 
 			  rss.channel.item.push(i);
