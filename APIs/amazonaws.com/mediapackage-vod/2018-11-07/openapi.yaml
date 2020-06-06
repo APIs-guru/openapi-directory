@@ -553,6 +553,16 @@ paths:
               required:
                 - id
               properties:
+                authorization:
+                  description: CDN Authorization credentials
+                  type: object
+                  properties:
+                    CdnIdentifierSecret:
+                      description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+                      $ref: '#/components/schemas/__string'
+                    SecretsRoleArn:
+                      description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+                      $ref: '#/components/schemas/__string'
                 id:
                   description: The ID of the PackagingGroup.
                   type: string
@@ -987,10 +997,80 @@ paths:
           description: The ID of a MediaPackage VOD PackagingGroup resource.
           schema:
             type: string
+    put:
+      operationId: UpdatePackagingGroup
+      description: Updates a specific packaging group. You can't change the id attribute or any other system-generated attributes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackagingGroupResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of a MediaPackage VOD PackagingGroup resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authorization:
+                  description: CDN Authorization credentials
+                  type: object
+                  properties:
+                    CdnIdentifierSecret:
+                      description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+                      $ref: '#/components/schemas/__string'
+                    SecretsRoleArn:
+                      description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+                      $ref: '#/components/schemas/__string'
   '/tags/{resource-arn}':
     get:
       operationId: ListTagsForResource
-      description: List tags for a given MediaPackage VOD resource
+      description: Returns a list of the tags assigned to the specified resource.
       responses:
         '200':
           description: Success
@@ -1002,7 +1082,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
           schema:
             type: string
     parameters:
@@ -1015,7 +1095,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Set tags for a given MediaPackage VOD resource
+      description: Adds tags to the specified resource. You can specify one or more tags to add.
       responses:
         '204':
           description: Success
@@ -1023,7 +1103,7 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
           schema:
             type: string
       requestBody:
@@ -1036,14 +1116,14 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: ''
+                  description: A collection of tags associated with a resource
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
   '/tags/{resource-arn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Delete tags for a given MediaPackage VOD resource
+      description: Removes tags from the specified resource. You can specify one or more tags to remove.
       responses:
         '204':
           description: Success
@@ -1051,13 +1131,13 @@ paths:
         - name: resource-arn
           in: path
           required: true
-          description: ''
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
           schema:
             type: string
         - name: tagKeys
           in: query
           required: true
-          description: The key(s) of tag to be deleted
+          description: A comma-separated list of the tag keys to remove from the resource.
           schema:
             type: array
             items:
@@ -1253,6 +1333,8 @@ components:
         Arn:
           description: The ARN of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
         DomainName:
           description: The fully qualified domain name for Assets in the PackagingGroup.
           $ref: '#/components/schemas/__string'
@@ -1327,6 +1409,8 @@ components:
         Arn:
           description: The ARN of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
         DomainName:
           description: The fully qualified domain name for Assets in the PackagingGroup.
           $ref: '#/components/schemas/__string'
@@ -1366,7 +1450,24 @@ components:
       type: object
       properties:
         Tags:
+          description: A collection of tags associated with a resource
           $ref: '#/components/schemas/__mapOf__string'
+    UpdatePackagingGroupResponse:
+      type: object
+      properties:
+        Arn:
+          description: The ARN of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
+        DomainName:
+          description: The fully qualified domain name for Assets in the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Id:
+          description: The ID of the PackagingGroup.
+          $ref: '#/components/schemas/__string'
+        Tags:
+          $ref: '#/components/schemas/Tags'
     AdMarkers:
       enum:
         - NONE
@@ -1405,6 +1506,19 @@ components:
         Tags:
           $ref: '#/components/schemas/Tags'
       description: A MediaPackage VOD Asset resource.
+    Authorization:
+      required:
+        - SecretsRoleArn
+        - CdnIdentifierSecret
+      type: object
+      properties:
+        CdnIdentifierSecret:
+          description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+          $ref: '#/components/schemas/__string'
+        SecretsRoleArn:
+          description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+          $ref: '#/components/schemas/__string'
+      description: CDN Authorization credentials
     SpekeKeyProvider:
       required:
         - SystemIds
@@ -1560,6 +1674,8 @@ components:
       type: object
       title: CreatePackagingGroupRequest
       properties:
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
         Id:
           description: The ID of the PackagingGroup.
           $ref: '#/components/schemas/__string'
@@ -1756,6 +1872,8 @@ components:
         Arn:
           description: The ARN of the PackagingGroup.
           $ref: '#/components/schemas/__string'
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
         DomainName:
           description: The fully qualified domain name for Assets in the PackagingGroup.
           $ref: '#/components/schemas/__string'
@@ -1782,11 +1900,19 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
+          description: A collection of tags associated with a resource
           $ref: '#/components/schemas/__mapOf__string'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdatePackagingGroupRequest:
+      type: object
+      title: UpdatePackagingGroupRequest
+      properties:
+        Authorization:
+          $ref: '#/components/schemas/Authorization'
+      description: A MediaPackage VOD PackagingGroup resource configuration.
     __PeriodTriggersElement:
       enum:
         - ADS

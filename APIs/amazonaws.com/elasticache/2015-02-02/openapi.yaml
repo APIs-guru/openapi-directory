@@ -1960,6 +1960,12 @@ paths:
           description: '<p>Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails.</p> <p>If <code>true</code>, Multi-AZ is enabled for this replication group. If <code>false</code>, Multi-AZ is disabled for this replication group.</p> <p> <code>AutomaticFailoverEnabled</code> must be enabled for Redis (cluster mode enabled) replication groups.</p> <p>Default: false</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
           schema:
             type: boolean
+        - name: MultiAZEnabled
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: boolean
         - name: NumCacheClusters
           in: query
           required: false
@@ -7589,6 +7595,12 @@ paths:
           description: '<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
           schema:
             type: boolean
+        - name: MultiAZEnabled
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: boolean
         - name: NodeGroupId
           in: query
           required: false
@@ -10272,6 +10284,8 @@ components:
         AutomaticFailover:
           $ref: '#/components/schemas/AutomaticFailoverStatus'
           description: '<p>Indicates the status of Multi-AZ with automatic failover for this Redis replication group.</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+        MultiAZ:
+          $ref: '#/components/schemas/MultiAZStatus'
         ConfigurationEndpoint:
           $ref: '#/components/schemas/Endpoint'
           description: The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
@@ -10637,6 +10651,8 @@ components:
         AutomaticFailoverEnabled:
           $ref: '#/components/schemas/BooleanOptional'
           description: '<p>Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails.</p> <p>If <code>true</code>, Multi-AZ is enabled for this replication group. If <code>false</code>, Multi-AZ is disabled for this replication group.</p> <p> <code>AutomaticFailoverEnabled</code> must be enabled for Redis (cluster mode enabled) replication groups.</p> <p>Default: false</p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+        MultiAZEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
         NumCacheClusters:
           $ref: '#/components/schemas/IntegerOptional'
           description: '<p>The number of nodes in the cluster.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>'
@@ -11563,6 +11579,8 @@ components:
         AutomaticFailoverEnabled:
           $ref: '#/components/schemas/BooleanOptional'
           description: '<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:</p> <ul> <li> <p>Redis versions earlier than 2.8.6.</p> </li> <li> <p>Redis (cluster mode disabled): T1 node types.</p> </li> <li> <p>Redis (cluster mode enabled): T1 node types.</p> </li> </ul>'
+        MultiAZEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
         NodeGroupId:
           deprecated: true
           $ref: '#/components/schemas/String'
@@ -11649,6 +11667,11 @@ components:
           $ref: '#/components/schemas/NodeGroupsToRetainList'
           description: '<p>If the value of <code>NodeGroupCount</code> is less than the current number of node groups (shards), then either <code>NodeGroupsToRemove</code> or <code>NodeGroupsToRetain</code> is required. <code>NodeGroupsToRetain</code> is a list of <code>NodeGroupId</code>s to retain in the cluster.</p> <p>ElastiCache for Redis will attempt to remove all node groups except those listed by <code>NodeGroupsToRetain</code> from the cluster.</p>'
       description: Represents the input for a <code>ModifyReplicationGroupShardConfiguration</code> operation.
+    MultiAZStatus:
+      type: string
+      enum:
+        - enabled
+        - disabled
     NodeGroupMemberList:
       type: array
       items:

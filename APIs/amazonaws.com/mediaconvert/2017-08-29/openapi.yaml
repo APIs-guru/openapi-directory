@@ -2439,7 +2439,7 @@ components:
           description: 'The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.'
         CodecSettings:
           $ref: '#/components/schemas/VideoCodecSettings'
-          description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
+          description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9, Vp9Settings'
         ColorMetadata:
           $ref: '#/components/schemas/ColorMetadata'
           description: 'Choose Insert (INSERT) for this setting to include color metadata in this output. Choose Ignore (IGNORE) to exclude color metadata from this output. If you don''t specify a value, the service sets this to Insert by default.'
@@ -2882,6 +2882,8 @@ components:
         - AC3
         - EAC3
         - EAC3_ATMOS
+        - VORBIS
+        - OPUS
         - PASSTHROUGH
       description: Type of Audio codec.
     Eac3AtmosSettings:
@@ -3038,6 +3040,32 @@ components:
           $ref: '#/components/schemas/__integerMin0Max9'
           description: Required when you set Bitrate control mode (rateControlMode) to VBR. Specify the audio quality of this MP3 output from 0 (highest quality) to 9 (lowest quality).
       description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3.'
+    OpusSettings:
+      type: object
+      properties:
+        Bitrate:
+          $ref: '#/components/schemas/__integerMin32000Max192000'
+          description: 'Optional. Specify the average bitrate in bits per second. Valid values are multiples of 8000, from 32000 through 192000. The default value is 96000, which we recommend for quality and bandwidth.'
+        Channels:
+          $ref: '#/components/schemas/__integerMin1Max2'
+          description: 'Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2.'
+        SampleRate:
+          $ref: '#/components/schemas/__integerMin16000Max48000'
+          description: 'Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The default value is 48000.'
+      description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value OPUS.'
+    VorbisSettings:
+      type: object
+      properties:
+        Channels:
+          $ref: '#/components/schemas/__integerMin1Max2'
+          description: 'Optional. Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are 1 and 2. The default value is 2.'
+        SampleRate:
+          $ref: '#/components/schemas/__integerMin22050Max48000'
+          description: 'Optional. Specify the audio sample rate in Hz. Valid values are 22050, 32000, 44100, and 48000. The default value is 48000.'
+        VbrQuality:
+          $ref: '#/components/schemas/__integerMinNegative1Max10'
+          description: 'Optional. Specify the variable audio quality of this Vorbis output from -1 (lowest quality, ~45 kbit/s) to 10 (highest quality, ~500 kbit/s). The default value is 4 (~128 kbit/s). Values 5 and 6 are approximately 160 and 192 kbit/s, respectively.'
+      description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value Vorbis.'
     WavSettings:
       type: object
       properties:
@@ -3081,10 +3109,16 @@ components:
         Mp3Settings:
           $ref: '#/components/schemas/Mp3Settings'
           description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value MP3.'
+        OpusSettings:
+          $ref: '#/components/schemas/OpusSettings'
+          description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value OPUS.'
+        VorbisSettings:
+          $ref: '#/components/schemas/VorbisSettings'
+          description: 'Required when you set Codec, under AudioDescriptions>CodecSettings, to the value Vorbis.'
         WavSettings:
           $ref: '#/components/schemas/WavSettings'
           description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV.
-      description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
+      description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings'
     AudioDefaultSelection:
       type: string
       enum:
@@ -3360,7 +3394,7 @@ components:
           description: 'When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then that value is passed through to the output. If the input contains no ISO 639 audio_type, the value in Audio Type is included in the output. Otherwise the value in Audio Type is included in the output. Note that this field and audioType are both ignored if audioDescriptionBroadcasterMix is set to BROADCASTER_MIXED_AD.'
         CodecSettings:
           $ref: '#/components/schemas/AudioCodecSettings'
-          description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings'
+          description: 'Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings'
         CustomLanguageCode:
           $ref: '#/components/schemas/__stringPatternAZaZ23AZaZ'
           description: 'Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control (AudioLanguageCodeControl) to Use configured (USE_CONFIGURED). The service also uses your specified custom language code when you set Language code control (AudioLanguageCodeControl) to Follow input (FOLLOW_INPUT), but your input file doesn''t specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.'
@@ -3415,9 +3449,9 @@ components:
       pattern: '^[A-Za-z]{3}$'
       minLength: 3
       maxLength: 3
-    __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE:
+    __stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE:
       type: string
-      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+      pattern: '^((s3://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([wW][eE][bB][mM]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]))))|(https?://([^\/]+\/+)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
     __integerMinNegative2147483648Max2147483647:
       type: integer
       minimum: -2147483648
@@ -3447,7 +3481,7 @@ components:
           $ref: '#/components/schemas/AudioDefaultSelection'
           description: 'Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can''t find the specified input audio. If you don''t set a default, those outputs have no audio.'
         ExternalAudioFileInput:
-          $ref: '#/components/schemas/__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
+          $ref: '#/components/schemas/__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE'
           description: Specifies audio data from an external file source.
         LanguageCode:
           $ref: '#/components/schemas/LanguageCode'
@@ -3983,11 +4017,11 @@ components:
       properties:
         FramerateDenominator:
           $ref: '#/components/schemas/__integerMin1Max1001'
-          description: Specify the denominator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate numerator (framerateNumerator).
+          description: Specify the denominator of the fraction that represents the frame rate for the setting Caption source frame rate (CaptionSourceFramerate). Use this setting along with the setting Framerate numerator (framerateNumerator).
         FramerateNumerator:
           $ref: '#/components/schemas/__integerMin1Max60000'
-          description: Specify the numerator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate denominator (framerateDenominator).
-      description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
+          description: Specify the numerator of the fraction that represents the frame rate for the setting Caption source frame rate (CaptionSourceFramerate). Use this setting along with the setting Framerate denominator (framerateDenominator).
+      description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
     DvbSubSourceSettings:
       type: object
       properties:
@@ -4019,7 +4053,7 @@ components:
           description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
         Framerate:
           $ref: '#/components/schemas/CaptionSourceFramerate'
-          description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
+          description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
         SourceFile:
           $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI'
           description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', and ''smi''.'
@@ -4430,6 +4464,7 @@ components:
         - MP4
         - MPD
         - MXF
+        - WEBM
         - RAW
       description: 'Container for this output. Some containers require a container settings object. If not specified, the default object will be created.'
     F4vSettings:
@@ -5858,7 +5893,7 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
     H264GopBReference:
       type: string
       enum:
@@ -5888,14 +5923,14 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
     H264QualityTuningLevel:
       type: string
       enum:
         - SINGLE_PASS
         - SINGLE_PASS_HQ
         - MULTI_PASS_HQ
-      description: 'Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
     H264QvbrSettings:
       type: object
       properties:
@@ -6018,7 +6053,7 @@ components:
           description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
         FramerateConversionAlgorithm:
           $ref: '#/components/schemas/H264FramerateConversionAlgorithm'
-          description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+          description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
         FramerateDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
@@ -6063,7 +6098,7 @@ components:
           description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
         ParControl:
           $ref: '#/components/schemas/H264ParControl'
-          description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+          description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
         ParDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: Pixel Aspect Ratio denominator.
@@ -6072,7 +6107,7 @@ components:
           description: Pixel Aspect Ratio numerator.
         QualityTuningLevel:
           $ref: '#/components/schemas/H264QualityTuningLevel'
-          description: 'Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+          description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
         QvbrSettings:
           $ref: '#/components/schemas/H264QvbrSettings'
           description: 'Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
@@ -6173,7 +6208,7 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
     H265FramerateConversionAlgorithm:
       type: string
       enum:
@@ -6206,14 +6241,14 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
     H265QualityTuningLevel:
       type: string
       enum:
         - SINGLE_PASS
         - SINGLE_PASS_HQ
         - MULTI_PASS_HQ
-      description: 'Use Quality tuning level (H265QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
     __integerMin1000Max1466400000:
       type: integer
       minimum: 1000
@@ -6331,7 +6366,7 @@ components:
           description: Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
         FramerateControl:
           $ref: '#/components/schemas/H265FramerateControl'
-          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
         FramerateConversionAlgorithm:
           $ref: '#/components/schemas/H265FramerateConversionAlgorithm'
           description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
@@ -6376,7 +6411,7 @@ components:
           description: Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.
         ParControl:
           $ref: '#/components/schemas/H265ParControl'
-          description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+          description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
         ParDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: Pixel Aspect Ratio denominator.
@@ -6385,7 +6420,7 @@ components:
           description: Pixel Aspect Ratio numerator.
         QualityTuningLevel:
           $ref: '#/components/schemas/H265QualityTuningLevel'
-          description: 'Use Quality tuning level (H265QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding.'
+          description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
         QvbrSettings:
           $ref: '#/components/schemas/H265QvbrSettings'
           description: 'Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don''t define Rate control mode.'
@@ -6781,7 +6816,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
-      description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
+      description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manually controllable for MPEG2 and uncompressed video inputs.
     InputDecryptionSettings:
       type: object
       properties:
@@ -6877,16 +6912,16 @@ components:
           description: 'Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.'
         AudioSelectors:
           $ref: '#/components/schemas/__mapOfAudioSelector'
-          description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use mutiple Audio selectors per input.
+          description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use multiple Audio selectors per input.
         CaptionSelectors:
           $ref: '#/components/schemas/__mapOfCaptionSelector'
-          description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
+          description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use multiple captions selectors per input.
         Crop:
           $ref: '#/components/schemas/Rectangle'
           description: 'Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).'
         DeblockFilter:
           $ref: '#/components/schemas/InputDeblockFilter'
-          description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
+          description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manually controllable for MPEG2 and uncompressed video inputs.
         DecryptionSettings:
           $ref: '#/components/schemas/InputDecryptionSettings'
           description: Settings for decrypting any input files that you encrypt before you upload them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key Management Service (KMS) to encrypt the data key that you use to encrypt your content.
@@ -6972,16 +7007,16 @@ components:
           description: 'Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.'
         AudioSelectors:
           $ref: '#/components/schemas/__mapOfAudioSelector'
-          description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use mutiple Audio selectors per input.
+          description: Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use multiple Audio selectors per input.
         CaptionSelectors:
           $ref: '#/components/schemas/__mapOfCaptionSelector'
-          description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use mutiple captions selectors per input.
+          description: Use Captions selectors (CaptionSelectors) to specify the captions data from the input that you will use in your outputs. You can use multiple captions selectors per input.
         Crop:
           $ref: '#/components/schemas/Rectangle'
           description: 'Use Cropping selection (crop) to specify the video area that the service will include in the output video frame. If you specify a value here, it will override any value that you specify in the output setting Cropping selection (crop).'
         DeblockFilter:
           $ref: '#/components/schemas/InputDeblockFilter'
-          description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs.
+          description: Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manually controllable for MPEG2 and uncompressed video inputs.
         DenoiseFilter:
           $ref: '#/components/schemas/InputDenoiseFilter'
           description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
@@ -7505,13 +7540,13 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
     Mpeg2FramerateConversionAlgorithm:
       type: string
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
     Mpeg2GopSizeUnits:
       type: string
       enum:
@@ -7544,13 +7579,13 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
     Mpeg2QualityTuningLevel:
       type: string
       enum:
         - SINGLE_PASS
         - MULTI_PASS
-      description: Use Quality tuning level (Mpeg2QualityTuningLevel) to specifiy whether to use single-pass or multipass video encoding.
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
     Mpeg2RateControlMode:
       type: string
       enum:
@@ -7630,10 +7665,10 @@ components:
           description: Choose Adaptive to improve subjective video quality for high-motion content. This will cause the service to use fewer B-frames (which infer information based on other frames) for high-motion portions of the video and more B-frames for low-motion portions. The maximum number of B-frames is limited by the value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
         FramerateControl:
           $ref: '#/components/schemas/Mpeg2FramerateControl'
-          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
         FramerateConversionAlgorithm:
           $ref: '#/components/schemas/Mpeg2FramerateConversionAlgorithm'
-          description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+          description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
         FramerateDenominator:
           $ref: '#/components/schemas/__integerMin1Max1001'
           description: Frame rate denominator.
@@ -7675,7 +7710,7 @@ components:
           description: Number of B-frames between reference frames.
         ParControl:
           $ref: '#/components/schemas/Mpeg2ParControl'
-          description: 'Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio.'
+          description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
         ParDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: Pixel Aspect Ratio denominator.
@@ -7684,7 +7719,7 @@ components:
           description: Pixel Aspect Ratio numerator.
         QualityTuningLevel:
           $ref: '#/components/schemas/Mpeg2QualityTuningLevel'
-          description: Use Quality tuning level (Mpeg2QualityTuningLevel) to specifiy whether to use single-pass or multipass video encoding.
+          description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding.'
         RateControlMode:
           $ref: '#/components/schemas/Mpeg2RateControlMode'
           description: Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).
@@ -7778,6 +7813,13 @@ components:
       type: integer
       minimum: 0
       maximum: 0
+    NoiseFilterPostTemporalSharpening:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+        - AUTO
+      description: 'Optional. When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), you can optionally use this setting to apply additional sharpening. The default behavior, Auto (AUTO) allows the transcoder to determine whether to apply filtering, depending on input type and quality.'
     NoiseReducerFilter:
       type: string
       enum:
@@ -7816,6 +7858,9 @@ components:
         AggressiveMode:
           $ref: '#/components/schemas/__integerMin0Max4'
           description: Use Aggressive mode for content that has complex motion. Higher values produce stronger temporal filtering. This filters highly complex scenes more aggressively and creates better VQ for low bitrate outputs.
+        PostTemporalSharpening:
+          $ref: '#/components/schemas/NoiseFilterPostTemporalSharpening'
+          description: 'Optional. When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), you can optionally use this setting to apply additional sharpening. The default behavior, Auto (AUTO) allows the transcoder to determine whether to apply filtering, depending on input type and quality.'
         Speed:
           $ref: '#/components/schemas/__integerMinNegative1Max3'
           description: 'The speed of the filter (higher number is faster). Low setting reduces bit rate at the cost of transcode time, high setting improves transcode time at the cost of bit rate.'
@@ -7859,6 +7904,14 @@ components:
       type: integer
       minimum: -1
       maximum: 3
+    __integerMin32000Max192000:
+      type: integer
+      minimum: 32000
+      maximum: 192000
+    __integerMin16000Max48000:
+      type: integer
+      minimum: 16000
+      maximum: 48000
     __listOfCaptionDescription:
       type: array
       items:
@@ -7887,7 +7940,7 @@ components:
           description: Container specific settings.
         Extension:
           $ref: '#/components/schemas/__string'
-          description: 'Use Extension (Extension) to specify the file extension for outputs in File output groups. If you do not specify a value, the service will use default extensions by container type as follows * MPEG-2 transport stream, m2ts * Quicktime, mov * MXF container, mxf * MPEG-4 container, mp4 * No Container, the service will use codec extensions (e.g. AAC, H265, H265, AC3)'
+          description: 'Use Extension (Extension) to specify the file extension for outputs in File output groups. If you do not specify a value, the service will use default extensions by container type as follows * MPEG-2 transport stream, m2ts * Quicktime, mov * MXF container, mxf * MPEG-4 container, mp4 * WebM container, webm * No Container, the service will use codec extensions (e.g. AAC, H265, H265, AC3)'
         NameModifier:
           $ref: '#/components/schemas/__stringMin1'
           description: 'Use Name modifier (NameModifier) to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier (NameModifier) is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.'
@@ -8007,13 +8060,13 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
     ProresFramerateConversionAlgorithm:
       type: string
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
     ProresInterlaceMode:
       type: string
       enum:
@@ -8031,7 +8084,7 @@ components:
       enum:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
-      description: 'Use (ProresParControl) to specify how the service determines the pixel aspect ratio. Set to Follow source (INITIALIZE_FROM_SOURCE) to use the pixel aspect ratio from the input.  To specify a different pixel aspect ratio: Using the console, choose it from the dropdown menu. Using the API, set ProresParControl to (SPECIFIED) and provide  for (ParNumerator) and (ParDenominator).'
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
     ProresSlowPal:
       type: string
       enum:
@@ -8052,10 +8105,10 @@ components:
           description: Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.
         FramerateControl:
           $ref: '#/components/schemas/ProresFramerateControl'
-          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
         FramerateConversionAlgorithm:
           $ref: '#/components/schemas/ProresFramerateConversionAlgorithm'
-          description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
+          description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
         FramerateDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: Frame rate denominator.
@@ -8070,7 +8123,7 @@ components:
               - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
         ParControl:
           $ref: '#/components/schemas/ProresParControl'
-          description: 'Use (ProresParControl) to specify how the service determines the pixel aspect ratio. Set to Follow source (INITIALIZE_FROM_SOURCE) to use the pixel aspect ratio from the input.  To specify a different pixel aspect ratio: Using the console, choose it from the dropdown menu. Using the API, set ProresParControl to (SPECIFIED) and provide  for (ParNumerator) and (ParDenominator).'
+          description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To use a different PAR, choose (SPECIFIED). In the console, SPECIFIED corresponds to any value other than Follow source. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
         ParDenominator:
           $ref: '#/components/schemas/__integerMin1Max2147483647'
           description: Pixel Aspect Ratio denominator.
@@ -8365,7 +8418,95 @@ components:
         - H_265
         - MPEG2
         - PRORES
+        - VP8
+        - VP9
       description: Type of video codec
+    Vp8Settings:
+      type: object
+      properties:
+        Bitrate:
+          $ref: '#/components/schemas/__integerMin1000Max1152000000'
+          description: 'Target bitrate in bits/second. For example, enter five megabits per second as 5000000.'
+        FramerateControl:
+          $ref: '#/components/schemas/Vp8FramerateControl'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          $ref: '#/components/schemas/Vp8FramerateConversionAlgorithm'
+          description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+        FramerateDenominator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        FramerateNumerator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        GopSize:
+          $ref: '#/components/schemas/__doubleMin0'
+          description: GOP Length (keyframe interval) in frames. Must be greater than zero.
+        HrdBufferSize:
+          $ref: '#/components/schemas/__integerMin0Max47185920'
+          description: 'Optional. Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
+        MaxBitrate:
+          $ref: '#/components/schemas/__integerMin1000Max1152000000'
+          description: 'Ignore this setting unless you set qualityTuningLevel to MULTI_PASS. Optional. Specify the maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. The default behavior uses twice the target bitrate as the maximum bitrate.'
+        ParControl:
+          $ref: '#/components/schemas/Vp8ParControl'
+          description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output.  To specify a different PAR in the console, choose any value other than Follow source. To specify a different PAR by editing the JSON job specification, choose SPECIFIED. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
+        ParDenominator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parDenominator is 33.'
+        ParNumerator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.'
+        QualityTuningLevel:
+          $ref: '#/components/schemas/Vp8QualityTuningLevel'
+          description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, multi-pass encoding.'
+        RateControlMode:
+          $ref: '#/components/schemas/Vp8RateControlMode'
+          description: 'With the VP8 codec, you can use only the variable bitrate (VBR) rate control mode.'
+      description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP8.
+    Vp9Settings:
+      type: object
+      properties:
+        Bitrate:
+          $ref: '#/components/schemas/__integerMin1000Max480000000'
+          description: 'Target bitrate in bits/second. For example, enter five megabits per second as 5000000.'
+        FramerateControl:
+          $ref: '#/components/schemas/Vp9FramerateControl'
+          description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          $ref: '#/components/schemas/Vp9FramerateConversionAlgorithm'
+          description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+        FramerateDenominator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        FramerateNumerator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        GopSize:
+          $ref: '#/components/schemas/__doubleMin0'
+          description: GOP Length (keyframe interval) in frames. Must be greater than zero.
+        HrdBufferSize:
+          $ref: '#/components/schemas/__integerMin0Max47185920'
+          description: 'Size of buffer (HRD buffer model) in bits. For example, enter five megabits as 5000000.'
+        MaxBitrate:
+          $ref: '#/components/schemas/__integerMin1000Max480000000'
+          description: 'Ignore this setting unless you set qualityTuningLevel to MULTI_PASS. Optional. Specify the maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. The default behavior uses twice the target bitrate as the maximum bitrate.'
+        ParControl:
+          $ref: '#/components/schemas/Vp9ParControl'
+          description: Optional. Specify how the service determines the pixel aspect ratio for this output. The default behavior is to use the same pixel aspect ratio as your input video.
+        ParDenominator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parDenominator is 33.'
+        ParNumerator:
+          $ref: '#/components/schemas/__integerMin1Max2147483647'
+          description: 'Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.'
+        QualityTuningLevel:
+          $ref: '#/components/schemas/Vp9QualityTuningLevel'
+          description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, multi-pass encoding.'
+        RateControlMode:
+          $ref: '#/components/schemas/Vp9RateControlMode'
+          description: 'With the VP9 codec, you can use only the variable bitrate (VBR) rate control mode.'
+      description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9.
     VideoCodecSettings:
       type: object
       properties:
@@ -8390,7 +8531,13 @@ components:
         ProresSettings:
           $ref: '#/components/schemas/ProresSettings'
           description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
-      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings'
+        Vp8Settings:
+          $ref: '#/components/schemas/Vp8Settings'
+          description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP8.
+        Vp9Settings:
+          $ref: '#/components/schemas/Vp9Settings'
+          description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9.
+      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9, Vp9Settings'
     __integerMin0Max15:
       type: integer
       minimum: 0
@@ -8427,6 +8574,72 @@ components:
           $ref: '#/components/schemas/TimecodeBurnin'
           description: Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output.
       description: Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default.
+    __integerMinNegative1Max10:
+      type: integer
+      minimum: -1
+      maximum: 10
+    Vp8FramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    Vp8FramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+      description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+    Vp8ParControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output.  To specify a different PAR in the console, choose any value other than Follow source. To specify a different PAR by editing the JSON job specification, choose SPECIFIED. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
+    Vp8QualityTuningLevel:
+      type: string
+      enum:
+        - MULTI_PASS
+        - MULTI_PASS_HQ
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, multi-pass encoding.'
+    Vp8RateControlMode:
+      type: string
+      enum:
+        - VBR
+      description: 'With the VP8 codec, you can use only the variable bitrate (VBR) rate control mode.'
+    Vp9FramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    Vp9FramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+      description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+    Vp9ParControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output.  To specify a different PAR in the console, choose any value other than Follow source. To specify a different PAR by editing the JSON job specification, choose SPECIFIED. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
+    Vp9QualityTuningLevel:
+      type: string
+      enum:
+        - MULTI_PASS
+        - MULTI_PASS_HQ
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, multi-pass encoding.'
+    Vp9RateControlMode:
+      type: string
+      enum:
+        - VBR
+      description: 'With the VP9 codec, you can use only the variable bitrate (VBR) rate control mode.'
+    __integerMin1000Max480000000:
+      type: integer
+      minimum: 1000
+      maximum: 480000000
     WavFormat:
       type: string
       enum:

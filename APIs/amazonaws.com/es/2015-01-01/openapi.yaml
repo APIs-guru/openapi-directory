@@ -105,6 +105,50 @@ servers:
         default: cn-north-1
     description: The Amazon Elasticsearch Service endpoint for China (Beijing) and China (Ningxia)
 paths:
+  '/2015-01-01/es/ccs/inboundConnection/{ConnectionId}/accept':
+    put:
+      operationId: AcceptInboundCrossClusterSearchConnection
+      description: Allows the destination domain owner to accept an inbound cross-cluster search connection request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptInboundCrossClusterSearchConnectionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: ConnectionId
+          in: path
+          required: true
+          description: The id of the inbound connection that you want to accept.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/tags:
     post:
       operationId: AddTags
@@ -510,6 +554,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/ccs/outboundConnection:
+    post:
+      operationId: CreateOutboundCrossClusterSearchConnection
+      description: Creates a new cross-cluster search connection from a source domain to a destination domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOutboundCrossClusterSearchConnectionResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '483':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SourceDomainInfo
+                - DestinationDomainInfo
+                - ConnectionAlias
+              properties:
+                SourceDomainInfo:
+                  description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+                  type: object
+                  properties:
+                    OwnerId:
+                      $ref: '#/components/schemas/OwnerId'
+                    DomainName:
+                      $ref: '#/components/schemas/DomainName'
+                    Region:
+                      $ref: '#/components/schemas/Region'
+                DestinationDomainInfo:
+                  description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+                  type: object
+                  properties:
+                    OwnerId:
+                      $ref: '#/components/schemas/OwnerId'
+                    DomainName:
+                      $ref: '#/components/schemas/DomainName'
+                    Region:
+                      $ref: '#/components/schemas/Region'
+                ConnectionAlias:
+                  description: Specifies the connection alias that will be used by the customer for this connection.
+                  type: string
+                  maxLength: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/packages:
     post:
       operationId: CreatePackage
@@ -732,6 +855,82 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/ccs/inboundConnection/{ConnectionId}':
+    delete:
+      operationId: DeleteInboundCrossClusterSearchConnection
+      description: Allows the destination domain owner to delete an existing inbound cross-cluster search connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInboundCrossClusterSearchConnectionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: ConnectionId
+          in: path
+          required: true
+          description: The id of the inbound connection that you want to permanently delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/ccs/outboundConnection/{ConnectionId}':
+    delete:
+      operationId: DeleteOutboundCrossClusterSearchConnection
+      description: Allows the source domain owner to delete an existing outbound cross-cluster search connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOutboundCrossClusterSearchConnectionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: ConnectionId
+          in: path
+          required: true
+          description: The id of the outbound connection that you want to permanently delete.
+          schema:
+            type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1220,6 +1419,132 @@ paths:
           description: ' Version of Elasticsearch for which <code> <a>Limits</a> </code> are needed. '
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/ccs/inboundConnection/search:
+    post:
+      operationId: DescribeInboundCrossClusterSearchConnections
+      description: Lists all the inbound cross-cluster search connections for a destination domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInboundCrossClusterSearchConnectionsResponse'
+        '480':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Filters:
+                  description: ' A list of filters used to match properties for inbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>source-domain-info.domain-name</li> <li>source-domain-info.owner-id</li> <li>source-domain-info.region</li> <li>destination-domain-info.domain-name</li> </ul> '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                MaxResults:
+                  description: ' Set this value to limit the number of results returned. '
+                  type: integer
+                  maximum: 100
+                NextToken:
+                  description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/ccs/outboundConnection/search:
+    post:
+      operationId: DescribeOutboundCrossClusterSearchConnections
+      description: Lists all the outbound cross-cluster search connections for a source domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOutboundCrossClusterSearchConnectionsResponse'
+        '480':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Filters:
+                  description: ' A list of filters used to match properties for outbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>destination-domain-info.domain-name</li> <li>destination-domain-info.owner-id</li> <li>destination-domain-info.region</li> <li>source-domain-info.domain-name</li> </ul> '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                MaxResults:
+                  description: ' Set this value to limit the number of results returned. '
+                  type: integer
+                  maximum: 100
+                NextToken:
+                  description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2233,6 +2558,44 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/ccs/inboundConnection/{ConnectionId}/reject':
+    put:
+      operationId: RejectInboundCrossClusterSearchConnection
+      description: Allows the destination domain owner to reject an inbound cross-cluster search connection request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RejectInboundCrossClusterSearchConnectionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: ConnectionId
+          in: path
+          required: true
+          description: The id of the inbound connection that you want to reject.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/tags-removal:
     post:
       operationId: RemoveTags
@@ -2474,6 +2837,16 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AcceptInboundCrossClusterSearchConnectionResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnection:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of accepted inbound connection. '
+      description: The result of a <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation. Contains details of accepted inbound connection.
+    ResourceNotFoundException: {}
+    LimitExceededException: {}
+    DisabledOperationException: {}
     Tag:
       type: object
       required:
@@ -2488,7 +2861,6 @@ components:
           description: 'Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and do not have to be unique in a tag set. For example, you can have a key value pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code>'
       description: Specifies a key value pair for a resource tag.
     BaseException: {}
-    LimitExceededException: {}
     ValidationException: {}
     InternalException: {}
     AssociatePackageResponse:
@@ -2498,7 +2870,6 @@ components:
           $ref: '#/components/schemas/DomainPackageDetails'
           description: <code>DomainPackageDetails</code>
       description: ' Container for response returned by <code> <a>AssociatePackage</a> </code> operation. '
-    ResourceNotFoundException: {}
     AccessDeniedException: {}
     ConflictException: {}
     CancelElasticsearchServiceSoftwareUpdateResponse:
@@ -2650,9 +3021,39 @@ components:
           $ref: '#/components/schemas/Password'
           description: 'The master user''s password, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
       description: 'Credentials for the master user: username and password, ARN, or both.'
-    DisabledOperationException: {}
     InvalidTypeException: {}
     ResourceAlreadyExistsException: {}
+    CreateOutboundCrossClusterSearchConnectionResponse:
+      type: object
+      properties:
+        SourceDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+        DestinationDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+        ConnectionAlias:
+          $ref: '#/components/schemas/ConnectionAlias'
+          description: Specifies the connection alias provided during the create connection request.
+        ConnectionStatus:
+          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
+          description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the newly created connection.
+        CrossClusterSearchConnectionId:
+          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+          description: 'Unique id for the created outbound connection, which is used for subsequent operations on connection.'
+      description: The result of a <code><a>CreateOutboundCrossClusterSearchConnection</a></code> request. Contains the details of the newly created cross-cluster search connection.
+    OwnerId:
+      type: string
+      minLength: 12
+      maxLength: 12
+    DomainName:
+      type: string
+      pattern: '[a-z][a-z0-9\-]+'
+      description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+      minLength: 3
+      maxLength: 28
+    Region:
+      type: string
     CreatePackageResponse:
       type: object
       properties:
@@ -2673,6 +3074,20 @@ components:
           $ref: '#/components/schemas/ElasticsearchDomainStatus'
           description: The status of the Elasticsearch domain being deleted.
       description: 'The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.'
+    DeleteInboundCrossClusterSearchConnectionResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnection:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of deleted inbound connection. '
+      description: The result of a <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted inbound connection.
+    DeleteOutboundCrossClusterSearchConnectionResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnection:
+          $ref: '#/components/schemas/OutboundCrossClusterSearchConnection'
+          description: 'Specifies the <code><a>OutboundCrossClusterSearchConnection</a></code> of deleted outbound connection. '
+      description: The result of a <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted outbound connection.
     DeletePackageResponse:
       type: object
       properties:
@@ -2707,18 +3122,43 @@ components:
           $ref: '#/components/schemas/ElasticsearchDomainStatusList'
           description: The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.
       description: The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.
-    DomainName:
-      type: string
-      pattern: '[a-z][a-z0-9\-]+'
-      description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
-      minLength: 3
-      maxLength: 28
     DescribeElasticsearchInstanceTypeLimitsResponse:
       type: object
       properties:
         LimitsByRole:
           $ref: '#/components/schemas/LimitsByRole'
       description: ' Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
+    DescribeInboundCrossClusterSearchConnectionsResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnections:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnections'
+          description: Consists of list of <code><a>InboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
+      description: The result of a <code><a>DescribeInboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.
+    Filter:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' Specifies the name of the filter. '
+        Values:
+          $ref: '#/components/schemas/ValueStringList'
+          description: ' Contains one or more values for the filter. '
+      description: ' A filter used to limit results when describing inbound or outbound cross-cluster search connections. Multiple values can be specified per filter. A cross-cluster search connection must match at least one of the specified values for it to be returned from an operation. '
+    InvalidPaginationTokenException: {}
+    DescribeOutboundCrossClusterSearchConnectionsResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnections:
+          $ref: '#/components/schemas/OutboundCrossClusterSearchConnections'
+          description: Consists of list of <code><a>OutboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
+      description: The result of a <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.
     DescribePackagesResponse:
       type: object
       properties:
@@ -2856,6 +3296,13 @@ components:
           $ref: '#/components/schemas/ReservationToken'
           description: The customer-specified identifier used to track this reservation.
       description: Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.
+    RejectInboundCrossClusterSearchConnectionResponse:
+      type: object
+      properties:
+        CrossClusterSearchConnection:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of rejected inbound connection. '
+      description: The result of a <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation. Contains details of rejected inbound connection.
     StartElasticsearchServiceSoftwareUpdateResponse:
       type: object
       properties:
@@ -2887,6 +3334,29 @@ components:
     ARN:
       type: string
       description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+    CrossClusterSearchConnectionId:
+      type: string
+    AcceptInboundCrossClusterSearchConnectionRequest:
+      type: object
+      title: AcceptInboundCrossClusterSearchConnectionRequest
+      properties: {}
+      description: Container for the parameters to the <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation.
+    InboundCrossClusterSearchConnection:
+      type: object
+      properties:
+        SourceDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+        DestinationDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+        CrossClusterSearchConnectionId:
+          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+          description: Specifies the connection id for the inbound cross-cluster search connection.
+        ConnectionStatus:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatus'
+          description: Specifies the <code><a>InboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
+      description: Specifies details of an inbound connection.
     PolicyDocument:
       type: string
       description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
@@ -3144,6 +3614,9 @@ components:
       description: 'List of supported elastic search versions. '
       items:
         $ref: '#/components/schemas/ElasticsearchVersionString'
+    ConnectionAlias:
+      type: string
+      maxLength: 20
     ElasticsearchClusterConfig:
       type: object
       properties:
@@ -3367,6 +3840,45 @@ components:
           $ref: '#/components/schemas/AdvancedSecurityOptions'
           description: The current status of the Elasticsearch domain's advanced security options.
       description: The current status of an Elasticsearch domain.
+    DomainInformation:
+      type: object
+      required:
+        - DomainName
+      properties:
+        OwnerId:
+          $ref: '#/components/schemas/OwnerId'
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Region:
+          $ref: '#/components/schemas/Region'
+    CreateOutboundCrossClusterSearchConnectionRequest:
+      type: object
+      required:
+        - SourceDomainInfo
+        - DestinationDomainInfo
+        - ConnectionAlias
+      title: CreateOutboundCrossClusterSearchConnectionRequest
+      properties:
+        SourceDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+        DestinationDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+        ConnectionAlias:
+          $ref: '#/components/schemas/ConnectionAlias'
+          description: Specifies the connection alias that will be used by the customer for this connection.
+      description: Container for the parameters to the <code><a>CreateOutboundCrossClusterSearchConnection</a></code> operation.
+    OutboundCrossClusterSearchConnectionStatus:
+      type: object
+      properties:
+        StatusCode:
+          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatusCode'
+          description: '<p>The state code for outbound connection. This can be one of the following:</p> <ul> <li>VALIDATING: The outbound connection request is being validated.</li> <li>VALIDATION_FAILED: Validation failed for the connection request.</li> <li>PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by destination domain owner.</li> <li>PROVISIONING: Outbound connection request is in process.</li> <li>ACTIVE: Outbound connection is active and ready to use.</li> <li>REJECTED: Outbound connection request is rejected by destination domain owner.</li> <li>DELETING: Outbound connection deletion is in progress.</li> <li>DELETED: Outbound connection is deleted and cannot be used further.</li> </ul>'
+        Message:
+          $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
+          description: Specifies verbose information for the outbound connection status.
+      description: Specifies the connection status of an outbound cross-cluster search connection.
     PackageName:
       type: string
       pattern: '[a-z][a-z0-9\-]+'
@@ -3438,11 +3950,42 @@ components:
     CreatedAt:
       type: string
       format: date-time
+    CrossClusterSearchConnectionStatusMessage:
+      type: string
     DeleteElasticsearchDomainRequest:
       type: object
       title: DeleteElasticsearchDomainRequest
       properties: {}
       description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
+    DeleteInboundCrossClusterSearchConnectionRequest:
+      type: object
+      title: DeleteInboundCrossClusterSearchConnectionRequest
+      properties: {}
+      description: Container for the parameters to the <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation.
+    DeleteOutboundCrossClusterSearchConnectionRequest:
+      type: object
+      title: DeleteOutboundCrossClusterSearchConnectionRequest
+      properties: {}
+      description: Container for the parameters to the <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation.
+    OutboundCrossClusterSearchConnection:
+      type: object
+      properties:
+        SourceDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+        DestinationDomainInfo:
+          $ref: '#/components/schemas/DomainInformation'
+          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+        CrossClusterSearchConnectionId:
+          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+          description: Specifies the connection id for the outbound cross-cluster search connection.
+        ConnectionAlias:
+          $ref: '#/components/schemas/ConnectionAlias'
+          description: Specifies the connection alias for the outbound cross-cluster search connection.
+        ConnectionStatus:
+          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
+          description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
+      description: Specifies details of an outbound connection.
     DeletePackageRequest:
       type: object
       title: DeletePackageRequest
@@ -3542,6 +4085,53 @@ components:
       description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>data: If the given InstanceType is used as data node</li> <li>master: If the given InstanceType is used as master node</li> <li>ultra_warm: If the given InstanceType is used as warm node</li> </ul> '
       additionalProperties:
         $ref: '#/components/schemas/Limits'
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    MaxResults:
+      type: integer
+      description: ' Set this value to limit the number of results returned. '
+      maximum: 100
+    NextToken:
+      type: string
+      description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+    DescribeInboundCrossClusterSearchConnectionsRequest:
+      type: object
+      title: DescribeInboundCrossClusterSearchConnectionsRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+          description: ' A list of filters used to match properties for inbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>source-domain-info.domain-name</li> <li>source-domain-info.owner-id</li> <li>source-domain-info.region</li> <li>destination-domain-info.domain-name</li> </ul> '
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
+      description: Container for the parameters to the <code><a>DescribeInboundCrossClusterSearchConnections</a></code> operation.
+    InboundCrossClusterSearchConnections:
+      type: array
+      items:
+        $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+    DescribeOutboundCrossClusterSearchConnectionsRequest:
+      type: object
+      title: DescribeOutboundCrossClusterSearchConnectionsRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+          description: ' A list of filters used to match properties for outbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>destination-domain-info.domain-name</li> <li>destination-domain-info.owner-id</li> <li>destination-domain-info.region</li> <li>source-domain-info.domain-name</li> </ul> '
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
+      description: Container for the parameters to the <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> operation.
+    OutboundCrossClusterSearchConnections:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutboundCrossClusterSearchConnection'
     DescribePackagesFilterName:
       type: string
       enum:
@@ -3560,13 +4150,6 @@ components:
     DescribePackagesFilterValue:
       type: string
       pattern: '^[0-9a-zA-Z\*\.\\/\?-]*$'
-    MaxResults:
-      type: integer
-      description: ' Set this value to limit the number of results returned. '
-      maximum: 100
-    NextToken:
-      type: string
-      description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
     DescribePackagesRequest:
       type: object
       title: DescribePackagesRequest
@@ -3800,6 +4383,14 @@ components:
       type: string
     ErrorMessage:
       type: string
+    NonEmptyString:
+      type: string
+      minLength: 1
+    ValueStringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
     GetCompatibleElasticsearchVersionsRequest:
       type: object
       title: GetCompatibleElasticsearchVersionsRequest
@@ -3834,6 +4425,25 @@ components:
         - FAILED
     UpgradeName:
       type: string
+    InboundCrossClusterSearchConnectionStatus:
+      type: object
+      properties:
+        StatusCode:
+          $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatusCode'
+          description: '<p>The state code for inbound connection. This can be one of the following:</p> <ul> <li>PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain owner.</li> <li>APPROVED: Inbound connection is pending acceptance by destination domain owner.</li> <li>REJECTING: Inbound connection rejection is in process.</li> <li>REJECTED: Inbound connection is rejected.</li> <li>DELETING: Inbound connection deletion is in progress.</li> <li>DELETED: Inbound connection is deleted and cannot be used further.</li> </ul>'
+        Message:
+          $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
+          description: Specifies verbose information for the inbound connection status.
+      description: Specifies the coonection status of an inbound cross-cluster search connection.
+    InboundCrossClusterSearchConnectionStatusCode:
+      type: string
+      enum:
+        - PENDING_ACCEPTANCE
+        - APPROVED
+        - REJECTING
+        - REJECTED
+        - DELETING
+        - DELETED
     InstanceCount:
       type: integer
       description: Specifies the number of EC2 instances in the Elasticsearch domain.
@@ -3939,6 +4549,17 @@ components:
     UIntValue:
       type: integer
       minimum: 0
+    OutboundCrossClusterSearchConnectionStatusCode:
+      type: string
+      enum:
+        - PENDING_ACCEPTANCE
+        - VALIDATING
+        - VALIDATION_FAILED
+        - PROVISIONING
+        - ACTIVE
+        - REJECTED
+        - DELETING
+        - DELETED
     PackageStatus:
       type: string
       enum:
@@ -3985,6 +4606,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RecurringCharge'
+    RejectInboundCrossClusterSearchConnectionRequest:
+      type: object
+      title: RejectInboundCrossClusterSearchConnectionRequest
+      properties: {}
+      description: Container for the parameters to the <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation.
     RemoveTagsRequest:
       type: object
       required:

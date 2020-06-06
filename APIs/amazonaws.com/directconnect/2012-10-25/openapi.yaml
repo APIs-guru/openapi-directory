@@ -1094,7 +1094,7 @@ paths:
   '/#X-Amz-Target=OvertureService.CreatePrivateVirtualInterface':
     post:
       operationId: CreatePrivateVirtualInterface
-      description: 'Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.'
+      description: '<p>Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1208,7 +1208,7 @@ paths:
   '/#X-Amz-Target=OvertureService.CreateTransitVirtualInterface':
     post:
       operationId: CreateTransitVirtualInterface
-      description: '<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important>'
+      description: '<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important> <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2378,6 +2378,141 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.ListVirtualInterfaceTestHistory':
+    post:
+      operationId: ListVirtualInterfaceTestHistory
+      description: Lists the virtual interface failover test history.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVirtualInterfaceTestHistoryResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListVirtualInterfaceTestHistoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.ListVirtualInterfaceTestHistory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.StartBgpFailoverTest':
+    post:
+      operationId: StartBgpFailoverTest
+      description: '<p>Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages.</p> <p>You can run the test on public, private, transit, and hosted virtual interfaces.</p> <p>You can use <a href="https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html">ListVirtualInterfaceTestHistory</a> to view the virtual interface test history.</p> <p>If you need to stop the test before the test interval completes, use <a href="https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html">StopBgpFailoverTest</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartBgpFailoverTestResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartBgpFailoverTestRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.StartBgpFailoverTest
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=OvertureService.StopBgpFailoverTest':
+    post:
+      operationId: StopBgpFailoverTest
+      description: Stops the virtual interface failover test.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopBgpFailoverTestResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopBgpFailoverTestRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.StopBgpFailoverTest
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=OvertureService.TagResource':
     post:
       operationId: TagResource
@@ -2573,7 +2708,7 @@ paths:
   '/#X-Amz-Target=OvertureService.UpdateVirtualInterfaceAttributes':
     post:
       operationId: UpdateVirtualInterfaceAttributes
-      description: '<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
+      description: '<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual q interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2824,7 +2959,7 @@ components:
           description: The type of virtual interface. The possible values are <code>private</code> and <code>public</code>.
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -3767,6 +3902,73 @@ components:
         lagId:
           $ref: '#/components/schemas/LagId'
           description: The ID of the LAG.
+    ListVirtualInterfaceTestHistoryResponse:
+      type: object
+      properties:
+        virtualInterfaceTestHistory:
+          $ref: '#/components/schemas/VirtualInterfaceTestHistoryList'
+          description: The ID of the tested virtual interface.
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ListVirtualInterfaceTestHistoryRequest:
+      type: object
+      title: ListVirtualInterfaceTestHistoryRequest
+      properties:
+        testId:
+          $ref: '#/components/schemas/TestId'
+          description: The ID of the virtual interface failover test.
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+          description: The ID of the virtual interface that was tested.
+        bgpPeers:
+          $ref: '#/components/schemas/BGPPeerIdList'
+          description: The BGP peers that were placed in the DOWN state during the virtual interface failover test.
+        status:
+          $ref: '#/components/schemas/FailureTestHistoryStatus'
+          description: The status of the virtual interface failover test.
+        maxResults:
+          $ref: '#/components/schemas/MaxResultSetSize'
+          description: '<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: The token for the next page of results.
+    StartBgpFailoverTestResponse:
+      type: object
+      properties:
+        virtualInterfaceTest:
+          $ref: '#/components/schemas/VirtualInterfaceTestHistory'
+          description: Information about the virtual interface failover test.
+    StartBgpFailoverTestRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+      title: StartBgpFailoverTestRequest
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+          description: The ID of the virtual interface you want to test.
+        bgpPeers:
+          $ref: '#/components/schemas/BGPPeerIdList'
+          description: The BGP peers to place in the DOWN state.
+        testDurationInMinutes:
+          $ref: '#/components/schemas/TestDuration'
+          description: '<p>The time in minutes that the virtual interface failover test will last.</p> <p>Maximum value: 180 minutes (3 hours).</p> <p>Default: 180 minutes (3 hours).</p>'
+    StopBgpFailoverTestResponse:
+      type: object
+      properties:
+        virtualInterfaceTest:
+          $ref: '#/components/schemas/VirtualInterfaceTestHistory'
+          description: Information about the virtual interface failover test.
+    StopBgpFailoverTestRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+      title: StopBgpFailoverTestRequest
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+          description: The ID of the virtual interface you no longer want to test.
     TagResourceResponse:
       type: object
       properties: {}
@@ -3919,7 +4121,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -3954,7 +4156,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -3985,7 +4187,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -4106,6 +4308,10 @@ components:
           $ref: '#/components/schemas/AwsDeviceV2'
           description: The Direct Connect endpoint on which the BGP peer terminates.
       description: Information about a BGP peer.
+    BGPPeerIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BGPPeerId'
     BGPPeerList:
       type: array
       items:
@@ -4248,7 +4454,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -4289,7 +4495,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -4320,7 +4526,7 @@ components:
       properties:
         virtualInterfaceName:
           $ref: '#/components/schemas/VirtualInterfaceName'
-          description: The name of the virtual interface assigned by the customer network.
+          description: 'The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).'
         vlan:
           $ref: '#/components/schemas/VLAN'
           description: The ID of the VLAN.
@@ -4458,6 +4664,11 @@ components:
           $ref: '#/components/schemas/StateChangeError'
           description: The error message if the state of an object failed to advance.
       description: Information about an attachment between a Direct Connect gateway and a virtual interface.
+    EndTime:
+      type: string
+      format: date-time
+    FailureTestHistoryStatus:
+      type: string
     InterconnectList:
       type: array
       items:
@@ -4476,6 +4687,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Lag'
+    TestId:
+      type: string
+    VirtualInterfaceTestHistoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VirtualInterfaceTestHistory'
     LoaContent:
       type: string
     ProviderList:
@@ -4529,6 +4746,39 @@ components:
       description: Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
     RouterConfig:
       type: string
+    TestDuration:
+      type: integer
+    VirtualInterfaceTestHistory:
+      type: object
+      properties:
+        testId:
+          $ref: '#/components/schemas/TestId'
+          description: The ID of the virtual interface failover test.
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+          description: The ID of the tested virtual interface.
+        bgpPeers:
+          $ref: '#/components/schemas/BGPPeerIdList'
+          description: The BGP peers that were put in the DOWN state as part of the virtual interface failover test.
+        status:
+          $ref: '#/components/schemas/FailureTestHistoryStatus'
+          description: The status of the virtual interface failover test.
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+          description: The owner ID of the tested virtual interface.
+        testDurationInMinutes:
+          $ref: '#/components/schemas/TestDuration'
+          description: The time that the virtual interface failover test ran in minutes.
+        startTime:
+          $ref: '#/components/schemas/StartTime'
+          description: The time that the virtual interface moves to the DOWN state.
+        endTime:
+          $ref: '#/components/schemas/EndTime'
+          description: The time that the virtual interface moves out of the DOWN state.
+      description: Information about the virtual interface failover test.
+    StartTime:
+      type: string
+      format: date-time
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'

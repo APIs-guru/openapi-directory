@@ -1617,6 +1617,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
       requestBody:
         required: true
         content:
@@ -1785,6 +1791,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
       requestBody:
         required: true
         content:
@@ -4707,7 +4719,7 @@ components:
           description: 'The service action definition type. For example, <code>SSM_AUTOMATION</code>.'
         Definition:
           $ref: '#/components/schemas/ServiceActionDefinitionMap'
-          description: '<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager Document. For example, <code>AWS-RestartEC2Instance</code>.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>"Version": "1"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>"AssumeRole": "arn:aws:iam::12345678910:role/ActionRole"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>"AssumeRole": "LAUNCH_ROLE"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}]</code> or <code>[{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}]</code>.</p> </dd> </dl>'
+          description: '<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager document (SSM document). For example, <code>AWS-RestartEC2Instance</code>.</p> <p>If you are using a shared SSM document, you must provide the ARN instead of the name.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>"Version": "1"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>"AssumeRole": "arn:aws:iam::12345678910:role/ActionRole"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>"AssumeRole": "LAUNCH_ROLE"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}]</code> or <code>[{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}]</code>.</p> </dd> </dl>'
         Description:
           $ref: '#/components/schemas/ServiceActionDescription'
           description: The self-service action description.
@@ -4984,10 +4996,11 @@ components:
         Budgets:
           $ref: '#/components/schemas/Budgets'
           description: Information about the associated budgets.
+        LaunchPaths:
+          $ref: '#/components/schemas/LaunchPaths'
+          description: Information about the associated launch paths.
     DescribeProductInput:
       type: object
-      required:
-        - Id
       title: DescribeProductInput
       properties:
         AcceptLanguage:
@@ -4996,6 +5009,9 @@ components:
         Id:
           $ref: '#/components/schemas/Id'
           description: The product identifier.
+        Name:
+          $ref: '#/components/schemas/ProductViewName'
+          description: The product name.
     DescribeProductAsAdminOutput:
       type: object
       properties:
@@ -5016,8 +5032,6 @@ components:
           description: Information about the associated budgets.
     DescribeProductAsAdminInput:
       type: object
-      required:
-        - Id
       title: DescribeProductAsAdminInput
       properties:
         AcceptLanguage:
@@ -5026,6 +5040,9 @@ components:
         Id:
           $ref: '#/components/schemas/Id'
           description: The product identifier.
+        Name:
+          $ref: '#/components/schemas/ProductViewName'
+          description: The product name.
     DescribeProductViewOutput:
       type: object
       properties:
@@ -5112,9 +5129,6 @@ components:
           description: The status of the current request.
     DescribeProvisioningArtifactInput:
       type: object
-      required:
-        - ProvisioningArtifactId
-        - ProductId
       title: DescribeProvisioningArtifactInput
       properties:
         AcceptLanguage:
@@ -5126,6 +5140,12 @@ components:
         ProductId:
           $ref: '#/components/schemas/Id'
           description: The product identifier.
+        ProvisioningArtifactName:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+          description: The provisioning artifact name.
+        ProductName:
+          $ref: '#/components/schemas/ProductViewName'
+          description: The product name.
         Verbose:
           $ref: '#/components/schemas/Verbose'
           description: Indicates whether a verbose level of detail is enabled.
@@ -6308,7 +6328,7 @@ components:
           description: The identifier of the provisioned product.
         ProvisionedProductProperties:
           $ref: '#/components/schemas/ProvisionedProductProperties'
-          description: '<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product''s history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>'
+          description: '<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product''s history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>'
         IdempotencyToken:
           $ref: '#/components/schemas/IdempotencyToken'
           description: The idempotency token that uniquely identifies the provisioning product update request.
@@ -6913,6 +6933,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProvisioningArtifact'
+    LaunchPaths:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchPath'
     ProvisionedProductDetail:
       type: object
       properties:
@@ -7011,6 +7035,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceChange'
+    ProvisioningArtifactName:
+      type: string
+      maxLength: 8192
     Verbose:
       type: boolean
     ProvisioningArtifactParameters:
@@ -7177,6 +7204,18 @@ components:
       type: string
     LastRequestId:
       type: string
+    PortfolioName:
+      type: string
+    LaunchPath:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+          description: The identifier of the launch path.
+        Name:
+          $ref: '#/components/schemas/PortfolioName'
+          description: The name of the launch path.
+      description: A launch path object.
     LaunchPathSummary:
       type: object
       properties:
@@ -7197,8 +7236,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LaunchPathSummary'
-    PortfolioName:
-      type: string
     PortfolioDetails:
       type: array
       items:
@@ -7565,10 +7602,9 @@ components:
         - SearchQuery
     ProvisionedProductViewFilterValue:
       type: string
-    ProvisioningArtifactName:
-      type: string
     ProvisioningArtifactDescription:
       type: string
+      maxLength: 8192
     ProvisioningArtifactCreatedTime:
       type: string
       format: date-time

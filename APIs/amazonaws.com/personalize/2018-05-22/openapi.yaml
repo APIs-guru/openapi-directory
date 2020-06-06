@@ -472,6 +472,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.CreateFilter':
+    post:
+      operationId: CreateFilter
+      description: 'Creates a recommendation filter. For more information, see Using Filters with Amazon Personalize.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFilterResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFilterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.CreateFilter
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonPersonalize.CreateSchema':
     post:
       operationId: CreateSchema
@@ -817,6 +874,47 @@ paths:
             type: string
             enum:
               - AmazonPersonalize.DeleteEventTracker
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.DeleteFilter':
+    post:
+      operationId: DeleteFilter
+      description: Deletes a filter.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFilterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.DeleteFilter
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1271,6 +1369,51 @@ paths:
             type: string
             enum:
               - AmazonPersonalize.DescribeFeatureTransformation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.DescribeFilter':
+    post:
+      operationId: DescribeFilter
+      description: Describes a filter's properties.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFilterResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFilterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.DescribeFilter
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1846,6 +1989,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AmazonPersonalize.ListFilters':
+    post:
+      operationId: ListFilters
+      description: Lists all filters that belong to a given dataset group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFiltersResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFiltersRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.ListFilters
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AmazonPersonalize.ListRecipes':
     post:
       operationId: ListRecipes
@@ -2193,6 +2381,9 @@ components:
         solutionVersionArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the solution version that will be used to generate the batch inference recommendations.
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.'
         numResults:
           $ref: '#/components/schemas/NumBatchResults'
           description: The number of recommendations to retreive.
@@ -2330,6 +2521,29 @@ components:
         datasetGroupArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
+    CreateFilterResponse:
+      type: object
+      properties:
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the new filter.
+    CreateFilterRequest:
+      type: object
+      required:
+        - name
+        - datasetGroupArn
+        - filterExpression
+      title: CreateFilterRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter to create.
+        datasetGroupArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group that the filter will belong to.
+        filterExpression:
+          $ref: '#/components/schemas/FilterExpression'
+          description: '<p>The filter expression that designates the interaction types that the filter will filter out. A filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. To filter out all items with any interactions history, set <code>"*"</code> as the EVENT_TYPE. For more information, see Using Filters with Amazon Personalize.</p>'
     CreateSchemaResponse:
       type: object
       properties:
@@ -2437,6 +2651,15 @@ components:
         eventTrackerArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the event tracker to delete.
+    DeleteFilterRequest:
+      type: object
+      required:
+        - filterArn
+      title: DeleteFilterRequest
+      properties:
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter to delete.
     DeleteSchemaRequest:
       type: object
       required:
@@ -2575,6 +2798,21 @@ components:
         featureTransformationArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the feature transformation to describe.
+    DescribeFilterResponse:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/Filter'
+          description: The filter's details.
+    DescribeFilterRequest:
+      type: object
+      required:
+        - filterArn
+      title: DescribeFilterRequest
+      properties:
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter to describe.
     DescribeRecipeResponse:
       type: object
       properties:
@@ -2783,6 +3021,28 @@ components:
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: The maximum number of event trackers to return.
+    ListFiltersResponse:
+      type: object
+      properties:
+        Filters:
+          $ref: '#/components/schemas/Filters'
+          description: A list of returned filters.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token for getting the next set of filters (if they exist).
+    ListFiltersRequest:
+      type: object
+      title: ListFiltersRequest
+      properties:
+        datasetGroupArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group that contains the filters.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: A token returned from the previous call to <code>ListFilters</code> for getting the next set of filters (if they exist).
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of filters to return.
     ListRecipesResponse:
       type: object
       properties:
@@ -3045,6 +3305,9 @@ components:
         batchInferenceJobArn:
           $ref: '#/components/schemas/Arn'
           description: The Amazon Resource Name (ARN) of the batch inference job.
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter used on the batch inference job.
         failureReason:
           $ref: '#/components/schemas/FailureReason'
           description: 'If the batch inference job failed, the reason for the failure.'
@@ -3266,6 +3529,11 @@ components:
     TrackingId:
       type: string
       maxLength: 256
+    FilterExpression:
+      type: string
+      minLength: 1
+      maxLength: 2500
+      format: password
     PerformAutoML:
       type: boolean
     EventType:
@@ -3619,6 +3887,34 @@ components:
           $ref: '#/components/schemas/Status'
           description: '<p>The status of the feature transformation.</p> <p>A feature transformation can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>'
       description: Provides feature transformation information. Feature transformation is the process of modifying raw input data into a form more suitable for model training.
+    Filter:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter.
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter.
+        creationDateTime:
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was created.
+        lastUpdatedDateTime:
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was last updated.
+        datasetGroupArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group to which the filter belongs.
+        failureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the filter failed, the reason for its failure.'
+        filterExpression:
+          $ref: '#/components/schemas/FilterExpression'
+          description: '<p>Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")</code> </p> <p>Where "EVENT_TYPE" is the type of event to filter out. For more information, see Using Filters with Amazon Personalize.</p>'
+        status:
+          $ref: '#/components/schemas/Status'
+          description: The status of the filter.
+      description: 'Contains information on a recommendation filter, including its ARN, status, and filter expression.'
     Recipe:
       type: object
       properties:
@@ -3784,6 +4080,36 @@ components:
       maxProperties: 100
       additionalProperties:
         $ref: '#/components/schemas/ParameterValue'
+    FilterSummary:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+          description: The name of the filter.
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the filter.
+        creationDateTime:
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was created.
+        lastUpdatedDateTime:
+          $ref: '#/components/schemas/Date'
+          description: The time at which the filter was last updated.
+        datasetGroupArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dataset group to which the filter belongs.
+        failureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: 'If the filter failed, the reason for the failure.'
+        status:
+          $ref: '#/components/schemas/Status'
+          description: The status of the filter.
+      description: A short summary of a filter's attributes.
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterSummary'
+      maxItems: 100
     Metrics:
       type: object
       maxProperties: 100

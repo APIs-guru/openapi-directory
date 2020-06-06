@@ -177,12 +177,20 @@ paths:
         - name: X-Amzn-SageMaker-Target-Model
           in: header
           required: false
-          description: 'Specifies the model to be requested for an inference when invoking a multi-model endpoint. '
+          description: 'The model to request for inference when invoking a multi-model endpoint. '
           schema:
             type: string
             pattern: '\A\S[\p{Print}]*\z'
             minLength: 1
             maxLength: 1024
+        - name: X-Amzn-SageMaker-Target-Variant
+          in: header
+          required: false
+          description: 'Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants. Note that this parameter overrides the default behavior for the endpoint, which is to distribute the invocation traffic based on the variant weights.'
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+            maxLength: 63
       requestBody:
         required: true
         content:
@@ -193,9 +201,9 @@ paths:
                 - Body
               properties:
                 Body:
-                  description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+                  description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
                   type: string
-                  maxLength: 5242880
+                  maxLength: 6291456
                   format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -264,14 +272,14 @@ components:
       properties:
         Body:
           $ref: '#/components/schemas/BodyBlob'
-          description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+          description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
     InternalFailure: {}
     ServiceUnavailable: {}
     ValidationError: {}
     ModelError: {}
     BodyBlob:
       type: string
-      maxLength: 5242880
+      maxLength: 6291456
       format: password
     CustomAttributesHeader:
       type: string
@@ -291,6 +299,10 @@ components:
       pattern: '\A\S[\p{Print}]*\z'
       minLength: 1
       maxLength: 1024
+    TargetVariantHeader:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      maxLength: 63
     InvokeEndpointInput:
       type: object
       required:
@@ -299,6 +311,6 @@ components:
       properties:
         Body:
           $ref: '#/components/schemas/BodyBlob'
-          description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats—Inference</a>.</p>'
+          description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
 security:
   - hmac: []

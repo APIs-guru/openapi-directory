@@ -3,7 +3,7 @@ info:
   version: '2010-12-01'
   x-release: v4
   title: AWS Elastic Beanstalk
-  description: '<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href="http://aws.amazon.com/elasticbeanstalk/">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href="http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> <p> <b>Endpoints</b> </p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>'
+  description: '<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href="http://aws.amazon.com/elasticbeanstalk/">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href="https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">https://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> <p> <b>Endpoints</b> </p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -291,6 +291,92 @@ paths:
             type: string
             enum:
               - ApplyEnvironmentManagedAction
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-12-01'
+  '/#Action=AssociateEnvironmentOperationsRole':
+    get:
+      x-aws-operation-name: AssociateEnvironmentOperationsRole
+      operationId: GET_AssociateEnvironmentOperationsRole
+      description: 'Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to downstream services during subsequent calls acting on this environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentName
+          in: query
+          required: true
+          description: The name of the environment to which to set the operations role.
+          schema:
+            type: string
+            minLength: 4
+            maxLength: 40
+        - name: OperationsRole
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateEnvironmentOperationsRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AssociateEnvironmentOperationsRole
+      operationId: POST_AssociateEnvironmentOperationsRole
+      description: 'Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to downstream services during subsequent calls acting on this environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AssociateEnvironmentOperationsRoleMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateEnvironmentOperationsRole
         - name: Version
           in: query
           required: true
@@ -1118,7 +1204,7 @@ paths:
         - name: PlatformArn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html"> Custom Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p> <note> <p>If you specify <code>PlatformArn</code>, don''t specify <code>SolutionStackName</code>.</p> </note>'
+          description: '<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html">Custom Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p> <note> <p>If you specify <code>PlatformArn</code>, don''t specify <code>SolutionStackName</code>.</p> </note>'
           schema:
             type: string
         - name: OptionSettings
@@ -1137,6 +1223,14 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/OptionSpecification'
+        - name: OperationsRole
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment''s operations role. If specified, Elastic Beanstalk uses the operations role for permissions to downstream services during this call and during subsequent calls acting on this environment. To specify an operations role, you must have the <code>iam:PassRole</code> permission for the role. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
         - name: Action
           in: query
           required: true
@@ -3329,6 +3423,84 @@ paths:
             type: string
             enum:
               - '2010-12-01'
+  '/#Action=DisassociateEnvironmentOperationsRole':
+    get:
+      x-aws-operation-name: DisassociateEnvironmentOperationsRole
+      operationId: GET_DisassociateEnvironmentOperationsRole
+      description: 'Disassociate the operations role from an environment. After this call is made, Elastic Beanstalk uses the caller''s permissions for permissions to downstream services during subsequent calls acting on this environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      parameters:
+        - name: EnvironmentName
+          in: query
+          required: true
+          description: The name of the environment from which to disassociate the operations role.
+          schema:
+            type: string
+            minLength: 4
+            maxLength: 40
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateEnvironmentOperationsRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DisassociateEnvironmentOperationsRole
+      operationId: POST_DisassociateEnvironmentOperationsRole
+      description: 'Disassociate the operations role from an environment. After this call is made, Elastic Beanstalk uses the caller''s permissions for permissions to downstream services during subsequent calls acting on this environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DisassociateEnvironmentOperationsRoleMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateEnvironmentOperationsRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-12-01'
   '/#Action=ListAvailableSolutionStacks':
     get:
       x-aws-operation-name: ListAvailableSolutionStacks
@@ -4859,7 +5031,7 @@ paths:
         - name: TagsToAdd
           in: query
           required: false
-          description: '<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag''s value is updated.</p>'
+          description: '<p>A list of tags to add or update. If a key of an existing tag is added, the tag''s value is updated.</p> <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>'
           schema:
             type: array
             items:
@@ -4867,7 +5039,7 @@ paths:
         - name: TagsToRemove
           in: query
           required: false
-          description: '<p>A list of tag keys to remove.</p> <p>If a tag key doesn''t exist, it is silently ignored.</p>'
+          description: '<p>A list of tag keys to remove. If a tag key doesn''t exist, it is silently ignored.</p> <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>'
           schema:
             type: array
             items:
@@ -5431,6 +5603,9 @@ components:
         EnvironmentArn:
           $ref: '#/components/schemas/EnvironmentArn'
           description: 'The environment''s Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.'
+        OperationsRole:
+          $ref: '#/components/schemas/OperationsRole'
+          description: 'The Amazon Resource Name (ARN) of the environment''s operations role. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
       description: Describes the properties of an environment.
     OptionSpecification:
       type: object
@@ -6244,6 +6419,24 @@ components:
           $ref: '#/components/schemas/String'
           description: The action ID of the scheduled managed action to execute.
       description: Request to execute a scheduled managed action immediately.
+    OperationsRole:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AssociateEnvironmentOperationsRoleMessage:
+      type: object
+      required:
+        - EnvironmentName
+        - OperationsRole
+      title: AssociateEnvironmentOperationsRoleMessage
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+          description: The name of the environment to which to set the operations role.
+        OperationsRole:
+          $ref: '#/components/schemas/OperationsRole'
+          description: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
+      description: Request to add or change the operations role used by an environment.
     AutoCreateApplication:
       type: boolean
     ResourceId:
@@ -6657,13 +6850,16 @@ components:
           description: '<p>The name of an Elastic Beanstalk solution stack (platform version) to use with the environment. If specified, Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html">Elastic Beanstalk Supported Platforms</a> in the <i>AWS Elastic Beanstalk Platforms</i> guide.</p> <note> <p>If you specify <code>SolutionStackName</code>, don''t specify <code>PlatformArn</code> or <code>TemplateName</code>.</p> </note>'
         PlatformArn:
           $ref: '#/components/schemas/PlatformArn'
-          description: '<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html"> Custom Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p> <note> <p>If you specify <code>PlatformArn</code>, don''t specify <code>SolutionStackName</code>.</p> </note>'
+          description: '<p>The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html">Custom Platforms</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.</p> <note> <p>If you specify <code>PlatformArn</code>, don''t specify <code>SolutionStackName</code>.</p> </note>'
         OptionSettings:
           $ref: '#/components/schemas/ConfigurationOptionSettingsList'
           description: 'If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.'
         OptionsToRemove:
           $ref: '#/components/schemas/OptionsSpecifierList'
           description: A list of custom user-defined configuration options to remove from the configuration set for this new environment.
+        OperationsRole:
+          $ref: '#/components/schemas/OperationsRole'
+          description: 'The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment''s operations role. If specified, Elastic Beanstalk uses the operations role for permissions to downstream services during this call and during subsequent calls acting on this environment. To specify an operations role, you must have the <code>iam:PassRole</code> permission for the role. For more information, see <a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html">Operations roles</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>.'
       description: <p/>
     PlatformName:
       type: string
@@ -7246,6 +7442,16 @@ components:
           $ref: '#/components/schemas/PlatformBranchLifecycleState'
           description: '<p>The state of the platform version''s branch in its lifecycle.</p> <p>Possible values: <code>Beta</code> | <code>Supported</code> | <code>Deprecated</code> | <code>Retired</code> </p>'
       description: Detailed information about a platform version.
+    DisassociateEnvironmentOperationsRoleMessage:
+      type: object
+      required:
+        - EnvironmentName
+      title: DisassociateEnvironmentOperationsRoleMessage
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+          description: The name of the environment from which to disassociate the operations role.
+      description: Request to disassociate the operations role from an environment.
     Ec2InstanceId:
       type: string
     EndpointURL:
@@ -8010,10 +8216,10 @@ components:
           description: <p>The Amazon Resource Name (ARN) of the resouce to be updated.</p> <p>Must be the ARN of an Elastic Beanstalk resource.</p>
         TagsToAdd:
           $ref: '#/components/schemas/TagList'
-          description: '<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag''s value is updated.</p>'
+          description: '<p>A list of tags to add or update. If a key of an existing tag is added, the tag''s value is updated.</p> <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>'
         TagsToRemove:
           $ref: '#/components/schemas/TagKeyList'
-          description: '<p>A list of tag keys to remove.</p> <p>If a tag key doesn''t exist, it is silently ignored.</p>'
+          description: '<p>A list of tag keys to remove. If a tag key doesn''t exist, it is silently ignored.</p> <p>Specify at least one of these parameters: <code>TagsToAdd</code>, <code>TagsToRemove</code>.</p>'
     ValidateConfigurationSettingsMessage:
       type: object
       required:

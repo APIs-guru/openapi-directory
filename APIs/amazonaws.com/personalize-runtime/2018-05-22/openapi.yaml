@@ -224,6 +224,11 @@ paths:
                   maxProperties: 150
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
+                filterArn:
+                  description: 'The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.'
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -373,6 +378,9 @@ components:
         context:
           $ref: '#/components/schemas/Context'
           description: 'The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user''s recommendations, such as the user''s current location or device type.'
+        filterArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.'
     PredictedItem:
       type: object
       properties:
@@ -381,7 +389,7 @@ components:
           description: The recommended item ID.
         score:
           $ref: '#/components/schemas/Score'
-          description: 'A numeric representation of the model''s certainty in the item''s suitability. For more information on scoring logic, see <a>how-scores-work</a>.'
+          description: 'A numeric representation of the model''s certainty that the item will be the next user selection. For more information on scoring logic, see <a>how-scores-work</a>.'
       description: <p>An object that identifies an item.</p> <p>The and APIs return a list of <code>PredictedItem</code>s.</p>
     Score:
       type: number
