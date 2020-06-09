@@ -141,6 +141,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DuplicateRequest'
+        '484':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
       requestBody:
         required: true
         content:
@@ -198,6 +204,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DuplicateRequest'
+        '484':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
       requestBody:
         required: true
         content:
@@ -255,6 +267,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DuplicateRequest'
+        '484':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
       requestBody:
         required: true
         content:
@@ -312,6 +330,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceAlreadyExists'
+        '484':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
       requestBody:
         required: true
         content:
@@ -534,6 +558,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidInput'
+        '483':
+          description: RequestLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceeded'
       requestBody:
         required: true
         content:
@@ -1015,6 +1045,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Route53AutoNaming_v20170314.ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53AutoNaming_v20170314.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=Route53AutoNaming_v20170314.RegisterInstance':
     post:
       operationId: RegisterInstance
@@ -1070,6 +1145,102 @@ paths:
             type: string
             enum:
               - Route53AutoNaming_v20170314.RegisterInstance
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Route53AutoNaming_v20170314.TagResource':
+    post:
+      operationId: TagResource
+      description: Adds one or more tags to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '482':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53AutoNaming_v20170314.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=Route53AutoNaming_v20170314.UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes one or more tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53AutoNaming_v20170314.UntagResource
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1236,6 +1407,8 @@ components:
   schemas:
     CreateHttpNamespaceResponse:
       type: object
+      example:
+        OperationId: httpvoqozuhfet5kzxoxg-a-response-example
       properties:
         OperationId:
           $ref: '#/components/schemas/OperationId'
@@ -1255,10 +1428,14 @@ components:
         Description:
           $ref: '#/components/schemas/ResourceDescription'
           description: A description for the namespace.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     InvalidInput: {}
     NamespaceAlreadyExists: {}
     ResourceLimitExceeded: {}
     DuplicateRequest: {}
+    TooManyTagsException: {}
     CreatePrivateDnsNamespaceResponse:
       type: object
       example:
@@ -1286,8 +1463,13 @@ components:
         Vpc:
           $ref: '#/components/schemas/ResourceId'
           description: The ID of the Amazon VPC that you want to associate the namespace with.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     CreatePublicDnsNamespaceResponse:
       type: object
+      example:
+        OperationId: dns2voqozuhfet5kzxoxg-a-response-example
       properties:
         OperationId:
           $ref: '#/components/schemas/OperationId'
@@ -1307,6 +1489,9 @@ components:
         Description:
           $ref: '#/components/schemas/ResourceDescription'
           description: A description for the namespace.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     CreateServiceResponse:
       type: object
       example:
@@ -1354,6 +1539,9 @@ components:
         HealthCheckCustomConfig:
           $ref: '#/components/schemas/HealthCheckCustomConfig'
           description: '<p>A complex type that contains information about an optional custom health check.</p> <important> <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code> or <code>HealthCheckConfig</code> but not both.</p> </important> <p>You can''t add, update, or delete a <code>HealthCheckCustomConfig</code> configuration from an existing service.</p>'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the service. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     NamespaceNotFound: {}
     ServiceAlreadyExists: {}
     DeleteNamespaceResponse:
@@ -1439,7 +1627,7 @@ components:
           $ref: '#/components/schemas/ServiceName'
           description: The name of the service that you specified when you registered the instance.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
+          $ref: '#/components/schemas/DiscoverMaxResults'
           description: 'The maximum number of instances that you want AWS Cloud Map to return in the response to a <code>DiscoverInstances</code> request. If you don''t specify a value for <code>MaxResults</code>, AWS Cloud Map returns up to 100 instances.'
         QueryParameters:
           $ref: '#/components/schemas/Attributes'
@@ -1447,8 +1635,18 @@ components:
         HealthStatus:
           $ref: '#/components/schemas/HealthStatusFilter'
           description: The health status of the instances that you want to discover.
+    RequestLimitExceeded: {}
     GetInstanceResponse:
       type: object
+      example:
+        Instance:
+          Attributes:
+            AWS_INSTANCE_IPV4: 192.0.2.44
+            AWS_INSTANCE_PORT: '80'
+            color: green
+            region: us-west-2
+            stage: beta
+          Id: i-abcd1234
       properties:
         Instance:
           $ref: '#/components/schemas/Instance'
@@ -1468,6 +1666,10 @@ components:
           description: The ID of the instance that you want to get information about.
     GetInstancesHealthStatusResponse:
       type: object
+      example:
+        Status:
+          i-abcd1234: HEALTHY
+          i-abcd1235: UNHEALTHY
       properties:
         Status:
           $ref: '#/components/schemas/InstanceHealthStatusMap'
@@ -1495,6 +1697,19 @@ components:
           description: '<p>For the first <code>GetInstancesHealthStatus</code> request, omit this value.</p> <p>If more than <code>MaxResults</code> instances match the specified criteria, you can submit another <code>GetInstancesHealthStatus</code> request to get the next group of results. Specify the value of <code>NextToken</code> from the previous response in the next request.</p>'
     GetNamespaceResponse:
       type: object
+      example:
+        Namespace:
+          Arn: 'arn:aws:servicediscovery:us-west-2: 123456789120:namespace/ns-e1tpmexample0001'
+          CreateDate: 20181118T211712Z
+          CreatorRequestId: example-creator-request-id-0001
+          Description: Example.com AWS Cloud Map HTTP Namespace
+          Id: ns-e1tpmexample0001
+          Name: example-http.com
+          Properties:
+            DnsProperties: {}
+            HttpProperties:
+              HttpName: example-http.com
+          Type: HTTP
       properties:
         Namespace:
           $ref: '#/components/schemas/Namespace'
@@ -1535,6 +1750,19 @@ components:
     OperationNotFound: {}
     GetServiceResponse:
       type: object
+      example:
+        Service:
+          Arn: 'arn:aws:servicediscovery:us-west-2:123456789120:service/srv-e4anhexample0004'
+          CreateDate: 20181118T211707Z
+          CreatorRequestId: example-creator-request-id-0004
+          Description: Example.com AWS Cloud Map HTTP Service
+          HealthCheckConfig:
+            FailureThreshold: 3
+            ResourcePath: /
+            Type: HTTPS
+          Id: srv-e4anhexample0004
+          Name: example-http-service
+          NamespaceId: ns-e4anhexample0004
       properties:
         Service:
           $ref: '#/components/schemas/Service'
@@ -1634,6 +1862,14 @@ components:
           description: '<p>A complex type that contains specifications for the namespaces that you want to list.</p> <p>If you specify more than one filter, a namespace must match all filters to be returned by <code>ListNamespaces</code>.</p>'
     ListOperationsResponse:
       type: object
+      example:
+        Operations:
+          - Id: 76yy8ovhpdz0plmjzbsnqgnrqvpv2qdt-kexample
+            Status: SUCCESS
+          - Id: prysnyzpji3u2ciy45nke83x2zanl7yk-dexample
+            Status: SUCCESS
+          - Id: ko4ekftir7kzlbechsh7xvcdgcpk66gh-7example
+            Status: PENDING
       properties:
         Operations:
           $ref: '#/components/schemas/OperationSummaryList'
@@ -1687,6 +1923,28 @@ components:
         Filters:
           $ref: '#/components/schemas/ServiceFilters'
           description: '<p>A complex type that contains specifications for the namespaces that you want to list services for. </p> <p>If you specify more than one filter, an operation must match all filters to be returned by <code>ListServices</code>.</p>'
+    ListTagsForResourceResponse:
+      type: object
+      example:
+        Tags:
+          - Key: Project
+            Value: Zeta
+          - Key: Department
+            Value: Engineering
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tags that are assigned to the resource.
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+    ResourceNotFoundException: {}
     RegisterInstanceResponse:
       type: object
       example:
@@ -1714,7 +1972,41 @@ components:
           description: 'A unique string that identifies the request and that allows failed <code>RegisterInstance</code> requests to be retried without the risk of executing the operation twice. You must use a unique <code>CreatorRequestId</code> string every time you submit a <code>RegisterInstance</code> request if you''re registering additional instances for the same namespace and service. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp.'
         Attributes:
           $ref: '#/components/schemas/Attributes'
-          description: '<p>A string map that contains the following information for the service that you specify in <code>ServiceId</code>:</p> <ul> <li> <p>The attributes that apply to the records that are defined in the service. </p> </li> <li> <p>For each attribute, the applicable value.</p> </li> </ul> <p>Supported attribute keys include the following:</p> <p> <b>AWS_ALIAS_DNS_NAME</b> </p> <p> <b/> </p> <p>If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that is associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a> in the <i>Route 53 API Reference</i>.</p> <p>Note the following:</p> <ul> <li> <p>The configuration for the service that is specified by <code>ServiceId</code> must include settings for an A record, an AAAA record, or both.</p> </li> <li> <p>In the service that is specified by <code>ServiceId</code>, the value of <code>RoutingPolicy</code> must be <code>WEIGHTED</code>.</p> </li> <li> <p>If the service that is specified by <code>ServiceId</code> includes <code>HealthCheckConfig</code> settings, AWS Cloud Map will create the Route 53 health check, but it won''t associate the health check with the alias record.</p> </li> <li> <p>Auto naming currently doesn''t support creating alias records that route traffic to AWS resources other than ELB load balancers.</p> </li> <li> <p>If you specify a value for <code>AWS_ALIAS_DNS_NAME</code>, don''t specify values for any of the <code>AWS_INSTANCE</code> attributes.</p> </li> </ul> <p> <b>AWS_INIT_HEALTH_STATUS</b> </p> <p>If the service configuration includes <code>HealthCheckCustomConfig</code>, you can optionally use <code>AWS_INIT_HEALTH_STATUS</code> to specify the initial status of the custom health check, <code>HEALTHY</code> or <code>UNHEALTHY</code>. If you don''t specify a value for <code>AWS_INIT_HEALTH_STATUS</code>, the initial status is <code>HEALTHY</code>.</p> <p> <b>AWS_INSTANCE_CNAME</b> </p> <p>If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries, for example, <code>example.com</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an CNAME record.</p> <p> <b>AWS_INSTANCE_IPV4</b> </p> <p>If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries, for example, <code>192.0.2.44</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p> <p> <b>AWS_INSTANCE_IPV6</b> </p> <p>If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries, for example, <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p> <p> <b>AWS_INSTANCE_PORT</b> </p> <p>If the service includes an SRV record, the value that you want Route 53 to return for the port.</p> <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send requests to. </p> <p>This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.</p> <p> <b>Custom attributes</b> </p> <p>You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. </p>'
+          description: '<p>A string map that contains the following information for the service that you specify in <code>ServiceId</code>:</p> <ul> <li> <p>The attributes that apply to the records that are defined in the service. </p> </li> <li> <p>For each attribute, the applicable value.</p> </li> </ul> <p>Supported attribute keys include the following:</p> <p> <b>AWS_ALIAS_DNS_NAME</b> </p> <p> <b/> </p> <p>If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that is associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a> in the <i>Route 53 API Reference</i>.</p> <p>Note the following:</p> <ul> <li> <p>The configuration for the service that is specified by <code>ServiceId</code> must include settings for an A record, an AAAA record, or both.</p> </li> <li> <p>In the service that is specified by <code>ServiceId</code>, the value of <code>RoutingPolicy</code> must be <code>WEIGHTED</code>.</p> </li> <li> <p>If the service that is specified by <code>ServiceId</code> includes <code>HealthCheckConfig</code> settings, AWS Cloud Map will create the Route 53 health check, but it won''t associate the health check with the alias record.</p> </li> <li> <p>Auto naming currently doesn''t support creating alias records that route traffic to AWS resources other than ELB load balancers.</p> </li> <li> <p>If you specify a value for <code>AWS_ALIAS_DNS_NAME</code>, don''t specify values for any of the <code>AWS_INSTANCE</code> attributes.</p> </li> </ul> <p> <b>AWS_INIT_HEALTH_STATUS</b> </p> <p>If the service configuration includes <code>HealthCheckCustomConfig</code>, you can optionally use <code>AWS_INIT_HEALTH_STATUS</code> to specify the initial status of the custom health check, <code>HEALTHY</code> or <code>UNHEALTHY</code>. If you don''t specify a value for <code>AWS_INIT_HEALTH_STATUS</code>, the initial status is <code>HEALTHY</code>.</p> <p> <b>AWS_INSTANCE_CNAME</b> </p> <p>If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries, for example, <code>example.com</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an CNAME record.</p> <p> <b>AWS_INSTANCE_IPV4</b> </p> <p>If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries, for example, <code>192.0.2.44</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p> <p> <b>AWS_INSTANCE_IPV6</b> </p> <p>If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries, for example, <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>.</p> <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p> <p> <b>AWS_INSTANCE_PORT</b> </p> <p>If the service includes an SRV record, the value that you want Route 53 to return for the port.</p> <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send requests to. </p> <p>This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.</p> <p> <b>Custom attributes</b> </p> <p>You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. Total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.</p>'
+    TagResourceResponse:
+      type: object
+      example: {}
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: 'The tags to add to the specified resource. Specifying the tag key is required. You can set the value of a tag to an empty string, but you can''t set the value of a tag to null.'
+    UntagResourceResponse:
+      type: object
+      example: {}
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+          description: The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+          description: The tag keys to remove from the specified resource.
     UpdateInstanceCustomHealthStatusRequest:
       type: object
       required:
@@ -1735,6 +2027,8 @@ components:
     CustomHealthNotFound: {}
     UpdateServiceResponse:
       type: object
+      example:
+        OperationId: m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5
       properties:
         OperationId:
           $ref: '#/components/schemas/OperationId'
@@ -1752,14 +2046,20 @@ components:
         Service:
           $ref: '#/components/schemas/ServiceChange'
           description: A complex type that contains the new settings for the service.
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
     Arn:
       type: string
       maxLength: 255
     AttrKey:
       type: string
+      pattern: '^[a-zA-Z0-9!-~]+$'
       maxLength: 255
     AttrValue:
       type: string
+      pattern: '^([a-zA-Z0-9!-~][ \ta-zA-Z0-9!-~]*){0,1}[a-zA-Z0-9!-~]{0,1}$'
       maxLength: 1024
     Attributes:
       type: object
@@ -1776,6 +2076,12 @@ components:
     ResourceDescription:
       type: string
       maxLength: 1024
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     OperationId:
       type: string
       maxLength: 255
@@ -1862,10 +2168,10 @@ components:
       enum:
         - HEALTHY
         - UNHEALTHY
-    MaxResults:
+    DiscoverMaxResults:
       type: integer
       minimum: 1
-      maximum: 100
+      maximum: 1000
     HealthStatusFilter:
       type: string
       enum:
@@ -1963,6 +2269,10 @@ components:
       items:
         $ref: '#/components/schemas/ResourceId'
       minItems: 1
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
     NextToken:
       type: string
       maxLength: 4096
@@ -2239,8 +2549,6 @@ components:
         - INSTANCE
     ServiceChange:
       type: object
-      required:
-        - DnsConfig
       properties:
         Description:
           $ref: '#/components/schemas/ResourceDescription'
@@ -2299,5 +2607,32 @@ components:
           $ref: '#/components/schemas/Timestamp'
           description: The date and time that the service was created.
       description: A complex type that contains information about a specified service.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+          description: 'The key identifier, or name, of the tag.'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+          description: 'The string value that''s associated with the key of the tag. You can set the value of a tag to an empty string, but you can''t set the value of a tag to null.'
+      description: A custom key-value pair associated with a resource.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
 security:
   - hmac: []
