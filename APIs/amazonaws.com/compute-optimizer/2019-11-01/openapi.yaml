@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: AWS Compute Optimizer
-  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS resources, such as EC2 instances and Auto Scaling groups. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
+  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS resources, such as EC2 instances and Auto Scaling groups. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -106,6 +106,249 @@ servers:
     description: The AWS Compute Optimizer endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/#X-Amz-Target=ComputeOptimizerService.DescribeRecommendationExportJobs':
+    post:
+      operationId: DescribeRecommendationExportJobs
+      description: <p>Describes recommendation export jobs created in the last seven days.</p> <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions to request an export of your recommendations. Then use the <code>DescribeRecommendationExportJobs</code> action to view your export jobs.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRecommendationExportJobsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRecommendationExportJobsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.DescribeRecommendationExportJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComputeOptimizerService.ExportAutoScalingGroupRecommendations':
+    post:
+      operationId: ExportAutoScalingGroupRecommendations
+      description: '<p>Exports optimization recommendations for Auto Scaling groups.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Auto Scaling group export job in progress per AWS Region.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportAutoScalingGroupRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportAutoScalingGroupRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.ExportAutoScalingGroupRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=ComputeOptimizerService.ExportEC2InstanceRecommendations':
+    post:
+      operationId: ExportEC2InstanceRecommendations
+      description: '<p>Exports optimization recommendations for Amazon EC2 instances.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Amazon EC2 instance export job in progress per AWS Region.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportEC2InstanceRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportEC2InstanceRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.ExportEC2InstanceRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=ComputeOptimizerService.GetAutoScalingGroupRecommendations':
     post:
       operationId: GetAutoScalingGroupRecommendations
@@ -352,7 +595,7 @@ paths:
   '/#X-Amz-Target=ComputeOptimizerService.GetEnrollmentStatus':
     post:
       operationId: GetEnrollmentStatus
-      description: '<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this operation also confirms the enrollment status of member accounts within the organization.</p>'
+      description: '<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.</p>'
       responses:
         '200':
           description: Success
@@ -496,7 +739,7 @@ paths:
   '/#X-Amz-Target=ComputeOptimizerService.UpdateEnrollmentStatus':
     post:
       operationId: UpdateEnrollmentStatus
-      description: '<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this operation can also enroll member accounts within the organization.</p>'
+      description: '<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.</p>'
       responses:
         '200':
           description: Success
@@ -614,6 +857,106 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    DescribeRecommendationExportJobsResponse:
+      type: object
+      properties:
+        recommendationExportJobs:
+          $ref: '#/components/schemas/RecommendationExportJobs'
+          description: An array of objects that describe recommendation export jobs.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: <p>The token to use to advance to the next page of export jobs.</p> <p>This value is null when there are no more pages of export jobs to return.</p>
+    DescribeRecommendationExportJobsRequest:
+      type: object
+      title: DescribeRecommendationExportJobsRequest
+      properties:
+        jobIds:
+          $ref: '#/components/schemas/JobIds'
+          description: <p>The identification numbers of the export jobs to return.</p> <p>An export job ID is returned when you create an export using the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions.</p> <p>All export jobs created in the last seven days are returned if this parameter is omitted.</p>
+        filters:
+          $ref: '#/components/schemas/JobFilters'
+          description: An array of objects that describe a filter to return a more specific list of export jobs.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token to advance to the next page of export jobs.
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: '<p>The maximum number of export jobs to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
+    OptInRequiredException: {}
+    InternalServerException: {}
+    ServiceUnavailableException: {}
+    AccessDeniedException: {}
+    InvalidParameterValueException: {}
+    ResourceNotFoundException: {}
+    MissingAuthenticationToken: {}
+    ThrottlingException: {}
+    ExportAutoScalingGroupRecommendationsResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: '<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>'
+        s3Destination:
+          $ref: '#/components/schemas/S3Destination'
+          description: An object that describes the destination Amazon S3 bucket of a recommendations export file.
+    ExportAutoScalingGroupRecommendationsRequest:
+      type: object
+      required:
+        - s3DestinationConfig
+      title: ExportAutoScalingGroupRecommendationsRequest
+      properties:
+        accountIds:
+          $ref: '#/components/schemas/AccountIds'
+          description: '<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+        filters:
+          $ref: '#/components/schemas/Filters'
+          description: An array of objects that describe a filter to export a more specific set of Auto Scaling group recommendations.
+        fieldsToExport:
+          $ref: '#/components/schemas/ExportableAutoScalingGroupFields'
+          description: The recommendations data to include in the export file.
+        s3DestinationConfig:
+          $ref: '#/components/schemas/S3DestinationConfig'
+          description: '<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>'
+        fileFormat:
+          $ref: '#/components/schemas/FileFormat'
+          description: <p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>
+        includeMemberAccounts:
+          $ref: '#/components/schemas/IncludeMemberAccounts'
+          description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+    LimitExceededException: {}
+    ExportEC2InstanceRecommendationsResponse:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: '<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>'
+        s3Destination:
+          $ref: '#/components/schemas/S3Destination'
+          description: An object that describes the destination Amazon S3 bucket of a recommendations export file.
+    ExportEC2InstanceRecommendationsRequest:
+      type: object
+      required:
+        - s3DestinationConfig
+      title: ExportEC2InstanceRecommendationsRequest
+      properties:
+        accountIds:
+          $ref: '#/components/schemas/AccountIds'
+          description: '<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+        filters:
+          $ref: '#/components/schemas/Filters'
+          description: An array of objects that describe a filter to export a more specific set of instance recommendations.
+        fieldsToExport:
+          $ref: '#/components/schemas/ExportableInstanceFields'
+          description: The recommendations data to include in the export file.
+        s3DestinationConfig:
+          $ref: '#/components/schemas/S3DestinationConfig'
+          description: '<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>'
+        fileFormat:
+          $ref: '#/components/schemas/FileFormat'
+          description: <p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>
+        includeMemberAccounts:
+          $ref: '#/components/schemas/IncludeMemberAccounts'
+          description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     GetAutoScalingGroupRecommendationsResponse:
       type: object
       properties:
@@ -632,7 +975,7 @@ components:
       properties:
         accountIds:
           $ref: '#/components/schemas/AccountIds'
-          description: <p>The AWS account IDs for which to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>
+          description: '<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>'
         autoScalingGroupArns:
           $ref: '#/components/schemas/AutoScalingGroupArns'
           description: The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return recommendations.
@@ -641,18 +984,10 @@ components:
           description: The token to advance to the next page of Auto Scaling group recommendations.
         maxResults:
           $ref: '#/components/schemas/MaxResults'
-          description: '<p>The maximum number of Auto Scaling group recommendations to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>'
+          description: '<p>The maximum number of Auto Scaling group recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
         filters:
           $ref: '#/components/schemas/Filters'
           description: An array of objects that describe a filter that returns a more specific list of Auto Scaling group recommendations.
-    OptInRequiredException: {}
-    InternalServerException: {}
-    ServiceUnavailableException: {}
-    AccessDeniedException: {}
-    InvalidParameterValueException: {}
-    ResourceNotFoundException: {}
-    MissingAuthenticationToken: {}
-    ThrottlingException: {}
     GetEC2InstanceRecommendationsResponse:
       type: object
       properties:
@@ -677,13 +1012,13 @@ components:
           description: The token to advance to the next page of instance recommendations.
         maxResults:
           $ref: '#/components/schemas/MaxResults'
-          description: '<p>The maximum number of instance recommendations to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>'
+          description: '<p>The maximum number of instance recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
         filters:
           $ref: '#/components/schemas/Filters'
           description: An array of objects that describe a filter that returns a more specific list of instance recommendations.
         accountIds:
           $ref: '#/components/schemas/AccountIds'
-          description: <p>The AWS account IDs for which to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>
+          description: '<p>The IDs of the AWS accounts for which to return instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>'
     GetEC2RecommendationProjectedMetricsResponse:
       type: object
       properties:
@@ -746,13 +1081,13 @@ components:
       properties:
         accountIds:
           $ref: '#/components/schemas/AccountIds'
-          description: <p>The AWS account IDs for which to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>
+          description: '<p>The IDs of the AWS accounts for which to return recommendation summaries.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>'
         nextToken:
           $ref: '#/components/schemas/NextToken'
           description: The token to advance to the next page of recommendation summaries.
         maxResults:
           $ref: '#/components/schemas/MaxResults'
-          description: '<p>The maximum number of recommendation summaries to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>'
+          description: '<p>The maximum number of recommendation summaries to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
     UpdateEnrollmentStatusResponse:
       type: object
       properties:
@@ -773,7 +1108,7 @@ components:
           description: <p>The new enrollment status of the account.</p> <p>Accepted options are <code>Active</code> or <code>Inactive</code>. You will get an error if <code>Pending</code> or <code>Failed</code> are specified.</p>
         includeMemberAccounts:
           $ref: '#/components/schemas/IncludeMemberAccounts'
-          description: 'Indicates whether to enroll member accounts within the organization, if the account is a master account of an organization.'
+          description: Indicates whether to enroll member accounts of the organization if the your account is the master account of an organization.
     AccountId:
       type: string
     AccountIds:
@@ -897,7 +1232,152 @@ components:
         $ref: '#/components/schemas/AutoScalingGroupRecommendation'
     Code:
       type: string
+    CreationTimestamp:
+      type: string
+      format: date-time
     CurrentInstanceType:
+      type: string
+    JobIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobId'
+    JobFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobFilter'
+    NextToken:
+      type: string
+    MaxResults:
+      type: integer
+    RecommendationExportJobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationExportJob'
+    DestinationBucket:
+      type: string
+    DestinationKey:
+      type: string
+    DestinationKeyPrefix:
+      type: string
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    ExportableAutoScalingGroupFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportableAutoScalingGroupField'
+    S3DestinationConfig:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/DestinationBucket'
+          description: The name of the Amazon S3 bucket to use as the destination for an export job.
+        keyPrefix:
+          $ref: '#/components/schemas/DestinationKeyPrefix'
+          description: The Amazon S3 bucket prefix for an export job.
+      description: '<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for a recommendations export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>'
+    FileFormat:
+      type: string
+      enum:
+        - Csv
+    IncludeMemberAccounts:
+      type: boolean
+    JobId:
+      type: string
+    S3Destination:
+      type: object
+      properties:
+        bucket:
+          $ref: '#/components/schemas/DestinationBucket'
+          description: The name of the Amazon S3 bucket used as the destination of an export file.
+        key:
+          $ref: '#/components/schemas/DestinationKey'
+          description: '<p>The Amazon S3 bucket key of an export file.</p> <p>The key uniquely identifies the object, or export file, in the S3 bucket.</p>'
+        metadataKey:
+          $ref: '#/components/schemas/MetadataKey'
+          description: '<p>The Amazon S3 bucket key of a metadata file.</p> <p>The key uniquely identifies the object, or metadata file, in the S3 bucket.</p>'
+      description: 'Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.'
+    ExportDestination:
+      type: object
+      properties:
+        s3:
+          $ref: '#/components/schemas/S3Destination'
+          description: 'An object that describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.'
+      description: Describes the destination of the recommendations export and metadata files.
+    ExportableInstanceFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportableInstanceField'
+    ExportableAutoScalingGroupField:
+      type: string
+      enum:
+        - AccountId
+        - AutoScalingGroupArn
+        - AutoScalingGroupName
+        - Finding
+        - UtilizationMetricsCpuMaximum
+        - UtilizationMetricsMemoryMaximum
+        - LookbackPeriodInDays
+        - CurrentConfigurationInstanceType
+        - CurrentConfigurationDesiredCapacity
+        - CurrentConfigurationMinSize
+        - CurrentConfigurationMaxSize
+        - CurrentOnDemandPrice
+        - CurrentStandardOneYearNoUpfrontReservedPrice
+        - CurrentStandardThreeYearNoUpfrontReservedPrice
+        - CurrentVCpus
+        - CurrentMemory
+        - CurrentStorage
+        - CurrentNetwork
+        - RecommendationOptionsConfigurationInstanceType
+        - RecommendationOptionsConfigurationDesiredCapacity
+        - RecommendationOptionsConfigurationMinSize
+        - RecommendationOptionsConfigurationMaxSize
+        - RecommendationOptionsProjectedUtilizationMetricsCpuMaximum
+        - RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum
+        - RecommendationOptionsPerformanceRisk
+        - RecommendationOptionsOnDemandPrice
+        - RecommendationOptionsStandardOneYearNoUpfrontReservedPrice
+        - RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice
+        - RecommendationOptionsVcpus
+        - RecommendationOptionsMemory
+        - RecommendationOptionsStorage
+        - RecommendationOptionsNetwork
+        - LastRefreshTimestamp
+    ExportableInstanceField:
+      type: string
+      enum:
+        - AccountId
+        - InstanceArn
+        - InstanceName
+        - Finding
+        - LookbackPeriodInDays
+        - CurrentInstanceType
+        - UtilizationMetricsCpuMaximum
+        - UtilizationMetricsMemoryMaximum
+        - CurrentOnDemandPrice
+        - CurrentStandardOneYearNoUpfrontReservedPrice
+        - CurrentStandardThreeYearNoUpfrontReservedPrice
+        - CurrentVCpus
+        - CurrentMemory
+        - CurrentStorage
+        - CurrentNetwork
+        - RecommendationOptionsInstanceType
+        - RecommendationOptionsProjectedUtilizationMetricsCpuMaximum
+        - RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum
+        - RecommendationOptionsPerformanceRisk
+        - RecommendationOptionsVcpus
+        - RecommendationOptionsMemory
+        - RecommendationOptionsStorage
+        - RecommendationOptionsNetwork
+        - RecommendationOptionsOnDemandPrice
+        - RecommendationOptionsStandardOneYearNoUpfrontReservedPrice
+        - RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice
+        - RecommendationsSourcesRecommendationSourceArn
+        - RecommendationsSourcesRecommendationSourceType
+        - LastRefreshTimestamp
+    FailureReason:
       type: string
     FilterName:
       type: string
@@ -913,21 +1393,13 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/FilterName'
-          description: <p>The name of the filter.</p> <p>Specify <code>Finding</code> to filter the results to a specific findings classification.</p> <p>Specify <code>RecommendationSourceType</code> to filter the results to a specific resource type.</p>
+          description: '<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific findings classification (e.g., <code>Overprovisioned</code>).</p> <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific resource type (e.g., <code>AutoScalingGroup</code>).</p>'
         values:
           $ref: '#/components/schemas/FilterValues'
-          description: '<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you''re recommendations for an <i>instance</i>, then the valid values are <code>Underprovisioned</code>, <code>Overprovisioned</code>, <code>NotOptimized</code>, or <code>Optimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you''re recommendations for an <i>Auto Scaling group</i>, then the valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>RecommendationSourceType</code>, then the valid values are <code>EC2Instance</code>, or <code>AutoScalingGroup</code>.</p>'
+          description: '<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>instance</i>, then the valid values are <code>Underprovisioned</code>, <code>Overprovisioned</code>, <code>NotOptimized</code>, or <code>Optimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>Auto Scaling group</i>, then the valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>RecommendationSourceType</code>, then the valid values are <code>Ec2Instance</code>, or <code>AutoScalingGroup</code>.</p>'
       description: Describes a filter that returns a more specific list of recommendations.
     FilterValue:
       type: string
-    Filters:
-      type: array
-      items:
-        $ref: '#/components/schemas/Filter'
-    NextToken:
-      type: string
-    MaxResults:
-      type: integer
     GetRecommendationErrors:
       type: array
       items:
@@ -988,8 +1460,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RecommendationSummary'
-    IncludeMemberAccounts:
-      type: boolean
     InstanceName:
       type: string
     RecommendationOptions:
@@ -1008,7 +1478,7 @@ components:
           description: The Amazon Resource Name (ARN) of the current instance.
         accountId:
           $ref: '#/components/schemas/AccountId'
-          description: The AWS account ID of the instance recommendation.
+          description: The AWS account ID of the instance.
         instanceName:
           $ref: '#/components/schemas/InstanceName'
           description: The name of the current instance.
@@ -1050,6 +1520,33 @@ components:
           $ref: '#/components/schemas/Rank'
           description: <p>The rank of the instance recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
       description: Describes a recommendation option for an Amazon EC2 instance.
+    JobFilterName:
+      type: string
+      enum:
+        - ResourceType
+        - JobStatus
+    JobFilter:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/JobFilterName'
+          description: '<p>The name of the filter.</p> <p>Specify <code>ResourceType</code> to return export jobs of a specific resource type (e.g., <code>Ec2Instance</code>).</p> <p>Specify <code>JobStatus</code> to return export jobs with a specific status (e.g, <code>Complete</code>).</p>'
+        values:
+          $ref: '#/components/schemas/FilterValues'
+          description: '<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>ResourceType</code>, the valid values are <code>Ec2Instance</code> or <code>AutoScalingGroup</code>.</p> <p>If you specify the <code>name</code> parameter as <code>JobStatus</code>, the valid values are <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>, or <code>Failed</code>.</p>'
+      description: <p>Describes a filter that returns a more specific list of recommendation export jobs.</p> <p>This filter is used with the <code>DescribeRecommendationExportJobs</code> action.</p>
+    JobStatus:
+      type: string
+      enum:
+        - Queued
+        - InProgress
+        - Complete
+        - Failed
+    LastUpdatedTimestamp:
+      type: string
+      format: date-time
+    MetadataKey:
+      type: string
     MetricName:
       type: string
       enum:
@@ -1096,6 +1593,36 @@ components:
           $ref: '#/components/schemas/MetricValue'
           description: The value of the utilization metric.
       description: 'Describes a utilization metric of a resource, such as an Amazon EC2 instance.'
+    ResourceType:
+      type: string
+      enum:
+        - Ec2Instance
+        - AutoScalingGroup
+    RecommendationExportJob:
+      type: object
+      properties:
+        jobId:
+          $ref: '#/components/schemas/JobId'
+          description: The identification number of the export job.
+        destination:
+          $ref: '#/components/schemas/ExportDestination'
+          description: An object that describes the destination of the export file.
+        resourceType:
+          $ref: '#/components/schemas/ResourceType'
+          description: The resource type of the exported recommendations.
+        status:
+          $ref: '#/components/schemas/JobStatus'
+          description: The status of the export job.
+        creationTimestamp:
+          $ref: '#/components/schemas/CreationTimestamp'
+          description: The timestamp of when the export job was created.
+        lastUpdatedTimestamp:
+          $ref: '#/components/schemas/LastUpdatedTimestamp'
+          description: The timestamp of when the export job was last updated.
+        failureReason:
+          $ref: '#/components/schemas/FailureReason'
+          description: The reason for an export job failure.
+      description: <p>Describes a recommendation export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action to view your recommendation export jobs.</p> <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions to request an export of your recommendations.</p>
     RecommendationSourceArn:
       type: string
     RecommendationSourceType:

@@ -281,7 +281,7 @@ paths:
                 RetrievalRoleArn:
                   description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
                   type: string
-                  pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+                  pattern: '^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\d{12}:role[/].*)$'
                   minLength: 20
                   maxLength: 2048
                 Validators:
@@ -942,7 +942,7 @@ paths:
                 RetrievalRoleArn:
                   description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
                   type: string
-                  pattern: 'arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1})?:(\d{12})?:[a-zA-Z0-9-_/:.]+'
+                  pattern: '^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\d{12}:role[/].*)$'
                   minLength: 20
                   maxLength: 2048
                 Validators:
@@ -984,7 +984,7 @@ paths:
           description: The ID of the deployment strategy you want to delete.
           schema:
             type: string
-            pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+            pattern: '(^[a-z0-9]{4,7}$|^AppConfig\.[A-Za-z0-9]{9,40}$)'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1181,12 +1181,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
           description: BadRequestException
           content:
             application/json:
@@ -1384,7 +1378,7 @@ paths:
           description: The ID of the deployment strategy to get.
           schema:
             type: string
-            pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+            pattern: '(^[a-z0-9]{4,7}$|^AppConfig\.[A-Za-z0-9]{9,40}$)'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1428,7 +1422,7 @@ paths:
           description: The deployment strategy ID.
           schema:
             type: string
-            pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+            pattern: '(^[a-z0-9]{4,7}$|^AppConfig\.[A-Za-z0-9]{9,40}$)'
       requestBody:
         required: true
         content:
@@ -1606,7 +1600,7 @@ paths:
                 DeploymentStrategyId:
                   description: The deployment strategy ID.
                   type: string
-                  pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+                  pattern: '(^[a-z0-9]{4,7}$|^AppConfig\.[A-Za-z0-9]{9,40}$)'
                 ConfigurationProfileId:
                   description: The configuration profile ID.
                   type: string
@@ -1922,7 +1916,7 @@ components:
           $ref: '#/components/schemas/Uri'
           description: The URI location of the configuration.
         RetrievalRoleArn:
-          $ref: '#/components/schemas/Arn'
+          $ref: '#/components/schemas/RoleArn'
           description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
           $ref: '#/components/schemas/ValidatorList'
@@ -1996,7 +1990,7 @@ components:
           $ref: '#/components/schemas/Arn'
           description: ARN of the Amazon CloudWatch alarm.
         AlarmRoleArn:
-          $ref: '#/components/schemas/Arn'
+          $ref: '#/components/schemas/RoleArn'
           description: ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.
       description: Amazon CloudWatch alarms to monitor during the deployment process.
     ConflictException: {}
@@ -2144,6 +2138,7 @@ components:
       maxLength: 2048
     Blob:
       type: string
+      format: password
     Version:
       type: string
       minLength: 1
@@ -2153,6 +2148,11 @@ components:
     Uri:
       type: string
       minLength: 1
+      maxLength: 2048
+    RoleArn:
+      type: string
+      pattern: '^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\d{12}:role[/].*)$'
+      minLength: 20
       maxLength: 2048
     ValidatorList:
       type: array
@@ -2228,7 +2228,7 @@ components:
           $ref: '#/components/schemas/Uri'
           description: 'A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document_name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object, specify the URI in the following format: <code>s3://&lt;bucket&gt;/&lt;objectKey&gt; </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json'
         RetrievalRoleArn:
-          $ref: '#/components/schemas/Arn'
+          $ref: '#/components/schemas/RoleArn'
           description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
           $ref: '#/components/schemas/ValidatorList'
@@ -2322,7 +2322,7 @@ components:
       properties: {}
     DeploymentStrategyId:
       type: string
-      pattern: '([a-z0-9]{4,7}|arn:aws.*)'
+      pattern: '(^[a-z0-9]{4,7}$|^AppConfig\.[A-Za-z0-9]{9,40}$)'
     DeleteDeploymentStrategyRequest:
       type: object
       title: DeleteDeploymentStrategyRequest
@@ -2529,6 +2529,7 @@ components:
       type: string
       minLength: 0
       maxLength: 32768
+      format: password
     TagKeyList:
       type: array
       items:
@@ -2569,7 +2570,7 @@ components:
           $ref: '#/components/schemas/Description'
           description: A description of the configuration profile.
         RetrievalRoleArn:
-          $ref: '#/components/schemas/Arn'
+          $ref: '#/components/schemas/RoleArn'
           description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
           $ref: '#/components/schemas/ValidatorList'

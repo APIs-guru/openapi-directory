@@ -184,82 +184,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /findings/archive:
-    post:
-      operationId: ArchiveFindings
-      description: ' <p>Archives one or more findings.</p>'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArchiveFindingsResponse'
-        '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '485':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '486':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - findingIds
-              properties:
-                findingIds:
-                  description: An array of strings that lists the unique identifiers for the findings to archive.
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/__string'
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /custom-data-identifiers/get:
     post:
       operationId: BatchGetCustomDataIdentifiers
@@ -3776,82 +3700,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /findings/unarchive:
-    post:
-      operationId: UnarchiveFindings
-      description: ' <p>Reactivates (unarchives) one or more findings.</p>'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnarchiveFindingsResponse'
-        '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '485':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '486':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - findingIds
-              properties:
-                findingIds:
-                  description: An array of strings that lists the unique identifiers for the findings to reactivate.
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/__string'
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -4031,11 +3879,6 @@ components:
     ResourceNotFoundException: {}
     ThrottlingException: {}
     ConflictException: {}
-    ArchiveFindingsResponse:
-      type: object
-      properties: {}
-    __string:
-      type: string
     BatchGetCustomDataIdentifiersResponse:
       type: object
       properties:
@@ -4045,6 +3888,8 @@ components:
         notFoundIdentifierIds:
           $ref: '#/components/schemas/__listOf__string'
           description: 'An array of identifiers, one for each identifier that was specified in the request, but doesn''t correlate to an existing custom data identifier.'
+    __string:
+      type: string
     CreateClassificationJobResponse:
       type: object
       properties:
@@ -4590,9 +4435,6 @@ components:
         matchCount:
           $ref: '#/components/schemas/__integer'
           description: The number of instances of sample text that matched the detection criteria specified in the custom data identifier.
-    UnarchiveFindingsResponse:
-      type: object
-      properties: {}
     UntagResourceResponse:
       type: object
       properties: {}
@@ -4713,19 +4555,6 @@ components:
           $ref: '#/components/schemas/__timestampIso8601'
           description: Reserved for future use.
       description: Reserved for future use.
-    __listOf__string:
-      type: array
-      items:
-        $ref: '#/components/schemas/__string'
-    ArchiveFindingsRequest:
-      type: object
-      required:
-        - findingIds
-      title: ArchiveFindingsRequest
-      properties:
-        findingIds:
-          $ref: '#/components/schemas/__listOf__string'
-          description: An array of strings that lists the unique identifiers for the findings to archive.
     SessionContext:
       type: object
       properties:
@@ -4794,6 +4623,10 @@ components:
           $ref: '#/components/schemas/__string'
           description: The custom name of the custom data identifier.
       description: Provides information about a custom data identifier.
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
     BatchGetCustomDataIdentifiersRequest:
       type: object
       title: BatchGetCustomDataIdentifiersRequest
@@ -5487,6 +5320,7 @@ components:
         - NONE
         - AES256
         - 'aws:kms'
+        - UNKNOWN
       description: 'The server-side encryption algorithm that''s used when storing the S3 bucket or object. Valid values are:'
     ErrorCode:
       type: string
@@ -6433,15 +6267,6 @@ components:
         sampleText:
           $ref: '#/components/schemas/__string'
           description: 'The sample text to inspect by using the custom data identifier. The text can contain as many as 1,000 characters.'
-    UnarchiveFindingsRequest:
-      type: object
-      required:
-        - findingIds
-      title: UnarchiveFindingsRequest
-      properties:
-        findingIds:
-          $ref: '#/components/schemas/__listOf__string'
-          description: An array of strings that lists the unique identifiers for the findings to reactivate.
     UnprocessedAccount:
       type: object
       properties:
