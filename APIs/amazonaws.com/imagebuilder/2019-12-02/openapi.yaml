@@ -264,6 +264,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '490':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -412,6 +418,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '490':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -517,6 +529,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceInUseException'
+        '488':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -639,6 +657,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '489':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -793,6 +817,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '490':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -843,6 +873,11 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                workingDirectory:
+                  description: The working directory to be used during build and test workflows.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
                 clientToken:
                   description: 'The idempotency token used to make this request idempotent. '
                   type: string
@@ -921,6 +956,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '489':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -981,6 +1022,13 @@ paths:
                   description: 'The SNS topic on which to send image build events. '
                   type: string
                   pattern: '^arn:aws[^:]*:sns:[^:]+:\d{12}:[a-zA-Z0-9-_]{1,256}$'
+                resourceTags:
+                  description: The tags attached to the resource created by Image Builder.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 30
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
                 tags:
                   description: 'The tags of the infrastructure configuration. '
                   type: object
@@ -1469,7 +1517,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires "/\d+$" suffix.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1658,7 +1706,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the image that you want to retrieve. '
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2439,7 +2487,7 @@ paths:
   /ListImageBuildVersions:
     post:
       operationId: ListImageBuildVersions
-      description: ' Returns a list of distribution configurations. '
+      description: ' Returns a list of image build versions. '
       responses:
         '200':
           description: Success
@@ -2856,7 +2904,7 @@ paths:
   /ListImages:
     post:
       operationId: ListImages
-      description: ' Returns the list of image build versions for the specified semantic version. '
+      description: ' Returns the list of images that you have access to. '
       responses:
         '200':
           description: Success
@@ -3925,6 +3973,13 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 36
+                resourceTags:
+                  description: The tags attached to the resource created by Image Builder.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 30
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4025,6 +4080,7 @@ components:
       maxLength: 256
     InvalidVersionNumberException: {}
     InvalidParameterCombinationException: {}
+    ServiceQuotaExceededException: {}
     CreateDistributionConfigurationResponse:
       type: object
       properties:
@@ -4973,6 +5029,9 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: ' The tags of the image recipe. '
+        workingDirectory:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The working directory to be used during build and test workflows.
         clientToken:
           $ref: '#/components/schemas/ClientToken'
           description: 'The idempotency token used to make this request idempotent. '
@@ -5023,6 +5082,12 @@ components:
     SnsTopicArn:
       type: string
       pattern: '^arn:aws[^:]*:sns:[^:]+:\d{12}:[a-zA-Z0-9-_]{1,256}$'
+    ResourceTagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 30
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateInfrastructureConfigurationRequest:
       type: object
       required:
@@ -5061,6 +5126,9 @@ components:
         snsTopicArn:
           $ref: '#/components/schemas/SnsTopicArn'
           description: 'The SNS topic on which to send image build events. '
+        resourceTags:
+          $ref: '#/components/schemas/ResourceTagMap'
+          description: The tags attached to the resource created by Image Builder.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: 'The tags of the infrastructure configuration. '
@@ -5334,7 +5402,13 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the image recipe.
+        workingDirectory:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The working directory to be used during build and test workflows.
       description: An image recipe.
+    ImageVersionArnOrBuildVersionArn:
+      type: string
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
     GetImageRequest:
       type: object
       title: GetImageRequest
@@ -5438,6 +5512,9 @@ components:
         dateUpdated:
           $ref: '#/components/schemas/DateTime'
           description: The date on which the infrastructure configuration was last updated.
+        resourceTags:
+          $ref: '#/components/schemas/ResourceTagMap'
+          description: The tags attached to the resource created by Image Builder.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the infrastructure configuration.
@@ -5631,6 +5708,9 @@ components:
         dateUpdated:
           $ref: '#/components/schemas/DateTime'
           description: The date on which the infrastructure configuration was last updated.
+        resourceTags:
+          $ref: '#/components/schemas/ResourceTagMap'
+          description: The tags attached to the image created by Image Builder.
         tags:
           $ref: '#/components/schemas/TagMap'
           description: The tags of the infrastructure configuration.
@@ -5966,5 +6046,8 @@ components:
         clientToken:
           $ref: '#/components/schemas/ClientToken'
           description: 'The idempotency token used to make this request idempotent. '
+        resourceTags:
+          $ref: '#/components/schemas/ResourceTagMap'
+          description: The tags attached to the resource created by Image Builder.
 security:
   - hmac: []

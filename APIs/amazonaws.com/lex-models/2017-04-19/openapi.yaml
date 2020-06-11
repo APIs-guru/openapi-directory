@@ -2661,6 +2661,19 @@ paths:
                 createVersion:
                   description: 'When set to <code>true</code> a new numbered version of the intent is created. This is the same as calling the <code>CreateIntentVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.'
                   type: boolean
+                kendraConfiguration:
+                  description: 'Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html"> AMAZON.KendraSearchIntent</a>.'
+                  type: object
+                  properties:
+                    kendraIndex:
+                      $ref: '#/components/schemas/KendraIndexArn'
+                      description: 'The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot. If the Amazon Kendra index does not exist, you get an exception when you call the <code>PutIntent</code> operation.'
+                    queryFilterString:
+                      $ref: '#/components/schemas/QueryFilterString'
+                      description: '<p>A query filter that Amazon Lex sends to Amazon Kendra to filter the response from the query. The filter is in the format defined by Amazon Kendra. For more information, see <a href="http://docs.aws.amazon.com/kendra/latest/dg/filtering.html">Filtering queries</a>.</p> <p>You can override this filter string with a new filter string at runtime.</p>'
+                    role:
+                      $ref: '#/components/schemas/roleArn'
+                      description: 'The Amazon Resource Name (ARN) of an IAM role that has permission to search the Amazon Kendra index. The role must be in the same account and Region as the Amazon Lex bot. If the role does not exist, you get an exception when you call the <code>PutIntent</code> operation.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3069,6 +3082,9 @@ components:
         checksum:
           $ref: '#/components/schemas/String'
           description: Checksum of the intent version created.
+        kendraConfiguration:
+          $ref: '#/components/schemas/KendraConfiguration'
+          description: 'Configuration information, if any, for connectin an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.'
     CreateSlotTypeVersionResponse:
       type: object
       properties:
@@ -3492,6 +3508,9 @@ components:
         checksum:
           $ref: '#/components/schemas/String'
           description: Checksum of the intent.
+        kendraConfiguration:
+          $ref: '#/components/schemas/KendraConfiguration'
+          description: 'Configuration information, if any, to connect to an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.'
     GetIntentVersionsResponse:
       type: object
       properties:
@@ -3775,7 +3794,7 @@ components:
         $ref: '#/components/schemas/LogSettingsRequest'
     IamRoleArn:
       type: string
-      pattern: '^arn:[\w\-]+:iam::[\d]{12}:role\/[\w+=,\.@\-]{1,64}$'
+      pattern: '^arn:[\w\-]+:iam::[\d]{12}:role/.+$'
       minLength: 20
       maxLength: 2048
     PutIntentResponse:
@@ -3913,6 +3932,9 @@ components:
         createVersion:
           $ref: '#/components/schemas/Boolean'
           description: ' <code>True</code> if a new version of the intent was created. If the <code>createVersion</code> field was not specified in the request, the <code>createVersion</code> field is set to false in the response.'
+        kendraConfiguration:
+          $ref: '#/components/schemas/KendraConfiguration'
+          description: 'Configuration information, if any, required to connect to an Amazon Kendra index and use the <code>AMAZON.KendraSearchIntent</code> intent.'
     Slot:
       type: object
       required:
@@ -3939,7 +3961,7 @@ components:
           description: The prompt that Amazon Lex uses to elicit the slot value from the user.
         priority:
           $ref: '#/components/schemas/Priority'
-          description: '<p> Directs Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Lex elicits values is arbitrary.</p>'
+          description: '<p> Directs Amazon Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Amazon Lex elicits values is arbitrary.</p>'
         sampleUtterances:
           $ref: '#/components/schemas/SlotUtteranceList'
           description: ' If you know a specific pattern with which users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy. This is optional. In most cases, Amazon Lex is capable of understanding user utterances. '
@@ -4009,6 +4031,19 @@ components:
           $ref: '#/components/schemas/MessageVersion'
           description: 'The version of the request-response that you want Amazon Lex to use to invoke your Lambda function. For more information, see <a>using-lambda</a>.'
       description: Specifies a Lambda function that verifies requests to a bot or fulfills the user's request to a bot..
+    KendraIndexArn:
+      type: string
+      pattern: 'arn:aws:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index\/[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 20
+      maxLength: 2048
+    QueryFilterString:
+      type: string
+      minLength: 0
+    roleArn:
+      type: string
+      pattern: 'arn:aws:iam::[0-9]{12}:role/.*'
+      minLength: 20
+      maxLength: 2048
     PutSlotTypeResponse:
       type: object
       example:
@@ -4427,6 +4462,22 @@ components:
           $ref: '#/components/schemas/CodeHook'
           description: ' A description of the Lambda function that is run to fulfill the intent. '
       description: '<p> Describes how the intent is fulfilled after the user provides all of the information required for the intent. You can provide a Lambda function to process the intent, or you can return the intent information to the client application. We recommend that you use a Lambda function so that the relevant logic lives in the Cloud and limit the client-side code primarily to presentation. If you need to update the logic, you only update the Lambda function; you don''t need to upgrade your client application. </p> <p>Consider the following examples:</p> <ul> <li> <p>In a pizza ordering application, after the user provides all of the information for placing an order, you use a Lambda function to place an order with a pizzeria. </p> </li> <li> <p>In a gaming application, when a user says "pick up a rock," this information must go back to the client application so that it can perform the operation and update the graphics. In this case, you want Amazon Lex to return the intent data to the client. </p> </li> </ul>'
+    KendraConfiguration:
+      type: object
+      required:
+        - kendraIndex
+        - role
+      properties:
+        kendraIndex:
+          $ref: '#/components/schemas/KendraIndexArn'
+          description: 'The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot. If the Amazon Kendra index does not exist, you get an exception when you call the <code>PutIntent</code> operation.'
+        queryFilterString:
+          $ref: '#/components/schemas/QueryFilterString'
+          description: '<p>A query filter that Amazon Lex sends to Amazon Kendra to filter the response from the query. The filter is in the format defined by Amazon Kendra. For more information, see <a href="http://docs.aws.amazon.com/kendra/latest/dg/filtering.html">Filtering queries</a>.</p> <p>You can override this filter string with a new filter string at runtime.</p>'
+        role:
+          $ref: '#/components/schemas/roleArn'
+          description: 'The Amazon Resource Name (ARN) of an IAM role that has permission to search the Amazon Kendra index. The role must be in the same account and Region as the Amazon Lex bot. If the role does not exist, you get an exception when you call the <code>PutIntent</code> operation.'
+      description: 'Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html"> AMAZON.KendraSearchIntent</a>.'
     SlotTypeName:
       type: string
       pattern: '^([A-Za-z]_?)+$'
@@ -4915,6 +4966,9 @@ components:
         createVersion:
           $ref: '#/components/schemas/Boolean'
           description: 'When set to <code>true</code> a new numbered version of the intent is created. This is the same as calling the <code>CreateIntentVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.'
+        kendraConfiguration:
+          $ref: '#/components/schemas/KendraConfiguration'
+          description: 'Configuration information required to use the <code>AMAZON.KendraSearchIntent</code> intent to connect to an Amazon Kendra index. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html"> AMAZON.KendraSearchIntent</a>.'
     PutSlotTypeRequest:
       type: object
       title: PutSlotTypeRequest

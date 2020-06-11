@@ -3,7 +3,7 @@ info:
   version: '2015-05-28'
   x-release: v4
   title: AWS IoT Data Plane
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete thing shadows. A thing shadow is a persistent representation of your things and their state in the AWS cloud.</p>'
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete shadows. A shadow is a persistent representation of your things and their state in the AWS cloud.</p> <p>Find the endpoint address for actions in the AWS IoT data plane by running this CLI command:</p> <p> <code>aws iot describe-endpoint --endpoint-type iot:Data-ATS</code> </p> <p>The service name used by <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">AWS Signature Version 4</a> to sign requests is: <i>iotdevicegateway</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -108,7 +108,7 @@ paths:
   '/things/{thingName}/shadow':
     delete:
       operationId: DeleteThingShadow
-      description: '<p>Deletes the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: '<p>Deletes the shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the AWS IoT Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -171,9 +171,18 @@ paths:
           description: The name of the thing.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9_-]+'
+            pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -184,7 +193,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetThingShadow
-      description: '<p>Gets the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: '<p>Gets the shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the AWS IoT Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -247,12 +256,21 @@ paths:
           description: The name of the thing.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9_-]+'
+            pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 64
     post:
       operationId: UpdateThingShadow
-      description: '<p>Updates the thing shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: '<p>Updates the shadow for the specified thing.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the AWS IoT Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -321,9 +339,18 @@ paths:
           description: The name of the thing.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9_-]+'
+            pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: name
+          in: query
+          required: false
+          description: The name of the shadow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 64
       requestBody:
         required: true
         content:
@@ -336,10 +363,95 @@ paths:
                 payload:
                   description: 'The state information, in JSON format.'
                   type: string
+  '/api/things/shadow/ListNamedShadowsForThing/{thingName}':
+    get:
+      operationId: ListNamedShadowsForThing
+      description: Lists the shadows for the specified thing.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNamedShadowsForThingResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '486':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the thing.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to retrieve the next set of results.
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          required: false
+          description: The result page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/topics/{topic}':
     post:
       operationId: Publish
-      description: '<p>Publishes state information.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http">HTTP Protocol</a> in the <i>AWS IoT Developer Guide</i>.</p>'
+      description: '<p>Publishes state information.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http">HTTP Protocol</a> in the AWS IoT Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -461,62 +573,14 @@ components:
           $ref: '#/components/schemas/JsonDocument'
           description: 'The state information, in JSON format.'
       description: The output from the DeleteThingShadow operation.
-    ResourceNotFoundException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: The specified resource does not exist.
-    InvalidRequestException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: The request is not valid.
-    ThrottlingException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: The rate exceeds the limit.
-    UnauthorizedException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: You are not authorized to perform this operation.
-    ServiceUnavailableException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: The service is temporarily unavailable.
-    InternalFailureException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: An unexpected error has occurred.
-    MethodNotAllowedException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: The message for the exception.
-      description: The specified combination of HTTP verb and URI is not supported.
-    UnsupportedDocumentEncodingException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/errorMessage'
-          description: The message for the exception.
-      description: The document encoding is not supported.
+    ResourceNotFoundException: {}
+    InvalidRequestException: {}
+    ThrottlingException: {}
+    UnauthorizedException: {}
+    ServiceUnavailableException: {}
+    InternalFailureException: {}
+    MethodNotAllowedException: {}
+    UnsupportedDocumentEncodingException: {}
     GetThingShadowResponse:
       type: object
       properties:
@@ -524,6 +588,18 @@ components:
           $ref: '#/components/schemas/JsonDocument'
           description: 'The state information, in JSON format.'
       description: The output from the GetThingShadow operation.
+    ListNamedShadowsForThingResponse:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/NamedShadowList'
+          description: The list of shadows for the specified thing.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'The token for the next set of results, or null if there are no additional results.'
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+          description: The Epoch date and time the response was generated by AWS IoT.
     UpdateThingShadowResponse:
       type: object
       properties:
@@ -531,27 +607,18 @@ components:
           $ref: '#/components/schemas/JsonDocument'
           description: 'The state information, in JSON format.'
       description: The output from the UpdateThingShadow operation.
-    ConflictException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: The message for the exception.
-      description: The specified version does not match the version of the document.
-    RequestEntityTooLargeException:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: The message for the exception.
-      description: The payload exceeds the maximum size allowed.
-    ErrorMessage:
-      type: string
+    ConflictException: {}
+    RequestEntityTooLargeException: {}
     ThingName:
       type: string
-      pattern: '[a-zA-Z0-9_-]+'
+      pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
       maxLength: 128
+    ShadowName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 64
     DeleteThingShadowRequest:
       type: object
       title: DeleteThingShadowRequest
@@ -564,8 +631,22 @@ components:
       title: GetThingShadowRequest
       properties: {}
       description: The input for the GetThingShadow operation.
-    errorMessage:
+    NextToken:
       type: string
+    PageSize:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListNamedShadowsForThingRequest:
+      type: object
+      title: ListNamedShadowsForThingRequest
+      properties: {}
+    NamedShadowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ShadowName'
+    Timestamp:
+      type: integer
     Payload:
       type: string
     Topic:
