@@ -36,7 +36,7 @@ var resolverContext = {
   called: false
 }
 var fromLeads = false;
-var newBlackList = [];
+var newBlockList = [];
 
 var warnings = [];
 var moved = [];
@@ -265,8 +265,8 @@ function updateCollection(dir, command) {
     .then(function(){
       console.log('Finishing successfully');
       fs.writeFileSync(pathLib.join(__dirname,'../metadata/httpCache.yaml'),YAML.safeDump(httpCache, {lineWidth:-1}),'utf8');
-      if (newBlackList.length) {
-        console.warn(utilLib.inspect(newBlackList));
+      if (newBlockList.length) {
+        console.warn(utilLib.inspect(newBlockList));
       }
     });
 }
@@ -621,7 +621,7 @@ function writeSpec(source, format, exPatch, command) {
         else console.log(e.message||e.context.message||e); // FIXME openapi_3
       }
       else {
-        newBlackList.push(resolverContext.source);
+        newBlockList.push(resolverContext.source);
       }
     });
 }

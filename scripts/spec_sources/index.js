@@ -27,7 +27,7 @@ var specSources = {
 };
 var catalogProviders = _.keys(specSources);
 
-var blackListedUrls = util.readYaml(__dirname + '/blacklist.yaml');
+var blockListedUrls = util.readYaml(__dirname + '/blocklist.yaml');
 
 function providerName(info) {
   if (info.hasOwnProperty('x-providerName')) return info['x-providerName'];
@@ -72,7 +72,7 @@ exports.getCatalogsLeads = function (providers = catalogProviders) {
   return Promise.all(promises)
     .then(function (catalogsLeads) {
       var allLeads = _.flatten(catalogsLeads);
-      return _.omit(indexByOriginUrl(allLeads), blackListedUrls);
+      return _.omit(indexByOriginUrl(allLeads), blockListedUrls);
     });
 }
 
