@@ -4141,10 +4141,10 @@ paths:
                   description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the <code>requestTemplates</code> property on the Integration resource. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>. </p> <ul> <li><p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the integration back end without transformation.</p></li> <li><p><code>NEVER</code> rejects unmapped content types with an HTTP 415 ''Unsupported Media Type'' response.</p></li> <li><p><code>WHEN_NO_TEMPLATES</code> allows pass-through when the integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p></li> </ul>'
                   type: string
                 cacheNamespace:
-                  description: A list of request parameters whose values are to be cached.
+                  description: 'Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the <code>cacheNamespace</code>. You can specify the same <code>cacheNamespace</code> across resources to return the same cached data for requests to different resources.'
                   type: string
                 cacheKeyParameters:
-                  description: An API-specific tag group of related cached parameters.
+                  description: 'A list of request parameters whose values API Gateway caches. To be valid values for <code>cacheKeyParameters</code>, these parameters must also be specified for <a>Method</a> <code>requestParameters</code>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -4163,7 +4163,7 @@ paths:
                   properties:
                     insecureSkipVerification:
                       $ref: '#/components/schemas/Boolean'
-                      description: 'Specifies whether API Gateway skips trust chain validation of the server certificate during the TLS handshake. Supported only for <code>HTTP</code> and <code>HTTP_PROXY</code> integrations. By default, API Gateway validates that certificates for integration endpoints are issued by a <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html">supported Certificate Authority</a>. If enabled, API Gateway skips trust chain validation of the server certificate. This is not recommended, but it enables you to use certificates that are signed by private Certificate Authorities, or certificates that are self-signed.'
+                      description: 'Specifies whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html">supported certificate authority</a>. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate''s expiration date, hostname, and presence of a root certificate authority. Supported only for <code>HTTP</code> and <code>HTTP_PROXY</code> integrations.'
     patch:
       operationId: UpdateIntegration
       description: Represents an update integration.
@@ -5873,7 +5873,7 @@ paths:
                 - body
               properties:
                 body:
-                  description: '[Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.'
+                  description: '[Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.'
                   type: string
     patch:
       operationId: UpdateRestApi
@@ -7573,7 +7573,7 @@ paths:
                 - body
               properties:
                 body:
-                  description: '[Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.'
+                  description: '[Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -8416,7 +8416,7 @@ components:
           description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
         cacheNamespace:
           $ref: '#/components/schemas/String'
-          description: 'An API-specific tag group of related cached parameters. To be valid values for <code>cacheKeyParameters</code>, these parameters must also be specified for <a>Method</a> <code>requestParameters</code>.'
+          description: 'Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the <code>cacheNamespace</code>. You can specify the same <code>cacheNamespace</code> across resources to return the same cached data for requests to different resources.'
         cacheKeyParameters:
           $ref: '#/components/schemas/ListOfString'
           description: 'A list of request parameters whose values API Gateway caches. To be valid values for <code>cacheKeyParameters</code>, these parameters must also be specified for <a>Method</a> <code>requestParameters</code>.'
@@ -9713,7 +9713,7 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/Blob'
-          description: '[Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.'
+          description: '[Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.'
       description: A POST request to import an API to API Gateway using an input of an API definition file.
     IntegrationType:
       type: string
@@ -9733,7 +9733,7 @@ components:
       properties:
         insecureSkipVerification:
           $ref: '#/components/schemas/Boolean'
-          description: 'Specifies whether API Gateway skips trust chain validation of the server certificate during the TLS handshake. Supported only for <code>HTTP</code> and <code>HTTP_PROXY</code> integrations. By default, API Gateway validates that certificates for integration endpoints are issued by a <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html">supported Certificate Authority</a>. If enabled, API Gateway skips trust chain validation of the server certificate. This is not recommended, but it enables you to use certificates that are signed by private Certificate Authorities, or certificates that are self-signed.'
+          description: 'Specifies whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html">supported certificate authority</a>. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate''s expiration date, hostname, and presence of a root certificate authority. Supported only for <code>HTTP</code> and <code>HTTP_PROXY</code> integrations.'
     Long:
       type: integer
     ListOfLong:
@@ -9944,10 +9944,10 @@ components:
           description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the <code>requestTemplates</code> property on the Integration resource. There are three valid values: <code>WHEN_NO_MATCH</code>, <code>WHEN_NO_TEMPLATES</code>, and <code>NEVER</code>. </p> <ul> <li><p><code>WHEN_NO_MATCH</code> passes the request body for unmapped content types through to the integration back end without transformation.</p></li> <li><p><code>NEVER</code> rejects unmapped content types with an HTTP 415 ''Unsupported Media Type'' response.</p></li> <li><p><code>WHEN_NO_TEMPLATES</code> allows pass-through when the integration has NO content types mapped to templates. However if there is at least one content type defined, unmapped content types will be rejected with the same 415 response.</p></li> </ul>'
         cacheNamespace:
           $ref: '#/components/schemas/String'
-          description: A list of request parameters whose values are to be cached.
+          description: 'Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the <code>cacheNamespace</code>. You can specify the same <code>cacheNamespace</code> across resources to return the same cached data for requests to different resources.'
         cacheKeyParameters:
           $ref: '#/components/schemas/ListOfString'
-          description: An API-specific tag group of related cached parameters.
+          description: 'A list of request parameters whose values API Gateway caches. To be valid values for <code>cacheKeyParameters</code>, these parameters must also be specified for <a>Method</a> <code>requestParameters</code>.'
         contentHandling:
           $ref: '#/components/schemas/ContentHandlingStrategy'
           description: '<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p> <ul> <li><p><code>CONVERT_TO_BINARY</code>: Converts a request payload from a Base64-encoded string to the corresponding binary blob.</p></li> <li><p><code>CONVERT_TO_TEXT</code>: Converts a request payload from a binary blob to a Base64-encoded string.</p></li> </ul> <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehavior</code> is configured to support payload pass-through.</p>'
@@ -10024,7 +10024,7 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/Blob'
-          description: '[Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.'
+          description: '[Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.'
       description: 'A PUT request to update an existing API, with external API definitions specified as the request body.'
     TagResourceRequest:
       type: object
