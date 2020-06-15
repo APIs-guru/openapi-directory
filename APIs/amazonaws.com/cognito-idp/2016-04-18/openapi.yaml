@@ -1195,6 +1195,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AliasExistsException'
         '486':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '487':
           description: InternalErrorException
           content:
             application/json:
@@ -11026,7 +11032,7 @@ components:
     AuthParametersType:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/AuthParametersValueType'
+        $ref: '#/components/schemas/StringType'
     AnalyticsMetadataType:
       type: object
       properties:
@@ -11344,9 +11350,6 @@ components:
           $ref: '#/components/schemas/EventFeedbackType'
           description: 'A flag specifying the user feedback captured at the time of an event request is good or bad. '
       description: The authentication event type.
-    AuthParametersValueType:
-      type: string
-      format: password
     IntegerType:
       type: integer
     NewDeviceMetadataType:

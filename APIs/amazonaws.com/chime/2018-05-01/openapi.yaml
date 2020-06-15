@@ -1712,7 +1712,7 @@ paths:
   /meetings:
     post:
       operationId: CreateMeeting
-      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
       responses:
         '201':
           description: Success
@@ -1792,7 +1792,7 @@ paths:
                   maxLength: 64
                   format: password
                 MediaRegion:
-                  description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
+                  description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
                   type: string
                 Tags:
                   description: The tag key-value pairs.
@@ -1802,7 +1802,7 @@ paths:
                   minItems: 1
                   maxItems: 50
                 NotificationsConfiguration:
-                  description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
+                  description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
                   type: object
                   properties:
                     SnsTopicArn:
@@ -1892,6 +1892,130 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/meetings#operation=create-attendees':
+    post:
+      operationId: CreateMeetingWithAttendees
+      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMeetingWithAttendeesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - create-attendees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ClientRequestToken
+              properties:
+                ClientRequestToken:
+                  description: The unique identifier for the client request. Use a different token for different meetings.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                ExternalMeetingId:
+                  description: The external meeting ID.
+                  type: string
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                MeetingHostId:
+                  description: Reserved.
+                  type: string
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                MediaRegion:
+                  description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+                  type: string
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+                NotificationsConfiguration:
+                  description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
+                  type: object
+                  properties:
+                    SnsTopicArn:
+                      $ref: '#/components/schemas/Arn'
+                      description: The SNS topic ARN.
+                    SqsQueueArn:
+                      $ref: '#/components/schemas/Arn'
+                      description: The SQS queue ARN.
+                Attendees:
+                  description: The request containing the attendees to create.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateAttendeeRequestItem'
+                  minItems: 1
+                  maxItems: 5
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /phone-number-orders:
     post:
       operationId: CreatePhoneNumberOrder
@@ -9607,6 +9731,17 @@ components:
       minLength: 1
       maxLength: 1024
       format: password
+    CreateMeetingWithAttendeesResponse:
+      type: object
+      properties:
+        Meeting:
+          $ref: '#/components/schemas/Meeting'
+        Attendees:
+          $ref: '#/components/schemas/AttendeeList'
+          description: 'The attendee information, including attendees IDs and join tokens.'
+        Errors:
+          $ref: '#/components/schemas/BatchCreateAttendeeErrorList'
+          description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
     CreatePhoneNumberOrderResponse:
       type: object
       properties:
@@ -10616,7 +10751,7 @@ components:
         SqsQueueArn:
           $ref: '#/components/schemas/Arn'
           description: The SQS queue ARN.
-      description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.
+      description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
     CreateMeetingRequest:
       type: object
       required:
@@ -10634,7 +10769,7 @@ components:
           description: Reserved.
         MediaRegion:
           $ref: '#/components/schemas/String'
-          description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
+          description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
         Tags:
           $ref: '#/components/schemas/MeetingTagList'
           description: The tag key-value pairs.
@@ -10657,6 +10792,38 @@ components:
           $ref: '#/components/schemas/String'
           description: 'The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
       description: A meeting created using the Amazon Chime SDK.
+    CreateMeetingWithAttendeesRequestItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CreateAttendeeRequestItem'
+      minItems: 1
+      maxItems: 5
+    CreateMeetingWithAttendeesRequest:
+      type: object
+      required:
+        - ClientRequestToken
+      title: CreateMeetingWithAttendeesRequest
+      properties:
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: The unique identifier for the client request. Use a different token for different meetings.
+        ExternalMeetingId:
+          $ref: '#/components/schemas/ExternalMeetingIdType'
+          description: The external meeting ID.
+        MeetingHostId:
+          $ref: '#/components/schemas/ExternalUserIdType'
+          description: Reserved.
+        MediaRegion:
+          $ref: '#/components/schemas/String'
+          description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+        Tags:
+          $ref: '#/components/schemas/MeetingTagList'
+          description: The tag key-value pairs.
+        NotificationsConfiguration:
+          $ref: '#/components/schemas/MeetingNotificationConfiguration'
+        Attendees:
+          $ref: '#/components/schemas/CreateMeetingWithAttendeesRequestItemList'
+          description: The request containing the attendees to create.
     PhoneNumberProductType:
       type: string
       enum:

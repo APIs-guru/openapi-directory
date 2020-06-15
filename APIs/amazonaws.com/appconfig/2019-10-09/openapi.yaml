@@ -3,7 +3,7 @@ info:
   version: '2019-10-09'
   x-release: v4
   title: Amazon AppConfig
-  description: '<fullname>AWS AppConfig</fullname> <p>Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.</p> <p>To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.</p> <p>During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. </p> <p>AppConfig supports multiple use cases. Here are some examples.</p> <ul> <li> <p> <b>Application tuning</b>: Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic.</p> </li> <li> <p> <b>Feature toggle</b>: Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement. </p> </li> <li> <p> <b>User membership</b>: Use AppConfig to allow premium subscribers to access paid content. </p> </li> <li> <p> <b>Operational issues</b>: Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system.</p> </li> </ul> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html">AWS AppConfig User Guide</a>.</p>'
+  description: '<fullname>AWS AppConfig</fullname> <p>Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.</p> <p>To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.</p> <p>During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. </p> <p>AppConfig supports multiple use cases. Here are some examples.</p> <ul> <li> <p> <b>Application tuning</b>: Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic.</p> </li> <li> <p> <b>Feature toggle</b>: Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement. </p> </li> <li> <p> <b>Allow list</b>: Use AppConfig to allow premium subscribers to access paid content. </p> </li> <li> <p> <b>Operational issues</b>: Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system.</p> </li> </ul> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html">AWS AppConfig User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -261,7 +261,6 @@ paths:
               required:
                 - Name
                 - LocationUri
-                - RetrievalRoleArn
               properties:
                 Name:
                   description: A name for the configuration profile.
@@ -652,6 +651,111 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions#Content-Type':
+    post:
+      operationId: CreateHostedConfigurationVersion
+      description: Create a new configuration in the AppConfig configuration store.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedConfigurationVersion'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The configuration profile ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: Description
+          in: header
+          required: false
+          description: A description of the configuration.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1024
+        - name: Content-Type
+          in: header
+          required: true
+          description: 'A standard MIME type describing the format of the configuration content. For more information, see <a href="https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: Latest-Version-Number
+          in: header
+          required: false
+          description: 'An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version of the latest hosted configuration version.'
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Content
+              properties:
+                Content:
+                  description: The content of the configuration or the configuration data.
+                  type: string
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/applications/{ApplicationId}':
     delete:
       operationId: DeleteApplication
@@ -1157,6 +1261,109 @@ paths:
                     $ref: '#/components/schemas/Monitor'
                   minItems: 0
                   maxItems: 5
+  '/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}':
+    delete:
+      operationId: DeleteHostedConfigurationVersion
+      description: Delete a version of a configuration from the AppConfig configuration store.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The configuration profile ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: VersionNumber
+          in: path
+          required: true
+          description: The versions number to delete.
+          schema:
+            type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetHostedConfigurationVersion
+      description: Get information about a specific configuration version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedConfigurationVersion'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The configuration profile ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: VersionNumber
+          in: path
+          required: true
+          description: The version.
+          schema:
+            type: integer
   '/applications/{Application}/environments/{Environment}/configurations/{Configuration}#client_id':
     get:
       operationId: GetConfiguration
@@ -1226,7 +1433,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 128
+            maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1609,7 +1816,7 @@ paths:
                   description: The configuration version to deploy.
                   type: string
                   minLength: 1
-                  maxLength: 128
+                  maxLength: 1024
                 Description:
                   description: A description of the deployment.
                   type: string
@@ -1622,6 +1829,86 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions':
+    get:
+      operationId: ListHostedConfigurationVersions
+      description: View a list of configurations stored in the AppConfig configuration store by version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedConfigurationVersions'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ApplicationId
+          in: path
+          required: true
+          description: The application ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: ConfigurationProfileId
+          in: path
+          required: true
+          description: The configuration profile ID.
+          schema:
+            type: string
+            pattern: '[a-z0-9]{4,7}'
+        - name: max_results
+          in: query
+          required: false
+          description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next_token
+          in: query
+          required: false
+          description: 'A token to start the list. Use this token to get the next set of results. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{ResourceArn}':
     get:
       operationId: ListTagsForResource
@@ -1819,7 +2106,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 128
+            maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1993,7 +2280,15 @@ components:
           $ref: '#/components/schemas/RoleArn'
           description: ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.
       description: Amazon CloudWatch alarms to monitor during the deployment process.
+    HostedConfigurationVersion:
+      type: object
+      properties:
+        Content:
+          $ref: '#/components/schemas/Blob'
+          description: The content of the configuration or the configuration data.
+    ServiceQuotaExceededException: {}
     ConflictException: {}
+    PayloadTooLargeException: {}
     Configuration:
       type: object
       properties:
@@ -2102,6 +2397,15 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: The token for the next set of items to return. Use this token to get the next set of results.
+    HostedConfigurationVersions:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/HostedConfigurationVersionSummaryList'
+          description: The elements from this collection.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next set of items to return. Use this token to get the next set of results.
     ResourceTags:
       type: object
       properties:
@@ -2142,7 +2446,7 @@ components:
     Version:
       type: string
       minLength: 1
-      maxLength: 128
+      maxLength: 1024
     String:
       type: string
     Uri:
@@ -2215,7 +2519,6 @@ components:
       required:
         - Name
         - LocationUri
-        - RetrievalRoleArn
       title: CreateConfigurationProfileRequest
       properties:
         Name:
@@ -2312,6 +2615,21 @@ components:
         Tags:
           $ref: '#/components/schemas/TagMap'
           description: 'Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+    StringWithLengthBetween1And255:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Integer:
+      type: integer
+    CreateHostedConfigurationVersionRequest:
+      type: object
+      required:
+        - Content
+      title: CreateHostedConfigurationVersionRequest
+      properties:
+        Content:
+          $ref: '#/components/schemas/Blob'
+          description: The content of the configuration or the configuration data.
     DeleteApplicationRequest:
       type: object
       title: DeleteApplicationRequest
@@ -2331,8 +2649,10 @@ components:
       type: object
       title: DeleteEnvironmentRequest
       properties: {}
-    Integer:
-      type: integer
+    DeleteHostedConfigurationVersionRequest:
+      type: object
+      title: DeleteHostedConfigurationVersionRequest
+      properties: {}
     Percentage:
       type: number
       format: float
@@ -2470,6 +2790,33 @@ components:
       type: object
       title: GetEnvironmentRequest
       properties: {}
+    GetHostedConfigurationVersionRequest:
+      type: object
+      title: GetHostedConfigurationVersionRequest
+      properties: {}
+    HostedConfigurationVersionSummary:
+      type: object
+      properties:
+        ApplicationId:
+          $ref: '#/components/schemas/Id'
+          description: The application ID.
+        ConfigurationProfileId:
+          $ref: '#/components/schemas/Id'
+          description: The configuration profile ID.
+        VersionNumber:
+          $ref: '#/components/schemas/Integer'
+          description: The configuration version.
+        Description:
+          $ref: '#/components/schemas/Description'
+          description: A description of the configuration.
+        ContentType:
+          $ref: '#/components/schemas/StringWithLengthBetween1And255'
+          description: 'A standard MIME type describing the format of the configuration content. For more information, see <a href="https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a>.'
+      description: Information about the configuration.
+    HostedConfigurationVersionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HostedConfigurationVersionSummary'
     MaxResults:
       type: integer
       minimum: 1
@@ -2493,6 +2840,10 @@ components:
     ListEnvironmentsRequest:
       type: object
       title: ListEnvironmentsRequest
+      properties: {}
+    ListHostedConfigurationVersionsRequest:
+      type: object
+      title: ListHostedConfigurationVersionsRequest
       properties: {}
     ListTagsForResourceRequest:
       type: object
