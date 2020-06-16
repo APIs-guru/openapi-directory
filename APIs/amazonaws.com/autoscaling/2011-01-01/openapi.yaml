@@ -639,6 +639,117 @@ paths:
             type: string
             enum:
               - '2011-01-01'
+  '/#Action=CancelInstanceRefresh':
+    get:
+      x-aws-operation-name: CancelInstanceRefresh
+      operationId: GET_CancelInstanceRefresh
+      description: '<p>Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling Instances Based on an Instance Refresh</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CancelInstanceRefreshAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+        '482':
+          description: ActiveInstanceRefreshNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ActiveInstanceRefreshNotFoundFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: query
+          required: true
+          description: The name of the Auto Scaling group.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CancelInstanceRefresh
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CancelInstanceRefresh
+      operationId: POST_CancelInstanceRefresh
+      description: '<p>Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling Instances Based on an Instance Refresh</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CancelInstanceRefreshAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+        '482':
+          description: ActiveInstanceRefreshNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ActiveInstanceRefreshNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CancelInstanceRefreshType'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CancelInstanceRefresh
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
   '/#Action=CompleteLifecycleAction':
     get:
       x-aws-operation-name: CompleteLifecycleAction
@@ -2530,6 +2641,126 @@ paths:
             type: string
             enum:
               - DescribeAutoScalingNotificationTypes
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
+  '/#Action=DescribeInstanceRefreshes':
+    get:
+      x-aws-operation-name: DescribeInstanceRefreshes
+      operationId: GET_DescribeInstanceRefreshes
+      description: '<p>Describes one or more instance refreshes.</p> <p>You can determine the status of a request by looking at the <code>Status</code> parameter. The following are the possible statuses: </p> <ul> <li> <p> <code>Pending</code> - The request was created, but the operation has not started.</p> </li> <li> <p> <code>InProgress</code> - The operation is in progress.</p> </li> <li> <p> <code>Successful</code> - The operation completed successfully.</p> </li> <li> <p> <code>Failed</code> - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> </li> <li> <p> <code>Cancelled</code> - The operation is cancelled. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceRefreshesAnswer'
+        '480':
+          description: InvalidNextToken
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: query
+          required: true
+          description: The name of the Auto Scaling group.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: InstanceRefreshIds
+          in: query
+          required: false
+          description: One or more instance refresh IDs.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/XmlStringMaxLen255'
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+          schema:
+            type: string
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: MaxRecords
+          in: query
+          required: false
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+          schema:
+            type: integer
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeInstanceRefreshes
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeInstanceRefreshes
+      operationId: POST_DescribeInstanceRefreshes
+      description: '<p>Describes one or more instance refreshes.</p> <p>You can determine the status of a request by looking at the <code>Status</code> parameter. The following are the possible statuses: </p> <ul> <li> <p> <code>Pending</code> - The request was created, but the operation has not started.</p> </li> <li> <p> <code>InProgress</code> - The operation is in progress.</p> </li> <li> <p> <code>Successful</code> - The operation completed successfully.</p> </li> <li> <p> <code>Failed</code> - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> </li> <li> <p> <code>Cancelled</code> - The operation is cancelled. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceRefreshesAnswer'
+        '480':
+          description: InvalidNextToken
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeInstanceRefreshesType'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeInstanceRefreshes
         - name: Version
           in: query
           required: true
@@ -5507,7 +5738,7 @@ paths:
         - name: ScalingProcesses
           in: query
           required: false
-          description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
+          description: '<p>One or more of the following processes:</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>InstanceRefresh</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> </ul> <p>If you omit this parameter, all processes are specified.</p>'
           schema:
             type: array
             items:
@@ -5883,6 +6114,139 @@ paths:
             type: string
             enum:
               - '2011-01-01'
+  '/#Action=StartInstanceRefresh':
+    get:
+      x-aws-operation-name: StartInstanceRefresh
+      operationId: GET_StartInstanceRefresh
+      description: '<p>Starts a new instance refresh operation, which triggers a rolling replacement of all previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an active instance refresh operation, use the <a>CancelInstanceRefresh</a> API.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling Instances Based on an Instance Refresh</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartInstanceRefreshAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+        '482':
+          description: InstanceRefreshInProgressFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InstanceRefreshInProgressFault'
+      parameters:
+        - name: AutoScalingGroupName
+          in: query
+          required: true
+          description: The name of the Auto Scaling group.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: Strategy
+          in: query
+          required: false
+          description: '<p>The strategy to use for the instance refresh. The only valid value is <code>Rolling</code>.</p> <p>A rolling update is an update that is applied to all instances in an Auto Scaling group until all instances have been updated. A rolling update can fail due to failed health checks or if instances are on standby or are protected from scale-in. If the rolling update process fails, any instances that were already replaced are not rolled back to their previous configuration. </p>'
+          schema:
+            type: string
+            enum:
+              - Rolling
+        - name: Preferences
+          in: query
+          required: false
+          description: Set of preferences associated with the instance refresh request.
+          schema:
+            type: object
+            properties:
+              MinHealthyPercentage:
+                $ref: '#/components/schemas/IntPercent'
+                description: 'The amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default is <code>90</code>. '
+              InstanceWarmup:
+                $ref: '#/components/schemas/RefreshInstanceWarmup'
+                description: '<p>The number of seconds until a newly launched instance is configured and ready to use. During this time, Amazon EC2 Auto Scaling does not immediately move on to the next replacement. The default is to use the value specified for the health check grace period for the group.</p> <p>Note: While warming up, a newly launched instance is not counted toward the aggregated metrics of the Auto Scaling group. </p>'
+            description: 'Describes information used to start an instance refresh. '
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartInstanceRefresh
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartInstanceRefresh
+      operationId: POST_StartInstanceRefresh
+      description: '<p>Starts a new instance refresh operation, which triggers a rolling replacement of all previously launched instances in the Auto Scaling group with a new group of instances.</p> <p>If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an active instance refresh operation, use the <a>CancelInstanceRefresh</a> API.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling Instances Based on an Instance Refresh</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartInstanceRefreshAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+        '482':
+          description: InstanceRefreshInProgressFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InstanceRefreshInProgressFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StartInstanceRefreshType'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartInstanceRefresh
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2011-01-01'
   '/#Action=SuspendProcesses':
     get:
       x-aws-operation-name: SuspendProcesses
@@ -5916,7 +6280,7 @@ paths:
         - name: ScalingProcesses
           in: query
           required: false
-          description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
+          description: '<p>One or more of the following processes:</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>InstanceRefresh</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> </ul> <p>If you omit this parameter, all processes are specified.</p>'
           schema:
             type: array
             items:
@@ -6446,6 +6810,13 @@ components:
       description: '<p>Describes information used for one or more scheduled scaling action updates in a <a>BatchPutScheduledUpdateGroupAction</a> operation.</p> <p>When updating a scheduled scaling action, all optional parameters are left unchanged if not specified.</p>'
     AlreadyExistsFault: {}
     LimitExceededFault: {}
+    CancelInstanceRefreshAnswer:
+      type: object
+      properties:
+        InstanceRefreshId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The instance refresh ID.
+    ActiveInstanceRefreshNotFoundFault: {}
     CompleteLifecycleActionAnswer:
       type: object
       properties: {}
@@ -6485,7 +6856,7 @@ components:
         SpotMaxPrice:
           $ref: '#/components/schemas/MixedInstanceSpotPrice'
           description: '<p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If you leave the value of this parameter blank (which is the default), the maximum Spot price is set at the On-Demand price.</p> <p>To remove a value that you previously set, include the parameter but leave the value blank.</p>'
-      description: '<p>Describes an instances distribution for an Auto Scaling group with <a>MixedInstancesPolicy</a>.</p> <p>The instances distribution specifies the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacity.</p> <p>When you update <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>, or <code>SpotMaxPrice</code>, this update action does not deploy any changes across the running Amazon EC2 instances in the group. Your existing Spot Instances continue to run as long as the maximum price for those instances is higher than the current Spot price. When scale out occurs, Amazon EC2 Auto Scaling launches instances based on the new settings. When scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group''s termination policies.</p>'
+      description: '<p>Describes an instances distribution for an Auto Scaling group with a <a>MixedInstancesPolicy</a>.</p> <p>The instances distribution specifies the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacity.</p> <p>When you update <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>, or <code>SpotMaxPrice</code>, this update action does not deploy any changes across the running Amazon EC2 instances in the group. Your existing Spot Instances continue to run as long as the maximum price for those instances is higher than the current Spot price. When scale out occurs, Amazon EC2 Auto Scaling launches instances based on the new settings. When scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group''s termination policies.</p>'
     XmlStringMaxLen1600:
       type: string
       minLength: 1
@@ -6671,6 +7042,15 @@ components:
         AutoScalingNotificationTypes:
           $ref: '#/components/schemas/AutoScalingNotificationTypes'
           description: The notification types.
+    DescribeInstanceRefreshesAnswer:
+      type: object
+      properties:
+        InstanceRefreshes:
+          $ref: '#/components/schemas/InstanceRefreshes'
+          description: '<p>The instance refreshes for the specified group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html">Replacing Auto Scaling Instances Based on an Instance Refresh</a>.</p>'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+          description: 'A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the <code>NextToken</code> value when requesting the next set of items. This value is null when there are no more items to return.'
     LaunchConfigurationsType:
       type: object
       required:
@@ -7019,7 +7399,7 @@ components:
           description: '<p>The metric type. The following predefined metrics are available:</p> <ul> <li> <p> <code>ASGAverageCPUUtilization</code> - Average CPU utilization of the Auto Scaling group.</p> </li> <li> <p> <code>ASGAverageNetworkIn</code> - Average number of bytes received on all network interfaces by the Auto Scaling group.</p> </li> <li> <p> <code>ASGAverageNetworkOut</code> - Average number of bytes sent out on all network interfaces by the Auto Scaling group.</p> </li> <li> <p> <code>ALBRequestCountPerTarget</code> - Number of requests completed per target in an Application Load Balancer target group.</p> </li> </ul>'
         ResourceLabel:
           $ref: '#/components/schemas/XmlStringMaxLen1023'
-          description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Auto Scaling group.</p> <p>The format is <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where </p> <ul> <li> <p> <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and</p> </li> <li> <p> <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN.</p> </li> </ul>'
+          description: '<p>Identifies the resource associated with the metric type. You can''t specify a resource label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target group attached to the Auto Scaling group.</p> <p>Elastic Load Balancing sends data about your load balancers to Amazon CloudWatch. CloudWatch collects the data and specifies the format to use to access the data. The format is <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i>/targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code>, where </p> <ul> <li> <p> <code>app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> is the final portion of the load balancer ARN, and</p> </li> <li> <p> <code>targetgroup/<i>target-group-name</i>/<i>target-group-id</i> </code> is the final portion of the target group ARN.</p> </li> </ul> <p>To find the ARN for an Application Load Balancer, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use the <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html">DescribeTargetGroups</a> API operation.</p>'
       description: Represents a predefined metric for a target tracking scaling policy to use with Amazon EC2 Auto Scaling.
     CustomizedMetricSpecification:
       type: object
@@ -7055,6 +7435,20 @@ components:
     SetInstanceProtectionAnswer:
       type: object
       properties: {}
+    StartInstanceRefreshAnswer:
+      type: object
+      properties:
+        InstanceRefreshId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: A unique ID for tracking the progress of the request.
+    IntPercent:
+      type: integer
+      minimum: 0
+      maximum: 100
+    RefreshInstanceWarmup:
+      type: integer
+      minimum: 0
+    InstanceRefreshInProgressFault: {}
     ActivityType:
       type: object
       properties:
@@ -7528,6 +7922,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BlockDeviceMapping'
+    CancelInstanceRefreshType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      title: CancelInstanceRefreshType
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The name of the Auto Scaling group.
     ClassicLinkVPCSecurityGroups:
       type: array
       items:
@@ -7846,6 +8249,32 @@ components:
         NextToken:
           $ref: '#/components/schemas/XmlString'
           description: The token for the next set of items to return. (You received this token from a previous call.)
+    InstanceRefreshes:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceRefresh'
+    InstanceRefreshIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    DescribeInstanceRefreshesType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      title: DescribeInstanceRefreshesType
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The name of the Auto Scaling group.
+        InstanceRefreshIds:
+          $ref: '#/components/schemas/InstanceRefreshIds'
+          description: One or more instance refresh IDs.
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+          description: The token for the next set of items to return. (You received this token from a previous call.)
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+          description: The maximum number of items to return with this call. The default value is <code>50</code> and the maximum value is <code>100</code>.
     LifecycleHooks:
       type: array
       items:
@@ -8227,6 +8656,46 @@ components:
           $ref: '#/components/schemas/XmlStringMaxLen32'
           description: '<p>The number of capacity units contributed by the instance based on its instance type.</p> <p>Valid Range: Minimum value of 1. Maximum value of 999.</p>'
       description: Describes an EC2 instance.
+    InstanceRefreshStatus:
+      type: string
+      enum:
+        - Pending
+        - InProgress
+        - Successful
+        - Failed
+        - Cancelling
+        - Cancelled
+    InstancesToUpdate:
+      type: integer
+      minimum: 0
+    InstanceRefresh:
+      type: object
+      properties:
+        InstanceRefreshId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The instance refresh ID.
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The name of the Auto Scaling group.
+        Status:
+          $ref: '#/components/schemas/InstanceRefreshStatus'
+          description: '<p>The current status for the instance refresh operation:</p> <ul> <li> <p> <code>Pending</code> - The request was created, but the operation has not started.</p> </li> <li> <p> <code>InProgress</code> - The operation is in progress.</p> </li> <li> <p> <code>Successful</code> - The operation completed successfully.</p> </li> <li> <p> <code>Failed</code> - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities. </p> </li> <li> <p> <code>Cancelling</code> - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started. </p> </li> <li> <p> <code>Cancelled</code> - The operation is cancelled. </p> </li> </ul>'
+        StatusReason:
+          $ref: '#/components/schemas/XmlStringMaxLen1023'
+          description: 'Provides more details about the current status of the instance refresh. '
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+          description: The date and time at which the instance refresh began.
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+          description: The date and time at which the instance refresh ended.
+        PercentageComplete:
+          $ref: '#/components/schemas/IntPercent'
+          description: 'The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance''s health status and warm-up time. When the instance''s health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.'
+        InstancesToUpdate:
+          $ref: '#/components/schemas/InstancesToUpdate'
+          description: The number of instances remaining to update before the instance refresh is complete.
+      description: 'Describes an instance refresh for an Auto Scaling group. '
     OnDemandBaseCapacity:
       type: integer
     OnDemandPercentageAboveBaseCapacity:
@@ -8478,7 +8947,7 @@ components:
       properties:
         ProcessName:
           $ref: '#/components/schemas/XmlStringMaxLen255'
-          description: '<p>One of the following processes:</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> </ul>'
+          description: '<p>One of the following processes:</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>InstanceRefresh</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> </ul>'
       description: '<p>Describes a process type.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types">Scaling Processes</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
     Processes:
       type: array
@@ -8659,6 +9128,20 @@ components:
         InstanceId:
           $ref: '#/components/schemas/XmlStringMaxLen19'
           description: The ID of the instance.
+    RefreshPreferences:
+      type: object
+      properties:
+        MinHealthyPercentage:
+          $ref: '#/components/schemas/IntPercent'
+          description: 'The amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default is <code>90</code>. '
+        InstanceWarmup:
+          $ref: '#/components/schemas/RefreshInstanceWarmup'
+          description: '<p>The number of seconds until a newly launched instance is configured and ready to use. During this time, Amazon EC2 Auto Scaling does not immediately move on to the next replacement. The default is to use the value specified for the health check grace period for the group.</p> <p>Note: While warming up, a newly launched instance is not counted toward the aggregated metrics of the Auto Scaling group. </p>'
+      description: 'Describes information used to start an instance refresh. '
+    RefreshStrategy:
+      type: string
+      enum:
+        - Rolling
     ScalingPolicy:
       type: object
       properties:
@@ -8719,7 +9202,7 @@ components:
           description: The name of the Auto Scaling group.
         ScalingProcesses:
           $ref: '#/components/schemas/ProcessNames'
-          description: '<p>One or more of the following processes. If you omit this parameter, all processes are specified.</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> </ul>'
+          description: '<p>One or more of the following processes:</p> <ul> <li> <p> <code>Launch</code> </p> </li> <li> <p> <code>Terminate</code> </p> </li> <li> <p> <code>AddToLoadBalancer</code> </p> </li> <li> <p> <code>AlarmNotification</code> </p> </li> <li> <p> <code>AZRebalance</code> </p> </li> <li> <p> <code>HealthCheck</code> </p> </li> <li> <p> <code>InstanceRefresh</code> </p> </li> <li> <p> <code>ReplaceUnhealthy</code> </p> </li> <li> <p> <code>ScheduledActions</code> </p> </li> </ul> <p>If you omit this parameter, all processes are specified.</p>'
     ScheduledUpdateGroupActions:
       type: array
       items:
@@ -8809,6 +9292,21 @@ components:
         ProtectedFromScaleIn:
           $ref: '#/components/schemas/ProtectedFromScaleIn'
           description: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
+    StartInstanceRefreshType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      title: StartInstanceRefreshType
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+          description: The name of the Auto Scaling group.
+        Strategy:
+          $ref: '#/components/schemas/RefreshStrategy'
+          description: '<p>The strategy to use for the instance refresh. The only valid value is <code>Rolling</code>.</p> <p>A rolling update is an update that is applied to all instances in an Auto Scaling group until all instances have been updated. A rolling update can fail due to failed health checks or if instances are on standby or are protected from scale-in. If the rolling update process fails, any instances that were already replaced are not rolled back to their previous configuration. </p>'
+        Preferences:
+          $ref: '#/components/schemas/RefreshPreferences'
+          description: Set of preferences associated with the instance refresh request.
     SuspendedProcess:
       type: object
       properties:

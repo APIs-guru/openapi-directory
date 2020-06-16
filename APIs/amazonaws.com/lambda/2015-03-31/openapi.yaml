@@ -527,7 +527,7 @@ paths:
                   properties:
                     AdditionalVersionWeights:
                       $ref: '#/components/schemas/AdditionalVersionWeights'
-                      description: 'The name of the second alias, and the percentage of traffic that''s routed to it.'
+                      description: 'The second version, and the percentage of traffic that''s routed to it.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -969,6 +969,12 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/LayerVersionArn'
+                FileSystemConfigs:
+                  description: Connection settings for an Amazon EFS file system.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FileSystemConfig'
+                  maxItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1177,7 +1183,7 @@ paths:
                   properties:
                     AdditionalVersionWeights:
                       $ref: '#/components/schemas/AdditionalVersionWeights'
-                      description: 'The name of the second alias, and the percentage of traffic that''s routed to it.'
+                      description: 'The second version, and the percentage of traffic that''s routed to it.'
                 RevisionId:
                   description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
                   type: string
@@ -1733,7 +1739,7 @@ paths:
             maxLength: 128
     put:
       operationId: PutFunctionEventInvokeConfig
-      description: '<p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a> on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use <a>PutFunctionEventInvokeConfig</a>.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p> <p>To send an invocation record to a queue, topic, function, or event bus, specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">destination</a>. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.</p>'
+      description: '<p>Configures options for <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html">asynchronous invocation</a> on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use <a>UpdateFunctionEventInvokeConfig</a>.</p> <p>By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with <a>UpdateFunctionConfiguration</a>.</p> <p>To send an invocation record to a queue, topic, function, or event bus, specify a <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">destination</a>. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.</p>'
       responses:
         '200':
           description: Success
@@ -2480,6 +2486,12 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/LayerVersionArn'
+                FileSystemConfigs:
+                  description: Connection settings for an Amazon EFS file system.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FileSystemConfig'
+                  maxItems: 1
   '/2018-10-31/layers#find=LayerVersion&Arn':
     get:
       operationId: GetLayerVersionByArn
@@ -2612,72 +2624,96 @@ paths:
               schema:
                 $ref: '#/components/schemas/ENILimitReachedException'
         '490':
+          description: EFSMountConnectivityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EFSMountConnectivityException'
+        '491':
+          description: EFSMountFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EFSMountFailureException'
+        '492':
+          description: EFSMountTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EFSMountTimeoutException'
+        '493':
+          description: EFSIOException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EFSIOException'
+        '494':
           description: EC2ThrottledException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EC2ThrottledException'
-        '491':
+        '495':
           description: EC2AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EC2AccessDeniedException'
-        '492':
+        '496':
           description: InvalidSubnetIDException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidSubnetIDException'
-        '493':
+        '497':
           description: InvalidSecurityGroupIDException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidSecurityGroupIDException'
-        '494':
+        '498':
           description: InvalidZipFileException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidZipFileException'
-        '495':
+        '499':
           description: KMSDisabledException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSDisabledException'
-        '496':
+        '500':
           description: KMSInvalidStateException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
-        '497':
+        '501':
           description: KMSAccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSAccessDeniedException'
-        '498':
+        '502':
           description: KMSNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSNotFoundException'
-        '499':
+        '503':
           description: InvalidRuntimeException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRuntimeException'
-        '500':
+        '504':
           description: ResourceConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceConflictException'
-        '501':
+        '505':
           description: ResourceNotReadyException
           content:
             application/json:
@@ -4150,6 +4186,9 @@ components:
         LastUpdateStatusReasonCode:
           $ref: '#/components/schemas/LastUpdateStatusReasonCode'
           description: The reason code for the last update that was performed on the function.
+        FileSystemConfigs:
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: Connection settings for an Amazon EFS file system.
       description: Details about a function's configuration.
     Blob:
       type: string
@@ -4196,6 +4235,19 @@ components:
       pattern: 'arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+'
       minLength: 1
       maxLength: 140
+    FileSystemConfig:
+      type: object
+      required:
+        - Arn
+        - LocalMountPath
+      properties:
+        Arn:
+          $ref: '#/components/schemas/FileSystemArn'
+          description: The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
+        LocalMountPath:
+          $ref: '#/components/schemas/LocalMountPath'
+          description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
+      description: Details about the connection between a Lambda function and an Amazon EFS file system.
     CodeStorageExceededException: {}
     ResourceInUseException: {}
     GetAccountSettingsResponse:
@@ -4402,6 +4454,10 @@ components:
     EC2UnexpectedException: {}
     SubnetIPAddressLimitReachedException: {}
     ENILimitReachedException: {}
+    EFSMountConnectivityException: {}
+    EFSMountFailureException: {}
+    EFSMountTimeoutException: {}
+    EFSIOException: {}
     EC2ThrottledException: {}
     EC2AccessDeniedException: {}
     InvalidSubnetIDException: {}
@@ -4927,7 +4983,7 @@ components:
       properties:
         AdditionalVersionWeights:
           $ref: '#/components/schemas/AdditionalVersionWeights'
-          description: 'The name of the second alias, and the percentage of traffic that''s routed to it.'
+          description: 'The second version, and the percentage of traffic that''s routed to it.'
       description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.'
     AliasList:
       type: array
@@ -4969,7 +5025,7 @@ components:
           description: A description of the alias.
         RoutingConfig:
           $ref: '#/components/schemas/AliasRoutingConfiguration'
-          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
+          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
     Enabled:
       type: boolean
     MaximumBatchingWindowInSeconds:
@@ -5122,6 +5178,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LayerVersionArn'
+    FileSystemConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileSystemConfig'
+      maxItems: 1
     CreateFunctionRequest:
       type: object
       required:
@@ -5180,6 +5241,9 @@ components:
         Layers:
           $ref: '#/components/schemas/LayerList'
           description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+        FileSystemConfigs:
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: Connection settings for an Amazon EFS file system.
     DeleteAliasRequest:
       type: object
       title: DeleteAliasRequest
@@ -5247,6 +5311,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EventSourceMappingConfiguration'
+    FileSystemArn:
+      type: string
+      pattern: 'arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:access-point/fsap-[a-f0-9]{17}'
+      maxLength: 200
+    LocalMountPath:
+      type: string
+      pattern: '^/mnt/[a-zA-Z0-9-_.]+$'
+      maxLength: 160
     FunctionCodeLocation:
       type: object
       properties:
@@ -5723,7 +5795,7 @@ components:
           description: A description of the alias.
         RoutingConfig:
           $ref: '#/components/schemas/AliasRoutingConfiguration'
-          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing configuration</a> of the alias.'
+          description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
         RevisionId:
           $ref: '#/components/schemas/String'
           description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
@@ -5826,6 +5898,9 @@ components:
         Layers:
           $ref: '#/components/schemas/LayerList'
           description: 'A list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">function layers</a> to add to the function''s execution environment. Specify each layer by its ARN, including the version.'
+        FileSystemConfigs:
+          $ref: '#/components/schemas/FileSystemConfigList'
+          description: Connection settings for an Amazon EFS file system.
     UpdateFunctionEventInvokeConfigRequest:
       type: object
       title: UpdateFunctionEventInvokeConfigRequest
