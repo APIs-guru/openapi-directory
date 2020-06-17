@@ -5,12 +5,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Recommender
-  version: v1beta1
+  version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
@@ -20,9 +16,9 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.7.31
       format: google
-      url: 'https://recommender.googleapis.com/$discovery/rest?version=v1beta1'
+      url: 'https://recommender.googleapis.com/$discovery/rest?version=v1'
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: recommender
 externalDocs:
@@ -30,7 +26,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  '/v1beta1/{name}':
+  '/v1/{name}':
     get:
       description: |-
         Gets the requested recommendation. Requires the recommender.*.get
@@ -49,89 +45,38 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation'
+                $ref: '#/components/schemas/GoogleCloudRecommenderV1Recommendation'
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-  '/v1beta1/{name}:markAccepted':
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v1/{name}:markClaimed':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
-    post:
-      description: |-
-        Marks the Insight State as Accepted. Users can use this method to
-        indicate to the Recommender API that they have applied some action based
-        on the insight. This stops the insight content from being updated.
-
-        MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
-        the recommender.*.update IAM permission for the specified insight.
-      operationId: recommender.projects.locations.insightTypes.insights.markAccepted
-      parameters:
-        - description: Required. Name of the insight.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1MarkInsightAcceptedRequest'
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Insight'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-  '/v1beta1/{name}:markClaimed':
-    parameters:
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Marks the Recommendation State as Claimed. Users can use this method to
@@ -139,8 +84,8 @@ paths:
         recommendation themselves. This stops the recommendation content from being
         updated. Associated insights are frozen and placed in the ACCEPTED state.
 
-        MarkRecommendationClaimed can be applied to recommendations in CLAIMED or
-        ACTIVE state.
+        MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
+        SUCCEEDED, FAILED, or ACTIVE state.
 
         Requires the recommender.*.update IAM permission for the specified
         recommender.
@@ -157,34 +102,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1MarkRecommendationClaimedRequest'
+              $ref: '#/components/schemas/GoogleCloudRecommenderV1MarkRecommendationClaimedRequest'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation'
+                $ref: '#/components/schemas/GoogleCloudRecommenderV1Recommendation'
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1beta1/{name}:markFailed':
+  '/v1/{name}:markFailed':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Marks the Recommendation State as Failed. Users can use this method to
@@ -211,34 +154,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1MarkRecommendationFailedRequest'
+              $ref: '#/components/schemas/GoogleCloudRecommenderV1MarkRecommendationFailedRequest'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation'
+                $ref: '#/components/schemas/GoogleCloudRecommenderV1Recommendation'
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1beta1/{name}:markSucceeded':
+  '/v1/{name}:markSucceeded':
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/upload_protocol'
     post:
       description: |-
         Marks the Recommendation State as Succeeded. Users can use this method to
@@ -265,95 +206,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1MarkRecommendationSucceededRequest'
+              $ref: '#/components/schemas/GoogleCloudRecommenderV1MarkRecommendationSucceededRequest'
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation'
+                $ref: '#/components/schemas/GoogleCloudRecommenderV1Recommendation'
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1beta1/{parent}/insights':
-    get:
-      description: |-
-        Lists insights for a Cloud project. Requires the recommender.*.list IAM
-        permission for the specified insight type.
-      operationId: recommender.projects.locations.insightTypes.insights.list
-      parameters:
-        - description: |-
-            Required. The container resource on which to execute the request.
-            Acceptable formats:
-
-            1.
-            "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]",
-
-            LOCATION here refers to GCP Locations:
-            https://cloud.google.com/about/locations/
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional. Filter expression to restrict the insights returned. Supported
-            filter fields: state
-            Eg: `state:"DISMISSED" or state:"ACTIVE"
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: |-
-            Optional. The maximum number of results to return from this request.  Non-positive
-            values are ignored. If not specified, the server will determine the number
-            of results to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: |-
-            Optional. If present, retrieves the next batch of results from the preceding call to
-            this method. `page_token` must be the value of `next_page_token` from the
-            previous response. The values of other method parameters must be identical
-            to those in the previous call.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1ListInsightsResponse'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/alt'
-  '/v1beta1/{parent}/recommendations':
+  '/v1/{parent}/recommendations':
     get:
       description: |-
         Lists recommendations for a Cloud project. Requires the recommender.*.list
@@ -376,6 +242,15 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: |-
+            Optional. If present, retrieves the next batch of results from the preceding call to
+            this method. `page_token` must be the value of `next_page_token` from the
+            previous response. The values of other method parameters must be identical
+            to those in the previous call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
             Filter expression to restrict the recommendations returned. Supported
             filter fields: state_info.state
             Eg: `state_info.state:"DISMISSED" or state_info.state:"FAILED"
@@ -391,41 +266,30 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: |-
-            Optional. If present, retrieves the next batch of results from the preceding call to
-            this method. `page_token` must be the value of `next_page_token` from the
-            previous response. The values of other method parameters must be identical
-            to those in the previous call.
-          in: query
-          name: pageToken
-          schema:
-            type: string
       responses:
         '200':
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1ListRecommendationsResponse'
+                $ref: '#/components/schemas/GoogleCloudRecommenderV1ListRecommendationsResponse'
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/upload_protocol'
 components:
   parameters:
     _.xgafv:
@@ -504,7 +368,7 @@ components:
       schema:
         type: string
   schemas:
-    GoogleCloudRecommenderV1beta1CostProjection:
+    GoogleCloudRecommenderV1CostProjection:
       description: Contains metadata about how much money a recommendation can save or incur.
       properties:
         cost:
@@ -518,7 +382,7 @@ components:
           format: google-duration
           type: string
       type: object
-    GoogleCloudRecommenderV1beta1Impact:
+    GoogleCloudRecommenderV1Impact:
       description: Contains the impact a recommendation can have for a given category.
       properties:
         category:
@@ -531,112 +395,10 @@ components:
             - MANAGEABILITY
           type: string
         costProjection:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1CostProjection'
+          $ref: '#/components/schemas/GoogleCloudRecommenderV1CostProjection'
           description: Use with CategoryType.COST
       type: object
-    GoogleCloudRecommenderV1beta1Insight:
-      description: |-
-        An insight along with the information used to derive the insight. The insight
-        may have associated recomendations as well.
-      properties:
-        associatedRecommendations:
-          description: Recommendations derived from this insight.
-          items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1InsightRecommendationReference'
-          type: array
-        category:
-          description: Category being targeted by the insight.
-          enum:
-            - CATEGORY_UNSPECIFIED
-            - COST
-            - SECURITY
-            - PERFORMANCE
-            - MANAGEABILITY
-          type: string
-        content:
-          additionalProperties:
-            description: Properties of the object.
-          description: |-
-            A struct of custom fields to explain the insight.
-            Example: "grantedPermissionsCount": "1000"
-          type: object
-        description:
-          description: |-
-            Free-form human readable summary in English. The maximum length is 500
-            characters.
-          type: string
-        etag:
-          description: |-
-            Fingerprint of the Insight. Provides optimistic locking when updating
-            states.
-          type: string
-        insightSubtype:
-          description: Insight subtype. Insight content schema will be stable for a given subtype.
-          type: string
-        lastRefreshTime:
-          description: Timestamp of the latest data used to generate the insight.
-          format: google-datetime
-          type: string
-        name:
-          description: Name of the insight.
-          type: string
-        observationPeriod:
-          description: |-
-            Observation period that led to the insight. The source data used to
-            generate the insight ends at last_refresh_time and begins at
-            (last_refresh_time - observation_period).
-          format: google-duration
-          type: string
-        stateInfo:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1InsightStateInfo'
-          description: Information state and metadata.
-        targetResources:
-          description: Fully qualified resource names that this insight is targeting.
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudRecommenderV1beta1InsightRecommendationReference:
-      description: Reference to an associated recommendation.
-      properties:
-        recommendation:
-          description: |-
-            Recommendation resource name, e.g.
-            projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/recommendations/[RECOMMENDATION_ID]
-          type: string
-      type: object
-    GoogleCloudRecommenderV1beta1InsightStateInfo:
-      description: Information related to insight state.
-      properties:
-        state:
-          description: Insight state.
-          enum:
-            - STATE_UNSPECIFIED
-            - ACTIVE
-            - ACCEPTED
-            - DISMISSED
-          type: string
-        stateMetadata:
-          additionalProperties:
-            type: string
-          description: 'A map of metadata for the state, provided by user or automations systems.'
-          type: object
-      type: object
-    GoogleCloudRecommenderV1beta1ListInsightsResponse:
-      description: Response to the `ListInsights` method.
-      properties:
-        insights:
-          description: The set of insights for the `parent` resource.
-          items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Insight'
-          type: array
-        nextPageToken:
-          description: |-
-            A token that can be used to request the next page of results. This field is
-            empty if there are no additional results.
-          type: string
-      type: object
-    GoogleCloudRecommenderV1beta1ListRecommendationsResponse:
+    GoogleCloudRecommenderV1ListRecommendationsResponse:
       description: Response to the `ListRecommendations` method.
       properties:
         nextPageToken:
@@ -647,24 +409,10 @@ components:
         recommendations:
           description: The set of recommendations for the `parent` resource.
           items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation'
+            $ref: '#/components/schemas/GoogleCloudRecommenderV1Recommendation'
           type: array
       type: object
-    GoogleCloudRecommenderV1beta1MarkInsightAcceptedRequest:
-      description: Request for the `MarkInsightAccepted` method.
-      properties:
-        etag:
-          description: Required. Fingerprint of the Insight. Provides optimistic locking.
-          type: string
-        stateMetadata:
-          additionalProperties:
-            type: string
-          description: |-
-            Optional. State properties user wish to include with this state.  Full replace of the
-            current state_metadata.
-          type: object
-      type: object
-    GoogleCloudRecommenderV1beta1MarkRecommendationClaimedRequest:
+    GoogleCloudRecommenderV1MarkRecommendationClaimedRequest:
       description: Request for the `MarkRecommendationClaimed` Method.
       properties:
         etag:
@@ -680,7 +428,7 @@ components:
             Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
-    GoogleCloudRecommenderV1beta1MarkRecommendationFailedRequest:
+    GoogleCloudRecommenderV1MarkRecommendationFailedRequest:
       description: Request for the `MarkRecommendationFailed` Method.
       properties:
         etag:
@@ -696,7 +444,7 @@ components:
             Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
-    GoogleCloudRecommenderV1beta1MarkRecommendationSucceededRequest:
+    GoogleCloudRecommenderV1MarkRecommendationSucceededRequest:
       description: Request for the `MarkRecommendationSucceeded` Method.
       properties:
         etag:
@@ -712,7 +460,7 @@ components:
             Values must match the regex /^[a-zA-Z0-9_./-]{0,255}$/.
           type: object
       type: object
-    GoogleCloudRecommenderV1beta1Operation:
+    GoogleCloudRecommenderV1Operation:
       description: |-
         Contains an operation for a resource loosely based on the JSON-PATCH format
         with support for:
@@ -727,7 +475,7 @@ components:
         action:
           description: |-
             Type of this operation. Contains one of 'and', 'remove', 'replace', 'move',
-            'copy', 'test' and 'custom' operations. This field is case-insensitive and
+            'copy', 'test' and custom operations. This field is case-insensitive and
             always populated.
           type: string
         path:
@@ -747,21 +495,21 @@ components:
             * Example: {
               "/versions/*/name" : "it-123"
               "/versions/*/targetSize/percent": 20
-              }
+             }
             * Example: {
               "/bindings/*/role": "roles/admin"
               "/bindings/*/condition" : null
-              }
+             }
             * Example: {
               "/bindings/*/role": "roles/admin"
               "/bindings/*/members/*" : ["x@google.com", "y@google.com"]
-              }
+             }
             When both path_filters and path_value_matchers are set, an implicit AND
             must be performed.
           type: object
         pathValueMatchers:
           additionalProperties:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1ValueMatcher'
+            $ref: '#/components/schemas/GoogleCloudRecommenderV1ValueMatcher'
           description: |-
             Similar to path_filters, this contains set of filters to apply if `path`
             field referes to array elements. This is meant to support value matching
@@ -799,12 +547,12 @@ components:
             Maybe set for action: 'test'. Either this or `value_matcher` will be set
             for 'test' operation. An exact match must be performed.
         valueMatcher:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1ValueMatcher'
+          $ref: '#/components/schemas/GoogleCloudRecommenderV1ValueMatcher'
           description: |-
             Can be set for action 'test' for advanced matching for the value of
             'path' field. Either this or `value` will be set for 'test' operation.
       type: object
-    GoogleCloudRecommenderV1beta1OperationGroup:
+    GoogleCloudRecommenderV1OperationGroup:
       description: Group of operations that need to be performed atomically.
       properties:
         operations:
@@ -812,10 +560,10 @@ components:
             List of operations across one or more resources that belong to this group.
             Loosely based on RFC6902 and should be performed in the order they appear.
           items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Operation'
+            $ref: '#/components/schemas/GoogleCloudRecommenderV1Operation'
           type: array
       type: object
-    GoogleCloudRecommenderV1beta1Recommendation:
+    GoogleCloudRecommenderV1Recommendation:
       description: |-
         A recommendation along with a suggested action. E.g., a rightsizing
         recommendation for an underutilized VM, IAM role recommendations, etc
@@ -826,15 +574,10 @@ components:
             trying to optimize for the primary category. These may be positive
             or negative.
           items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Impact'
-          type: array
-        associatedInsights:
-          description: Insights that led to this recommendation.
-          items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1RecommendationInsightReference'
+            $ref: '#/components/schemas/GoogleCloudRecommenderV1Impact'
           type: array
         content:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1RecommendationContent'
+          $ref: '#/components/schemas/GoogleCloudRecommenderV1RecommendationContent'
           description: Content of the recommendation describing recommended changes to resources.
         description:
           description: |-
@@ -856,7 +599,7 @@ components:
           description: Name of recommendation.
           type: string
         primaryImpact:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1Impact'
+          $ref: '#/components/schemas/GoogleCloudRecommenderV1Impact'
           description: |-
             The primary impact that this recommendation can have while trying to
             optimize for one category.
@@ -873,10 +616,10 @@ components:
               recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"
           type: string
         stateInfo:
-          $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1RecommendationStateInfo'
+          $ref: '#/components/schemas/GoogleCloudRecommenderV1RecommendationStateInfo'
           description: Information for state. Contains state and metadata.
       type: object
-    GoogleCloudRecommenderV1beta1RecommendationContent:
+    GoogleCloudRecommenderV1RecommendationContent:
       description: Contains what resources are changing and how they are changing.
       properties:
         operationGroups:
@@ -885,19 +628,10 @@ components:
             that, all operations within one group are expected to be performed
             atomically and in an order.
           items:
-            $ref: '#/components/schemas/GoogleCloudRecommenderV1beta1OperationGroup'
+            $ref: '#/components/schemas/GoogleCloudRecommenderV1OperationGroup'
           type: array
       type: object
-    GoogleCloudRecommenderV1beta1RecommendationInsightReference:
-      description: Reference to an associated insight.
-      properties:
-        insight:
-          description: |-
-            Insight resource name, e.g.
-            projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/insights/[INSIGHT_ID]
-          type: string
-      type: object
-    GoogleCloudRecommenderV1beta1RecommendationStateInfo:
+    GoogleCloudRecommenderV1RecommendationStateInfo:
       description: Information for state. Contains state and metadata.
       properties:
         state:
@@ -916,7 +650,7 @@ components:
           description: 'A map of metadata for the state, provided by user or automations systems.'
           type: object
       type: object
-    GoogleCloudRecommenderV1beta1ValueMatcher:
+    GoogleCloudRecommenderV1ValueMatcher:
       description: Contains various matching options for values for a GCP resource field.
       properties:
         matchesPattern:
@@ -951,19 +685,10 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 implicit authentication
+      description: Oauth 2.0 authentication
       flows:
         implicit:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      type: oauth2
-    Oauth2c:
-      description: Oauth 2.0 accessCode authentication
-      flows:
-        authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-          scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
       type: oauth2

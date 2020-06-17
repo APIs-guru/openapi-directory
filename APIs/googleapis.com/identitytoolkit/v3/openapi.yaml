@@ -6,10 +6,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Help the third party sites to implement federated login.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity Toolkit
   version: v3
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.7.31
       format: google
-      url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
+      url: 'https://identitytoolkit.googleapis.com/$discovery/rest?version=v3'
       version: v1
   x-preferred: true
   x-providerName: googleapis.com
@@ -35,13 +31,13 @@ tags:
 paths:
   /createAuthUri:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Creates the URI used by the IdP to authenticate the user.
       operationId: identitytoolkit.relyingparty.createAuthUri
@@ -60,19 +56,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /deleteAccount:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Delete user account.
       operationId: identitytoolkit.relyingparty.deleteAccount
@@ -91,19 +85,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /downloadAccount:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Batch download user accounts.
       operationId: identitytoolkit.relyingparty.downloadAccount
@@ -122,23 +114,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
   /emailLinkSignin:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.emailLinkSignin
@@ -157,19 +145,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getAccountInfo:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Returns the account info.
       operationId: identitytoolkit.relyingparty.getAccountInfo
@@ -188,19 +174,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getOobConfirmationCode:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Get a code for user action confirmation.
       operationId: identitytoolkit.relyingparty.getOobConfirmationCode
@@ -219,8 +203,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getProjectConfig:
@@ -228,14 +210,14 @@ paths:
       description: Get project configuration.
       operationId: identitytoolkit.relyingparty.getProjectConfig
       parameters:
-        - description: Delegated GCP project number of the request.
-          in: query
-          name: delegatedProjectNumber
-          schema:
-            type: string
         - description: GCP project number of the request.
           in: query
           name: projectNumber
+          schema:
+            type: string
+        - description: Delegated GCP project number of the request.
+          in: query
+          name: delegatedProjectNumber
           schema:
             type: string
       responses:
@@ -248,18 +230,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
   /getRecaptchaParam:
     get:
       description: Get recaptcha secure param.
@@ -274,18 +254,16 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
   /publicKeys:
     get:
       description: Get token signing public key.
@@ -300,27 +278,25 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
   /resetPassword:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Reset password for a user.
       operationId: identitytoolkit.relyingparty.resetPassword
@@ -339,19 +315,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /sendVerificationCode:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Send SMS verification code.
       operationId: identitytoolkit.relyingparty.sendVerificationCode
@@ -370,19 +344,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setAccountInfo:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Set account info for a user.
       operationId: identitytoolkit.relyingparty.setAccountInfo
@@ -401,19 +373,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setProjectConfig:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Set project configuration.
       operationId: identitytoolkit.relyingparty.setProjectConfig
@@ -432,19 +402,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signOutUser:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Sign out user.
       operationId: identitytoolkit.relyingparty.signOutUser
@@ -463,19 +431,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signupNewUser:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Signup new user.
       operationId: identitytoolkit.relyingparty.signupNewUser
@@ -494,19 +460,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /uploadAccount:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Batch upload existing user accounts.
       operationId: identitytoolkit.relyingparty.uploadAccount
@@ -525,23 +489,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
   /verifyAssertion:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Verifies the assertion returned by the IdP.
       operationId: identitytoolkit.relyingparty.verifyAssertion
@@ -560,19 +520,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyCustomToken:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Verifies the developer asserted ID token.
       operationId: identitytoolkit.relyingparty.verifyCustomToken
@@ -591,19 +549,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyPassword:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Verifies the user entered password.
       operationId: identitytoolkit.relyingparty.verifyPassword
@@ -622,19 +578,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyPhoneNumber:
     parameters:
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/userIp'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
     post:
       description: Verifies ownership of a phone number and creates/updates the user account accordingly.
       operationId: identitytoolkit.relyingparty.verifyPhoneNumber
@@ -652,8 +606,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -1952,21 +1904,11 @@ components:
       type: object
   securitySchemes:
     Oauth2:
-      description: Oauth 2.0 implicit authentication
+      description: Oauth 2.0 authentication
       flows:
         implicit:
           authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
           scopes:
             'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
             'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-      type: oauth2
-    Oauth2c:
-      description: Oauth 2.0 accessCode authentication
-      flows:
-        authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-          scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
       type: oauth2
