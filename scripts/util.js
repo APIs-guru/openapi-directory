@@ -187,7 +187,7 @@ exports.exec = function (cmd, canFail) {
     silent: true
   });
   sh.config.verbose = glovalVerbose;
-  if (!canFail) assert(result.code === 0);
+  if (!canFail) assert(result.code === 0,'Exec returned non-zero exit code');
   return result.stdout;
 }
 
