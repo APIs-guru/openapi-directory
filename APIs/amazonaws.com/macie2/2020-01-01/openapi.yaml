@@ -3,7 +3,7 @@ info:
   version: '2020-01-01'
   x-release: v4
   title: Amazon Macie 2
-  description: Amazon Macie
+  description: 'Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS. Macie automates the discovery of sensitive data, such as PII and intellectual property, to provide you with insight into the data that your organization stores in AWS. Macie also provides an inventory of your Amazon S3 buckets, which it continually monitors for you. If Macie detects sensitive data or potential data access issues, it generates detailed findings for you to review and act upon as necessary.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -464,7 +464,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 maximumMatchDistance:
-                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
                   type: integer
                 name:
                   description: '<p>A custom name for the custom data identifier. The name can contain as many as 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
@@ -551,7 +551,7 @@ paths:
                 - name
               properties:
                 action:
-                  description: 'The action to perform on findings that meet the filter criteria. Valid values are:'
+                  description: 'The action to perform on findings that meet the filter criteria. To suppress (automatically archive) findings that meet the criteria, set this value to ARCHIVE. Valid values are:'
                   type: string
                   enum:
                     - ARCHIVE
@@ -1434,7 +1434,7 @@ paths:
               type: object
               properties:
                 action:
-                  description: 'The action to perform on findings that meet the filter criteria. Valid values are:'
+                  description: 'The action to perform on findings that meet the filter criteria. To suppress (automatically archive) findings that meet the criteria, set this value to ARCHIVE. Valid values are:'
                   type: string
                   enum:
                     - ARCHIVE
@@ -2146,7 +2146,7 @@ paths:
                   description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
                   type: string
                 findingPublishingFrequency:
-                  description: 'The frequency with which Amazon Macie publishes findings for an account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch. Valid values are:'
+                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -2272,7 +2272,7 @@ paths:
               type: object
               properties:
                 findingPublishingFrequency:
-                  description: 'The frequency with which Amazon Macie publishes findings for an account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch. Valid values are:'
+                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -2701,7 +2701,7 @@ paths:
   /classification-export-configuration:
     get:
       operationId: GetClassificationExportConfiguration
-      description: Retrieves the configuration settings for exporting data classification results.
+      description: Retrieves the configuration settings for storing data classification results.
       responses:
         '200':
           description: Success
@@ -2762,7 +2762,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutClassificationExportConfiguration
-      description: Creates or updates the configuration settings for exporting data classification results.
+      description: Creates or updates the configuration settings for storing data classification results.
       responses:
         '200':
           description: Success
@@ -2823,12 +2823,12 @@ paths:
                 - configuration
               properties:
                 configuration:
-                  description: 'Specifies where to export data classification results to, and the encryption settings to use when storing results in that location. Currently, you can export classification results only to an S3 bucket.'
+                  description: 'Specifies where to store data classification results, and the encryption settings to use when storing results in that location. Currently, you can store classification results only in an S3 bucket.'
                   type: object
                   properties:
                     s3Destination:
                       $ref: '#/components/schemas/S3Destination'
-                      description: 'The S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.'
+                      description: 'The S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.'
   /findings/statistics:
     post:
       operationId: GetFindingStatistics
@@ -3684,7 +3684,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 maximumMatchDistance:
-                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+                  description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
                   type: integer
                 regex:
                   description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
@@ -4153,7 +4153,7 @@ components:
       properties:
         configuration:
           $ref: '#/components/schemas/ClassificationExportConfiguration'
-          description: 'The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.'
+          description: 'The location where data classification results are stored, and the encryption settings that are used when storing results in that location.'
     GetCustomDataIdentifierResponse:
       type: object
       properties:
@@ -4213,7 +4213,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/FindingsFilterAction'
-          description: 'The action that''s performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, automatically archive the findings; and, NOOP, don''t perform any action on the findings.'
+          description: 'The action that''s performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don''t perform any action on the findings.'
         arn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the filter.
@@ -4249,7 +4249,7 @@ components:
           description: 'The date and time, in UTC and extended ISO 8601 format, when the Amazon Macie account was created.'
         findingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: The frequency with which Amazon Macie publishes findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+          description: The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
         serviceRole:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
@@ -4409,7 +4409,7 @@ components:
       properties:
         configuration:
           $ref: '#/components/schemas/ClassificationExportConfiguration'
-          description: 'The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.'
+          description: 'The location where the data classification results are stored, and the encryption settings that are used when storing results in that location.'
     S3Destination:
       type: object
       required:
@@ -4418,14 +4418,14 @@ components:
       properties:
         bucketName:
           $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the bucket. This must be the ARN of an existing bucket.
+          description: The name of the bucket.
         keyPrefix:
           $ref: '#/components/schemas/__string'
           description: The path prefix to use in the path to the location in the bucket. This prefix specifies where to store classification results in the bucket.
         kmsKeyArn:
           $ref: '#/components/schemas/__string'
-          description: 'The Amazon Resource Name (ARN) of the AWS Key Management Service master key to use for encryption of the exported results. This must be the ARN of an existing KMS key. In addition, the key must be in the same AWS Region as the bucket.'
-      description: 'Specifies an S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.'
+          description: The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
+      description: 'Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -4564,7 +4564,7 @@ components:
         sessionIssuer:
           $ref: '#/components/schemas/SessionIssuer'
           description: The source and type of credentials that the entity obtained.
-      description: Provides information about a session that was created for an entity who performed an action by using temporary security credentials.
+      description: Provides information about a session that was created for an entity that performed an action by using temporary security credentials.
     AssumedRole:
       type: object
       properties:
@@ -4873,8 +4873,8 @@ components:
       properties:
         s3Destination:
           $ref: '#/components/schemas/S3Destination'
-          description: 'The S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.'
-      description: 'Specifies where to export data classification results to, and the encryption settings to use when storing results in that location. Currently, you can export classification results only to an S3 bucket.'
+          description: 'The S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.'
+      description: 'Specifies where to store data classification results, and the encryption settings to use when storing results in that location. Currently, you can store classification results only in an S3 bucket.'
     CustomDataIdentifiers:
       type: object
       properties:
@@ -4993,7 +4993,7 @@ components:
           description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
         maximumMatchDistance:
           $ref: '#/components/schemas/__integer'
-          description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+          description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
         name:
           $ref: '#/components/schemas/__string'
           description: '<p>A custom name for the custom data identifier. The name can contain as many as 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
@@ -5008,7 +5008,7 @@ components:
       enum:
         - ARCHIVE
         - NOOP
-      description: 'The action to perform on findings that meet the filter criteria. Valid values are:'
+      description: 'The action to perform on findings that meet the filter criteria. To suppress (automatically archive) findings that meet the criteria, set this value to ARCHIVE. Valid values are:'
     FindingCriteria:
       type: object
       properties:
@@ -5026,7 +5026,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/FindingsFilterAction'
-          description: 'The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don''t perform any action on the findings.'
+          description: 'The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don''t perform any action on the findings.'
         clientToken:
           $ref: '#/components/schemas/__string'
           description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
@@ -5282,7 +5282,7 @@ components:
         - FIFTEEN_MINUTES
         - ONE_HOUR
         - SIX_HOURS
-      description: 'The frequency with which Amazon Macie publishes findings for an account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch. Valid values are:'
+      description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
     MacieStatus:
       type: string
       enum:
@@ -5298,7 +5298,7 @@ components:
           description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
         findingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+          description: Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
         status:
           $ref: '#/components/schemas/MacieStatus'
           description: 'Specifies the status for the account. To enable Amazon Macie and start all Amazon Macie activities for the account, set this value to ENABLED.'
@@ -5361,7 +5361,7 @@ components:
           description: The action that occurred and produced the finding.
         actor:
           $ref: '#/components/schemas/FindingActor'
-          description: The entity who performed the action that produced the finding.
+          description: The entity that performed the action that produced the finding.
       description: Provides detailed information about a policy finding.
     ResourcesAffected:
       type: object
@@ -5445,6 +5445,7 @@ components:
       type: string
       enum:
         - AWS_API_CALL
+      description: The type of action that occurred for the resource and produced the policy finding.
     FindingAction:
       type: object
       properties:
@@ -5503,8 +5504,8 @@ components:
           description: The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.
         userIdentity:
           $ref: '#/components/schemas/UserIdentity'
-          description: The name and type of entity who performed the action on the affected resource.
-      description: Provides information about an entity who performed an action that produced a policy finding for a resource.
+          description: The name and type of entity that performed the action on the affected resource.
+      description: Provides information about an entity that performed an action that produced a policy finding for a resource.
     FindingStatisticsSortCriteria:
       type: object
       properties:
@@ -6028,7 +6029,7 @@ components:
       properties:
         configuration:
           $ref: '#/components/schemas/ClassificationExportConfiguration'
-          description: 'The location to export data classification results to, and the encryption settings to use when storing results in that location.'
+          description: 'The location to store data classification results in, and the encryption settings to use when storing results in that location.'
     S3Bucket:
       type: object
       properties:
@@ -6149,7 +6150,7 @@ components:
       properties:
         category:
           $ref: '#/components/schemas/SensitiveDataItemCategory'
-          description: 'The category of sensitive data that was detected. For example, FINANCIAL_INFORMATION, for financial information such as credit card numbers, or PERSONAL_INFORMATION, for personally identifiable information such as names and addresses.'
+          description: 'The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information such as full names and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.'
         detections:
           $ref: '#/components/schemas/DefaultDetections'
           description: 'An array of objects, one for each type of sensitive data that was detected. Each object reports the number of occurrences of a specific type of sensitive data that was detected.'
@@ -6164,6 +6165,7 @@ components:
         - PERSONAL_INFORMATION
         - CREDENTIALS
         - CUSTOM_IDENTIFIER
+      description: The category of sensitive data that was detected and produced the finding.
     Unit:
       type: string
       enum:
@@ -6260,7 +6262,7 @@ components:
           description: 'An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.'
         maximumMatchDistance:
           $ref: '#/components/schemas/__integer'
-          description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+          description: The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
         regex:
           $ref: '#/components/schemas/__string'
           description: The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
@@ -6299,7 +6301,7 @@ components:
       properties:
         action:
           $ref: '#/components/schemas/FindingsFilterAction'
-          description: 'The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don''t perform any action on the findings.'
+          description: 'The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don''t perform any action on the findings.'
         description:
           $ref: '#/components/schemas/__string'
           description: '<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see the filter''s description, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
@@ -6318,7 +6320,7 @@ components:
       properties:
         findingPublishingFrequency:
           $ref: '#/components/schemas/FindingPublishingFrequency'
-          description: Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+          description: Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
         status:
           $ref: '#/components/schemas/MacieStatus'
           description: 'Specifies whether to change the status of the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.'

@@ -43,24 +43,12 @@ servers:
   - url: 'https://iam.us-gov.amazonaws.com'
     variables: {}
     description: The general IAM endpoint for AWS GovCloud (US) and AWS GovCloud (US-East)
-  - url: 'http://iam.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The IAM endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://iam.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The IAM endpoint for China (Beijing) and China (Ningxia)
+  - url: 'http://iam.cn-north-1.amazonaws.com.cn'
+    variables: {}
+    description: The general IAM endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://iam.cn-north-1.amazonaws.com.cn'
+    variables: {}
+    description: The general IAM endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
   '/#Action=AddClientIDToOpenIDConnectProvider':

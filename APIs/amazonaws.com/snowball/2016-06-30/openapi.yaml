@@ -1163,10 +1163,10 @@ components:
           description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
         SnowballType:
           $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
+          description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
         ShippingOption:
           $ref: '#/components/schemas/ShippingOption'
-          description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+          description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
         Notification:
           $ref: '#/components/schemas/Notification'
           description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
@@ -1222,13 +1222,16 @@ components:
           description: 'The ID of a cluster. If you''re creating a job for a node in a cluster, you need to provide only this <code>clusterId</code> value. The other job attributes are inherited from the cluster.'
         SnowballType:
           $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
+          description: '<p>The type of AWS Snowball device to use for this job. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
         ForwardingAddressId:
           $ref: '#/components/schemas/AddressId'
           description: The forwarding address ID for a job. This field is not supported in most regions.
         TaxDocuments:
           $ref: '#/components/schemas/TaxDocuments'
           description: The tax documents required in your AWS Region.
+        DeviceConfiguration:
+          $ref: '#/components/schemas/DeviceConfiguration'
+          description: Defines the device configuration for an AWS Snowcone job.
     ClusterLimitExceededException: {}
     DescribeAddressResult:
       type: object
@@ -1754,6 +1757,7 @@ components:
         - EDGE_C
         - EDGE_CG
         - EDGE_S
+        - SNC1_HDD
     JobResource:
       type: object
       properties:
@@ -1792,7 +1796,6 @@ components:
       properties:
         IND:
           $ref: '#/components/schemas/INDTaxDocuments'
-          description: The tax documents required in AWS Regions in India.
       description: The tax documents required in your AWS Region.
     ClusterMetadata:
       type: object
@@ -1817,7 +1820,7 @@ components:
           description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
         SnowballType:
           $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
+          description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
         CreationDate:
           $ref: '#/components/schemas/Timestamp'
           description: The creation date for this cluster.
@@ -1862,7 +1865,15 @@ components:
         - T100
         - T42
         - T98
+        - T8
         - NoPreference
+    DeviceConfiguration:
+      type: object
+      properties:
+        SnowconeDeviceConfiguration:
+          $ref: '#/components/schemas/SnowconeDeviceConfiguration'
+          description: Returns information about the device configuration for an AWS Snowcone job.
+      description: 'The container for <code>SnowconeDeviceConfiguration</code>. '
     Long:
       type: integer
     DataTransfer:
@@ -1942,11 +1953,20 @@ components:
         TaxDocuments:
           $ref: '#/components/schemas/TaxDocuments'
           description: The metadata associated with the tax documents required in your AWS Region.
+        DeviceConfiguration:
+          $ref: '#/components/schemas/DeviceConfiguration'
       description: 'Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.'
     JobMetadataList:
       type: array
       items:
         $ref: '#/components/schemas/JobMetadata'
+    SnowconeDeviceConfiguration:
+      type: object
+      properties:
+        WirelessConnection:
+          $ref: '#/components/schemas/WirelessConnection'
+          description: Configures the wireless connection for the AWS Snowcone device.
+      description: 'Specifies the device configuration for an AWS Snowcone job. '
     Ec2AmiResource:
       type: object
       required:
@@ -2116,5 +2136,12 @@ components:
           $ref: '#/components/schemas/String'
           description: '<p>The tracking number for this job. Using this tracking number with your region''s carrier''s website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>'
       description: The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.
+    WirelessConnection:
+      type: object
+      properties:
+        IsWifiEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Enables the Wi-Fi adapter on an AWS Snowcone device.
+      description: Configures the wireless connection on an AWS Snowcone device.
 security:
   - hmac: []

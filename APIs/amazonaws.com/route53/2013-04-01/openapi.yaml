@@ -37,24 +37,18 @@ servers:
   - url: 'https://route53.amazonaws.com'
     variables: {}
     description: The general Route 53 multi-region endpoint
-  - url: 'http://route53.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Route 53 endpoint for China (Beijing) and China (Ningxia)
-  - url: 'https://route53.{region}.amazonaws.com.cn'
-    variables:
-      region:
-        description: The AWS region
-        enum:
-          - cn-north-1
-          - cn-northwest-1
-        default: cn-north-1
-    description: The Route 53 endpoint for China (Beijing) and China (Ningxia)
+  - url: 'http://route53.us-gov.amazonaws.com'
+    variables: {}
+    description: The general Route 53 endpoint for AWS GovCloud (US) and AWS GovCloud (US-East)
+  - url: 'https://route53.us-gov.amazonaws.com'
+    variables: {}
+    description: The general Route 53 endpoint for AWS GovCloud (US) and AWS GovCloud (US-East)
+  - url: 'http://route53.amazonaws.com.cn'
+    variables: {}
+    description: The general Route 53 endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://route53.amazonaws.com.cn'
+    variables: {}
+    description: The general Route 53 endpoint for China (Beijing) and China (Ningxia)
 paths:
   '/2013-04-01/hostedzone/{Id}/associatevpc':
     post:
@@ -109,6 +103,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitsExceeded'
+        '487':
+          description: PriorRequestNotComplete
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PriorRequestNotComplete'
       parameters:
         - name: Id
           in: path
@@ -3469,6 +3469,7 @@ components:
     PublicZoneVPCAssociation: {}
     ConflictingDomainExists: {}
     LimitsExceeded: {}
+    PriorRequestNotComplete: {}
     ChangeResourceRecordSetsResponse:
       type: object
       required:
@@ -3494,7 +3495,6 @@ components:
       minItems: 1
     NoSuchHealthCheck: {}
     InvalidChangeBatch: {}
-    PriorRequestNotComplete: {}
     ChangeTagsForResourceResponse:
       type: object
       example: {}
