@@ -489,6 +489,11 @@ function appendFixup(fixupPath, spec, editedSpec) {
   saveFixup(fixupPath, spec, editedSpec);
 }
 
+const promiseEach = async function(arr, fn, command) { // take an array and a function
+   for (const item of arr) await fn(item, command);
+   return arr;
+}
+
 function updateCatalogLeads(dir,command) {
   fromLeads = true;
   var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
@@ -502,9 +507,8 @@ function updateCatalogLeads(dir,command) {
   specSources.getCatalogsLeads()
     .then(function (catalogsLeads) {
       var newLeads = _(catalogsLeads).omit(knownUrls).values().value();
-      return Promise.each(newLeads, writeSpecFromLead);
-    })
-    .done();
+      return promiseEach(newLeads, writeSpecFromLead, command);
+    });
 }
 
 function writeSpecFromLead(lead,command) {
