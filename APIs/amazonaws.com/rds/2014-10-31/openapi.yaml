@@ -863,7 +863,7 @@ paths:
     get:
       x-aws-operation-name: BacktrackDBCluster
       operationId: GET_BacktrackDBCluster
-      description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora MySQL DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -934,7 +934,7 @@ paths:
     post:
       x-aws-operation-name: BacktrackDBCluster
       operationId: POST_BacktrackDBCluster
-      description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Backtracks a DB cluster to a specific time, without creating a new DB cluster.</p> <p>For more information on backtracking, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html"> Backtracking an Aurora DB Cluster</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora MySQL DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2206,7 +2206,7 @@ paths:
         - name: BacktrackWindow
           in: query
           required: false
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
           schema:
             type: integer
         - name: EnableCloudwatchLogsExports
@@ -2282,6 +2282,12 @@ paths:
           description: Specify the name of the IAM role to be used when making API calls to the Directory Service.
           schema:
             type: string
+        - name: EnableGlobalWriteForwarding
+          in: query
+          required: false
+          description: 'A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.'
+          schema:
+            type: boolean
         - name: SourceRegion
           in: query
           required: false
@@ -3166,7 +3172,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: '<p>A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> isn''t specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> isn''t specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>'
           schema:
             type: boolean
         - name: Tags
@@ -3665,7 +3671,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
           schema:
             type: boolean
         - name: Tags
@@ -4871,7 +4877,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalCluster
       operationId: GET_CreateGlobalCluster
-      description: '<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4971,7 +4977,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalCluster
       operationId: POST_CreateGlobalCluster
-      description: '<p> </p> <p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -7200,7 +7206,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBClusterBacktracks
       operationId: GET_DescribeDBClusterBacktracks
-      description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora MySQL DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -7278,7 +7284,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBClusterBacktracks
       operationId: POST_DescribeDBClusterBacktracks
-      description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Returns information about backtracks for a DB cluster.</p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora MySQL DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -12353,7 +12359,7 @@ paths:
         - name: BacktrackWindow
           in: query
           required: false
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
           schema:
             type: integer
         - name: CloudwatchLogsExportConfiguration
@@ -12439,6 +12445,12 @@ paths:
           in: query
           required: false
           description: A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
+          schema:
+            type: boolean
+        - name: EnableGlobalWriteForwarding
+          in: query
+          required: false
+          description: 'A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.'
           schema:
             type: boolean
         - name: Action
@@ -12828,7 +12840,7 @@ paths:
     get:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
       operationId: GET_ModifyDBClusterSnapshotAttribute
-      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the <code>DescribeDBClusterSnapshotAttributes</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts.</p> <note> <p>Don''t add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts.</p> </note> <p>If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot is public or private, use the <a>DescribeDBClusterSnapshotAttributes</a> API action. The accounts are returned as values for the <code>restore</code> attribute.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -12864,7 +12876,7 @@ paths:
         - name: AttributeName
           in: query
           required: true
-          description: '<p>The name of the DB cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to <code>restore</code>.</p>'
+          description: '<p>The name of the DB cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to <code>restore</code>.</p> <note> <p>To view the list of attributes available to modify, use the <a>DescribeDBClusterSnapshotAttributes</a> API action.</p> </note>'
           schema:
             type: string
         - name: ValuesToAdd
@@ -12908,7 +12920,7 @@ paths:
     post:
       x-aws-operation-name: ModifyDBClusterSnapshotAttribute
       operationId: POST_ModifyDBClusterSnapshotAttribute
-      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the <code>DescribeDBClusterSnapshotAttributes</code> API action.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts.</p> <note> <p>Don''t add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts.</p> </note> <p>If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot is public or private, use the <a>DescribeDBClusterSnapshotAttributes</a> API action. The accounts are returned as values for the <code>restore</code> attribute.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -13244,7 +13256,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: '<p>A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. </p> <p> <code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be enabled for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p>'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible. </p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p> <code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be enabled for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p>'
           schema:
             type: boolean
         - name: MonitoringRoleArn
@@ -13991,7 +14003,7 @@ paths:
     get:
       x-aws-operation-name: ModifyDBSnapshotAttribute
       operationId: GET_ModifyDBSnapshotAttribute
-      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts. If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <code>DescribeDBSnapshotAttributes</code> API action.</p>'
+      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts.</p> <note> <p>Don''t add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts.</p> </note> <p>If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <a>DescribeDBSnapshotAttributes</a> API action. The accounts are returned as values for the <code>restore</code> attribute.</p>'
       responses:
         '200':
           description: Success
@@ -14027,7 +14039,7 @@ paths:
         - name: AttributeName
           in: query
           required: true
-          description: '<p>The name of the DB snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB snapshot, set this value to <code>restore</code>.</p>'
+          description: '<p>The name of the DB snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB snapshot, set this value to <code>restore</code>.</p> <note> <p>To view the list of attributes available to modify, use the <a>DescribeDBSnapshotAttributes</a> API action.</p> </note>'
           schema:
             type: string
         - name: ValuesToAdd
@@ -14071,7 +14083,7 @@ paths:
     post:
       x-aws-operation-name: ModifyDBSnapshotAttribute
       operationId: POST_ModifyDBSnapshotAttribute
-      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts. If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <code>DescribeDBSnapshotAttributes</code> API action.</p>'
+      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB snapshot.</p> <p>To share a manual DB snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code> and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB snapshot. Uses the value <code>all</code> to make the manual DB snapshot public, which means it can be copied or restored by all AWS accounts.</p> <note> <p>Don''t add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts.</p> </note> <p>If the manual DB snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p> <p>To view which AWS accounts have access to copy or restore a manual DB snapshot, or whether a manual DB snapshot public or private, use the <a>DescribeDBSnapshotAttributes</a> API action. The accounts are returned as values for the <code>restore</code> attribute.</p>'
       responses:
         '200':
           description: Success
@@ -16333,7 +16345,7 @@ paths:
         - name: BacktrackWindow
           in: query
           required: false
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
           schema:
             type: integer
         - name: EnableCloudwatchLogsExports
@@ -16720,7 +16732,7 @@ paths:
         - name: BacktrackWindow
           in: query
           required: false
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
           schema:
             type: integer
         - name: EnableCloudwatchLogsExports
@@ -17159,7 +17171,7 @@ paths:
         - name: BacktrackWindow
           in: query
           required: false
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
           schema:
             type: integer
         - name: EnableCloudwatchLogsExports
@@ -17539,7 +17551,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
           schema:
             type: boolean
         - name: AutoMinorVersionUpgrade
@@ -18098,7 +18110,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
           schema:
             type: boolean
         - name: Tags
@@ -18586,7 +18598,7 @@ paths:
         - name: PubliclyAccessible
           in: query
           required: false
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
           schema:
             type: boolean
         - name: AutoMinorVersionUpgrade
@@ -21876,7 +21888,7 @@ components:
           description: Specifies the DB instance identifier of the DB instance this DB snapshot was created from.
         SnapshotCreateTime:
           $ref: '#/components/schemas/TStamp'
-          description: 'Provides the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
+          description: Specifies when the snapshot was taken in Coodinated Universal Time (UTC).
         Engine:
           $ref: '#/components/schemas/String'
           description: Specifies the name of the database engine.
@@ -21897,7 +21909,7 @@ components:
           description: Provides the VPC ID associated with the DB snapshot.
         InstanceCreateTime:
           $ref: '#/components/schemas/TStamp'
-          description: 'Specifies the time when the snapshot was taken, in Universal Coordinated Time (UTC).'
+          description: 'Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.'
         MasterUsername:
           $ref: '#/components/schemas/String'
           description: Provides the master username for the DB snapshot.
@@ -22162,7 +22174,7 @@ components:
           description: '<p>A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>'
         BacktrackWindow:
           $ref: '#/components/schemas/LongOptional'
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0. </p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
         EnableCloudwatchLogsExports:
           $ref: '#/components/schemas/LogTypeList'
           description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
@@ -22190,6 +22202,9 @@ components:
         DomainIAMRoleName:
           $ref: '#/components/schemas/String'
           description: Specify the name of the IAM role to be used when making API calls to the Directory Service.
+        EnableGlobalWriteForwarding:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.'
         SourceRegion:
           $ref: '#/components/schemas/String'
           description: The ID of the region that contains the source for the read replica.
@@ -22373,6 +22388,12 @@ components:
         DomainMemberships:
           $ref: '#/components/schemas/DomainMembershipList'
           description: The Active Directory Domain membership records associated with the DB cluster.
+        GlobalWriteForwardingStatus:
+          $ref: '#/components/schemas/WriteForwardingStatus'
+          description: 'Specifies whether a secondary cluster in an Aurora global database has write forwarding enabled, not enabled, or is in the process of enabling it.'
+        GlobalWriteForwardingRequested:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'Specifies whether you have requested to enable write forwarding for a secondary cluster in an Aurora global database. Because write forwarding takes time to enable, check the value of <code>GlobalWriteForwardingStatus</code> to confirm that the request has completed before using the write forwarding feature for this cluster.'
       description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>'
     CreateDBClusterSnapshotMessage:
       type: object
@@ -22478,7 +22499,7 @@ components:
           description: '<p>For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The character set is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p>'
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: '<p>A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> isn''t specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> isn''t specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn''t specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: Tags to assign to the DB instance.
@@ -22585,7 +22606,7 @@ components:
           description: '<p>The name of the DB parameter group to associate with this DB instance.</p> <p>If you do not specify a value for <code>DBParameterGroupName</code>, then Amazon RDS uses the <code>DBParameterGroup</code> of source DB instance for a same region read replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a cross region read replica.</p> <note> <p>Currently, specifying a parameter group for this operation is only supported for Oracle DB instances.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
         DBSubnetGroupName:
@@ -22740,7 +22761,7 @@ components:
           description: 'If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.'
         PubliclyAccessible:
           $ref: '#/components/schemas/Boolean'
-          description: 'Specifies the accessibility options for the DB instance. A value of true specifies an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of false specifies an internal instance with a DNS name that resolves to a private IP address.'
+          description: '<p>Specifies the accessibility options for the DB instance.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
         StatusInfos:
           $ref: '#/components/schemas/DBInstanceStatusInfoList'
           description: 'The status of a read replica. If the instance isn''t a read replica, this is blank.'
@@ -23209,6 +23230,14 @@ components:
       description: List of Active Directory Domain membership records associated with a DB instance or cluster.
       items:
         $ref: '#/components/schemas/DomainMembership'
+    WriteForwardingStatus:
+      type: string
+      enum:
+        - enabled
+        - disabled
+        - enabling
+        - disabling
+        - unknown
     DBClusterBacktrackList:
       type: array
       items:
@@ -24946,6 +24975,9 @@ components:
         IsWriter:
           $ref: '#/components/schemas/Boolean'
           description: ' Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated. '
+        GlobalWriteForwardingStatus:
+          $ref: '#/components/schemas/WriteForwardingStatus'
+          description: 'Specifies whether a secondary cluster in an Aurora global database has write forwarding enabled, not enabled, or is in the process of enabling it.'
       description: ' A data structure with information about any primary and secondary clusters associated with an Aurora global database. '
     IAMAuthMode:
       type: string
@@ -25119,7 +25151,7 @@ components:
           description: '<p>A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>'
         BacktrackWindow:
           $ref: '#/components/schemas/LongOptional'
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
         CloudwatchLogsExportConfiguration:
           $ref: '#/components/schemas/CloudwatchLogsExportConfiguration'
           description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
@@ -25150,6 +25182,9 @@ components:
         CopyTagsToSnapshot:
           $ref: '#/components/schemas/BooleanOptional'
           description: A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
+        EnableGlobalWriteForwarding:
+          $ref: '#/components/schemas/BooleanOptional'
+          description: 'A value that indicates whether to enable write operations to be forwarded from this cluster to the primary cluster in an Aurora global database. The resulting changes are replicated back to this cluster. This parameter only applies to DB clusters that are secondary clusters in an Aurora global database. By default, Aurora disallows write operations for secondary clusters.'
       description: <p/>
     ModifyDBClusterParameterGroupMessage:
       type: object
@@ -25177,7 +25212,7 @@ components:
           description: The identifier for the DB cluster snapshot to modify the attributes for.
         AttributeName:
           $ref: '#/components/schemas/String'
-          description: '<p>The name of the DB cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to <code>restore</code>.</p>'
+          description: '<p>The name of the DB cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to <code>restore</code>.</p> <note> <p>To view the list of attributes available to modify, use the <a>DescribeDBClusterSnapshotAttributes</a> API action.</p> </note>'
         ValuesToAdd:
           $ref: '#/components/schemas/AttributeValueList'
           description: '<p>A list of DB cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other AWS accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more AWS account IDs, or <code>all</code> to make the manual DB cluster snapshot restorable by any AWS account. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts.</p>'
@@ -25277,7 +25312,7 @@ components:
           description: '<p>The port number on which the database accepts connections.</p> <p>The value of the <code>DBPortNumber</code> parameter must not match any of the port values specified for options in the option group for the DB instance.</p> <p>Your database will restart when you change the <code>DBPortNumber</code> value regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p> <b>MySQL</b> </p> <p> Default: <code>3306</code> </p> <p> Valid values: <code>1150-65535</code> </p> <p> <b>MariaDB</b> </p> <p> Default: <code>3306</code> </p> <p> Valid values: <code>1150-65535</code> </p> <p> <b>PostgreSQL</b> </p> <p> Default: <code>5432</code> </p> <p> Valid values: <code>1150-65535</code> </p> <p>Type: Integer</p> <p> <b>Oracle</b> </p> <p> Default: <code>1521</code> </p> <p> Valid values: <code>1150-65535</code> </p> <p> <b>SQL Server</b> </p> <p> Default: <code>1433</code> </p> <p> Valid values: <code>1150-65535</code> except <code>1234</code>, <code>1434</code>, <code>3260</code>, <code>3343</code>, <code>3389</code>, <code>47001</code>, and <code>49152-49156</code>.</p> <p> <b>Amazon Aurora</b> </p> <p> Default: <code>3306</code> </p> <p> Valid values: <code>1150-65535</code> </p>'
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: '<p>A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. </p> <p> <code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be enabled for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p>'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible. </p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p> <code>PubliclyAccessible</code> only applies to DB instances in a VPC. The DB instance must be part of a public subnet and <code>PubliclyAccessible</code> must be enabled for it to be publicly accessible. </p> <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless of the value of the <code>ApplyImmediately</code> parameter.</p>'
         MonitoringRoleArn:
           $ref: '#/components/schemas/String'
           description: '<p>The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs. For example, <code>arn:aws:iam:123456789012:role/emaccess</code>. For information on creating a monitoring role, go to <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole">To create an IAM role for Amazon RDS Enhanced Monitoring</a> in the <i>Amazon RDS User Guide.</i> </p> <p>If <code>MonitoringInterval</code> is set to a value other than 0, then you must supply a <code>MonitoringRoleArn</code> value.</p>'
@@ -25393,7 +25428,7 @@ components:
           description: The identifier for the DB snapshot to modify the attributes for.
         AttributeName:
           $ref: '#/components/schemas/String'
-          description: '<p>The name of the DB snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB snapshot, set this value to <code>restore</code>.</p>'
+          description: '<p>The name of the DB snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB snapshot, set this value to <code>restore</code>.</p> <note> <p>To view the list of attributes available to modify, use the <a>DescribeDBSnapshotAttributes</a> API action.</p> </note>'
         ValuesToAdd:
           $ref: '#/components/schemas/AttributeValueList'
           description: '<p>A list of DB snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other AWS accounts to copy or restore a manual snapshot, set this list to include one or more AWS account IDs, or <code>all</code> to make the manual DB snapshot restorable by any AWS account. Do not add the <code>all</code> value for any manual DB snapshots that contain private information that you don''t want available to all AWS accounts.</p>'
@@ -26209,7 +26244,7 @@ components:
           description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon RDS to access the Amazon S3 bucket on your behalf.
         BacktrackWindow:
           $ref: '#/components/schemas/LongOptional'
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
         EnableCloudwatchLogsExports:
           $ref: '#/components/schemas/LogTypeList'
           description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
@@ -26274,7 +26309,7 @@ components:
           description: '<p>A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>'
         BacktrackWindow:
           $ref: '#/components/schemas/LongOptional'
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
         EnableCloudwatchLogsExports:
           $ref: '#/components/schemas/LogTypeList'
           description: 'The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Aurora User Guide</i>.'
@@ -26344,7 +26379,7 @@ components:
           description: '<p>A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html"> IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>'
         BacktrackWindow:
           $ref: '#/components/schemas/LongOptional'
-          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
+          description: '<p>The target backtrack window, in seconds. To disable backtracking, set this value to 0.</p> <note> <p>Currently, Backtrack is only supported for Aurora MySQL DB clusters.</p> </note> <p>Default: 0</p> <p>Constraints:</p> <ul> <li> <p>If specified, this value must be set to a number from 0 to 259,200 (72 hours).</p> </li> </ul>'
         EnableCloudwatchLogsExports:
           $ref: '#/components/schemas/LogTypeList'
           description: 'The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
@@ -26394,7 +26429,7 @@ components:
           description: '<p>A value that indicates whether the DB instance is a Multi-AZ deployment.</p> <p>Constraint: You can''t specify the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>'
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/BooleanOptional'
           description: A value that indicates whether minor version upgrades are applied automatically to the DB instance during the maintenance window.
@@ -26535,7 +26570,7 @@ components:
           description: 'The name of the option group to associate with this DB instance. If this argument is omitted, the default option group for the specified engine is used. '
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: 'A list of tags to associate with this DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
@@ -26631,7 +26666,7 @@ components:
           description: '<p>A value that indicates whether the DB instance is a Multi-AZ deployment.</p> <p>Constraint: You can''t specify the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>'
         PubliclyAccessible:
           $ref: '#/components/schemas/BooleanOptional'
-          description: 'A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. When the DB instance isn''t publicly accessible, it is an internal instance with a DNS name that resolves to a private IP address. For more information, see <a>CreateDBInstance</a>.'
+          description: '<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance''s VPC, and to the public IP address from outside of the DB instance''s VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn''t permit it.</p> <p>When the DB instance isn''t publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>For more information, see <a>CreateDBInstance</a>.</p>'
         AutoMinorVersionUpgrade:
           $ref: '#/components/schemas/BooleanOptional'
           description: A value that indicates whether minor version upgrades are applied automatically to the DB instance during the maintenance window.
