@@ -446,6 +446,9 @@ paths:
                     CaptionDescriptions:
                       $ref: '#/components/schemas/__listOfCaptionDescription'
                       description: Settings for caption decriptions
+                    FeatureActivations:
+                      $ref: '#/components/schemas/FeatureActivations'
+                      description: Feature Activations
                     GlobalConfiguration:
                       $ref: '#/components/schemas/GlobalConfiguration'
                       description: Configuration settings that apply to the event as a whole.
@@ -1650,6 +1653,9 @@ paths:
                     CaptionDescriptions:
                       $ref: '#/components/schemas/__listOfCaptionDescription'
                       description: Settings for caption decriptions
+                    FeatureActivations:
+                      $ref: '#/components/schemas/FeatureActivations'
+                      description: Feature Activations
                     GlobalConfiguration:
                       $ref: '#/components/schemas/GlobalConfiguration'
                       description: Configuration settings that apply to the event as a whole.
@@ -4136,6 +4142,15 @@ components:
       description: Placeholder documentation for __listOfCaptionDescription
       items:
         $ref: '#/components/schemas/CaptionDescription'
+    FeatureActivations:
+      type: object
+      properties:
+        InputPrepareScheduleActions:
+          $ref: '#/components/schemas/FeatureActivationsInputPrepareScheduleActions'
+          description: |-
+            Enables the Input Prepare feature. You can create Input Prepare actions in the schedule only if this feature is enabled.
+            If you disable the feature on an existing schedule, make sure that you first delete all input prepare actions from the schedule.
+      description: Feature Activations
     GlobalConfiguration:
       type: object
       properties:
@@ -6470,6 +6485,9 @@ components:
         CaptionDescriptions:
           $ref: '#/components/schemas/__listOfCaptionDescription'
           description: Settings for caption decriptions
+        FeatureActivations:
+          $ref: '#/components/schemas/FeatureActivations'
+          description: Feature Activations
         GlobalConfiguration:
           $ref: '#/components/schemas/GlobalConfiguration'
           description: Configuration settings that apply to the event as a whole.
@@ -7541,6 +7559,12 @@ components:
       description: Placeholder documentation for __integerMin1Max5
       minimum: 1
       maximum: 5
+    FeatureActivationsInputPrepareScheduleActions:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Feature Activations Input Prepare Schedule Actions
     FecOutputIncludeFec:
       type: string
       enum:
@@ -9139,6 +9163,21 @@ components:
         - COLOR
         - SLATE
       description: Input Loss Image Type
+    InputPrepareScheduleActionSettings:
+      type: object
+      required:
+        - InputAttachmentNameReference
+      properties:
+        InputAttachmentNameReference:
+          $ref: '#/components/schemas/__string'
+          description: 'The name of the input attachment that should be prepared by this action. If no name is provided, the action will stop the most recent prepare (if any) when activated.'
+        InputClippingSettings:
+          $ref: '#/components/schemas/InputClippingSettings'
+          description: 'Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.'
+        UrlPath:
+          $ref: '#/components/schemas/__listOf__string'
+          description: 'The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.'
+      description: Action to prepare an input for a future immediate input switch.
     __listOfAudioSelector:
       type: array
       description: Placeholder documentation for __listOfAudioSelector
@@ -10287,6 +10326,9 @@ components:
         HlsTimedMetadataSettings:
           $ref: '#/components/schemas/HlsTimedMetadataScheduleActionSettings'
           description: Action to insert HLS metadata
+        InputPrepareSettings:
+          $ref: '#/components/schemas/InputPrepareScheduleActionSettings'
+          description: Action to prepare an input for a future immediate input switch
         InputSwitchSettings:
           $ref: '#/components/schemas/InputSwitchScheduleActionSettings'
           description: Action to switch the input
