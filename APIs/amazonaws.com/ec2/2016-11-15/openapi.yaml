@@ -4833,7 +4833,7 @@ paths:
     get:
       x-aws-operation-name: CreateInstanceExportTask
       operationId: GET_CreateInstanceExportTask
-      description: '<p>Exports a running or stopped instance to an S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>'
+      description: '<p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4842,7 +4842,7 @@ paths:
         - name: Description
           in: query
           required: false
-          description: A description for the conversion task or the resource being exported. The maximum length is 255 bytes.
+          description: A description for the conversion task or the resource being exported. The maximum length is 255 characters.
           schema:
             type: string
         - name: ExportToS3
@@ -4860,10 +4860,10 @@ paths:
                 description: The format for the exported image.
               S3Bucket:
                 $ref: '#/components/schemas/String'
-                description: The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
+                description: The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
               S3Prefix:
                 $ref: '#/components/schemas/String'
-                description: The image is written to a single object in the S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
+                description: The image is written to a single object in the Amazon S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
             description: Describes an instance export task.
         - name: InstanceId
           in: query
@@ -4881,6 +4881,14 @@ paths:
               - citrix
               - vmware
               - microsoft
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the instance export task during creation.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -4906,7 +4914,7 @@ paths:
     post:
       x-aws-operation-name: CreateInstanceExportTask
       operationId: POST_CreateInstanceExportTask
-      description: '<p>Exports a running or stopped instance to an S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>'
+      description: '<p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -8045,7 +8053,6 @@ paths:
             enum:
               - standard
               - io1
-              - io2
               - gp2
               - sc1
               - st1
@@ -14363,7 +14370,7 @@ paths:
     get:
       x-aws-operation-name: DescribeExportImageTasks
       operationId: GET_DescribeExportImageTasks
-      description: Describes the specified export image tasks or all your export image tasks.
+      description: Describes the specified export image tasks or all of your export image tasks.
       responses:
         '200':
           description: Success
@@ -14430,7 +14437,7 @@ paths:
     post:
       x-aws-operation-name: DescribeExportImageTasks
       operationId: POST_DescribeExportImageTasks
-      description: Describes the specified export image tasks or all your export image tasks.
+      description: Describes the specified export image tasks or all of your export image tasks.
       responses:
         '200':
           description: Success
@@ -14468,7 +14475,7 @@ paths:
     get:
       x-aws-operation-name: DescribeExportTasks
       operationId: GET_DescribeExportTasks
-      description: Describes the specified export instance tasks or all your export instance tasks.
+      description: Describes the specified export instance tasks or all of your export instance tasks.
       responses:
         '200':
           description: Success
@@ -14515,7 +14522,7 @@ paths:
     post:
       x-aws-operation-name: DescribeExportTasks
       operationId: POST_DescribeExportTasks
-      description: Describes the specified export instance tasks or all your export instance tasks.
+      description: Describes the specified export instance tasks or all of your export instance tasks.
       responses:
         '200':
           description: Success
@@ -25994,7 +26001,7 @@ paths:
         - name: Description
           in: query
           required: false
-          description: A description of the image being exported. The maximum length is 255 bytes.
+          description: A description of the image being exported. The maximum length is 255 characters.
           schema:
             type: string
         - name: DiskImageFormat
@@ -26022,7 +26029,7 @@ paths:
         - name: S3ExportLocation
           in: query
           required: true
-          description: Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+          description: Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
           schema:
             type: object
             required:
@@ -26030,7 +26037,7 @@ paths:
             properties:
               S3Bucket:
                 $ref: '#/components/schemas/String'
-                description: The destination S3 bucket.
+                description: The destination Amazon S3 bucket.
               S3Prefix:
                 $ref: '#/components/schemas/String'
                 description: The prefix (logical hierarchy) in the bucket.
@@ -26038,9 +26045,17 @@ paths:
         - name: RoleName
           in: query
           required: false
-          description: 'The name of the role that grants VM Import/Export permission to export images to your S3 bucket. If this parameter is not specified, the default role is named ''vmimport''.'
+          description: 'The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket. If this parameter is not specified, the default role is named ''vmimport''.'
           schema:
             type: string
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the image being exported.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -27670,6 +27685,14 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/ImportImageLicenseConfigurationRequest'
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the image being imported.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -27986,7 +28009,7 @@ paths:
                 description: 'The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..).'
               UserBucket:
                 $ref: '#/components/schemas/UserBucket'
-                description: The S3 bucket for the disk image.
+                description: The Amazon S3 bucket for the disk image.
             description: The disk container object for the import snapshot request.
         - name: DryRun
           in: query
@@ -28012,6 +28035,14 @@ paths:
           description: 'The name of the role to use when not using the default role, ''vmimport''.'
           schema:
             type: string
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the snapshot being imported.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
         - name: Action
           in: query
           required: true
@@ -30958,7 +30989,6 @@ paths:
             enum:
               - standard
               - io1
-              - io2
               - gp2
               - sc1
               - st1
@@ -41140,19 +41170,22 @@ components:
           description: The ID of the image.
         RoleName:
           $ref: '#/components/schemas/String'
-          description: The name of the role that grants VM Import/Export permission to export images to your S3 bucket.
+          description: The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket.
         Progress:
           $ref: '#/components/schemas/String'
           description: The percent complete of the export image task.
         S3ExportLocation:
           $ref: '#/components/schemas/ExportTaskS3Location'
-          description: Information about the destination S3 bucket.
+          description: Information about the destination Amazon S3 bucket.
         Status:
           $ref: '#/components/schemas/String'
           description: 'The status of the export image task. The possible values are <code>active</code>, <code>completed</code>, <code>deleting</code>, and <code>deleted</code>.'
         StatusMessage:
           $ref: '#/components/schemas/String'
           description: The status message for the export image task.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Any tags assigned to the image being exported.
     ExportTransitGatewayRoutesResult:
       type: object
       properties:
@@ -41399,7 +41432,7 @@ components:
           description: A description of the import task.
         Encrypted:
           $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the AMI is encypted.
+          description: Indicates whether the AMI is encrypted.
         Hypervisor:
           $ref: '#/components/schemas/String'
           description: The target hypervisor of the import task.
@@ -41407,10 +41440,10 @@ components:
           $ref: '#/components/schemas/String'
           description: The ID of the Amazon Machine Image (AMI) created by the import task.
         ImportTaskId:
-          $ref: '#/components/schemas/String'
+          $ref: '#/components/schemas/ImportImageTaskId'
           description: The task ID of the import image task.
         KmsKeyId:
-          $ref: '#/components/schemas/String'
+          $ref: '#/components/schemas/KmsKeyId'
           description: The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
         LicenseType:
           $ref: '#/components/schemas/String'
@@ -41433,6 +41466,9 @@ components:
         LicenseSpecifications:
           $ref: '#/components/schemas/ImportImageLicenseSpecificationListResponse'
           description: The ARNs of the license configurations.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Any tags assigned to the image being imported.
     Double:
       type: number
       format: double
@@ -41447,7 +41483,7 @@ components:
           description: The block device mapping for the disk.
         Format:
           $ref: '#/components/schemas/String'
-          description: '<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>'
+          description: '<p>The format of the disk image being imported.</p> <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VHDX</code> |<code>VMDK</code> </p>'
         SnapshotId:
           $ref: '#/components/schemas/SnapshotId'
           description: The ID of the EBS snapshot to be used for importing the snapshot.
@@ -41552,16 +41588,19 @@ components:
         SnapshotTaskDetail:
           $ref: '#/components/schemas/SnapshotTaskDetail'
           description: Information about the import snapshot task.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Any tags assigned to the snapshot being imported.
     UserBucket:
       type: object
       properties:
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The name of the S3 bucket where the disk image is located.
+          description: The name of the Amazon S3 bucket where the disk image is located.
         S3Key:
           $ref: '#/components/schemas/String'
           description: The file name of the disk image.
-      description: Describes the S3 bucket for the disk image.
+      description: Describes the Amazon S3 bucket for the disk image.
     ImportVolumeResult:
       type: object
       properties:
@@ -45591,10 +45630,10 @@ components:
           description: The format for the exported image.
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
+          description: The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
         S3Prefix:
           $ref: '#/components/schemas/String'
-          description: The image is written to a single object in the S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
+          description: The image is written to a single object in the Amazon S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
       description: Describes an instance export task.
     ExportEnvironment:
       type: string
@@ -45610,7 +45649,7 @@ components:
       properties:
         Description:
           $ref: '#/components/schemas/String'
-          description: A description for the conversion task or the resource being exported. The maximum length is 255 bytes.
+          description: A description for the conversion task or the resource being exported. The maximum length is 255 characters.
         ExportToS3Task:
           $ref: '#/components/schemas/ExportToS3TaskSpecification'
           description: The format and location for an instance export task.
@@ -45620,6 +45659,9 @@ components:
         TargetEnvironment:
           $ref: '#/components/schemas/ExportEnvironment'
           description: The target virtualization environment.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the instance export task during creation.
     ExportTask:
       type: object
       properties:
@@ -47135,7 +47177,6 @@ components:
       enum:
         - standard
         - io1
-        - io2
         - gp2
         - sc1
         - st1
@@ -52546,7 +52587,7 @@ components:
       properties:
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The destination S3 bucket.
+          description: The destination Amazon S3 bucket.
         S3Prefix:
           $ref: '#/components/schemas/String'
           description: The prefix (logical hierarchy) in the bucket.
@@ -52564,7 +52605,7 @@ components:
           description: Token to enable idempotency for export image requests.
         Description:
           $ref: '#/components/schemas/String'
-          description: A description of the image being exported. The maximum length is 255 bytes.
+          description: A description of the image being exported. The maximum length is 255 characters.
         DiskImageFormat:
           $ref: '#/components/schemas/DiskImageFormat'
           description: The disk image format.
@@ -52576,16 +52617,19 @@ components:
           description: The ID of the image.
         S3ExportLocation:
           $ref: '#/components/schemas/ExportTaskS3LocationRequest'
-          description: Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+          description: Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
         RoleName:
           $ref: '#/components/schemas/String'
-          description: 'The name of the role that grants VM Import/Export permission to export images to your S3 bucket. If this parameter is not specified, the default role is named ''vmimport''.'
+          description: 'The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket. If this parameter is not specified, the default role is named ''vmimport''.'
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the image being exported.
     ExportTaskS3Location:
       type: object
       properties:
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The destination S3 bucket.
+          description: The destination Amazon S3 bucket.
         S3Prefix:
           $ref: '#/components/schemas/String'
           description: The prefix (logical hierarchy) in the bucket.
@@ -52607,13 +52651,16 @@ components:
           description: The percent complete of the export image task.
         S3ExportLocation:
           $ref: '#/components/schemas/ExportTaskS3Location'
-          description: Information about the destination S3 bucket.
+          description: Information about the destination Amazon S3 bucket.
         Status:
           $ref: '#/components/schemas/String'
           description: 'The status of the export image task. The possible values are <code>active</code>, <code>completed</code>, <code>deleting</code>, and <code>deleted</code>.'
         StatusMessage:
           $ref: '#/components/schemas/String'
           description: The status message for the export image task.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Any tags assigned to the image being exported.
       description: Describes an export image task.
     ExportToS3Task:
       type: object
@@ -52626,7 +52673,7 @@ components:
           description: The format for the exported image.
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
+          description: The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.
         S3Key:
           $ref: '#/components/schemas/String'
           description: The encryption key for your S3 bucket.
@@ -54045,6 +54092,9 @@ components:
         LicenseSpecifications:
           $ref: '#/components/schemas/ImportImageLicenseSpecificationListRequest'
           description: The ARNs of the license configurations.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the image being imported.
     SnapshotDetailList:
       type: array
       items:
@@ -54218,7 +54268,7 @@ components:
           description: 'The URL to the Amazon S3-based disk image being imported. It can either be a https URL (https://..) or an Amazon S3 URL (s3://..).'
         UserBucket:
           $ref: '#/components/schemas/UserBucket'
-          description: The S3 bucket for the disk image.
+          description: The Amazon S3 bucket for the disk image.
       description: The disk container object for the import snapshot request.
     ImportSnapshotRequest:
       type: object
@@ -54248,6 +54298,9 @@ components:
         RoleName:
           $ref: '#/components/schemas/String'
           description: 'The name of the role to use when not using the default role, ''vmimport''.'
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the snapshot being imported.
     SnapshotTaskDetail:
       type: object
       properties:
@@ -54283,7 +54336,7 @@ components:
           description: The URL of the disk image from which the snapshot is created.
         UserBucket:
           $ref: '#/components/schemas/UserBucketDetails'
-          description: The S3 bucket for the disk image.
+          description: The Amazon S3 bucket for the disk image.
       description: Details about the import snapshot task.
     ImportSnapshotTask:
       type: object
@@ -55780,14 +55833,19 @@ components:
         - dhcp-options
         - elastic-ip
         - elastic-gpu
+        - export-image-task
+        - export-instance-task
         - fleet
         - fpga-image
         - host-reservation
         - image
+        - import-image-task
+        - import-snapshot-task
         - instance
         - internet-gateway
         - key-pair
         - launch-template
+        - local-gateway-route-table-vpc-association
         - natgateway
         - network-acl
         - network-interface
@@ -59513,11 +59571,11 @@ components:
       properties:
         S3Bucket:
           $ref: '#/components/schemas/String'
-          description: The S3 bucket from which the disk image was created.
+          description: The Amazon S3 bucket from which the disk image was created.
         S3Key:
           $ref: '#/components/schemas/String'
           description: The file name of the disk image.
-      description: Describes the S3 bucket for the disk image.
+      description: Describes the Amazon S3 bucket for the disk image.
     SnapshotDetail:
       type: object
       properties:
@@ -59550,7 +59608,7 @@ components:
           description: The URL used to access the disk image.
         UserBucket:
           $ref: '#/components/schemas/UserBucketDetails'
-          description: The S3 bucket for the disk image.
+          description: The Amazon S3 bucket for the disk image.
       description: Describes the snapshot created from the imported disk.
     SnapshotInfo:
       type: object

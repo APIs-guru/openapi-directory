@@ -628,7 +628,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.DeleteProject':
     post:
       operationId: DeleteProject
-      description: '<p>Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see <a>DeleteProjectVersion</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProject</code> action. </p>'
+      description: '<p>Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProject</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -703,7 +703,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.DeleteProjectVersion':
     post:
       operationId: DeleteProjectVersion
-      description: '<p>Deletes a version of a model. </p> <p>You must first stop the model before you can delete it. To check if a model is running, use the <code>Status</code> field returned from <a>DescribeProjectVersions</a>. To stop a running model call <a>StopProjectVersion</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProjectVersion</code> action. </p>'
+      description: '<p>Deletes an Amazon Rekognition Custom Labels model. </p> <p>You can''t delete a model if it is running or if it is training. To check the status of a model, use the <code>Status</code> field returned from <a>DescribeProjectVersions</a>. To stop a running model call <a>StopProjectVersion</a>. If the model is training, wait until it finishes.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteProjectVersion</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -2176,6 +2176,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.GetSegmentDetection':
+    post:
+      operationId: GetSegmentDetection
+      description: '<p>Gets the segment detection results of a Amazon Rekognition Video analysis started by <a>StartSegmentDetection</a>.</p> <p>Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by calling <a>StartSegmentDetection</a> which returns a job identifier (<code>JobId</code>). When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartSegmentDetection</code>. To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <code>GetSegmentDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call of <code>StartSegmentDetection</code>.</p> <p> <code>GetSegmentDetection</code> returns detected segments in an array (<code>Segments</code>) of <a>SegmentDetection</a> objects. <code>Segments</code> is sorted by the segment types specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. Each element of the array includes the detected segment, the precentage confidence in the acuracy of the detected segment, the type of the segment, and the frame in which the segment was detected.</p> <p>Use <code>SelectedSegmentTypes</code> to find out the type of segment detection requested in the call to <code>StartSegmentDetection</code>.</p> <p>Use the <code>MaxResults</code> parameter to limit the number of segment detections returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetSegmentDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetSegmentDetection</code>.</p> <p>For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSegmentDetectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSegmentDetectionRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.GetSegmentDetection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=RekognitionService.GetTextDetection':
     post:
       operationId: GetTextDetection
@@ -2266,7 +2353,7 @@ paths:
   '/#X-Amz-Target=RekognitionService.IndexFaces':
     post:
       operationId: IndexFaces
-      description: '<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition doesn''t save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the <a>SearchFaces</a> and <a>SearchFacesByImage</a> operations.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p> <p>If you''re using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. </p> <p>If you''re using version 4 or later of the face model, image orientation information is not returned in the <code>OrientationCorrection</code> field. </p> <p>To determine which version of the model you''re using, call <a>DescribeCollection</a> and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code> </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.</p> <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input parameter. This is useful when you want to index the largest faces in an image and don''t want to index smaller faces, such as those belonging to people standing in the background.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that''s used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>Information about faces detected in an image, but not indexed, is returned in an array of <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren''t indexed for reasons such as:</p> <ul> <li> <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request parameter.</p> </li> <li> <p>The face is too small compared to the image dimensions.</p> </li> <li> <p>The face is too blurry.</p> </li> <li> <p>The image is too dark.</p> </li> <li> <p>The face has an extreme pose.</p> </li> <li> <p>The face doesn’t have enough detail to be suitable for face search.</p> </li> </ul> <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for all detected faces, <code>FaceRecords</code>. This includes: </p> <ul> <li> <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p> </li> <li> <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the bounding box contains a face.</p> </li> <li> <p>A face ID, <code>FaceId</code>, assigned by the service for each face that''s detected and stored.</p> </li> <li> <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p> </li> </ul> <p>If you request all facial attributes (by using the <code>detectionAttributes</code> parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn''t save duplicate face metadata.</p> <p/> <p>The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>'
+      description: '<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition doesn''t save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the <a>SearchFaces</a> and <a>SearchFacesByImage</a> operations.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p> <p>If you''re using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. </p> <p>If you''re using version 4 or later of the face model, image orientation information is not returned in the <code>OrientationCorrection</code> field. </p> <p>To determine which version of the model you''re using, call <a>DescribeCollection</a> and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code> </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageId</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.</p> <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input parameter. This is useful when you want to index the largest faces in an image and don''t want to index smaller faces, such as those belonging to people standing in the background.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that''s used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>Information about faces detected in an image, but not indexed, is returned in an array of <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren''t indexed for reasons such as:</p> <ul> <li> <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request parameter.</p> </li> <li> <p>The face is too small compared to the image dimensions.</p> </li> <li> <p>The face is too blurry.</p> </li> <li> <p>The image is too dark.</p> </li> <li> <p>The face has an extreme pose.</p> </li> <li> <p>The face doesn’t have enough detail to be suitable for face search.</p> </li> </ul> <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for all detected faces, <code>FaceRecords</code>. This includes: </p> <ul> <li> <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p> </li> <li> <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the bounding box contains a face.</p> </li> <li> <p>A face ID, <code>FaceId</code>, assigned by the service for each face that''s detected and stored.</p> </li> <li> <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p> </li> </ul> <p>If you request all facial attributes (by using the <code>detectionAttributes</code> parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn''t save duplicate face metadata.</p> <p/> <p>The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -3457,6 +3544,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=RekognitionService.StartSegmentDetection':
+    post:
+      operationId: StartSegmentDetection
+      description: '<p>Starts asynchronous detection of segment detection in a stored video.</p> <p>Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartSegmentDetection</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>You can use the <code>Filters</code> (<a>StartSegmentDetectionFilters</a>) input parameter to specify the minimum detection confidence returned in the response. Within <code>Filters</code>, use <code>ShotFilter</code> (<a>StartShotDetectionFilter</a>) to filter detected shots. Use <code>TechnicalCueFilter</code> (<a>StartTechnicalCueDetectionFilter</a>) to filter technical cues. </p> <p>To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <a>GetSegmentDetection</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartSegmentDetection</code>. </p> <p>For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSegmentDetectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: IdempotentParameterMismatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: VideoTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoTooLargeException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '488':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSegmentDetectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.StartSegmentDetection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=RekognitionService.StartStreamProcessor':
     post:
       operationId: StartStreamProcessor
@@ -4113,7 +4287,7 @@ components:
           description: The Amazon Resource Name (ARN) of the project that contains the models you want to describe.
         VersionNames:
           $ref: '#/components/schemas/VersionNames'
-          description: 'A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don''t specify a value, all model descriptions are returned.'
+          description: 'A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don''t specify a value, all model descriptions are returned. A version name is part of a model (ProjectVersion) ARN. For example, <code>my-model.2020-01-21T09.10.15</code> is the version name in the following ARN. <code>arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/<i>my-model.2020-01-21T09.10.15</i>/1234567890123</code>.'
         NextToken:
           $ref: '#/components/schemas/ExtendedPaginationToken'
           description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
@@ -4579,6 +4753,45 @@ components:
         SortBy:
           $ref: '#/components/schemas/PersonTrackingSortBy'
           description: 'Sort to use for elements in the <code>Persons</code> array. Use <code>TIMESTAMP</code> to sort array elements by the time persons are detected. Use <code>INDEX</code> to sort by the tracked persons. If you sort by <code>INDEX</code>, the array elements for each person are sorted by detection confidence. The default sort is by <code>TIMESTAMP</code>.'
+    GetSegmentDetectionResponse:
+      type: object
+      properties:
+        JobStatus:
+          $ref: '#/components/schemas/VideoJobStatus'
+          description: Current status of the segment detection job.
+        StatusMessage:
+          $ref: '#/components/schemas/StatusMessage'
+          description: 'If the job fails, <code>StatusMessage</code> provides a descriptive error message.'
+        VideoMetadata:
+          $ref: '#/components/schemas/VideoMetadataList'
+          description: 'Currently, Amazon Rekognition Video returns a single object in the <code>VideoMetadata</code> array. The object contains information about the video stream in the input file that Amazon Rekognition Video chose to analyze. The <code>VideoMetadata</code> object includes the video codec, video format and other information. Video metadata is returned in each page of information returned by <code>GetSegmentDetection</code>.'
+        AudioMetadata:
+          $ref: '#/components/schemas/AudioMetadataList'
+          description: 'An array of objects. There can be multiple audio streams. Each <code>AudioMetadata</code> object contains metadata for a single audio stream. Audio information in an <code>AudioMetadata</code> objects includes the audio codec, the number of audio channels, the duration of the audio stream, and the sample rate. Audio metadata is returned in each page of information returned by <code>GetSegmentDetection</code>.'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of text.'
+        Segments:
+          $ref: '#/components/schemas/SegmentDetections'
+          description: An array of segments detected in a video.
+        SelectedSegmentTypes:
+          $ref: '#/components/schemas/SegmentTypesInfo'
+          description: 'An array containing the segment types requested in the call to <code>StartSegmentDetection</code>. '
+    GetSegmentDetectionRequest:
+      type: object
+      required:
+        - JobId
+      title: GetSegmentDetectionRequest
+      properties:
+        JobId:
+          $ref: '#/components/schemas/JobId'
+          description: Job identifier for the text detection operation for which you want results returned. You get the job identifer from an initial call to <code>StartSegmentDetection</code>.
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of text.'
     GetTextDetectionResponse:
       type: object
       properties:
@@ -4607,7 +4820,7 @@ components:
       properties:
         JobId:
           $ref: '#/components/schemas/JobId'
-          description: Job identifier for the label detection operation for which you want results returned. You get the job identifer from an initial call to <code>StartTextDetection</code>.
+          description: Job identifier for the text detection operation for which you want results returned. You get the job identifer from an initial call to <code>StartTextDetection</code>.
         MaxResults:
           $ref: '#/components/schemas/MaxResults'
           description: Maximum number of results to return per paginated call. The largest value you can specify is 1000.
@@ -5217,6 +5430,36 @@ components:
         MinInferenceUnits:
           $ref: '#/components/schemas/InferenceUnits'
           description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+    StartSegmentDetectionResponse:
+      type: object
+      properties:
+        JobId:
+          $ref: '#/components/schemas/JobId'
+          description: 'Unique identifier for the segment detection job. The <code>JobId</code> is returned from <code>StartSegmentDetection</code>. '
+    StartSegmentDetectionRequest:
+      type: object
+      required:
+        - Video
+        - SegmentTypes
+      title: StartSegmentDetectionRequest
+      properties:
+        Video:
+          $ref: '#/components/schemas/Video'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Idempotent token used to identify the start request. If you use the same token with multiple <code>StartSegmentDetection</code> requests, the same <code>JobId</code> is returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. '
+        NotificationChannel:
+          $ref: '#/components/schemas/NotificationChannel'
+          description: The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation.
+        JobTag:
+          $ref: '#/components/schemas/JobTag'
+          description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
+        Filters:
+          $ref: '#/components/schemas/StartSegmentDetectionFilters'
+          description: Filters for technical cue or shot detection.
+        SegmentTypes:
+          $ref: '#/components/schemas/SegmentTypes'
+          description: An array of segment types to detect in the video. Valid values are TECHNICAL_CUE and SHOT.
     StartStreamProcessorResponse:
       type: object
       properties: {}
@@ -5319,6 +5562,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Attribute'
+    String:
+      type: string
+    ULong:
+      type: integer
+      minimum: 0
+    AudioMetadata:
+      type: object
+      properties:
+        Codec:
+          $ref: '#/components/schemas/String'
+          description: 'The audio codec used to encode or decode the audio stream. '
+        DurationMillis:
+          $ref: '#/components/schemas/ULong'
+          description: The duration of the audio stream in milliseconds.
+        SampleRate:
+          $ref: '#/components/schemas/ULong'
+          description: The sample rate for the audio stream.
+        NumberOfChannels:
+          $ref: '#/components/schemas/ULong'
+          description: The number of audio channels in the segement.
+      description: 'Metadata information about an audio stream. An array of <code>AudioMetadata</code> objects for the audio streams found in a stored video is returned by <a>GetSegmentDetection</a>. '
+    AudioMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AudioMetadata'
     Boolean:
       type: boolean
     Percent:
@@ -5369,8 +5637,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Url'
-    String:
-      type: string
     RekognitionUniqueId:
       type: string
       pattern: '[0-9A-Za-z]*'
@@ -5786,9 +6052,6 @@ components:
         - STOPPING
         - STOPPED
         - DELETING
-    ULong:
-      type: integer
-      minimum: 0
     VersionNames:
       type: array
       items:
@@ -5841,7 +6104,7 @@ components:
           description: The name of the human review used for this image. This should be kept unique within a region.
         FlowDefinitionArn:
           $ref: '#/components/schemas/FlowDefinitionArn'
-          description: The Amazon Resource Name (ARN) of the flow definition.
+          description: 'The Amazon Resource Name (ARN) of the flow definition. You can create a flow definition by using the Amazon Sagemaker <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateFlowDefinition.html">CreateFlowDefinition</a> Operation. '
         DataAttributes:
           $ref: '#/components/schemas/HumanLoopDataAttributes'
           description: Sets attributes of the input data.
@@ -6182,6 +6445,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PersonDetection'
+    VideoMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VideoMetadata'
+    SegmentDetections:
+      type: array
+      items:
+        $ref: '#/components/schemas/SegmentDetection'
+    SegmentTypesInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/SegmentTypeInfo'
     TextDetectionResults:
       type: array
       items:
@@ -6543,6 +6818,84 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+    SegmentConfidence:
+      type: number
+      format: float
+      minimum: 50
+      maximum: 100
+    SegmentType:
+      type: string
+      enum:
+        - TECHNICAL_CUE
+        - SHOT
+    Timecode:
+      type: string
+    TechnicalCueSegment:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/TechnicalCueType'
+          description: The type of the technical cue.
+        Confidence:
+          $ref: '#/components/schemas/SegmentConfidence'
+          description: The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.
+      description: 'Information about a technical cue segment. For more information, see <a>SegmentDetection</a>.'
+    ShotSegment:
+      type: object
+      properties:
+        Index:
+          $ref: '#/components/schemas/ULong'
+          description: 'An Identifier for a shot detection segment detected in a video '
+        Confidence:
+          $ref: '#/components/schemas/SegmentConfidence'
+          description: The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.
+      description: 'Information about a shot detection segment detected in a video. For more information, see <a>SegmentDetection</a>.'
+    SegmentDetection:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/SegmentType'
+          description: The type of the segment. Valid values are <code>TECHNICAL_CUE</code> and <code>SHOT</code>.
+        StartTimestampMillis:
+          $ref: '#/components/schemas/Timestamp'
+          description: The start time of the detected segment in milliseconds from the start of the video.
+        EndTimestampMillis:
+          $ref: '#/components/schemas/Timestamp'
+          description: 'The end time of the detected segment, in milliseconds, from the start of the video.'
+        DurationMillis:
+          $ref: '#/components/schemas/ULong'
+          description: 'The duration of the detected segment in milliseconds. '
+        StartTimecodeSMPTE:
+          $ref: '#/components/schemas/Timecode'
+          description: 'The frame-accurate SMPTE timecode, from the start of a video, for the start of a detected segment. <code>StartTimecode</code> is in <i>HH:MM:SS:fr</i> format (and <i>;fr</i> for drop frame-rates). '
+        EndTimecodeSMPTE:
+          $ref: '#/components/schemas/Timecode'
+          description: 'The frame-accurate SMPTE timecode, from the start of a video, for the end of a detected segment. <code>EndTimecode</code> is in <i>HH:MM:SS:fr</i> format (and <i>;fr</i> for drop frame-rates).'
+        DurationSMPTE:
+          $ref: '#/components/schemas/Timecode'
+          description: The duration of the timecode for the detected segment in SMPTE format.
+        TechnicalCueSegment:
+          $ref: '#/components/schemas/TechnicalCueSegment'
+          description: 'If the segment is a technical cue, contains information about the technical cue.'
+        ShotSegment:
+          $ref: '#/components/schemas/ShotSegment'
+          description: 'If the segment is a shot detection, contains information about the shot detection.'
+      description: 'A technical cue or shot detection segment detected in a video. An array of <code>SegmentDetection</code> objects containing all segments detected in a stored video is returned by <a>GetSegmentDetection</a>. '
+    SegmentTypeInfo:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/SegmentType'
+          description: The type of a segment (technical cue or shot detection).
+        ModelVersion:
+          $ref: '#/components/schemas/String'
+          description: The version of the model used to detect segments.
+      description: Information about the type of a segment requested in a call to <a>StartSegmentDetection</a>. An array of <code>SegmentTypeInfo</code> objects is returned by the response from <a>GetSegmentDetection</a>.
+    SegmentTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/SegmentType'
+      minItems: 1
     Video:
       type: object
       properties:
@@ -6550,6 +6903,30 @@ components:
           $ref: '#/components/schemas/S3Object'
           description: The Amazon S3 bucket name and file name for the video.
       description: 'Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as <a>StartLabelDetection</a> use <code>Video</code> to specify a video for analysis. The supported file formats are .mp4, .mov and .avi.'
+    StartTechnicalCueDetectionFilter:
+      type: object
+      properties:
+        MinSegmentConfidence:
+          $ref: '#/components/schemas/SegmentConfidence'
+          description: '<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn''t return any segments with a confidence level lower than this specified value.</p> <p>If you don''t specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns segments with confidence values greater than or equal to 50 percent.</p>'
+      description: 'Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information, see <a>StartSegmentDetectionFilters</a>.'
+    StartShotDetectionFilter:
+      type: object
+      properties:
+        MinSegmentConfidence:
+          $ref: '#/components/schemas/SegmentConfidence'
+          description: '<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn''t return any segments with a confidence level lower than this specified value.</p> <p>If you don''t specify <code>MinSegmentConfidence</code>, the <code>GetSegmentDetection</code> returns segments with confidence values greater than or equal to 50 percent.</p>'
+      description: 'Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. For more information, see <a>StartSegmentDetectionFilters</a>.'
+    StartSegmentDetectionFilters:
+      type: object
+      properties:
+        TechnicalCueFilter:
+          $ref: '#/components/schemas/StartTechnicalCueDetectionFilter'
+          description: Filters that are specific to technical cues.
+        ShotFilter:
+          $ref: '#/components/schemas/StartShotDetectionFilter'
+          description: Filters that are specific to shot detections.
+      description: 'Filters applied to the technical cue or shot detection segments. For more information, see <a>StartSegmentDetection</a>. '
     StartTextDetectionFilters:
       type: object
       properties:
@@ -6570,6 +6947,12 @@ components:
           $ref: '#/components/schemas/StreamProcessorStatus'
           description: Current status of the Amazon Rekognition stream processor.
       description: 'An object that recognizes faces in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>. The request parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts. '
+    TechnicalCueType:
+      type: string
+      enum:
+        - ColorBars
+        - EndCredits
+        - BlackFrames
     TextTypes:
       type: string
       enum:
