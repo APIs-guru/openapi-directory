@@ -1880,6 +1880,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: UnsupportedAPIEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedAPIEndpointException'
       requestBody:
         required: true
         content:
@@ -2050,6 +2056,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: UnsupportedAPIEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedAPIEndpointException'
       requestBody:
         required: true
         content:
@@ -2469,6 +2481,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: UnsupportedAPIEndpointException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedAPIEndpointException'
       requestBody:
         required: true
         content:

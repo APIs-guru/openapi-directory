@@ -286,6 +286,16 @@ paths:
                     Value:
                       description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
                       $ref: '#/components/schemas/__string'
+                Bumper:
+                  description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
+                  type: object
+                  properties:
+                    EndUrl:
+                      description: 'The URL for the end bumper asset. '
+                      $ref: '#/components/schemas/__string'
+                    StartUrl:
+                      description: 'The URL for the start bumper asset. '
+                      $ref: '#/components/schemas/__string'
                 CdnConfiguration:
                   description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
                   type: object
@@ -445,6 +455,9 @@ components:
         AvailSuppression:
           $ref: '#/components/schemas/AvailSuppression'
           description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+        Bumper:
+          $ref: '#/components/schemas/Bumper'
+          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
           description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
           $ref: '#/components/schemas/CdnConfiguration'
@@ -515,6 +528,9 @@ components:
         AvailSuppression:
           $ref: '#/components/schemas/AvailSuppression'
           description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+        Bumper:
+          $ref: '#/components/schemas/Bumper'
+          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
           description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
           $ref: '#/components/schemas/CdnConfiguration'
@@ -578,6 +594,16 @@ components:
           description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
           $ref: '#/components/schemas/__string'
       description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+    Bumper:
+      type: object
+      properties:
+        EndUrl:
+          description: 'The URL for the end bumper asset. '
+          $ref: '#/components/schemas/__string'
+        StartUrl:
+          description: 'The URL for the start bumper asset. '
+          $ref: '#/components/schemas/__string'
+      description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
     CdnConfiguration:
       type: object
       properties:
@@ -668,6 +694,9 @@ components:
         AvailSuppression:
           description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
           $ref: '#/components/schemas/AvailSuppression'
+        Bumper:
+          $ref: '#/components/schemas/Bumper'
+          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
           description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
           $ref: '#/components/schemas/CdnConfiguration'
@@ -715,6 +744,9 @@ components:
         AvailSuppression:
           $ref: '#/components/schemas/AvailSuppression'
           description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+        Bumper:
+          $ref: '#/components/schemas/Bumper'
+          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
           description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
           $ref: '#/components/schemas/CdnConfiguration'
