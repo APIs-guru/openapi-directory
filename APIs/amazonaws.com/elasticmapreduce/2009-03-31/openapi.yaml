@@ -3256,13 +3256,14 @@ components:
         $ref: '#/components/schemas/InstanceTypeSpecification'
     InstanceFleetProvisioningSpecifications:
       type: object
-      required:
-        - SpotSpecification
       properties:
         SpotSpecification:
           $ref: '#/components/schemas/SpotProvisioningSpecification'
-          description: 'The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.'
-      description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+          description: 'The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.'
+        OnDemandSpecification:
+          $ref: '#/components/schemas/OnDemandProvisioningSpecification'
+          description: '<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+      description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation strategies are available in Amazon EMR version 5.12.1 and later.</p> </note>'
     InstanceFleet:
       type: object
       properties:
@@ -3339,7 +3340,19 @@ components:
         BlockDurationMinutes:
           $ref: '#/components/schemas/WholeNumber'
           description: 'The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. '
-      description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+        AllocationStrategy:
+          $ref: '#/components/schemas/SpotProvisioningAllocationStrategy'
+          description: ' Specifies the strategy to use in launching Spot instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot instance pools with optimal capacity for the number of instances that are launching. '
+      description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+    OnDemandProvisioningSpecification:
+      type: object
+      required:
+        - AllocationStrategy
+      properties:
+        AllocationStrategy:
+          $ref: '#/components/schemas/OnDemandProvisioningAllocationStrategy'
+          description: ' Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first. '
+      description: '<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
     InstanceFleetState:
       type: string
       enum:
@@ -4016,6 +4029,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SupportedProductConfig'
+    OnDemandProvisioningAllocationStrategy:
+      type: string
+      enum:
+        - lowest-price
     Port:
       type: integer
       minimum: 0
@@ -4098,6 +4115,10 @@ components:
           $ref: '#/components/schemas/Date'
           description: The date and time the security configuration was created.
       description: 'The creation date and time, and name, of a security configuration.'
+    SpotProvisioningAllocationStrategy:
+      type: string
+      enum:
+        - capacity-optimized
     SpotProvisioningTimeoutAction:
       type: string
       enum:

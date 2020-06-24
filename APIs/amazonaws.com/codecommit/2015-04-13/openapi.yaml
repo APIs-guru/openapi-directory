@@ -3,7 +3,7 @@ info:
   version: '2015-04-13'
   x-release: v4
   title: AWS CodeCommit
-  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository can access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object in a repository.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a single file in a specified repository and branch.</p> </li> </ul> <p>Commits, by calling the following:</p> <ul> <li> <p> <a>BatchGetCommits</a>, which returns information about one or more commits in a repository.</p> </li> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference).</p> </li> </ul> <p>Merges, by calling the following:</p> <ul> <li> <p> <a>BatchDescribeMergeConflicts</a>, which returns information about conflicts in a merge between commits in a repository.</p> </li> <li> <p> <a>CreateUnreferencedMergeCommit</a>, which creates an unreferenced commit between two branches or commits for the purpose of comparing them and identifying any potential conflicts.</p> </li> <li> <p> <a>DescribeMergeConflicts</a>, which returns information about merge conflicts between the base, source, and destination versions of a file in a potential merge.</p> </li> <li> <p> <a>GetMergeCommit</a>, which returns information about the merge between a source and destination commit. </p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetMergeOptions</a>, which returns information about the available merge options between two branches or commit specifiers.</p> </li> <li> <p> <a>MergeBranchesByFastForward</a>, which merges two branches using the fast-forward merge option.</p> </li> <li> <p> <a>MergeBranchesBySquash</a>, which merges two branches using the squash merge option.</p> </li> <li> <p> <a>MergeBranchesByThreeWay</a>, which merges two branches using the three-way merge option.</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>CreatePullRequestApprovalRule</a>, which creates an approval rule for a specified pull request.</p> </li> <li> <p> <a>DeletePullRequestApprovalRule</a>, which deletes an approval rule for a specified pull request.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>EvaluatePullRequestApprovalRules</a>, which evaluates whether a pull request has met all the conditions specified in its associated approval rules.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>GetPullRequestApprovalStates</a>, which returns information about the approval states for a specified pull request.</p> </li> <li> <p> <a>GetPullRequestOverrideState</a>, which returns information about whether approval rules have been set aside (overriden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>MergePullRequestBySquash</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the squash merge option.</p> </li> <li> <p> <a>MergePullRequestByThreeWay</a>. which merges the source destination branch of a pull request into the specified destination branch for that pull request using the three-way merge option.</p> </li> <li> <p> <a>OverridePullRequestApprovalRules</a>, which sets aside all approval rule requirements for a pull request.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestApprovalRuleContent</a>, which updates the structure of an approval rule for a pull request.</p> </li> <li> <p> <a>UpdatePullRequestApprovalState</a>, which updates the state of an approval on a pull request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Approval rule templates, by calling the following:</p> <ul> <li> <p> <a>AssociateApprovalRuleTemplateWithRepository</a>, which associates a template with a specified repository. After the template is associated with a repository, AWS CodeCommit creates approval rules that match the template conditions on every pull request created in the specified repository.</p> </li> <li> <p> <a>BatchAssociateApprovalRuleTemplateWithRepositories</a>, which associates a template with one or more specified repositories. After the template is associated with a repository, AWS CodeCommit creates approval rules that match the template conditions on every pull request created in the specified repositories.</p> </li> <li> <p> <a>BatchDisassociateApprovalRuleTemplateFromRepositories</a>, which removes the association between a template and specified repositories so that approval rules based on the template are not automatically created when pull requests are created in those repositories.</p> </li> <li> <p> <a>CreateApprovalRuleTemplate</a>, which creates a template for approval rules that can then be associated with one or more repositories in your AWS account.</p> </li> <li> <p> <a>DeleteApprovalRuleTemplate</a>, which deletes the specified template. It does not remove approval rules on pull requests already created with the template.</p> </li> <li> <p> <a>DisassociateApprovalRuleTemplateFromRepository</a>, which removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository.</p> </li> <li> <p> <a>GetApprovalRuleTemplate</a>, which returns information about an approval rule template.</p> </li> <li> <p> <a>ListApprovalRuleTemplates</a>, which lists all approval rule templates in the AWS Region in your AWS account.</p> </li> <li> <p> <a>ListAssociatedApprovalRuleTemplatesForRepository</a>, which lists all approval rule templates that are associated with a specified repository.</p> </li> <li> <p> <a>ListRepositoriesForApprovalRuleTemplate</a>, which lists all repositories associated with the specified approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateDescription</a>, which updates the description of an approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateName</a>, which updates the name of an approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateContent</a>, which updates the content of an approval rule template.</p> </li> </ul> <p>Comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository can access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object in a repository.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a single file in a specified repository and branch.</p> </li> </ul> <p>Commits, by calling the following:</p> <ul> <li> <p> <a>BatchGetCommits</a>, which returns information about one or more commits in a repository.</p> </li> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference).</p> </li> </ul> <p>Merges, by calling the following:</p> <ul> <li> <p> <a>BatchDescribeMergeConflicts</a>, which returns information about conflicts in a merge between commits in a repository.</p> </li> <li> <p> <a>CreateUnreferencedMergeCommit</a>, which creates an unreferenced commit between two branches or commits for the purpose of comparing them and identifying any potential conflicts.</p> </li> <li> <p> <a>DescribeMergeConflicts</a>, which returns information about merge conflicts between the base, source, and destination versions of a file in a potential merge.</p> </li> <li> <p> <a>GetMergeCommit</a>, which returns information about the merge between a source and destination commit. </p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetMergeOptions</a>, which returns information about the available merge options between two branches or commit specifiers.</p> </li> <li> <p> <a>MergeBranchesByFastForward</a>, which merges two branches using the fast-forward merge option.</p> </li> <li> <p> <a>MergeBranchesBySquash</a>, which merges two branches using the squash merge option.</p> </li> <li> <p> <a>MergeBranchesByThreeWay</a>, which merges two branches using the three-way merge option.</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>CreatePullRequestApprovalRule</a>, which creates an approval rule for a specified pull request.</p> </li> <li> <p> <a>DeletePullRequestApprovalRule</a>, which deletes an approval rule for a specified pull request.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>EvaluatePullRequestApprovalRules</a>, which evaluates whether a pull request has met all the conditions specified in its associated approval rules.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>GetPullRequestApprovalStates</a>, which returns information about the approval states for a specified pull request.</p> </li> <li> <p> <a>GetPullRequestOverrideState</a>, which returns information about whether approval rules have been set aside (overriden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>MergePullRequestBySquash</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the squash merge option.</p> </li> <li> <p> <a>MergePullRequestByThreeWay</a>. which merges the source destination branch of a pull request into the specified destination branch for that pull request using the three-way merge option.</p> </li> <li> <p> <a>OverridePullRequestApprovalRules</a>, which sets aside all approval rule requirements for a pull request.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestApprovalRuleContent</a>, which updates the structure of an approval rule for a pull request.</p> </li> <li> <p> <a>UpdatePullRequestApprovalState</a>, which updates the state of an approval on a pull request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Approval rule templates, by calling the following:</p> <ul> <li> <p> <a>AssociateApprovalRuleTemplateWithRepository</a>, which associates a template with a specified repository. After the template is associated with a repository, AWS CodeCommit creates approval rules that match the template conditions on every pull request created in the specified repository.</p> </li> <li> <p> <a>BatchAssociateApprovalRuleTemplateWithRepositories</a>, which associates a template with one or more specified repositories. After the template is associated with a repository, AWS CodeCommit creates approval rules that match the template conditions on every pull request created in the specified repositories.</p> </li> <li> <p> <a>BatchDisassociateApprovalRuleTemplateFromRepositories</a>, which removes the association between a template and specified repositories so that approval rules based on the template are not automatically created when pull requests are created in those repositories.</p> </li> <li> <p> <a>CreateApprovalRuleTemplate</a>, which creates a template for approval rules that can then be associated with one or more repositories in your AWS account.</p> </li> <li> <p> <a>DeleteApprovalRuleTemplate</a>, which deletes the specified template. It does not remove approval rules on pull requests already created with the template.</p> </li> <li> <p> <a>DisassociateApprovalRuleTemplateFromRepository</a>, which removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository.</p> </li> <li> <p> <a>GetApprovalRuleTemplate</a>, which returns information about an approval rule template.</p> </li> <li> <p> <a>ListApprovalRuleTemplates</a>, which lists all approval rule templates in the AWS Region in your AWS account.</p> </li> <li> <p> <a>ListAssociatedApprovalRuleTemplatesForRepository</a>, which lists all approval rule templates that are associated with a specified repository.</p> </li> <li> <p> <a>ListRepositoriesForApprovalRuleTemplate</a>, which lists all repositories associated with the specified approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateDescription</a>, which updates the description of an approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateName</a>, which updates the name of an approval rule template.</p> </li> <li> <p> <a>UpdateApprovalRuleTemplateContent</a>, which updates the content of an approval rule template.</p> </li> </ul> <p>Comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentReactions</a>, which returns information about emoji reactions to comments.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>PutCommentReaction</a>, which creates or updates an emoji reaction to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -3157,7 +3157,7 @@ paths:
   '/#X-Amz-Target=CodeCommit_20150413.GetComment':
     post:
       operationId: GetComment
-      description: 'Returns the content of a comment made on a change, file, or commit in a repository.'
+      description: '<p>Returns the content of a comment made on a change, file, or commit in a repository. </p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3172,23 +3172,53 @@ paths:
               schema:
                 $ref: '#/components/schemas/CommentDoesNotExistException'
         '481':
-          description: CommentIdRequiredException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommentIdRequiredException'
-        '482':
-          description: InvalidCommentIdException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidCommentIdException'
-        '483':
           description: CommentDeletedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentDeletedException'
+        '482':
+          description: CommentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentIdRequiredException'
+        '483':
+          description: InvalidCommentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommentIdException'
+        '484':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '485':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '486':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '487':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '488':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
       requestBody:
         required: true
         content:
@@ -3211,10 +3241,97 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.GetCommentReactions':
+    post:
+      operationId: GetCommentReactions
+      description: Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCommentReactionsOutput'
+        '480':
+          description: CommentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentDoesNotExistException'
+        '481':
+          description: CommentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentIdRequiredException'
+        '482':
+          description: InvalidCommentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommentIdException'
+        '483':
+          description: InvalidReactionUserArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidReactionUserArnException'
+        '484':
+          description: InvalidMaxResultsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMaxResultsException'
+        '485':
+          description: InvalidContinuationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContinuationTokenException'
+        '486':
+          description: CommentDeletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentDeletedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCommentReactionsInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeCommit_20150413.GetCommentReactions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit':
     post:
       operationId: GetCommentsForComparedCommit
-      description: Returns information about comments made on the comparison between two commits.
+      description: '<p>Returns information about comments made on the comparison between two commits.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3337,7 +3454,7 @@ paths:
   '/#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest':
     post:
       operationId: GetCommentsForPullRequest
-      description: Returns comments made on a pull request.
+      description: '<p>Returns comments made on a pull request.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -6957,41 +7074,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidCommitIdException'
         '494':
-          description: EncryptionIntegrityChecksFailedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
-        '495':
-          description: EncryptionKeyAccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
-        '496':
-          description: EncryptionKeyDisabledException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyDisabledException'
-        '497':
-          description: EncryptionKeyNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
-        '498':
-          description: EncryptionKeyUnavailableException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
-        '499':
           description: BeforeCommitIdAndAfterCommitIdAreSameException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeforeCommitIdAndAfterCommitIdAreSameException'
+        '495':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '496':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '497':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '498':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '499':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
         '500':
           description: CommitDoesNotExistException
           content:
@@ -7010,6 +7127,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PathDoesNotExistException'
+        '503':
+          description: PathRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathRequiredException'
       requestBody:
         required: true
         content:
@@ -7152,65 +7275,65 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidCommitIdException'
         '498':
-          description: EncryptionIntegrityChecksFailedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
-        '499':
-          description: EncryptionKeyAccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
-        '500':
-          description: EncryptionKeyDisabledException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyDisabledException'
-        '501':
-          description: EncryptionKeyNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
-        '502':
-          description: EncryptionKeyUnavailableException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
-        '503':
-          description: CommitDoesNotExistException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommitDoesNotExistException'
-        '504':
-          description: InvalidPathException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidPathException'
-        '505':
-          description: PathDoesNotExistException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PathDoesNotExistException'
-        '506':
-          description: PathRequiredException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PathRequiredException'
-        '507':
           description: BeforeCommitIdAndAfterCommitIdAreSameException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BeforeCommitIdAndAfterCommitIdAreSameException'
+        '499':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '500':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '501':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '502':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '503':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+        '504':
+          description: CommitDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitDoesNotExistException'
+        '505':
+          description: InvalidPathException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPathException'
+        '506':
+          description: PathDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathDoesNotExistException'
+        '507':
+          description: PathRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathRequiredException'
       requestBody:
         required: true
         content:
@@ -7306,6 +7429,77 @@ paths:
             type: string
             enum:
               - CodeCommit_20150413.PostCommentReply
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=CodeCommit_20150413.PutCommentReaction':
+    post:
+      operationId: PutCommentReaction
+      description: 'Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: CommentDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentDoesNotExistException'
+        '481':
+          description: CommentIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentIdRequiredException'
+        '482':
+          description: InvalidCommentIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommentIdException'
+        '483':
+          description: InvalidReactionValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidReactionValueException'
+        '484':
+          description: ReactionValueRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReactionValueRequiredException'
+        '485':
+          description: ReactionLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReactionLimitExceededException'
+        '486':
+          description: CommentDeletedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentDeletedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutCommentReactionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeCommit_20150413.PutCommentReaction
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9255,7 +9449,7 @@ components:
           description: 'The name of the approval rule template. Provide descriptive names, because this name is applied to the approval rules created automatically in associated repositories.'
         approvalRuleTemplateContent:
           $ref: '#/components/schemas/ApprovalRuleTemplateContent'
-          description: '<p>The content of the approval rule that is created on pull requests in associated repositories. If you specify one or more destination references (branches), approval rules are created in an associated repository only if their destination references (branches) match those specified in the template.</p> <note> <p>When you create the content of the approval rule template, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following are counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
+          description: '<p>The content of the approval rule that is created on pull requests in associated repositories. If you specify one or more destination references (branches), approval rules are created in an associated repository only if their destination references (branches) match those specified in the template.</p> <note> <p>When you create the content of the approval rule template, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following are counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
         approvalRuleTemplateDescription:
           $ref: '#/components/schemas/ApprovalRuleTemplateDescription'
           description: The description of the approval rule template. Consider providing a description that explains what this template does and when it might be appropriate to associate it with repositories.
@@ -9438,7 +9632,7 @@ components:
           description: The name for the approval rule.
         approvalRuleContent:
           $ref: '#/components/schemas/ApprovalRuleContent'
-          description: '<p>The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information about approval pools, see the AWS CodeCommit User Guide.</p> <note> <p>When you create the content of the approval rule, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following would be counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
+          description: '<p>The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any. For more information about approval pools, see the AWS CodeCommit User Guide.</p> <note> <p>When you create the content of the approval rule, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following would be counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
     ApprovalRuleNameRequiredException: {}
     InvalidApprovalRuleNameException: {}
     ApprovalRuleNameAlreadyExistsException: {}
@@ -9903,6 +10097,36 @@ components:
         commentId:
           $ref: '#/components/schemas/CommentId'
           description: 'The unique, system-generated ID of the comment. To get this ID, use <a>GetCommentsForComparedCommit</a> or <a>GetCommentsForPullRequest</a>.'
+    GetCommentReactionsOutput:
+      type: object
+      required:
+        - reactionsForComment
+      properties:
+        reactionsForComment:
+          $ref: '#/components/schemas/ReactionsForCommentList'
+          description: An array of reactions to the specified comment.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: An enumeration token that can be used in a request to return the next batch of the results.
+    GetCommentReactionsInput:
+      type: object
+      required:
+        - commentId
+      title: GetCommentReactionsInput
+      properties:
+        commentId:
+          $ref: '#/components/schemas/CommentId'
+          description: The ID of the comment for which you want to get reactions information.
+        reactionUserArn:
+          $ref: '#/components/schemas/Arn'
+          description: Optional. The Amazon Resource Name (ARN) of the user or identity for which you want to get reaction information.
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: 'An enumeration token that, when provided in a request, returns the next batch of the results. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'A non-zero, non-negative integer used to limit the number of returned results. The default is the same as the allowed maximum, 1,000.'
+    InvalidReactionUserArnException: {}
     GetCommentsForComparedCommitOutput:
       type: object
       properties:
@@ -10923,6 +11147,22 @@ components:
         content:
           $ref: '#/components/schemas/Content'
           description: The contents of your reply to a comment.
+    PutCommentReactionInput:
+      type: object
+      required:
+        - commentId
+        - reactionValue
+      title: PutCommentReactionInput
+      properties:
+        commentId:
+          $ref: '#/components/schemas/CommentId'
+          description: The ID of the comment to which you want to add or update a reaction.
+        reactionValue:
+          $ref: '#/components/schemas/ReactionValue'
+          description: 'The emoji reaction you want to add or update. To remove a reaction, provide a value of blank or null. You can also provide the value of none. For information about emoji reaction values supported in AWS CodeCommit, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-commit-comment.html#emoji-reaction-table">AWS CodeCommit User Guide</a>.'
+    InvalidReactionValueException: {}
+    ReactionValueRequiredException: {}
+    ReactionLimitExceededException: {}
     PutFileOutput:
       type: object
       required:
@@ -11191,7 +11431,7 @@ components:
           description: The SHA-256 hash signature for the content of the approval rule. You can retrieve this information by using <a>GetPullRequest</a>.
         newRuleContent:
           $ref: '#/components/schemas/ApprovalRuleContent'
-          description: '<p>The updated content for the approval rule.</p> <note> <p>When you update the content of the approval rule, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following are counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
+          description: '<p>The updated content for the approval rule.</p> <note> <p>When you update the content of the approval rule, you can specify approvers in an approval pool in one of two ways:</p> <ul> <li> <p> <b>CodeCommitApprovers</b>: This option only requires an AWS account and a resource. It can be used for both IAM users and federated access users whose name matches the provided resource name. This is a very powerful option that offers a great deal of flexibility. For example, if you specify the AWS account <i>123456789012</i> and <i>Mary_Major</i>, all of the following are counted as approvals coming from that user:</p> <ul> <li> <p>An IAM user in the account (arn:aws:iam::<i>123456789012</i>:user/<i>Mary_Major</i>)</p> </li> <li> <p>A federated user identified in IAM as Mary_Major (arn:aws:sts::<i>123456789012</i>:federated-user/<i>Mary_Major</i>)</p> </li> </ul> <p>This option does not recognize an active session of someone assuming the role of CodeCommitReview with a role session name of <i>Mary_Major</i> (arn:aws:sts::<i>123456789012</i>:assumed-role/CodeCommitReview/<i>Mary_Major</i>) unless you include a wildcard (*Mary_Major).</p> </li> <li> <p> <b>Fully qualified ARN</b>: This option allows you to specify the fully qualified Amazon Resource Name (ARN) of the IAM user or role. </p> </li> </ul> <p>For more information about IAM ARNs, wildcards, and formats, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> </note>'
     ApprovalRuleDoesNotExistException: {}
     CannotModifyApprovalRuleFromTemplateException: {}
     UpdatePullRequestApprovalStateInput:
@@ -11664,6 +11904,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BranchName'
+    ReactionValue:
+      type: string
+    CallerReactions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReactionValue'
     CapitalBoolean:
       type: boolean
     ChangeTypeEnum:
@@ -11684,6 +11930,10 @@ components:
       type: string
     IsCommentDeleted:
       type: boolean
+    ReactionCountsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Count'
     Comment:
       type: object
       properties:
@@ -11711,6 +11961,12 @@ components:
         clientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
           description: 'A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.'
+        callerReactions:
+          $ref: '#/components/schemas/CallerReactions'
+          description: 'The emoji reactions to a comment, if any, submitted by the user whose credentials are associated with the call to the API.'
+        reactionCounts:
+          $ref: '#/components/schemas/ReactionCountsMap'
+          description: A string to integer map that represents the number of individual users who have responded to a comment with the specified reactions.
       description: Returns information about a specific comment.
     Comments:
       type: array
@@ -11981,6 +12237,8 @@ components:
           $ref: '#/components/schemas/SetFileModeEntries'
           description: File modes that are set as part of the merge conflict resolution.
       description: 'If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.'
+    Count:
+      type: integer
     Name:
       type: string
     Email:
@@ -12213,6 +12471,10 @@ components:
         $ref: '#/components/schemas/Folder'
     blob:
       type: string
+    ReactionsForCommentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReactionForComment'
     Limit:
       type: integer
     ObjectSize:
@@ -12481,6 +12743,42 @@ components:
           $ref: '#/components/schemas/IsMove'
           description: Whether to remove the source file from the parent commit.
       description: Information about a source file that is part of changes made in a commit.
+    ReactionEmoji:
+      type: string
+    ReactionValueFormats:
+      type: object
+      properties:
+        emoji:
+          $ref: '#/components/schemas/ReactionEmoji'
+          description: The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted slightly differently on different operating systems.
+        shortCode:
+          $ref: '#/components/schemas/ReactionShortCode'
+          description: 'The emoji short code for the reaction. Short codes are interpreted slightly differently on different operating systems. '
+        unicode:
+          $ref: '#/components/schemas/ReactionUnicode'
+          description: The Unicode codepoint for the reaction.
+      description: Information about the values for reactions to a comment. AWS CodeCommit supports a limited set of reactions.
+    ReactionUsersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+    ReactionForComment:
+      type: object
+      properties:
+        reaction:
+          $ref: '#/components/schemas/ReactionValueFormats'
+          description: The reaction for a specified comment.
+        reactionUsers:
+          $ref: '#/components/schemas/ReactionUsersList'
+          description: The Amazon Resource Names (ARNs) of users who have provided reactions to the comment.
+        reactionsFromDeletedUsersCount:
+          $ref: '#/components/schemas/Count'
+          description: 'A numerical count of users who reacted with the specified emoji whose identities have been subsequently deleted from IAM. While these IAM users or roles no longer exist, the reactions might still appear in total reaction counts.'
+      description: Information about the reaction values provided by users on a comment.
+    ReactionShortCode:
+      type: string
+    ReactionUnicode:
+      type: string
     ReplaceContentEntry:
       type: object
       required:

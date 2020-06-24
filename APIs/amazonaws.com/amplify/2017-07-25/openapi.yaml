@@ -3,7 +3,7 @@ info:
   version: '2017-07-25'
   x-release: v4
   title: AWS Amplify
-  description: ' Amplify is a fully managed continuous deployment and hosting service for modern web apps. '
+  description: '<p> Welcome to the AWS Amplify API documentation. This reference provides descriptions of the actions and data types for the Amplify API.</p> <p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps. The Amplify Console provides a continuous delivery and hosting service for web applications. For more information, see the <a href="https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html">Amplify Console User Guide</a>. The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation for client app development. For more information, see the <a href="https://aws-amplify.github.io/docs/">Amplify Framework.</a> </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -109,7 +109,7 @@ paths:
   /apps:
     post:
       operationId: CreateApp
-      description: ' Creates a new Amplify App. '
+      description: ' Creates a new Amplify app. '
       responses:
         '200':
           description: Success
@@ -158,108 +158,114 @@ paths:
                 - name
               properties:
                 name:
-                  description: ' Name for the Amplify App '
+                  description: ' The name for the Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 description:
-                  description: ' Description for an Amplify App '
+                  description: ' The description for an Amplify app. '
                   type: string
                   maxLength: 1000
                 repository:
-                  description: ' Repository for an Amplify App '
+                  description: ' The repository for an Amplify app. '
                   type: string
                   maxLength: 1000
                 platform:
-                  description: ' Platform / framework for an Amplify App '
+                  description: ' The platform or framework for an Amplify app. '
                   type: string
                   enum:
                     - WEB
                 iamServiceRoleArn:
-                  description: ' AWS IAM service role for an Amplify App '
+                  description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 1000
                 oauthToken:
-                  description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+                  description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
                   type: string
                   maxLength: 100
+                  format: password
                 accessToken:
-                  description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
+                  description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
                   type: string
                   minLength: 1
                   maxLength: 255
+                  format: password
                 environmentVariables:
-                  description: ' Environment variables map for an Amplify App. '
+                  description: ' The environment variables map for an Amplify app. '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 enableBranchAutoBuild:
-                  description: ' Enable the auto building of branches for an Amplify App. '
+                  description: ' Enables the auto building of branches for an Amplify app. '
+                  type: boolean
+                enableBranchAutoDeletion:
+                  description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
                   type: boolean
                 enableBasicAuth:
-                  description: ' Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. '
+                  description: ' Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. '
                   type: boolean
                 basicAuthCredentials:
-                  description: ' Credentials for Basic Authorization for an Amplify App. '
+                  description: ' The credentials for basic authorization for an Amplify app. '
                   type: string
                   maxLength: 2000
+                  format: password
                 customRules:
-                  description: ' Custom rewrite / redirect rules for an Amplify App. '
+                  description: ' The custom rewrite and redirect rules for an Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/CustomRule'
                 tags:
-                  description: ' Tag for an Amplify App '
+                  description: ' The tag for an Amplify app. '
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 buildSpec:
-                  description: ' BuildSpec file for Amplify app build. '
+                  description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
                   minLength: 1
                   maxLength: 25000
                 enableAutoBranchCreation:
-                  description: ' Enables automated branch creation for the Amplify App. '
+                  description: ' Enables automated branch creation for the Amplify app. '
                   type: boolean
                 autoBranchCreationPatterns:
-                  description: ' Automated branch creation glob patterns for the Amplify App. '
+                  description: ' The automated branch creation glob patterns for the Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/AutoBranchCreationPattern'
                 autoBranchCreationConfig:
-                  description: ' Structure with auto branch creation config. '
+                  description: ' Describes the automated branch creation configuration. '
                   type: object
                   properties:
                     stage:
                       $ref: '#/components/schemas/Stage'
-                      description: ' Stage for the auto created branch. '
+                      description: ' Describes the current stage for the autocreated branch. '
                     framework:
                       $ref: '#/components/schemas/Framework'
-                      description: ' Framework for the auto created branch. '
+                      description: ' The framework for the autocreated branch. '
                     enableAutoBuild:
                       $ref: '#/components/schemas/EnableAutoBuild'
-                      description: ' Enables auto building for the auto created branch. '
+                      description: ' Enables auto building for the autocreated branch. '
                     environmentVariables:
                       $ref: '#/components/schemas/EnvironmentVariables'
-                      description: ' Environment Variables for the auto created branch. '
+                      description: ' The environment variables for the autocreated branch. '
                     basicAuthCredentials:
                       $ref: '#/components/schemas/BasicAuthCredentials'
-                      description: ' Basic Authorization credentials for the auto created branch. '
+                      description: ' The basic authorization credentials for the autocreated branch. '
                     enableBasicAuth:
                       $ref: '#/components/schemas/EnableBasicAuth'
-                      description: ' Enables Basic Auth for the auto created branch. '
+                      description: ' Enables basic authorization for the autocreated branch. '
                     buildSpec:
                       $ref: '#/components/schemas/BuildSpec'
-                      description: ' BuildSpec for the auto created branch. '
+                      description: ' The build specification (build spec) for the autocreated branch. '
                     enablePullRequestPreview:
                       $ref: '#/components/schemas/EnablePullRequestPreview'
-                      description: ' Enables Pull Request Preview for auto created branch. '
+                      description: ' Enables pull request preview for the autocreated branch. '
                     pullRequestEnvironmentName:
                       $ref: '#/components/schemas/PullRequestEnvironmentName'
-                      description: ' The Amplify Environment name for the pull request. '
+                      description: ' The Amplify environment name for the pull request. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -270,7 +276,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListApps
-      description: ' Lists existing Amplify Apps. '
+      description: ' Returns a list of the existing Amplify apps. '
       responses:
         '200':
           description: Success
@@ -300,14 +306,14 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+          description: ' A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -315,7 +321,7 @@ paths:
   '/apps/{appId}/backendenvironments':
     post:
       operationId: CreateBackendEnvironment
-      description: ' Creates a new backend environment for an Amplify App. '
+      description: ' Creates a new backend environment for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -357,7 +363,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -372,17 +378,17 @@ paths:
                 - environmentName
               properties:
                 environmentName:
-                  description: ' Name for the backend environment. '
+                  description: ' The name for the backend environment. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 stackName:
-                  description: ' CloudFormation stack name of backend environment. '
+                  description: ' The AWS CloudFormation stack name of a backend environment. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 deploymentArtifacts:
-                  description: ' Name of deployment artifacts. '
+                  description: ' The name of deployment artifacts. '
                   type: string
                   minLength: 1
                   maxLength: 1000
@@ -396,7 +402,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListBackendEnvironments
-      description: ' Lists backend environments for an Amplify App. '
+      description: ' Lists the backend environments for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -426,7 +432,15 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an amplify App. '
+          description: ' The unique ID for an Amplify app. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: environmentName
+          in: query
+          required: false
+          description: ' The name of the backend environment '
           schema:
             type: string
             minLength: 1
@@ -434,34 +448,22 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing backen environments from start. If a non-null pagination token is returned in a result, then pass its value in here to list more backend environments. '
+          description: ' A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
             maximum: 100
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                environmentName:
-                  description: ' Name of the backend environment '
-                  type: string
-                  minLength: 1
-                  maxLength: 255
   '/apps/{appId}/branches':
     post:
       operationId: CreateBranch
-      description: ' Creates a new Branch for an Amplify App. '
+      description: ' Creates a new branch for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -509,7 +511,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -524,16 +526,16 @@ paths:
                 - branchName
               properties:
                 branchName:
-                  description: ' Name for the branch. '
+                  description: ' The name for the branch. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 description:
-                  description: ' Description for the branch. '
+                  description: ' The description for the branch. '
                   type: string
                   maxLength: 1000
                 stage:
-                  description: ' Stage for the branch. '
+                  description: ' Describes the current stage for the branch. '
                   type: string
                   enum:
                     - PRODUCTION
@@ -542,7 +544,7 @@ paths:
                     - EXPERIMENTAL
                     - PULL_REQUEST
                 framework:
-                  description: ' Framework for the branch. '
+                  description: ' The framework for the branch. '
                   type: string
                   maxLength: 255
                 enableNotification:
@@ -552,45 +554,46 @@ paths:
                   description: ' Enables auto building for the branch. '
                   type: boolean
                 environmentVariables:
-                  description: ' Environment Variables for the branch. '
+                  description: ' The environment variables for the branch. '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 basicAuthCredentials:
-                  description: ' Basic Authorization credentials for the branch. '
+                  description: ' The basic authorization credentials for the branch. '
                   type: string
                   maxLength: 2000
+                  format: password
                 enableBasicAuth:
-                  description: ' Enables Basic Auth for the branch. '
+                  description: ' Enables basic authorization for the branch. '
                   type: boolean
                 tags:
-                  description: ' Tag for the branch. '
+                  description: ' The tag for the branch. '
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 buildSpec:
-                  description: ' BuildSpec file for Amplify app build. '
+                  description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
                   minLength: 1
                   maxLength: 25000
                 ttl:
-                  description: ' The content TTL for the website in seconds. '
+                  description: ' The content Time to Live (TTL) for the website in seconds. '
                   type: string
                 displayName:
-                  description: ' Display name for a branch, will use as the default domain prefix. '
+                  description: ' The display name for a branch. This is used as the default domain prefix. '
                   type: string
                   maxLength: 255
                 enablePullRequestPreview:
-                  description: ' Enables Pull Request Preview for this branch. '
+                  description: ' Enables pull request preview for this branch. '
                   type: boolean
                 pullRequestEnvironmentName:
-                  description: ' The Amplify Environment name for the pull request. '
+                  description: ' The Amplify environment name for the pull request. '
                   type: string
                   maxLength: 20
                 backendEnvironmentArn:
-                  description: ' ARN for a Backend Environment, part of an Amplify App. '
+                  description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 1000
@@ -604,7 +607,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListBranches
-      description: ' Lists branches for an Amplify App. '
+      description: ' Lists the branches of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -634,7 +637,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -642,14 +645,14 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing branches from start. If a non-null pagination token is returned in a result, then pass its value in here to list more branches. '
+          description: ' A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -657,7 +660,7 @@ paths:
   '/apps/{appId}/branches/{branchName}/deployments':
     post:
       operationId: CreateDeployment
-      description: ' Create a deployment for manual deploy apps. (Apps are not connected to repository) '
+      description: ' Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository. '
       responses:
         '200':
           description: Success
@@ -693,7 +696,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -701,7 +704,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The name for the branch, for the job. '
           schema:
             type: string
             minLength: 1
@@ -714,7 +717,7 @@ paths:
               type: object
               properties:
                 fileMap:
-                  description: ' Optional file map that contains file name as the key and file content md5 hash as the value. If this argument is provided, the service will generate different upload url per file. Otherwise, the service will only generate a single upload url for the zipped files. '
+                  description: ' An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files. '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/MD5Hash'
@@ -729,7 +732,7 @@ paths:
   '/apps/{appId}/domains':
     post:
       operationId: CreateDomainAssociation
-      description: ' Create a new DomainAssociation on an App '
+      description: ' Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app '
       responses:
         '200':
           description: Success
@@ -777,7 +780,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -793,18 +796,28 @@ paths:
                 - subDomainSettings
               properties:
                 domainName:
-                  description: ' Domain name for the Domain Association. '
+                  description: ' The domain name for the domain association. '
                   type: string
                   maxLength: 255
                 enableAutoSubDomain:
-                  description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
+                  description: ' Enables the automated creation of subdomains for branches. '
                   type: boolean
                 subDomainSettings:
-                  description: ' Setting structure for the Subdomain. '
+                  description: ' The setting for the subdomain. '
                   type: array
                   items:
                     $ref: '#/components/schemas/SubDomainSetting'
                   maxItems: 255
+                autoSubDomainCreationPatterns:
+                  description: ' Sets the branch patterns for automatic subdomain creation. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AutoSubDomainCreationPattern'
+                autoSubDomainIAMRole:
+                  description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+                  type: string
+                  pattern: '^$|^arn:aws:iam::\d{12}:role.+'
+                  maxLength: 1000
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -815,7 +828,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListDomainAssociations
-      description: ' List domains with an app '
+      description: ' Returns the domain associations for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -845,7 +858,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -853,14 +866,14 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
+          description: ' A pagination token. Set to null to start listing apps from the start. If non-null, a pagination token is returned in a result. Pass its value in here to list more projects. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -868,7 +881,7 @@ paths:
   '/apps/{appId}/webhooks':
     post:
       operationId: CreateWebhook
-      description: ' Create a new webhook on an App. '
+      description: ' Creates a new webhook on an Amplify app. '
       responses:
         '200':
           description: Success
@@ -916,7 +929,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -931,12 +944,12 @@ paths:
                 - branchName
               properties:
                 branchName:
-                  description: ' Name for a branch, part of an Amplify App. '
+                  description: ' The name for a branch that is part of an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 description:
-                  description: ' Description for a webhook. '
+                  description: ' The description for a webhook. '
                   type: string
                   maxLength: 1000
     parameters:
@@ -949,7 +962,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListWebhooks
-      description: ' List webhooks with an app. '
+      description: ' Returns a list of webhooks for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -985,7 +998,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -993,14 +1006,14 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing webhooks from start. If non-null pagination token is returned in a result, then pass its value in here to list more webhooks. '
+          description: ' A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -1008,7 +1021,7 @@ paths:
   '/apps/{appId}':
     delete:
       operationId: DeleteApp
-      description: ' Delete an existing Amplify App by appId. '
+      description: ' Deletes an existing Amplify app specified by an app ID. '
       responses:
         '200':
           description: Success
@@ -1050,7 +1063,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1065,7 +1078,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApp
-      description: ' Retrieves an existing Amplify App by appId. '
+      description: ' Returns an existing Amplify app by appID. '
       responses:
         '200':
           description: Success
@@ -1101,14 +1114,14 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
             maxLength: 255
     post:
       operationId: UpdateApp
-      description: ' Updates an existing Amplify App. '
+      description: ' Updates an existing Amplify app. '
       responses:
         '200':
           description: Success
@@ -1144,7 +1157,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1157,105 +1170,111 @@ paths:
               type: object
               properties:
                 name:
-                  description: ' Name for an Amplify App. '
+                  description: ' The name for an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 description:
-                  description: ' Description for an Amplify App. '
+                  description: ' The description for an Amplify app. '
                   type: string
                   maxLength: 1000
                 platform:
-                  description: ' Platform for an Amplify App. '
+                  description: ' The platform for an Amplify app. '
                   type: string
                   enum:
                     - WEB
                 iamServiceRoleArn:
-                  description: ' IAM service role for an Amplify App. '
+                  description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 1000
                 environmentVariables:
-                  description: ' Environment Variables for an Amplify App. '
+                  description: ' The environment variables for an Amplify app. '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 enableBranchAutoBuild:
-                  description: ' Enables branch auto-building for an Amplify App. '
+                  description: ' Enables branch auto-building for an Amplify app. '
+                  type: boolean
+                enableBranchAutoDeletion:
+                  description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
                   type: boolean
                 enableBasicAuth:
-                  description: ' Enables Basic Authorization for an Amplify App. '
+                  description: ' Enables basic authorization for an Amplify app. '
                   type: boolean
                 basicAuthCredentials:
-                  description: ' Basic Authorization credentials for an Amplify App. '
+                  description: ' The basic authorization credentials for an Amplify app. '
                   type: string
                   maxLength: 2000
+                  format: password
                 customRules:
-                  description: ' Custom redirect / rewrite rules for an Amplify App. '
+                  description: ' The custom redirect and rewrite rules for an Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/CustomRule'
                 buildSpec:
-                  description: ' BuildSpec file for Amplify app build. '
+                  description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
                   minLength: 1
                   maxLength: 25000
                 enableAutoBranchCreation:
-                  description: ' Enables automated branch creation for the Amplify App. '
+                  description: ' Enables automated branch creation for the Amplify app. '
                   type: boolean
                 autoBranchCreationPatterns:
-                  description: ' Automated branch creation glob patterns for the Amplify App. '
+                  description: ' Describes the automated branch creation glob patterns for the Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/AutoBranchCreationPattern'
                 autoBranchCreationConfig:
-                  description: ' Structure with auto branch creation config. '
+                  description: ' Describes the automated branch creation configuration. '
                   type: object
                   properties:
                     stage:
                       $ref: '#/components/schemas/Stage'
-                      description: ' Stage for the auto created branch. '
+                      description: ' Describes the current stage for the autocreated branch. '
                     framework:
                       $ref: '#/components/schemas/Framework'
-                      description: ' Framework for the auto created branch. '
+                      description: ' The framework for the autocreated branch. '
                     enableAutoBuild:
                       $ref: '#/components/schemas/EnableAutoBuild'
-                      description: ' Enables auto building for the auto created branch. '
+                      description: ' Enables auto building for the autocreated branch. '
                     environmentVariables:
                       $ref: '#/components/schemas/EnvironmentVariables'
-                      description: ' Environment Variables for the auto created branch. '
+                      description: ' The environment variables for the autocreated branch. '
                     basicAuthCredentials:
                       $ref: '#/components/schemas/BasicAuthCredentials'
-                      description: ' Basic Authorization credentials for the auto created branch. '
+                      description: ' The basic authorization credentials for the autocreated branch. '
                     enableBasicAuth:
                       $ref: '#/components/schemas/EnableBasicAuth'
-                      description: ' Enables Basic Auth for the auto created branch. '
+                      description: ' Enables basic authorization for the autocreated branch. '
                     buildSpec:
                       $ref: '#/components/schemas/BuildSpec'
-                      description: ' BuildSpec for the auto created branch. '
+                      description: ' The build specification (build spec) for the autocreated branch. '
                     enablePullRequestPreview:
                       $ref: '#/components/schemas/EnablePullRequestPreview'
-                      description: ' Enables Pull Request Preview for auto created branch. '
+                      description: ' Enables pull request preview for the autocreated branch. '
                     pullRequestEnvironmentName:
                       $ref: '#/components/schemas/PullRequestEnvironmentName'
-                      description: ' The Amplify Environment name for the pull request. '
+                      description: ' The Amplify environment name for the pull request. '
                 repository:
-                  description: ' Repository for an Amplify App '
+                  description: ' The name of the repository for an Amplify app '
                   type: string
                   maxLength: 1000
                 oauthToken:
-                  description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+                  description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
                   type: string
                   maxLength: 100
+                  format: password
                 accessToken:
-                  description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
+                  description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
                   type: string
                   minLength: 1
                   maxLength: 255
+                  format: password
   '/apps/{appId}/backendenvironments/{environmentName}':
     delete:
       operationId: DeleteBackendEnvironment
-      description: ' Delete backend environment for an Amplify App. '
+      description: ' Deletes a backend environment for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1297,7 +1316,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id of an Amplify App. '
+          description: ' The unique ID of an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1305,7 +1324,7 @@ paths:
         - name: environmentName
           in: path
           required: true
-          description: ' Name of a backend environment of an Amplify App. '
+          description: ' The name of a backend environment of an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1320,7 +1339,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetBackendEnvironment
-      description: ' Retrieves a backend environment for an Amplify App. '
+      description: ' Returns a backend environment for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1356,7 +1375,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique id for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1364,7 +1383,7 @@ paths:
         - name: environmentName
           in: path
           required: true
-          description: ' Name for the backend environment. '
+          description: ' The name for the backend environment. '
           schema:
             type: string
             minLength: 1
@@ -1372,7 +1391,7 @@ paths:
   '/apps/{appId}/branches/{branchName}':
     delete:
       operationId: DeleteBranch
-      description: ' Deletes a branch for an Amplify App. '
+      description: ' Deletes a branch for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1414,7 +1433,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1422,7 +1441,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: ' The name for the branch. '
           schema:
             type: string
             minLength: 1
@@ -1437,7 +1456,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetBranch
-      description: ' Retrieves a branch for an Amplify App. '
+      description: ' Returns a branch for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1473,7 +1492,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1481,14 +1500,14 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: ' The name for the branch. '
           schema:
             type: string
             minLength: 1
             maxLength: 255
     post:
       operationId: UpdateBranch
-      description: ' Updates a branch for an Amplify App. '
+      description: ' Updates a branch for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1530,7 +1549,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1538,7 +1557,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch. '
+          description: ' The name for the branch. '
           schema:
             type: string
             minLength: 1
@@ -1551,15 +1570,15 @@ paths:
               type: object
               properties:
                 description:
-                  description: ' Description for the branch. '
+                  description: ' The description for the branch. '
                   type: string
                   maxLength: 1000
                 framework:
-                  description: ' Framework for the branch. '
+                  description: ' The framework for the branch. '
                   type: string
                   maxLength: 255
                 stage:
-                  description: ' Stage for the branch. '
+                  description: ' Describes the current stage for the branch. '
                   type: string
                   enum:
                     - PRODUCTION
@@ -1574,45 +1593,46 @@ paths:
                   description: ' Enables auto building for the branch. '
                   type: boolean
                 environmentVariables:
-                  description: ' Environment Variables for the branch. '
+                  description: ' The environment variables for the branch. '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 basicAuthCredentials:
-                  description: ' Basic Authorization credentials for the branch. '
+                  description: ' The basic authorization credentials for the branch. '
                   type: string
                   maxLength: 2000
+                  format: password
                 enableBasicAuth:
-                  description: ' Enables Basic Auth for the branch. '
+                  description: ' Enables basic authorization for the branch. '
                   type: boolean
                 buildSpec:
-                  description: ' BuildSpec file for Amplify app build. '
+                  description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
                   minLength: 1
                   maxLength: 25000
                 ttl:
-                  description: ' The content TTL for the website in seconds. '
+                  description: ' The content Time to Live (TTL) for the website in seconds. '
                   type: string
                 displayName:
-                  description: ' Display name for a branch, will use as the default domain prefix. '
+                  description: ' The display name for a branch. This is used as the default domain prefix. '
                   type: string
                   maxLength: 255
                 enablePullRequestPreview:
-                  description: ' Enables Pull Request Preview for this branch. '
+                  description: ' Enables pull request preview for this branch. '
                   type: boolean
                 pullRequestEnvironmentName:
-                  description: ' The Amplify Environment name for the pull request. '
+                  description: ' The Amplify environment name for the pull request. '
                   type: string
                   maxLength: 20
                 backendEnvironmentArn:
-                  description: ' ARN for a Backend Environment, part of an Amplify App. '
+                  description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 1000
   '/apps/{appId}/domains/{domainName}':
     delete:
       operationId: DeleteDomainAssociation
-      description: ' Deletes a DomainAssociation. '
+      description: ' Deletes a domain association for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1654,7 +1674,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique id for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1662,7 +1682,7 @@ paths:
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: ' The name of the domain. '
           schema:
             type: string
             maxLength: 255
@@ -1676,7 +1696,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetDomainAssociation
-      description: ' Retrieves domain info that corresponds to an appId and domainName. '
+      description: ' Returns the domain information for an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1712,7 +1732,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique id for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1720,13 +1740,13 @@ paths:
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: ' The name of the domain. '
           schema:
             type: string
             maxLength: 255
     post:
       operationId: UpdateDomainAssociation
-      description: ' Create a new DomainAssociation on an App '
+      description: ' Creates a new domain association for an Amplify app.'
       responses:
         '200':
           description: Success
@@ -1768,7 +1788,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1776,7 +1796,7 @@ paths:
         - name: domainName
           in: path
           required: true
-          description: ' Name of the domain. '
+          description: ' The name of the domain. '
           schema:
             type: string
             maxLength: 255
@@ -1790,18 +1810,28 @@ paths:
                 - subDomainSettings
               properties:
                 enableAutoSubDomain:
-                  description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
+                  description: ' Enables the automated creation of subdomains for branches. '
                   type: boolean
                 subDomainSettings:
-                  description: ' Setting structure for the Subdomain. '
+                  description: ' Describes the settings for the subdomain. '
                   type: array
                   items:
                     $ref: '#/components/schemas/SubDomainSetting'
                   maxItems: 255
+                autoSubDomainCreationPatterns:
+                  description: ' Sets the branch patterns for automatic subdomain creation. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AutoSubDomainCreationPattern'
+                autoSubDomainIAMRole:
+                  description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+                  type: string
+                  pattern: '^$|^arn:aws:iam::\d{12}:role.+'
+                  maxLength: 1000
   '/apps/{appId}/branches/{branchName}/jobs/{jobId}':
     delete:
       operationId: DeleteJob
-      description: ' Delete a job, for an Amplify branch, part of Amplify App. '
+      description: ' Deletes a job for a branch of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1843,7 +1873,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1851,7 +1881,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The name for the branch, for the job. '
           schema:
             type: string
             minLength: 1
@@ -1859,7 +1889,7 @@ paths:
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: ' The unique ID for the job. '
           schema:
             type: string
             maxLength: 255
@@ -1873,7 +1903,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetJob
-      description: ' Get a job for a branch, part of an Amplify App. '
+      description: ' Returns a job for a branch of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -1915,7 +1945,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -1923,7 +1953,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The branch name for the job. '
           schema:
             type: string
             minLength: 1
@@ -1931,7 +1961,7 @@ paths:
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: ' The unique ID for the job. '
           schema:
             type: string
             maxLength: 255
@@ -1980,7 +2010,7 @@ paths:
         - name: webhookId
           in: path
           required: true
-          description: ' Unique Id for a webhook. '
+          description: ' The unique ID for a webhook. '
           schema:
             type: string
             maxLength: 255
@@ -1994,7 +2024,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetWebhook
-      description: ' Retrieves webhook info that corresponds to a webhookId. '
+      description: ' Returns the webhook information that corresponds to a specified webhook ID. '
       responses:
         '200':
           description: Success
@@ -2036,13 +2066,13 @@ paths:
         - name: webhookId
           in: path
           required: true
-          description: ' Unique Id for a webhook. '
+          description: ' The unique ID for a webhook. '
           schema:
             type: string
             maxLength: 255
     post:
       operationId: UpdateWebhook
-      description: ' Update a webhook. '
+      description: ' Updates a webhook. '
       responses:
         '200':
           description: Success
@@ -2084,7 +2114,7 @@ paths:
         - name: webhookId
           in: path
           required: true
-          description: ' Unique Id for a webhook. '
+          description: ' The unique ID for a webhook. '
           schema:
             type: string
             maxLength: 255
@@ -2096,18 +2126,18 @@ paths:
               type: object
               properties:
                 branchName:
-                  description: ' Name for a branch, part of an Amplify App. '
+                  description: ' The name for a branch that is part of an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 255
                 description:
-                  description: ' Description for a webhook. '
+                  description: ' The description for a webhook. '
                   type: string
                   maxLength: 1000
   '/apps/{appId}/accesslogs':
     post:
       operationId: GenerateAccessLogs
-      description: ' Retrieve website access logs for a specific time range via a pre-signed URL. '
+      description: ' Returns the website access logs for a specific time range using a presigned URL. '
       responses:
         '200':
           description: Success
@@ -2143,7 +2173,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2158,15 +2188,15 @@ paths:
                 - domainName
               properties:
                 startTime:
-                  description: ' The time at which the logs should start, inclusive. '
+                  description: ' The time at which the logs should start. The time range specified is inclusive of the start time. '
                   type: string
                   format: date-time
                 endTime:
-                  description: ' The time at which the logs should end, inclusive. '
+                  description: ' The time at which the logs should end. The time range specified is inclusive of the end time. '
                   type: string
                   format: date-time
                 domainName:
-                  description: ' Name of the domain. '
+                  description: ' The name of the domain. '
                   type: string
                   maxLength: 255
     parameters:
@@ -2180,7 +2210,7 @@ paths:
   '/artifacts/{artifactId}':
     get:
       operationId: GetArtifactUrl
-      description: ' Retrieves artifact info that corresponds to a artifactId. '
+      description: ' Returns the artifact info that corresponds to an artifact id. '
       responses:
         '200':
           description: Success
@@ -2222,7 +2252,7 @@ paths:
         - name: artifactId
           in: path
           required: true
-          description: ' Unique Id for a artifact. '
+          description: ' The unique ID for an artifact. '
           schema:
             type: string
             maxLength: 255
@@ -2237,7 +2267,7 @@ paths:
   '/apps/{appId}/branches/{branchName}/jobs/{jobId}/artifacts':
     get:
       operationId: ListArtifacts
-      description: ' List artifacts with an app, a branch, a job and an artifact type. '
+      description: ' Returns a list of artifacts for a specified app, branch, and job. '
       responses:
         '200':
           description: Success
@@ -2273,7 +2303,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2281,7 +2311,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for a branch, part of an Amplify App. '
+          description: ' The name of a branch that is part of an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2289,21 +2319,21 @@ paths:
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for an Job. '
+          description: ' The unique ID for a job. '
           schema:
             type: string
             maxLength: 255
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. '
+          description: ' A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -2319,7 +2349,7 @@ paths:
   '/apps/{appId}/branches/{branchName}/jobs':
     get:
       operationId: ListJobs
-      description: ' List Jobs for a branch, part of an Amplify App. '
+      description: ' Lists the jobs for a branch of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -2355,7 +2385,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2363,7 +2393,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for a branch. '
+          description: ' The name for a branch. '
           schema:
             type: string
             minLength: 1
@@ -2371,14 +2401,14 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: ' Pagination token. Set to null to start listing steps from start. If a non-null pagination token is returned in a result, then pass its value in here to list more steps. '
+          description: ' A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps. '
           schema:
             type: string
             maxLength: 2000
         - name: maxResults
           in: query
           required: false
-          description: ' Maximum number of records to list in a single response. '
+          description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
             minimum: 1
@@ -2393,7 +2423,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: StartJob
-      description: ' Starts a new job for a branch, part of an Amplify App. '
+      description: ' Starts a new job for a branch of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -2435,7 +2465,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2443,7 +2473,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The branch name for the job. '
           schema:
             type: string
             minLength: 1
@@ -2458,11 +2488,11 @@ paths:
                 - jobType
               properties:
                 jobId:
-                  description: ' Unique Id for an existing job. Required for "RETRY" JobType. '
+                  description: ' The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. '
                   type: string
                   maxLength: 255
                 jobType:
-                  description: ' Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with the latest change from the specified branch. Only available for apps that have connected to a repository. "RETRY": Retry an existing job. JobId is required for this type of job. '
+                  description: ' Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. '
                   type: string
                   enum:
                     - RELEASE
@@ -2471,25 +2501,25 @@ paths:
                     - WEB_HOOK
                   maxLength: 10
                 jobReason:
-                  description: ' Descriptive reason for starting this job. '
+                  description: ' A descriptive reason for starting this job. '
                   type: string
                   maxLength: 255
                 commitId:
-                  description: ' Commit Id from 3rd party repository provider for the Job. '
+                  description: ' The commit ID from a third-party repository provider for the job. '
                   type: string
                   maxLength: 255
                 commitMessage:
-                  description: ' Commit message from 3rd party repository provider for the Job. '
+                  description: ' The commit message from a third-party repository provider for the job. '
                   type: string
                   maxLength: 10000
                 commitTime:
-                  description: ' Commit date / time for the Job. '
+                  description: ' The commit date and time for the job. '
                   type: string
                   format: date-time
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: ' List tags for resource. '
+      description: ' Returns a list of tags for a specified Amazon Resource Name (ARN). '
       responses:
         '200':
           description: Success
@@ -2519,7 +2549,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: ' Resource arn used to list tags. '
+          description: ' The Amazon Resource Name (ARN) to use to list tags. '
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
@@ -2533,7 +2563,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: ' Tag resource with tag key and value. '
+      description: ' Tags the resource with a tag key and value. '
       responses:
         '200':
           description: Success
@@ -2563,7 +2593,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: ' Resource arn used to tag resource. '
+          description: ' The Amazon Resource Name (ARN) to use to tag a resource. '
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
@@ -2577,7 +2607,7 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: ' Tags used to tag resource. '
+                  description: ' The tags used to tag the resource. '
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -2586,7 +2616,7 @@ paths:
   '/apps/{appId}/branches/{branchName}/deployments/start':
     post:
       operationId: StartDeployment
-      description: ' Start a deployment for manual deploy apps. (Apps are not connected to repository) '
+      description: ' Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository. '
       responses:
         '200':
           description: Success
@@ -2628,7 +2658,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2636,7 +2666,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The name for the branch, for the job. '
           schema:
             type: string
             minLength: 1
@@ -2649,11 +2679,11 @@ paths:
               type: object
               properties:
                 jobId:
-                  description: ' The job id for this deployment, generated by create deployment request. '
+                  description: ' The job ID for this deployment, generated by the create deployment request. '
                   type: string
                   maxLength: 255
                 sourceUrl:
-                  description: ' The sourceUrl for this deployment, used when calling start deployment without create deployment. SourceUrl can be any HTTP GET url that is public accessible and downloads a single zip. '
+                  description: ' The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. '
                   type: string
                   maxLength: 1000
     parameters:
@@ -2667,7 +2697,7 @@ paths:
   '/apps/{appId}/branches/{branchName}/jobs/{jobId}/stop':
     delete:
       operationId: StopJob
-      description: ' Stop a job that is in progress, for an Amplify branch, part of Amplify App. '
+      description: ' Stops a job that is in progress for a branch of an Amplify app. '
       responses:
         '200':
           description: Success
@@ -2709,7 +2739,7 @@ paths:
         - name: appId
           in: path
           required: true
-          description: ' Unique Id for an Amplify App. '
+          description: ' The unique ID for an Amplify app. '
           schema:
             type: string
             minLength: 1
@@ -2717,7 +2747,7 @@ paths:
         - name: branchName
           in: path
           required: true
-          description: ' Name for the branch, for the Job. '
+          description: ' The name for the branch, for the job. '
           schema:
             type: string
             minLength: 1
@@ -2725,7 +2755,7 @@ paths:
         - name: jobId
           in: path
           required: true
-          description: ' Unique Id for the Job. '
+          description: ' The unique id for the job. '
           schema:
             type: string
             maxLength: 255
@@ -2740,7 +2770,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: ' Untag resource with resourceArn. '
+      description: ' Untags a resource with a specified Amazon Resource Name (ARN). '
       responses:
         '200':
           description: Success
@@ -2770,14 +2800,14 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: ' Resource arn used to untag resource. '
+          description: ' The Amazon Resource Name (ARN) to use to untag a resource. '
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
         - name: tagKeys
           in: query
           required: true
-          description: ' Tag keys used to untag resource. '
+          description: ' The tag keys to use to untag a resource. '
           schema:
             type: array
             items:
@@ -2871,8 +2901,8 @@ components:
           description: ' The status code for a URL rewrite or redirect rule. '
         condition:
           $ref: '#/components/schemas/Condition'
-          description: ' The condition for a URL rewrite or redirect rule, e.g. country code. '
-      description: ' Custom rewrite / redirect rule. '
+          description: ' The condition for a URL rewrite or redirect rule, such as a country code. '
+      description: ' Describes a custom rewrite or redirect rule. '
     TagValue:
       type: string
       maxLength: 256
@@ -2900,11 +2930,12 @@ components:
     BasicAuthCredentials:
       type: string
       maxLength: 2000
+      format: password
     EnableBasicAuth:
       type: boolean
     BuildSpec:
       type: string
-      description: ' BuildSpec file for Amplify app build. '
+      description: ' The build specification (build spec) file for an Amplify app build. '
       minLength: 1
       maxLength: 25000
     EnablePullRequestPreview:
@@ -2924,8 +2955,8 @@ components:
       properties:
         backendEnvironment:
           $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Backend environment structure for an amplify App. '
-      description: ' Result structure for create backend environment. '
+          description: ' Describes the backend environment for an Amplify app. '
+      description: ' The result structure for the create backend environment request. '
     NotFoundException: {}
     CreateBranchResult:
       type: object
@@ -2934,8 +2965,8 @@ components:
       properties:
         branch:
           $ref: '#/components/schemas/Branch'
-          description: ' Branch structure for an Amplify App. '
-      description: ' Result structure for create branch request. '
+          description: ' Describes the branch for an Amplify app, which maps to a third-party repository branch. '
+      description: ' The result structure for create branch request. '
     CreateDeploymentResult:
       type: object
       required:
@@ -2944,14 +2975,14 @@ components:
       properties:
         jobId:
           $ref: '#/components/schemas/JobId'
-          description: ' The jobId for this deployment, will supply to start deployment api. '
+          description: ' The job ID for this deployment. will supply to start deployment api. '
         fileUploadUrls:
           $ref: '#/components/schemas/FileUploadUrls'
-          description: ' When the fileMap argument is provided in the request, the fileUploadUrls will contain a map of file names to upload url. '
+          description: ' When the <code>fileMap</code> argument is provided in the request, <code>fileUploadUrls</code> will contain a map of file names to upload URLs. '
         zipUploadUrl:
           $ref: '#/components/schemas/UploadUrl'
-          description: ' When the fileMap argument is NOT provided. This zipUploadUrl will be returned. '
-      description: ' Result structure for create a new deployment. '
+          description: ' When the <code>fileMap</code> argument is not provided in the request, this <code>zipUploadUrl</code> is returned. '
+      description: ' The result structure for the create a new deployment request. '
     MD5Hash:
       type: string
       maxLength: 32
@@ -2962,8 +2993,8 @@ components:
       properties:
         domainAssociation:
           $ref: '#/components/schemas/DomainAssociation'
-          description: ' Domain Association structure. '
-      description: ' Result structure for the create Domain Association request. '
+          description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
+      description: ' The result structure for the create domain association request. '
     SubDomainSetting:
       type: object
       required:
@@ -2972,11 +3003,15 @@ components:
       properties:
         prefix:
           $ref: '#/components/schemas/DomainPrefix'
-          description: ' Prefix setting for the Subdomain. '
+          description: ' The prefix setting for the subdomain. '
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Branch name setting for the Subdomain. '
-      description: ' Setting for the Subdomain. '
+          description: ' The branch name setting for the subdomain. '
+      description: ' Describes the settings for the subdomain. '
+    AutoSubDomainCreationPattern:
+      type: string
+      minLength: 1
+      maxLength: 2048
     CreateWebhookResult:
       type: object
       required:
@@ -2984,8 +3019,8 @@ components:
       properties:
         webhook:
           $ref: '#/components/schemas/Webhook'
-          description: ' Webhook structure. '
-      description: ' Result structure for the create webhook request. '
+          description: ' Describes a webhook that connects repository events to an Amplify app. '
+      description: ' The result structure for the create webhook request. '
     DeleteAppResult:
       type: object
       required:
@@ -2993,7 +3028,7 @@ components:
       properties:
         app:
           $ref: '#/components/schemas/App'
-      description: ' Result structure for an Amplify App delete request. '
+      description: ' The result structure for the delete app request. '
     DeleteBackendEnvironmentResult:
       type: object
       required:
@@ -3001,8 +3036,8 @@ components:
       properties:
         backendEnvironment:
           $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Backend environment structure for an Amplify App. '
-      description: ' Result structure of a delete backend environment result. '
+          description: ' Describes the backend environment for an Amplify app. '
+      description: ' The result structure of the delete backend environment result. '
     DeleteBranchResult:
       type: object
       required:
@@ -3010,8 +3045,8 @@ components:
       properties:
         branch:
           $ref: '#/components/schemas/Branch'
-          description: ' Branch structure for an Amplify App. '
-      description: ' Result structure for delete branch request. '
+          description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
+      description: ' The result structure for the delete branch request. '
     DeleteDomainAssociationResult:
       type: object
       required:
@@ -3026,7 +3061,7 @@ components:
       properties:
         jobSummary:
           $ref: '#/components/schemas/JobSummary'
-      description: ' Result structure for the delete job request. '
+      description: ' The result structure for the delete job request. '
     DeleteWebhookResult:
       type: object
       required:
@@ -3034,15 +3069,15 @@ components:
       properties:
         webhook:
           $ref: '#/components/schemas/Webhook'
-          description: ' Webhook structure. '
-      description: ' Result structure for the delete webhook request. '
+          description: ' Describes a webhook that connects repository events to an Amplify app. '
+      description: ' The result structure for the delete webhook request. '
     GenerateAccessLogsResult:
       type: object
       properties:
         logUrl:
           $ref: '#/components/schemas/LogUrl'
-          description: ' Pre-signed URL for the requested access logs. '
-      description: ' Result structure for the generate access logs request. '
+          description: ' The pre-signed URL for the requested access logs. '
+      description: ' The result structure for the generate access logs request. '
     GetAppResult:
       type: object
       required:
@@ -3058,11 +3093,11 @@ components:
       properties:
         artifactId:
           $ref: '#/components/schemas/ArtifactId'
-          description: ' Unique Id for a artifact. '
+          description: ' The unique ID for an artifact. '
         artifactUrl:
           $ref: '#/components/schemas/ArtifactUrl'
-          description: ' Presigned url for the artifact. '
-      description: ' Result structure for the get artifact request. '
+          description: ' The presigned URL for the artifact. '
+      description: ' Returns the result structure for the get artifact request. '
     GetBackendEnvironmentResult:
       type: object
       required:
@@ -3070,8 +3105,8 @@ components:
       properties:
         backendEnvironment:
           $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Backend environment structure for an an Amplify App. '
-      description: ' Result structure for get backend environment result. '
+          description: ' Describes the backend environment for an Amplify app. '
+      description: ' The result structure for the get backend environment result. '
     GetBranchResult:
       type: object
       required:
@@ -3086,8 +3121,8 @@ components:
       properties:
         domainAssociation:
           $ref: '#/components/schemas/DomainAssociation'
-          description: ' Domain Association structure. '
-      description: ' Result structure for the get Domain Association request. '
+          description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
+      description: ' The result structure for the get domain association request. '
     GetJobResult:
       type: object
       required:
@@ -3102,8 +3137,8 @@ components:
       properties:
         webhook:
           $ref: '#/components/schemas/Webhook'
-          description: ' Webhook structure. '
-      description: ' Result structure for the get webhook request. '
+          description: ' Describes the structure of a webhook. '
+      description: ' The result structure for the get webhook request. '
     ListAppsResult:
       type: object
       required:
@@ -3111,11 +3146,11 @@ components:
       properties:
         apps:
           $ref: '#/components/schemas/Apps'
-          description: ' List of Amplify Apps. '
+          description: ' A list of Amplify apps. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. '
-      description: ' Result structure for an Amplify App list request. '
+          description: ' A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. '
+      description: ' The result structure for an Amplify app list request. '
     ListArtifactsResult:
       type: object
       required:
@@ -3123,11 +3158,11 @@ components:
       properties:
         artifacts:
           $ref: '#/components/schemas/Artifacts'
-          description: ' List of artifacts. '
+          description: ' A list of artifacts. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Result structure for the list artifacts request. '
+          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+      description: ' The result structure for the list artifacts request. '
     ListBackendEnvironmentsResult:
       type: object
       required:
@@ -3135,11 +3170,11 @@ components:
       properties:
         backendEnvironments:
           $ref: '#/components/schemas/BackendEnvironments'
-          description: ' List of backend environments for an Amplify App. '
+          description: ' The list of backend environments for an Amplify app. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Result structure for list backend environments result. '
+          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+      description: ' The result structure for the list backend environments result. '
     ListBranchesResult:
       type: object
       required:
@@ -3147,11 +3182,11 @@ components:
       properties:
         branches:
           $ref: '#/components/schemas/Branches'
-          description: ' List of branches for an Amplify App. '
+          description: ' A list of branches for an Amplify app. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Result structure for list branches request. '
+          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+      description: ' The result structure for the list branches request. '
     ListDomainAssociationsResult:
       type: object
       required:
@@ -3159,11 +3194,11 @@ components:
       properties:
         domainAssociations:
           $ref: '#/components/schemas/DomainAssociations'
-          description: ' List of Domain Associations. '
+          description: ' A list of domain associations. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Result structure for the list Domain Association request. '
+          description: ' A pagination token. If non-null, a pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+      description: ' The result structure for the list domain association request. '
     ListJobsResult:
       type: object
       required:
@@ -3171,18 +3206,18 @@ components:
       properties:
         jobSummaries:
           $ref: '#/components/schemas/JobSummaries'
-          description: ' Result structure for list job result request. '
+          description: ' The result structure for the list job result request. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Maximum number of records to list in a single response. '
+          description: ' A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+      description: ' The maximum number of records to list in a single response. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tags result for response. '
-      description: ' Response for list tags. '
+          description: ' A list of tags for the specified The Amazon Resource Name (ARN). '
+      description: ' The response for the list tags for resource request. '
     ResourceNotFoundException: {}
     ListWebhooksResult:
       type: object
@@ -3191,11 +3226,11 @@ components:
       properties:
         webhooks:
           $ref: '#/components/schemas/Webhooks'
-          description: ' List of webhooks. '
+          description: ' A list of webhooks. '
         nextToken:
           $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
-      description: ' Result structure for the list webhooks request. '
+          description: ' A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+      description: ' The result structure for the list webhooks request. '
     StartDeploymentResult:
       type: object
       required:
@@ -3203,8 +3238,8 @@ components:
       properties:
         jobSummary:
           $ref: '#/components/schemas/JobSummary'
-          description: ' Summary for the Job. '
-      description: ' Result structure for start a deployment. '
+          description: ' The summary for the job. '
+      description: ' The result structure for the start a deployment request. '
     StartJobResult:
       type: object
       required:
@@ -3212,8 +3247,8 @@ components:
       properties:
         jobSummary:
           $ref: '#/components/schemas/JobSummary'
-          description: ' Summary for the Job. '
-      description: ' Result structure for run job request. '
+          description: ' The summary for the job. '
+      description: ' The result structure for the run job request. '
     StopJobResult:
       type: object
       required:
@@ -3221,16 +3256,16 @@ components:
       properties:
         jobSummary:
           $ref: '#/components/schemas/JobSummary'
-          description: ' Summary for the Job. '
-      description: ' Result structure for the stop job request. '
+          description: ' The summary for the job. '
+      description: ' The result structure for the stop job request. '
     TagResourceResponse:
       type: object
       properties: {}
-      description: ' Response for tag resource. '
+      description: ' The response for the tag resource request. '
     UntagResourceResponse:
       type: object
       properties: {}
-      description: ' Response for untag resource. '
+      description: ' The response for the untag resource request. '
     TagKey:
       type: string
       pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
@@ -3243,8 +3278,8 @@ components:
       properties:
         app:
           $ref: '#/components/schemas/App'
-          description: ' App structure for the updated App. '
-      description: ' Result structure for an Amplify App update request. '
+          description: ' Represents the updated Amplify app. '
+      description: ' The result structure for an Amplify app update request. '
     UpdateBranchResult:
       type: object
       required:
@@ -3252,8 +3287,8 @@ components:
       properties:
         branch:
           $ref: '#/components/schemas/Branch'
-          description: ' Branch structure for an Amplify App. '
-      description: ' Result structure for update branch request. '
+          description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
+      description: ' The result structure for the update branch request. '
     UpdateDomainAssociationResult:
       type: object
       required:
@@ -3261,8 +3296,8 @@ components:
       properties:
         domainAssociation:
           $ref: '#/components/schemas/DomainAssociation'
-          description: ' Domain Association structure. '
-      description: ' Result structure for the update Domain Association request. '
+          description: ' Describes a domain association, which associates a custom domain with an Amplify app. '
+      description: ' The result structure for the update domain association request. '
     UpdateWebhookResult:
       type: object
       required:
@@ -3270,12 +3305,13 @@ components:
       properties:
         webhook:
           $ref: '#/components/schemas/Webhook'
-          description: ' Webhook structure. '
-      description: ' Result structure for the update webhook request. '
+          description: ' Describes a webhook that connects repository events to an Amplify app. '
+      description: ' The result structure for the update webhook request. '
     AccessToken:
       type: string
       minLength: 1
       maxLength: 255
+      format: password
     ActiveJobId:
       type: string
       maxLength: 1000
@@ -3322,6 +3358,8 @@ components:
       maxLength: 1000
     EnableBranchAutoBuild:
       type: boolean
+    EnableBranchAutoDeletion:
+      type: boolean
     CustomRules:
       type: array
       items:
@@ -3331,17 +3369,17 @@ components:
       properties:
         lastDeployTime:
           $ref: '#/components/schemas/LastDeployTime'
-          description: ' Last Deploy Time of Production Branch. '
+          description: ' The last deploy time of the production branch. '
         status:
           $ref: '#/components/schemas/Status'
-          description: ' Status of Production Branch. '
+          description: ' The status of the production branch. '
         thumbnailUrl:
           $ref: '#/components/schemas/ThumbnailUrl'
-          description: ' Thumbnail URL for Production Branch. '
+          description: ' The thumbnail URL for the production branch. '
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Branch Name for Production Branch. '
-      description: ' Structure with Production Branch information. '
+          description: ' The branch name for the production branch. '
+      description: ' Describes the information about a production branch for an Amplify app. '
     EnableAutoBranchCreation:
       type: boolean
     AutoBranchCreationPatterns:
@@ -3353,32 +3391,32 @@ components:
       properties:
         stage:
           $ref: '#/components/schemas/Stage'
-          description: ' Stage for the auto created branch. '
+          description: ' Describes the current stage for the autocreated branch. '
         framework:
           $ref: '#/components/schemas/Framework'
-          description: ' Framework for the auto created branch. '
+          description: ' The framework for the autocreated branch. '
         enableAutoBuild:
           $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto building for the auto created branch. '
+          description: ' Enables auto building for the autocreated branch. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables for the auto created branch. '
+          description: ' The environment variables for the autocreated branch. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for the auto created branch. '
+          description: ' The basic authorization credentials for the autocreated branch. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Auth for the auto created branch. '
+          description: ' Enables basic authorization for the autocreated branch. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec for the auto created branch. '
+          description: ' The build specification (build spec) for the autocreated branch. '
         enablePullRequestPreview:
           $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables Pull Request Preview for auto created branch. '
+          description: ' Enables pull request preview for the autocreated branch. '
         pullRequestEnvironmentName:
           $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify Environment name for the pull request. '
-      description: ' Structure with auto branch creation config. '
+          description: ' The Amplify environment name for the pull request. '
+      description: ' Describes the automated branch creation configuration. '
     App:
       type: object
       required:
@@ -3397,68 +3435,71 @@ components:
       properties:
         appId:
           $ref: '#/components/schemas/AppId'
-          description: ' Unique Id for the Amplify App. '
+          description: ' The unique ID of the Amplify app. '
         appArn:
           $ref: '#/components/schemas/AppArn'
-          description: ' ARN for the Amplify App. '
+          description: ' The Amazon Resource Name (ARN) of the Amplify app. '
         name:
           $ref: '#/components/schemas/Name'
-          description: ' Name for the Amplify App. '
+          description: ' The name for the Amplify app. '
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tag for Amplify App. '
+          description: ' The tag for the Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for the Amplify App. '
+          description: ' The description for the Amplify app. '
         repository:
           $ref: '#/components/schemas/Repository'
-          description: ' Repository for the Amplify App. '
+          description: ' The repository for the Amplify app. '
         platform:
           $ref: '#/components/schemas/Platform'
-          description: ' Platform for the Amplify App. '
+          description: ' The platform for the Amplify app. '
         createTime:
           $ref: '#/components/schemas/CreateTime'
-          description: ' Create date / time for the Amplify App. '
+          description: ' Creates a date and time for the Amplify app. '
         updateTime:
           $ref: '#/components/schemas/UpdateTime'
-          description: ' Update date / time for the Amplify App. '
+          description: ' Updates the date and time for the Amplify app. '
         iamServiceRoleArn:
           $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' IAM service role ARN for the Amplify App. '
+          description: ' The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables for the Amplify App. '
+          description: ' The environment variables for the Amplify app. '
         defaultDomain:
           $ref: '#/components/schemas/DefaultDomain'
-          description: ' Default domain for the Amplify App. '
+          description: ' The default domain for the Amplify app. '
         enableBranchAutoBuild:
           $ref: '#/components/schemas/EnableBranchAutoBuild'
-          description: ' Enables auto-building of branches for the Amplify App. '
+          description: ' Enables the auto-building of branches for the Amplify app. '
+        enableBranchAutoDeletion:
+          $ref: '#/components/schemas/EnableBranchAutoDeletion'
+          description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Authorization for branches for the Amplify App. '
+          description: ' Enables basic authorization for the Amplify app''s branches. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for branches for the Amplify App. '
+          description: ' The basic authorization credentials for branches for the Amplify app. '
         customRules:
           $ref: '#/components/schemas/CustomRules'
-          description: ' Custom redirect / rewrite rules for the Amplify App. '
+          description: ' Describes the custom redirect and rewrite rules for the Amplify app. '
         productionBranch:
           $ref: '#/components/schemas/ProductionBranch'
-          description: ' Structure with Production Branch information. '
+          description: ' Describes the information about a production branch of the Amplify app. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec content for Amplify App. '
+          description: ' Describes the content of the build specification (build spec) for the Amplify app. '
         enableAutoBranchCreation:
           $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify App. '
+          description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
           $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' Automated branch creation glob patterns for the Amplify App. '
+          description: ' Describes the automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
           $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' Automated branch creation config for the Amplify App. '
-      description: ' Amplify App represents different branches of a repository for building, deploying, and hosting. '
+          description: ' Describes the automated branch creation configuration for the Amplify app. '
+      description: ' Represents the different branches of a repository for building, deploying, and hosting an Amplify app. '
     Apps:
       type: array
       items:
@@ -3477,11 +3518,11 @@ components:
       properties:
         artifactFileName:
           $ref: '#/components/schemas/ArtifactFileName'
-          description: ' File name for the artifact. '
+          description: ' The file name for the artifact. '
         artifactId:
           $ref: '#/components/schemas/ArtifactId'
-          description: ' Unique Id for a artifact. '
-      description: ' Structure for artifact. '
+          description: ' The unique ID for the artifact. '
+      description: ' Describes an artifact. '
     ArtifactUrl:
       type: string
       maxLength: 1000
@@ -3500,6 +3541,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssociatedResource'
+    AutoSubDomainCreationPatterns:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoSubDomainCreationPattern'
+    AutoSubDomainIAMRole:
+      type: string
+      pattern: '^$|^arn:aws:iam::\d{12}:role.+'
+      maxLength: 1000
     BackendEnvironmentArn:
       type: string
       minLength: 1
@@ -3526,23 +3575,23 @@ components:
       properties:
         backendEnvironmentArn:
           $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' Arn for a backend environment, part of an Amplify App. '
+          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
         environmentName:
           $ref: '#/components/schemas/EnvironmentName'
-          description: ' Name for a backend environment, part of an Amplify App. '
+          description: ' The name for a backend environment that is part of an Amplify app. '
         stackName:
           $ref: '#/components/schemas/StackName'
-          description: ' CloudFormation stack name of backend environment. '
+          description: ' The AWS CloudFormation stack name of a backend environment. '
         deploymentArtifacts:
           $ref: '#/components/schemas/DeploymentArtifacts'
-          description: ' Name of deployment artifacts. '
+          description: ' The name of deployment artifacts. '
         createTime:
           $ref: '#/components/schemas/CreateTime'
-          description: ' Creation date and time for a backend environment, part of an Amplify App. '
+          description: ' The creation date and time for a backend environment that is part of an Amplify app. '
         updateTime:
           $ref: '#/components/schemas/UpdateTime'
-          description: ' Last updated date and time for a backend environment, part of an Amplify App. '
-      description: ' Backend environment for an Amplify App. '
+          description: ' The last updated date and time for a backend environment that is part of an Amplify app. '
+      description: ' Describes the backend environment for an Amplify app. '
     BackendEnvironments:
       type: array
       items:
@@ -3573,7 +3622,7 @@ components:
       maxLength: 2000
     TTL:
       type: string
-      description: ' The content TTL for the website in seconds. '
+      description: ' The content Time to Live (TTL) for the website in seconds. '
     Branch:
       type: object
       required:
@@ -3597,73 +3646,73 @@ components:
       properties:
         branchArn:
           $ref: '#/components/schemas/BranchArn'
-          description: ' ARN for a branch, part of an Amplify App. '
+          description: ' The Amazon Resource Name (ARN) for a branch that is part of an Amplify app. '
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Name for a branch, part of an Amplify App. '
+          description: ' The name for the branch that is part of an Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for a branch, part of an Amplify App. '
+          description: ' The description for the branch that is part of an Amplify app. '
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tag for branch for Amplify App. '
+          description: ' The tag for the branch of an Amplify app. '
         stage:
           $ref: '#/components/schemas/Stage'
-          description: ' Stage for a branch, part of an Amplify App. '
+          description: ' The current stage for the branch that is part of an Amplify app. '
         displayName:
           $ref: '#/components/schemas/DisplayName'
-          description: ' Display name for a branch, will use as the default domain prefix. '
+          description: ' The display name for the branch. This is used as the default domain prefix. '
         enableNotification:
           $ref: '#/components/schemas/EnableNotification'
-          description: ' Enables notifications for a branch, part of an Amplify App. '
+          description: ' Enables notifications for a branch that is part of an Amplify app. '
         createTime:
           $ref: '#/components/schemas/CreateTime'
-          description: ' Creation date and time for a branch, part of an Amplify App. '
+          description: ' The creation date and time for a branch that is part of an Amplify app. '
         updateTime:
           $ref: '#/components/schemas/UpdateTime'
-          description: ' Last updated date and time for a branch, part of an Amplify App. '
+          description: ' The last updated date and time for a branch that is part of an Amplify app. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables specific to a branch, part of an Amplify App. '
+          description: ' The environment variables specific to a branch of an Amplify app. '
         enableAutoBuild:
           $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto-building on push for a branch, part of an Amplify App. '
+          description: ' Enables auto-building on push for a branch of an Amplify app. '
         customDomains:
           $ref: '#/components/schemas/CustomDomains'
-          description: ' Custom domains for a branch, part of an Amplify App. '
+          description: ' The custom domains for a branch of an Amplify app. '
         framework:
           $ref: '#/components/schemas/Framework'
-          description: ' Framework for a branch, part of an Amplify App. '
+          description: ' The framework for a branch of an Amplify app. '
         activeJobId:
           $ref: '#/components/schemas/ActiveJobId'
-          description: ' Id of the active job for a branch, part of an Amplify App. '
+          description: ' The ID of the active job for a branch of an Amplify app. '
         totalNumberOfJobs:
           $ref: '#/components/schemas/TotalNumberOfJobs'
-          description: ' Total number of Jobs part of an Amplify App. '
+          description: ' The total number of jobs that are part of an Amplify app. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Authorization for a branch, part of an Amplify App. '
+          description: ' Enables basic authorization for a branch of an Amplify app. '
         thumbnailUrl:
           $ref: '#/components/schemas/ThumbnailUrl'
-          description: ' Thumbnail URL for the branch. '
+          description: ' The thumbnail URL for the branch of an Amplify app. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for a branch, part of an Amplify App. '
+          description: ' The basic authorization credentials for a branch of an Amplify app. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec content for branch for Amplify App. '
+          description: ' The build specification (build spec) content for the branch of an Amplify app. '
         ttl:
           $ref: '#/components/schemas/TTL'
-          description: ' The content TTL for the website in seconds. '
+          description: ' The content Time to Live (TTL) for the website in seconds. '
         associatedResources:
           $ref: '#/components/schemas/AssociatedResources'
-          description: ' List of custom resources that are linked to this branch. '
+          description: ' A list of custom resources that are linked to this branch. '
         enablePullRequestPreview:
           $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables Pull Request Preview for this branch. '
+          description: ' Enables pull request preview for the branch. '
         pullRequestEnvironmentName:
           $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify Environment name for the pull request. '
+          description: ' The Amplify environment name for the pull request. '
         destinationBranch:
           $ref: '#/components/schemas/BranchName'
           description: ' The destination branch if the branch is a pull request branch. '
@@ -3672,8 +3721,8 @@ components:
           description: ' The source branch if the branch is a pull request branch. '
         backendEnvironmentArn:
           $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' ARN for a Backend Environment, part of an Amplify App. '
-      description: ' Branch for an Amplify App, which maps to a 3rd party repository branch. '
+          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+      description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
     Branches:
       type: array
       items:
@@ -3700,6 +3749,7 @@ components:
     OauthToken:
       type: string
       maxLength: 100
+      format: password
     CreateAppRequest:
       type: object
       required:
@@ -3708,56 +3758,59 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/Name'
-          description: ' Name for the Amplify App '
+          description: ' The name for the Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for an Amplify App '
+          description: ' The description for an Amplify app. '
         repository:
           $ref: '#/components/schemas/Repository'
-          description: ' Repository for an Amplify App '
+          description: ' The repository for an Amplify app. '
         platform:
           $ref: '#/components/schemas/Platform'
-          description: ' Platform / framework for an Amplify App '
+          description: ' The platform or framework for an Amplify app. '
         iamServiceRoleArn:
           $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' AWS IAM service role for an Amplify App '
+          description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
         oauthToken:
           $ref: '#/components/schemas/OauthToken'
-          description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+          description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
         accessToken:
           $ref: '#/components/schemas/AccessToken'
-          description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
+          description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment variables map for an Amplify App. '
+          description: ' The environment variables map for an Amplify app. '
         enableBranchAutoBuild:
           $ref: '#/components/schemas/EnableBranchAutoBuild'
-          description: ' Enable the auto building of branches for an Amplify App. '
+          description: ' Enables the auto building of branches for an Amplify app. '
+        enableBranchAutoDeletion:
+          $ref: '#/components/schemas/EnableBranchAutoDeletion'
+          description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. '
+          description: ' Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Credentials for Basic Authorization for an Amplify App. '
+          description: ' The credentials for basic authorization for an Amplify app. '
         customRules:
           $ref: '#/components/schemas/CustomRules'
-          description: ' Custom rewrite / redirect rules for an Amplify App. '
+          description: ' The custom rewrite and redirect rules for an Amplify app. '
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tag for an Amplify App '
+          description: ' The tag for an Amplify app. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec for an Amplify App '
+          description: ' The build specification (build spec) for an Amplify app. '
         enableAutoBranchCreation:
           $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify App. '
+          description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
           $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' Automated branch creation glob patterns for the Amplify App. '
+          description: ' The automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
           $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' Automated branch creation config for the Amplify App. '
-      description: ' Request structure used to create Apps in Amplify. '
+          description: ' The automated branch creation configuration for the Amplify app. '
+      description: ' The request structure used to create apps in Amplify. '
     CreateBackendEnvironmentRequest:
       type: object
       required:
@@ -3766,14 +3819,14 @@ components:
       properties:
         environmentName:
           $ref: '#/components/schemas/EnvironmentName'
-          description: ' Name for the backend environment. '
+          description: ' The name for the backend environment. '
         stackName:
           $ref: '#/components/schemas/StackName'
-          description: ' CloudFormation stack name of backend environment. '
+          description: ' The AWS CloudFormation stack name of a backend environment. '
         deploymentArtifacts:
           $ref: '#/components/schemas/DeploymentArtifacts'
-          description: ' Name of deployment artifacts. '
-      description: ' Request structure for a backend environment create request. '
+          description: ' The name of deployment artifacts. '
+      description: ' The request structure for the backend environment create request. '
     CreateBranchRequest:
       type: object
       required:
@@ -3782,16 +3835,16 @@ components:
       properties:
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Name for the branch. '
+          description: ' The name for the branch. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for the branch. '
+          description: ' The description for the branch. '
         stage:
           $ref: '#/components/schemas/Stage'
-          description: ' Stage for the branch. '
+          description: ' Describes the current stage for the branch. '
         framework:
           $ref: '#/components/schemas/Framework'
-          description: ' Framework for the branch. '
+          description: ' The framework for the branch. '
         enableNotification:
           $ref: '#/components/schemas/EnableNotification'
           description: ' Enables notifications for the branch. '
@@ -3800,35 +3853,35 @@ components:
           description: ' Enables auto building for the branch. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables for the branch. '
+          description: ' The environment variables for the branch. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for the branch. '
+          description: ' The basic authorization credentials for the branch. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Auth for the branch. '
+          description: ' Enables basic authorization for the branch. '
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tag for the branch. '
+          description: ' The tag for the branch. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec for the branch. '
+          description: ' The build specification (build spec) for the branch. '
         ttl:
           $ref: '#/components/schemas/TTL'
-          description: ' The content TTL for the website in seconds. '
+          description: ' The content Time To Live (TTL) for the website in seconds. '
         displayName:
           $ref: '#/components/schemas/DisplayName'
-          description: ' Display name for a branch, will use as the default domain prefix. '
+          description: ' The display name for a branch. This is used as the default domain prefix. '
         enablePullRequestPreview:
           $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables Pull Request Preview for this branch. '
+          description: ' Enables pull request preview for this branch. '
         pullRequestEnvironmentName:
           $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify Environment name for the pull request. '
+          description: ' The Amplify environment name for the pull request. '
         backendEnvironmentArn:
           $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' ARN for a Backend Environment, part of an Amplify App. '
-      description: ' Request structure for a branch create request. '
+          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+      description: ' The request structure for the create branch request. '
     FileMap:
       type: object
       additionalProperties:
@@ -3839,8 +3892,8 @@ components:
       properties:
         fileMap:
           $ref: '#/components/schemas/FileMap'
-          description: ' Optional file map that contains file name as the key and file content md5 hash as the value. If this argument is provided, the service will generate different upload url per file. Otherwise, the service will only generate a single upload url for the zipped files. '
-      description: ' Request structure for create a new deployment. '
+          description: ' An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files. '
+      description: ' The request structure for the create a new deployment request. '
     JobId:
       type: string
       maxLength: 255
@@ -3870,14 +3923,20 @@ components:
       properties:
         domainName:
           $ref: '#/components/schemas/DomainName'
-          description: ' Domain name for the Domain Association. '
+          description: ' The domain name for the domain association. '
         enableAutoSubDomain:
           $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
+          description: ' Enables the automated creation of subdomains for branches. '
         subDomainSettings:
           $ref: '#/components/schemas/SubDomainSettings'
-          description: ' Setting structure for the Subdomain. '
-      description: ' Request structure for create Domain Association request. '
+          description: ' The setting for the subdomain. '
+        autoSubDomainCreationPatterns:
+          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+          description: ' Sets the branch patterns for automatic subdomain creation. '
+        autoSubDomainIAMRole:
+          $ref: '#/components/schemas/AutoSubDomainIAMRole'
+          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+      description: ' The request structure for the create domain association request. '
     DomainAssociation:
       type: object
       required:
@@ -3890,26 +3949,32 @@ components:
       properties:
         domainAssociationArn:
           $ref: '#/components/schemas/DomainAssociationArn'
-          description: ' ARN for the Domain Association. '
+          description: ' The Amazon Resource Name (ARN) for the domain association. '
         domainName:
           $ref: '#/components/schemas/DomainName'
-          description: ' Name of the domain. '
+          description: ' The name of the domain. '
         enableAutoSubDomain:
           $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
+          description: ' Enables the automated creation of subdomains for branches. '
+        autoSubDomainCreationPatterns:
+          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+          description: ' Sets branch patterns for automatic subdomain creation. '
+        autoSubDomainIAMRole:
+          $ref: '#/components/schemas/AutoSubDomainIAMRole'
+          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
         domainStatus:
           $ref: '#/components/schemas/DomainStatus'
-          description: ' Status fo the Domain Association. '
+          description: ' The current status of the domain association. '
         statusReason:
           $ref: '#/components/schemas/StatusReason'
-          description: ' Reason for the current status of the Domain Association. '
+          description: ' The reason for the current status of the domain association. '
         certificateVerificationDNSRecord:
           $ref: '#/components/schemas/CertificateVerificationDNSRecord'
-          description: ' DNS Record for certificate verification. '
+          description: ' The DNS record for certificate verification. '
         subDomains:
           $ref: '#/components/schemas/SubDomains'
-          description: ' Subdomains for the Domain Association. '
-      description: ' Structure for Domain Association, which associates a custom domain with an Amplify App. '
+          description: ' The subdomains for the domain association. '
+      description: ' Describes a domain association that associates a custom domain with an Amplify app. '
     CreateWebhookRequest:
       type: object
       required:
@@ -3918,11 +3983,11 @@ components:
       properties:
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Name for a branch, part of an Amplify App. '
+          description: ' The name for a branch that is part of an Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for a webhook. '
-      description: ' Request structure for create webhook request. '
+          description: ' The description for a webhook. '
+      description: ' The request structure for the create webhook request. '
     Webhook:
       type: object
       required:
@@ -3936,26 +4001,26 @@ components:
       properties:
         webhookArn:
           $ref: '#/components/schemas/WebhookArn'
-          description: ' ARN for the webhook. '
+          description: ' The Amazon Resource Name (ARN) for the webhook. '
         webhookId:
           $ref: '#/components/schemas/WebhookId'
-          description: ' Id of the webhook. '
+          description: ' The ID of the webhook. '
         webhookUrl:
           $ref: '#/components/schemas/WebhookUrl'
-          description: ' Url of the webhook. '
+          description: ' The URL of the webhook. '
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Name for a branch, part of an Amplify App. '
+          description: ' The name for a branch that is part of an Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for a webhook. '
+          description: ' The description for a webhook. '
         createTime:
           $ref: '#/components/schemas/CreateTime'
-          description: ' Create date / time for a webhook. '
+          description: ' The create date and time for a webhook. '
         updateTime:
           $ref: '#/components/schemas/UpdateTime'
-          description: ' Update date / time for a webhook. '
-      description: ' Structure for webhook, which associates a webhook with an Amplify App. '
+          description: ' Updates the date and time for a webhook. '
+      description: ' Describes a webhook that connects repository events to an Amplify app. '
     CustomDomain:
       type: string
       maxLength: 255
@@ -3978,27 +4043,27 @@ components:
       type: object
       title: DeleteAppRequest
       properties: {}
-      description: ' Request structure for an Amplify App delete request. '
+      description: ' Describes the request structure for the delete app request. '
     DeleteBackendEnvironmentRequest:
       type: object
       title: DeleteBackendEnvironmentRequest
       properties: {}
-      description: ' Request structure for delete backend environment request. '
+      description: ' The request structure for the delete backend environment request. '
     DeleteBranchRequest:
       type: object
       title: DeleteBranchRequest
       properties: {}
-      description: ' Request structure for delete branch request. '
+      description: ' The request structure for the delete branch request. '
     DeleteDomainAssociationRequest:
       type: object
       title: DeleteDomainAssociationRequest
       properties: {}
-      description: ' Request structure for the delete Domain Association request. '
+      description: ' The request structure for the delete domain association request. '
     DeleteJobRequest:
       type: object
       title: DeleteJobRequest
       properties: {}
-      description: ' Request structure for delete job request. '
+      description: ' The request structure for the delete job request. '
     JobSummary:
       type: object
       required:
@@ -4013,32 +4078,32 @@ components:
       properties:
         jobArn:
           $ref: '#/components/schemas/JobArn'
-          description: ' Arn for the Job. '
+          description: ' The Amazon Resource Name (ARN) for the job. '
         jobId:
           $ref: '#/components/schemas/JobId'
-          description: ' Unique Id for the Job. '
+          description: ' The unique ID for the job. '
         commitId:
           $ref: '#/components/schemas/CommitId'
-          description: ' Commit Id from 3rd party repository provider for the Job. '
+          description: ' The commit ID from a third-party repository provider for the job. '
         commitMessage:
           $ref: '#/components/schemas/CommitMessage'
-          description: ' Commit message from 3rd party repository provider for the Job. '
+          description: ' The commit message from a third-party repository provider for the job. '
         commitTime:
           $ref: '#/components/schemas/CommitTime'
-          description: ' Commit date / time for the Job. '
+          description: ' The commit date and time for the job. '
         startTime:
           $ref: '#/components/schemas/StartTime'
-          description: ' Start date / time for the Job. '
+          description: ' The start date and time for the job. '
         status:
           $ref: '#/components/schemas/JobStatus'
-          description: ' Status for the Job. '
+          description: ' The current status for the job. '
         endTime:
           $ref: '#/components/schemas/EndTime'
-          description: ' End date / time for the Job. '
+          description: ' The end date and time for the job. '
         jobType:
           $ref: '#/components/schemas/JobType'
-          description: ' Type for the Job. \n "RELEASE": Manually released from source by using StartJob API. "RETRY": Manually retried by using StartJob API. "WEB_HOOK": Automatically triggered by WebHooks. '
-      description: ' Structure for the summary of a Job. '
+          description: ' The type for the job. If the value is <code>RELEASE</code>, the job was manually released from its source by using the <code>StartJob</code> API. If the value is <code>RETRY</code>, the job was manually retried using the <code>StartJob</code> API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by webhooks. '
+      description: ' Describes the summary for an execution job for an Amplify app. '
     WebhookId:
       type: string
       maxLength: 255
@@ -4046,7 +4111,7 @@ components:
       type: object
       title: DeleteWebhookRequest
       properties: {}
-      description: ' Request structure for the delete webhook request. '
+      description: ' The request structure for the delete webhook request. '
     DomainAssociationArn:
       type: string
       maxLength: 1000
@@ -4097,14 +4162,14 @@ components:
       properties:
         startTime:
           $ref: '#/components/schemas/StartTime'
-          description: ' The time at which the logs should start, inclusive. '
+          description: ' The time at which the logs should start. The time range specified is inclusive of the start time. '
         endTime:
           $ref: '#/components/schemas/EndTime'
-          description: ' The time at which the logs should end, inclusive. '
+          description: ' The time at which the logs should end. The time range specified is inclusive of the end time. '
         domainName:
           $ref: '#/components/schemas/DomainName'
-          description: ' Name of the domain. '
-      description: ' Request structure for the generate access logs request. '
+          description: ' The name of the domain. '
+      description: ' The request structure for the generate access logs request. '
     LogUrl:
       type: string
       maxLength: 1000
@@ -4112,32 +4177,32 @@ components:
       type: object
       title: GetAppRequest
       properties: {}
-      description: ' Request structure for get App request. '
+      description: ' The request structure for the get app request. '
     GetArtifactUrlRequest:
       type: object
       title: GetArtifactUrlRequest
       properties: {}
-      description: ' Request structure for the get artifact request. '
+      description: ' Returns the request structure for the get artifact request. '
     GetBackendEnvironmentRequest:
       type: object
       title: GetBackendEnvironmentRequest
       properties: {}
-      description: ' Request structure for get backend environment request. '
+      description: ' The request structure for the get backend environment request. '
     GetBranchRequest:
       type: object
       title: GetBranchRequest
       properties: {}
-      description: ' Request structure for get branch request. '
+      description: ' The request structure for the get branch request. '
     GetDomainAssociationRequest:
       type: object
       title: GetDomainAssociationRequest
       properties: {}
-      description: ' Request structure for the get Domain Association request. '
+      description: ' The request structure for the get domain association request. '
     GetJobRequest:
       type: object
       title: GetJobRequest
       properties: {}
-      description: ' Request structure for get job request. '
+      description: ' The request structure for the get job request. '
     Job:
       type: object
       required:
@@ -4146,16 +4211,16 @@ components:
       properties:
         summary:
           $ref: '#/components/schemas/JobSummary'
-          description: ' Summary for an execution job for an Amplify App. '
+          description: ' Describes the summary for an execution job for an Amplify app. '
         steps:
           $ref: '#/components/schemas/Steps'
-          description: ' Execution steps for an execution job, for an Amplify App. '
-      description: ' Structure for an execution job for an Amplify App. '
+          description: ' The execution steps for an execution job, for an Amplify app. '
+      description: ' Describes an execution job for an Amplify app. '
     GetWebhookRequest:
       type: object
       title: GetWebhookRequest
       properties: {}
-      description: ' Request structure for the get webhook request. '
+      description: ' The request structure for the get webhook request. '
     Steps:
       type: array
       items:
@@ -4202,35 +4267,32 @@ components:
       type: object
       title: ListAppsRequest
       properties: {}
-      description: ' Request structure for an Amplify App list request. '
+      description: ' The request structure for the list apps request. '
     ListArtifactsRequest:
       type: object
       title: ListArtifactsRequest
       properties: {}
-      description: ' Request structure for the list artifacts request. '
+      description: ' Describes the request structure for the list artifacts request. '
     ListBackendEnvironmentsRequest:
       type: object
       title: ListBackendEnvironmentsRequest
-      properties:
-        environmentName:
-          $ref: '#/components/schemas/EnvironmentName'
-          description: ' Name of the backend environment '
-      description: ' Request structure for list backend environments request. '
+      properties: {}
+      description: ' The request structure for the list backend environments request. '
     ListBranchesRequest:
       type: object
       title: ListBranchesRequest
       properties: {}
-      description: ' Request structure for list branches request. '
+      description: ' The request structure for the list branches request. '
     ListDomainAssociationsRequest:
       type: object
       title: ListDomainAssociationsRequest
       properties: {}
-      description: ' Request structure for the list Domain Associations request. '
+      description: ' The request structure for the list domain associations request. '
     ListJobsRequest:
       type: object
       title: ListJobsRequest
       properties: {}
-      description: ' Request structure for list job request. '
+      description: ' The request structure for the list jobs request. '
     ResourceArn:
       type: string
       pattern: '^arn:aws:amplify:.*'
@@ -4238,12 +4300,12 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
-      description: ' Request structure used to list tags for resource. '
+      description: ' The request structure to use to list tags for a resource. '
     ListWebhooksRequest:
       type: object
       title: ListWebhooksRequest
       properties: {}
-      description: ' Request structure for the list webhooks request. '
+      description: ' The request structure for the list webhooks request. '
     Webhooks:
       type: array
       items:
@@ -4261,11 +4323,11 @@ components:
       properties:
         jobId:
           $ref: '#/components/schemas/JobId'
-          description: ' The job id for this deployment, generated by create deployment request. '
+          description: ' The job ID for this deployment, generated by the create deployment request. '
         sourceUrl:
           $ref: '#/components/schemas/SourceUrl'
-          description: ' The sourceUrl for this deployment, used when calling start deployment without create deployment. SourceUrl can be any HTTP GET url that is public accessible and downloads a single zip. '
-      description: ' Request structure for start a deployment. '
+          description: ' The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. '
+      description: ' The request structure for the start a deployment request. '
     StartJobRequest:
       type: object
       required:
@@ -4274,23 +4336,23 @@ components:
       properties:
         jobId:
           $ref: '#/components/schemas/JobId'
-          description: ' Unique Id for an existing job. Required for "RETRY" JobType. '
+          description: ' The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. '
         jobType:
           $ref: '#/components/schemas/JobType'
-          description: ' Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with the latest change from the specified branch. Only available for apps that have connected to a repository. "RETRY": Retry an existing job. JobId is required for this type of job. '
+          description: ' Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. '
         jobReason:
           $ref: '#/components/schemas/JobReason'
-          description: ' Descriptive reason for starting this job. '
+          description: ' A descriptive reason for starting this job. '
         commitId:
           $ref: '#/components/schemas/CommitId'
-          description: ' Commit Id from 3rd party repository provider for the Job. '
+          description: ' The commit ID from a third-party repository provider for the job. '
         commitMessage:
           $ref: '#/components/schemas/CommitMessage'
-          description: ' Commit message from 3rd party repository provider for the Job. '
+          description: ' The commit message from a third-party repository provider for the job. '
         commitTime:
           $ref: '#/components/schemas/CommitTime'
-          description: ' Commit date / time for the Job. '
-      description: ' Request structure for Start job request. '
+          description: ' The commit date and time for the job. '
+      description: ' The request structure for the start job request. '
     StepName:
       type: string
       maxLength: 255
@@ -4310,43 +4372,43 @@ components:
       properties:
         stepName:
           $ref: '#/components/schemas/StepName'
-          description: ' Name of the execution step. '
+          description: ' The name of the execution step. '
         startTime:
           $ref: '#/components/schemas/StartTime'
-          description: ' Start date/ time of the execution step. '
+          description: ' The start date and time of the execution step. '
         status:
           $ref: '#/components/schemas/JobStatus'
-          description: ' Status of the execution step. '
+          description: ' The status of the execution step. '
         endTime:
           $ref: '#/components/schemas/EndTime'
-          description: ' End date/ time of the execution step. '
+          description: ' The end date and time of the execution step. '
         logUrl:
           $ref: '#/components/schemas/LogUrl'
-          description: ' URL to the logs for the execution step. '
+          description: ' The URL to the logs for the execution step. '
         artifactsUrl:
           $ref: '#/components/schemas/ArtifactsUrl'
-          description: ' URL to the artifact for the execution step. '
+          description: ' The URL to the artifact for the execution step. '
         testArtifactsUrl:
           $ref: '#/components/schemas/TestArtifactsUrl'
-          description: ' URL to the test artifact for the execution step. '
+          description: ' The URL to the test artifact for the execution step. '
         testConfigUrl:
           $ref: '#/components/schemas/TestConfigUrl'
-          description: ' URL to the test config for the execution step. '
+          description: ' The URL to the test configuration for the execution step. '
         screenshots:
           $ref: '#/components/schemas/Screenshots'
-          description: ' List of screenshot URLs for the execution step, if relevant. '
+          description: ' The list of screenshot URLs for the execution step, if relevant. '
         statusReason:
           $ref: '#/components/schemas/StatusReason'
-          description: ' The reason for current step status. '
+          description: ' The reason for the current step status. '
         context:
           $ref: '#/components/schemas/Context'
-          description: ' The context for current step, will include build image if step is build. '
-      description: ' Structure for an execution step for an execution job, for an Amplify App. '
+          description: ' The context for the current step. Includes a build image if the step is build. '
+      description: ' Describes an execution step, for an execution job, for an Amplify app. '
     StopJobRequest:
       type: object
       title: StopJobRequest
       properties: {}
-      description: ' Request structure for stop job request. '
+      description: ' The request structure for the stop job request. '
     Verified:
       type: boolean
     SubDomain:
@@ -4358,14 +4420,14 @@ components:
       properties:
         subDomainSetting:
           $ref: '#/components/schemas/SubDomainSetting'
-          description: ' Setting structure for the Subdomain. '
+          description: ' Describes the settings for the subdomain. '
         verified:
           $ref: '#/components/schemas/Verified'
-          description: ' Verified status of the Subdomain '
+          description: ' The verified status of the subdomain '
         dnsRecord:
           $ref: '#/components/schemas/DNSRecord'
-          description: ' DNS record for the Subdomain. '
-      description: ' Subdomain for the Domain Association. '
+          description: ' The DNS record for the subdomain. '
+      description: ' The subdomain for the domain association. '
     TagKeyList:
       type: array
       items:
@@ -4380,8 +4442,8 @@ components:
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
-          description: ' Tags used to tag resource. '
-      description: ' Request structure used to tag resource. '
+          description: ' The tags used to tag the resource. '
+      description: ' The request structure to tag a resource with a tag key and value. '
     ThumbnailName:
       type: string
       maxLength: 256
@@ -4389,73 +4451,76 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
-      description: ' Request structure used to untag resource. '
+      description: ' The request structure for the untag resource request. '
     UpdateAppRequest:
       type: object
       title: UpdateAppRequest
       properties:
         name:
           $ref: '#/components/schemas/Name'
-          description: ' Name for an Amplify App. '
+          description: ' The name for an Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for an Amplify App. '
+          description: ' The description for an Amplify app. '
         platform:
           $ref: '#/components/schemas/Platform'
-          description: ' Platform for an Amplify App. '
+          description: ' The platform for an Amplify app. '
         iamServiceRoleArn:
           $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' IAM service role for an Amplify App. '
+          description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables for an Amplify App. '
+          description: ' The environment variables for an Amplify app. '
         enableBranchAutoBuild:
           $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables branch auto-building for an Amplify App. '
+          description: ' Enables branch auto-building for an Amplify app. '
+        enableBranchAutoDeletion:
+          $ref: '#/components/schemas/EnableBranchAutoDeletion'
+          description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Authorization for an Amplify App. '
+          description: ' Enables basic authorization for an Amplify app. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for an Amplify App. '
+          description: ' The basic authorization credentials for an Amplify app. '
         customRules:
           $ref: '#/components/schemas/CustomRules'
-          description: ' Custom redirect / rewrite rules for an Amplify App. '
+          description: ' The custom redirect and rewrite rules for an Amplify app. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec for an Amplify App. '
+          description: ' The build specification (build spec) for an Amplify app. '
         enableAutoBranchCreation:
           $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify App. '
+          description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
           $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' Automated branch creation glob patterns for the Amplify App. '
+          description: ' Describes the automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
           $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' Automated branch creation branchConfig for the Amplify App. '
+          description: ' The automated branch creation configuration for the Amplify app. '
         repository:
           $ref: '#/components/schemas/Repository'
-          description: ' Repository for an Amplify App '
+          description: ' The name of the repository for an Amplify app '
         oauthToken:
           $ref: '#/components/schemas/OauthToken'
-          description: ' OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. '
+          description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
         accessToken:
           $ref: '#/components/schemas/AccessToken'
-          description: ' Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. '
-      description: ' Request structure for update App request. '
+          description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
+      description: ' The request structure for the update app request. '
     UpdateBranchRequest:
       type: object
       title: UpdateBranchRequest
       properties:
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for the branch. '
+          description: ' The description for the branch. '
         framework:
           $ref: '#/components/schemas/Framework'
-          description: ' Framework for the branch. '
+          description: ' The framework for the branch. '
         stage:
           $ref: '#/components/schemas/Stage'
-          description: ' Stage for the branch. '
+          description: ' Describes the current stage for the branch. '
         enableNotification:
           $ref: '#/components/schemas/EnableNotification'
           description: ' Enables notifications for the branch. '
@@ -4464,32 +4529,32 @@ components:
           description: ' Enables auto building for the branch. '
         environmentVariables:
           $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' Environment Variables for the branch. '
+          description: ' The environment variables for the branch. '
         basicAuthCredentials:
           $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' Basic Authorization credentials for the branch. '
+          description: ' The basic authorization credentials for the branch. '
         enableBasicAuth:
           $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables Basic Auth for the branch. '
+          description: ' Enables basic authorization for the branch. '
         buildSpec:
           $ref: '#/components/schemas/BuildSpec'
-          description: ' BuildSpec for the branch. '
+          description: ' The build specification (build spec) for the branch. '
         ttl:
           $ref: '#/components/schemas/TTL'
-          description: ' The content TTL for the website in seconds. '
+          description: ' The content Time to Live (TTL) for the website in seconds. '
         displayName:
           $ref: '#/components/schemas/DisplayName'
-          description: ' Display name for a branch, will use as the default domain prefix. '
+          description: ' The display name for a branch. This is used as the default domain prefix. '
         enablePullRequestPreview:
           $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables Pull Request Preview for this branch. '
+          description: ' Enables pull request preview for this branch. '
         pullRequestEnvironmentName:
           $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify Environment name for the pull request. '
+          description: ' The Amplify environment name for the pull request. '
         backendEnvironmentArn:
           $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' ARN for a Backend Environment, part of an Amplify App. '
-      description: ' Request structure for update branch request. '
+          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+      description: ' The request structure for the update branch request. '
     UpdateDomainAssociationRequest:
       type: object
       required:
@@ -4498,22 +4563,28 @@ components:
       properties:
         enableAutoSubDomain:
           $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables automated creation of Subdomains for branches. (Currently not supported) '
+          description: ' Enables the automated creation of subdomains for branches. '
         subDomainSettings:
           $ref: '#/components/schemas/SubDomainSettings'
-          description: ' Setting structure for the Subdomain. '
-      description: ' Request structure for update Domain Association request. '
+          description: ' Describes the settings for the subdomain. '
+        autoSubDomainCreationPatterns:
+          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+          description: ' Sets the branch patterns for automatic subdomain creation. '
+        autoSubDomainIAMRole:
+          $ref: '#/components/schemas/AutoSubDomainIAMRole'
+          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+      description: ' The request structure for the update domain association request. '
     UpdateWebhookRequest:
       type: object
       title: UpdateWebhookRequest
       properties:
         branchName:
           $ref: '#/components/schemas/BranchName'
-          description: ' Name for a branch, part of an Amplify App. '
+          description: ' The name for a branch that is part of an Amplify app. '
         description:
           $ref: '#/components/schemas/Description'
-          description: ' Description for a webhook. '
-      description: ' Request structure for update webhook request. '
+          description: ' The description for a webhook. '
+      description: ' The request structure for the update webhook request. '
     WebhookArn:
       type: string
       maxLength: 1000

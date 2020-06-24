@@ -1,0 +1,579 @@
+openapi: 3.0.0
+info:
+  version: '2020-03-01'
+  x-release: v4
+  title: Amazon Honeycode
+  description: ' Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals, resources, and even your team. '
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: honeycode
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/honeycode-2020-03-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/honeycode/'
+servers:
+  - url: 'http://honeycode.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Honeycode multi-region endpoint
+  - url: 'https://honeycode.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+        default: us-east-1
+    description: The Honeycode multi-region endpoint
+  - url: 'http://honeycode.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Honeycode endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://honeycode.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Honeycode endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /screendata:
+    post:
+      operationId: GetScreenData
+      description: ' The GetScreenData API allows retrieval of data from a screen in a Honeycode app. The API allows setting local variables in the screen to filter, sort or otherwise affect what will be displayed on the screen. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScreenDataResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workbookId
+                - appId
+                - screenId
+              properties:
+                workbookId:
+                  description: The ID of the workbook that contains the screen.
+                  type: string
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                appId:
+                  description: The ID of the app that contains the screem.
+                  type: string
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                screenId:
+                  description: The ID of the screen.
+                  type: string
+                  pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                variables:
+                  description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/VariableValue'
+                maxResults:
+                  description: '<p> The number of results to be returned on a single page. Specify a number between 1 and 100. The maximum value is 100. </p> <p> This parameter is optional. If you don''t specify this parameter, the default page size is 100. </p>'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: '<p> This parameter is optional. If a nextToken is not specified, the API returns the first page of data. </p> <p> Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. </p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workbooks/{workbookId}/apps/{appId}/screens/{screenId}/automations/{automationId}':
+    post:
+      operationId: InvokeScreenAutomation
+      description: ' The InvokeScreenAutomation API allows invoking an action defined in a screen in a Honeycode app. The API allows setting local variables, which can then be used in the automation being invoked. This allows automating the Honeycode app interactions to write, update or delete data in the workbook. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvokeScreenAutomationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: AutomationExecutionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationExecutionException'
+        '487':
+          description: AutomationExecutionTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationExecutionTimeoutException'
+        '488':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+      parameters:
+        - name: workbookId
+          in: path
+          required: true
+          description: The ID of the workbook that contains the screen automation.
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+        - name: appId
+          in: path
+          required: true
+          description: The ID of the app that contains the screen automation.
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+        - name: screenId
+          in: path
+          required: true
+          description: The ID of the screen that contains the screen automation.
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+        - name: automationId
+          in: path
+          required: true
+          description: The ID of the automation action to be performed.
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/VariableValue'
+                rowId:
+                  description: ' The row ID for the automation if the automation is defined inside a block with source or list. '
+                  type: string
+                  pattern: 'row:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+                clientRequestToken:
+                  description: '<p> The request token for performing the automation action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will return the response of the previous call rather than performing the action again. </p> <p> Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. </p>'
+                  type: string
+                  minLength: 32
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    GetScreenDataResult:
+      type: object
+      required:
+        - results
+        - workbookCursor
+      properties:
+        results:
+          $ref: '#/components/schemas/ResultSetMap'
+          description: A map of all the rows on the screen keyed by block name.
+        workbookCursor:
+          $ref: '#/components/schemas/WorkbookCursor'
+          description: ' Indicates the cursor of the workbook at which the data returned by this workbook is read. Workbook cursor keeps increasing with every update and the increments are not sequential. '
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: ' Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the query has been loaded. '
+    VariableValue:
+      type: object
+      required:
+        - rawValue
+      properties:
+        rawValue:
+          $ref: '#/components/schemas/RawValue'
+          description: Raw value of the variable.
+      description: The input variables to the app to be used by the InvokeScreenAutomation action request.
+    AccessDeniedException: {}
+    InternalServerException: {}
+    RequestTimeoutException: {}
+    ResourceNotFoundException: {}
+    ServiceUnavailableException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    InvokeScreenAutomationResult:
+      type: object
+      required:
+        - workbookCursor
+      properties:
+        workbookCursor:
+          $ref: '#/components/schemas/WorkbookCursor'
+          description: The updated workbook cursor after performing the automation action.
+    AutomationExecutionException: {}
+    AutomationExecutionTimeoutException: {}
+    ClientRequestToken:
+      type: string
+      minLength: 32
+      maxLength: 64
+    Name:
+      type: string
+      format: password
+    Format:
+      type: string
+      enum:
+        - AUTO
+        - NUMBER
+        - CURRENCY
+        - DATE
+        - TIME
+        - DATE_TIME
+        - PERCENTAGE
+        - TEXT
+        - ACCOUNTING
+        - CONTACT
+        - ROWLINK
+    ColumnMetadata:
+      type: object
+      required:
+        - name
+        - format
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+          description: The name of the column.
+        format:
+          $ref: '#/components/schemas/Format'
+          description: The format of the column.
+      description: Metadata for column in the table.
+    RawValue:
+      type: string
+    FormattedValue:
+      type: string
+    DataItem:
+      type: object
+      properties:
+        overrideFormat:
+          $ref: '#/components/schemas/Format'
+          description: ' The overrideFormat is optional and is specified only if a particular row of data has a different format for the data than the default format defined on the screen or the table. '
+        rawValue:
+          $ref: '#/components/schemas/RawValue'
+          description: The raw value of the data. e.g. jsmith@example.com
+        formattedValue:
+          $ref: '#/components/schemas/FormattedValue'
+          description: The formatted value of the data. e.g. John Smith.
+      description: The data in a particular data cell defined on the screen.
+    DataItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataItem'
+    ResourceId:
+      type: string
+      pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    VariableValueMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/VariableValue'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    GetScreenDataRequest:
+      type: object
+      required:
+        - workbookId
+        - appId
+        - screenId
+      title: GetScreenDataRequest
+      properties:
+        workbookId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The ID of the workbook that contains the screen.
+        appId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The ID of the app that contains the screem.
+        screenId:
+          $ref: '#/components/schemas/ResourceId'
+          description: The ID of the screen.
+        variables:
+          $ref: '#/components/schemas/VariableValueMap'
+          description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: '<p> The number of results to be returned on a single page. Specify a number between 1 and 100. The maximum value is 100. </p> <p> This parameter is optional. If you don''t specify this parameter, the default page size is 100. </p>'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: '<p> This parameter is optional. If a nextToken is not specified, the API returns the first page of data. </p> <p> Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. </p>'
+    ResultSetMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ResultSet'
+    WorkbookCursor:
+      type: integer
+    RowId:
+      type: string
+      pattern: 'row:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    InvokeScreenAutomationRequest:
+      type: object
+      title: InvokeScreenAutomationRequest
+      properties:
+        variables:
+          $ref: '#/components/schemas/VariableValueMap'
+          description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+        rowId:
+          $ref: '#/components/schemas/RowId'
+          description: ' The row ID for the automation if the automation is defined inside a block with source or list. '
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: '<p> The request token for performing the automation action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will return the response of the previous call rather than performing the action again. </p> <p> Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. </p>'
+    ResultHeader:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnMetadata'
+    ResultRow:
+      type: object
+      required:
+        - dataItems
+      properties:
+        rowId:
+          $ref: '#/components/schemas/RowId'
+          description: The ID for a particular row.
+        dataItems:
+          $ref: '#/components/schemas/DataItems'
+          description: List of all the data cells in a row.
+      description: A single row in the ResultSet.
+    ResultRows:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResultRow'
+    ResultSet:
+      type: object
+      required:
+        - headers
+        - rows
+      properties:
+        headers:
+          $ref: '#/components/schemas/ResultHeader'
+          description: '<p> List of headers for all the data cells in the block. The header identifies the name and default format of the data cell. Data cells appear in the same order in all rows as defined in the header. The names and formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank value is used. </p> <p> For example, a task list that displays the task name, due date and assigned person might have headers [ { "name": "Task Name"}, {"name": "Due Date", "format": "DATE"}, {"name": "Assigned", "format": "CONTACT"} ]. Every row in the result will have the task name as the first item, due date as the second item and assigned person as the third item. If a particular task does not have a due date, that row will still have a blank value in the second element and the assigned person will still be in the third element. </p>'
+        rows:
+          $ref: '#/components/schemas/ResultRows'
+          description: ' List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data cells will be present in the same order as they are defined in the header. '
+      description: ' ResultSet contains the results of the request for a single block or list defined on the screen. '
+    VariableName:
+      type: string
+      format: password
+security:
+  - hmac: []
