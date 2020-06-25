@@ -1828,6 +1828,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForPartition':
+    post:
+      operationId: DeleteColumnStatisticsForPartition
+      description: Delete the partition column statistics of a column.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteColumnStatisticsForPartitionResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteColumnStatisticsForPartitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteColumnStatisticsForPartition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForTable':
+    post:
+      operationId: DeleteColumnStatisticsForTable
+      description: Retrieves table statistics of columns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteColumnStatisticsForTableResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteColumnStatisticsForTableRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteColumnStatisticsForTable
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.DeleteConnection':
     post:
       operationId: DeleteConnection
@@ -2747,6 +2873,132 @@ paths:
             type: string
             enum:
               - AWSGlue.GetClassifiers
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetColumnStatisticsForPartition':
+    post:
+      operationId: GetColumnStatisticsForPartition
+      description: Retrieves partition statistics of columns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetColumnStatisticsForPartitionResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetColumnStatisticsForPartitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetColumnStatisticsForPartition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.GetColumnStatisticsForTable':
+    post:
+      operationId: GetColumnStatisticsForTable
+      description: Retrieves table statistics of columns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetColumnStatisticsForTableResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetColumnStatisticsForTableRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetColumnStatisticsForTable
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6949,6 +7201,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForPartition':
+    post:
+      operationId: UpdateColumnStatisticsForPartition
+      description: Creates or updates partition statistics of columns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateColumnStatisticsForPartitionResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateColumnStatisticsForPartitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.UpdateColumnStatisticsForPartition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForTable':
+    post:
+      operationId: UpdateColumnStatisticsForTable
+      description: Creates or updates table statistics of columns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateColumnStatisticsForTableResponse'
+        '480':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateColumnStatisticsForTableRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.UpdateColumnStatisticsForTable
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/#X-Amz-Target=AWSGlue.UpdateConnection':
     post:
       operationId: UpdateConnection
@@ -8583,6 +8961,56 @@ components:
         Name:
           $ref: '#/components/schemas/NameString'
           description: Name of the classifier to remove.
+    DeleteColumnStatisticsForPartitionResponse:
+      type: object
+      properties: {}
+    DeleteColumnStatisticsForPartitionRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - PartitionValues
+        - ColumnName
+      title: DeleteColumnStatisticsForPartitionRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        PartitionValues:
+          $ref: '#/components/schemas/ValueStringList'
+          description: A list of partition values identifying the partition.
+        ColumnName:
+          $ref: '#/components/schemas/NameString'
+          description: Name of the column.
+    DeleteColumnStatisticsForTableResponse:
+      type: object
+      properties: {}
+    DeleteColumnStatisticsForTableRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - ColumnName
+      title: DeleteColumnStatisticsForTableRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        ColumnName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the column.
     DeleteConnectionResponse:
       type: object
       properties: {}
@@ -8853,6 +9281,68 @@ components:
         NextToken:
           $ref: '#/components/schemas/Token'
           description: An optional continuation token.
+    GetColumnStatisticsForPartitionResponse:
+      type: object
+      properties:
+        ColumnStatisticsList:
+          $ref: '#/components/schemas/ColumnStatisticsList'
+          description: List of ColumnStatistics that failed to be retrieved.
+        Errors:
+          $ref: '#/components/schemas/ColumnErrors'
+          description: Error occurred during retrieving column statistics data.
+    GetColumnStatisticsForPartitionRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - PartitionValues
+        - ColumnNames
+      title: GetColumnStatisticsForPartitionRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        PartitionValues:
+          $ref: '#/components/schemas/ValueStringList'
+          description: A list of partition values identifying the partition.
+        ColumnNames:
+          $ref: '#/components/schemas/GetColumnNamesList'
+          description: A list of the column names.
+    GetColumnStatisticsForTableResponse:
+      type: object
+      properties:
+        ColumnStatisticsList:
+          $ref: '#/components/schemas/ColumnStatisticsList'
+          description: List of ColumnStatistics that failed to be retrieved.
+        Errors:
+          $ref: '#/components/schemas/ColumnErrors'
+          description: List of ColumnStatistics that failed to be retrieved.
+    GetColumnStatisticsForTableRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - ColumnNames
+      title: GetColumnStatisticsForTableRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        ColumnNames:
+          $ref: '#/components/schemas/GetColumnNamesList'
+          description: A list of the column names.
     GetConnectionResponse:
       type: object
       properties:
@@ -10340,6 +10830,62 @@ components:
           $ref: '#/components/schemas/UpdateCsvClassifierRequest'
           description: A <code>CsvClassifier</code> object with updated fields.
     VersionMismatchException: {}
+    UpdateColumnStatisticsForPartitionResponse:
+      type: object
+      properties:
+        Errors:
+          $ref: '#/components/schemas/ColumnStatisticsErrors'
+          description: Error occurred during updating column statistics data.
+    UpdateColumnStatisticsForPartitionRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - PartitionValues
+        - ColumnStatisticsList
+      title: UpdateColumnStatisticsForPartitionRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        PartitionValues:
+          $ref: '#/components/schemas/ValueStringList'
+          description: A list of partition values identifying the partition.
+        ColumnStatisticsList:
+          $ref: '#/components/schemas/UpdateColumnStatisticsList'
+          description: A list of the column statistics.
+    UpdateColumnStatisticsForTableResponse:
+      type: object
+      properties:
+        Errors:
+          $ref: '#/components/schemas/ColumnStatisticsErrors'
+          description: List of ColumnStatisticsErrors.
+    UpdateColumnStatisticsForTableRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - ColumnStatisticsList
+      title: UpdateColumnStatisticsForTableRequest
+      properties:
+        CatalogId:
+          $ref: '#/components/schemas/CatalogIdString'
+          description: 'The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.'
+        DatabaseName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the catalog database where the partitions reside.
+        TableName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the partitions' table.
+        ColumnStatisticsList:
+          $ref: '#/components/schemas/UpdateColumnStatisticsList'
+          description: A list of the column statistics.
     UpdateConnectionResponse:
       type: object
       properties: {}
@@ -10872,8 +11418,51 @@ components:
           $ref: '#/components/schemas/IdString'
           description: The <code>JobRunId</code> of the job run that was stopped.
       description: Records a successful request to stop a specified <code>JobRun</code>.
+    NonNegativeLong:
+      type: integer
+      minimum: 0
+    NonNegativeDouble:
+      type: number
+      format: double
+      minimum: 0
+    BinaryColumnStatisticsData:
+      type: object
+      required:
+        - MaximumLength
+        - AverageLength
+        - NumberOfNulls
+      properties:
+        MaximumLength:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Maximum length of the column.
+        AverageLength:
+          $ref: '#/components/schemas/NonNegativeDouble'
+          description: Average length of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+      description: Defines a binary column statistics data.
+    Blob:
+      type: string
     Boolean:
       type: boolean
+    BooleanColumnStatisticsData:
+      type: object
+      required:
+        - NumberOfTrues
+        - NumberOfFalses
+        - NumberOfNulls
+      properties:
+        NumberOfTrues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of true value.
+        NumberOfFalses:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of false value.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+      description: Defines a boolean column statistics.
     BooleanNullable:
       type: boolean
     BooleanValue:
@@ -11221,6 +11810,20 @@ components:
           $ref: '#/components/schemas/ParametersMap'
           description: These key-value pairs define properties associated with the column.
       description: A column in a <code>Table</code>.
+    ColumnError:
+      type: object
+      properties:
+        ColumnName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the column.
+        Error:
+          $ref: '#/components/schemas/ErrorDetail'
+          description: The error message occurred during operation.
+      description: Defines a column containing error.
+    ColumnErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnError'
     ColumnList:
       type: array
       items:
@@ -11230,6 +11833,187 @@ components:
       minLength: 1
       maxLength: 1024
       x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    TypeString:
+      type: string
+      minLength: 0
+      maxLength: 20000
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    ColumnStatisticsData:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          $ref: '#/components/schemas/ColumnStatisticsType'
+          description: The name of the column.
+        BooleanColumnStatisticsData:
+          $ref: '#/components/schemas/BooleanColumnStatisticsData'
+          description: Boolean Column Statistics Data.
+        DateColumnStatisticsData:
+          $ref: '#/components/schemas/DateColumnStatisticsData'
+          description: Date Column Statistics Data.
+        DecimalColumnStatisticsData:
+          $ref: '#/components/schemas/DecimalColumnStatisticsData'
+          description: Decimal Column Statistics Data.
+        DoubleColumnStatisticsData:
+          $ref: '#/components/schemas/DoubleColumnStatisticsData'
+          description: Double Column Statistics Data.
+        LongColumnStatisticsData:
+          $ref: '#/components/schemas/LongColumnStatisticsData'
+          description: Long Column Statistics Data.
+        StringColumnStatisticsData:
+          $ref: '#/components/schemas/StringColumnStatisticsData'
+          description: String Column Statistics Data.
+        BinaryColumnStatisticsData:
+          $ref: '#/components/schemas/BinaryColumnStatisticsData'
+          description: Binary Column Statistics Data.
+      description: Defines a column statistics data.
+    ColumnStatistics:
+      type: object
+      required:
+        - ColumnName
+        - ColumnType
+        - AnalyzedTime
+        - StatisticsData
+      properties:
+        ColumnName:
+          $ref: '#/components/schemas/NameString'
+          description: The name of the column.
+        ColumnType:
+          $ref: '#/components/schemas/TypeString'
+          description: The type of the column.
+        AnalyzedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The analyzed time of the column statistics.
+        StatisticsData:
+          $ref: '#/components/schemas/ColumnStatisticsData'
+          description: The statistics of the column.
+      description: Defines a column statistics.
+    ColumnStatisticsType:
+      type: string
+      enum:
+        - BOOLEAN
+        - DATE
+        - DECIMAL
+        - DOUBLE
+        - LONG
+        - STRING
+        - BINARY
+    DateColumnStatisticsData:
+      type: object
+      required:
+        - NumberOfNulls
+        - NumberOfDistinctValues
+      properties:
+        MinimumValue:
+          $ref: '#/components/schemas/Timestamp'
+          description: Minimum value of the column.
+        MaximumValue:
+          $ref: '#/components/schemas/Timestamp'
+          description: Maximum value of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+        NumberOfDistinctValues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of distinct values.
+      description: Defines a date column statistics data.
+    DecimalColumnStatisticsData:
+      type: object
+      required:
+        - NumberOfNulls
+        - NumberOfDistinctValues
+      properties:
+        MinimumValue:
+          $ref: '#/components/schemas/DecimalNumber'
+          description: Minimum value of the column.
+        MaximumValue:
+          $ref: '#/components/schemas/DecimalNumber'
+          description: Maximum value of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+        NumberOfDistinctValues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of distinct values.
+      description: Defines a decimal column statistics data.
+    DoubleColumnStatisticsData:
+      type: object
+      required:
+        - NumberOfNulls
+        - NumberOfDistinctValues
+      properties:
+        MinimumValue:
+          $ref: '#/components/schemas/Double'
+          description: Minimum value of the column.
+        MaximumValue:
+          $ref: '#/components/schemas/Double'
+          description: Maximum value of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+        NumberOfDistinctValues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of distinct values.
+      description: Defines a double column statistics data.
+    LongColumnStatisticsData:
+      type: object
+      required:
+        - NumberOfNulls
+        - NumberOfDistinctValues
+      properties:
+        MinimumValue:
+          $ref: '#/components/schemas/Long'
+          description: Minimum value of the column.
+        MaximumValue:
+          $ref: '#/components/schemas/Long'
+          description: Maximum value of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+        NumberOfDistinctValues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of distinct values.
+      description: Defines a long column statistics data.
+    StringColumnStatisticsData:
+      type: object
+      required:
+        - MaximumLength
+        - AverageLength
+        - NumberOfNulls
+        - NumberOfDistinctValues
+      properties:
+        MaximumLength:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Maximum value of the column.
+        AverageLength:
+          $ref: '#/components/schemas/NonNegativeDouble'
+          description: Average value of the column.
+        NumberOfNulls:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of nulls.
+        NumberOfDistinctValues:
+          $ref: '#/components/schemas/NonNegativeLong'
+          description: Number of distinct values.
+      description: Defines a string column statistics data.
+    ColumnStatisticsError:
+      type: object
+      properties:
+        ColumnStatistics:
+          $ref: '#/components/schemas/ColumnStatistics'
+          description: The ColumnStatistics of the column.
+        Error:
+          $ref: '#/components/schemas/ErrorDetail'
+          description: The error message occurred during operation.
+      description: Defines a column containing error.
+    ColumnStatisticsErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnStatisticsError'
+    ColumnStatisticsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnStatistics'
     ColumnValuesString:
       type: string
     ColumnValueStringList:
@@ -11627,10 +12411,6 @@ components:
           $ref: '#/components/schemas/CrawlerSecurityConfiguration'
           description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
       description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
-    NonNegativeDouble:
-      type: number
-      format: double
-      minimum: 0
     NonNegativeInteger:
       type: integer
       minimum: 0
@@ -12106,6 +12886,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Database'
+    DecimalNumber:
+      type: object
+      required:
+        - UnscaledValue
+        - Scale
+      properties:
+        UnscaledValue:
+          $ref: '#/components/schemas/Blob'
+          description: The unscaled numeric value.
+        Scale:
+          $ref: '#/components/schemas/Integer'
+          description: The scale that determines where the decimal point falls in the unscaled value.
+      description: Contains a numeric value in decimal format.
     DeleteBehavior:
       type: string
       enum:
@@ -12214,6 +13007,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NameString'
+    Double:
+      type: number
+      format: double
     Path:
       type: string
     DynamoDBTarget:
@@ -12362,6 +13158,12 @@ components:
       maximum: 1000
     Token:
       type: string
+    GetColumnNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NameString'
+      minItems: 0
+      maxItems: 100
     GetConnectionsFilter:
       type: object
       properties:
@@ -13110,6 +13912,8 @@ components:
       enum:
         - AND
         - ANY
+    Long:
+      type: integer
     MLTransform:
       type: object
       properties:
@@ -13697,6 +14501,12 @@ components:
           $ref: '#/components/schemas/NullableBoolean'
           description: Enables the processing of files that contain only one column.
       description: Specifies a custom CSV classifier to be updated.
+    UpdateColumnStatisticsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnStatistics'
+      minItems: 0
+      maxItems: 25
     WorkflowGraph:
       type: object
       properties:
