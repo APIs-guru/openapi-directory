@@ -337,7 +337,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}':
     post:
       operationId: CreateDashboard
-      description: '<p>Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
+      description: '<p>Creates a dashboard from a template. To first create a template, see the <a>CreateTemplate</a> API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
       responses:
         '200':
           description: Success
@@ -1171,12 +1171,15 @@ paths:
                       $ref: '#/components/schemas/TwitterParameters'
                       description: Twitter parameters.
                 Credentials:
-                  description: Data source credentials.
+                  description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                   type: object
                   properties:
                     CredentialPair:
                       $ref: '#/components/schemas/CredentialPair'
-                      description: Credential pair.
+                      description: 'Credential pair. For more information, see <a>CredentialPair</a>.'
+                    CopySourceArn:
+                      $ref: '#/components/schemas/CopySourceArn'
+                      description: 'The Amazon Resource Name (ARN) of a data source that has the credential pair that you want to use. When <code>CopySourceArn</code> is not null, the credential pair from the data source in the ARN is used as the credentials for the <code>DataSourceCredentials</code> structure.'
                 Permissions:
                   description: A list of resource permissions on the data source.
                   type: array
@@ -2347,7 +2350,7 @@ paths:
         - name: AliasName
           in: path
           required: true
-          description: 'The name for the template alias. If you name a specific alias, you delete the version that the alias points to. You can specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. '
+          description: 'The name for the template alias. To delete a specific alias, you delete the version that the alias points to. You can specify the alias name, or specify the latest version of the template by providing the keyword <code>$LATEST</code> in the <code>AliasName</code> parameter. '
           schema:
             type: string
             pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
@@ -3003,12 +3006,15 @@ paths:
                       $ref: '#/components/schemas/TwitterParameters'
                       description: Twitter parameters.
                 Credentials:
-                  description: Data source credentials.
+                  description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
                   type: object
                   properties:
                     CredentialPair:
                       $ref: '#/components/schemas/CredentialPair'
-                      description: Credential pair.
+                      description: 'Credential pair. For more information, see <a>CredentialPair</a>.'
+                    CopySourceArn:
+                      $ref: '#/components/schemas/CopySourceArn'
+                      description: 'The Amazon Resource Name (ARN) of a data source that has the credential pair that you want to use. When <code>CopySourceArn</code> is not null, the credential pair from the data source in the ARN is used as the credentials for the <code>DataSourceCredentials</code> structure.'
                 VpcConnectionProperties:
                   description: VPC connection properties.
                   type: object
@@ -4485,7 +4491,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url#creds-type':
     get:
       operationId: GetDashboardEmbedUrl
-      description: '<p>Generates a server-side embeddable URL and authorization code. For this process to work properly, first configure the dashboards and user permissions. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user’s browser.</p>'
+      description: '<p>Generates a URL and authorization code that you can embed in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user''s browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p>'
       responses:
         '200':
           description: Success
@@ -6008,7 +6014,7 @@ paths:
                 - Filters
               properties:
                 Filters:
-                  description: 'The filters to apply to the search. Currently, you can search only by user name. For example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
+                  description: 'The filters to apply to the search. Currently, you can search only by user name, for example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
                   type: array
                   items:
                     $ref: '#/components/schemas/DashboardSearchFilter'
@@ -6709,7 +6715,13 @@ components:
         Password:
           $ref: '#/components/schemas/Password'
           description: Password.
+        AlternateDataSourceParameters:
+          $ref: '#/components/schemas/DataSourceParametersList'
+          description: 'A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.'
       description: The combination of user name and password that are used as credentials.
+    CopySourceArn:
+      type: string
+      pattern: '^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+'
     Boolean:
       type: boolean
     CreateGroupResponse:
@@ -6945,7 +6957,7 @@ components:
           description: The name for the template alias.
         Arn:
           $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the resource.
+          description: The Amazon Resource Name (ARN) of the template you want to delete.
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -7150,7 +7162,7 @@ components:
       properties:
         EmbedUrl:
           $ref: '#/components/schemas/EmbeddingUrl'
-          description: 'An URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes, and the resulting session is valid for 10 hours. The API provides the URL with an <code>auth_code</code> value that enables a single sign-on session. '
+          description: 'A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
@@ -7420,13 +7432,13 @@ components:
       properties:
         Operator:
           $ref: '#/components/schemas/FilterOperator'
-          description: 'The comparison operator that you want to use as a filter. For example, <code>"Operator": "StringEquals"</code>.'
+          description: 'The comparison operator that you want to use as a filter, for example, <code>"Operator": "StringEquals"</code>.'
         Name:
           $ref: '#/components/schemas/DashboardFilterAttribute'
-          description: 'The name of the value that you want to use as a filter. For example, <code>"Name": "QUICKSIGHT_USER"</code>. '
+          description: 'The name of the value that you want to use as a filter, for example, <code>"Name": "QUICKSIGHT_USER"</code>. '
         Value:
           $ref: '#/components/schemas/String'
-          description: 'The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter. For example, <code>"Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. '
+          description: 'The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter, for example, <code>"Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>. '
       description: 'A filter that you apply when searching for dashboards. '
     TagResourceResponse:
       type: object
@@ -7918,7 +7930,7 @@ components:
         ColumnGeographicRole:
           $ref: '#/components/schemas/GeoSpatialDataRole'
           description: A geospatial role for a column.
-      description: 'A tag for a column in a <code>TagColumnOperation</code> structure. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
+      description: 'A tag for a column in a <a>TagColumnOperation</a> structure. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
     ColumnTagList:
       type: array
       items:
@@ -8008,13 +8020,13 @@ components:
           description: The display name of the dashboard.
         Parameters:
           $ref: '#/components/schemas/Parameters'
-          description: 'A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. You can use the dashboard permissions structure described following to override two string parameters that accept multiple values. '
+          description: 'A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. '
         Permissions:
           $ref: '#/components/schemas/ResourcePermissionList'
           description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
         SourceEntity:
           $ref: '#/components/schemas/DashboardSourceEntity'
-          description: '<p>The source entity from which the dashboard is created. The source entity accepts the Amazon Resource Name (ARN) of the source template or analysis and also references the replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template. </p> <p>If you are creating a dashboard from a source entity in a different AWS account, use the ARN of the source template.</p>'
+          description: '<p>The entity that you are using as a source when you create the dashboard. In <code>SourceEntity</code>, you specify the type of object you''re using as source. You can only create a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code>ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dashboard.
@@ -8023,7 +8035,7 @@ components:
           description: A description for the first version of the dashboard being created.
         DashboardPublishOptions:
           $ref: '#/components/schemas/DashboardPublishOptions'
-          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
+          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default.</p> </li> </ul>'
     ResourceStatus:
       type: string
       enum:
@@ -8195,8 +8207,11 @@ components:
       properties:
         CredentialPair:
           $ref: '#/components/schemas/CredentialPair'
-          description: Credential pair.
-      description: Data source credentials.
+          description: 'Credential pair. For more information, see <a>CredentialPair</a>.'
+        CopySourceArn:
+          $ref: '#/components/schemas/CopySourceArn'
+          description: 'The Amazon Resource Name (ARN) of a data source that has the credential pair that you want to use. When <code>CopySourceArn</code> is not null, the credential pair from the data source in the ARN is used as the credentials for the <code>DataSourceCredentials</code> structure.'
+      description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
     VpcConnectionProperties:
       type: object
       required:
@@ -8398,7 +8413,7 @@ components:
           description: 'A list of resource permissions to be set on the template. '
         SourceEntity:
           $ref: '#/components/schemas/TemplateSourceEntity'
-          description: 'The Amazon Resource Name (ARN) of the source entity from which this template is being created. Currently, you can create a template from an analysis or another template. If the ARN is for an analysis, include its dataset references. '
+          description: '<p>The entity that you are using as a source when you create the template. In <code>SourceEntity</code>, you specify the type of object you''re using as source: <code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an analysis. Both of these require an Amazon Resource Name (ARN). For <code>SourceTemplate</code>, specify the ARN of the source template. For <code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code> ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or <code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
@@ -8413,6 +8428,12 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+    DataSourceParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSourceParameters'
+      minItems: 1
+      maxItems: 50
     CustomSqlName:
       type: string
       minLength: 1
@@ -8769,6 +8790,9 @@ components:
         DataSourceParameters:
           $ref: '#/components/schemas/DataSourceParameters'
           description: 'The parameters that Amazon QuickSight uses to connect to your underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
+        AlternateDataSourceParameters:
+          $ref: '#/components/schemas/DataSourceParametersList'
+          description: 'A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.'
         VpcConnectionProperties:
           $ref: '#/components/schemas/VpcConnectionProperties'
           description: The VPC connection information. You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
@@ -8782,6 +8806,8 @@ components:
     DataSourceErrorInfoType:
       type: string
       enum:
+        - ACCESS_DENIED
+        - COPY_SOURCE_NOT_FOUND
         - TIMEOUT
         - ENGINE_VERSION_NOT_SUPPORTED
         - UNKNOWN_HOST
@@ -9584,7 +9610,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/DashboardSearchFilterList'
-          description: 'The filters to apply to the search. Currently, you can search only by user name. For example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
+          description: 'The filters to apply to the search. Currently, you can search only by user name, for example, <code>"Filters": [ { "Name": "QUICKSIGHT_USER", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1" } ]</code> '
         NextToken:
           $ref: '#/components/schemas/String'
           description: 'The token for the next set of results, or null if there are no more results.'
@@ -9793,16 +9819,16 @@ components:
           description: The display name of the dashboard.
         SourceEntity:
           $ref: '#/components/schemas/DashboardSourceEntity'
-          description: The template or analysis from which the dashboard is created. The <code>SouceTemplate</code> entity accepts the Amazon Resource Name (ARN) of the template and also references to replacement datasets for the placeholders set when creating the template. The replacement datasets need to follow the same schema as the datasets for which placeholders were created when creating the template.
+          description: '<p>The entity that you are using as a source when you update the dashboard. In <code>SourceEntity</code>, you specify the type of object you''re using as source. You can only update a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code> ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>'
         Parameters:
           $ref: '#/components/schemas/Parameters'
-          description: A structure that contains the parameters of the dashboard.
+          description: 'A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. '
         VersionDescription:
           $ref: '#/components/schemas/VersionDescription'
           description: A description for the first version of the dashboard being created.
         DashboardPublishOptions:
           $ref: '#/components/schemas/DashboardPublishOptions'
-          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
+          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
     UpdateDataSetPermissionsRequest:
       type: object
       title: UpdateDataSetPermissionsRequest
@@ -9917,7 +9943,7 @@ components:
       properties:
         SourceEntity:
           $ref: '#/components/schemas/TemplateSourceEntity'
-          description: The source QuickSight entity from which this template is being updated. You can currently update templates from an Analysis or another template.
+          description: '<p>The entity that you are using as a source when you update the template. In <code>SourceEntity</code>, you specify the type of object you''re using as source: <code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an analysis. Both of these require an Amazon Resource Name (ARN). For <code>SourceTemplate</code>, specify the ARN of the source template. For <code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code> ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or <code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>'
         VersionDescription:
           $ref: '#/components/schemas/VersionDescription'
           description: 'A description of the current template version that is being updated. Every time you call <code>UpdateTemplate</code>, you create a new version of the template. Each version of the template maintains a description of the version in the <code>VersionDescription</code> field.'

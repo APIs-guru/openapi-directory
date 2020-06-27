@@ -2730,7 +2730,7 @@ components:
           description: The type of endpoint. Valid values are <code>source</code> and <code>target</code>.
         EngineName:
           $ref: '#/components/schemas/String'
-          description: 'The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, and <code>"sqlserver"</code>.'
+          description: 'The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, <code>"sqlserver"</code>, and <code>"neptune"</code>.'
         Username:
           $ref: '#/components/schemas/String'
           description: The user name to be used to log in to the endpoint database.
@@ -2781,16 +2781,16 @@ components:
           description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration">Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KinesisSettings:
           $ref: '#/components/schemas/KinesisSettings'
-          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KafkaSettings:
           $ref: '#/components/schemas/KafkaSettings'
-          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         ElasticsearchSettings:
           $ref: '#/components/schemas/ElasticsearchSettings'
-          description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide</i>.'
         NeptuneSettings:
           $ref: '#/components/schemas/NeptuneSettings'
-          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings</a> in the <i>AWS Database Migration Service User Guide.</i> '
+          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
       description: <p/>
@@ -2893,13 +2893,13 @@ components:
       properties:
         ReplicationInstanceIdentifier:
           $ref: '#/components/schemas/String'
-          description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
+          description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
         AllocatedStorage:
           $ref: '#/components/schemas/IntegerOptional'
           description: The amount of storage (in gigabytes) to be initially allocated for the replication instance.
         ReplicationInstanceClass:
           $ref: '#/components/schemas/String'
-          description: '<p>The compute and memory capacity of the replication instance as specified by the replication instance class.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+          description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>"dms.c4.large"</code>.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right AWS DMS replication instance for your migration</a>. </p>'
         VpcSecurityGroupIds:
           $ref: '#/components/schemas/VpcSecurityGroupIdList'
           description: ' Specifies the VPC security group to be used with the replication instance. The VPC security group must work with the VPC containing the replication instance. '
@@ -2932,7 +2932,7 @@ components:
           description: ' Specifies the accessibility options for the replication instance. A value of <code>true</code> represents an instance with a public IP address. A value of <code>false</code> represents an instance with a private IP address. The default value is <code>true</code>. '
         DnsNameServers:
           $ref: '#/components/schemas/String'
-          description: A list of DNS name servers supported for the replication instance.
+          description: 'A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers. For example: <code>"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"</code> '
       description: <p/>
     InsufficientResourceCapacityFault: {}
     StorageQuotaExceededFault: {}
@@ -3000,7 +3000,7 @@ components:
       properties:
         ReplicationTaskIdentifier:
           $ref: '#/components/schemas/String'
-          description: '<p>An identifier for the replication task.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>An identifier for the replication task.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
         SourceEndpointArn:
           $ref: '#/components/schemas/String'
           description: An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.
@@ -3015,7 +3015,7 @@ components:
           description: 'The migration type. Valid values: <code>full-load</code> | <code>cdc</code> | <code>full-load-and-cdc</code> '
         TableMappings:
           $ref: '#/components/schemas/String'
-          description: 'The table mappings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Using Table Mapping to Specify Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'The table mappings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html">Using Table Mapping to Specify Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
         ReplicationTaskSettings:
           $ref: '#/components/schemas/String'
           description: 'Overall settings for the task, in JSON format. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Specifying Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
@@ -3033,7 +3033,7 @@ components:
           description: One or more tags to be assigned to the replication task.
         TaskData:
           $ref: '#/components/schemas/String'
-          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
     DeleteCertificateResponse:
       type: object
@@ -3785,7 +3785,7 @@ components:
           description: The type of endpoint. Valid values are <code>source</code> and <code>target</code>.
         EngineName:
           $ref: '#/components/schemas/String'
-          description: 'The type of engine for the endpoint. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, and <code>"sqlserver"</code>.'
+          description: 'The type of engine for the endpoint. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, <code>"sqlserver"</code>, and <code>"neptune"</code>.'
         Username:
           $ref: '#/components/schemas/String'
           description: The user name to be used to login to the endpoint database.
@@ -3830,16 +3830,16 @@ components:
           description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KinesisSettings:
           $ref: '#/components/schemas/KinesisSettings'
-          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html">Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         KafkaSettings:
           $ref: '#/components/schemas/KafkaSettings'
-          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html">Using Apache Kafka as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
         ElasticsearchSettings:
           $ref: '#/components/schemas/ElasticsearchSettings'
-          description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
         NeptuneSettings:
           $ref: '#/components/schemas/NeptuneSettings'
-          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings</a> in the <i>AWS Database Migration Service User Guide.</i> '
+          description: 'Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings">Specifying Endpoint Settings for Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User Guide.</i> '
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
       description: <p/>
@@ -3931,7 +3931,7 @@ components:
           description: Indicates whether the changes should be applied immediately or during the next maintenance window.
         ReplicationInstanceClass:
           $ref: '#/components/schemas/String'
-          description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+          description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>"dms.c4.large"</code>.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right AWS DMS replication instance for your migration</a>. </p>'
         VpcSecurityGroupIds:
           $ref: '#/components/schemas/VpcSecurityGroupIdList'
           description: ' Specifies the VPC security group to be used with the replication instance. The VPC security group must work with the VPC containing the replication instance. '
@@ -4000,7 +4000,7 @@ components:
           description: The Amazon Resource Name (ARN) of the replication task.
         ReplicationTaskIdentifier:
           $ref: '#/components/schemas/String'
-          description: '<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The replication task identifier.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
         MigrationType:
           $ref: '#/components/schemas/MigrationTypeValue'
           description: 'The migration type. Valid values: <code>full-load</code> | <code>cdc</code> | <code>full-load-and-cdc</code> '
@@ -4021,7 +4021,7 @@ components:
           description: '<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>'
         TaskData:
           $ref: '#/components/schemas/String'
-          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
     RebootReplicationInstanceResponse:
       type: object
@@ -4268,7 +4268,7 @@ components:
         Name:
           $ref: '#/components/schemas/String'
           description: The name of the Availability Zone.
-      description: The name of the Availability Zone for use during database migration.
+      description: The name of an Availability Zone for use during database migration.
     AvailabilityZonesList:
       type: array
       items:
@@ -4338,7 +4338,7 @@ components:
           description: The ARN string that uniquely identifies the endpoint.
         Status:
           $ref: '#/components/schemas/String'
-          description: The connection status.
+          description: '<p>The connection status. This parameter can return one of the following values:</p> <ul> <li> <p> <code>"successful"</code> </p> </li> <li> <p> <code>"testing"</code> </p> </li> <li> <p> <code>"failed"</code> </p> </li> <li> <p> <code>"deleting"</code> </p> </li> </ul>'
         LastFailureMessage:
           $ref: '#/components/schemas/String'
           description: The error message when the connection last failed.
@@ -4474,22 +4474,22 @@ components:
           description: ' The database name on the MongoDB source endpoint. '
         AuthType:
           $ref: '#/components/schemas/AuthTypeValue'
-          description: '<p> The authentication type you use to access the MongoDB source endpoint.</p> <p>Valid values: NO, PASSWORD </p> <p>When NO is selected, user name and password parameters are not used and can be empty. </p>'
+          description: '<p> The authentication type you use to access the MongoDB source endpoint.</p> <p>When when set to <code>"no"</code>, user name and password parameters are not used and can be empty. </p>'
         AuthMechanism:
           $ref: '#/components/schemas/AuthMechanismValue'
-          description: '<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1 </p> <p>DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x, use SCRAM_SHA_1. This setting isn''t used when authType=No.</p>'
+          description: '<p> The authentication mechanism you use to access the MongoDB source endpoint.</p> <p>For the default value, in MongoDB version 2.x, <code>"default"</code> is <code>"mongodb_cr"</code>. For MongoDB version 3.x or later, <code>"default"</code> is <code>"scram_sha_1"</code>. This setting isn''t used when <code>AuthType</code> is set to <code>"no"</code>.</p>'
         NestingLevel:
           $ref: '#/components/schemas/NestingLevelValue'
-          description: '<p> Specifies either document or table mode. </p> <p>Valid values: NONE, ONE</p> <p>Default value is NONE. Specify NONE to use document mode. Specify ONE to use table mode.</p>'
+          description: <p> Specifies either document or table mode. </p> <p>Default value is <code>"none"</code>. Specify <code>"none"</code> to use document mode. Specify <code>"one"</code> to use table mode.</p>
         ExtractDocId:
           $ref: '#/components/schemas/String'
-          description: <p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to NONE. </p> <p>Default value is false. </p>
+          description: <p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to <code>"none"</code>. </p> <p>Default value is <code>"false"</code>. </p>
         DocsToInvestigate:
           $ref: '#/components/schemas/String'
-          description: <p> Indicates the number of documents to preview to determine the document organization. Use this setting when <code>NestingLevel</code> is set to ONE. </p> <p>Must be a positive value greater than 0. Default value is 1000.</p>
+          description: <p> Indicates the number of documents to preview to determine the document organization. Use this setting when <code>NestingLevel</code> is set to <code>"one"</code>. </p> <p>Must be a positive value greater than <code>0</code>. Default value is <code>1000</code>.</p>
         AuthSource:
           $ref: '#/components/schemas/String'
-          description: <p> The MongoDB database name. This setting isn't used when <code>authType=NO</code>. </p> <p>The default is admin.</p>
+          description: <p> The MongoDB database name. This setting isn't used when <code>AuthType</code> is set to <code>"no"</code>. </p> <p>The default is <code>"admin"</code>.</p>
         KmsKeyId:
           $ref: '#/components/schemas/String'
           description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
@@ -4559,25 +4559,25 @@ components:
       properties:
         ServiceAccessRoleArn:
           $ref: '#/components/schemas/String'
-          description: 'The ARN of the service role you have created for the Neptune target endpoint. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole">https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole</a> in the <i>AWS Database Migration Service User Guide.</i> '
+          description: 'The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole">Creating an IAM Service Role for Accessing Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User Guide. </i> '
         S3BucketName:
           $ref: '#/components/schemas/String'
-          description: The name of the S3 bucket for AWS DMS to temporarily store migrated graph data in CSV files before bulk-loading it to the Neptune target database. AWS DMS maps the SQL source data to graph data before storing it in these CSV files.
+          description: The name of the Amazon S3 bucket where AWS DMS can temporarily store migrated graph data in .csv files before bulk-loading it to the Neptune target database. AWS DMS maps the SQL source data to graph data before storing it in these .csv files.
         S3BucketFolder:
           $ref: '#/components/schemas/String'
-          description: 'A folder path where you where you want AWS DMS to store migrated graph data in the S3 bucket specified by <code>S3BucketName</code> '
+          description: 'A folder path where you want AWS DMS to store migrated graph data in the S3 bucket specified by <code>S3BucketName</code> '
         ErrorRetryDuration:
           $ref: '#/components/schemas/IntegerOptional'
           description: The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.
         MaxFileSize:
           $ref: '#/components/schemas/IntegerOptional'
-          description: 'The maximum size in KB of migrated graph data stored in a CSV file before AWS DMS bulk-loads the data to the Neptune target database. The default is 1048576 KB. If successful, AWS DMS clears the bucket, ready to store the next batch of migrated graph data.'
+          description: 'The maximum size in kilobytes of migrated graph data stored in a .csv file before AWS DMS bulk-loads the data to the Neptune target database. The default is 1,048,576 KB. If the bulk load is successful, AWS DMS clears the bucket, ready to store the next batch of migrated graph data.'
         MaxRetryCount:
           $ref: '#/components/schemas/IntegerOptional'
-          description: The number of times for AWS DMS to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 5.
+          description: The number of times for AWS DMS to retry a bulk load of migrated graph data to the Neptune target database before raising an error. The default is 5.
         IamAuthEnabled:
           $ref: '#/components/schemas/BooleanOptional'
-          description: 'If you want IAM authorization enabled for this endpoint, set this parameter to <code>true</code> and attach the appropriate role policy document to your service role specified by <code>ServiceAccessRoleArn</code>. The default is <code>false</code>.'
+          description: 'If you want AWS Identity and Access Management (IAM) authorization enabled for this endpoint, set this parameter to <code>true</code>. Then attach the appropriate IAM policy document to your service role specified by <code>ServiceAccessRoleArn</code>. The default is <code>false</code>.'
       description: Provides information that defines an Amazon Neptune endpoint.
     RedshiftSettings:
       type: object
@@ -4669,7 +4669,7 @@ components:
           description: The type of endpoint. Valid values are <code>source</code> and <code>target</code>.
         EngineName:
           $ref: '#/components/schemas/String'
-          description: 'The database engine name. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, and <code>"sqlserver"</code>.'
+          description: 'The database engine name. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, <code>"sqlserver"</code>, and <code>"neptune"</code>.'
         EngineDisplayName:
           $ref: '#/components/schemas/String'
           description: 'The expanded name for the engine name. For example, if the <code>EngineName</code> parameter is "aurora," this value would be "Amazon Aurora MySQL."'
@@ -4735,7 +4735,7 @@ components:
           description: 'The settings for the Elasticsearch source endpoint. For more information, see the <code>ElasticsearchSettings</code> structure.'
         NeptuneSettings:
           $ref: '#/components/schemas/NeptuneSettings'
-          description: 'The settings for the MongoDB source endpoint. For more information, see the <code>NeptuneSettings</code> structure.'
+          description: 'The settings for the Amazon Neptune target endpoint. For more information, see the <code>NeptuneSettings</code> structure.'
         RedshiftSettings:
           $ref: '#/components/schemas/RedshiftSettings'
           description: Settings for the Amazon Redshift endpoint.
@@ -4765,7 +4765,7 @@ components:
           description: '<p>The status of the AWS DMS event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: creating | modifying | deleting | active | no-permission | topic-not-exist</p> <p>The status "no-permission" indicates that AWS DMS no longer has permission to post to the SNS topic. The status "topic-not-exist" indicates that the topic was deleted after the subscription was created.</p>'
         SubscriptionCreationTime:
           $ref: '#/components/schemas/String'
-          description: The time the RDS event notification subscription was created.
+          description: The time the AWS DMS event notification subscription was created.
         SourceType:
           $ref: '#/components/schemas/String'
           description: '<p> The type of AWS DMS resource that generates events. </p> <p>Valid values: replication-instance | replication-server | security-group | replication-task</p>'
@@ -4788,13 +4788,13 @@ components:
       properties:
         ReplicationInstanceIdentifier:
           $ref: '#/components/schemas/String'
-          description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
+          description: '<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>'
         ReplicationInstanceClass:
           $ref: '#/components/schemas/String'
-          description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+          description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right AWS DMS replication instance for your migration</a>. </p>'
         ReplicationInstanceStatus:
           $ref: '#/components/schemas/String'
-          description: The status of the replication instance.
+          description: '<p>The status of the replication instance. The possible return values include:</p> <ul> <li> <p> <code>"available"</code> </p> </li> <li> <p> <code>"creating"</code> </p> </li> <li> <p> <code>"deleted"</code> </p> </li> <li> <p> <code>"deleting"</code> </p> </li> <li> <p> <code>"failed"</code> </p> </li> <li> <p> <code>"modifying"</code> </p> </li> <li> <p> <code>"upgrading"</code> </p> </li> <li> <p> <code>"rebooting"</code> </p> </li> <li> <p> <code>"resetting-master-credentials"</code> </p> </li> <li> <p> <code>"storage-full"</code> </p> </li> <li> <p> <code>"incompatible-credentials"</code> </p> </li> <li> <p> <code>"incompatible-network"</code> </p> </li> <li> <p> <code>"maintenance"</code> </p> </li> </ul>'
         AllocatedStorage:
           $ref: '#/components/schemas/Integer'
           description: The amount of storage (in gigabytes) that is allocated for the replication instance.
@@ -4856,7 +4856,7 @@ components:
           description: ' The expiration date of the free replication instance that is part of the Free DMS program. '
         DnsNameServers:
           $ref: '#/components/schemas/String'
-          description: The DNS name servers for the replication instance.
+          description: The DNS name servers supported for the replication instance to access your on-premise source or target database.
       description: Provides information that defines a replication instance.
     SubnetIdentifierList:
       type: array
@@ -4892,7 +4892,7 @@ components:
       properties:
         ReplicationTaskIdentifier:
           $ref: '#/components/schemas/String'
-          description: '<p>The user-assigned replication task identifier or name.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          description: '<p>The user-assigned replication task identifier or name.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
         SourceEndpointArn:
           $ref: '#/components/schemas/String'
           description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -4919,7 +4919,7 @@ components:
           description: The last error (failure) message generated for the replication instance.
         StopReason:
           $ref: '#/components/schemas/String'
-          description: The reason the replication task was stopped.
+          description: '<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>"STOP_REASON_FULL_LOAD_COMPLETED"</code> – Full-load migration completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_APPLIED"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"</code> – In a full-load and CDC migration, the full-load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>"STOP_REASON_SERVER_TIME"</code> – The migration stopped at the specified server time.</p> </li> </ul>'
         ReplicationTaskCreationDate:
           $ref: '#/components/schemas/TStamp'
           description: The date the replication task was created.
@@ -4943,7 +4943,7 @@ components:
           description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
         TaskData:
           $ref: '#/components/schemas/String'
-          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration User Guide.</i> '
+          description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.
     DataFormatValue:
       type: string
@@ -5118,7 +5118,7 @@ components:
           description: The version of the replication engine.
         ReplicationInstanceClass:
           $ref: '#/components/schemas/String'
-          description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+          description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>"dms.c4.large"</code>.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right AWS DMS replication instance for your migration</a>. </p>'
         StorageType:
           $ref: '#/components/schemas/String'
           description: The type of storage used by the replication instance.
@@ -5196,7 +5196,7 @@ components:
       properties:
         ReplicationInstanceClass:
           $ref: '#/components/schemas/String'
-          description: '<p>The compute and memory capacity of the replication instance.</p> <p> Valid Values: <code>dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge </code> </p>'
+          description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right AWS DMS replication instance for your migration</a>. </p>'
         AllocatedStorage:
           $ref: '#/components/schemas/IntegerOptional'
           description: The amount of storage (in gigabytes) that is allocated for the replication instance.
@@ -5318,7 +5318,7 @@ components:
       properties:
         EngineName:
           $ref: '#/components/schemas/String'
-          description: 'The database engine name. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, and <code>"sqlserver"</code>.'
+          description: 'The database engine name. Valid values, depending on the EndpointType, include <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, <code>"mariadb"</code>, <code>"aurora"</code>, <code>"aurora-postgresql"</code>, <code>"redshift"</code>, <code>"s3"</code>, <code>"db2"</code>, <code>"azuredb"</code>, <code>"sybase"</code>, <code>"dynamodb"</code>, <code>"mongodb"</code>, <code>"kinesis"</code>, <code>"kafka"</code>, <code>"elasticsearch"</code>, <code>"documentdb"</code>, <code>"sqlserver"</code>, and <code>"neptune"</code>.'
         SupportsCDC:
           $ref: '#/components/schemas/Boolean'
           description: Indicates if Change Data Capture (CDC) is supported.
@@ -5408,20 +5408,20 @@ components:
       properties:
         Key:
           $ref: '#/components/schemas/String'
-          description: 'A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can''t be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+          description: 'A key is the required name of the tag. The string value can be 1-128 Unicode characters in length and can''t be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regular expressions: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
         Value:
           $ref: '#/components/schemas/String'
-          description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+          description: 'A value is the optional value of the tag. The string value can be 1-256 Unicode characters in length and can''t be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regular expressions: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
       description: '<p>A user-defined key-value pair that describes metadata added to an AWS DMS resource and that is used by operations such as the following:</p> <ul> <li> <p> <code>AddTagsToResource</code> </p> </li> <li> <p> <code>ListTagsForResource</code> </p> </li> <li> <p> <code>RemoveTagsFromResource</code> </p> </li> </ul>'
     VpcSecurityGroupMembership:
       type: object
       properties:
         VpcSecurityGroupId:
           $ref: '#/components/schemas/String'
-          description: The VPC security group Id.
+          description: The VPC security group ID.
         Status:
           $ref: '#/components/schemas/String'
           description: The status of the VPC security group.
-      description: Describes status of a security group associated with the virtual private cloud hosting your replication and DB instances.
+      description: Describes the status of a security group associated with the virtual private cloud (VPC) hosting your replication and DB instances.
 security:
   - hmac: []
