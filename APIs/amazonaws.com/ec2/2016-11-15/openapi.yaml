@@ -5602,6 +5602,111 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  '/#Action=CreateManagedPrefixList':
+    get:
+      x-aws-operation-name: CreateManagedPrefixList
+      operationId: GET_CreateManagedPrefixList
+      description: <p>Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.</p> <p>You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.</p>
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListName
+          in: query
+          required: true
+          description: '<p>A name for the prefix list.</p> <p>Constraints: Up to 255 characters in length. The name cannot start with <code>com.amazonaws</code>.</p>'
+          schema:
+            type: string
+        - name: Entry
+          in: query
+          required: false
+          description: One or more entries for the prefix list.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AddPrefixListEntry'
+            minItems: 0
+            maxItems: 1000
+        - name: MaxEntries
+          in: query
+          required: true
+          description: The maximum number of entries for the prefix list.
+          schema:
+            type: integer
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the prefix list during creation.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagSpecification'
+        - name: AddressFamily
+          in: query
+          required: true
+          description: '<p>The IP address type.</p> <p>Valid Values: <code>IPv4</code> | <code>IPv6</code> </p>'
+          schema:
+            type: string
+        - name: ClientToken
+          in: query
+          required: false
+          description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraints: Up to 255 UTF-8 characters in length.</p>'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateManagedPrefixList
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateManagedPrefixList
+      operationId: POST_CreateManagedPrefixList
+      description: <p>Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.</p> <p>You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.</p>
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateManagedPrefixList
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   '/#Action=CreateNatGateway':
     get:
       x-aws-operation-name: CreateNatGateway
@@ -5772,7 +5877,7 @@ paths:
         - name: CidrBlock
           in: query
           required: false
-          description: 'The IPv4 network range to allow or deny, in CIDR notation (for example <code>172.16.0.0/24</code>).'
+          description: 'The IPv4 network range to allow or deny, in CIDR notation (for example <code>172.16.0.0/24</code>). We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
           schema:
             type: string
         - name: DryRun
@@ -6298,13 +6403,19 @@ paths:
         - name: DestinationCidrBlock
           in: query
           required: false
-          description: The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match.
+          description: 'The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
           schema:
             type: string
         - name: DestinationIpv6CidrBlock
           in: query
           required: false
           description: The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.
+          schema:
+            type: string
+        - name: DestinationPrefixListId
+          in: query
+          required: false
+          description: The ID of a prefix list used for the destination match.
           schema:
             type: string
         - name: DryRun
@@ -6825,7 +6936,7 @@ paths:
     get:
       x-aws-operation-name: CreateSubnet
       operationId: GET_CreateSubnet
-      description: '<p>Creates a subnet in an existing VPC.</p> <p>When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can''t change its CIDR block. The size of the subnet''s IPv4 CIDR block can be the same as a VPC''s IPv4 CIDR block, or a subset of a VPC''s IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets'' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses).</p> <p>If you''ve associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet''s CIDR block. They''re not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they''re set up in a star topology with a logical router in the middle.</p> <p>If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn''t change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It''s therefore possible to have a subnet with no running instances (they''re all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a subnet in a specified VPC.</p> <p>You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can''t change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC.</p> <p>If you''ve associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet''s CIDR block. They''re not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they''re set up in a star topology with a logical router in the middle.</p> <p>When you stop an instance in a subnet, it retains its private IPv4 address. It''s therefore possible to have a subnet with no running instances (they''re all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -6846,7 +6957,7 @@ paths:
         - name: CidrBlock
           in: query
           required: true
-          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>.'
+          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
           schema:
             type: string
         - name: Ipv6CidrBlock
@@ -6898,7 +7009,7 @@ paths:
     post:
       x-aws-operation-name: CreateSubnet
       operationId: POST_CreateSubnet
-      description: '<p>Creates a subnet in an existing VPC.</p> <p>When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can''t change its CIDR block. The size of the subnet''s IPv4 CIDR block can be the same as a VPC''s IPv4 CIDR block, or a subset of a VPC''s IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets'' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses).</p> <p>If you''ve associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet''s CIDR block. They''re not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they''re set up in a star topology with a logical router in the middle.</p> <p>If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn''t change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It''s therefore possible to have a subnet with no running instances (they''re all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a subnet in a specified VPC.</p> <p>You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can''t change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC.</p> <p>If you''ve associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet''s CIDR block. They''re not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they''re set up in a star topology with a logical router in the middle.</p> <p>When you stop an instance in a subnet, it retains its private IPv4 address. It''s therefore possible to have a subnet with no running instances (they''re all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -8136,7 +8247,7 @@ paths:
         - name: CidrBlock
           in: query
           required: true
-          description: 'The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>.'
+          description: 'The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
           schema:
             type: string
         - name: AmazonProvidedIpv6CidrBlock
@@ -9911,6 +10022,75 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  '/#Action=DeleteManagedPrefixList':
+    get:
+      x-aws-operation-name: DeleteManagedPrefixList
+      operationId: GET_DeleteManagedPrefixList
+      description: Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListId
+          in: query
+          required: true
+          description: The ID of the prefix list.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteManagedPrefixList
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteManagedPrefixList
+      operationId: POST_DeleteManagedPrefixList
+      description: Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteManagedPrefixList
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   '/#Action=DeleteNatGateway':
     get:
       x-aws-operation-name: DeleteNatGateway
@@ -10427,6 +10607,12 @@ paths:
           in: query
           required: false
           description: The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
+          schema:
+            type: string
+        - name: DestinationPrefixListId
+          in: query
+          required: false
+          description: The ID of the prefix list for the route.
           schema:
             type: string
         - name: DryRun
@@ -17998,6 +18184,111 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  '/#Action=DescribeManagedPrefixLists':
+    get:
+      x-aws-operation-name: DescribeManagedPrefixLists
+      operationId: GET_DescribeManagedPrefixLists
+      description: '<p>Describes your managed prefix lists and any AWS-managed prefix lists.</p> <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Filter
+          in: query
+          required: false
+          description: <p>One or more filters.</p> <ul> <li> <p> <code>owner-id</code> - The ID of the prefix list owner.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>prefix-list-name</code> - The name of the prefix list.</p> </li> </ul>
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Filter'
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: PrefixListId
+          in: query
+          required: false
+          description: One or more prefix list IDs.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeManagedPrefixLists
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeManagedPrefixLists
+      operationId: POST_DescribeManagedPrefixLists
+      description: '<p>Describes your managed prefix lists and any AWS-managed prefix lists.</p> <p>To view the entries for your prefix list, use <a>GetManagedPrefixListEntries</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeManagedPrefixLists
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   '/#Action=DescribeMovingAddresses':
     get:
       x-aws-operation-name: DescribeMovingAddresses
@@ -18505,7 +18796,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.nat-gateway-id</code> - The ID of the NAT gateway to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -18688,7 +18979,7 @@ paths:
     get:
       x-aws-operation-name: DescribePrefixLists
       operationId: GET_DescribePrefixLists
-      description: 'Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.'
+      description: '<p>Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service.</p> <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>'
       responses:
         '200':
           description: Success
@@ -18753,7 +19044,7 @@ paths:
     post:
       x-aws-operation-name: DescribePrefixLists
       operationId: POST_DescribePrefixLists
-      description: 'Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.'
+      description: '<p>Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service.</p> <p>We recommend that you use <a>DescribeManagedPrefixLists</a> instead.</p>'
       responses:
         '200':
           description: Success
@@ -20276,7 +20567,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.from-port</code> - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>egress.ip-permission.group-id</code> - The ID of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.group-name</code> - The name of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which a security group rule allows outbound access.</p> </li> <li> <p> <code>egress.ip-permission.protocol</code> - The IP protocol for an outbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>egress.ip-permission.to-port</code> - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>egress.ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service from which a security group rule allows inbound access.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for an inbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>'
+          description: '<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.from-port</code> - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>egress.ip-permission.group-id</code> - The ID of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.group-name</code> - The name of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p> </li> <li> <p> <code>egress.ip-permission.protocol</code> - The IP protocol for an outbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>egress.ip-permission.to-port</code> - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>egress.ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for an inbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -26944,6 +27235,202 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  '/#Action=GetManagedPrefixListAssociations':
+    get:
+      x-aws-operation-name: GetManagedPrefixListAssociations
+      operationId: GET_GetManagedPrefixListAssociations
+      description: Gets information about the resources that are associated with the specified managed prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListId
+          in: query
+          required: true
+          description: The ID of the prefix list.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 5
+            maximum: 255
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetManagedPrefixListAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetManagedPrefixListAssociations
+      operationId: POST_GetManagedPrefixListAssociations
+      description: Gets information about the resources that are associated with the specified managed prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetManagedPrefixListAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  '/#Action=GetManagedPrefixListEntries':
+    get:
+      x-aws-operation-name: GetManagedPrefixListEntries
+      operationId: GET_GetManagedPrefixListEntries
+      description: Gets information about the entries for a specified managed prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListId
+          in: query
+          required: true
+          description: The ID of the prefix list.
+          schema:
+            type: string
+        - name: TargetVersion
+          in: query
+          required: false
+          description: The version of the prefix list for which to return the entries. The default is the current version.
+          schema:
+            type: integer
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetManagedPrefixListEntries
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetManagedPrefixListEntries
+      operationId: POST_GetManagedPrefixListEntries
+      description: Gets information about the entries for a specified managed prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetManagedPrefixListEntries
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   '/#Action=GetPasswordData':
     get:
       x-aws-operation-name: GetPasswordData
@@ -30006,6 +30493,107 @@ paths:
             type: string
             enum:
               - ModifyLaunchTemplate
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  '/#Action=ModifyManagedPrefixList':
+    get:
+      x-aws-operation-name: ModifyManagedPrefixList
+      operationId: GET_ModifyManagedPrefixList
+      description: '<p>Modifies the specified managed prefix list.</p> <p>Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version.</p> <p>If you specify a current version number that does not match the true current version number, the request fails.</p>'
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListId
+          in: query
+          required: true
+          description: The ID of the prefix list.
+          schema:
+            type: string
+        - name: CurrentVersion
+          in: query
+          required: false
+          description: The current version of the prefix list.
+          schema:
+            type: integer
+        - name: PrefixListName
+          in: query
+          required: false
+          description: A name for the prefix list.
+          schema:
+            type: string
+        - name: AddEntry
+          in: query
+          required: false
+          description: One or more entries to add to the prefix list.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AddPrefixListEntry'
+            minItems: 0
+            maxItems: 1000
+        - name: RemoveEntry
+          in: query
+          required: false
+          description: One or more entries to remove from the prefix list.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RemovePrefixListEntry'
+            minItems: 0
+            maxItems: 1000
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyManagedPrefixList
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyManagedPrefixList
+      operationId: POST_ModifyManagedPrefixList
+      description: '<p>Modifies the specified managed prefix list.</p> <p>Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version.</p> <p>If you specify a current version number that does not match the true current version number, the request fails.</p>'
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyManagedPrefixList
         - name: Version
           in: query
           required: true
@@ -33791,6 +34379,12 @@ paths:
           description: The IPv6 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.
           schema:
             type: string
+        - name: DestinationPrefixListId
+          in: query
+          required: false
+          description: The ID of the prefix list for the route.
+          schema:
+            type: string
         - name: DryRun
           in: query
           required: false
@@ -35016,6 +35610,87 @@ paths:
             type: string
             enum:
               - RestoreAddressToClassic
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  '/#Action=RestoreManagedPrefixListVersion':
+    get:
+      x-aws-operation-name: RestoreManagedPrefixListVersion
+      operationId: GET_RestoreManagedPrefixListVersion
+      description: Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: PrefixListId
+          in: query
+          required: true
+          description: The ID of the prefix list.
+          schema:
+            type: string
+        - name: PreviousVersion
+          in: query
+          required: true
+          description: The version to restore.
+          schema:
+            type: integer
+        - name: CurrentVersion
+          in: query
+          required: true
+          description: The current version number for the prefix list.
+          schema:
+            type: integer
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RestoreManagedPrefixListVersion
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RestoreManagedPrefixListVersion
+      operationId: POST_RestoreManagedPrefixListVersion
+      description: Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
+      responses:
+        '200':
+          description: Success
+          content: {}
+      requestBody:
+        content: {}
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RestoreManagedPrefixListVersion
         - name: Version
           in: query
           required: true
@@ -37499,7 +38174,7 @@ components:
       properties:
         ResourceType:
           $ref: '#/components/schemas/ResourceType'
-          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>instance</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>natgateway</code> | <code>spot-fleet-request</code> | <code>placement-group</code> | <code>snapshot</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>volume</code> | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
+          description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>instance</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>natgateway</code> | <code>spot-fleet-request</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>snapshot</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>volume</code> | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
         Tags:
           $ref: '#/components/schemas/TagList'
           description: The tags to apply to the resource.
@@ -37680,7 +38355,7 @@ components:
           description: '[VPC only] The IPv6 ranges.'
         PrefixListIds:
           $ref: '#/components/schemas/PrefixListIdList'
-          description: '[VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.'
+          description: '[VPC only] The prefix list IDs.'
         ToPort:
           $ref: '#/components/schemas/Integer'
           description: 'The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of <code>-1</code> indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.'
@@ -38572,6 +39247,24 @@ components:
         LocalGatewayRouteTableVpcAssociation:
           $ref: '#/components/schemas/LocalGatewayRouteTableVpcAssociation'
           description: Information about the association.
+    CreateManagedPrefixListResult:
+      type: object
+      properties:
+        PrefixList:
+          $ref: '#/components/schemas/ManagedPrefixList'
+          description: Information about the prefix list.
+    AddPrefixListEntry:
+      type: object
+      required:
+        - Cidr
+      properties:
+        Cidr:
+          $ref: '#/components/schemas/String'
+          description: The CIDR block.
+        Description:
+          $ref: '#/components/schemas/String'
+          description: '<p>A description for the entry.</p> <p>Constraints: Up to 255 characters in length.</p>'
+      description: An entry for a prefix list.
     CreateNatGatewayResult:
       type: object
       example:
@@ -39146,6 +39839,12 @@ components:
         LocalGatewayRouteTableVpcAssociation:
           $ref: '#/components/schemas/LocalGatewayRouteTableVpcAssociation'
           description: Information about the association.
+    DeleteManagedPrefixListResult:
+      type: object
+      properties:
+        PrefixList:
+          $ref: '#/components/schemas/ManagedPrefixList'
+          description: Information about the prefix list.
     DeleteNatGatewayResult:
       type: object
       example:
@@ -40084,6 +40783,15 @@ components:
           description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     LocalGatewayId:
       type: string
+    DescribeManagedPrefixListsResult:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+        PrefixLists:
+          $ref: '#/components/schemas/ManagedPrefixListSet'
+          description: Information about the prefix lists.
     DescribeMovingAddressesResult:
       type: object
       example:
@@ -41344,6 +42052,24 @@ components:
         LaunchTemplateData:
           $ref: '#/components/schemas/ResponseLaunchTemplateData'
           description: The instance data.
+    GetManagedPrefixListAssociationsResult:
+      type: object
+      properties:
+        PrefixListAssociations:
+          $ref: '#/components/schemas/PrefixListAssociationSet'
+          description: Information about the associations.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    GetManagedPrefixListEntriesResult:
+      type: object
+      properties:
+        Entries:
+          $ref: '#/components/schemas/PrefixListEntrySet'
+          description: Information about the prefix list entries.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     GetPasswordDataResult:
       type: object
       properties:
@@ -41767,6 +42493,21 @@ components:
         LaunchTemplate:
           $ref: '#/components/schemas/LaunchTemplate'
           description: Information about the launch template.
+    ModifyManagedPrefixListResult:
+      type: object
+      properties:
+        PrefixList:
+          $ref: '#/components/schemas/ManagedPrefixList'
+          description: Information about the prefix list.
+    RemovePrefixListEntry:
+      type: object
+      required:
+        - Cidr
+      properties:
+        Cidr:
+          $ref: '#/components/schemas/String'
+          description: The CIDR block.
+      description: An entry for a prefix list.
     NetworkInterfaceAttachmentId:
       type: string
     ModifyReservedInstancesResult:
@@ -42270,6 +43011,12 @@ components:
         Status:
           $ref: '#/components/schemas/Status'
           description: The move status for the IP address.
+    RestoreManagedPrefixListVersionResult:
+      type: object
+      properties:
+        PrefixList:
+          $ref: '#/components/schemas/ManagedPrefixList'
+          description: Information about the prefix list.
     RevokeClientVpnIngressResult:
       type: object
       properties:
@@ -42801,6 +43548,12 @@ components:
         - pending_fulfillment
         - pending_termination
         - fulfilled
+    AddPrefixListEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AddPrefixListEntry'
+      minItems: 0
+      maxItems: 1000
     DomainType:
       type: string
       enum:
@@ -46010,6 +46763,69 @@ components:
           $ref: '#/components/schemas/TagList'
           description: The tags assigned to the association.
       description: Describes an association between a local gateway route table and a VPC.
+    CreateManagedPrefixListRequest:
+      type: object
+      required:
+        - PrefixListName
+        - MaxEntries
+        - AddressFamily
+      title: CreateManagedPrefixListRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListName:
+          $ref: '#/components/schemas/String'
+          description: '<p>A name for the prefix list.</p> <p>Constraints: Up to 255 characters in length. The name cannot start with <code>com.amazonaws</code>.</p>'
+        Entries:
+          $ref: '#/components/schemas/AddPrefixListEntries'
+          description: One or more entries for the prefix list.
+        MaxEntries:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of entries for the prefix list.
+        TagSpecifications:
+          $ref: '#/components/schemas/TagSpecificationList'
+          description: The tags to apply to the prefix list during creation.
+        AddressFamily:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IP address type.</p> <p>Valid Values: <code>IPv4</code> | <code>IPv6</code> </p>'
+        ClientToken:
+          $ref: '#/components/schemas/String'
+          description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraints: Up to 255 UTF-8 characters in length.</p>'
+    ManagedPrefixList:
+      type: object
+      properties:
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
+        AddressFamily:
+          $ref: '#/components/schemas/String'
+          description: The IP address version.
+        State:
+          $ref: '#/components/schemas/PrefixListState'
+          description: The state of the prefix list.
+        StateMessage:
+          $ref: '#/components/schemas/String'
+          description: The state message.
+        PrefixListArn:
+          $ref: '#/components/schemas/ResourceArn'
+          description: The Amazon Resource Name (ARN) for the prefix list.
+        PrefixListName:
+          $ref: '#/components/schemas/String'
+          description: The name of the prefix list.
+        MaxEntries:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of entries for the prefix list.
+        Version:
+          $ref: '#/components/schemas/Long'
+          description: The version of the prefix list.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: The tags for the prefix list.
+        OwnerId:
+          $ref: '#/components/schemas/String'
+          description: The ID of the owner of the prefix list.
+      description: Describes a managed prefix list.
     CreateNatGatewayRequest:
       type: object
       required:
@@ -46106,7 +46922,7 @@ components:
       properties:
         CidrBlock:
           $ref: '#/components/schemas/String'
-          description: 'The IPv4 network range to allow or deny, in CIDR notation (for example <code>172.16.0.0/24</code>).'
+          description: 'The IPv4 network range to allow or deny, in CIDR notation (for example <code>172.16.0.0/24</code>). We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -46418,10 +47234,13 @@ components:
       properties:
         DestinationCidrBlock:
           $ref: '#/components/schemas/String'
-          description: The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match.
+          description: 'The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         DestinationIpv6CidrBlock:
           $ref: '#/components/schemas/String'
           description: The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.
+        DestinationPrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of a prefix list used for the destination match.
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -46611,7 +47430,7 @@ components:
           description: The AZ ID or the Local Zone ID of the subnet.
         CidrBlock:
           $ref: '#/components/schemas/String'
-          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>.'
+          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         Ipv6CidrBlock:
           $ref: '#/components/schemas/String'
           description: 'The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.'
@@ -47456,7 +48275,7 @@ components:
       properties:
         CidrBlock:
           $ref: '#/components/schemas/String'
-          description: 'The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>.'
+          description: 'The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         AmazonProvidedIpv6CidrBlock:
           $ref: '#/components/schemas/Boolean'
           description: 'Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.'
@@ -47953,6 +48772,18 @@ components:
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    DeleteManagedPrefixListRequest:
+      type: object
+      required:
+        - PrefixListId
+      title: DeleteManagedPrefixListRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
     DeleteNatGatewayRequest:
       type: object
       required:
@@ -48092,6 +48923,9 @@ components:
         DestinationIpv6CidrBlock:
           $ref: '#/components/schemas/String'
           description: The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
+        DestinationPrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list for the route.
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -50043,6 +50877,33 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LocalGateway'
+    PrefixListMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    DescribeManagedPrefixListsRequest:
+      type: object
+      title: DescribeManagedPrefixListsRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+          description: <p>One or more filters.</p> <ul> <li> <p> <code>owner-id</code> - The ID of the prefix list owner.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>prefix-list-name</code> - The name of the prefix list.</p> </li> </ul>
+        MaxResults:
+          $ref: '#/components/schemas/PrefixListMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
+        PrefixListIds:
+          $ref: '#/components/schemas/ValueStringList'
+          description: One or more prefix list IDs.
+    ManagedPrefixListSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedPrefixList'
     DescribeMovingAddressesMaxResults:
       type: integer
       minimum: 5
@@ -50223,7 +51084,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.nat-gateway-id</code> - The ID of the NAT gateway to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>addresses.private-ip-address</code> - The private IPv4 addresses associated with the network interface.</p> </li> <li> <p> <code>addresses.primary</code> - Whether the private IPv4 address is the primary IP address associated with the network interface. </p> </li> <li> <p> <code>addresses.association.public-ip</code> - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).</p> </li> <li> <p> <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p> </li> <li> <p> <code>association.association-id</code> - The association ID returned when the network interface was associated with an IPv4 address.</p> </li> <li> <p> <code>association.allocation-id</code> - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.</p> </li> <li> <p> <code>association.ip-owner-id</code> - The owner of the Elastic IP address (IPv4) associated with the network interface.</p> </li> <li> <p> <code>association.public-ip</code> - The address of the Elastic IP address (IPv4) bound to the network interface.</p> </li> <li> <p> <code>association.public-dns-name</code> - The public DNS name for the network interface (IPv4).</p> </li> <li> <p> <code>attachment.attachment-id</code> - The ID of the interface attachment.</p> </li> <li> <p> <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p> </li> <li> <p> <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p> </li> <li> <p> <code>attachment.device-index</code> - The device index to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p> </li> <li> <p> <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone of the network interface.</p> </li> <li> <p> <code>description</code> - The description of the network interface.</p> </li> <li> <p> <code>group-id</code> - The ID of a security group associated with the network interface.</p> </li> <li> <p> <code>group-name</code> - The name of a security group associated with the network interface.</p> </li> <li> <p> <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with the network interface.</p> </li> <li> <p> <code>mac-address</code> - The MAC address of the network interface.</p> </li> <li> <p> <code>network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the network interface owner.</p> </li> <li> <p> <code>private-ip-address</code> - The private IPv4 address or addresses of the network interface.</p> </li> <li> <p> <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p> </li> <li> <p> <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p> </li> <li> <p> <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p> </li> <li> <p> <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; if a network interface is attached to an instance the status is <code>in-use</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet for the network interface.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the network interface.</p> </li> </ul>'
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -50697,7 +51558,7 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.from-port</code> - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>egress.ip-permission.group-id</code> - The ID of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.group-name</code> - The name of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service to which a security group rule allows outbound access.</p> </li> <li> <p> <code>egress.ip-permission.protocol</code> - The IP protocol for an outbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>egress.ip-permission.to-port</code> - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>egress.ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.prefix-list-id</code> - The ID (prefix) of the AWS service from which a security group rule allows inbound access.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for an inbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>'
+          description: '<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p> <ul> <li> <p> <code>description</code> - The description of the security group.</p> </li> <li> <p> <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.from-port</code> - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>egress.ip-permission.group-id</code> - The ID of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.group-name</code> - The name of a security group that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an outbound security group rule.</p> </li> <li> <p> <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p> </li> <li> <p> <code>egress.ip-permission.protocol</code> - The IP protocol for an outbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>egress.ip-permission.to-port</code> - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>egress.ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an outbound security group rule.</p> </li> <li> <p> <code>group-id</code> - The ID of the security group. </p> </li> <li> <p> <code>group-name</code> - The name of the security group.</p> </li> <li> <p> <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.from-port</code> - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.</p> </li> <li> <p> <code>ip-permission.group-id</code> - The ID of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.group-name</code> - The name of a security group that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security group rule.</p> </li> <li> <p> <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p> </li> <li> <p> <code>ip-permission.protocol</code> - The IP protocol for an inbound security group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a protocol number).</p> </li> <li> <p> <code>ip-permission.to-port</code> - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.</p> </li> <li> <p> <code>ip-permission.user-id</code> - The ID of an AWS account that has been referenced in an inbound security group rule.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner of the security group.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p> </li> </ul>'
         GroupIds:
           $ref: '#/components/schemas/GroupIdStringList'
           description: '<p>The IDs of the security groups. Required for security groups in a nondefault VPC.</p> <p>Default: Describes all your security groups.</p>'
@@ -53412,6 +54273,57 @@ components:
           $ref: '#/components/schemas/LaunchTemplateInstanceMetadataOptions'
           description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
       description: 'The information for a launch template. '
+    GetManagedPrefixListAssociationsMaxResults:
+      type: integer
+      minimum: 5
+      maximum: 255
+    GetManagedPrefixListAssociationsRequest:
+      type: object
+      required:
+        - PrefixListId
+      title: GetManagedPrefixListAssociationsRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
+        MaxResults:
+          $ref: '#/components/schemas/GetManagedPrefixListAssociationsMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
+    PrefixListAssociationSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrefixListAssociation'
+    GetManagedPrefixListEntriesRequest:
+      type: object
+      required:
+        - PrefixListId
+      title: GetManagedPrefixListEntriesRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
+        TargetVersion:
+          $ref: '#/components/schemas/Long'
+          description: The version of the prefix list for which to return the entries. The default is the current version.
+        MaxResults:
+          $ref: '#/components/schemas/PrefixListMaxResults'
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+          description: The token for the next page of results.
+    PrefixListEntrySet:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrefixListEntry'
     GetPasswordDataRequest:
       type: object
       required:
@@ -56085,6 +56997,25 @@ components:
           $ref: '#/components/schemas/TagList'
           description: The tags assigned to the virtual interface group.
       description: Describes a local gateway virtual interface group.
+    PrefixListState:
+      type: string
+      enum:
+        - create-in-progress
+        - create-complete
+        - create-failed
+        - modify-in-progress
+        - modify-complete
+        - modify-failed
+        - restore-in-progress
+        - restore-complete
+        - restore-failed
+        - delete-in-progress
+        - delete-complete
+        - delete-failed
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1283
     MaxIpv4AddrPerInterface:
       type: integer
     MaxIpv6AddrPerInterface:
@@ -56550,6 +57481,36 @@ components:
         DefaultVersion:
           $ref: '#/components/schemas/String'
           description: The version number of the launch template to set as the default version.
+    RemovePrefixListEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/RemovePrefixListEntry'
+      minItems: 0
+      maxItems: 1000
+    ModifyManagedPrefixListRequest:
+      type: object
+      required:
+        - PrefixListId
+      title: ModifyManagedPrefixListRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
+        CurrentVersion:
+          $ref: '#/components/schemas/Long'
+          description: The current version of the prefix list.
+        PrefixListName:
+          $ref: '#/components/schemas/String'
+          description: A name for the prefix list.
+        AddEntries:
+          $ref: '#/components/schemas/AddPrefixListEntries'
+          description: One or more entries to add to the prefix list.
+        RemoveEntries:
+          $ref: '#/components/schemas/RemovePrefixListEntries'
+          description: One or more entries to remove from the prefix list.
     NetworkInterfaceAttachmentChanges:
       type: object
       properties:
@@ -57570,6 +58531,26 @@ components:
           $ref: '#/components/schemas/String'
           description: The name of the prefix.
       description: Describes prefixes for AWS services.
+    PrefixListAssociation:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/String'
+          description: The ID of the resource.
+        ResourceOwner:
+          $ref: '#/components/schemas/String'
+          description: The owner of the resource.
+      description: Describes the resource with which a prefix list is associated.
+    PrefixListEntry:
+      type: object
+      properties:
+        Cidr:
+          $ref: '#/components/schemas/String'
+          description: The CIDR block.
+        Description:
+          $ref: '#/components/schemas/String'
+          description: The description.
+      description: Describes a prefix list entry.
     PrefixListId:
       type: object
       properties:
@@ -58245,6 +59226,9 @@ components:
         DestinationIpv6CidrBlock:
           $ref: '#/components/schemas/String'
           description: The IPv6 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.
+        DestinationPrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list for the route.
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -58860,6 +59844,26 @@ components:
         PublicIp:
           $ref: '#/components/schemas/String'
           description: The Elastic IP address.
+    RestoreManagedPrefixListVersionRequest:
+      type: object
+      required:
+        - PrefixListId
+        - PreviousVersion
+        - CurrentVersion
+      title: RestoreManagedPrefixListVersionRequest
+      properties:
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        PrefixListId:
+          $ref: '#/components/schemas/PrefixListResourceId'
+          description: The ID of the prefix list.
+        PreviousVersion:
+          $ref: '#/components/schemas/Long'
+          description: The version to restore.
+        CurrentVersion:
+          $ref: '#/components/schemas/Long'
+          description: The current version number for the prefix list.
     RevokeClientVpnIngressRequest:
       type: object
       required:
@@ -59827,7 +60831,7 @@ components:
           description: The IP ranges. Not applicable for stale security group rules.
         PrefixListIds:
           $ref: '#/components/schemas/PrefixListIdSet'
-          description: The prefix list IDs for an AWS service. Not applicable for stale security group rules.
+          description: The prefix list IDs. Not applicable for stale security group rules.
         ToPort:
           $ref: '#/components/schemas/Integer'
           description: 'The end of the port range for the TCP and UDP protocols, or an ICMP type number. A value of <code>-1</code> indicates all ICMP types. '

@@ -4734,7 +4734,7 @@ paths:
     get:
       x-aws-operation-name: ExecutePolicy
       operationId: GET_ExecutePolicy
-      description: Executes the specified policy.
+      description: Executes the specified policy. This can be useful for testing the design of your scaling policy.
       responses:
         '200':
           description: Success
@@ -4772,7 +4772,7 @@ paths:
         - name: HonorCooldown
           in: query
           required: false
-          description: '<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>This parameter is not supported if the policy type is <code>StepScaling</code> or <code>TargetTrackingScaling</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          description: '<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>Valid only if the policy type is <code>SimpleScaling</code>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
           schema:
             type: boolean
         - name: MetricValue
@@ -4814,7 +4814,7 @@ paths:
     post:
       x-aws-operation-name: ExecutePolicy
       operationId: POST_ExecutePolicy
-      description: Executes the specified policy.
+      description: Executes the specified policy. This can be useful for testing the design of your scaling policy.
       responses:
         '200':
           description: Success
@@ -6812,6 +6812,8 @@ components:
     LimitExceededFault: {}
     CancelInstanceRefreshAnswer:
       type: object
+      example:
+        InstanceRefreshId: 08b91cf7-8fa6-48af-b6a6-d227f40f1b9b
       properties:
         InstanceRefreshId:
           $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -7044,6 +7046,21 @@ components:
           description: The notification types.
     DescribeInstanceRefreshesAnswer:
       type: object
+      example:
+        InstanceRefreshes:
+          - AutoScalingGroupName: my-auto-scaling-group
+            InstanceRefreshId: 08b91cf7-8fa6-48af-b6a6-d227f40f1b9b
+            InstancesToUpdate: 5
+            PercentageComplete: 0
+            StartTime: '2020-06-02T18:11:27Z'
+            Status: InProgress
+          - AutoScalingGroupName: my-auto-scaling-group
+            EndTime: '2020-06-02T16:53:37Z'
+            InstanceRefreshId: dd7728d0-5bc4-4575-96a3-1b2c52bf8bb1
+            InstancesToUpdate: 0
+            PercentageComplete: 100
+            StartTime: '2020-06-02T16:43:19Z'
+            Status: Successful
       properties:
         InstanceRefreshes:
           $ref: '#/components/schemas/InstanceRefreshes'
@@ -7365,7 +7382,12 @@ components:
     PolicyARNType:
       type: object
       example:
-        PolicyARN: 'arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn'
+        Alarms:
+          - AlarmARN: 'arn:aws:cloudwatch:us-west-2:123456789012:alarm:TargetTracking-my-asg-AlarmHigh-fc0e4183-23ac-497e-9992-691c9980c38e'
+            AlarmName: TargetTracking-my-asg-AlarmHigh-fc0e4183-23ac-497e-9992-691c9980c38e
+          - AlarmARN: 'arn:aws:cloudwatch:us-west-2:123456789012:alarm:TargetTracking-my-asg-AlarmLow-61a39305-ed0c-47af-bd9e-471a352ee1a2'
+            AlarmName: TargetTracking-my-asg-AlarmLow-61a39305-ed0c-47af-bd9e-471a352ee1a2
+        PolicyARN: 'arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:228f02c2-c665-4bfd-aaac-8b04080bea3c:autoScalingGroupName/my-auto-scaling-group:policyName/alb1000-target-tracking-scaling-policy'
       properties:
         PolicyARN:
           $ref: '#/components/schemas/ResourceName'
@@ -7437,6 +7459,8 @@ components:
       properties: {}
     StartInstanceRefreshAnswer:
       type: object
+      example:
+        InstanceRefreshId: 08b91cf7-8fa6-48af-b6a6-d227f40f1b9b
       properties:
         InstanceRefreshId:
           $ref: '#/components/schemas/XmlStringMaxLen255'
@@ -7899,10 +7923,10 @@ components:
       properties:
         SnapshotId:
           $ref: '#/components/schemas/XmlStringMaxLen255'
-          description: '<p>The snapshot ID of the volume to use.</p> <p> <code>SnapshotId</code> is optional if you specify a volume size. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>'
+          description: <p>The snapshot ID of the volume to use.</p> <p>You must specify either a <code>VolumeSize</code> or a <code>SnapshotId</code>.</p>
         VolumeSize:
           $ref: '#/components/schemas/BlockDeviceEbsVolumeSize'
-          description: '<p>The volume size, in Gibibytes (GiB).</p> <p>This can be a number from 1-1,024 for <code>standard</code>, 4-16,384 for <code>io1</code>, 1-16,384 for <code>gp2</code>, and 500-16,384 for <code>st1</code> and <code>sc1</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don''t specify a volume size, the default is the snapshot size.</p> <note> <p>At least one of <code>VolumeSize</code> or <code>SnapshotId</code> is required.</p> </note>'
+          description: '<p>The volume size, in Gibibytes (GiB).</p> <p>This can be a number from 1-1,024 for <code>standard</code>, 4-16,384 for <code>io1</code>, 1-16,384 for <code>gp2</code>, and 500-16,384 for <code>st1</code> and <code>sc1</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don''t specify a volume size, the default is the snapshot size.</p> <p>You must specify either a <code>VolumeSize</code> or a <code>SnapshotId</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>'
         VolumeType:
           $ref: '#/components/schemas/BlockDeviceEbsVolumeType'
           description: '<p>The volume type, which can be <code>standard</code> for Magnetic, <code>io1</code> for Provisioned IOPS SSD, <code>gp2</code> for General Purpose SSD, <code>st1</code> for Throughput Optimized HDD, or <code>sc1</code> for Cold HDD. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> | <code>st1</code> | <code>sc1</code> </p>'
@@ -8561,7 +8585,7 @@ components:
           description: The name or ARN of the policy.
         HonorCooldown:
           $ref: '#/components/schemas/HonorCooldown'
-          description: '<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>This parameter is not supported if the policy type is <code>StepScaling</code> or <code>TargetTrackingScaling</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+          description: '<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>Valid only if the policy type is <code>SimpleScaling</code>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
         MetricValue:
           $ref: '#/components/schemas/MetricScale'
           description: '<p>The metric value to compare to <code>BreachThreshold</code>. This enables you to execute a policy of type <code>StepScaling</code> and determine which step adjustment to use. For example, if the breach threshold is 50 and you want to use a step adjustment with a lower bound of 0 and an upper bound of 10, you can set the metric value to 59.</p> <p>If you specify a metric value that doesn''t correspond to a step adjustment for the policy, the call returns an error.</p> <p>Required if the policy type is <code>StepScaling</code> and not supported otherwise.</p>'
