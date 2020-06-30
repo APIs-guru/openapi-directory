@@ -1302,6 +1302,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImageTagAlreadyExistsException'
+        '488':
+          description: ImageDigestDoesNotMatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageDigestDoesNotMatchException'
       requestBody:
         required: true
         content:
@@ -2532,9 +2538,13 @@ components:
         imageTag:
           $ref: '#/components/schemas/ImageTag'
           description: The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+        imageDigest:
+          $ref: '#/components/schemas/ImageDigest'
+          description: The image digest of the image manifest corresponding to the image.
     ImageAlreadyExistsException: {}
     ReferencedImagesNotFoundException: {}
     ImageTagAlreadyExistsException: {}
+    ImageDigestDoesNotMatchException: {}
     PutImageScanningConfigurationResponse:
       type: object
       properties:

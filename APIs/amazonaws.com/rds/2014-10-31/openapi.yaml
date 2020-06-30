@@ -4091,7 +4091,7 @@ paths:
     get:
       x-aws-operation-name: CreateDBProxy
       operationId: GET_CreateDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>
+      description: Creates a new DB proxy.
       responses:
         '200':
           description: Success
@@ -4215,7 +4215,7 @@ paths:
     post:
       x-aws-operation-name: CreateDBProxy
       operationId: POST_CreateDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>
+      description: Creates a new DB proxy.
       responses:
         '200':
           description: Success
@@ -6034,7 +6034,7 @@ paths:
     get:
       x-aws-operation-name: DeleteDBProxy
       operationId: GET_DeleteDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>
+      description: Deletes an existing proxy.
       responses:
         '200':
           description: Success
@@ -6086,7 +6086,7 @@ paths:
     post:
       x-aws-operation-name: DeleteDBProxy
       operationId: POST_DeleteDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>
+      description: Deletes an existing proxy.
       responses:
         '200':
           description: Success
@@ -6778,7 +6778,7 @@ paths:
     get:
       x-aws-operation-name: DeregisterDBProxyTargets
       operationId: GET_DeregisterDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>
+      description: Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -6864,7 +6864,7 @@ paths:
     post:
       x-aws-operation-name: DeregisterDBProxyTargets
       operationId: POST_DeregisterDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>
+      description: Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -8808,7 +8808,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBProxies
       operationId: GET_DescribeDBProxies
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>
+      description: Returns information about DB proxies.
       responses:
         '200':
           description: Success
@@ -8876,7 +8876,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBProxies
       operationId: POST_DescribeDBProxies
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>
+      description: Returns information about DB proxies.
       responses:
         '200':
           description: Success
@@ -8926,7 +8926,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBProxyTargetGroups
       operationId: GET_DescribeDBProxyTargetGroups
-      description: '<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>'
+      description: 'Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.'
       responses:
         '200':
           description: Success
@@ -9012,7 +9012,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBProxyTargetGroups
       operationId: POST_DescribeDBProxyTargetGroups
-      description: '<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>'
+      description: 'Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.'
       responses:
         '200':
           description: Success
@@ -9074,7 +9074,7 @@ paths:
     get:
       x-aws-operation-name: DescribeDBProxyTargets
       operationId: GET_DescribeDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>
+      description: Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.
       responses:
         '200':
           description: Success
@@ -9166,7 +9166,7 @@ paths:
     post:
       x-aws-operation-name: DescribeDBProxyTargets
       operationId: POST_DescribeDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>
+      description: Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.
       responses:
         '200':
           description: Success
@@ -13706,7 +13706,7 @@ paths:
     get:
       x-aws-operation-name: ModifyDBProxy
       operationId: GET_ModifyDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>
+      description: Changes the settings for an existing DB proxy.
       responses:
         '200':
           description: Success
@@ -13810,7 +13810,7 @@ paths:
     post:
       x-aws-operation-name: ModifyDBProxy
       operationId: POST_ModifyDBProxy
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>
+      description: Changes the settings for an existing DB proxy.
       responses:
         '200':
           description: Success
@@ -13860,7 +13860,7 @@ paths:
     get:
       x-aws-operation-name: ModifyDBProxyTargetGroup
       operationId: GET_ModifyDBProxyTargetGroup
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>
+      description: Modifies the properties of a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -13920,8 +13920,8 @@ paths:
                 description: '<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior.</p> <p>Default: no session pinning filters</p>'
               InitQuery:
                 $ref: '#/components/schemas/String'
-                description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>'
-            description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>
+                description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>'
+            description: Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.
         - name: NewName
           in: query
           required: false
@@ -13953,7 +13953,7 @@ paths:
     post:
       x-aws-operation-name: ModifyDBProxyTargetGroup
       operationId: POST_ModifyDBProxyTargetGroup
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>
+      description: Modifies the properties of a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -15206,7 +15206,7 @@ paths:
     get:
       x-aws-operation-name: RegisterDBProxyTargets
       operationId: GET_RegisterDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>
+      description: Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -15316,7 +15316,7 @@ paths:
     post:
       x-aws-operation-name: RegisterDBProxyTargets
       operationId: POST_RegisterDBProxyTargets
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>
+      description: Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.
       responses:
         '200':
           description: Success
@@ -20569,7 +20569,7 @@ components:
         IAMAuth:
           $ref: '#/components/schemas/IAMAuthMode'
           description: Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>
+      description: Specifies the details of authentication used by a proxy to log in as a specific database user.
     DBProxyAlreadyExistsFault: {}
     DBProxyQuotaExceededFault: {}
     CreateDBSecurityGroupResult:
@@ -21756,8 +21756,8 @@ components:
           description: '<p>Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior.</p> <p>Default: no session pinning filters</p>'
         InitQuery:
           $ref: '#/components/schemas/String'
-          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>'
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>
+          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>'
+      description: Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.
     Integer:
       type: integer
     ConnectionPoolConfigurationInfo:
@@ -21777,8 +21777,8 @@ components:
           description: 'Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is <code>EXCLUDE_VARIABLE_SETS</code>.'
         InitQuery:
           $ref: '#/components/schemas/String'
-          description: '<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p>'
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>
+          description: ' One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. '
+      description: Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.
     CopyDBClusterParameterGroupMessage:
       type: object
       required:
@@ -23055,7 +23055,7 @@ components:
         UpdatedDate:
           $ref: '#/components/schemas/TStamp'
           description: The date and time when the proxy was last updated.
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>
+      description: <p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>
     CreateDBSecurityGroupMessage:
       type: object
       required:
@@ -23755,7 +23755,7 @@ components:
         Description:
           $ref: '#/components/schemas/String'
           description: 'A description of the health of the RDS Proxy target. If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.'
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Information about the connection health of an RDS Proxy target.</p>
+      description: Information about the connection health of an RDS Proxy target.
     DBProxyTarget:
       type: object
       properties:
@@ -23780,7 +23780,7 @@ components:
         TargetHealth:
           $ref: '#/components/schemas/TargetHealth'
           description: Information about the connection health of the RDS Proxy target.
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>
+      description: <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>
     DBProxyTargetGroup:
       type: object
       properties:
@@ -23808,7 +23808,7 @@ components:
         UpdatedDate:
           $ref: '#/components/schemas/TStamp'
           description: The date and time when the target group was last updated.
-      description: '<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>'
+      description: '<p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>'
     EC2SecurityGroupList:
       type: array
       items:
@@ -27039,7 +27039,7 @@ components:
         IAMAuth:
           $ref: '#/components/schemas/IAMAuthMode'
           description: Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
-      description: <note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>
+      description: Returns the details of authentication used by a proxy to log in as a specific database user.
     ValidStorageOptionsList:
       type: array
       items:
