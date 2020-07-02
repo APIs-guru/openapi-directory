@@ -4624,7 +4624,7 @@ components:
         userGroups:
           $ref: '#/components/schemas/StringList'
           description: 'The name of the group. '
-      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI.'
+      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>. '
     AmiDistributionConfiguration:
       type: object
       properties:
@@ -4637,6 +4637,9 @@ components:
         amiTags:
           $ref: '#/components/schemas/TagMap'
           description: 'The tags to apply to AMIs distributed to this Region. '
+        kmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: ' The KMS key identifier used to encrypt the distributed image. '
         launchPermission:
           $ref: '#/components/schemas/LaunchPermissionConfiguration'
           description: ' Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances. '

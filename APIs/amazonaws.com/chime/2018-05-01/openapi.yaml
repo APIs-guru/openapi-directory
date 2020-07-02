@@ -241,6 +241,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - E164PhoneNumbers
               properties:
                 E164PhoneNumbers:
                   description: 'List of phone numbers, in E.164 format.'
@@ -338,6 +340,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - E164PhoneNumbers
               properties:
                 E164PhoneNumbers:
                   description: 'List of phone numbers, in E.164 format.'
@@ -4931,6 +4935,207 @@ paths:
                 RequireEncryption:
                   description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
                   type: boolean
+  '/voice-connectors/{voiceConnectorId}/emergency-calling-configuration':
+    delete:
+      operationId: DeleteVoiceConnectorEmergencyCallingConfiguration
+      description: Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVoiceConnectorEmergencyCallingConfiguration
+      description: Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVoiceConnectorEmergencyCallingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    put:
+      operationId: PutVoiceConnectorEmergencyCallingConfiguration
+      description: 'Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutVoiceConnectorEmergencyCallingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: voiceConnectorId
+          in: path
+          required: true
+          description: The Amazon Chime Voice Connector ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - EmergencyCallingConfiguration
+              properties:
+                EmergencyCallingConfiguration:
+                  description: The emergency calling configuration details associated with an Amazon Chime Voice Connector.
+                  type: object
+                  properties:
+                    DNIS:
+                      $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
+                      description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
   '/voice-connector-groups/{voiceConnectorGroupId}':
     delete:
       operationId: DeleteVoiceConnectorGroup
@@ -5151,7 +5356,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/origination':
     delete:
       operationId: DeleteVoiceConnectorOrigination
-      description: Deletes the origination settings for the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.</p> </note>'
       responses:
         '204':
           description: Success
@@ -5275,7 +5480,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: PutVoiceConnectorOrigination
-      description: Adds origination settings for the specified Amazon Chime Voice Connector.
+      description: '<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5787,7 +5992,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/termination':
     delete:
       operationId: DeleteVoiceConnectorTermination
-      description: Deletes the termination settings for the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.</p> </note>'
       responses:
         '204':
           description: Success
@@ -5911,7 +6116,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: PutVoiceConnectorTermination
-      description: Adds termination settings for the specified Amazon Chime Voice Connector.
+      description: '<p>Adds termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.</p> </note>'
       responses:
         '200':
           description: Success
@@ -6073,6 +6278,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - Usernames
               properties:
                 Usernames:
                   description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
@@ -6242,6 +6449,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - E164PhoneNumbers
               properties:
                 E164PhoneNumbers:
                   description: 'List of phone numbers, in E.164 format.'
@@ -6330,6 +6539,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - E164PhoneNumbers
               properties:
                 E164PhoneNumbers:
                   description: 'List of phone numbers, in E.164 format.'
@@ -9938,6 +10149,12 @@ components:
         VoiceConnector:
           $ref: '#/components/schemas/VoiceConnector'
           description: The Amazon Chime Voice Connector details.
+    GetVoiceConnectorEmergencyCallingConfigurationResponse:
+      type: object
+      properties:
+        EmergencyCallingConfiguration:
+          $ref: '#/components/schemas/EmergencyCallingConfiguration'
+          description: The emergency calling configuration details.
     GetVoiceConnectorGroupResponse:
       type: object
       properties:
@@ -10153,6 +10370,16 @@ components:
           $ref: '#/components/schemas/RetentionDays'
           description: The number of days for which to retain chat conversation messages.
       description: The retention settings that determine how long to retain chat conversation messages for an Amazon Chime Enterprise account.
+    PutVoiceConnectorEmergencyCallingConfigurationResponse:
+      type: object
+      properties:
+        EmergencyCallingConfiguration:
+          $ref: '#/components/schemas/EmergencyCallingConfiguration'
+          description: The emergency calling configuration details.
+    DNISEmergencyCallingConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DNISEmergencyCallingConfiguration'
     PutVoiceConnectorLoggingConfigurationResponse:
       type: object
       properties:
@@ -10413,6 +10640,9 @@ components:
           $ref: '#/components/schemas/SensitiveString'
           description: The ARN of the room resource.
       description: 'The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.'
+    Alpha2CountryCode:
+      type: string
+      pattern: '[A-Z]{2}'
     AssociatePhoneNumberWithUserRequest:
       type: object
       required:
@@ -10430,6 +10660,8 @@ components:
       type: boolean
     AssociatePhoneNumbersWithVoiceConnectorGroupRequest:
       type: object
+      required:
+        - E164PhoneNumbers
       title: AssociatePhoneNumbersWithVoiceConnectorGroupRequest
       properties:
         E164PhoneNumbers:
@@ -10444,6 +10676,8 @@ components:
         $ref: '#/components/schemas/PhoneNumberError'
     AssociatePhoneNumbersWithVoiceConnectorRequest:
       type: object
+      required:
+        - E164PhoneNumbers
       title: AssociatePhoneNumbersWithVoiceConnectorRequest
       properties:
         E164PhoneNumbers:
@@ -11201,6 +11435,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Credential'
+    DNISEmergencyCallingConfiguration:
+      type: object
+      required:
+        - EmergencyPhoneNumber
+        - CallingCountry
+      properties:
+        EmergencyPhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+          description: 'The DNIS phone number to route emergency calls to, in E.164 format.'
+        TestPhoneNumber:
+          $ref: '#/components/schemas/E164PhoneNumber'
+          description: 'The DNIS phone number to route test emergency calls to, in E.164 format.'
+        CallingCountry:
+          $ref: '#/components/schemas/Alpha2CountryCode'
+          description: 'The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.'
+      description: The Dialed Number Identification Service (DNIS) emergency calling configuration details associated with an Amazon Chime Voice Connector's emergency calling configuration.
     DeleteAccountRequest:
       type: object
       title: DeleteAccountRequest
@@ -11233,6 +11483,10 @@ components:
       type: object
       title: DeleteRoomRequest
       properties: {}
+    DeleteVoiceConnectorEmergencyCallingConfigurationRequest:
+      type: object
+      title: DeleteVoiceConnectorEmergencyCallingConfigurationRequest
+      properties: {}
     DeleteVoiceConnectorGroupRequest:
       type: object
       title: DeleteVoiceConnectorGroupRequest
@@ -11259,6 +11513,8 @@ components:
         $ref: '#/components/schemas/SensitiveString'
     DeleteVoiceConnectorTerminationCredentialsRequest:
       type: object
+      required:
+        - Usernames
       title: DeleteVoiceConnectorTerminationCredentialsRequest
       properties:
         Usernames:
@@ -11274,6 +11530,8 @@ components:
       properties: {}
     DisassociatePhoneNumbersFromVoiceConnectorGroupRequest:
       type: object
+      required:
+        - E164PhoneNumbers
       title: DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
       properties:
         E164PhoneNumbers:
@@ -11281,6 +11539,8 @@ components:
           description: 'List of phone numbers, in E.164 format.'
     DisassociatePhoneNumbersFromVoiceConnectorRequest:
       type: object
+      required:
+        - E164PhoneNumbers
       title: DisassociatePhoneNumbersFromVoiceConnectorRequest
       properties:
         E164PhoneNumbers:
@@ -11301,6 +11561,13 @@ components:
         - NotSent
         - Sent
         - Failed
+    EmergencyCallingConfiguration:
+      type: object
+      properties:
+        DNIS:
+          $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
+          description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
+      description: The emergency calling configuration details associated with an Amazon Chime Voice Connector.
     ErrorCode:
       type: string
       enum:
@@ -11449,6 +11716,10 @@ components:
           $ref: '#/components/schemas/TelephonySettings'
           description: The telephony settings associated with the user.
       description: 'Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.'
+    GetVoiceConnectorEmergencyCallingConfigurationRequest:
+      type: object
+      title: GetVoiceConnectorEmergencyCallingConfigurationRequest
+      properties: {}
     GetVoiceConnectorGroupRequest:
       type: object
       title: GetVoiceConnectorGroupRequest
@@ -11986,6 +12257,15 @@ components:
         RetentionSettings:
           $ref: '#/components/schemas/RetentionSettings'
           description: The retention settings.
+    PutVoiceConnectorEmergencyCallingConfigurationRequest:
+      type: object
+      required:
+        - EmergencyCallingConfiguration
+      title: PutVoiceConnectorEmergencyCallingConfigurationRequest
+      properties:
+        EmergencyCallingConfiguration:
+          $ref: '#/components/schemas/EmergencyCallingConfiguration'
+          description: The emergency calling configuration details.
     PutVoiceConnectorLoggingConfigurationRequest:
       type: object
       required:

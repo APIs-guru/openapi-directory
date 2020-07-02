@@ -13176,6 +13176,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/BackupPolicyNotFoundFault'
+        '497':
+          description: KMSKeyNotAccessibleFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '498':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
       parameters:
         - name: DBInstanceIdentifier
           in: query
@@ -13578,6 +13590,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/BackupPolicyNotFoundFault'
+        '497':
+          description: KMSKeyNotAccessibleFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '498':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
       requestBody:
         content:
           text/xml:

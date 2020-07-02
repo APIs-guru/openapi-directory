@@ -3687,7 +3687,7 @@ paths:
                     - ENABLED
                     - DISABLED
                 DisabledReason:
-                  description: A description of the reason why you are disabling a security standard control.
+                  description: 'A description of the reason why you are disabling a security standard control. If you are disabling a control, then this is required.'
                   type: string
                   pattern: .*\S.*
     parameters:
@@ -3879,6 +3879,9 @@ components:
         Network:
           $ref: '#/components/schemas/Network'
           description: The details of network-related information about a finding.
+        NetworkPath:
+          $ref: '#/components/schemas/NetworkPathList'
+          description: Provides information about a network path that is relevant to a finding. Each entry under <code>NetworkPath</code> represents a component of that path.
         Process:
           $ref: '#/components/schemas/ProcessDetails'
           description: The details of process-related information about a finding.
@@ -3909,6 +3912,9 @@ components:
         Note:
           $ref: '#/components/schemas/Note'
           description: A user-defined note added to a finding.
+        Vulnerabilities:
+          $ref: '#/components/schemas/VulnerabilityList'
+          description: Provides a list of vulnerabilities associated with the findings.
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
@@ -4329,6 +4335,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AvailabilityZone'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    Integer:
+      type: integer
+    AwsAutoScalingAutoScalingGroupDetails:
+      type: object
+      properties:
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the launch configuration.
+        LoadBalancerNames:
+          $ref: '#/components/schemas/StringList'
+          description: The list of load balancers associated with the group.
+        HealthCheckType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The service to use for the health checks.
+        HealthCheckGracePeriod:
+          $ref: '#/components/schemas/Integer'
+          description: 'The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service.'
+        CreatedTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The datetime when the auto scaling group was created.
+      description: Provides details about an auto scaling group.
     AwsCloudFrontDistributionLogging:
       type: object
       properties:
@@ -4473,13 +4504,7 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: '<p>The service that created the credentials to access a private Docker registry.</p> <p>The valid value,<code> SECRETS_MANAGER</code>, is for AWS Secrets Manager.</p>'
       description: The credentials for access to a private registry.
-    Integer:
-      type: integer
     NonEmptyStringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/NonEmptyString'
-    StringList:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
@@ -4679,6 +4704,75 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: 'The ID of the VPC peering connection, if applicable.'
       description: A relationship between a security group and a user.
+    AwsEc2VolumeAttachment:
+      type: object
+      properties:
+        AttachTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The datetime when the attachment initiated.
+        DeleteOnTermination:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the EBS volume is deleted when the EC2 instance is terminated.
+        InstanceId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the EC2 instance.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The attachment state of the volume.
+      description: An attachment to an AWS EC2 volume.
+    AwsEc2VolumeAttachmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2VolumeAttachment'
+    AwsEc2VolumeDetails:
+      type: object
+      properties:
+        CreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The datetime when the volume was created.
+        Encrypted:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the volume is encrypted.
+        Size:
+          $ref: '#/components/schemas/Integer'
+          description: 'The size of the volume, in GiBs.'
+        SnapshotId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The snapshot from which the volume was created.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The volume state.
+        KmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
+        Attachments:
+          $ref: '#/components/schemas/AwsEc2VolumeAttachmentList'
+          description: The volume attachments.
+      description: Details about an EC2 volume.
+    CidrBlockAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CidrBlockAssociation'
+    Ipv6CidrBlockAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ipv6CidrBlockAssociation'
+    AwsEc2VpcDetails:
+      type: object
+      properties:
+        CidrBlockAssociationSet:
+          $ref: '#/components/schemas/CidrBlockAssociationList'
+          description: Information about the IPv4 CIDR blocks associated with the VPC.
+        Ipv6CidrBlockAssociationSet:
+          $ref: '#/components/schemas/Ipv6CidrBlockAssociationList'
+          description: Information about the IPv6 CIDR blocks associated with the VPC.
+        DhcpOptionsId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options that are associated with the VPC. If the default options are associated with the VPC, then this is default.'
+        State:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current state of the VPC.
+      description: Details about an EC2 VPC.
     AwsElasticsearchDomainDomainEndpointOptions:
       type: object
       properties:
@@ -5246,6 +5340,9 @@ components:
         Protocol:
           $ref: '#/components/schemas/NonEmptyString'
           description: The protocol of network-related information about a finding.
+        OpenPortRange:
+          $ref: '#/components/schemas/PortRange'
+          description: The range of open ports that is present on the network.
         SourceIpV4:
           $ref: '#/components/schemas/NonEmptyString'
           description: The source IPv4 address of network-related information about a finding.
@@ -5274,6 +5371,10 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The destination domain of network-related information about a finding.
       description: The details of network-related information about a finding.
+    NetworkPathList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkPathComponent'
     ProcessDetails:
       type: object
       properties:
@@ -5367,6 +5468,10 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The timestamp of when the note was updated.
       description: A user-defined note added to a finding.
+    VulnerabilityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Vulnerability'
     AwsSecurityFindingFilters:
       type: object
       properties:
@@ -5877,6 +5982,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    CidrBlockAssociation:
+      type: object
+      properties:
+        AssociationId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The association ID for the IPv4 CIDR block.
+        CidrBlock:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The IPv4 CIDR block.
+        CidrBlockState:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Information about the state of the IPv4 CIDR block.
+      description: An IPv4 CIDR block association.
     ComplianceStatus:
       type: string
       enum:
@@ -5958,6 +6076,23 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Result'
+    Cvss:
+      type: object
+      properties:
+        Version:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version of CVSS for the CVSS score.
+        BaseScore:
+          $ref: '#/components/schemas/Double'
+          description: The base CVSS score.
+        BaseVector:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The base scoring vector for the CVSS score.
+      description: CVSS scores from the advisory related to the vulnerability.
+    CvssList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cvss'
     DateRange:
       type: object
       properties:
@@ -6302,6 +6437,19 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: A finding's CIDR value.
       description: The IP filter for querying findings.
+    Ipv6CidrBlockAssociation:
+      type: object
+      properties:
+        AssociationId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The association ID for the IPv6 CIDR block.
+        Ipv6CidrBlock:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The IPv6 CIDR block.
+        CidrBlockState:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Information about the state of the CIDR block.
+      description: An IPV6 CIDR block association.
     KeywordFilter:
       type: object
       properties:
@@ -6418,6 +6566,59 @@ components:
       enum:
         - IN
         - OUT
+    PortRange:
+      type: object
+      properties:
+        Begin:
+          $ref: '#/components/schemas/Integer'
+          description: The first port in the port range.
+        End:
+          $ref: '#/components/schemas/Integer'
+          description: The last port in the port range.
+      description: A range of ports.
+    NetworkPathComponentDetails:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/StringList'
+          description: The IP addresses of the destination.
+        PortRanges:
+          $ref: '#/components/schemas/PortRangeList'
+          description: A list of port ranges for the destination.
+      description: Information about the destination of the next component in the network path.
+    NetworkHeader:
+      type: object
+      properties:
+        Protocol:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The protocol used for the component.
+        Destination:
+          $ref: '#/components/schemas/NetworkPathComponentDetails'
+          description: Information about the destination of the component.
+        Source:
+          $ref: '#/components/schemas/NetworkPathComponentDetails'
+          description: Information about the origin of the component.
+      description: Details about a network path component that occurs before or after the current component.
+    NetworkPathComponent:
+      type: object
+      properties:
+        ComponentId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of a component in the network path.
+        ComponentType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The type of component.
+        Egress:
+          $ref: '#/components/schemas/NetworkHeader'
+          description: Information about the component that comes after the current component in the network path.
+        Ingress:
+          $ref: '#/components/schemas/NetworkHeader'
+          description: Information about the component that comes before the current node in the network path.
+      description: Information about a network path component.
+    PortRangeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortRange'
     NumberFilter:
       type: object
       properties:
@@ -6483,6 +6684,9 @@ components:
     ResourceDetails:
       type: object
       properties:
+        AwsAutoScalingAutoScalingGroup:
+          $ref: '#/components/schemas/AwsAutoScalingAutoScalingGroupDetails'
+          description: Details for an autoscaling group.
         AwsCodeBuildProject:
           $ref: '#/components/schemas/AwsCodeBuildProjectDetails'
           description: Details for an AWS CodeBuild project.
@@ -6498,6 +6702,12 @@ components:
         AwsEc2SecurityGroup:
           $ref: '#/components/schemas/AwsEc2SecurityGroupDetails'
           description: Details for an EC2 security group.
+        AwsEc2Volume:
+          $ref: '#/components/schemas/AwsEc2VolumeDetails'
+          description: Details for an EC2 volume.
+        AwsEc2Vpc:
+          $ref: '#/components/schemas/AwsEc2VpcDetails'
+          description: Details for an EC2 VPC.
         AwsElbv2LoadBalancer:
           $ref: '#/components/schemas/AwsElbv2LoadBalancerDetails'
           description: Details about a load balancer.
@@ -6586,6 +6796,29 @@ components:
         - MEDIUM
         - HIGH
         - CRITICAL
+    SoftwarePackage:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the software package.
+        Version:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version of the software package.
+        Epoch:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The epoch of the software package.
+        Release:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The release of the software package.
+        Architecture:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The architecture used for the software package.
+      description: Information about a software package.
+    SoftwarePackageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SoftwarePackage'
     SortOrder:
       type: string
       enum:
@@ -6812,7 +7045,52 @@ components:
           description: The updated status of the security standard control.
         DisabledReason:
           $ref: '#/components/schemas/NonEmptyString'
-          description: A description of the reason why you are disabling a security standard control.
+          description: 'A description of the reason why you are disabling a security standard control. If you are disabling a control, then this is required.'
+    VulnerabilityVendor:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the vendor.
+        Url:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The URL of the vulnerability advisory.
+        VendorSeverity:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The severity that the vendor assigned to the vulnerability.
+        VendorCreatedAt:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The datetime when the vulnerability advisory was created.
+        VendorUpdatedAt:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The datetime when the vulnerability advisory was last updated.
+      description: A vendor that generates a vulnerability report.
+    Vulnerability:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the vulnerability.
+        VulnerablePackages:
+          $ref: '#/components/schemas/SoftwarePackageList'
+          description: List of software packages that have the vulnerability.
+        Cvss:
+          $ref: '#/components/schemas/CvssList'
+          description: CVSS scores from the advisory related to the vulnerability.
+        RelatedVulnerabilities:
+          $ref: '#/components/schemas/StringList'
+          description: List of vulnerabilities that are related to this vulnerability.
+        Vendor:
+          $ref: '#/components/schemas/VulnerabilityVendor'
+          description: Information about the vendor that generates the vulnerability report.
+        ReferenceUrls:
+          $ref: '#/components/schemas/StringList'
+          description: A list of URLs that provide additional information about the vulnerability.
+      description: A vulnerability associated with a finding.
     WafExcludedRule:
       type: object
       properties:
