@@ -3327,7 +3327,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/properties/history#startDate&endDate':
+  /properties/history:
     get:
       operationId: GetAssetPropertyValueHistory
       description: '<p>Gets the history of an asset property''s values. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values">Querying Historical Property Values</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
@@ -3398,14 +3398,14 @@ paths:
             maxLength: 2048
         - name: startDate
           in: query
-          required: true
+          required: false
           description: 'The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.'
           schema:
             type: string
             format: date-time
         - name: endDate
           in: query
-          required: true
+          required: false
           description: 'The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.'
           schema:
             type: string
