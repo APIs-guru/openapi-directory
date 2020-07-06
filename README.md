@@ -43,7 +43,7 @@ What does APIs.guru do?
 API definition acceptance criteria
 ----------------------------------
 * Public - anyone can access it as long as they follow some clearly defined steps (subscribe, pay fees, etc.).
-* Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
+* Persistent - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
 * Useful - API should provide useful functionality not only for its owner.
 
 Update procedure
