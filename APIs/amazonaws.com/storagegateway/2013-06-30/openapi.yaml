@@ -2794,7 +2794,7 @@ paths:
   '/#X-Amz-Target=StorageGateway_20130630.RefreshCache':
     post:
       operationId: RefreshCache
-      description: '<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+      description: '<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket''s contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn''t necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4098,7 +4098,7 @@ components:
           description: The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage.
         LocationARN:
           $ref: '#/components/schemas/LocationARN'
-          description: The ARN of the backed storage used for storing file data.
+          description: The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
         DefaultStorageClass:
           $ref: '#/components/schemas/StorageClass'
           description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
@@ -4123,6 +4123,12 @@ components:
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that can be assigned to the NFS file share. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256.</p> </note>'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: CreateNFSFileShareInput
     CreateSMBFileShareOutput:
       type: object
@@ -4157,7 +4163,7 @@ components:
           description: The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage.
         LocationARN:
           $ref: '#/components/schemas/LocationARN'
-          description: The ARN of the backed storage used for storing file data.
+          description: The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
         DefaultStorageClass:
           $ref: '#/components/schemas/StorageClass'
           description: '<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p> <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> | <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code> </p>'
@@ -4178,22 +4184,31 @@ components:
           description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         AdminUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: '<p>A list of users in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user.</p> <important> <p>Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions.</p> </important>'
+          description: '<p>A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>.</p> <important> <p>Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions.</p> </important>'
         ValidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
+          description: 'A list of users or groups in the Active Directory that are allowed to access the file <a href=""/> share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
+          description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           $ref: '#/components/schemas/AuditDestinationARN'
           description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
         Authentication:
           $ref: '#/components/schemas/Authentication'
           description: '<p>The authentication method that users use to access the file share. The default is <code>ActiveDirectory</code>.</p> <p>Valid Values: <code>ActiveDirectory</code> | <code>GuestAccess</code> </p>'
+        CaseSensitivity:
+          $ref: '#/components/schemas/CaseSensitivity'
+          description: 'The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default value is <code>ClientSpecified</code>.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: '<p>A list of up to 50 tags that can be assigned to the NFS file share. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag''s key is 128 characters, and the maximum length for a tag''s value is 256.</p> </note>'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: CreateSMBFileShareInput
     CreateSnapshotOutput:
       type: object
@@ -5896,6 +5911,12 @@ components:
         RequesterPays:
           $ref: '#/components/schemas/Boolean'
           description: '<p>A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket. If this value is set to <code>true</code>, the requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket owner always pays the cost of storing data.</p> <note> <p> <code>RequesterPays</code> is a configuration for the S3 bucket that backs the file share, so make sure that the configuration on the file share is the same as the S3 bucket configuration.</p> </note> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: UpdateNFSFileShareInput
     UpdateSMBFileShareOutput:
       type: object
@@ -5939,16 +5960,25 @@ components:
           description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
         AdminUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: 'A list of users in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
+          description: 'A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         ValidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
+          description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+          description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           $ref: '#/components/schemas/AuditDestinationARN'
           description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
+        CaseSensitivity:
+          $ref: '#/components/schemas/CaseSensitivity'
+          description: 'The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default value is <code>ClientSpecified</code>.'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: UpdateSMBFileShareInput
     UpdateSMBSecurityStrategyOutput:
       type: object
@@ -6185,6 +6215,15 @@ components:
       minimum: 51200
     Boolean:
       type: boolean
+    CacheStaleTimeoutInSeconds:
+      type: integer
+    CacheAttributes:
+      type: object
+      properties:
+        CacheStaleTimeoutInSeconds:
+          $ref: '#/components/schemas/CacheStaleTimeoutInSeconds'
+          description: '<p>Refreshes a file share''s cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory''s contents from the Amazon S3 bucket. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>'
+      description: Lists refresh cache information.
     VolumeId:
       type: string
       minLength: 12
@@ -6235,6 +6274,7 @@ components:
       type: integer
     KMSKey:
       type: string
+      pattern: '(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\S+)$)|(^alias/(\S+)$)'
       description: The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.
       minLength: 7
       maxLength: 2048
@@ -6284,6 +6324,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CachediSCSIVolume'
+    CaseSensitivity:
+      type: string
+      enum:
+        - ClientSpecified
+        - CaseSensitive
     ChapInfo:
       type: object
       properties:
@@ -6339,14 +6384,15 @@ components:
       description: 'Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don''t, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.'
     Role:
       type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov):iam::([0-9]+):role/(\S+)$'
       description: The ARN of the IAM role that file gateway assumes when it accesses the underlying storage.
       minLength: 20
       maxLength: 2048
     LocationARN:
       type: string
-      description: The ARN of the backend storage used for storing file data.
+      description: The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
       minLength: 16
-      maxLength: 310
+      maxLength: 1400
     StorageClass:
       type: string
       description: <p/>
@@ -6375,6 +6421,10 @@ components:
       description: '<p>The user mapped to anonymous user. Valid options are the following:</p> <ul> <li> <p> <code>RootSquash</code>: Only root is mapped to anonymous user.</p> </li> <li> <p> <code>NoSquash</code>: No one is mapped to anonymous user.</p> </li> <li> <p> <code>AllSquash</code>: Everyone is mapped to anonymous user.</p> </li> </ul>'
       minLength: 5
       maxLength: 15
+    FileShareName:
+      type: string
+      minLength: 1
+      maxLength: 255
     FileShareARN:
       type: string
       description: The Amazon Resource Name (ARN) of the file share.
@@ -6713,6 +6763,8 @@ components:
     Host:
       type: string
       pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])(:(\d+))?$'
+      minLength: 6
+      maxLength: 1024
     Hosts:
       type: array
       items:
@@ -6809,6 +6861,12 @@ components:
         Tags:
           $ref: '#/components/schemas/Tags'
           description: 'A list of up to 50 tags assigned to the NFS file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API operation.'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
     NotificationId:
       type: string
@@ -6861,21 +6919,30 @@ components:
           description: '<p>If this value is set to <code>true</code>, it indicates that access control list (ACL) is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
         AdminUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+          description: 'A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         ValidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
+          description: 'A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         InvalidUserList:
           $ref: '#/components/schemas/FileShareUserList'
-          description: A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example <code>@group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.
+          description: 'A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.'
         AuditDestinationARN:
           $ref: '#/components/schemas/AuditDestinationARN'
           description: The Amazon Resource Name (ARN) of the storage used for the audit logs.
         Authentication:
           $ref: '#/components/schemas/Authentication'
+        CaseSensitivity:
+          $ref: '#/components/schemas/CaseSensitivity'
+          description: 'The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default value is <code>ClientSpecified</code>.'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: 'A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API operation.'
+        FileShareName:
+          $ref: '#/components/schemas/FileShareName'
+          description: <p>The name of the file share. Optional.</p> <note> <p> <code>FileShareName</code> must be set if an S3 prefix name is set in <code>LocationARN</code>.</p> </note>
+        CacheAttributes:
+          $ref: '#/components/schemas/CacheAttributes'
+          description: Refresh cache information.
       description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
     SMBGuestPassword:
       type: string

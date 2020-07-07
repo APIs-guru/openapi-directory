@@ -13075,7 +13075,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Availability Zone or Local Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Availability Zone or Local Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>'
+          description: '<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -13083,7 +13083,7 @@ paths:
         - name: ZoneName
           in: query
           required: false
-          description: The names of the Availability Zones and Local Zones.
+          description: The names of the Zones.
           schema:
             type: array
             items:
@@ -13091,7 +13091,7 @@ paths:
         - name: ZoneId
           in: query
           required: false
-          description: The IDs of the Availability Zones and Local Zones.
+          description: The IDs of the Zones.
           schema:
             type: array
             items:
@@ -28754,7 +28754,7 @@ paths:
     get:
       x-aws-operation-name: ModifyAvailabilityZoneGroup
       operationId: GET_ModifyAvailabilityZoneGroup
-      description: '<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2ApiDocReef/build/server-root/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html">describe-availability-zones</a> to view the value for <code>GroupName</code>.</p>'
+      description: '<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html"> DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>'
       responses:
         '200':
           description: Success
@@ -28806,7 +28806,7 @@ paths:
     post:
       x-aws-operation-name: ModifyAvailabilityZoneGroup
       operationId: POST_ModifyAvailabilityZoneGroup
-      description: '<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2ApiDocReef/build/server-root/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html">describe-availability-zones</a> to view the value for <code>GroupName</code>.</p>'
+      description: '<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html"> DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>'
       responses:
         '200':
           description: Success
@@ -40140,7 +40140,7 @@ components:
       properties:
         AvailabilityZones:
           $ref: '#/components/schemas/AvailabilityZoneList'
-          description: Information about the Availability Zones and Local Zones.
+          description: Information about the Zones.
     DescribeBundleTasksResult:
       type: object
       properties:
@@ -44509,29 +44509,38 @@ components:
       properties:
         State:
           $ref: '#/components/schemas/AvailabilityZoneState'
-          description: The state of the Availability Zone or Local Zone.
+          description: The state of the Zone.
         OptInStatus:
           $ref: '#/components/schemas/AvailabilityZoneOptInStatus'
           description: '<p> For Availability Zones, this parameter always has the value of <code>opt-in-not-required</code>.</p> <p>For Local Zones, this parameter is the opt in status. The possible values are <code>opted-in</code>, and <code>not-opted-in</code>.</p>'
         Messages:
           $ref: '#/components/schemas/AvailabilityZoneMessageList'
-          description: Any messages about the Availability Zone or Local Zone.
+          description: Any messages about the Zone.
         RegionName:
           $ref: '#/components/schemas/String'
           description: The name of the Region.
         ZoneName:
           $ref: '#/components/schemas/String'
-          description: The name of the Availability Zone or Local Zone.
+          description: The name of the Zone.
         ZoneId:
           $ref: '#/components/schemas/String'
-          description: The ID of the Availability Zone or Local Zone.
+          description: The ID of the Zone.
         GroupName:
           $ref: '#/components/schemas/String'
           description: '<p> For Availability Zones, this parameter has the same value as the Region name.</p> <p>For Local Zones, the name of the associated group, for example <code>us-west-2-lax-1</code>.</p>'
         NetworkBorderGroup:
           $ref: '#/components/schemas/String'
           description: The name of the location from which the address is advertised.
-      description: Describes an Availability Zone or Local Zone.
+        ZoneType:
+          $ref: '#/components/schemas/String'
+          description: The type of zone. The valid values are <code>availability-zone</code> and <code>local-zone</code>.
+        ParentZoneName:
+          $ref: '#/components/schemas/String'
+          description: 'The name of the zone that handles some of the Local Zone control plane operations, such as API calls.'
+        ParentZoneId:
+          $ref: '#/components/schemas/String'
+          description: 'The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.'
+      description: Describes a Zone.
     AvailabilityZoneList:
       type: array
       items:
@@ -44541,8 +44550,8 @@ components:
       properties:
         Message:
           $ref: '#/components/schemas/String'
-          description: The message about the Availability Zone or Local Zone.
-      description: Describes a message about an Availability Zone or Local Zone.
+          description: The message about the Zone.
+      description: Describes a message about a Zone.
     AvailabilityZoneStringList:
       type: array
       items:
@@ -49514,13 +49523,13 @@ components:
       properties:
         Filters:
           $ref: '#/components/schemas/FilterList'
-          description: '<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Availability Zone or Local Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Availability Zone or Local Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>'
+          description: '<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>'
         ZoneNames:
           $ref: '#/components/schemas/ZoneNameStringList'
-          description: The names of the Availability Zones and Local Zones.
+          description: The names of the Zones.
         ZoneIds:
           $ref: '#/components/schemas/ZoneIdStringList'
-          description: The IDs of the Availability Zones and Local Zones.
+          description: The IDs of the Zones.
         AllAvailabilityZones:
           $ref: '#/components/schemas/Boolean'
           description: '<p>Include all Availability Zones and Local Zones regardless of your opt in status.</p> <p>If you do not use this parameter, the results include only the zones for the Regions where you have chosen the option to opt in.</p>'

@@ -130,18 +130,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessPointAlreadyExists'
         '482':
+          description: IncorrectFileSystemLifeCycleState
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectFileSystemLifeCycleState'
+        '483':
           description: InternalServerError
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
-        '483':
+        '484':
           description: FileSystemNotFound
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/FileSystemNotFound'
-        '484':
+        '485':
           description: AccessPointLimitExceeded
           content:
             application/json:
@@ -171,6 +177,8 @@ paths:
                 FileSystemId:
                   description: The ID of the EFS file system that the access point provides access to.
                   type: string
+                  pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+                  maxLength: 128
                 PosixUser:
                   description: 'The full POSIX identity, including the user ID, group ID, and any secondary group IDs, on the access point that is used for all file system operations performed by NFS clients using the access point.'
                   type: object
@@ -262,6 +270,8 @@ paths:
           description: '(Optional) If you provide a <code>FileSystemId</code>, EFS returns all access points for that file system; mutually exclusive with <code>AccessPointId</code>.'
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
   /2015-02-01/file-systems:
     post:
       operationId: CreateFileSystem
@@ -322,6 +332,7 @@ paths:
                 CreationToken:
                   description: A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
                   type: string
+                  pattern: .+
                   minLength: 1
                   maxLength: 64
                 PerformanceMode:
@@ -336,7 +347,7 @@ paths:
                 KmsKeyId:
                   description: '<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This parameter is only required if you want to use a nondefault CMK. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:</p> <ul> <li> <p>Key ID - A unique identifier of the key, for example <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>ARN - An Amazon Resource Name (ARN) for the key, for example <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p> </li> <li> <p>Key alias - A previously created display name for a key, for example <code>alias/projectKey1</code>.</p> </li> <li> <p>Key alias ARN - An ARN for a key alias, for example <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p> </li> </ul> <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p> <important> <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p> </important>'
                   type: string
-                  minLength: 1
+                  pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$'
                   maxLength: 2048
                 ThroughputMode:
                   description: 'The throughput mode for the file system to be created. There are two throughput modes to choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system''s throughput in Provisioned Throughput mode or change between the throughput modes as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more, see <a href="https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput">Specifying Throughput with Provisioned Mode</a> in the <i>Amazon EFS User Guide.</i> '
@@ -404,12 +415,16 @@ paths:
           description: '(Optional) Opaque pagination token returned from a previous <code>DescribeFileSystems</code> operation (String). If present, specifies to continue the list from where the returning call had left off. '
           schema:
             type: string
+            pattern: .+
+            minLength: 1
+            maxLength: 128
         - name: CreationToken
           in: query
           required: false
           description: (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
           schema:
             type: string
+            pattern: .+
             minLength: 1
             maxLength: 64
         - name: FileSystemId
@@ -418,6 +433,8 @@ paths:
           description: (Optional) ID of the file system whose description you want to retrieve (String).
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
   /2015-02-01/mount-targets:
     post:
       operationId: CreateMountTarget
@@ -515,12 +532,20 @@ paths:
                 FileSystemId:
                   description: The ID of the file system for which to create the mount target.
                   type: string
+                  pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+                  maxLength: 128
                 SubnetId:
                   description: The ID of the subnet to add the mount target in.
                   type: string
+                  pattern: '^subnet-[0-9a-f]{8,40}$'
+                  minLength: 15
+                  maxLength: 47
                 IpAddress:
                   description: Valid IPv4 address within the address range of the specified subnet.
                   type: string
+                  pattern: '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$'
+                  minLength: 7
+                  maxLength: 15
                 SecurityGroups:
                   description: 'Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.'
                   type: array
@@ -589,18 +614,26 @@ paths:
           description: '(Optional) Opaque pagination token returned from a previous <code>DescribeMountTargets</code> operation (String). If present, it specifies to continue the list from where the previous returning call left off.'
           schema:
             type: string
+            pattern: .+
+            minLength: 1
+            maxLength: 128
         - name: FileSystemId
           in: query
           required: false
           description: (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if an <code>AccessPointId</code> or <code>MountTargetId</code> is not included. Accepts either a file system ID or ARN as input.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
         - name: MountTargetId
           in: query
           required: false
           description: (Optional) ID of the mount target that you want to have described (String). It must be included in your request if <code>FileSystemId</code> is not included. Accepts either a mount target ID or ARN as input.
           schema:
             type: string
+            pattern: '^fsmt-[0-9a-f]{8,40}$'
+            minLength: 13
+            maxLength: 45
         - name: AccessPointId
           in: query
           required: false
@@ -640,6 +673,8 @@ paths:
           description: 'The ID of the file system whose tags you want to modify (String). This operation modifies the tags only, not the file system.'
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -740,6 +775,8 @@ paths:
           description: The ID of the file system you want to delete.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -807,6 +844,8 @@ paths:
           description: The ID of the file system that you want to update.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -857,6 +896,8 @@ paths:
           description: Specifies the EFS file system for which to delete the <code>FileSystemPolicy</code>.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -900,6 +941,8 @@ paths:
           description: Specifies which EFS file system to retrieve the <code>FileSystemPolicy</code> for.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
     put:
       operationId: PutFileSystemPolicy
       description: '<p>Applies an Amazon EFS <code>FileSystemPolicy</code> to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see <a href="https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy">Default EFS File System Policy</a>. </p> <p>This operation requires permissions for the <code>elasticfilesystem:PutFileSystemPolicy</code> action.</p>'
@@ -941,6 +984,8 @@ paths:
           description: The ID of the EFS file system that you want to create or update the <code>FileSystemPolicy</code> for.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -994,6 +1039,9 @@ paths:
           description: The ID of the mount target to delete (String).
           schema:
             type: string
+            pattern: '^fsmt-[0-9a-f]{8,40}$'
+            minLength: 13
+            maxLength: 45
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1035,6 +1083,8 @@ paths:
           description: The ID of the file system whose tags you want to delete (String).
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -1059,6 +1109,129 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-02-01/file-systems/{FileSystemId}/backup-policy':
+    get:
+      operationId: DescribeBackupPolicy
+      description: Returns the backup policy for the specified EFS file system.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPolicyDescription'
+        '480':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '481':
+          description: FileSystemNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemNotFound'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: PolicyNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyNotFound'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: Specifies which EFS file system to retrieve the <code>BackupPolicy</code> for.
+          schema:
+            type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutBackupPolicy
+      description: 'Updates the file system''s backup policy. Use this action to start or stop automatic backups of the file system. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPolicyDescription'
+        '480':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '481':
+          description: FileSystemNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemNotFound'
+        '482':
+          description: IncorrectFileSystemLifeCycleState
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectFileSystemLifeCycleState'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: FileSystemId
+          in: path
+          required: true
+          description: Specifies which EFS file system to update the backup policy for.
+          schema:
+            type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - BackupPolicy
+              properties:
+                BackupPolicy:
+                  description: 'The backup policy for the file system, showing the curent status. If <code>ENABLED</code>, the file system is being backed up.'
+                  type: object
+                  properties:
+                    Status:
+                      $ref: '#/components/schemas/Status'
+                      description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <i> <code>ENABLED</code> - EFS is automatically backing up the file system.</i> </p> </li> <li> <p> <i> <code>ENABLING</code> - EFS is turning on automatic backups for the file system.</i> </p> </li> <li> <p> <i> <code>DISABLED</code> - automatic back ups are turned off for the file system.</i> </p> </li> <li> <p> <i> <code>DISABLED</code> - EFS is turning off automatic backups for the file system.</i> </p> </li> </ul>
   '/2015-02-01/file-systems/{FileSystemId}/lifecycle-configuration':
     get:
       operationId: DescribeLifecycleConfiguration
@@ -1095,6 +1268,8 @@ paths:
           description: The ID of the file system whose <code>LifecycleConfiguration</code> object you want to retrieve (String).
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1144,6 +1319,8 @@ paths:
           description: The ID of the file system for which you are creating the <code>LifecycleConfiguration</code> object (String).
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -1200,6 +1377,9 @@ paths:
           description: The ID of the mount target whose security groups you want to retrieve.
           schema:
             type: string
+            pattern: '^fsmt-[0-9a-f]{8,40}$'
+            minLength: 13
+            maxLength: 45
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1257,6 +1437,9 @@ paths:
           description: The ID of the mount target whose security groups you want to modify.
           schema:
             type: string
+            pattern: '^fsmt-[0-9a-f]{8,40}$'
+            minLength: 13
+            maxLength: 45
       requestBody:
         required: true
         content:
@@ -1314,12 +1497,17 @@ paths:
           description: '(Optional) An opaque pagination token returned from a previous <code>DescribeTags</code> operation (String). If present, it specifies to continue the list from where the previous call left off.'
           schema:
             type: string
+            pattern: .+
+            minLength: 1
+            maxLength: 128
         - name: FileSystemId
           in: path
           required: true
           description: The ID of the file system whose tag set you want to retrieve.
           schema:
             type: string
+            pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1634,6 +1822,7 @@ components:
       description: '<p>Required if the <code>RootDirectory</code> &gt; <code>Path</code> specified does not exist. Specifies the POSIX IDs and permissions to apply to the access point''s <code>RootDirectory</code> &gt; <code>Path</code>. If the access point root directory does not exist, EFS creates it with these settings when a client connects to the access point. When specifying <code>CreationInfo</code>, you must include values for all properties. </p> <important> <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> does not exist, attempts to mount the file system using the access point will fail.</p> </important>'
     BadRequest: {}
     AccessPointAlreadyExists: {}
+    IncorrectFileSystemLifeCycleState: {}
     InternalServerError: {}
     FileSystemNotFound: {}
     AccessPointLimitExceeded: {}
@@ -1672,6 +1861,9 @@ components:
         FileSystemId:
           $ref: '#/components/schemas/FileSystemId'
           description: 'The ID of the file system, assigned by Amazon EFS.'
+        FileSystemArn:
+          $ref: '#/components/schemas/FileSystemArn'
+          description: 'The Amazon Resource Name (ARN) for the EFS file system, in the format <code>arn:aws:elasticfilesystem:<i>region</i>:<i>account-id</i>:file-system/<i>file-system-id</i> </code>. Example with sample data: <code>arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567</code> '
         CreationTime:
           $ref: '#/components/schemas/Timestamp'
           description: 'The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).'
@@ -1753,10 +1945,15 @@ components:
         AvailabilityZoneName:
           $ref: '#/components/schemas/AvailabilityZoneName'
           description: 'The name of the Availability Zone (AZ) that the mount target resides in. AZs are independently mapped to names for each AWS account. For example, the Availability Zone <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.'
+        VpcId:
+          $ref: '#/components/schemas/VpcId'
+          description: The Virtual Private Cloud (VPC) ID that the mount target is configured in.
       description: Provides a description of a mount target.
     SecurityGroup:
       type: string
-    IncorrectFileSystemLifeCycleState: {}
+      pattern: '^sg-[0-9a-f]{8,40}'
+      minLength: 11
+      maxLength: 43
     MountTargetConflict: {}
     SubnetNotFound: {}
     NoFreeAddressesInSubnet: {}
@@ -1771,6 +1968,7 @@ components:
     MountTargetNotFound: {}
     TagKey:
       type: string
+      pattern: '^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$'
       minLength: 1
       maxLength: 128
     DescribeAccessPointsResponse:
@@ -1782,6 +1980,14 @@ components:
         NextToken:
           $ref: '#/components/schemas/Token'
           description: Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
+    BackupPolicyDescription:
+      type: object
+      properties:
+        BackupPolicy:
+          $ref: '#/components/schemas/BackupPolicy'
+          description: 'Describes the file system''s backup policy, indicating whether automatic backups are turned on or off..'
+    PolicyNotFound: {}
+    ValidationException: {}
     FileSystemPolicyDescription:
       type: object
       properties:
@@ -1791,7 +1997,6 @@ components:
         Policy:
           $ref: '#/components/schemas/Policy'
           description: The JSON formatted <code>FileSystemPolicy</code> for the EFS file system.
-    PolicyNotFound: {}
     DescribeFileSystemsResponse:
       type: object
       example:
@@ -1834,7 +2039,7 @@ components:
         - SecurityGroups
       example:
         SecurityGroups:
-          - sg-fghi4567
+          - sg-4567abcd
       properties:
         SecurityGroups:
           $ref: '#/components/schemas/SecurityGroups'
@@ -1890,6 +2095,13 @@ components:
         NextToken:
           $ref: '#/components/schemas/Token'
           description: ' <code>NextToken</code> is present if the response payload is paginated. You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions.'
+    Status:
+      type: string
+      enum:
+        - ENABLED
+        - ENABLING
+        - DISABLED
+        - DISABLING
     InvalidPolicyException: {}
     LifecyclePolicy:
       type: object
@@ -1915,6 +2127,8 @@ components:
       type: string
     FileSystemId:
       type: string
+      pattern: '^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:file-system/fs-[0-9a-f]{8,40}|fs-[0-9a-f]{8,40})$'
+      maxLength: 128
     PosixUser:
       type: object
       required:
@@ -1943,6 +2157,8 @@ components:
       description: Specifies the directory on the Amazon EFS file system that the access point provides access to. The access point exposes the specified file system path as the root directory of your file system to applications using the access point. NFS clients using the access point can only access data in the access point's <code>RootDirectory</code> and it's subdirectories.
     AwsAccountId:
       type: string
+      pattern: '^(\d{12})|(\d{4}-\d{4}-\d{4})$'
+      maxLength: 14
     LifeCycleState:
       type: string
       enum:
@@ -1959,6 +2175,15 @@ components:
       type: string
     AvailabilityZoneName:
       type: string
+    BackupPolicy:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          $ref: '#/components/schemas/Status'
+          description: <p>Describes the status of the file system's backup policy.</p> <ul> <li> <p> <i> <code>ENABLED</code> - EFS is automatically backing up the file system.</i> </p> </li> <li> <p> <i> <code>ENABLING</code> - EFS is turning on automatic backups for the file system.</i> </p> </li> <li> <p> <i> <code>DISABLED</code> - automatic back ups are turned off for the file system.</i> </p> </li> <li> <p> <i> <code>DISABLED</code> - EFS is turning off automatic backups for the file system.</i> </p> </li> </ul>
+      description: 'The backup policy for the file system, showing the curent status. If <code>ENABLED</code>, the file system is being backed up.'
     BypassPolicyLockoutSafetyCheck:
       type: boolean
     CreateAccessPointRequest:
@@ -1985,6 +2210,7 @@ components:
           description: 'Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the <code>RootDirectory</code> &gt; <code>Path</code> specified does not exist, EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code> is optional.'
     CreationToken:
       type: string
+      pattern: .+
       minLength: 1
       maxLength: 64
     PerformanceMode:
@@ -1996,7 +2222,7 @@ components:
       type: boolean
     KmsKeyId:
       type: string
-      minLength: 1
+      pattern: '^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$'
       maxLength: 2048
     ThroughputMode:
       type: string
@@ -2036,8 +2262,14 @@ components:
           description: 'A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a <code>"Key":"Name","Value":"{value}"</code> key-value pair.'
     SubnetId:
       type: string
+      pattern: '^subnet-[0-9a-f]{8,40}$'
+      minLength: 15
+      maxLength: 47
     IpAddress:
       type: string
+      pattern: '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$'
+      minLength: 7
+      maxLength: 15
     SecurityGroups:
       type: array
       items:
@@ -2099,6 +2331,9 @@ components:
       description: <p/>
     MountTargetId:
       type: string
+      pattern: '^fsmt-[0-9a-f]{8,40}$'
+      minLength: 13
+      maxLength: 45
     DeleteMountTargetRequest:
       type: object
       title: DeleteMountTargetRequest
@@ -2129,6 +2364,10 @@ components:
       type: object
       title: DescribeAccessPointsRequest
       properties: {}
+    DescribeBackupPolicyRequest:
+      type: object
+      title: DescribeBackupPolicyRequest
+      properties: {}
     DescribeFileSystemPolicyRequest:
       type: object
       title: DescribeFileSystemPolicyRequest
@@ -2138,6 +2377,9 @@ components:
       minimum: 1
     Marker:
       type: string
+      pattern: .+
+      minLength: 1
+      maxLength: 128
     DescribeFileSystemsRequest:
       type: object
       title: DescribeFileSystemsRequest
@@ -2170,11 +2412,14 @@ components:
       title: DescribeTagsRequest
       properties: {}
       description: <p/>
+    FileSystemArn:
+      type: string
     Timestamp:
       type: string
       format: date-time
     TagValue:
       type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       maxLength: 256
     MountTargetCount:
       type: integer
@@ -2233,6 +2478,17 @@ components:
       description: <p/>
     NetworkInterfaceId:
       type: string
+    VpcId:
+      type: string
+    PutBackupPolicyRequest:
+      type: object
+      required:
+        - BackupPolicy
+      title: PutBackupPolicyRequest
+      properties:
+        BackupPolicy:
+          $ref: '#/components/schemas/BackupPolicy'
+          description: The backup policy included in the <code>PutBackupPolicy</code> request.
     PutFileSystemPolicyRequest:
       type: object
       required:
