@@ -376,12 +376,16 @@ function validatePreferred(specs) {
           swagger.info["x-preferred"] = value;
           util.saveSwagger(swagger);
         }
-        else console.warn('In validatePreferred (2). Not found',id,version);
+        else {
+          console.warn('In validatePreferred (2). Not found',id,version);
+          process.exit(2);
+        }
       }
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
       //assert(value !== true || !seenTrue,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
       if (value === true && seenTrue) {
         warnings.push(`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+        process.exit(2);
       }
       seenTrue = value || seenTrue;
       if ((version > maxVersion) && (version.indexOf('alpha')<0) && (version.indexOf('beta')<0)) {
