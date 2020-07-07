@@ -62,6 +62,9 @@ buildApiList(specs)
 function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
   var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
+  if (fs.existsSync(deployDir(logoFile)) {
+    return rootUrl(logoFile);
+  }
   if (fs.existsSync(deployDir(logoFile)+'.jpeg')) {
     return rootUrl(logoFile+'.jpeg');
   }
