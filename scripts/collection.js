@@ -384,7 +384,7 @@ function validatePreferred(specs) {
       assert(_.isBoolean(value), `Non boolean value for "x-preferred" in "${id}" "${version}": "${typeof value}"`);
       //assert(value !== true || !seenTrue,`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
       if (value === true && seenTrue) {
-        warnings.push(`Multiple preferred versions in "${id}" "${version}": "${value}"`,validatePreferred);
+        console.warn(`Multiple preferred versions in "${id}" "${version}": "${value}"`,'validatePreferred');
         process.exit(2);
       }
       seenTrue = value || seenTrue;
