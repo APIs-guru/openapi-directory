@@ -118,6 +118,255 @@ servers:
         default: cn-north-1
     description: The AWS App Mesh endpoint for China (Beijing) and China (Ningxia)
 paths:
+  '/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes':
+    put:
+      operationId: CreateGatewayRoute
+      description: |-
+        <p>Creates a gateway route.</p>
+                 <p>A gateway route is attached to a virtual gateway and routes traffic to an existing
+                 virtual service. If a route matches a request, it can distribute traffic to a target virtual service.</p>
+                 <p>For more information about gateway routes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html">Gateway routes</a>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGatewayRouteOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to create the gateway route in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
+                           the account that you specify must share the mesh with your account before you can create 
+                         the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: |-
+            The name of the virtual gateway to associate the gateway route with. If the virtual
+                     gateway is in a shared mesh, then you must be the owner of the virtual gateway
+                     resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - gatewayRouteName
+                - spec
+              properties:
+                clientToken:
+                  description: |-
+                    Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                    request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                  type: string
+                gatewayRouteName:
+                  description: The name to use for the gateway route.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                spec:
+                  description: |-
+                    An object that represents a gateway route specification. Specify one gateway route
+                             type.
+                  type: object
+                  properties:
+                    grpcRoute:
+                      $ref: '#/components/schemas/GrpcGatewayRoute'
+                      description: An object that represents the specification of a gRPC gateway route.
+                    http2Route:
+                      $ref: '#/components/schemas/HttpGatewayRoute'
+                      description: An object that represents the specification of an HTTP/2 gateway route.
+                    httpRoute:
+                      $ref: '#/components/schemas/HttpGatewayRoute'
+                      description: An object that represents the specification of an HTTP gateway route.
+                tags:
+                  description: |-
+                    Optional metadata that you can apply to the gateway route to assist with categorization
+                             and organization. Each tag consists of a key and an optional value, both of which you
+                             define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                                a maximum length of 256 characters.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagRef'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListGatewayRoutes
+      description: |-
+        Returns a list of existing gateway routes that are associated to a virtual
+                 gateway.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGatewayRoutesOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            The maximum number of results returned by <code>ListGatewayRoutes</code> in paginated
+                     output. When you use this parameter, <code>ListGatewayRoutes</code> returns only
+                        <code>limit</code> results in a single page along with a <code>nextToken</code> response
+                     element. You can see the remaining results of the initial request by sending another
+                        <code>ListGatewayRoutes</code> request with the returned <code>nextToken</code> value.
+                     This value can be between 1 and 100. If you don't use this
+                     parameter, <code>ListGatewayRoutes</code> returns up to 100 results and a
+                        <code>nextToken</code> value if applicable.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to list gateway routes in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                        <code>ListGatewayRoutes</code> request where <code>limit</code> was used and the results
+                     exceeded the value of that parameter. Pagination continues from the end of the previous
+                     results that returned the <code>nextToken</code> value.
+          schema:
+            type: string
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway to list gateway routes in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
   /v20190125/meshes:
     put:
       operationId: CreateMesh
@@ -558,6 +807,235 @@ paths:
             type: string
             minLength: 1
             maxLength: 255
+  '/v20190125/meshes/{meshName}/virtualGateways':
+    put:
+      operationId: CreateVirtualGateway
+      description: |-
+        <p>Creates a virtual gateway.</p>
+                 <p>A virtual gateway allows resources outside your mesh to communicate to resources that
+                 are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS
+                 task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which
+                 represents an Envoy running with an application, a virtual gateway represents Envoy deployed by itself.</p>
+                 <p>For more information about virtual gateways, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html">Virtual gateways</a>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVirtualGatewayOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to create the virtual gateway in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
+                           the account that you specify must share the mesh with your account before you can create 
+                         the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spec
+                - virtualGatewayName
+              properties:
+                clientToken:
+                  description: |-
+                    Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                    request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                  type: string
+                spec:
+                  description: An object that represents the specification of a service mesh resource.
+                  type: object
+                  properties:
+                    backendDefaults:
+                      $ref: '#/components/schemas/VirtualGatewayBackendDefaults'
+                      description: A reference to an object that represents the defaults for backends.
+                    listeners:
+                      $ref: '#/components/schemas/VirtualGatewayListeners'
+                      description: |-
+                        The listeners that the mesh endpoint is expected to receive inbound traffic from. You
+                                 can specify one listener.
+                    logging:
+                      $ref: '#/components/schemas/VirtualGatewayLogging'
+                tags:
+                  description: |-
+                    Optional metadata that you can apply to the virtual gateway to assist with
+                             categorization and organization. Each tag consists of a key and an optional value, both of
+                             which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                                a maximum length of 256 characters.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagRef'
+                  minItems: 0
+                  maxItems: 50
+                virtualGatewayName:
+                  description: The name to use for the virtual gateway.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListVirtualGateways
+      description: Returns a list of existing virtual gateways in a service mesh.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVirtualGatewaysOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            The maximum number of results returned by <code>ListVirtualGateways</code> in paginated
+                     output. When you use this parameter, <code>ListVirtualGateways</code> returns only
+                        <code>limit</code> results in a single page along with a <code>nextToken</code> response
+                     element. You can see the remaining results of the initial request by sending another
+                        <code>ListVirtualGateways</code> request with the returned <code>nextToken</code> value.
+                     This value can be between 1 and 100. If you don't use this
+                     parameter, <code>ListVirtualGateways</code> returns up to 100 results and
+                     a <code>nextToken</code> value if applicable.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to list virtual gateways in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: nextToken
+          in: query
+          required: false
+          description: |-
+            The <code>nextToken</code> value returned from a previous paginated
+                        <code>ListVirtualGateways</code> request where <code>limit</code> was used and the
+                     results exceeded the value of that parameter. Pagination continues from the end of the
+                     previous results that returned the <code>nextToken</code> value.
+          schema:
+            type: string
   '/v20190125/meshes/{meshName}/virtualNodes':
     put:
       operationId: CreateVirtualNode
@@ -1260,6 +1738,307 @@ paths:
                      previous results that returned the <code>nextToken</code> value.
           schema:
             type: string
+  '/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}':
+    delete:
+      operationId: DeleteGatewayRoute
+      description: Deletes an existing gateway route.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGatewayRouteOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: gatewayRouteName
+          in: path
+          required: true
+          description: The name of the gateway route to delete.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to delete the gateway route from.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway to delete the route from.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeGatewayRoute
+      description: Describes an existing gateway route.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGatewayRouteOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: gatewayRouteName
+          in: path
+          required: true
+          description: The name of the gateway route to describe.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the gateway route resides in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway that the gateway route is associated with.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateGatewayRoute
+      description: |-
+        Updates an existing gateway route that is associated to a specified virtual gateway in a
+                 service mesh.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGatewayRouteOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: gatewayRouteName
+          in: path
+          required: true
+          description: The name of the gateway route to update.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the gateway route resides in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway that the gateway route is associated with.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spec
+              properties:
+                clientToken:
+                  description: |-
+                    Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                    request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                  type: string
+                spec:
+                  description: |-
+                    An object that represents a gateway route specification. Specify one gateway route
+                             type.
+                  type: object
+                  properties:
+                    grpcRoute:
+                      $ref: '#/components/schemas/GrpcGatewayRoute'
+                      description: An object that represents the specification of a gRPC gateway route.
+                    http2Route:
+                      $ref: '#/components/schemas/HttpGatewayRoute'
+                      description: An object that represents the specification of an HTTP/2 gateway route.
+                    httpRoute:
+                      $ref: '#/components/schemas/HttpGatewayRoute'
+                      description: An object that represents the specification of an HTTP gateway route.
   '/v20190125/meshes/{meshName}':
     delete:
       operationId: DeleteMesh
@@ -1783,6 +2562,282 @@ paths:
                     tcpRoute:
                       $ref: '#/components/schemas/TcpRoute'
                       description: An object that represents the specification of a TCP route.
+  '/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}':
+    delete:
+      operationId: DeleteVirtualGateway
+      description: |-
+        Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway
+                 routes are associated to it.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVirtualGatewayOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh to delete the virtual gateway from.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway to delete.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeVirtualGateway
+      description: Describes an existing virtual gateway.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeVirtualGatewayOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the gateway route resides in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway to describe.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateVirtualGateway
+      description: Updates an existing virtual gateway in a specified service mesh.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVirtualGatewayOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: meshName
+          in: path
+          required: true
+          description: The name of the service mesh that the virtual gateway resides in.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: meshOwner
+          in: query
+          required: false
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+          schema:
+            type: string
+            minLength: 12
+            maxLength: 12
+        - name: virtualGatewayName
+          in: path
+          required: true
+          description: The name of the virtual gateway to update.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spec
+              properties:
+                clientToken:
+                  description: |-
+                    Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                    request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+                  type: string
+                spec:
+                  description: An object that represents the specification of a service mesh resource.
+                  type: object
+                  properties:
+                    backendDefaults:
+                      $ref: '#/components/schemas/VirtualGatewayBackendDefaults'
+                      description: A reference to an object that represents the defaults for backends.
+                    listeners:
+                      $ref: '#/components/schemas/VirtualGatewayListeners'
+                      description: |-
+                        The listeners that the mesh endpoint is expected to receive inbound traffic from. You
+                                 can specify one listener.
+                    logging:
+                      $ref: '#/components/schemas/VirtualGatewayLogging'
   '/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}':
     delete:
       operationId: DeleteVirtualNode
@@ -2914,29 +3969,40 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
-    CreateMeshOutput:
+    CreateGatewayRouteOutput:
       type: object
       required:
-        - mesh
+        - gatewayRoute
       properties:
-        mesh:
-          $ref: '#/components/schemas/MeshData'
-          description: The full description of your service mesh following the create call.
-      description: ''
-    EgressFilter:
+        gatewayRoute:
+          $ref: '#/components/schemas/GatewayRouteData'
+          description: The full description of your gateway route following the create call.
+    GrpcGatewayRoute:
       type: object
       required:
-        - type
+        - action
+        - match
       properties:
-        type:
-          $ref: '#/components/schemas/EgressFilterType'
-          description: |-
-            The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows
-                     egress only from virtual nodes to other defined resources in the service mesh (and any
-                     traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter
-                     type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the
-                     service mesh.
-      description: An object that represents the egress filter rules for a service mesh.
+        action:
+          $ref: '#/components/schemas/GrpcGatewayRouteAction'
+          description: An object that represents the action to take if a match is determined.
+        match:
+          $ref: '#/components/schemas/GrpcGatewayRouteMatch'
+          description: An object that represents the criteria for determining a request match.
+      description: An object that represents a gRPC gateway route.
+    HttpGatewayRoute:
+      type: object
+      required:
+        - action
+        - match
+      properties:
+        action:
+          $ref: '#/components/schemas/HttpGatewayRouteAction'
+          description: An object that represents the action to take if a match is determined.
+        match:
+          $ref: '#/components/schemas/HttpGatewayRouteMatch'
+          description: An object that represents the criteria for determining a request match.
+      description: An object that represents an HTTP gateway route.
     TagRef:
       type: object
       required:
@@ -2965,6 +4031,29 @@ components:
     NotFoundException: {}
     ServiceUnavailableException: {}
     TooManyRequestsException: {}
+    CreateMeshOutput:
+      type: object
+      required:
+        - mesh
+      properties:
+        mesh:
+          $ref: '#/components/schemas/MeshData'
+          description: The full description of your service mesh following the create call.
+      description: ''
+    EgressFilter:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/EgressFilterType'
+          description: |-
+            The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows
+                     egress only from virtual nodes to other defined resources in the service mesh (and any
+                     traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter
+                     type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the
+                     service mesh.
+      description: An object that represents the egress filter rules for a service mesh.
     CreateRouteOutput:
       type: object
       required:
@@ -2991,6 +4080,7 @@ components:
           description: An object that represents a retry policy.
         timeout:
           $ref: '#/components/schemas/GrpcTimeout'
+          description: 'An object that represents types of timeouts. '
       description: An object that represents a gRPC route type.
     HttpRoute:
       type: object
@@ -3009,6 +4099,7 @@ components:
           description: An object that represents a retry policy.
         timeout:
           $ref: '#/components/schemas/HttpTimeout'
+          description: 'An object that represents types of timeouts. '
       description: An object that represents an HTTP or HTTP/2 route type.
     RoutePriority:
       type: integer
@@ -3024,7 +4115,36 @@ components:
           description: The action to take if a match is determined.
         timeout:
           $ref: '#/components/schemas/TcpTimeout'
+          description: 'An object that represents types of timeouts. '
       description: An object that represents a TCP route type.
+    CreateVirtualGatewayOutput:
+      type: object
+      required:
+        - virtualGateway
+      properties:
+        virtualGateway:
+          $ref: '#/components/schemas/VirtualGatewayData'
+          description: The full description of your virtual gateway following the create call.
+    VirtualGatewayBackendDefaults:
+      type: object
+      properties:
+        clientPolicy:
+          $ref: '#/components/schemas/VirtualGatewayClientPolicy'
+          description: A reference to an object that represents a client policy.
+      description: An object that represents the default properties for a backend.
+    VirtualGatewayListeners:
+      type: array
+      items:
+        $ref: '#/components/schemas/VirtualGatewayListener'
+      minItems: 0
+      maxItems: 1
+    VirtualGatewayLogging:
+      type: object
+      properties:
+        accessLog:
+          $ref: '#/components/schemas/VirtualGatewayAccessLog'
+          description: The access log configuration.
+      description: An object that represents logging information.
     CreateVirtualNodeOutput:
       type: object
       required:
@@ -3102,6 +4222,15 @@ components:
           $ref: '#/components/schemas/VirtualRouterServiceProvider'
           description: The virtual router associated with a virtual service.
       description: An object that represents the provider for a virtual service.
+    DeleteGatewayRouteOutput:
+      type: object
+      required:
+        - gatewayRoute
+      properties:
+        gatewayRoute:
+          $ref: '#/components/schemas/GatewayRouteData'
+          description: The gateway route that was deleted.
+    ResourceInUseException: {}
     DeleteMeshOutput:
       type: object
       required:
@@ -3111,7 +4240,6 @@ components:
           $ref: '#/components/schemas/MeshData'
           description: The service mesh that was deleted.
       description: ''
-    ResourceInUseException: {}
     DeleteRouteOutput:
       type: object
       required:
@@ -3121,6 +4249,14 @@ components:
           $ref: '#/components/schemas/RouteData'
           description: The route that was deleted.
       description: ''
+    DeleteVirtualGatewayOutput:
+      type: object
+      required:
+        - virtualGateway
+      properties:
+        virtualGateway:
+          $ref: '#/components/schemas/VirtualGatewayData'
+          description: The virtual gateway that was deleted.
     DeleteVirtualNodeOutput:
       type: object
       required:
@@ -3148,6 +4284,14 @@ components:
           $ref: '#/components/schemas/VirtualServiceData'
           description: The virtual service that was deleted.
       description: ''
+    DescribeGatewayRouteOutput:
+      type: object
+      required:
+        - gatewayRoute
+      properties:
+        gatewayRoute:
+          $ref: '#/components/schemas/GatewayRouteData'
+          description: The full description of your gateway route.
     DescribeMeshOutput:
       type: object
       required:
@@ -3166,6 +4310,14 @@ components:
           $ref: '#/components/schemas/RouteData'
           description: The full description of your route.
       description: ''
+    DescribeVirtualGatewayOutput:
+      type: object
+      required:
+        - virtualGateway
+      properties:
+        virtualGateway:
+          $ref: '#/components/schemas/VirtualGatewayData'
+          description: The full description of your virtual gateway.
     DescribeVirtualNodeOutput:
       type: object
       required:
@@ -3193,6 +4345,23 @@ components:
           $ref: '#/components/schemas/VirtualServiceData'
           description: The full description of your virtual service.
       description: ''
+    ListGatewayRoutesOutput:
+      type: object
+      required:
+        - gatewayRoutes
+      properties:
+        gatewayRoutes:
+          $ref: '#/components/schemas/GatewayRouteList'
+          description: |-
+            The list of existing gateway routes for the specified service mesh and virtual
+                     gateway.
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            The <code>nextToken</code> value to include in a future <code>ListGatewayRoutes</code>
+                     request. When the results of a <code>ListGatewayRoutes</code> request exceed
+                        <code>limit</code>, you can use this value to retrieve the next page of results. This
+                     value is <code>null</code> when there are no more results to return.
     ListMeshesOutput:
       type: object
       required:
@@ -3241,6 +4410,21 @@ components:
           $ref: '#/components/schemas/TagList'
           description: The tags for the resource.
       description: ''
+    ListVirtualGatewaysOutput:
+      type: object
+      required:
+        - virtualGateways
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            The <code>nextToken</code> value to include in a future <code>ListVirtualGateways</code>
+                     request. When the results of a <code>ListVirtualGateways</code> request exceed
+                        <code>limit</code>, you can use this value to retrieve the next page of results. This
+                     value is <code>null</code> when there are no more results to return.
+        virtualGateways:
+          $ref: '#/components/schemas/VirtualGatewayList'
+          description: The list of existing virtual gateways for the specified service mesh.
     ListVirtualNodesOutput:
       type: object
       required:
@@ -3302,6 +4486,14 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateGatewayRouteOutput:
+      type: object
+      required:
+        - gatewayRoute
+      properties:
+        gatewayRoute:
+          $ref: '#/components/schemas/GatewayRouteData'
+          description: A full description of the gateway route that was updated.
     UpdateMeshOutput:
       type: object
       required:
@@ -3319,6 +4511,14 @@ components:
           $ref: '#/components/schemas/RouteData'
           description: A full description of the route that was updated.
       description: ''
+    UpdateVirtualGatewayOutput:
+      type: object
+      required:
+        - virtualGateway
+      properties:
+        virtualGateway:
+          $ref: '#/components/schemas/VirtualGatewayData'
+          description: A full description of the virtual gateway that was updated.
     UpdateVirtualNodeOutput:
       type: object
       required:
@@ -3519,15 +4719,82 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VirtualRouterRef'
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    AccountId:
+      type: string
+      minLength: 12
+      maxLength: 12
+    VirtualGatewaySpec:
+      type: object
+      required:
+        - listeners
+      properties:
+        backendDefaults:
+          $ref: '#/components/schemas/VirtualGatewayBackendDefaults'
+          description: A reference to an object that represents the defaults for backends.
+        listeners:
+          $ref: '#/components/schemas/VirtualGatewayListeners'
+          description: |-
+            The listeners that the mesh endpoint is expected to receive inbound traffic from. You
+                     can specify one listener.
+        logging:
+          $ref: '#/components/schemas/VirtualGatewayLogging'
+      description: An object that represents the specification of a service mesh resource.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagRef'
+      minItems: 0
+      maxItems: 50
+    CreateVirtualGatewayInput:
+      type: object
+      required:
+        - spec
+        - virtualGatewayName
+      title: CreateVirtualGatewayInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualGatewaySpec'
+          description: The virtual gateway specification to apply.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            Optional metadata that you can apply to the virtual gateway to assist with
+                     categorization and organization. Each tag consists of a key and an optional value, both of
+                     which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
+        virtualGatewayName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name to use for the virtual gateway.
+    UpdateVirtualGatewayInput:
+      type: object
+      required:
+        - spec
+      title: UpdateVirtualGatewayInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/VirtualGatewaySpec'
+          description: |-
+            The new virtual gateway specification to apply. This overwrites the existing
+                     data.
     Arn:
       type: string
     Timestamp:
       type: string
       format: date-time
-    AccountId:
-      type: string
-      minLength: 12
-      maxLength: 12
     ResourceMetadata:
       type: object
       required:
@@ -3563,9 +4830,7 @@ components:
           description: The unique identifier for the resource.
         version:
           $ref: '#/components/schemas/Long'
-          description: |-
-            The version of the resource. Resources are created at version 1, and this version is
-                     incremented each time that they're updated.
+          description: 'The version of the resource. Resources are created at version 1, and this version is incremented each time that they''re updated.'
       description: An object that represents metadata for a resource.
     RouteList:
       type: array
@@ -3592,6 +4857,21 @@ components:
           $ref: '#/components/schemas/ServiceName'
           description: The name of the virtual service that is acting as a virtual node backend.
       description: An object that represents a virtual service backend for a virtual node.
+    HttpGatewayRouteMatch:
+      type: object
+      required:
+        - prefix
+      properties:
+        prefix:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Specifies the path to match requests with. This parameter must always start with
+                        <code>/</code>, which by itself matches all requests to the virtual service name. You
+                     can also match for path-based routing of requests. For example, if your virtual service
+                     name is <code>my-service.local</code> and you want the route to match requests to
+                        <code>my-service.local/metrics</code>, your prefix should be
+                     <code>/metrics</code>.
+      description: An object that represents the criteria for determining a request match.
     GrpcRouteMetadata:
       type: object
       required:
@@ -3686,6 +4966,10 @@ components:
             The number of consecutive failed health checks that must occur before declaring a
                      virtual node unhealthy. 
       description: An object that represents the health check policy for a virtual node's listener.
+    VirtualGatewayHealthCheckTimeoutMillis:
+      type: integer
+      minimum: 2000
+      maximum: 60000
     EgressFilterType:
       type: string
       enum:
@@ -3753,12 +5037,34 @@ components:
           $ref: '#/components/schemas/TlsValidationContext'
           description: A reference to an object that represents a TLS validation context.
       description: An object that represents a Transport Layer Security (TLS) client policy.
+    VirtualGatewayHealthCheckIntervalMillis:
+      type: integer
+      minimum: 5000
+      maximum: 300000
     Boolean:
       type: boolean
     HttpRetryPolicyEvent:
       type: string
       minLength: 1
       maxLength: 25
+    FilePath:
+      type: string
+      minLength: 1
+      maxLength: 255
+    VirtualGatewayFileAccessLog:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          $ref: '#/components/schemas/FilePath'
+          description: |-
+            The file path to write access logs to. You can use <code>/dev/stdout</code> to send
+                     access logs to standard out and configure your Envoy container to use a log driver, such as
+                        <code>awslogs</code>, to export the access logs to a log storage service such as Amazon
+                     CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
+                     the files to disk.
+      description: An object that represents an access log file.
     VirtualServiceData:
       type: object
       required:
@@ -3783,6 +5089,46 @@ components:
           $ref: '#/components/schemas/ServiceName'
           description: The name of the virtual service.
       description: An object that represents a virtual service returned by a describe operation.
+    GatewayRouteSpec:
+      type: object
+      properties:
+        grpcRoute:
+          $ref: '#/components/schemas/GrpcGatewayRoute'
+          description: An object that represents the specification of a gRPC gateway route.
+        http2Route:
+          $ref: '#/components/schemas/HttpGatewayRoute'
+          description: An object that represents the specification of an HTTP/2 gateway route.
+        httpRoute:
+          $ref: '#/components/schemas/HttpGatewayRoute'
+          description: An object that represents the specification of an HTTP gateway route.
+      description: |-
+        An object that represents a gateway route specification. Specify one gateway route
+                 type.
+    CreateGatewayRouteInput:
+      type: object
+      required:
+        - gatewayRouteName
+        - spec
+      title: CreateGatewayRouteInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        gatewayRouteName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name to use for the gateway route.
+        spec:
+          $ref: '#/components/schemas/GatewayRouteSpec'
+          description: The gateway route specification to apply.
+        tags:
+          $ref: '#/components/schemas/TagList'
+          description: |-
+            Optional metadata that you can apply to the gateway route to assist with categorization
+                     and organization. Each tag consists of a key and an optional value, both of which you
+                     define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+                        a maximum length of 256 characters.
     CertificateAuthorityArns:
       type: array
       items:
@@ -3794,6 +5140,39 @@ components:
       pattern: '((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^.$)'
       minLength: 1
       maxLength: 1024
+    VirtualGatewayStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/VirtualGatewayStatusCode'
+          description: The current status.
+      description: An object that represents the status of the mesh resource.
+    VirtualGatewayData:
+      type: object
+      required:
+        - meshName
+        - metadata
+        - spec
+        - status
+        - virtualGatewayName
+      properties:
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the virtual gateway resides in.
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+        spec:
+          $ref: '#/components/schemas/VirtualGatewaySpec'
+          description: The specifications of the virtual gateway.
+        status:
+          $ref: '#/components/schemas/VirtualGatewayStatus'
+          description: The current status of the virtual gateway.
+        virtualGatewayName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the virtual gateway.
+      description: An object that represents a virtual gateway returned by a describe operation.
     RouteData:
       type: object
       required:
@@ -3823,6 +5202,111 @@ components:
           $ref: '#/components/schemas/ResourceName'
           description: The virtual router that the route is associated with.
       description: An object that represents a route returned by a describe operation.
+    VirtualGatewayHealthCheckPolicy:
+      type: object
+      required:
+        - healthyThreshold
+        - intervalMillis
+        - protocol
+        - timeoutMillis
+        - unhealthyThreshold
+      properties:
+        healthyThreshold:
+          $ref: '#/components/schemas/VirtualGatewayHealthCheckThreshold'
+          description: |-
+            The number of consecutive successful health checks that must occur before declaring the
+                     listener healthy.
+        intervalMillis:
+          $ref: '#/components/schemas/VirtualGatewayHealthCheckIntervalMillis'
+          description: The time period in milliseconds between each health check execution.
+        path:
+          $ref: '#/components/schemas/String'
+          description: |-
+            The destination path for the health check request. This value is only used if the
+                     specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+        port:
+          $ref: '#/components/schemas/PortNumber'
+          description: |-
+            The destination port for the health check request. This port must match the port defined
+                     in the <a>PortMapping</a> for the listener.
+        protocol:
+          $ref: '#/components/schemas/VirtualGatewayPortProtocol'
+          description: |-
+            The protocol for the health check request. If you specify <code>grpc</code>, then your
+                     service must conform to the <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">GRPC Health
+                        Checking Protocol</a>.
+        timeoutMillis:
+          $ref: '#/components/schemas/VirtualGatewayHealthCheckTimeoutMillis'
+          description: |-
+            The amount of time to wait when receiving a response from the health check, in
+                     milliseconds.
+        unhealthyThreshold:
+          $ref: '#/components/schemas/VirtualGatewayHealthCheckThreshold'
+          description: |-
+            The number of consecutive failed health checks that must occur before declaring a
+                     virtual gateway unhealthy.
+      description: |-
+        An object that represents the health check policy for a virtual gateway's
+                 listener.
+    VirtualGatewayPortMapping:
+      type: object
+      required:
+        - port
+        - protocol
+      properties:
+        port:
+          $ref: '#/components/schemas/PortNumber'
+          description: The port used for the port mapping. Specify one protocol.
+        protocol:
+          $ref: '#/components/schemas/VirtualGatewayPortProtocol'
+          description: The protocol used for the port mapping.
+      description: An object that represents a port mapping.
+    VirtualGatewayListenerTls:
+      type: object
+      required:
+        - certificate
+        - mode
+      properties:
+        certificate:
+          $ref: '#/components/schemas/VirtualGatewayListenerTlsCertificate'
+          description: An object that represents a Transport Layer Security (TLS) certificate.
+        mode:
+          $ref: '#/components/schemas/VirtualGatewayListenerTlsMode'
+          description: |-
+            <p>Specify one of the following modes.</p>
+                     <ul>
+                        <li>
+                           <p>
+                              <b/>STRICT – Listener only accepts connections with TLS
+                           enabled. </p>
+                        </li>
+                        <li>
+                           <p>
+                              <b/>PERMISSIVE – Listener accepts connections with or
+                           without TLS enabled.</p>
+                        </li>
+                        <li>
+                           <p>
+                              <b/>DISABLED – Listener only accepts connections without
+                           TLS. </p>
+                        </li>
+                     </ul>
+      description: An object that represents the Transport Layer Security (TLS) properties for a listener.
+    VirtualGatewayListener:
+      type: object
+      required:
+        - portMapping
+      properties:
+        healthCheck:
+          $ref: '#/components/schemas/VirtualGatewayHealthCheckPolicy'
+          description: The health check information for the listener.
+        portMapping:
+          $ref: '#/components/schemas/VirtualGatewayPortMapping'
+          description: The port mapping information for the listener.
+        tls:
+          $ref: '#/components/schemas/VirtualGatewayListenerTls'
+          description: A reference to an object that represents the Transport Layer Security (TLS) properties for the listener.
+      description: An object that represents a listener for a virtual gateway.
     Hostname:
       type: string
     DnsServiceDiscovery:
@@ -3836,10 +5320,12 @@ components:
       description: |-
         An object that represents the DNS service discovery information for your virtual
                  node.
-    ResourceName:
+    VirtualGatewayPortProtocol:
       type: string
-      minLength: 1
-      maxLength: 255
+      enum:
+        - grpc
+        - http
+        - http2
     DeleteRouteInput:
       type: object
       title: DeleteRouteInput
@@ -3878,10 +5364,30 @@ components:
           $ref: '#/components/schemas/VirtualNodeStatusCode'
           description: The current status of the virtual node.
       description: An object that represents the current status of the virtual node.
+    ListGatewayRoutesLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
     TcpRetryPolicyEvent:
       type: string
       enum:
         - connection-error
+    VirtualGatewayListenerTlsCertificate:
+      type: object
+      properties:
+        acm:
+          $ref: '#/components/schemas/VirtualGatewayListenerTlsAcmCertificate'
+          description: A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+        file:
+          $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
+          description: A reference to an object that represents a local file certificate.
+      description: An object that represents a listener's Transport Layer Security (TLS) certificate.
+    VirtualGatewayListenerTlsMode:
+      type: string
+      enum:
+        - DISABLED
+        - PERMISSIVE
+        - STRICT
     Backend:
       type: object
       properties:
@@ -3900,6 +5406,27 @@ components:
       title: ListMeshesInput
       properties: {}
       description: ''
+    VirtualGatewayListenerTlsFileCertificate:
+      type: object
+      required:
+        - certificateChain
+        - privateKey
+      properties:
+        certificateChain:
+          $ref: '#/components/schemas/FilePath'
+          description: The certificate chain for the certificate.
+        privateKey:
+          $ref: '#/components/schemas/FilePath'
+          description: |-
+            The private key for a certificate stored on the file system of the mesh endpoint that
+                     the proxy is running on.
+      description: |-
+        An object that represents a local file certificate.
+                 The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.
+    ListGatewayRoutesInput:
+      type: object
+      title: ListGatewayRoutesInput
+      properties: {}
     VirtualRouterSpec:
       type: object
       properties:
@@ -3938,12 +5465,10 @@ components:
           $ref: '#/components/schemas/MeshSpec'
           description: The service mesh specification to apply.
       description: ''
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/TagRef'
-      minItems: 0
-      maxItems: 50
+    VirtualGatewayHealthCheckThreshold:
+      type: integer
+      minimum: 2
+      maximum: 10
     CreateVirtualRouterInput:
       type: object
       required:
@@ -4008,6 +5533,15 @@ components:
           $ref: '#/components/schemas/VirtualServiceStatusCode'
           description: The current status of the virtual service.
       description: An object that represents the status of a virtual service.
+    VirtualGatewayListenerTlsAcmCertificate:
+      type: object
+      required:
+        - certificateArn
+      properties:
+        certificateArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+      description: An object that represents an AWS Certicate Manager (ACM) certificate.
     ListenerTlsAcmCertificate:
       type: object
       required:
@@ -4049,6 +5583,15 @@ components:
       pattern: '^[a-zA-Z0-9!-~]+$'
       minLength: 1
       maxLength: 255
+    GatewayRouteVirtualService:
+      type: object
+      required:
+        - virtualServiceName
+      properties:
+        virtualServiceName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the virtual service that traffic is routed to.
+      description: An object that represents the virtual service that traffic is routed to.
     MeshList:
       type: array
       items:
@@ -4069,13 +5612,23 @@ components:
         - POST
         - PUT
         - TRACE
+    VirtualGatewayClientPolicy:
+      type: object
+      properties:
+        tls:
+          $ref: '#/components/schemas/VirtualGatewayClientPolicyTls'
+          description: A reference to an object that represents a Transport Layer Security (TLS) client policy.
+      description: An object that represents a client policy.
     GrpcTimeout:
       type: object
       properties:
         idle:
           $ref: '#/components/schemas/Duration'
+          description: An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.
         perRequest:
           $ref: '#/components/schemas/Duration'
+          description: 'An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.'
+      description: 'An object that represents types of timeouts. '
     HttpTimeout:
       type: object
       properties:
@@ -4083,11 +5636,13 @@ components:
           $ref: '#/components/schemas/Duration'
         perRequest:
           $ref: '#/components/schemas/Duration'
+      description: 'An object that represents types of timeouts. '
     TcpTimeout:
       type: object
       properties:
         idle:
           $ref: '#/components/schemas/Duration'
+      description: 'An object that represents types of timeouts. '
     ListenerTimeout:
       type: object
       properties:
@@ -4095,10 +5650,14 @@ components:
           $ref: '#/components/schemas/GrpcTimeout'
         http:
           $ref: '#/components/schemas/HttpTimeout'
+          description: 'An object that represents types of timeouts. '
         http2:
           $ref: '#/components/schemas/HttpTimeout'
+          description: 'An object that represents types of timeouts. '
         tcp:
           $ref: '#/components/schemas/TcpTimeout'
+          description: 'An object that represents types of timeouts. '
+      description: An object that represents timeouts for different protocols.
     MeshRef:
       type: object
       required:
@@ -4136,6 +5695,10 @@ components:
           $ref: '#/components/schemas/Long'
           description: 'The version of the resource. Resources are created at version 1, and this version is incremented each time that they''re updated.'
       description: An object that represents a service mesh returned by a list operation.
+    DescribeGatewayRouteInput:
+      type: object
+      title: DescribeGatewayRouteInput
+      properties: {}
     TlsValidationContextAcmTrust:
       type: object
       required:
@@ -4196,6 +5759,59 @@ components:
                  across targets according to their relative weight. For example, a weighted target with a
                  relative weight of 50 receives five times as much traffic as one with a relative weight of
                  10. The total weight for all targets combined must be less than or equal to 100.
+    GrpcGatewayRouteAction:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          $ref: '#/components/schemas/GatewayRouteTarget'
+          description: An object that represents the target that traffic is routed to when a request matches the gateway route.
+      description: An object that represents the action to take if a match is determined.
+    GrpcGatewayRouteMatch:
+      type: object
+      properties:
+        serviceName:
+          $ref: '#/components/schemas/ServiceName'
+          description: The fully qualified domain name for the service to match from the request.
+      description: An object that represents the criteria for determining a request match.
+    GatewayRouteStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/GatewayRouteStatusCode'
+          description: The current status for the gateway route.
+      description: An object that represents the current status of a gateway route.
+    GatewayRouteData:
+      type: object
+      required:
+        - gatewayRouteName
+        - meshName
+        - metadata
+        - spec
+        - status
+        - virtualGatewayName
+      properties:
+        gatewayRouteName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the gateway route.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: 'The name of the service mesh that the resource resides in. '
+        metadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+        spec:
+          $ref: '#/components/schemas/GatewayRouteSpec'
+          description: The specifications of the gateway route.
+        status:
+          $ref: '#/components/schemas/GatewayRouteStatus'
+          description: The status of the gateway route.
+        virtualGatewayName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The virtual gateway that the gateway route is associated with.
+      description: An object that represents a gateway route returned by a describe operation.
     RouteRef:
       type: object
       required:
@@ -4332,9 +5948,47 @@ components:
       description: |-
         An object that represents the method and value to match with the header value sent in a
                  request. Specify one match method.
+    VirtualGatewayTlsValidationContext:
+      type: object
+      required:
+        - trust
+      properties:
+        trust:
+          $ref: '#/components/schemas/VirtualGatewayTlsValidationContextTrust'
+          description: A reference to an object that represents a TLS validation context trust.
+      description: An object that represents a Transport Layer Security (TLS) validation context.
+    VirtualGatewayClientPolicyTls:
+      type: object
+      required:
+        - validation
+      properties:
+        enforce:
+          $ref: '#/components/schemas/Boolean'
+          description: |-
+            Whether the policy is enforced. The default is <code>True</code>, if a value isn't
+                     specified.
+        ports:
+          $ref: '#/components/schemas/PortSet'
+          description: One or more ports that the policy is enforced for.
+        validation:
+          $ref: '#/components/schemas/VirtualGatewayTlsValidationContext'
+          description: A reference to an object that represents a TLS validation context.
+      description: An object that represents a Transport Layer Security (TLS) client policy.
     DurationValue:
       type: integer
       minimum: 0
+    VirtualGatewayStatusCode:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETED
+        - INACTIVE
+    GatewayRouteStatusCode:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETED
+        - INACTIVE
     TagResourceInput:
       type: object
       required:
@@ -4348,6 +6002,22 @@ components:
                      Tag keys can have a maximum character length of 128 characters, and tag values can have
                         a maximum length of 256 characters.
       description: ''
+    VirtualGatewayList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VirtualGatewayRef'
+    VirtualGatewayTlsValidationContextTrust:
+      type: object
+      properties:
+        acm:
+          $ref: '#/components/schemas/VirtualGatewayTlsValidationContextAcmTrust'
+          description: |-
+            A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+                     certificate.
+        file:
+          $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
+          description: An object that represents a TLS validation context trust for a local file.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust.
     VirtualNodeServiceProvider:
       type: object
       required:
@@ -4451,10 +6121,55 @@ components:
           $ref: '#/components/schemas/ResourceName'
           description: The name to use for the virtual node.
       description: ''
-    FilePath:
-      type: string
-      minLength: 1
-      maxLength: 255
+    GatewayRouteRef:
+      type: object
+      required:
+        - arn
+        - createdAt
+        - gatewayRouteName
+        - lastUpdatedAt
+        - meshName
+        - meshOwner
+        - resourceOwner
+        - version
+        - virtualGatewayName
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The full Amazon Resource Name (ARN) for the gateway route.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
+        gatewayRouteName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the gateway route.
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was last updated.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: 'The name of the service mesh that the resource resides in. '
+        meshOwner:
+          $ref: '#/components/schemas/AccountId'
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+        resourceOwner:
+          $ref: '#/components/schemas/AccountId'
+          description: |-
+            The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
+          description: 'The version of the resource. Resources are created at version 1, and this version is incremented each time that they''re updated.'
+        virtualGatewayName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The virtual gateway that the gateway route is associated with.
+      description: An object that represents a gateway route returned by a list operation.
+    GatewayRouteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GatewayRouteRef'
     FileAccessLog:
       type: object
       required:
@@ -4487,10 +6202,23 @@ components:
           $ref: '#/components/schemas/TlsValidationContextTrust'
           description: A reference to an object that represents a TLS validation context trust.
       description: An object that represents a Transport Layer Security (TLS) validation context.
+    DescribeVirtualGatewayInput:
+      type: object
+      title: DescribeVirtualGatewayInput
+      properties: {}
     TagsLimit:
       type: integer
       minimum: 1
       maximum: 50
+    GatewayRouteTarget:
+      type: object
+      required:
+        - virtualService
+      properties:
+        virtualService:
+          $ref: '#/components/schemas/GatewayRouteVirtualService'
+          description: An object that represents a virtual service gateway route target.
+      description: An object that represents a gateway route target.
     UpdateVirtualNodeInput:
       type: object
       required:
@@ -4594,6 +6322,15 @@ components:
           $ref: '#/components/schemas/VirtualRouterSpec'
           description: The new virtual router specification to apply. This overwrites the existing data.
       description: ''
+    HttpGatewayRouteAction:
+      type: object
+      required:
+        - target
+      properties:
+        target:
+          $ref: '#/components/schemas/GatewayRouteTarget'
+          description: An object that represents the target that traffic is routed to when a request matches the gateway route.
+      description: An object that represents the action to take if a match is determined.
     ListTagsForResourceInput:
       type: object
       title: ListTagsForResourceInput
@@ -4622,10 +6359,52 @@ components:
           description: The port mapping information for the listener.
         timeout:
           $ref: '#/components/schemas/ListenerTimeout'
+          description: An object that represents timeouts for different protocols.
         tls:
           $ref: '#/components/schemas/ListenerTls'
           description: A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.
       description: An object that represents a listener for a virtual node.
+    VirtualGatewayRef:
+      type: object
+      required:
+        - arn
+        - createdAt
+        - lastUpdatedAt
+        - meshName
+        - meshOwner
+        - resourceOwner
+        - version
+        - virtualGatewayName
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The full Amazon Resource Name (ARN) for the resource.
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was created.
+        lastUpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+          description: The Unix epoch timestamp in seconds for when the resource was last updated.
+        meshName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the service mesh that the resource resides in.
+        meshOwner:
+          $ref: '#/components/schemas/AccountId'
+          description: |-
+            The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+                           the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+        resourceOwner:
+          $ref: '#/components/schemas/AccountId'
+          description: |-
+            The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
+                           the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.
+        version:
+          $ref: '#/components/schemas/Long'
+          description: 'The version of the resource. Resources are created at version 1, and this version is incremented each time that they''re updated.'
+        virtualGatewayName:
+          $ref: '#/components/schemas/ResourceName'
+          description: The name of the resource.
+      description: An object that represents a virtual gateway returned by a list operation.
     VirtualNodeStatusCode:
       type: string
       enum:
@@ -4829,6 +6608,17 @@ components:
           $ref: '#/components/schemas/WeightedTargets'
           description: An object that represents the targets that traffic is routed to when a request matches the route.
       description: An object that represents the action to take if a match is determined.
+    VirtualGatewayTlsValidationContextFileTrust:
+      type: object
+      required:
+        - certificateChain
+      properties:
+        certificateChain:
+          $ref: '#/components/schemas/FilePath'
+          description: |-
+            The certificate trust chain for a certificate stored on the file system of the virtual
+                     node that the proxy is running on.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
     GrpcRouteMetadataMatchMethod:
       type: object
       properties:
@@ -4857,6 +6647,30 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    VirtualGatewayCertificateAuthorityArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 3
+    VirtualGatewayTlsValidationContextAcmTrust:
+      type: object
+      required:
+        - certificateAuthorityArns
+      properties:
+        certificateAuthorityArns:
+          $ref: '#/components/schemas/VirtualGatewayCertificateAuthorityArns'
+          description: One or more ACM Amazon Resource Name (ARN)s.
+      description: |-
+        An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+                 certificate.
+    VirtualGatewayAccessLog:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/VirtualGatewayFileAccessLog'
+          description: The file object to send virtual gateway access logs to.
+      description: The access log configuration for a virtual gateway.
     ListVirtualRoutersLimit:
       type: integer
       minimum: 1
@@ -4935,6 +6749,14 @@ components:
       description: |-
         An object that represents the requirements for a route to match HTTP requests for a
                  virtual router.
+    ListVirtualGatewaysLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    DeleteVirtualGatewayInput:
+      type: object
+      title: DeleteVirtualGatewayInput
+      properties: {}
     DescribeVirtualNodeInput:
       type: object
       title: DescribeVirtualNodeInput
@@ -4986,6 +6808,24 @@ components:
       title: DescribeVirtualRouterInput
       properties: {}
       description: ''
+    UpdateGatewayRouteInput:
+      type: object
+      required:
+        - spec
+      title: UpdateGatewayRouteInput
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/String'
+          description: |-
+            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+        spec:
+          $ref: '#/components/schemas/GatewayRouteSpec'
+          description: The new gateway route specification to apply. This overwrites the existing data.
+    ListVirtualGatewaysInput:
+      type: object
+      title: ListVirtualGatewaysInput
+      properties: {}
     CreateRouteInput:
       type: object
       required:
@@ -5014,6 +6854,10 @@ components:
                      Tag keys can have a maximum character length of 128 characters, and tag values can have
                         a maximum length of 256 characters.
       description: ''
+    DeleteGatewayRouteInput:
+      type: object
+      title: DeleteGatewayRouteInput
+      properties: {}
     UpdateRouteInput:
       type: object
       required:
