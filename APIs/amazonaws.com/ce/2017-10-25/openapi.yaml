@@ -631,7 +631,7 @@ paths:
   '/#X-Amz-Target=AWSInsightsIndexService.GetRightsizingRecommendation':
     post:
       operationId: GetRightsizingRecommendation
-      description: '<p>Creates recommendations that helps you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html">Optimizing Your Cost with Rightsizing Recommendations</a>.</p>'
+      description: '<p>Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1504,7 +1504,7 @@ components:
           description: The token to retrieve the next set of results.
         Configuration:
           $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
-          description: 'Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
+          description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
     GetRightsizingRecommendationRequest:
       type: object
       required:
@@ -1515,7 +1515,7 @@ components:
           $ref: '#/components/schemas/Expression'
         Configuration:
           $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
-          description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
+          description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
         Service:
           $ref: '#/components/schemas/GenericString'
           description: The specific service that you want recommendations for. The only valid value for <code>GetRightsizingRecommendation</code> is "<code>AmazonEC2</code>".
@@ -1589,7 +1589,7 @@ components:
           description: The Savings Plans recommendation type requested.
         TermInYears:
           $ref: '#/components/schemas/TermInYears'
-          description: The savings plan recommendation term used to generated these recommendations.
+          description: The savings plan recommendation term used to generate these recommendations.
         PaymentOption:
           $ref: '#/components/schemas/PaymentOption'
           description: The payment option used to generate these recommendations.
@@ -2078,6 +2078,9 @@ components:
         ResourceId:
           $ref: '#/components/schemas/GenericString'
           description: Resource ID of the current instance.
+        InstanceName:
+          $ref: '#/components/schemas/GenericString'
+          description: The name you've given an instance. This field will show as blank if you haven't given the instance a name.
         Tags:
           $ref: '#/components/schemas/TagValuesList'
           description: Cost allocation resource tags applied to the instance.
@@ -2504,7 +2507,7 @@ components:
         BenefitsConsidered:
           $ref: '#/components/schemas/GenericBoolean'
           description: ' The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>. '
-      description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. '
+      description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
     RightsizingRecommendationMetadata:
       type: object
       properties:
@@ -2513,7 +2516,7 @@ components:
           description: ' The ID for this specific recommendation.'
         GenerationTimestamp:
           $ref: '#/components/schemas/GenericString'
-          description: ' The time stamp for when Amazon Web Services made this recommendation.'
+          description: ' The timestamp for when Amazon Web Services made this recommendation.'
         LookbackPeriodInDays:
           $ref: '#/components/schemas/LookbackPeriodInDays'
           description: ' How many days of previous usage that Amazon Web Services considers when making this recommendation.'
@@ -2532,7 +2535,7 @@ components:
           description: ' The currency code that Amazon Web Services used to calculate the savings.'
         SavingsPercentage:
           $ref: '#/components/schemas/GenericString'
-          description: ' Savings percentage based on the recommended modifications, relative to the total On Demand costs associated with these instances.'
+          description: ' Savings percentage based on the recommended modifications, relative to the total On-Demand costs associated with these instances.'
       description: ' Summary of rightsizing recommendations '
     RightsizingRecommendationList:
       type: array
