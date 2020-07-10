@@ -1,29 +1,30 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
 host: api.nytimes.com
 basePath: /svc/movies/v2
 info:
-  description: 'With the Movie Reviews API, you can search New York Times movie reviews by keyword and get lists of NYT Critics'' Picks.'
-  termsOfService: 'http://developer.nytimes.com/tou'
-  title: Movie Reviews
+  description: With the Movie Reviews API, you can search New York Times movie
+    reviews by keyword and get lists of NYT Critics' Picks.
+  termsOfService: http://developer.nytimes.com/tou
+  title: Movie Reviews API
   version: 2.0.0
   x-apiClientRegistration:
-    url: 'http://developer.nytimes.com/signup'
+    url: http://developer.nytimes.com/signup
   x-apisguru-categories:
     - media
     - open_data
   x-logo:
-    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+    url: https://static01.nyt.com/images/icons/t_logo_291_black.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/movie_reviews/movie_reviews_v2.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/NYTimes/public_api_specs/master/movie_reviews/movie_reviews_v2.json
+      version: "2.0"
   x-providerName: nytimes.com
   x-serviceName: movie_reviews
 externalDocs:
-  url: 'http://developer.nytimes.com/'
+  url: http://developer.nytimes.com/
 produces:
   - application/json
 securityDefinitions:
@@ -34,11 +35,12 @@ securityDefinitions:
 security:
   - apikey: []
 paths:
-  '/critics/{resource-type}.json':
+  "/critics/{resource-type}.json":
     get:
       parameters:
-        - description: |
+        - description: >
             all | full-time | part-time | [reviewer-name]
+
 
             Specify all to get all Times reviewers, or specify full-time or part-time to get that subset. Specify a reviewer's name to get details about a particular reviewer.
           in: path
@@ -46,7 +48,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Movie Critics
           schema:
             properties:
@@ -56,7 +58,7 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/Critic'
+                  $ref: "#/definitions/Critic"
                 type: array
               status:
                 type: string
@@ -64,8 +66,9 @@ paths:
   /reviews/search.json:
     get:
       parameters:
-        - description: |
+        - description: >
             Search keywords; matches movie title and indexed terms
+
 
             To limit your search to exact matches only, surround your search string with single quotation marks (e.g., query='28+days+later'). Otherwise, responses will include partial matches ("head words") as well as exact matches (e.g., president will match president, presidents and presidential).
               
@@ -76,32 +79,41 @@ paths:
           name: query
           required: false
           type: string
-        - description: |
-            Set this parameter to Y to limit the results to NYT Critics' Picks. To get only those movies that have not been highlighted by Times critics, specify critics-pick=N. (To get all reviews regardless of critics-pick status, simply omit this parameter.)
+        - description: >
+            Set this parameter to Y to limit the results to NYT Critics' Picks.
+            To get only those movies that have not been highlighted by Times
+            critics, specify critics-pick=N. (To get all reviews regardless of
+            critics-pick status, simply omit this parameter.)
           enum:
-            - 'Y'
-            - 'N'
+            - Y
+            - N
           in: query
           name: critics-pick
           type: string
-        - description: |
-            Include this parameter to limit your results to reviews by a specific critic. Reviewer names should be formatted like this: Manohla Dargis.
+        - description: >
+            Include this parameter to limit your results to reviews by a
+            specific critic. Reviewer names should be formatted like this:
+            Manohla Dargis.
           in: query
           name: reviewer
           type: string
-        - description: |
+        - description: >
             Single date: YYYY-MM-DD
 
+
             Start and end date: YYYY-MM-DD;YYYY-MM-DD
+
 
             The publication-date is the date the review was first published in The Times.
           in: query
           name: publication-date
           type: string
-        - description: |
+        - description: >
             Single date: YYYY-MM-DD
 
+
             Start and end date: YYYY-MM-DD;YYYY-MM-DD
+
 
             The opening-date is the date the movie's opening date in the New York region.
           in: query
@@ -109,22 +121,24 @@ paths:
           required: false
           type: string
         - default: 20
-          description: 'Positive integer, multiple of 20'
+          description: Positive integer, multiple of 20
           in: query
           name: offset
           required: false
           type: integer
-        - description: |
+        - description: >
             Sets the sort order of the results.
 
+
             Results ordered by-title are in ascending alphabetical order. Results ordered by one of the date parameters are in reverse chronological order.
+
 
             If you do not specify a sort order, the results will be ordered by publication-date.
           in: query
           name: order
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Movies
           schema:
             properties:
@@ -134,12 +148,12 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/Movie'
+                  $ref: "#/definitions/Movie"
                 type: array
               status:
                 type: string
             type: object
-  '/reviews/{resource-type}.json':
+  "/reviews/{resource-type}.json":
     get:
       parameters:
         - description: |+
@@ -155,16 +169,18 @@ paths:
           required: true
           type: string
         - default: 20
-          description: 'Positive integer, multiple of 20'
+          description: Positive integer, multiple of 20
           in: query
           name: offset
           required: false
           type: integer
         - default: by-publication-date
-          description: |
+          description: >
             Sets the sort order of the results.
 
+
             Results ordered by-title are in ascending alphabetical order. Results ordered by one of the date parameters are in reverse chronological order.
+
 
             If you do not specify a sort order, the results will be ordered by publication-date.
           enum:
@@ -176,7 +192,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Movies
           schema:
             properties:
@@ -186,7 +202,7 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/Movie'
+                  $ref: "#/definitions/Movie"
                 type: array
               status:
                 type: string

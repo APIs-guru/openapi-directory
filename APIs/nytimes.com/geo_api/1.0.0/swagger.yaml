@@ -1,30 +1,34 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
 host: api.nytimes.com
 basePath: /svc/semantic/v2/geocodes
 info:
-  description: |
-    The Geographic API extends the Semantic API, using a linked data approach to enhance location concepts used in The New York Times' controlled vocabulary and data resources which combine them with the GeoNames database, an authoritative and free to use database of global geographical places, names and features.
-  termsOfService: 'http://developer.nytimes.com/tou'
-  title: Geographic
+  description: >
+    The Geographic API extends the Semantic API, using a linked data approach to
+    enhance location concepts used in The New York Times' controlled vocabulary
+    and data resources which combine them with the GeoNames database, an
+    authoritative and free to use database of global geographical places, names
+    and features.
+  termsOfService: http://developer.nytimes.com/tou
+  title: Geographic API
   version: 1.0.0
   x-apiClientRegistration:
-    url: 'http://developer.nytimes.com/signup'
+    url: http://developer.nytimes.com/signup
   x-apisguru-categories:
     - media
     - open_data
   x-logo:
-    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+    url: https://static01.nyt.com/images/icons/t_logo_291_black.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/geo_api/geo_api_v2.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/NYTimes/public_api_specs/master/geo_api/geo_api_v2.json
+      version: "2.0"
   x-providerName: nytimes.com
   x-serviceName: geo_api
 externalDocs:
-  url: 'http://developer.nytimes.com/'
+  url: http://developer.nytimes.com/
 produces:
   - application/json
 securityDefinitions:
@@ -53,43 +57,62 @@ paths:
           in: query
           name: longitude
           type: string
-        - description: 'The elevation of the specified place, in meters.'
+        - description: The elevation of the specified place, in meters.
           in: query
           name: elevation
           required: false
           type: integer
-        - description: 'Along with ne, forms a bounded box using the longitude and latitude coordinates specified as the southwest corner. The search results are limited to the resulting box. Two float values, separated by a comma `latitude,longitude` <br/> The ne parameter is required to use this parameter.'
+        - description: Along with ne, forms a bounded box using the longitude and latitude
+            coordinates specified as the southwest corner. The search results
+            are limited to the resulting box. Two float values, separated by a
+            comma `latitude,longitude` <br/> The ne parameter is required to use
+            this parameter.
           in: query
           name: sw
           required: false
           type: string
-        - description: |
-            Search keywords to perform a text search on the fields: web_description, event_name and venue_name. 'AND' searches can be performed by wrapping query terms in quotes. If you do not specify a query, all results will be returned.
+        - description: >
+            Search keywords to perform a text search on the fields:
+            web_description, event_name and venue_name. 'AND' searches can be
+            performed by wrapping query terms in quotes. If you do not specify a
+            query, all results will be returned.
           in: query
           name: query
           required: false
           type: string
-        - description: |
-            Filters search results based on the facets provided.  For more information on the values you can filter on, see Facets.
+        - description: >
+            Filters search results based on the facets provided.  For more
+            information on the values you can filter on, see Facets.
           in: query
           name: filter
           required: false
           type: string
-        - description: 'Start date to end date in the following format- YYYY-MM-DD:YYYY-MM-DD'
+        - description: Start date to end date in the following format- YYYY-MM-DD:YYYY-MM-DD
           in: query
           name: date_range
           required: false
           type: string
         - default: 0
-          description: 'When facets is set to 1, a count of all facets will be included in the response.'
+          description: When facets is set to 1, a count of all facets will be included in
+            the response.
           enum:
             - 0
             - 1
           in: query
           name: facets
           type: integer
-        - description: |
-            Sorts your results on the fields specified. <br/> `sort_value1+[asc | desc],sort_value2+[asc|desc],[...]`<br/> Appending +asc to a facet or response will sort results on that value in ascending order. Appending +desc to a facet or response  will sort results in descending order. You can sort on multiple fields. You can sort on any facet. For the list of responses you can sort on, see the Sortable Field column in the Response table. <br/><br/>If you are doing a spatial search with the ll parameter, you can also sort by the distance from the center of the search: dist+[asc | desc] <br/> **Note:** either +asc or +desc is required when using the sort parameter.
+        - description: >
+            Sorts your results on the fields specified. <br/> `sort_value1+[asc
+            | desc],sort_value2+[asc|desc],[...]`<br/> Appending +asc to a facet
+            or response will sort results on that value in ascending order.
+            Appending +desc to a facet or response  will sort results in
+            descending order. You can sort on multiple fields. You can sort on
+            any facet. For the list of responses you can sort on, see the
+            Sortable Field column in the Response table. <br/><br/>If you are
+            doing a spatial search with the ll parameter, you can also sort by
+            the distance from the center of the search: dist+[asc | desc] <br/>
+            **Note:** either +asc or +desc is required when using the sort
+            parameter.
           in: query
           name: sort
           type: string
@@ -104,13 +127,13 @@ paths:
           name: offset
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of events
           schema:
             properties:
               results:
                 items:
-                  $ref: '#/definitions/Event'
+                  $ref: "#/definitions/Event"
                 type: array
             type: object
       summary: Geographic API

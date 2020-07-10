@@ -1,29 +1,32 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
 host: api.nytimes.com
 basePath: /svc/suggest/v1
 info:
-  description: 'With the TimesTags API, you can mine the riches of the New York Times tag set. The TimesTags service matches your query to the controlled vocabularies that fuel NYTimes.com metadata. You supply a string of characters, and the service returns a ranked list of suggested terms.'
-  termsOfService: 'http://developer.nytimes.com/tou'
-  title: TimesTags
+  description: With the TimesTags API, you can mine the riches of the New York
+    Times tag set. The TimesTags service matches your query to the controlled
+    vocabularies that fuel NYTimes.com metadata. You supply a string of
+    characters, and the service returns a ranked list of suggested terms.
+  termsOfService: http://developer.nytimes.com/tou
+  title: TimesTags API
   version: 1.0.0
   x-apiClientRegistration:
-    url: 'http://developer.nytimes.com/signup'
+    url: http://developer.nytimes.com/signup
   x-apisguru-categories:
     - media
     - open_data
   x-logo:
-    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+    url: https://static01.nyt.com/images/icons/t_logo_291_black.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/times_tags/times_tags_v3.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/NYTimes/public_api_specs/master/times_tags/times_tags_v3.json
+      version: "2.0"
   x-providerName: nytimes.com
   x-serviceName: times_tags
 externalDocs:
-  url: 'http://developer.nytimes.com/'
+  url: http://developer.nytimes.com/
 produces:
   - application/json
 securityDefinitions:
@@ -42,8 +45,11 @@ paths:
           name: query
           required: true
           type: string
-        - description: |
-            If you do not specify a value for filter (see the Optional Parameters), your query will be matched to tags in all four Times dictionaries: subject, geographic location, organization and person. To use more than one, separate with commas.
+        - description: >
+            If you do not specify a value for filter (see the Optional
+            Parameters), your query will be matched to tags in all four Times
+            dictionaries: subject, geographic location, organization and person.
+            To use more than one, separate with commas.
           enum:
             - Des
             - Geo
@@ -60,7 +66,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of tags
           schema:
             items:

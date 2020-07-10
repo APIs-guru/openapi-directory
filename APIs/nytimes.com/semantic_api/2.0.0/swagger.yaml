@@ -1,32 +1,37 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
 host: api.nytimes.com
 basePath: /svc/semantic/v2/concept
 info:
-  description: |
-    The Semantic API complements the Articles API. With the Semantic API, you get access to the long list of people, places, organizations and other locations, entities and descriptors that make up the controlled vocabulary used as metadata by The New York Times (sometimes referred to as Times Tags and used for Times Topics pages).
+  description: >
+    The Semantic API complements the Articles API. With the Semantic API, you
+    get access to the long list of people, places, organizations and other
+    locations, entities and descriptors that make up the controlled vocabulary
+    used as metadata by The New York Times (sometimes referred to as Times Tags
+    and used for Times Topics pages).
+
 
     The Semantic API uses concepts which are, by definition, terms in The New York Times controlled vocabulary. Like the way facets are used in the Articles API, concepts are a good way to uncover articles of interest in The New York Times archive, and at the same time, limit the scope and number of those articles. The Semantic API maps to external semantic data resources, in a fashion consistent with the idea of linked data. The Semantic API also provides combination and relationship information to other, similar concepts in The New York Times controlled vocabulary.
-  termsOfService: 'http://developer.nytimes.com/tou'
-  title: Semantic
+  termsOfService: http://developer.nytimes.com/tou
+  title: Semantic API
   version: 2.0.0
   x-apiClientRegistration:
-    url: 'http://developer.nytimes.com/signup'
+    url: http://developer.nytimes.com/signup
   x-apisguru-categories:
     - media
     - open_data
   x-logo:
-    url: 'https://static01.nyt.com/images/icons/t_logo_291_black.png'
+    url: https://static01.nyt.com/images/icons/t_logo_291_black.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/NYTimes/public_api_specs/master/semantic_api/semantic_api.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/NYTimes/public_api_specs/master/semantic_api/semantic_api.json
+      version: "2.0"
   x-providerName: nytimes.com
   x-serviceName: semantic_api
 externalDocs:
-  url: 'http://developer.nytimes.com/'
+  url: http://developer.nytimes.com/
 produces:
   - application/json
 securityDefinitions:
@@ -37,11 +42,14 @@ securityDefinitions:
 security:
   - apikey: []
 paths:
-  '/name/{concept-type}/{specific-concept}.json':
+  "/name/{concept-type}/{specific-concept}.json":
     get:
       parameters:
-        - description: |
-            The type of the concept, used for Constructing a Semantic API Request by Concept Type and Specific Concept Name. The parameter is defined as a name-value pair, as in "concept_type=[nytd_geo|nytd_per|nytd_org|nytd_des]".
+        - description: >
+            The type of the concept, used for Constructing a Semantic API
+            Request by Concept Type and Specific Concept Name. The parameter is
+            defined as a name-value pair, as in
+            "concept_type=[nytd_geo|nytd_per|nytd_org|nytd_des]".
           enum:
             - nytd_geo
             - nytd_per
@@ -51,25 +59,40 @@ paths:
           name: concept-type
           required: true
           type: string
-        - description: |
-            The name of the concept, used for Constructing a Semantic API Request by Concept Type and Specific Concept Name. The parameter is defined in the URI path, as the element immediately preceding ".json" like with "Baseball.json".
+        - description: >
+            The name of the concept, used for Constructing a Semantic API
+            Request by Concept Type and Specific Concept Name. The parameter is
+            defined in the URI path, as the element immediately preceding
+            ".json" like with "Baseball.json".
           in: path
           name: specific-concept
           required: true
           type: string
-        - description: |
-            "all" or comma-separated list of specific optional fields: pages, ticker_symbol, links, taxonomy, combinations, geocodes, article_list, scope_notes, search_api_query
+        - description: >
+            "all" or comma-separated list of specific optional fields: pages,
+            ticker_symbol, links, taxonomy, combinations, geocodes,
+            article_list, scope_notes, search_api_query
+
 
             Optional fields are returned in result_set. They are briefly explained here:
 
+
             pages: A list of topic pages associated with a specific concept.
+
             ticker_symbol: If this concept is a publicly traded company, this field contains the ticker symbol.
+
             links: A list of links from this concept to external data resources.
+
             taxonomy: For descriptor concepts, this field returns a list of taxonomic relations to other concepts.
+
             combinations: For descriptor concepts, this field returns a list of the specific meanings tis concept takes on when combined with other concepts.
+
             geocodes: For geographic concepts, the full GIS record from geonames.
+
             article_list: A list of up to 10 articles associated with this concept.
+
             scope_notes: Scope notes contains clarifications and meaning definitions that explicate the relationship between the concept and an article.
+
             search_api_query: Returns the request one would need to submit to the Article Search API to obtain a list of articles annotated with this concept.
           enum:
             - all
@@ -86,13 +109,17 @@ paths:
           name: fields
           required: false
           type: string
-        - description: 'Precedes the search term string. Used in a Search Query. Except for &lt;specific_concept_name&gt;, Search Query will take the required parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;, &lt;article_uri&gt;) as an optional_parameter in addition to the query=&lt;query_term&gt;.'
+        - description: Precedes the search term string. Used in a Search Query. Except for
+            &lt;specific_concept_name&gt;, Search Query will take the required
+            parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;,
+            &lt;article_uri&gt;) as an optional_parameter in addition to the
+            query=&lt;query_term&gt;.
           in: query
           name: query
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Concepts
           schema:
             properties:
@@ -102,7 +129,7 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/Concept'
+                  $ref: "#/definitions/Concept"
                 type: array
               status:
                 type: string
@@ -110,30 +137,48 @@ paths:
   /search.json:
     get:
       parameters:
-        - description: 'Precedes the search term string. Used in a Search Query. Except for &lt;specific_concept_name&gt;, Search Query will take the required parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;, &lt;article_uri&gt;) as an optional_parameter in addition to the query=&lt;query_term&gt;.'
+        - description: Precedes the search term string. Used in a Search Query. Except for
+            &lt;specific_concept_name&gt;, Search Query will take the required
+            parameters listed above (&lt;concept_type&gt;, &lt;concept_uri&gt;,
+            &lt;article_uri&gt;) as an optional_parameter in addition to the
+            query=&lt;query_term&gt;.
           in: query
           name: query
           required: true
           type: string
         - default: 10
-          description: 'Integer value for the index count from the first concept to the last concept, sorted alphabetically. Used in a Search Query. A Search Query will return up to 10 concepts in its results.'
+          description: Integer value for the index count from the first concept to the
+            last concept, sorted alphabetically. Used in a Search Query. A
+            Search Query will return up to 10 concepts in its results.
           in: query
           name: offset
           required: false
           type: integer
-        - description: |
-            "all" or comma-separated list of specific optional fields: pages, ticker_symbol, links, taxonomy, combinations, geocodes, article_list, scope_notes, search_api_query
+        - description: >
+            "all" or comma-separated list of specific optional fields: pages,
+            ticker_symbol, links, taxonomy, combinations, geocodes,
+            article_list, scope_notes, search_api_query
+
 
             Optional fields are returned in result_set. They are briefly explained here:
 
+
             pages: A list of topic pages associated with a specific concept.
+
             ticker_symbol: If this concept is a publicly traded company, this field contains the ticker symbol.
+
             links: A list of links from this concept to external data resources.
+
             taxonomy: For descriptor concepts, this field returns a list of taxonomic relations to other concepts.
+
             combinations: For descriptor concepts, this field returns a list of the specific meanings tis concept takes on when combined with other concepts.
+
             geocodes: For geographic concepts, the full GIS record from geonames.
+
             article_list: A list of up to 10 articles associated with this concept.
+
             scope_notes: Scope notes contains clarifications and meaning definitions that explicate the relationship between the concept and an article.
+
             search_api_query: Returns the request one would need to submit to the Article Search API to obtain a list of articles annotated with this concept.
           enum:
             - all
@@ -151,7 +196,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Concepts
           schema:
             properties:
@@ -161,7 +206,7 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/ConceptRelation'
+                  $ref: "#/definitions/ConceptRelation"
                 type: array
               status:
                 type: string
@@ -171,7 +216,7 @@ definitions:
     properties:
       ancestors:
         items:
-          $ref: '#/definitions/ConceptRelation'
+          $ref: "#/definitions/ConceptRelation"
         type: array
       article_list:
         properties:
@@ -245,7 +290,7 @@ definitions:
         type: string
       descendants:
         items:
-          $ref: '#/definitions/ConceptRelation'
+          $ref: "#/definitions/ConceptRelation"
         type: array
       is_times_tag:
         type: integer
