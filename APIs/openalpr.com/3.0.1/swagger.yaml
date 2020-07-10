@@ -1,25 +1,28 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.openalpr.com
-basePath: /v2
+basePath: /v3
 info:
   contact:
     x-twitter: openalpr
-  description: |
-    The OpenALPR Cloud API allows you to send images to the cloud for processing. 
+  description: >
+    The OpenALPR CarCheck API allows you to send images to the cloud for
+    processing. 
+
     The image will be analyzed for license plates and vehicle make/models.  The results 
+
     are returned in JSON format
-  title: OpenALPR Cloud
-  version: 2.0.1
+  title: OpenALPR CarCheck API
+  version: 3.0.1
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/openalpr/profile_image?size=original'
+    url: https://twitter.com/openalpr/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://doc.openalpr.com/api/specs/cloudapi.yaml'
-      version: '2.0'
+      url: http://doc.openalpr.com/api/specs/cloudapi.yaml
+      version: "2.0"
   x-providerName: openalpr.com
 produces:
   - application/json
@@ -34,16 +37,19 @@ parameters:
     name: country
     required: true
     type: string
-  prewarp:
-    default: ''
+  is_cropped:
+    default: 0
     description: |
-      Prewarp configuration is used to calibrate the analyses for the 
-      angle of a particular camera.  More information is available here
-      http://doc.openalpr.com/accuracy_improvements.html#calibration
+      When providing a plate or vehicle that is already cropped,  
+      this performs a recognition against the full crop and does not 
+      attempt to localize the plate/vehicle
+    enum:
+      - 0
+      - 1
     in: query
-    name: prewarp
+    name: is_cropped
     required: false
-    type: string
+    type: integer
   recognize_vehicle:
     default: 0
     description: |
@@ -77,17 +83,6 @@ parameters:
     name: secret_key
     required: true
     type: string
-  state:
-    default: ''
-    description: |
-      Corresponds to a US state or EU country code used by OpenALPR pattern 
-      recognition.  For example, using "md" matches US plates against the 
-      Maryland plate patterns.  Using "fr" matches European plates against 
-      the French plate patterns.
-    in: query
-    name: state
-    required: false
-    type: string
   topn:
     default: 10
     description: |
@@ -118,7 +113,8 @@ responses:
           description: The number of API credits that were used to process this image
           type: integer
         credits_monthly_total:
-          description: The maximum number of API credits available this month according to your plan
+          description: The maximum number of API credits available this month according to
+            your plan
           type: integer
         credits_monthly_used:
           description: The number of API credits used this month
@@ -154,11 +150,16 @@ responses:
         regions_of_interest:
           description: Describes the areas analyzed in the input image
           items:
-            $ref: '#/definitions/region_of_interest'
+            $ref: "#/definitions/region_of_interest"
           type: array
         results:
           items:
-            $ref: '#/definitions/plate_details'
+            $ref: "#/definitions/plate_details"
+          type: array
+        vehicles:
+          description: Describes all vehicles found in the input image
+          items:
+            $ref: "#/definitions/vehicles"
           type: array
         version:
           description: API format version
@@ -197,8 +198,10 @@ paths:
       description: |
         Get a list of available results for plate and vehicle recognition
       operationId: getConfig
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: ok
           schema:
             properties:
@@ -261,24 +264,25 @@ paths:
           name: image
           required: true
           type: file
-        - $ref: '#/parameters/secret_key'
-        - $ref: '#/parameters/recognize_vehicle'
-        - $ref: '#/parameters/country'
-        - $ref: '#/parameters/state'
-        - $ref: '#/parameters/return_image'
-        - $ref: '#/parameters/topn'
-        - $ref: '#/parameters/prewarp'
+        - $ref: "#/parameters/secret_key"
+        - $ref: "#/parameters/recognize_vehicle"
+        - $ref: "#/parameters/country"
+        - $ref: "#/parameters/return_image"
+        - $ref: "#/parameters/topn"
+        - $ref: "#/parameters/is_cropped"
+      produces:
+        - application/json
       responses:
-        '200':
-          $ref: '#/responses/api_200'
-        '400':
-          $ref: '#/responses/api_400'
-        '401':
-          $ref: '#/responses/api_401'
-        '402':
-          $ref: '#/responses/api_402'
-        '403':
-          $ref: '#/responses/api_403'
+        "200":
+          $ref: "#/responses/api_200"
+        "400":
+          $ref: "#/responses/api_400"
+        "401":
+          $ref: "#/responses/api_401"
+        "402":
+          $ref: "#/responses/api_402"
+        "403":
+          $ref: "#/responses/api_403"
   /recognize_bytes:
     post:
       consumes:
@@ -295,31 +299,33 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/parameters/secret_key'
-        - $ref: '#/parameters/recognize_vehicle'
-        - $ref: '#/parameters/country'
-        - $ref: '#/parameters/state'
-        - $ref: '#/parameters/return_image'
-        - $ref: '#/parameters/topn'
-        - $ref: '#/parameters/prewarp'
+        - $ref: "#/parameters/secret_key"
+        - $ref: "#/parameters/recognize_vehicle"
+        - $ref: "#/parameters/country"
+        - $ref: "#/parameters/return_image"
+        - $ref: "#/parameters/topn"
+      produces:
+        - application/json
       responses:
-        '200':
-          $ref: '#/responses/api_200'
-        '400':
-          $ref: '#/responses/api_400'
-        '401':
-          $ref: '#/responses/api_401'
-        '402':
-          $ref: '#/responses/api_402'
-        '403':
-          $ref: '#/responses/api_403'
+        "200":
+          $ref: "#/responses/api_200"
+        "400":
+          $ref: "#/responses/api_400"
+        "401":
+          $ref: "#/responses/api_401"
+        "402":
+          $ref: "#/responses/api_402"
+        "403":
+          $ref: "#/responses/api_403"
   /recognize_url:
     post:
       consumes:
         - application/json
-      description: |
+      description: >
         Send an image for OpenALPR to analyze and provide metadata back
+
         The image is sent as a URL.  The OpenALPR service will download the image 
+
         and process it
       operationId: recognizeUrl
       parameters:
@@ -329,30 +335,30 @@ paths:
           name: image_url
           required: true
           type: string
-        - $ref: '#/parameters/secret_key'
-        - $ref: '#/parameters/recognize_vehicle'
-        - $ref: '#/parameters/country'
-        - $ref: '#/parameters/state'
-        - $ref: '#/parameters/return_image'
-        - $ref: '#/parameters/topn'
-        - $ref: '#/parameters/prewarp'
+        - $ref: "#/parameters/secret_key"
+        - $ref: "#/parameters/recognize_vehicle"
+        - $ref: "#/parameters/country"
+        - $ref: "#/parameters/return_image"
+        - $ref: "#/parameters/topn"
+      produces:
+        - application/json
       responses:
-        '200':
-          $ref: '#/responses/api_200'
-        '400':
-          $ref: '#/responses/api_400'
-        '401':
-          $ref: '#/responses/api_401'
-        '402':
-          $ref: '#/responses/api_402'
-        '403':
-          $ref: '#/responses/api_403'
+        "200":
+          $ref: "#/responses/api_200"
+        "400":
+          $ref: "#/responses/api_400"
+        "401":
+          $ref: "#/responses/api_401"
+        "402":
+          $ref: "#/responses/api_402"
+        "403":
+          $ref: "#/responses/api_403"
 definitions:
   coordinate:
     properties:
       x:
         type: integer
-      'y':
+      y:
         type: integer
     type: object
   plate_candidate:
@@ -372,7 +378,7 @@ definitions:
       candidates:
         description: All the top N candidates that could be the correct plate number
         items:
-          $ref: '#/definitions/plate_candidate'
+          $ref: "#/definitions/plate_candidate"
         type: array
       confidence:
         description: Confidence percentage that the plate number is correct
@@ -383,7 +389,7 @@ definitions:
           Four coordinates are provided that form a polygon starting
           from the top-left and moving clockwise ending in the bottom left
         items:
-          $ref: '#/definitions/coordinate'
+          $ref: "#/definitions/coordinate"
         type: array
       matches_template:
         description: Indicates whether the plate matched a regional text pattern
@@ -395,7 +401,7 @@ definitions:
         description: Number of milliseconds to process the license plate
         type: number
       region:
-        description: 'Specified or detected region (e.g., tx for Texas)'
+        description: Specified or detected region (e.g., tx for Texas)
         type: string
       region_confidence:
         description: Confidence percentage that the plate region is correct
@@ -404,9 +410,9 @@ definitions:
         description: The max number of results requested
         type: integer
       vehicle:
-        $ref: '#/definitions/vehicle_details'
+        $ref: "#/definitions/vehicle_details"
       vehicle_region:
-        $ref: '#/definitions/region_of_interest'
+        $ref: "#/definitions/region_of_interest"
     type: object
   region_of_interest:
     properties:
@@ -416,7 +422,7 @@ definitions:
         type: integer
       x:
         type: integer
-      'y':
+      y:
         type: integer
     type: object
   vehicle_candidate:
@@ -432,18 +438,39 @@ definitions:
     properties:
       body_type:
         items:
-          $ref: '#/definitions/vehicle_candidate'
+          $ref: "#/definitions/vehicle_candidate"
         type: array
       color:
         items:
-          $ref: '#/definitions/vehicle_candidate'
+          $ref: "#/definitions/vehicle_candidate"
         type: array
       make:
         items:
-          $ref: '#/definitions/vehicle_candidate'
+          $ref: "#/definitions/vehicle_candidate"
         type: array
       make_model:
         items:
-          $ref: '#/definitions/vehicle_candidate'
+          $ref: "#/definitions/vehicle_candidate"
         type: array
+      orientation:
+        items:
+          $ref: "#/definitions/vehicle_candidate"
+        type: array
+      year:
+        items:
+          $ref: "#/definitions/vehicle_candidate"
+        type: array
+    type: object
+  vehicles:
+    properties:
+      details:
+        $ref: "#/definitions/vehicle_details"
+      height:
+        type: integer
+      width:
+        type: integer
+      x:
+        type: integer
+      y:
+        type: integer
     type: object
