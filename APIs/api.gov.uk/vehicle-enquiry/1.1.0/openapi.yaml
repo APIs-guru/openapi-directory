@@ -1,25 +1,25 @@
 openapi: 3.0.0
 servers:
   - description: Production environment
-    url: 'https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry'
+    url: https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry
   - description: Test environment
-    url: 'https://uat.driver-vehicle-licensing.api.gov.uk/vehicle-enquiry'
+    url: https://uat.driver-vehicle-licensing.api.gov.uk/vehicle-enquiry
 info:
   contact:
     email: DvlaAPIAccess@dvla.gov.uk
     name: DVLA API Team
     x-twitter: GDSTeam
   description: Interface specification for the DVLA Vehicle Enquiry API
-  title: Vehicle Enquiry
+  title: Vehicle Enquiry API
   version: 1.1.0
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/GDSTeam/profile_image?size=original'
+    url: https://twitter.com/GDSTeam/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/v1.1.0-vehicle-enquiry-service.json'
-      version: '3.0'
+      url: https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/v1.1.0-vehicle-enquiry-service.json
+      version: "3.0"
   x-providerName: api.gov.uk
   x-serviceName: vehicle-enquiry
 tags:
@@ -46,39 +46,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VehicleRequest'
+              $ref: "#/components/schemas/VehicleRequest"
         description: Registration number of the vehicle to find details for
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vehicle'
+                $ref: "#/components/schemas/Vehicle"
           description: Successful response
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Bad Request
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Vehicle Not Found
-        '500':
+        "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Internal Server Error
-        '503':
+        "503":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Service Unavailable
       summary: Get vehicle details by registration number
       tags:
@@ -90,21 +90,21 @@ components:
       properties:
         errors:
           items:
-            $ref: '#/components/schemas/Errors'
+            $ref: "#/components/schemas/Errors"
           type: array
       type: object
     Errors:
       properties:
         code:
           description: DVLA reference code
-          example: '105'
+          example: "105"
           type: string
         detail:
           description: A meaningful description of the error which has occurred
           example: Invalid format for field - vehicle registration number
           type: string
         status:
-          example: '400'
+          example: "400"
           type: string
         title:
           description: Error title
@@ -116,8 +116,8 @@ components:
     Vehicle:
       properties:
         artEndDate:
-          description: 'Additional Rate of Tax End Date, format: YYYY-MM-DD'
-          example: '2007-12-25'
+          description: "Additional Rate of Tax End Date, format: YYYY-MM-DD"
+          example: 2007-12-25
           format: date
           type: string
         co2Emissions:
@@ -131,7 +131,7 @@ components:
           type: string
         dateOfLastV5CIssued:
           description: Date of last V5C issued
-          example: '2016-12-25'
+          example: 2016-12-25
           format: date
           type: string
         engineCapacity:
@@ -167,7 +167,7 @@ components:
           type: string
         motExpiryDate:
           description: Mot Expiry Date
-          example: '2008-12-25'
+          example: 2008-12-25
           format: date
           type: string
         motStatus:
@@ -181,7 +181,7 @@ components:
           type: string
         realDrivingEmissions:
           description: Real Driving Emissions value
-          example: '1'
+          example: "1"
           type: string
         registrationNumber:
           description: Registration number of the vehicle
@@ -193,8 +193,9 @@ components:
           format: int32
           type: integer
         taxDueDate:
-          description: 'Date of tax liablity, Used in calculating licence information presented to user'
-          example: '2017-12-25'
+          description: Date of tax liablity, Used in calculating licence information
+            presented to user
+          example: 2017-12-25
           format: date
           type: string
         taxStatus:
