@@ -1,48 +1,56 @@
 openapi: 3.0.1
 servers:
   - description: namsor_v2
-    url: 'https://v2.namsor.com/NamSorAPIv2'
+    url: https://v2.namsor.com/NamSorAPIv2
     variables: {}
 info:
   contact:
     email: contact@namsor.com
     name: Namsor SAS
-    url: 'http://www.namsor.com/'
+    url: http://www.namsor.com/
     x-twitter: gendreapp
-  description: 'NamSor API v2 : enpoints to process personal names (gender, cultural origin or ethnicity) in all alphabets or languages. Use GET methods for small tests, but prefer POST methods for higher throughput (batch processing of up to 100 names at a time). Need something you can''t find here? We have many more features coming soon. Let us know, we''ll do our best to add it! '
+  description: "NamSor API v2 : enpoints to process personal names (gender,
+    cultural origin or ethnicity) in all alphabets or languages. Use GET methods
+    for small tests, but prefer POST methods for higher throughput (batch
+    processing of up to 100 names at a time). Need something you can't find
+    here? We have many more features coming soon. Let us know, we'll do our best
+    to add it! "
   license:
     name: NamSorAPI_Lic_v0.0.7
-    url: 'https://v2.namsor.com/NamSorAPIv2/assets/pdf/201803_NamSor_API_Terms_v007.pdf'
+    url: https://v2.namsor.com/NamSorAPIv2/assets/pdf/201803_NamSor_API_Terms_v007.pdf
   title: NamSor API v2
-  version: 2.0.5
+  version: 2.0.10
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/gendreapp/profile_image?size=original'
+    url: https://twitter.com/gendreapp/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://v2.namsor.com/NamSorAPIv2/api2/openapi.json'
-      version: '3.0'
+      url: https://v2.namsor.com/NamSorAPIv2/api2/openapi.json
+      version: "3.0"
   x-providerName: namsor.com
 externalDocs:
-  description: 'NamSor API client SDKs v2 for Java, Python'
-  url: 'https://github.com/namsor'
+  description: NamSor API client SDKs v2 for Java, Python
+  url: https://github.com/namsor
 security:
   - api_key: []
 tags:
-  - description: 'Personal names (anthroponyms) : gender, country origin/ethnicity, diaspora, US ''race''/ethniciy'
+  - description: "Personal names (anthroponyms) : gender, country origin/ethnicity,
+      diaspora, US 'race'/ethniciy"
     name: personal
   - description: Social media and pseudonyms
     name: social
   - description: CHINESE special features
     name: chinese
-  - description: 'Administrative, system management.'
+  - description: JAPANESE special features
+    name: japanese
+  - description: Administrative, system management.
     name: admin
 paths:
-  '/api2/json/addCredits/{apiKey}/{usageCredits}/{userMessage}':
+  "/api2/json/addCredits/{apiKey}/{usageCredits}/{userMessage}":
     get:
       operationId: addCredits
       parameters:
@@ -63,20 +71,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SystemMetricsOut'
+                $ref: "#/components/schemas/SystemMetricsOut"
           description: Estimate new after applying credits.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
       summary: Add usage credits to an API Key.
       tags:
         - admin
-  '/api2/json/anonymize/{source}/{anonymized}':
+  "/api2/json/anonymize/{source}/{anonymized}":
     get:
       operationId: anonymize
       parameters:
@@ -91,9 +99,9 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Anonymization of a source.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Activate/deactivate anonymization for a source.
       tags:
@@ -102,28 +110,43 @@ paths:
     get:
       operationId: availableServices
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlansOut'
+                $ref: "#/components/schemas/APIPlansOut"
           description: Available services
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: List of API services and usage cost in Units (default is 1=ONE Unit).
+      tags:
+        - admin
+  /api2/json/apiStatus:
+    get:
+      operationId: apiStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIPlansOut"
+          description: Available classifiers and status
+        "401":
+          description: Missing or incorrect token
+      summary: Prints the current status of the classifiers.
       tags:
         - admin
   /api2/json/apiUsage:
     get:
       operationId: apiUsage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPeriodUsageOut'
+                $ref: "#/components/schemas/APIPeriodUsageOut"
           description: Print current API usage.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
@@ -134,13 +157,13 @@ paths:
     get:
       operationId: apiUsageHistory
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPeriodUsageOut'
+                $ref: "#/components/schemas/APIPeriodUsageOut"
           description: Print historical API usage.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
@@ -151,37 +174,38 @@ paths:
     get:
       operationId: apiUsageHistoryAggregate
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPeriodUsageOut'
+                $ref: "#/components/schemas/APIPeriodUsageOut"
           description: Print historical API usage.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
-      summary: 'Print historical API usage (in an aggregated view, by service, by day/hour/min).'
+      summary: Print historical API usage (in an aggregated view, by service, by
+        day/hour/min).
       tags:
         - admin
   /api2/json/availablePlans:
     get:
-      operationId: availablePlans_1
+      operationId: availablePlans
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlansOut'
+                $ref: "#/components/schemas/APIPlansOut"
           description: Available plans
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: List all available plans in the default currency (usd).
       tags:
         - admin
-  '/api2/json/availablePlans/{token}':
+  "/api2/json/availablePlans/{token}":
     get:
-      operationId: availablePlans
+      operationId: availablePlans_1
       parameters:
         - in: path
           name: token
@@ -189,13 +213,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlansOut'
+                $ref: "#/components/schemas/APIPlansOut"
           description: Available plans
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: List all available plans in the user's preferred currency.
       tags:
@@ -204,18 +228,18 @@ paths:
     get:
       operationId: billingCurrencies
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CurrenciesOut'
+                $ref: "#/components/schemas/CurrenciesOut"
           description: The supported billing currencies.
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'List possible currency options for billing (USD, EUR, GBP, ...)'
+      summary: List possible currency options for billing (USD, EUR, GBP, ...)
       tags:
         - admin
-  '/api2/json/billingHistory/{token}':
+  "/api2/json/billingHistory/{token}":
     get:
       operationId: billingHistory
       parameters:
@@ -225,18 +249,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BillingHistoryOut'
+                $ref: "#/components/schemas/BillingHistoryOut"
           description: The billing history
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: Read the history billing information (invoices paid via Stripe or manually).
+      summary: Read the history billing information (invoices paid via Stripe or
+        manually).
       tags:
         - admin
-  '/api2/json/billingInfo/{token}':
+  "/api2/json/billingInfo/{token}":
     get:
       operationId: billingInfo
       parameters:
@@ -246,15 +271,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BillingInfoInOut'
+                $ref: "#/components/schemas/BillingInfoInOut"
           description: The current billing info
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Read the billing information (company name, address, phone, vat ID)'
+      summary: Read the billing information (company name, address, phone, vat ID)
       tags:
         - admin
   /api2/json/charge:
@@ -262,7 +287,7 @@ paths:
       operationId: charge
       requestBody:
         content:
-          '*/*':
+          "*/*":
             schema:
               properties:
                 stripeEmail:
@@ -271,18 +296,19 @@ paths:
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: A stripe customerID
-        '401':
+        "401":
           description: Missing or incorrect email or payment token
-      summary: 'Create a Stripe Customer, based on a payment card token (from secure StripeJS) and email.'
+      summary: Create a Stripe Customer, based on a payment card token (from secure
+        StripeJS) and email.
       tags:
         - admin
-  '/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}':
+  "/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}":
     get:
       operationId: chineseNameCandidates
       parameters:
@@ -297,19 +323,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RomanizedNameOut'
+                $ref: "#/components/schemas/RomanizedNameOut"
           description: A romanized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming'
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang
+        Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameCandidatesBatch:
@@ -319,22 +346,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
-        description: 'A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal Chinese names in LATIN, firstName =
+          chineseGivenName; lastName=chineseSurname
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchNameMatchCandidatesOut'
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming'
+      summary: Identify Chinese name candidates, based on the romanized name
+        (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang
+        Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameCandidatesGenderBatch:
@@ -344,25 +374,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
-        description: 'A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal Chinese names in LATIN, firstName =
+          chineseGivenName; lastName=chineseSurname
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchNameMatchCandidatesOut'
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.'
+      summary: Identify Chinese name candidates, based on the romanized name
+        (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang
+        Xiaoming.
       tags:
         - chinese
-  '/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}':
+  "/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}":
     get:
       operationId: chineseNameGenderCandidates
       parameters:
@@ -382,22 +415,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RomanizedNameOut'
+                $ref: "#/components/schemas/RomanizedNameOut"
           description: A romanized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender (''male'' or ''female'')'
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang
+        Xiaoming - having a known gender ('male' or 'female')
       tags:
         - chinese
-  '/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}':
+  "/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}":
     get:
       operationId: chineseNameMatch
       parameters:
@@ -417,19 +451,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RomanizedNameOut'
+                $ref: "#/components/schemas/RomanizedNameOut"
           description: A romanized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
+      summary: Return a score for matching Chinese name ex. 王晓明 with a romanized name
+        ex. Wang Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameMatchBatch:
@@ -439,25 +474,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
-        description: 'A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal Chinese names in LATIN, firstName =
+          chineseGivenName; lastName=chineseSurname
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchNameMatchCandidatesOut'
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming'
+      summary: Identify Chinese name candidates, based on the romanized name
+        (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang
+        Xiaoming
       tags:
         - chinese
-  '/api2/json/corporateKey/{apiKey}/{corporate}':
+  "/api2/json/corporateKey/{apiKey}/{corporate}":
     get:
       operationId: corporateKey
       parameters:
@@ -472,14 +510,14 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: API Key set to a corporate status.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Setting an API Key to a corporate status.
       tags:
         - admin
-  '/api2/json/country/{personalNameFull}':
+  "/api2/json/country/{personalNameFull}":
     get:
       operationId: country
       parameters:
@@ -489,19 +527,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameGeoOut'
+                $ref: "#/components/schemas/PersonalNameGeoOut"
           description: A origined name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer the likely country of residence of a personal full name, or one surname. Assumes names as they are in the country of residence OR the country of origin.'
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of a
+        personal full name, or one surname. Assumes names as they are in the
+        country of residence OR the country of origin."
       tags:
         - personal
   /api2/json/countryBatch:
@@ -511,25 +551,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameGeoOut'
+                $ref: "#/components/schemas/BatchPersonalNameGeoOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer the likely country of residence of up to 100 personal full names, or surnames. Assumes names as they are in the country of residence OR the country of origin.'
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of up
+        to 100 personal full names, or surnames. Assumes names as they are in
+        the country of residence OR the country of origin."
       tags:
         - personal
-  '/api2/json/debugLevel/{logger}/{level}':
+  "/api2/json/debugLevel/{logger}/{level}":
     get:
       operationId: debugLevel
       parameters:
@@ -544,12 +586,12 @@ paths:
           schema:
             type: string
       responses:
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Update debug level for a classifier
       tags:
         - admin
-  '/api2/json/diaspora/{countryIso2}/{firstName}/{lastName}':
+  "/api2/json/diaspora/{countryIso2}/{firstName}/{lastName}":
     get:
       operationId: diaspora
       parameters:
@@ -569,19 +611,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameDiasporaedOut'
+                $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
           description: A diaspora / ethnicity for given name and geography.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 20 UNITS] Infer the likely ethnicity/diaspora of a personal name, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)'
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of a
+        personal name, given a country of residence ISO2 code (ex. US, CA, AU,
+        NZ etc.)"
       tags:
         - personal
   /api2/json/diasporaBatch:
@@ -591,38 +635,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameGeoIn'
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameDiasporaedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameDiasporaedOut"
           description: A list of diaspora / ethnicity given a name and residency.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 20 UNITS] Infer the likely ethnicity/diaspora of up to 100 personal names, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)'
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of up to
+        100 personal names, given a country of residence ISO2 code (ex. US, CA,
+        AU, NZ etc.)"
       tags:
         - personal
   /api2/json/flush:
     get:
       operationId: flush
       responses:
-        '200':
-          description: Shutdown AI.
-        '401':
+        "200":
+          description: Flush API Key caches.
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
       summary: Flush counters.
       tags:
         - admin
-  '/api2/json/gender/{firstName}/{lastName}':
+  "/api2/json/gender/{firstName}/{lastName}":
     get:
       operationId: gender
       parameters:
@@ -637,15 +683,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameGenderedOut'
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
@@ -659,25 +705,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameGenderedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 names, detecting automatically the cultural context.'
+      summary: Infer the likely gender of up to 100 names, detecting automatically the
+        cultural context.
       tags:
         - personal
-  '/api2/json/genderChineseName/{chineseName}':
+  "/api2/json/genderChineseName/{chineseName}":
     get:
       operationId: genderChineseName
       parameters:
@@ -687,15 +734,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameGenderedOut'
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
@@ -709,25 +756,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
-        description: 'A list of personal names, with a country ISO2 code'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names, with a country ISO2 code
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameGenderedOut'
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
       summary: Infer the likely gender of up to 100 full names ex. 王晓明
       tags:
         - chinese
-  '/api2/json/genderChineseNamePinyin/{chineseSurnameLatin}/{chineseGivenNameLatin}':
+  "/api2/json/genderChineseNamePinyin/{chineseSurnameLatin}/{chineseGivenNameLatin}":
     get:
       operationId: genderChineseNamePinyin
       parameters:
@@ -742,15 +789,15 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameGenderedOut'
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
@@ -764,25 +811,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
-        description: 'A list of names, with country code.'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of names, with country code.
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameGenderedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
       summary: Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
       tags:
         - chinese
-  '/api2/json/genderFull/{fullName}':
+  "/api2/json/genderFull/{fullName}":
     get:
       operationId: genderFull
       parameters:
@@ -792,19 +839,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameGenderedOut'
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of a full name, ex. John H. Smith'
+      summary: Infer the likely gender of a full name, ex. John H. Smith
       tags:
         - personal
   /api2/json/genderFullBatch:
@@ -814,25 +861,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameGenderedOut'
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 full names, detecting automatically the cultural context.'
+      summary: Infer the likely gender of up to 100 full names, detecting
+        automatically the cultural context.
       tags:
         - personal
-  '/api2/json/genderFullGeo/{fullName}/{countryIso2}':
+  "/api2/json/genderFullGeo/{fullName}/{countryIso2}":
     get:
       operationId: genderFullGeo
       parameters:
@@ -847,19 +895,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameGenderedOut'
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of a full name, given a local context (ISO2 country code).'
+      summary: Infer the likely gender of a full name, given a local context (ISO2
+        country code).
       tags:
         - personal
   /api2/json/genderFullGeoBatch:
@@ -869,25 +918,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameGeoIn'
-        description: 'A list of personal names, with a country ISO2 code'
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
+        description: A list of personal names, with a country ISO2 code
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameGenderedOut'
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 full names, with a given cultural context (country ISO2 code).'
+      summary: Infer the likely gender of up to 100 full names, with a given cultural
+        context (country ISO2 code).
       tags:
         - personal
-  '/api2/json/genderGeo/{firstName}/{lastName}/{countryIso2}':
+  "/api2/json/genderGeo/{firstName}/{lastName}/{countryIso2}":
     get:
       operationId: genderGeo
       parameters:
@@ -907,19 +957,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameGenderedOut'
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
           description: A genderized name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of a name, given a local context (ISO2 country code).'
+      summary: Infer the likely gender of a name, given a local context (ISO2 country
+        code).
       tags:
         - personal
   /api2/json/genderGeoBatch:
@@ -929,36 +980,356 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameGeoIn'
-        description: 'A list of names, with country code.'
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
+        description: A list of names, with country code.
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameGenderedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 names, each given a local context (ISO2 country code).'
+      summary: Infer the likely gender of up to 100 names, each given a local context
+        (ISO2 country code).
       tags:
         - personal
+  "/api2/json/genderJapaneseName/{japaneseSurname}/{japaneseGivenName}":
+    get:
+      operationId: genderJapaneseNamePinyin
+      parameters:
+        - in: path
+          name: japaneseSurname
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FirstLastNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Japanese name in LATIN (Pinyin).
+      tags:
+        - japanese
+  /api2/json/genderJapaneseNameBatch:
+    post:
+      operationId: genderJapaneseNamePinyinBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of names, with country code.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
+          description: A list of genderized names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
+      tags:
+        - japanese
+  "/api2/json/genderJapaneseNameFull/{japaneseName}":
+    get:
+      operationId: genderJapaneseNameFull
+      parameters:
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameGenderedOut"
+          description: A genderized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of a Japanese full name ex. 王晓明
+      tags:
+        - japanese
+  /api2/json/genderJapaneseNameFullBatch:
+    post:
+      operationId: genderJapaneseNameFullBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameGenderedOut"
+          description: A list of genderized names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely gender of up to 100 full names
+      tags:
+        - japanese
   /api2/json/invalidateCache:
     get:
       operationId: invalidateCache
       responses:
-        '200':
+        "200":
           description: Clear caches.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Invalidate system caches.
       tags:
         - admin
-  '/api2/json/learnable/{source}/{learnable}':
+  "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}":
+    get:
+      operationId: japaneseNameKanjiCandidates
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RomanizedNameOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name
+        ex. Yamamoto Sanae
+      tags:
+        - japanese
+  /api2/json/japaneseNameKanjiCandidatesBatch:
+    post:
+      operationId: japaneseNameKanjiCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal japanese names in LATIN, firstName =
+          japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Identify japanese name candidates in KANJI, based on the romanized name
+        (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto
+        Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameLatinCandidates/{japaneseSurnameKanji}/{japaneseGivenNameKanji}":
+    get:
+      operationId: japaneseNameLatinCandidates
+      parameters:
+        - in: path
+          name: japaneseSurnameKanji
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameKanji
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RomanizedNameOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize japanese name, based on the name in Kanji.
+      tags:
+        - japanese
+  /api2/json/japaneseNameLatinCandidatesBatch:
+    post:
+      operationId: japaneseNameLatinCandidatesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal japanese names in KANJI, firstName =
+          japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of genderized names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Romanize japanese names, based on the name in KANJI
+      tags:
+        - japanese
+  "/api2/json/japaneseNameMatch/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}":
+    get:
+      operationId: japaneseNameMatch
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RomanizedNameOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a
+        romanized name ex. Yamamoto Sanae
+      tags:
+        - japanese
+  /api2/json/japaneseNameMatchBatch:
+    post:
+      operationId: japaneseNameMatchBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
+        description: A list of personal Japanese names in LATIN, firstName =
+          japaneseGivenName; lastName=japaneseSurname
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchNameMatchCandidatesOut"
+          description: A list of matched names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗
+        with romanized names ex. Yamamoto Sanae
+      tags:
+        - japanese
+  "/api2/json/japaneseNameMatchFeedbackLoop/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}":
+    get:
+      operationId: japaneseNameMatchFeedbackLoop
+      parameters:
+        - in: path
+          name: japaneseSurnameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseGivenNameLatin
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RomanizedNameOut"
+          description: A romanized name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: "[CREDITS 1 UNIT] Feedback loop to better perform matching Japanese
+        name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae"
+      tags:
+        - japanese
+  "/api2/json/learnable/{source}/{learnable}":
     get:
       operationId: learnable
       parameters:
@@ -973,9 +1344,9 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Vetting of a source.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Activate/deactivate learning from a source.
       tags:
@@ -984,18 +1355,18 @@ paths:
     get:
       operationId: namsorCounter
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SoftwareVersionOut'
+                $ref: "#/components/schemas/SoftwareVersionOut"
           description: The overall API counter
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: Get the overall API counter
       tags:
         - admin
-  '/api2/json/origin/{firstName}/{lastName}':
+  "/api2/json/origin/{firstName}/{lastName}":
     get:
       operationId: origin
       parameters:
@@ -1010,19 +1381,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameOriginedOut'
+                $ref: "#/components/schemas/FirstLastNameOriginedOut"
           description: A origined name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer the likely country of origin of a personal name. Assumes names as they are in the country of origin. For US, CA, AU, NZ and other melting-pots : use ''diaspora'' instead.'
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of a
+        personal name. Assumes names as they are in the country of origin. For
+        US, CA, AU, NZ and other melting-pots : use 'diaspora' instead."
       tags:
         - personal
   /api2/json/originBatch:
@@ -1032,25 +1405,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameIn'
+              $ref: "#/components/schemas/BatchFirstLastNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameOriginedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameOriginedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer the likely country of origin of up to 100 names, detecting automatically the cultural context.'
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of up to
+        100 names, detecting automatically the cultural context."
       tags:
         - personal
-  '/api2/json/parseChineseName/{chineseName}':
+  "/api2/json/parseChineseName/{chineseName}":
     get:
       operationId: parseChineseName
       parameters:
@@ -1060,19 +1434,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameParsedOut'
+                $ref: "#/components/schemas/PersonalNameParsedOut"
           description: A origined name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)'
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 ->
+        王(surname) 晓明(given name)
       tags:
         - chinese
   /api2/json/parseChineseNameBatch:
@@ -1082,25 +1457,78 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameParsedOut'
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
           description: A list of parsed names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).'
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 ->
+        王(surname) 晓明(given name).
       tags:
         - chinese
-  '/api2/json/parseName/{nameFull}':
+  "/api2/json/parseJapaneseName/{japaneseName}":
+    get:
+      operationId: parseJapaneseName
+      parameters:
+        - in: path
+          name: japaneseName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalNameParsedOut"
+          description: A origined name.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: Infer the likely first/last name structure of a name, ex. 山本 早苗 or
+        Yamamoto Sanae
+      tags:
+        - japanese
+  /api2/json/parseJapaneseNameBatch:
+    post:
+      operationId: parseJapaneseNameBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchPersonalNameIn"
+        description: A list of personal names
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
+          description: A list of parsed names.
+        "401":
+          description: Missing or incorrect API Key
+        "403":
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: "Infer the likely first/last name structure of a name, ex. 山本 早苗 or
+        Yamamoto Sanae "
+      tags:
+        - japanese
+  "/api2/json/parseName/{nameFull}":
     get:
       operationId: parseName
       parameters:
@@ -1110,22 +1538,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameParsedOut'
+                $ref: "#/components/schemas/PersonalNameParsedOut"
           description: A origined name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. '
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith
+        or SMITH, John or SMITH; John. "
       tags:
         - personal
-  '/api2/json/parseName/{nameFull}/{countryIso2}':
+  "/api2/json/parseName/{nameFull}/{countryIso2}":
     get:
       operationId: parseNameGeo
       parameters:
@@ -1140,19 +1569,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameParsedOut'
+                $ref: "#/components/schemas/PersonalNameParsedOut"
           description: A origined name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. For better accuracy, provide a geographic context.'
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or
+        SMITH, John or SMITH; John. For better accuracy, provide a geographic
+        context.
       tags:
         - personal
   /api2/json/parseNameBatch:
@@ -1162,22 +1593,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameParsedOut'
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
           description: A list of parsed names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John.'
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or
+        SMITH, John or SMITH; John.
       tags:
         - personal
   /api2/json/parseNameGeoBatch:
@@ -1187,22 +1619,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameGeoIn'
+              $ref: "#/components/schemas/BatchPersonalNameGeoIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameParsedOut'
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
           description: A list of parsed names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. Giving a local context improves precision. '
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith
+        or SMITH, John or SMITH; John. Giving a local context improves
+        precision. "
       tags:
         - personal
   /api2/json/parsedGenderBatch:
@@ -1212,22 +1646,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchParsedFullNameIn'
+              $ref: "#/components/schemas/BatchParsedFullNameIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameGenderedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 fully parsed names, detecting automatically the cultural context.'
+      summary: Infer the likely gender of up to 100 fully parsed names, detecting
+        automatically the cultural context.
       tags:
         - personal
   /api2/json/parsedGenderGeoBatch:
@@ -1237,25 +1672,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchParsedFullNameGeoIn'
+              $ref: "#/components/schemas/BatchParsedFullNameGeoIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameGenderedOut'
+                $ref: "#/components/schemas/BatchFirstLastNameGenderedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Infer the likely gender of up to 100 fully parsed names, detecting automatically the cultural context.'
+      summary: Infer the likely gender of up to 100 fully parsed names, detecting
+        automatically the cultural context.
       tags:
         - personal
-  '/api2/json/paymentInfo/{token}':
+  "/api2/json/paymentInfo/{token}":
     get:
       operationId: paymentInfo
       parameters:
@@ -1265,18 +1701,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An session token
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: Get the Stripe payment information associated with the current google auth session token.
+      summary: Get the Stripe payment information associated with the current google
+        auth session token.
       tags:
         - admin
-  '/api2/json/phoneCode/{firstName}/{lastName}/{phoneNumber}':
+  "/api2/json/phoneCode/{firstName}/{lastName}/{phoneNumber}":
     get:
       operationId: phoneCode
       parameters:
@@ -1296,19 +1733,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNamePhoneCodedOut'
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
           description: A name with country and phone code.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 11 UNITS] Infer the likely country and phone prefix, given a personal name and formatted / unformatted phone number.'
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix,
+        given a personal name and formatted / unformatted phone number."
       tags:
         - social
   /api2/json/phoneCodeBatch:
@@ -1318,25 +1756,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNamePhoneNumberIn'
+              $ref: "#/components/schemas/BatchFirstLastNamePhoneNumberIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNamePhoneCodedOut'
+                $ref: "#/components/schemas/BatchFirstLastNamePhoneCodedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 11 UNITS] Infer the likely country and phone prefix, of up to 100 personal names, detecting automatically the local context given a name and formatted / unformatted phone number.'
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of
+        up to 100 personal names, detecting automatically the local context
+        given a name and formatted / unformatted phone number."
       tags:
         - social
-  '/api2/json/phoneCodeGeo/{firstName}/{lastName}/{phoneNumber}/{countryIso2}':
+  "/api2/json/phoneCodeGeo/{firstName}/{lastName}/{phoneNumber}/{countryIso2}":
     get:
       operationId: phoneCodeGeo
       parameters:
@@ -1361,19 +1801,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNamePhoneCodedOut'
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
           description: A name with country and phone code.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 11 UNITS] Infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence).'
+      summary: "[USES 11 UNITS PER NAME] Infer the likely phone prefix, given a
+        personal name and formatted / unformatted phone number, with a local
+        context (ISO2 country of residence)."
       tags:
         - social
   /api2/json/phoneCodeGeoBatch:
@@ -1383,25 +1825,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNamePhoneNumberGeoIn'
+              $ref: "#/components/schemas/BatchFirstLastNamePhoneNumberGeoIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNamePhoneCodedOut'
+                $ref: "#/components/schemas/BatchFirstLastNamePhoneCodedOut"
           description: A list of genderized names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 11 UNITS] Infer the likely country and phone prefix, of up to 100 personal names, with a local context (ISO2 country of residence).'
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of
+        up to 100 personal names, with a local context (ISO2 country of
+        residence)."
       tags:
         - social
-  '/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}':
+  "/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}":
     get:
       operationId: phoneCodeGeoFeedbackLoop
       parameters:
@@ -1431,22 +1875,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNamePhoneCodedOut'
+                $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
           description: A name with country and phone code.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[CREDITS 1 UNIT] Feedback loop to better infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence).'
+      summary: "[CREDITS 1 UNIT] Feedback loop to better infer the likely phone
+        prefix, given a personal name and formatted / unformatted phone number,
+        with a local context (ISO2 country of residence)."
       tags:
         - social
-  '/api2/json/pinyinChineseName/{chineseName}':
+  "/api2/json/pinyinChineseName/{chineseName}":
     get:
       operationId: pinyinChineseName
       parameters:
@@ -1456,19 +1902,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalNameParsedOut'
+                $ref: "#/components/schemas/PersonalNameParsedOut"
           description: A pinyin name.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)'
+      summary: Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming
+        (given name)
       tags:
         - chinese
   /api2/json/pinyinChineseNameBatch:
@@ -1478,25 +1925,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchPersonalNameIn'
+              $ref: "#/components/schemas/BatchPersonalNameIn"
         description: A list of Chinese names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchPersonalNameParsedOut'
+                $ref: "#/components/schemas/BatchPersonalNameParsedOut"
           description: A list of Pinyin names.
-        '401':
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: 'Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).'
+      summary: Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname)
+        Xiaoming (given name).
       tags:
         - chinese
-  '/api2/json/procureKey/{token}':
+  "/api2/json/procureKey/{token}":
     get:
       operationId: procureKey
       parameters:
@@ -1506,33 +1954,34 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An API Key
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Procure an API Key (sent via Email), based on an auth token. Keep your API Key secret.'
+      summary: Procure an API Key (sent via Email), based on an auth token. Keep your
+        API Key secret.
       tags:
         - admin
   /api2/json/redeployUI:
     get:
-      operationId: redeployUI_1
+      operationId: redeployUI
       responses:
-        '200':
+        "200":
           description: Redeploy UI from DEV.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
       summary: Redeploy UI from current dev branch.
       tags:
         - admin
-  '/api2/json/redeployUI/{live}':
+  "/api2/json/redeployUI/{live}":
     get:
-      operationId: redeployUI
+      operationId: redeployUI_1
       parameters:
         - in: path
           name: live
@@ -1540,16 +1989,16 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Redeploy UI from DEV.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
       summary: Redeploy UI from current dev branch.
       tags:
         - admin
-  '/api2/json/removeUserAccount/{token}':
+  "/api2/json/removeUserAccount/{token}":
     get:
       operationId: removeUserAccount
       parameters:
@@ -1559,18 +2008,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlanSubscriptionOut'
+                $ref: "#/components/schemas/APIPlanSubscriptionOut"
           description: An API subscription
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: Remove the user account.
       tags:
         - admin
-  '/api2/json/removeUserAccountOnBehalf/{apiKey}':
+  "/api2/json/removeUserAccountOnBehalf/{apiKey}":
     get:
       operationId: removeUserAccountOnBehalf
       parameters:
@@ -1580,13 +2029,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlanSubscriptionOut'
+                $ref: "#/components/schemas/APIPlanSubscriptionOut"
           description: An API subscription
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: Remove (on behalf) a user account.
       tags:
@@ -1595,9 +2044,9 @@ paths:
     get:
       operationId: shutdown
       responses:
-        '200':
+        "200":
           description: Shutdown AI.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
@@ -1608,18 +2057,18 @@ paths:
     get:
       operationId: softwareVersion
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SoftwareVersionOut'
+                $ref: "#/components/schemas/SoftwareVersionOut"
           description: The current software version
-        '401':
+        "401":
           description: Missing or incorrect token
       summary: Get the current software version
       tags:
         - admin
-  '/api2/json/sourceStats/{source}':
+  "/api2/json/sourceStats/{source}":
     get:
       operationId: sourceStats
       parameters:
@@ -1629,13 +2078,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SystemMetricsOut'
+                $ref: "#/components/schemas/SystemMetricsOut"
           description: Current system status.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
@@ -1646,13 +2095,13 @@ paths:
     get:
       operationId: stats
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SystemMetricsOut'
+                $ref: "#/components/schemas/SystemMetricsOut"
           description: Current system status.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       security:
         - api_key: []
@@ -1680,12 +2129,12 @@ paths:
           schema:
             type: string
       responses:
-        '401':
+        "401":
           description: Missing or incorrect email or payment token
       summary: Connects a Stripe Account.
       tags:
         - admin
-  '/api2/json/subscribePlan/{planName}/{token}':
+  "/api2/json/subscribePlan/{planName}/{token}":
     get:
       operationId: subscribePlan
       parameters:
@@ -1700,18 +2149,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlanSubscriptionOut'
+                $ref: "#/components/schemas/APIPlanSubscriptionOut"
           description: An API subscription
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Subscribe to a give API plan, using the user''s preferred or default currency.'
+      summary: Subscribe to a give API plan, using the user's preferred or default
+        currency.
       tags:
         - admin
-  '/api2/json/subscribePlanOnBehalf/{planName}/{apiKey}':
+  "/api2/json/subscribePlanOnBehalf/{planName}/{apiKey}":
     get:
       operationId: subscribePlanOnBehalf
       parameters:
@@ -1726,18 +2176,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPlanSubscriptionOut'
+                $ref: "#/components/schemas/APIPlanSubscriptionOut"
           description: An API subscription
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Subscribe to a give API plan, using the user''s preferred or default currency (admin only).'
+      summary: Subscribe to a give API plan, using the user's preferred or default
+        currency (admin only).
       tags:
         - admin
-  '/api2/json/updateBillingInfo/{token}':
+  "/api2/json/taxonomyClasses/{classifierName}":
+    get:
+      operationId: taxonomyClasses
+      parameters:
+        - in: path
+          name: classifierName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIPlansOut"
+          description: Available plans
+        "401":
+          description: Missing or incorrect token
+      summary: Print the taxonomy classes valid for the given classifier.
+      tags:
+        - admin
+  "/api2/json/updateBillingInfo/{token}":
     post:
       operationId: updateBillingInfo
       parameters:
@@ -1750,20 +2222,21 @@ paths:
         content:
           application/json;charset=UTF-8:
             schema:
-              $ref: '#/components/schemas/BillingInfoInOut'
+              $ref: "#/components/schemas/BillingInfoInOut"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BillingInfoInOut'
+                $ref: "#/components/schemas/BillingInfoInOut"
           description: The updated billing info
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Sets or update the billing information (company name, address, phone, vat ID)'
+      summary: Sets or update the billing information (company name, address, phone,
+        vat ID)
       tags:
         - admin
-  '/api2/json/updateLimit/{usageLimit}/{hardOrSoft}/{token}':
+  "/api2/json/updateLimit/{usageLimit}/{hardOrSoft}/{token}":
     get:
       operationId: updateLimit
       parameters:
@@ -1784,18 +2257,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIPeriodUsageOut'
+                $ref: "#/components/schemas/APIPeriodUsageOut"
           description: An API subscription
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: Modifies the hard/soft limit on the API plan's overages (default is 0$ soft limit).
+      summary: Modifies the hard/soft limit on the API plan's overages (default is 0$
+        soft limit).
       tags:
         - admin
-  '/api2/json/updatePaymentDefault/{defautSourceId}/{token}':
+  "/api2/json/updatePaymentDefault/{defautSourceId}/{token}":
     get:
       operationId: updatePaymentDefault
       parameters:
@@ -1810,18 +2284,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An session token
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: Update the default Stripe card associated with the current google auth session token.
+      summary: Update the default Stripe card associated with the current google auth
+        session token.
       tags:
         - admin
-  '/api2/json/usRaceEthnicity/{firstName}/{lastName}':
+  "/api2/json/usRaceEthnicity/{firstName}/{lastName}":
     get:
       operationId: usRaceEthnicity
       parameters:
@@ -1836,19 +2311,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameUSRaceEthnicityOut'
-          description: 'a US resident''s likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
-        '401':
+                $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
+            HL (hispano latino),  A (asian, non latino), B_NL (black, non
+            latino)."
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer a US resident''s likely race/ethnicity according to US Census taxonomy W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
+        according to US Census taxonomy W_NL (white, non latino), HL (hispano
+        latino),  A (asian, non latino), B_NL (black, non latino)."
       tags:
         - personal
   /api2/json/usRaceEthnicityBatch:
@@ -1858,25 +2337,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameGeoIn'
+              $ref: "#/components/schemas/BatchFirstLastNameGeoIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut'
-          description: 'A list of US resident''s likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
-        '401':
+                $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non
+            latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
+            non latino).
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer up-to 100 US resident''s likely race/ethnicity according to US Census taxonomy.'
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
+        race/ethnicity according to US Census taxonomy."
       tags:
         - personal
-  '/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}':
+  "/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}":
     get:
       operationId: usRaceEthnicityZIP5
       parameters:
@@ -1896,19 +2378,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FirstLastNameUSRaceEthnicityOut'
-          description: 'a US resident''s likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
-        '401':
+                $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
+            HL (hispano latino),  A (asian, non latino), B_NL (black, non
+            latino)."
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer a US resident''s likely race/ethnicity according to US Census taxonomy, using (optional) ZIP5 code info. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
+        according to US Census taxonomy, using (optional) ZIP5 code info. Output
+        is W_NL (white, non latino), HL (hispano latino),  A (asian, non
+        latino), B_NL (black, non latino)."
       tags:
         - personal
   /api2/json/usZipRaceEthnicityBatch:
@@ -1918,25 +2405,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BatchFirstLastNameGeoZippedIn'
+              $ref: "#/components/schemas/BatchFirstLastNameGeoZippedIn"
         description: A list of personal names
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut'
-          description: 'A list of US resident''s likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino).'
-        '401':
+                $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non
+            latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
+            non latino).
+        "401":
           description: Missing or incorrect API Key
-        '403':
+        "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: '[USES 10 UNITS] Infer up-to 100 US resident''s likely race/ethnicity according to US Census taxonomy, with (optional) ZIP code.'
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
+        race/ethnicity according to US Census taxonomy, with (optional) ZIP
+        code."
       tags:
         - personal
-  '/api2/json/userInfo/{token}':
+  "/api2/json/userInfo/{token}":
     get:
       operationId: userInfo
       parameters:
@@ -1946,18 +2437,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An session token
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: Get the user profile associated with the current google auth session token.
+      summary: Get the user profile associated with the current google auth session
+        token.
       tags:
         - admin
-  '/api2/json/verifyEmail/{emailToken}':
+  "/api2/json/verifyEmail/{emailToken}":
     get:
       operationId: verifyEmail
       parameters:
@@ -1967,18 +2459,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An API Key
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Verifies an email, based on token sent to that email'
+      summary: Verifies an email, based on token sent to that email
       tags:
         - admin
-  '/api2/json/verifyRemoveEmail/{emailToken}':
+  "/api2/json/verifyRemoveEmail/{emailToken}":
     get:
       operationId: verifyRemoveEmail
       parameters:
@@ -1988,18 +2480,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyOut'
+                $ref: "#/components/schemas/APIKeyOut"
           description: An API Key
-        '401':
+        "401":
           description: Missing or incorrect token
-      summary: 'Verifies an email, based on token sent to that email'
+      summary: Verifies an email, based on token sent to that email
       tags:
         - admin
-  '/api2/json/vetting/{source}/{vetted}':
+  "/api2/json/vetting/{source}/{vetted}":
     get:
       operationId: vet
       parameters:
@@ -2014,9 +2506,9 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Vetting of a source.
-        '401':
+        "401":
           description: Missing or incorrect API Key
       summary: Vetting of a source.
       tags:
@@ -2056,10 +2548,47 @@ components:
       type: object
       xml:
         name: APIBillingPeriodUsageOut
+    APIClassifierOut:
+      properties:
+        classifierName:
+          type: string
+        learning:
+          type: boolean
+        probabilityCalibrated:
+          type: boolean
+        serving:
+          type: boolean
+        shuttingDown:
+          type: boolean
+      type: object
+      xml:
+        name: APIClassifierOut
+    APIClassifierTaxonomyOut:
+      properties:
+        classifierName:
+          type: string
+        taxonomyClasses:
+          items:
+            type: string
+          type: array
+      type: object
+      xml:
+        name: APIClassifierTaxonomyOut
+    APIClassifiersStatusOut:
+      properties:
+        classifiers:
+          items:
+            $ref: "#/components/schemas/APIClassifierOut"
+          type: array
+        softwareVersion:
+          $ref: "#/components/schemas/SoftwareVersionOut"
+      type: object
+      xml:
+        name: APIClassifiersStatusOut
     APICounterV2Out:
       properties:
         apiKey:
-          $ref: '#/components/schemas/APIKeyOut'
+          $ref: "#/components/schemas/APIKeyOut"
         apiService:
           type: string
         createdDateTime:
@@ -2112,7 +2641,7 @@ components:
     APIPeriodUsageOut:
       properties:
         billingPeriod:
-          $ref: '#/components/schemas/APIBillingPeriodUsageOut'
+          $ref: "#/components/schemas/APIBillingPeriodUsageOut"
         overageCurrency:
           type: string
         overageExclTax:
@@ -2125,7 +2654,7 @@ components:
           format: int64
           type: integer
         subscription:
-          $ref: '#/components/schemas/APIPlanSubscriptionOut'
+          $ref: "#/components/schemas/APIPlanSubscriptionOut"
       type: object
       xml:
         name: APICurrentUsageOut
@@ -2206,7 +2735,7 @@ components:
           type: string
         plans:
           items:
-            $ref: '#/components/schemas/APIPlanOut'
+            $ref: "#/components/schemas/APIPlanOut"
           type: array
         usageRatioForDupplicates:
           format: int64
@@ -2230,7 +2759,7 @@ components:
       properties:
         apiServices:
           items:
-            $ref: '#/components/schemas/APIServiceOut'
+            $ref: "#/components/schemas/APIServiceOut"
           type: array
       type: object
       xml:
@@ -2269,11 +2798,12 @@ components:
       xml:
         name: APIUsageAggregatedOut
     BatchFirstLastNameDiasporaedOut:
-      description: 'Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.'
+      description: Represents the output of inferring the LIKELY ethnicity from a
+        personal name, given an country of residence.
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameDiasporaedOut'
+            $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
           type: array
       type: object
       xml:
@@ -2282,17 +2812,18 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameGenderIn'
+            $ref: "#/components/schemas/FirstLastNameGenderIn"
           type: array
       type: object
       xml:
         name: BatchFirstLastNameGenderIn
     BatchFirstLastNameGenderedOut:
-      description: Represents the output of inferring the LIKELY gender from a list of personal names.
+      description: Represents the output of inferring the LIKELY gender from a list of
+        personal names.
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameGenderedOut'
+            $ref: "#/components/schemas/FirstLastNameGenderedOut"
           type: array
       type: object
       xml:
@@ -2301,7 +2832,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameGeoIn'
+            $ref: "#/components/schemas/FirstLastNameGeoIn"
           type: array
       type: object
       xml:
@@ -2310,7 +2841,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameGeoZippedIn'
+            $ref: "#/components/schemas/FirstLastNameGeoZippedIn"
           type: array
       type: object
       xml:
@@ -2319,27 +2850,29 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameIn'
+            $ref: "#/components/schemas/FirstLastNameIn"
           type: array
       type: object
       xml:
         name: BatchFirstLastNameIn
     BatchFirstLastNameOriginedOut:
-      description: Represents the output of inferring the LIKELY origin from a list of personal names.
+      description: Represents the output of inferring the LIKELY origin from a list of
+        personal names.
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameOriginedOut'
+            $ref: "#/components/schemas/FirstLastNameOriginedOut"
           type: array
       type: object
       xml:
         name: BatchFirstLastNameOriginedOut
     BatchFirstLastNamePhoneCodedOut:
-      description: Represents the output of inferring the LIKELY country and phone code of personal names+phones.
+      description: Represents the output of inferring the LIKELY country and phone
+        code of personal names+phones.
       properties:
         personalNamesWithPhoneNumbers:
           items:
-            $ref: '#/components/schemas/FirstLastNamePhoneCodedOut'
+            $ref: "#/components/schemas/FirstLastNamePhoneCodedOut"
           type: array
       type: object
       xml:
@@ -2348,7 +2881,7 @@ components:
       properties:
         personalNamesWithPhoneNumbers:
           items:
-            $ref: '#/components/schemas/FirstLastNamePhoneNumberGeoIn'
+            $ref: "#/components/schemas/FirstLastNamePhoneNumberGeoIn"
           type: array
       type: object
       xml:
@@ -2357,17 +2890,19 @@ components:
       properties:
         personalNamesWithPhoneNumbers:
           items:
-            $ref: '#/components/schemas/FirstLastNamePhoneNumberIn'
+            $ref: "#/components/schemas/FirstLastNamePhoneNumberIn"
           type: array
       type: object
       xml:
         name: BatchFirstLastNamePhoneNumberIn
     BatchFirstLastNameUSRaceEthnicityOut:
-      description: 'Represents the output of inferring the LIKELY US ''race/ethnicity'' from a personal name, given US country of residence and (optionally) a ZIP5 code.'
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity'
+        from a personal name, given US country of residence and (optionally) a
+        ZIP5 code.
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/FirstLastNameUSRaceEthnicityOut'
+            $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
           type: array
       type: object
       xml:
@@ -2376,7 +2911,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/MatchPersonalFirstLastNameIn'
+            $ref: "#/components/schemas/MatchPersonalFirstLastNameIn"
           type: array
       type: object
       xml:
@@ -2385,7 +2920,7 @@ components:
       properties:
         namesAndMatchCandidates:
           items:
-            $ref: '#/components/schemas/NameMatchCandidatesOut'
+            $ref: "#/components/schemas/NameMatchCandidatesOut"
           type: array
       type: object
       xml:
@@ -2394,7 +2929,7 @@ components:
       properties:
         matchedNames:
           items:
-            $ref: '#/components/schemas/NameMatchedOut'
+            $ref: "#/components/schemas/NameMatchedOut"
           type: array
       type: object
       xml:
@@ -2403,7 +2938,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/ParsedFullNameGeoIn'
+            $ref: "#/components/schemas/ParsedFullNameGeoIn"
           type: array
       type: object
       xml:
@@ -2412,7 +2947,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/ParsedFullNameIn'
+            $ref: "#/components/schemas/ParsedFullNameIn"
           type: array
       type: object
       xml:
@@ -2421,7 +2956,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/PersonalNameGenderedOut'
+            $ref: "#/components/schemas/PersonalNameGenderedOut"
           type: array
       type: object
       xml:
@@ -2430,7 +2965,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/PersonalNameGeoIn'
+            $ref: "#/components/schemas/PersonalNameGeoIn"
           type: array
       type: object
       xml:
@@ -2439,7 +2974,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/PersonalNameGeoOut'
+            $ref: "#/components/schemas/PersonalNameGeoOut"
           type: array
       type: object
       xml:
@@ -2448,7 +2983,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/PersonalNameIn'
+            $ref: "#/components/schemas/PersonalNameIn"
           type: array
       type: object
       xml:
@@ -2457,7 +2992,7 @@ components:
       properties:
         personalNames:
           items:
-            $ref: '#/components/schemas/PersonalNameParsedOut'
+            $ref: "#/components/schemas/PersonalNameParsedOut"
           type: array
       type: object
       xml:
@@ -2466,11 +3001,11 @@ components:
       properties:
         corporateInvoices:
           items:
-            $ref: '#/components/schemas/InvoiceOut'
+            $ref: "#/components/schemas/InvoiceOut"
           type: array
         stripeInvoices:
           items:
-            $ref: '#/components/schemas/InvoiceOut'
+            $ref: "#/components/schemas/InvoiceOut"
           type: array
       type: object
       xml:
@@ -2502,6 +3037,16 @@ components:
       type: object
       xml:
         name: BillingInfoInOut
+    CacheMetricsOut:
+      description: Simple metrics system caches
+      properties:
+        cacheName:
+          type: string
+        cacheStats:
+          type: string
+      type: object
+      xml:
+        name: CacheMetricsOut
     ClassifierMetricsOut:
       description: Simple metrics on a classifier
       properties:
@@ -2516,7 +3061,7 @@ components:
           type: integer
         aiNonVettedExpectedClassMetrics:
           items:
-            $ref: '#/components/schemas/ExpectedClassMetricsOut'
+            $ref: "#/components/schemas/ExpectedClassMetricsOut"
           type: array
         aiNonVettedLearnTotal:
           format: int64
@@ -2535,7 +3080,7 @@ components:
           type: integer
         aiVettedExpectedClassMetrics:
           items:
-            $ref: '#/components/schemas/ExpectedClassMetricsOut'
+            $ref: "#/components/schemas/ExpectedClassMetricsOut"
           type: array
         aiVettedLearnTotal:
           format: int64
@@ -2560,6 +3105,8 @@ components:
         featuresSize:
           format: int64
           type: integer
+        hostAddress:
+          type: string
         learnDurationsCurrent:
           format: double
           type: number
@@ -2575,6 +3122,8 @@ components:
         preClassifyQueueSize:
           format: int32
           type: integer
+        softwareVersion:
+          type: string
       type: object
       xml:
         name: ClassifierMetricsOut
@@ -2597,7 +3146,7 @@ components:
       xml:
         name: DeployUIOut
     ExpectedClassMetricsOut:
-      description: 'Simple metrics on a classifier, for a given expected class'
+      description: Simple metrics on a classifier, for a given expected class
       properties:
         aiEstimatePrecision:
           format: double
@@ -2627,12 +3176,19 @@ components:
       xml:
         name: FeedbackLoopOut
     FirstLastNameDiasporaedOut:
-      description: 'Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.'
+      description: Represents the output of inferring the LIKELY ethnicity from a
+        personal name, given an country of residence.
       properties:
         countryIso2:
           type: string
           xml:
             attribute: true
+        ethnicitiesTop:
+          description: List ethnicities (top 10)
+          items:
+            description: List ethnicities (top 10)
+            type: string
+          type: array
         ethnicity:
           type: string
           xml:
@@ -2680,12 +3236,13 @@ components:
       xml:
         name: FirstLastName
     FirstLastNameGenderedOut:
-      description: Represents the output of inferring the LIKELY gender from a personal name.
+      description: Represents the output of inferring the LIKELY gender from a
+        personal name.
       properties:
         firstName:
           type: string
         genderScale:
-          description: 'Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value'
+          description: Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value
           format: double
           type: number
         id:
@@ -2772,13 +3329,20 @@ components:
       xml:
         name: FirstLastName
     FirstLastNameOriginedOut:
-      description: Represents the output of inferring the LIKELY country of Origin from a personal name.
+      description: Represents the output of inferring the LIKELY country of Origin
+        from a personal name.
       properties:
+        countriesOriginTop:
+          description: List countries of Origin (top 10)
+          items:
+            description: List countries of Origin (top 10)
+            type: string
+          type: array
         countryOrigin:
           description: Most likely country of Origin
           type: string
         countryOriginAlt:
-          description: 'Second best alternative : country of Origin'
+          description: "Second best alternative : country of Origin"
           type: string
         firstName:
           type: string
@@ -2786,6 +3350,12 @@ components:
           type: string
         lastName:
           type: string
+        probabilityAltCalibrated:
+          format: double
+          type: number
+        probabilityCalibrated:
+          format: double
+          type: number
         regionOrigin:
           description: Most likely region of Origin (based on countryOrigin ISO2 code)
           type: string
@@ -2814,7 +3384,8 @@ components:
       xml:
         name: FirstLastNameOut
     FirstLastNamePhoneCodedOut:
-      description: Represents the output of inferring the LIKELY country and phone code from a personal name and phone number.
+      description: Represents the output of inferring the LIKELY country and phone
+        code from a personal name and phone number.
       properties:
         countryIso2:
           type: string
@@ -2855,7 +3426,7 @@ components:
     FirstLastNamePhoneNumberGeoIn:
       properties:
         FirstLastNameOriginedOut:
-          $ref: '#/components/schemas/FirstLastNameOriginedOut'
+          $ref: "#/components/schemas/FirstLastNameOriginedOut"
         countryIso2:
           type: string
         countryIso2Alt:
@@ -2880,7 +3451,7 @@ components:
     FirstLastNamePhoneNumberIn:
       properties:
         FirstLastNameOriginedOut:
-          $ref: '#/components/schemas/FirstLastNameOriginedOut'
+          $ref: "#/components/schemas/FirstLastNameOriginedOut"
         firstName:
           type: string
           xml:
@@ -2899,7 +3470,9 @@ components:
       xml:
         name: FirstLastNamePhoneNumberIn
     FirstLastNameUSRaceEthnicityOut:
-      description: 'Represents the output of inferring the LIKELY US ''race/ethnicity'' from a personal name, given US country of residence and (optionally) a ZIP5 code.'
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity'
+        from a personal name, given US country of residence and (optionally) a
+        ZIP5 code.
       properties:
         firstName:
           type: string
@@ -2907,6 +3480,18 @@ components:
           type: string
         lastName:
           type: string
+        probabilityAltCalibrated:
+          format: double
+          type: number
+        probabilityCalibrated:
+          format: double
+          type: number
+        raceEthnicitiesTop:
+          description: List 'race'/ethnicities
+          items:
+            description: List 'race'/ethnicities
+            type: string
+          type: array
         raceEthnicity:
           description: Most likely US 'race'/ethnicity
           enum:
@@ -2996,7 +3581,7 @@ components:
           type: boolean
         items:
           items:
-            $ref: '#/components/schemas/InvoiceItemOut'
+            $ref: "#/components/schemas/InvoiceItemOut"
           type: array
         periodEnd:
           format: date-time
@@ -3034,9 +3619,9 @@ components:
         name:
           type: string
         name1:
-          $ref: '#/components/schemas/FirstLastNameIn'
+          $ref: "#/components/schemas/FirstLastNameIn"
         name2:
-          $ref: '#/components/schemas/PersonalNameIn'
+          $ref: "#/components/schemas/PersonalNameIn"
       type: object
       xml:
         name: MatchPersonalFirstLastNameIn
@@ -3068,7 +3653,7 @@ components:
           type: string
         matchCandidates:
           items:
-            $ref: '#/components/schemas/NameMatchCandidateOut'
+            $ref: "#/components/schemas/NameMatchCandidateOut"
           type: array
       type: object
       xml:
@@ -3150,7 +3735,7 @@ components:
     PersonalNameGenderedOut:
       properties:
         genderScale:
-          description: 'Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value'
+          description: Compatibility to NamSor_v1 Gender Scale M[-1..U..+1]F value
           format: double
           type: number
         id:
@@ -3164,6 +3749,9 @@ components:
           type: string
         name:
           type: string
+        probabilityCalibrated:
+          format: double
+          type: number
         score:
           format: double
           type: number
@@ -3189,6 +3777,12 @@ components:
         name: PersonalNameGeoIn
     PersonalNameGeoOut:
       properties:
+        countriesTop:
+          description: List countries (top 10)
+          items:
+            description: List countries (top 10)
+            type: string
+          type: array
         country:
           type: string
         countryAlt:
@@ -3197,6 +3791,12 @@ components:
           type: string
         name:
           type: string
+        probabilityAltCalibrated:
+          format: double
+          type: number
+        probabilityCalibrated:
+          format: double
+          type: number
         region:
           type: string
         score:
@@ -3225,7 +3825,7 @@ components:
     PersonalNameParsedOut:
       properties:
         firstLastName:
-          $ref: '#/components/schemas/FirstLastNameOut'
+          $ref: "#/components/schemas/FirstLastNameOut"
         id:
           type: string
         name:
@@ -3275,7 +3875,7 @@ components:
       xml:
         name: SoftwareVersionOut
     SourceDetailedMetricsOut:
-      description: 'Simple metrics on source, with details by classifier.'
+      description: Simple metrics on source, with details by classifier.
       properties:
         aiEstimatePrecision:
           format: double
@@ -3296,7 +3896,7 @@ components:
           type: string
         expectedClassMetrics:
           items:
-            $ref: '#/components/schemas/ExpectedClassMetricsOut'
+            $ref: "#/components/schemas/ExpectedClassMetricsOut"
           type: array
         metricTimeStamp:
           format: int64
@@ -3305,12 +3905,12 @@ components:
           format: int64
           type: integer
         source:
-          $ref: '#/components/schemas/APIKeyOut'
+          $ref: "#/components/schemas/APIKeyOut"
       type: object
       xml:
         name: SourceDetailedMetricsOut
     SourceMetricsOut:
-      description: 'Simple metrics on a classifier, for a given source'
+      description: Simple metrics on a classifier, for a given source
       properties:
         aiEstimatePrecision:
           format: double
@@ -3336,7 +3936,7 @@ components:
           format: int64
           type: integer
         source:
-          $ref: '#/components/schemas/APIKeyOut'
+          $ref: "#/components/schemas/APIKeyOut"
       type: object
       xml:
         name: SourceMetricsOut
@@ -3369,16 +3969,20 @@ components:
           type: string
         stripedCards:
           items:
-            $ref: '#/components/schemas/StripeCardOut'
+            $ref: "#/components/schemas/StripeCardOut"
           type: array
       type: object
       xml:
         name: StripeCustomerOut
     SystemMetricsOut:
       properties:
+        cacheMetrics:
+          items:
+            $ref: "#/components/schemas/CacheMetricsOut"
+          type: array
         classifierMetrics:
           items:
-            $ref: '#/components/schemas/ClassifierMetricsOut'
+            $ref: "#/components/schemas/ClassifierMetricsOut"
           type: array
         freeMem:
           format: int64
@@ -3388,7 +3992,7 @@ components:
           type: integer
         sourceMetrics:
           items:
-            $ref: '#/components/schemas/SourceMetricsOut'
+            $ref: "#/components/schemas/SourceMetricsOut"
           type: array
         totalMem:
           format: int64
@@ -3412,7 +4016,7 @@ components:
           type: string
         otherInfos:
           items:
-            $ref: '#/components/schemas/UserInfoOut'
+            $ref: "#/components/schemas/UserInfoOut"
           type: array
         phoneNumber:
           type: string
