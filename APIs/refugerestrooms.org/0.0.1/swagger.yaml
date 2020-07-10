@@ -1,21 +1,20 @@
-swagger: '2.0'
-schemes:
-  - http
+swagger: "2.0"
 host: www.refugerestrooms.org
 basePath: /api
 info:
-  description: 'REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.'
+  description: REFUGE is a web application that seeks to provide safe restroom
+    access for transgender, intersex, and gender nonconforming individuals.
   title: API title
   version: 0.0.1
   x-apisguru-categories:
     - open_data
   x-logo:
-    backgroundColor: '#4C4C4C'
-    url: 'https://pbs.twimg.com/profile_images/432717338270380032/BZWevLrA.jpeg'
+    backgroundColor: "#4C4C4C"
+    url: https://pbs.twimg.com/profile_images/432717338270380032/BZWevLrA.jpeg
   x-origin:
     - format: swagger
-      url: 'http://www.refugerestrooms.org/api/swagger_doc.json'
-      version: '2.0'
+      url: https://www.refugerestrooms.org/api/swagger_doc.json
+      version: "2.0"
   x-preferred: true
   x-providerName: refugerestrooms.org
 produces:
@@ -66,7 +65,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Get all restroom records ordered by date descending.
       tags:
         - restrooms
@@ -106,7 +105,8 @@ paths:
           name: unisex
           required: false
           type: boolean
-        - description: Return restroom records updated (rather than created) since given date
+        - description: Return restroom records updated (rather than created) since given
+            date
           in: query
           name: updated
           required: false
@@ -132,8 +132,9 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
-          description: Search for restroom records updated or created on or after a given date
+        "200":
+          description: Search for restroom records updated or created on or after a given
+            date
       tags:
         - restrooms
   /v1/restrooms/by_location:
@@ -187,7 +188,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Search by location.
       tags:
         - restrooms
@@ -235,7 +236,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Perform full-text search of restroom records.
       tags:
         - restrooms
