@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.archive.org
@@ -7,16 +7,16 @@ info:
   contact:
     x-twitter: internetarchive
   description: API for Internet Archive's Wayback Machine
-  title: Wayback
+  title: Wayback API
   version: 1.0.0
   x-apisguru-categories:
     - search
   x-logo:
-    url: 'https://twitter.com/internetarchive/profile_image?size=original'
+    url: https://twitter.com/internetarchive/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/ArchiveLabs/api.archive.org/master/swagger/wayback.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/ArchiveLabs/api.archive.org/master/swagger/wayback.json
+      version: "2.0"
   x-providerName: archive.org
   x-serviceName: wayback
 produces:
@@ -24,16 +24,22 @@ produces:
   - application/javascript
 parameters:
   callback:
-    description: |
-      Specifies a JavaScript function func, for a JSON-P response. When provided, results are wrapped as `callback(data)`, and the returned MIME type is application/javascript. This causes the caller to automatically run the func with the JSON results as its argument.
+    description: >
+      Specifies a JavaScript function func, for a JSON-P response. When
+      provided, results are wrapped as `callback(data)`, and the returned MIME
+      type is application/javascript. This causes the caller to automatically
+      run the func with the JSON results as its argument.
     in: query
     name: callback
     required: false
     type: string
   closest:
     default: either
-    description: |
-      The direction specifies whether to match archived timestamps that are before the provided one, after, or the default either (closest in either direction). Must be before, after, or either. May be overidden by individual requests.
+    description: >
+      The direction specifies whether to match archived timestamps that are
+      before the provided one, after, or the default either (closest in either
+      direction). Must be before, after, or either. May be overidden by
+      individual requests.
     enum:
       - either
       - before
@@ -43,8 +49,10 @@ parameters:
     required: false
     type: string
   status_code:
-    description: |
-      HTTP status codes to filter by. Only results with these codes will be returned
+    collectionFormat: multi
+    description: >
+      HTTP status codes to filter by. Only results with these codes will be
+      returned
     enum:
       - 200
       - 201
@@ -100,23 +108,27 @@ parameters:
     required: false
     type: integer
   tag:
-    description: |
-      The optional tag can have any value, and is returned with the results; it can be used to help collate input and output values.
+    description: >
+      The optional tag can have any value, and is returned with the results; it
+      can be used to help collate input and output values.
     in: query
     name: tag
     required: false
     type: string
   timeout:
     default: 5
-    description: |
-      Timeout is the maximum number of seconds to wait for the availability API to get its underlying results from the CDX server. The default value is 5.0.
+    description: >
+      Timeout is the maximum number of seconds to wait for the availability API
+      to get its underlying results from the CDX server. The default value is
+      5.0.
     in: query
     name: timeout
     required: false
     type: number
   timestamp:
-    description: |
-      Timestamp requested in ISO 8601 format. The following formats are acceptable:
+    description: >
+      Timestamp requested in ISO 8601 format. The following formats are
+      acceptable:
        - YYYY
        - YYYY-MM
        - YYYY-MM-DD
@@ -139,75 +151,76 @@ responses:
       applcation/json:
         results:
           - snapshot:
-              status: '200'
-              timestamp: '2016-04-07T19:39:18Z'
-              url: 'http://web.archive.org/web/20160111075133/http://entish.org/'
-            tag: '0'
-            timestamp: '2016-04-07T19:39:18Z'
-            url: 'http://www.entish.org'
+              status: "200"
+              timestamp: 2016-04-07T19:39:18Z
+              url: http://web.archive.org/web/20160111075133/http://entish.org/
+            tag: "0"
+            timestamp: 2016-04-07T19:39:18Z
+            url: http://www.entish.org
           - snapshot:
-              timestamp: '2016-04-13T13:20:39Z'
-              url: 'http://web.archive.org/web/20160413132039/http://www.cnn.com/'
-            tag: '1'
-            url: 'http://www.cnn.com/'
+              timestamp: 2016-04-13T13:20:39Z
+              url: http://web.archive.org/web/20160413132039/http://www.cnn.com/
+            tag: "1"
+            url: http://www.cnn.com/
           - snapshot: {}
-            tag: '2'
-            timestamp: '2016-04-07T19:39:18Z'
-            url: 'http://www.youcantfindthis.cat'
+            tag: "2"
+            timestamp: 2016-04-07T19:39:18Z
+            url: http://www.youcantfindthis.cat
     schema:
-      $ref: '#/definitions/AvailabilityResults'
+      $ref: "#/definitions/AvailabilityResults"
 paths:
   /wayback/v1/available:
     get:
       parameters:
-        - $ref: '#/parameters/url'
-        - $ref: '#/parameters/timestamp'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/timeout'
-        - $ref: '#/parameters/closest'
-        - $ref: '#/parameters/status_code'
-        - $ref: '#/parameters/tag'
+        - $ref: "#/parameters/url"
+        - $ref: "#/parameters/timestamp"
+        - $ref: "#/parameters/callback"
+        - $ref: "#/parameters/timeout"
+        - $ref: "#/parameters/closest"
+        - $ref: "#/parameters/status_code"
+        - $ref: "#/parameters/tag"
       responses:
-        '200':
-          $ref: '#/responses/AvailabilityResults'
+        "200":
+          $ref: "#/responses/AvailabilityResults"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
     post:
       consumes:
         - application/json
         - text/csv
         - application/x-www-form-urlencoded
       parameters:
-        - $ref: '#/parameters/url'
-        - $ref: '#/parameters/timestamp'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/timeout'
-        - $ref: '#/parameters/closest'
-        - $ref: '#/parameters/status_code'
-        - $ref: '#/parameters/tag'
+        - $ref: "#/parameters/url"
+        - $ref: "#/parameters/timestamp"
+        - $ref: "#/parameters/callback"
+        - $ref: "#/parameters/timeout"
+        - $ref: "#/parameters/closest"
+        - $ref: "#/parameters/status_code"
+        - $ref: "#/parameters/tag"
         - in: body
           name: availabilty_request
           schema:
-            $ref: '#/definitions/AvailabilityRequests'
+            $ref: "#/definitions/AvailabilityRequests"
       responses:
-        '200':
-          $ref: '#/responses/AvailabilityResults'
+        "200":
+          $ref: "#/responses/AvailabilityResults"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
 definitions:
   ArchivedResult:
     properties:
       snapshot:
-        $ref: '#/definitions/Snapshot'
+        $ref: "#/definitions/Snapshot"
       tag:
         description: The user-supplied tag for use in collation
         type: string
       timestamp:
-        description: 'The _intepreted_ timestamp requested, in [RFC 3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format'
+        description: The _intepreted_ timestamp requested, in [RFC
+          3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
         format: dateTime
         type: string
       url:
@@ -228,11 +241,13 @@ definitions:
           - before
         type: string
       tag:
-        description: 'A user-supplied tag, used for collation'
+        description: A user-supplied tag, used for collation
         type: string
       timestamp:
-        description: |
-          Timestamp requested in ISO 8601 format. The following formats are acceptable: - YYYY - YYYY-MM - YYYY-MM-DD - YYYY-MM-DDTHH:mm:SSz - YYYY-MM-DD:HH:mm+00:00
+        description: >
+          Timestamp requested in ISO 8601 format. The following formats are
+          acceptable: - YYYY - YYYY-MM - YYYY-MM-DD - YYYY-MM-DDTHH:mm:SSz -
+          YYYY-MM-DD:HH:mm+00:00
         type: string
       url:
         description: The URL requested
@@ -242,23 +257,23 @@ definitions:
     type: object
   AvailabilityRequests:
     example:
-      - tag: '0'
-        timestamp: '2016-04-07T19:39:18Z'
-        url: 'http://www.entish.org'
-      - tag: '1'
-        url: 'http://www.cnn.com/'
-      - tag: '2'
-        timestamp: '2016-04-07T19:39:18Z'
-        url: 'http://www.youcantfindthis.cat'
+      - tag: "0"
+        timestamp: 2016-04-07T19:39:18Z
+        url: http://www.entish.org
+      - tag: "1"
+        url: http://www.cnn.com/
+      - tag: "2"
+        timestamp: 2016-04-07T19:39:18Z
+        url: http://www.youcantfindthis.cat
     items:
-      $ref: '#/definitions/AvailabilityRequest'
+      $ref: "#/definitions/AvailabilityRequest"
     type: array
   AvailabilityResults:
     properties:
       results:
         description: A list of results
         items:
-          $ref: '#/definitions/ArchivedResult'
+          $ref: "#/definitions/ArchivedResult"
         type: array
     required:
       - results
@@ -277,7 +292,8 @@ definitions:
         description: The HTTP status of the URL requested
         type: integer
       timestamp:
-        description: 'The timestamp of the snapshot in [RFC 3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format'
+        description: The timestamp of the snapshot in [RFC
+          3339](http://xml2rfc.ietf.org/public/rfc/html/rfc3339.html) format
         format: dateTime
         type: string
       url:

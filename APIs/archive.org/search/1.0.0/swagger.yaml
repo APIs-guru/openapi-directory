@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.archive.org
@@ -13,11 +13,11 @@ info:
   x-apisguru-categories:
     - search
   x-logo:
-    url: 'https://twitter.com/internetarchive/profile_image?size=original'
+    url: https://twitter.com/internetarchive/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/ArchiveLabs/api.archive.org/master/swagger/search.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/ArchiveLabs/api.archive.org/master/swagger/search.yaml
+      version: "2.0"
   x-providerName: archive.org
   x-serviceName: search
 produces:
@@ -25,7 +25,10 @@ produces:
   - application/javascript
 parameters:
   callback:
-    description: 'Specifies a JavaScript function func, for a JSON-P response. When provided, results are wrapped as `callback(data)`, and the returned MIME type is application/javascript. This causes the caller to automatically run the func with the JSON results as its argument.'
+    description: Specifies a JavaScript function func, for a JSON-P response. When
+      provided, results are wrapped as `callback(data)`, and the returned MIME
+      type is application/javascript. This causes the caller to automatically
+      run the func with the JSON results as its argument.
     in: query
     name: callback
     required: false
@@ -37,6 +40,7 @@ parameters:
     required: false
     type: string
   field:
+    collectionFormat: multi
     default: identifier
     description: Metadata field
     in: query
@@ -60,6 +64,7 @@ parameters:
     required: false
     type: integer
   sort:
+    collectionFormat: multi
     description: sort collations
     in: query
     maxLength: 250
@@ -79,54 +84,54 @@ paths:
     get:
       description: Fields that can be requested
       parameters:
-        - $ref: '#/parameters/callback'
+        - $ref: "#/parameters/callback"
       responses:
-        '200':
+        "200":
           description: Fields that can be requested
           schema:
             items:
-              $ref: '#/definitions/Field'
+              $ref: "#/definitions/Field"
             type: array
   /search/v1/organic:
     get:
       description: |
         Return relevance-based results from search queries
       parameters:
-        - $ref: '#/parameters/query'
-        - $ref: '#/parameters/field'
-        - $ref: '#/parameters/size'
-        - $ref: '#/parameters/total_only'
-        - $ref: '#/parameters/callback'
+        - $ref: "#/parameters/query"
+        - $ref: "#/parameters/field"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/total_only"
+        - $ref: "#/parameters/callback"
       responses:
-        '200':
+        "200":
           description: Organic Search API. Returns results in descending relevance order
           schema:
-            $ref: '#/definitions/OrganicResult'
+            $ref: "#/definitions/OrganicResult"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
   /search/v1/scrape:
     get:
       description: |
         Scrape search results from Internet Archive, allowing a scrolling cursor
       parameters:
-        - $ref: '#/parameters/query'
-        - $ref: '#/parameters/field'
-        - $ref: '#/parameters/sort'
-        - $ref: '#/parameters/size'
-        - $ref: '#/parameters/cursor'
-        - $ref: '#/parameters/total_only'
-        - $ref: '#/parameters/callback'
+        - $ref: "#/parameters/query"
+        - $ref: "#/parameters/field"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/cursor"
+        - $ref: "#/parameters/total_only"
+        - $ref: "#/parameters/callback"
       responses:
-        '200':
+        "200":
           description: Scaping API
           schema:
-            $ref: '#/definitions/ScrapeResult'
+            $ref: "#/definitions/ScrapeResult"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
 definitions:
   Cursor:
     description: A scroll handle
@@ -154,7 +159,7 @@ definitions:
         type: integer
       items:
         items:
-          $ref: '#/definitions/Hit'
+          $ref: "#/definitions/Hit"
         type: array
       total:
         description: Approximate number of results meeting query
@@ -170,13 +175,13 @@ definitions:
         minimum: 0
         type: integer
       cursor:
-        $ref: '#/definitions/Cursor'
+        $ref: "#/definitions/Cursor"
       items:
         items:
-          $ref: '#/definitions/Hit'
+          $ref: "#/definitions/Hit"
         type: array
       previous:
-        $ref: '#/definitions/Cursor'
+        $ref: "#/definitions/Cursor"
       total:
         description: Total number of results from this cursor point
         minimum: 0
