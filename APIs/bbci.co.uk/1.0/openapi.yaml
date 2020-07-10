@@ -1,53 +1,53 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://ibl.api.bbci.co.uk/ibl/v1'
-  - url: 'http://ibl.api.bbci.co.uk/ibl/v1'
+  - url: https://ibl.api.bbci.co.uk/ibl/v1
+  - url: http://ibl.api.bbci.co.uk/ibl/v1
 info:
   contact:
     email: ibl-team@lists.forge.bbc.co.uk
     name: Open iBL Project
-    url: 'http://developer.bbc.co.uk/'
+    url: http://developer.bbc.co.uk/
   description: The definitive iPlayer API.
   license:
     name: MIT
-    url: 'https://opensource.org/licenses/MIT'
+    url: https://opensource.org/licenses/MIT
   title: BBC iPlayer Business Layer
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - media
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://twitter.com/BBCiPlayer/profile_image?size=original'
+    backgroundColor: "#FFFFFF"
+    url: https://twitter.com/BBCiPlayer/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/openapi.yaml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/openapi.yaml
+      version: "3.0"
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-468
-  x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
+  x-release: 1.0.0-484
+  x-schema-id: https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json
   x-unofficialSpec: true
 externalDocs:
   description: BBC iPlayer documentation
-  url: 'http://smethur.st/posts/176135860'
+  url: http://smethur.st/posts/176135860
 security:
   - api_key: []
 paths:
-  '/atoz/{letter}/programmes':
+  "/atoz/{letter}/programmes":
     get:
       description: Get the Programmes whose title begins with the given initial character.
       operationId: Get_Programmes AtoZ search_
       parameters:
-        - description: 'Letter to search by, a to z or the string ''0-9'''
+        - description: Letter to search by, a to z or the string '0-9'
           in: path
           name: letter
           required: true
           schema:
-            pattern: '[a-z](0-9)'
+            pattern: "[a-z](0-9)"
             type: string
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
-        - $ref: '#/components/parameters/initial_child_count'
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/initial_child_count"
         - description: The sort order of the results.
           in: query
           name: sort
@@ -56,14 +56,14 @@ paths:
             enum:
               - title
             type: string
-        - $ref: '#/components/parameters/sort_direction'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/sort_direction"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Programmes by initial title character
@@ -74,47 +74,47 @@ paths:
       description: Get the list of all the categories in TV & iPlayer.
       operationId: Get_Categories_
       parameters:
-        - $ref: '#/components/parameters/lang'
+        - $ref: "#/components/parameters/lang"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get categories
       tags:
         - Categories
-  '/categories/{category}':
+  "/categories/{category}":
     get:
       description: Get sub-categories
       operationId: Get_Sub-categories_
       parameters:
-        - $ref: '#/components/parameters/category'
-        - $ref: '#/components/parameters/lang'
+        - $ref: "#/components/parameters/category"
+        - $ref: "#/components/parameters/lang"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get sub-categories
       tags:
         - Categories
-  '/categories/{category}/episodes':
+  "/categories/{category}/episodes":
     get:
       description: Get the list of all the episodes for a given category in TV & iPlayer.
       operationId: Get_Episodes by category_
       parameters:
-        - $ref: '#/components/parameters/category'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
+        - $ref: "#/components/parameters/category"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
         - description: The sort order of the results.
           in: query
           name: sort
@@ -125,54 +125,55 @@ paths:
               - popular
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List all the episodes for a category.
       tags:
         - Episodes
-  '/categories/{category}/highlights':
+  "/categories/{category}/highlights":
     get:
       description: Get the editorial highlights of a given category in TV & iPlayer.
       operationId: Get_Highlights by category_
       parameters:
-        - $ref: '#/components/parameters/category'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/category"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List the highlights for a category.
       tags:
         - Programmes (TLEOs)
-  '/categories/{category}/programmes':
+  "/categories/{category}/programmes":
     get:
-      description: Get the list of all the Programmes (TLEOs) for a given category in TV & iPlayer.
+      description: Get the list of all the Programmes (TLEOs) for a given category in
+        TV & iPlayer.
       operationId: Get_Programmes by category_
       parameters:
-        - $ref: '#/components/parameters/category'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
+        - $ref: "#/components/parameters/category"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List all the programmes for a category.
@@ -189,233 +190,233 @@ paths:
           required: false
           schema:
             type: string
-        - $ref: '#/components/parameters/lang'
+        - $ref: "#/components/parameters/lang"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List all the channels.
       tags:
         - Channels
-  '/channels/{channel}/broadcasts':
+  "/channels/{channel}/broadcasts":
     get:
       description: Get broadcasts by channel
       operationId: Get_Broadcasts by channel_
       parameters:
-        - $ref: '#/components/parameters/channel'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
-        - $ref: '#/components/parameters/per_page'
-        - description: 'Time to return results from, e.g. -3h'
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
+        - $ref: "#/components/parameters/per_page"
+        - description: Time to return results from, e.g. -3h
           in: query
           name: from
           required: false
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get broadcasts by channel
       tags:
         - Programmes (TLEOs)
-  '/channels/{channel}/highlights':
+  "/channels/{channel}/highlights":
     get:
       description: Get the editorial highlights of a given channel in TV & iPlayer.
       operationId: Get_Highlights by channel_
       parameters:
-        - $ref: '#/components/parameters/channel'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
         - description: Whether to include live programmes
           in: query
           name: live
           required: false
           schema:
             type: boolean
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List the highlights for a channel.
       tags:
         - Channels
-  '/channels/{channel}/programmes':
+  "/channels/{channel}/programmes":
     get:
       description: Get programmes by channel
       operationId: Get_Programmes by channel_
       parameters:
-        - $ref: '#/components/parameters/channel'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
+        - $ref: "#/components/parameters/channel"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get programmes by channel
       tags:
         - Programmes (TLEOs)
-  '/channels/{channel}/schedule/{date}':
+  "/channels/{channel}/schedule/{date}":
     get:
       description: Get schedule by channel
       operationId: Get_Schedule by channel_
       parameters:
-        - $ref: '#/components/parameters/channel'
-        - description: 'The date to return the schedule for, yyyy-mm-dd format'
+        - $ref: "#/components/parameters/channel"
+        - description: The date to return the schedule for, yyyy-mm-dd format
           in: path
           name: date
           required: true
           schema:
             type: string
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get schedule by channel
       tags:
         - Channels
-  '/clips/{pid}':
+  "/clips/{pid}":
     get:
       description: Get Clips
       operationId: Get_Clips_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get Clips
       tags:
         - Episodes
-  '/episodes/{pid}':
+  "/episodes/{pid}":
     get:
       description: Get the episode for a given episode identifier.
       operationId: Get_Programme by PID_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Episode for a given pid.
       tags:
         - Episodes
-  '/episodes/{pid}/next':
+  "/episodes/{pid}/next":
     get:
       description: Get Onward Journey (next programme)
       operationId: Get_Onward_Journey
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get Onward Journey
       tags:
         - Episodes
-  '/episodes/{pid}/postrolls':
+  "/episodes/{pid}/postrolls":
     get:
       description: Get Follow-ups (post-rolls)
       operationId: getPostRolls
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get Follow-ups (post-rolls)
       tags:
         - Episodes
-  '/episodes/{pid}/prerolls':
+  "/episodes/{pid}/prerolls":
     get:
       description: Get Trailers (pre-rolls)
       operationId: Get_Trailers (pre-rolls)_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get Trailers (pre-rolls)
       tags:
         - Episodes
-  '/episodes/{pid}/recommendations':
+  "/episodes/{pid}/recommendations":
     get:
       description: Get programme recommendations
       operationId: Get_Programme recommendations_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get programme recommendations
@@ -426,48 +427,48 @@ paths:
       description: Get programmes popular
       operationId: Get_Programmes popular_
       parameters:
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
-        - $ref: '#/components/parameters/initial_child_count'
-        - $ref: '#/components/parameters/sort'
-        - $ref: '#/components/parameters/sort_direction'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/initial_child_count"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/sort_direction"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get programmes popular
       tags:
         - Episodes
-  '/groups/{pid}/episodes':
+  "/groups/{pid}/episodes":
     get:
-      description: 'Get episodes by group, brand or series'
+      description: Get episodes by group, brand or series
       operationId: Get_Episodes by group_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/per_page'
-        - $ref: '#/components/parameters/initial_child_count'
-        - $ref: '#/components/parameters/sort'
-        - $ref: '#/components/parameters/sort_direction'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/initial_child_count"
+        - $ref: "#/components/parameters/sort"
+        - $ref: "#/components/parameters/sort_direction"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
-      summary: 'Get episodes by group, brand or series'
+      summary: Get episodes by group, brand or series
       tags:
         - Episodes
   /home/highlights:
@@ -475,56 +476,56 @@ paths:
       description: Get programme highlights
       operationId: Get_Programme highlights_
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/mixin'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/mixin"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get programme highlights
       tags:
         - Programmes (TLEOs)
-  '/programmes/{pid}':
+  "/programmes/{pid}":
     get:
       description: Get the programme for a given programme identifier.
       operationId: Get_Programmes by parent PID_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/initial_child_count'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/initial_child_count"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Programme for a given pid.
       tags:
         - Programmes (TLEOs)
-  '/programmes/{pid}/episodes':
+  "/programmes/{pid}/episodes":
     get:
       description: Get the child episodes belonging to a given programme identifier.
       operationId: Get_Episodes by parent PID_
       parameters:
-        - $ref: '#/components/parameters/pid'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
-        - $ref: '#/components/parameters/initial_child_count'
+        - $ref: "#/components/parameters/pid"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
+        - $ref: "#/components/parameters/initial_child_count"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Child episodes for a given programme pid.
@@ -535,13 +536,13 @@ paths:
       description: Get the list of all the regions TV & iPlayer.
       operationId: Get_Regions_
       parameters:
-        - $ref: '#/components/parameters/lang'
+        - $ref: "#/components/parameters/lang"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: List all regions
@@ -552,11 +553,11 @@ paths:
       description: Get schema
       operationId: Get_Schema_
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get schema
@@ -567,16 +568,16 @@ paths:
       description: Search
       operationId: Search_
       parameters:
-        - $ref: '#/components/parameters/q'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/q"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Search
@@ -587,16 +588,16 @@ paths:
       description: Search-suggest
       operationId: Search-suggest_
       parameters:
-        - $ref: '#/components/parameters/q'
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/rights'
-        - $ref: '#/components/parameters/availability'
+        - $ref: "#/components/parameters/q"
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/rights"
+        - $ref: "#/components/parameters/availability"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Search-suggest
@@ -604,14 +605,17 @@ paths:
         - Search
   /status:
     get:
-      description: 'Get the current iPlayer business layer status. This tells the caller the status of the iPlayer data, but not necessarily the overall status of the website. In the future it might include the status of the dependent data services within the BBC.'
+      description: Get the current iPlayer business layer status. This tells the
+        caller the status of the iPlayer data, but not necessarily the overall
+        status of the website. In the future it might include the status of the
+        dependent data services within the BBC.
       operationId: Get_Status_
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get status
@@ -622,13 +626,13 @@ paths:
       description: Get user store purchases
       operationId: Get_User store purchases_
       parameters:
-        - $ref: '#/components/parameters/identity_cookie'
+        - $ref: "#/components/parameters/identity_cookie"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security:
         - basic: []
@@ -640,13 +644,13 @@ paths:
       description: Get user store recommendations
       operationId: Get_User store recommendations_
       parameters:
-        - $ref: '#/components/parameters/identity_cookie'
+        - $ref: "#/components/parameters/identity_cookie"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get user store recommendations
@@ -657,13 +661,13 @@ paths:
       description: Get user watching
       operationId: Get_User watching_
       parameters:
-        - $ref: '#/components/parameters/identity_cookie'
+        - $ref: "#/components/parameters/identity_cookie"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ibl'
+                $ref: "#/components/schemas/ibl"
           description: Default response
       security: []
       summary: Get user watching
@@ -672,7 +676,7 @@ paths:
 components:
   parameters:
     availability:
-      description: 'Whether to return all, or available programmes'
+      description: Whether to return all, or available programmes
       in: query
       name: availability
       required: true
@@ -763,7 +767,7 @@ components:
       required: true
       schema:
         minLength: 8
-        pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+        pattern: ^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$
         type: string
     q:
       description: The term to search for.
@@ -806,7 +810,7 @@ components:
       additionalProperties: false
       properties:
         programme:
-          $ref: '#/components/schemas/programme'
+          $ref: "#/components/schemas/programme"
         type:
           enum:
             - added
@@ -839,9 +843,25 @@ components:
             - text
           type: object
         episode:
-          $ref: '#/components/schemas/episode'
+          $ref: "#/components/schemas/episode"
         episode_id:
           type: string
+        events:
+          items:
+            additionalProperties: false
+            properties:
+              name:
+                type: string
+              system:
+                type: string
+              time:
+                type: string
+            required:
+              - name
+              - system
+              - time
+            type: object
+          type: array
         id:
           type: string
         repeat:
@@ -893,7 +913,7 @@ components:
           type: string
         sub_categories:
           items:
-            $ref: '#/components/schemas/category'
+            $ref: "#/components/schemas/category"
           type: array
         title:
           type: string
@@ -960,7 +980,7 @@ components:
               type: string
           type: object
         master_brand:
-          $ref: '#/components/schemas/master_brand'
+          $ref: "#/components/schemas/master_brand"
         onward_journey:
           additionalProperties: false
           properties:
@@ -1039,19 +1059,33 @@ components:
                 type: object
               events:
                 items:
-                  additionalProperties: false
-                  properties:
-                    name:
-                      type: string
-                    offset:
-                      type: integer
-                    system:
-                      type: string
-                  required:
-                    - name
-                    - system
-                    - offset
-                  type: object
+                  oneOf:
+                    - additionalProperties: false
+                      properties:
+                        name:
+                          type: string
+                        offset:
+                          type: integer
+                        system:
+                          type: string
+                      required:
+                        - name
+                        - system
+                        - offset
+                      type: object
+                    - additionalProperties: false
+                      properties:
+                        name:
+                          type: string
+                        system:
+                          type: string
+                        time:
+                          type: string
+                      required:
+                        - name
+                        - system
+                        - time
+                      type: object
                 type: array
               first_broadcast:
                 type: string
@@ -1163,6 +1197,10 @@ components:
               type: string
             programme_logo:
               type: string
+            promotional:
+              type: string
+            promotional_with_logo:
+              type: string
             standard:
               type: string
             type:
@@ -1193,7 +1231,7 @@ components:
         live_title:
           type: string
         master_brand:
-          $ref: '#/components/schemas/master_brand'
+          $ref: "#/components/schemas/master_brand"
         next_broadcast:
           additionalProperties: false
           properties:
@@ -1383,19 +1421,33 @@ components:
                     type: object
                   events:
                     items:
-                      additionalProperties: false
-                      properties:
-                        name:
-                          type: string
-                        offset:
-                          type: integer
-                        system:
-                          type: string
-                      required:
-                        - name
-                        - system
-                        - offset
-                      type: object
+                      oneOf:
+                        - additionalProperties: false
+                          properties:
+                            name:
+                              type: string
+                            offset:
+                              type: integer
+                            system:
+                              type: string
+                          required:
+                            - name
+                            - system
+                            - offset
+                          type: object
+                        - additionalProperties: false
+                          properties:
+                            name:
+                              type: string
+                            system:
+                              type: string
+                            time:
+                              type: string
+                          required:
+                            - name
+                            - system
+                            - time
+                          type: object
                     type: array
                   first_broadcast:
                     type: string
@@ -1600,11 +1652,11 @@ components:
         initial_children:
           items:
             anyOf:
-              - $ref: '#/components/schemas/episode'
-              - $ref: '#/components/schemas/broadcast'
+              - $ref: "#/components/schemas/episode"
+              - $ref: "#/components/schemas/broadcast"
           type: array
         master_brand:
-          $ref: '#/components/schemas/master_brand'
+          $ref: "#/components/schemas/master_brand"
         related_links:
           items:
             additionalProperties: false
@@ -1701,7 +1753,7 @@ components:
           type: object
         initial_children:
           items:
-            $ref: '#/components/schemas/episode'
+            $ref: "#/components/schemas/episode"
           type: array
         labels:
           additionalProperties: false
@@ -1712,7 +1764,7 @@ components:
         lexical_sort_letter:
           type: string
         master_brand:
-          $ref: '#/components/schemas/master_brand'
+          $ref: "#/components/schemas/master_brand"
         programme_type:
           enum:
             - narrative
@@ -1836,7 +1888,7 @@ components:
       additionalProperties: false
       properties:
         episode:
-          $ref: '#/components/schemas/episode'
+          $ref: "#/components/schemas/episode"
         id:
           type: string
         type:
@@ -1969,7 +2021,7 @@ components:
         algorithm:
           type: string
         episode:
-          $ref: '#/components/schemas/episode'
+          $ref: "#/components/schemas/episode"
         type:
           enum:
             - user_recommendation
@@ -2018,19 +2070,33 @@ components:
           type: object
         events:
           items:
-            additionalProperties: false
-            properties:
-              name:
-                type: string
-              offset:
-                type: integer
-              system:
-                type: string
-            required:
-              - name
-              - system
-              - offset
-            type: object
+            oneOf:
+              - additionalProperties: false
+                properties:
+                  name:
+                    type: string
+                  offset:
+                    type: integer
+                  system:
+                    type: string
+                required:
+                  - name
+                  - system
+                  - offset
+                type: object
+              - additionalProperties: false
+                properties:
+                  name:
+                    type: string
+                  system:
+                    type: string
+                  time:
+                    type: string
+                required:
+                  - name
+                  - system
+                  - time
+                type: object
           type: array
         first_broadcast:
           type: string
@@ -2101,13 +2167,13 @@ components:
       additionalProperties: false
       properties:
         episode:
-          $ref: '#/components/schemas/episode'
+          $ref: "#/components/schemas/episode"
         has_next:
           type: boolean
         offset:
           type: number
         programme:
-          $ref: '#/components/schemas/programme'
+          $ref: "#/components/schemas/programme"
         progress:
           type: number
         remaining:
@@ -2123,7 +2189,7 @@ components:
         urn:
           type: string
         version:
-          $ref: '#/components/schemas/version'
+          $ref: "#/components/schemas/version"
       required:
         - type
         - urn
