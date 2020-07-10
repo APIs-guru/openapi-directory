@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -7,25 +7,26 @@ basePath: /api/v1
 info:
   contact:
     email: api+covid19@h7.org
-  description: 'Coronavirus API with free COVID-19 live updates. The best free coronavirus API and COVID-19 update source. Programmatically access live corona virus updates for statistics with historical data, maps, charts, graphs. COVID-19 API and corona virus live updates.'
+  description: Coronavirus API with free COVID-19 live updates. The best free
+    coronavirus API and COVID-19 update source. Programmatically access live
+    corona virus updates for statistics with historical data, maps, charts,
+    graphs. COVID-19 API and corona virus live updates.
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: 'https://quarantine.country/coronavirus/api/privacy.html'
-  title: Coronavirus
-  version: '1.0'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://quarantine.country/coronavirus/api/privacy.html
+  title: Coronavirus API
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-origin:
     - format: swagger
-      url: 'https://quarantine.country/coronavirus/api/swagger.json'
-      version: '2.0'
+      url: https://quarantine.country/coronavirus/api/swagger.json
+      version: "2.0"
   x-providerName: quarantine.country
 externalDocs:
   description: Find out more about Swagger
-  url: 'http://swagger.io'
-produces:
-  - application/json
+  url: http://swagger.io
 tags:
   - description: Latest data
     name: summary
@@ -45,12 +46,14 @@ paths:
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/SpotsResponse'
-        '404':
+            $ref: "#/definitions/SpotsResponse"
+        "404":
           description: Unknown region
       summary: Resolve change chart by day
       tags:
@@ -68,12 +71,14 @@ paths:
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/SpotsResponse'
-        '404':
+            $ref: "#/definitions/SpotsResponse"
+        "404":
           description: Unknown region
       summary: Resolve change chart for week
       tags:
@@ -91,12 +96,14 @@ paths:
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/SpotsResponse'
-        '404':
+            $ref: "#/definitions/SpotsResponse"
+        "404":
           description: Unknown region
       summary: Resolve change chart for week
       tags:
@@ -114,30 +121,34 @@ paths:
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/SpotsResponse'
-        '404':
+            $ref: "#/definitions/SpotsResponse"
+        "404":
           description: Unknown region
       summary: Resolve change chart for week
       tags:
         - spot
   /summary/latest:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: today
           description: Date of the report
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ReportResponse'
+            $ref: "#/definitions/ReportResponse"
       summary: Get latest coronavirus situation report
       tags:
         - summary
@@ -154,12 +165,14 @@ paths:
           in: query
           name: date
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ReportResponse'
-        '404':
+            $ref: "#/definitions/ReportResponse"
+        "404":
           description: Region does not exist
       summary: Resolve report for region
       tags:
@@ -171,7 +184,7 @@ definitions:
         title: Active cases number
         type: integer
       change:
-        $ref: '#/definitions/Report'
+        $ref: "#/definitions/Report"
         title: Change over previous day
         type: object
       death_ratio:
@@ -200,7 +213,7 @@ definitions:
       data:
         properties:
           change:
-            $ref: '#/definitions/Report'
+            $ref: "#/definitions/Report"
             description: Change over previous day
             type: object
           generated_on:
@@ -208,7 +221,7 @@ definitions:
             type: integer
           regions:
             additionalProperties:
-              $ref: '#/definitions/Report'
+              $ref: "#/definitions/Report"
               type: object
             example:
               switzerland:
@@ -228,7 +241,7 @@ definitions:
                 total_cases: 23280
             type: object
           summary:
-            $ref: '#/definitions/Report'
+            $ref: "#/definitions/Report"
             description: Summary data for date
             type: object
         type: object
@@ -246,16 +259,16 @@ definitions:
     properties:
       data:
         additionalProperties:
-          $ref: '#/definitions/Report'
+          $ref: "#/definitions/Report"
           type: object
         example:
-          '2020-04-09 12:20:00':
+          2020-04-09 12:20:00:
             death_ratio: 0.040285703944113994
             deaths: 3339
             recovered: 77678
             recovery_ratio: 0.937200632216498
             total_cases: 82883
-          '2020-04-09 12:40:00':
+          2020-04-09 12:40:00:
             death_ratio: 0.040285703944113994
             deaths: 3339
             recovered: 77678
