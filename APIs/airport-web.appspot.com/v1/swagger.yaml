@@ -1,20 +1,21 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: airport-web.appspot.com
 basePath: /_ah/api
 info:
-  description: Get name and website-URL for airports by ICAO code. Covered airports are mostly in Germany.
+  description: Get name and website-URL for airports by ICAO code. Covered
+    airports are mostly in Germany.
   title: airportsapi
   version: v1
   x-apisguru-categories:
     - transport
   x-logo:
-    url: 'https://user-images.githubusercontent.com/21603/37955263-098e5b38-31a0-11e8-96fd-5755b16341e3.png'
+    url: https://user-images.githubusercontent.com/21603/37955263-098e5b38-31a0-11e8-96fd-5755b16341e3.png
   x-origin:
     - format: swagger
-      url: 'https://airport-web.appspot.com/api/docs/swagger.json'
-      version: '2.0'
+      url: https://airport-web.appspot.com/api/docs/swagger.json
+      version: "2.0"
   x-providerName: airport-web.appspot.com
 consumes:
   - application/json
@@ -22,13 +23,13 @@ produces:
   - application/json
 securityDefinitions:
   google_id_token:
-    authorizationUrl: ''
+    authorizationUrl: ""
     flow: implicit
     type: oauth2
     x-google-issuer: accounts.google.com
-    x-google-jwks_uri: 'https://www.googleapis.com/oauth2/v1/certs'
+    x-google-jwks_uri: https://www.googleapis.com/oauth2/v1/certs
 paths:
-  '/airportsapi/v1/airports/{icao_code}':
+  "/airportsapi/v1/airports/{icao_code}":
     get:
       operationId: AirportApi_getAirport
       parameters:
@@ -37,10 +38,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful response
           schema:
-            $ref: '#/definitions/ApiEndpointsAirportResponse'
+            $ref: "#/definitions/ApiEndpointsAirportResponse"
 definitions:
   ApiEndpointsAirportResponse:
     properties:
