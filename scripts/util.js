@@ -22,7 +22,7 @@ exports.readYaml = function (filename) {
     return;
 
   var data = fs.readFileSync(filename, 'utf-8');
-  return YAML.safeLoad(data, {filename: filename});
+  return YAML.safeLoad(data, {filename: filename, schema:YAML.JSON_SCHEMA});
 }
 
 exports.readJson = function (filename) {
@@ -144,6 +144,7 @@ exports.getPathComponents = function (swagger, stripVersion) {
     path.push(serviceName);
   if (!stripVersion) {
     var version = swagger.info.version||'1.0.0';
+    if (typeof version !== 'string') version = version.toString();
     version = version.split(' (')[0];
     path.push(version);
   }
