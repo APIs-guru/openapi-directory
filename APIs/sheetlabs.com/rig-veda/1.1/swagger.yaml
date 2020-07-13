@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: sheetlabs.com
@@ -7,34 +7,51 @@ info:
   contact:
     email: ab.techwriter@gmail.com
     x-twitter: sheetlabs
-  description: 'This API returns information about all of the verses in Rig Veda. The results are JSON objects that contain the name of the god, poet, and meter of the verses in Rig Veda, the category of the god and the poet, and the mandal and sukta number.'
+  description: >
+    # Introduction
+
+    This API returns information about all of the verses in Rig Veda. The results are JSON objects that contain the name of the god, poet, and meter of the verses in Rig Veda, the category of the god and the poet, and the _mandal_ and _sukta_ number.
+
+
+    The API uses the Swagger 2.0 specification.
+
+
+    # Authentication
+
+    This is an open API.
+
+
+    # Rate limits
+
+    Total monthly calls are limited to 10,000.
   license:
     name: Distributed under the MIT license
-    url: 'https://opensource.org/licenses/MIT'
-  title: rv
-  version: '1.1'
+    url: https://opensource.org/licenses/MIT
+  title: rv API
+  version: "1.1"
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/sheetlabs/profile_image?size=original'
+    altText: Indica logo
+    url: https://AninditaBasu.github.io/images/indica.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/AninditaBasu/indica/master/rv_SDKs/rv.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/AninditaBasu/indica/master/rv_SDKs/rv.yaml
+      version: "2.0"
   x-providerName: sheetlabs.com
   x-serviceName: rig-veda
 externalDocs:
   description: Documentation
-  url: 'https://aninditabasu.github.io/indica/'
+  url: https://aninditabasu.github.io/indica/
 paths:
   /:
     get:
       responses:
-        '200':
-          description: Records fetched
-        '401':
-          description: The API needs an authentication key.
-      summary: Fetch all records from the database
+        "200":
+          description: Entries fetched
+        "404":
+          description: No entry found
+      summary: Fetch all entries in this API
   /mandal:
     get:
       parameters:
@@ -55,43 +72,41 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-      summary: Fetch all verses in a specific book
+        "200":
+          description: Verses fetched.
+        "404":
+          description: No verses found.
+      summary: Fetch all verses in a specific book (mandal)
   /meter:
     get:
       parameters:
-        - description: 'The name of the meter. Wildcard characters allowed, for example *tri'
+        - description: The name of the meter. Wildcard characters allowed, for example
+            \*tri*
           in: query
           name: meter
           required: true
           type: string
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-        '404':
+        "200":
+          description: Verses fetched.
+        "404":
           description: Rig Veda does not have any verses in that meter.
       summary: Fetch all verses composed in a specific meter
   /sungby:
     get:
       parameters:
-        - description: 'The name of the rishi. Wildcard characters allowed, for example *mitra'
+        - description: The name of the rishi. Wildcard characters allowed, for example
+            \*mitra*
           in: query
           name: sungby
           required: true
           type: string
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-        '404':
+        "200":
+          description: Verses fetched.
+        "404":
           description: No such rishi composed anything that went into the Rig Veda.
-      summary: Fetch all verses composed by a specific rishi
+      summary: Fetch all verses composed by a specific rishi (poet)
   /sungbycategory:
     get:
       parameters:
@@ -108,29 +123,27 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-        '404':
+        "200":
+          description: Verses fetched.
+        "404":
           description: No such poet category exists in this API.
-      summary: Fetch all verses composed by a specific category of beings
+      summary: Fetch all verses composed by a specific category of poets
   /sungfor:
     get:
       parameters:
-        - description: 'The name of the god, goddess, or object. Wildcard characters allowed, for example *dra'
+        - description: The name of the god, goddess, or object. Wildcard characters
+            allowed, for example \*dra*
           in: query
           name: sungfor
           required: true
           type: string
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-        '404':
-          description: No such god or thing had verses composed in their honour.
-      summary: 'Fetch all verses addressed to a specific god, goddess, or object'
+        "200":
+          description: Verses fetched.
+        "404":
+          description: No such god or thing have verses in the Rig Veda composed in their
+            honour.
+      summary: Fetch all verses addressed to a specific god, human, or thing
   /sungforcategory:
     get:
       parameters:
@@ -153,10 +166,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: Verses fetched successfully.
-        '401':
-          description: You need an authentication key.
-        '404':
+        "200":
+          description: Verses fetched.
+        "404":
           description: No such category exists in this API.
-      summary: Fetch all verses composed for a specific category
+      summary: Fetch all verses composed for a specific category of god, human, or thing

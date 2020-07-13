@@ -1,31 +1,39 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: demo.waterlinked.com
 info:
   contact:
     x-twitter: waterlinkedas
-  description: |-
-    API for the Water Linked Underwater GPS. For more details: http://www.waterlinked.com
+  description: >-
+    API for the Water Linked Underwater GPS. For more details:
+    http://www.waterlinked.com
+
 
     Recommended approach for connecting to a Underwater GPS via the API is:
+
     - If "GET /api/" times out, the Underwater GPS is not running (on this IP address)
+
     - If "GET /api/" responds with 200 OK check that the api version returrned (eg "v1") is supported by the client (eg: also supports "v1").
+
     - If the api version returned does not match what the client supports: give an error to the user and recommend upgrading. (Eg: response is "v2" while client only supports "v1")
+
     - If "GET /api/" responds with 301 Moved permanently. "GET /api/v1/version" to check if the kit has a version earlier than 1.5.
+
     - "GET /api/v1/version" will always respond with 200 OK on Underwater GPS earlier than 1.5 release.
 
+
     Configuration API is is not considered stable and will potentially be changed
-  title: The Water Linked Underwater GPS
+  title: The Water Linked Underwater GPS API
   version: 1.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://twitter.com/waterlinkedas/profile_image?size=original'
+    url: https://twitter.com/waterlinkedas/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://demo.waterlinked.com/swagger/swagger.json'
-      version: '2.0'
+      url: http://demo.waterlinked.com/swagger/swagger.json
+      version: "2.0"
   x-providerName: waterlinked.com
 consumes:
   - application/json
@@ -45,14 +53,14 @@ responses:
 paths:
   /api/:
     get:
-      operationId: 'about#ApiVersion'
+      operationId: about#ApiVersion
       produces:
         - application/vnd.wupdater.apiversion
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WupdaterApiversion'
+            $ref: "#/definitions/WupdaterApiversion"
       schemes:
         - http
       summary: ApiVersion about
@@ -61,14 +69,14 @@ paths:
   /api/v1/about:
     get:
       description: Get about information
-      operationId: 'about#Get'
+      operationId: about#Get
       produces:
         - application/vnd.waterlinked.about+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedAbout'
+            $ref: "#/definitions/WaterlinkedAbout"
       schemes:
         - http
       summary: Get about
@@ -77,14 +85,14 @@ paths:
   /api/v1/about/status:
     get:
       description: Get current IMU and GPS status
-      operationId: 'about#Status'
+      operationId: about#Status
       produces:
         - application/vnd.waterlinked.status+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedStatus'
+            $ref: "#/definitions/WaterlinkedStatus"
       schemes:
         - http
       summary: Status about
@@ -93,14 +101,14 @@ paths:
   /api/v1/about/temperature:
     get:
       description: Get board temperature
-      operationId: 'about#Temperature'
+      operationId: about#Temperature
       produces:
         - application/vnd.waterlinked.temperature+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedTemperature'
+            $ref: "#/definitions/WaterlinkedTemperature"
       schemes:
         - http
       summary: Temperature about
@@ -109,19 +117,19 @@ paths:
   /api/v1/config/generic:
     get:
       description: Get generic configuration
-      operationId: 'config#Get'
+      operationId: config#Get
       produces:
         - application/vnd.waterlinked.configuration+json
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedConfiguration'
-        '500':
+            $ref: "#/definitions/WaterlinkedConfiguration"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: Get config
@@ -129,30 +137,30 @@ paths:
         - config
     put:
       description: Modify generic configuration
-      operationId: 'config#Modify'
+      operationId: config#Modify
       parameters:
         - description: Configuration parameters
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/ModifyConfigPayload'
+            $ref: "#/definitions/ModifyConfigPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '400':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '503':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "503":
           description: Service Unavailable
       schemes:
         - http
@@ -162,14 +170,14 @@ paths:
   /api/v1/config/ip:
     get:
       description: Get IP configuration
-      operationId: 'config#GetIP'
+      operationId: config#GetIP
       produces:
         - application/vnd.waterlinked.ip_config+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedIp_config'
+            $ref: "#/definitions/WaterlinkedIp_config"
       schemes:
         - http
       summary: GetIP config
@@ -177,33 +185,33 @@ paths:
         - config
     put:
       description: Modify IP configuration
-      operationId: 'config#ModifyIP'
+      operationId: config#ModifyIP
       parameters:
         - description: Configuration parameters
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/ModifyIPConfigPayload'
+            $ref: "#/definitions/ModifyIPConfigPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '400':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '503':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "503":
           description: Service Unavailable
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: ModifyIP config
@@ -212,23 +220,23 @@ paths:
   /api/v1/config/receivers/:
     get:
       description: (Re)Load current receiver settings and return them
-      operationId: 'config#ListReceiver'
+      operationId: config#ListReceiver
       produces:
         - application/vnd.waterlinked.receiver+json; type=collection
       responses:
-        '200':
+        "200":
           description: Returned list of receivers
           schema:
-            $ref: '#/definitions/WaterlinkedReceiverCollection'
+            $ref: "#/definitions/WaterlinkedReceiverCollection"
       schemes:
         - http
       summary: ListReceiver config
       tags:
         - config
-  '/api/v1/config/receivers/{ID}':
+  "/api/v1/config/receivers/{ID}":
     get:
       description: Get receiver configuration by id
-      operationId: 'config#ShowReceiver'
+      operationId: config#ShowReceiver
       parameters:
         - description: Identifier
           in: path
@@ -238,11 +246,11 @@ paths:
       produces:
         - application/vnd.waterlinked.receiver+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedReceiver'
-        '404':
+            $ref: "#/definitions/WaterlinkedReceiver"
+        "404":
           description: Not Found
       schemes:
         - http
@@ -250,8 +258,9 @@ paths:
       tags:
         - config
     put:
-      description: 'Modify receiver configuration, does not apply the change until generic modify is called. Calling list will discard changes'
-      operationId: 'config#ModifyReceiver'
+      description: Modify receiver configuration, does not apply the change until
+        generic modify is called. Calling list will discard changes
+      operationId: config#ModifyReceiver
       parameters:
         - description: Identifier
           in: path
@@ -263,11 +272,11 @@ paths:
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/ModifyReceiverConfigPayload'
+            $ref: "#/definitions/ModifyReceiverConfigPayload"
       responses:
-        '204':
+        "204":
           description: No Content
-        '404':
+        "404":
           description: Not Found
       schemes:
         - http
@@ -276,26 +285,27 @@ paths:
         - config
   /api/v1/external/depth:
     put:
-      description: 'Set depth from external source. If Locator A1 is used, this is required to get a position'
-      operationId: 'external#SetDepth'
+      description: Set depth from external source. If Locator A1 is used, this is
+        required to get a position
+      operationId: external#SetDepth
       parameters:
         - description: Current locator depth and temperature
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/SetDepthExternalPayload'
+            $ref: "#/definitions/SetDepthExternalPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: SetDepth external
@@ -303,16 +313,17 @@ paths:
         - external
   /api/v1/external/imu:
     get:
-      description: Get rotation and acceleration of vehicle Locator is mounted on which was previously set
-      operationId: 'external#GetVehicleIMU'
+      description: Get rotation and acceleration of vehicle Locator is mounted on
+        which was previously set
+      operationId: external#GetVehicleIMU
       produces:
         - application/vnd.wl.external.vehicle.imu+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WlExternalVehicleImu'
-        '204':
+            $ref: "#/definitions/WlExternalVehicleImu"
+        "204":
           description: No Content
       schemes:
         - http
@@ -320,26 +331,27 @@ paths:
       tags:
         - external
     put:
-      description: Set rotation and acceleration of vehicle Locator is mounted on. This is used to improve positioning of vehicle
-      operationId: 'external#SetVehicleIMU'
+      description: Set rotation and acceleration of vehicle Locator is mounted on.
+        This is used to improve positioning of vehicle
+      operationId: external#SetVehicleIMU
       parameters:
         - description: Set current rotation and acceleration of vehicle
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/SetVehicleIMUExternalPayload'
+            $ref: "#/definitions/SetVehicleIMUExternalPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: SetVehicleIMU external
@@ -347,26 +359,27 @@ paths:
         - external
   /api/v1/external/master:
     put:
-      description: Set current global position of master electronics from external source. Values are only used if GPS mode is set to use external GPS
-      operationId: 'external#SetMaster'
+      description: Set current global position of master electronics from external
+        source. Values are only used if GPS mode is set to use external GPS
+      operationId: external#SetMaster
       parameters:
         - description: Global master position from external source
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/SetMasterExternalPayload'
+            $ref: "#/definitions/SetMasterExternalPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: SetMaster external
@@ -375,45 +388,46 @@ paths:
   /api/v1/external/orientation:
     get:
       description: Get orientation of Vehicle/ROV/Locator set by SetOrientation
-      operationId: 'external#GetOrientation'
+      operationId: external#GetOrientation
       produces:
         - application/vnd.waterlinked.operation_response+json
         - application/vnd.wl.external.locator.orientation+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WlExternalLocatorOrientation'
-        '500':
+            $ref: "#/definitions/WlExternalLocatorOrientation"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: GetOrientation external
       tags:
         - external
     put:
-      description: Set orientation/compass heading of Vehicle/ROV/Locator. This is used only for visualization in GUI
-      operationId: 'external#SetOrientation'
+      description: Set orientation/compass heading of Vehicle/ROV/Locator. This is
+        used only for visualization in GUI
+      operationId: external#SetOrientation
       parameters:
         - description: Set current compass heading of ROV/locator
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/SetOrientationExternalPayload'
+            $ref: "#/definitions/SetOrientationExternalPayload"
       produces:
         - application/vnd.waterlinked.operation_response+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
-        '500':
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/WaterlinkedOperation_response'
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: SetOrientation external
@@ -422,29 +436,29 @@ paths:
   /api/v1/poi:
     post:
       description: Create a new POI
-      operationId: 'poi#Create'
+      operationId: poi#Create
       parameters:
         - description: A list of all POI
           in: body
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/CreatePoiPayload'
+            $ref: "#/definitions/CreatePoiPayload"
       produces:
         - application/vnd.goa.error
       responses:
-        '201':
+        "201":
           description: Resource created
           headers:
             Location:
               description: href to created resource
-              pattern: '^/poi/[0-9]+$'
+              pattern: ^/poi/[0-9]+$
               type: string
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/error'
-        '403':
+            $ref: "#/definitions/error"
+        "403":
           description: Forbidden
       schemes:
         - http
@@ -454,24 +468,24 @@ paths:
   /api/v1/poi/:
     get:
       description: List all points of interest
-      operationId: 'poi#List'
+      operationId: poi#List
       produces:
         - application/vnd.waterlinked.poi+json; type=collection
       responses:
-        '200':
+        "200":
           description: Return list of all POIs
           schema:
-            $ref: '#/definitions/WaterlinkedPoiCollection'
-        '404':
+            $ref: "#/definitions/WaterlinkedPoiCollection"
+        "404":
           description: Not Found
       schemes:
         - http
       summary: List poi
       tags:
         - poi
-  '/api/v1/poi/{ID}':
+  "/api/v1/poi/{ID}":
     delete:
-      operationId: 'poi#Delete'
+      operationId: poi#Delete
       parameters:
         - in: path
           name: ID
@@ -480,13 +494,13 @@ paths:
       produces:
         - application/vnd.goa.error
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/error'
-        '404':
+            $ref: "#/definitions/error"
+        "404":
           description: Not Found
       schemes:
         - http
@@ -495,7 +509,7 @@ paths:
         - poi
     get:
       description: Get a POI
-      operationId: 'poi#Show'
+      operationId: poi#Show
       parameters:
         - in: path
           name: ID
@@ -504,11 +518,11 @@ paths:
       produces:
         - application/vnd.waterlinked.poi+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedPoi'
-        '404':
+            $ref: "#/definitions/WaterlinkedPoi"
+        "404":
           description: Not Found
       schemes:
         - http
@@ -516,7 +530,7 @@ paths:
       tags:
         - poi
     patch:
-      operationId: 'poi#Update'
+      operationId: poi#Update
       parameters:
         - in: path
           name: ID
@@ -527,17 +541,17 @@ paths:
           name: payload
           required: true
           schema:
-            $ref: '#/definitions/UpdatePoiPayload'
+            $ref: "#/definitions/UpdatePoiPayload"
       produces:
         - application/vnd.goa.error
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/error'
-        '404':
+            $ref: "#/definitions/error"
+        "404":
           description: Not Found
       schemes:
         - http
@@ -546,16 +560,17 @@ paths:
         - poi
   /api/v1/position/acoustic/filtered:
     get:
-      description: 'Get current Kalman filtered acoustic position relative to master acoustics. Expected update frequency: 4 Hz'
-      operationId: 'position#AcousticFiltered'
+      description: "Get current Kalman filtered acoustic position relative to master
+        acoustics. Expected update frequency: 4 Hz"
+      operationId: position#AcousticFiltered
       produces:
         - application/vnd.waterlinked.accoustic.position+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedAccousticPosition'
-        '500':
+            $ref: "#/definitions/WaterlinkedAccousticPosition"
+        "500":
           description: Internal Server Error
       schemes:
         - http
@@ -564,16 +579,17 @@ paths:
         - position
   /api/v1/position/acoustic/raw:
     get:
-      description: 'Get current unfiltered acoustic position relative to master acoustics. Expected update frequency: 4 Hz'
-      operationId: 'position#AcousticRaw'
+      description: "Get current unfiltered acoustic position relative to master
+        acoustics. Expected update frequency: 4 Hz"
+      operationId: position#AcousticRaw
       produces:
         - application/vnd.waterlinked.accoustic.position+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WaterlinkedAccousticPosition'
-        '500':
+            $ref: "#/definitions/WaterlinkedAccousticPosition"
+        "500":
           description: Internal Server Error
       schemes:
         - http
@@ -582,16 +598,18 @@ paths:
         - position
   /api/v1/position/global:
     get:
-      description: 'Get current global position of locator. Locator position is calculated from the current acoustic position and the global position of the master electronics. Expected update frequency: 4 Hz'
-      operationId: 'position#Get'
+      description: "Get current global position of locator. Locator position is
+        calculated from the current acoustic position and the global position of
+        the master electronics. Expected update frequency: 4 Hz"
+      operationId: position#Get
       produces:
         - application/vnd.wl.satellite.position+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WlSatellitePosition'
-        '500':
+            $ref: "#/definitions/WlSatellitePosition"
+        "500":
           description: Internal Server Error
       schemes:
         - http
@@ -600,16 +618,17 @@ paths:
         - position
   /api/v1/position/master:
     get:
-      description: 'Get current global position of master electronics. Expected update frequency: 1 Hz'
-      operationId: 'position#GetMaster'
+      description: "Get current global position of master electronics. Expected update
+        frequency: 1 Hz"
+      operationId: position#GetMaster
       produces:
         - application/vnd.wl.satellite.position+json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WlSatellitePosition'
-        '500':
+            $ref: "#/definitions/WlSatellitePosition"
+        "500":
           description: Internal Server Error
       schemes:
         - http
@@ -619,14 +638,14 @@ paths:
   /api/v1/warnings/:
     get:
       description: Get current list of messages
-      operationId: 'warnings#Get'
+      operationId: warnings#Get
       produces:
         - application/vnd.wl.warning+json; type=collection
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WlWarningCollection'
+            $ref: "#/definitions/WlWarningCollection"
       schemes:
         - http
       summary: Get warnings
@@ -636,8 +655,8 @@ definitions:
   CreatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.5399978780328414
-      icon: Quis vero in deleniti qui nihil.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -646,12 +665,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.5399978780328414
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Quis vero in deleniti qui nihil.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -688,14 +707,13 @@ definitions:
   ModifyConfigPayload:
     description: Configuration parameters
     example:
-      antenna_enabled: true
       channel: 13
-      compass: external
-      environment: openwater
-      external_pps_enabled: true
-      gps: external
+      compass: static
+      environment: reflective
+      external_pps_enabled: false
+      gps: onboard
       imu_vehicle_enabled: false
-      locator_type: p1
+      locator_type: u1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -705,10 +723,6 @@ definitions:
       static_lon: 10.424
       static_orientation: 42
     properties:
-      antenna_enabled:
-        description: Enable use of antenna
-        example: true
-        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -721,18 +735,18 @@ definitions:
           - onboard
           - static
           - external
-        example: external
+        example: static
         type: string
       environment:
         description: Environment setting
         enum:
           - reflective
           - openwater
-        example: openwater
+        example: reflective
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: true
+        example: false
         type: boolean
       gps:
         description: GPS provider setting
@@ -740,7 +754,7 @@ definitions:
           - onboard
           - static
           - external
-        example: external
+        example: onboard
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
@@ -754,7 +768,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: p1
+        example: u1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -857,7 +871,7 @@ definitions:
     example:
       id: 831253423044275100
       x: 0.6812896786410381
-      'y': 0.42906662013966146
+      y: 0.42906662013966146
       z: 0.25362356554993554
     properties:
       id:
@@ -870,7 +884,7 @@ definitions:
         example: 0.6812896786410381
         format: double
         type: number
-      'y':
+      y:
         description: Configured Y position relative to master electronics (meter)
         example: 0.42906662013966146
         format: double
@@ -883,7 +897,7 @@ definitions:
     required:
       - id
       - x
-      - 'y'
+      - y
       - z
     title: ModifyReceiverConfigPayload
     type: object
@@ -978,7 +992,8 @@ definitions:
       orientation: 42
     properties:
       orientation:
-        description: Current orientation/compass heading (degrees). -1 means no orientation set
+        description: Current orientation/compass heading (degrees). -1 means no
+          orientation set
         example: 42
         maximum: 359.999
         minimum: -1
@@ -993,7 +1008,7 @@ definitions:
       pitch: 30
       roll: -30
       x: 10
-      'y': -10
+      y: -10
       yaw: 30
       z: 5
     properties:
@@ -1015,7 +1030,7 @@ definitions:
         maximum: 20
         minimum: -20
         type: number
-      'y':
+      y:
         description: Current acceleration in y-axis of vehicle.
         example: -10
         maximum: 20
@@ -1038,15 +1053,15 @@ definitions:
       - roll
       - yaw
       - x
-      - 'y'
+      - y
       - z
     title: SetVehicleIMUExternalPayload
     type: object
   UpdatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.5399978780328414
-      icon: Quis vero in deleniti qui nihil.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -1055,12 +1070,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.5399978780328414
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Quis vero in deleniti qui nihil.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -1097,13 +1112,13 @@ definitions:
   WaterlinkedAbout:
     description: About information (default view)
     example:
-      chipid: '0x123456789'
+      chipid: "0x123456789"
       version: 1.0.0 (abc.def)
       version_short: 1.0.0
     properties:
       chipid:
         description: Chip identifier
-        example: '0x123456789'
+        example: "0x123456789"
         type: string
       version:
         description: Detailed Web Server version string
@@ -1117,7 +1132,8 @@ definitions:
       - version
       - version_short
       - chipid
-    title: 'Mediatype identifier: application/vnd.waterlinked.about+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.about+json;
+      view=default"
     type: object
   WaterlinkedAccousticPosition:
     description: Current relative Locator position (default view)
@@ -1125,7 +1141,7 @@ definitions:
       std: 0.5
       temp: 5.5
       x: 32.1
-      'y': 11.2
+      y: 11.2
       z: 10.2
     properties:
       std:
@@ -1143,35 +1159,36 @@ definitions:
         example: 32.1
         format: double
         type: number
-      'y':
+      y:
         description: Current acoustic y position relative to master electronics (meter)
         example: 11.2
         format: double
         type: number
       z:
-        description: Current acoustic z position (depth) relative to master electronics (meter)
+        description: Current acoustic z position (depth) relative to master electronics
+          (meter)
         example: 10.2
         minimum: 0
         type: number
     required:
       - x
-      - 'y'
+      - y
       - z
       - std
       - temp
-    title: 'Mediatype identifier: application/vnd.waterlinked.accoustic.position+json; view=default'
+    title: "Mediatype identifier:
+      application/vnd.waterlinked.accoustic.position+json; view=default"
     type: object
   WaterlinkedConfiguration:
     description: Configuration parameters (default view)
     example:
-      antenna_enabled: true
       channel: 13
-      compass: external
-      environment: openwater
-      external_pps_enabled: true
-      gps: external
+      compass: static
+      environment: reflective
+      external_pps_enabled: false
+      gps: onboard
       imu_vehicle_enabled: false
-      locator_type: p1
+      locator_type: u1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
@@ -1181,10 +1198,6 @@ definitions:
       static_lon: 10.424
       static_orientation: 42
     properties:
-      antenna_enabled:
-        description: Enable use of antenna
-        example: true
-        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -1197,18 +1210,18 @@ definitions:
           - onboard
           - static
           - external
-        example: external
+        example: static
         type: string
       environment:
         description: Environment setting
         enum:
           - reflective
           - openwater
-        example: openwater
+        example: reflective
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
-        example: true
+        example: false
         type: boolean
       gps:
         description: GPS provider setting
@@ -1216,7 +1229,7 @@ definitions:
           - onboard
           - static
           - external
-        example: external
+        example: onboard
         type: string
       imu_vehicle_enabled:
         description: Enable IMU input from vehicle
@@ -1230,7 +1243,7 @@ definitions:
           - s1
           - p1
           - u1
-        example: p1
+        example: u1
         type: string
       range_max_x:
         description: Max range (meters)
@@ -1293,7 +1306,8 @@ definitions:
       - static_lat
       - static_lon
       - static_orientation
-    title: 'Mediatype identifier: application/vnd.waterlinked.configuration+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.configuration+json;
+      view=default"
     type: object
   WaterlinkedIp_config:
     description: Configuration parameters (default view)
@@ -1326,7 +1340,8 @@ definitions:
       - gateway
       - prefix
       - dns
-    title: 'Mediatype identifier: application/vnd.waterlinked.ip_config+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.ip_config+json;
+      view=default"
     type: object
   WaterlinkedOperation_response:
     description: Response from server on operations performed (default view)
@@ -1344,13 +1359,14 @@ definitions:
         type: boolean
     required:
       - success
-    title: 'Mediatype identifier: application/vnd.waterlinked.operation_response+json; view=default'
+    title: "Mediatype identifier:
+      application/vnd.waterlinked.operation_response+json; view=default"
     type: object
   WaterlinkedPoi:
     description: A list of all POI (default view)
     example:
-      depth: 0.5399978780328414
-      icon: Quis vero in deleniti qui nihil.
+      depth: 0.768439233512868
+      icon: Fugit quis vero in deleniti qui nihil.
       id: 6536865564212348000
       lat: 0.9848439086783396
       lng: 0.983923109918765
@@ -1359,12 +1375,12 @@ definitions:
     properties:
       depth:
         description: Depth of POI
-        example: 0.5399978780328414
+        example: 0.768439233512868
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Quis vero in deleniti qui nihil.
+        example: Fugit quis vero in deleniti qui nihil.
         type: string
       id:
         description: Unique POI id
@@ -1396,42 +1412,44 @@ definitions:
       - depth
       - icon
       - visible
-    title: 'Mediatype identifier: application/vnd.waterlinked.poi+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.poi+json; view=default"
     type: object
   WaterlinkedPoiCollection:
-    description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
+    description: WaterlinkedPoiCollection is the media type for an array of
+      WaterlinkedPoi (default view)
     example:
-      - depth: 0.5399978780328414
-        icon: Quis vero in deleniti qui nihil.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765
         name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.5399978780328414
-        icon: Quis vero in deleniti qui nihil.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765
         name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
-      - depth: 0.5399978780328414
-        icon: Quis vero in deleniti qui nihil.
+      - depth: 0.768439233512868
+        icon: Fugit quis vero in deleniti qui nihil.
         id: 6536865564212348000
         lat: 0.9848439086783396
         lng: 0.983923109918765
         name: Molestias laboriosam quasi aut ex omnis reprehenderit.
         visible: false
     items:
-      $ref: '#/definitions/WaterlinkedPoi'
-    title: 'Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default'
+      $ref: "#/definitions/WaterlinkedPoi"
+    title: "Mediatype identifier: application/vnd.waterlinked.poi+json;
+      type=collection; view=default"
     type: array
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
     example:
       id: 831253423044275100
       x: 0.6812896786410381
-      'y': 0.42906662013966146
+      y: 0.42906662013966146
       z: 0.25362356554993554
     properties:
       id:
@@ -1444,7 +1462,7 @@ definitions:
         example: 0.6812896786410381
         format: double
         type: number
-      'y':
+      y:
         description: Configured Y position relative to master electronics (meter)
         example: 0.42906662013966146
         format: double
@@ -1457,20 +1475,23 @@ definitions:
     required:
       - id
       - x
-      - 'y'
+      - y
       - z
-    title: 'Mediatype identifier: application/vnd.waterlinked.receiver+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json;
+      view=default"
     type: object
   WaterlinkedReceiverCollection:
-    description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
+    description: WaterlinkedReceiverCollection is the media type for an array of
+      WaterlinkedReceiver (default view)
     example:
       - id: 831253423044275100
         x: 0.6812896786410381
-        'y': 0.42906662013966146
+        y: 0.42906662013966146
         z: 0.25362356554993554
     items:
-      $ref: '#/definitions/WaterlinkedReceiver'
-    title: 'Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default'
+      $ref: "#/definitions/WaterlinkedReceiver"
+    title: "Mediatype identifier: application/vnd.waterlinked.receiver+json;
+      type=collection; view=default"
     type: array
   WaterlinkedStatus:
     description: Status information (default view)
@@ -1501,7 +1522,8 @@ definitions:
       - imu
       - gps
       - battery
-    title: 'Mediatype identifier: application/vnd.waterlinked.status+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.status+json;
+      view=default"
     type: object
   WaterlinkedTemperature:
     description: Temperature information (default view)
@@ -1522,7 +1544,8 @@ definitions:
     required:
       - board
       - water
-    title: 'Mediatype identifier: application/vnd.waterlinked.temperature+json; view=default'
+    title: "Mediatype identifier: application/vnd.waterlinked.temperature+json;
+      view=default"
     type: object
   WlExternalLocatorOrientation:
     description: Set current compass heading of ROV/locator (default view)
@@ -1530,14 +1553,16 @@ definitions:
       orientation: 42
     properties:
       orientation:
-        description: Current orientation/compass heading (degrees). -1 means no orientation set
+        description: Current orientation/compass heading (degrees). -1 means no
+          orientation set
         example: 42
         maximum: 359.999
         minimum: -1
         type: number
     required:
       - orientation
-    title: 'Mediatype identifier: application/vnd.wl.external.locator.orientation+json; view=default'
+    title: "Mediatype identifier:
+      application/vnd.wl.external.locator.orientation+json; view=default"
     type: object
   WlExternalVehicleImu:
     description: Set current rotation and acceleration of vehicle (default view)
@@ -1545,7 +1570,7 @@ definitions:
       pitch: 30
       roll: -30
       x: 10
-      'y': -10
+      y: -10
       yaw: 30
       z: 5
     properties:
@@ -1567,7 +1592,7 @@ definitions:
         maximum: 20
         minimum: -20
         type: number
-      'y':
+      y:
         description: Current acceleration in y-axis of vehicle.
         example: -10
         maximum: 20
@@ -1590,9 +1615,10 @@ definitions:
       - roll
       - yaw
       - x
-      - 'y'
+      - y
       - z
-    title: 'Mediatype identifier: application/vnd.wl.external.vehicle.imu+json; view=default'
+    title: "Mediatype identifier: application/vnd.wl.external.vehicle.imu+json;
+      view=default"
     type: object
   WlSatellitePosition:
     description: GPS and IMU position (default view)
@@ -1659,7 +1685,8 @@ definitions:
       - hdop
       - numsats
       - fix_quality
-    title: 'Mediatype identifier: application/vnd.wl.satellite.position+json; view=default'
+    title: "Mediatype identifier: application/vnd.wl.satellite.position+json;
+      view=default"
     type: object
   WlWarning:
     description: Warning message (default view)
@@ -1684,10 +1711,11 @@ definitions:
       - id
       - message
       - severity
-    title: 'Mediatype identifier: application/vnd.wl.warning+json; view=default'
+    title: "Mediatype identifier: application/vnd.wl.warning+json; view=default"
     type: object
   WlWarningCollection:
-    description: WlWarningCollection is the media type for an array of WlWarning (default view)
+    description: WlWarningCollection is the media type for an array of WlWarning
+      (default view)
     example:
       - id: Libero pariatur quia id modi.
         message: Itaque nemo dolorem ea.
@@ -1696,8 +1724,9 @@ definitions:
         message: Itaque nemo dolorem ea.
         severity: Dolorum nihil.
     items:
-      $ref: '#/definitions/WlWarning'
-    title: 'Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default'
+      $ref: "#/definitions/WlWarning"
+    title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection;
+      view=default"
     type: array
   WupdaterApiversion:
     description: Returns supported api versions (default view)
@@ -1717,7 +1746,7 @@ definitions:
         type: array
     required:
       - versions
-    title: 'Mediatype identifier: application/vnd.wupdater.apiversion; view=default'
+    title: "Mediatype identifier: application/vnd.wupdater.apiversion; view=default"
     type: object
   error:
     description: Error response media type (default view)
@@ -1727,14 +1756,15 @@ definitions:
       id: 3F1FKVRR
       meta:
         timestamp: 1458609066
-      status: '400'
+      status: "400"
     properties:
       code:
-        description: 'an application-specific error code, expressed as a string value.'
+        description: an application-specific error code, expressed as a string value.
         example: invalid_value
         type: string
       detail:
-        description: a human-readable explanation specific to this occurrence of the problem.
+        description: a human-readable explanation specific to this occurrence of the
+          problem.
         example: Value of ID must be an integer
         type: string
       id:
@@ -1748,8 +1778,9 @@ definitions:
           timestamp: 1458609066
         type: object
       status:
-        description: 'the HTTP status code applicable to this problem, expressed as a string value.'
-        example: '400'
+        description: the HTTP status code applicable to this problem, expressed as a
+          string value.
+        example: "400"
         type: string
-    title: 'Mediatype identifier: application/vnd.goa.error; view=default'
+    title: "Mediatype identifier: application/vnd.goa.error; view=default"
     type: object

@@ -1,193 +1,312 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://api.fulfillment.com/v2'
+  - description: Production
+    url: https://api.fulfillment.com/v2
 info:
   contact:
     email: dev@fulfillment.com
-  description: |
-    Welcome to our current iteration of our REST API. While we encourage you to upgrade to v2.0 we will continue support for our [SOAP API](https://github.com/fulfillment/soap-integration).
+  description: >
+    Welcome to our current iteration of our REST API. While we encourage you to
+    upgrade to v2.0 we will continue support for our [SOAP
+    API](https://github.com/fulfillment/soap-integration).
+
 
     # Versioning
 
+
     The Fulfillment.com (FDC) REST API is version controlled and backwards compatible. We have many future APIs scheduled for publication within our v2.0 spec so please be prepared for us to add data nodes in our responses, however, we will not remove knowledge from previously published APIs.
+
 
     #### A Current Response
 
+
     ```javascript
+
     {
       id: 123
     }
+
     ```
+
 
     #### A Potential Future Response
 
+
     ```javascript
+
     {
       id: 123,
       reason: "More Knowledge"
     }
+
     ```
+
 
     # Getting Started
 
+
     We use OAuth v2.0 to authenticate clients, you can choose [implicit](https://oauth.net/2/grant-types/implicit/) or [password](https://oauth.net/2/grant-types/password/) grant type. To obtain an OAuth `client_id` and `client_secret` contact your account executive.
+
 
     **Tip**: Generate an additional login and use those credentials for your integration so that changes are accredited to that "user".
 
+
     You are now ready to make requests to our other APIs by filling your `Authorization` header with `Bearer {access_token}`.
+
 
     ## Perpetuating Access
 
+
     Perpetuating access to FDC without storing your password locally can be achieved using the `refresh_token` returned by [POST /oauth/access_token](#operation/generateToken).
+
 
     A simple concept to achieve this is outlined below.
 
+
     1. Your application/script will ask you for your `username` and `password`, your `client_id` and `client_secret` will be accessible via a DB or ENV.
+
     2. [Request an access_token](#operation/generateToken)
       + Your function should be capable of formatting your request for both a `grant_type` of \"password\" (step 1) and \"refresh_token\" (step 4).
     3. Store the `access_token` and `refresh_token` so future requests can skip step 1
+
     4. When the `access_token` expires request anew using your `refresh_token`, replace both tokens in local storage.
-      
+
+
     + If this fails you will have to revert to step 1.
-      
+
+
     Alternatively if you choose for your application/script to have access to your `username` and `password` you can skip step 4.
-      
+
+
     In all scenarios we recommend storing all credentials outside your codebase.
-      
+
+
     ## Date Time Definitions
-      
+
+
     We will report all date-time stamps using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. When using listing API's where fromDate and toDate are available note that both dates are inclusive while requiring the fromDate to be before or at the toDate.
+
 
     ### The Fulfillment Process
 
+
     Many steps are required to fulfill your order we report back to you three fundamental milestones inside the orders model.
+
 
     * `recordedOn` When we received your order. This will never change.
 
+
     * `dispatchDate` When the current iteration of your order was scheduled for fulfillment. This may change however it is an indicator that the physical process of fulfillment has begun and a tracking number has been **assigned** to your order. The tracking number **MAY CHANGE**. You will not be able to cancel an order once it has been dispatched. If you need to recall an order that has been dispatched please contact your account executive.
+
 
     * `departDate` When we recorded your order passing our final inspection and placed with the carrier. At this point it is **safe to inform the consignee** of the tracking number as it will not change.
 
+
     ## Evaluating Error Responses
+
 
     We currently return two different error models, with and without context. All errors will include a `message` node while errors with `context` will include additional information designed to save you time when encountering highly probable errors. For example, when you send us a request to create a duplicate order, we will reject your request and the context will include the FDC order `id` so that you may record it for your records.
 
+
     ### Without Context
+
 
     New order with missing required fields.
 
+
     | Header | Response |
+
     | ------ | -------- |
+
     | Status | `400 Bad Request` |
 
+
     ```javascript
+
     {    
       "message": "Invalid request body"
     }
+
     ```
+
 
     ### With Context
 
+
     New order with duplicate `merchantOrderId`.
 
+
     | Header | Response |
+
     | ------ | -------- |
+
     | Status | `409 Conflict` |
 
+
     ```javascript
+
     {
       "message": "Duplicate Order",
       "context": {
         "id": 123
       }
     }
+
     ```
+
 
     ## Status Codes
 
+
     Codes are a concatenation of State, Stage, and Detail.
+
 
     `^([0-9]{2})([0-9]{2})([0-9]{2})$`
 
+
     | Code | State              | Stage    | Detail         |
+
     | ---- | ------------------ | -------- | -------------- |
+
     | 010101 | Processing Order | Recieved | Customer Order |
+
     | 010102 | Processing Order | Recieved | Recieved |
+
     | 010201 | Processing Order | Approved | |
+
     | 010301 | Processing Order | Hold | Merchant Stock |
+
     | 010302 | Processing Order | Hold | Merchant Funds |
+
     | 010303 | Processing Order | Hold | For Merchant |
+
     | 010304 | Processing Order | Hold | Oversized Shipment |
+
     | 010305 | Processing Order | Hold | Invalid Parent Order |
+
     | 010306 | Processing Order | Hold | Invalid Address |
+
     | 010307 | Processing Order | Hold | By Admin |
+
     | 010401 | Processing Order | Address Problem | Incomplete Address |
+
     | 010402 | Processing Order | Address Problem | Invalid Locality |
+
     | 010403 | Processing Order | Address Problem | Invalid Region |
+
     | 010404 | Processing Order | Address Problem | Address Not Found |
+
     | 010405 | Processing Order | Address Problem | Many Addresses Found |
+
     | 010406 | Processing Order | Address Problem | Invalid Postal Code |
+
     | 010407 | Processing Order | Address Problem | Country Not Mapped |
+
     | 010408 | Processing Order | Address Problem | Invalid Recipient Name |
+
     | 010409 | Processing Order | Address Problem | Bad UK Address |
+
     | 010410 | Processing Order | Address Problem | Invalid Address Line 1 or 2 |
+
     | 010501 | Processing Order | Sku Problem | Invalid SKU |
+
     | 010501 | Processing Order | Sku Problem | Child Order has Invalid SKUs |
+
     | 010601 | Processing Order | Facility Problem | Facility Not Mapped |
+
     | 010701 | Processing Order | Ship Method Problem | Unmapped Ship Method |
+
     | 010702 | Processing Order | Ship Method Problem | Unmapped Ship Cost |
+
     | 010703 | Processing Order | Ship Method Problem | Missing Ship Method |
+
     | 010704 | Processing Order | Ship Method Problem | Invalid Ship Method |
+
     | 010705 | Processing Order | Ship Method Problem | Order Weight Outside of Ship Method Weight |
+
     | 010801 | Processing Order | Inventory Problem | Insufficient Inventory In Facility |
+
     | 010802 | Processing Order | Inventory Problem | Issue Encountered During Inventory Adjustment |
+
     | 010901 | Processing Order | Released To WMS | Released |
+
     | 020101 | Fulfillment In Progress | Postage Problem | Address Issue |
+
     | 020102 | Fulfillment In Progress | Postage Problem | Postage OK, OMS Issue Occurred |
+
     | 020103 | Fulfillment In Progress | Postage Problem | Postage Void Failed |
+
     | 020201 | Fulfillment In Progress | Postage Acquired | |
+
     | 020301 | Fulfillment In Progress | Postage Voided | Postage Void Failed Gracefully |
+
     | 020301 | Fulfillment In Progress | Hold | Departure Hold Requested |
+
     | 020401 | Fulfillment In Progress | 4PL Processing | |
+
     | 020501 | Fulfillment In Progress | 4PL Problem | Order is Proccessable, Postage Issue Occurred |
+
     | 020601 | Fulfillment In Progress | Label Printed | |
+
     | 020701 | Fulfillment In Progress | Shipment Cubed | |
+
     | 020801 | Fulfillment In Progress | Picking Inventory | |
+
     | 020901 | Fulfillment In Progress | Label Print Verified | |
+
     | 021001 | Fulfillment In Progress | Passed Final Inspection | |
+
     | 030101 | Shipped | Fulfilled By 4PL | |
+
     | 030102 | Shipped | Fulfilled By 4PL | Successfully Fulfilled, OMS Encountered Issue During Processing |
+
     | 030201 | Shipped | Fulfilled By FDC | |
+
     | 040101 | Returned | Returned | |
+
     | 050101 | Cancelled | Cancelled | |
+
     | 060101 | Test | Test | Test |
-  termsOfService: 'https://fulfillment.github.io/api/terms/'
-  title: Fulfillment.com
-  version: '2.0'
+  termsOfService: https://fulfillment.github.io/api/terms/
+  title: Fulfillment.com API
+  version: "2.0"
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://fulfillment.github.io/api/FDC_API_144x144.png'
+    url: https://fulfillment.github.io/api/FDC_API_144x144.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://fulfillment.github.io/api/openapi.json'
-      version: '3.0'
+      url: https://fulfillment.github.io/api/openapi.json
+      version: "3.0"
   x-providerName: fulfillment.com
 tags:
-  - description: 'Please note that in keeping with the OAuth standard, parameters are underscored however all other API parameters are camelCase.'
+  - description: Please note that in keeping with the OAuth standard, parameters are
+      underscored however all other API parameters are camelCase.
     name: Auth
-  - description: 'Creating, viewing, and canceling orders.'
+  - description: Creating, viewing, and canceling orders.
     name: Orders
+  - description: ""
+    name: Inventory
+  - description: ""
+    name: Partners
+  - description: ""
+    name: Returns
+  - description: Carrier Independent Tracking
+    name: Tracking
+  - description: ""
+    name: Users
 paths:
   /inventory:
     get:
-      description: Retrieve inventory for one or more items
-      operationId: getInventory
+      description: Retrieve inventory for one or more items. This API requires
+        elevated permissions, please speak to your success manager.
+      operationId: get-inventory
       parameters:
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip
+            before returning results
           in: query
           name: page
           schema:
@@ -202,7 +321,7 @@ paths:
             maximum: 200
             minimum: 1
             type: integer
-        - description: 'A CSV of merchant id, ''123'' or ''1,2,3'''
+        - description: A CSV of merchant id, '123' or '1,2,3'
           explode: false
           in: query
           name: merchantIds
@@ -211,7 +330,8 @@ paths:
               type: integer
             type: array
           style: form
-        - description: 'A CSV of sku reference names, ''skuName1'' or ''skuName1,skuName2,skuName3'''
+        - description: A CSV of sku reference names, 'skuName1' or
+            'skuName1,skuName2,skuName3'
           explode: false
           in: query
           name: externalSkuNames
@@ -221,35 +341,35 @@ paths:
             type: array
           style: form
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inventoriesArray'
+                $ref: "#/components/schemas/inventoriesArray"
           description: Found Inventory
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: Bad Request
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: Unauthorized
-        '403':
+        "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: Access Denied
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: No Inventory Found
       security:
         - fdcAuth:
@@ -259,30 +379,34 @@ paths:
         - Inventory
   /oauth/access_token:
     post:
-      description: 'By default tokens are valid for 7 days while refresh tokens are valid for 30 days. If your `grant_type` is "password" include the `username` and `password`, if however your `grant_type` is "refresh_token" the username/password are not required, instead set the `refresh_token`'
+      description: By default tokens are valid for 7 days while refresh tokens are
+        valid for 30 days. If your `grant_type` is "password" include the
+        `username` and `password`, if however your `grant_type` is
+        "refresh_token" the username/password are not required, instead set the
+        `refresh_token`
       externalDocs:
         description: More Information on Refresh Tokens
-        url: '#section/Getting-Started/Perpetuating-Access'
-      operationId: generateToken
+        url: "#section/Getting-Started/Perpetuating-Access"
+      operationId: post-oauth-access_token
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
-              $ref: '#/components/schemas/accessTokenRequest'
+              $ref: "#/components/schemas/accessTokenRequest"
         description: Get an access token
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/accessTokenResponse'
+                $ref: "#/components/schemas/accessTokenResponse"
           description: Authorized
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: Unauthorized
       summary: Generate an Access Token
       tags:
@@ -291,21 +415,23 @@ paths:
   /orders:
     get:
       description: Retrieve many orders at once
-      operationId: getOrders
+      operationId: get-orders
       parameters:
-        - description: 'Date-time in ISO 8601 format for selecting orders after, or at, the specified time'
+        - description: Date-time in ISO 8601 format for selecting orders after, or at, the
+            specified time
           in: query
           name: fromDate
           required: true
           schema:
             type: string
-        - description: 'Date-time in ISO 8601 format for selecting orders before, or at, the specified time'
+        - description: Date-time in ISO 8601 format for selecting orders before, or at,
+            the specified time
           in: query
           name: toDate
           required: true
           schema:
             type: string
-        - description: 'A CSV of merchant id, ''123'' or ''1,2,3'''
+        - description: A CSV of merchant id, '123' or '1,2,3'
           explode: false
           in: query
           name: merchantIds
@@ -314,7 +440,7 @@ paths:
               type: integer
             type: array
           style: form
-        - description: 'A CSV of warehouse id, ''123'' or ''1,2,3'''
+        - description: A CSV of warehouse id, '123' or '1,2,3'
           explode: false
           in: query
           name: warehouseIds
@@ -323,7 +449,8 @@ paths:
               type: integer
             type: array
           style: form
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip
+            before returning results
           in: query
           name: page
           schema:
@@ -339,17 +466,17 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ordersArray'
+                $ref: "#/components/schemas/ordersArray"
           description: Found Orders
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: No Orders Found
       security:
         - fdcAuth:
@@ -358,42 +485,51 @@ paths:
       tags:
         - Orders
     post:
-      description: |
+      description: >
         Error Notes&#58;
+
         * When `409 Conflict` is a 'Duplicate Order' the `context` will include the FDC `id`, see samples.
-      operationId: createOrder
+      operationId: post-orders
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/newOrder'
+              $ref: "#/components/schemas/newOrder"
         description: The order to create
         required: true
       responses:
-        '201':
+        "201":
           content:
             application/json:
+              examples:
+                duplicate-order:
+                  value:
+                    context:
+                      id: 123
+                    message: Duplicate Order
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: "#/components/schemas/order"
           description: Order Created
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: Invalid order object
-        '401':
+        "401":
           content: {}
           description: You do not have permission to create orders
-        '409':
+        "409":
           content:
             application/json:
-              example:
-                context:
-                  id: 123
-                message: Duplicate Order
+              examples:
+                duplicate-order:
+                  value:
+                    context:
+                      id: 123
+                    message: Duplicate Order
               schema:
-                $ref: '#/components/schemas/standardErrorWithContext'
+                $ref: "#/components/schemas/standardErrorWithContext"
           description: Conflict
       security:
         - fdcAuth:
@@ -402,9 +538,10 @@ paths:
       tags:
         - Orders
       x-codegen-request-body-name: body
-  '/orders/{id}':
+  "/orders/{id}":
     delete:
-      operationId: cancelOrder
+      description: Request an order is canceled to prevent shipment.
+      operationId: delete-orders-id
       parameters:
         - description: ID of order that needs to be canceled
           in: path
@@ -414,21 +551,21 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: "#/components/schemas/order"
           description: Your order was successfully canceled
-        '404':
+        "404":
           content: {}
           description: Order not found
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
-          description: 'Could not cancel your order, perhaps it already shipped'
+                $ref: "#/components/schemas/standardError"
+          description: Could not cancel your order, perhaps it already shipped
       security:
         - fdcAuth:
             - oms
@@ -436,7 +573,8 @@ paths:
       tags:
         - Orders
     get:
-      description: For the fastest results use the FDC provided `id` however you can use your `merchantOrderId` as the `id`.
+      description: For the fastest results use the FDC provided `id` however you can
+        use your `merchantOrderId` as the `id`.
       operationId: getOrder
       parameters:
         - description: The FDC order Id
@@ -445,19 +583,22 @@ paths:
           required: true
           schema:
             type: string
-        - description: Providing your `merchantId` indicates the `id` is your `merchantOrderId`. Although it is not necessary to provide this it will speed up your results when using your `merchantOrderId` however it will slow your results when using the FDC provided `id`
+        - description: Providing your `merchantId` indicates the `id` is your
+            `merchantOrderId`. Although it is not necessary to provide this it
+            will speed up your results when using your `merchantOrderId` however
+            it will slow your results when using the FDC provided `id`
           in: query
           name: merchantId
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: "#/components/schemas/order"
           description: Order Found
-        '404':
+        "404":
           content: {}
           description: Order not found
       security:
@@ -466,10 +607,11 @@ paths:
       summary: Order Details
       tags:
         - Orders
-  '/orders/{id}/ship':
+  "/orders/{id}/ship":
     put:
-      description: 'Note, this API is used to update orders and is reserved for our shipping partners.'
-      operationId: putOrderShip
+      description: Note, this API is used to update orders and is reserved for our
+        shipping partners.
+      operationId: put-orders-id-ship
       parameters:
         - description: The FDC order Id
           in: path
@@ -482,17 +624,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/orderShip'
+              $ref: "#/components/schemas/orderShip"
         description: Shipping Details
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: "#/components/schemas/order"
           description: Order Found
-        '404':
+        "404":
           content: {}
           description: Order not found
       security:
@@ -502,10 +644,11 @@ paths:
       tags:
         - Partners
       x-codegen-request-body-name: body
-  '/orders/{id}/status':
+  "/orders/{id}/status":
     put:
-      description: 'Note, this API is used to update orders and is reserved for our shipping partners.'
-      operationId: putOrderStatus
+      description: Note, this API is used to update orders and is reserved for our
+        shipping partners.
+      operationId: put-orders-id-status
       parameters:
         - description: The FDC order Id
           in: path
@@ -518,17 +661,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/statusTypeSimple'
+              $ref: "#/components/schemas/statusTypeSimple"
         description: New status event
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/order'
+                $ref: "#/components/schemas/order"
           description: Order Found
-        '404':
+        "404":
           content: {}
           description: Order not found
       security:
@@ -540,22 +683,29 @@ paths:
       x-codegen-request-body-name: body
   /returns:
     get:
-      description: 'Retrieves summary return activity during the queried timespan. Although return knowledge can be learned from `GET /orders/{id}` it can take an unknown amount of time for an order that is refused or undeliverable to return to an FDC facility. Instead we recommend regularly querying this API.'
-      operationId: getReturns
+      description: Retrieves summary return activity during the queried timespan.
+        Although return knowledge can be learned from `GET /orders/{id}` it can
+        take an unknown amount of time for an order that is refused or
+        undeliverable to return to an FDC facility. Instead we recommend
+        regularly querying this API.
+      operationId: get-returns
       parameters:
-        - description: 'Date-time in ISO 8601 format for selecting orders after, or at, the specified time'
+        - description: Date-time in ISO 8601 format for selecting orders after, or at, the
+            specified time
           in: query
           name: fromDate
           required: true
           schema:
             type: string
-        - description: 'Date-time in ISO 8601 format for selecting orders before, or at, the specified time'
+        - description: Date-time in ISO 8601 format for selecting orders before, or at,
+            the specified time
           in: query
           name: toDate
           required: true
           schema:
             type: string
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
+        - description: A multiplier of the number of items (limit paramater) to skip
+            before returning results
           in: query
           name: page
           schema:
@@ -571,11 +721,11 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/returns'
+                $ref: "#/components/schemas/returns"
           description: Returns
       security:
         - fdcAuth:
@@ -584,39 +734,39 @@ paths:
       tags:
         - Returns
     put:
-      description: ''
-      operationId: putReturns
+      description: Inform FDC of an expected return.
+      operationId: put-returns
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/rma'
+              $ref: "#/components/schemas/rmaRequest"
         description: RMA
         required: true
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rmaResponse'
+                $ref: "#/components/schemas/rmaResponse"
           description: RMA Created
-        '202':
+        "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rmaResponse'
+                $ref: "#/components/schemas/rmaResponse"
           description: RMA Updated
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/standardError'
+                $ref: "#/components/schemas/standardError"
           description: A Component of Your Request Was Not Found
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rmaResponse'
+                $ref: "#/components/schemas/rmaResponse"
           description: RMA Already Processed
       security:
         - fdcAuth:
@@ -624,16 +774,48 @@ paths:
       summary: Inform us of an RMA
       tags:
         - Returns
-  /users/me:
+  /track:
     get:
-      description: Returns the user profile of the access token's owner. This could be useful if managing multiple accounts or confirming validity of a token.
-      operationId: getUserMe
+      description: Get uniformed tracking events for any package, this response is
+        carrier independent. Please note, an API Key is required for throttling
+        purposes, please contact your success manager for details.
+      operationId: get-track
+      parameters:
+        - description: Publicly available tracking number
+          in: query
+          name: trackingNumber
+          required: true
+          schema:
+            pattern: "[A-Z0-9]+"
+            type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userContact'
+                $ref: "#/components/schemas/trackingResponse"
+          description: OK
+        "404":
+          description: Not Found
+        "429":
+          description: Too Many Requests
+      security:
+        - fdcAuth: []
+        - apiKey: []
+      summary: Event Tracking
+      tags:
+        - Tracking
+  /users/me:
+    get:
+      description: Returns the user profile of the access token's owner. This could be
+        useful if managing multiple accounts or confirming validity of a token.
+      operationId: get-users-me
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userContact"
           description: User
       security:
         - fdcAuth:
@@ -651,7 +833,7 @@ components:
       schema:
         type: string
     externalSkuNameParam:
-      description: 'A CSV of sku reference names, ''skuName1'' or ''skuName1,skuName2,skuName3'''
+      description: A CSV of sku reference names, 'skuName1' or 'skuName1,skuName2,skuName3'
       explode: false
       in: query
       name: externalSkuNames
@@ -661,7 +843,8 @@ components:
         type: array
       style: form
     fromDateParam:
-      description: 'Date-time in ISO 8601 format for selecting orders after, or at, the specified time'
+      description: Date-time in ISO 8601 format for selecting orders after, or at, the
+        specified time
       in: query
       name: fromDate
       required: true
@@ -677,7 +860,7 @@ components:
         minimum: 1
         type: integer
     merchantParam:
-      description: 'A CSV of merchant id, ''123'' or ''1,2,3'''
+      description: A CSV of merchant id, '123' or '1,2,3'
       explode: false
       in: query
       name: merchantIds
@@ -687,7 +870,8 @@ components:
         type: array
       style: form
     pageParam:
-      description: A multiplier of the number of items (limit paramater) to skip before returning results
+      description: A multiplier of the number of items (limit paramater) to skip
+        before returning results
       in: query
       name: page
       schema:
@@ -695,14 +879,15 @@ components:
         minimum: 1
         type: integer
     toDateParam:
-      description: 'Date-time in ISO 8601 format for selecting orders before, or at, the specified time'
+      description: Date-time in ISO 8601 format for selecting orders before, or at,
+        the specified time
       in: query
       name: toDate
       required: true
       schema:
         type: string
     warehouseParam:
-      description: 'A CSV of warehouse id, ''123'' or ''1,2,3'''
+      description: A CSV of warehouse id, '123' or '1,2,3'
       explode: false
       in: query
       name: warehouseIds
@@ -720,7 +905,8 @@ components:
         client_secret:
           type: string
         grant_type:
-          description: 'Indicates how you''re authenticating your request, see `username`, `password`, and `refresh_token` below'
+          description: Indicates how you're authenticating your request, see `username`,
+            `password`, and `refresh_token` below
           enum:
             - password
             - refresh_token
@@ -729,7 +915,8 @@ components:
           description: See above
           type: string
         refresh_token:
-          description: You may request future tokens with the `refresh_token` from your previous `/oauth/access_token` request
+          description: You may request future tokens with the `refresh_token` from your
+            previous `/oauth/access_token` request
           type: string
         scope:
           default: oms
@@ -758,6 +945,26 @@ components:
           default: Bearer
           type: string
       type: object
+    carrier:
+      oneOf:
+        - $ref: "#/components/schemas/carrierSimple"
+        - $ref: "#/components/schemas/carrierHyrdated"
+    carrierHyrdated:
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      title: carrierHyrdated
+      type: object
+    carrierSimple:
+      properties:
+        id:
+          type: integer
+      required:
+        - id
+      title: carrier
+      type: object
     consignee:
       properties:
         address1:
@@ -782,7 +989,7 @@ components:
         id:
           type: integer
         iso:
-          $ref: '#/components/schemas/isoCountry'
+          $ref: "#/components/schemas/isoCountry"
         lastName:
           type: string
         phone:
@@ -794,7 +1001,7 @@ components:
           format: date-time
           type: string
         updatedBy:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
       required:
         - address1
         - addressLocality
@@ -805,16 +1012,53 @@ components:
         - lastName
         - postalCode
       type: object
+    geojson:
+      properties:
+        geometry:
+          description: Placeholder until GeoJSON fully supported
+          oneOf:
+            - properties:
+                coordinates:
+                  items: {}
+                  type: array
+                type:
+                  default: Point
+                  enum:
+                    - Point
+                    - MultiPoint
+                    - LineString
+                    - MultiLineString
+                    - Polygon
+                    - MultiPolygon
+                    - GeometryCollection
+                  example: Point
+                  type: string
+            - {}
+          type: object
+        properties:
+          properties:
+            name:
+              example: Savannah, GA
+              type: string
+          type: object
+        type:
+          default: Feature
+          enum:
+            - Feature
+          example: Feature
+          type: string
+      title: geojson
+      type: object
     inventoriesArray:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/itemInventory'
+            $ref: "#/components/schemas/itemInventory"
           type: array
         meta:
           properties:
             pagination:
-              $ref: '#/components/schemas/pagination'
+              $ref: "#/components/schemas/pagination"
           type: object
       type: object
     isoCountry:
@@ -823,7 +1067,7 @@ components:
           type: integer
         iso2:
           description: Two character ISO code
-          pattern: '[A-Z]{2}'
+          pattern: "[A-Z]{2}"
           type: string
         name:
           description: Country Name
@@ -886,17 +1130,17 @@ components:
         companyName:
           type: string
         country:
-          description: 'Country, for best results please provide the two character ISO code'
+          description: Country, for best results please provide the two character ISO code
           type: string
         email:
-          description: 'Email, required for international shipments'
+          description: Email, required for international shipments
           type: string
         firstName:
           type: string
         lastName:
           type: string
         phone:
-          description: 'Phone number, required for international shipments'
+          description: Phone number, required for international shipments
           type: string
         postalCode:
           description: Postal Code / Zip
@@ -914,7 +1158,9 @@ components:
     newOrder:
       properties:
         integrator:
-          description: Use of this property requires special permission and must be discussed with your account executive; values are restricted while custom values need to be accepted by your AE.
+          description: Use of this property requires special permission and must be
+            discussed with your account executive; values are restricted while
+            custom values need to be accepted by your AE.
           enum:
             - 1ShoppingCart
             - 3dCart
@@ -978,10 +1224,11 @@ components:
           type: string
         items:
           items:
-            $ref: '#/components/schemas/newOrderItem'
+            $ref: "#/components/schemas/newOrderItem"
           type: array
         merchantId:
-          description: 'Necessary if you have a multitenancy account, otherwise we will associate the order with your account'
+          description: Necessary if you have a multitenancy account, otherwise we will
+            associate the order with your account
           type: integer
         merchantOrderId:
           description: Unique ID provided by the merchant
@@ -989,11 +1236,15 @@ components:
         notes:
           type: string
         recipient:
-          $ref: '#/components/schemas/newContactInfo'
+          $ref: "#/components/schemas/newContactInfo"
         shippingMethod:
           type: string
         warehouse:
-          description: 'We automatically select a warehouse based on inventory availability, requested carrier and delivery schedule, and carrier cost. You may however override this process. Because this is not recommended please inform your AE prior to using so they may enable this feature.'
+          description: We automatically select a warehouse based on inventory
+            availability, requested carrier and delivery schedule, and carrier
+            cost. You may however override this process. Because this is not
+            recommended please inform your AE prior to using so they may enable
+            this feature.
           properties:
             id:
               type: integer
@@ -1007,7 +1258,10 @@ components:
     newOrderItem:
       properties:
         declaredValue:
-          description: 'Using USD, a per unit value of a single SKU. If your declaring a kit this is the sum total for a single kit. In both scenarios we will multiply the `declaredValue` against the `quantity` for customs declaration.'
+          description: Using USD, a per unit value of a single SKU. If your declaring a
+            kit this is the sum total for a single kit. In both scenarios we
+            will multiply the `declaredValue` against the `quantity` for customs
+            declaration.
           format: double
           type: number
         quantity:
@@ -1023,7 +1277,7 @@ components:
     order:
       properties:
         currentStatus:
-          $ref: '#/components/schemas/statusEvent'
+          $ref: "#/components/schemas/statusEvent"
         departDate:
           description: DateTime order departed an FDC warehouse
           format: date-time
@@ -1036,7 +1290,7 @@ components:
           description: FDC ID for this order
           type: integer
         merchant:
-          $ref: '#/components/schemas/merchant'
+          $ref: "#/components/schemas/merchant"
         merchantOrderId:
           description: Merchant provided ID
           type: string
@@ -1044,7 +1298,7 @@ components:
           description: Requested ship method
           type: string
         originalConsignee:
-          $ref: '#/components/schemas/consignee'
+          $ref: "#/components/schemas/consignee"
         parentOrder:
           properties:
             id:
@@ -1052,7 +1306,7 @@ components:
               type: integer
           type: object
         purchaseOrderNum:
-          description: 'Merchant provided PO#'
+          description: Merchant provided PO#
           type: string
         recordedOn:
           description: DateTime order was recorded by FDC
@@ -1060,12 +1314,12 @@ components:
           type: string
         trackingNumbers:
           items:
-            $ref: '#/components/schemas/trackingNumber'
+            $ref: "#/components/schemas/trackingNumber"
           type: array
         validatedConsignee:
-          $ref: '#/components/schemas/consignee'
+          $ref: "#/components/schemas/consignee"
         warehouse:
-          $ref: '#/components/schemas/warehouse'
+          $ref: "#/components/schemas/warehouse"
       required:
         - currentStatus
         - id
@@ -1090,21 +1344,22 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/order'
+            $ref: "#/components/schemas/order"
           type: array
         meta:
           properties:
             pagination:
-              $ref: '#/components/schemas/pagination'
+              $ref: "#/components/schemas/pagination"
           type: object
       type: object
     pagination:
       properties:
         count:
-          description: 'Count of records returned in response, this will be equal to or less then the limit paramater'
+          description: Count of records returned in response, this will be equal to or
+            less then the limit paramater
           type: integer
         currentPage:
-          description: 'Current page of the response, this will match the page paramater'
+          description: Current page of the response, this will match the page paramater
           type: integer
         total:
           description: Total number of records available to request
@@ -1115,19 +1370,25 @@ components:
       type: object
     return:
       properties:
+        comments:
+          nullable: true
+          type: string
         createdAt:
           format: date-time
           type: string
         createdBy:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
         id:
           type: integer
         order:
+          nullable: true
           properties:
             id:
               type: integer
             merchantId:
               type: integer
+            merchantOrderId:
+              type: string
           type: object
         reason:
           properties:
@@ -1139,6 +1400,15 @@ components:
             - id
             - title
           type: object
+        returnedBy:
+          type: string
+        rmaItems:
+          items:
+            $ref: "#/components/schemas/rmaItem"
+          type: array
+        rmaNumber:
+          nullable: true
+          type: string
         status:
           properties:
             id:
@@ -1153,7 +1423,7 @@ components:
           format: date-time
           type: string
         updatedBy:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
       required:
         - createdAt
         - createdBy
@@ -1167,15 +1437,47 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/return'
+            $ref: "#/components/schemas/return"
           type: array
         meta:
           properties:
             pagination:
-              $ref: '#/components/schemas/pagination'
+              $ref: "#/components/schemas/pagination"
           type: object
       type: object
-    rma:
+    rmaItem:
+      properties:
+        comments:
+          nullable: true
+          type: string
+        id:
+          type: integer
+        item:
+          properties:
+            id:
+              type: integer
+            sku:
+              type: string
+          type: object
+        nonRestockedReason:
+          nullable: true
+          properties:
+            id:
+              type: integer
+            title:
+              type: string
+          type: object
+        quantityExpected:
+          nullable: true
+          type: integer
+        quantityRestocked:
+          type: integer
+        quantityReturned:
+          type: integer
+        quantityShipped:
+          type: integer
+      type: object
+    rmaRequest:
       properties:
         items:
           items:
@@ -1193,13 +1495,14 @@ components:
         merchantOrderId:
           type: string
         recipient:
-          $ref: '#/components/schemas/newContactInfo'
+          $ref: "#/components/schemas/newContactInfo"
         rmaNumber:
           type: string
       required:
         - rmaNumber
         - recipient
         - items
+      title: ""
       type: object
     rmaResponse:
       properties:
@@ -1219,7 +1522,7 @@ components:
         merchantOrderId:
           type: string
         recipient:
-          $ref: '#/components/schemas/consignee'
+          $ref: "#/components/schemas/consignee"
         rmaNumber:
           type: string
       required:
@@ -1244,7 +1547,7 @@ components:
     statusEvent:
       properties:
         createdBy:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
         date:
           description: DateTime of Status Event
           format: date-time
@@ -1255,7 +1558,7 @@ components:
           description: Explanation for status
           type: string
         status:
-          $ref: '#/components/schemas/statusType'
+          $ref: "#/components/schemas/statusType"
       required:
         - id
       type: object
@@ -1267,26 +1570,27 @@ components:
             id:
               type: integer
             name:
-              description: Human readable description of responsible party to resolve the issue
+              description: Human readable description of responsible party to resolve the
+                issue
               type: string
           type: object
         code:
-          description: 'Code, see [status codes](#section/Getting-Started/Status-Codes)'
-          pattern: '^\d{6}$'
+          description: Code, see [status codes](#section/Getting-Started/Status-Codes)
+          pattern: ^\d{6}$
           type: string
         detail:
           type: string
         detailCode:
-          pattern: '^\d{2}$'
+          pattern: ^\d{2}$
           type: string
         id:
-          description: 'Depricated, use code instead'
+          description: Depricated, use code instead
           type: integer
         isClosed:
-          description: 'Depricated, does this status event close the order'
+          description: Depricated, does this status event close the order
           type: boolean
         name:
-          description: 'Depricated, use stage/state instead'
+          description: Depricated, use stage/state instead
           type: string
         reason:
           description: Depricated
@@ -1319,7 +1623,7 @@ components:
         status:
           properties:
             code:
-              pattern: '^\d{6}$'
+              pattern: ^\d{6}$
               type: string
           required:
             - code
@@ -1328,17 +1632,92 @@ components:
         - reason
         - status
       type: object
+    trackingEvent:
+      properties:
+        eventCategory:
+          type: string
+        eventCategoryCode:
+          type: integer
+        eventDateTime:
+          format: date-time
+          type: string
+        eventLocation:
+          $ref: "#/components/schemas/geojson"
+        eventSource:
+          enum:
+            - carrier
+            - internal
+          example: carrier
+          type: string
+        eventStatus:
+          type: string
+      title: trackingEvent
+      type: object
+      x-examples:
+        example-1:
+          eventCategory: Delivered
+          eventCategoryCode: 5
+          eventDateTime: 2018-07-31 16:15:00
+          eventLocation: {}
+          eventStatus: Delivered, In/At Mailbox
+          statusSource: carrier
+      x-tags:
+        - Tracking
     trackingNumber:
       properties:
         barcodeScanValue:
+          deprecated: true
           description: The computer readable alternative to the human readable
           type: string
         carrier:
-          type: string
+          $ref: "#/components/schemas/carrier"
         value:
           description: The human readable tracking number recipients (consignee) expect
           type: string
       type: object
+      x-tags:
+        - Tracking
+    trackingResponse:
+      description: ""
+      properties:
+        destination:
+          $ref: "#/components/schemas/geojson"
+        fdcOrderId:
+          type: integer
+        firstCheckedDateTime:
+          format: date-time
+          type: string
+        firstTransitEvent:
+          format: date-time
+          type: string
+        lastCheckedDateTime:
+          format: date-time
+          type: string
+        lastUpdatedDateTime:
+          format: date-time
+          type: string
+        origin:
+          $ref: "#/components/schemas/geojson"
+        status:
+          type: string
+        statusCategoryCode:
+          type: integer
+        statusDateTime:
+          format: date-time
+          type: string
+        statusMessage:
+          type: string
+        trackedEvents:
+          items:
+            $ref: "#/components/schemas/trackingEvent"
+          type: array
+        trackingNumber:
+          $ref: "#/components/schemas/trackingNumber"
+      title: trackingResponse
+      type: object
+      x-examples: {}
+      x-tags:
+        - Tracking
     user:
       properties:
         id:
@@ -1352,7 +1731,7 @@ components:
           description: Depricated
           type: string
         contactInfo:
-          $ref: '#/components/schemas/consignee'
+          $ref: "#/components/schemas/consignee"
         createDate:
           format: date-time
           type: string
@@ -1388,17 +1767,22 @@ components:
         - id
       type: object
   securitySchemes:
+    apiKey:
+      description: ""
+      in: header
+      name: x-api-key
+      type: apiKey
     fdcAuth:
       flows:
         implicit:
-          authorizationUrl: 'https://api.fulfillment.com/v2/oauth/authorize'
+          authorizationUrl: https://api.fulfillment.com/v2/oauth/authorize
           scopes:
             oms: read & write access
         password:
-          refreshUrl: 'https://api.fulfillment.com/v2/oauth/access_token'
+          refreshUrl: https://api.fulfillment.com/v2/oauth/access_token
           scopes:
             oms: read & write access
-          tokenUrl: 'https://api.fulfillment.com/v2/oauth/access_token'
+          tokenUrl: https://api.fulfillment.com/v2/oauth/access_token
       type: oauth2
 x-tagGroups:
   - name: Support
@@ -1413,3 +1797,6 @@ x-tagGroups:
   - name: Items
     tags:
       - Inventory
+  - name: Services
+    tags:
+      - Tracking

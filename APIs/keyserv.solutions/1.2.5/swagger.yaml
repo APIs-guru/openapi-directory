@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: keyserv.solutions
@@ -11,18 +11,18 @@ info:
   x-apisguru-categories:
     - iot
   x-logo:
-    url: 'https://twitter.com/theTechComp/profile_image?size=original'
+    url: https://twitter.com/theTechComp/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://keyserv.solutions/v1/s2.json'
-      version: '2.0'
+      url: https://keyserv.solutions/v1/s2.json
+      version: "2.0"
   x-providerName: keyserv.solutions
 consumes:
   - application/json
 produces:
   - application/json
 paths:
-  '/v1/KeysApi/Current/{serial}':
+  "/v1/KeysApi/Current/{serial}":
     get:
       operationId: KeysApi_Current
       parameters:
@@ -33,14 +33,14 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/CurrentKey'
+            $ref: "#/definitions/CurrentKey"
           x-nullable: true
       tags:
         - KeysApi
-  '/v1/KeysApi/Custom/{serial}':
+  "/v1/KeysApi/Custom/{serial}":
     get:
       operationId: KeysApi_Custom
       parameters:
@@ -51,14 +51,14 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             type: file
           x-nullable: true
       tags:
         - KeysApi
-  '/v1/KeysApi/Expiry/{serial}':
+  "/v1/KeysApi/Expiry/{serial}":
     get:
       operationId: KeysApi_Expiry
       parameters:
@@ -69,14 +69,14 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Expiry'
+            $ref: "#/definitions/Expiry"
           x-nullable: true
       tags:
         - KeysApi
-  '/v1/KeysApi/Find/{serial}':
+  "/v1/KeysApi/Find/{serial}":
     get:
       operationId: KeysApi_Find
       parameters:
@@ -87,10 +87,10 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/KeyView'
+            $ref: "#/definitions/KeyView"
           x-nullable: true
       tags:
         - KeysApi
@@ -102,11 +102,11 @@ paths:
           name: productJson
           required: true
           schema:
-            $ref: '#/definitions/ProductCreateModify'
+            $ref: "#/definitions/ProductCreateModify"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - ProductsApi
     post:
@@ -116,11 +116,11 @@ paths:
           name: productJson
           required: true
           schema:
-            $ref: '#/definitions/ProductCreateModify'
+            $ref: "#/definitions/ProductCreateModify"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - ProductsApi
   /v1/ProductsApi/Count:
@@ -131,13 +131,13 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/CountOf'
+            $ref: "#/definitions/CountOf"
           x-nullable: true
       tags:
         - ProductsApi
@@ -149,7 +149,7 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
         - format: int32
           in: query
@@ -158,10 +158,10 @@ paths:
           type: integer
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/ProductView'
+            $ref: "#/definitions/ProductView"
           x-nullable: true
       tags:
         - ProductsApi
@@ -173,7 +173,7 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
           x-nullable: true
         - format: int32
           in: query
@@ -182,11 +182,11 @@ paths:
           type: integer
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             items:
-              $ref: '#/definitions/ProductView'
+              $ref: "#/definitions/ProductView"
             type: array
           x-nullable: true
       tags:
@@ -199,17 +199,17 @@ paths:
           name: productJson
           required: true
           schema:
-            $ref: '#/definitions/ProductCreateModify'
+            $ref: "#/definitions/ProductCreateModify"
           x-nullable: true
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
           schema:
-            $ref: '#/definitions/ProductView'
+            $ref: "#/definitions/ProductView"
           x-nullable: true
       tags:
         - ProductsApi
-  '/v1/ProductsApi/{serial}':
+  "/v1/ProductsApi/{serial}":
     delete:
       operationId: ProductsApi_DeleteProduct
       parameters:
@@ -226,8 +226,8 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - ProductsApi
     post:
@@ -246,8 +246,8 @@ paths:
           type: string
           x-nullable: false
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - ProductsApi
   /v1/SubscriptionsApi:
@@ -258,11 +258,11 @@ paths:
           name: subscriptionJson
           required: true
           schema:
-            $ref: '#/definitions/SubscriptionCreateModify'
+            $ref: "#/definitions/SubscriptionCreateModify"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
     put:
@@ -272,11 +272,11 @@ paths:
           name: subscriptionJson
           required: true
           schema:
-            $ref: '#/definitions/SubscriptionCreateModify'
+            $ref: "#/definitions/SubscriptionCreateModify"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
   /v1/SubscriptionsApi/Count:
@@ -287,13 +287,13 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/ApiCredentials'
+            $ref: "#/definitions/ApiCredentials"
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/CountOf'
+            $ref: "#/definitions/CountOf"
           x-nullable: true
       tags:
         - SubscriptionsApi
@@ -305,11 +305,11 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
     post:
@@ -319,11 +319,11 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
   /v1/SubscriptionsApi/Enable:
@@ -334,11 +334,11 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
     post:
@@ -348,11 +348,11 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
   /v1/SubscriptionsApi/Find:
@@ -363,13 +363,13 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/SubscriptionView'
+            $ref: "#/definitions/SubscriptionView"
           x-nullable: true
       tags:
         - SubscriptionsApi
@@ -381,7 +381,7 @@ paths:
           name: apiCreds
           required: true
           schema:
-            $ref: '#/definitions/FindCredentials'
+            $ref: "#/definitions/FindCredentials"
           x-nullable: true
         - format: int32
           in: query
@@ -390,11 +390,11 @@ paths:
           type: integer
           x-nullable: true
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             items:
-              $ref: '#/definitions/SubscriptionView'
+              $ref: "#/definitions/SubscriptionView"
             type: array
           x-nullable: true
       tags:
@@ -407,17 +407,17 @@ paths:
           name: subscriptionJson
           required: true
           schema:
-            $ref: '#/definitions/SubscriptionCreateModify'
+            $ref: "#/definitions/SubscriptionCreateModify"
           x-nullable: true
       responses:
-        '201':
-          description: ''
+        "201":
+          description: ""
           schema:
-            $ref: '#/definitions/KeyView'
+            $ref: "#/definitions/KeyView"
           x-nullable: true
       tags:
         - SubscriptionsApi
-  '/v1/SubscriptionsApi/{serial}':
+  "/v1/SubscriptionsApi/{serial}":
     delete:
       operationId: SubscriptionsApi_DeleteSubscription
       parameters:
@@ -439,8 +439,8 @@ paths:
           type: boolean
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
     post:
@@ -464,8 +464,8 @@ paths:
           type: boolean
           x-nullable: true
       responses:
-        '204':
-          description: ''
+        "204":
+          description: ""
       tags:
         - SubscriptionsApi
 definitions:
@@ -603,7 +603,7 @@ definitions:
         type: string
       subscriptions:
         items:
-          $ref: '#/definitions/SubscriptionView'
+          $ref: "#/definitions/SubscriptionView"
         type: array
       updated:
         format: date-time
@@ -675,7 +675,7 @@ definitions:
         type: string
       keys:
         items:
-          $ref: '#/definitions/KeyView'
+          $ref: "#/definitions/KeyView"
         type: array
       name:
         maxLength: 80

@@ -1,27 +1,30 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://apps.nrs.gov.bc.ca/gwells/api/v1/'
+  - url: https://apps.nrs.gov.bc.ca/gwells/api/v1/
 info:
   contact:
     email: groundwater@gov.bc.ca
-  description: 'The groundwater wells, aquifers and registry API contains information related to groundwater wells and aquifers as well as a register of qualified well drillers and well pump installers registered to operate in B.C.'
+  description: The groundwater wells, aquifers and registry API contains
+    information related to groundwater wells and aquifers as well as a register
+    of qualified well drillers and well pump installers registered to operate in
+    B.C.
   license:
     name: Open Government License - British Columbia
-    url: 'https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61'
-  termsOfService: 'http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88'
-  title: 'Groundwater Wells, Aquifers and Registry'
+    url: https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61
+  termsOfService: http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88
+  title: Groundwater Wells, Aquifers and Registry API
   version: v1
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
+    url: https://avatars1.githubusercontent.com/u/916280?v=3&s=200
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/gwells/gwells.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/bcgov/api-specs/master/gwells/gwells.json
+      version: "3.0"
   x-providerName: gov.bc.ca
   x-serviceName: gwells
 security:
@@ -47,7 +50,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -62,13 +65,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/AquiferDemand'
+                      $ref: "#/components/schemas/AquiferDemand"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -90,7 +93,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -105,13 +108,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/AquiferMaterial'
+                      $ref: "#/components/schemas/AquiferMaterial"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -133,7 +136,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -148,13 +151,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/AquiferProductivity'
+                      $ref: "#/components/schemas/AquiferProductivity"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -176,7 +179,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -191,13 +194,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/QualityConcern'
+                      $ref: "#/components/schemas/QualityConcern"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -219,7 +222,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -234,13 +237,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/AquiferSubtype'
+                      $ref: "#/components/schemas/AquiferSubtype"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -262,7 +265,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -277,13 +280,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/AquiferVulnerability'
+                      $ref: "#/components/schemas/AquiferVulnerability"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -305,7 +308,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -320,13 +323,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/WaterUse'
+                      $ref: "#/components/schemas/WaterUse"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifer-codes
     parameters: []
@@ -335,7 +338,7 @@ paths:
       description: return a list of aquifers
       operationId: aquifers_list
       parameters:
-        - description: ''
+        - description: ""
           in: query
           name: aquifer_id
           required: false
@@ -366,7 +369,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -381,13 +384,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/Aquifer'
+                      $ref: "#/components/schemas/Aquifer"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - aquifers
     parameters: []
@@ -403,28 +406,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AquiferSerializerBasic'
+                  $ref: "#/components/schemas/AquiferSerializerBasic"
                 type: array
-          description: ''
+          description: ""
       tags:
         - aquifers
     parameters: []
-  '/aquifers/{aquifer_id}/':
+  "/aquifers/{aquifer_id}/":
     get:
       description: return details of aquifers
       operationId: aquifers_read
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Aquifer'
-          description: ''
+                $ref: "#/components/schemas/Aquifer"
+          description: ""
       tags:
         - aquifers
     parameters:
@@ -434,12 +437,12 @@ paths:
         required: true
         schema:
           type: integer
-  '/aquifers/{aquifer_id}/files':
+  "/aquifers/{aquifer_id}/files":
     get:
       description: list files found for the aquifer identified in the uri
       operationId: aquifers_files_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -474,33 +477,35 @@ paths:
           type: string
   /cities/drillers/:
     get:
-      description: 'returns a list of cities with a qualified, registered operator (driller or installer)'
+      description: returns a list of cities with a qualified, registered operator
+        (driller or installer)
       operationId: cities_drillers_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/CityList'
+                  $ref: "#/components/schemas/CityList"
                 type: array
-          description: ''
+          description: ""
       tags:
         - cities
     parameters: []
   /cities/installers/:
     get:
-      description: 'returns a list of cities with a qualified, registered operator (driller or installer)'
+      description: returns a list of cities with a qualified, registered operator
+        (driller or installer)
       operationId: cities_installers_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/CityList'
+                  $ref: "#/components/schemas/CityList"
                 type: array
-          description: ''
+          description: ""
       tags:
         - cities
     parameters: []
@@ -509,8 +514,8 @@ paths:
       description: serves general configuration
       operationId: config_list
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
         - config
     parameters: []
@@ -544,14 +549,14 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PersonList'
+                  $ref: "#/components/schemas/PersonList"
                 type: array
-          description: ''
+          description: ""
       tags:
         - drillers
     parameters: []
@@ -567,25 +572,25 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PersonName'
+                  $ref: "#/components/schemas/PersonName"
                 type: array
-          description: ''
+          description: ""
       tags:
         - drillers
     parameters: []
   /drillers/options/:
     parameters: []
-  '/drillers/{person_guid}/files/':
+  "/drillers/{person_guid}/files/":
     get:
       description: list files found for the aquifer identified in the uri
       operationId: drillers_files_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -623,8 +628,8 @@ paths:
       description: serves keycloak config
       operationId: keycloak_list
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
         - keycloak
     parameters: []
@@ -633,8 +638,8 @@ paths:
       description: Options required for submitting activity report forms
       operationId: submissions_options_list
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
         - submissions
     parameters: []
@@ -643,14 +648,14 @@ paths:
       description: returns a list of active surveys
       operationId: surveys_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Survey'
+                  $ref: "#/components/schemas/Survey"
                 type: array
-          description: ''
+          description: ""
       tags:
         - surveys
     parameters: []
@@ -672,7 +677,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -687,13 +692,13 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/WellList'
+                      $ref: "#/components/schemas/WellList"
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: ''
+          description: ""
       tags:
         - wells
     parameters: []
@@ -717,23 +722,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/WellTagSearch'
+                  $ref: "#/components/schemas/WellTagSearch"
                 type: array
-          description: ''
+          description: ""
       tags:
         - wells
     parameters: []
-  '/wells/{tag}/files':
+  "/wells/{tag}/files":
     get:
       description: list files found for the well identified in the uri
       operationId: wells_files_list
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -766,19 +771,19 @@ paths:
         required: true
         schema:
           type: string
-  '/wells/{well_tag_number}':
+  "/wells/{well_tag_number}":
     get:
       description: |-
         Return well detail.
         This view is open to all, and has no permissions.
       operationId: wells_read
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WellDetail'
-          description: ''
+                $ref: "#/components/schemas/WellDetail"
+          description: ""
       tags:
         - wells
     parameters:
@@ -801,14 +806,14 @@ components:
           title: Certificate
           type: string
         current_status:
-          $ref: '#/components/schemas/ApplicationStatusCode'
+          $ref: "#/components/schemas/ApplicationStatusCode"
         display_status:
           readOnly: true
           title: Display status
           type: string
         qualifications:
           items:
-            $ref: '#/components/schemas/Qualification'
+            $ref: "#/components/schemas/Qualification"
           readOnly: true
           type: array
         removal_date:
@@ -816,7 +821,7 @@ components:
           title: Removal date
           type: string
         subactivity:
-          $ref: '#/components/schemas/Subactivity'
+          $ref: "#/components/schemas/Subactivity"
       required:
         - subactivity
       type: object
@@ -871,7 +876,7 @@ components:
           title: Description of Location
           type: string
         mapping_year:
-          description: 'Use the following format: '
+          description: "Use the following format: "
           maximum: 2019
           minimum: 1990
           title: Date of Mapping
@@ -885,7 +890,7 @@ components:
           type: string
         notes:
           maxLength: 2000
-          title: 'Notes on Aquifer, for internal use only.'
+          title: Notes on Aquifer, for internal use only.
           type: string
         productivity:
           title: Productivity Reference
@@ -1034,7 +1039,7 @@ components:
     CityList:
       properties:
         organization:
-          $ref: '#/components/schemas/Organization'
+          $ref: "#/components/schemas/Organization"
       required:
         - organization
       type: object
@@ -1266,7 +1271,7 @@ components:
           type: string
         registrations:
           items:
-            $ref: '#/components/schemas/RegistrationsList'
+            $ref: "#/components/schemas/RegistrationsList"
           readOnly: true
           type: array
         surname:
@@ -1290,7 +1295,7 @@ components:
           type: string
         registrations:
           items:
-            $ref: '#/components/schemas/RegistrationsNumber'
+            $ref: "#/components/schemas/RegistrationsNumber"
           readOnly: true
           type: array
       type: object
@@ -1332,11 +1337,11 @@ components:
           type: string
         applications:
           items:
-            $ref: '#/components/schemas/ApplicationList'
+            $ref: "#/components/schemas/ApplicationList"
           readOnly: true
           type: array
         organization:
-          $ref: '#/components/schemas/OrganizationList'
+          $ref: "#/components/schemas/OrganizationList"
         registration_no:
           maxLength: 15
           title: Registration no
@@ -1390,7 +1395,7 @@ components:
           type: string
         qualification_set:
           items:
-            $ref: '#/components/schemas/Qualification'
+            $ref: "#/components/schemas/Qualification"
           readOnly: true
           type: array
         registries_subactivity_code:
@@ -1495,7 +1500,7 @@ components:
           type: string
         casing_set:
           items:
-            $ref: '#/components/schemas/Casing'
+            $ref: "#/components/schemas/Casing"
           type: array
         city:
           maxLength: 50
@@ -1506,7 +1511,7 @@ components:
           title: Comments
           type: string
         company_of_person_responsible:
-          $ref: '#/components/schemas/OrganizationNameList'
+          $ref: "#/components/schemas/OrganizationNameList"
         construction_end_date:
           format: date
           title: Construction Date
@@ -1520,7 +1525,7 @@ components:
           type: string
         decommission_description_set:
           items:
-            $ref: '#/components/schemas/DecommissionDescription'
+            $ref: "#/components/schemas/DecommissionDescription"
           type: array
         decommission_details:
           maxLength: 250
@@ -1694,11 +1699,11 @@ components:
           type: string
         linerperforation_set:
           items:
-            $ref: '#/components/schemas/LinerPerforation'
+            $ref: "#/components/schemas/LinerPerforation"
           type: array
         lithologydescription_set:
           items:
-            $ref: '#/components/schemas/LithologyDescription'
+            $ref: "#/components/schemas/LithologyDescription"
           type: array
         longitude:
           format: decimal
@@ -1728,7 +1733,7 @@ components:
           title: Owner Name
           type: string
         person_responsible:
-          $ref: '#/components/schemas/PersonBasic'
+          $ref: "#/components/schemas/PersonBasic"
         recommended_pump_depth:
           format: decimal
           title: Recommended pump depth
@@ -1755,7 +1760,7 @@ components:
           type: string
         screen_set:
           items:
-            $ref: '#/components/schemas/Screen'
+            $ref: "#/components/schemas/Screen"
           type: array
         screen_type:
           title: Type

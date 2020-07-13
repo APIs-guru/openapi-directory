@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -6,20 +6,26 @@ host: api.jokes.one
 info:
   contact:
     name: Jokes One
-    url: 'https://jokes.one/api/joke/'
-  description: ' Jokes One API offers a complete feature rich REST API access to its jokes platform.  This is the documentation for the world famous [jokes API](https://jokes.one/api/joke/).  If you are a subscriber and you are trying this from a console add ''X-JokesOne-Api-Secret'' header and add your api key as the header value. You can test and play with the API right here on this web page. For using the private end points and subscribing to the API please visit https://jokes.one/api/joke/.'
-  termsOfService: 'https://jokes.one/terms'
-  title: Jokes One
-  version: '1.1'
+    url: https://jokes.one/api/joke/
+  description: " Jokes One API offers a complete feature rich REST API access to
+    its jokes platform.  This is the documentation for the world famous [jokes
+    API](https://jokes.one/api/joke/).  If you are a subscriber and you are
+    trying this from a console add 'X-JokesOne-Api-Secret' header and add your
+    api key as the header value. You can test and play with the API right here
+    on this web page. For using the private end points and subscribing to the
+    API please visit https://jokes.one/api/joke/."
+  termsOfService: https://jokes.one/terms
+  title: Jokes One API
+  version: "1.1"
   x-apisguru-categories:
     - entertainment
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://jokes.one/branding/smile_magenta.png'
+    backgroundColor: "#FFFFFF"
+    url: https://jokes.one/branding/smile_magenta.png
   x-origin:
     - format: swagger
-      url: 'https://api.jokes.one/yaml/jokes.one.yaml'
-      version: '2.0'
+      url: https://api.jokes.one/yaml/jokes.one.yaml
+      version: "2.0"
   x-providerName: jokes.one
 consumes:
   - application/json
@@ -33,12 +39,16 @@ securityDefinitions:
     name: X-JokesOne-Api-Secret
     type: apiKey
 tags:
-  - description: 'Access joke of the day service. Use this to get the joke of the day in various categories. This is a free API that is available to public. You must credit Jokes One if you are using the free version. '
+  - description: "Access joke of the day service. Use this to get the joke of the
+      day in various categories. This is a free API that is available to public.
+      You must credit Jokes One if you are using the free version. "
     externalDocs:
       description: Find out more
-      url: 'https://jokes.one/api#joke-of-the-day'
+      url: https://jokes.one/api#joke-of-the-day
     name: jod
-  - description: 'Access random joke service. Use this to get random jokes , jokes filtered by authors or tags etc. You need an API key to access this service.'
+  - description: Access random joke service. Use this to get random jokes , jokes
+      filtered by authors or tags etc. You need an API key to access this
+      service.
     name: joke
 paths:
   /jod:
@@ -57,10 +67,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                 "total": 1
@@ -86,8 +96,9 @@ paths:
                 "copyright": "2018-20 https://jokes.one"
                   }
               }
-            application/xml: |-
+            application/xml: >-
               <?xml version="1.0"?>
+
               <response>
                 <success>
                   <total>1</total>
@@ -112,7 +123,7 @@ paths:
                 </contents>
               </response>
           schema:
-            $ref: '#/definitions/JokeOfTheDayResponse'
+            $ref: "#/definitions/JokeOfTheDayResponse"
       security:
         - X-JokesOne-Api-Secret: []
       tags:
@@ -125,7 +136,7 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -163,8 +174,9 @@ paths:
         - jod
   /joke:
     delete:
-      description: |
-        Delete a joke. The user needs to be the owner of the joke to be able to delete it.
+      description: >
+        Delete a joke. The user needs to be the owner of the joke to be able to
+        delete it.
       parameters:
         - description: Joke ID
           format: string
@@ -176,11 +188,11 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/xml: '{}'
-        '401':
+            application/xml: "{}"
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -190,7 +202,7 @@ paths:
                       "message": "Unauthorized"
                   }
               }
-        '404':
+        "404":
           description: 404  response
           examples:
             application/json: |-
@@ -217,10 +229,10 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -239,8 +251,9 @@ paths:
                       "copyright": "2018-20 https://jokes.one"
                   }
               }
-            application/xml: |-
+            application/xml: >-
               <?xml version="1.0"?>
+
               <response>
                 <success>
                   <total>1</total>
@@ -255,14 +268,15 @@ paths:
                     <text>
               The USA blamed the Russian companies that they were supplying Bagdad with the elastic band for pants. Iraq engineers made the catapults of them and now Iraq soldiers are striking a blow to American air forces.
 
+
               </text>
                   </jokes>
                   <copyright>2018-20 https://jokes.one</copyright>
                 </contents>
               </response>
           schema:
-            $ref: '#/definitions/JokeResponse'
-        '401':
+            $ref: "#/definitions/JokeResponse"
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -309,7 +323,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -323,7 +337,7 @@ paths:
                   }
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -363,7 +377,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -377,7 +391,7 @@ paths:
                   }
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -401,7 +415,8 @@ paths:
           required: true
           type: string
         - default: 0
-          description: Response is paged. This parameter controls where response starts the listing at
+          description: Response is paged. This parameter controls where response starts
+            the listing at
           format: int32
           in: query
           name: start
@@ -411,7 +426,7 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -437,17 +452,18 @@ paths:
       description: Get the list of jokes in your private collection.
       parameters:
         - default: 0
-          description: Response is paged. This parameter controls where response starts the listing at
+          description: Response is paged. This parameter controls where response starts
+            the listing at
           format: int32
           in: query
           name: start
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": "263",
@@ -506,7 +522,7 @@ paths:
                       ]
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -520,12 +536,13 @@ paths:
         - joke
   /joke/random:
     get:
-      description: Gets a `Random Joke`. When you are in a hurry this is what you call to get a random famous joke.
+      description: Gets a `Random Joke`. When you are in a hurry this is what you call
+        to get a random famous joke.
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -566,8 +583,8 @@ paths:
                 </contents>
               </response>
           schema:
-            $ref: '#/definitions/JokeResponse'
-        '401':
+            $ref: "#/definitions/JokeResponse"
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -581,7 +598,9 @@ paths:
         - joke
   /joke/search:
     get:
-      description: 'Search for a `Joke` in Jokes One platform. Optional `category` , `author`, `minlength`, `maxlength` params determines the filters applied while searching for the joke. '
+      description: "Search for a `Joke` in Jokes One platform. Optional `category` ,
+        `author`, `minlength`, `maxlength` params determines the filters applied
+        while searching for the joke. "
       parameters:
         - description: Joke Category
           format: string
@@ -626,10 +645,10 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -670,8 +689,8 @@ paths:
                 </contents>
               </response>        
           schema:
-            $ref: '#/definitions/JokeResponse'
-        '401':
+            $ref: "#/definitions/JokeResponse"
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -702,13 +721,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
               {
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -718,7 +737,7 @@ paths:
                       "message": "Unauthorized"
                   }
               }
-        '404':
+        "404":
           description: 404  response
           examples:
             application/json: |-
@@ -747,13 +766,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
               {
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -763,7 +782,7 @@ paths:
                       "message": "Unauthorized"
                   }
               }
-        '404':
+        "404":
           description: 404  response
           examples:
             application/json: |-
@@ -778,7 +797,7 @@ paths:
 definitions:
   Joke:
     allOf:
-      - $ref: '#/definitions/NewJoke'
+      - $ref: "#/definitions/NewJoke"
       - properties:
           id:
             description: Unique identifier representing a specific joke in jokes.one.
@@ -793,7 +812,7 @@ definitions:
         type: object
   JokeOfTheDay:
     allOf:
-      - $ref: '#/definitions/Joke'
+      - $ref: "#/definitions/Joke"
       - properties:
           date:
             description: Date this joke of the day belongs to
@@ -807,7 +826,7 @@ definitions:
           jokes:
             description: List of jokes
             items:
-              $ref: '#/definitions/JokeOfTheDay'
+              $ref: "#/definitions/JokeOfTheDay"
             type: array
       success:
         description: Metadata about this successful call
@@ -819,7 +838,7 @@ definitions:
           jokes:
             description: List of jokes
             items:
-              $ref: '#/definitions/Joke'
+              $ref: "#/definitions/Joke"
             type: array
       success:
         description: Metadata about this successful call

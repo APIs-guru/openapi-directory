@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: rest-api.d7networks.com
@@ -7,19 +7,22 @@ info:
   contact:
     email: int@d7networks.com
     name: Emanuel
-    url: 'https://d7networks.com/'
+    url: https://d7networks.com/
     x-twitter: d7sms
-  description: D7 SMS allows you to reach your customers via SMS over D7's own connectivity to global mobile networks. D7 provides reliable and cost-effective SMS services to businesses across all industries and aims to connect all countries and territories via direct connections.
+  description: D7 SMS allows you to reach your customers via SMS over D7's own
+    connectivity to global mobile networks. D7 provides reliable and
+    cost-effective SMS services to businesses across all industries and aims to
+    connect all countries and territories via direct connections.
   title: D7SMS
   version: 1.0.2
   x-apisguru-categories:
     - messaging
   x-logo:
-    url: 'https://twitter.com/d7sms/profile_image?size=original'
+    url: https://twitter.com/d7sms/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.swaggerhub.com/apis/Direct7Networks/D7SMS/1.0.2'
-      version: '2.0'
+      url: https://api.swaggerhub.com/apis/Direct7Networks/D7SMS/1.0.2
+      version: "2.0"
   x-providerName: d7networks.com
 consumes:
   - application/json
@@ -38,11 +41,13 @@ paths:
       description: Check account balance
       operationId: BalanceGet
       parameters: []
+      produces:
+        - application/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
-        '500':
+        "500":
           description: Internal Server Error
           schema: {}
       summary: Balance
@@ -57,22 +62,24 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/SendSMSRequest'
-        - description: ''
+            $ref: "#/definitions/SendSMSRequest"
+        - description: ""
           in: header
           name: Content-Type
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: Accept
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
-        '500':
+        "500":
           description: Internal Server Error
           schema: {}
       summary: SendSMS
@@ -87,20 +94,22 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/BulkSMSRequest'
-        - description: ''
+            $ref: "#/definitions/BulkSMSRequest"
+        - description: ""
           in: header
           name: Content-Type
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: Accept
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers: {}
       summary: Bulk SMS
 definitions:
@@ -111,28 +120,28 @@ definitions:
         - content: Same content goes to three numbers
           from: SignSMS
           to:
-            - '971562316353'
-            - '971562316354'
-            - '971562316355'
+            - "971562316353"
+            - "971562316354"
+            - "971562316355"
     properties:
       messages:
         description: Sendbatch message body
         items:
-          $ref: '#/definitions/Message'
+          $ref: "#/definitions/Message"
         type: array
     required:
       - messages
     title: BulkSMSRequest
     type: object
   Message:
-    description: ''
+    description: ""
     example:
       content: Same content goes to three numbers
       from: SignSMS
       to:
-        - '971562316353'
-        - '971562316354'
-        - '971562316355'
+        - "971562316353"
+        - "971562316354"
+        - "971562316355"
     properties:
       content:
         type: string

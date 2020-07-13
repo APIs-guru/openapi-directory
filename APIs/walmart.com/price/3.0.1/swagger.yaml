@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: developer.walmart.com
@@ -7,21 +7,21 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: 'Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.'
-  title: Price
+  description: Please make sure you use the correct version of the APIs for your
+    use case. To find out the appropriate version, go to the API Docs  drop down
+    on the menu.
+  title: Price API
   version: 3.0.1
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/Walmart/profile_image?size=original'
+    url: https://twitter.com/Walmart/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.walmart.com/v1/swaggerProxy?type=price'
-      version: '2.0'
+      url: https://developer.walmart.com/v1/swaggerProxy?type=price
+      version: "2.0"
   x-providerName: walmart.com
   x-serviceName: price
-produces:
-  - application/xml
 tags:
   - name: Version 3
 paths:
@@ -29,7 +29,9 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: 'You can upload a price feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed'
+      description: You can upload a price feed. If the feed successfully processed, it
+        returns a feed ID. Use the returned feed ID to retrieve a feed status.
+        You need Your Consumer ID and the private key to upload the feed
       operationId: updatePrice
       parameters:
         - default: price
@@ -84,17 +86,20 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
       responses:
         default:
           description: successful operation
       summary: Upload a price feed
       tags:
         - Version 3
-  '/v3/feeds/{feedId}':
+  "/v3/feeds/{feedId}":
     get:
       consumes:
         - application/xml
-      description: You can display the status of an item price within a feed. Use the feed ID returned from the upload a price feed API.
+      description: You can display the status of an item price within a feed. Use the
+        feed ID returned from the upload a price feed API.
       operationId: getFeedsStatus
       parameters:
         - description: The feed ID which status you want to retrieve.
@@ -102,20 +107,24 @@ paths:
           name: feedId
           required: true
           type: string
-        - default: 'false'
-          description: Includes details of each entity in the feed. Do not set this parameter to true.
+        - default: "false"
+          description: Includes details of each entity in the feed. Do not set this
+            parameter to true.
           in: query
           name: includeDetails
           required: false
           type: string
-        - default: '0'
-          description: 'The object response to start with, where 0 is the first entity that can be requested. It can only be used when includeDetails is set to true.'
+        - default: "0"
+          description: The object response to start with, where 0 is the first entity that
+            can be requested. It can only be used when includeDetails is set to
+            true.
           in: query
           name: offset
           required: false
           type: string
-        - default: '50'
-          description: The number of entities to be returned. It cannot be more than 50 entities. Only used when includeDetails is set to true.
+        - default: "50"
+          description: The number of entities to be returned. It cannot be more than 50
+            entities. Only used when includeDetails is set to true.
           in: query
           name: limit
           required: false
@@ -157,6 +166,8 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
       responses:
         default:
           description: successful operation

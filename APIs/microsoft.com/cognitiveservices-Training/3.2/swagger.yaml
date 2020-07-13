@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: southcentralus.api.cognitive.microsoft.com
@@ -7,15 +7,15 @@ info:
   contact:
     x-twitter: microsoft
   title: Custom Vision Training Client
-  version: '3.2'
+  version: "3.2"
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/microsoft/profile_image?size=original'
+    url: https://twitter.com/microsoft/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v3.2/Training.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v3.2/Training.json
+      version: "2.0"
   x-preferred: false
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-Training
@@ -48,70 +48,23 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Domain'
+              $ref: "#/definitions/Domain"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get a list of the available domains.
       tags:
         - DomainsApi
       x-ms-examples:
         Successful GetDomains request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-          responses:
-            '200':
-              body:
-                - enabled: true
-                  exportable: false
-                  id: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  name: General
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: c151d5b5-dd07-472a-acc8-15d29dea8518
-                  name: Food
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: ca455789-012d-4b50-9fec-5bb63841c793
-                  name: Landmarks
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                  name: Retail
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: 45badf75-3591-4f26-a705-45678d3e9f5f
-                  name: Adult
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: 0732100f-1a38-4e49-a514-c9b44c697ab5
-                  name: General (compact)
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: b5cfd229-2ac7-4b2b-8d0a-2b0661344894
-                  name: Landmarks (compact)
-                  type: Classification
-                - enabled: true
-                  exportable: false
-                  id: 6b4faeda-8396-481b-9f8b-177b9fa3097f
-                  name: Retail (compact)
-                  type: Classification
-              headers: {}
-  '/domains/{domainId}':
+          $ref: ./examples/GetDomains.json
+  "/domains/{domainId}":
     get:
       consumes: []
       operationId: GetDomain
@@ -128,33 +81,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Domain'
+            $ref: "#/definitions/Domain"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get information about a specific domain.
       tags:
         - DomainsApi
       x-ms-examples:
         Successful GetDomain request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            domainId: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-          responses:
-            '200':
-              body:
-                enabled: true
-                exportable: false
-                id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                name: Retail
-                type: Classification
-              headers: {}
+          $ref: ./examples/GetDomain.json
   /projects:
     get:
       consumes: []
@@ -165,37 +105,22 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Project'
+              $ref: "#/definitions/Project"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get your projects.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetProjects request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-          responses:
-            '200':
-              body:
-                - created: '2017-12-18T05:43:18Z'
-                  description: ''
-                  id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                  lastModified: '2017-12-18T05:43:18Z'
-                  name: My New Project
-                  settings:
-                    domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  thumbnailUri: ''
-              headers: {}
+          $ref: ./examples/GetProjects.json
     post:
       consumes: []
       operationId: CreateProject
@@ -243,38 +168,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Create a project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful CreateProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            description: A test project
-            domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-            name: My New Project
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18Z'
-                description: A test project
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:18Z'
-                name: My New Project
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: ''
-              headers: {}
+          $ref: ./examples/CreateProject.json
   /projects/import:
     post:
       consumes: []
@@ -290,38 +197,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Imports a project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful ImportProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            token: token
-          responses:
-            '200':
-              body:
-                created: '2019-10-06T05:43:18Z'
-                description: ''
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2019-10-06T05:43:18Z'
-                name: Import Project
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                status: Importing
-                thumbnailUri: ''
-              headers: {}
-  '/projects/{projectId}':
+          $ref: ./examples/ImportProject.json
+  "/projects/{projectId}":
     delete:
       consumes: []
       operationId: DeleteProject
@@ -335,24 +225,18 @@ paths:
           x-nullable: false
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete a specific project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful DeleteProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '204': {}
+          $ref: ./examples/DeleteProject.json
     get:
       consumes: []
       operationId: GetProject
@@ -369,36 +253,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get a specific project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18Z'
-                description: A test project
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:18Z'
-                name: My New Project
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: ''
-              headers: {}
+          $ref: ./examples/GetProject.json
     patch:
       consumes:
         - application/json
@@ -419,48 +287,27 @@ paths:
           name: updatedProject
           required: true
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Update a specific project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful UpdateProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            updatedProject:
-              description: A new Description
-              name: New Project Name
-              settings:
-                domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18Z'
-                description: A new Description
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:19Z'
-                name: New Project Name
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: ''
-              headers: {}
-  '/projects/{projectId}/export':
+          $ref: ./examples/UpdateProject.json
+  "/projects/{projectId}/export":
     get:
       consumes: []
       operationId: ExportProject
@@ -477,30 +324,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProjectExport'
+            $ref: "#/definitions/ProjectExport"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Exports a project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful ExportProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                token: <token>
-              headers: {}
-  '/projects/{projectId}/images':
+          $ref: ./examples/ExportProject.json
+  "/projects/{projectId}/images":
     delete:
       consumes: []
       operationId: DeleteImages
@@ -524,12 +362,16 @@ paths:
           name: imageIds
           required: false
           type: array
-        - description: 'Flag to specify delete all images, specify this flag or a list of images. Using this flag will return a 202 response to indicate the images are being deleted.'
+        - description: Flag to specify delete all images, specify this flag or a list of
+            images. Using this flag will return a 202 response to indicate the
+            images are being deleted.
           in: query
           name: allImages
           required: false
           type: boolean
-        - description: 'Removes these images from all iterations, not just the current workspace. Using this flag will return a 202 response to indicate the images are being deleted.'
+        - description: Removes these images from all iterations, not just the current
+            workspace. Using this flag will return a 202 response to indicate
+            the images are being deleted.
           in: query
           name: allIterations
           required: false
@@ -539,35 +381,29 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '202':
+        "202":
           description: Accepted
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete images from the set of training images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImages request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '202': {}
-            '204': {}
+          $ref: ./examples/DeleteImages.json
     post:
       consumes:
         - multipart/form-data
         - application/octet-stream
-      description: "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files"
+      description: "This API accepts body content as multipart/form-data and
+        application/octet-stream. When using multipart\r
+
+        multiple image files can be sent at once, with a maximum of 64
+        files"
       operationId: CreateImagesFromData
       parameters:
         - description: The project id.
@@ -589,7 +425,8 @@ paths:
           name: tagIds
           required: false
           type: array
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 6MB.
           in: formData
           name: imageData
           required: true
@@ -599,69 +436,29 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Add the provided images to the set of training images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromData request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageData: multipart data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds:
-              - b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      originalImageUri: '{Image Uri}'
-                      resizedImageUri: '{Resized Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                          tagName: tag 1
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                  - image:
-                      created: '2017-12-19T15:56:10Z'
-                      height: 1531
-                      id: f1855a92-b873-47e7-b513-f07a667ceda1
-                      originalImageUri: '{Image Uri}'
-                      resizedImageUri: '{Resized Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                          tagName: tag 1
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 900
-                    sourceUrl: '"hemlock_6.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/files':
+          $ref: ./examples/CreateImagesFromData.json
+  "/projects/{projectId}/images/files":
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.'
+      description: This API accepts a batch of files, and optionally tags, to create
+        images. There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromFiles
       parameters:
         - description: The project id.
@@ -671,66 +468,39 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: The batch of image files to add. Limited to 64 images and 20 tags per batch.
+        - description: The batch of image files to add. Limited to 64 images and 20 tags
+            per batch.
           in: body
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageFileCreateBatch'
+            $ref: "#/definitions/ImageFileCreateBatch"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Add the provided batch of images to the set of training images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromFiles request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - contents: '{image contents}'
-                  name: hemlock_10.jpg
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      originalImageUri: '{Image Uri}'
-                      resizedImageUri: '{Resized Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                          tagName: tag 1
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/id':
+          $ref: ./examples/CreateImagesFromFiles.json
+  "/projects/{projectId}/images/id":
     get:
       consumes: []
-      description: "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used."
+      description: "This API will return a set of Images for the specified tags and
+        optionally iteration. If no iteration is specified the\r
+
+        current workspace is used."
       operationId: GetImagesByIds
       parameters:
         - description: The project id.
@@ -763,39 +533,31 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get images by id for a given project iteration.
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetImagesByIds request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/predictions':
+          $ref: ./examples/GetImagesByIds.json
+  "/projects/{projectId}/images/predictions":
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.
+      description: This API creates a batch of images from predicted images specified.
+        There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromPredictions
       parameters:
         - description: The project id.
@@ -810,57 +572,27 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageIdCreateBatch'
+            $ref: "#/definitions/ImageIdCreateBatch"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Add the specified predicted images to the set of training images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromPredictions request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      originalImageUri: '{Image Uri}'
-                      resizedImageUri: '{Resized Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                          tagName: tag 1
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/regions':
+          $ref: ./examples/CreateImagesFromPredictions.json
+  "/projects/{projectId}/images/regions":
     delete:
       consumes: []
       operationId: DeleteImageRegions
@@ -886,33 +618,28 @@ paths:
           type: array
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete a set of image regions.
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImageRegions request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            regionIds:
-              - ''
-          responses:
-            '204': {}
+          $ref: ./examples/DeleteImageRegions.json
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch."
+      description: "This API accepts a batch of image regions, and optionally tags, to
+        update existing images with region information.\r
+
+        There is a limit of 64 entries in the batch."
       operationId: CreateImageRegions
       parameters:
         - description: The project id.
@@ -922,58 +649,41 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: Batch of image regions which include a tag and bounding box. Limited to 64.
+        - description: Batch of image regions which include a tag and bounding box.
+            Limited to 64.
           in: body
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageRegionCreateBatch'
+            $ref: "#/definitions/ImageRegionCreateBatch"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageRegionCreateSummary'
+            $ref: "#/definitions/ImageRegionCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Create a set of image regions.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImageRegions request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            batch:
-              regions:
-                - height: 0.25
-                  imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                  left: 0.25
-                  tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                  top: 0.25
-                  width: 0.25
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created: []
-                duplicated: []
-                exceeded: []
-              headers: {}
-  '/projects/{projectId}/images/suggested':
+          $ref: ./examples/CreateImageRegions.json
+  "/projects/{projectId}/images/suggested":
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.
+      description: This API will fetch untagged images filtered by suggested tags Ids.
+        It returns an empty array if no images are found.
       operationId: QuerySuggestedImages
       parameters:
         - description: The project id.
@@ -995,69 +705,36 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/SuggestedTagAndRegionQueryToken'
+            $ref: "#/definitions/SuggestedTagAndRegionQueryToken"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SuggestedTagAndRegionQuery'
+            $ref: "#/definitions/SuggestedTagAndRegionQuery"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.
+            $ref: "#/definitions/CustomVisionError"
+      summary: Get untagged images whose suggested tags match given tags. Returns
+        empty array if no images are found.
       tags:
         - ImageApi
       x-ms-examples:
         Successful QuerySuggestedImages request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            query:
-              tagIds:
-                - b5f7e6a2-a481-49a6-afec-a7cef1af3544
-          responses:
-            '200':
-              body:
-                results:
-                  - created: '2018-01-31T20:18:26Z'
-                    domain: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                    id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
-                    iteration: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-                    originalImageUri: <image uri>
-                    predictions:
-                      - probability: 1
-                        tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                        tagName: Tag 1
-                      - probability: 3.60627153e-12
-                        tagId: 45619cda-d1c9-4bc8-a3e1-87c5d81adbc3
-                        tagName: Tag 2
-                    project: 8988643a-ae70-447d-9a22-15c4255e5ecb
-                    resizedImageUri: <resized image uri>
-                    thumbnailUri: <thumbnail uri>
-                token:
-                  continuation: ''
-                  maxCount: 0
-                  session: '1:286613'
-                  sortBy: Newest
-                  tagIds:
-                    - b5f7e6a2-a481-49a6-afec-a7cef1af3544
-              headers: {}
-  '/projects/{projectId}/images/suggested/count':
+          $ref: ./examples/QuerySuggestedImages.json
+  "/projects/{projectId}/images/suggested/count":
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: This API takes in tagIds to get count of untagged images per suggested tags for a given threshold.
+      description: This API takes in tagIds to get count of untagged images per
+        suggested tags for a given threshold.
       operationId: QuerySuggestedImageCount
       parameters:
         - description: The project id.
@@ -1074,18 +751,18 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: 'Model that contains tagIds, threshold and projectType to query by.'
+        - description: Model that contains tagIds, threshold and projectType to query by.
           in: body
           name: query
           required: true
           schema:
-            $ref: '#/definitions/TagFilter'
+            $ref: "#/definitions/TagFilter"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
@@ -1095,30 +772,29 @@ paths:
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.
+            $ref: "#/definitions/CustomVisionError"
+      summary: Get count of images whose suggested tags match given tags and their
+        probabilities are greater than or equal to the given threshold. Returns
+        count as 0 if none found.
       tags:
         - ImageApi
       x-ms-examples:
         Successful QuerySuggestedImageCount request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            query:
-              tagIds:
-                - b5f7e6a2-a481-49a6-afec-a7cef1af3544
-          responses:
-            '200':
-              body:
-                b5f7e6a2-a481-49a6-afec-a7cef1af3544: 1
-              headers: {}
-  '/projects/{projectId}/images/tagged':
+          $ref: ./examples/QuerySuggestedImageCount.json
+  "/projects/{projectId}/images/tagged":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch.\r
+
+        The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetTaggedImages
       parameters:
         - description: The project id.
@@ -1135,7 +811,8 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.
+          description: A list of tags ids to filter the images. Defaults to all tagged
+            images when null. Limited to 20.
           in: query
           items:
             format: uuid
@@ -1155,7 +832,7 @@ paths:
           required: false
           type: string
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256.'
+          description: Maximum number of images to return. Defaults to 50, limited to 256.
           format: int32
           in: query
           maximum: 256
@@ -1164,7 +841,8 @@ paths:
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0.
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0.
           format: int32
           in: query
           name: skip
@@ -1175,35 +853,30 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get tagged images for a given project iteration.
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetTaggedImages request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/tagged/count':
+          $ref: ./examples/GetTaggedImages.json
+  "/projects/{projectId}/images/tagged/count":
     get:
       consumes: []
-      description: "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetTaggedImageCount
       parameters:
         - description: The project id.
@@ -1220,7 +893,8 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: A list of tags ids to filter the images to count. Defaults to all tags when null.
+          description: A list of tags ids to filter the images to count. Defaults to all
+            tags when null.
           in: query
           items:
             format: uuid
@@ -1234,7 +908,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1242,23 +916,14 @@ paths:
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: 'Gets the number of images tagged with the provided {tagIds}.'
+            $ref: "#/definitions/CustomVisionError"
+      summary: Gets the number of images tagged with the provided {tagIds}.
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetTaggedImageCount request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: '10'
-              headers: {}
-  '/projects/{projectId}/images/tags':
+          $ref: ./examples/GetTaggedImageCount.json
+  "/projects/{projectId}/images/tags":
     delete:
       consumes: []
       operationId: DeleteImageTags
@@ -1296,30 +961,18 @@ paths:
           type: array
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Remove a set of tags from a set of images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImageTags request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-          responses:
-            '204': {}
+          $ref: ./examples/DeleteImageTags.json
     post:
       consumes:
         - application/json
@@ -1340,47 +993,34 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageTagCreateBatch'
+            $ref: "#/definitions/ImageTagCreateBatch"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageTagCreateSummary'
+            $ref: "#/definitions/ImageTagCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Associate a set of images with a set of tags.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImageTags request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            batch:
-              tags:
-                - imageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                  tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created:
-                  - imageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                duplicated: null
-                exceeded: null
-              headers: {}
-  '/projects/{projectId}/images/untagged':
+          $ref: ./examples/CreateImageTags.json
+  "/projects/{projectId}/images/untagged":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch."
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch."
       operationId: GetUntaggedImages
       parameters:
         - description: The project id.
@@ -1405,7 +1045,7 @@ paths:
           required: false
           type: string
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256.'
+          description: Maximum number of images to return. Defaults to 50, limited to 256.
           format: int32
           in: query
           maximum: 256
@@ -1414,7 +1054,8 @@ paths:
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0.
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0.
           format: int32
           in: query
           name: skip
@@ -1425,35 +1066,29 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get untagged images for a given project iteration.
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetUntaggedImages request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/untagged/count':
+          $ref: ./examples/GetUntaggedImages.json
+  "/projects/{projectId}/images/untagged/count":
     get:
       consumes: []
-      description: "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used."
+      description: "This API returns the images which have no tags for a given project
+        and optionally an iteration. If no iteration is specified the\r
+
+        current workspace is used."
       operationId: GetUntaggedImageCount
       parameters:
         - description: The project id.
@@ -1474,7 +1109,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1482,30 +1117,22 @@ paths:
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Gets the number of untagged images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetUntaggedImageCount request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: '10'
-              headers: {}
-  '/projects/{projectId}/images/urls':
+          $ref: ./examples/GetUntaggedImageCount.json
+  "/projects/{projectId}/images/urls":
     post:
       consumes:
         - application/json
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.'
+      description: This API accepts a batch of urls, and optionally tags, to create
+        images. There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromUrls
       parameters:
         - description: The project id.
@@ -1520,60 +1147,32 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageUrlCreateBatch'
+            $ref: "#/definitions/ImageUrlCreateBatch"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Add the provided images urls to the set of training images.
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromUrls request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - url: '{url to image}'
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      originalImageUri: '{Image Uri}'
-                      resizedImageUri: '{Resized Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                          tagName: tag name
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '{url to image}'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/{imageId}/regionproposals':
+          $ref: ./examples/CreateImagesFromUrls.json
+  "/projects/{projectId}/images/{imageId}/regionproposals":
     post:
       consumes: []
-      description: This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.
+      description: This API will get region proposals for an image along with
+        confidences for the region. It returns an empty array if no proposals
+        are found.
       operationId: GetImageRegionProposals
       parameters:
         - description: The project id.
@@ -1593,39 +1192,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageRegionProposal'
+            $ref: "#/definitions/ImageRegionProposal"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: Get region proposals for an image. Returns empty array if no proposals are found.
+            $ref: "#/definitions/CustomVisionError"
+      summary: Get region proposals for an image. Returns empty array if no proposals
+        are found.
       tags:
         - ImageRegionProposalApi
       x-ms-examples:
         Successful GetImageRegionProposals request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-                proposals:
-                  - boundingBox:
-                      height: 0.25
-                      left: 0.25
-                      top: 0.25
-                      width: 0.25
-                    confidence: 0.25
-              headers: {}
-  '/projects/{projectId}/iterations':
+          $ref: ./examples/GetImageRegionProposals.json
+  "/projects/{projectId}/iterations":
     get:
       consumes: []
       operationId: GetIterations
@@ -1642,81 +1224,23 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Iteration'
+              $ref: "#/definitions/Iteration"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get iterations for the project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetIterations request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                - created: '2017-12-18T22:40:29Z'
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  exportable: false
-                  exportableTo:
-                    - ONNX
-                    - DockerFile
-                    - TensorFlow
-                    - CoreML
-                  id: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                  lastModified: '2017-12-18T22:40:41Z'
-                  name: Iteration 1
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  publishName: ''
-                  reservedBudgetInHours: 0
-                  status: Completed
-                  trainedAt: '2017-12-18T22:40:41Z'
-                  trainingType: Regular
-                - created: '2017-12-18T22:40:36Z'
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  exportable: false
-                  exportableTo:
-                    - ONNX
-                    - DockerFile
-                    - TensorFlow
-                    - CoreML
-                  id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                  lastModified: '2017-12-19T15:47:02Z'
-                  name: Iteration 2
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  publishName: model1
-                  reservedBudgetInHours: 5
-                  status: Completed
-                  trainedAt: '2017-12-19T15:47:02Z'
-                  trainingType: Regular
-                - created: '2017-12-19T15:46:59Z'
-                  domainId: null
-                  exportable: false
-                  exportableTo:
-                    - ONNX
-                    - DockerFile
-                    - TensorFlow
-                    - CoreML
-                  id: 3adaf7b2-18fc-4376-9da4-b5ea160a7cf5
-                  lastModified: '2017-12-19T15:46:59Z'
-                  name: Iteration 3
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  publishName: ''
-                  reservedBudgetInHours: 0
-                  status: New
-                  trainingType: Regular
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}':
+          $ref: ./examples/GetIterations.json
+  "/projects/{projectId}/iterations/{iterationId}":
     delete:
       consumes: []
       operationId: DeleteIteration
@@ -1737,25 +1261,18 @@ paths:
           x-nullable: false
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete a specific iteration of a project.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful DeleteIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204': {}
+          $ref: ./examples/DeleteIteration.json
     get:
       consumes: []
       operationId: GetIteration
@@ -1779,46 +1296,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get a specific iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36Z'
-                domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                exportable: false
-                exportableTo:
-                  - ONNX
-                  - DockerFile
-                  - TensorFlow
-                  - CoreML
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                lastModified: '2017-12-19T15:47:02Z'
-                name: Iteration 2
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                publishName: ''
-                reservedBudgetInHours: 0
-                status: Completed
-                trainedAt: '2017-12-19T15:47:02Z'
-                trainingType: Regular
-              headers: {}
+          $ref: ./examples/GetIteration.json
     patch:
       consumes:
         - application/json
@@ -1846,55 +1337,27 @@ paths:
           name: updatedIteration
           required: true
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Update a specific iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful UpdateIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            updatedIteration:
-              name: Best Iteration
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36Z'
-                domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                exportable: false
-                exportableTo:
-                  - ONNX
-                  - DockerFile
-                  - TensorFlow
-                  - CoreML
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                lastModified: '2017-12-19T15:53:07Z'
-                name: Best Iteration
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                publishName: ''
-                reservedBudgetInHours: 0
-                status: Completed
-                trainedAt: '2017-12-19T15:47:02Z'
-                trainingType: Regular
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/export':
+          $ref: ./examples/UpdateIteration.json
+  "/projects/{projectId}/iterations/{iterationId}/export":
     get:
       consumes: []
       operationId: GetExports
@@ -1918,35 +1381,22 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Export'
+              $ref: "#/definitions/Export"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get the list of exports for a specific iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetExports request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                - downloadUri: '{Download URI}'
-                  newerVersionAvailable: false
-                  platform: TensorFlow
-                  status: Done
-              headers: {}
+          $ref: ./examples/GetExports.json
     post:
       consumes: []
       operationId: ExportIteration
@@ -1994,35 +1444,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Export'
+            $ref: "#/definitions/Export"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Export a trained iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful ExportIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            platform: TensorFlow
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                downloadUri: ''
-                newerVersionAvailable: false
-                platform: TensorFlow
-                status: Exporting
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance':
+          $ref: ./examples/ExportIteration.json
+  "/projects/{projectId}/iterations/{iterationId}/performance":
     get:
       consumes: []
       operationId: GetIterationPerformance
@@ -2047,7 +1483,8 @@ paths:
           name: threshold
           required: false
           type: number
-        - description: 'If applicable, the bounding box overlap threshold used to determine true predictions.'
+        - description: If applicable, the bounding box overlap threshold used to determine
+            true predictions.
           format: float
           in: query
           name: overlapThreshold
@@ -2058,51 +1495,34 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/IterationPerformance'
+            $ref: "#/definitions/IterationPerformance"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get detailed performance information about an iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetIterationPerformance request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            threshold: 0.9
-          responses:
-            '200':
-              body:
-                perTagPerformance:
-                  - id: e31ff107-5505-4753-be42-b369b21b026c
-                    name: Hemlock
-                    precision: 1
-                    precisionStdDeviation: 0
-                    recall: 1
-                    recallStdDeviation: 0
-                  - id: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    name: Japanese Cherry
-                    precision: 1
-                    precisionStdDeviation: 0
-                    recall: 1
-                    recallStdDeviation: 0
-                precision: 1
-                precisionStdDeviation: 0
-                recall: 1
-                recallStdDeviation: 0
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance/images':
+          $ref: ./examples/GetIterationPerformance.json
+  "/projects/{projectId}/iterations/{iterationId}/performance/images":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch.\r
+
+        The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetImagePerformances
       parameters:
         - description: The project id.
@@ -2120,7 +1540,8 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.
+          description: A list of tags ids to filter the images. Defaults to all tagged
+            images when null. Limited to 20.
           in: query
           items:
             format: uuid
@@ -2140,7 +1561,7 @@ paths:
           required: false
           type: string
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256.'
+          description: Maximum number of images to return. Defaults to 50, limited to 256.
           format: int32
           in: query
           maximum: 256
@@ -2149,7 +1570,8 @@ paths:
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0.
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0.
           format: int32
           in: query
           name: skip
@@ -2160,55 +1582,30 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ImagePerformance'
+              $ref: "#/definitions/ImagePerformance"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get image with its prediction for a given project iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetImagePerformances request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-            orderBy: Newest
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagIds:
-              - ''
-          responses:
-            '200':
-              body:
-                - created: '2018-01-31T20:18:26Z'
-                  height: 1600
-                  id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
-                  imageUri: <image uri>
-                  predictions:
-                    - boundingBox:
-                        height: 0.25
-                        left: 0.25
-                        top: 0.25
-                        width: 0.25
-                      probability: 1
-                      tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                      tagName: Tag 1
-                  regions: []
-                  tags: []
-                  thumbnailUri: <thumbnail uri>
-                  width: 600
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance/images/count':
+          $ref: ./examples/GetImagePerformances.json
+  "/projects/{projectId}/iterations/{iterationId}/performance/images/count":
     get:
       consumes: []
-      description: "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetImagePerformanceCount
       parameters:
         - description: The project id.
@@ -2226,7 +1623,8 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: A list of tags ids to filter the images to count. Defaults to all tags when null.
+          description: A list of tags ids to filter the images to count. Defaults to all
+            tags when null.
           in: query
           items:
             format: uuid
@@ -2240,7 +1638,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -2248,25 +1646,17 @@ paths:
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}."
+            $ref: "#/definitions/CustomVisionError"
+      summary: "Gets the number of images tagged with the provided {tagIds} that have
+        prediction results from\r
+
+        training for the provided iteration {iterationId}."
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetImagePerformanceCount request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagIds:
-              - b5f7e6a2-a481-49a6-afec-a7cef1af3544
-          responses:
-            '200':
-              body: '1'
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/publish':
+          $ref: ./examples/GetImagePerformanceCount.json
+  "/projects/{projectId}/iterations/{iterationId}/publish":
     delete:
       consumes: []
       operationId: UnpublishIteration
@@ -2287,25 +1677,18 @@ paths:
           x-nullable: false
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Unpublish a specific iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful UnpublishIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204': {}
+          $ref: ./examples/UnpublishIteration.json
     post:
       consumes: []
       operationId: PublishIteration
@@ -2339,32 +1722,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: boolean
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Publish a specific iteration.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful PublishIteration request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            predictionId: '/subscriptions/{subscription}/resourceGroups/{resource group name}/providers/Microsoft.CognitiveServices/accounts/{resource name}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishName: Model1
-          responses:
-            '200':
-              body: true
-              headers: {}
-  '/projects/{projectId}/predictions':
+          $ref: ./examples/PublishIteration.json
+  "/projects/{projectId}/predictions":
     delete:
       consumes: []
       operationId: DeletePrediction
@@ -2390,28 +1762,19 @@ paths:
           type: array
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete a set of predicted images and their associated prediction results.
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful DeletePrediction request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            ids:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204': {}
-  '/projects/{projectId}/predictions/query':
+          $ref: ./examples/DeletePrediction.json
+  "/projects/{projectId}/predictions/query":
     post:
       consumes:
         - application/json
@@ -2427,75 +1790,33 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: Parameters used to query the predictions. Limited to combining 2 tags.
+        - description: Parameters used to query the predictions. Limited to combining 2
+            tags.
           in: body
           name: query
           required: true
           schema:
-            $ref: '#/definitions/PredictionQueryToken'
+            $ref: "#/definitions/PredictionQueryToken"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PredictionQueryResult'
+            $ref: "#/definitions/PredictionQueryResult"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get images that were sent to your prediction endpoint.
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QueryPredictions request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            query:
-              orderBy: Newest
-              tags:
-                - id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                  maxThreshold: 1
-                  minThreshold: 0.9
-          responses:
-            '200':
-              body:
-                results:
-                  - created: '2018-01-31T20:18:26Z'
-                    domain: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                    id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
-                    iteration: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-                    originalImageUri: <image uri>
-                    predictions:
-                      - probability: 1
-                        tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                        tagName: Tag 1
-                      - probability: 3.60627153e-12
-                        tagId: 45619cda-d1c9-4bc8-a3e1-87c5d81adbc3
-                        tagName: Tag 2
-                    project: 8988643a-ae70-447d-9a22-15c4255e5ecb
-                    resizedImageUri: <resized image uri>
-                    thumbnailUri: <thumbnail uri>
-                token:
-                  application: ''
-                  continuation: ''
-                  endTime: null
-                  iterationId: null
-                  maxCount: 0
-                  orderBy: Newest
-                  session: '1:286613'
-                  startTime: null
-                  tags:
-                    - id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                      maxThreshold: 1
-                      minThreshold: 0.9
-              headers: {}
-  '/projects/{projectId}/quicktest/image':
+          $ref: ./examples/QueryPredictions.json
+  "/projects/{projectId}/quicktest/image":
     post:
       consumes:
         - multipart/form-data
@@ -2509,19 +1830,25 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+        - description: "Optional. Specifies the id of a particular iteration to evaluate
+            against.\r
+
+            \            The default iteration for the project will
+            be used when not specified."
           format: uuid
           in: query
           name: iterationId
           required: false
           type: string
         - default: true
-          description: 'Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.'
+          description: Optional. Specifies whether or not to store the result of this
+            prediction. The default is true, to store.
           in: query
           name: store
           required: false
           type: boolean
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 6MB.
           in: formData
           name: imageData
           required: true
@@ -2531,42 +1858,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Quick test an image.
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QuickTestImage request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageData: multipart-form-data
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-19T14:21:41Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/projects/{projectId}/quicktest/url':
+          $ref: ./examples/QuickTestImage.json
+  "/projects/{projectId}/quicktest/url":
     post:
       consumes:
         - application/json
@@ -2587,15 +1893,20 @@ paths:
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
-        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+            $ref: "#/definitions/ImageUrl"
+        - description: "Optional. Specifies the id of a particular iteration to evaluate
+            against.\r
+
+            \            The default iteration for the project will
+            be used when not specified."
           format: uuid
           in: query
           name: iterationId
           required: false
           type: string
         - default: true
-          description: 'Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.'
+          description: Optional. Specifies whether or not to store the result of this
+            prediction. The default is true, to store.
           in: query
           name: store
           required: false
@@ -2605,43 +1916,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Quick test an image url.
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QuickTestImageUrl request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-19T14:21:41Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/projects/{projectId}/tags':
+          $ref: ./examples/QuickTestImageUrl.json
+  "/projects/{projectId}/tags":
     get:
       consumes: []
       operationId: GetTags
@@ -2664,35 +1953,22 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Tag'
+              $ref: "#/definitions/Tag"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get the tags for a given project and iteration.
       tags:
         - TagsApi
       x-ms-examples:
         Successful GetTags request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                - description: Description of Tag1
-                  id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                  imageCount: 0
-                  name: Tag1
-                  type: Regular
-              headers: {}
+          $ref: ./examples/GetTags.json
     post:
       consumes: []
       operationId: CreateTag
@@ -2727,37 +2003,21 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Create a tag for the project.
       tags:
         - TagsApi
       x-ms-examples:
         Successful CreateTag request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            body: ''
-            description: Description of Tag1
-            name: Tag1
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                description: Description of Tag1
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Tag1
-                type: Regular
-              headers: {}
-  '/projects/{projectId}/tags/{tagId}':
+          $ref: ./examples/CreateTag.json
+  "/projects/{projectId}/tags/{tagId}":
     delete:
       consumes: []
       operationId: DeleteTag
@@ -2778,25 +2038,18 @@ paths:
           x-nullable: false
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Delete a tag from the project.
       tags:
         - TagsApi
       x-ms-examples:
         Successful DeleteTag request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-          responses:
-            '204': {}
+          $ref: ./examples/DeleteTag.json
     get:
       consumes: []
       operationId: GetTag
@@ -2815,7 +2068,8 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: 'The iteration to retrieve this tag from. Optional, defaults to current training set.'
+        - description: The iteration to retrieve this tag from. Optional, defaults to
+            current training set.
           format: uuid
           in: query
           name: iterationId
@@ -2826,34 +2080,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Get information about a specific tag.
       tags:
         - TagsApi
       x-ms-examples:
         Successful GetTag request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-          responses:
-            '200':
-              body:
-                description: Description of Tag1
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Tag1
-                type: Regular
-              headers: {}
+          $ref: ./examples/GetTag.json
     patch:
       consumes:
         - application/json
@@ -2881,48 +2121,34 @@ paths:
           name: updatedTag
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Update a tag.
       tags:
         - TagsApi
       x-ms-examples:
         Successful UpdateTag request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-            updatedTag:
-              description: Better description
-              name: Better Tag Name
-              type: Regular
-          responses:
-            '200':
-              body:
-                description: Better description
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Better Tag Name
-                type: Regular
-              headers: {}
-  '/projects/{projectId}/tagsandregions/suggestions':
+          $ref: ./examples/UpdateTag.json
+  "/projects/{projectId}/tagsandregions/suggestions":
     post:
       consumes: []
-      description: "This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch."
+      description: "This API will get suggested tags and regions for an array/batch of
+        untagged images along with confidences for the tags. It returns an empty
+        array if no tags are found.\r
+
+        There is a limit of 64 images in the batch."
       operationId: SuggestTagsAndRegions
       parameters:
         - description: The project id.
@@ -2940,7 +2166,8 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: Array of image ids tag suggestion are needed for. Use GetUntaggedImages API to get imageIds.
+          description: Array of image ids tag suggestion are needed for. Use
+            GetUntaggedImages API to get imageIds.
           in: query
           items:
             format: uuid
@@ -2956,47 +2183,24 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/SuggestedTagAndRegion'
+              $ref: "#/definitions/SuggestedTagAndRegion"
             type: array
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
-      summary: Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.
+            $ref: "#/definitions/CustomVisionError"
+      summary: Suggest tags and regions for an array/batch of untagged images. Returns
+        empty array if no tags are found.
       tags:
         - SuggestTagsAndRegionsApi
       x-ms-examples:
         Successful SuggestTagsAndRegions request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            imageIds:
-              - e7f08c23-9e54-49f7-b609-69a0240ba306
-              - ce632666-4b66-4adb-aa0a-ad8b7c32df06
-            iterationId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                - created: '2019-07-08T13:43:18Z'
-                  id: 8497e814-23cc-47d7-b24b-691cef0bcec9
-                  iteration: ce271ee4-cc13-460f-b66f-993f8005522d
-                  predictionUncertainty: 0.32
-                  predictions:
-                    - probability: 1
-                      tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                      tagName: Tag 1
-                    - probability: 3.60627153e-12
-                      tagId: 45619cda-d1c9-4bc8-a3e1-87c5d81adbc3
-                      tagName: Tag 2
-                  project: bc3f7dad-5544-468c-8573-3ef04d55463e
-              headers: {}
-  '/projects/{projectId}/train':
+          $ref: ./examples/SuggestTagsAndRegions.json
+  "/projects/{projectId}/train":
     post:
       consumes:
         - application/json
@@ -3012,7 +2216,8 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: 'The type of training to use to train the project (default: Regular).'
+        - description: "The type of training to use to train the project (default:
+            Regular)."
           enum:
             - Regular
             - Advanced
@@ -3028,67 +2233,45 @@ paths:
           required: false
           type: integer
         - default: false
-          description: 'Whether to force train even if dataset and configuration does not change (default: false).'
+          description: "Whether to force train even if dataset and configuration does not
+            change (default: false)."
           in: query
           name: forceTrain
           required: false
           type: boolean
-        - description: 'The email address to send notification to when training finishes (default: null).'
+        - description: "The email address to send notification to when training finishes
+            (default: null)."
           in: query
           name: notificationEmailAddress
           required: false
           type: string
-        - description: Additional training parameters passed in to control how the project is trained.
+        - description: Additional training parameters passed in to control how the project
+            is trained.
           in: body
           name: trainingParameters
           required: false
           schema:
-            $ref: '#/definitions/TrainingParameters'
+            $ref: "#/definitions/TrainingParameters"
           x-nullable: true
       produces:
         - application/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Queues project for training.
       tags:
         - ProjectApi
       x-ms-examples:
         Successful TrainProject request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Training-Key: '{API Key}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            trainingParameters: {}
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36Z'
-                domainId: null
-                exportable: false
-                exportableTo:
-                  - ONNX
-                  - DockerFile
-                  - TensorFlow
-                  - CoreML
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                lastModified: '2017-12-19T15:46:58Z'
-                name: Iteration 2
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                publishName: ''
-                reservedBudgetInHours: 0
-                status: Training
-                trainingType: Regular
-              headers: {}
+          $ref: ./examples/TrainProject.json
 definitions:
   BoundingBox:
     description: Bounding box that defines a region of an image.
@@ -3297,7 +2480,15 @@ definitions:
         readOnly: true
         type: string
       flavor:
-        description: "Flavor of the export. These are specializations of the export platform.\r\nDocker platform has valid flavors: Linux, Windows, ARM.\r\nTensorflow platform has valid flavors: TensorFlowNormal, TensorFlowLite.\r\nONNX platform has valid flavors: ONNX10, ONNX12."
+        description: "Flavor of the export. These are specializations of the export
+          platform.\r
+
+          Docker platform has valid flavors: Linux, Windows, ARM.\r
+
+          Tensorflow platform has valid flavors: TensorFlowNormal,
+          TensorFlowLite.\r
+
+          ONNX platform has valid flavors: ONNX10, ONNX12."
         enum:
           - Linux
           - Windows
@@ -3313,7 +2504,8 @@ definitions:
           name: ExportFlavor
         x-nullable: true
       newerVersionAvailable:
-        description: Indicates an updated version of the export package is available and should be re-exported for the latest changes.
+        description: Indicates an updated version of the export package is available and
+          should be re-exported for the latest changes.
         readOnly: true
         type: boolean
         x-nullable: false
@@ -3372,7 +2564,7 @@ definitions:
       regions:
         description: Regions associated with this image.
         items:
-          $ref: '#/definitions/ImageRegion'
+          $ref: "#/definitions/ImageRegion"
         readOnly: true
         type: array
         x-nullable: true
@@ -3383,7 +2575,7 @@ definitions:
       tags:
         description: Tags associated with this image.
         items:
-          $ref: '#/definitions/ImageTag'
+          $ref: "#/definitions/ImageTag"
         readOnly: true
         type: array
         x-nullable: true
@@ -3401,7 +2593,7 @@ definitions:
   ImageCreateResult:
     properties:
       image:
-        $ref: '#/definitions/Image'
+        $ref: "#/definitions/Image"
         description: The image.
         readOnly: true
       sourceUrl:
@@ -3435,12 +2627,13 @@ definitions:
       images:
         description: List of the image creation results.
         items:
-          $ref: '#/definitions/ImageCreateResult'
+          $ref: "#/definitions/ImageCreateResult"
           x-nullable: false
         readOnly: true
         type: array
       isBatchSuccessful:
-        description: 'True if all of the images in the batch were created successfully, otherwise false.'
+        description: True if all of the images in the batch were created successfully,
+          otherwise false.
         readOnly: true
         type: boolean
         x-nullable: false
@@ -3449,7 +2642,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageFileCreateEntry'
+          $ref: "#/definitions/ImageFileCreateEntry"
           x-nullable: false
         readOnly: false
         type: array
@@ -3473,7 +2666,7 @@ definitions:
         x-nullable: false
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
           x-nullable: false
         readOnly: false
         type: array
@@ -3489,7 +2682,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageIdCreateEntry'
+          $ref: "#/definitions/ImageIdCreateEntry"
           x-nullable: false
         readOnly: false
         type: array
@@ -3511,7 +2704,7 @@ definitions:
         x-nullable: false
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
           x-nullable: false
         readOnly: false
         type: array
@@ -3546,19 +2739,19 @@ definitions:
         type: string
       predictions:
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
         readOnly: true
         type: array
         x-nullable: true
       regions:
         items:
-          $ref: '#/definitions/ImageRegion'
+          $ref: "#/definitions/ImageRegion"
         readOnly: true
         type: array
         x-nullable: true
       tags:
         items:
-          $ref: '#/definitions/ImageTag'
+          $ref: "#/definitions/ImageTag"
         readOnly: true
         type: array
         x-nullable: true
@@ -3595,7 +2788,7 @@ definitions:
       predictions:
         description: List of predictions.
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
           x-nullable: false
         readOnly: true
         type: array
@@ -3612,7 +2805,12 @@ definitions:
       augmentationMethods:
         additionalProperties:
           type: boolean
-        description: "Gets or sets enabled image transforms. The key corresponds to the transform name. If value is set to true, then correspondent transform is enabled. Otherwise this transform will not be used.\r\nAugmentation will be uniformly distributed among enabled transforms."
+        description: "Gets or sets enabled image transforms. The key corresponds to the
+          transform name. If value is set to true, then correspondent transform
+          is enabled. Otherwise this transform will not be used.\r
+
+          Augmentation will be uniformly distributed among enabled
+          transforms."
         readOnly: false
         type: object
         x-nullable: true
@@ -3675,7 +2873,7 @@ definitions:
     properties:
       regions:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
           x-nullable: false
         readOnly: false
         type: array
@@ -3789,19 +2987,19 @@ definitions:
     properties:
       created:
         items:
-          $ref: '#/definitions/ImageRegionCreateResult'
+          $ref: "#/definitions/ImageRegionCreateResult"
         readOnly: false
         type: array
         x-nullable: true
       duplicated:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
         readOnly: false
         type: array
         x-nullable: true
       exceeded:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
         readOnly: false
         type: array
         x-nullable: true
@@ -3820,7 +3018,7 @@ definitions:
         x-nullable: false
       proposals:
         items:
-          $ref: '#/definitions/RegionProposal'
+          $ref: "#/definitions/RegionProposal"
           x-nullable: false
         readOnly: true
         type: array
@@ -3848,7 +3046,7 @@ definitions:
       tags:
         description: Image Tag entries to include in this batch.
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
           x-nullable: false
         readOnly: false
         type: array
@@ -3873,19 +3071,19 @@ definitions:
     properties:
       created:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         readOnly: false
         type: array
         x-nullable: true
       duplicated:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         readOnly: false
         type: array
         x-nullable: true
       exceeded:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         readOnly: false
         type: array
         x-nullable: true
@@ -3905,7 +3103,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageUrlCreateEntry'
+          $ref: "#/definitions/ImageUrlCreateEntry"
           x-nullable: false
         readOnly: false
         type: array
@@ -3921,7 +3119,7 @@ definitions:
     properties:
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
           x-nullable: false
         readOnly: false
         type: array
@@ -4066,7 +3264,7 @@ definitions:
       perTagPerformance:
         description: Gets the per-tag performance details for this iteration.
         items:
-          $ref: '#/definitions/TagPerformance'
+          $ref: "#/definitions/TagPerformance"
           x-nullable: false
         readOnly: true
         type: array
@@ -4099,7 +3297,7 @@ definitions:
     description: Prediction result.
     properties:
       boundingBox:
-        $ref: '#/definitions/BoundingBox'
+        $ref: "#/definitions/BoundingBox"
         description: Bounding box of the prediction.
         readOnly: true
         x-nullable: true
@@ -4122,17 +3320,18 @@ definitions:
         x-nullable: true
     type: object
   PredictionQueryResult:
-    description: Query result of the prediction images that were sent to your prediction endpoint.
+    description: Query result of the prediction images that were sent to your
+      prediction endpoint.
     properties:
       results:
         description: Result of an prediction request.
         items:
-          $ref: '#/definitions/StoredImagePrediction'
+          $ref: "#/definitions/StoredImagePrediction"
           x-nullable: false
         readOnly: true
         type: array
       token:
-        $ref: '#/definitions/PredictionQueryToken'
+        $ref: "#/definitions/PredictionQueryToken"
         description: Prediction Query Token.
         readOnly: false
     type: object
@@ -4201,7 +3400,7 @@ definitions:
         x-nullable: true
       tags:
         items:
-          $ref: '#/definitions/PredictionQueryTag'
+          $ref: "#/definitions/PredictionQueryTag"
           x-nullable: false
         readOnly: false
         type: array
@@ -4221,7 +3420,8 @@ definitions:
         type: string
         x-nullable: true
       drModeEnabled:
-        description: 'Gets if the Disaster Recovery (DR) mode is on, indicating the project is temporarily read-only.'
+        description: Gets if the Disaster Recovery (DR) mode is on, indicating the
+          project is temporarily read-only.
         readOnly: true
         type: boolean
         x-nullable: true
@@ -4243,7 +3443,7 @@ definitions:
         type: string
         x-nullable: false
       settings:
-        $ref: '#/definitions/ProjectSettings'
+        $ref: "#/definitions/ProjectSettings"
         description: Gets or sets the project settings.
         readOnly: false
       status:
@@ -4271,7 +3471,10 @@ definitions:
     description: Represents information about a project export.
     properties:
       estimatedImportTimeInMS:
-        description: "Estimated time this project will take to import, can change based on network connectivity and load between\r\nsource and destination regions."
+        description: "Estimated time this project will take to import, can change based
+          on network connectivity and load between\r
+
+          source and destination regions."
         format: int32
         readOnly: true
         type: integer
@@ -4301,7 +3504,10 @@ definitions:
         type: integer
         x-nullable: false
       token:
-        description: "Opaque token that should be passed to ImportProject to perform the import. This token grants access to import this\r\nproject to all that have the token."
+        description: "Opaque token that should be passed to ImportProject to perform the
+          import. This token grants access to import this\r
+
+          project to all that have the token."
         readOnly: true
         type: string
         x-nullable: false
@@ -4321,7 +3527,7 @@ definitions:
           name: Classifier
         x-nullable: true
       detectionParameters:
-        description: 'Detection parameters in use, if any.'
+        description: Detection parameters in use, if any.
         readOnly: true
         type: string
         x-nullable: false
@@ -4332,11 +3538,12 @@ definitions:
         type: string
         x-nullable: false
       imageProcessingSettings:
-        $ref: '#/definitions/ImageProcessingSettings'
+        $ref: "#/definitions/ImageProcessingSettings"
         description: Gets or sets image preprocessing settings.
         readOnly: false
       targetExportPlatforms:
-        description: A list of ExportPlatform that the trained model should be able to support.
+        description: A list of ExportPlatform that the trained model should be able to
+          support.
         items:
           enum:
             - CoreML
@@ -4396,7 +3603,7 @@ definitions:
   RegionProposal:
     properties:
       boundingBox:
-        $ref: '#/definitions/BoundingBox'
+        $ref: "#/definitions/BoundingBox"
         readOnly: true
       confidence:
         format: float
@@ -4438,7 +3645,7 @@ definitions:
       predictions:
         description: List of predictions.
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
           x-nullable: false
         readOnly: true
         type: array
@@ -4503,7 +3710,7 @@ definitions:
       predictions:
         description: List of predictions.
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
           x-nullable: false
         readOnly: true
         type: array
@@ -4558,7 +3765,7 @@ definitions:
       predictions:
         description: List of predictions.
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
           x-nullable: false
         readOnly: true
         type: array
@@ -4570,25 +3777,31 @@ definitions:
         x-nullable: false
     type: object
   SuggestedTagAndRegionQuery:
-    description: The array of result images and token containing session and continuation Ids for the next query.
+    description: The array of result images and token containing session and
+      continuation Ids for the next query.
     properties:
       results:
         description: Result of a suggested tags and regions request of the untagged image.
         items:
-          $ref: '#/definitions/StoredSuggestedTagAndRegion'
+          $ref: "#/definitions/StoredSuggestedTagAndRegion"
           x-nullable: false
         readOnly: true
         type: array
       token:
-        $ref: '#/definitions/SuggestedTagAndRegionQueryToken'
+        $ref: "#/definitions/SuggestedTagAndRegionQueryToken"
         description: Contains properties we need to fetch suggested tags for.
         readOnly: false
     type: object
   SuggestedTagAndRegionQueryToken:
-    description: "Contains properties we need to fetch suggested tags for. For the first call, Session and continuation set to null.\r\nThen on subsequent calls, uses the session/continuation from the previous SuggestedTagAndRegionQuery result to fetch additional results."
+    description: "Contains properties we need to fetch suggested tags for. For the
+      first call, Session and continuation set to null.\r
+
+      Then on subsequent calls, uses the session/continuation from the
+      previous SuggestedTagAndRegionQuery result to fetch additional results."
     properties:
       continuation:
-        description: Continuation Id for database pagination. Initially null but later used to paginate.
+        description: Continuation Id for database pagination. Initially null but later
+          used to paginate.
         readOnly: false
         type: string
         x-nullable: false
@@ -4599,7 +3812,8 @@ definitions:
         type: integer
         x-nullable: false
       session:
-        description: SessionId for database query. Initially set to null but later used to paginate.
+        description: SessionId for database query. Initially set to null but later used
+          to paginate.
         readOnly: false
         type: string
         x-nullable: false
@@ -4671,7 +3885,9 @@ definitions:
       - type
     type: object
   TagFilter:
-    description: Model that query for counting of images whose suggested tags match given tags and their probability are greater than or equal to the given threshold.
+    description: Model that query for counting of images whose suggested tags match
+      given tags and their probability are greater than or equal to the given
+      threshold.
     properties:
       tagIds:
         description: Existing TagIds in project to get suggested tags count for.
@@ -4735,7 +3951,8 @@ definitions:
     description: Parameters used for training.
     properties:
       selectedTags:
-        description: 'List of tags selected for this training session, other tags in the project will be ignored.'
+        description: List of tags selected for this training session, other tags in the
+          project will be ignored.
         items:
           format: uuid
           type: string
@@ -4744,7 +3961,7 @@ definitions:
         type: array
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{Endpoint}'
+  hostTemplate: "{Endpoint}"
   parameters:
-    - $ref: '#/parameters/Endpoint'
+    - $ref: "#/parameters/Endpoint"
   useSchemePrefix: false

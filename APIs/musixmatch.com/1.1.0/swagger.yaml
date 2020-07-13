@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.musixmatch.com
@@ -7,175 +7,256 @@ info:
   contact:
     email: info@musixmatch.com
     name: Musixmatch
-    url: 'https://musixmatch.com'
+    url: https://musixmatch.com
     x-twitter: Musixmatch
-  description: |
-    Musixmatch lyrics API is a robust service that permits you to search and retrieve lyrics in the simplest possible way. It just works.
+  description: >
+    Musixmatch lyrics API is a robust service that permits you to search and
+    retrieve lyrics in the simplest possible way. It just works.
+
 
     Include millions of licensed lyrics on your website or in your application legally.
 
+
     The fastest, most powerful and legal way to display lyrics on your website or in your application.
 
+
     #### Read musixmatch API Terms & Conditions and the Privacy Policy:
+
     Before getting started, you must take a look at the [API Terms & Conditions](http://musixmatch.com/apiterms/) and the [Privacy Policy](https://developer.musixmatch.com/privacy). We’ve worked hard to make this service completely legal so that we are all protected from any foreseeable liability. Take the time to read this stuff.
 
+
     #### Register for an API key:
+
     All you need to do is [register](https://developer.musixmatch.com/signup) in order to get your API key, a mandatory parameter for most of our API calls. It’s your personal identifier and should be kept secret:
+
 
     ```
       https://api.musixmatch.com/ws/v1.1/track.get?apikey=YOUR_API_KEY
     ```
+
     #### Integrate the musixmatch service with your web site or application
+
     In the most common scenario you only need to implement two API calls: 
+
     The first call is to match your catalog to ours using the [track.search](#!/Track/get_track_search) function and the second is to get the lyrics using the [track.lyrics.get](#!/Lyrics/get_track_lyrics_get) api. That’s it!
 
+
     ## API Methods
+
     What does the musiXmatch API do?
+
 
     The musiXmatch API allows you to read objects from our huge 100% licensed lyrics database.
 
+
     To make your life easier we are providing you with one or more examples to show you how it could work in the wild. You’ll find both the API request and API response in all the available output formats for each API call. Follow the links below for the details.
+
 
     The current API version is 1.1, the root URL is located at https://api.musixmatch.com/ws/1.1/
 
+
     Supported input parameters can be found on the page [Input Parameters](https://developer.musixmatch.com/documentation/input-parameters). Use UTF-8 to encode arguments when calling API methods.
+
 
     Every response includes a status_code. A list of all status codes can be consulted at [Status Codes](https://developer.musixmatch.com/documentation/status-codes).
 
+
     ## Music meta data
+
     The musiXmatch api is built around lyrics, but there are many other data we provide through the api that can be used to improve every existent music service.
 
+
     ## Track
+
     Inside the track object you can get the following extra information:
+
 
     ### TRACK RATING
 
+
     The track rating is a score 0-100 identifying how popular is a song in musixmatch.
+
 
     You can use this information to sort search results, like the most popular songs of an artist, of a music genre, of a lyrics language.
 
+
     ### INSTRUMENTAL AND EXPLICIT FLAGS
+
 
     The instrumental flag identifies songs with music only, no lyrics.
 
+
     The explicit flag identifies songs with explicit lyrics or explicit title. We're able to identify explicit words and set the flag for the most common languages.
+
 
     ### FAVOURITES
 
+
     How many users have this song in their list of favourites.
+
 
     Can be used to sort tracks by num favourite to identify more popular tracks within a set.
 
+
     ### MUSIC GENRE
+
 
     The music genere of the song.
 
+
     Can be used to group songs by genre, as input for similarity alghorithms, artist genre identification, navigate songs by genere, etc.
+
 
     ### SONG TITLES TRANSLATIONS
 
+
     The track title, as translated in different lanauages, can be used to display the right writing for a given user, example:
 
+
     LIES (Bigbang) becomes 在光化門 in chinese
+
     HALLELUJAH (Bigbang) becomes ハレルヤ in japanese
 
 
+
     ## Artist
+
     Inside the artist object you can get the following nice extra information:
+
 
     ### COMMENTS AND COUNTRY
 
+
     An artist comment is a short snippet of text which can be mainly used for disambiguation.
+
 
     The artist country is the born country of the artist/group
 
+
     There are two perfect search result if you search by artist with the keyword "U2". Indeed there are two distinct music groups with this same name, one is the most known irish group of Bono Vox, the other is a less popular (world wide speaking) group from Japan.
+
 
     Here's how you can made use of the artist comment in your search result page:
 
+
     U2 (Irish rock band)
+
     U2 (あきやまうに)
+
     You can also show the artist country for even better disambiguation:
 
+
     U2 (Irish rock band) from Ireland
+
     U2 (あきやまうに) from Japan
+
     ARTIST TRANSLATIONS
+
 
     When you create a world wide music related service you have to take into consideration to display the artist name in the user's local language. These translation are also used as aliases to improve the search results.
 
+
     Let's use PSY for this example.
+
 
     Western people know him as PSY but korean want to see the original name 싸이.
 
+
     Using the name translations provided by our api you can show to every user the writing they expect to see.
+
 
     Furthermore, when you search for "psy gangnam style" or "싸이 gangnam style" with our search/match api you will still be able to find the song.
 
+
     ### ARTIST RATING
+
 
     The artist rating is a score 0-100 identifying how popular is an artist in musixmatch.
 
+
     You can use this information to build charts, for suggestions, to sort search results. In the example above about U2, we use the artist rating to show the irish band before the japanese one in our serp.
 
+
     ### ARTIST MUSIC GENRE
+
 
     We provide one or more main artist genre, this information can be used to calculate similar artist, suggestions, or the filter a search by artist genre.
 
 
 
+
     ## Album
+
     Inside the album object you can get the following nice extra information:
 
-    ### ALBUM RATING
-
-    The album rating is a score 0-100 identifying how popular is an album in musixmatch.
-
-    You can use this information to sort search results, like the most popular albums of an artist.
 
     ### ALBUM RATING
 
+
     The album rating is a score 0-100 identifying how popular is an album in musixmatch.
 
+
     You can use this information to sort search results, like the most popular albums of an artist.
+
+
+    ### ALBUM RATING
+
+
+    The album rating is a score 0-100 identifying how popular is an album in musixmatch.
+
+
+    You can use this information to sort search results, like the most popular albums of an artist.
+
 
     ### ALBUM COPYRIGHT AND LABEL
 
+
     For most of our albums we can provide extra information like for example:
 
+
     Label: Universal-Island Records Ltd.
+
     Copyright: (P) 2013 Rubyworks, under license to Columbia Records, a Division of Sony Music Entertainment.
+
     ALBUM TYPE AND RELEASE DATE
+
 
     The album official release date can be used to sort an artist's albums view starting by the most recent one.
 
+
     Album can also be filtered or grouped by type: Single, Album, Compilation, Remix, Live. This can help to build an artist page with a more organized structure.
+
 
     ### ALBUM MUSIC GENRE
 
+
     For most of the albums we provide two groups of music genres. Primary and secondary. This information can be used to help user navigate albums by genre.
+
 
     An example could be:
 
+
     Primary genere: POP
+
     Secondary genre: K-POP or Mandopop
   license:
     name: MIT
-    url: 'http://opensource.org/licenses/MIT'
-  termsOfService: 'http://musixmatch.com/apiterms/'
-  title: Musixmatch
+    url: http://opensource.org/licenses/MIT
+  termsOfService: http://musixmatch.com/apiterms/
+  title: Musixmatch API
   version: 1.1.0
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/Musixmatch/profile_image?size=original'
+    url: https://twitter.com/Musixmatch/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/musixmatch/musixmatch-sdk/master/swagger/swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/musixmatch/musixmatch-sdk/master/swagger/swagger.yaml
+      version: "2.0"
   x-providerName: musixmatch.com
 externalDocs:
   description: Find out more about Musixmatch API
-  url: 'https://developer.musixmatch.com/'
+  url: https://developer.musixmatch.com/
 consumes:
   - application/json
 produces:
@@ -188,25 +269,25 @@ securityDefinitions:
 security:
   - key: []
 tags:
-  - description: ''
+  - description: ""
     name: Track
-  - description: ''
+  - description: ""
     name: Artist
-  - description: ''
+  - description: ""
     name: Album
-  - description: ''
+  - description: ""
     name: Lyrics
-  - description: ''
+  - description: ""
     name: Subtitle
-  - description: ''
+  - description: ""
     name: Snippet
 paths:
   /album.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -222,7 +303,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -231,30 +312,30 @@ paths:
                   body:
                     properties:
                       album:
-                        $ref: '#/definitions/Album'
+                        $ref: "#/definitions/Album"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Album
   /album.tracks.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -269,7 +350,7 @@ paths:
           name: album_id
           required: true
           type: string
-        - description: 'When set, filter only contents with lyrics'
+        - description: When set, filter only contents with lyrics
           in: query
           name: f_has_lyrics
           required: false
@@ -285,7 +366,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -296,34 +377,34 @@ paths:
                       track_list:
                         description: A list of tracks
                         items:
-                          $ref: '#/definitions/Track'
+                          $ref: "#/definitions/Track"
                         type: array
                     type: object
                   header:
                     properties:
                       available:
-                        description: ''
+                        description: ""
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Track
   /artist.albums.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -359,7 +440,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -372,35 +453,35 @@ paths:
                         items:
                           properties:
                             album:
-                              $ref: '#/definitions/Album'
+                              $ref: "#/definitions/Album"
                           type: object
                         type: array
                     type: object
                   header:
                     properties:
                       available:
-                        description: ''
+                        description: ""
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Album
   /artist.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -416,7 +497,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -425,30 +506,30 @@ paths:
                   body:
                     properties:
                       artist:
-                        $ref: '#/definitions/Artist'
+                        $ref: "#/definitions/Artist"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Artist
   /artist.related.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -474,7 +555,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -487,35 +568,35 @@ paths:
                         items:
                           properties:
                             artist:
-                              $ref: '#/definitions/Artist'
+                              $ref: "#/definitions/Artist"
                           type: object
                         type: array
                     type: object
                   header:
                     properties:
                       available:
-                        description: ''
+                        description: ""
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Artist
   /artist.search:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -530,7 +611,7 @@ paths:
           name: q_artist
           required: false
           type: string
-        - description: 'When set, filter by this artist id'
+        - description: When set, filter by this artist id
           in: query
           name: f_artist_id
           required: false
@@ -546,7 +627,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -559,35 +640,35 @@ paths:
                         items:
                           properties:
                             artist:
-                              $ref: '#/definitions/Artist'
+                              $ref: "#/definitions/Artist"
                           type: object
                         type: array
                     type: object
                   header:
                     properties:
                       available:
-                        description: ''
+                        description: ""
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Artist
   /chart.artists.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -614,7 +695,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -627,7 +708,7 @@ paths:
                         items:
                           properties:
                             artist:
-                              $ref: '#/definitions/Artist'
+                              $ref: "#/definitions/Artist"
                           type: object
                         type: array
                     type: object
@@ -636,25 +717,25 @@ paths:
                       available:
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Artist
   /chart.tracks.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -680,13 +761,13 @@ paths:
           name: country
           required: false
           type: string
-        - description: 'When set, filter only contents with lyrics'
+        - description: When set, filter only contents with lyrics
           in: query
           name: f_has_lyrics
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -699,7 +780,7 @@ paths:
                         items:
                           properties:
                             track:
-                              $ref: '#/definitions/Track'
+                              $ref: "#/definitions/Track"
                           type: object
                         type: array
                     type: object
@@ -708,25 +789,25 @@ paths:
                       available:
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Track
   /matcher.lyrics.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -747,7 +828,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -756,30 +837,30 @@ paths:
                   body:
                     properties:
                       lyrics:
-                        $ref: '#/definitions/Lyrics'
+                        $ref: "#/definitions/Lyrics"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Lyrics
   /matcher.subtitle.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -810,7 +891,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -819,30 +900,30 @@ paths:
                   body:
                     properties:
                       subtitle:
-                        $ref: '#/definitions/Subtitle'
+                        $ref: "#/definitions/Subtitle"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Subtitle
   /matcher.track.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -862,18 +943,18 @@ paths:
           name: q_track
           required: false
           type: string
-        - description: 'When set, filter only contents with lyrics'
+        - description: When set, filter only contents with lyrics
           in: query
           name: f_has_lyrics
           required: false
           type: number
-        - description: 'When set, filter only contents with subtitles'
+        - description: When set, filter only contents with subtitles
           in: query
           name: f_has_subtitle
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -882,30 +963,30 @@ paths:
                   body:
                     properties:
                       track:
-                        $ref: '#/definitions/Track'
+                        $ref: "#/definitions/Track"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Track
   /track.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -921,7 +1002,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -930,30 +1011,30 @@ paths:
                   body:
                     properties:
                       track:
-                        $ref: '#/definitions/Track'
+                        $ref: "#/definitions/Track"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Track
   /track.lyrics.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -969,7 +1050,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -978,30 +1059,30 @@ paths:
                   body:
                     properties:
                       lyrics:
-                        $ref: '#/definitions/Lyrics'
+                        $ref: "#/definitions/Lyrics"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Lyrics
   /track.search:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -1026,22 +1107,22 @@ paths:
           name: q_lyrics
           required: false
           type: string
-        - description: 'When set, filter by this artist id'
+        - description: When set, filter by this artist id
           in: query
           name: f_artist_id
           required: false
           type: number
-        - description: 'When set, filter by this music category id'
+        - description: When set, filter by this music category id
           in: query
           name: f_music_genre_id
           required: false
           type: number
-        - description: 'Filter by the lyrics language (en,it,..)'
+        - description: Filter by the lyrics language (en,it,..)
           in: query
           name: f_lyrics_language
           required: false
           type: number
-        - description: 'When set, filter only contents with lyrics'
+        - description: When set, filter only contents with lyrics
           in: query
           name: f_has_lyrics
           required: false
@@ -1057,7 +1138,8 @@ paths:
           required: false
           type: string
         - default: 1
-          description: Search only a part of the given query string.Allowed range is (0.1 – 0.9)
+          description: Search only a part of the given query string.Allowed range is (0.1
+            – 0.9)
           in: query
           name: quorum_factor
           required: false
@@ -1073,7 +1155,7 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -1086,7 +1168,7 @@ paths:
                         items:
                           properties:
                             track:
-                              $ref: '#/definitions/Track'
+                              $ref: "#/definitions/Track"
                           type: object
                         type: array
                     type: object
@@ -1095,25 +1177,25 @@ paths:
                       available:
                         type: number
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Track
   /track.snippet.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -1129,7 +1211,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -1138,30 +1220,30 @@ paths:
                   body:
                     properties:
                       snippet:
-                        $ref: '#/definitions/Snippet'
+                        $ref: "#/definitions/Snippet"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Snippet
   /track.subtitle.get:
     get:
-      description: ''
+      description: ""
       parameters:
         - default: json
-          description: 'output format: json, jsonp, xml.'
+          description: "output format: json, jsonp, xml."
           in: query
           name: format
           required: false
@@ -1177,7 +1259,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The request was successful.
           schema:
             properties:
@@ -1186,22 +1268,22 @@ paths:
                   body:
                     properties:
                       subtitle:
-                        $ref: '#/definitions/Subtitle'
+                        $ref: "#/definitions/Subtitle"
                     type: object
                   header:
                     properties:
                       execute_time:
-                        description: ''
+                        description: ""
                         type: number
                       status_code:
-                        description: ''
+                        description: ""
                         type: number
                     type: object
                 type: object
             type: object
       security:
         - key: []
-      summary: ''
+      summary: ""
       tags:
         - Subtitle
 definitions:
@@ -1209,58 +1291,58 @@ definitions:
     description: a album of songs in the Musixmatch database.
     properties:
       album_copyright:
-        description: ''
+        description: ""
         type: string
       album_coverart_100x100:
-        description: ''
+        description: ""
         type: string
       album_coverart_350x350:
-        description: ''
+        description: ""
         type: string
       album_coverart_500x500:
-        description: ''
+        description: ""
         type: string
       album_coverart_800x800:
-        description: ''
+        description: ""
         type: string
       album_edit_url:
-        description: ''
+        description: ""
         type: string
       album_id:
-        description: ''
+        description: ""
         type: number
       album_label:
-        description: ''
+        description: ""
         type: string
       album_mbid:
-        description: ''
+        description: ""
         type: string
       album_name:
-        description: ''
+        description: ""
         type: string
       album_pline:
-        description: ''
+        description: ""
         type: string
       album_rating:
-        description: ''
+        description: ""
         type: number
       album_release_date:
-        description: ''
+        description: ""
         type: string
       album_release_type:
-        description: ''
+        description: ""
         type: string
       album_track_count:
-        description: ''
+        description: ""
         type: number
       album_vanity_id:
-        description: ''
+        description: ""
         type: string
       artist_id:
-        description: ''
+        description: ""
         type: number
       artist_name:
-        description: ''
+        description: ""
         type: string
       primary_genres:
         properties:
@@ -1270,37 +1352,37 @@ definitions:
                 music_genre:
                   properties:
                     music_genre_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_name:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_name_extended:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_parent_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_vanity:
-                      description: ''
+                      description: ""
                       type: string
                   type: object
               type: object
             type: array
         type: object
       restricted:
-        description: ''
+        description: ""
         type: number
       secondary_genres:
         properties:
           music_genre_list:
             items:
-              description: ''
+              description: ""
               type: string
             type: array
         type: object
       updated_time:
-        description: ''
+        description: ""
         type: string
     title: a Album object
   Artist:
@@ -1310,35 +1392,35 @@ definitions:
         items:
           properties:
             artist_alias:
-              description: ''
+              description: ""
               type: string
           type: object
         type: array
       artist_comment:
-        description: ''
+        description: ""
         type: string
       artist_country:
-        description: ''
+        description: ""
         type: string
       artist_credits:
         properties:
           artist_list:
             items:
-              description: ''
+              description: ""
               type: string
             type: array
         type: object
       artist_edit_url:
-        description: ''
+        description: ""
         type: string
       artist_id:
-        description: ''
+        description: ""
         type: number
       artist_mbid:
-        description: ''
+        description: ""
         type: string
       artist_name:
-        description: ''
+        description: ""
         type: string
       artist_name_translation_list:
         items:
@@ -1346,28 +1428,28 @@ definitions:
             artist_name_translation:
               properties:
                 language:
-                  description: ''
+                  description: ""
                   type: string
                 translation:
-                  description: ''
+                  description: ""
                   type: string
               type: object
           type: object
         type: array
       artist_rating:
-        description: ''
+        description: ""
         type: number
       artist_share_url:
-        description: ''
+        description: ""
         type: string
       artist_twitter_url:
-        description: ''
+        description: ""
         type: string
       artist_vanity_id:
-        description: ''
+        description: ""
         type: string
       managed:
-        description: ''
+        description: ""
         type: number
       primary_genres:
         properties:
@@ -1377,98 +1459,98 @@ definitions:
                 music_genre:
                   properties:
                     music_genre_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_name:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_name_extended:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_parent_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_vanity:
-                      description: ''
+                      description: ""
                       type: string
                   type: object
               type: object
             type: array
         type: object
       restricted:
-        description: ''
+        description: ""
         type: number
       secondary_genres:
         properties:
           music_genre_list:
             items:
-              description: ''
+              description: ""
               type: string
             type: array
         type: object
       updated_time:
-        description: ''
+        description: ""
         type: string
     title: a Artist object
   Lyrics:
     description: a Lyrics in the Musixmatch database.
     properties:
       action_requested:
-        description: ''
+        description: ""
         type: string
       can_edit:
-        description: ''
+        description: ""
         type: number
       explicit:
-        description: ''
+        description: ""
         type: number
       html_tracking_url:
-        description: ''
+        description: ""
         type: string
       instrumental:
-        description: ''
+        description: ""
         type: number
       locked:
-        description: ''
+        description: ""
         type: number
       lyrics_body:
-        description: ''
+        description: ""
         type: string
       lyrics_copyright:
-        description: ''
+        description: ""
         type: string
       lyrics_id:
-        description: ''
+        description: ""
         type: number
       lyrics_language:
-        description: ''
+        description: ""
         type: string
       lyrics_language_description:
-        description: ''
+        description: ""
         type: string
       pixel_tracking_url:
-        description: ''
+        description: ""
         type: string
       publisher_list:
         items:
-          description: ''
+          description: ""
           type: string
         type: array
       restricted:
-        description: ''
+        description: ""
         type: number
       script_tracking_url:
-        description: ''
+        description: ""
         type: string
       updated_time:
-        description: ''
+        description: ""
         type: string
       verified:
-        description: ''
+        description: ""
         type: number
       writer_list:
         items:
-          description: ''
+          description: ""
           type: string
         type: array
     title: a Lyrics object
@@ -1477,31 +1559,31 @@ definitions:
     description: Snippet of lyrics text in the Musixmatch database.
     properties:
       html_tracking_url:
-        description: ''
+        description: ""
         type: string
       instrumental:
-        description: ''
+        description: ""
         type: number
       pixel_tracking_url:
-        description: ''
+        description: ""
         type: string
       restricted:
-        description: ''
+        description: ""
         type: number
       script_tracking_url:
-        description: ''
+        description: ""
         type: string
       snippet_body:
-        description: ''
+        description: ""
         type: string
       snippet_id:
-        description: ''
+        description: ""
         type: number
       snippet_language:
-        description: ''
+        description: ""
         type: string
       updated_time:
-        description: ''
+        description: ""
         type: string
     title: a Snippet object
     type: object
@@ -1509,46 +1591,46 @@ definitions:
     description: a synchronized lyrics subtitle in the Musixmatch database.
     properties:
       html_tracking_url:
-        description: ''
+        description: ""
         type: string
       lyrics_copyright:
-        description: ''
+        description: ""
         type: string
       pixel_tracking_url:
-        description: ''
+        description: ""
         type: string
       publisher_list:
         items:
-          description: ''
+          description: ""
           type: string
         type: array
       restricted:
-        description: ''
+        description: ""
         type: number
       script_tracking_url:
-        description: ''
+        description: ""
         type: string
       subtitle_body:
-        description: ''
+        description: ""
         type: string
       subtitle_id:
-        description: ''
+        description: ""
         type: number
       subtitle_language:
-        description: ''
+        description: ""
         type: string
       subtitle_language_description:
-        description: ''
+        description: ""
         type: string
       subtitle_length:
-        description: ''
+        description: ""
         type: number
       updated_time:
-        description: ''
+        description: ""
         type: string
       writer_list:
         items:
-          description: ''
+          description: ""
           type: string
         type: array
     title: a Subtitle object
@@ -1556,58 +1638,58 @@ definitions:
     description: a song in the Musixmatch database
     properties:
       album_coverart_100x100:
-        description: ''
+        description: ""
         type: string
       album_coverart_350x350:
-        description: ''
+        description: ""
         type: string
       album_coverart_500x500:
-        description: ''
+        description: ""
         type: string
       album_coverart_800x800:
-        description: ''
+        description: ""
         type: string
       album_id:
-        description: ''
+        description: ""
         type: number
       album_name:
-        description: ''
+        description: ""
         type: string
       artist_id:
-        description: ''
+        description: ""
         type: number
       artist_mbid:
-        description: ''
+        description: ""
         type: string
       artist_name:
-        description: ''
+        description: ""
         type: string
       commontrack_id:
-        description: ''
+        description: ""
         type: number
       commontrack_vanity_id:
-        description: ''
+        description: ""
         type: string
       explicit:
-        description: ''
+        description: ""
         type: number
       first_release_date:
-        description: ''
+        description: ""
         type: string
       has_lyrics:
-        description: ''
+        description: ""
         type: number
       has_subtitles:
-        description: ''
+        description: ""
         type: number
       instrumental:
-        description: ''
+        description: ""
         type: number
       lyrics_id:
-        description: ''
+        description: ""
         type: number
       num_favourite:
-        description: ''
+        description: ""
         type: number
       primary_genres:
         properties:
@@ -1617,26 +1699,26 @@ definitions:
                 music_genre:
                   properties:
                     music_genre_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_name:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_name_extended:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_parent_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_vanity:
-                      description: ''
+                      description: ""
                       type: string
                   type: object
               type: object
             type: array
         type: object
       restricted:
-        description: ''
+        description: ""
         type: number
       secondary_genres:
         properties:
@@ -1646,67 +1728,67 @@ definitions:
                 music_genre:
                   properties:
                     music_genre_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_name:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_name_extended:
-                      description: ''
+                      description: ""
                       type: string
                     music_genre_parent_id:
-                      description: ''
+                      description: ""
                       type: number
                     music_genre_vanity:
-                      description: ''
+                      description: ""
                       type: string
                   type: object
               type: object
             type: array
         type: object
       subtitle_id:
-        description: ''
+        description: ""
         type: number
       track_edit_url:
-        description: ''
+        description: ""
         type: string
       track_id:
-        description: ''
+        description: ""
         type: number
       track_isrc:
-        description: ''
+        description: ""
         type: string
       track_length:
-        description: ''
+        description: ""
         type: number
       track_mbid:
-        description: ''
+        description: ""
         type: string
       track_name:
-        description: ''
+        description: ""
         type: string
       track_name_translation_list:
         items:
-          description: ''
+          description: ""
           type: string
         type: array
       track_rating:
-        description: ''
+        description: ""
         type: number
       track_share_url:
-        description: ''
+        description: ""
         type: string
       track_soundcloud_id:
-        description: ''
+        description: ""
         type: number
       track_spotify_id:
-        description: ''
+        description: ""
         type: string
       track_xboxmusic_id:
-        description: ''
+        description: ""
         type: string
       updated_time:
-        description: ''
+        description: ""
         type: string
     title: a Track object
     type: object

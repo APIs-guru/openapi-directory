@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -9,19 +9,19 @@ info:
     email: Joachim.Schirrmacher@deutschebahn.com
     name: DB Systel GmbH
   description: This REST-API enables you to query station and stop infos
-  termsOfService: 'https://developer.deutschebahn.com/store/'
+  termsOfService: https://developer.deutschebahn.com/store/
   title: Betriebsstellen
   version: v1
   x-apisguru-categories:
     - transport
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png
   x-origin:
     - format: swagger
-      url: 'https://developer.deutschebahn.com/store/api-docs/DBOpenData/Betriebsstellen/v1'
-      version: '2.0'
+      url: https://developer.deutschebahn.com/store/api-docs/DBOpenData/Betriebsstellen/v1
+      version: "2.0"
   x-providerName: deutschebahn.com
   x-serviceName: betriebsstellen
 securityDefinitions: {}
@@ -40,22 +40,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: List was generated
           schema:
-            $ref: '#/definitions/StationList'
-        '404':
+            $ref: "#/definitions/StationList"
+        "404":
           description: No stations or stops could be found matching the given name
           schema:
-            $ref: '#/definitions/Error'
-        '416':
+            $ref: "#/definitions/Error"
+        "416":
           description: Filtering required - specify a name fragment of at least 3 characters
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get information of stations matching a given text
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/betriebsstellen/{abbrev}':
+  "/betriebsstellen/{abbrev}":
     get:
       description: Get information about a specific station or stop by abbrevation
       parameters:
@@ -65,14 +65,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Entry found
           schema:
-            $ref: '#/definitions/Station'
-        '404':
+            $ref: "#/definitions/Station"
+        "404":
           description: Entry not found
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get information about a specific station or stop by abbrevation
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
@@ -140,5 +140,5 @@ definitions:
     type: object
   StationList:
     items:
-      $ref: '#/definitions/Station'
+      $ref: "#/definitions/Station"
     type: array

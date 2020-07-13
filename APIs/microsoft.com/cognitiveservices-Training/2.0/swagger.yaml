@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: southcentralus.api.cognitive.microsoft.com
@@ -7,15 +7,15 @@ info:
   contact:
     x-twitter: microsoft
   title: TrainingApi
-  version: '2.0'
+  version: "2.0"
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/microsoft/profile_image?size=original'
+    url: https://twitter.com/microsoft/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v2.0/Training.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v2.0/Training.json
+      version: "2.0"
   x-preferred: false
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-Training
@@ -35,18 +35,18 @@ paths:
       consumes: []
       operationId: GetDomains
       parameters:
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Domain'
+              $ref: "#/definitions/Domain"
             type: array
             x-nullable: true
       summary: Get a list of the available domains
@@ -54,38 +54,8 @@ paths:
         - DomainsApi
       x-ms-examples:
         Successful GetDomains request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-          responses:
-            '200':
-              body:
-                - exportable: false
-                  id: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  name: General
-                - exportable: false
-                  id: c151d5b5-dd07-472a-acc8-15d29dea8518
-                  name: Food
-                - exportable: false
-                  id: ca455789-012d-4b50-9fec-5bb63841c793
-                  name: Landmarks
-                - exportable: false
-                  id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                  name: Retail
-                - exportable: false
-                  id: 45badf75-3591-4f26-a705-45678d3e9f5f
-                  name: Adult
-                - exportable: true
-                  id: 0732100f-1a38-4e49-a514-c9b44c697ab5
-                  name: General (compact)
-                - exportable: true
-                  id: b5cfd229-2ac7-4b2b-8d0a-2b0661344894
-                  name: Landmarks (compact)
-                - exportable: true
-                  id: 6b4faeda-8396-481b-9f8b-177b9fa3097f
-                  name: Retail (compact)
-              headers: {}
-  '/domains/{domainId}':
+          $ref: ./examples/GetDomains.json
+  "/domains/{domainId}":
     get:
       consumes: []
       operationId: GetDomain
@@ -97,50 +67,40 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Domain'
+            $ref: "#/definitions/Domain"
       summary: Get information about a specific domain
       tags:
         - DomainsApi
       x-ms-examples:
         Successful GetDomain request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            domainId: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-          responses:
-            '200':
-              body:
-                exportable: false
-                id: b30a91ae-e3c1-4f73-a81e-c270bff27c39
-                name: Retail
-              headers: {}
+          $ref: ./examples/GetDomain.json
   /projects:
     get:
       consumes: []
       operationId: GetProjects
       parameters:
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Project'
+              $ref: "#/definitions/Project"
             type: array
             x-nullable: true
       summary: Get your projects
@@ -148,21 +108,7 @@ paths:
         - ProjectApi
       x-ms-examples:
         Successful GetProjects request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-          responses:
-            '200':
-              body:
-                - created: '2017-12-18T05:43:18.08Z'
-                  description: ''
-                  id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                  lastModified: '2017-12-18T05:43:18.0962423Z'
-                  name: My New Project
-                  settings:
-                    domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  thumbnailUri: null
-              headers: {}
+          $ref: ./examples/GetProjects.json
     post:
       consumes: []
       operationId: CreateProject
@@ -186,41 +132,24 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
       summary: Create a project
       tags:
         - ProjectApi
       x-ms-examples:
         Successful CreateProject request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            description: A test project
-            domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-            name: My New Project
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18.08Z'
-                description: A test project
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:18.0962423Z'
-                name: My New Project
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: null
-              headers: {}
-  '/projects/{projectId}':
+          $ref: ./examples/CreateProject.json
+  "/projects/{projectId}":
     delete:
       consumes: []
       operationId: DeleteProject
@@ -232,24 +161,17 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete a specific project
       tags:
         - ProjectApi
       x-ms-examples:
         Successful DeleteProject request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteProject.json
     get:
       consumes: []
       operationId: GetProject
@@ -261,38 +183,23 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
       summary: Get a specific project
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetProject request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18.08Z'
-                description: A test project
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:18.0962423Z'
-                name: My New Project
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: null
-              headers: {}
+          $ref: ./examples/GetProject.json
     patch:
       consumes:
         - application/json
@@ -314,43 +221,25 @@ paths:
           name: updatedProject
           required: true
           schema:
-            $ref: '#/definitions/Project'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/Project"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
       summary: Update a specific project
       tags:
         - ProjectApi
       x-ms-examples:
         Successful UpdateProject request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            updatedProject:
-              description: A new Description
-              name: New Project Name
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T05:43:18.08Z'
-                description: A new Description
-                id: bc3f7dad-5544-468c-8573-3ef04d55463e
-                lastModified: '2017-12-18T05:43:18.0962423Z'
-                name: New Project Name
-                settings:
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                thumbnailUri: null
-              headers: {}
-  '/projects/{projectId}/images':
+          $ref: ./examples/UpdateProject.json
+  "/projects/{projectId}/images":
     delete:
       consumes: []
       operationId: DeleteImages
@@ -372,32 +261,26 @@ paths:
           required: true
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete images from the set of training images
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImages request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteImages.json
     post:
       consumes:
         - multipart/form-data
         - application/octet-stream
-      description: "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files"
+      description: "This API accepts body content as multipart/form-data and
+        application/octet-stream. When using multipart\r
+
+        multiple image files can be sent at once, with a maximum of 64
+        files"
       operationId: CreateImagesFromData
       parameters:
         - description: The project id
@@ -421,60 +304,24 @@ paths:
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
       summary: Add the provided images to the set of training images
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromData request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageData: multipart data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds:
-              - b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10.65Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      imageUri: '{Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09.6105895Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                  - image:
-                      created: '2017-12-19T15:56:10.57Z'
-                      height: 1531
-                      id: f1855a92-b873-47e7-b513-f07a667ceda1
-                      imageUri: '{Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09.5168568Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 900
-                    sourceUrl: '"hemlock_6.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/files':
+          $ref: ./examples/CreateImagesFromData.json
+  "/projects/{projectId}/images/files":
     post:
       consumes:
         - application/json
@@ -482,7 +329,8 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.'
+      description: This API accepts a batch of files, and optionally tags, to create
+        images. There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromFiles
       parameters:
         - description: The project id
@@ -492,61 +340,37 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: The batch of image files to add. Limited to 64 images and 20 tags per batch
+        - description: The batch of image files to add. Limited to 64 images and 20 tags
+            per batch
           in: body
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageFileCreateBatch'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/ImageFileCreateBatch"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
       summary: Add the provided batch of images to the set of training images
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromFiles request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - contents: '{image contents}'
-                  name: hemlock_10.jpg
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10.65Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      imageUri: '{Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09.6105895Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/id':
+          $ref: ./examples/CreateImagesFromFiles.json
+  "/projects/{projectId}/images/id":
     get:
       consumes: []
-      description: "This API will return a set of Images for the specified tags and optionally iteration. If no iteration is specified the\r\ncurrent workspace is used."
+      description: "This API will return a set of Images for the specified tags and
+        optionally iteration. If no iteration is specified the\r
+
+        current workspace is used."
       operationId: GetImagesByIds
       parameters:
         - description: The project id
@@ -573,18 +397,18 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
             x-nullable: true
       summary: Get images by id for a given project iteration
@@ -592,16 +416,8 @@ paths:
         - ImageApi
       x-ms-examples:
         Successful GetImagesByIds request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/predictions':
+          $ref: ./examples/GetImagesByIds.json
+  "/projects/{projectId}/images/predictions":
     post:
       consumes:
         - application/json
@@ -609,7 +425,8 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.
+      description: This API creates a batch of images from predicted images specified.
+        There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromPredictions
       parameters:
         - description: The project id
@@ -624,52 +441,25 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageIdCreateBatch'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/ImageIdCreateBatch"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
       summary: Add the specified predicted images to the set of training images
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromPredictions request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10.65Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      imageUri: '{Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09.6105895Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '"hemlock_10.jpg"'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/images/regions':
+          $ref: ./examples/CreateImagesFromPredictions.json
+  "/projects/{projectId}/images/regions":
     delete:
       consumes: []
       operationId: DeleteImageRegions
@@ -691,26 +481,17 @@ paths:
           required: true
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete a set of image regions
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImageRegions request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            regionIds:
-              - ''
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteImageRegions.json
     post:
       consumes:
         - application/json
@@ -718,7 +499,10 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch."
+      description: "This API accepts a batch of image regions, and optionally tags, to
+        update existing images with region information.\r
+
+        There is a limit of 64 entries in the batch."
       operationId: CreateImageRegions
       parameters:
         - description: The project id
@@ -728,51 +512,44 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: Batch of image regions which include a tag and bounding box. Limited to 64
+        - description: Batch of image regions which include a tag and bounding box.
+            Limited to 64
           in: body
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageRegionCreateBatch'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/ImageRegionCreateBatch"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageRegionCreateSummary'
+            $ref: "#/definitions/ImageRegionCreateSummary"
       summary: Create a set of image regions
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImageRegions request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            batch:
-              regions:
-                - height: 0.25
-                  imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                  left: 0.25
-                  tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                  top: 0.25
-                  width: 0.25
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created: []
-                duplicated: []
-                exceeded: []
-              headers: {}
-  '/projects/{projectId}/images/tagged':
+          $ref: ./examples/CreateImageRegions.json
+  "/projects/{projectId}/images/tagged":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch.\r
+
+        The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetTaggedImages
       parameters:
         - description: The project id
@@ -790,7 +567,8 @@ paths:
           type: string
           x-nullable: true
         - collectionFormat: csv
-          description: A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20
+          description: A list of tags ids to filter the images. Defaults to all tagged
+            images when null. Limited to 20
           in: query
           items:
             type: string
@@ -809,31 +587,32 @@ paths:
           type: string
           x-nullable: false
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256'
+          description: Maximum number of images to return. Defaults to 50, limited to 256
           format: int32
           in: query
           name: take
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0
           format: int32
           in: query
           name: skip
           required: false
           type: integer
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
             x-nullable: true
       summary: Get tagged images for a given project iteration
@@ -841,19 +620,15 @@ paths:
         - ImageApi
       x-ms-examples:
         Successful GetTaggedImages request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/tagged/count':
+          $ref: ./examples/GetTaggedImages.json
+  "/projects/{projectId}/images/tagged/count":
     get:
       consumes: []
-      description: "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetTaggedImageCount
       parameters:
         - description: The project id
@@ -871,7 +646,8 @@ paths:
           type: string
           x-nullable: true
         - collectionFormat: csv
-          description: A list of tags ids to filter the images to count. Defaults to all tags when null.
+          description: A list of tags ids to filter the images to count. Defaults to all
+            tags when null.
           in: query
           items:
             type: string
@@ -880,34 +656,26 @@ paths:
           required: false
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
             type: integer
             x-nullable: false
-      summary: 'Gets the number of images tagged with the provided {tagIds}'
+      summary: Gets the number of images tagged with the provided {tagIds}
       tags:
         - ImageApi
       x-ms-examples:
         Successful GetTaggedImageCount request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: '10'
-              headers: {}
-  '/projects/{projectId}/images/tags':
+          $ref: ./examples/GetTaggedImageCount.json
+  "/projects/{projectId}/images/tags":
     delete:
       consumes: []
       operationId: DeleteImageTags
@@ -939,30 +707,17 @@ paths:
           required: true
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Remove a set of tags from a set of images
       tags:
         - ImageApi
       x-ms-examples:
         Successful DeleteImageTags request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteImageTags.json
     post:
       consumes:
         - application/json
@@ -984,44 +739,32 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageTagCreateBatch'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/ImageTagCreateBatch"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageTagCreateSummary'
+            $ref: "#/definitions/ImageTagCreateSummary"
       summary: Associate a set of images with a set of tags
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImageTags request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            batch:
-              tags:
-                - imageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                  tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                created:
-                  - imageId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                duplicated: null
-                exceeded: null
-              headers: {}
-  '/projects/{projectId}/images/untagged':
+          $ref: ./examples/CreateImageTags.json
+  "/projects/{projectId}/images/untagged":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch."
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch."
       operationId: GetUntaggedImages
       parameters:
         - description: The project id
@@ -1048,31 +791,32 @@ paths:
           type: string
           x-nullable: false
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256'
+          description: Maximum number of images to return. Defaults to 50, limited to 256
           format: int32
           in: query
           name: take
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0
           format: int32
           in: query
           name: skip
           required: false
           type: integer
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
             x-nullable: true
       summary: Get untagged images for a given project iteration
@@ -1080,19 +824,14 @@ paths:
         - ImageApi
       x-ms-examples:
         Successful GetUntaggedImages request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: []
-              headers: {}
-  '/projects/{projectId}/images/untagged/count':
+          $ref: ./examples/GetUntaggedImages.json
+  "/projects/{projectId}/images/untagged/count":
     get:
       consumes: []
-      description: "This API returns the images which have no tags for a given project and optionally an iteration. If no iteration is specified the\r\ncurrent workspace is used."
+      description: "This API returns the images which have no tags for a given project
+        and optionally an iteration. If no iteration is specified the\r
+
+        current workspace is used."
       operationId: GetUntaggedImageCount
       parameters:
         - description: The project id
@@ -1109,14 +848,14 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1127,16 +866,8 @@ paths:
         - ImageApi
       x-ms-examples:
         Successful GetUntaggedImageCount request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body: '10'
-              headers: {}
-  '/projects/{projectId}/images/urls':
+          $ref: ./examples/GetUntaggedImageCount.json
+  "/projects/{projectId}/images/urls":
     post:
       consumes:
         - application/json
@@ -1144,7 +875,8 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.'
+      description: This API accepts a batch of urls, and optionally tags, to create
+        images. There is a limit of 64 images and 20 tags.
       operationId: CreateImagesFromUrls
       parameters:
         - description: The project id
@@ -1159,52 +891,25 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/ImageUrlCreateBatch'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/ImageUrlCreateBatch"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageCreateSummary'
+            $ref: "#/definitions/ImageCreateSummary"
       summary: Add the provided images urls to the set of training images
       tags:
         - ImageApi
       x-ms-examples:
         Successful CreateImagesFromUrls request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            batch:
-              images:
-                - url: '{url to image}'
-              tagIds:
-                - b607964f-7bd6-4a3b-a869-6791fb6aab87
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            tagIds: b607964f-7bd6-4a3b-a869-6791fb6aab87
-          responses:
-            '200':
-              body:
-                images:
-                  - image:
-                      created: '2017-12-19T15:56:10.65Z'
-                      height: 900
-                      id: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                      imageUri: '{Image Uri}'
-                      tags:
-                        - created: '2017-12-19T15:56:09.6105895Z'
-                          tagId: b607964f-7bd6-4a3b-a869-6791fb6aab87
-                      thumbnailUri: '{Thumbnail Uri}'
-                      width: 1095
-                    sourceUrl: '{url to image}'
-                    status: OK
-                isBatchSuccessful: true
-              headers: {}
-  '/projects/{projectId}/iterations':
+          $ref: ./examples/CreateImagesFromUrls.json
+  "/projects/{projectId}/iterations":
     get:
       consumes: []
       operationId: GetIterations
@@ -1216,18 +921,18 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Iteration'
+              $ref: "#/definitions/Iteration"
             type: array
             x-nullable: true
       summary: Get iterations for the project
@@ -1235,44 +940,8 @@ paths:
         - ProjectApi
       x-ms-examples:
         Successful GetIterations request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                - created: '2017-12-18T22:40:29.7304213Z'
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  exportable: false
-                  id: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                  isDefault: true
-                  lastModified: '2017-12-18T22:40:41.3173903Z'
-                  name: Iteration 1
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  status: Completed
-                  trainedAt: '2017-12-18T22:40:41.0058589Z'
-                - created: '2017-12-18T22:40:36.9066667Z'
-                  domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                  exportable: false
-                  id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                  isDefault: false
-                  lastModified: '2017-12-19T15:47:02.9511889Z'
-                  name: Iteration 2
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  status: Completed
-                  trainedAt: '2017-12-19T15:47:02.9511889Z'
-                - created: '2017-12-19T15:46:59.2533333Z'
-                  domainId: null
-                  exportable: false
-                  id: 3adaf7b2-18fc-4376-9da4-b5ea160a7cf5
-                  isDefault: false
-                  lastModified: '2017-12-19T15:46:59.2699369Z'
-                  name: Iteration 3
-                  projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                  status: New
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}':
+          $ref: ./examples/GetIterations.json
+  "/projects/{projectId}/iterations/{iterationId}":
     delete:
       consumes: []
       operationId: DeleteIteration
@@ -1291,25 +960,17 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete a specific iteration of a project
       tags:
         - ProjectApi
       x-ms-examples:
         Successful DeleteIteration request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteIteration.json
     get:
       consumes: []
       operationId: GetIteration
@@ -1328,41 +989,23 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
       summary: Get a specific iteration
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetIteration request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36.9066667Z'
-                domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                exportable: false
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                isDefault: false
-                lastModified: '2017-12-19T15:47:02.9511889Z'
-                name: Iteration 2
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                status: Completed
-                trainedAt: '2017-12-19T15:47:02.9511889Z'
-              headers: {}
+          $ref: ./examples/GetIteration.json
     patch:
       consumes:
         - application/json
@@ -1391,45 +1034,25 @@ paths:
           name: updatedIteration
           required: true
           schema:
-            $ref: '#/definitions/Iteration'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/Iteration"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
       summary: Update a specific iteration
       tags:
         - ProjectApi
       x-ms-examples:
         Successful UpdateIteration request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            updatedIteration:
-              name: Best Iteration
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36.9066667Z'
-                domainId: ee85a74c-405e-4adc-bb47-ffa8ca0c9f31
-                exportable: false
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                isDefault: false
-                lastModified: '2017-12-19T15:53:07.8782881Z'
-                name: Best Iteration
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                status: Completed
-                trainedAt: '2017-12-19T15:47:02.9511889Z'
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/export':
+          $ref: ./examples/UpdateIteration.json
+  "/projects/{projectId}/iterations/{iterationId}/export":
     get:
       consumes: []
       operationId: GetExports
@@ -1448,18 +1071,18 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Export'
+              $ref: "#/definitions/Export"
             type: array
             x-nullable: true
       summary: Get the list of exports for a specific iteration
@@ -1467,18 +1090,7 @@ paths:
         - ProjectApi
       x-ms-examples:
         Successful GetExports request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                - downloadUri: '{Download URI'
-                  platform: TensorFlow
-                  status: Done
-              headers: {}
+          $ref: ./examples/GetExports.json
     post:
       consumes: []
       operationId: ExportIteration
@@ -1503,42 +1115,30 @@ paths:
           required: true
           type: string
           x-nullable: true
-        - description: 'The flavor of the target platform (Windows, Linux, ARM, or GPU)'
+        - description: The flavor of the target platform (Windows, Linux, ARM, or GPU)
           in: query
           name: flavor
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Export'
+            $ref: "#/definitions/Export"
       summary: Export a trained iteration
       tags:
         - ProjectApi
       x-ms-examples:
         Successful ExportIteration request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-            platform: tensorflow
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                downloadUri: null
-                platform: TensorFlow
-                status: Exporting
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance':
+          $ref: ./examples/ExportIteration.json
+  "/projects/{projectId}/iterations/{iterationId}/performance":
     get:
       consumes: []
       operationId: GetIterationPerformance
@@ -1563,59 +1163,44 @@ paths:
           name: threshold
           required: false
           type: number
-        - description: 'If applicable, the bounding box overlap threshold used to determine true predictions'
+        - description: If applicable, the bounding box overlap threshold used to determine
+            true predictions
           format: float
           in: query
           name: overlapThreshold
           required: false
           type: number
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/IterationPerformance'
+            $ref: "#/definitions/IterationPerformance"
       summary: Get detailed performance information about an iteration
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetIterationPerformance request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            threshold: 0.9
-          responses:
-            '200':
-              body:
-                perTagPerformance:
-                  - id: e31ff107-5505-4753-be42-b369b21b026c
-                    name: Hemlock
-                    precision: 1
-                    precisionStdDeviation: 0
-                    recall: 1
-                    recallStdDeviation: 0
-                  - id: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    name: Japanese Cherry
-                    precision: 1
-                    precisionStdDeviation: 0
-                    recall: 1
-                    recallStdDeviation: 0
-                precision: 1
-                precisionStdDeviation: 0
-                recall: 1
-                recallStdDeviation: 0
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance/images':
+          $ref: ./examples/GetIterationPerformance.json
+  "/projects/{projectId}/iterations/{iterationId}/performance/images":
     get:
       consumes: []
-      description: "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "This API supports batching and range selection. By default it will
+        only return first 50 images matching images.\r
+
+        Use the {take} and {skip} parameters to control how many images
+        to return in a given batch.\r
+
+        The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetImagePerformances
       parameters:
         - description: The project id
@@ -1633,7 +1218,8 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20
+          description: A list of tags ids to filter the images. Defaults to all tagged
+            images when null. Limited to 20
           in: query
           items:
             type: string
@@ -1652,31 +1238,32 @@ paths:
           type: string
           x-nullable: false
         - default: 50
-          description: 'Maximum number of images to return. Defaults to 50, limited to 256'
+          description: Maximum number of images to return. Defaults to 50, limited to 256
           format: int32
           in: query
           name: take
           required: false
           type: integer
         - default: 0
-          description: Number of images to skip before beginning the image batch. Defaults to 0
+          description: Number of images to skip before beginning the image batch. Defaults
+            to 0
           format: int32
           in: query
           name: skip
           required: false
           type: integer
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ImagePerformance'
+              $ref: "#/definitions/ImagePerformance"
             type: array
             x-nullable: true
       summary: Get image with its prediction for a given project iteration
@@ -1684,39 +1271,15 @@ paths:
         - ProjectApi
       x-ms-examples:
         Successful GetImagePerformances request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-            orderBy: Newest
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagIds:
-              - ''
-          responses:
-            '200':
-              body:
-                - created: '2018-01-31T20:18:26.5806336Z'
-                  height: 1600
-                  id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
-                  imageUri: <image uri>
-                  predictions:
-                    - boundingBox:
-                        height: 0.25
-                        left: 0.25
-                        top: 0.25
-                        width: 0.25
-                      probability: 1
-                      tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                      tagName: Tag 1
-                  regions: []
-                  tags: []
-                  thumbnailUri: <thumbnail uri>
-                  width: 600
-              headers: {}
-  '/projects/{projectId}/iterations/{iterationId}/performance/images/count':
+          $ref: ./examples/GetImagePerformances.json
+  "/projects/{projectId}/iterations/{iterationId}/performance/images/count":
     get:
       consumes: []
-      description: "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned"
+      description: "The filtering is on an and/or relationship. For example, if the
+        provided tag ids are for the \"Dog\" and\r
+
+        \"Cat\" tags, then only images tagged with Dog and/or Cat will
+        be returned"
       operationId: GetImagePerformanceCount
       parameters:
         - description: The project id
@@ -1734,7 +1297,8 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: A list of tags ids to filter the images to count. Defaults to all tags when null.
+          description: A list of tags ids to filter the images to count. Defaults to all
+            tags when null.
           in: query
           items:
             type: string
@@ -1743,36 +1307,29 @@ paths:
           required: false
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
             type: integer
             x-nullable: false
-      summary: "Gets the number of images tagged with the provided {tagIds} that have prediction results from\r\ntraining for the provided iteration {iterationId}"
+      summary: "Gets the number of images tagged with the provided {tagIds} that have
+        prediction results from\r
+
+        training for the provided iteration {iterationId}"
       tags:
         - ProjectApi
       x-ms-examples:
         Successful GetImagePerformanceCount request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            iterationId: cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagIds:
-              - b5f7e6a2-a481-49a6-afec-a7cef1af3544
-          responses:
-            '200':
-              body: '1'
-              headers: {}
-  '/projects/{projectId}/predictions':
+          $ref: ./examples/GetImagePerformanceCount.json
+  "/projects/{projectId}/predictions":
     delete:
       consumes: []
       operationId: DeletePrediction
@@ -1794,28 +1351,18 @@ paths:
           required: true
           type: array
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete a set of predicted images and their associated prediction results
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful DeletePrediction request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            ids:
-              - e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-              - cf0f83fb-ebaa-4b25-8e34-613a6a0b8a12
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '204':
-              body: ''
-              headers: {}
-  '/projects/{projectId}/predictions/query':
+          $ref: ./examples/DeletePrediction.json
+  "/projects/{projectId}/predictions/query":
     post:
       consumes:
         - application/json
@@ -1837,64 +1384,25 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/PredictionQueryToken'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/PredictionQueryToken"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PredictionQueryResult'
+            $ref: "#/definitions/PredictionQueryResult"
       summary: Get images that were sent to your prediction endpoint
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QueryPredictions request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            query:
-              orderBy: Newest
-              tags:
-                - id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                  minThreshold: 0.9
-          responses:
-            '200':
-              body:
-                results:
-                  - created: '2018-01-31T20:18:26.5806336Z'
-                    id: dfd2d346-3ed5-4e1e-857d-af4e32cec042
-                    imageUri: <image uri>
-                    iteration: b7b9d99c-a2c6-4658-9900-a98d2ff5bc66
-                    predictions:
-                      - probability: 1
-                        tagId: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                        tagName: Tag 1
-                      - probability: 3.60627153e-12
-                        tagId: 45619cda-d1c9-4bc8-a3e1-87c5d81adbc3
-                        tagName: Tag 2
-                    project: 8988643a-ae70-447d-9a22-15c4255e5ecb
-                    thumbnailUri: <thumbnail uri>
-                token:
-                  application: null
-                  continuation: null
-                  endTime: null
-                  iterationId: null
-                  maxCount: 0
-                  orderBy: Newest
-                  session: '1:286613'
-                  startTime: null
-                  tags:
-                    - id: b5f7e6a2-a481-49a6-afec-a7cef1af3544
-                      maxThreshold: 1
-                      minThreshold: 0.9
-              headers: {}
-  '/projects/{projectId}/quicktest/image':
+          $ref: ./examples/QueryPredictions.json
+  "/projects/{projectId}/quicktest/image":
     post:
       consumes:
         - multipart/form-data
@@ -1908,7 +1416,11 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+        - description: "Optional. Specifies the id of a particular iteration to evaluate
+            against.\r
+
+            \            The default iteration for the project will
+            be used when not specified."
           format: uuid
           in: query
           name: iterationId
@@ -1919,44 +1431,24 @@ paths:
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
       summary: Quick test an image
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QuickTestImage request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageData: multipart-form-data
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-19T14:21:41.6789561Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/projects/{projectId}/quicktest/url':
+          $ref: ./examples/QuickTestImage.json
+  "/projects/{projectId}/quicktest/url":
     post:
       consumes:
         - application/json
@@ -1973,58 +1465,42 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated'
+        - description: An {Iris.Web.Api.Models.ImageUrl} that contains the url of the
+            image to be evaluated
           in: body
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
-        - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified."
+            $ref: "#/definitions/ImageUrl"
+        - description: "Optional. Specifies the id of a particular iteration to evaluate
+            against.\r
+
+            \            The default iteration for the project will
+            be used when not specified."
           format: uuid
           in: query
           name: iterationId
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
       summary: Quick test an image url
       tags:
         - PredictionsApi
       x-ms-examples:
         Successful QuickTestImageUrl request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            iterationId: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-19T14:21:41.6789561Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/projects/{projectId}/tags':
+          $ref: ./examples/QuickTestImageUrl.json
+  "/projects/{projectId}/tags":
     get:
       consumes: []
       operationId: GetTags
@@ -2043,18 +1519,18 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Tag'
+              $ref: "#/definitions/Tag"
             type: array
             x-nullable: true
       summary: Get the tags for a given project and iteration
@@ -2062,18 +1538,7 @@ paths:
         - TagsApi
       x-ms-examples:
         Successful GetTags request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                - description: Description of Tag1
-                  id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                  imageCount: 0
-                  name: Tag1
-              headers: {}
+          $ref: ./examples/GetTags.json
     post:
       consumes: []
       operationId: CreateTag
@@ -2097,38 +1562,24 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       summary: Create a tag for the project
       tags:
         - TagsApi
       x-ms-examples:
         Successful CreateTag request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            body: ''
-            description: Description of Tag1
-            name: Tag1
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                description: Description of Tag1
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Tag1
-              headers: {}
-  '/projects/{projectId}/tags/{tagId}':
+          $ref: ./examples/CreateTag.json
+  "/projects/{projectId}/tags/{tagId}":
     delete:
       consumes: []
       operationId: DeleteTag
@@ -2147,25 +1598,17 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Delete a tag from the project
       tags:
         - TagsApi
       x-ms-examples:
         Successful DeleteTag request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-          responses:
-            '204':
-              body: ''
-              headers: {}
+          $ref: ./examples/DeleteTag.json
     get:
       consumes: []
       operationId: GetTag
@@ -2184,42 +1627,31 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: 'The iteration to retrieve this tag from. Optional, defaults to current training set'
+        - description: The iteration to retrieve this tag from. Optional, defaults to
+            current training set
           format: uuid
           in: query
           name: iterationId
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       summary: Get information about a specific tag
       tags:
         - TagsApi
       x-ms-examples:
         Successful GetTag request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-          responses:
-            '200':
-              body:
-                description: Description of Tag1
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Tag1
-              headers: {}
+          $ref: ./examples/GetTag.json
     patch:
       consumes:
         - application/json
@@ -2248,40 +1680,25 @@ paths:
           name: updatedTag
           required: true
           schema:
-            $ref: '#/definitions/Tag'
-        - $ref: '#/parameters/ApiKey'
+            $ref: "#/definitions/Tag"
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       summary: Update a tag
       tags:
         - TagsApi
       x-ms-examples:
         Successful UpdateTag request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-            tagId: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-            updatedTag:
-              description: Better description
-              name: Better Tag Name
-          responses:
-            '200':
-              body:
-                description: Better description
-                id: 9e27bc1b-7ae7-4e3b-a4e5-36153479dc01
-                imageCount: 0
-                name: Better Tag Name
-              headers: {}
-  '/projects/{projectId}/train':
+          $ref: ./examples/UpdateTag.json
+  "/projects/{projectId}/train":
     post:
       consumes: []
       operationId: TrainProject
@@ -2293,43 +1710,29 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Iteration'
+            $ref: "#/definitions/Iteration"
       summary: Queues project for training
       tags:
         - ProjectApi
       x-ms-examples:
         Successful TrainProject request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-          responses:
-            '200':
-              body:
-                created: '2017-12-18T22:40:36.9066667Z'
-                domainId: null
-                exportable: false
-                id: e31a14ab-5d78-4f7b-a267-3a1e4fd8a758
-                isDefault: false
-                lastModified: '2017-12-19T15:46:58.197323Z'
-                name: Iteration 2
-                projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-                status: Training
-              headers: {}
-  '/{projectId}/images/{imageId}/regionproposals':
+          $ref: ./examples/TrainProject.json
+  "/{projectId}/images/{imageId}/regionproposals":
     post:
       consumes: []
-      description: This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.
+      description: This API will get region proposals for an image along with
+        confidences for the region. It returns an empty array if no proposals
+        are found.
       operationId: GetImageRegionProposals
       parameters:
         - description: The project id
@@ -2346,38 +1749,22 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - $ref: '#/parameters/ApiKey'
+        - $ref: "#/parameters/ApiKey"
       produces:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImageRegionProposal'
-      summary: Get region proposals for an image. Returns empty array if no proposals are found.
+            $ref: "#/definitions/ImageRegionProposal"
+      summary: Get region proposals for an image. Returns empty array if no proposals
+        are found.
       tags:
         - ImageRegionProposalApi
       x-ms-examples:
         Successful GetImageRegionProposals request:
-          parameters:
-            Content-Type: application/json
-            Training-Key: '{API Key}'
-            imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-            projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-          responses:
-            '200':
-              body:
-                imageId: 4d6eb844-42ee-42bc-bd6f-c32455ef07c9
-                projectId: bc3f7dad-5544-468c-8573-3ef04d55463e
-                proposals:
-                  - boundingBox:
-                      height: 0.25
-                      left: 0.25
-                      top: 0.25
-                      width: 0.25
-                    confidence: 0.25
-              headers: {}
+          $ref: ./examples/GetImageRegionProposals.json
 definitions:
   BoundingBox:
     properties:
@@ -2495,13 +1882,13 @@ definitions:
         x-nullable: true
       regions:
         items:
-          $ref: '#/definitions/ImageRegion'
+          $ref: "#/definitions/ImageRegion"
         readOnly: true
         type: array
         x-nullable: true
       tags:
         items:
-          $ref: '#/definitions/ImageTag'
+          $ref: "#/definitions/ImageTag"
         readOnly: true
         type: array
         x-nullable: true
@@ -2519,7 +1906,7 @@ definitions:
   ImageCreateResult:
     properties:
       image:
-        $ref: '#/definitions/Image'
+        $ref: "#/definitions/Image"
         readOnly: true
       sourceUrl:
         readOnly: true
@@ -2549,7 +1936,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageCreateResult'
+          $ref: "#/definitions/ImageCreateResult"
         readOnly: true
         type: array
         x-nullable: true
@@ -2563,7 +1950,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageFileCreateEntry'
+          $ref: "#/definitions/ImageFileCreateEntry"
         type: array
         x-nullable: true
       tagIds:
@@ -2586,7 +1973,7 @@ definitions:
         x-nullable: true
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
         type: array
         x-nullable: true
       tagIds:
@@ -2602,7 +1989,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageIdCreateEntry'
+          $ref: "#/definitions/ImageIdCreateEntry"
         type: array
         x-nullable: true
       tagIds:
@@ -2622,7 +2009,7 @@ definitions:
         x-nullable: false
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
         type: array
         x-nullable: true
       tagIds:
@@ -2658,19 +2045,19 @@ definitions:
         x-nullable: true
       predictions:
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
         readOnly: true
         type: array
         x-nullable: true
       regions:
         items:
-          $ref: '#/definitions/ImageRegion'
+          $ref: "#/definitions/ImageRegion"
         readOnly: true
         type: array
         x-nullable: true
       tags:
         items:
-          $ref: '#/definitions/ImageTag'
+          $ref: "#/definitions/ImageTag"
         readOnly: true
         type: array
         x-nullable: true
@@ -2704,7 +2091,7 @@ definitions:
         x-nullable: false
       predictions:
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
         readOnly: true
         type: array
         x-nullable: true
@@ -2758,7 +2145,7 @@ definitions:
     properties:
       regions:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
         type: array
         x-nullable: true
     type: object
@@ -2838,17 +2225,17 @@ definitions:
     properties:
       created:
         items:
-          $ref: '#/definitions/ImageRegionCreateResult'
+          $ref: "#/definitions/ImageRegionCreateResult"
         type: array
         x-nullable: true
       duplicated:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
         type: array
         x-nullable: true
       exceeded:
         items:
-          $ref: '#/definitions/ImageRegionCreateEntry'
+          $ref: "#/definitions/ImageRegionCreateEntry"
         type: array
         x-nullable: true
     type: object
@@ -2867,7 +2254,7 @@ definitions:
         x-nullable: false
       proposals:
         items:
-          $ref: '#/definitions/RegionProposal'
+          $ref: "#/definitions/RegionProposal"
         readOnly: true
         type: array
         x-nullable: true
@@ -2895,7 +2282,7 @@ definitions:
     properties:
       tags:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         type: array
         x-nullable: true
     type: object
@@ -2916,17 +2303,17 @@ definitions:
     properties:
       created:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         type: array
         x-nullable: true
       duplicated:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         type: array
         x-nullable: true
       exceeded:
         items:
-          $ref: '#/definitions/ImageTagCreateEntry'
+          $ref: "#/definitions/ImageTagCreateEntry"
         type: array
         x-nullable: true
     type: object
@@ -2942,7 +2329,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/ImageUrlCreateEntry'
+          $ref: "#/definitions/ImageUrlCreateEntry"
         type: array
         x-nullable: true
       tagIds:
@@ -2958,7 +2345,7 @@ definitions:
     properties:
       regions:
         items:
-          $ref: '#/definitions/Region'
+          $ref: "#/definitions/Region"
         type: array
         x-nullable: true
       tagIds:
@@ -3000,7 +2387,8 @@ definitions:
         type: string
         x-nullable: false
       isDefault:
-        description: Gets or sets a value indicating whether the iteration is the default iteration for the project
+        description: Gets or sets a value indicating whether the iteration is the
+          default iteration for the project
         type: boolean
         x-nullable: false
       lastModified:
@@ -3044,7 +2432,7 @@ definitions:
       perTagPerformance:
         description: Gets the per-tag performance details for this iteration
         items:
-          $ref: '#/definitions/TagPerformance'
+          $ref: "#/definitions/TagPerformance"
         readOnly: true
         type: array
         x-nullable: true
@@ -3077,7 +2465,7 @@ definitions:
   Prediction:
     properties:
       boundingBox:
-        $ref: '#/definitions/BoundingBox'
+        $ref: "#/definitions/BoundingBox"
         readOnly: true
       probability:
         format: float
@@ -3099,12 +2487,12 @@ definitions:
     properties:
       results:
         items:
-          $ref: '#/definitions/StoredImagePrediction'
+          $ref: "#/definitions/StoredImagePrediction"
         readOnly: true
         type: array
         x-nullable: true
       token:
-        $ref: '#/definitions/PredictionQueryToken'
+        $ref: "#/definitions/PredictionQueryToken"
         readOnly: true
     type: object
     x-nullable: true
@@ -3166,7 +2554,7 @@ definitions:
         x-nullable: true
       tags:
         items:
-          $ref: '#/definitions/PredictionQueryTag'
+          $ref: "#/definitions/PredictionQueryTag"
         type: array
         x-nullable: true
     type: object
@@ -3201,7 +2589,7 @@ definitions:
         type: string
         x-nullable: true
       settings:
-        $ref: '#/definitions/ProjectSettings'
+        $ref: "#/definitions/ProjectSettings"
         description: Gets or sets the project settings
       thumbnailUri:
         description: Gets the thumbnail url representing the project
@@ -3247,7 +2635,7 @@ definitions:
   RegionProposal:
     properties:
       boundingBox:
-        $ref: '#/definitions/BoundingBox'
+        $ref: "#/definitions/BoundingBox"
         readOnly: true
       confidence:
         format: float
@@ -3285,7 +2673,7 @@ definitions:
         x-nullable: false
       predictions:
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
         readOnly: true
         type: array
         x-nullable: true

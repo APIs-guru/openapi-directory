@@ -1,17 +1,17 @@
 openapi: 3.0.0
 servers:
   - description: SwaggerHub API Auto Mocking
-    url: 'https://virtserver.swaggerhub.com/aijaz/QRCodeSigninServer/1.0'
+    url: https://virtserver.swaggerhub.com/aijaz/QRCodeSigninServer/1.0
 info:
   description: This is the API for the COVID-19 Contact Tracing QRCode Signin Server
   title: API for the COVID-19 Tracking QR Code Signin Server.
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/aijaz/qrCodeSigninServer/main/openapi.yaml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/aijaz/qrCodeSigninServer/main/openapi.yaml
+      version: "3.0"
   x-providerName: c19qrserver.local
 security:
   - TokenHeader: []
@@ -29,12 +29,12 @@ paths:
     post:
       description: Pass in your old password and your new password
       requestBody:
-        $ref: '#/components/requestBodies/changePasswordPayload'
+        $ref: "#/components/requestBodies/changePasswordPayload"
       responses:
-        '200':
+        "200":
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Used for changing your password
       tags:
         - Passwords
@@ -42,16 +42,16 @@ paths:
     post:
       description: Submit your email and password to get an API token
       requestBody:
-        $ref: '#/components/requestBodies/loginPayload'
+        $ref: "#/components/requestBodies/loginPayload"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/loginResponse'
+                $ref: "#/components/schemas/loginResponse"
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       security: []
       summary: Log in to get an API token
       tags:
@@ -60,26 +60,33 @@ paths:
     post:
       description: Log out by deleting your token off the server.
       responses:
-        '200':
+        "200":
           description: Success
       summary: Log out
       tags:
         - Authentication
   /requestPasswordReset:
     post:
-      description: |
-        The admin should run this on behalf of a user who forgot their password.  The API will generate a password reset code which the admin should then provide to the user. The user can use their client to reset their password. Normally the password reset code is mailed to the user, but I didn't want to do this in this case because I didn't want to  introduce the complicated dependency of having an SMTP server just for this purpose. Doing it this way makes it easy for people to adopt this  API.
+      description: >
+        The admin should run this on behalf of a user who forgot their
+        password.  The API will generate a password reset code which the admin
+        should then provide to the user. The user can use their client to reset
+        their password. Normally the password reset code is mailed to the user,
+        but I didn't want to do this in this case because I didn't want
+        to  introduce the complicated dependency of having an SMTP server just
+        for this purpose. Doing it this way makes it easy for people to adopt
+        this  API.
       requestBody:
-        $ref: '#/components/requestBodies/requestPasswordResetPayload'
+        $ref: "#/components/requestBodies/requestPasswordResetPayload"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/requestPasswordResetResponse'
+                $ref: "#/components/schemas/requestPasswordResetResponse"
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Used for requesting a password reset code
       tags:
         - Passwords
@@ -87,18 +94,18 @@ paths:
     post:
       description: Create a new signin record
       requestBody:
-        $ref: '#/components/requestBodies/loginPayload'
+        $ref: "#/components/requestBodies/loginPayload"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/signinResponse'
+                $ref: "#/components/schemas/signinResponse"
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '503':
-          $ref: '#/components/responses/KeyFailure'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/KeyFailure"
       tags:
         - Attendees signins
   /signins:
@@ -121,18 +128,18 @@ paths:
             minimum: 1
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/signin'
+                  $ref: "#/components/schemas/signin"
                 type: array
           description: Successful response
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '503':
-          $ref: '#/components/responses/KeyFailure'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/KeyFailure"
       summary: Get signin info
       tags:
         - Attendees signins
@@ -140,23 +147,27 @@ paths:
     post:
       description: Use this endpoint to create a team member (user) record
       requestBody:
-        $ref: '#/components/requestBodies/createUserPayload'
+        $ref: "#/components/requestBodies/createUserPayload"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/createUserResponse'
+                $ref: "#/components/schemas/createUserResponse"
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Create a user
       tags:
         - Team Members
-  '/user/{userId}':
+  "/user/{userId}":
     delete:
-      description: |
-        To preserve referential integrity in the database, the user account  will not be deleted from the database. Rather, the password will be set to the empty string, effectively preventing that user from logging in. Furthermore, all active sessions for that user will be deleted, as will any password reset tokens. 
+      description: >
+        To preserve referential integrity in the database, the user
+        account  will not be deleted from the database. Rather, the password
+        will be set to the empty string, effectively preventing that user from
+        logging in. Furthermore, all active sessions for that user will be
+        deleted, as will any password reset tokens. 
       parameters:
         - description: The ID of the user record to be deleted.
           in: path
@@ -166,10 +177,10 @@ paths:
             example: 1
             type: integer
       responses:
-        '200':
+        "200":
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Delete a team member's user record
       tags:
         - Team Members
@@ -185,14 +196,14 @@ paths:
             example: 1
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userRecord'
+                $ref: "#/components/schemas/userRecord"
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Retrieve the information associated with a team member's user record
       tags:
         - Team Members
@@ -201,37 +212,40 @@ paths:
       description: |
         Retrieve the information associated with all team members' user records
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/userRecord'
+                  $ref: "#/components/schemas/userRecord"
                 type: array
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Retrieve the information associated with all team members' user records
       tags:
         - Team Members
   /verifyPasswordChange:
     post:
-      description: |
-        Another endpoint will generate a password reset code for you. You should  use the client app to submit the reset code along with the new password to change your password.
+      description: >
+        Another endpoint will generate a password reset code for you. You
+        should  use the client app to submit the reset code along with the new
+        password to change your password.
       requestBody:
-        $ref: '#/components/requestBodies/passwordResetPayload'
+        $ref: "#/components/requestBodies/passwordResetPayload"
       responses:
-        '200':
+        "200":
           description: Success
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+        "401":
+          $ref: "#/components/responses/Unauthorized"
       summary: Used for resetting your password when you forgot it
       tags:
         - Passwords
 components:
   parameters:
     zip:
-      description: '**Zip code**. Search by zip code. *Example: 95050,us*. Please note that if the country is not specified, the search uses USA as a default.'
+      description: "**Zip code**. Search by zip code. *Example: 95050,us*. Please note
+        that if the country is not specified, the search uses USA as a default."
       in: query
       name: zip
       schema:
@@ -260,8 +274,10 @@ components:
           schema:
             properties:
               admin:
-                description: |
-                  If the user has admin privileges then the user will be able to create password reset requests on behalf of other users, and will also be able to view and edit  the data of other users.
+                description: >
+                  If the user has admin privileges then the user will be able to
+                  create password reset requests on behalf of other users, and
+                  will also be able to view and edit  the data of other users.
                 example: true
                 type: boolean
               email:
@@ -336,19 +352,19 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/keyFailure'
+            $ref: "#/components/schemas/keyFailure"
       description: Key Failure
     SigninResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/signinResponse'
+            $ref: "#/components/schemas/signinResponse"
       description: The response that's sent when you successfully create a signin
     Unauthorized:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/invalidToken'
+            $ref: "#/components/schemas/invalidToken"
       description: Unauthorized
   schemas:
     createUserResponse:
@@ -396,7 +412,8 @@ components:
           example: Firstname Lastname
           type: string
         read_only:
-          description: True if this user has permissions to write to the database. False otherwise
+          description: True if this user has permissions to write to the database. False
+            otherwise
           example: false
           type: boolean
         token:
@@ -460,8 +477,10 @@ components:
       description: A team member user record
       properties:
         admin:
-          description: |
-            If the user has admin privileges then the user will be able to create password reset requests on behalf of other users, and will also be able to view and edit  the data of other users.
+          description: >
+            If the user has admin privileges then the user will be able to
+            create password reset requests on behalf of other users, and will
+            also be able to view and edit  the data of other users.
           example: true
           type: boolean
         email:

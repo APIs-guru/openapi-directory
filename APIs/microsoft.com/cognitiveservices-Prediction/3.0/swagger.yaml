@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: southcentralus.api.cognitive.microsoft.com
@@ -7,33 +7,28 @@ info:
   contact:
     x-twitter: microsoft
   title: Custom Vision Prediction Client
-  version: '3.0'
+  version: "3.0"
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/microsoft/profile_image?size=original'
+    url: https://twitter.com/microsoft/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Prediction/stable/v3.0/Prediction.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Prediction/stable/v3.0/Prediction.json
+      version: "2.0"
   x-preferred: true
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-Prediction
   x-tags:
     - Microsoft
-produces:
-  - application/json
-  - application/xml
-  - text/xml
-parameters:
-  ApiKey:
-    description: API key.
+securityDefinitions:
+  apim_key:
     in: header
     name: Prediction-Key
-    required: true
-    type: string
-    x-ms-client-name: ApiKey
-    x-ms-parameter-location: client
+    type: apiKey
+security:
+  - apim_key: []
+parameters:
   Endpoint:
     description: Supported Cognitive Services endpoints.
     in: path
@@ -43,7 +38,7 @@ parameters:
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
 paths:
-  '/{projectId}/classify/iterations/{publishedName}/image':
+  "/{projectId}/classify/iterations/{publishedName}/image":
     post:
       consumes:
         - multipart/form-data
@@ -68,49 +63,32 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 4MB.
           in: formData
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Classify an image and saves the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful ClassifyImage request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageData: multipart-form-data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-06T02:15:00Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0.000193528482
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/{projectId}/classify/iterations/{publishedName}/image/nostore':
+          $ref: ./examples/ClassifyImage.json
+  "/{projectId}/classify/iterations/{publishedName}/image/nostore":
     post:
       consumes:
         - multipart/form-data
@@ -135,49 +113,32 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 0MB.
           in: formData
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Classify an image without saving the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful ClassifyImageWithNoStore request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageData: multipart-form-data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-06T02:15:00Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0.000193528482
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/{projectId}/classify/iterations/{publishedName}/url':
+          $ref: ./examples/ClassifyImageWithNoStore.json
+  "/{projectId}/classify/iterations/{publishedName}/url":
     post:
       consumes:
         - application/json
@@ -203,52 +164,33 @@ paths:
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
+            $ref: "#/definitions/ImageUrl"
         - description: Optional. Specifies the name of application using the endpoint.
           in: query
           name: application
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Classify an image url and saves the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful ClassifyImageUrl request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-06T02:15:00Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0.000193528482
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/{projectId}/classify/iterations/{publishedName}/url/nostore':
+          $ref: ./examples/ClassifyImageUrl.json
+  "/{projectId}/classify/iterations/{publishedName}/url/nostore":
     post:
       consumes:
         - application/json
@@ -269,57 +211,39 @@ paths:
           name: publishedName
           required: true
           type: string
-        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.'
+        - description: An {Iris.Web.Api.Models.ImageUrl} that contains the url of the
+            image to be evaluated.
           in: body
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
+            $ref: "#/definitions/ImageUrl"
         - description: Optional. Specifies the name of application using the endpoint.
           in: query
           name: application
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Classify an image url without saving the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful ClassifyImageUrlWithNoStore request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-06T02:15:00Z'
-                id: 951098b2-9b69-427b-bddb-d5cb618874e3
-                iteration: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
-                predictions:
-                  - probability: 0.05149666
-                    tagId: e31ff107-5505-4753-be42-b369b21b026c
-                    tagName: Hemlock
-                  - probability: 0.000193528482
-                    tagId: 349d72ac-0948-4d51-b1e4-c14a1f9b848a
-                    tagName: Japanese Cherry
-                project: 64b822c5-8082-4b36-a426-27225f4aa18c
-              headers: {}
-  '/{projectId}/detect/iterations/{publishedName}/image':
+          $ref: ./examples/ClassifyImageUrlWithNoStore.json
+  "/{projectId}/detect/iterations/{publishedName}/image":
     post:
       consumes:
         - multipart/form-data
@@ -344,59 +268,32 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 4MB.
           in: formData
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Detect objects in an image and saves the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful DetectImage request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageData: multipart-form-data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-10T06:10:28Z'
-                id: 64615ba1-b53f-e911-b05b-f8633f7a2ef1
-                iteration: 45c79472-7198-46e1-8ed7-bad2ca111957
-                predictions:
-                  - boundingBox:
-                      height: 0.156851858
-                      left: 0.955476165
-                      top: 0
-                      width: 0.0412225723
-                    probability: 0.05149666
-                    tagId: 7e703b80-3c7a-4c3c-bf48-9673c6891a75
-                    tagName: Tag 1
-                  - boundingBox:
-                      height: 0.6830492
-                      left: 0.062178582
-                      top: 0
-                      width: 0.9378114
-                    probability: 0.000193528482
-                    tagId: a0d06a54-18e4-4787-a9f9-27a9c13a91e8
-                    tagName: Tag 2
-                project: fb5bc587-b53f-e911-b05b-f8633f7a2ef1
-              headers: {}
-  '/{projectId}/detect/iterations/{publishedName}/image/nostore':
+          $ref: ./examples/DetectImage.json
+  "/{projectId}/detect/iterations/{publishedName}/image/nostore":
     post:
       consumes:
         - multipart/form-data
@@ -421,59 +318,32 @@ paths:
           required: false
           type: string
           x-nullable: true
-        - description: 'Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.'
+        - description: Binary image data. Supported formats are JPEG, GIF, PNG, and BMP.
+            Supports images up to 0MB.
           in: formData
           name: imageData
           required: true
           type: file
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Detect objects in an image without saving the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful DetectImageWithNoStore request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageData: multipart-form-data
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-10T06:10:28Z'
-                id: 64615ba1-b53f-e911-b05b-f8633f7a2ef1
-                iteration: 45c79472-7198-46e1-8ed7-bad2ca111957
-                predictions:
-                  - boundingBox:
-                      height: 0.156851858
-                      left: 0.955476165
-                      top: 0
-                      width: 0.0412225723
-                    probability: 0.05149666
-                    tagId: 7e703b80-3c7a-4c3c-bf48-9673c6891a75
-                    tagName: Tag 1
-                  - boundingBox:
-                      height: 0.6830492
-                      left: 0.062178582
-                      top: 0
-                      width: 0.9378114
-                    probability: 0.000193528482
-                    tagId: a0d06a54-18e4-4787-a9f9-27a9c13a91e8
-                    tagName: Tag 2
-                project: fb5bc587-b53f-e911-b05b-f8633f7a2ef1
-              headers: {}
-  '/{projectId}/detect/iterations/{publishedName}/url':
+          $ref: ./examples/DetectImageWithNoStore.json
+  "/{projectId}/detect/iterations/{publishedName}/url":
     post:
       consumes:
         - application/json
@@ -499,62 +369,33 @@ paths:
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
+            $ref: "#/definitions/ImageUrl"
         - description: Optional. Specifies the name of application using the endpoint.
           in: query
           name: application
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Detect objects in an image url and saves the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful DetectImageUrl request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-10T06:10:28Z'
-                id: 64615ba1-b53f-e911-b05b-f8633f7a2ef1
-                iteration: 45c79472-7198-46e1-8ed7-bad2ca111957
-                predictions:
-                  - boundingBox:
-                      height: 0.156851858
-                      left: 0.955476165
-                      top: 0
-                      width: 0.0412225723
-                    probability: 0.05149666
-                    tagId: 7e703b80-3c7a-4c3c-bf48-9673c6891a75
-                    tagName: Tag 1
-                  - boundingBox:
-                      height: 0.6830492
-                      left: 0.062178582
-                      top: 0
-                      width: 0.9378114
-                    probability: 0.000193528482
-                    tagId: a0d06a54-18e4-4787-a9f9-27a9c13a91e8
-                    tagName: Tag 2
-                project: fb5bc587-b53f-e911-b05b-f8633f7a2ef1
-              headers: {}
-  '/{projectId}/detect/iterations/{publishedName}/url/nostore':
+          $ref: ./examples/DetectImageUrl.json
+  "/{projectId}/detect/iterations/{publishedName}/url/nostore":
     post:
       consumes:
         - application/json
@@ -575,66 +416,38 @@ paths:
           name: publishedName
           required: true
           type: string
-        - description: 'An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated.'
+        - description: An {Iris.Web.Api.Models.ImageUrl} that contains the url of the
+            image to be evaluated.
           in: body
           name: imageUrl
           required: true
           schema:
-            $ref: '#/definitions/ImageUrl'
+            $ref: "#/definitions/ImageUrl"
         - description: Optional. Specifies the name of application using the endpoint.
           in: query
           name: application
           required: false
           type: string
           x-nullable: true
-        - $ref: '#/parameters/ApiKey'
+      produces:
+        - application/json
+        - application/xml
+        - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ImagePrediction'
+            $ref: "#/definitions/ImagePrediction"
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/CustomVisionError'
+            $ref: "#/definitions/CustomVisionError"
       summary: Detect objects in an image url without saving the result.
       tags:
         - ImagePredictionApi
       x-ms-examples:
         Successful DetectImageUrlWithNoStore request:
-          parameters:
-            Content-Type: application/json
-            Endpoint: 'https://westus.api.cognitive.microsoft.com'
-            Prediction-Key: '{API Key}'
-            imageUrl:
-              url: '{Image URL}'
-            projectId: 64b822c5-8082-4b36-a426-27225f4aa18c
-            publishedName: MyModel1
-          responses:
-            '200':
-              body:
-                created: '2019-03-10T06:10:28Z'
-                id: 64615ba1-b53f-e911-b05b-f8633f7a2ef1
-                iteration: 45c79472-7198-46e1-8ed7-bad2ca111957
-                predictions:
-                  - boundingBox:
-                      height: 0.156851858
-                      left: 0.955476165
-                      top: 0
-                      width: 0.0412225723
-                    probability: 0.05149666
-                    tagId: 7e703b80-3c7a-4c3c-bf48-9673c6891a75
-                    tagName: Tag 1
-                  - boundingBox:
-                      height: 0.6830492
-                      left: 0.062178582
-                      top: 0
-                      width: 0.9378114
-                    probability: 0.000193528482
-                    tagId: a0d06a54-18e4-4787-a9f9-27a9c13a91e8
-                    tagName: Tag 2
-                project: fb5bc587-b53f-e911-b05b-f8633f7a2ef1
-              headers: {}
+          $ref: ./examples/DetectImageUrlWithNoStore.json
 definitions:
   BoundingBox:
     description: Bounding box that defines a region of an image.
@@ -821,7 +634,7 @@ definitions:
       predictions:
         description: List of predictions.
         items:
-          $ref: '#/definitions/Prediction'
+          $ref: "#/definitions/Prediction"
           x-nullable: false
         readOnly: true
         type: array
@@ -847,7 +660,7 @@ definitions:
     description: Prediction result.
     properties:
       boundingBox:
-        $ref: '#/definitions/BoundingBox'
+        $ref: "#/definitions/BoundingBox"
         description: Bounding box of the prediction.
         readOnly: true
         x-nullable: true
@@ -870,7 +683,7 @@ definitions:
         x-nullable: true
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{Endpoint}'
+  hostTemplate: "{Endpoint}"
   parameters:
-    - $ref: '#/parameters/Endpoint'
+    - $ref: "#/parameters/Endpoint"
   useSchemePrefix: false

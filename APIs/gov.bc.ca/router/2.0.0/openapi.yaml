@@ -1,46 +1,64 @@
 openapi: 3.0.0
 servers:
   - description: Production
-    url: 'https://router.api.gov.bc.ca/'
+    url: https://router.api.gov.bc.ca/
   - description: Test
-    url: 'https://routertst.api.gov.bc.ca/'
+    url: https://routertst.api.gov.bc.ca/
   - description: Delivery
-    url: 'https://router-dev.api.gov.bc.ca/'
+    url: https://router-dev.api.gov.bc.ca/
 info:
   contact:
     email: IDDDBCLS@Victoria1.gov.bc.ca
     name: DataBC
-    url: 'https://data.gov.bc.ca/'
-  description: |-
-    Finds shortest/fastest route between a start point and one or more stop points on British Columbia's public road network. The BC Route planner [webpage](https://www2.gov.bc.ca/gov/content?id=9D99E684CCD042CD88FADC51E079B4B5) provides additional information.  Here are some geocoded addresses to play with:<br>18 Douglas St,Victoria -123.36962,48.40892<br>1002 Johnson St, Victoria -123.355745,48.426206<br>543 Johnson St, Victoria, BC -123.36907,48.42770 <br>14 Centennial Sq, Victoria, BC -123.36564,48.42863<br>1105 Royal Ave,New Westminster  -122.92009,49.20063<br>808 Jackson Cres, New Westminster -122.90762,49.22558<br>10810 McDonald Rd, Chilliwack -121.93808,49.19859<br>3950 June Springs Rd, Kelowna -119.40751,49.83960<br>1201 Riondel Rd, Kootenay Bay -116.85402,49.74448<br>1201 Riondel Rd, Kootenay Bay -116.832759,49.730500 (parcelPoint)<br>2499 Walbran Pl, Courtenay -124.97295,49.71518<br>2013 Smoke Bluff Rd, Squamish -123.13946,49.70401<br>235 Kelvin Grove Way, Lions Bay -123.23524,49.45035<br>   Please see our <a href=https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice target="_blank">data collection notice</a>. 
+    url: https://data.gov.bc.ca/
+  description: >+
+    Finds shortest/fastest route between a start point and one or more stop
+    points on British Columbia's public road network. The BC Route planner
+    [webpage](https://www2.gov.bc.ca/gov/content?id=9D99E684CCD042CD88FADC51E079B4B5)
+    provides additional information.  Here are some geocoded addresses to play
+    with:<br>18 Douglas St,Victoria -123.36962,48.40892<br>1002 Johnson St,
+    Victoria -123.355745,48.426206<br>543 Johnson St, Victoria, BC
+    -123.36907,48.42770 <br>14 Centennial Sq, Victoria, BC
+    -123.36564,48.42863<br>1105 Royal Ave,New
+    Westminster  -122.92009,49.20063<br>808 Jackson Cres, New Westminster
+    -122.90762,49.22558<br>10810 McDonald Rd, Chilliwack
+    -121.93808,49.19859<br>3950 June Springs Rd, Kelowna
+    -119.40751,49.83960<br>1201 Riondel Rd, Kootenay Bay
+    -116.85402,49.74448<br>1201 Riondel Rd, Kootenay Bay -116.832759,49.730500
+    (parcelPoint)<br>2499 Walbran Pl, Courtenay -124.97295,49.71518<br>2013
+    Smoke Bluff Rd, Squamish -123.13946,49.70401<br>235 Kelvin Grove Way, Lions
+    Bay -123.23524,49.45035<br>   Please see our <a
+    href=https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice
+    target="_blank">data collection notice</a>. 
+
 
     Please note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers. 
 
-    [Developer API keys](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys) are unique and provide the ability to make up to 2 requests per second. Production government applications may use organization API keys which are further described in [the Developer guide](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys).
 
-    **To acquire an API key please visit the [API Key Request](https://kq.apps.gov.bc.ca) application.**
+    [Developer API keys](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys) are unique and can be acquired with a GitHub account. Production government applications may use organization API keys acquired by [contacting DataBC](https://forms.gov.bc.ca/databc-contact-us/).
+
   license:
     name: Copyright Province of British Columbia - Access only
-    url: 'https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA'
-  termsOfService: 'http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88'
-  title: BC Route Planner
+    url: https://www2.gov.bc.ca/gov/content?id=1AAACC9C65754E4D89A118B875E0FBDA
+  termsOfService: http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88
+  title: BC Route Planner REST API
   version: 2.0.0
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
+    url: https://avatars1.githubusercontent.com/u/916280?v=3&s=200
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/router/router.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/bcgov/api-specs/master/router/router.json
+      version: "3.0"
   x-providerName: gov.bc.ca
   x-serviceName: router
 externalDocs:
   description: Developer Guide
-  url: 'https://github.com/bcgov/api-specs/blob/master/router/router-developer-guide.md'
+  url: https://github.com/bcgov/ols-router/blob/gh-pages/router-developer-guide.md
 security:
   - apikey: []
 tags:
@@ -48,9 +66,11 @@ tags:
   - name: distance
   - name: route
 paths:
-  '/directions.{outputFormat}':
+  "/directions.{outputFormat}":
     get:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between given start and end points'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between given start and end
+        points
       parameters:
         - description: Format of representation
           example: json
@@ -64,14 +84,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -87,7 +112,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -97,7 +123,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -107,35 +133,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -143,13 +181,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the directions, path, distance and travel time between a series of geographic points'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route
+      summary: Get the directions, path, distance and travel time between a series of
+        geographic points
       tags:
         - directions
     post:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between given start and end points'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between given start and end
+        points
       parameters:
         - description: Format of representation
           example: json
@@ -163,14 +205,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -186,7 +233,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -196,7 +244,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -206,35 +254,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -242,14 +302,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the directions, path, distance and travel time between a series of geographic points'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route
+      summary: Get the directions, path, distance and travel time between a series of
+        geographic points
       tags:
         - directions
-  '/distance.{outputFormat}':
+  "/distance.{outputFormat}":
     get:
-      description: Represents the distance and time of the shortest or fastest path between given start and end points.
+      description: Represents the distance and time of the shortest or fastest path
+        between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -263,14 +326,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -286,7 +354,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -296,7 +365,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -306,35 +375,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -342,13 +423,14 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
+        "200":
           description: Distance and time of the shortest or fastest route
       summary: Get distance and travel time between two geographic points
       tags:
         - distance
     post:
-      description: Represents the distance and time of the shortest or fastest path between given start and end points.
+      description: Represents the distance and time of the shortest or fastest path
+        between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -362,14 +444,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -385,7 +472,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -395,7 +483,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -405,35 +493,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -441,14 +541,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
+        "200":
           description: Distance and time of the shortest or fastest route
       summary: Get distance and travel time between two geographic points
       tags:
         - distance
-  '/distance/betweenPairs.{outputFormat}':
+  "/distance/betweenPairs.{outputFormat}":
     get:
-      description: Represents the distance and time of the shortest or fastest paths between all pairs of fromPoints and toPoints. The number of fromPoints times the number of toPoints should not exceed 100 or the request will time out.
+      description: Represents the distance and time of the shortest or fastest paths
+        between all pairs of fromPoints and toPoints. The number of fromPoints
+        times the number of toPoints should not exceed 100 or the request will
+        time out.
       parameters:
         - description: Format of representation
           example: json
@@ -461,21 +564,28 @@ paths:
               - json
               - html
             type: string
-        - description: 'A comma-separated list of origin points.  See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints target=''_blank''>fromPoints</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A comma-separated list of origin points.  See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints
+            target='_blank'>fromPoints</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: fromPoints
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of destination points. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints target=''_blank''>toPoints</a>'
-          example: '-124.972951,49.715181,-123.139464,49.704015'
+        - description: A comma-separated list of destination points. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints
+            target='_blank'>toPoints</a>
+          example: -124.972951,49.715181,-123.139464,49.704015
           in: query
           name: toPoints
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -491,7 +601,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -501,7 +612,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -511,48 +622,67 @@ paths:
               - km
               - mi
             type: string
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
           schema:
             default: Routing results
             type: string
-        - description: 'The maximum number of pairs to return for each toPoint.  Pairs are ordered by distance/time from fromPoint. For example, given 1 fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints, maxPairs=3 means return the 3 nearest toPoints to each fromPoint.'
+        - description: The maximum number of pairs to return for each toPoint.  Pairs are
+            ordered by distance/time from fromPoint. For example, given 1
+            fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest
+            toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints,
+            maxPairs=3 means return the 3 nearest toPoints to each fromPoint.
           in: query
           name: maxPairs
           required: false
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: A list of routes and their route distances/times.
       summary: Get distance and travel time between each pair of geographic points
       tags:
         - distance
     post:
-      description: Represents the distance and time of the shortest or fastest paths between all pairs of fromPoints and toPoints. The number of fromPoints times the number of toPoints should not exceed 100 or the request will time out.
+      description: Represents the distance and time of the shortest or fastest paths
+        between all pairs of fromPoints and toPoints. The number of fromPoints
+        times the number of toPoints should not exceed 100 or the request will
+        time out.
       parameters:
         - description: Format of representation
           example: json
@@ -565,21 +695,28 @@ paths:
               - json
               - html
             type: string
-        - description: 'A comma-separated list of origin points.  See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints target=''_blank''>fromPoints</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A comma-separated list of origin points.  See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints
+            target='_blank'>fromPoints</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: fromPoints
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of destination points. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints target=''_blank''>toPoints</a>'
-          example: '-124.972951,49.715181,-123.139464,49.704015'
+        - description: A comma-separated list of destination points. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints
+            target='_blank'>toPoints</a>
+          example: -124.972951,49.715181,-123.139464,49.704015
           in: query
           name: toPoints
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -595,7 +732,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -605,7 +743,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -615,49 +753,67 @@ paths:
               - km
               - mi
             type: string
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
           schema:
             default: Routing results
             type: string
-        - description: 'The maximum number of pairs to return for each toPoint.  Pairs are ordered by distance/time from fromPoint. For example, given 1 fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints, maxPairs=3 means return the 3 nearest toPoints to each fromPoint.'
+        - description: The maximum number of pairs to return for each toPoint.  Pairs are
+            ordered by distance/time from fromPoint. For example, given 1
+            fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest
+            toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints,
+            maxPairs=3 means return the 3 nearest toPoints to each fromPoint.
           in: query
           name: maxPairs
           required: false
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: A list of routes and their route distances/times.
       summary: Get distance and travel time between each pair of geographic points
       tags:
         - distance
-  '/optimalDirections.{outputFormat}':
+  "/optimalDirections.{outputFormat}":
     get:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between a start point and a series of end points which are reordered to minimize distance/time'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between a start point and a
+        series of end points which are reordered to minimize distance/time
       parameters:
         - description: Format of representation
           example: json
@@ -671,14 +827,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -694,7 +855,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -704,7 +866,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -714,35 +876,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -750,13 +924,19 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the directions, optimal path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time.'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route. End points are reordered to minimize
+            total distance or time.
+      summary: Get the directions, optimal path, distance and travel time between a
+        start point and a series of end points which are reordered to minimize
+        total distance or time.
       tags:
         - directions
     post:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between a start point and one or more end points which are reordered to minimize distance or time.'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between a start point and one
+        or more end points which are reordered to minimize distance or time.
       parameters:
         - description: Format of representation
           example: json
@@ -770,14 +950,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -793,7 +978,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -803,7 +989,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -813,35 +999,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -849,14 +1047,20 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the directions, optimal path, distance and travel time between a start point and one or more end points which are reordered to minimize total distance or time.'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route. End points are reordered to minimize
+            total distance or time.
+      summary: Get the directions, optimal path, distance and travel time between a
+        start point and one or more end points which are reordered to minimize
+        total distance or time.
       tags:
         - directions
-  '/optimalRoute.{outputFormat}':
+  "/optimalRoute.{outputFormat}":
     get:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between a start point and a series of end points which are reordered to minimize distance or time'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between a start point and a series of end points which are
+        reordered to minimize distance or time
       parameters:
         - description: Format of representation
           example: json
@@ -870,14 +1074,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -893,7 +1102,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -903,7 +1113,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -913,35 +1123,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -949,13 +1171,18 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time'
-      summary: 'Get the optimal path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time.'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route. End
+            points are reordered to minimize total distance or time
+      summary: Get the optimal path, distance and travel time between a start point
+        and a series of end points which are reordered to minimize total
+        distance or time.
       tags:
         - route
     post:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between a start point and a series of end points which are reordered to minimize total distance or time.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between a start point and a series of end points which are
+        reordered to minimize total distance or time.
       parameters:
         - description: Format of representation
           example: json
@@ -969,14 +1196,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -992,7 +1224,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1002,7 +1235,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1012,35 +1245,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1048,14 +1293,18 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time.'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route. End
+            points are reordered to minimize total distance or time.
+      summary: Get the path, distance and travel time between a start point and a
+        series of end points which are reordered to minimize total distance or
+        time.
       tags:
         - route
-  '/route.{outputFormat}':
+  "/route.{outputFormat}":
     get:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between given start and end points.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -1069,14 +1318,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1092,7 +1346,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1102,7 +1357,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1112,35 +1367,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br> Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br> Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1148,13 +1415,15 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the path, distance and travel time between a series of geographic points'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route
+      summary: Get the path, distance and travel time between a series of geographic
+        points
       tags:
         - route
     post:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between given start and end points.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -1168,14 +1437,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1191,7 +1465,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1201,7 +1476,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1211,35 +1486,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1247,14 +1534,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the path, distance and travel time between a series of geographic points'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route
+      summary: Get the path, distance and travel time between a series of geographic
+        points
       tags:
         - route
-  '/truck/directions.{outputFormat}':
+  "/truck/directions.{outputFormat}":
     get:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between given start and end points for a commercial vehicle'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between given start and end
+        points for a commercial vehicle
       parameters:
         - description: Format of representation
           example: json
@@ -1268,14 +1558,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1291,7 +1586,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1301,7 +1597,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1311,35 +1607,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1347,13 +1655,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the directions, path, distance and travel time between a series of geographic points for a commercial vehicle'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route
+      summary: Get the directions, path, distance and travel time between a series of
+        geographic points for a commercial vehicle
       tags:
         - directions
     post:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between given start and end points'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between given start and end
+        points
       parameters:
         - description: Format of representation
           example: json
@@ -1367,14 +1679,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1390,7 +1707,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1400,7 +1718,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1410,35 +1728,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1446,14 +1776,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the directions, path, distance and travel time between a series of geographic points'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route
+      summary: Get the directions, path, distance and travel time between a series of
+        geographic points
       tags:
         - directions
-  '/truck/distance.{outputFormat}':
+  "/truck/distance.{outputFormat}":
     get:
-      description: Represents the distance and time of the shortest or fastest path between given start and end points.
+      description: Represents the distance and time of the shortest or fastest path
+        between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -1467,14 +1800,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1490,7 +1828,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1500,7 +1839,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1510,35 +1849,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1546,13 +1897,15 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
+        "200":
           description: Distance and time of the shortest or fastest route
-      summary: Get distance and travel time between two geographic points for a commercial vehicle
+      summary: Get distance and travel time between two geographic points for a
+        commercial vehicle
       tags:
         - distance
     post:
-      description: Represents the distance and time of the shortest or fastest path between given start and end points.
+      description: Represents the distance and time of the shortest or fastest path
+        between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -1566,14 +1919,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1589,7 +1947,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1599,7 +1958,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1609,35 +1968,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1645,14 +2016,17 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
+        "200":
           description: Distance and time of the shortest or fastest route
       summary: Get distance and travel time between two geographic points
       tags:
         - distance
-  '/truck/distance/betweenPairs.{outputFormat}':
+  "/truck/distance/betweenPairs.{outputFormat}":
     get:
-      description: Represents the distance and time of the shortest or fastest paths between all pairs of fromPoints and toPoints for a commercial vehicle. The number of fromPoints times the number of toPoints should not exceed 100 or the request will time out.
+      description: Represents the distance and time of the shortest or fastest paths
+        between all pairs of fromPoints and toPoints for a commercial vehicle.
+        The number of fromPoints times the number of toPoints should not exceed
+        100 or the request will time out.
       parameters:
         - description: Format of representation
           example: json
@@ -1665,21 +2039,28 @@ paths:
               - json
               - html
             type: string
-        - description: 'A comma-separated list of origin points.  See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints target=''_blank''>fromPoints</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A comma-separated list of origin points.  See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints
+            target='_blank'>fromPoints</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: fromPoints
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of destination points. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints target=''_blank''>toPoints</a>'
-          example: '-124.972951,49.715181,-123.139464,49.704015'
+        - description: A comma-separated list of destination points. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints
+            target='_blank'>toPoints</a>
+          example: -124.972951,49.715181,-123.139464,49.704015
           in: query
           name: toPoints
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1695,7 +2076,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1705,7 +2087,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1715,48 +2097,68 @@ paths:
               - km
               - mi
             type: string
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
           schema:
             default: Routing results
             type: string
-        - description: 'The maximum number of pairs to return for each toPoint.  Pairs are ordered by distance/time from fromPoint. For example, given 1 fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints, maxPairs=3 means return the 3 nearest toPoints to each fromPoint.'
+        - description: The maximum number of pairs to return for each toPoint.  Pairs are
+            ordered by distance/time from fromPoint. For example, given 1
+            fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest
+            toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints,
+            maxPairs=3 means return the 3 nearest toPoints to each fromPoint.
           in: query
           name: maxPairs
           required: false
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: A list of routes and their route distances/times.
-      summary: Get distance and travel time between each pair of geographic points for a commercial vehicle
+      summary: Get distance and travel time between each pair of geographic points for
+        a commercial vehicle
       tags:
         - distance
     post:
-      description: Represents the distance and time of the shortest or fastest paths between all pairs of fromPoints and toPoints. The number of fromPoints times the number of toPoints should not exceed 100 or the request will time out.
+      description: Represents the distance and time of the shortest or fastest paths
+        between all pairs of fromPoints and toPoints. The number of fromPoints
+        times the number of toPoints should not exceed 100 or the request will
+        time out.
       parameters:
         - description: Format of representation
           example: json
@@ -1769,21 +2171,28 @@ paths:
               - json
               - html
             type: string
-        - description: 'A comma-separated list of origin points.  See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints target=''_blank''>fromPoints</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A comma-separated list of origin points.  See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#fromPoints
+            target='_blank'>fromPoints</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: fromPoints
           required: true
           schema:
             type: string
-        - description: 'A comma-separated list of destination points. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints target=''_blank''>toPoints</a>'
-          example: '-124.972951,49.715181,-123.139464,49.704015'
+        - description: A comma-separated list of destination points. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#toPoints
+            target='_blank'>toPoints</a>
+          example: -124.972951,49.715181,-123.139464,49.704015
           in: query
           name: toPoints
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1799,7 +2208,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1809,7 +2219,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1819,49 +2229,68 @@ paths:
               - km
               - mi
             type: string
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
           schema:
             default: Routing results
             type: string
-        - description: 'The maximum number of pairs to return for each toPoint.  Pairs are ordered by distance/time from fromPoint. For example, given 1 fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints, maxPairs=3 means return the 3 nearest toPoints to each fromPoint.'
+        - description: The maximum number of pairs to return for each toPoint.  Pairs are
+            ordered by distance/time from fromPoint. For example, given 1
+            fromPoint, and 10 toPoints, and maxPairs=1 , return the nearest
+            toPoint to the fromPoint. Given 3 fromPoints and 10 toPoints,
+            maxPairs=3 means return the 3 nearest toPoints to each fromPoint.
           in: query
           name: maxPairs
           required: false
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: A list of routes and their route distances/times.
       summary: Get distance and travel time between each pair of geographic points
       tags:
         - distance
-  '/truck/optimalDirections.{outputFormat}':
+  "/truck/optimalDirections.{outputFormat}":
     get:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between a start point and a series of end points which are reordered to minimize distance/time for a commercial vehicle.'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between a start point and a
+        series of end points which are reordered to minimize distance/time for a
+        commercial vehicle.
       parameters:
         - description: Format of representation
           example: json
@@ -1875,14 +2304,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1898,7 +2332,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -1908,7 +2343,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -1918,35 +2353,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -1954,13 +2401,19 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the directions, optimal path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time for a commercial vehicle'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route. End points are reordered to minimize
+            total distance or time.
+      summary: Get the directions, optimal path, distance and travel time between a
+        start point and a series of end points which are reordered to minimize
+        total distance or time for a commercial vehicle
       tags:
         - directions
     post:
-      description: 'Represents the turn-by-turn directions, geometry, distance, and time of the shortest path or fastest path between a start point and one or more end points which are reordered to minimize distance or time.'
+      description: Represents the turn-by-turn directions, geometry, distance, and
+        time of the shortest path or fastest path between a start point and one
+        or more end points which are reordered to minimize distance or time.
       parameters:
         - description: Format of representation
           example: json
@@ -1974,14 +2427,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -1997,7 +2455,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -2007,7 +2466,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -2017,35 +2476,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -2053,14 +2524,20 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'turn-by-turn directions, geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the directions, optimal path, distance and travel time between a start point and one or more end points which are reordered to minimize total distance or time.'
+        "200":
+          description: turn-by-turn directions, geometry, distance, and time of the
+            shortest or fastest route. End points are reordered to minimize
+            total distance or time.
+      summary: Get the directions, optimal path, distance and travel time between a
+        start point and one or more end points which are reordered to minimize
+        total distance or time.
       tags:
         - directions
-  '/truck/optimalRoute.{outputFormat}':
+  "/truck/optimalRoute.{outputFormat}":
     get:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between a start point and a series of end points which are reordered to minimize distance or time for a commercial vehicle.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between a start point and a series of end points which are
+        reordered to minimize distance or time for a commercial vehicle.
       parameters:
         - description: Format of representation
           example: json
@@ -2074,14 +2551,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -2097,7 +2579,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -2107,7 +2590,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -2117,35 +2600,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -2153,13 +2648,18 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time'
-      summary: 'Get the optimal path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time for a commercial vehicle'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route. End
+            points are reordered to minimize total distance or time
+      summary: Get the optimal path, distance and travel time between a start point
+        and a series of end points which are reordered to minimize total
+        distance or time for a commercial vehicle
       tags:
         - route
     post:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between a start point and a series of end points which are reordered to minimize total distance or time.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between a start point and a series of end points which are
+        reordered to minimize total distance or time.
       parameters:
         - description: Format of representation
           example: json
@@ -2173,14 +2673,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -2196,7 +2701,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -2206,7 +2712,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -2216,35 +2722,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start and end points.Default is false.'
+        - description: If true, route starts and ends on same side of road as start and
+            end points.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -2252,14 +2770,19 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route. End points are reordered to minimize total distance or time.'
-      summary: 'Get the path, distance and travel time between a start point and a series of end points which are reordered to minimize total distance or time.'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route. End
+            points are reordered to minimize total distance or time.
+      summary: Get the path, distance and travel time between a start point and a
+        series of end points which are reordered to minimize total distance or
+        time.
       tags:
         - route
-  '/truck/route.{outputFormat}':
+  "/truck/route.{outputFormat}":
     get:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between given start and end points for a commercial vehicle.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between given start and end points for a commercial
+        vehicle.
       parameters:
         - description: Format of representation
           example: json
@@ -2273,14 +2796,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -2296,7 +2824,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -2306,7 +2835,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -2316,35 +2845,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br> Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br> Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -2352,13 +2893,15 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the path, distance and travel time between a series of geographic points for a commercial vehicle'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route
+      summary: Get the path, distance and travel time between a series of geographic
+        points for a commercial vehicle
       tags:
         - route
     post:
-      description: 'Represents the geometry, distance, and time of the shortest or fastest path between given start and end points.'
+      description: Represents the geometry, distance, and time of the shortest or
+        fastest path between given start and end points.
       parameters:
         - description: Format of representation
           example: json
@@ -2372,14 +2915,19 @@ paths:
               - kml
               - html
             type: string
-        - description: 'A list of any number of route points in start to end order. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points target=''_blank''>points</a>'
-          example: '-123.70794,48.77869,-123.53785,48.38200'
+        - description: A list of any number of route points in start to end order. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#points
+            target='_blank'>points</a>
+          example: -123.70794,48.77869,-123.53785,48.38200
           in: query
           name: points
           required: true
           schema:
             type: string
-        - description: 'The EPSG code of the spatial reference system (SRS) to use for output geometries. See <a href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS target="_blank">outputSRS</a>'
+        - description: The EPSG code of the spatial reference system (SRS) to use for
+            output geometries. See <a
+            href=https://github.com/bcgov/api-specs/blob/master/router/glossary.md#outputSRS
+            target="_blank">outputSRS</a>
           in: query
           name: outputSRS
           required: false
@@ -2395,7 +2943,8 @@ paths:
               - 26910
               - 26911
             type: integer
-        - description: 'Routing criteria to optimize (e.g., shortest, fastest). Default is shortest.'
+        - description: Routing criteria to optimize (e.g., shortest, fastest). Default is
+            shortest.
           in: query
           name: criteria
           required: false
@@ -2405,7 +2954,7 @@ paths:
               - shortest
               - fastest
             type: string
-        - description: 'distance unit of measure (e.g., km, mi). Default is km.'
+        - description: distance unit of measure (e.g., km, mi). Default is km.
           in: query
           name: distanceUnit
           required: false
@@ -2415,35 +2964,47 @@ paths:
               - km
               - mi
             type: string
-        - description: 'If true, route ends at start point. Default is false.'
+        - description: If true, route ends at start point. Default is false.
           in: query
           name: roundTrip
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'departure date and time in internet timestamp notation as defined in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br> Ignored if time-dependency modules are disabled'
+        - description: departure date and time in internet timestamp notation as defined
+            in RFC 3339, section 5.6 (e.g., 2019-02-28T11:36:00-08:00);<br>
+            Ignored if time-dependency modules are disabled
           in: query
           name: departure
           required: false
           schema:
             format: date-time
             type: string
-        - description: 'If true, route starts and ends on same side of road as start/end point.Default is false.'
+        - description: If true, route starts and ends on same side of road as start/end
+            point.Default is false.
           in: query
           name: correctSide
           required: false
           schema:
             default: false
             type: boolean
-        - description: 'A comma-separated list of time-related modules to disable (e.g., sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules; disabled by default; disabled by default and only suitable for demos<br>tf – historic traffic congestion; disabled by default and only suitable for demos<br>ev – road events; disabled by default and only suitable for demos<br>td – time-dependency; disabling this disables sc, tf, and ev modules<br>tr – turn restrictions; if td is disabled, time-dependent turn restrictions are ignored<br>tc - turn costs (e.g., left turns take longer than right turns)'
+        - description: A comma-separated list of time-related modules to disable (e.g.,
+            sc,tf,ev,td).<br>Module names include:<br> sc – ferry schedules;
+            disabled by default; disabled by default and only suitable for
+            demos<br>tf – historic traffic congestion; disabled by default and
+            only suitable for demos<br>ev – road events; disabled by default and
+            only suitable for demos<br>td – time-dependency; disabling this
+            disables sc, tf, and ev modules<br>tr – turn restrictions; if td is
+            disabled, time-dependent turn restrictions are ignored<br>tc - turn
+            costs (e.g., left turns take longer than right turns)
           in: query
           name: disable
           required: false
           schema:
-            default: 'sc,tf,ev,td'
+            default: sc,tf,ev,td
             type: string
-        - description: 'Route description (e.g., Shortest route from 1002 Johnson St, Victoria to 1105 Royal Ave,New Westminster)'
+        - description: Route description (e.g., Shortest route from 1002 Johnson St,
+            Victoria to 1105 Royal Ave,New Westminster)
           in: query
           name: routeDescription
           required: false
@@ -2451,9 +3012,10 @@ paths:
             default: Routing results
             type: string
       responses:
-        '200':
-          description: 'Geometry, distance, and time of the shortest or fastest route'
-      summary: 'Get the path, distance and travel time between a series of geographic points'
+        "200":
+          description: Geometry, distance, and time of the shortest or fastest route
+      summary: Get the path, distance and travel time between a series of geographic
+        points
       tags:
         - route
 components:

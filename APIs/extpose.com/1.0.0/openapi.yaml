@@ -1,44 +1,46 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://extpose.com/api/v1'
+  - url: https://extpose.com/api/v1
 info:
   contact:
     email: info@extpose.com
-  description: 'Extpose — in‑store performance analytics and optimization tool for Chrome extensions. [https://extpose.com](https://extpose.com)'
-  termsOfService: 'https://extpose.com/privacy-policy'
+  description: Extpose — in‑store performance analytics and optimization tool for
+    Chrome extensions. [https://extpose.com](https://extpose.com)
+  termsOfService: https://extpose.com/privacy-policy
   title: Extpose
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://extpose.com/openapi.yaml'
-      version: '3.0'
+      url: https://extpose.com/openapi.yaml
+      version: "3.0"
   x-providerName: extpose.com
 externalDocs:
   description: Find out more about Extpose
-  url: 'https://extpose.com'
+  url: https://extpose.com
 tags:
   - description: user-specific methods
     name: user
 paths:
   /user-extensions:
     get:
-      description: This endpoint allows you to get list of your extensions including extensions from the watchlist.
+      description: This endpoint allows you to get list of your extensions including
+        extensions from the watchlist.
       operationId: getUserExtensions
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Extension'
+                  $ref: "#/components/schemas/Extension"
                 type: array
           description: successful operation
-        '400':
+        "400":
           content: {}
           description: Invalid status value
       security:
@@ -57,8 +59,8 @@ components:
         prev_install_count: 1225
         prev_rating_count: 7
         rating_count: 10
-        update_ts: 'Tue, 24 Sep 2019 22:16:41 GMT'
-        url: 'https://chrome.google.com/webstore/detail/bitcoin-price-ticker/bgddejjmhilkdllbakkgddjodommlimc'
+        update_ts: Tue, 24 Sep 2019 22:16:41 GMT
+        url: https://chrome.google.com/webstore/detail/bitcoin-price-ticker/bgddejjmhilkdllbakkgddjodommlimc
       properties:
         avg_rating:
           format: float

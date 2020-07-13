@@ -1,13 +1,15 @@
 openapi: 3.0.0
 servers:
   - description: Production server (uses live data)
-    url: 'https://chompthis.com/api/v2'
+    url: https://chompthis.com/api/v2
 info:
   contact:
     x-twitter: chomp_this_
-  description: |
+  description: >
     ## Important
+
     An **[API key](https://chompthis.com/api/)** is required for access to this API. Get yours at **[https://chompthis.com/api](https://chompthis.com/api/)**.
+
 
     ### Getting Started
       * **[Subscribe](https://chompthis.com/api/#pricing)** to the API.
@@ -39,25 +41,28 @@ info:
       * **Guidelines**
         * [Terms & License &raquo;](https://chompthis.com/api/terms.php)
         * [Attribution &raquo;](https://chompthis.com/api/docs/attribution.php)
-  title: Chomp Food Database
+  title: Chomp Food Database API Documentation
   version: 1.0.0-oas3
   x-apisguru-categories:
     - tools
   x-logo:
-    url: 'https://twitter.com/chomp_this_/profile_image?size=original'
+    url: https://twitter.com/chomp_this_/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/chompfoods/examples/master/chomp-Chomp-1.0.0-oas3-swagger.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/chompfoods/examples/master/chomp-Chomp-1.0.0-oas3-swagger.json
+      version: "3.0"
   x-providerName: chompthis.com
 paths:
   /food/branded/barcode.php:
     get:
-      description: |
+      description: >
         ## Get data for a branded food using the food's UPC/EAN barcode.
 
+
         **Example** 
+
         > ```https://chompthis.com/api/v2/food/branded/barcode.php?api_key=API_KEY&code=CODE```
+
 
         **Tips**
           * Read our **[Knowledge Base article](https://desk.zoho.com/portal/chompthis/kb/articles/im-having-trouble-getting-matches-for-barcodes-what-can-id-do)** for helpful tips and tricks.
@@ -73,46 +78,56 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          $ref: '#/components/responses/200BrandedResponse'
-        '400':
-          $ref: '#/components/responses/400Error'
-        '401':
-          $ref: '#/components/responses/401Error'
-        '404':
-          $ref: '#/components/responses/404Error'
-        '500':
-          $ref: '#/components/responses/500Error'
+        "200":
+          $ref: "#/components/responses/200BrandedResponse"
+        "400":
+          $ref: "#/components/responses/400Error"
+        "401":
+          $ref: "#/components/responses/401Error"
+        "404":
+          $ref: "#/components/responses/404Error"
+        "500":
+          $ref: "#/components/responses/500Error"
       security:
         - ApiKeyAuth: []
       summary: Get a branded food item using a barcode
   /food/branded/name.php:
     get:
-      description: |
+      description: >
         ## Search for branded food items by name.
 
+
         **Example**
+
         > ```https://chompthis.com/api/v2/food/branded/name.php?api_key=API_KEY&name=NAME```
+
 
         **Tips**
           * Get started by using our **[food lookup tool](https://chompthis.com/api/lookup.php)**.
 
         > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
       parameters:
-        - description: |
-            #### Search for branded food items using a general food name keyword. This does not have to exactly match the "official" name for the food.
+        - description: >
+            #### Search for branded food items using a general food name
+            keyword. This does not have to exactly match the "official" name for
+            the food.
+
 
             **Example**
+
             > ```&name=Starburst```
           in: query
           name: name
           required: true
           schema:
             type: string
-        - description: |
-            #### Set maximum number of records you want the API to return. The default value is "**10**."
+        - description: >
+            #### Set maximum number of records you want the API to return. The
+            default value is "**10**."
+
 
             **Example**
+
             > ```&limit=10```
           in: query
           name: limit
@@ -130,10 +145,14 @@ paths:
               - 9
               - 10
             type: integer
-        - description: |
-            #### This is how you paginate the search result. By default, you will see the first 10 records. You must increment the page number to access the next 10 records, and so on. The default value is "**1**."
+        - description: >
+            #### This is how you paginate the search result. By default, you
+            will see the first 10 records. You must increment the page number to
+            access the next 10 records, and so on. The default value is "**1**."
+
 
             **Example**
+
             > ```&page=1```
           in: query
           name: page
@@ -141,37 +160,44 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          $ref: '#/components/responses/200BrandedResponse'
-        '400':
-          $ref: '#/components/responses/400Error'
-        '401':
-          $ref: '#/components/responses/401Error'
-        '404':
-          $ref: '#/components/responses/404Error'
-        '500':
-          $ref: '#/components/responses/500Error'
+        "200":
+          $ref: "#/components/responses/200BrandedResponse"
+        "400":
+          $ref: "#/components/responses/400Error"
+        "401":
+          $ref: "#/components/responses/401Error"
+        "404":
+          $ref: "#/components/responses/404Error"
+        "500":
+          $ref: "#/components/responses/500Error"
       security:
         - ApiKeyAuth: []
       summary: Get a branded food item by name
   /food/branded/search.php:
     get:
-      description: |
+      description: >
         ## Search for branded food items using various parameters.
 
+
         **Example**
+
         > ```https://chompthis.com/api/v2/food/branded/search.php?api_key=API_KEY&brand=BRAND&country=COUNTRY&page=1```
+
 
         **Tips** 
           * Get started by using the **[Query Builder](https://chompthis.com/api/build.php)**.
 
         > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
       parameters:
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific allergen.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific allergen.
+
 
             **Example**
+
             > ```&allergen=Peanuts```
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -179,31 +205,41 @@ paths:
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that are owned by a specific brand.
+        - description: >
+            #### Filter the search to only include branded foods that are owned
+            by a specific brand.
+
 
             **Example**
+
             > ```&brand=Starbucks```
           in: query
           name: brand
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods from a specific category.
+        - description: >
+            #### Filter the search to only include branded foods from a specific
+            category.
+
 
             **Example**
+
             > ```&category=Plant Based Foods```
           in: query
           name: category
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that are sold in a specific country.
+        - description: >
+            #### Filter the search to only include branded foods that are sold
+            in a specific country.
+
 
             **Example**
+
             > ```&country=United States```
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -211,8 +247,10 @@ paths:
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that are considered compatible with a specific diet.
+        - description: >
+            #### Filter the search to only include branded foods that are
+            considered compatible with a specific diet.
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -224,21 +262,28 @@ paths:
               - Vegetarian
               - Gluten Free
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific ingredient.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific ingredient.
+
 
             **Example**
+
             > ```&ingredient=Salt```
           in: query
           name: ingredient
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that are associated with a specific keyword.
+        - description: >
+            #### Filter the search to only include branded foods that are
+            associated with a specific keyword.
+
 
             **Example**
+
             > ```&keyword=Organic```
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -246,21 +291,28 @@ paths:
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific mineral.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific mineral.
+
 
             **Example**
+
             > ```&mineral=Potassium```
           in: query
           name: mineral
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific nutrient.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific nutrient.
+
 
             **Example**
+
             > ```&nutrient=Caffeine```
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -268,21 +320,28 @@ paths:
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific ingredient made using palm oil.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific ingredient made using palm oil.
+
 
             **Example**
+
             > ```&palm_oil=E160a Beta Carotene```
           in: query
           name: palm_oil
           required: false
           schema:
             type: string
-        - description: |
-            ### Filter the search to only include branded foods that contain a specific trace ingredient.
+        - description: >
+            ### Filter the search to only include branded foods that contain a
+            specific trace ingredient.
+
 
             **Example**
+
             > ```&trace=Tree Nuts```
+
 
             **Important Note**: This parameter cannot be used alone. It must be paired with at least 1 additional parameter.
           in: query
@@ -290,20 +349,26 @@ paths:
           required: false
           schema:
             type: string
-        - description: |
-            #### Filter the search to only include branded foods that contain a specific vitamin.
+        - description: >
+            #### Filter the search to only include branded foods that contain a
+            specific vitamin.
+
 
             **Example**
+
             > ```&vitamin=Biotin```
           in: query
           name: vitamin
           required: false
           schema:
             type: string
-        - description: |
-            #### Set maximum number of records you want the API to return. The default value is "**10**."
+        - description: >
+            #### Set maximum number of records you want the API to return. The
+            default value is "**10**."
+
 
             **Example**
+
             > ```&limit=10```
           in: query
           name: limit
@@ -321,10 +386,14 @@ paths:
               - 9
               - 10
             type: integer
-        - description: |
-            #### This is how you paginate the search result. By default, you will see the first 10 records. You must increment the page number to access the next 10 records, and so on. The default value is "**1**."
+        - description: >
+            #### This is how you paginate the search result. By default, you
+            will see the first 10 records. You must increment the page number to
+            access the next 10 records, and so on. The default value is "**1**."
+
 
             **Example**
+
             > ```&page=1```
           in: query
           name: page
@@ -332,43 +401,54 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
-          $ref: '#/components/responses/200BrandedResponse'
-        '400':
-          $ref: '#/components/responses/400Error'
-        '401':
-          $ref: '#/components/responses/401Error'
-        '404':
-          $ref: '#/components/responses/404Error'
-        '500':
-          $ref: '#/components/responses/500Error'
+        "200":
+          $ref: "#/components/responses/200BrandedResponse"
+        "400":
+          $ref: "#/components/responses/400Error"
+        "401":
+          $ref: "#/components/responses/401Error"
+        "404":
+          $ref: "#/components/responses/404Error"
+        "500":
+          $ref: "#/components/responses/500Error"
       security:
         - ApiKeyAuth: []
       summary: Get data for branded food items using various search parameters
   /food/ingredient/search.php:
     get:
-      description: |
+      description: >
         ## Get data for a specific ingredient or a specific set of ingredients.
 
+
         **Example #1: Single Ingredient**
+
         > ```https://chompthis.com/api/v2/ingredient/search.php?api_key=API_KEY&find=raw broccoli```
 
+
         **Example #2: Set of Ingredients**
+
         > ```https://chompthis.com/api/v2/ingredient/search.php?api_key=API_KEY&find=raw broccoli,mashed potatoes,chicken drumstick```
+
 
         **Tips**
           * Expose ingredient endpoints by using our **[food lookup tool](https://chompthis.com/api/lookup.php)**.
 
         > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
       parameters:
-        - description: |
-            Search our database for a single ingredient or a specific set of ingredients.
+        - description: >
+            Search our database for a single ingredient or a specific set of
+            ingredients.
+
 
             **Example #1: Single Ingredient**
+
             > ```&find=raw broccoli```
 
+
             **Example #2: Set of Ingredients**
+
             > ```&find=raw broccoli,buttermilk waffle,mashed potatoes```
+
 
             **Important Notes** 
               * Comma-separated lists cannot contain more than **10 ingredients**. You must perform additional API calls if you are looking up more than 10 ingredients.
@@ -377,10 +457,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: |
-            #### Set maximum number of records you want the API to return, per search term. The default value is "**1**."
+        - description: >
+            #### Set maximum number of records you want the API to return, per
+            search term. The default value is "**1**."
+
 
             **Example**
+
             > ```&limit=3```
           in: query
           name: limit
@@ -392,16 +475,16 @@ paths:
               - 3
             type: integer
       responses:
-        '200':
-          $ref: '#/components/responses/200IngredientResponse'
-        '400':
-          $ref: '#/components/responses/400Error'
-        '401':
-          $ref: '#/components/responses/401Error'
-        '404':
-          $ref: '#/components/responses/404Error'
-        '500':
-          $ref: '#/components/responses/500Error'
+        "200":
+          $ref: "#/components/responses/200IngredientResponse"
+        "400":
+          $ref: "#/components/responses/400Error"
+        "401":
+          $ref: "#/components/responses/401Error"
+        "404":
+          $ref: "#/components/responses/404Error"
+        "500":
+          $ref: "#/components/responses/500Error"
       security:
         - ApiKeyAuth: []
       summary: Get raw/generic food ingredient item(s)
@@ -411,39 +494,48 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BrandedFoodObject'
+            $ref: "#/components/schemas/BrandedFoodObject"
       description: |
         **Valid** - Will return an object containing any matching foods. 
     200IngredientResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/IngredientObject'
-      description: |
-        **Valid** - Will return an object containing any matching ingredient foods. 
+            $ref: "#/components/schemas/IngredientObject"
+      description: >
+        **Valid** - Will return an object containing any matching ingredient
+        foods. 
     400Error:
       description: |
         **Validation error** - Invalid parameters or request.
     401Error:
-      description: |
-        **Unauthorized** - Invalid API key, unauthorized access, or usage limits exceeded. ***[More information &raquo;](https://desk.zoho.com/portal/chompthis/kb/articles/what-is-a-rate-limit)***
+      description: >
+        **Unauthorized** - Invalid API key, unauthorized access, or usage limits
+        exceeded. ***[More information
+        &raquo;](https://desk.zoho.com/portal/chompthis/kb/articles/what-is-a-rate-limit)***
     404Error:
       description: |
         **Not found** - No food items were found.
     500Error:
-      description: |
-        **Server error** - Internal server error, request failed, or base error. *Please **[contact us](https://chompthis.com/api/ticket-new.php)** if you see this.*
+      description: >
+        **Server error** - Internal server error, request failed, or base error.
+        *Please **[contact us](https://chompthis.com/api/ticket-new.php)** if
+        you see this.*
   schemas:
     BrandedFoodObject:
-      description: 'Please read the description of each field in this API response object example. By default, the value of each field is **null**. This indicates an unknown state or that no data exists.'
+      description: Please read the description of each field in this API response
+        object example. By default, the value of each field is **null**. This
+        indicates an unknown state or that no data exists.
       properties:
         items:
-          description: An array containing an object for each individual item returned by your API call.
+          description: An array containing an object for each individual item returned by
+            your API call.
           items:
             description: An object containing information for this specific item.
             properties:
               allergens:
-                description: An array of ingredients in this item that may cause allergic reactions in people
+                description: An array of ingredients in this item that may cause allergic
+                  reactions in people
                 items:
                   type: string
                 type: array
@@ -454,7 +546,8 @@ components:
                 description: The brand name that owns this item
                 type: string
               brand_list:
-                description: An array of brands we have associated with this item. Some items are sold by more than 1 brand.
+                description: An array of brands we have associated with this item. Some items
+                  are sold by more than 1 brand.
                 items:
                   type: string
                 type: array
@@ -469,28 +562,37 @@ components:
                   type: string
                 type: array
               country_details:
-                description: An object containing additional information on the countries where this item is found
+                description: An object containing additional information on the countries where
+                  this item is found
                 properties:
                   english_speaking:
-                    description: The number of countries where English is the country's primary language
+                    description: The number of countries where English is the country's primary
+                      language
                     type: integer
                   non_english_speaking:
-                    description: The number of countries where English is not the country's primary language
+                    description: The number of countries where English is not the country's primary
+                      language
                     type: integer
                 type: object
               description:
                 description: A description of this item
                 type: string
               diet_flags:
-                description: An array of ingredient objects that were flagged while grading this item for compatibility with each diet
+                description: An array of ingredient objects that were flagged while grading this
+                  item for compatibility with each diet
                 items:
-                  description: An object containing information on an individual ingredient that was flagged as potentially not being compatible with a certain diet
+                  description: An object containing information on an individual ingredient that
+                    was flagged as potentially not being compatible with a
+                    certain diet
                   properties:
                     compatibility_description:
-                      description: A description of how we graded this ingredient for compatibility with the diet
+                      description: A description of how we graded this ingredient for compatibility
+                        with the diet
                       type: string
                     compatibility_level:
-                      description: A numeric representation of if we believe this ingredient is compatible with the diet. Higher values indicate more compatibility
+                      description: A numeric representation of if we believe this ingredient is
+                        compatible with the diet. Higher values indicate more
+                        compatibility
                       type: integer
                     diet_label:
                       description: Name of the diet with which this ingredient may not be compatible
@@ -505,21 +607,26 @@ components:
                       description: Boolean representing if the ingredient is a known allergen
                       type: boolean
                     is_compatible:
-                      description: A description of if we believe this ingredient is compatible with the diet
+                      description: A description of if we believe this ingredient is compatible with
+                        the diet
                       type: string
                   type: object
                 type: array
               diet_labels:
-                description: An object containing this item's compatibility grades for each supported diet
+                description: An object containing this item's compatibility grades for each
+                  supported diet
                 properties:
                   gluten_free:
-                    description: An object containing information on this item's compatibility with Gluten Free diets
+                    description: An object containing information on this item's compatibility with
+                      Gluten Free diets
                     properties:
                       compatibility_level:
-                        description: Numeric representation of how compatible this item is with this diet. Higher values indicate more compatibility
+                        description: Numeric representation of how compatible this item is with this
+                          diet. Higher values indicate more compatibility
                         type: integer
                       confidence:
-                        description: Boolean that indicates if we are confident in how this item is graded for this diet
+                        description: Boolean that indicates if we are confident in how this item is
+                          graded for this diet
                         type: integer
                       confidence_description:
                         description: Description of our confidence that this item was graded correctly
@@ -532,13 +639,16 @@ components:
                         type: string
                     type: object
                   vegan:
-                    description: An object containing information on this item's compatibility with the Vegan diets
+                    description: An object containing information on this item's compatibility with
+                      the Vegan diets
                     properties:
                       compatibility_level:
-                        description: Numeric representation of how compatible this item is with this diet. Higher values indicate more compatibility
+                        description: Numeric representation of how compatible this item is with this
+                          diet. Higher values indicate more compatibility
                         type: integer
                       confidence:
-                        description: Boolean that indicates if we are confident in how this item is graded for this diet
+                        description: Boolean that indicates if we are confident in how this item is
+                          graded for this diet
                         type: integer
                       confidence_description:
                         description: Description of our confidence that this item was graded correctly
@@ -551,13 +661,16 @@ components:
                         type: string
                     type: object
                   vegetarian:
-                    description: An object containing information on this item's compatibility with Vegetarian diets
+                    description: An object containing information on this item's compatibility with
+                      Vegetarian diets
                     properties:
                       compatibility_level:
-                        description: Numeric representation of how compatible this item is with this diet. Higher values indicate more compatibility
+                        description: Numeric representation of how compatible this item is with this
+                          diet. Higher values indicate more compatibility
                         type: integer
                       confidence:
-                        description: Boolean that indicates if we are confident in how this item is graded for this diet
+                        description: Boolean that indicates if we are confident in how this item is
+                          graded for this diet
                         type: integer
                       confidence_description:
                         description: Description of our confidence that this item was graded correctly
@@ -597,7 +710,8 @@ components:
               nutrients:
                 description: An array containing nutrient informatio objects for this food item
                 items:
-                  description: An object containing information for a specific nutrient found in this food item
+                  description: An object containing information for a specific nutrient found in
+                    this food item
                   properties:
                     data_points:
                       description: Number of observations on which the value is based
@@ -646,7 +760,8 @@ components:
                         type: string
                     type: object
                   ingredients:
-                    description: An object containing photos of the ingredients on this item's packaging
+                    description: An object containing photos of the ingredients on this item's
+                      packaging
                     properties:
                       display:
                         description: Full-sized photo of the ingredients on this item's packaging
@@ -681,7 +796,8 @@ components:
                 description: An object containing serving information for this item
                 properties:
                   measurement_unit:
-                    description: 'Measurement unit for each serving (e.g. if measure is 3 tsp, the unit is tsp)'
+                    description: Measurement unit for each serving (e.g. if measure is 3 tsp, the
+                      unit is tsp)
                     type: string
                   size:
                     description: Serving size
@@ -704,15 +820,19 @@ components:
           type: array
       type: object
     IngredientObject:
-      description: 'Please read the description of each field in this API response object example. By default, the value of each field is **null**. This indicates an unknown state or that no data exists.'
+      description: Please read the description of each field in this API response
+        object example. By default, the value of each field is **null**. This
+        indicates an unknown state or that no data exists.
       properties:
         items:
-          description: An array containing an object for each individual item returned by your API call.
+          description: An array containing an object for each individual item returned by
+            your API call.
           items:
             description: An object containing information for this specific item.
             properties:
               calorie_conversion_factor:
-                description: An object containing the multiplication factors to be used when calculating energy from macronutrients for a specific food.
+                description: An object containing the multiplication factors to be used when
+                  calculating energy from macronutrients for a specific food.
                 properties:
                   carbohydrate_value:
                     description: The multiplication factor for carbohydrates
@@ -730,12 +850,16 @@ components:
                   type: string
                 type: array
               common_name:
-                description: Common name associated with this item. These generally clarify what the item is (e.g. when the brand name is "BRAND's Spicy Enchilada" the common name may be "Chicken enchilada")
+                description: Common name associated with this item. These generally clarify what
+                  the item is (e.g. when the brand name is "BRAND's Spicy
+                  Enchilada" the common name may be "Chicken enchilada")
                 type: string
               components:
-                description: An array of objects containing the constituent parts of a food (e.g. bone is a component of meat)
+                description: An array of objects containing the constituent parts of a food
+                  (e.g. bone is a component of meat)
                 items:
-                  description: An object containing information on a specific component of this food item
+                  description: An object containing information on a specific component of this
+                    food item
                   properties:
                     data_points:
                       description: The number of obersvations on which the measure is based
@@ -744,18 +868,20 @@ components:
                       description: The weight of the component in grams
                       type: number
                     is_refuse:
-                      description: 'Whether the component is refuse, i.e. not edible'
+                      description: Whether the component is refuse, i.e. not edible
                       type: boolean
                     name:
-                      description: 'The kind of component, e.g. bone'
+                      description: The kind of component, e.g. bone
                       type: string
                     pct_weight:
-                      description: The weight of the component as a percentage of the total weight of the food
+                      description: The weight of the component as a percentage of the total weight of
+                        the food
                       type: number
                   type: object
                 type: array
               footnote:
-                description: Comments on any unusual aspects of this item. Examples might include unusual aspects of the food overall
+                description: Comments on any unusual aspects of this item. Examples might
+                  include unusual aspects of the food overall
                 type: string
               name:
                 description: Item name as provided by brand owner or as shown on packaging
@@ -763,7 +889,8 @@ components:
               nutrients:
                 description: An array containing nutrient informatio objects for this food item
                 items:
-                  description: An object containing information for a specific nutrient found in this food item
+                  description: An object containing information for a specific nutrient found in
+                    this food item
                   properties:
                     data_points:
                       description: Number of observations on which the value is based
@@ -772,7 +899,9 @@ components:
                       description: Description of the nutrient source
                       type: string
                     footnote:
-                      description: Comments on any unusual aspect of the food nutrient. Examples might include why a nutrient value is different than typically expected.
+                      description: Comments on any unusual aspect of the food nutrient. Examples might
+                        include why a nutrient value is different than typically
+                        expected.
                       type: string
                     max:
                       description: Maximum nutrient value
@@ -798,27 +927,35 @@ components:
                   type: object
                 type: array
               portions:
-                description: An array of objects containing information on discrete amounts of a food found in this item
+                description: An array of objects containing information on discrete amounts of a
+                  food found in this item
                 items:
-                  description: An object containing information on a specific food portion found in this item
+                  description: An object containing information on a specific food portion found
+                    in this item
                   properties:
                     data_points:
                       description: The number of observations on which the measure is based
                       type: integer
                     description:
-                      description: 'Comments that provide more specificity on the measure. For example, for a pizza measure the dissemination text might be 1 slice is 1/8th of a 14 inch pizza.'
+                      description: Comments that provide more specificity on the measure. For example,
+                        for a pizza measure the dissemination text might be 1
+                        slice is 1/8th of a 14 inch pizza.
                       type: string
                     footnote:
-                      description: 'Comments on any unusual aspects of the measure. Examples might includes caveats on the usage of a measure, or reasons why a measure gram weight is an unexpected value.'
+                      description: Comments on any unusual aspects of the measure. Examples might
+                        includes caveats on the usage of a measure, or reasons
+                        why a measure gram weight is an unexpected value.
                       type: string
                     gram_weight:
                       description: The weight of the measure in grams
                       type: number
                     measurement_unit:
-                      description: 'The unit used for measure (e.g. if mesure is 3 tsp, the unit is tsp)'
+                      description: The unit used for measure (e.g. if mesure is 3 tsp, the unit is
+                        tsp)
                       type: string
                     modifier:
-                      description: 'Qualifier of the measure (e.g. related to food shape or form) (e.g. melted, crushed, diced)'
+                      description: Qualifier of the measure (e.g. related to food shape or form) (e.g.
+                        melted, crushed, diced)
                       type: string
                   type: object
                 type: array
@@ -826,7 +963,9 @@ components:
                 description: The multiplication factor used to calculate protein from nitrogen
                 type: number
               score:
-                description: A value that represents how similar the name of this food item is to the original search term. The lower the value the closer this item's name is to the original search term.
+                description: A value that represents how similar the name of this food item is
+                  to the original search term. The lower the value the closer
+                  this item's name is to the original search term.
                 type: string
               search_term:
                 description: The original search term that found this food item

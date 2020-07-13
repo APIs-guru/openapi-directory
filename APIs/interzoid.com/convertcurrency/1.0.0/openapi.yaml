@@ -1,39 +1,44 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.interzoid.com'
+  - url: https://api.interzoid.com
 info:
   contact:
     email: support@interzoid.com
     name: API Support
-    url: 'https://www.interzoid.com'
+    url: https://www.interzoid.com
     x-twitter: interzoid
-  description: This API enables you to convert an amount of one currency into another currency using current foreign exchange rates.
+  description: This API enables you to convert an amount of one currency into
+    another currency using current foreign exchange rates.
   license:
     name: Interzoid license
-    url: 'https://www.interzoid.com/license'
-  termsOfService: 'https://www.interzoid.com/terms'
-  title: Interzoid Convert Currency Rate
+    url: https://www.interzoid.com/license
+  termsOfService: https://www.interzoid.com/terms
+  title: Interzoid Convert Currency Rate API
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/interzoid/profile_image?size=original'
+    url: https://twitter.com/interzoid/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://oas.interzoid.com/api/convertcurrency.json'
-      version: '3.0'
+      url: https://oas.interzoid.com/api/convertcurrency.json
+      version: "3.0"
   x-providerName: interzoid.com
   x-serviceName: convertcurrency
 externalDocs:
   description: API home page and documentation
-  url: 'https://www.interzoid.com/services/convertcurrency'
+  url: https://www.interzoid.com/services/convertcurrency
 paths:
   /convertcurrency:
     get:
-      description: 'Provide an amount in one currency (EUR, GBP, CNY, JPY, AUD, etc.), and also a second currency to convert it to. The API will return the result using current foreign exchange rates. See the API home page for a list of all supported currencies.'
+      description: Provide an amount in one currency (EUR, GBP, CNY, JPY, AUD, etc.),
+        and also a second currency to convert it to. The API will return the
+        result using current foreign exchange rates. See the API home page for a
+        list of all supported currencies.
       operationId: convertcurrency
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
@@ -58,7 +63,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -73,17 +78,17 @@ paths:
                     type: string
                 type: object
           description: Currency rate data to one US DOllar
-        '400':
+        "400":
           description: bad request - insufficient parameters
-        '402':
+        "402":
           description: credits exhausted
-        '403':
+        "403":
           description: invalid license API key
-        '404':
+        "404":
           description: currency symbol not found
-        '405':
+        "405":
           description: method not allowed
-        '500':
+        "500":
           description: internal server error
       summary: Converts amount in one currency to that of another
       tags:

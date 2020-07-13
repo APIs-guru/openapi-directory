@@ -1,29 +1,34 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://api.mailboxvalidator.com/'
+  - url: https://api.mailboxvalidator.com/
 info:
   contact:
     x-twitter: MailBoxV
-  description: 'The MailboxValidator Free Email Checker checks if a single email address is from a free email provider and returns the results in either JSON or XML format. Refer to https://www.mailboxvalidator.com/api-email-freem for further information.'
+  description: The MailboxValidator Free Email Checker checks if a single email
+    address is from a free email provider and returns the results in either JSON
+    or XML format. Refer to https://www.mailboxvalidator.com/api-email-freem for
+    further information.
   title: MailboxValidator Free Email Checker
   version: 1.0.0
   x-apisguru-categories:
     - email
   x-logo:
-    url: 'https://twitter.com/MailBoxV/profile_image?size=original'
+    url: https://twitter.com/MailBoxV/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://api.swaggerhub.com/apis/mailboxvalidator/MailboxValidator-Free-Email-Checker/1.0.0'
-      version: '3.0'
+      url: https://api.swaggerhub.com/apis/mailboxvalidator/MailboxValidator-Free-Email-Checker/1.0.0
+      version: "3.0"
   x-providerName: mailboxvalidator.com
   x-serviceName: checker
 paths:
   /v1/email/free:
     get:
-      description: The Free Email Checker API does validation on a single email address and returns if it is from a free email provider in either JSON or XML format.
+      description: The Free Email Checker API does validation on a single email
+        address and returns if it is from a free email provider in either JSON
+        or XML format.
       parameters:
         - description: Return the result in json (default) or xml format.
           in: query
@@ -46,11 +51,11 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
-                '0':
+                "0":
                   value: '{"email_address":"","is_free":"","credits_available":"","error_code":"","error_message":""}'
               schema:
                 type: string

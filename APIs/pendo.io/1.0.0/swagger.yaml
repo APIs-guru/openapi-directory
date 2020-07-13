@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.feedback.eu.pendo.io
@@ -7,42 +7,53 @@ info:
     email: support@receptive.io
     name: Feedback Support
     x-twitter: receptiveio
-  description: |-
+  description: >-
     ## Who is this for?
+
 
     This documentation is for developers creating their own integration with [Feedback's](https://www.pendo.io/product/feedback/) API. If you are doing a standard integration, there's a really easy [Javascript integration](https://help.receptive.io/hc/en-us/articles/209221969-How-to-integrate-Receptive-with-your-app) that you should know about before you go to the effort of building your own integration.
 
+
     ## Authentication
+
 
     API calls generally need to be authenticated. Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request URL as a query parameter named 'auth-token'
 
+
     ## Endpoint
+
 
     API endpoint is https://api.feedback.eu.pendo.io / https://api.feedback.us.pendo.io depending where your datacenter is located.
 
+
     ## Notes
+
 
     API endpoints are being added to this documentation as needed by customers. If you don't see an endpoint you need please contact support and if it exists we'll publish the docs here. The 'try it out' feature on this documentation page will probably be blocked by your browser because the Access-Control-Allow-Origin header has its value set by the Feedback server depending on your hostname.
 
+
     ## Generating client code
 
+
     This documentation is automatically generated from an OpenAPI spec available [here](http://apidoc.receptive.io/receptive.swagger.json). You can use Swagger to auto-generate API client code in many languages using the [Swagger Editor](http://editor.swagger.io/#/)
-  title: Pendo Feedback
+  title: Pendo Feedback API
   version: 1.0.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/receptiveio/profile_image?size=original'
+    url: https://twitter.com/receptiveio/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://apidoc.receptive.io/receptive.swagger.json'
-      version: '2.0'
+      url: http://apidoc.receptive.io/receptive.swagger.json
+      version: "2.0"
   x-providerName: pendo.io
 produces:
   - application/json
 securityDefinitions:
   userApiKey:
-    description: 'Generate an API Key at https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This key should then be added to every request URL as a query parameter.'
+    description: Generate an API Key at
+      https://feedback.pendo.io/app/#/vendor/settings?section=integrate. This
+      key should then be added to every request URL as a query parameter.
     in: query
     name: auth-token
     type: apiKey
@@ -85,20 +96,20 @@ parameters:
     required: false
     type: number
 responses:
-  '410':
+  "410":
     description: Resource has been deleted
     headers:
       status:
         enum:
-          - '410'
+          - "410"
         type: integer
 paths:
   /accounts:
     get:
       parameters:
-        - $ref: '#/parameters/limit'
-        - $ref: '#/parameters/start'
-        - $ref: '#/parameters/order_dir'
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/order_dir"
         - description: The field to use for sort
           enum:
             - churned
@@ -109,16 +120,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/Account'
+              $ref: "#/definitions/Account"
             type: array
       summary: Query accounts
       tags:
         - account
-  '/accounts/{id}':
+  "/accounts/{id}":
     delete:
       description: This removes most traces of an Accounts existence from the system.
       parameters:
@@ -127,29 +138,29 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: the deleted Account
           schema:
-            $ref: '#/definitions/Account'
+            $ref: "#/definitions/Account"
       summary: Delete an Account
       tags:
         - account
     get:
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
       responses:
-        '200':
+        "200":
           description: an Account
           schema:
-            $ref: '#/definitions/Account'
-        '410':
-          $ref: '#/responses/410'
+            $ref: "#/definitions/Account"
+        "410":
+          $ref: "#/responses/410"
       summary: Get an Account
       tags:
         - account
     put:
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
         - description: Updated Account values
           in: body
           name: account
@@ -168,45 +179,50 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: Success
       summary: Update an Account
       tags:
         - account
-  '/accounts/{id}/tags':
+  "/accounts/{id}/tags":
     delete:
       description: Removes all custom tags associated with the Account
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
       responses:
-        '200':
+        "200":
           description: success
       summary: Delete custom Account tags
       tags:
         - account
     get:
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
       responses:
-        '200':
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+        "200":
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
+
 
             {'resources' => ['dev', 'test', 'support']}
 
+
             ]
-        '404':
+        "404":
           description: Account not found
       summary: Get custom Account tags
       tags:
         - account
     post:
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
         - description: |-
             An array of maps specifying tags under each tag group, for example:
 
@@ -221,27 +237,47 @@ paths:
           name: tags
           required: true
           schema:
-            $ref: '#/definitions/Tags'
+            $ref: "#/definitions/Tags"
       responses:
-        '200':
+        "200":
           description: Updated Account tags
-        '404':
+        "404":
           description: Account not found
       summary: Overwrite current custom Account tags with the given tags
       tags:
         - account
+  /comments:
+    get:
+      description: get a list of Comment records
+      parameters:
+        - description: case_id
+          in: query
+          name: case_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Comment records
+          schema:
+            items:
+              $ref: "#/definitions/Comment"
+            type: array
+      summary: fetch Comment records
+      tags:
+        - comment
   /features:
     get:
       parameters:
-        - $ref: '#/parameters/limit'
-        - $ref: '#/parameters/start'
-        - $ref: '#/parameters/order_dir'
-        - description: 'Filter by whether the features are shown/hidden from customer, if supplied.'
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/order_dir"
+        - description: Filter by whether the features are shown/hidden from customer, if
+            supplied.
           in: query
           name: is_private
           required: false
           type: boolean
-        - description: 'Filter by User ID, if supplied.'
+        - description: Filter by User ID, if supplied.
           in: query
           name: wanted_by
           required: false
@@ -261,27 +297,31 @@ paths:
           name: order_by
           required: false
           type: string
-        - description: 'Tags to limit results by. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".'
+        - description: Tags to limit results by. Multiple tags can be provided via comma
+            delimeted string. Tags with contexts can be used. E.g.
+            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: 'Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".'
+        - description: Products to limit results by. Comma delimeted string of either ids
+            or names. E.g. "...&products=1,2,3" or
+            "...products=Product1,Product2".
           in: query
           name: products
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/Feature'
+              $ref: "#/definitions/Feature"
             type: array
       summary: Query features
       tags:
         - feature
-  '/features/{id}':
+  "/features/{id}":
     get:
       parameters:
         - description: ID of the feature
@@ -290,14 +330,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: ok
           schema:
-            $ref: '#/definitions/Feature'
+            $ref: "#/definitions/Feature"
       summary: Get a Feature by ID
       tags:
         - feature
-  '/features/{id}/tags':
+  "/features/{id}/tags":
     delete:
       description: Removes all custom tags associated with the Feature
       parameters:
@@ -307,27 +347,32 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: success
       summary: Delete custom Feature tags
       tags:
         - feature
     get:
       parameters:
-        - $ref: '#/parameters/accountIdInPath'
+        - $ref: "#/parameters/accountIdInPath"
       responses:
-        '200':
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+        "200":
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
+
 
             {'resources' => ['dev', 'test', 'support']}
 
+
             ]
-        '404':
+        "404":
           description: Feature not found
       summary: Get custom Feature tags
       tags:
@@ -343,22 +388,23 @@ paths:
           name: tags
           required: true
           schema:
-            $ref: '#/definitions/Tags'
+            $ref: "#/definitions/Tags"
       responses:
-        '200':
+        "200":
           description: Updated Feature tags
-        '404':
+        "404":
           description: Feature not found
       summary: Overwrite current custom Feature tags with the given tags
       tags:
         - feature
   /health-check/ping:
     get:
-      description: Provides a response for automatic checks that the API and load balancers are healthy
+      description: Provides a response for automatic checks that the API and load
+        balancers are healthy
       responses:
-        '200':
+        "200":
           description: API is healthy
-        '503':
+        "503":
           description: Load balancers cannot route a request to a healthy API server
       security: []
       summary: Health check for API
@@ -374,10 +420,13 @@ paths:
           schema:
             properties:
               event:
-                description: |-
+                description: >-
                   The event field can contain one of the following values-
+
                   1) 'feature_created' - When a new feature is created a webhook will be triggered with the details of the feature. Feature details can be found in the model section under Feature object
+
                   2) 'feature_status_changed' - When a feature status is updated a webhook will be triggered with the updated Feature details. Feature details can be found in the model section under Feature object.
+
                   3) 'feature_comment_created' - When a commment is created on a feature, a webhook will be triggered with the details about the Feature and the new comment. Feature and Comment details can be found in the model section under Feature object and Comment object.
                 type: string
               target_url:
@@ -385,7 +434,7 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: Successfully subscribed to the weebhooks
       summary: Subscribe to webhooks
       tags:
@@ -403,7 +452,7 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: Successfully unsubscribed from the weebhooks
       summary: Unsubscribe from webhooks
       tags:
@@ -411,7 +460,8 @@ paths:
   /search:
     get:
       parameters:
-        - description: Specifies the type of entity being searched for. Must be set to 'feature'
+        - description: Specifies the type of entity being searched for. Must be set to
+            'feature'
           enum:
             - feature
           in: query
@@ -423,7 +473,9 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'A comma seperated list of status values to filter by, if required. Valid values: ''new'', ''waiting'', ''planned'', ''developing'', ''released'', ''declined''.'
+        - description: "A comma seperated list of status values to filter by, if required.
+            Valid values: 'new', 'waiting', 'planned', 'developing', 'released',
+            'declined'."
           enum:
             - new
             - waiting
@@ -435,22 +487,27 @@ paths:
           name: status
           required: false
           type: string
-        - description: 'Tags to limit results by - only applies when scope is ''case'' or ''feature''. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. "....&tags=TagExample,Multi:TagThis,Multi:TagThat".'
+        - description: Tags to limit results by - only applies when scope is 'case' or
+            'feature'. Multiple tags can be provided via comma delimeted string.
+            Tags with contexts can be used. E.g.
+            "....&tags=TagExample,Multi:TagThis,Multi:TagThat".
           in: query
           name: tags
           required: false
           type: string
-        - description: 'Products to limit results by. Comma delimeted string of either ids or names. E.g. "...&products=1,2,3" or "...products=Product1,Product2".'
+        - description: Products to limit results by. Comma delimeted string of either ids
+            or names. E.g. "...&products=1,2,3" or
+            "...products=Product1,Product2".
           in: query
           name: products
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/Feature'
+              $ref: "#/definitions/Feature"
             type: array
       summary: Search features
       tags:
@@ -467,20 +524,21 @@ paths:
           name: role
           required: true
           type: string
-        - description: 'Filter by Account ID, if supplied. Only useful if role param is endUser'
+        - description: Filter by Account ID, if supplied. Only useful if role param is
+            endUser
           in: query
           name: account
           required: false
           type: integer
-        - $ref: '#/parameters/limit'
-        - $ref: '#/parameters/order_by'
-        - $ref: '#/parameters/order_dir'
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/order_dir"
       responses:
-        '200':
+        "200":
           description: User records
           schema:
             items:
-              $ref: '#/definitions/User'
+              $ref: "#/definitions/User"
             type: array
       summary: fetch User records
       tags:
@@ -488,16 +546,26 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Feedback that the EndUser has been seen. This keeps Feedback''s ''last seen'' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is ''endUser''. The id you supply here for the User and Account should be your own unique id, which Feedback calls external_id. This probably isn''t the same as Feedback''s id seen elsewhere in the API.'
+      description: Replicates much of the functionality of the widget ping, allowing
+        callers to create or update User records for End Users. If you call this
+        with a new User and/or Account, the record will be created. If you call
+        for an existing User/Account, the record will be updated. You can also
+        call this at EndUser login time, or more frequently, to notify Feedback
+        that the EndUser has been seen. This keeps Feedback's 'last seen' data
+        fresh and updates your reporting. This endpoint is used by our Zapier
+        integration. The only value allowed in user.roles is 'endUser'. The id
+        you supply here for the User and Account should be your own unique id,
+        which Feedback calls external_id. This probably isn't the same as
+        Feedback's id seen elsewhere in the API.
       parameters:
         - description: the account and user
           in: body
           name: data
           required: true
           schema:
-            $ref: '#/definitions/EndUserPing'
+            $ref: "#/definitions/EndUserPing"
       responses:
-        '200':
+        "200":
           description: Success
       summary: Ping to create or update an EndUser and Account in one call
       tags:
@@ -535,7 +603,7 @@ paths:
               - account_status
             type: object
       responses:
-        '200':
+        "200":
           description: success
       summary: Invite an EndUser (customer)
       tags:
@@ -566,7 +634,7 @@ paths:
               - full_name
             type: object
       responses:
-        '200':
+        "200":
           description: success
       summary: Invite a VendorUser (Team member)
       tags:
@@ -575,17 +643,19 @@ paths:
   /users/search:
     get:
       parameters:
-        - description: 'Find using your external ID, rather than the ID generated by Feedback'
+        - description: Find using your external ID, rather than the ID generated by Feedback
           in: query
           name: external_id
           required: false
           type: string
-        - description: Find user by their email address. Role param must be specified when using this option
+        - description: Find user by their email address. Role param must be specified when
+            using this option
           in: query
           name: email
           required: false
           type: string
-        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a user by their email address
+        - description: Users role ('vendorUser' or 'endUser'). Only useful when finding a
+            user by their email address
           enum:
             - endUser
             - vendorUser
@@ -593,28 +663,30 @@ paths:
           name: role
           type: string
       responses:
-        '200':
+        "200":
           description: the User record
           schema:
-            $ref: '#/definitions/User'
-        '410':
+            $ref: "#/definitions/User"
+        "410":
           description: User has been deleted
       summary: Find a User with a query
       tags:
         - user
-  '/users/{id}':
+  "/users/{id}":
     delete:
-      description: This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.
+      description: This removes most traces of a User's existence from the system. For
+        an EndUser you might want to consider just letting them churn after a
+        period of inactivity.
       parameters:
         - in: path
           name: id
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: the deleted User
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       summary: Delete a User
       tags:
         - user
@@ -625,11 +697,11 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: the User record
           schema:
-            $ref: '#/definitions/User'
-        '410':
+            $ref: "#/definitions/User"
+        "410":
           description: User has been deleted
       summary: Get a User record
       tags:
@@ -657,14 +729,14 @@ paths:
                 type: number
             type: object
       responses:
-        '200':
+        "200":
           description: updated User
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       summary: Update a User
       tags:
         - user
-  '/users/{id}/tags':
+  "/users/{id}/tags":
     delete:
       description: Removes all custom tags associated with the User
       parameters:
@@ -674,7 +746,7 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: success
       summary: Delete custom User tags
       tags:
@@ -687,18 +759,23 @@ paths:
           required: true
           type: number
       responses:
-        '200':
-          description: |-
-            Returns an array of maps specifying tags under each tag group, for example:
+        "200":
+          description: >-
+            Returns an array of maps specifying tags under each tag group, for
+            example:
+
 
             [
 
+
             {'impacts' => ['sales']},
+
 
             {'resources' => ['dev', 'test', 'support']}
 
+
             ]
-        '404':
+        "404":
           description: User not found
       summary: Get custom User tags
       tags:
@@ -724,11 +801,11 @@ paths:
           name: tags
           required: true
           schema:
-            $ref: '#/definitions/Tags'
+            $ref: "#/definitions/Tags"
       responses:
-        '200':
+        "200":
           description: Updated User tags
-        '404':
+        "404":
           description: User not found
       summary: Overwrite current custom User tags with the given tags
       tags:
@@ -737,7 +814,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.'
+      description: the POST /vendor_users is very similar to the POST
+        /users/invite_vendor_user but /vendor_users is intended for consumers to
+        refresh team member data periodically, rather than just a one-off user
+        creation.
       parameters:
         - in: body
           name: data
@@ -758,7 +838,7 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: success
       summary: Create or update a team member by their external_id
       tags:
@@ -800,16 +880,17 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: Vote records
           schema:
             items:
-              $ref: '#/definitions/Vote'
+              $ref: "#/definitions/Vote"
             type: array
       tags:
         - votes
     post:
-      description: Automatically subscribes/unsubscribes the User to the specifed feature depending on the quantity value
+      description: Automatically subscribes/unsubscribes the User to the specifed
+        feature depending on the quantity value
       parameters:
         - in: body
           name: data
@@ -820,11 +901,11 @@ paths:
                 type: string
               votes:
                 items:
-                  $ref: '#/definitions/FeatureVote'
+                  $ref: "#/definitions/FeatureVote"
                 type: array
             type: object
       responses:
-        '200':
+        "200":
           description: Updated votes
       summary: update specified votes for a User
       tags:
@@ -836,7 +917,7 @@ definitions:
         format: dateTime
         type: string
       external_id:
-        description: 'ID for the Account, provided by the Feedback Customer'
+        description: ID for the Account, provided by the Feedback Customer
         type: string
       id:
         type: string
@@ -867,7 +948,7 @@ definitions:
       status:
         type: string
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: "#/definitions/Tags"
     type: object
   Comment:
     properties:
@@ -890,13 +971,13 @@ definitions:
   EndUserPing:
     properties:
       account:
-        $ref: '#/definitions/AccountWithTags'
+        $ref: "#/definitions/AccountWithTags"
       return_url:
         type: string
       user:
         properties:
           allowed_products:
-            $ref: '#/definitions/Products'
+            $ref: "#/definitions/Products"
           created_at:
             format: dateTime
             type: string
@@ -911,7 +992,7 @@ definitions:
               - endUser
             type: string
           tags:
-            $ref: '#/definitions/Tags'
+            $ref: "#/definitions/Tags"
         type: object
     type: object
   Feature:
@@ -930,10 +1011,12 @@ definitions:
       developing_at:
         type: string
       effort:
-        description: How much Effort is assigned to the development of this Feature. Not visible to EndUsers
+        description: How much Effort is assigned to the development of this Feature. Not
+          visible to EndUsers
         type: integer
       form_entry:
-        description: a JSON serialized version of the Form containing the description and other fields for this Feature.
+        description: a JSON serialized version of the Form containing the description
+          and other fields for this Feature.
         type: string
       id:
         type: number
@@ -941,7 +1024,8 @@ definitions:
         description: Is this Feature hidden from EndUsers?
         type: boolean
       merged_to_feature_id:
-        description: 'If this Feature was merged into another, the ID of the preserved Feature'
+        description: If this Feature was merged into another, the ID of the preserved
+          Feature
         type: integer
       planned_at:
         type: string
@@ -969,7 +1053,7 @@ definitions:
       status_changed_at:
         type: string
       tags:
-        $ref: '#/definitions/Tags'
+        $ref: "#/definitions/Tags"
       title:
         type: string
       updated_at:
@@ -983,7 +1067,8 @@ definitions:
       vendor_id:
         type: integer
       view_count:
-        description: 'How many times has this Feature been viewed. May only be visible to VendorUsers, depending on config'
+        description: How many times has this Feature been viewed. May only be visible to
+          VendorUsers, depending on config
         type: integer
       waiting_at:
         type: string
@@ -993,23 +1078,31 @@ definitions:
       feature_id:
         type: string
       quantity:
-        description: Value between -1 and 1000000. -1 indicates that the User is "Not Interested" in the feature.
+        description: Value between -1 and 1000000. -1 indicates that the User is "Not
+          Interested" in the feature.
         type: integer
     type: object
   Products:
-    description: |-
-      Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name: new product name}]. 
+    description: >-
+      Supplied as an array of maps where each map describes an existing or new
+      product e.g [{id:exising_product_id, name:existing name},
+      {id:new_product_id, name: new product name}]. 
+
       Existing product id/names held in your account can be referenced at https://feedback.pendo.io/app/#/vendor/products
     items:
       type: string
     type: array
   Tags:
-    description: |-
+    description: >-
       Simple tags are supplied as an array of Strings e.g ['Foo', 'Bar']. 
+
       To put the tags in categories replace the Strings with maps of using tag category as the key and tag value as the value, e.g 
 
+
       [
+
       {Color:Red}, {Flavor:Cherry}
+
       ]. Simple and categorised tags can be mixed in the same array.
     items:
       type: string
@@ -1017,7 +1110,7 @@ definitions:
   User:
     properties:
       account:
-        $ref: '#/definitions/UserAccount'
+        $ref: "#/definitions/UserAccount"
       created_at:
         format: dateTime
         type: string
@@ -1057,7 +1150,9 @@ definitions:
       feature_id:
         type: integer
       quantity:
-        description: A negative number indicates that the User has indicated "Not Interested" in a Features. Between 0 and 1000000 is the User's current prioritization of the Feature.
+        description: A negative number indicates that the User has indicated "Not
+          Interested" in a Features. Between 0 and 1000000 is the User's current
+          prioritization of the Feature.
         type: integer
       updated_at:
         type: string

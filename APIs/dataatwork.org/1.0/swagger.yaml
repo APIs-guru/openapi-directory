@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.dataatwork.org
@@ -6,18 +6,20 @@ basePath: /v1
 info:
   contact:
     name: Work Data Initiative
-    url: 'http://www.dataatwork.org'
-  description: 'A complete and standard data store for canonical and emerging skills, knowledge, abilities, tools, technolgies, and how they relate to jobs.'
-  title: Open Skills
-  version: '1.0'
+    url: http://www.dataatwork.org
+  description: A complete and standard data store for canonical and emerging
+    skills, knowledge, abilities, tools, technolgies, and how they relate to
+    jobs.
+  title: Open Skills API
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/593962900408008704/WT7rcPhZ_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/593962900408008704/WT7rcPhZ_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'http://api.dataatwork.org/v1/spec/skills-api.json'
-      version: '2.0'
+      url: http://api.dataatwork.org/v1/spec/skills-api.json
+      version: "2.0"
   x-providerName: dataatwork.org
 consumes:
   - application/json
@@ -26,29 +28,31 @@ produces:
 paths:
   /jobs:
     get:
-      description: 'Retrieves the names, descriptions, and UUIDs of all job titles.'
+      description: Retrieves the names, descriptions, and UUIDs of all job titles.
       parameters:
         - description: Pagination offset. Default is 0.
           in: query
           name: offset
           type: integer
-        - description: Maximum number of items per page. Default is 20 and cannot exceed 500.
+        - description: Maximum number of items per page. Default is 20 and cannot exceed
+            500.
           in: query
           name: limit
           type: integer
       responses:
-        '200':
+        "200":
           description: A collection of jobs
           schema:
-            $ref: '#/definitions/Jobs'
+            $ref: "#/definitions/Jobs"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Job Titles and Descriptions
   /jobs/autocomplete:
     get:
-      description: 'Retrieves the names, descriptions, and UUIDs of all job titles matching a given search criteria.'
+      description: Retrieves the names, descriptions, and UUIDs of all job titles
+        matching a given search criteria.
       parameters:
         - description: Find job titles beginning with the given text fragment
           in: query
@@ -66,68 +70,73 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: A collection of jobs
           schema:
-            $ref: '#/definitions/Jobs'
+            $ref: "#/definitions/Jobs"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Job Title Autocomplete
   /jobs/normalize:
     get:
       description: Retrieves the canonical job title for a synonymous job title
       parameters:
-        - description: Find the canonical job title(s) for jobs matching the given text fragment
+        - description: Find the canonical job title(s) for jobs matching the given text
+            fragment
           in: query
           name: job_title
           required: true
           type: string
-        - description: Maximumn number of job title synonyms to return. Default is 1 and cannot exceed 10.
+        - description: Maximumn number of job title synonyms to return. Default is 1 and
+            cannot exceed 10.
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: A collection of normalized jobs
           schema:
-            $ref: '#/definitions/NormalizedJobs'
+            $ref: "#/definitions/NormalizedJobs"
       summary: Job Title Normalization
   /jobs/unusual_titles:
     get:
-      description: Retrieves a list of unusual job titles and the UUIDs of their canonical jobs.
+      description: Retrieves a list of unusual job titles and the UUIDs of their
+        canonical jobs.
       responses:
-        '200':
+        "200":
           description: A collection of normalized jobs
           schema:
-            $ref: '#/definitions/NormalizedJobs'
+            $ref: "#/definitions/NormalizedJobs"
       summary: Unusual Job Titles
-  '/jobs/{id}':
+  "/jobs/{id}":
     get:
-      description: 'Retrieves the name, description, and UUID of a job by specifying its O*NET SOC Code or UUID.'
+      description: Retrieves the name, description, and UUID of a job by specifying
+        its O*NET SOC Code or UUID.
       parameters:
         - description: The O*NET SOC Code or UUID of the job title to retrieve
           in: path
           name: id
           required: true
           type: string
-        - description: The FIPS Code of a Core-Based Statistical Area. Only return the job if present in this area
+        - description: The FIPS Code of a Core-Based Statistical Area. Only return the job
+            if present in this area
           in: query
           name: fips
           type: string
       responses:
-        '200':
+        "200":
           description: A job
           schema:
-            $ref: '#/definitions/Job'
+            $ref: "#/definitions/Job"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Job Title and Description
-  '/jobs/{id}/related_jobs':
+  "/jobs/{id}/related_jobs":
     get:
       description: Retrieves a collection of jobs associated with a specified job.
       parameters:
@@ -137,16 +146,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A job and its related jobs
           schema:
-            $ref: '#/definitions/JobRelatedJobs'
+            $ref: "#/definitions/JobRelatedJobs"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Jobs Associated with a Job
-  '/jobs/{id}/related_skills':
+  "/jobs/{id}/related_skills":
     get:
       description: Retrieves a collection of skills associated with a specified job.
       parameters:
@@ -156,40 +165,42 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A job and its related skills
           schema:
-            $ref: '#/definitions/JobSkills'
+            $ref: "#/definitions/JobSkills"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Skills Associated with a Job
   /skills:
     get:
-      description: 'Retrieve the names, descriptions, and UUIDs of all skills.'
+      description: Retrieve the names, descriptions, and UUIDs of all skills.
       parameters:
         - description: Pagination offset. Default is 0.
           in: query
           name: offset
           type: integer
-        - description: Maximum number of items per page. Default is 20 and cannot exceed 500.
+        - description: Maximum number of items per page. Default is 20 and cannot exceed
+            500.
           in: query
           name: limit
           type: integer
       responses:
-        '200':
+        "200":
           description: A collection of skills
           schema:
-            $ref: '#/definitions/Skills'
+            $ref: "#/definitions/Skills"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Skill Names and Descriptions
   /skills/autocomplete:
     get:
-      description: 'Retrieves the names, descriptions, and UUIDs of all skills matching a given search criteria.'
+      description: Retrieves the names, descriptions, and UUIDs of all skills matching
+        a given search criteria.
       parameters:
         - description: Find skill names beginning with the given text fragment
           in: query
@@ -207,33 +218,35 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: A collection of skills
           schema:
-            $ref: '#/definitions/SkillJobs'
+            $ref: "#/definitions/SkillJobs"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Skill Name Autocomplete
   /skills/normalize:
     get:
       description: Retrieves the canonical skill name for a synonymous skill name
       parameters:
-        - description: Find the canonical skill name(s) for skills matching the given text fragment
+        - description: Find the canonical skill name(s) for skills matching the given text
+            fragment
           in: query
           name: skill_name
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A collection of normalized skills
           schema:
-            $ref: '#/definitions/NormalizedSkills'
+            $ref: "#/definitions/NormalizedSkills"
       summary: Skill Name Normalization
-  '/skills/{id}':
+  "/skills/{id}":
     get:
-      description: 'Retrieves the name, description, and UUID of a job by specifying its UUID.'
+      description: Retrieves the name, description, and UUID of a job by specifying
+        its UUID.
       parameters:
         - description: The UUID of the skill name to retrieve
           in: path
@@ -241,16 +254,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A skill
           schema:
-            $ref: '#/definitions/Skill'
+            $ref: "#/definitions/Skill"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Skill Name and Description
-  '/skills/{id}/related_jobs':
+  "/skills/{id}/related_jobs":
     get:
       description: Retrieves a collection of jobs associated with a specified skill.
       parameters:
@@ -260,16 +273,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A skill and its related jobs
           schema:
-            $ref: '#/definitions/SkillJobs'
+            $ref: "#/definitions/SkillJobs"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Jobs Associated with a Skill
-  '/skills/{id}/related_skills':
+  "/skills/{id}/related_skills":
     get:
       description: Retrieves a collection of skills associated with a specified skill.
       parameters:
@@ -279,14 +292,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A skill and its related skills
           schema:
-            $ref: '#/definitions/SkillRelatedSkills'
+            $ref: "#/definitions/SkillRelatedSkills"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Skills Associated with a Skill
 definitions:
   Error:
@@ -325,7 +338,7 @@ definitions:
     properties:
       related_job_titles:
         items:
-          $ref: '#/definitions/JobRelatedJob'
+          $ref: "#/definitions/JobRelatedJob"
         type: array
       uuid:
         description: Universally Unique Identifier for the job
@@ -360,15 +373,15 @@ definitions:
         type: string
       skills:
         items:
-          $ref: '#/definitions/SkillJob'
+          $ref: "#/definitions/SkillJob"
         type: array
   Jobs:
     items:
-      $ref: '#/definitions/Job'
+      $ref: "#/definitions/Job"
     properties:
       links:
         items:
-          $ref: '#/definitions/PageLink'
+          $ref: "#/definitions/PageLink"
         type: array
     type: array
   NormalizedJob:
@@ -387,7 +400,7 @@ definitions:
         type: string
   NormalizedJobs:
     items:
-      $ref: '#/definitions/NormalizedJob'
+      $ref: "#/definitions/NormalizedJob"
     type: array
   NormalizedSkill:
     properties:
@@ -399,7 +412,7 @@ definitions:
         type: string
   NormalizedSkills:
     items:
-      $ref: '#/definitions/NormalizedSkill'
+      $ref: "#/definitions/NormalizedSkill"
     type: array
   PageLink:
     properties:
@@ -407,7 +420,7 @@ definitions:
         description: Link URI
         type: string
       rel:
-        description: 'Link descriptor (e.g. self, first, prev, next, last)'
+        description: Link descriptor (e.g. self, first, prev, next, last)
         type: string
   Skill:
     properties:
@@ -447,7 +460,7 @@ definitions:
     properties:
       jobs:
         items:
-          $ref: '#/definitions/JobSkill'
+          $ref: "#/definitions/JobSkill"
         type: array
       normalized_job_title:
         description: Normalized title of the job associated with the UUID
@@ -470,17 +483,17 @@ definitions:
     properties:
       related_skill_name:
         items:
-          $ref: '#/definitions/SkillRelatedSkill'
+          $ref: "#/definitions/SkillRelatedSkill"
         type: array
       uuid:
         description: Universally Unique Identifier for the skills
         type: string
   Skills:
     items:
-      $ref: '#/definitions/Skill'
+      $ref: "#/definitions/Skill"
     properties:
       links:
         items:
-          $ref: '#/definitions/PageLink'
+          $ref: "#/definitions/PageLink"
         type: array
     type: array

@@ -1,17 +1,19 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://football-prediction-api.p.rapidapi.com'
+  - url: https://football-prediction-api.p.rapidapi.com
 info:
-  description: 'The Football Prediction API allows developers to get predictions for upcoming football (soccer) matches, results for past matches, and performance monitoring for statistical models.'
-  title: Football Prediction
-  version: '2'
+  description: The Football Prediction API allows developers to get predictions
+    for upcoming football (soccer) matches, results for past matches, and
+    performance monitoring for statistical models.
+  title: Football Prediction API
+  version: "2"
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://boggio-analytics.com/fp-api/schema/football-prediction-openapi.yaml'
-      version: '3.0'
+      url: https://boggio-analytics.com/fp-api/schema/football-prediction-openapi.yaml
+      version: "3.0"
   x-providerName: rapidapi.com
   x-serviceName: football-prediction
 paths:
@@ -19,18 +21,18 @@ paths:
     get:
       description: Returns an array of all the available federations.
       parameters:
-        - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
+        - description: Your key obtained from https://boggio-analytics.com/fp-api/
           in: header
-          name: X-RapidAPI-Key
+          name: X-RapidApi-Key
           schema:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
-                '0':
+                "0":
                   value: '{"data": ["UEFA", "OFC", "CAF", "CONCACAF", "CONMEBOL", "AFC"]}'
               schema:
                 properties:
@@ -39,8 +41,8 @@ paths:
                       type: string
                     type: array
                 type: object
-          description: 'Static response, shows available federations.'
-        '404':
+          description: Static response, shows available federations.
+        "404":
           content:
             application/json:
               schema:
@@ -54,24 +56,28 @@ paths:
                       type: object
                     type: object
                 type: object
-          description: 'Bad request, check response for detailed errors.'
+          description: Bad request, check response for detailed errors.
   /api/v2/list-markets:
     get:
       description: Returns an array of all the supported prediction markets
       parameters:
-        - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
+        - description: Your key obtained from https://boggio-analytics.com/fp-api/
           in: header
-          name: X-RapidAPI-Key
+          name: X-RapidApi-Key
           schema:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
-                '0':
-                  value: '{"data": {"all": ["over_25", "away_over_15", "away_over_05", "classic", "home_over_05", "home_over_15", "btts", "over_35"], "allowed_for_your_subscription": ["over_25", "away_over_15", "away_over_05", "classic", "home_over_05", "home_over_15", "btts", "over_35"]}}'
+                "0":
+                  value: '{"data": {"all": ["over_25", "away_over_15", "away_over_05", "classic",
+                    "home_over_05", "home_over_15", "btts", "over_35"],
+                    "allowed_for_your_subscription": ["over_25", "away_over_15",
+                    "away_over_05", "classic", "home_over_05", "home_over_15",
+                    "btts", "over_35"]}}'
               schema:
                 properties:
                   data:
@@ -86,8 +92,9 @@ paths:
                         type: array
                     type: object
                 type: object
-          description: 'Static response, shows available markets for the current subscription and all available markets in general.'
-        '404':
+          description: Static response, shows available markets for the current
+            subscription and all available markets in general.
+        "404":
           content:
             application/json:
               schema:
@@ -101,19 +108,19 @@ paths:
                       type: object
                     type: object
                 type: object
-          description: 'Bad request, check response for detailed errors.'
+          description: Bad request, check response for detailed errors.
   /api/v2/performance-stats:
     get:
-      description: 'Returns predictions accuracy in the last 1, 7, 14, 30 days.'
+      description: Returns predictions accuracy in the last 1, 7, 14, 30 days.
       parameters:
-        - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
+        - description: Your key obtained from https://boggio-analytics.com/fp-api/
           in: header
-          name: X-RapidAPI-Key
+          name: X-RapidApi-Key
           schema:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -190,8 +197,9 @@ paths:
                         type: string
                     type: object
                 type: object
-          description: 'Good request, returns object that contains accuracy and other datails about predictions.'
-        '404':
+          description: Good request, returns object that contains accuracy and other
+            datails about predictions.
+        "404":
           content:
             application/json:
               schema:
@@ -205,21 +213,25 @@ paths:
                       type: object
                     type: object
                 type: object
-          description: 'Bad request, check response for detailed errors.'
+          description: Bad request, check response for detailed errors.
   /api/v2/predictions:
     get:
-      description: This endpoint returns by default the next non-expired football predictions. URL parameters can be specified to show specific date in the past or future or to filter by federation and prediction market name.
+      description: This endpoint returns by default the next non-expired football
+        predictions. URL parameters can be specified to show specific date in
+        the past or future or to filter by federation and prediction market
+        name.
       parameters:
-        - description: 'Your key obtained from https://boggio-analytics.com/fp-api/'
+        - description: Your key obtained from https://boggio-analytics.com/fp-api/
           in: header
-          name: X-RapidAPI-Key
+          name: X-RapidApi-Key
           schema:
             format: uuid
             type: string
       responses:
-        '200':
-          description: 'Good request, returns object that contains data array with all predictions.'
-        '404':
+        "200":
+          description: Good request, returns object that contains data array with all
+            predictions.
+        "404":
           content:
             application/json:
               schema:
@@ -233,8 +245,8 @@ paths:
                       type: object
                     type: object
                 type: object
-          description: 'Bad request, check response for detailed errors.'
-  '/api/v2/predictions/{id}':
+          description: Bad request, check response for detailed errors.
+  "/api/v2/predictions/{id}":
     get:
       description: Returns all predictions available for a match id.
       parameters:
@@ -245,7 +257,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -255,8 +267,9 @@ paths:
                       type: object
                     type: array
                 type: object
-          description: 'Good request, returns object that contains all the predictions for a certain event.'
-        '404':
+          description: Good request, returns object that contains all the predictions for
+            a certain event.
+        "404":
           content:
             application/json:
               schema:
@@ -270,4 +283,4 @@ paths:
                       type: object
                     type: object
                 type: object
-          description: 'Bad request, check response for detailed errors.'
+          description: Bad request, check response for detailed errors.

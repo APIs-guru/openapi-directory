@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: cnab-online.herokuapp.com
@@ -11,12 +11,12 @@ info:
     - financial
   x-description-language: pt
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'http://cnab-online.github.io/img/logo.png'
+    backgroundColor: "#FFFFFF"
+    url: http://cnab-online.github.io/img/logo.png
   x-origin:
     - format: swagger
-      url: 'http://cnab-online.github.io/api-reference/api-reference-v1.json'
-      version: '2.0'
+      url: http://cnab-online.github.io/api-reference/api-reference-v1.json
+      version: "2.0"
   x-providerName: cnab-online.herokuapp.com
 produces:
   - application/json
@@ -25,8 +25,9 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: |
-        Processa um arquivo CNAB para obter informações sobre o mesmo. Retorna um ID temporário para o mesmo.
+      description: >
+        Processa um arquivo CNAB para obter informações sobre o mesmo. Retorna
+        um ID temporário para o mesmo.
       parameters:
         - description: Arquivo CNAB
           in: formData
@@ -34,21 +35,21 @@ paths:
           required: true
           type: file
       responses:
-        '200':
+        "200":
           description: Informações básicas do arquivo
           schema:
             properties:
               data:
-                $ref: '#/definitions/File'
+                $ref: "#/definitions/File"
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Faz o upload de um arquivo
       tags:
         - file
-  '/file/{fileId}':
+  "/file/{fileId}":
     get:
       parameters:
         - description: ID Temporário gerado no endpoint file
@@ -57,21 +58,21 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Informações básicas do arquivo
           schema:
             properties:
               data:
-                $ref: '#/definitions/File'
+                $ref: "#/definitions/File"
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Retorna as informações básicas de um arquivo previamente processado
       tags:
         - file
-  '/file/{fileId}/lines':
+  "/file/{fileId}/lines":
     get:
       parameters:
         - description: ID Temporário gerado no endpoint file
@@ -80,23 +81,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Informações básicas do arquivo
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Line'
+                  $ref: "#/definitions/Line"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Retorna todas as linhas e seus respectivos campos (de forma não processada, apenas indicando os campos reconhecidos)'
+            $ref: "#/definitions/Error"
+      summary: Retorna todas as linhas e seus respectivos campos (de forma não
+        processada, apenas indicando os campos reconhecidos)
       tags:
         - file
-  '/file/{fileId}/occurrences':
+  "/file/{fileId}/occurrences":
     get:
       parameters:
         - description: ID Temporário gerado no endpoint file
@@ -105,19 +107,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Informações básicas do arquivo
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Occurrence'
+                  $ref: "#/definitions/Occurrence"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Retorna as informações de baixa de boletos e outros tipos de ocorrências
       tags:
         - file
@@ -231,10 +233,12 @@ definitions:
             description: Retorna se é para dar baixa no boleto
             type: boolean
           is_rejected_payment:
-            description: 'Retorno se é uma baixa rejeitada (Ex: pedido de baixa foi rejeitado)'
+            description: "Retorno se é uma baixa rejeitada (Ex: pedido de baixa foi
+              rejeitado)"
             type: boolean
           liquidation_code:
-            description: 'Retorna o código de liquidação, normalmente usado para saber onde o cliente efetuou o pagamento'
+            description: Retorna o código de liquidação, normalmente usado para saber onde o
+              cliente efetuou o pagamento
             type: string
           liquidation_description:
             description: Retorna a descrição do código de liquidação
@@ -243,7 +247,7 @@ definitions:
             description: Retorna o valor de juros e mora
             type: string
           occurrence_date:
-            description: 'Retorna a data da ocorrencia, o dia do pagamento'
+            description: Retorna a data da ocorrencia, o dia do pagamento
             type: string
           others_credits_value:
             description: Retorna o valor de outros creditos
@@ -270,7 +274,8 @@ definitions:
             description: Retorna o número da carteira do boleto
             type: string
       id:
-        description: Posição da ocorrência em relação às outras ocorrências processadas neste mesmo arquivo
+        description: Posição da ocorrência em relação às outras ocorrências processadas
+          neste mesmo arquivo
         type: integer
       type:
         description: Sempre 'occurrences' para seguir a especificação JSON API

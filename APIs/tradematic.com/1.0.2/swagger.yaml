@@ -1,48 +1,57 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.tradematic.com
 info:
   contact:
     email: support@tradematic.com
-  description: |
+  description: >
     ### Overview
+
     Tradematic Cloud is a trading infrastructure for building investment services.
 
+
     It’s a trading engine + API + ready-made adapters to stock and forex brokers, crypto exchanges, and market data providers.
+
 
     You can use it as a cloud API, or you can deploy it on your servers. 
 
 
 
+
     ### How to use Tradematic Cloud API
+
 
     Sign up at [tradematic.cloud](https://tradematic.cloud). After signing up, you will receive your API key.
 
+
     ### Authorization
+
 
     Add the 'X-API-KEY' header with your API key to each request.
 
+
     ### Examples of writing code with Tradematic Cloud API
+
 
     Examples are available at [tradematic.cloud](https://tradematic.cloud). 
 
+
     ### Swagger (.yaml) File
+
     Swagger (.yaml) file can be found [here](http://tradematic.cloud/sdk/swagger.yaml).
-  title: Tradematic Cloud
+  title: Tradematic Cloud API
   version: 1.0.2
   x-apisguru-categories:
     - financial
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://tradematic.cloud/img/logo-dark.png'
+    backgroundColor: "#FFFFFF"
+    url: https://tradematic.cloud/img/logo-dark.png
   x-origin:
     - format: swagger
-      url: 'https://tradematic.cloud/sdk/swagger.yaml'
-      version: '2.0'
+      url: https://tradematic.cloud/sdk/swagger.yaml
+      version: "2.0"
   x-providerName: tradematic.com
-produces:
-  - application/json
 securityDefinitions:
   Secured:
     in: header
@@ -69,17 +78,19 @@ paths:
   /autofollow/strategies:
     get:
       description: Get autofollow strategies list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Strategy'
+              $ref: "#/definitions/Strategy"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get autofollow strategies list
@@ -94,26 +105,28 @@ paths:
           schema:
             properties:
               strategy:
-                $ref: '#/definitions/NewStrategy'
+                $ref: "#/definitions/NewStrategy"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               strategyid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Create new autofollow strategy
       tags:
         - Autofollow API
-  '/autofollow/strategies/{strategyid}':
+  "/autofollow/strategies/{strategyid}":
     get:
       description: Get autofollow strategy by ID
       parameters:
@@ -122,15 +135,17 @@ paths:
           name: strategyid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Strategy'
-        '500':
+            $ref: "#/definitions/Strategy"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get autofollow strategy by ID
@@ -150,26 +165,28 @@ paths:
           schema:
             properties:
               strategy:
-                $ref: '#/definitions/UpdatedStrategy'
+                $ref: "#/definitions/UpdatedStrategy"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               result:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Update autofollow strategy
       tags:
         - Autofollow API
-  '/autofollow/strategies/{strategyid}/content':
+  "/autofollow/strategies/{strategyid}/content":
     put:
       description: Update rules for strategy that was created with strategy builder
       parameters:
@@ -184,26 +201,28 @@ paths:
           schema:
             properties:
               strategy:
-                $ref: '#/definitions/UpdatedStrategyContent'
+                $ref: "#/definitions/UpdatedStrategyContent"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               strategyid:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Update rules for strategy that was created with strategy builder
       tags:
         - Autofollow API
-  '/autofollow/strategies/{strategyid}/positions':
+  "/autofollow/strategies/{strategyid}/positions":
     get:
       description: Get positions for strategy
       parameters:
@@ -212,23 +231,25 @@ paths:
           name: strategyid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/StrategyPosition'
+              $ref: "#/definitions/StrategyPosition"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get positions for strategy
       tags:
         - Autofollow API
-  '/autofollow/strategies/{strategyid}/signals':
+  "/autofollow/strategies/{strategyid}/signals":
     get:
       description: Get trading signals for strategy
       parameters:
@@ -242,17 +263,19 @@ paths:
           name: count
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Signal'
+              $ref: "#/definitions/Signal"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get trading signals for strategy
@@ -272,20 +295,22 @@ paths:
           schema:
             properties:
               signal:
-                $ref: '#/definitions/NewSignal'
+                $ref: "#/definitions/NewSignal"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               signalid:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Send a new signal for autofollow strategy
@@ -294,23 +319,25 @@ paths:
   /builder/rules:
     get:
       description: Get strategy builder rules list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Rule'
+              $ref: "#/definitions/Rule"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get strategy builder rules list
       tags:
         - Builder API
-  '/builder/rules/{ruleid}':
+  "/builder/rules/{ruleid}":
     get:
       description: Get strategy builder rules by ID
       parameters:
@@ -319,17 +346,19 @@ paths:
           name: ruleid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Rule'
+              $ref: "#/definitions/Rule"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get strategy builder rules by ID
@@ -338,17 +367,19 @@ paths:
   /client/apikeys:
     get:
       description: Get API keys
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/APIKey'
+              $ref: "#/definitions/APIKey"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get API keys
@@ -356,8 +387,10 @@ paths:
         - Client API
     post:
       description: Create new API key
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -366,16 +399,16 @@ paths:
               keyid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Create new API key
       tags:
         - Client API
-  '/client/apikeys/{keyid}':
+  "/client/apikeys/{keyid}":
     delete:
       description: Delete API key
       parameters:
@@ -384,18 +417,20 @@ paths:
           name: keyid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               keyid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Delete API key
@@ -404,17 +439,19 @@ paths:
   /client/users:
     get:
       description: Get users list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/User'
+              $ref: "#/definitions/User"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get users list
@@ -423,8 +460,10 @@ paths:
   /client/users/login:
     post:
       description: Logs user into the system
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -433,10 +472,10 @@ paths:
               userid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Logs user into the system
@@ -452,26 +491,28 @@ paths:
           schema:
             properties:
               user:
-                $ref: '#/definitions/NewUser'
+                $ref: "#/definitions/NewUser"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               userid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Register a new user
       tags:
         - Client API
-  '/client/users/{userid}':
+  "/client/users/{userid}":
     get:
       description: Get user by ID
       parameters:
@@ -480,15 +521,17 @@ paths:
           name: userid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/User'
-        '500':
+            $ref: "#/definitions/User"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get user by ID
@@ -497,23 +540,25 @@ paths:
   /cloud/accounts:
     get:
       description: Get trading accounts list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Account'
+              $ref: "#/definitions/Account"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get trading accounts list
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}':
+  "/cloud/accounts/{accountid}":
     get:
       description: Get trading account by ID
       parameters:
@@ -522,21 +567,23 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Account'
-        '500':
+            $ref: "#/definitions/Account"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get trading account by ID
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/closeall':
+  "/cloud/accounts/{accountid}/closeall":
     post:
       description: Close all positions by account
       parameters:
@@ -545,24 +592,26 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Close all positions by account
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/orders':
+  "/cloud/accounts/{accountid}/orders":
     get:
       description: Get orders list by account
       parameters:
@@ -571,17 +620,19 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Order'
+              $ref: "#/definitions/Order"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get orders list by account
@@ -601,26 +652,28 @@ paths:
           schema:
             properties:
               order:
-                $ref: '#/definitions/NewOrder'
+                $ref: "#/definitions/NewOrder"
             type: object
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Place a new order
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/orders/{orderid}':
+  "/cloud/accounts/{accountid}/orders/{orderid}":
     delete:
       description: Cancel an order by ID
       parameters:
@@ -634,24 +687,26 @@ paths:
           name: orderid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Cancel an order by ID
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/snapshots':
+  "/cloud/accounts/{accountid}/snapshots":
     get:
       description: Get account equity and cash snapshots
       parameters:
@@ -660,23 +715,25 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Snapshot'
+              $ref: "#/definitions/Snapshot"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get account equity and cash snapshots
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/sync':
+  "/cloud/accounts/{accountid}/sync":
     post:
       description: Syhchronize an account with account active strategies
       parameters:
@@ -685,24 +742,26 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Syhchronize an account with account active strategies
       tags:
         - Cloud API
-  '/cloud/accounts/{accountid}/trades':
+  "/cloud/accounts/{accountid}/trades":
     get:
       description: Get trades list by account
       parameters:
@@ -711,17 +770,19 @@ paths:
           name: accountid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Trade'
+              $ref: "#/definitions/Trade"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get trades list by account
@@ -730,23 +791,25 @@ paths:
   /cloud/commands:
     get:
       description: Get commands list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Command'
+              $ref: "#/definitions/Command"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get commands list
       tags:
         - Cloud API
-  '/cloud/commands/{commandid}':
+  "/cloud/commands/{commandid}":
     get:
       description: Get command by ID
       parameters:
@@ -755,15 +818,17 @@ paths:
           name: commandid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Command'
-        '500':
+            $ref: "#/definitions/Command"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get command by ID
@@ -772,17 +837,19 @@ paths:
   /cloud/connections:
     get:
       description: Get connections list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Connection'
+              $ref: "#/definitions/Connection"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get connections list
@@ -797,26 +864,28 @@ paths:
           schema:
             properties:
               connection:
-                $ref: '#/definitions/UpdatedConnection'
+                $ref: "#/definitions/UpdatedConnection"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               connectionid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Create a new connection
       tags:
         - Cloud API
-  '/cloud/connections/{connectionid}':
+  "/cloud/connections/{connectionid}":
     delete:
       description: Delete connection by ID
       parameters:
@@ -825,18 +894,20 @@ paths:
           name: connectionid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               connectionid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Delete connection by ID
@@ -850,15 +921,17 @@ paths:
           name: connectionid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Connection'
-        '500':
+            $ref: "#/definitions/Connection"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get connection by ID
@@ -878,20 +951,22 @@ paths:
           schema:
             properties:
               connection:
-                $ref: '#/definitions/UpdatedConnection'
+                $ref: "#/definitions/UpdatedConnection"
             type: object
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               connectionid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Update existing connection
@@ -900,23 +975,25 @@ paths:
   /cloud/connectors:
     get:
       description: Get available connectors list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Connector'
+              $ref: "#/definitions/Connector"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get available connectors list
       tags:
         - Cloud API
-  '/cloud/connectors/{connectorid}':
+  "/cloud/connectors/{connectorid}":
     get:
       description: Get connector by ID
       parameters:
@@ -925,15 +1002,17 @@ paths:
           name: connectorid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Connector'
-        '500':
+            $ref: "#/definitions/Connector"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get connector by ID
@@ -942,23 +1021,25 @@ paths:
   /cloud/sessions:
     get:
       description: Get sessions list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Session'
+              $ref: "#/definitions/Session"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get sessions list
       tags:
         - Cloud API
-  '/cloud/sessions/{sessionid}':
+  "/cloud/sessions/{sessionid}":
     get:
       description: Get session by ID
       parameters:
@@ -967,15 +1048,17 @@ paths:
           name: sessionid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Session'
-        '500':
+            $ref: "#/definitions/Session"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get session by ID
@@ -984,17 +1067,19 @@ paths:
   /cloud/strategies:
     get:
       description: Get list of active (executing) strategies
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/CloudStrategy'
+              $ref: "#/definitions/CloudStrategy"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get list of active (executing) strategies
@@ -1010,26 +1095,28 @@ paths:
           schema:
             properties:
               data:
-                $ref: '#/definitions/StartStrategyData'
+                $ref: "#/definitions/StartStrategyData"
             type: object
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Start a strategy execution for account
       tags:
         - Cloud API
-  '/cloud/strategies/{strategyid}':
+  "/cloud/strategies/{strategyid}":
     get:
       description: Get active (executing) strategy by ID
       parameters:
@@ -1038,23 +1125,25 @@ paths:
           name: strategyid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/CloudStrategy'
+              $ref: "#/definitions/CloudStrategy"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get active (executing) strategy by ID
       tags:
         - Cloud API
-  '/cloud/strategies/{strategyid}/stop':
+  "/cloud/strategies/{strategyid}/stop":
     post:
       description: Stop a strategy execution by ID
       parameters:
@@ -1063,18 +1152,20 @@ paths:
           name: strategyid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               commandid:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Stop a strategy execution by ID
@@ -1083,23 +1174,25 @@ paths:
   /marketdata/markets:
     get:
       description: Get markets list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Market'
+              $ref: "#/definitions/Market"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get markets list
       tags:
         - MarketData API
-  '/marketdata/markets/{marketid}':
+  "/marketdata/markets/{marketid}":
     get:
       description: Get market by ID
       parameters:
@@ -1108,15 +1201,17 @@ paths:
           name: marketid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Market'
-        '500':
+            $ref: "#/definitions/Market"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get market by ID
@@ -1136,23 +1231,25 @@ paths:
           name: filter
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Symbol'
+              $ref: "#/definitions/Symbol"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get symbols list
       tags:
         - MarketData API
-  '/marketdata/symbols/{symbolid}':
+  "/marketdata/symbols/{symbolid}":
     get:
       description: Get symbol by ID
       parameters:
@@ -1161,21 +1258,23 @@ paths:
           name: symbolid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Symbol'
-        '500':
+            $ref: "#/definitions/Symbol"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get symbol by ID
       tags:
         - MarketData API
-  '/marketdata/symbols/{symbolid}/histdata':
+  "/marketdata/symbols/{symbolid}/histdata":
     get:
       description: Get historical data for instrument
       parameters:
@@ -1199,8 +1298,10 @@ paths:
           name: to
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1210,7 +1311,7 @@ paths:
                 type: integer
               results:
                 items:
-                  $ref: '#/definitions/Result'
+                  $ref: "#/definitions/Result"
                 type: array
               resultsCount:
                 type: integer
@@ -1219,10 +1320,10 @@ paths:
               ticker:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get historical data for instrument
@@ -1231,23 +1332,25 @@ paths:
   /news/news:
     get:
       description: Get news list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/News'
+              $ref: "#/definitions/News"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get news list
       tags:
         - News API
-  '/news/news/{newsid}':
+  "/news/news/{newsid}":
     get:
       description: Get news by ID
       parameters:
@@ -1256,15 +1359,17 @@ paths:
           name: newsid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/News'
-        '500':
+            $ref: "#/definitions/News"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get news by ID
@@ -1273,15 +1378,17 @@ paths:
   /ping:
     get:
       description: Ping
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Ping
@@ -1290,17 +1397,19 @@ paths:
   /taskmanager/tasks:
     get:
       description: Get tasks list
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Task'
+              $ref: "#/definitions/Task"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get tasks list
@@ -1315,26 +1424,28 @@ paths:
           schema:
             properties:
               task:
-                $ref: '#/definitions/NewTask'
+                $ref: "#/definitions/NewTask"
             type: object
+      produces:
+        - application/json
       responses:
-        '202':
+        "202":
           description: Successful operation
           schema:
             properties:
               taskid:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Create a new task
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}':
+  "/taskmanager/tasks/{taskid}":
     get:
       description: Get task by ID
       parameters:
@@ -1343,96 +1454,104 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Task'
-        '500':
+            $ref: "#/definitions/Task"
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get task by ID
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/bymonths':
+  "/taskmanager/tasks/{taskid}/bymonths":
     get:
-      description: 'Get backtest data for equity chart, grouped by months'
+      description: Get backtest data for equity chart, grouped by months
       parameters:
         - format: int64
           in: path
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ByMonths'
+              $ref: "#/definitions/ByMonths"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
-      summary: 'Get backtest data for equity chart, grouped by months'
+      summary: Get backtest data for equity chart, grouped by months
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/byquarters':
+  "/taskmanager/tasks/{taskid}/byquarters":
     get:
-      description: 'Get backtest data for equity chart, grouped by quarters'
+      description: Get backtest data for equity chart, grouped by quarters
       parameters:
         - format: int64
           in: path
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ByQuarters'
+              $ref: "#/definitions/ByQuarters"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
-      summary: 'Get backtest data for equity chart, grouped by quarters'
+      summary: Get backtest data for equity chart, grouped by quarters
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/byyears':
+  "/taskmanager/tasks/{taskid}/byyears":
     get:
-      description: 'Get backtest data for equity chart, grouped by years'
+      description: Get backtest data for equity chart, grouped by years
       parameters:
         - format: int64
           in: path
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ByYears'
+              $ref: "#/definitions/ByYears"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
-      summary: 'Get backtest data for equity chart, grouped by years'
+      summary: Get backtest data for equity chart, grouped by years
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/contribution':
+  "/taskmanager/tasks/{taskid}/contribution":
     get:
       description: Get backtest symbol contribution data
       parameters:
@@ -1441,23 +1560,25 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Contribution'
+              $ref: "#/definitions/Contribution"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get backtest symbol contribution data
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/drawdown':
+  "/taskmanager/tasks/{taskid}/drawdown":
     get:
       description: Get data for drawdown chart
       parameters:
@@ -1466,23 +1587,25 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/DrawdownItem'
+              $ref: "#/definitions/DrawdownItem"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get data for drawdown chart
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/equity':
+  "/taskmanager/tasks/{taskid}/equity":
     get:
       description: Get data for equity chart
       parameters:
@@ -1491,23 +1614,25 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/EquityItem'
+              $ref: "#/definitions/EquityItem"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get data for equity chart
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/equitypct':
+  "/taskmanager/tasks/{taskid}/equitypct":
     get:
       description: Get data for equity chart (%)
       parameters:
@@ -1516,23 +1641,25 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/EquityPctItem'
+              $ref: "#/definitions/EquityPctItem"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get data for equity chart (%)
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/equitypctsm':
+  "/taskmanager/tasks/{taskid}/equitypctsm":
     get:
       description: Get spared data for equity chart (%)
       parameters:
@@ -1541,23 +1668,25 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/EquityPctSmItem'
+              $ref: "#/definitions/EquityPctSmItem"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get spared data for equity chart (%)
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/folder':
+  "/taskmanager/tasks/{taskid}/folder":
     get:
       description: Get task result folder name
       parameters:
@@ -1566,24 +1695,26 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               folder:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get task result folder name
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/performance':
+  "/taskmanager/tasks/{taskid}/performance":
     get:
       description: Get backtest statistics
       parameters:
@@ -1592,30 +1723,32 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               buyandhold:
-                $ref: '#/definitions/Longshort'
+                $ref: "#/definitions/Longshort"
               long:
-                $ref: '#/definitions/Longshort'
+                $ref: "#/definitions/Longshort"
               longshort:
-                $ref: '#/definitions/Longshort'
+                $ref: "#/definitions/Longshort"
               short:
-                $ref: '#/definitions/Longshort'
+                $ref: "#/definitions/Longshort"
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get backtest statistics
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/result':
+  "/taskmanager/tasks/{taskid}/result":
     get:
       description: Get task result
       parameters:
@@ -1624,8 +1757,10 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1676,16 +1811,16 @@ paths:
               trades_png:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get task result
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/result2':
+  "/taskmanager/tasks/{taskid}/result2":
     get:
       description: Get task result (version 2)
       parameters:
@@ -1694,8 +1829,10 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1720,16 +1857,16 @@ paths:
               yearProfit:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get task result (version 2)
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/status':
+  "/taskmanager/tasks/{taskid}/status":
     get:
       description: Get task status
       parameters:
@@ -1738,24 +1875,26 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               status:
                 type: string
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get task status
       tags:
         - TaskManager API
-  '/taskmanager/tasks/{taskid}/trades':
+  "/taskmanager/tasks/{taskid}/trades":
     get:
       description: Get backtest trades list
       parameters:
@@ -1764,17 +1903,19 @@ paths:
           name: taskid
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/BacktestTrade'
+              $ref: "#/definitions/BacktestTrade"
             type: array
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get backtest trades list
@@ -1783,18 +1924,20 @@ paths:
   /time:
     get:
       description: Get current server time
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
               servertime:
                 type: integer
             type: object
-        '500':
+        "500":
           description: Error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Secured: []
       summary: Get current server time
@@ -1835,9 +1978,9 @@ definitions:
       hwid:
         type: string
       positions:
-        $ref: '#/definitions/Positions'
+        $ref: "#/definitions/Positions"
       positionspercent:
-        $ref: '#/definitions/Positions'
+        $ref: "#/definitions/Positions"
       sessionid:
         type: string
       typeid:
@@ -1942,7 +2085,7 @@ definitions:
       message:
         type: string
       parameters:
-        $ref: '#/definitions/Parameters'
+        $ref: "#/definitions/Parameters"
       status:
         type: string
       timestamp:
@@ -2055,7 +2198,7 @@ definitions:
         type: string
       parameters:
         items:
-          $ref: '#/definitions/Parameter'
+          $ref: "#/definitions/Parameter"
         type: array
       validnot:
         type: string
@@ -2070,7 +2213,7 @@ definitions:
         type: string
       parameters:
         items:
-          $ref: '#/definitions/Parameter'
+          $ref: "#/definitions/Parameter"
         type: array
       validnot:
         type: string
@@ -2324,7 +2467,7 @@ definitions:
         type: number
       l:
         type: number
-      'n':
+      n:
         type: integer
       o:
         type: number
@@ -2345,7 +2488,7 @@ definitions:
         type: string
       parameters:
         items:
-          $ref: '#/definitions/Parameter'
+          $ref: "#/definitions/Parameter"
         type: array
       ruletype:
         type: string
@@ -2358,11 +2501,11 @@ definitions:
     properties:
       longentry:
         items:
-          $ref: '#/definitions/Longentry'
+          $ref: "#/definitions/Longentry"
         type: array
       longexit:
         items:
-          $ref: '#/definitions/Longexit'
+          $ref: "#/definitions/Longexit"
         type: array
     type: object
   Session:
@@ -2475,21 +2618,21 @@ definitions:
       risklevelname:
         type: string
       rules:
-        $ref: '#/definitions/Rules'
+        $ref: "#/definitions/Rules"
       strategyid:
         type: string
       strategytypeid:
         type: string
       symbols:
         items:
-          $ref: '#/definitions/Symbol'
+          $ref: "#/definitions/Symbol"
         type: array
       taskfolder:
         type: string
       taskid:
         type: string
       taskresult:
-        $ref: '#/definitions/Taskresult'
+        $ref: "#/definitions/Taskresult"
       timeframe:
         type: string
       updatedate:
@@ -2608,7 +2751,7 @@ definitions:
   UpdatedStrategyContent:
     properties:
       rules:
-        $ref: '#/definitions/Rules'
+        $ref: "#/definitions/Rules"
     type: object
   User:
     properties:

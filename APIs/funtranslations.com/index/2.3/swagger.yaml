@@ -1,49 +1,53 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.funtranslations.com
 info:
   contact:
     name: Fun Translations
-    url: 'http://funtranslations.com/'
+    url: http://funtranslations.com/
     x-twitter: funtranslate
-  description: |
-    Funtranslations API gives access to the full set of translations available at funtranslations.com so that you can integrate them in your workflow or an app. [Click here to get details and subscribe](http://funtranslations.com/api) . Here are the individual API links:
+  description: >
+    Funtranslations API gives access to the full set of translations available
+    at funtranslations.com so that you can integrate them in your workflow or an
+    app. [Click here to get details and
+    subscribe](http://funtranslations.com/api) . Here are the individual API
+    links:
 
       ## Morse code API ##
       Morse code conversion API on the cloud. Translate to and from Morse Code.[Click here to subscribe](http://funtranslations.com/api/morse)
       ## Braille API ##
-      Braille conversion API on the cloud. Translate to Braille and get Braille results suitable for many display types.[Click here to subscribe](http://funtranslations.com/api/braille)
+      Braille conversion API on the cloud. Translate to Braille and get Braille results suitable for many display types.[Click here to subscribe](http://funtranslations.com/api/braille)     
       ## Starwars Translation API ##
-      Ever wonder how to talk like Yoda? Well, use our API and let your APP/webpage speak like Yoda too.[Click here to subscribe](http://funtranslations.com/api/yoda)
-
-      Sith Translator API. [Click here to subscribe](http://funtranslations.com/api/sith)
-
-      Cheunh Translator API. [Click here to subscribe](http://funtranslations.com/api/cheunh)
-
+      Ever wonder how to talk like Yoda? Well, use our API and let your APP/webpage speak like Yoda too.[Click here to subscribe](http://funtranslations.com/api/yoda)  
+      
+      Sith Translator API. [Click here to subscribe](http://funtranslations.com/api/sith) 
+      
+      Cheunh Translator API. [Click here to subscribe](http://funtranslations.com/api/cheunh) 
+      
       Huttese Translator API. [Click here to subscribe](http://funtranslations.com/api/huttese)
-
+      
       Mandalorian Translator API. [Click here to subscribe](http://funtranslations.com/api/mandalorian)
-
+      
       Gungan Translator API. [Click here to subscribe](http://funtranslations.com/api/gungan)
-
+      
       ## Pirate Speak Translation API ##
-      Ahoy, matey. Let's get those land lubbers speak our tounge too! Our evergreen pirate speak tranlsator API.[Click here to subscribe](http://funtranslations.com/api/pirate)
+      Ahoy, matey. Let's get those land lubbers speak our tounge too! Our evergreen pirate speak tranlsator API.[Click here to subscribe](http://funtranslations.com/api/pirate) 
       ## Valley Speak Translation API ##
-      Our throwback Valspeak translations API.[Click here to subscribe](http://funtranslations.com/api/valspeak)
+      Our throwback Valspeak translations API.[Click here to subscribe](http://funtranslations.com/api/valspeak)    
       ## Minion Speak Translation API ##
-      Our evil master following minion speak translations API.[Click here to subscribe](http://funtranslations.com/api/minion)
-  termsOfService: 'https://funtranslations.com/terms'
-  title: FunTranslations
-  version: '2.3'
+      Our evil master following minion speak translations API.[Click here to subscribe](http://funtranslations.com/api/minion)     
+  termsOfService: https://funtranslations.com/terms
+  title: FunTranslations API
+  version: "2.3"
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/funtranslate/profile_image?size=original'
+    url: https://twitter.com/funtranslate/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://api.funtranslations.com/yaml/funtranslations.yaml'
-      version: '2.0'
+      url: http://api.funtranslations.com/yaml/funtranslations.yaml
+      version: "2.0"
   x-providerName: funtranslations.com
   x-serviceName: index
 consumes:
@@ -61,42 +65,45 @@ tags:
   - description: Morse Code Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/morse'
+      url: http://funtranslations.com/api/morse
     name: Morse
   - description: Starwars Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/yoda'
+      url: http://funtranslations.com/api/yoda
     name: Starwars
   - description: Startrek Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/yoda'
+      url: http://funtranslations.com/api/yoda
     name: Startrek
   - description: Pirate Speak Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/pirate'
+      url: http://funtranslations.com/api/pirate
     name: Pirate
   - description: Valley Speak Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/valspeak'
+      url: http://funtranslations.com/api/valspeak
     name: Valspeak
   - description: Braille Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/braille'
+      url: http://funtranslations.com/api/braille
     name: Braille
   - description: Minion Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/minion'
+      url: http://funtranslations.com/api/minion
     name: Minion
 paths:
   /translate/braille:
     get:
-      description: Translate from English to Braille. This is what you use if you have a braille display. This API translates the English text into characters that a braille display understands and you can feed the translated text directly to the display.
+      description: Translate from English to Braille. This is what you use if you have
+        a braille display. This API translates the English text into characters
+        that a braille display understands and you can feed the translated text
+        directly to the display.
       parameters:
         - description: Text to translate
           format: string
@@ -104,11 +111,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -122,7 +133,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -131,14 +142,16 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }    
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
         - Braille
   /translate/braille/dots:
     get:
-      description: Use this to see which dots are enabled for each Braille letters. This is highly educational (to see which dots are enabled) and can potentially drive a non braille display which works on individual dots.
+      description: Use this to see which dots are enabled for each Braille letters.
+        This is highly educational (to see which dots are enabled) and can
+        potentially drive a non braille display which works on individual dots.
       parameters:
         - description: Text to translate
           format: string
@@ -146,8 +159,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -203,7 +220,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -212,14 +229,16 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }        
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
         - Braille
   /translate/braille/html:
     get:
-      description: Translate from English to Braille Image characters. This is probably what you want to use if you are displaying braille in a browser.
+      description: Translate from English to Braille Image characters. This is
+        probably what you want to use if you are displaying braille in a
+        browser.
       parameters:
         - description: Text to translate
           format: string
@@ -227,8 +246,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -284,7 +307,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -293,14 +316,16 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }                                            
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
         - Braille
   /translate/braille/image:
     get:
-      description: Translate from English to Braille image characters. This is probably what you want to use if you are displaying braille in a browser.
+      description: Translate from English to Braille image characters. This is
+        probably what you want to use if you are displaying braille in a
+        browser.
       parameters:
         - description: Text to translate
           format: string
@@ -308,11 +333,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -365,7 +394,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -374,7 +403,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -389,8 +418,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -446,7 +479,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -455,7 +488,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }    
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -470,11 +503,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -485,7 +522,7 @@ paths:
                   "translation": "brooklyn"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -494,7 +531,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -509,11 +546,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -524,7 +565,7 @@ paths:
                   "translation": "chef"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -533,7 +574,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -548,11 +589,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -563,7 +608,7 @@ paths:
                   "translation": "cheunh"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -572,7 +617,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }   
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -587,11 +632,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -602,7 +651,7 @@ paths:
                   "translation": "cockney"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -611,7 +660,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -626,8 +675,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -641,7 +694,7 @@ paths:
                   "translation": "dolan"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -665,8 +718,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -680,7 +737,7 @@ paths:
                   "translation": "dothraki"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -689,7 +746,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -704,11 +761,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -719,16 +780,16 @@ paths:
                   "translation": "ermahgerd"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "error": {
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }                                                                                
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -743,11 +804,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -758,7 +823,7 @@ paths:
                   "translation": "ferblatin"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -767,7 +832,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }            
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -782,8 +847,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -797,7 +866,7 @@ paths:
                   "translation": "fudd"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -806,7 +875,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }                   
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -821,11 +890,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -836,7 +909,7 @@ paths:
                   "translation": "gungan"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -845,7 +918,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -860,8 +933,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -875,7 +952,7 @@ paths:
                   "translation": "huttese"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -899,11 +976,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -914,7 +995,7 @@ paths:
                   "translation": "jive"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -923,7 +1004,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }       
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -938,11 +1019,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -953,7 +1038,7 @@ paths:
                   "translation": "klingon"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -977,8 +1062,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -992,7 +1081,7 @@ paths:
                   "translation": "mandalorian"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1016,8 +1105,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -1031,7 +1124,7 @@ paths:
                   "translation": "minion"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1040,7 +1133,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }     
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1055,11 +1148,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1070,7 +1167,7 @@ paths:
                   "translation": "morse"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1106,11 +1203,15 @@ paths:
           name: tone
           required: true
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -1128,7 +1229,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1152,11 +1253,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -1170,7 +1275,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1194,11 +1299,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1209,7 +1318,7 @@ paths:
                   "translation": "oldenglish"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1218,7 +1327,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }  
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1233,11 +1342,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1248,7 +1361,7 @@ paths:
                   "translation": "piglatin"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1257,7 +1370,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }              
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1272,11 +1385,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1287,7 +1404,7 @@ paths:
                   "translation": "pirate"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1296,7 +1413,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1311,11 +1428,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1326,7 +1447,7 @@ paths:
                   "translation": "quenya"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1335,7 +1456,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }                       
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1350,11 +1471,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1365,7 +1490,7 @@ paths:
                   "translation": "shakespeare"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1374,7 +1499,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1389,11 +1514,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1404,7 +1533,7 @@ paths:
                   "translation": "sindarin"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1413,7 +1542,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }  
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1428,11 +1557,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1443,7 +1576,7 @@ paths:
                   "translation": "sith"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1467,11 +1600,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1482,7 +1619,7 @@ paths:
                   "translation": "uk2us"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1491,7 +1628,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }                                         
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1506,8 +1643,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -1521,7 +1662,7 @@ paths:
                   "translation": "us2uk"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1530,7 +1671,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }  
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1545,11 +1686,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1560,7 +1705,7 @@ paths:
                   "translation": "valspeak"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1569,7 +1714,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1584,11 +1729,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1599,7 +1748,7 @@ paths:
                   "translation": "valyrian"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1623,11 +1772,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -1638,7 +1791,7 @@ paths:
                   "translation": "vulcan"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1647,7 +1800,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              }  
       security:
         - X-Funtranslations-Api-Secret: []
       tags:
@@ -1662,8 +1815,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -1677,7 +1834,7 @@ paths:
                   "translation": "yoda"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -1686,7 +1843,7 @@ paths:
                       "code": 401,
                       "message": "Unauthorized"
                   }
-              }
+              } 
       security:
         - X-Funtranslations-Api-Secret: []
       tags:

@@ -1,26 +1,26 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: slicebox.local
 basePath: /api
 info:
   contact:
-    url: 'http://github.org/slicebox/slicebox'
+    url: http://github.org/slicebox/slicebox
   description: Slicebox - safe sharing of medical images
   license:
     name: Apache 2.0 License
-    url: 'http://opensource.org/licenses/Apache-2.0'
-  title: Slicebox
-  version: '2.0'
+    url: http://opensource.org/licenses/Apache-2.0
+  title: Slicebox API
+  version: "2.0"
   x-apisguru-categories:
     - collaboration
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://avatars0.githubusercontent.com/u/12760279?s=200&v=4'
+    backgroundColor: "#FFFFFF"
+    url: https://avatars0.githubusercontent.com/u/12760279?s=200&v=4
   x-origin:
     - format: swagger
-      url: 'https://slicebox.github.io/slicebox-api/swagger.yaml'
-      version: '2.0'
+      url: https://slicebox.github.io/slicebox-api/swagger.yaml
+      version: "2.0"
   x-providerName: slicebox.local
 consumes:
   - application/json
@@ -30,7 +30,8 @@ produces:
   - application/json
   - application/octet-stream
 tags:
-  - description: General routes applicable to multiple aspects of the slicebox API and to the slicebox system
+  - description: General routes applicable to multiple aspects of the slicebox API
+      and to the slicebox system
     name: General
   - description: Methods for handling structured importing of DICOM files into slicebox
     name: Import
@@ -38,19 +39,23 @@ tags:
     name: Meta Data
   - description: Methods concerning images and datasets
     name: Images
-  - description: Methods concerning anonymization and de-anonymization of images and the associated anonymization data
+  - description: Methods concerning anonymization and de-anonymization of images and
+      the associated anonymization data
     name: Anonymization
   - description: Methods for handling box-to-box connections and issuing box commands
     name: Boxes
-  - description: Methods for handling box-to-box transactions of images (primarily for internal slicebox use)
+  - description: Methods for handling box-to-box transactions of images (primarily
+      for internal slicebox use)
     name: Transactions
-  - description: Methods for handling DICOM storage class providers for receiving images from PACS
+  - description: Methods for handling DICOM storage class providers for receiving
+      images from PACS
     name: SCPs
   - description: Methods for handling DICOM storage class users for sending images to PACS
     name: SCUs
   - description: Methods for handling watch directories for importing images stored as files
     name: Directories
-  - description: Methods for handling forwarding rules for automatically forwarding image data from sources to destinations.
+  - description: Methods for handling forwarding rules for automatically forwarding
+      image data from sources to destinations.
     name: Forwarding
   - description: Methods for handling filtering of DICOM attributes on incoming objects.
     name: Filtering
@@ -63,7 +68,9 @@ tags:
 paths:
   /anonymization/anonymize:
     post:
-      description: 'anonymize the images corresponding to the supplied list of image IDs (each paired with a list of DICOM tag translation). This route corresponds to repeated use of the route /images/{id}/anonymize.'
+      description: anonymize the images corresponding to the supplied list of image
+        IDs (each paired with a list of DICOM tag translation). This route
+        corresponds to repeated use of the route /images/{id}/anonymize.
       parameters:
         - description: parameters of anonymization key query
           in: body
@@ -71,20 +78,21 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/imageTagValues'
+              $ref: "#/definitions/imageTagValues"
             type: array
       responses:
-        '200':
+        "200":
           description: the list of newly created anonymous images
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
       tags:
         - Anonymization
   /anonymization/keys:
     get:
-      description: 'get a list of anonymization keys, each specifying how vital DICOM attributes have been anonymized for a particular image'
+      description: get a list of anonymization keys, each specifying how vital DICOM
+        attributes have been anonymized for a particular image
       parameters:
         - default: 0
           description: start index of returned slice of anonymization keys
@@ -106,22 +114,23 @@ paths:
           required: false
           type: string
         - default: true
-          description: 'order result ascendingly if true, descendingly otherwise'
+          description: order result ascendingly if true, descendingly otherwise
           in: query
           name: orderascending
           required: false
           type: boolean
-        - description: filter the results by matching substrings of properties against this value
+        - description: filter the results by matching substrings of properties against
+            this value
           in: query
           name: filter
           required: false
           type: string
       responses:
-        '200':
-          description: 'anonymization keys, one per DICOM image'
+        "200":
+          description: anonymization keys, one per DICOM image
           schema:
             items:
-              $ref: '#/definitions/anonymizationKey'
+              $ref: "#/definitions/anonymizationKey"
             type: array
       tags:
         - Anonymization
@@ -129,7 +138,7 @@ paths:
     get:
       description: export all anonymization keys as a csv file
       responses:
-        '200':
+        "200":
           description: all anonymization keys as a csv file
           schema:
             type: string
@@ -144,17 +153,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/anonymizationKeyQuery'
+            $ref: "#/definitions/anonymizationKeyQuery"
       responses:
-        '200':
+        "200":
           description: anonymization keys
           schema:
             items:
-              $ref: '#/definitions/anonymizationKey'
+              $ref: "#/definitions/anonymizationKey"
             type: array
       tags:
         - Anonymization
-  '/anonymization/keys/{id}':
+  "/anonymization/keys/{id}":
     delete:
       description: delete an anonymization key that is no longer of interest
       parameters:
@@ -165,7 +174,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: anonymization key deleted
       tags:
         - Anonymization
@@ -179,17 +188,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: anonymization key for the supplied ID
           schema:
-            $ref: '#/definitions/anonymizationKey'
-        '404':
+            $ref: "#/definitions/anonymizationKey"
+        "404":
           description: if no anonymization key could be found for the supplied ID
       tags:
         - Anonymization
-  '/anonymization/keys/{id}/keyvalues':
+  "/anonymization/keys/{id}/keyvalues":
     get:
-      description: get pointers to the images corresponding to the anonymization key with the supplied ID
+      description: get pointers to the images corresponding to the anonymization key
+        with the supplied ID
       parameters:
         - description: ID of anonymization key
           format: int64
@@ -198,25 +208,27 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: an array of anonymization key-value pairs corresponding to the anonymization key for the supplied ID
+        "200":
+          description: an array of anonymization key-value pairs corresponding to the
+            anonymization key for the supplied ID
           schema:
             items:
-              $ref: '#/definitions/anonymizationKeyValue'
+              $ref: "#/definitions/anonymizationKeyValue"
             type: array
-        '404':
+        "404":
           description: if no anonymization key could be found for the supplied ID
       tags:
         - Anonymization
   /anonymization/options:
     get:
-      description: list all supported anonymization options defining an anonymization profile
+      description: list all supported anonymization options defining an anonymization
+        profile
       responses:
-        '200':
+        "200":
           description: supported anonymization options
           schema:
             items:
-              $ref: '#/definitions/confidentialityOption'
+              $ref: "#/definitions/confidentialityOption"
             type: array
       tags:
         - Anonymization
@@ -239,51 +251,54 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: box connections
           schema:
             items:
-              $ref: '#/definitions/box'
+              $ref: "#/definitions/box"
             type: array
       tags:
         - Boxes
   /boxes/connect:
     post:
-      description: connect to another box using a received URL. Used to connect to a public box.
+      description: connect to another box using a received URL. Used to connect to a
+        public box.
       parameters:
         - description: remote box to connect with
           in: body
           name: remoteBox
           required: true
           schema:
-            $ref: '#/definitions/remoteBox'
+            $ref: "#/definitions/remoteBox"
       responses:
-        '201':
+        "201":
           description: connected box
           schema:
-            $ref: '#/definitions/box'
+            $ref: "#/definitions/box"
       tags:
         - Boxes
   /boxes/createconnection:
     post:
-      description: create a new box connection where the supplied entity holds the remote box name. Used by publicly available boxes.
+      description: create a new box connection where the supplied entity holds the
+        remote box name. Used by publicly available boxes.
       parameters:
         - description: name of box to connect (and send URL) to
           in: body
           name: remoteBoxConnectionData
           required: true
           schema:
-            $ref: '#/definitions/remoteBoxConnectionData'
+            $ref: "#/definitions/remoteBoxConnectionData"
       responses:
-        '201':
+        "201":
           description: remote box of the connection
           schema:
-            $ref: '#/definitions/box'
+            $ref: "#/definitions/box"
       tags:
         - Boxes
   /boxes/incoming:
     get:
-      description: 'get incoming transactions (finished, currently receiving, waiting or failed)'
+      description: get incoming transactions (finished, currently receiving, waiting
+        or failed)
       parameters:
         - default: 0
           description: start index of returned slice of transactions
@@ -300,17 +315,19 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
-          description: 'incoming transactions, sorted from most to least recently updated'
+        "200":
+          description: incoming transactions, sorted from most to least recently updated
           schema:
             items:
-              $ref: '#/definitions/incomingTransaction'
+              $ref: "#/definitions/incomingTransaction"
             type: array
       tags:
         - Boxes
-  '/boxes/incoming/{id}':
+  "/boxes/incoming/{id}":
     delete:
-      description: 'delete an incoming transaction. If a currently active transaction is deleted, a new transaction with the remainder of the images is created when receiving the next incoming image.'
+      description: delete an incoming transaction. If a currently active transaction
+        is deleted, a new transaction with the remainder of the images is
+        created when receiving the next incoming image.
       parameters:
         - description: ID of incoming transaction
           format: int64
@@ -319,13 +336,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: incoming transaction deleted
       tags:
         - Boxes
-  '/boxes/incoming/{id}/images':
+  "/boxes/incoming/{id}/images":
     get:
-      description: get the received images corresponding to the incoming transaction with the supplied ID
+      description: get the received images corresponding to the incoming transaction
+        with the supplied ID
       parameters:
         - description: ID of incoming transaction
           format: int64
@@ -334,19 +352,20 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: images received corresponding to the specified incoming transaction
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
-        '404':
+        "404":
           description: incoming transaction not found (invalid ID)
       tags:
         - Boxes
   /boxes/outgoing:
     get:
-      description: 'get outgoing transactions (finished, currently sending, waiting or failed)'
+      description: get outgoing transactions (finished, currently sending, waiting or
+        failed)
       parameters:
         - default: 0
           description: start index of returned slice of transactions
@@ -363,15 +382,15 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
-          description: 'outgoing transactions, finished, sending, waiting or failed'
+        "200":
+          description: outgoing transactions, finished, sending, waiting or failed
           schema:
             items:
-              $ref: '#/definitions/outgoingTransaction'
+              $ref: "#/definitions/outgoingTransaction"
             type: array
       tags:
         - Boxes
-  '/boxes/outgoing/{id}':
+  "/boxes/outgoing/{id}":
     delete:
       description: delete an outgoing transaction. This will stop ongoing transactions.
       parameters:
@@ -382,13 +401,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: outgoing transaction deleted
       tags:
         - Boxes
-  '/boxes/outgoing/{id}/images':
+  "/boxes/outgoing/{id}/images":
     get:
-      description: get the sent images corresponding to the outgoing transaction with the supplied ID
+      description: get the sent images corresponding to the outgoing transaction with
+        the supplied ID
       parameters:
         - description: ID of outgoing transaction
           format: int64
@@ -397,17 +417,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: images sent corresponding to the specified outgoing transaction
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
-        '404':
+        "404":
           description: outgoing transaction not found (invalid ID)
       tags:
         - Boxes
-  '/boxes/{id}':
+  "/boxes/{id}":
     delete:
       description: Delete the remote box with the supplied ID
       parameters:
@@ -418,13 +438,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: box deleted
       tags:
         - Boxes
-  '/boxes/{id}/send':
+  "/boxes/{id}/send":
     post:
-      description: send images corresponding to the supplied image ids to the remote box with the supplied ID
+      description: send images corresponding to the supplied image ids to the remote
+        box with the supplied ID
       parameters:
         - description: ID of box to send images to
           format: int64
@@ -432,34 +453,39 @@ paths:
           name: id
           required: true
           type: integer
-        - description: specification of which images to send and list of DICOM attribute values to use in anonymized datasets
+        - description: specification of which images to send and list of DICOM attribute
+            values to use in anonymized datasets
           in: body
           name: sequence of image tag values
           required: true
           schema:
-            $ref: '#/definitions/bulkAnonymizationData'
+            $ref: "#/definitions/bulkAnonymizationData"
       responses:
-        '201':
+        "201":
           description: images sent
-        '404':
+        "404":
           description: box not found (invalid ID)
       tags:
         - Boxes
   /destinations:
     get:
-      description: 'Returns a list of currently available destinations. Possible destinations are box - sending data to a remote box, and scu - sending data a receiving SCP.'
+      description: Returns a list of currently available destinations. Possible
+        destinations are box - sending data to a remote box, and scu - sending
+        data a receiving SCP.
       responses:
-        '200':
+        "200":
           description: currently available destinations
           schema:
             items:
-              $ref: '#/definitions/destination'
+              $ref: "#/definitions/destination"
             type: array
       tags:
         - General
   /directorywatches:
     get:
-      description: 'get a list of watch directories. Each watch directory and its sub-directories are watched for incoming DICOM files, which are read and imported into slicebox.'
+      description: get a list of watch directories. Each watch directory and its
+        sub-directories are watched for incoming DICOM files, which are read and
+        imported into slicebox.
       parameters:
         - default: 0
           description: start index of returned slice of watched directories
@@ -476,30 +502,31 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of watched directories
           schema:
             items:
-              $ref: '#/definitions/watchedDirectory'
+              $ref: "#/definitions/watchedDirectory"
             type: array
       tags:
         - Directories
     post:
       description: add a new directory to watch for incoming DICOM files
       parameters:
-        - description: 'directory to setup a watch for. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: directory to setup a watch for. The ID property is irrelevant, the
+            ID of the inserted record is present in the returned data.
           in: body
           name: watchedDirectory
           schema:
-            $ref: '#/definitions/watchedDirectory'
+            $ref: "#/definitions/watchedDirectory"
       responses:
-        '201':
+        "201":
           description: the directory now being watched
           schema:
-            $ref: '#/definitions/watchedDirectory'
+            $ref: "#/definitions/watchedDirectory"
       tags:
         - Directories
-  '/directorywatches/{id}':
+  "/directorywatches/{id}":
     delete:
       description: stop watching and remove the directory corresponding to the supplied ID
       parameters:
@@ -510,7 +537,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: directory watch removed
       tags:
         - Directories
@@ -533,29 +560,31 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of source <-> filter associations
           schema:
             items:
-              $ref: '#/definitions/sourceTagFilter'
+              $ref: "#/definitions/sourceTagFilter"
             type: array
       tags:
         - Filtering
     post:
-      description: 'Inserts or updates a source <-> filter associations. If the specified Source already  has an association this is updated, otherwise a new is inserted.'
+      description: Inserts or updates a source <-> filter associations. If the
+        specified Source already  has an association this is updated, otherwise
+        a new is inserted.
       parameters:
         - description: Source to Filter association
           in: body
           name: sourcetagfilter
           required: true
           schema:
-            $ref: '#/definitions/sourceTagFilter'
+            $ref: "#/definitions/sourceTagFilter"
       responses:
-        '201':
+        "201":
           description: Upserted source <-> filter association
       tags:
         - Filtering
-  '/filtering/associations/{id}':
+  "/filtering/associations/{id}":
     delete:
       description: remove the source <-> filter association corresponding to the supplied ID
       parameters:
@@ -566,7 +595,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: source <-> filter association removed
       tags:
         - Filtering
@@ -589,29 +618,31 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of filters
           schema:
             items:
-              $ref: '#/definitions/filter'
+              $ref: "#/definitions/filter"
             type: array
       tags:
         - Filtering
     post:
-      description: 'Inserts or updates a filter. If a filter with same name as supplied filter exists this filter is updated, otherwise a new filter is inserted.'
+      description: Inserts or updates a filter. If a filter with same name as supplied
+        filter exists this filter is updated, otherwise a new filter is
+        inserted.
       parameters:
         - description: Filter
           in: body
           name: tagFilter
           required: true
           schema:
-            $ref: '#/definitions/filter'
+            $ref: "#/definitions/filter"
       responses:
-        '201':
+        "201":
           description: Filter upserted
       tags:
         - Filtering
-  '/filtering/filters/{id}':
+  "/filtering/filters/{id}":
     delete:
       description: remove the filter corresponding to the supplied ID
       parameters:
@@ -622,11 +653,11 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: Filter removed
       tags:
         - Filtering
-  '/filtering/filters/{id}/tagpaths':
+  "/filtering/filters/{id}/tagpaths":
     get:
       description: List tagpaths for the selected filter
       parameters:
@@ -637,11 +668,11 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of tagpaths
           schema:
             items:
-              $ref: '#/definitions/tagPathTag'
+              $ref: "#/definitions/tagPathTag"
             type: array
       tags:
         - Filtering
@@ -659,13 +690,13 @@ paths:
           name: tagpath
           required: true
           schema:
-            $ref: '#/definitions/tagPathTag'
+            $ref: "#/definitions/tagPathTag"
       responses:
-        '201':
+        "201":
           description: TagPath added
       tags:
         - Filtering
-  '/filtering/filters/{id}/tagpaths/{tagpathid}':
+  "/filtering/filters/{id}/tagpaths/{tagpathid}":
     delete:
       description: remove the tagpath corresponding to the supplied ID
       parameters:
@@ -682,11 +713,11 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: TagPath removed
       tags:
         - Filtering
-  '/forwarding/rule/{id}':
+  "/forwarding/rule/{id}":
     delete:
       description: remove the forwarding rule corresponding to the supplied ID
       parameters:
@@ -697,13 +728,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: forwarding rule removed
       tags:
         - Forwarding
   /forwarding/rules:
     get:
-      description: 'get a list of all forwarding rules. A forwarding rule specifies the automatic forwarding of images from a source (SCP, BOX, etc.) to a destimation (BOX, SCU, etc.)'
+      description: get a list of all forwarding rules. A forwarding rule specifies the
+        automatic forwarding of images from a source (SCP, BOX, etc.) to a
+        destimation (BOX, SCU, etc.)
       parameters:
         - default: 0
           description: start index of returned slice of rules
@@ -720,27 +753,28 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of forwarding rules
           schema:
             items:
-              $ref: '#/definitions/forwardingrule'
+              $ref: "#/definitions/forwardingrule"
             type: array
       tags:
         - Forwarding
     post:
       description: add a new forwarding rule
       parameters:
-        - description: 'The forwarding rule to add. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: The forwarding rule to add. The ID property is irrelevant, the ID
+            of the inserted record is present in the returned data.
           in: body
           name: FowardingRule
           schema:
-            $ref: '#/definitions/forwardingrule'
+            $ref: "#/definitions/forwardingrule"
       responses:
-        '201':
+        "201":
           description: the created forwarding rule
           schema:
-            $ref: '#/definitions/forwardingrule'
+            $ref: "#/definitions/forwardingrule"
       tags:
         - Forwarding
   /images:
@@ -753,19 +787,22 @@ paths:
           required: true
           type: file
       responses:
-        '200':
-          description: meta data for added dataset on the image level of the DICOM hierarchy. Status code 200 signifies that this image was already present in the slicebox database.
+        "200":
+          description: meta data for added dataset on the image level of the DICOM
+            hierarchy. Status code 200 signifies that this image was already
+            present in the slicebox database.
           schema:
-            $ref: '#/definitions/image'
-        '201':
+            $ref: "#/definitions/image"
+        "201":
           description: meta data for added dataset on the image level of the DICOM hierarchy
           schema:
-            $ref: '#/definitions/image'
+            $ref: "#/definitions/image"
       tags:
         - Images
   /images/delete:
     post:
-      description: 'bulk delete a sequence of images according to the supplied image IDs. This is the same as a sequence of DELETE requests to /images/{id}'
+      description: bulk delete a sequence of images according to the supplied image
+        IDs. This is the same as a sequence of DELETE requests to /images/{id}
       parameters:
         - description: IDs of images to delete
           in: body
@@ -777,7 +814,7 @@ paths:
               type: integer
             type: array
       responses:
-        '204':
+        "204":
           description: Images deleted
       tags:
         - Images
@@ -794,12 +831,14 @@ paths:
       produces:
         - application/zip
       responses:
-        '200':
+        "200":
           description: zip archive of images
       tags:
         - Images
     post:
-      description: 'create an export set, a group of image IDs of images to export. The export set will contain the selected images. The export set is available for download 12 hours before it is automatically deleted.'
+      description: create an export set, a group of image IDs of images to export. The
+        export set will contain the selected images. The export set is available
+        for download 12 hours before it is automatically deleted.
       parameters:
         - description: ids of images to export
           in: body
@@ -811,17 +850,21 @@ paths:
               type: integer
             type: array
       responses:
-        '200':
-          description: ID of created export set. To be used with the associated GET method for downloading.
+        "200":
+          description: ID of created export set. To be used with the associated GET method
+            for downloading.
           schema:
-            $ref: '#/definitions/exportSetId'
-        '201':
-          description: if the supplied list of image ids is empty or no if images could be found
+            $ref: "#/definitions/exportSetId"
+        "201":
+          description: if the supplied list of image ids is empty or no if images could be
+            found
       tags:
         - Images
   /images/jpeg:
     post:
-      description: add a JPEG image to slicebox. The image data will be wrapped in a DICOM file and added as a new series belonging to the study with the supplied ID
+      description: add a JPEG image to slicebox. The image data will be wrapped in a
+        DICOM file and added as a new series belonging to the study with the
+        supplied ID
       parameters:
         - description: ID of study to add new series to
           format: int64
@@ -840,13 +883,13 @@ paths:
           required: true
           schema: {}
       responses:
-        '201':
+        "201":
           description: meta data for added dataset on the image level of the DICOM hierarchy
           schema:
-            $ref: '#/definitions/image'
+            $ref: "#/definitions/image"
       tags:
         - Images
-  '/images/{id}':
+  "/images/{id}":
     delete:
       description: Delete the image with the supplied ID
       parameters:
@@ -857,7 +900,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: image deleted
       tags:
         - Images
@@ -873,13 +916,13 @@ paths:
       produces:
         - application/octet-stream
       responses:
-        '200':
+        "200":
           description: binary data of dataset
-        '404':
+        "404":
           description: if no image was found for the supplied image ID
       tags:
         - Images
-  '/images/{id}/anonymize':
+  "/images/{id}/anonymize":
     put:
       description: delete the selected image and replace it with an anonymized version
       parameters:
@@ -894,18 +937,18 @@ paths:
           name: tag values
           required: true
           schema:
-            $ref: '#/definitions/anonymizationData'
+            $ref: "#/definitions/anonymizationData"
       responses:
-        '200':
+        "200":
           description: the newly created anonymous image
           schema:
-            $ref: '#/definitions/image'
-        '404':
+            $ref: "#/definitions/image"
+        "404":
           description: image or corresponding dataset not found
       tags:
         - Anonymization
         - Images
-  '/images/{id}/anonymized':
+  "/images/{id}/anonymized":
     post:
       description: get an anonymized version of the image with the supplied ID
       parameters:
@@ -920,18 +963,19 @@ paths:
           name: tag values
           required: true
           schema:
-            $ref: '#/definitions/anonymizationData'
+            $ref: "#/definitions/anonymizationData"
       responses:
-        '200':
+        "200":
           description: binary data of anonymized dataset
-        '404':
+        "404":
           description: if no image was found for the supplied image ID
       tags:
         - Anonymization
         - Images
-  '/images/{id}/attributes':
+  "/images/{id}/attributes":
     get:
-      description: list all DICOM attributes of the dataset corresponding to the supplied image ID
+      description: list all DICOM attributes of the dataset corresponding to the
+        supplied image ID
       parameters:
         - description: ID of image
           format: int64
@@ -940,17 +984,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: list of DICOM attributes
           schema:
             items:
-              $ref: '#/definitions/imageAttribute'
+              $ref: "#/definitions/imageAttribute"
             type: array
-        '404':
+        "404":
           description: if no image was found for the supplied image ID
       tags:
         - Images
-  '/images/{id}/imageinformation':
+  "/images/{id}/imageinformation":
     get:
       description: get basic information about the pixel data of an image
       parameters:
@@ -961,17 +1005,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: basic information about the pixeldata of an image
           schema:
-            $ref: '#/definitions/imageInformation'
-        '404':
+            $ref: "#/definitions/imageInformation"
+        "404":
           description: if no image was found for the supplied image ID
       tags:
         - Images
-  '/images/{id}/modify':
+  "/images/{id}/modify":
     put:
-      description: modify and/or insert image attributes according to the input tagpath-value mappings
+      description: modify and/or insert image attributes according to the input
+        tagpath-value mappings
       parameters:
         - description: ID of image to modify
           format: int64
@@ -979,22 +1024,24 @@ paths:
           name: id
           required: true
           type: integer
-        - description: specification of tag paths and corresponding values to insert or modify
+        - description: specification of tag paths and corresponding values to insert or
+            modify
           in: body
           name: tag path value mappings
           required: true
           schema:
             items:
-              $ref: '#/definitions/tagMapping'
+              $ref: "#/definitions/tagMapping"
             type: array
       responses:
-        '201':
+        "201":
           description: image attributes successfully modified
       tags:
         - Images
-  '/images/{id}/png':
+  "/images/{id}/png":
     get:
-      description: get a PNG image representation of the image corresponding to the supplied ID
+      description: get a PNG image representation of the image corresponding to the
+        supplied ID
       parameters:
         - description: ID of image
           format: int64
@@ -1010,21 +1057,24 @@ paths:
           required: false
           type: integer
         - default: 0
-          description: 'intensity window minimum value. If not specified or set to zero, windowing will be selected from relevant DICOM attributes'
+          description: intensity window minimum value. If not specified or set to zero,
+            windowing will be selected from relevant DICOM attributes
           format: int32
           in: query
           name: windowmin
           required: false
           type: integer
         - default: 0
-          description: 'intensity window maximum value. If not specified or set to zero, windowing will be selected from relevant DICOM attributes'
+          description: intensity window maximum value. If not specified or set to zero,
+            windowing will be selected from relevant DICOM attributes
           format: int32
           in: query
           name: windowmax
           required: false
           type: integer
         - default: 0
-          description: 'height of PNG image. If not specified or set to zero, the image height will equal that of the data'
+          description: height of PNG image. If not specified or set to zero, the image
+            height will equal that of the data
           format: int32
           in: query
           name: imageheight
@@ -1033,12 +1083,13 @@ paths:
       produces:
         - image/png
       responses:
-        '200':
+        "200":
           description: image data
-        '404':
+        "404":
           description: if no image was found for the supplied image ID
-        '501':
-          description: if the system is not capable of creating an image representation of the data
+        "501":
+          description: if the system is not capable of creating an image representation of
+            the data
       tags:
         - Images
   /import/sessions:
@@ -1060,31 +1111,32 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: available import sessions
           schema:
             items:
-              $ref: '#/definitions/importSession'
+              $ref: "#/definitions/importSession"
             type: array
       tags:
         - Import
     post:
       description: create a new import sessions
       parameters:
-        - description: The import session to create containing the user defined name of the session
+        - description: The import session to create containing the user defined name of
+            the session
           in: body
           name: import session
           required: true
           schema:
-            $ref: '#/definitions/importSession'
+            $ref: "#/definitions/importSession"
       responses:
-        '201':
+        "201":
           description: the created import session
           schema:
-            $ref: '#/definitions/importSession'
+            $ref: "#/definitions/importSession"
       tags:
         - Import
-  '/import/sessions/{id}':
+  "/import/sessions/{id}":
     delete:
       description: deletes the import session with the supplied ID
       parameters:
@@ -1095,7 +1147,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: import session deleted
       tags:
         - Import
@@ -1109,17 +1161,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: the import session with the supplied ID
           schema:
-            $ref: '#/definitions/importSession'
-        '404':
+            $ref: "#/definitions/importSession"
+        "404":
           description: import session not found (invalid ID)
       tags:
         - Import
-  '/import/sessions/{id}/images':
+  "/import/sessions/{id}/images":
     get:
-      description: get the imported images corresponding to the import session with the supplied ID
+      description: get the imported images corresponding to the import session with
+        the supplied ID
       parameters:
         - description: ID of import session
           format: int64
@@ -1128,13 +1181,13 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: images corresponding to the specified import session
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
-        '404':
+        "404":
           description: import session not found (invalid ID)
       tags:
         - Import
@@ -1153,15 +1206,18 @@ paths:
           required: true
           type: file
       responses:
-        '200':
-          description: meta data for the imported dataset on the image level of the DICOM hierarchy. Status code 200 signifies that this image was already present in the slicebox database.
+        "200":
+          description: meta data for the imported dataset on the image level of the DICOM
+            hierarchy. Status code 200 signifies that this image was already
+            present in the slicebox database.
           schema:
-            $ref: '#/definitions/image'
-        '201':
-          description: meta data for the imported dataset on the image level of the DICOM hierarchy
+            $ref: "#/definitions/image"
+        "201":
+          description: meta data for the imported dataset on the image level of the DICOM
+            hierarchy
           schema:
-            $ref: '#/definitions/image'
-        '404':
+            $ref: "#/definitions/image"
+        "404":
           description: import session not found (invalid ID)
       tags:
         - Import
@@ -1169,7 +1225,7 @@ paths:
     delete:
       description: delete all log messages
       responses:
-        '204':
+        "204":
           description: log messages successfully
       tags:
         - Logs
@@ -1195,21 +1251,21 @@ paths:
           name: subject
           required: false
           type: string
-        - description: 'log type (DEFAULT, INFO, WARN, ERROR) to filter results by'
+        - description: log type (DEFAULT, INFO, WARN, ERROR) to filter results by
           in: query
           name: type
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: log messages
           schema:
             items:
-              $ref: '#/definitions/logEntry'
+              $ref: "#/definitions/logEntry"
             type: array
       tags:
         - Logs
-  '/log/{id}':
+  "/log/{id}":
     delete:
       description: Delete the log entry with the supplied ID
       parameters:
@@ -1220,13 +1276,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: log entry deleted
       tags:
         - Logs
   /metadata/flatseries:
     get:
-      description: 'Returns a list of flattened metadata on the patient, study and series levels'
+      description: Returns a list of flattened metadata on the patient, study and
+        series levels
       parameters:
         - default: 0
           description: start index of returned slice of flat series
@@ -1248,37 +1305,49 @@ paths:
           required: false
           type: string
         - default: true
-          description: 'order result ascendingly if true, descendingly otherwise'
+          description: order result ascendingly if true, descendingly otherwise
           in: query
           name: orderascending
           required: false
           type: boolean
-        - description: filter the results by matching substrings of flat series properties against this value
+        - description: filter the results by matching substrings of flat series properties
+            against this value
           in: query
           name: filter
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more series sources.
+            Examples of sources are user, box, directory or scp. The list of
+            sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more series types. The
+            supplied list of series types must be a comma separated list of
+            series type ids. For instance, the argument seriestypes=3,7,22 shows
+            series assigned to either of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more series tags. The
+            supplied list of series tags must be a comma separated list of
+            series tag ids. For instance, the argument seriestags=6,2,11 shows
+            series with either of the series tags with ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: flat series
           schema:
             items:
-              $ref: '#/definitions/flatSeries'
+              $ref: "#/definitions/flatSeries"
             type: array
       tags:
         - Meta Data
@@ -1291,17 +1360,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/query'
+            $ref: "#/definitions/query"
       responses:
-        '200':
+        "200":
           description: flat series
           schema:
             items:
-              $ref: '#/definitions/flatSeries'
+              $ref: "#/definitions/flatSeries"
             type: array
       tags:
         - Meta Data
-  '/metadata/flatseries/{id}':
+  "/metadata/flatseries/{id}":
     get:
       description: Return the flat series with the supplied ID
       parameters:
@@ -1312,11 +1381,11 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: flat series response
           schema:
-            $ref: '#/definitions/flatSeries'
-        '404':
+            $ref: "#/definitions/flatSeries"
+        "404":
           description: flat series not found (invalid ID)
       tags:
         - Meta Data
@@ -1345,11 +1414,11 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: images
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
       tags:
         - Meta Data
@@ -1362,17 +1431,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/query'
+            $ref: "#/definitions/query"
       responses:
-        '200':
+        "200":
           description: images
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
       tags:
         - Meta Data
-  '/metadata/images/{id}':
+  "/metadata/images/{id}":
     get:
       description: Return the image with the supplied ID
       parameters:
@@ -1383,11 +1452,11 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: image response
           schema:
-            $ref: '#/definitions/image'
-        '404':
+            $ref: "#/definitions/image"
+        "404":
           description: image not found (invalid ID)
       tags:
         - Meta Data
@@ -1415,37 +1484,51 @@ paths:
           required: false
           type: string
         - default: true
-          description: 'order result ascendingly if true, descendingly otherwise'
+          description: order result ascendingly if true, descendingly otherwise
           in: query
           name: orderascending
           required: false
           type: boolean
-        - description: filter the results by matching substrings of patient properties against this value
+        - description: filter the results by matching substrings of patient properties
+            against this value
           in: query
           name: filter
           required: false
           type: string
-        - description: 'filter the results by matching on one or more underlying series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more underlying series
+            sources. Examples of sources are user, box, directory or scp. The
+            list of sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more underlying series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows results including series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more underlying series
+            types. The supplied list of series types must be a comma separated
+            list of series type ids. For instance, the argument
+            seriestypes=3,7,22 shows results including series assigned to either
+            of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more underlying series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows results including series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more underlying series
+            tags. The supplied list of series tags must be a comma separated
+            list of series tag ids. For instance, the argument seriestags=6,2,11
+            shows results including series with either of the series tags with
+            ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: patients
           schema:
             items:
-              $ref: '#/definitions/patient'
+              $ref: "#/definitions/patient"
             type: array
       tags:
         - Meta Data
@@ -1458,17 +1541,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/query'
+            $ref: "#/definitions/query"
       responses:
-        '200':
+        "200":
           description: patients
           schema:
             items:
-              $ref: '#/definitions/patient'
+              $ref: "#/definitions/patient"
             type: array
       tags:
         - Meta Data
-  '/metadata/patients/{id}':
+  "/metadata/patients/{id}":
     get:
       description: Return the patient with the supplied ID
       parameters:
@@ -1479,15 +1562,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: patient response
           schema:
-            $ref: '#/definitions/patient'
-        '404':
+            $ref: "#/definitions/patient"
+        "404":
           description: patient not found (invalid ID)
       tags:
         - Meta Data
-  '/metadata/patients/{id}/images':
+  "/metadata/patients/{id}/images":
     get:
       description: Returns all images for the patient with the supplied patient ID
       parameters:
@@ -1497,27 +1580,38 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'filter the results by matching on one or more series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more series sources.
+            Examples of sources are user, box, directory or scp. The list of
+            sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more series types. The
+            supplied list of series types must be a comma separated list of
+            series type ids. For instance, the argument seriestypes=3,7,22 shows
+            series assigned to either of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more series tags. The
+            supplied list of series tags must be a comma separated list of
+            series tag ids. For instance, the argument seriestags=6,2,11 shows
+            series with either of the series tags with ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: list of images
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
       tags:
         - Meta Data
@@ -1545,27 +1639,38 @@ paths:
           name: studyid
           required: true
           type: integer
-        - description: 'filter the results by matching on one or more series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more series sources.
+            Examples of sources are user, box, directory or scp. The list of
+            sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more series types. The
+            supplied list of series types must be a comma separated list of
+            series type ids. For instance, the argument seriestypes=3,7,22 shows
+            series assigned to either of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more series tags. The
+            supplied list of series tags must be a comma separated list of
+            series tag ids. For instance, the argument seriestags=6,2,11 shows
+            series with either of the series tags with ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: series
           schema:
             items:
-              $ref: '#/definitions/series'
+              $ref: "#/definitions/series"
             type: array
       tags:
         - Meta Data
@@ -1578,17 +1683,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/query'
+            $ref: "#/definitions/query"
       responses:
-        '200':
+        "200":
           description: series
           schema:
             items:
-              $ref: '#/definitions/series'
+              $ref: "#/definitions/series"
             type: array
       tags:
         - Meta Data
-  '/metadata/series/{id}':
+  "/metadata/series/{id}":
     get:
       description: Return the series with the supplied ID
       parameters:
@@ -1599,15 +1704,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: series response
           schema:
-            $ref: '#/definitions/series'
-        '404':
+            $ref: "#/definitions/series"
+        "404":
           description: series not found (invalid ID)
       tags:
         - Meta Data
-  '/metadata/series/{id}/seriestags':
+  "/metadata/series/{id}/seriestags":
     get:
       description: get the list of series tags for the series with the supplied ID.
       parameters:
@@ -1618,13 +1723,13 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of series tags
           schema:
             items:
-              $ref: '#/definitions/seriestag'
+              $ref: "#/definitions/seriestag"
             type: array
-        '404':
+        "404":
           description: series not found (invalid ID)
       tags:
         - Meta Data
@@ -1642,17 +1747,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/seriestag'
+            $ref: "#/definitions/seriestag"
       responses:
-        '201':
+        "201":
           description: added series tag
           schema:
-            $ref: '#/definitions/seriestag'
-        '404':
+            $ref: "#/definitions/seriestag"
+        "404":
           description: if no series with the supplied ID exists
       tags:
         - Meta Data
-  '/metadata/series/{id}/seriestypes':
+  "/metadata/series/{id}/seriestypes":
     delete:
       description: Delete all series types for the series with the supplied ID
       parameters:
@@ -1663,7 +1768,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series types deleted
       tags:
         - Meta Data
@@ -1677,17 +1782,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of series types
           schema:
             items:
-              $ref: '#/definitions/seriestype'
+              $ref: "#/definitions/seriestype"
             type: array
-        '404':
+        "404":
           description: series not found (invalid ID)
       tags:
         - Meta Data
-  '/metadata/series/{id}/source':
+  "/metadata/series/{id}/source":
     get:
       description: Return the source of the series with the supplied ID
       parameters:
@@ -1698,17 +1803,18 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: source for series
           schema:
-            $ref: '#/definitions/source'
-        '404':
+            $ref: "#/definitions/source"
+        "404":
           description: series not found (invalid ID)
       tags:
         - Meta Data
-  '/metadata/series/{seriesId}/seriestags/{seriesTagId}':
+  "/metadata/series/{seriesId}/seriestags/{seriesTagId}":
     delete:
-      description: Delete the series tag with the supplied series tag ID from the series with the supplied series ID
+      description: Delete the series tag with the supplied series tag ID from the
+        series with the supplied series ID
       parameters:
         - description: ID of series
           format: int64
@@ -1723,13 +1829,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series tag removed
       tags:
         - Meta Data
-  '/metadata/series/{seriesId}/seriestypes/{seriesTypeId}':
+  "/metadata/series/{seriesId}/seriestypes/{seriesTypeId}":
     delete:
-      description: Delete the series type with the supplied series type ID from the series with the supplied series ID
+      description: Delete the series type with the supplied series type ID from the
+        series with the supplied series ID
       parameters:
         - description: ID of series
           format: int64
@@ -1744,12 +1851,13 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series type removed
       tags:
         - Meta Data
     put:
-      description: Add the series type with the supplied series type ID to the series with the supplied series ID
+      description: Add the series type with the supplied series type ID to the series
+        with the supplied series ID
       parameters:
         - description: ID of series
           format: int64
@@ -1764,9 +1872,9 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series type added
-        '404':
+        "404":
           description: no series or series type found for the supplied ID(s)
       tags:
         - Meta Data
@@ -1774,11 +1882,11 @@ paths:
     get:
       description: Returns a list of series tags currently currently in use.
       responses:
-        '200':
+        "200":
           description: a list of unique series tags currently used to tag series
           schema:
             items:
-              $ref: '#/definitions/seriestag'
+              $ref: "#/definitions/seriestag"
             type: array
       tags:
         - Meta Data
@@ -1806,27 +1914,40 @@ paths:
           name: patientid
           required: true
           type: integer
-        - description: 'filter the results by matching on one or more underlying series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more underlying series
+            sources. Examples of sources are user, box, directory or scp. The
+            list of sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more underlying series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows results including series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more underlying series
+            types. The supplied list of series types must be a comma separated
+            list of series type ids. For instance, the argument
+            seriestypes=3,7,22 shows results including series assigned to either
+            of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more underlying series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows results including series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more underlying series
+            tags. The supplied list of series tags must be a comma separated
+            list of series tag ids. For instance, the argument seriestags=6,2,11
+            shows results including series with either of the series tags with
+            ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: studies
           schema:
             items:
-              $ref: '#/definitions/study'
+              $ref: "#/definitions/study"
             type: array
       tags:
         - Meta Data
@@ -1839,17 +1960,17 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/query'
+            $ref: "#/definitions/query"
       responses:
-        '200':
+        "200":
           description: studies
           schema:
             items:
-              $ref: '#/definitions/study'
+              $ref: "#/definitions/study"
             type: array
       tags:
         - Meta Data
-  '/metadata/studies/{id}':
+  "/metadata/studies/{id}":
     get:
       description: Return the study with the supplied ID
       parameters:
@@ -1860,15 +1981,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: study response
           schema:
-            $ref: '#/definitions/study'
-        '404':
+            $ref: "#/definitions/study"
+        "404":
           description: study not found (invalid ID)
       tags:
         - Meta Data
-  '/metadata/studies/{id}/images':
+  "/metadata/studies/{id}/images":
     get:
       description: Returns all images for the study with the supplied study ID
       parameters:
@@ -1878,35 +1999,47 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'filter the results by matching on one or more series sources. Examples of sources are user, box, directory or scp. The list of sources to filter results by must have the form TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument sources=box:1,user:5 shows results either sent from (slice)box with id 1 or uploaded by user with id 5.'
+        - description: filter the results by matching on one or more series sources.
+            Examples of sources are user, box, directory or scp. The list of
+            sources to filter results by must have the form
+            TYPE1:ID1,TYPE2:ID2,...,TYPEN:IDN. For instance, the argument
+            sources=box:1,user:5 shows results either sent from (slice)box with
+            id 1 or uploaded by user with id 5.
           in: query
           name: sources
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series types. The supplied list of series types must be a comma separated list of series type ids. For instance, the argument seriestypes=3,7,22 shows series assigned to either of the series types with ids 3, 7 and 22.'
+        - description: filter the results by matching on one or more series types. The
+            supplied list of series types must be a comma separated list of
+            series type ids. For instance, the argument seriestypes=3,7,22 shows
+            series assigned to either of the series types with ids 3, 7 and 22.
           in: query
           name: seriestypes
           required: false
           type: string
-        - description: 'filter the results by matching on one or more series tags. The supplied list of series tags must be a comma separated list of series tag ids. For instance, the argument seriestags=6,2,11 shows series with either of the series tags with ids 6, 2 and 11.'
+        - description: filter the results by matching on one or more series tags. The
+            supplied list of series tags must be a comma separated list of
+            series tag ids. For instance, the argument seriestags=6,2,11 shows
+            series with either of the series tags with ids 6, 2 and 11.
           in: query
           name: seriestags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: list of images
           schema:
             items:
-              $ref: '#/definitions/image'
+              $ref: "#/definitions/image"
             type: array
-        '404':
+        "404":
           description: study not found (invalid ID)
       tags:
         - Meta Data
   /scps:
     get:
-      description: get a list of DICOM SCPs. Each SCP is a server for receiving DICOM images from e.g. a PACS system.
+      description: get a list of DICOM SCPs. Each SCP is a server for receiving DICOM
+        images from e.g. a PACS system.
       parameters:
         - default: 0
           description: start index of returned slice of SCPs
@@ -1923,32 +2056,33 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of SCPs
           schema:
             items:
-              $ref: '#/definitions/scp'
+              $ref: "#/definitions/scp"
             type: array
       tags:
         - SCPs
     post:
       description: add a new SCP for receiving DICOM images
       parameters:
-        - description: 'SCP information. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: SCP information. The ID property is irrelevant, the ID of the
+            inserted record is present in the returned data.
           in: body
           name: scp
           schema:
-            $ref: '#/definitions/scp'
+            $ref: "#/definitions/scp"
       responses:
-        '201':
+        "201":
           description: the created SCP
           schema:
-            $ref: '#/definitions/scp'
-        '400':
+            $ref: "#/definitions/scp"
+        "400":
           description: Invalid port number or AE title
       tags:
         - SCPs
-  '/scps/{id}':
+  "/scps/{id}":
     delete:
       description: shut down and remove the SCP corresponding to the supplied ID
       parameters:
@@ -1959,13 +2093,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: SCP removed
       tags:
         - SCPs
   /scus:
     get:
-      description: 'get a list of DICOM SCUs. Each SCU is a client for sending DICOM images to an SCP, e.g. a PACS system.'
+      description: get a list of DICOM SCUs. Each SCU is a client for sending DICOM
+        images to an SCP, e.g. a PACS system.
       parameters:
         - default: 0
           description: start index of returned slice of SCUs
@@ -1982,32 +2117,33 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of SCUs
           schema:
             items:
-              $ref: '#/definitions/scu'
+              $ref: "#/definitions/scu"
             type: array
       tags:
         - SCUs
     post:
       description: add a new SCU for sending DICOM images
       parameters:
-        - description: 'SCU information. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: SCU information. The ID property is irrelevant, the ID of the
+            inserted record is present in the returned data.
           in: body
           name: scu
           schema:
-            $ref: '#/definitions/scu'
+            $ref: "#/definitions/scu"
       responses:
-        '201':
+        "201":
           description: the created SCU
           schema:
-            $ref: '#/definitions/scu'
-        '400':
+            $ref: "#/definitions/scu"
+        "400":
           description: Invalid port number or AE title
       tags:
         - SCUs
-  '/scus/{id}':
+  "/scus/{id}":
     delete:
       description: remove the SCU corresponding to the supplied ID
       parameters:
@@ -2018,13 +2154,14 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: SCU removed
       tags:
         - SCUs
-  '/scus/{id}/send':
+  "/scus/{id}/send":
     post:
-      description: send the images with the supplied image IDs to a DICOM SCP using the the SCU with the supplied scu ID
+      description: send the images with the supplied image IDs to a DICOM SCP using
+        the the SCU with the supplied scu ID
       parameters:
         - description: id of SCU to use for sending
           format: int64
@@ -2042,17 +2179,19 @@ paths:
               type: integer
             type: array
       responses:
-        '204':
+        "204":
           description: Series sent
-        '404':
+        "404":
           description: Series not found or SCU not found
-        '502':
+        "502":
           description: Receiving SCP host not available
       tags:
         - SCUs
   /seriestypes:
     get:
-      description: 'get a list of all added series types. By filtering search results for certain series types, it is easier for applications to ensure that they read images of applicable types.'
+      description: get a list of all added series types. By filtering search results
+        for certain series types, it is easier for applications to ensure that
+        they read images of applicable types.
       parameters:
         - default: 0
           description: start index of returned slice of series types
@@ -2069,32 +2208,36 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: the list of series types
           schema:
             items:
-              $ref: '#/definitions/seriestype'
+              $ref: "#/definitions/seriestype"
             type: array
       tags:
         - Series Types
     post:
       description: add a new series type
       parameters:
-        - description: 'Series type information. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: Series type information. The ID property is irrelevant, the ID of
+            the inserted record is present in the returned data.
           in: body
           name: SeriesType
           schema:
-            $ref: '#/definitions/seriestype'
+            $ref: "#/definitions/seriestype"
       responses:
-        '201':
+        "201":
           description: the created series type
           schema:
-            $ref: '#/definitions/seriestype'
+            $ref: "#/definitions/seriestype"
       tags:
         - Series Types
   /seriestypes/rules:
     get:
-      description: 'get a list of rules for assigning series types to series. A rule connects to a series of attributes with values and a resulting series type. If a series has the required values of the listed attributes, it is assigned to the series type of the rule.'
+      description: get a list of rules for assigning series types to series. A rule
+        connects to a series of attributes with values and a resulting series
+        type. If a series has the required values of the listed attributes, it
+        is assigned to the series type of the rule.
       parameters:
         - description: ID of series type to list rules for
           format: int64
@@ -2103,40 +2246,43 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: the list of series type rules for the series type with the supplied ID
+        "200":
+          description: the list of series type rules for the series type with the supplied
+            ID
           schema:
             items:
-              $ref: '#/definitions/seriestyperule'
+              $ref: "#/definitions/seriestyperule"
             type: array
       tags:
         - Series Types
     post:
       description: add a new series type rule
       parameters:
-        - description: 'Series type rule information. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: Series type rule information. The ID property is irrelevant, the ID
+            of the inserted record is present in the returned data.
           in: body
           name: SeriesTypeRule
           schema:
-            $ref: '#/definitions/seriestyperule'
+            $ref: "#/definitions/seriestyperule"
       responses:
-        '201':
+        "201":
           description: the created series type rule
           schema:
-            $ref: '#/definitions/seriestyperule'
+            $ref: "#/definitions/seriestyperule"
       tags:
         - Series Types
   /seriestypes/rules/updatestatus:
     get:
-      description: 'get the status of the internal process of updating series types for series following a change of series types, rules or attributes.'
+      description: get the status of the internal process of updating series types for
+        series following a change of series types, rules or attributes.
       responses:
-        '200':
-          description: 'a status message, indicating if an update is running'
+        "200":
+          description: a status message, indicating if an update is running
           schema:
-            $ref: '#/definitions/seriestypeupdatestatus'
+            $ref: "#/definitions/seriestypeupdatestatus"
       tags:
         - Series Types
-  '/seriestypes/rules/{id}':
+  "/seriestypes/rules/{id}":
     delete:
       description: remove the series type rule corresponding to the supplied ID
       parameters:
@@ -2147,11 +2293,11 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series type rule removed
       tags:
         - Series Types
-  '/seriestypes/rules/{id}/attributes':
+  "/seriestypes/rules/{id}/attributes":
     get:
       description: get the list of attributes for the series type rule with the supplied ID.
       parameters:
@@ -2162,11 +2308,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: the list of series type rule attributes for the series type rule with the supplied ID
+        "200":
+          description: the list of series type rule attributes for the series type rule
+            with the supplied ID
           schema:
             items:
-              $ref: '#/definitions/seriestyperuleattribute'
+              $ref: "#/definitions/seriestyperuleattribute"
             type: array
       tags:
         - Series Types
@@ -2179,21 +2326,24 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Series type rule attribute information. The ID property is irrelevant, the ID of the inserted record is present in the returned data.'
+        - description: Series type rule attribute information. The ID property is
+            irrelevant, the ID of the inserted record is present in the returned
+            data.
           in: body
           name: SeriesTypeRuleAttribute
           schema:
-            $ref: '#/definitions/seriestyperuleattribute'
+            $ref: "#/definitions/seriestyperuleattribute"
       responses:
-        '201':
+        "201":
           description: the created series type rule attribute
           schema:
-            $ref: '#/definitions/seriestyperuleattribute'
+            $ref: "#/definitions/seriestyperuleattribute"
       tags:
         - Series Types
-  '/seriestypes/rules/{ruleId}/attributes/{attributeId}':
+  "/seriestypes/rules/{ruleId}/attributes/{attributeId}":
     delete:
-      description: remove the series type rule attribute corresponding to the supplied series type and attribute IDs
+      description: remove the series type rule attribute corresponding to the supplied
+        series type and attribute IDs
       parameters:
         - description: id of series type rule for which to remove an attribute
           format: int64
@@ -2208,7 +2358,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series type rule attribute removed
       tags:
         - Series Types
@@ -2221,15 +2371,15 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/idsquery'
+            $ref: "#/definitions/idsquery"
       responses:
-        '200':
+        "200":
           description: series
           schema:
-            $ref: '#/definitions/seriesidseriestypesresult'
+            $ref: "#/definitions/seriesidseriestypesresult"
       tags:
         - Meta Data
-  '/seriestypes/{id}':
+  "/seriestypes/{id}":
     delete:
       description: remove the series type corresponding to the supplied ID
       parameters:
@@ -2240,12 +2390,13 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: series type removed
       tags:
         - Series Types
     put:
-      description: 'request an asynchronous update of all series, labelling appropriate series with the series type corresponding to the supplied ID.'
+      description: request an asynchronous update of all series, labelling appropriate
+        series with the series type corresponding to the supplied ID.
       parameters:
         - description: id of series type to update series labels for
           format: int64
@@ -2254,19 +2405,23 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: update successfully added to queue of series type updates
       tags:
         - Series Types
   /sources:
     get:
-      description: 'Returns a list of currently available data sources. Possible source types are user - data imported by an API call by a user, box - data received from a remote box, directory - data imported via a watched directory, import - data imported into slicebox using import sessions, or scp - data received from a PACS.'
+      description: Returns a list of currently available data sources. Possible source
+        types are user - data imported by an API call by a user, box - data
+        received from a remote box, directory - data imported via a watched
+        directory, import - data imported into slicebox using import sessions,
+        or scp - data received from a PACS.
       responses:
-        '200':
+        "200":
           description: currently available sources
           schema:
             items:
-              $ref: '#/definitions/source'
+              $ref: "#/definitions/source"
             type: array
       tags:
         - General
@@ -2274,7 +2429,7 @@ paths:
     get:
       description: No-op route for checking whether the service is alive or not
       responses:
-        '200':
+        "200":
           description: The service is up and running
       tags:
         - General
@@ -2282,15 +2437,16 @@ paths:
     post:
       description: stop and shut down slicebox
       responses:
-        '200':
+        "200":
           description: shutdown message
       tags:
         - General
-  '/transactions/{token}/image':
+  "/transactions/{token}/image":
     post:
       consumes:
         - application/octet-stream
-      description: add an image (dataset) as part of a transaction. This method is used when sending images using the push method to a public slicebox.
+      description: add an image (dataset) as part of a transaction. This method is
+        used when sending images using the push method to a public slicebox.
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
@@ -2321,15 +2477,17 @@ paths:
           required: true
           schema: {}
       responses:
-        '204':
+        "204":
           description: image data received
-        '401':
-          description: 'unauthorized, invalid token'
+        "401":
+          description: unauthorized, invalid token
       tags:
         - Transactions
-  '/transactions/{token}/outgoing':
+  "/transactions/{token}/outgoing":
     get:
-      description: fetch an image from the connected box as part of a transaction. This method is used when sending images using the poll method from a public slicebox.
+      description: fetch an image from the connected box as part of a transaction.
+        This method is used when sending images using the poll method from a
+        public slicebox.
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
@@ -2351,17 +2509,20 @@ paths:
       produces:
         - application/octet-stream
       responses:
-        '200':
+        "200":
           description: binary data of dataset
-        '401':
-          description: 'unauthorized, invalid token'
-        '404':
-          description: no outgoing trensaction and/or image found for the supplied transaction id and transaction image id
+        "401":
+          description: unauthorized, invalid token
+        "404":
+          description: no outgoing trensaction and/or image found for the supplied
+            transaction id and transaction image id
       tags:
         - Transactions
-  '/transactions/{token}/outgoing/done':
+  "/transactions/{token}/outgoing/done":
     post:
-      description: signal that the supplied outgoing transaction and image was successfully received and can be marked as sent. This method is used when sending images using the poll method from a public slicebox.
+      description: signal that the supplied outgoing transaction and image was
+        successfully received and can be marked as sent. This method is used
+        when sending images using the poll method from a public slicebox.
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
@@ -2373,39 +2534,46 @@ paths:
           name: outgoing entry and image information block
           required: true
           schema:
-            $ref: '#/definitions/outgoingTransactionImage'
+            $ref: "#/definitions/outgoingTransactionImage"
       responses:
-        '204':
+        "204":
           description: done message received
-        '401':
-          description: 'unauthorized, invalid token'
+        "401":
+          description: unauthorized, invalid token
       tags:
         - Transactions
-  '/transactions/{token}/outgoing/failed':
+  "/transactions/{token}/outgoing/failed":
     post:
-      description: 'signal that the image corresponding to the supplied outgoing transaction and image could not be read or stored properly on the receiving side, and that the transaction should be marked as failed.'
+      description: signal that the image corresponding to the supplied outgoing
+        transaction and image could not be read or stored properly on the
+        receiving side, and that the transaction should be marked as failed.
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
           name: token
           required: true
           type: string
-        - description: 'the outgoing transaction and image information block corresponding to the failed image transfer, along with the associated error message'
+        - description: the outgoing transaction and image information block corresponding
+            to the failed image transfer, along with the associated error
+            message
           in: body
-          name: 'outgoing transaction and image, and error message'
+          name: outgoing transaction and image, and error message
           required: true
           schema:
-            $ref: '#/definitions/failedOutgoingTransactionImage'
+            $ref: "#/definitions/failedOutgoingTransactionImage"
       responses:
-        '204':
+        "204":
           description: failed message received
-        '401':
-          description: 'unauthorized, invalid token'
+        "401":
+          description: unauthorized, invalid token
       tags:
         - Transactions
-  '/transactions/{token}/outgoing/poll':
+  "/transactions/{token}/outgoing/poll":
     get:
-      description: 'get next outgoing transaction and image (information on the next image that the connected box wishes to send to you), if any. This method is used when sending images using the poll method from a public slicebox.'
+      description: get next outgoing transaction and image (information on the next
+        image that the connected box wishes to send to you), if any. This method
+        is used when sending images using the poll method from a public
+        slicebox.
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
@@ -2413,21 +2581,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: next outgoing transaction and image information block
           schema:
             items:
-              $ref: '#/definitions/outgoingTransactionImage'
+              $ref: "#/definitions/outgoingTransactionImage"
             type: array
-        '401':
-          description: 'unauthorized, invalid token'
-        '404':
-          description: there are currently no outgoing transactions to fetch for the box connection with the supplied token
+        "401":
+          description: unauthorized, invalid token
+        "404":
+          description: there are currently no outgoing transactions to fetch for the box
+            connection with the supplied token
       tags:
         - Transactions
-  '/transactions/{token}/status':
+  "/transactions/{token}/status":
     get:
-      description: get the status of the remote incoming transaction with the supplied transaction ID
+      description: get the status of the remote incoming transaction with the supplied
+        transaction ID
       parameters:
         - description: authentication token identifying the current box-to-box connection
           in: path
@@ -2441,11 +2611,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: 'string representation of the transaction status (FINISHED, FAILED, WAITING or PROCESSING)'
-        '401':
-          description: 'unauthorized, invalid token'
-        '404':
+        "200":
+          description: string representation of the transaction status (FINISHED, FAILED,
+            WAITING or PROCESSING)
+        "401":
+          description: unauthorized, invalid token
+        "404":
           description: no transaction found for the supplied transaction ID and box token
       tags:
         - Transactions
@@ -2470,9 +2641,9 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        "204":
           description: status update successfully applied to transaction
-        '404':
+        "404":
           description: no transaction found for the supplied transaction ID and box token
       tags:
         - Transactions
@@ -2495,11 +2666,11 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: user response
           schema:
             items:
-              $ref: '#/definitions/user'
+              $ref: "#/definitions/user"
             type: array
       tags:
         - Users
@@ -2511,53 +2682,58 @@ paths:
           name: user
           required: true
           schema:
-            $ref: '#/definitions/newUser'
+            $ref: "#/definitions/newUser"
       responses:
-        '201':
+        "201":
           description: user response
           schema:
-            $ref: '#/definitions/user'
+            $ref: "#/definitions/user"
       tags:
         - Users
   /users/current:
     get:
-      description: 'obtain information on the currently logged in user as specified by the supplied session cookie, IP address and user agent.'
+      description: obtain information on the currently logged in user as specified by
+        the supplied session cookie, IP address and user agent.
       responses:
-        '200':
+        "200":
           description: user information
           schema:
-            $ref: '#/definitions/userInfo'
-        '404':
-          description: 'no user found for the supplied session cookie, IP address and user agent, or if any of the required headers are missing.'
+            $ref: "#/definitions/userInfo"
+        "404":
+          description: no user found for the supplied session cookie, IP address and user
+            agent, or if any of the required headers are missing.
       tags:
         - Users
   /users/login:
     post:
-      description: Obtain a session cookie that can be used to authenticate future API calls from the present IP address and with the present user agent.
+      description: Obtain a session cookie that can be used to authenticate future API
+        calls from the present IP address and with the present user agent.
       parameters:
         - description: username and password for user logging in
           in: body
           name: UserPass
           required: true
           schema:
-            $ref: '#/definitions/userPass'
+            $ref: "#/definitions/userPass"
       responses:
-        '201':
-          description: if the supplied credentials are valid. The response headers will contain Set-Cookie.
-        '401':
+        "201":
+          description: if the supplied credentials are valid. The response headers will
+            contain Set-Cookie.
+        "401":
           description: if the supplied credentials are invalid.
       tags:
         - Users
   /users/logout:
     post:
-      description: Logout the current user by responding with a delete cookie header removing the session cookie for this user.
+      description: Logout the current user by responding with a delete cookie header
+        removing the session cookie for this user.
       parameters: []
       responses:
-        '201':
+        "201":
           description: the user was logged out
       tags:
         - Users
-  '/users/{id}':
+  "/users/{id}":
     delete:
       description: deletes a single user based on the ID supplied
       parameters:
@@ -2568,7 +2744,7 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: user deleted
       tags:
         - Users
@@ -2576,10 +2752,10 @@ definitions:
   anonymizationData:
     properties:
       profile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
       tagValues:
         items:
-          $ref: '#/definitions/tagValue'
+          $ref: "#/definitions/tagValue"
         type: array
     type: object
   anonymizationKey:
@@ -2620,10 +2796,10 @@ definitions:
         format: int64
         type: integer
       order:
-        $ref: '#/definitions/queryOrder'
+        $ref: "#/definitions/queryOrder"
       queryProperties:
         items:
-          $ref: '#/definitions/queryProperty'
+          $ref: "#/definitions/queryProperty"
         type: array
       startIndex:
         format: int64
@@ -2644,7 +2820,7 @@ definitions:
         format: int64
         type: integer
       tagPath:
-        $ref: '#/definitions/tagPathTag'
+        $ref: "#/definitions/tagPathTag"
       value:
         type: string
     type: object
@@ -2652,7 +2828,7 @@ definitions:
     properties:
       options:
         items:
-          $ref: '#/definitions/confidentialityOption'
+          $ref: "#/definitions/confidentialityOption"
         type: array
     type: object
   box:
@@ -2667,7 +2843,7 @@ definitions:
       online:
         type: boolean
       profile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
       sendMethod:
         type: string
       token:
@@ -2677,10 +2853,10 @@ definitions:
     properties:
       imageTagValuesSet:
         items:
-          $ref: '#/definitions/imageTagValues'
+          $ref: "#/definitions/imageTagValues"
         type: array
       profile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
     type: object
   confidentialityOption:
     properties:
@@ -2720,7 +2896,7 @@ definitions:
       message:
         type: string
       transactionImage:
-        $ref: '#/definitions/outgoingTransactionImage'
+        $ref: "#/definitions/outgoingTransactionImage"
     type: object
   filter:
     properties:
@@ -2733,7 +2909,7 @@ definitions:
         type: string
       tags:
         items:
-          $ref: '#/definitions/tagPathTag'
+          $ref: "#/definitions/tagPathTag"
         type: array
     type: object
   flatSeries:
@@ -2742,23 +2918,23 @@ definitions:
         format: int64
         type: integer
       patient:
-        $ref: '#/definitions/patient'
+        $ref: "#/definitions/patient"
       series:
-        $ref: '#/definitions/series'
+        $ref: "#/definitions/series"
       study:
-        $ref: '#/definitions/study'
+        $ref: "#/definitions/study"
     type: object
   forwardingrule:
     properties:
       destination:
-        $ref: '#/definitions/destination'
+        $ref: "#/definitions/destination"
       id:
         format: int64
         type: integer
       keepImages:
         type: boolean
       source:
-        $ref: '#/definitions/source'
+        $ref: "#/definitions/source"
     type: object
   idsquery:
     properties:
@@ -2776,14 +2952,14 @@ definitions:
         format: int64
         type: integer
       imageType:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       instanceNumber:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       seriesId:
         format: int64
         type: integer
       sopInstanceUID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
     type: object
   imageAttribute:
     properties:
@@ -2831,7 +3007,7 @@ definitions:
         type: integer
       tagValues:
         items:
-          $ref: '#/definitions/tagValue'
+          $ref: "#/definitions/tagValue"
         type: array
     type: object
   importSession:
@@ -2939,7 +3115,7 @@ definitions:
         format: int64
         type: integer
       profile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
       sentImageCount:
         format: int64
         type: integer
@@ -2955,9 +3131,9 @@ definitions:
   outgoingTransactionImage:
     properties:
       image:
-        $ref: '#/definitions/outgoingImage'
+        $ref: "#/definitions/outgoingImage"
       transaction:
-        $ref: '#/definitions/outgoingTransaction'
+        $ref: "#/definitions/outgoingTransaction"
     type: object
   patient:
     properties:
@@ -2965,13 +3141,13 @@ definitions:
         format: int64
         type: integer
       patientBirthDate:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       patientID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       patientName:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       patientSex:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
     type: object
   query:
     properties:
@@ -2979,12 +3155,12 @@ definitions:
         format: int64
         type: integer
       filters:
-        $ref: '#/definitions/queryFilters'
+        $ref: "#/definitions/queryFilters"
       order:
-        $ref: '#/definitions/queryOrder'
+        $ref: "#/definitions/queryOrder"
       queryProperties:
         items:
-          $ref: '#/definitions/queryProperty'
+          $ref: "#/definitions/queryProperty"
         type: array
       startIndex:
         format: int64
@@ -3008,7 +3184,7 @@ definitions:
         type: array
       sourceRefs:
         items:
-          $ref: '#/definitions/sourceRef'
+          $ref: "#/definitions/sourceRef"
         type: array
     type: object
   queryOrder:
@@ -3032,14 +3208,14 @@ definitions:
       baseUrl:
         type: string
       defaultProfile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
       name:
         type: string
     type: object
   remoteBoxConnectionData:
     properties:
       defaultProfile:
-        $ref: '#/definitions/anonymizationProfile'
+        $ref: "#/definitions/anonymizationProfile"
       name:
         type: string
     type: object
@@ -3074,26 +3250,26 @@ definitions:
   series:
     properties:
       bodyPartExamined:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       frameOfReferenceUID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       id:
         format: int64
         type: integer
       manufacturer:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       modality:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       protocolName:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       seriesDate:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       seriesDescription:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       seriesInstanceUID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       stationName:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       studyId:
         format: int64
         type: integer
@@ -3104,13 +3280,13 @@ definitions:
         format: int64
         type: integer
       seriestype:
-        $ref: '#/definitions/seriestype'
+        $ref: "#/definitions/seriestype"
     type: object
   seriesidseriestypesresult:
     properties:
       seriesidseriestypes:
         items:
-          $ref: '#/definitions/seriesidseriestype'
+          $ref: "#/definitions/seriesidseriestype"
         type: array
     type: object
   seriestag:
@@ -3205,35 +3381,35 @@ definitions:
   study:
     properties:
       accessionNumber:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       id:
         format: int64
         type: integer
       patientAge:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       patientId:
         format: int64
         type: integer
       studyDate:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       studyDescription:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       studyID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
       studyInstanceUID:
-        $ref: '#/definitions/dicomPropertyValue'
+        $ref: "#/definitions/dicomPropertyValue"
     type: object
   tagMapping:
     properties:
       tagPath:
-        $ref: '#/definitions/tagPathTag'
+        $ref: "#/definitions/tagPathTag"
       value:
         type: string
     type: object
   tagPathTag:
     properties:
       previous:
-        $ref: '#/definitions/tagPathTrunk'
+        $ref: "#/definitions/tagPathTrunk"
       tag:
         format: int32
         type: integer
@@ -3243,7 +3419,7 @@ definitions:
       item:
         type: string
       previous:
-        $ref: '#/definitions/tagPathTrunk'
+        $ref: "#/definitions/tagPathTrunk"
       tag:
         format: int32
         type: integer
@@ -3251,7 +3427,7 @@ definitions:
   tagValue:
     properties:
       tagPath:
-        $ref: '#/definitions/tagPathTag'
+        $ref: "#/definitions/tagPathTag"
       value:
         type: string
     type: object

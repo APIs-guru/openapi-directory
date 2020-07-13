@@ -1,6 +1,4 @@
-swagger: '2.0'
-schemes:
-  - https
+swagger: "2.0"
 host: config2.gamesparks.net
 basePath: /
 info:
@@ -8,18 +6,18 @@ info:
     x-twitter: GameSparksltd
   description: The API to manage the GameSparks game details
   license:
-    name: ' '
-  termsOfService: 'http://www.gamesparks.com/gamesparks-terms-of-use'
-  title: GameSparks Game Details
+    name: " "
+  termsOfService: http://www.gamesparks.com/gamesparks-terms-of-use
+  title: GameSparks Game Details API
   version: v2
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/GameSparksltd/profile_image?size=original'
+    url: https://twitter.com/GameSparksltd/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://config2.gamesparks.net/restv2/admin/api/schema'
-      version: '2.0'
+      url: https://config2.gamesparks.net/restv2/admin/api/schema
+      version: "2.0"
   x-providerName: gamesparks.net
   x-serviceName: game-details
 securityDefinitions:
@@ -68,22 +66,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/GameRegionOptionsDTO'
-        '400':
+            $ref: "#/definitions/GameRegionOptionsDTO"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getRegionOptions
       tags:
         - region
-  '/restv2/game/{apiKey}/admin/analytics':
+  "/restv2/game/{apiKey}/admin/analytics":
     get:
       consumes:
         - application/json
@@ -146,7 +144,7 @@ paths:
           name: endDate
           required: true
           type: string
-        - description: 'the keys to select. For example "ReturningUsers", "NewUsers", etc'
+        - description: the keys to select. For example "ReturningUsers", "NewUsers", etc
           in: query
           name: keys
           required: false
@@ -154,24 +152,24 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/AnalyticsDataSwaggerModel'
+              $ref: "#/definitions/AnalyticsDataSwaggerModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Returns the results of executed query defined by the parameters passed in
       tags:
         - analytics
-  '/restv2/game/{apiKey}/admin/analytics/count':
+  "/restv2/game/{apiKey}/admin/analytics/count":
     get:
       consumes:
         - application/json
@@ -205,22 +203,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AnalyticsDataCountSwaggerModel'
-        '400':
+            $ref: "#/definitions/AnalyticsDataCountSwaggerModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Returns the count of executed query
       tags:
         - analytics
-  '/restv2/game/{apiKey}/admin/analytics/rollingRetention':
+  "/restv2/game/{apiKey}/admin/analytics/rollingRetention":
     get:
       consumes:
         - application/json
@@ -242,22 +240,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AnalyticsDataCountSwaggerModel'
-        '400':
+            $ref: "#/definitions/AnalyticsDataCountSwaggerModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Returns the percentage of user retention over the last 30 days
       tags:
         - analytics
-  '/restv2/game/{apiKey}/admin/billingDetails':
+  "/restv2/game/{apiKey}/admin/billingDetails":
     get:
       consumes:
         - application/json
@@ -272,17 +270,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BillingDetailsModel'
-        '400':
+            $ref: "#/definitions/BillingDetailsModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Retrieves the Billing Details
       tags:
@@ -303,26 +301,26 @@ paths:
           name: billingDetails
           required: true
           schema:
-            $ref: '#/definitions/BillingDetailsModel'
+            $ref: "#/definitions/BillingDetailsModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BillingDetailsModel'
-        '400':
+            $ref: "#/definitions/BillingDetailsModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Updates the Billing Details
       tags:
         - billingDetails
-  '/restv2/game/{apiKey}/admin/notifications/summary':
+  "/restv2/game/{apiKey}/admin/notifications/summary":
     get:
       consumes:
         - application/json
@@ -356,22 +354,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/GameSummaryModel'
-        '400':
+            $ref: "#/definitions/GameSummaryModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getGameSummary
       tags:
         - notifications
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/amazon':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/amazon":
     post:
       consumes:
         - application/json
@@ -387,26 +385,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testPushAmazonNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/apple/development':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/apple/development":
     post:
       consumes:
         - application/json
@@ -422,26 +420,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testPushAppleDevNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/apple/production':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/apple/production":
     post:
       consumes:
         - application/json
@@ -457,26 +455,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testPushAppleProdNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/google':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/google":
     post:
       consumes:
         - application/json
@@ -492,26 +490,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testPushGoogleNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windows8':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windows8":
     post:
       consumes:
         - application/json
@@ -527,26 +525,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testWindows8Notifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windowsPhone8':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/microsoft/windowsPhone8":
     post:
       consumes:
         - application/json
@@ -562,26 +560,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testWindowsPhone8Notifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/viber/integration':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/viber/integration":
     post:
       consumes:
         - application/json
@@ -597,26 +595,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testViberIntegrationNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/pushNotifications/test/viber/production':
+  "/restv2/game/{apiKey}/admin/pushNotifications/test/viber/production":
     post:
       consumes:
         - application/json
@@ -632,26 +630,26 @@ paths:
           name: messageDetails
           required: true
           schema:
-            $ref: '#/definitions/PushNotificationTestModel'
+            $ref: "#/definitions/PushNotificationTestModel"
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PushNotificationTestSummaryListModel'
-        '400':
+            $ref: "#/definitions/PushNotificationTestSummaryListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: testViberProductionNotifications
       tags:
         - pushNotificationTest
-  '/restv2/game/{apiKey}/admin/scripts/differences/{snapshotId1}/{snapshotId2}':
+  "/restv2/game/{apiKey}/admin/scripts/differences/{snapshotId1}/{snapshotId2}":
     get:
       consumes:
         - application/json
@@ -673,24 +671,24 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ScriptsDifferenceListModel'
-        '400':
+            $ref: "#/definitions/ScriptsDifferenceListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getScriptDifferences
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/scripts/export':
+  "/restv2/game/{apiKey}/admin/scripts/export":
     get:
       consumes:
         - application/json
@@ -702,22 +700,22 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: exportZip
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/scripts/import/accept':
+  "/restv2/game/{apiKey}/admin/scripts/import/accept":
     post:
       consumes:
         - multipart/form-data
@@ -741,22 +739,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: importAccept
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/scripts/import/preview':
+  "/restv2/game/{apiKey}/admin/scripts/import/preview":
     post:
       consumes:
         - multipart/form-data
@@ -775,22 +773,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ScriptsDifferenceListModel'
-        '400':
+            $ref: "#/definitions/ScriptsDifferenceListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: importZip
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/scripts/versions':
+  "/restv2/game/{apiKey}/admin/scripts/versions":
     get:
       consumes:
         - application/json
@@ -809,24 +807,24 @@ paths:
           required: false
           type: integer
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SnapshotScriptVersionListModel'
-        '400':
+            $ref: "#/definitions/SnapshotScriptVersionListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getScriptVersions
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/scripts/versions/{page}':
+  "/restv2/game/{apiKey}/admin/scripts/versions/{page}":
     get:
       consumes:
         - application/json
@@ -851,24 +849,24 @@ paths:
           required: false
           type: integer
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SnapshotScriptVersionListModel'
-        '400':
+            $ref: "#/definitions/SnapshotScriptVersionListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getScriptVersions
       tags:
         - scripts
-  '/restv2/game/{apiKey}/admin/segmentQueryFilters':
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters":
     get:
       consumes:
         - application/json
@@ -882,22 +880,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SegmentQueryFilterListModel'
-        '400':
+            $ref: "#/definitions/SegmentQueryFilterListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSegmentQueryFilters
       tags:
         - segmentQueryFilters
-  '/restv2/game/{apiKey}/admin/segmentQueryFilters/config':
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters/config":
     get:
       consumes:
         - application/json
@@ -911,17 +909,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SegmentQueryFilterConfigModel'
-        '400':
+            $ref: "#/definitions/SegmentQueryFilterConfigModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSegmentQueryFiltersConfig
       tags:
@@ -936,7 +934,7 @@ paths:
           name: segmentQueryConfig
           required: true
           schema:
-            $ref: '#/definitions/SegmentQueryFilterConfigModel'
+            $ref: "#/definitions/SegmentQueryFilterConfigModel"
         - description: apiKey
           in: path
           name: apiKey
@@ -945,22 +943,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SegmentQueryFilterConfigModel'
-        '400':
+            $ref: "#/definitions/SegmentQueryFilterConfigModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateSegmentQueryFiltersConfig
       tags:
         - segmentQueryFilters
-  '/restv2/game/{apiKey}/admin/segmentQueryFilters/standardFilters':
+  "/restv2/game/{apiKey}/admin/segmentQueryFilters/standardFilters":
     get:
       consumes:
         - application/json
@@ -974,22 +972,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SegmentQueryFilterListModel'
-        '400':
+            $ref: "#/definitions/SegmentQueryFilterListModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSegmentQueryStandardFilters
       tags:
         - segmentQueryFilters
-  '/restv2/game/{apiKey}/admin/snapshots':
+  "/restv2/game/{apiKey}/admin/snapshots":
     get:
       consumes:
         - application/json
@@ -1010,19 +1008,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/SnapshotModel'
+              $ref: "#/definitions/SnapshotModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSnapshots
       tags:
@@ -1042,26 +1040,26 @@ paths:
           name: description
           required: true
           schema:
-            $ref: '#/definitions/SnapshotCreationModel'
+            $ref: "#/definitions/SnapshotCreationModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/SnapshotModel'
-        '400':
+            $ref: "#/definitions/SnapshotModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createSnapshots
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/liveSnapshotId':
+  "/restv2/game/{apiKey}/admin/snapshots/liveSnapshotId":
     get:
       consumes:
         - application/json
@@ -1075,22 +1073,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getLiveSnapshotId
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/page/{page}':
+  "/restv2/game/{apiKey}/admin/snapshots/page/{page}":
     get:
       consumes:
         - application/json
@@ -1117,24 +1115,24 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/SnapshotModel'
+              $ref: "#/definitions/SnapshotModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSnapshots
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/revert/to/{snapshotId}':
+  "/restv2/game/{apiKey}/admin/snapshots/revert/to/{snapshotId}":
     post:
       consumes:
         - application/json
@@ -1153,22 +1151,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: revertToSnapshot
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/{snapshotId}':
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}":
     delete:
       consumes:
         - application/json
@@ -1187,17 +1185,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteSnapshot
       tags:
@@ -1220,22 +1218,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SnapshotModel'
-        '400':
+            $ref: "#/definitions/SnapshotModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSnapshot
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy':
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy":
     post:
       consumes:
         - application/json
@@ -1278,22 +1276,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SnapshotCreationSuccessModel'
-        '400':
+            $ref: "#/definitions/SnapshotCreationSuccessModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: copySnapshotToNewGame
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy/to/{targetApiKey}':
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/copy/to/{targetApiKey}":
     post:
       consumes:
         - application/json
@@ -1341,22 +1339,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SnapshotCreationSuccessModel'
-        '400':
+            $ref: "#/definitions/SnapshotCreationSuccessModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: copySnapshotToExistingGame
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/publish':
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/publish":
     post:
       consumes:
         - application/json
@@ -1375,20 +1373,20 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: publishSnapshot
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/unpublish':
+  "/restv2/game/{apiKey}/admin/snapshots/{snapshotId}/unpublish":
     post:
       consumes:
         - application/json
@@ -1407,22 +1405,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: unpublishSnapshot
       tags:
         - snapshots
-  '/restv2/game/{apiKey}/admin/testHarness/scenarios':
+  "/restv2/game/{apiKey}/admin/testHarness/scenarios":
     get:
       consumes:
         - application/json
@@ -1436,19 +1434,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TestHarnessScenarioModel'
+              $ref: "#/definitions/TestHarnessScenarioModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getTestHarnessScenarios
       tags:
@@ -1468,26 +1466,26 @@ paths:
           name: testHarnessScenarioDTO
           required: true
           schema:
-            $ref: '#/definitions/TestHarnessScenarioModel'
+            $ref: "#/definitions/TestHarnessScenarioModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/TestHarnessScenarioModel'
-        '400':
+            $ref: "#/definitions/TestHarnessScenarioModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createTestHarnessScenario
       tags:
         - testHarness
-  '/restv2/game/{apiKey}/admin/testHarness/scenarios/{scenarioName}':
+  "/restv2/game/{apiKey}/admin/testHarness/scenarios/{scenarioName}":
     delete:
       consumes:
         - application/json
@@ -1506,17 +1504,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteTestHarnessScenario
       tags:
@@ -1539,17 +1537,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TestHarnessScenarioModel'
-        '400':
+            $ref: "#/definitions/TestHarnessScenarioModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getTestHarnessScenario
       tags:
@@ -1574,26 +1572,26 @@ paths:
           name: testHarnessScenarioDTO
           required: true
           schema:
-            $ref: '#/definitions/TestHarnessScenarioModel'
+            $ref: "#/definitions/TestHarnessScenarioModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TestHarnessScenarioModel'
-        '400':
+            $ref: "#/definitions/TestHarnessScenarioModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateTestHarnessScenario
       tags:
         - testHarness
-  '/restv2/game/{apiKey}/config/~credentials/{credentialName}/resetSecret':
+  "/restv2/game/{apiKey}/config/~credentials/{credentialName}/resetSecret":
     post:
       consumes:
         - application/json
@@ -1612,20 +1610,20 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: Resets the secret of a credential
       tags:
         - credentials
-  '/restv2/game/{apiKey}/endpoints':
+  "/restv2/game/{apiKey}/endpoints":
     get:
       consumes:
         - application/json
@@ -1639,22 +1637,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/GameEndpointsModel'
-        '400':
+            $ref: "#/definitions/GameEndpointsModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getGamesEndpoints
       tags:
         - gamesAdmin
-  '/restv2/game/{apiKey}/manage/experiments':
+  "/restv2/game/{apiKey}/manage/experiments":
     get:
       consumes:
         - application/json
@@ -1668,19 +1666,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ExperimentModel'
+              $ref: "#/definitions/ExperimentModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getExperiments
       tags:
@@ -1700,26 +1698,26 @@ paths:
           name: input
           required: true
           schema:
-            $ref: '#/definitions/ExperimentModel'
+            $ref: "#/definitions/ExperimentModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ExperimentModel'
-        '400':
+            $ref: "#/definitions/ExperimentModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createExperiment
       tags:
         - experiments
-  '/restv2/game/{apiKey}/manage/experiments/{id}':
+  "/restv2/game/{apiKey}/manage/experiments/{id}":
     delete:
       consumes:
         - application/json
@@ -1739,17 +1737,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteExperiment
       tags:
@@ -1773,17 +1771,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExperimentModel'
-        '400':
+            $ref: "#/definitions/ExperimentModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getExperiment
       tags:
@@ -1809,26 +1807,26 @@ paths:
           name: input
           required: true
           schema:
-            $ref: '#/definitions/ExperimentModel'
+            $ref: "#/definitions/ExperimentModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExperimentModel'
-        '400':
+            $ref: "#/definitions/ExperimentModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateExperiment
       tags:
         - experiments
-  '/restv2/game/{apiKey}/manage/experiments/{id}/{action}':
+  "/restv2/game/{apiKey}/manage/experiments/{id}/{action}":
     post:
       consumes:
         - application/json
@@ -1858,22 +1856,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExperimentModel'
-        '400':
+            $ref: "#/definitions/ExperimentModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: doActionExperiment
       tags:
         - experiments
-  '/restv2/game/{apiKey}/manage/queries':
+  "/restv2/game/{apiKey}/manage/queries":
     get:
       consumes:
         - application/json
@@ -1887,19 +1885,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ManageItemSummary'
+              $ref: "#/definitions/ManageItemSummary"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listQueries
       tags:
@@ -1919,26 +1917,26 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/ManageQuery'
+            $ref: "#/definitions/ManageQuery"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageQuery'
-        '400':
+            $ref: "#/definitions/ManageQuery"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createQuery
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/queries/{shortCode}':
+  "/restv2/game/{apiKey}/manage/queries/{shortCode}":
     delete:
       consumes:
         - application/json
@@ -1957,17 +1955,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteQuery
       tags:
@@ -1990,17 +1988,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageQuery'
-        '400':
+            $ref: "#/definitions/ManageQuery"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getQuery
       tags:
@@ -2025,26 +2023,26 @@ paths:
           name: query
           required: true
           schema:
-            $ref: '#/definitions/ManageQuery'
+            $ref: "#/definitions/ManageQuery"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageQuery'
-        '400':
+            $ref: "#/definitions/ManageQuery"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateQuery
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/screens':
+  "/restv2/game/{apiKey}/manage/screens":
     get:
       consumes:
         - application/json
@@ -2058,19 +2056,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ManageItemSummary'
+              $ref: "#/definitions/ManageItemSummary"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listScreens
       tags:
@@ -2090,26 +2088,26 @@ paths:
           name: screen
           required: true
           schema:
-            $ref: '#/definitions/ManageScreen'
+            $ref: "#/definitions/ManageScreen"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageScreen'
-        '400':
+            $ref: "#/definitions/ManageScreen"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createScreen
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/screens/executable':
+  "/restv2/game/{apiKey}/manage/screens/executable":
     get:
       consumes:
         - application/json
@@ -2123,24 +2121,24 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ManageItemSummary'
+              $ref: "#/definitions/ManageItemSummary"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listExecutableScreens
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/screens/{shortCode}':
+  "/restv2/game/{apiKey}/manage/screens/{shortCode}":
     delete:
       consumes:
         - application/json
@@ -2159,17 +2157,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteScreen
       tags:
@@ -2192,17 +2190,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageScreen'
-        '400':
+            $ref: "#/definitions/ManageScreen"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getScreen
       tags:
@@ -2227,26 +2225,26 @@ paths:
           name: screen
           required: true
           schema:
-            $ref: '#/definitions/ManageScreen'
+            $ref: "#/definitions/ManageScreen"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageScreen'
-        '400':
+            $ref: "#/definitions/ManageScreen"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateScreen
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snapshots':
+  "/restv2/game/{apiKey}/manage/snapshots":
     get:
       consumes:
         - application/json
@@ -2260,19 +2258,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ManageSnapshot'
+              $ref: "#/definitions/ManageSnapshot"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listSnapshots
       tags:
@@ -2292,26 +2290,26 @@ paths:
           name: model
           required: true
           schema:
-            $ref: '#/definitions/SnapshotCreationModel'
+            $ref: "#/definitions/SnapshotCreationModel"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ManageSnapshot'
-        '400':
+            $ref: "#/definitions/ManageSnapshot"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createSnapshot
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snapshots/{snapshotId}':
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}":
     delete:
       consumes:
         - application/json
@@ -2330,24 +2328,24 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: success
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteSnapshot
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/copy/to/{targetApiKey}':
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/copy/to/{targetApiKey}":
     post:
       consumes:
         - application/json
@@ -2371,22 +2369,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: copySnapshotToExistingGame
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/publish':
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/publish":
     post:
       consumes:
         - application/json
@@ -2405,22 +2403,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: publishSnapshot
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/revert':
+  "/restv2/game/{apiKey}/manage/snapshots/{snapshotId}/revert":
     post:
       consumes:
         - application/json
@@ -2439,22 +2437,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: revertSnapshot
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snippets':
+  "/restv2/game/{apiKey}/manage/snippets":
     get:
       consumes:
         - application/json
@@ -2468,19 +2466,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ManageItemSummary'
+              $ref: "#/definitions/ManageItemSummary"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listSnippets
       tags:
@@ -2500,26 +2498,26 @@ paths:
           name: snippet
           required: true
           schema:
-            $ref: '#/definitions/ManageSnippet'
+            $ref: "#/definitions/ManageSnippet"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageSnippet'
-        '400':
+            $ref: "#/definitions/ManageSnippet"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: createSnippet
       tags:
         - manage
-  '/restv2/game/{apiKey}/manage/snippets/{shortCode}':
+  "/restv2/game/{apiKey}/manage/snippets/{shortCode}":
     delete:
       consumes:
         - application/json
@@ -2538,17 +2536,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageResult'
-        '400':
+            $ref: "#/definitions/ManageResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: deleteSnippet
       tags:
@@ -2571,17 +2569,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageSnippet'
-        '400':
+            $ref: "#/definitions/ManageSnippet"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getSnippet
       tags:
@@ -2606,26 +2604,26 @@ paths:
           name: snippet
           required: true
           schema:
-            $ref: '#/definitions/ManageSnippet'
+            $ref: "#/definitions/ManageSnippet"
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ManageSnippet'
-        '400':
+            $ref: "#/definitions/ManageSnippet"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: updateSnippet
       tags:
         - manage
-  '/restv2/game/{apiKey}/restore':
+  "/restv2/game/{apiKey}/restore":
     post:
       consumes:
         - application/json
@@ -2639,22 +2637,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageModel'
-        '400':
+            $ref: "#/definitions/MessageModel"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: restoreDeletedGame
       tags:
         - gamesAdmin
-  '/restv2/game/{gameApiKey}/region/{regionCode}':
+  "/restv2/game/{gameApiKey}/region/{regionCode}":
     post:
       consumes:
         - application/json
@@ -2673,22 +2671,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RegionResult'
-        '400':
+            $ref: "#/definitions/RegionResult"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: setGameRegion
       tags:
         - region
-  '/restv2/game/{gameApiKey}/regions':
+  "/restv2/game/{gameApiKey}/regions":
     get:
       consumes:
         - application/json
@@ -2702,17 +2700,17 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/GameRegionOptionsDTO'
-        '400':
+            $ref: "#/definitions/GameRegionOptionsDTO"
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: getGameRegionOptions
       tags:
@@ -2725,19 +2723,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/GameModel'
+              $ref: "#/definitions/GameModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: list
       tags:
@@ -2750,19 +2748,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DeletedGameModel'
+              $ref: "#/definitions/DeletedGameModel"
             type: array
-        '400':
+        "400":
           description: json error
           schema:
-            $ref: '#/definitions/MessageModel'
-        '403':
+            $ref: "#/definitions/MessageModel"
+        "403":
           description: not allowed
-        '404':
+        "404":
           description: not found
       summary: listDeleted
       tags:
@@ -2850,7 +2848,7 @@ definitions:
       complete:
         type: boolean
       config:
-        $ref: '#/definitions/ExperimentConfigModel'
+        $ref: "#/definitions/ExperimentConfigModel"
       endDate:
         format: date-time
         type: string
@@ -2886,7 +2884,7 @@ definitions:
     type: object
   GameModel:
     properties:
-      '@id':
+      "@id":
         type: string
       name:
         type: string
@@ -2906,7 +2904,7 @@ definitions:
         type: boolean
       options:
         items:
-          $ref: '#/definitions/GameRegionOptionDTO'
+          $ref: "#/definitions/GameRegionOptionDTO"
         type: array
     type: object
   GameSummaryModel:
@@ -2917,7 +2915,7 @@ definitions:
         type: array
       logLevelSummary:
         items:
-          $ref: '#/definitions/LogLevelSummaryModel'
+          $ref: "#/definitions/LogLevelSummaryModel"
         type: array
       message:
         type: string
@@ -3019,7 +3017,7 @@ definitions:
     properties:
       summaries:
         items:
-          $ref: '#/definitions/PushNotificationTestSummaryModel'
+          $ref: "#/definitions/PushNotificationTestSummaryModel"
         type: array
     type: object
   PushNotificationTestSummaryModel:
@@ -3046,7 +3044,7 @@ definitions:
     properties:
       differences:
         items:
-          $ref: '#/definitions/ScriptsDifferenceModel'
+          $ref: "#/definitions/ScriptsDifferenceModel"
         type: array
     type: object
   ScriptsDifferenceModel:
@@ -3076,7 +3074,7 @@ definitions:
     properties:
       customFilters:
         items:
-          $ref: '#/definitions/SegmentQueryFilterModel'
+          $ref: "#/definitions/SegmentQueryFilterModel"
         type: array
       hiddenFilters:
         items:
@@ -3087,7 +3085,7 @@ definitions:
     properties:
       filters:
         items:
-          $ref: '#/definitions/SegmentQueryFilterModel'
+          $ref: "#/definitions/SegmentQueryFilterModel"
         type: array
     type: object
   SegmentQueryFilterModel:
@@ -3138,7 +3136,7 @@ definitions:
     properties:
       scriptVersions:
         items:
-          $ref: '#/definitions/SnapshotScriptVersionModel'
+          $ref: "#/definitions/SnapshotScriptVersionModel"
         type: array
     type: object
   SnapshotScriptVersionModel:

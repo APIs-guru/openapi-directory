@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.who-hosts-this.com
@@ -6,29 +6,31 @@ basePath: /APIEndpoint
 info:
   contact:
     name: Who Hosts This
-    url: 'https://www.who-hosts-this.com/Contact'
+    url: https://www.who-hosts-this.com/Contact
   description: Discover the hosting provider for any web site
-  title: Who Hosts This
+  title: Who Hosts This API
   version: 0.0.1
   x-apisguru-categories:
     - hosting
     - iot
     - tools
   x-logo:
-    backgroundColor: '#2c3e50'
-    url: 'https://www.who-hosts-this.com/data/_uploaded/image/logo-who-hosts-padded.png'
+    backgroundColor: "#2c3e50"
+    url: https://www.who-hosts-this.com/data/_uploaded/image/logo-who-hosts-padded.png
   x-origin:
     - format: swagger
-      url: 'https://www.who-hosts-this.com/API-Specification.json'
-      version: '2.0'
+      url: https://www.who-hosts-this.com/API-Specification.json
+      version: "2.0"
+  x-preferred: true
   x-providerName: who-hosts-this.com
 externalDocs:
-  url: 'https://www.who-hosts-this.com/Documentation'
+  url: https://www.who-hosts-this.com/Documentation
 produces:
   - application/json
 securityDefinitions:
   QueryKey:
-    description: 'Simple api key authentication. API Keys available at https://www.who-hosts-this.com/API'
+    description: Simple api key authentication. API Keys available at
+      https://www.who-hosts-this.com/API
     in: query
     name: key
     type: apiKey
@@ -44,7 +46,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Status of the detection and list of any found hosting providers
       summary: Discover the hosting provider for a web site
       tags:
@@ -52,6 +54,6 @@ paths:
   /Status:
     get:
       responses:
-        '200':
+        "200":
           description: Status of the detection and list of any found hosting providers
       summary: View usage details for the current billing period

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.infermedica.com
@@ -6,19 +6,18 @@ basePath: /v2
 info:
   contact:
     x-twitter: Infermedica
-  description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
-  title: Infermedica
+  description: Empower your healthcare services with intelligent diagnostic
+    insights of Infermedica API.
+  title: Infermedica API
   version: v2
   x-logo:
-    backgroundColor: '#1576D1'
-    url: 'https://twitter.com/Infermedica/profile_image?size=original'
+    backgroundColor: "#1576D1"
+    url: https://twitter.com/Infermedica/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.infermedica.com/v2/swagger.json'
-      version: '2.0'
+      url: https://api.infermedica.com/v2/swagger.json
+      version: "2.0"
   x-providerName: infermedica.com
-produces:
-  - application/json
 tags:
   - name: info
   - name: diagnosis
@@ -40,22 +39,29 @@ paths:
       description: Returns a list of all available conditions.
       operationId: getAllConditions
       parameters:
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/Condition_Public'
+              $ref: "#/definitions/Condition_Public"
             type: array
       summary: List all conditions
       tags:
         - conditions
-  '/conditions/{id}':
+  "/conditions/{id}":
     get:
       description: Returns details of a single condition specified by id parameter.
       operationId: getCondition
@@ -65,19 +71,26 @@ paths:
           name: id
           required: true
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/Condition_Details'
-        '400':
+            $ref: "#/definitions/Condition_Details"
+        "400":
           description: Invalid id specified
-        '404':
+        "404":
           description: Condition not found
       summary: Get condition by id
       tags:
@@ -86,19 +99,22 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible diagnoses and relevant observations based on provided patient information.
+      description: Suggests possible diagnoses and relevant observations based on
+        provided patient information.
       operationId: computeDiagnosis
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/DiagnosisRequest'
+            $ref: "#/definitions/DiagnosisRequest"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/DiagnosisResponse'
+            $ref: "#/definitions/DiagnosisResponse"
       summary: Query diagnostic engine
       tags:
         - diagnosis
@@ -107,18 +123,20 @@ paths:
       consumes:
         - application/json
       description: Explains which evidence impact probability of selected condition.
-      operationId: getExplanation
+      operationId: computeExplanation
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ExplanationRequest'
+            $ref: "#/definitions/ExplanationRequest"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/ExplanationResponse'
+            $ref: "#/definitions/ExplanationResponse"
       summary: Query diagnostic engine for explanation
       tags:
         - explain
@@ -126,12 +144,19 @@ paths:
     get:
       description: Returns information about data used by diagnostic engine.
       operationId: getDatabaseInfo
-      parameters: []
+      parameters:
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/Info_Public'
+            $ref: "#/definitions/Info_Public"
       summary: Get database information
       tags:
         - info
@@ -139,18 +164,25 @@ paths:
     get:
       description: Returns a list of all available lab tests.
       operationId: getAllLabTests
-      parameters: []
+      parameters:
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/LabTest_Public'
+              $ref: "#/definitions/LabTest_Public"
             type: array
       summary: List all lab tests
       tags:
         - lab_tests
-  '/lab_tests/{id}':
+  "/lab_tests/{id}":
     get:
       description: Returns details of a single lab test specified by id parameter.
       operationId: getLabTest
@@ -160,14 +192,21 @@ paths:
           name: id
           required: true
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/LabTest_Details'
-        '400':
+            $ref: "#/definitions/LabTest_Details"
+        "400":
           description: Invalid id specified
-        '404':
+        "404":
           description: Lab test not found
       summary: Get lab test by id
       tags:
@@ -190,14 +229,21 @@ paths:
           name: sex
           required: false
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/SearchResult'
-        '400':
+            $ref: "#/definitions/SearchResult"
+        "400":
           description: Phrase missing or invalid sex specified
-        '404':
+        "404":
           description: No observation matches given phrase
       summary: Find observation matching given phrase
       tags:
@@ -213,13 +259,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ParseRequest'
+            $ref: "#/definitions/ParseRequest"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/ParseResponse'
-        '400':
+            $ref: "#/definitions/ParseResponse"
+        "400":
           description: Text too long
       summary: Find mentions of observations in given text
       tags:
@@ -229,18 +277,20 @@ paths:
       consumes:
         - application/json
       description: Returns rationale behind the question asked by the system.
-      operationId: getRationale
+      operationId: computeRationale
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/RationaleRequest'
+            $ref: "#/definitions/RationaleRequest"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/RationaleResponse'
+            $ref: "#/definitions/RationaleResponse"
       summary: Query diagnostic engine for question rationale
       tags:
         - rationale
@@ -248,14 +298,15 @@ paths:
     post:
       consumes:
         - application/json
-      description: Suggests possible red flag symptoms based on provided patient information.
-      operationId: getRedFlags
+      description: Suggests possible red flag symptoms based on provided patient
+        information.
+      operationId: computeRedFlags
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/DiagnosisRequest'
+            $ref: "#/definitions/DiagnosisRequest"
         - default: 8
           description: maximum number of results
           format: int32
@@ -263,12 +314,14 @@ paths:
           name: max_results
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/SuggestResult'
+              $ref: "#/definitions/SuggestResult"
             type: array
       summary: Query the diagnostic engine for possible red flag symptoms
       tags:
@@ -278,22 +331,29 @@ paths:
       description: Returns a list of all available risk factors.
       operationId: getAllRiskFactors
       parameters:
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/RiskFactor_Public'
+              $ref: "#/definitions/RiskFactor_Public"
             type: array
       summary: List all risk factors
       tags:
         - risk_factors
-  '/risk_factors/{id}':
+  "/risk_factors/{id}":
     get:
       description: Returns details of a single risk factor specified by id parameter.
       operationId: getRiskFactor
@@ -303,19 +363,26 @@ paths:
           name: id
           required: true
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/RiskFactor_Details'
-        '400':
+            $ref: "#/definitions/RiskFactor_Details"
+        "400":
           description: Invalid id specified
-        '404':
+        "404":
           description: Risk factor not found
       summary: Get risk factor by id
       tags:
@@ -338,6 +405,11 @@ paths:
           name: sex
           required: false
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - default: 8
           description: maximum number of results
           format: int32
@@ -357,14 +429,16 @@ paths:
           name: type
           required: false
           type: array
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/SearchResult'
+              $ref: "#/definitions/SearchResult"
             type: array
-        '400':
+        "400":
           description: Phrase missing or invalid sex specified
       summary: Find observations matching given phrase
       tags:
@@ -380,7 +454,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SuggestRequest'
+            $ref: "#/definitions/SuggestRequest"
         - default: 8
           description: maximum number of results
           format: int32
@@ -388,12 +462,14 @@ paths:
           name: max_results
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/SuggestResult'
+              $ref: "#/definitions/SuggestResult"
             type: array
       summary: Query diagnostic engine for related symptoms
       tags:
@@ -403,22 +479,29 @@ paths:
       description: Returns a list of all available symptoms.
       operationId: getAllSymptoms
       parameters:
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/Symptom_Public'
+              $ref: "#/definitions/Symptom_Public"
             type: array
       summary: List all symptoms
       tags:
         - symptoms
-  '/symptoms/{id}':
+  "/symptoms/{id}":
     get:
       description: Returns details of a single symptom specified by id parameter.
       operationId: getSymptom
@@ -428,19 +511,26 @@ paths:
           name: id
           required: true
           type: string
+        - description: age
+          in: query
+          name: age
+          required: false
+          type: string
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
           required: false
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/Symptom_Details'
-        '400':
+            $ref: "#/definitions/Symptom_Details"
+        "400":
           description: Invalid id specified
-        '404':
+        "404":
           description: symptom not found
       summary: Get symptoms by id
       tags:
@@ -450,18 +540,20 @@ paths:
       consumes:
         - application/json
       description: Estimates triage level based on provided patient information.
-      operationId: computeDiagnosis_1
+      operationId: computeTriage
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/DiagnosisRequest'
+            $ref: "#/definitions/DiagnosisRequest"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/TriageResponse'
+            $ref: "#/definitions/TriageResponse"
       summary: Query diagnostic engine for triage level
       tags:
         - triage
@@ -517,7 +609,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -574,7 +666,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -622,7 +714,7 @@ definitions:
         type: string
       evidence:
         items:
-          $ref: '#/definitions/Evidence'
+          $ref: "#/definitions/Evidence"
         type: array
       extras:
         additionalProperties:
@@ -641,14 +733,14 @@ definitions:
     properties:
       conditions:
         items:
-          $ref: '#/definitions/ConditionProbability'
+          $ref: "#/definitions/ConditionProbability"
         type: array
       extras:
         additionalProperties:
           type: object
         type: object
       question:
-        $ref: '#/definitions/Question'
+        $ref: "#/definitions/Question"
       should_stop:
         type: boolean
     type: object
@@ -663,15 +755,17 @@ definitions:
       id:
         description: id of observation or condition
         type: string
-      initial:
-        description: 'true for initial evidence, false for evidence reported during interview'
-        type: boolean
       observed_at:
         description: time when evidence was observed in ISO 8601 format
         type: string
-      related:
-        description: 'true for related evidence, false for evidence reported during interview'
-        type: boolean
+      source:
+        description: Flag describing evidence origin
+        enum:
+          - initial
+          - suggest
+          - predefined
+          - red_flags
+        type: string
     required:
       - choice_id
       - id
@@ -700,7 +794,7 @@ definitions:
         type: string
       evidence:
         items:
-          $ref: '#/definitions/Evidence'
+          $ref: "#/definitions/Evidence"
         type: array
       extras:
         additionalProperties:
@@ -724,17 +818,17 @@ definitions:
       conflicting_evidence:
         description: conflicting evidence
         items:
-          $ref: '#/definitions/ExplanationEvidence'
+          $ref: "#/definitions/ExplanationEvidence"
         type: array
       supporting_evidence:
         description: supporting evidence
         items:
-          $ref: '#/definitions/ExplanationEvidence'
+          $ref: "#/definitions/ExplanationEvidence"
         type: array
       unconfirmed_evidence:
         description: unconfirmed evidence
         items:
-          $ref: '#/definitions/ExplanationEvidence'
+          $ref: "#/definitions/ExplanationEvidence"
         type: array
     required:
       - conflicting_evidence
@@ -813,7 +907,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/LabTestResult_Details'
+          $ref: "#/definitions/LabTestResult_Details"
         type: array
     required:
       - id
@@ -831,7 +925,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/LabTestResult_Public'
+          $ref: "#/definitions/LabTestResult_Public"
         type: array
     required:
       - id
@@ -883,7 +977,8 @@ definitions:
           type: string
         type: array
       context:
-        description: ordered list of ids of present symptoms that were already captured and can be used as context
+        description: ordered list of ids of present symptoms that were already captured
+          and can be used as context
         items:
           type: string
         type: array
@@ -904,10 +999,11 @@ definitions:
       mentions:
         description: list of recognized symptom or risk factor mentions
         items:
-          $ref: '#/definitions/ObservationMention'
+          $ref: "#/definitions/ObservationMention"
         type: array
       obvious:
-        description: indicates that entire input text has been parsed successfully and unambiguously
+        description: indicates that entire input text has been parsed successfully and
+          unambiguously
         type: boolean
       tokens:
         items:
@@ -922,12 +1018,12 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like images or HTML'
+        description: additional content, like images or HTML
         type: object
       items:
         description: one or more observations to evaluate
         items:
-          $ref: '#/definitions/QuestionItem'
+          $ref: "#/definitions/QuestionItem"
         type: array
       text:
         description: question text
@@ -947,7 +1043,7 @@ definitions:
       choices:
         description: list of available answer choices
         items:
-          $ref: '#/definitions/Choice'
+          $ref: "#/definitions/Choice"
         type: array
       id:
         description: observation id
@@ -984,7 +1080,7 @@ definitions:
         type: string
       evidence:
         items:
-          $ref: '#/definitions/Evidence'
+          $ref: "#/definitions/Evidence"
         type: array
       extras:
         additionalProperties:
@@ -1004,12 +1100,12 @@ definitions:
       condition_params:
         description: condition params
         items:
-          $ref: '#/definitions/RationaleParam'
+          $ref: "#/definitions/RationaleParam"
         type: array
       observation_params:
         description: observation params
         items:
-          $ref: '#/definitions/RationaleParam'
+          $ref: "#/definitions/RationaleParam"
         type: array
       type:
         description: type
@@ -1034,7 +1130,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -1045,7 +1141,7 @@ definitions:
       name:
         type: string
       question:
-        description: 'only available in object details, not in listing'
+        description: only available in object details, not in listing
         type: string
       sex_filter:
         enum:
@@ -1068,7 +1164,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -1094,7 +1190,7 @@ definitions:
       id:
         type: string
       label:
-        description: 'matched phrase, name or its synonym'
+        description: matched phrase, name or its synonym
         type: string
     required:
       - id
@@ -1126,7 +1222,7 @@ definitions:
         type: string
       evidence:
         items:
-          $ref: '#/definitions/Evidence'
+          $ref: "#/definitions/Evidence"
         type: array
       extras:
         additionalProperties:
@@ -1162,7 +1258,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -1188,7 +1284,7 @@ definitions:
           - radiation
         type: string
       question:
-        description: 'only available in object details, not in listing'
+        description: only available in object details, not in listing
         type: string
       sex_filter:
         enum:
@@ -1214,7 +1310,7 @@ definitions:
       extras:
         additionalProperties:
           type: object
-        description: 'additional content, like custom properties or images'
+        description: additional content, like custom properties or images
         type: object
       id:
         type: string
@@ -1252,6 +1348,8 @@ definitions:
     type: object
   TriageResponse:
     properties:
+      recommended_specialisation:
+        type: string
       root_cause:
         enum:
           - r1
@@ -1269,8 +1367,9 @@ definitions:
         type: string
       serious:
         items:
-          $ref: '#/definitions/SeriousObservation'
+          $ref: "#/definitions/SeriousObservation"
         type: array
+        uniqueItems: true
       teleconsultation_applicable:
         type: boolean
       triage_level:

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.haloapi.com
@@ -8,19 +8,17 @@ info:
     x-twitter: halo
   description: API that provides statistical data about Players and Matches.
   title: Stats
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - entertainment
   x-logo:
-    url: 'https://twitter.com/halo/profile_image?size=original'
+    url: https://twitter.com/halo/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.haloapi.com/docs/services/58acdf27e2f7f71ad0dad84b/export?DocumentFormat=Swagger'
-      version: '2.0'
+      url: https://developer.haloapi.com/docs/services/58acdf27e2f7f71ad0dad84b/export?DocumentFormat=Swagger
+      version: "2.0"
   x-providerName: haloapi.com
   x-serviceName: stats
-produces:
-  - application/json
 securityDefinitions:
   apiKeyHeader:
     in: header
@@ -35,24 +33,30 @@ security:
   - apiKeyQuery: []
 tags: []
 paths:
-  '/h5/arena/matches/{matchId}':
+  "/h5/arena/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Arena Game Mode.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Arena Game
+        Mode.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 12, 2018:</strong></p>
             <ul>
                 <li>Updated the documentation for "PlayerScore".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -61,6 +65,7 @@ paths:
                 <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
@@ -68,6 +73,7 @@ paths:
                 <li>Added documentation for the "MatchSpeedWinAmount", "ObjectivesCompletedAmount", and "BoostData" fields.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -77,13 +83,16 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Arena
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -267,26 +276,32 @@ paths:
                   Score: uint32
                   TeamId: int
               TotalDuration: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Result - Arena
-  '/h5/campaign/matches/{matchId}':
+  "/h5/campaign/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Campaign Game Mode.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Campaign Game
+        Mode.</p>
+
         <p>Every time a player plays a portion of a Campaign Mission, a Match will be generated whether the player finishes the Mission or not. If the "Match" ends because the Mission was completed, this will be indicated in the response.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -294,12 +309,14 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
                 <li>Documented HTTP 503 Response Code.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -308,13 +325,16 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Campaign
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -435,19 +455,23 @@ paths:
                 - int
               TotalDuration: string
               TotalMissionPlaythroughTime: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Result - Campaign
-  '/h5/companies/{companyId}':
+  "/h5/companies/{companyId}":
     get:
-      description: |
-        <p>Retrieves information about the Company. The response will contain the Company's name, status, and members.</p>
+      description: >
+        <p>Retrieves information about the Company. The response will contain
+        the Company's name, status, and members.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
@@ -456,16 +480,20 @@ paths:
         </div>
       operationId: Halo-5-Company
       parameters:
-        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
+        - description: The ID for the Company. The Company ID for a player can be
+            retrieved from the Profile APIs via the "Halo 5 - Player Apperance"
+            Endpoint.
           in: path
           name: companyId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: 'The response body will contain the Company name, status, and members.'
+        "200":
+          description: The response body will contain the Company name, status, and members.
           examples:
-            application/json: |
+            application/json: >
               {
                 // The ID of the company.
                 "Id": "guid",
@@ -546,14 +574,14 @@ paths:
                   "ISO8601Date": "string"
                 }
               }
-        '404':
+        "404":
           description: Specified Company was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Company
-  '/h5/companies/{companyId}/commendations':
+  "/h5/companies/{companyId}/commendations":
     get:
       description: |
         <p>Retrieves the commendation state for a Company.</p>
@@ -567,14 +595,19 @@ paths:
         </div>
       operationId: Halo-5-Company-Commendations
       parameters:
-        - description: The ID for the Company. The Company ID for a player can be retrieved from the Profile APIs via the "Halo 5 - Player Apperance" Endpoint.
+        - description: The ID for the Company. The Company ID for a player can be
+            retrieved from the Profile APIs via the "Halo 5 - Player Apperance"
+            Endpoint.
           in: path
           name: companyId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the commendation state for the Company.
+        "200":
+          description: The response body will contain the commendation state for the
+            Company.
           examples:
             application/json:
               LastUpdatedDateUtc:
@@ -594,25 +627,32 @@ paths:
                       Id: guid
                   Id: guid
                   Progress: int
-        '404':
+        "404":
           description: Specified Company was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Company Commendations
-  '/h5/custom/matches/{matchId}':
+  "/h5/custom/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode.
+        Games with the Custom Game Mode are played on Xbox Live Servers. For
+        games played on Local Servers, use the "Halo 5 - Match Result - Custom
+        Local" Endpoint.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 12, 2018:</strong></p>
             <ul>
                 <li>Updated the documentation for "PlayerScore".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
@@ -620,6 +660,7 @@ paths:
                 <li>Added documentation for "PresentInMatch".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -628,12 +669,14 @@ paths:
                 <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
                 <li>Documented HTTP 503 Response Code.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -643,13 +686,16 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Custom
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -777,25 +823,32 @@ paths:
                   Score: uint32
                   TeamId: int
               TotalDuration: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Result - Custom
-  '/h5/customlocal/matches/{matchId}':
+  "/h5/customlocal/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Local Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Match Result - Custom" Endpoint.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Custom Local Game
+        Mode. Games with the Custom Local Game Mode are played on Local Servers.
+        For games played on Xbox Live Servers, use the "Halo 5 - Match Result -
+        Custom" Endpoint.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 12, 2018:</strong></p>
             <ul>
                 <li>Updated the documentation for "PlayerScore".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
@@ -804,13 +857,16 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Custom-Local
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -938,21 +994,27 @@ paths:
                   Score: uint32
                   TeamId: int
               TotalDuration: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Result - Custom Local
-  '/h5/matches/{matchId}/events':
+  "/h5/matches/{matchId}/events":
     get:
-      description: |
-        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed.</p>
+      description: >
+        <p>Retrieves a set of Events related to the Match specified. Events are
+        only available once the Match has completed.</p>
+
         <p>The set of Events may grow over time as data becomes available.</p>
+
         <p>This Endpoint does not have the accuracy guarantees of other Endpoints have, so please use with caution. This endpoint may not return Matches before December 1, 2015.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -960,18 +1022,21 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 20, 2016:</strong></p>
             <ul>
                 <li>The Endpoint now correctly reports the "Content-Type" Response Header as "application/json".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
                 <li>Documented HTTP 503 Response Code.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -981,16 +1046,19 @@ paths:
         </div>
       operationId: Halo-5-Match-Events
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Events.
           examples:
-            application/json: |
+            application/json: >
               {
                 // Events that describe a match from start to completion. Events are reported in
                 // chronological order.
@@ -1128,7 +1196,9 @@ paths:
                 "Links": null
               }
 
+
               // Death Event
+
               {
                 // The gamertags of players who contributed to a kill.
                 "Assistants": [
@@ -1250,7 +1320,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // Impulse Event
+
               {
                 // The ID that uniquely identifies this impulse. Impulses are available via the
                 // Metadata API.
@@ -1273,7 +1345,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // Medal Event
+
               {
                 // The ID that uniquely identifies this medal. Medals are available via the Metadata
                 // API.
@@ -1297,7 +1371,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // PlayerSpawn Event
+
               {
                 // The player who spawned.
                 "Player": {
@@ -1317,7 +1393,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // RoundStart Event
+
               {
                 // The index of the round that started.
                 "RoundIndex" : "int",
@@ -1330,7 +1408,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // RoundEnd Event
+
               {
                 // The index of the round that ended.
                 "RoundIndex" : "int",
@@ -1343,7 +1423,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // WeaponDrop Event
+
               {
                 // The player who dropped the weapon.
                 "Player": {
@@ -1379,7 +1461,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // WeaponPickup Event
+
               {
                 // The player who picked up the weapon.
                 "Player": {
@@ -1405,7 +1489,9 @@ paths:
                 "TimeSinceStart": "string"
               }
 
+
               // WeaponPickupPad Event
+
               {
                 // The player who picked up the weapon.
                 "Player": {
@@ -1430,31 +1516,38 @@ paths:
                 // as an ISO 8601 Duration.
                 "TimeSinceStart": "string"
               }
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Events
-  '/h5/player-leaderboards/csr/{seasonId}/{playlistId}':
+  "/h5/player-leaderboards/csr/{seasonId}/{playlistId}":
     get:
-      description: |
-        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
+      description: >
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists
+        of the top Players with a CSR of 1800 or above for a given Playlist in a
+        Season.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>March 6, 2018:</strong></p>
             <ul>
                 <li>Fixed documentation typos for the names of the "Player" and "Gamertag" properties.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>July 31, 2017:</strong></p>
             <ul>
                 <li>Clarified documentation for which players are included in the leaderboard.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1462,6 +1555,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -1480,22 +1574,30 @@ paths:
           name: playlistId
           required: true
           type: string
-        - description: |-
-            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+        - description: >-
+            When specified, this indicates the maximum quantity of items the
+            client would like returned in the response.
+
 
             When omitted, 200 is assumed.
 
+
             When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
 
+
             When the value is greater than the allowed range [1,250], the maximum allowed value is used instead.
+
 
             The "Count" field in the response will confirm the actual value that was used.
           in: query
           name: count
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
+        "200":
+          description: The response body will contain the Players in the Leaderboard. An
+            empty list will be returned if no Players are in the Leaderboard.
           examples:
             application/json:
               Count: int
@@ -1513,14 +1615,15 @@ paths:
                     Rank: int
                     Tier: int
               Start: int
-        '404':
-          description: 'The Season does not exist, or the Playlist either does not exist or is not part of the given Season.'
-        '500':
+        "404":
+          description: The Season does not exist, or the Playlist either does not exist or
+            is not part of the given Season.
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Leaderboard - Player CSR
-  '/h5/players/{player}/commendations':
+  "/h5/players/{player}/commendations":
     get:
       description: |
         <p>Retrieves the commendation state for a Player.</p>
@@ -1539,8 +1642,10 @@ paths:
           name: player
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the commendation state for the Player.
           examples:
             application/json:
@@ -1561,32 +1666,40 @@ paths:
                       Id: guid
                   Id: guid
                   Progress: int
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Commendations
-  '/h5/players/{player}/matches':
+  "/h5/players/{player}/matches":
     get:
-      description: |
-        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
+      description: >
+        <p>Retrieves a list of Matches that the Player has participated in and
+        which have completed processing. If the Player is currently in a match,
+        it is not returned in this API.</p>
+
         <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 1, 2019:</strong></p>
             <ul>
                 <li>Enabled support for viewing the time component of the "MatchCompletedDate" via the "{include-times}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added support for the Custom Local Game mode.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1594,6 +1707,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -1608,49 +1722,70 @@ paths:
           name: player
           required: true
           type: string
-        - description: |-
-            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, customlocal, or warzone).
+        - description: >-
+            Indicates what Game Mode(s) the client is interested in getting
+            Matches for (arena, campaign, custom, customlocal, or warzone).
+
 
             When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
 
+
             When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
+
 
             When a valid Mode is specified more than once, HTTP 400 ("Bad Request") is returned.
           in: query
           name: modes
           type: string
-        - description: |-
-            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+        - description: >-
+            When specified, this indicates the starting index (0-based) for
+            which the batch of results will begin at. For example, "start=0"
+            indicates that the first qualifying result will be returned, no
+            items are 'skipped'. Passing "start=10" indicates that the result
+            will begin with the 11th item, the first 10 will be 'skipped'.
+
 
             When omitted, zero is assumed.
+
 
             When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
           in: query
           name: start
           type: number
-        - description: |-
-            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+        - description: >-
+            When specified, this indicates the maximum quantity of items the
+            client would like returned in the response.
+
 
             When omitted, 25 is assumed.
 
+
             When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
 
             When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
           in: query
           name: count
           type: number
-        - description: |-
-            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
+        - description: >-
+            When set to "true", this indicates that the time component of the
+            "MatchCompletedDate" field should be populated.
+
 
             Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
+
 
             When the value contains a non-boolean, HTTP 400 ("Bad Request") is returned.
           in: query
           name: include-times
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
+        "200":
+          description: The response body will contain the Player's recent Matches. An
+            empty list will be returned if the Player has not played any Matches
+            in the specified Game Mode(s).
           examples:
             application/json:
               Count: int
@@ -1696,33 +1831,40 @@ paths:
                       Rank: int
                       Score: uint32
               Start: int
-        '400':
+        "400":
           description: An unsupported value was provided for a query string parameter.
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Match History
   /h5/servicerecords/arena:
     get:
-      description: |
-        <p>Retrieves Service Records for the Arena Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+      description: >
+        <p>Retrieves Service Records for the Arena Game Mode for one or more
+        players. A Service Record contains a player's lifetime statistics in the
+        Game Mode.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>June 29, 2018:</strong></p>
             <ul>
                 <li>Added support for Social (Unranked) Playlists.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -1730,6 +1872,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -1738,20 +1881,28 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Arena
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
-        - description: 'When specified, this indicates the Season to request the Arena Playlist Stats for. If this is not specified, the default is the current Season. Seasons are available via the Metadata API. Social (Unranked) Arena Playlist Stats can be retrieved by specifying "NonSeasonal".'
+        - description: When specified, this indicates the Season to request the Arena
+            Playlist Stats for. If this is not specified, the default is the
+            current Season. Seasons are available via the Metadata API. Social
+            (Unranked) Arena Playlist Stats can be retrieved by specifying
+            "NonSeasonal".
           in: query
           name: seasonId
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
-            application/json: |
+            application/json: >
               {
                 // Set of responses. One per user queried.
                 "Results": [
@@ -2622,25 +2773,31 @@ paths:
                 // Internal use only. A set of related resource links.
                 "Links": null
               }
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Service Records - Arena
   /h5/servicerecords/campaign:
     get:
-      description: |
-        <p>Retrieves Service Records for the Campaign Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+      description: >
+        <p>Retrieves Service Records for the Campaign Game Mode for one or more
+        players. A Service Record contains a player's lifetime statistics in the
+        Game Mode.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -2650,14 +2807,18 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Campaign
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
             application/json:
               Links: null
@@ -2834,25 +2995,33 @@ paths:
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Service Records - Campaign
   /h5/servicerecords/custom:
     get:
-      description: |
-        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
+      description: >
+        <p>Retrieves Service Records for the Custom Game Mode for one or more
+        players. A Service Record contains a player's lifetime statistics in the
+        Game Mode. Games with the Custom Game Mode are played on Xbox Live
+        Servers. For games played on Local Servers, use the "Halo 5 - Player
+        Service Records - Custom Local" Endpoint.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -2862,14 +3031,18 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Custom
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
             application/json:
               Links: null
@@ -3035,19 +3208,28 @@ paths:
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Service Records - Custom
   /h5/servicerecords/customlocal:
     get:
-      description: |
-        <p>Retrieves Service Records for the Custom Local Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Local Game Mode are played on Local Servers. For games played on Xbox Live Servers, use the "Halo 5 - Player Service Records - Custom" Endpoint. A player's Custom Local Service Record summarizes games played on or after December 22, 2017.</p>
+      description: >
+        <p>Retrieves Service Records for the Custom Local Game Mode for one or
+        more players. A Service Record contains a player's lifetime statistics
+        in the Game Mode. Games with the Custom Local Game Mode are played on
+        Local Servers. For games played on Xbox Live Servers, use the "Halo 5 -
+        Player Service Records - Custom" Endpoint. A player's Custom Local
+        Service Record summarizes games played on or after December 22,
+        2017.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
@@ -3056,14 +3238,18 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Custom-Local
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
             application/json:
               Links: null
@@ -3229,25 +3415,31 @@ paths:
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Player Service Records - Custom Local
   /h5/servicerecords/warzone:
     get:
-      description: |
-        <p>Retrieves Service Records for the Warzone Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode.</p>
+      description: >
+        <p>Retrieves Service Records for the Warzone Game Mode for one or more
+        players. A Service Record contains a player's lifetime statistics in the
+        Game Mode.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -3257,14 +3449,18 @@ paths:
         </div>
       operationId: Halo-5-Player-Service-Records-Warzone
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
             application/json:
               Links: null
@@ -3428,23 +3624,28 @@ paths:
                           StockId: int
                     Xp: int
                   ResultCode: int
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
       summary: Halo 5 - Player Service Records - Warzone
-  '/h5/warzone/matches/{matchId}':
+  "/h5/warzone/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Warzone Game Mode.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Warzone Game
+        Mode.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -3453,6 +3654,7 @@ paths:
                 <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
@@ -3460,6 +3662,7 @@ paths:
                 <li>Added documentation for the "MatchSpeedWinAmount", "ObjectivesCompletedAmount", and "BoostData" fields.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -3469,13 +3672,16 @@ paths:
         </div>
       operationId: Halo-5-Match-Result-Warzone
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -3649,25 +3855,32 @@ paths:
                   Score: uint32
                   TeamId: int
               TotalDuration: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 - Match Result - Warzone
-  '/h5pc/custom/matches/{matchId}':
+  "/h5pc/custom/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match with the Custom Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Match Result - Custom Local" Endpoint.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match with the Custom Game Mode.
+        Games with the Custom Game Mode are played on Xbox Live Servers. For
+        games played on Local Servers, use the "Halo 5 - Match Result - Custom
+        Local" Endpoint.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 12, 2018:</strong></p>
             <ul>
                 <li>Updated the documentation for "PlayerScore".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
@@ -3675,6 +3888,7 @@ paths:
                 <li>Added documentation for "PresentInMatch".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -3683,12 +3897,14 @@ paths:
                 <li>Updated the documentation for "GameVariantResourceId" and "MapVariantResourceId" to reference the UGC API.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>May 16, 2016:</strong></p>
             <ul>
                 <li>Documented HTTP 503 Response Code.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -3698,13 +3914,16 @@ paths:
         </div>
       operationId: Halo-5-PC-Match-Result-Custom
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo 5 PC - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo 5 PC - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -3832,32 +4051,40 @@ paths:
                   Score: uint32
                   TeamId: int
               TotalDuration: string
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 PC - Match Result - Custom
-  '/h5pc/players/{player}/matches':
+  "/h5pc/players/{player}/matches":
     get:
-      description: |
-        <p>Retrieves a list of Matches that the Player has participated in and which have completed processing. If the Player is currently in a match, it is not returned in this API.</p>
+      description: >
+        <p>Retrieves a list of Matches that the Player has participated in and
+        which have completed processing. If the Player is currently in a match,
+        it is not returned in this API.</p>
+
         <p>This endpoint will include games played on Local Servers with the Custom Local Game Mode for games that occurred or after December 22, 2017.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 1, 2019:</strong></p>
             <ul>
                 <li>Enabled support for viewing the time component of the "MatchCompletedDate" via the "{include-times}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added support for the Custom Local Game mode.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -3865,6 +4092,7 @@ paths:
                 <li>Removed "{title}" Request Parameter.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>April 20, 2016:</strong></p>
             <ul>
@@ -3879,49 +4107,70 @@ paths:
           name: player
           required: true
           type: string
-        - description: |-
-            Indicates what Game Mode(s) the client is interested in getting Matches for (arena, campaign, custom, or warzone).
+        - description: >-
+            Indicates what Game Mode(s) the client is interested in getting
+            Matches for (arena, campaign, custom, or warzone).
+
 
             When the parameter is omitted or empty, Matches from all modes are returned. When a client would like to receive Matches spanning multiple Modes, separate the Modes with a comma (e.g. "arena,custom"). There is no significance to the order the Modes are specified in this parameter.
 
+
             When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
+
 
             When a valid Mode is specified more than once, HTTP 400 ("Bad Request") is returned.
           in: query
           name: modes
           type: string
-        - description: |-
-            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+        - description: >-
+            When specified, this indicates the starting index (0-based) for
+            which the batch of results will begin at. For example, "start=0"
+            indicates that the first qualifying result will be returned, no
+            items are 'skipped'. Passing "start=10" indicates that the result
+            will begin with the 11th item, the first 10 will be 'skipped'.
+
 
             When omitted, zero is assumed.
+
 
             When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
           in: query
           name: start
           type: number
-        - description: |-
-            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+        - description: >-
+            When specified, this indicates the maximum quantity of items the
+            client would like returned in the response.
+
 
             When omitted, 25 is assumed.
 
+
             When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
 
             When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
           in: query
           name: count
           type: number
-        - description: |-
-            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
+        - description: >-
+            When set to "true", this indicates that the time component of the
+            "MatchCompletedDate" field should be populated.
+
 
             Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
+
 
             When the value contains a non-boolean, HTTP 400 ("Bad Request") is returned.
           in: query
           name: include-times
           type: boolean
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
+        "200":
+          description: The response body will contain the Player's recent Matches. An
+            empty list will be returned if the Player has not played any Matches
+            in the specified Game Mode(s).
           examples:
             application/json:
               Count: int
@@ -3967,27 +4216,35 @@ paths:
                       Rank: int
                       Score: uint32
               Start: int
-        '400':
+        "400":
           description: An unsupported value was provided for a query string parameter.
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 PC - Player Match History
   /h5pc/servicerecords/custom:
     get:
-      description: |
-        <p>Retrieves Service Records for the Custom Game Mode for one or more players. A Service Record contains a player's lifetime statistics in the Game Mode. Games with the Custom Game Mode are played on Xbox Live Servers. For games played on Local Servers, use the "Halo 5 - Player Service Records - Custom Local" Endpoint.</p>
+      description: >
+        <p>Retrieves Service Records for the Custom Game Mode for one or more
+        players. A Service Record contains a player's lifetime statistics in the
+        Game Mode. Games with the Custom Game Mode are played on Xbox Live
+        Servers. For games played on Local Servers, use the "Halo 5 - Player
+        Service Records - Custom Local" Endpoint.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added Game Mode clarifications to the Endpoint description.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -3997,14 +4254,18 @@ paths:
         </div>
       operationId: Halo-5-PC-Player-Service-Records-Custom
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 32 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Service Records for the requested player(s).
+        "200":
+          description: The response body will contain the Service Records for the
+            requested player(s).
           examples:
             application/json:
               Links: null
@@ -4170,25 +4431,31 @@ paths:
                     SpartanRank: int
                     Xp: int
                   ResultCode: int
-        '404':
+        "404":
           description: One or more Gamertags don't pass validation rules.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo 5 PC - Player Service Records - Custom
-  '/hw2/matches/{matchId}':
+  "/hw2/matches/{matchId}":
     get:
-      description: |
-        <p>Retrieves detailed statistics for a Match. Matches can be retrieved before they are completed; however, the data for in-progress Matches is only updated every few minutes.</p>
+      description: >
+        <p>Retrieves detailed statistics for a Match. Matches can be retrieved
+        before they are completed; however, the data for in-progress Matches is
+        only updated every few minutes.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>September 5, 2017:</strong></p>
             <ul>
                 <li>Documented new game mode "Terminus Firefight".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -4197,13 +4464,16 @@ paths:
         </div>
       operationId: Halo-Wars-2-Match-Result
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Result.
           examples:
             application/json:
@@ -4289,26 +4559,33 @@ paths:
                   ObjectiveScore: int
                   TeamSize: int
               VictoryCondition: int
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Match Result
-  '/hw2/matches/{matchId}/events':
+  "/hw2/matches/{matchId}/events":
     get:
-      description: |
-        <p>Retrieves a set of Events related to the Match specified. Events are only available once the Match has completed. Events are not available for Matches played with the Custom Match Type.</p>
+      description: >
+        <p>Retrieves a set of Events related to the Match specified. Events are
+        only available once the Match has completed. Events are not available
+        for Matches played with the Custom Match Type.</p>
+
         <p>The set of Events may grow over time as data becomes available.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>September 5, 2017:</strong></p>
             <ul>
                 <li>Documented new game mode "Terminus Firefight".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -4317,19 +4594,25 @@ paths:
         </div>
       operationId: Halo-Wars-2-Match-Events
       parameters:
-        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved from the "Halo Wars 2 - Player Match History" Endpoint.
+        - description: An ID that uniquely identifies a Match. Match IDs can be retrieved
+            from the "Halo Wars 2 - Player Match History" Endpoint.
           in: path
           name: matchId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match Events.
           examples:
-            application/json: |
+            application/json: >
               //
+
               // Main Response
+
               //
+
               {
                 // Events that describe a match from start to completion. Events are reported in
                 // chronological order.
@@ -4344,20 +4627,35 @@ paths:
                 "IsCompleteSetOfEvents": "bool"
               }
 
+
               //
+
               // BuildingConstructionQueued Event
+
               //
+
               // This event is fired for the following reasons:
+
               //   - A player queues a building for construction.
+
               //   - A building is provided by the scenario (for instance, the buildings a player
+
               //     starts with at the beginning of the scenario). In this case, a subsequent
+
               //     BuildingConstructionCompleted event will not be fired.
+
               //   - A building is produced by a leader power.
+
               //   - A building is built in an "upgraded" state. In this case, a
+
               //     BuildingConstructionQueued event is fired for the the "upgraded" building rather
+
               //     than firing a BuildingConstructionQueued event for the "non-upgraded" building
+
               //     followed by a subsequent BuildingUpgraded event.
+
               //
+
               {
                 // Index of the player that will control building that was queued for construction.
                 "PlayerIndex": "int",
@@ -4399,11 +4697,17 @@ paths:
                 "EventName": "EventName"  
               }
 
+
               //
+
               // BuildingConstructionCompleted Event
+
               //
+
               // This event is fired when a building is successfully constructed.
+
               //
+
               {
                 // Index of the player that controls the building that was constructed.
                 "PlayerIndex": "int",
@@ -4418,11 +4722,17 @@ paths:
                 "EventName": "BuildingConstructionCompleted"  
               }
 
+
               //
+
               // BuildingRecycled Event
+
               //
+
               // This event is fired when a building is recycled.
+
               //
+
               {
                 // Index of the player that controls the building that was recycled.
                 "PlayerIndex": "int",
@@ -4446,11 +4756,17 @@ paths:
                 "EventName": "BuildingRecycled"  
               }
 
+
               //
+
               // BuildingUpgraded Event
+
               //
+
               // This event is fired when a building is upgraded.
+
               //
+
               {
                 // Index of the player that controls the building that was upgraded.
                 "PlayerIndex": "int",
@@ -4475,11 +4791,17 @@ paths:
                 "EventName": "BuildingUpgraded"  
               }
 
+
               //
+
               // CardCycled Event
+
               //
+
               // This event is fired when a card is cycled.
+
               //
+
               {
                 // Index of the player that cycled a card.
                 "PlayerIndex": "int",
@@ -4494,11 +4816,17 @@ paths:
                 "EventName": "CardCycled"  
               }
 
+
               //
+
               // CardPlayed Event
+
               //
+
               // This event is fired when a card is played.
+
               //
+
               {
                 // Index of the player that played a card.
                 "PlayerIndex": "int",
@@ -4533,11 +4861,17 @@ paths:
                 "EventName": "CardPlayed"  
               }
 
+
               //
+
               // Death Event
+
               //
+
               // This event is fired when a building or unit is destroyed.
+
               //
+
               {
                 // Index of the player that controlled the building or unit that was destroyed.
                 "VictimPlayerIndex": "int",
@@ -4632,11 +4966,17 @@ paths:
                 "EventName": "Death"  
               }
 
+
               //
+
               // FirefightWaveCompleted Event
+
               //
+
               // This event is fired when a team successfully clears a Firefight wave.
+
               //
+
               {
                 // Wave number that was completed.
                 "WaveNumber": "int",
@@ -4651,11 +4991,17 @@ paths:
                 "EventName": "FirefightWaveCompleted"  
               }
 
+
               //
+
               // FirefightWaveSpawned Event
+
               //
+
               // This event is fired when a Firefight wave has been spawned.
+
               //
+
               {
                 // Wave number that was spawned.
                 "WaveNumber": "int",
@@ -4670,11 +5016,17 @@ paths:
                 "EventName": "FirefightWaveSpawned"  
               }
 
+
               //
+
               // FirefightWaveStarted Event
+
               //
+
               // This event is fired when a Firefight wave has started.
+
               //
+
               {
                 // Wave number that was started.
                 "WaveNumber": "int",
@@ -4686,11 +5038,17 @@ paths:
                 "EventName": "FirefightWaveStarted"  
               }
 
+
               //
+
               // LeaderPowerCast Event
+
               //
+
               // This event is fired when a leader power is cast.
+
               //
+
               {
                 // Index of the player that cast the leader power.
                 "PlayerIndex": "int",
@@ -4726,11 +5084,17 @@ paths:
                 "EventName": "LeaderPowerCast"  
               }
 
+
               //
+
               // LeaderPowerUnlocked Event
+
               //
+
               // This event is fired when a leader power is unlocked.
+
               //
+
               {
                 // Index of the player that unlocked the leader power.
                 "PlayerIndex": "int",
@@ -4752,11 +5116,17 @@ paths:
                 "EventName": "LeaderPowerUnlocked"  
               }
 
+
               //
+
               // ManaOrbCollected Event
+
               //
+
               // This event is fired when a mana orb is collected.
+
               //
+
               {
                 // Index of the player that collected the mana orb.
                 "PlayerIndex": "int",
@@ -4784,11 +5154,17 @@ paths:
                 "EventName": "ManaOrbCollected"  
               }
 
+
               //
+
               // MatchEnd Event
+
               //
+
               // This event is fired when the match ends.
+
               //
+
               {
                 // Reason the match ended. This field will contain one of the following values:
                 //   Unknown = 0,
@@ -4845,11 +5221,17 @@ paths:
                 "EventName": "MatchEnd"  
               }
 
+
               //
+
               // MatchStart Event
+
               //
+
               // This event is fired when the match starts.
+
               //
+
               {
                 // ID of the match.
                 "MatchId": "guid",
@@ -4895,11 +5277,17 @@ paths:
                 "EventName": "MatchStart"  
               }
 
+
               //
+
               // PlayerEliminated Event
+
               //
+
               // This event is fired when a player is eliminated from the match.
+
               //
+
               {
                 // Index of the player that was eliminated.
                 "PlayerIndex": "int",
@@ -4911,12 +5299,19 @@ paths:
                 "EventName": "PlayerEliminated"  
               }
 
+
               //
+
               // PlayerJoinedMatch Event
+
               //
+
               // This event is fired at the start of the match for each player in the match. This event
+
               // is fired for the neutral players in addition to the Human and Computer players.
+
               //
+
               {
                 // Index of the player that joined the match. The player will be referred to by this
                 // index in subsequent events.
@@ -4960,15 +5355,25 @@ paths:
                 "EventName": "PlayerJoinedMatch"  
               }
 
+
               //
+
               // PlayerLeftMatch Event
+
               //
+
               // This event is fired when a player leaves the match early for any reason. This is not
+
               // to be confused with the PlayerEliminated event. If a player is eliminated, the
+
               // PlayerEliminated event will be fired. The player may continue to spectate the match
+
               // after being eliminated. If the player stops spectating the match, then this event will
+
               // be fired.
+
               //
+
               {
                 // Index of the player that left the match.
                 "PlayerIndex": "int",
@@ -4983,11 +5388,17 @@ paths:
                 "EventName": "PlayerLeftMatch"  
               }
 
+
               //
+
               // PointCaptured Event
+
               //
+
               // This event is fired when an objective is captured in all game modes besides Blitz.
+
               //
+
               {
                 // Index of the player that captured the objective.
                 "PlayerIndex": "int",
@@ -5019,12 +5430,19 @@ paths:
                 "EventName": "PointCaptured"  
               }
 
+
               //
+
               // PointCreated Event
+
               //
+
               // This event is fired at the start of the match for each objective that can be captured
+
               // on the map.
+
               //
+
               {
                 // ID that indicates the type of the objective.
                 "PointId": "string",
@@ -5050,11 +5468,17 @@ paths:
                 "EventName": "PointCreated"  
               }
 
+
               //
+
               // PointStatusChange Event
+
               //
+
               // This event is fired when an objective is captured in the Blitz game mode.
+
               //
+
               {
                 // Instance ID of the objective that was captured.
                 "InstanceId": "int",
@@ -5076,11 +5500,17 @@ paths:
                 "EventName": "PointStatusChange"  
               }
 
+
               //
+
               // ResourceHeartbeat Event
+
               //
+
               // This event is fired at the start of a match and then at regular 5 seconds thereafter.
+
               //
+
               {
                 // Current resources for each team.
                 "TeamResources": {
@@ -5147,11 +5577,17 @@ paths:
                 "EventName": "EventName"  
               }
 
+
               //
+
               // ResourceTransferred Event
+
               //
+
               // This event is fired when a player transfers resources to another player.
+
               //
+
               {
                 // Index of the player that sent the resources.
                 "SendingPlayerIndex": "int",
@@ -5178,11 +5614,17 @@ paths:
                 "EventName": "ResourceTransferred"  
               }
 
+
               //
+
               // TechResearched Event
+
               //
+
               // This event is fired when a tech is researched.
+
               //
+
               {
                 // Index of the player that received the researched tech.
                 "PlayerIndex": "int",
@@ -5210,12 +5652,19 @@ paths:
                 "EventName": "TechResearched"  
               }
 
+
               //
+
               // UnitControlTransferred Event
+
               //
+
               // This event is fired when control of a unit is transferred from a player to another
+
               // player.
+
               //
+
               {
                 // Index of the player that lost control of the unit.
                 "OldPlayerIndex": "int",
@@ -5254,11 +5703,17 @@ paths:
                 "EventName": "UnitControlTransferred"  
               }
 
+
               //
+
               // UnitPromoted Event
+
               //
+
               // This event is fired when a unit is promoted.
+
               //
+
               {
                 // Index of the player that controls the unit that was promoted.
                 "PlayerIndex": "int",
@@ -5277,15 +5732,25 @@ paths:
                 "EventName": "UnitPromoted"  
               }
 
+
               //
+
               // UnitTrained Event
+
               //
+
               // This event is fired for the following reasons:
+
               //   - A player trains a unit from a building.
+
               //   - A unit is produced by a leader power or card.
+
               //   - A unit is provided by the scenario (for instance, the units a player starts with
+
               //     at the beginning of the scenario).
+
               //
+
               {
                 // Index of the player that controls the unit that was trained.
                 "PlayerIndex": "int",
@@ -5332,31 +5797,38 @@ paths:
                 // Name of the event.
                 "EventName": "UnitTrained"  
               }
-        '404':
+        "404":
           description: The specified Match could not be found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Match Events
-  '/hw2/player-leaderboards/csr/{seasonId}/{playlistId}':
+  "/hw2/player-leaderboards/csr/{seasonId}/{playlistId}":
     get:
-      description: |
-        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists of the top Players with a CSR of 1800 or above for a given Playlist in a Season.</p>
+      description: >
+        <p>Retrieves the Leaderboard for Player CSRs. The Leaderboard consists
+        of the top Players with a CSR of 1800 or above for a given Playlist in a
+        Season.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>March 6, 2018:</strong></p>
             <ul>
                 <li>Fixed documentation typos for the names of the "Player" and "Gamertag" properties.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>July 31, 2017:</strong></p>
             <ul>
                 <li>Clarified documentation for which players are included in the leaderboard.</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>July 14, 2017:</strong></p>
             <ul>
@@ -5375,22 +5847,30 @@ paths:
           name: playlistId
           required: true
           type: string
-        - description: |-
-            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+        - description: >-
+            When specified, this indicates the maximum quantity of items the
+            client would like returned in the response.
+
 
             When omitted, 200 is assumed.
 
+
             When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
 
+
             When the value is greater than the allowed range [1,250], the maximum allowed value is used instead.
+
 
             The "Count" field in the response will confirm the actual value that was used.
           in: query
           name: count
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Players in the Leaderboard. An empty list will be returned if no Players are in the Leaderboard.
+        "200":
+          description: The response body will contain the Players in the Leaderboard. An
+            empty list will be returned if no Players are in the Leaderboard.
           examples:
             application/json:
               Count: int
@@ -5408,14 +5888,15 @@ paths:
                     Rank: int
                     Tier: int
               Start: int
-        '404':
-          description: 'The Season does not exist, or the Playlist either does not exist or is not part of the given Season.'
-        '500':
+        "404":
+          description: The Season does not exist, or the Playlist either does not exist or
+            is not part of the given Season.
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Leaderboard - Player CSR
-  '/hw2/players/{player}/campaign-progress':
+  "/hw2/players/{player}/campaign-progress":
     get:
       description: |
         <p>Retrieves the Campaign Progress state for a Player.</p>
@@ -5434,8 +5915,10 @@ paths:
           name: player
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Campaign Progress for the Player.
           examples:
             application/json:
@@ -5460,25 +5943,30 @@ paths:
                   TotalSoloPlayTime: string
               LogsUnlocked:
                 - int
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player Campaign Progress
-  '/hw2/players/{player}/matches':
+  "/hw2/players/{player}/matches":
     get:
-      description: |
-        <p>Retrieves a list of Matches that the Player has participated in. If the Player is currently in a Match, it is not returned in this API.</p>
+      description: >
+        <p>Retrieves a list of Matches that the Player has participated in. If
+        the Player is currently in a Match, it is not returned in this API.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>September 5, 2017:</strong></p>
             <ul>
                 <li>Documented new game mode "Terminus Firefight".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -5492,37 +5980,52 @@ paths:
           name: player
           required: true
           type: string
-        - description: |-
-            Indicates what Match Type the client is interested in getting Matches for ("custom" or "matchmaking").
+        - description: >-
+            Indicates what Match Type the client is interested in getting
+            Matches for ("custom" or "matchmaking").
+
 
             When the parameter is omitted or empty, Matches from all Match Types are returned.
+
 
             When an invalid Mode is specified, HTTP 400 ("Bad Request") is returned.
           in: query
           name: matchType
           type: string
-        - description: |-
-            When specified, this indicates the starting index (0-based) for which the batch of results will begin at. For example, "start=0" indicates that the first qualifying result will be returned, no items are 'skipped'. Passing "start=10" indicates that the result will begin with the 11th item, the first 10 will be 'skipped'.
+        - description: >-
+            When specified, this indicates the starting index (0-based) for
+            which the batch of results will begin at. For example, "start=0"
+            indicates that the first qualifying result will be returned, no
+            items are 'skipped'. Passing "start=10" indicates that the result
+            will begin with the 11th item, the first 10 will be 'skipped'.
+
 
             When omitted, zero is assumed.
+
 
             When the value contains a non-digit, HTTP 400 ("Bad Request") is returned.
           in: query
           name: start
           type: number
-        - description: |-
-            When specified, this indicates the maximum quantity of items the client would like returned in the response.
+        - description: >-
+            When specified, this indicates the maximum quantity of items the
+            client would like returned in the response.
+
 
             When omitted, 25 is assumed.
 
+
             When the value contains a non-digit or is exactly "0", HTTP 400 ("Bad Request") is returned.
+
 
             When the value is greater than the allowed range [1,25], the maximum allowed value is used instead. The "Count" field in the response will confirm the actual value that was used.
           in: query
           name: count
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Match History for the Player.
           examples:
             application/json:
@@ -5583,19 +6086,23 @@ paths:
                     PreviousTotalXP: int
                     UpdatedTotalXP: int
               Start: int
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player Match History
-  '/hw2/players/{player}/stats':
+  "/hw2/players/{player}/stats":
     get:
-      description: |
-        <p>Retrieves high-level aggregations across the lifetime of a Player.</p>
+      description: >
+        <p>Retrieves high-level aggregations across the lifetime of a
+        Player.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>September 5, 2017:</strong></p>
             <ul>
@@ -5603,6 +6110,7 @@ paths:
                 <li>Documented new game mode "Terminus Firefight".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -5616,14 +6124,19 @@ paths:
           name: player
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Stats Summary for the Player.
           examples:
-            application/json: |
+            application/json: >
               //
+
               // Main Response
+
               //
+
               {
                 // Summary of activity across all Custom matches that the player has participated in.
                 "CustomSummary": {
@@ -5715,9 +6228,13 @@ paths:
                 }
               }
 
+
               //
+
               // Summary
+
               //
+
               {
                 // Playlist ID that this entry summarizes. If this entry summarizes Custom matches,
                 // this will be null. Playlists are available via the Metadata API.
@@ -5854,19 +6371,22 @@ paths:
 
                 }
               }
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player Stats Summary
-  '/hw2/players/{player}/stats/seasons/{seasonId}':
+  "/hw2/players/{player}/stats/seasons/{seasonId}":
     get:
-      description: |
+      description: >
         <p>Retrieves high-level aggregations across a Season for a Player.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>September 5, 2017:</strong></p>
             <ul>
@@ -5875,6 +6395,7 @@ paths:
                 <li>Documented new game mode "Terminus Firefight".</li>
             </ul>
         </div>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -5888,13 +6409,16 @@ paths:
           name: player
           required: true
           type: string
-        - description: A Season ID or "current" for the current Season. Seasons are available via the Metadata API.
+        - description: A Season ID or "current" for the current Season. Seasons are
+            available via the Metadata API.
           in: path
           name: seasonId
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the Stats Summary for the Player.
           examples:
             application/json:
@@ -5931,19 +6455,23 @@ paths:
                   TotalUnitsDestroyed: int
                   TotalUnitsLost: int
               SeasonId: guid
-        '404':
+        "404":
           description: Specified Player was not found.
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player Season Stats Summary
-  '/hw2/playlist/{playlistId}/rating':
+  "/hw2/playlist/{playlistId}/rating":
     get:
-      description: |
-        <p>Retrieves Playlist Ratings in the current season for one or more Players.</p>
+      description: >
+        <p>Retrieves Playlist Ratings in the current season for one or more
+        Players.</p>
+
         <br />
+
         <h4>Changelog</h4>
+
         <div class="panel-body">
             <p><strong>February 21, 2017:</strong></p>
             <ul>
@@ -5957,14 +6485,18 @@ paths:
           name: playlistId
           required: true
           type: string
-        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: The response body will contain the Playlist Ratings for the Player(s).
+        "200":
+          description: The response body will contain the Playlist Ratings for the
+            Player(s).
           examples:
             application/json:
               Links: {}
@@ -5980,13 +6512,13 @@ paths:
                       Tier: int
                     Mmr:
                       LastModifiedDate:
-                        ISO8601Date: ''
+                        ISO8601Date: ""
                       Rating: double
                       Variance: double
                   ResultCode: int
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player Playlist Ratings
   /hw2/xp:
@@ -6003,13 +6535,16 @@ paths:
         </div>
       operationId: Halo-Wars-2-Player-XPs
       parameters:
-        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be specified.
+        - description: A comma-separated list of Gamertags. Up to 6 Gamertags may be
+            specified.
           in: query
           name: players
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: The response body will contain the XPs for the Player(s).
           examples:
             application/json:
@@ -6024,8 +6559,8 @@ paths:
                     SpartanRankId: guid
                     TotalXp: int
                   ResultCode: int
-        '500':
+        "500":
           description: Internal Server Error
-        '503':
+        "503":
           description: Service Unavailable
       summary: Halo Wars 2 - Player XPs

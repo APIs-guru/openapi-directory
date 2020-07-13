@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -6,10 +6,13 @@ host: api.funtranslations.com
 info:
   contact:
     name: Fun Translations
-    url: 'http://funtranslations.com/'
+    url: http://funtranslations.com/
     x-twitter: funtranslate
-  description: |
-    Funtranslations Starwars API gives access to the full set of starwars language translations available at funtranslations.com so that you can integrate them in your workflow or an app. [Click here to get details and subscribe](http://funtranslations.com/api/starwars) .      
+  description: >
+    Funtranslations Starwars API gives access to the full set of starwars
+    language translations available at funtranslations.com so that you can
+    integrate them in your workflow or an app. [Click here to get details and
+    subscribe](http://funtranslations.com/api/starwars) .      
 
       You can also subscribe to individual translators. Here are the details.
       
@@ -24,18 +27,17 @@ info:
       Mandalorian Translator API. [Click here to subscribe](http://funtranslations.com/api/mandalorian)
       
       Gungan Translator API. [Click here to subscribe](http://funtranslations.com/api/gungan)
-      
-  termsOfService: 'https://funtranslations.com/terms'
-  title: Starwars Translations
-  version: '2.3'
+  termsOfService: https://funtranslations.com/terms
+  title: Starwars Translations API
+  version: "2.3"
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/funtranslate/profile_image?size=original'
+    url: https://twitter.com/funtranslate/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://funtranslations.com/yaml/funtranslations.starwars.yaml'
-      version: '2.0'
+      url: https://funtranslations.com/yaml/funtranslations.starwars.yaml
+      version: "2.0"
   x-providerName: funtranslations.com
   x-serviceName: starwars
 consumes:
@@ -53,7 +55,7 @@ tags:
   - description: Starwars Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/starwars'
+      url: http://funtranslations.com/api/starwars
     name: Starwars
 paths:
   /translate/cheunh:
@@ -66,11 +68,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -81,7 +87,7 @@ paths:
                   "translation": "cheunh"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -105,11 +111,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -120,7 +130,7 @@ paths:
                   "translation": "gungan"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -144,8 +154,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -159,7 +173,7 @@ paths:
                   "translation": "huttese"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -183,8 +197,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -198,7 +216,7 @@ paths:
                   "translation": "mandalorian"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -222,11 +240,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                 "success": {
                   "total": 1
@@ -237,7 +259,7 @@ paths:
                   "translation": "sith"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -261,8 +283,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -276,7 +302,7 @@ paths:
                   "translation": "yoda"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-

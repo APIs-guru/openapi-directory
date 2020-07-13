@@ -1,18 +1,106 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: idealspot-geodata.p.rapidapi.com
 basePath: /api/v1
 info:
-  description: "Hyperlocal Demographics, Vehicle Traffic, Economic, Market Signals, and More. Use this API to request IdealSpot hyperlocal geospatial market insight and geometry data. \n\n## Detailed Description\n\nUse this API as your **local economy microscope** by querying [IdealSpot](https://www.idealspot.com) hyperlocal market insight and geometry data. We offer the most precise, extensive, and frequently-updated local market data in the US. Our data is available across the entire US and can be queried at geographic scales ranging from the micro (Census block) through the macro (nation).\n\nBetter data and analysis leads to a better understanding of local market opportunities and risks. Integrate with your commercial real estate and marketing applications, machine learning workflows, and other investment analytics.\n\nOur goal is to offer the most complete snapshot of the geographically distributed consumer and retail economy. We start with the fundamentals of consumers and business establishments. To connect retailers with consumers, we provide mobility data like vehicle traffic and mobile device data. To describe consumer intent, we provide geolocated digital marketing data. \n\nWe believe that accurate capital allocation through reliable local market data is foundational to creating robust, healthy, and livable communities for all. We hope you and your clients find tremendous value in this service.\n\n## Features\n\nQuery data and GeoJSON geometries at these scales for any US latitude and longitude:\n\n* Rings (0.5 km+)\n* Drive time (1-60 minutes)\n* Bike time (3-60 minutes)\n* Walk time (5-60 minutes)\n* Public transit time (5-60 minutes)\n* Administrative region (US, states, core-based statistical areas, counties, Census-designated places, Census tracts, zipcodes, Census block groups, opportunity zones)\n\n| Data Feature | Description |\n| ------- | ------------------------------|\n| Demographics, Housing, Spending | *Updated Quarterly*.  Current and historical market data including population, spending, and housing. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |\n| Labor, Business Establishments, Economic Conditions | *Updated Quarterly*.  Traditional market data including workforce, business establishment counts, and economic conditions like local GDP, unemployment rates. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |\n| Consumer segmentation\t| *Updated Annually*. Demographics grouped into narrative-oriented segments. |\n| Vehicle Traffic |\t*Updated semi-annually*. Gold standard in vehicle traffic data from INRIX. Counts by day of week, time of day and side of street. |\n| Rings and Travel time polygons | *Estimate in Real-time*. Rings alongside drive time, walk time, bike time, and public transit time polygons. Request as GeoJSON geometries for mapping or use with data queries |\n| Administrative region polygons | *Updated Annually*. GeoJSON administrative regions from US Census Bureau: block groups, tracts, counties, CBSAs, states, opportunity zones, USPS zipcodes |\n| Internet Search Volumes | 30 day rolling averages for geolocated advertising potential across 450 business categories from major search engines |\n| Social Media Interest\t| 30 day rolling average for geolocated advertising potential across 450 business categories from major social networks |\n\n### Coming Soon!\n\nThis API powers our local market research platform at [IdealSpot.com](https://www.idealspot.com). The functionality exposed so far is only a portion of our current capabilities. We will be exposing additional API features in time so watch this space!\n\n| Data Feature | Description |\n| ------- | ------------------------------|\nMobile device visit counts, points of interest, brands | Fresh point of interest data across 3000+ brands, millions of POI, and historical foot traffic counts using mobile data for those points of interest\nOrigin/destination trips from mobile devices | Map origins and destinations of devices visiting an arbitrary catchment area\nCompetition search | Search all major point-of-interest aggregators in one query\nEnvironment/climate | Expected weather patterns like temperature and precipitation\nFilter search API | Query data for all counties in state, all tracts in MSA, etc\nRoad segment tiles | Plot road segments on maps in interactive applications\n\n## Developer Website\n\nFor more detail see https://developer.idealspot.com/"
+  contact: {}
+  description: >-
+    Hyperlocal Demographics, Vehicle Traffic, Economic, Market Signals, and
+    More. Use this API to request IdealSpot hyperlocal geospatial market insight
+    and geometry data. 
+
+
+    ## Detailed Description
+
+
+    Use this API as your **local economy microscope** by querying [IdealSpot](https://www.idealspot.com) hyperlocal market insight and geometry data. We offer the most precise, extensive, and frequently-updated local market data in the US. Our data is available across the entire US and can be queried at geographic scales ranging from the micro (Census block) through the macro (nation).
+
+
+    Better data and analysis leads to a better understanding of local market opportunities and risks. Integrate with your commercial real estate and marketing applications, machine learning workflows, and other investment analytics.
+
+
+    Our goal is to offer the most complete snapshot of the geographically distributed consumer and retail economy. We start with the fundamentals of consumers and business establishments. To connect retailers with consumers, we provide mobility data like vehicle traffic and mobile device data. To describe consumer intent, we provide geolocated digital marketing data. 
+
+
+    We believe that accurate capital allocation through reliable local market data is foundational to creating robust, healthy, and livable communities for all. We hope you and your clients find tremendous value in this service.
+
+
+    ## Features
+
+
+    Query data and GeoJSON geometries at these scales for any US latitude and longitude:
+
+
+    * Rings (0.5 km+)
+
+    * Drive time (1-60 minutes)
+
+    * Bike time (3-60 minutes)
+
+    * Walk time (5-60 minutes)
+
+    * Public transit time (5-60 minutes)
+
+    * Administrative region (US, states, core-based statistical areas, counties, Census-designated places, Census tracts, zipcodes, Census block groups, opportunity zones)
+
+
+    | Data Feature | Description |
+
+    | ------- | ------------------------------|
+
+    | Demographics, Housing, Spending | *Updated Quarterly*.  Current and historical market data including population, spending, and housing. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |
+
+    | Labor, Business Establishments, Economic Conditions | *Updated Quarterly*.  Traditional market data including workforce, business establishment counts, and economic conditions like local GDP, unemployment rates. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |
+
+    | Consumer segmentation	| *Updated Annually*. Demographics grouped into narrative-oriented segments. |
+
+    | Vehicle Traffic |	*Updated semi-annually*. Gold standard in vehicle traffic data from INRIX. Counts by day of week, time of day and side of street. |
+
+    | Rings and Travel time polygons | *Estimate in Real-time*. Rings alongside drive time, walk time, bike time, and public transit time polygons. Request as GeoJSON geometries for mapping or use with data queries |
+
+    | Administrative region polygons | *Updated Annually*. GeoJSON administrative regions from US Census Bureau: block groups, tracts, counties, CBSAs, states, opportunity zones, USPS zipcodes |
+
+    | Internet Search Volumes | 30 day rolling averages for geolocated advertising potential across 450 business categories from major search engines |
+
+    | Social Media Interest	| 30 day rolling average for geolocated advertising potential across 450 business categories from major social networks |
+
+
+    ### Coming Soon!
+
+
+    This API powers our local market research platform at [IdealSpot.com](https://www.idealspot.com). The functionality exposed so far is only a portion of our current capabilities. We will be exposing additional API features in time so watch this space!
+
+
+    | Data Feature | Description |
+
+    | ------- | ------------------------------|
+
+    Mobile device visit counts, points of interest, brands | Fresh point of interest data across 3000+ brands, millions of POI, and historical foot traffic counts using mobile data for those points of interest
+
+    Origin/destination trips from mobile devices | Map origins and destinations of devices visiting an arbitrary catchment area
+
+    Competition search | Search all major point-of-interest aggregators in one query
+
+    Environment/climate | Expected weather patterns like temperature and precipitation
+
+    Filter search API | Query data for all counties in state, all tracts in MSA, etc
+
+    Road segment tiles | Plot road segments on maps in interactive applications
+
+
+    ## Developer Website
+
+
+    For more detail see https://developer.idealspot.com/
   title: IdealSpot GeoData
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - location
   x-origin:
     - format: swagger
-      url: 'https://idealspot.gitlab.io/developer-docs/specs/idealspot-swagger20.json'
-      version: '2.0'
+      url: https://idealspot.gitlab.io/developer-docs/specs/idealspot-swagger20.json
+      version: "2.0"
   x-providerName: rapidapi.com
   x-serviceName: idealspot-geodata
 consumes:
@@ -20,10 +108,12 @@ consumes:
 produces:
   - application/json
 tags:
-  - description: |-
+  - description: >-
       # Insights API
 
+
       To query demographics, spending, and other retail market insights, use the endpoints under the "Geodata" heading. "Insights" can be thought of as a unique dataset you can query. ie., residential population counts, avg. household incomes, home values, mortgage risk, and languages spoken.
+
 
       To see the full list of Insights currently available to query, visit: https://developer.idealspot.com/data
     name: Insights API
@@ -33,15 +123,18 @@ paths:
   /data/insights:
     get:
       deprecated: false
-      description: 'List all insights that the user has access to. This includes population, household income, crime statistics, walking traffic, vehicle traffic counts, employment, and much more,'
+      description: List all insights that the user has access to. This includes
+        population, household income, crime statistics, walking traffic, vehicle
+        traffic counts, employment, and much more,
       operationId: FetchAvailableInsights
       parameters:
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -49,8 +142,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json; charset=utf-8:
               data:
@@ -74,7 +167,10 @@ paths:
                   id: crime
                   name: Crime
                   version: v1
-                - description: 'Conventionally, daytime population is equated to the number of the employees in an area. However, that number does not capture stay-at-home parents, students, and retired or unemployed individuals. This insight provides that detail.'
+                - description: Conventionally, daytime population is equated to the number of the
+                    employees in an area. However, that number does not capture
+                    stay-at-home parents, students, and retired or unemployed
+                    individuals. This insight provides that detail.
                   id: daytime-population
                   name: Daytime Population
                   version: v2
@@ -86,7 +182,8 @@ paths:
                   id: employee-categories
                   name: Employee Categories
                   version: v2
-                - description: Quarterly historical total number of employees (often referred to as daytime population).
+                - description: Quarterly historical total number of employees (often referred to
+                    as daytime population).
                   id: employees
                   name: Daytime Population
                   version: v4
@@ -130,7 +227,7 @@ paths:
                   id: households
                   name: Households
                   version: v3
-                - description: 'Home renters, owners, and vacancies.'
+                - description: Home renters, owners, and vacancies.
                   id: housing-ownership
                   name: Housing Ownership
                   version: v2
@@ -154,7 +251,8 @@ paths:
                   id: occupation
                   name: Occupation
                   version: v2
-                - description: 'Historical, current and forecasted number of people living in houses and apartments within a trade area.'
+                - description: Historical, current and forecasted number of people living in
+                    houses and apartments within a trade area.
                   id: residential-population
                   name: Residential Population
                   version: v3
@@ -162,11 +260,13 @@ paths:
                   id: salaries
                   name: Salaries
                   version: v2
-                - description: 'Population residing in a housing unit specifically designated as seasonal housing, like a summer cottage or winter chalet.'
+                - description: Population residing in a housing unit specifically designated as
+                    seasonal housing, like a summer cottage or winter chalet.
                   id: seasonal-population
                   name: Seasonal Population
                   version: v3
-                - description: Expressed interest on social media within the location's trade area by business category.
+                - description: Expressed interest on social media within the location's trade area
+                    by business category.
                   id: social
                   name: Social Media Interest
                   version: v3
@@ -174,7 +274,8 @@ paths:
                   id: spending
                   name: Spending
                   version: v2
-                - description: Population residing in a hotel or RV (Recreational Vehicle) for at least 1 night.
+                - description: Population residing in a hotel or RV (Recreational Vehicle) for at
+                    least 1 night.
                   id: transient-population
                   name: Transient Population
                   version: v3
@@ -186,7 +287,8 @@ paths:
                   id: youth-age
                   name: Youth Age
                   version: v2
-                - description: Search engine searches within a location's trade area by business category.
+                - description: Search engine searches within a location's trade area by business
+                    category.
                   id: search
                   name: Search Engine Demand
                   version: v3
@@ -198,10 +300,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '1473'
+              default: "1473"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 00:59:03 GMT'
+              default: Fri, 26 Jun 2020 00:59:03 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -219,40 +321,46 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/ListAllLocalInsights'
+            $ref: "#/definitions/ListAllLocalInsights"
       security: []
       summary: Fetch Available Insights
       tags:
         - Insights API
-  '/data/insights/{insight_id:}':
+  "/data/insights/{insight_id:}":
     get:
       deprecated: false
-      description: 'Fetch request/response structure metadata for a given Insight. This provides you the periods of data available as well as any other parameters you may want to query the Insight by. Example Insights include population and market data such as: age, daytime population, avg. home value, crime indexes, foot traffic, employment, income, occupation, etc.  For the full-list see the developer documentation.'
+      description: "Fetch request/response structure metadata for a given Insight.
+        This provides you the periods of data available as well as any other
+        parameters you may want to query the Insight by. Example Insights
+        include population and market data such as: age, daytime population,
+        avg. home value, crime indexes, foot traffic, employment, income,
+        occupation, etc.  For the full-list see the developer documentation."
       operationId: FetchInsightQueryParameters
       parameters:
         - description: Insight ID. See developer documentation for full list.
           in: path
-          name: 'insight_id:'
+          name: "insight_id:"
           required: true
           type: string
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -260,8 +368,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json; charset=utf-8:
               data:
@@ -270,7 +378,8 @@ paths:
                   - White Collar
                   - Management occupations
                   - Top executives
-                  - 'Advertising, marketing, promotions, public relations, and sales managers'
+                  - Advertising, marketing, promotions, public relations, and
+                    sales managers
                   - Operations specialties managers
                   - Other management occupations
                   - Business and financial operations occupations
@@ -280,31 +389,32 @@ paths:
                   - Computer specialists
                   - Mathematical science occupations
                   - Architecture and engineering occupations
-                  - 'Architects, surveyors, and cartographers'
+                  - Architects, surveyors, and cartographers
                   - Engineers
-                  - 'Drafters, engineering, and mapping technicians'
-                  - 'Life, physical, and social science occupations'
+                  - Drafters, engineering, and mapping technicians
+                  - Life, physical, and social science occupations
                   - Life scientists
                   - Physical scientists
                   - Social scientists and related occupations
-                  - 'Life, physical, and social science technicians'
+                  - Life, physical, and social science technicians
                   - Community and social services occupations
-                  - 'Counselors, social workers, and other community and social service specialists'
+                  - Counselors, social workers, and other community and social
+                    service specialists
                   - Religious workers
-                  - 'All other counselors, social, and religious workers'
+                  - All other counselors, social, and religious workers
                   - Legal occupations
-                  - 'Lawyers, judges, and related workers'
+                  - Lawyers, judges, and related workers
                   - Legal support workers
                   - All other legal and related workers
-                  - 'Education, training, and library occupations'
+                  - Education, training, and library occupations
                   - Postsecondary teachers
-                  - 'Primary, secondary, and special education teachers'
+                  - Primary, secondary, and special education teachers
                   - Other teachers and instructors
-                  - 'Librarians, curators, and archivists'
-                  - 'Other education, training, and library occupations'
-                  - 'Arts, design, entertainment, sports, and media occupations'
+                  - Librarians, curators, and archivists
+                  - Other education, training, and library occupations
+                  - Arts, design, entertainment, sports, and media occupations
                   - Art and design occupations
-                  - 'Entertainers and performers, sports and related occupations'
+                  - Entertainers and performers, sports and related occupations
                   - Media and communication occupations
                   - Media and communication equipment occupations
                   - Healthcare practitioners and technical occupations
@@ -312,75 +422,79 @@ paths:
                   - Health technologists and technicians
                   - Other healthcare practitioners and technical occupations
                   - Healthcare support occupations
-                  - 'Nursing, psychiatric, and home health aides'
+                  - Nursing, psychiatric, and home health aides
                   - Occupational and physical therapist assistants and aides
                   - Other healthcare support occupations
                   - Blue Collar
                   - Protective service occupations
-                  - 'First-line supervisors/managers, protective service workers'
+                  - First-line supervisors/managers, protective service workers
                   - Fire fighting and prevention workers
                   - Law enforcement workers
                   - Other protective service workers
                   - Food preparation and serving related occupations
-                  - 'Supervisors, food preparation and serving workers'
+                  - Supervisors, food preparation and serving workers
                   - Cooks and food preparation workers
                   - Food and beverage serving workers
                   - Other food preparation and serving related workers
                   - Building and grounds cleaning and maintenance occupations
-                  - 'Supervisors, building and grounds cleaning and maintenance workers'
+                  - Supervisors, building and grounds cleaning and maintenance
+                    workers
                   - Building cleaning and pest control workers
                   - Grounds maintenance workers
-                  - All other building and grounds cleaning and maintenance workers
+                  - All other building and grounds cleaning and maintenance
+                    workers
                   - Personal care and service occupations
-                  - 'Supervisors, personal care and service workers'
+                  - Supervisors, personal care and service workers
                   - Animal care and service workers
                   - Entertainment attendants and related workers
                   - Funeral service workers
                   - Personal appearance workers
-                  - 'Transportation, tourism, and lodging attendants'
+                  - Transportation, tourism, and lodging attendants
                   - Other personal care and service workers
                   - Sales and related occupations
-                  - 'Supervisors, sales workers'
+                  - Supervisors, sales workers
                   - Retail sales workers
-                  - 'Sales representatives, services'
-                  - 'Sales representatives, wholesale and manufacturing'
+                  - Sales representatives, services
+                  - Sales representatives, wholesale and manufacturing
                   - Other sales and related workers
                   - Office and administrative support occupations
-                  - 'Supervisors, office and administrative support workers'
+                  - Supervisors, office and administrative support workers
                   - Communications equipment operators
                   - Financial clerks
                   - Information and record clerks
-                  - 'Material recording, scheduling, dispatching, and distributing occupations'
+                  - Material recording, scheduling, dispatching, and
+                    distributing occupations
                   - Secretaries and administrative assistants
                   - Other office and administrative support workers
-                  - 'Farming, fishing, and forestry occupations'
-                  - 'Supervisors, farming, fishing, and forestry workers'
+                  - Farming, fishing, and forestry occupations
+                  - Supervisors, farming, fishing, and forestry workers
                   - Agricultural workers
                   - Fishing and hunting workers
-                  - 'Forest, conservation, and logging workers'
+                  - Forest, conservation, and logging workers
                   - Construction and extraction occupations
-                  - 'Supervisors, construction and extraction workers'
+                  - Supervisors, construction and extraction workers
                   - Construction trades and related workers
-                  - 'Helpers, construction trades'
+                  - Helpers, construction trades
                   - Other construction and related workers
                   - Extraction workers
-                  - 'Installation, maintenance, and repair occupations'
-                  - 'Supervisors of installation, maintenance, and repair workers'
-                  - 'Electrical and electronic equipment mechanics, installers, and repairers'
-                  - 'And mobile equipment mechanics, installers, and repairers'
-                  - 'Other installation, maintenance, and repair occupations'
+                  - Installation, maintenance, and repair occupations
+                  - Supervisors of installation, maintenance, and repair workers
+                  - Electrical and electronic equipment mechanics, installers,
+                    and repairers
+                  - And mobile equipment mechanics, installers, and repairers
+                  - Other installation, maintenance, and repair occupations
                   - Production occupations
-                  - 'Supervisors, production workers'
+                  - Supervisors, production workers
                   - Assemblers and fabricators
                   - Food processing occupations
                   - Metal workers and plastic workers
                   - Printing occupations
-                  - 'Textile, apparel, and furnishings occupations'
+                  - Textile, apparel, and furnishings occupations
                   - Woodworkers
                   - Plant and system operators
                   - Other production occupations
                   - Transportation and material moving occupations
-                  - 'Supervisors, transportation and material moving workers'
+                  - Supervisors, transportation and material moving workers
                   - Air transportation occupations
                   - Motor vehicle operators
                   - Rail transportation occupations
@@ -395,250 +509,495 @@ paths:
                 name: Occupation
                 parameters:
                   category:
-                    - id: 2469
+                    - description: null
+                      id: 2469
                       label: White Collar
-                    - id: 2470
+                      parent_id: null
+                    - description: null
+                      id: 2470
                       label: Management occupations
-                    - id: 2471
+                      parent_id: null
+                    - description: null
+                      id: 2471
                       label: Top executives
-                    - id: 2472
-                      label: 'Advertising, marketing, promotions, public relations, and sales managers'
-                    - id: 2473
+                      parent_id: null
+                    - description: null
+                      id: 2472
+                      label: Advertising, marketing, promotions, public relations, and sales managers
+                      parent_id: null
+                    - description: null
+                      id: 2473
                       label: Operations specialties managers
-                    - id: 2474
+                      parent_id: null
+                    - description: null
+                      id: 2474
                       label: Other management occupations
-                    - id: 2475
+                      parent_id: null
+                    - description: null
+                      id: 2475
                       label: Business and financial operations occupations
-                    - id: 2476
+                      parent_id: null
+                    - description: null
+                      id: 2476
                       label: Business operations specialists
-                    - id: 2477
+                      parent_id: null
+                    - description: null
+                      id: 2477
                       label: Financial specialists
-                    - id: 2478
+                      parent_id: null
+                    - description: null
+                      id: 2478
                       label: Computer and mathematical science occupations
-                    - id: 2479
+                      parent_id: null
+                    - description: null
+                      id: 2479
                       label: Computer specialists
-                    - id: 2480
+                      parent_id: null
+                    - description: null
+                      id: 2480
                       label: Mathematical science occupations
-                    - id: 2481
+                      parent_id: null
+                    - description: null
+                      id: 2481
                       label: Architecture and engineering occupations
-                    - id: 2482
-                      label: 'Architects, surveyors, and cartographers'
-                    - id: 2483
+                      parent_id: null
+                    - description: null
+                      id: 2482
+                      label: Architects, surveyors, and cartographers
+                      parent_id: null
+                    - description: null
+                      id: 2483
                       label: Engineers
-                    - id: 2484
-                      label: 'Drafters, engineering, and mapping technicians'
-                    - id: 2485
-                      label: 'Life, physical, and social science occupations'
-                    - id: 2486
+                      parent_id: null
+                    - description: null
+                      id: 2484
+                      label: Drafters, engineering, and mapping technicians
+                      parent_id: null
+                    - description: null
+                      id: 2485
+                      label: Life, physical, and social science occupations
+                      parent_id: null
+                    - description: null
+                      id: 2486
                       label: Life scientists
-                    - id: 2487
+                      parent_id: null
+                    - description: null
+                      id: 2487
                       label: Physical scientists
-                    - id: 2488
+                      parent_id: null
+                    - description: null
+                      id: 2488
                       label: Social scientists and related occupations
-                    - id: 2489
-                      label: 'Life, physical, and social science technicians'
-                    - id: 2490
+                      parent_id: null
+                    - description: null
+                      id: 2489
+                      label: Life, physical, and social science technicians
+                      parent_id: null
+                    - description: null
+                      id: 2490
                       label: Community and social services occupations
-                    - id: 2491
-                      label: 'Counselors, social workers, and other community and social service specialists'
-                    - id: 2492
+                      parent_id: null
+                    - description: null
+                      id: 2491
+                      label: Counselors, social workers, and other community and social service
+                        specialists
+                      parent_id: null
+                    - description: null
+                      id: 2492
                       label: Religious workers
-                    - id: 2493
-                      label: 'All other counselors, social, and religious workers'
-                    - id: 2494
+                      parent_id: null
+                    - description: null
+                      id: 2493
+                      label: All other counselors, social, and religious workers
+                      parent_id: null
+                    - description: null
+                      id: 2494
                       label: Legal occupations
-                    - id: 2495
-                      label: 'Lawyers, judges, and related workers'
-                    - id: 2496
+                      parent_id: null
+                    - description: null
+                      id: 2495
+                      label: Lawyers, judges, and related workers
+                      parent_id: null
+                    - description: null
+                      id: 2496
                       label: Legal support workers
-                    - id: 2497
+                      parent_id: null
+                    - description: null
+                      id: 2497
                       label: All other legal and related workers
-                    - id: 2498
-                      label: 'Education, training, and library occupations'
-                    - id: 2499
+                      parent_id: null
+                    - description: null
+                      id: 2498
+                      label: Education, training, and library occupations
+                      parent_id: null
+                    - description: null
+                      id: 2499
                       label: Postsecondary teachers
-                    - id: 2500
-                      label: 'Primary, secondary, and special education teachers'
-                    - id: 2501
+                      parent_id: null
+                    - description: null
+                      id: 2500
+                      label: Primary, secondary, and special education teachers
+                      parent_id: null
+                    - description: null
+                      id: 2501
                       label: Other teachers and instructors
-                    - id: 2502
-                      label: 'Librarians, curators, and archivists'
-                    - id: 2503
-                      label: 'Other education, training, and library occupations'
-                    - id: 2504
-                      label: 'Arts, design, entertainment, sports, and media occupations'
-                    - id: 2505
+                      parent_id: null
+                    - description: null
+                      id: 2502
+                      label: Librarians, curators, and archivists
+                      parent_id: null
+                    - description: null
+                      id: 2503
+                      label: Other education, training, and library occupations
+                      parent_id: null
+                    - description: null
+                      id: 2504
+                      label: Arts, design, entertainment, sports, and media occupations
+                      parent_id: null
+                    - description: null
+                      id: 2505
                       label: Art and design occupations
-                    - id: 2506
-                      label: 'Entertainers and performers, sports and related occupations'
-                    - id: 2507
+                      parent_id: null
+                    - description: null
+                      id: 2506
+                      label: Entertainers and performers, sports and related occupations
+                      parent_id: null
+                    - description: null
+                      id: 2507
                       label: Media and communication occupations
-                    - id: 2508
+                      parent_id: null
+                    - description: null
+                      id: 2508
                       label: Media and communication equipment occupations
-                    - id: 2509
+                      parent_id: null
+                    - description: null
+                      id: 2509
                       label: Healthcare practitioners and technical occupations
-                    - id: 2510
+                      parent_id: null
+                    - description: null
+                      id: 2510
                       label: Health diagnosing and treating practitioners
-                    - id: 2511
+                      parent_id: null
+                    - description: null
+                      id: 2511
                       label: Health technologists and technicians
-                    - id: 2512
+                      parent_id: null
+                    - description: null
+                      id: 2512
                       label: Other healthcare practitioners and technical occupations
-                    - id: 2513
+                      parent_id: null
+                    - description: null
+                      id: 2513
                       label: Healthcare support occupations
-                    - id: 2514
-                      label: 'Nursing, psychiatric, and home health aides'
-                    - id: 2515
+                      parent_id: null
+                    - description: null
+                      id: 2514
+                      label: Nursing, psychiatric, and home health aides
+                      parent_id: null
+                    - description: null
+                      id: 2515
                       label: Occupational and physical therapist assistants and aides
-                    - id: 2516
+                      parent_id: null
+                    - description: null
+                      id: 2516
                       label: Other healthcare support occupations
-                    - id: 2517
+                      parent_id: null
+                    - description: null
+                      id: 2517
                       label: Blue Collar
-                    - id: 2518
+                      parent_id: null
+                    - description: null
+                      id: 2518
                       label: Protective service occupations
-                    - id: 2519
-                      label: 'First-line supervisors/managers, protective service workers'
-                    - id: 2520
+                      parent_id: null
+                    - description: null
+                      id: 2519
+                      label: First-line supervisors/managers, protective service workers
+                      parent_id: null
+                    - description: null
+                      id: 2520
                       label: Fire fighting and prevention workers
-                    - id: 2521
+                      parent_id: null
+                    - description: null
+                      id: 2521
                       label: Law enforcement workers
-                    - id: 2522
+                      parent_id: null
+                    - description: null
+                      id: 2522
                       label: Other protective service workers
-                    - id: 2523
+                      parent_id: null
+                    - description: null
+                      id: 2523
                       label: Food preparation and serving related occupations
-                    - id: 2524
-                      label: 'Supervisors, food preparation and serving workers'
-                    - id: 2525
+                      parent_id: null
+                    - description: null
+                      id: 2524
+                      label: Supervisors, food preparation and serving workers
+                      parent_id: null
+                    - description: null
+                      id: 2525
                       label: Cooks and food preparation workers
-                    - id: 2526
+                      parent_id: null
+                    - description: null
+                      id: 2526
                       label: Food and beverage serving workers
-                    - id: 2527
+                      parent_id: null
+                    - description: null
+                      id: 2527
                       label: Other food preparation and serving related workers
-                    - id: 2528
+                      parent_id: null
+                    - description: null
+                      id: 2528
                       label: Building and grounds cleaning and maintenance occupations
-                    - id: 2529
-                      label: 'Supervisors, building and grounds cleaning and maintenance workers'
-                    - id: 2530
+                      parent_id: null
+                    - description: null
+                      id: 2529
+                      label: Supervisors, building and grounds cleaning and maintenance workers
+                      parent_id: null
+                    - description: null
+                      id: 2530
                       label: Building cleaning and pest control workers
-                    - id: 2531
+                      parent_id: null
+                    - description: null
+                      id: 2531
                       label: Grounds maintenance workers
-                    - id: 2532
+                      parent_id: null
+                    - description: null
+                      id: 2532
                       label: All other building and grounds cleaning and maintenance workers
-                    - id: 2533
+                      parent_id: null
+                    - description: null
+                      id: 2533
                       label: Personal care and service occupations
-                    - id: 2534
-                      label: 'Supervisors, personal care and service workers'
-                    - id: 2535
+                      parent_id: null
+                    - description: null
+                      id: 2534
+                      label: Supervisors, personal care and service workers
+                      parent_id: null
+                    - description: null
+                      id: 2535
                       label: Animal care and service workers
-                    - id: 2536
+                      parent_id: null
+                    - description: null
+                      id: 2536
                       label: Entertainment attendants and related workers
-                    - id: 2537
+                      parent_id: null
+                    - description: null
+                      id: 2537
                       label: Funeral service workers
-                    - id: 2538
+                      parent_id: null
+                    - description: null
+                      id: 2538
                       label: Personal appearance workers
-                    - id: 2539
-                      label: 'Transportation, tourism, and lodging attendants'
-                    - id: 2540
+                      parent_id: null
+                    - description: null
+                      id: 2539
+                      label: Transportation, tourism, and lodging attendants
+                      parent_id: null
+                    - description: null
+                      id: 2540
                       label: Other personal care and service workers
-                    - id: 2541
+                      parent_id: null
+                    - description: null
+                      id: 2541
                       label: Sales and related occupations
-                    - id: 2542
-                      label: 'Supervisors, sales workers'
-                    - id: 2543
+                      parent_id: null
+                    - description: null
+                      id: 2542
+                      label: Supervisors, sales workers
+                      parent_id: null
+                    - description: null
+                      id: 2543
                       label: Retail sales workers
-                    - id: 2544
-                      label: 'Sales representatives, services'
-                    - id: 2545
-                      label: 'Sales representatives, wholesale and manufacturing'
-                    - id: 2546
+                      parent_id: null
+                    - description: null
+                      id: 2544
+                      label: Sales representatives, services
+                      parent_id: null
+                    - description: null
+                      id: 2545
+                      label: Sales representatives, wholesale and manufacturing
+                      parent_id: null
+                    - description: null
+                      id: 2546
                       label: Other sales and related workers
-                    - id: 2547
+                      parent_id: null
+                    - description: null
+                      id: 2547
                       label: Office and administrative support occupations
-                    - id: 2548
-                      label: 'Supervisors, office and administrative support workers'
-                    - id: 2549
+                      parent_id: null
+                    - description: null
+                      id: 2548
+                      label: Supervisors, office and administrative support workers
+                      parent_id: null
+                    - description: null
+                      id: 2549
                       label: Communications equipment operators
-                    - id: 2550
+                      parent_id: null
+                    - description: null
+                      id: 2550
                       label: Financial clerks
-                    - id: 2551
+                      parent_id: null
+                    - description: null
+                      id: 2551
                       label: Information and record clerks
-                    - id: 2552
-                      label: 'Material recording, scheduling, dispatching, and distributing occupations'
-                    - id: 2553
+                      parent_id: null
+                    - description: null
+                      id: 2552
+                      label: Material recording, scheduling, dispatching, and distributing occupations
+                      parent_id: null
+                    - description: null
+                      id: 2553
                       label: Secretaries and administrative assistants
-                    - id: 2554
+                      parent_id: null
+                    - description: null
+                      id: 2554
                       label: Other office and administrative support workers
-                    - id: 2555
-                      label: 'Farming, fishing, and forestry occupations'
-                    - id: 2556
-                      label: 'Supervisors, farming, fishing, and forestry workers'
-                    - id: 2557
+                      parent_id: null
+                    - description: null
+                      id: 2555
+                      label: Farming, fishing, and forestry occupations
+                      parent_id: null
+                    - description: null
+                      id: 2556
+                      label: Supervisors, farming, fishing, and forestry workers
+                      parent_id: null
+                    - description: null
+                      id: 2557
                       label: Agricultural workers
-                    - id: 2558
+                      parent_id: null
+                    - description: null
+                      id: 2558
                       label: Fishing and hunting workers
-                    - id: 2559
-                      label: 'Forest, conservation, and logging workers'
-                    - id: 2560
+                      parent_id: null
+                    - description: null
+                      id: 2559
+                      label: Forest, conservation, and logging workers
+                      parent_id: null
+                    - description: null
+                      id: 2560
                       label: Construction and extraction occupations
-                    - id: 2561
-                      label: 'Supervisors, construction and extraction workers'
-                    - id: 2562
+                      parent_id: null
+                    - description: null
+                      id: 2561
+                      label: Supervisors, construction and extraction workers
+                      parent_id: null
+                    - description: null
+                      id: 2562
                       label: Construction trades and related workers
-                    - id: 2563
-                      label: 'Helpers, construction trades'
-                    - id: 2564
+                      parent_id: null
+                    - description: null
+                      id: 2563
+                      label: Helpers, construction trades
+                      parent_id: null
+                    - description: null
+                      id: 2564
                       label: Other construction and related workers
-                    - id: 2565
+                      parent_id: null
+                    - description: null
+                      id: 2565
                       label: Extraction workers
-                    - id: 2566
-                      label: 'Installation, maintenance, and repair occupations'
-                    - id: 2567
-                      label: 'Supervisors of installation, maintenance, and repair workers'
-                    - id: 2568
-                      label: 'Electrical and electronic equipment mechanics, installers, and repairers'
-                    - id: 2569
-                      label: 'And mobile equipment mechanics, installers, and repairers'
-                    - id: 2570
-                      label: 'Other installation, maintenance, and repair occupations'
-                    - id: 2571
+                      parent_id: null
+                    - description: null
+                      id: 2566
+                      label: Installation, maintenance, and repair occupations
+                      parent_id: null
+                    - description: null
+                      id: 2567
+                      label: Supervisors of installation, maintenance, and repair workers
+                      parent_id: null
+                    - description: null
+                      id: 2568
+                      label: Electrical and electronic equipment mechanics, installers, and repairers
+                      parent_id: null
+                    - description: null
+                      id: 2569
+                      label: And mobile equipment mechanics, installers, and repairers
+                      parent_id: null
+                    - description: null
+                      id: 2570
+                      label: Other installation, maintenance, and repair occupations
+                      parent_id: null
+                    - description: null
+                      id: 2571
                       label: Production occupations
-                    - id: 2572
-                      label: 'Supervisors, production workers'
-                    - id: 2573
+                      parent_id: null
+                    - description: null
+                      id: 2572
+                      label: Supervisors, production workers
+                      parent_id: null
+                    - description: null
+                      id: 2573
                       label: Assemblers and fabricators
-                    - id: 2574
+                      parent_id: null
+                    - description: null
+                      id: 2574
                       label: Food processing occupations
-                    - id: 2575
+                      parent_id: null
+                    - description: null
+                      id: 2575
                       label: Metal workers and plastic workers
-                    - id: 2576
+                      parent_id: null
+                    - description: null
+                      id: 2576
                       label: Printing occupations
-                    - id: 2577
-                      label: 'Textile, apparel, and furnishings occupations'
-                    - id: 2578
+                      parent_id: null
+                    - description: null
+                      id: 2577
+                      label: Textile, apparel, and furnishings occupations
+                      parent_id: null
+                    - description: null
+                      id: 2578
                       label: Woodworkers
-                    - id: 2579
+                      parent_id: null
+                    - description: null
+                      id: 2579
                       label: Plant and system operators
-                    - id: 2580
+                      parent_id: null
+                    - description: null
+                      id: 2580
                       label: Other production occupations
-                    - id: 2581
+                      parent_id: null
+                    - description: null
+                      id: 2581
                       label: Transportation and material moving occupations
-                    - id: 2582
-                      label: 'Supervisors, transportation and material moving workers'
-                    - id: 2583
+                      parent_id: null
+                    - description: null
+                      id: 2582
+                      label: Supervisors, transportation and material moving workers
+                      parent_id: null
+                    - description: null
+                      id: 2583
                       label: Air transportation occupations
-                    - id: 2584
+                      parent_id: null
+                    - description: null
+                      id: 2584
                       label: Motor vehicle operators
-                    - id: 2585
+                      parent_id: null
+                    - description: null
+                      id: 2585
                       label: Rail transportation occupations
-                    - id: 2586
+                      parent_id: null
+                    - description: null
+                      id: 2586
                       label: Water transportation occupations
-                    - id: 2587
+                      parent_id: null
+                    - description: null
+                      id: 2587
                       label: Other transportation workers
-                    - id: 2588
+                      parent_id: null
+                    - description: null
+                      id: 2588
                       label: Material moving occupations
-                    - id: 2589
+                      parent_id: null
+                    - description: null
+                      id: 2589
                       label: Military
-                    - id: 2590
+                      parent_id: null
+                    - description: null
+                      id: 2590
                       label: Unclassified
+                      parent_id: null
                 periods:
                   - YR2020Q1
                 slug: occupation
@@ -651,10 +1010,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '2895'
+              default: "2895"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:26:42 GMT'
+              default: Fri, 26 Jun 2020 01:26:42 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -672,53 +1031,68 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/Describe%60occupation%60Insight'
+            $ref: "#/definitions/Describe%60occupation%60Insight"
       security: []
       summary: Fetch Insight Query Parameters
       tags:
         - Insights API
-  '/data/insights/{insight_id:}/query':
+  "/data/insights/{insight_id:}/query":
     get:
       deprecated: false
-      description: |-
-        Execute a query for a given insight and location(s). Some Insights may require you to provide required options. ie., when querying `occupation` for White-Collar Workers, you can filter by opt=`{"data":{"category":[2469]}}`
+      description: >-
+        Execute a query for a given insight and location(s). Some Insights may
+        require you to provide required options. ie., when querying `occupation`
+        for White-Collar Workers, you can filter by
+        opt=`{"data":{"category":[2469]}}`
+
 
         For examples of `locations`, please see [Location API Documentation](https://idealspot.gitlab.io/developer-docs/#location)
       operationId: QueryInsightatLocation
       parameters:
-        - description: '(Required) Insight version. Insight versions are incremented when a response format changes in any way, including the addition of new groups. Old versions are retained, unmodified, for backwards compatibility.'
+        - description: (Required) Insight version. Insight versions are incremented when a
+            response format changes in any way, including the addition of new
+            groups. Old versions are retained, unmodified, for backwards
+            compatibility.
           in: query
           name: version
           required: true
           type: string
-        - description: '(Required) Represents a buffer, region, or custom polygon specification. Accepts the `Location` model (as a `Buffer`, `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple `location` query parameters are allowed. NOTE: When requesting multiple locations, you must include brackets(i.e. `?location[]=...&location[]=...`). If not included, only the last location will be used. For more detail, see https://idealspot.gitlab.io/developer-docs/#location'
+        - description: "(Required) Represents a buffer, region, or custom polygon
+            specification. Accepts the `Location` model (as a `Buffer`,
+            `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple
+            `location` query parameters are allowed. NOTE: When requesting
+            multiple locations, you must include brackets(i.e.
+            `?location[]=...&location[]=...`). If not included, only the last
+            location will be used. For more detail, see
+            https://idealspot.gitlab.io/developer-docs/#location"
           in: query
-          name: 'location[]'
+          name: location[]
           required: true
           type: string
-        - description: 'Insight ID. See https://developer.idealspot.com/data for full list.'
+        - description: Insight ID. See https://developer.idealspot.com/data for full list.
           in: path
-          name: 'insight_id:'
+          name: "insight_id:"
           required: true
           type: string
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -726,8 +1100,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers:
             Connection:
               default: keep-alive
@@ -736,10 +1110,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '727'
+              default: "727"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:21:28 GMT'
+              default: Fri, 26 Jun 2020 01:21:28 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -757,19 +1131,19 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/Homevalueswithin1mi.radiusofLocation'
+            $ref: "#/definitions/Homevalueswithin1mi.radiusofLocation"
       security: []
       summary: Query Insight at Location
       tags:
@@ -780,17 +1154,24 @@ paths:
       description: Fetch location GeoJSON
       operationId: FetchGeometries
       parameters:
-        - description: '(Required) Represents a buffer, region, or custom polygon specification. Accepts the `Location` model (as a `Buffer`, `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple `location` query parameters are allowed. NOTE: When requesting multiple locations, you must include brackets(i.e. `?location[]=...&location[]=...`). If not included, only the last location will be used.'
+        - description: "(Required) Represents a buffer, region, or custom polygon
+            specification. Accepts the `Location` model (as a `Buffer`,
+            `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple
+            `location` query parameters are allowed. NOTE: When requesting
+            multiple locations, you must include brackets(i.e.
+            `?location[]=...&location[]=...`). If not included, only the last
+            location will be used."
           in: query
-          name: 'location[]'
+          name: location[]
           required: true
           type: string
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -798,8 +1179,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers:
             Connection:
               default: keep-alive
@@ -808,10 +1189,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '16704'
+              default: "16704"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:37:31 GMT'
+              default: Fri, 26 Jun 2020 01:37:31 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -829,27 +1210,28 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/Describetheregionwithin5minutedrive-timeofageographicpoint'
+            $ref: "#/definitions/Describetheregionwithin5minutedrive-timeofageographicpoint"
       security: []
       summary: Fetch Geometries
       tags:
         - Geometries API
-  '/geometries/regions/intersecting/{latitude}/{longitude}':
+  "/geometries/regions/intersecting/{latitude}/{longitude}":
     get:
       deprecated: false
-      description: 'For given latitude and longitude, find intersecting administrative regions. Region polygons are simplified for web mapping.'
+      description: For given latitude and longitude, find intersecting administrative
+        regions. Region polygons are simplified for web mapping.
       operationId: FetchAdministrativeRegionsusingLat/Lng
       parameters:
         - description: (Required) Search coordinate latitude
@@ -864,12 +1246,13 @@ paths:
           name: longitude
           required: true
           type: number
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -877,8 +1260,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           headers:
             Connection:
               default: keep-alive
@@ -887,7 +1270,7 @@ paths:
               default: gzip
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:40:28 GMT'
+              default: Fri, 26 Jun 2020 01:40:28 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -905,30 +1288,30 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
             transfer-encoding:
               default: chunked
               type: string
           schema:
-            $ref: '#/definitions/FetchAdministrativeRegionsusingLat~1Lng'
+            $ref: "#/definitions/FetchAdministrativeRegionsusingLat~1Lng"
       security: []
       summary: Fetch Administrative Regions using Lat/Lng
       tags:
         - Geometries API
-  '/traffic/counts/{segment_id}':
+  "/traffic/counts/{segment_id}":
     get:
       deprecated: false
-      description: 'Time of day, day of week, and side of street vehicle traffic counts.'
+      description: Time of day, day of week, and side of street vehicle traffic counts.
       operationId: VehicleTrafficCountsforRoadSegment
       parameters:
         - description: (Required) Road segment ID. Fetched from Search Road Segments
@@ -937,12 +1320,13 @@ paths:
           name: segment_id
           required: true
           type: integer
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -950,8 +1334,8 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json; charset=utf-8:
               data:
@@ -1127,30 +1511,30 @@ paths:
                   metadata:
                     bearing: W
                     columns:
-                      - '12:00am'
-                      - '01:00am'
-                      - '02:00am'
-                      - '03:00am'
-                      - '04:00am'
-                      - '05:00am'
-                      - '06:00am'
-                      - '07:00am'
-                      - '08:00am'
-                      - '09:00am'
-                      - '10:00am'
-                      - '11:00am'
-                      - '12:00pm'
-                      - '01:00pm'
-                      - '02:00pm'
-                      - '03:00pm'
-                      - '04:00pm'
-                      - '05:00pm'
-                      - '06:00pm'
-                      - '07:00pm'
-                      - '08:00pm'
-                      - '09:00pm'
-                      - '10:00pm'
-                      - '11:00pm'
+                      - 12:00am
+                      - 01:00am
+                      - 02:00am
+                      - 03:00am
+                      - 04:00am
+                      - 05:00am
+                      - 06:00am
+                      - 07:00am
+                      - 08:00am
+                      - 09:00am
+                      - 10:00am
+                      - 11:00am
+                      - 12:00pm
+                      - 01:00pm
+                      - 02:00pm
+                      - 03:00pm
+                      - 04:00pm
+                      - 05:00pm
+                      - 06:00pm
+                      - 07:00pm
+                      - 08:00pm
+                      - 09:00pm
+                      - 10:00pm
+                      - 11:00pm
                     name: East 6th Street
                     rows:
                       - Sun
@@ -1160,7 +1544,7 @@ paths:
                       - Thu
                       - Fri
                       - Sat
-                    segment_id: '1595369397'
+                    segment_id: "1595369397"
                     state: Texas
                   roadsegment:
                     coordinates:
@@ -1353,30 +1737,30 @@ paths:
                   metadata:
                     bearing: E
                     columns:
-                      - '12:00am'
-                      - '01:00am'
-                      - '02:00am'
-                      - '03:00am'
-                      - '04:00am'
-                      - '05:00am'
-                      - '06:00am'
-                      - '07:00am'
-                      - '08:00am'
-                      - '09:00am'
-                      - '10:00am'
-                      - '11:00am'
-                      - '12:00pm'
-                      - '01:00pm'
-                      - '02:00pm'
-                      - '03:00pm'
-                      - '04:00pm'
-                      - '05:00pm'
-                      - '06:00pm'
-                      - '07:00pm'
-                      - '08:00pm'
-                      - '09:00pm'
-                      - '10:00pm'
-                      - '11:00pm'
+                      - 12:00am
+                      - 01:00am
+                      - 02:00am
+                      - 03:00am
+                      - 04:00am
+                      - 05:00am
+                      - 06:00am
+                      - 07:00am
+                      - 08:00am
+                      - 09:00am
+                      - 10:00am
+                      - 11:00am
+                      - 12:00pm
+                      - 01:00pm
+                      - 02:00pm
+                      - 03:00pm
+                      - 04:00pm
+                      - 05:00pm
+                      - 06:00pm
+                      - 07:00pm
+                      - 08:00pm
+                      - 09:00pm
+                      - 10:00pm
+                      - 11:00pm
                     name: East 6th Street
                     rows:
                       - Sun
@@ -1386,7 +1770,7 @@ paths:
                       - Thu
                       - Fri
                       - Sat
-                    segment_id: '1595369411'
+                    segment_id: "1595369411"
                     state: Texas
                   roadsegment:
                     coordinates:
@@ -1415,10 +1799,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '826'
+              default: "826"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:49:02 GMT'
+              default: Fri, 26 Jun 2020 01:49:02 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -1436,33 +1820,33 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/VehicleTrafficCountsforRoadSegment'
+            $ref: "#/definitions/VehicleTrafficCountsforRoadSegment"
       security: []
       summary: Vehicle Traffic Counts for Road Segment
       tags:
         - Traffic Count API
-  '/traffic/roads/nearest/{latitude}/{longitude}':
+  "/traffic/roads/nearest/{latitude}/{longitude}":
     get:
       deprecated: false
-      description: 'For given latitude and longitude, find `n` nearest road segments'
+      description: For given latitude and longitude, find `n` nearest road segments
       operationId: FetchNearestRoadSegments
       parameters:
         - description: Number of road segments to return (between 1 and 20)
           format: int32
           in: query
-          name: 'n'
+          name: n
           required: true
           type: integer
         - description: (Required) Search coordinate latitude
@@ -1477,12 +1861,13 @@ paths:
           name: longitude
           required: true
           type: number
-        - description: '(Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata'
+        - description: (Required) Rapid API Key. See
+            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: header
           name: X-RapidAPI-Host
           required: true
@@ -1490,14 +1875,14 @@ paths:
       produces:
         - application/json; charset=utf-8
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json; charset=utf-8:
               data:
                 crs:
                   properties:
-                    name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+                    name: urn:ogc:def:crs:OGC:1.3:CRS84
                   type: name
                 features:
                   - geometry:
@@ -1532,9 +1917,9 @@ paths:
                           - 30.265642
                       type: LineString
                     properties:
-                      bearing: 'N'
+                      bearing: N
                       roadname: North Interstate Highway 35 Service Road
-                      segment_id: '1595171804'
+                      segment_id: "1595171804"
                       state: Texas
                     type: Feature
                 type: FeatureCollection
@@ -1546,10 +1931,10 @@ paths:
               default: gzip
               type: string
             Content-Length:
-              default: '351'
+              default: "351"
               type: string
             Date:
-              default: 'Fri, 26 Jun 2020 01:46:53 GMT'
+              default: Fri, 26 Jun 2020 01:46:53 GMT
               type: string
             Server:
               default: RapidAPI-1.1.15
@@ -1567,19 +1952,19 @@ paths:
               default: 1.1.15
               type: string
             access-control-allow-credentials:
-              default: 'true'
+              default: "true"
               type: string
             access-control-allow-origin:
-              default: '*'
+              default: "*"
               type: string
             access-control-expose-headers:
-              default: ''
+              default: ""
               type: string
             cache-control:
-              default: 'max-age=0, private, must-revalidate'
+              default: max-age=0, private, must-revalidate
               type: string
           schema:
-            $ref: '#/definitions/SearchRoadSegments'
+            $ref: "#/definitions/SearchRoadSegments"
       security: []
       summary: Fetch Nearest Road Segments
       tags:
@@ -1588,8 +1973,8 @@ definitions:
   Autocomplete:
     example:
       input:
-        - '48453000902'
-        - '9.02'
+        - "48453000902"
+        - "9.02"
     properties:
       input:
         items:
@@ -1601,8 +1986,10 @@ definitions:
     type: object
   Category:
     example:
+      description: null
       id: 2469
       label: White Collar
+      parent_id: null
     properties:
       description:
         type: string
@@ -1623,11 +2010,11 @@ definitions:
   Crs:
     example:
       properties:
-        name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+        name: urn:ogc:def:crs:OGC:1.3:CRS84
       type: name
     properties:
       properties:
-        $ref: '#/definitions/Properties4'
+        $ref: "#/definitions/Properties4"
       type:
         type: string
     required:
@@ -1642,7 +2029,8 @@ definitions:
         - White Collar
         - Management occupations
         - Top executives
-        - 'Advertising, marketing, promotions, public relations, and sales managers'
+        - Advertising, marketing, promotions, public relations, and sales
+          managers
         - Operations specialties managers
         - Other management occupations
         - Business and financial operations occupations
@@ -1652,31 +2040,32 @@ definitions:
         - Computer specialists
         - Mathematical science occupations
         - Architecture and engineering occupations
-        - 'Architects, surveyors, and cartographers'
+        - Architects, surveyors, and cartographers
         - Engineers
-        - 'Drafters, engineering, and mapping technicians'
-        - 'Life, physical, and social science occupations'
+        - Drafters, engineering, and mapping technicians
+        - Life, physical, and social science occupations
         - Life scientists
         - Physical scientists
         - Social scientists and related occupations
-        - 'Life, physical, and social science technicians'
+        - Life, physical, and social science technicians
         - Community and social services occupations
-        - 'Counselors, social workers, and other community and social service specialists'
+        - Counselors, social workers, and other community and social service
+          specialists
         - Religious workers
-        - 'All other counselors, social, and religious workers'
+        - All other counselors, social, and religious workers
         - Legal occupations
-        - 'Lawyers, judges, and related workers'
+        - Lawyers, judges, and related workers
         - Legal support workers
         - All other legal and related workers
-        - 'Education, training, and library occupations'
+        - Education, training, and library occupations
         - Postsecondary teachers
-        - 'Primary, secondary, and special education teachers'
+        - Primary, secondary, and special education teachers
         - Other teachers and instructors
-        - 'Librarians, curators, and archivists'
-        - 'Other education, training, and library occupations'
-        - 'Arts, design, entertainment, sports, and media occupations'
+        - Librarians, curators, and archivists
+        - Other education, training, and library occupations
+        - Arts, design, entertainment, sports, and media occupations
         - Art and design occupations
-        - 'Entertainers and performers, sports and related occupations'
+        - Entertainers and performers, sports and related occupations
         - Media and communication occupations
         - Media and communication equipment occupations
         - Healthcare practitioners and technical occupations
@@ -1684,75 +2073,77 @@ definitions:
         - Health technologists and technicians
         - Other healthcare practitioners and technical occupations
         - Healthcare support occupations
-        - 'Nursing, psychiatric, and home health aides'
+        - Nursing, psychiatric, and home health aides
         - Occupational and physical therapist assistants and aides
         - Other healthcare support occupations
         - Blue Collar
         - Protective service occupations
-        - 'First-line supervisors/managers, protective service workers'
+        - First-line supervisors/managers, protective service workers
         - Fire fighting and prevention workers
         - Law enforcement workers
         - Other protective service workers
         - Food preparation and serving related occupations
-        - 'Supervisors, food preparation and serving workers'
+        - Supervisors, food preparation and serving workers
         - Cooks and food preparation workers
         - Food and beverage serving workers
         - Other food preparation and serving related workers
         - Building and grounds cleaning and maintenance occupations
-        - 'Supervisors, building and grounds cleaning and maintenance workers'
+        - Supervisors, building and grounds cleaning and maintenance workers
         - Building cleaning and pest control workers
         - Grounds maintenance workers
         - All other building and grounds cleaning and maintenance workers
         - Personal care and service occupations
-        - 'Supervisors, personal care and service workers'
+        - Supervisors, personal care and service workers
         - Animal care and service workers
         - Entertainment attendants and related workers
         - Funeral service workers
         - Personal appearance workers
-        - 'Transportation, tourism, and lodging attendants'
+        - Transportation, tourism, and lodging attendants
         - Other personal care and service workers
         - Sales and related occupations
-        - 'Supervisors, sales workers'
+        - Supervisors, sales workers
         - Retail sales workers
-        - 'Sales representatives, services'
-        - 'Sales representatives, wholesale and manufacturing'
+        - Sales representatives, services
+        - Sales representatives, wholesale and manufacturing
         - Other sales and related workers
         - Office and administrative support occupations
-        - 'Supervisors, office and administrative support workers'
+        - Supervisors, office and administrative support workers
         - Communications equipment operators
         - Financial clerks
         - Information and record clerks
-        - 'Material recording, scheduling, dispatching, and distributing occupations'
+        - Material recording, scheduling, dispatching, and distributing
+          occupations
         - Secretaries and administrative assistants
         - Other office and administrative support workers
-        - 'Farming, fishing, and forestry occupations'
-        - 'Supervisors, farming, fishing, and forestry workers'
+        - Farming, fishing, and forestry occupations
+        - Supervisors, farming, fishing, and forestry workers
         - Agricultural workers
         - Fishing and hunting workers
-        - 'Forest, conservation, and logging workers'
+        - Forest, conservation, and logging workers
         - Construction and extraction occupations
-        - 'Supervisors, construction and extraction workers'
+        - Supervisors, construction and extraction workers
         - Construction trades and related workers
-        - 'Helpers, construction trades'
+        - Helpers, construction trades
         - Other construction and related workers
         - Extraction workers
-        - 'Installation, maintenance, and repair occupations'
-        - 'Supervisors of installation, maintenance, and repair workers'
-        - 'Electrical and electronic equipment mechanics, installers, and repairers'
-        - 'And mobile equipment mechanics, installers, and repairers'
-        - 'Other installation, maintenance, and repair occupations'
+        - Installation, maintenance, and repair occupations
+        - Supervisors of installation, maintenance, and repair workers
+        - Electrical and electronic equipment mechanics, installers, and
+          repairers
+        - And mobile equipment mechanics, installers, and repairers
+        - Other installation, maintenance, and repair occupations
         - Production occupations
-        - 'Supervisors, production workers'
+        - Supervisors, production workers
         - Assemblers and fabricators
         - Food processing occupations
         - Metal workers and plastic workers
         - Printing occupations
-        - 'Textile, apparel, and furnishings occupations'
+        - Textile, apparel, and furnishings occupations
         - Woodworkers
         - Plant and system operators
         - Other production occupations
         - Transportation and material moving occupations
-        - 'Supervisors, transportation and material moving workers'
+        - Supervisors, transportation and material moving workers
         - Air transportation occupations
         - Motor vehicle operators
         - Rail transportation occupations
@@ -1767,250 +2158,495 @@ definitions:
       name: Occupation
       parameters:
         category:
-          - id: 2469
+          - description: null
+            id: 2469
             label: White Collar
-          - id: 2470
+            parent_id: null
+          - description: null
+            id: 2470
             label: Management occupations
-          - id: 2471
+            parent_id: null
+          - description: null
+            id: 2471
             label: Top executives
-          - id: 2472
-            label: 'Advertising, marketing, promotions, public relations, and sales managers'
-          - id: 2473
+            parent_id: null
+          - description: null
+            id: 2472
+            label: Advertising, marketing, promotions, public relations, and sales managers
+            parent_id: null
+          - description: null
+            id: 2473
             label: Operations specialties managers
-          - id: 2474
+            parent_id: null
+          - description: null
+            id: 2474
             label: Other management occupations
-          - id: 2475
+            parent_id: null
+          - description: null
+            id: 2475
             label: Business and financial operations occupations
-          - id: 2476
+            parent_id: null
+          - description: null
+            id: 2476
             label: Business operations specialists
-          - id: 2477
+            parent_id: null
+          - description: null
+            id: 2477
             label: Financial specialists
-          - id: 2478
+            parent_id: null
+          - description: null
+            id: 2478
             label: Computer and mathematical science occupations
-          - id: 2479
+            parent_id: null
+          - description: null
+            id: 2479
             label: Computer specialists
-          - id: 2480
+            parent_id: null
+          - description: null
+            id: 2480
             label: Mathematical science occupations
-          - id: 2481
+            parent_id: null
+          - description: null
+            id: 2481
             label: Architecture and engineering occupations
-          - id: 2482
-            label: 'Architects, surveyors, and cartographers'
-          - id: 2483
+            parent_id: null
+          - description: null
+            id: 2482
+            label: Architects, surveyors, and cartographers
+            parent_id: null
+          - description: null
+            id: 2483
             label: Engineers
-          - id: 2484
-            label: 'Drafters, engineering, and mapping technicians'
-          - id: 2485
-            label: 'Life, physical, and social science occupations'
-          - id: 2486
+            parent_id: null
+          - description: null
+            id: 2484
+            label: Drafters, engineering, and mapping technicians
+            parent_id: null
+          - description: null
+            id: 2485
+            label: Life, physical, and social science occupations
+            parent_id: null
+          - description: null
+            id: 2486
             label: Life scientists
-          - id: 2487
+            parent_id: null
+          - description: null
+            id: 2487
             label: Physical scientists
-          - id: 2488
+            parent_id: null
+          - description: null
+            id: 2488
             label: Social scientists and related occupations
-          - id: 2489
-            label: 'Life, physical, and social science technicians'
-          - id: 2490
+            parent_id: null
+          - description: null
+            id: 2489
+            label: Life, physical, and social science technicians
+            parent_id: null
+          - description: null
+            id: 2490
             label: Community and social services occupations
-          - id: 2491
-            label: 'Counselors, social workers, and other community and social service specialists'
-          - id: 2492
+            parent_id: null
+          - description: null
+            id: 2491
+            label: Counselors, social workers, and other community and social service
+              specialists
+            parent_id: null
+          - description: null
+            id: 2492
             label: Religious workers
-          - id: 2493
-            label: 'All other counselors, social, and religious workers'
-          - id: 2494
+            parent_id: null
+          - description: null
+            id: 2493
+            label: All other counselors, social, and religious workers
+            parent_id: null
+          - description: null
+            id: 2494
             label: Legal occupations
-          - id: 2495
-            label: 'Lawyers, judges, and related workers'
-          - id: 2496
+            parent_id: null
+          - description: null
+            id: 2495
+            label: Lawyers, judges, and related workers
+            parent_id: null
+          - description: null
+            id: 2496
             label: Legal support workers
-          - id: 2497
+            parent_id: null
+          - description: null
+            id: 2497
             label: All other legal and related workers
-          - id: 2498
-            label: 'Education, training, and library occupations'
-          - id: 2499
+            parent_id: null
+          - description: null
+            id: 2498
+            label: Education, training, and library occupations
+            parent_id: null
+          - description: null
+            id: 2499
             label: Postsecondary teachers
-          - id: 2500
-            label: 'Primary, secondary, and special education teachers'
-          - id: 2501
+            parent_id: null
+          - description: null
+            id: 2500
+            label: Primary, secondary, and special education teachers
+            parent_id: null
+          - description: null
+            id: 2501
             label: Other teachers and instructors
-          - id: 2502
-            label: 'Librarians, curators, and archivists'
-          - id: 2503
-            label: 'Other education, training, and library occupations'
-          - id: 2504
-            label: 'Arts, design, entertainment, sports, and media occupations'
-          - id: 2505
+            parent_id: null
+          - description: null
+            id: 2502
+            label: Librarians, curators, and archivists
+            parent_id: null
+          - description: null
+            id: 2503
+            label: Other education, training, and library occupations
+            parent_id: null
+          - description: null
+            id: 2504
+            label: Arts, design, entertainment, sports, and media occupations
+            parent_id: null
+          - description: null
+            id: 2505
             label: Art and design occupations
-          - id: 2506
-            label: 'Entertainers and performers, sports and related occupations'
-          - id: 2507
+            parent_id: null
+          - description: null
+            id: 2506
+            label: Entertainers and performers, sports and related occupations
+            parent_id: null
+          - description: null
+            id: 2507
             label: Media and communication occupations
-          - id: 2508
+            parent_id: null
+          - description: null
+            id: 2508
             label: Media and communication equipment occupations
-          - id: 2509
+            parent_id: null
+          - description: null
+            id: 2509
             label: Healthcare practitioners and technical occupations
-          - id: 2510
+            parent_id: null
+          - description: null
+            id: 2510
             label: Health diagnosing and treating practitioners
-          - id: 2511
+            parent_id: null
+          - description: null
+            id: 2511
             label: Health technologists and technicians
-          - id: 2512
+            parent_id: null
+          - description: null
+            id: 2512
             label: Other healthcare practitioners and technical occupations
-          - id: 2513
+            parent_id: null
+          - description: null
+            id: 2513
             label: Healthcare support occupations
-          - id: 2514
-            label: 'Nursing, psychiatric, and home health aides'
-          - id: 2515
+            parent_id: null
+          - description: null
+            id: 2514
+            label: Nursing, psychiatric, and home health aides
+            parent_id: null
+          - description: null
+            id: 2515
             label: Occupational and physical therapist assistants and aides
-          - id: 2516
+            parent_id: null
+          - description: null
+            id: 2516
             label: Other healthcare support occupations
-          - id: 2517
+            parent_id: null
+          - description: null
+            id: 2517
             label: Blue Collar
-          - id: 2518
+            parent_id: null
+          - description: null
+            id: 2518
             label: Protective service occupations
-          - id: 2519
-            label: 'First-line supervisors/managers, protective service workers'
-          - id: 2520
+            parent_id: null
+          - description: null
+            id: 2519
+            label: First-line supervisors/managers, protective service workers
+            parent_id: null
+          - description: null
+            id: 2520
             label: Fire fighting and prevention workers
-          - id: 2521
+            parent_id: null
+          - description: null
+            id: 2521
             label: Law enforcement workers
-          - id: 2522
+            parent_id: null
+          - description: null
+            id: 2522
             label: Other protective service workers
-          - id: 2523
+            parent_id: null
+          - description: null
+            id: 2523
             label: Food preparation and serving related occupations
-          - id: 2524
-            label: 'Supervisors, food preparation and serving workers'
-          - id: 2525
+            parent_id: null
+          - description: null
+            id: 2524
+            label: Supervisors, food preparation and serving workers
+            parent_id: null
+          - description: null
+            id: 2525
             label: Cooks and food preparation workers
-          - id: 2526
+            parent_id: null
+          - description: null
+            id: 2526
             label: Food and beverage serving workers
-          - id: 2527
+            parent_id: null
+          - description: null
+            id: 2527
             label: Other food preparation and serving related workers
-          - id: 2528
+            parent_id: null
+          - description: null
+            id: 2528
             label: Building and grounds cleaning and maintenance occupations
-          - id: 2529
-            label: 'Supervisors, building and grounds cleaning and maintenance workers'
-          - id: 2530
+            parent_id: null
+          - description: null
+            id: 2529
+            label: Supervisors, building and grounds cleaning and maintenance workers
+            parent_id: null
+          - description: null
+            id: 2530
             label: Building cleaning and pest control workers
-          - id: 2531
+            parent_id: null
+          - description: null
+            id: 2531
             label: Grounds maintenance workers
-          - id: 2532
+            parent_id: null
+          - description: null
+            id: 2532
             label: All other building and grounds cleaning and maintenance workers
-          - id: 2533
+            parent_id: null
+          - description: null
+            id: 2533
             label: Personal care and service occupations
-          - id: 2534
-            label: 'Supervisors, personal care and service workers'
-          - id: 2535
+            parent_id: null
+          - description: null
+            id: 2534
+            label: Supervisors, personal care and service workers
+            parent_id: null
+          - description: null
+            id: 2535
             label: Animal care and service workers
-          - id: 2536
+            parent_id: null
+          - description: null
+            id: 2536
             label: Entertainment attendants and related workers
-          - id: 2537
+            parent_id: null
+          - description: null
+            id: 2537
             label: Funeral service workers
-          - id: 2538
+            parent_id: null
+          - description: null
+            id: 2538
             label: Personal appearance workers
-          - id: 2539
-            label: 'Transportation, tourism, and lodging attendants'
-          - id: 2540
+            parent_id: null
+          - description: null
+            id: 2539
+            label: Transportation, tourism, and lodging attendants
+            parent_id: null
+          - description: null
+            id: 2540
             label: Other personal care and service workers
-          - id: 2541
+            parent_id: null
+          - description: null
+            id: 2541
             label: Sales and related occupations
-          - id: 2542
-            label: 'Supervisors, sales workers'
-          - id: 2543
+            parent_id: null
+          - description: null
+            id: 2542
+            label: Supervisors, sales workers
+            parent_id: null
+          - description: null
+            id: 2543
             label: Retail sales workers
-          - id: 2544
-            label: 'Sales representatives, services'
-          - id: 2545
-            label: 'Sales representatives, wholesale and manufacturing'
-          - id: 2546
+            parent_id: null
+          - description: null
+            id: 2544
+            label: Sales representatives, services
+            parent_id: null
+          - description: null
+            id: 2545
+            label: Sales representatives, wholesale and manufacturing
+            parent_id: null
+          - description: null
+            id: 2546
             label: Other sales and related workers
-          - id: 2547
+            parent_id: null
+          - description: null
+            id: 2547
             label: Office and administrative support occupations
-          - id: 2548
-            label: 'Supervisors, office and administrative support workers'
-          - id: 2549
+            parent_id: null
+          - description: null
+            id: 2548
+            label: Supervisors, office and administrative support workers
+            parent_id: null
+          - description: null
+            id: 2549
             label: Communications equipment operators
-          - id: 2550
+            parent_id: null
+          - description: null
+            id: 2550
             label: Financial clerks
-          - id: 2551
+            parent_id: null
+          - description: null
+            id: 2551
             label: Information and record clerks
-          - id: 2552
-            label: 'Material recording, scheduling, dispatching, and distributing occupations'
-          - id: 2553
+            parent_id: null
+          - description: null
+            id: 2552
+            label: Material recording, scheduling, dispatching, and distributing occupations
+            parent_id: null
+          - description: null
+            id: 2553
             label: Secretaries and administrative assistants
-          - id: 2554
+            parent_id: null
+          - description: null
+            id: 2554
             label: Other office and administrative support workers
-          - id: 2555
-            label: 'Farming, fishing, and forestry occupations'
-          - id: 2556
-            label: 'Supervisors, farming, fishing, and forestry workers'
-          - id: 2557
+            parent_id: null
+          - description: null
+            id: 2555
+            label: Farming, fishing, and forestry occupations
+            parent_id: null
+          - description: null
+            id: 2556
+            label: Supervisors, farming, fishing, and forestry workers
+            parent_id: null
+          - description: null
+            id: 2557
             label: Agricultural workers
-          - id: 2558
+            parent_id: null
+          - description: null
+            id: 2558
             label: Fishing and hunting workers
-          - id: 2559
-            label: 'Forest, conservation, and logging workers'
-          - id: 2560
+            parent_id: null
+          - description: null
+            id: 2559
+            label: Forest, conservation, and logging workers
+            parent_id: null
+          - description: null
+            id: 2560
             label: Construction and extraction occupations
-          - id: 2561
-            label: 'Supervisors, construction and extraction workers'
-          - id: 2562
+            parent_id: null
+          - description: null
+            id: 2561
+            label: Supervisors, construction and extraction workers
+            parent_id: null
+          - description: null
+            id: 2562
             label: Construction trades and related workers
-          - id: 2563
-            label: 'Helpers, construction trades'
-          - id: 2564
+            parent_id: null
+          - description: null
+            id: 2563
+            label: Helpers, construction trades
+            parent_id: null
+          - description: null
+            id: 2564
             label: Other construction and related workers
-          - id: 2565
+            parent_id: null
+          - description: null
+            id: 2565
             label: Extraction workers
-          - id: 2566
-            label: 'Installation, maintenance, and repair occupations'
-          - id: 2567
-            label: 'Supervisors of installation, maintenance, and repair workers'
-          - id: 2568
-            label: 'Electrical and electronic equipment mechanics, installers, and repairers'
-          - id: 2569
-            label: 'And mobile equipment mechanics, installers, and repairers'
-          - id: 2570
-            label: 'Other installation, maintenance, and repair occupations'
-          - id: 2571
+            parent_id: null
+          - description: null
+            id: 2566
+            label: Installation, maintenance, and repair occupations
+            parent_id: null
+          - description: null
+            id: 2567
+            label: Supervisors of installation, maintenance, and repair workers
+            parent_id: null
+          - description: null
+            id: 2568
+            label: Electrical and electronic equipment mechanics, installers, and repairers
+            parent_id: null
+          - description: null
+            id: 2569
+            label: And mobile equipment mechanics, installers, and repairers
+            parent_id: null
+          - description: null
+            id: 2570
+            label: Other installation, maintenance, and repair occupations
+            parent_id: null
+          - description: null
+            id: 2571
             label: Production occupations
-          - id: 2572
-            label: 'Supervisors, production workers'
-          - id: 2573
+            parent_id: null
+          - description: null
+            id: 2572
+            label: Supervisors, production workers
+            parent_id: null
+          - description: null
+            id: 2573
             label: Assemblers and fabricators
-          - id: 2574
+            parent_id: null
+          - description: null
+            id: 2574
             label: Food processing occupations
-          - id: 2575
+            parent_id: null
+          - description: null
+            id: 2575
             label: Metal workers and plastic workers
-          - id: 2576
+            parent_id: null
+          - description: null
+            id: 2576
             label: Printing occupations
-          - id: 2577
-            label: 'Textile, apparel, and furnishings occupations'
-          - id: 2578
+            parent_id: null
+          - description: null
+            id: 2577
+            label: Textile, apparel, and furnishings occupations
+            parent_id: null
+          - description: null
+            id: 2578
             label: Woodworkers
-          - id: 2579
+            parent_id: null
+          - description: null
+            id: 2579
             label: Plant and system operators
-          - id: 2580
+            parent_id: null
+          - description: null
+            id: 2580
             label: Other production occupations
-          - id: 2581
+            parent_id: null
+          - description: null
+            id: 2581
             label: Transportation and material moving occupations
-          - id: 2582
-            label: 'Supervisors, transportation and material moving workers'
-          - id: 2583
+            parent_id: null
+          - description: null
+            id: 2582
+            label: Supervisors, transportation and material moving workers
+            parent_id: null
+          - description: null
+            id: 2583
             label: Air transportation occupations
-          - id: 2584
+            parent_id: null
+          - description: null
+            id: 2584
             label: Motor vehicle operators
-          - id: 2585
+            parent_id: null
+          - description: null
+            id: 2585
             label: Rail transportation occupations
-          - id: 2586
+            parent_id: null
+          - description: null
+            id: 2586
             label: Water transportation occupations
-          - id: 2587
+            parent_id: null
+          - description: null
+            id: 2587
             label: Other transportation workers
-          - id: 2588
+            parent_id: null
+          - description: null
+            id: 2588
             label: Material moving occupations
-          - id: 2589
+            parent_id: null
+          - description: null
+            id: 2589
             label: Military
-          - id: 2590
+            parent_id: null
+          - description: null
+            id: 2590
             label: Unclassified
+            parent_id: null
       periods:
         - YR2020Q1
       slug: occupation
@@ -2027,7 +2663,7 @@ definitions:
       name:
         type: string
       parameters:
-        $ref: '#/definitions/Parameters'
+        $ref: "#/definitions/Parameters"
       periods:
         items:
           type: string
@@ -2056,12 +2692,12 @@ definitions:
           type: array
         type: array
       location:
-        $ref: '#/definitions/Location1'
+        $ref: "#/definitions/Location1"
       location_index:
         format: int32
         type: integer
       metadata:
-        $ref: '#/definitions/Metadata'
+        $ref: "#/definitions/Metadata"
     required:
       - metadata
       - location_index
@@ -2072,9 +2708,9 @@ definitions:
   Data2:
     properties:
       geometry:
-        $ref: '#/definitions/Geometry'
+        $ref: "#/definitions/Geometry"
       properties:
-        $ref: '#/definitions/Properties'
+        $ref: "#/definitions/Properties"
       type:
         type: string
     required:
@@ -2087,7 +2723,7 @@ definitions:
     properties:
       features:
         items:
-          $ref: '#/definitions/Feature'
+          $ref: "#/definitions/Feature"
         type: array
       type:
         type: string
@@ -2100,7 +2736,7 @@ definitions:
     example:
       crs:
         properties:
-          name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+          name: urn:ogc:def:crs:OGC:1.3:CRS84
         type: name
       features:
         - geometry:
@@ -2135,18 +2771,18 @@ definitions:
                 - 30.265642
             type: LineString
           properties:
-            bearing: 'N'
+            bearing: N
             roadname: North Interstate Highway 35 Service Road
-            segment_id: '1595171804'
+            segment_id: "1595171804"
             state: Texas
           type: Feature
       type: FeatureCollection
     properties:
       crs:
-        $ref: '#/definitions/Crs'
+        $ref: "#/definitions/Crs"
       features:
         items:
-          $ref: '#/definitions/Feature1'
+          $ref: "#/definitions/Feature1"
         type: array
       type:
         type: string
@@ -2330,30 +2966,30 @@ definitions:
       metadata:
         bearing: W
         columns:
-          - '12:00am'
-          - '01:00am'
-          - '02:00am'
-          - '03:00am'
-          - '04:00am'
-          - '05:00am'
-          - '06:00am'
-          - '07:00am'
-          - '08:00am'
-          - '09:00am'
-          - '10:00am'
-          - '11:00am'
-          - '12:00pm'
-          - '01:00pm'
-          - '02:00pm'
-          - '03:00pm'
-          - '04:00pm'
-          - '05:00pm'
-          - '06:00pm'
-          - '07:00pm'
-          - '08:00pm'
-          - '09:00pm'
-          - '10:00pm'
-          - '11:00pm'
+          - 12:00am
+          - 01:00am
+          - 02:00am
+          - 03:00am
+          - 04:00am
+          - 05:00am
+          - 06:00am
+          - 07:00am
+          - 08:00am
+          - 09:00am
+          - 10:00am
+          - 11:00am
+          - 12:00pm
+          - 01:00pm
+          - 02:00pm
+          - 03:00pm
+          - 04:00pm
+          - 05:00pm
+          - 06:00pm
+          - 07:00pm
+          - 08:00pm
+          - 09:00pm
+          - 10:00pm
+          - 11:00pm
         name: East 6th Street
         rows:
           - Sun
@@ -2363,7 +2999,7 @@ definitions:
           - Thu
           - Fri
           - Sat
-        segment_id: '1595369397'
+        segment_id: "1595369397"
         state: Texas
       roadsegment:
         coordinates:
@@ -2393,11 +3029,11 @@ definitions:
           type: array
         type: array
       metadata:
-        $ref: '#/definitions/Metadata1'
+        $ref: "#/definitions/Metadata1"
       roadsegment:
-        $ref: '#/definitions/Roadsegment'
+        $ref: "#/definitions/Roadsegment"
       stats:
-        $ref: '#/definitions/Stats'
+        $ref: "#/definitions/Stats"
     required:
       - stats
       - roadsegment
@@ -2435,7 +3071,8 @@ definitions:
           - White Collar
           - Management occupations
           - Top executives
-          - 'Advertising, marketing, promotions, public relations, and sales managers'
+          - Advertising, marketing, promotions, public relations, and sales
+            managers
           - Operations specialties managers
           - Other management occupations
           - Business and financial operations occupations
@@ -2445,31 +3082,32 @@ definitions:
           - Computer specialists
           - Mathematical science occupations
           - Architecture and engineering occupations
-          - 'Architects, surveyors, and cartographers'
+          - Architects, surveyors, and cartographers
           - Engineers
-          - 'Drafters, engineering, and mapping technicians'
-          - 'Life, physical, and social science occupations'
+          - Drafters, engineering, and mapping technicians
+          - Life, physical, and social science occupations
           - Life scientists
           - Physical scientists
           - Social scientists and related occupations
-          - 'Life, physical, and social science technicians'
+          - Life, physical, and social science technicians
           - Community and social services occupations
-          - 'Counselors, social workers, and other community and social service specialists'
+          - Counselors, social workers, and other community and social service
+            specialists
           - Religious workers
-          - 'All other counselors, social, and religious workers'
+          - All other counselors, social, and religious workers
           - Legal occupations
-          - 'Lawyers, judges, and related workers'
+          - Lawyers, judges, and related workers
           - Legal support workers
           - All other legal and related workers
-          - 'Education, training, and library occupations'
+          - Education, training, and library occupations
           - Postsecondary teachers
-          - 'Primary, secondary, and special education teachers'
+          - Primary, secondary, and special education teachers
           - Other teachers and instructors
-          - 'Librarians, curators, and archivists'
-          - 'Other education, training, and library occupations'
-          - 'Arts, design, entertainment, sports, and media occupations'
+          - Librarians, curators, and archivists
+          - Other education, training, and library occupations
+          - Arts, design, entertainment, sports, and media occupations
           - Art and design occupations
-          - 'Entertainers and performers, sports and related occupations'
+          - Entertainers and performers, sports and related occupations
           - Media and communication occupations
           - Media and communication equipment occupations
           - Healthcare practitioners and technical occupations
@@ -2477,75 +3115,77 @@ definitions:
           - Health technologists and technicians
           - Other healthcare practitioners and technical occupations
           - Healthcare support occupations
-          - 'Nursing, psychiatric, and home health aides'
+          - Nursing, psychiatric, and home health aides
           - Occupational and physical therapist assistants and aides
           - Other healthcare support occupations
           - Blue Collar
           - Protective service occupations
-          - 'First-line supervisors/managers, protective service workers'
+          - First-line supervisors/managers, protective service workers
           - Fire fighting and prevention workers
           - Law enforcement workers
           - Other protective service workers
           - Food preparation and serving related occupations
-          - 'Supervisors, food preparation and serving workers'
+          - Supervisors, food preparation and serving workers
           - Cooks and food preparation workers
           - Food and beverage serving workers
           - Other food preparation and serving related workers
           - Building and grounds cleaning and maintenance occupations
-          - 'Supervisors, building and grounds cleaning and maintenance workers'
+          - Supervisors, building and grounds cleaning and maintenance workers
           - Building cleaning and pest control workers
           - Grounds maintenance workers
           - All other building and grounds cleaning and maintenance workers
           - Personal care and service occupations
-          - 'Supervisors, personal care and service workers'
+          - Supervisors, personal care and service workers
           - Animal care and service workers
           - Entertainment attendants and related workers
           - Funeral service workers
           - Personal appearance workers
-          - 'Transportation, tourism, and lodging attendants'
+          - Transportation, tourism, and lodging attendants
           - Other personal care and service workers
           - Sales and related occupations
-          - 'Supervisors, sales workers'
+          - Supervisors, sales workers
           - Retail sales workers
-          - 'Sales representatives, services'
-          - 'Sales representatives, wholesale and manufacturing'
+          - Sales representatives, services
+          - Sales representatives, wholesale and manufacturing
           - Other sales and related workers
           - Office and administrative support occupations
-          - 'Supervisors, office and administrative support workers'
+          - Supervisors, office and administrative support workers
           - Communications equipment operators
           - Financial clerks
           - Information and record clerks
-          - 'Material recording, scheduling, dispatching, and distributing occupations'
+          - Material recording, scheduling, dispatching, and distributing
+            occupations
           - Secretaries and administrative assistants
           - Other office and administrative support workers
-          - 'Farming, fishing, and forestry occupations'
-          - 'Supervisors, farming, fishing, and forestry workers'
+          - Farming, fishing, and forestry occupations
+          - Supervisors, farming, fishing, and forestry workers
           - Agricultural workers
           - Fishing and hunting workers
-          - 'Forest, conservation, and logging workers'
+          - Forest, conservation, and logging workers
           - Construction and extraction occupations
-          - 'Supervisors, construction and extraction workers'
+          - Supervisors, construction and extraction workers
           - Construction trades and related workers
-          - 'Helpers, construction trades'
+          - Helpers, construction trades
           - Other construction and related workers
           - Extraction workers
-          - 'Installation, maintenance, and repair occupations'
-          - 'Supervisors of installation, maintenance, and repair workers'
-          - 'Electrical and electronic equipment mechanics, installers, and repairers'
-          - 'And mobile equipment mechanics, installers, and repairers'
-          - 'Other installation, maintenance, and repair occupations'
+          - Installation, maintenance, and repair occupations
+          - Supervisors of installation, maintenance, and repair workers
+          - Electrical and electronic equipment mechanics, installers, and
+            repairers
+          - And mobile equipment mechanics, installers, and repairers
+          - Other installation, maintenance, and repair occupations
           - Production occupations
-          - 'Supervisors, production workers'
+          - Supervisors, production workers
           - Assemblers and fabricators
           - Food processing occupations
           - Metal workers and plastic workers
           - Printing occupations
-          - 'Textile, apparel, and furnishings occupations'
+          - Textile, apparel, and furnishings occupations
           - Woodworkers
           - Plant and system operators
           - Other production occupations
           - Transportation and material moving occupations
-          - 'Supervisors, transportation and material moving workers'
+          - Supervisors, transportation and material moving workers
           - Air transportation occupations
           - Motor vehicle operators
           - Rail transportation occupations
@@ -2560,257 +3200,502 @@ definitions:
         name: Occupation
         parameters:
           category:
-            - id: 2469
+            - description: null
+              id: 2469
               label: White Collar
-            - id: 2470
+              parent_id: null
+            - description: null
+              id: 2470
               label: Management occupations
-            - id: 2471
+              parent_id: null
+            - description: null
+              id: 2471
               label: Top executives
-            - id: 2472
-              label: 'Advertising, marketing, promotions, public relations, and sales managers'
-            - id: 2473
+              parent_id: null
+            - description: null
+              id: 2472
+              label: Advertising, marketing, promotions, public relations, and sales managers
+              parent_id: null
+            - description: null
+              id: 2473
               label: Operations specialties managers
-            - id: 2474
+              parent_id: null
+            - description: null
+              id: 2474
               label: Other management occupations
-            - id: 2475
+              parent_id: null
+            - description: null
+              id: 2475
               label: Business and financial operations occupations
-            - id: 2476
+              parent_id: null
+            - description: null
+              id: 2476
               label: Business operations specialists
-            - id: 2477
+              parent_id: null
+            - description: null
+              id: 2477
               label: Financial specialists
-            - id: 2478
+              parent_id: null
+            - description: null
+              id: 2478
               label: Computer and mathematical science occupations
-            - id: 2479
+              parent_id: null
+            - description: null
+              id: 2479
               label: Computer specialists
-            - id: 2480
+              parent_id: null
+            - description: null
+              id: 2480
               label: Mathematical science occupations
-            - id: 2481
+              parent_id: null
+            - description: null
+              id: 2481
               label: Architecture and engineering occupations
-            - id: 2482
-              label: 'Architects, surveyors, and cartographers'
-            - id: 2483
+              parent_id: null
+            - description: null
+              id: 2482
+              label: Architects, surveyors, and cartographers
+              parent_id: null
+            - description: null
+              id: 2483
               label: Engineers
-            - id: 2484
-              label: 'Drafters, engineering, and mapping technicians'
-            - id: 2485
-              label: 'Life, physical, and social science occupations'
-            - id: 2486
+              parent_id: null
+            - description: null
+              id: 2484
+              label: Drafters, engineering, and mapping technicians
+              parent_id: null
+            - description: null
+              id: 2485
+              label: Life, physical, and social science occupations
+              parent_id: null
+            - description: null
+              id: 2486
               label: Life scientists
-            - id: 2487
+              parent_id: null
+            - description: null
+              id: 2487
               label: Physical scientists
-            - id: 2488
+              parent_id: null
+            - description: null
+              id: 2488
               label: Social scientists and related occupations
-            - id: 2489
-              label: 'Life, physical, and social science technicians'
-            - id: 2490
+              parent_id: null
+            - description: null
+              id: 2489
+              label: Life, physical, and social science technicians
+              parent_id: null
+            - description: null
+              id: 2490
               label: Community and social services occupations
-            - id: 2491
-              label: 'Counselors, social workers, and other community and social service specialists'
-            - id: 2492
+              parent_id: null
+            - description: null
+              id: 2491
+              label: Counselors, social workers, and other community and social service
+                specialists
+              parent_id: null
+            - description: null
+              id: 2492
               label: Religious workers
-            - id: 2493
-              label: 'All other counselors, social, and religious workers'
-            - id: 2494
+              parent_id: null
+            - description: null
+              id: 2493
+              label: All other counselors, social, and religious workers
+              parent_id: null
+            - description: null
+              id: 2494
               label: Legal occupations
-            - id: 2495
-              label: 'Lawyers, judges, and related workers'
-            - id: 2496
+              parent_id: null
+            - description: null
+              id: 2495
+              label: Lawyers, judges, and related workers
+              parent_id: null
+            - description: null
+              id: 2496
               label: Legal support workers
-            - id: 2497
+              parent_id: null
+            - description: null
+              id: 2497
               label: All other legal and related workers
-            - id: 2498
-              label: 'Education, training, and library occupations'
-            - id: 2499
+              parent_id: null
+            - description: null
+              id: 2498
+              label: Education, training, and library occupations
+              parent_id: null
+            - description: null
+              id: 2499
               label: Postsecondary teachers
-            - id: 2500
-              label: 'Primary, secondary, and special education teachers'
-            - id: 2501
+              parent_id: null
+            - description: null
+              id: 2500
+              label: Primary, secondary, and special education teachers
+              parent_id: null
+            - description: null
+              id: 2501
               label: Other teachers and instructors
-            - id: 2502
-              label: 'Librarians, curators, and archivists'
-            - id: 2503
-              label: 'Other education, training, and library occupations'
-            - id: 2504
-              label: 'Arts, design, entertainment, sports, and media occupations'
-            - id: 2505
+              parent_id: null
+            - description: null
+              id: 2502
+              label: Librarians, curators, and archivists
+              parent_id: null
+            - description: null
+              id: 2503
+              label: Other education, training, and library occupations
+              parent_id: null
+            - description: null
+              id: 2504
+              label: Arts, design, entertainment, sports, and media occupations
+              parent_id: null
+            - description: null
+              id: 2505
               label: Art and design occupations
-            - id: 2506
-              label: 'Entertainers and performers, sports and related occupations'
-            - id: 2507
+              parent_id: null
+            - description: null
+              id: 2506
+              label: Entertainers and performers, sports and related occupations
+              parent_id: null
+            - description: null
+              id: 2507
               label: Media and communication occupations
-            - id: 2508
+              parent_id: null
+            - description: null
+              id: 2508
               label: Media and communication equipment occupations
-            - id: 2509
+              parent_id: null
+            - description: null
+              id: 2509
               label: Healthcare practitioners and technical occupations
-            - id: 2510
+              parent_id: null
+            - description: null
+              id: 2510
               label: Health diagnosing and treating practitioners
-            - id: 2511
+              parent_id: null
+            - description: null
+              id: 2511
               label: Health technologists and technicians
-            - id: 2512
+              parent_id: null
+            - description: null
+              id: 2512
               label: Other healthcare practitioners and technical occupations
-            - id: 2513
+              parent_id: null
+            - description: null
+              id: 2513
               label: Healthcare support occupations
-            - id: 2514
-              label: 'Nursing, psychiatric, and home health aides'
-            - id: 2515
+              parent_id: null
+            - description: null
+              id: 2514
+              label: Nursing, psychiatric, and home health aides
+              parent_id: null
+            - description: null
+              id: 2515
               label: Occupational and physical therapist assistants and aides
-            - id: 2516
+              parent_id: null
+            - description: null
+              id: 2516
               label: Other healthcare support occupations
-            - id: 2517
+              parent_id: null
+            - description: null
+              id: 2517
               label: Blue Collar
-            - id: 2518
+              parent_id: null
+            - description: null
+              id: 2518
               label: Protective service occupations
-            - id: 2519
-              label: 'First-line supervisors/managers, protective service workers'
-            - id: 2520
+              parent_id: null
+            - description: null
+              id: 2519
+              label: First-line supervisors/managers, protective service workers
+              parent_id: null
+            - description: null
+              id: 2520
               label: Fire fighting and prevention workers
-            - id: 2521
+              parent_id: null
+            - description: null
+              id: 2521
               label: Law enforcement workers
-            - id: 2522
+              parent_id: null
+            - description: null
+              id: 2522
               label: Other protective service workers
-            - id: 2523
+              parent_id: null
+            - description: null
+              id: 2523
               label: Food preparation and serving related occupations
-            - id: 2524
-              label: 'Supervisors, food preparation and serving workers'
-            - id: 2525
+              parent_id: null
+            - description: null
+              id: 2524
+              label: Supervisors, food preparation and serving workers
+              parent_id: null
+            - description: null
+              id: 2525
               label: Cooks and food preparation workers
-            - id: 2526
+              parent_id: null
+            - description: null
+              id: 2526
               label: Food and beverage serving workers
-            - id: 2527
+              parent_id: null
+            - description: null
+              id: 2527
               label: Other food preparation and serving related workers
-            - id: 2528
+              parent_id: null
+            - description: null
+              id: 2528
               label: Building and grounds cleaning and maintenance occupations
-            - id: 2529
-              label: 'Supervisors, building and grounds cleaning and maintenance workers'
-            - id: 2530
+              parent_id: null
+            - description: null
+              id: 2529
+              label: Supervisors, building and grounds cleaning and maintenance workers
+              parent_id: null
+            - description: null
+              id: 2530
               label: Building cleaning and pest control workers
-            - id: 2531
+              parent_id: null
+            - description: null
+              id: 2531
               label: Grounds maintenance workers
-            - id: 2532
+              parent_id: null
+            - description: null
+              id: 2532
               label: All other building and grounds cleaning and maintenance workers
-            - id: 2533
+              parent_id: null
+            - description: null
+              id: 2533
               label: Personal care and service occupations
-            - id: 2534
-              label: 'Supervisors, personal care and service workers'
-            - id: 2535
+              parent_id: null
+            - description: null
+              id: 2534
+              label: Supervisors, personal care and service workers
+              parent_id: null
+            - description: null
+              id: 2535
               label: Animal care and service workers
-            - id: 2536
+              parent_id: null
+            - description: null
+              id: 2536
               label: Entertainment attendants and related workers
-            - id: 2537
+              parent_id: null
+            - description: null
+              id: 2537
               label: Funeral service workers
-            - id: 2538
+              parent_id: null
+            - description: null
+              id: 2538
               label: Personal appearance workers
-            - id: 2539
-              label: 'Transportation, tourism, and lodging attendants'
-            - id: 2540
+              parent_id: null
+            - description: null
+              id: 2539
+              label: Transportation, tourism, and lodging attendants
+              parent_id: null
+            - description: null
+              id: 2540
               label: Other personal care and service workers
-            - id: 2541
+              parent_id: null
+            - description: null
+              id: 2541
               label: Sales and related occupations
-            - id: 2542
-              label: 'Supervisors, sales workers'
-            - id: 2543
+              parent_id: null
+            - description: null
+              id: 2542
+              label: Supervisors, sales workers
+              parent_id: null
+            - description: null
+              id: 2543
               label: Retail sales workers
-            - id: 2544
-              label: 'Sales representatives, services'
-            - id: 2545
-              label: 'Sales representatives, wholesale and manufacturing'
-            - id: 2546
+              parent_id: null
+            - description: null
+              id: 2544
+              label: Sales representatives, services
+              parent_id: null
+            - description: null
+              id: 2545
+              label: Sales representatives, wholesale and manufacturing
+              parent_id: null
+            - description: null
+              id: 2546
               label: Other sales and related workers
-            - id: 2547
+              parent_id: null
+            - description: null
+              id: 2547
               label: Office and administrative support occupations
-            - id: 2548
-              label: 'Supervisors, office and administrative support workers'
-            - id: 2549
+              parent_id: null
+            - description: null
+              id: 2548
+              label: Supervisors, office and administrative support workers
+              parent_id: null
+            - description: null
+              id: 2549
               label: Communications equipment operators
-            - id: 2550
+              parent_id: null
+            - description: null
+              id: 2550
               label: Financial clerks
-            - id: 2551
+              parent_id: null
+            - description: null
+              id: 2551
               label: Information and record clerks
-            - id: 2552
-              label: 'Material recording, scheduling, dispatching, and distributing occupations'
-            - id: 2553
+              parent_id: null
+            - description: null
+              id: 2552
+              label: Material recording, scheduling, dispatching, and distributing occupations
+              parent_id: null
+            - description: null
+              id: 2553
               label: Secretaries and administrative assistants
-            - id: 2554
+              parent_id: null
+            - description: null
+              id: 2554
               label: Other office and administrative support workers
-            - id: 2555
-              label: 'Farming, fishing, and forestry occupations'
-            - id: 2556
-              label: 'Supervisors, farming, fishing, and forestry workers'
-            - id: 2557
+              parent_id: null
+            - description: null
+              id: 2555
+              label: Farming, fishing, and forestry occupations
+              parent_id: null
+            - description: null
+              id: 2556
+              label: Supervisors, farming, fishing, and forestry workers
+              parent_id: null
+            - description: null
+              id: 2557
               label: Agricultural workers
-            - id: 2558
+              parent_id: null
+            - description: null
+              id: 2558
               label: Fishing and hunting workers
-            - id: 2559
-              label: 'Forest, conservation, and logging workers'
-            - id: 2560
+              parent_id: null
+            - description: null
+              id: 2559
+              label: Forest, conservation, and logging workers
+              parent_id: null
+            - description: null
+              id: 2560
               label: Construction and extraction occupations
-            - id: 2561
-              label: 'Supervisors, construction and extraction workers'
-            - id: 2562
+              parent_id: null
+            - description: null
+              id: 2561
+              label: Supervisors, construction and extraction workers
+              parent_id: null
+            - description: null
+              id: 2562
               label: Construction trades and related workers
-            - id: 2563
-              label: 'Helpers, construction trades'
-            - id: 2564
+              parent_id: null
+            - description: null
+              id: 2563
+              label: Helpers, construction trades
+              parent_id: null
+            - description: null
+              id: 2564
               label: Other construction and related workers
-            - id: 2565
+              parent_id: null
+            - description: null
+              id: 2565
               label: Extraction workers
-            - id: 2566
-              label: 'Installation, maintenance, and repair occupations'
-            - id: 2567
-              label: 'Supervisors of installation, maintenance, and repair workers'
-            - id: 2568
-              label: 'Electrical and electronic equipment mechanics, installers, and repairers'
-            - id: 2569
-              label: 'And mobile equipment mechanics, installers, and repairers'
-            - id: 2570
-              label: 'Other installation, maintenance, and repair occupations'
-            - id: 2571
+              parent_id: null
+            - description: null
+              id: 2566
+              label: Installation, maintenance, and repair occupations
+              parent_id: null
+            - description: null
+              id: 2567
+              label: Supervisors of installation, maintenance, and repair workers
+              parent_id: null
+            - description: null
+              id: 2568
+              label: Electrical and electronic equipment mechanics, installers, and repairers
+              parent_id: null
+            - description: null
+              id: 2569
+              label: And mobile equipment mechanics, installers, and repairers
+              parent_id: null
+            - description: null
+              id: 2570
+              label: Other installation, maintenance, and repair occupations
+              parent_id: null
+            - description: null
+              id: 2571
               label: Production occupations
-            - id: 2572
-              label: 'Supervisors, production workers'
-            - id: 2573
+              parent_id: null
+            - description: null
+              id: 2572
+              label: Supervisors, production workers
+              parent_id: null
+            - description: null
+              id: 2573
               label: Assemblers and fabricators
-            - id: 2574
+              parent_id: null
+            - description: null
+              id: 2574
               label: Food processing occupations
-            - id: 2575
+              parent_id: null
+            - description: null
+              id: 2575
               label: Metal workers and plastic workers
-            - id: 2576
+              parent_id: null
+            - description: null
+              id: 2576
               label: Printing occupations
-            - id: 2577
-              label: 'Textile, apparel, and furnishings occupations'
-            - id: 2578
+              parent_id: null
+            - description: null
+              id: 2577
+              label: Textile, apparel, and furnishings occupations
+              parent_id: null
+            - description: null
+              id: 2578
               label: Woodworkers
-            - id: 2579
+              parent_id: null
+            - description: null
+              id: 2579
               label: Plant and system operators
-            - id: 2580
+              parent_id: null
+            - description: null
+              id: 2580
               label: Other production occupations
-            - id: 2581
+              parent_id: null
+            - description: null
+              id: 2581
               label: Transportation and material moving occupations
-            - id: 2582
-              label: 'Supervisors, transportation and material moving workers'
-            - id: 2583
+              parent_id: null
+            - description: null
+              id: 2582
+              label: Supervisors, transportation and material moving workers
+              parent_id: null
+            - description: null
+              id: 2583
               label: Air transportation occupations
-            - id: 2584
+              parent_id: null
+            - description: null
+              id: 2584
               label: Motor vehicle operators
-            - id: 2585
+              parent_id: null
+            - description: null
+              id: 2585
               label: Rail transportation occupations
-            - id: 2586
+              parent_id: null
+            - description: null
+              id: 2586
               label: Water transportation occupations
-            - id: 2587
+              parent_id: null
+            - description: null
+              id: 2587
               label: Other transportation workers
-            - id: 2588
+              parent_id: null
+            - description: null
+              id: 2588
               label: Material moving occupations
-            - id: 2589
+              parent_id: null
+            - description: null
+              id: 2589
               label: Military
-            - id: 2590
+              parent_id: null
+            - description: null
+              id: 2590
               label: Unclassified
+              parent_id: null
         periods:
           - YR2020Q1
         slug: occupation
         version: v2
     properties:
       data:
-        $ref: '#/definitions/Data'
+        $ref: "#/definitions/Data"
     required:
       - data
     title: Describe`occupation`Insight
@@ -2818,7 +3703,7 @@ definitions:
   Describetheregionwithin5minutedrive-timeofageographicpoint:
     properties:
       data:
-        $ref: '#/definitions/Data3'
+        $ref: "#/definitions/Data3"
     required:
       - data
     title: Describetheregionwithin5minutedrive-timeofageographicpoint
@@ -2826,9 +3711,9 @@ definitions:
   Feature:
     properties:
       geometry:
-        $ref: '#/definitions/Geometry'
+        $ref: "#/definitions/Geometry"
       properties:
-        $ref: '#/definitions/Properties2'
+        $ref: "#/definitions/Properties2"
       type:
         type: string
     required:
@@ -2871,16 +3756,16 @@ definitions:
             - 30.265642
         type: LineString
       properties:
-        bearing: 'N'
+        bearing: N
         roadname: North Interstate Highway 35 Service Road
-        segment_id: '1595171804'
+        segment_id: "1595171804"
         state: Texas
       type: Feature
     properties:
       geometry:
-        $ref: '#/definitions/Geometry'
+        $ref: "#/definitions/Geometry"
       properties:
-        $ref: '#/definitions/Properties3'
+        $ref: "#/definitions/Properties3"
       type:
         type: string
     required:
@@ -2893,7 +3778,7 @@ definitions:
     properties:
       data:
         items:
-          $ref: '#/definitions/Data2'
+          $ref: "#/definitions/Data2"
         type: array
     required:
       - data
@@ -2919,7 +3804,7 @@ definitions:
     properties:
       data:
         items:
-          $ref: '#/definitions/Data1'
+          $ref: "#/definitions/Data1"
         type: array
     required:
       - data
@@ -2948,7 +3833,10 @@ definitions:
           id: crime
           name: Crime
           version: v1
-        - description: 'Conventionally, daytime population is equated to the number of the employees in an area. However, that number does not capture stay-at-home parents, students, and retired or unemployed individuals. This insight provides that detail.'
+        - description: Conventionally, daytime population is equated to the number of the
+            employees in an area. However, that number does not capture
+            stay-at-home parents, students, and retired or unemployed
+            individuals. This insight provides that detail.
           id: daytime-population
           name: Daytime Population
           version: v2
@@ -2960,7 +3848,8 @@ definitions:
           id: employee-categories
           name: Employee Categories
           version: v2
-        - description: Quarterly historical total number of employees (often referred to as daytime population).
+        - description: Quarterly historical total number of employees (often referred to
+            as daytime population).
           id: employees
           name: Daytime Population
           version: v4
@@ -3004,7 +3893,7 @@ definitions:
           id: households
           name: Households
           version: v3
-        - description: 'Home renters, owners, and vacancies.'
+        - description: Home renters, owners, and vacancies.
           id: housing-ownership
           name: Housing Ownership
           version: v2
@@ -3028,7 +3917,8 @@ definitions:
           id: occupation
           name: Occupation
           version: v2
-        - description: 'Historical, current and forecasted number of people living in houses and apartments within a trade area.'
+        - description: Historical, current and forecasted number of people living in
+            houses and apartments within a trade area.
           id: residential-population
           name: Residential Population
           version: v3
@@ -3036,11 +3926,13 @@ definitions:
           id: salaries
           name: Salaries
           version: v2
-        - description: 'Population residing in a housing unit specifically designated as seasonal housing, like a summer cottage or winter chalet.'
+        - description: Population residing in a housing unit specifically designated as
+            seasonal housing, like a summer cottage or winter chalet.
           id: seasonal-population
           name: Seasonal Population
           version: v3
-        - description: Expressed interest on social media within the location's trade area by business category.
+        - description: Expressed interest on social media within the location's trade area
+            by business category.
           id: social
           name: Social Media Interest
           version: v3
@@ -3048,7 +3940,8 @@ definitions:
           id: spending
           name: Spending
           version: v2
-        - description: Population residing in a hotel or RV (Recreational Vehicle) for at least 1 night.
+        - description: Population residing in a hotel or RV (Recreational Vehicle) for at
+            least 1 night.
           id: transient-population
           name: Transient Population
           version: v3
@@ -3060,14 +3953,15 @@ definitions:
           id: youth-age
           name: Youth Age
           version: v2
-        - description: Search engine searches within a location's trade area by business category.
+        - description: Search engine searches within a location's trade area by business
+            category.
           id: search
           name: Search Engine Demand
           version: v3
     properties:
       data:
         items:
-          $ref: '#/definitions/Datum'
+          $ref: "#/definitions/Datum"
         type: array
     required:
       - data
@@ -3111,7 +4005,7 @@ definitions:
       areatype: drivetime
       latitude: 30.264757
       longitude: -97.7356077
-      radius: '5'
+      radius: "5"
       type: buffer
       units: minutes
     properties:
@@ -3153,7 +4047,7 @@ definitions:
           type: array
         type: array
       units:
-        $ref: '#/definitions/Units'
+        $ref: "#/definitions/Units"
     required:
       - units
       - display_groups
@@ -3164,30 +4058,30 @@ definitions:
     example:
       bearing: W
       columns:
-        - '12:00am'
-        - '01:00am'
-        - '02:00am'
-        - '03:00am'
-        - '04:00am'
-        - '05:00am'
-        - '06:00am'
-        - '07:00am'
-        - '08:00am'
-        - '09:00am'
-        - '10:00am'
-        - '11:00am'
-        - '12:00pm'
-        - '01:00pm'
-        - '02:00pm'
-        - '03:00pm'
-        - '04:00pm'
-        - '05:00pm'
-        - '06:00pm'
-        - '07:00pm'
-        - '08:00pm'
-        - '09:00pm'
-        - '10:00pm'
-        - '11:00pm'
+        - 12:00am
+        - 01:00am
+        - 02:00am
+        - 03:00am
+        - 04:00am
+        - 05:00am
+        - 06:00am
+        - 07:00am
+        - 08:00am
+        - 09:00am
+        - 10:00am
+        - 11:00am
+        - 12:00pm
+        - 01:00pm
+        - 02:00pm
+        - 03:00pm
+        - 04:00pm
+        - 05:00pm
+        - 06:00pm
+        - 07:00pm
+        - 08:00pm
+        - 09:00pm
+        - 10:00pm
+        - 11:00pm
       name: East 6th Street
       rows:
         - Sun
@@ -3197,7 +4091,7 @@ definitions:
         - Thu
         - Fri
         - Sat
-      segment_id: '1595369397'
+      segment_id: "1595369397"
       state: Texas
     properties:
       bearing:
@@ -3228,254 +4122,499 @@ definitions:
   Parameters:
     example:
       category:
-        - id: 2469
+        - description: null
+          id: 2469
           label: White Collar
-        - id: 2470
+          parent_id: null
+        - description: null
+          id: 2470
           label: Management occupations
-        - id: 2471
+          parent_id: null
+        - description: null
+          id: 2471
           label: Top executives
-        - id: 2472
-          label: 'Advertising, marketing, promotions, public relations, and sales managers'
-        - id: 2473
+          parent_id: null
+        - description: null
+          id: 2472
+          label: Advertising, marketing, promotions, public relations, and sales managers
+          parent_id: null
+        - description: null
+          id: 2473
           label: Operations specialties managers
-        - id: 2474
+          parent_id: null
+        - description: null
+          id: 2474
           label: Other management occupations
-        - id: 2475
+          parent_id: null
+        - description: null
+          id: 2475
           label: Business and financial operations occupations
-        - id: 2476
+          parent_id: null
+        - description: null
+          id: 2476
           label: Business operations specialists
-        - id: 2477
+          parent_id: null
+        - description: null
+          id: 2477
           label: Financial specialists
-        - id: 2478
+          parent_id: null
+        - description: null
+          id: 2478
           label: Computer and mathematical science occupations
-        - id: 2479
+          parent_id: null
+        - description: null
+          id: 2479
           label: Computer specialists
-        - id: 2480
+          parent_id: null
+        - description: null
+          id: 2480
           label: Mathematical science occupations
-        - id: 2481
+          parent_id: null
+        - description: null
+          id: 2481
           label: Architecture and engineering occupations
-        - id: 2482
-          label: 'Architects, surveyors, and cartographers'
-        - id: 2483
+          parent_id: null
+        - description: null
+          id: 2482
+          label: Architects, surveyors, and cartographers
+          parent_id: null
+        - description: null
+          id: 2483
           label: Engineers
-        - id: 2484
-          label: 'Drafters, engineering, and mapping technicians'
-        - id: 2485
-          label: 'Life, physical, and social science occupations'
-        - id: 2486
+          parent_id: null
+        - description: null
+          id: 2484
+          label: Drafters, engineering, and mapping technicians
+          parent_id: null
+        - description: null
+          id: 2485
+          label: Life, physical, and social science occupations
+          parent_id: null
+        - description: null
+          id: 2486
           label: Life scientists
-        - id: 2487
+          parent_id: null
+        - description: null
+          id: 2487
           label: Physical scientists
-        - id: 2488
+          parent_id: null
+        - description: null
+          id: 2488
           label: Social scientists and related occupations
-        - id: 2489
-          label: 'Life, physical, and social science technicians'
-        - id: 2490
+          parent_id: null
+        - description: null
+          id: 2489
+          label: Life, physical, and social science technicians
+          parent_id: null
+        - description: null
+          id: 2490
           label: Community and social services occupations
-        - id: 2491
-          label: 'Counselors, social workers, and other community and social service specialists'
-        - id: 2492
+          parent_id: null
+        - description: null
+          id: 2491
+          label: Counselors, social workers, and other community and social service
+            specialists
+          parent_id: null
+        - description: null
+          id: 2492
           label: Religious workers
-        - id: 2493
-          label: 'All other counselors, social, and religious workers'
-        - id: 2494
+          parent_id: null
+        - description: null
+          id: 2493
+          label: All other counselors, social, and religious workers
+          parent_id: null
+        - description: null
+          id: 2494
           label: Legal occupations
-        - id: 2495
-          label: 'Lawyers, judges, and related workers'
-        - id: 2496
+          parent_id: null
+        - description: null
+          id: 2495
+          label: Lawyers, judges, and related workers
+          parent_id: null
+        - description: null
+          id: 2496
           label: Legal support workers
-        - id: 2497
+          parent_id: null
+        - description: null
+          id: 2497
           label: All other legal and related workers
-        - id: 2498
-          label: 'Education, training, and library occupations'
-        - id: 2499
+          parent_id: null
+        - description: null
+          id: 2498
+          label: Education, training, and library occupations
+          parent_id: null
+        - description: null
+          id: 2499
           label: Postsecondary teachers
-        - id: 2500
-          label: 'Primary, secondary, and special education teachers'
-        - id: 2501
+          parent_id: null
+        - description: null
+          id: 2500
+          label: Primary, secondary, and special education teachers
+          parent_id: null
+        - description: null
+          id: 2501
           label: Other teachers and instructors
-        - id: 2502
-          label: 'Librarians, curators, and archivists'
-        - id: 2503
-          label: 'Other education, training, and library occupations'
-        - id: 2504
-          label: 'Arts, design, entertainment, sports, and media occupations'
-        - id: 2505
+          parent_id: null
+        - description: null
+          id: 2502
+          label: Librarians, curators, and archivists
+          parent_id: null
+        - description: null
+          id: 2503
+          label: Other education, training, and library occupations
+          parent_id: null
+        - description: null
+          id: 2504
+          label: Arts, design, entertainment, sports, and media occupations
+          parent_id: null
+        - description: null
+          id: 2505
           label: Art and design occupations
-        - id: 2506
-          label: 'Entertainers and performers, sports and related occupations'
-        - id: 2507
+          parent_id: null
+        - description: null
+          id: 2506
+          label: Entertainers and performers, sports and related occupations
+          parent_id: null
+        - description: null
+          id: 2507
           label: Media and communication occupations
-        - id: 2508
+          parent_id: null
+        - description: null
+          id: 2508
           label: Media and communication equipment occupations
-        - id: 2509
+          parent_id: null
+        - description: null
+          id: 2509
           label: Healthcare practitioners and technical occupations
-        - id: 2510
+          parent_id: null
+        - description: null
+          id: 2510
           label: Health diagnosing and treating practitioners
-        - id: 2511
+          parent_id: null
+        - description: null
+          id: 2511
           label: Health technologists and technicians
-        - id: 2512
+          parent_id: null
+        - description: null
+          id: 2512
           label: Other healthcare practitioners and technical occupations
-        - id: 2513
+          parent_id: null
+        - description: null
+          id: 2513
           label: Healthcare support occupations
-        - id: 2514
-          label: 'Nursing, psychiatric, and home health aides'
-        - id: 2515
+          parent_id: null
+        - description: null
+          id: 2514
+          label: Nursing, psychiatric, and home health aides
+          parent_id: null
+        - description: null
+          id: 2515
           label: Occupational and physical therapist assistants and aides
-        - id: 2516
+          parent_id: null
+        - description: null
+          id: 2516
           label: Other healthcare support occupations
-        - id: 2517
+          parent_id: null
+        - description: null
+          id: 2517
           label: Blue Collar
-        - id: 2518
+          parent_id: null
+        - description: null
+          id: 2518
           label: Protective service occupations
-        - id: 2519
-          label: 'First-line supervisors/managers, protective service workers'
-        - id: 2520
+          parent_id: null
+        - description: null
+          id: 2519
+          label: First-line supervisors/managers, protective service workers
+          parent_id: null
+        - description: null
+          id: 2520
           label: Fire fighting and prevention workers
-        - id: 2521
+          parent_id: null
+        - description: null
+          id: 2521
           label: Law enforcement workers
-        - id: 2522
+          parent_id: null
+        - description: null
+          id: 2522
           label: Other protective service workers
-        - id: 2523
+          parent_id: null
+        - description: null
+          id: 2523
           label: Food preparation and serving related occupations
-        - id: 2524
-          label: 'Supervisors, food preparation and serving workers'
-        - id: 2525
+          parent_id: null
+        - description: null
+          id: 2524
+          label: Supervisors, food preparation and serving workers
+          parent_id: null
+        - description: null
+          id: 2525
           label: Cooks and food preparation workers
-        - id: 2526
+          parent_id: null
+        - description: null
+          id: 2526
           label: Food and beverage serving workers
-        - id: 2527
+          parent_id: null
+        - description: null
+          id: 2527
           label: Other food preparation and serving related workers
-        - id: 2528
+          parent_id: null
+        - description: null
+          id: 2528
           label: Building and grounds cleaning and maintenance occupations
-        - id: 2529
-          label: 'Supervisors, building and grounds cleaning and maintenance workers'
-        - id: 2530
+          parent_id: null
+        - description: null
+          id: 2529
+          label: Supervisors, building and grounds cleaning and maintenance workers
+          parent_id: null
+        - description: null
+          id: 2530
           label: Building cleaning and pest control workers
-        - id: 2531
+          parent_id: null
+        - description: null
+          id: 2531
           label: Grounds maintenance workers
-        - id: 2532
+          parent_id: null
+        - description: null
+          id: 2532
           label: All other building and grounds cleaning and maintenance workers
-        - id: 2533
+          parent_id: null
+        - description: null
+          id: 2533
           label: Personal care and service occupations
-        - id: 2534
-          label: 'Supervisors, personal care and service workers'
-        - id: 2535
+          parent_id: null
+        - description: null
+          id: 2534
+          label: Supervisors, personal care and service workers
+          parent_id: null
+        - description: null
+          id: 2535
           label: Animal care and service workers
-        - id: 2536
+          parent_id: null
+        - description: null
+          id: 2536
           label: Entertainment attendants and related workers
-        - id: 2537
+          parent_id: null
+        - description: null
+          id: 2537
           label: Funeral service workers
-        - id: 2538
+          parent_id: null
+        - description: null
+          id: 2538
           label: Personal appearance workers
-        - id: 2539
-          label: 'Transportation, tourism, and lodging attendants'
-        - id: 2540
+          parent_id: null
+        - description: null
+          id: 2539
+          label: Transportation, tourism, and lodging attendants
+          parent_id: null
+        - description: null
+          id: 2540
           label: Other personal care and service workers
-        - id: 2541
+          parent_id: null
+        - description: null
+          id: 2541
           label: Sales and related occupations
-        - id: 2542
-          label: 'Supervisors, sales workers'
-        - id: 2543
+          parent_id: null
+        - description: null
+          id: 2542
+          label: Supervisors, sales workers
+          parent_id: null
+        - description: null
+          id: 2543
           label: Retail sales workers
-        - id: 2544
-          label: 'Sales representatives, services'
-        - id: 2545
-          label: 'Sales representatives, wholesale and manufacturing'
-        - id: 2546
+          parent_id: null
+        - description: null
+          id: 2544
+          label: Sales representatives, services
+          parent_id: null
+        - description: null
+          id: 2545
+          label: Sales representatives, wholesale and manufacturing
+          parent_id: null
+        - description: null
+          id: 2546
           label: Other sales and related workers
-        - id: 2547
+          parent_id: null
+        - description: null
+          id: 2547
           label: Office and administrative support occupations
-        - id: 2548
-          label: 'Supervisors, office and administrative support workers'
-        - id: 2549
+          parent_id: null
+        - description: null
+          id: 2548
+          label: Supervisors, office and administrative support workers
+          parent_id: null
+        - description: null
+          id: 2549
           label: Communications equipment operators
-        - id: 2550
+          parent_id: null
+        - description: null
+          id: 2550
           label: Financial clerks
-        - id: 2551
+          parent_id: null
+        - description: null
+          id: 2551
           label: Information and record clerks
-        - id: 2552
-          label: 'Material recording, scheduling, dispatching, and distributing occupations'
-        - id: 2553
+          parent_id: null
+        - description: null
+          id: 2552
+          label: Material recording, scheduling, dispatching, and distributing occupations
+          parent_id: null
+        - description: null
+          id: 2553
           label: Secretaries and administrative assistants
-        - id: 2554
+          parent_id: null
+        - description: null
+          id: 2554
           label: Other office and administrative support workers
-        - id: 2555
-          label: 'Farming, fishing, and forestry occupations'
-        - id: 2556
-          label: 'Supervisors, farming, fishing, and forestry workers'
-        - id: 2557
+          parent_id: null
+        - description: null
+          id: 2555
+          label: Farming, fishing, and forestry occupations
+          parent_id: null
+        - description: null
+          id: 2556
+          label: Supervisors, farming, fishing, and forestry workers
+          parent_id: null
+        - description: null
+          id: 2557
           label: Agricultural workers
-        - id: 2558
+          parent_id: null
+        - description: null
+          id: 2558
           label: Fishing and hunting workers
-        - id: 2559
-          label: 'Forest, conservation, and logging workers'
-        - id: 2560
+          parent_id: null
+        - description: null
+          id: 2559
+          label: Forest, conservation, and logging workers
+          parent_id: null
+        - description: null
+          id: 2560
           label: Construction and extraction occupations
-        - id: 2561
-          label: 'Supervisors, construction and extraction workers'
-        - id: 2562
+          parent_id: null
+        - description: null
+          id: 2561
+          label: Supervisors, construction and extraction workers
+          parent_id: null
+        - description: null
+          id: 2562
           label: Construction trades and related workers
-        - id: 2563
-          label: 'Helpers, construction trades'
-        - id: 2564
+          parent_id: null
+        - description: null
+          id: 2563
+          label: Helpers, construction trades
+          parent_id: null
+        - description: null
+          id: 2564
           label: Other construction and related workers
-        - id: 2565
+          parent_id: null
+        - description: null
+          id: 2565
           label: Extraction workers
-        - id: 2566
-          label: 'Installation, maintenance, and repair occupations'
-        - id: 2567
-          label: 'Supervisors of installation, maintenance, and repair workers'
-        - id: 2568
-          label: 'Electrical and electronic equipment mechanics, installers, and repairers'
-        - id: 2569
-          label: 'And mobile equipment mechanics, installers, and repairers'
-        - id: 2570
-          label: 'Other installation, maintenance, and repair occupations'
-        - id: 2571
+          parent_id: null
+        - description: null
+          id: 2566
+          label: Installation, maintenance, and repair occupations
+          parent_id: null
+        - description: null
+          id: 2567
+          label: Supervisors of installation, maintenance, and repair workers
+          parent_id: null
+        - description: null
+          id: 2568
+          label: Electrical and electronic equipment mechanics, installers, and repairers
+          parent_id: null
+        - description: null
+          id: 2569
+          label: And mobile equipment mechanics, installers, and repairers
+          parent_id: null
+        - description: null
+          id: 2570
+          label: Other installation, maintenance, and repair occupations
+          parent_id: null
+        - description: null
+          id: 2571
           label: Production occupations
-        - id: 2572
-          label: 'Supervisors, production workers'
-        - id: 2573
+          parent_id: null
+        - description: null
+          id: 2572
+          label: Supervisors, production workers
+          parent_id: null
+        - description: null
+          id: 2573
           label: Assemblers and fabricators
-        - id: 2574
+          parent_id: null
+        - description: null
+          id: 2574
           label: Food processing occupations
-        - id: 2575
+          parent_id: null
+        - description: null
+          id: 2575
           label: Metal workers and plastic workers
-        - id: 2576
+          parent_id: null
+        - description: null
+          id: 2576
           label: Printing occupations
-        - id: 2577
-          label: 'Textile, apparel, and furnishings occupations'
-        - id: 2578
+          parent_id: null
+        - description: null
+          id: 2577
+          label: Textile, apparel, and furnishings occupations
+          parent_id: null
+        - description: null
+          id: 2578
           label: Woodworkers
-        - id: 2579
+          parent_id: null
+        - description: null
+          id: 2579
           label: Plant and system operators
-        - id: 2580
+          parent_id: null
+        - description: null
+          id: 2580
           label: Other production occupations
-        - id: 2581
+          parent_id: null
+        - description: null
+          id: 2581
           label: Transportation and material moving occupations
-        - id: 2582
-          label: 'Supervisors, transportation and material moving workers'
-        - id: 2583
+          parent_id: null
+        - description: null
+          id: 2582
+          label: Supervisors, transportation and material moving workers
+          parent_id: null
+        - description: null
+          id: 2583
           label: Air transportation occupations
-        - id: 2584
+          parent_id: null
+        - description: null
+          id: 2584
           label: Motor vehicle operators
-        - id: 2585
+          parent_id: null
+        - description: null
+          id: 2585
           label: Rail transportation occupations
-        - id: 2586
+          parent_id: null
+        - description: null
+          id: 2586
           label: Water transportation occupations
-        - id: 2587
+          parent_id: null
+        - description: null
+          id: 2587
           label: Other transportation workers
-        - id: 2588
+          parent_id: null
+        - description: null
+          id: 2588
           label: Material moving occupations
-        - id: 2589
+          parent_id: null
+        - description: null
+          id: 2589
           label: Military
-        - id: 2590
+          parent_id: null
+        - description: null
+          id: 2590
           label: Unclassified
+          parent_id: null
     properties:
       category:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
     required:
       - category
@@ -3487,30 +4626,30 @@ definitions:
         AFFGEOID: 1400000US48453000902
         ALAND: 3041429
         AWATER: 0
-        COUNTYFP: '453'
-        GEOID: '48453000902'
+        COUNTYFP: "453"
+        GEOID: "48453000902"
         LSAD: CT
-        NAME: '9.02'
-        STATEFP: '48'
-        TRACTCE: 000902
-      altname: '9.02'
+        NAME: "9.02"
+        STATEFP: "48"
+        TRACTCE: "000902"
+      altname: "9.02"
       autocomplete:
         input:
-          - '48453000902'
-          - '9.02'
+          - "48453000902"
+          - "9.02"
       calculated_area_sq_meters: 4105150.414024012
-      name: '48453000902'
-      region_id: '48453000902'
+      name: "48453000902"
+      region_id: "48453000902"
       regiontype: tract
       state_code: TX
-      timestamp: '2018-04-09T20:54:47.264495'
+      timestamp: 2018-04-09T20:54:47.264495
     properties:
       _properties:
-        $ref: '#/definitions/Properties1'
+        $ref: "#/definitions/Properties1"
       altname:
         type: string
       autocomplete:
-        $ref: '#/definitions/Autocomplete'
+        $ref: "#/definitions/Autocomplete"
       calculated_area_sq_meters:
         format: double
         type: number
@@ -3541,12 +4680,12 @@ definitions:
       AFFGEOID: 1400000US48453000902
       ALAND: 3041429
       AWATER: 0
-      COUNTYFP: '453'
-      GEOID: '48453000902'
+      COUNTYFP: "453"
+      GEOID: "48453000902"
       LSAD: CT
-      NAME: '9.02'
-      STATEFP: '48'
-      TRACTCE: 000902
+      NAME: "9.02"
+      STATEFP: "48"
+      TRACTCE: "000902"
     properties:
       AFFGEOID:
         type: string
@@ -3640,7 +4779,7 @@ definitions:
         areatype: drivetime
         latitude: 30.264757
         longitude: -97.7356077
-        radius: '5'
+        radius: "5"
         type: buffer
         units: minutes
       status: 200
@@ -3649,7 +4788,7 @@ definitions:
         format: double
         type: number
       location:
-        $ref: '#/definitions/Location3'
+        $ref: "#/definitions/Location3"
       status:
         format: int32
         type: integer
@@ -3661,9 +4800,9 @@ definitions:
     type: object
   Properties3:
     example:
-      bearing: 'N'
+      bearing: N
       roadname: North Interstate Highway 35 Service Road
-      segment_id: '1595171804'
+      segment_id: "1595171804"
       state: Texas
     properties:
       bearing:
@@ -3683,7 +4822,7 @@ definitions:
     type: object
   Properties4:
     example:
-      name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+      name: urn:ogc:def:crs:OGC:1.3:CRS84
     properties:
       name:
         type: string
@@ -3729,7 +4868,7 @@ definitions:
       data:
         crs:
           properties:
-            name: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+            name: urn:ogc:def:crs:OGC:1.3:CRS84
           type: name
         features:
           - geometry:
@@ -3764,15 +4903,15 @@ definitions:
                   - 30.265642
               type: LineString
             properties:
-              bearing: 'N'
+              bearing: N
               roadname: North Interstate Highway 35 Service Road
-              segment_id: '1595171804'
+              segment_id: "1595171804"
               state: Texas
             type: Feature
         type: FeatureCollection
     properties:
       data:
-        $ref: '#/definitions/Data4'
+        $ref: "#/definitions/Data4"
     required:
       - data
     title: SearchRoadSegments
@@ -4081,30 +5220,30 @@ definitions:
           metadata:
             bearing: W
             columns:
-              - '12:00am'
-              - '01:00am'
-              - '02:00am'
-              - '03:00am'
-              - '04:00am'
-              - '05:00am'
-              - '06:00am'
-              - '07:00am'
-              - '08:00am'
-              - '09:00am'
-              - '10:00am'
-              - '11:00am'
-              - '12:00pm'
-              - '01:00pm'
-              - '02:00pm'
-              - '03:00pm'
-              - '04:00pm'
-              - '05:00pm'
-              - '06:00pm'
-              - '07:00pm'
-              - '08:00pm'
-              - '09:00pm'
-              - '10:00pm'
-              - '11:00pm'
+              - 12:00am
+              - 01:00am
+              - 02:00am
+              - 03:00am
+              - 04:00am
+              - 05:00am
+              - 06:00am
+              - 07:00am
+              - 08:00am
+              - 09:00am
+              - 10:00am
+              - 11:00am
+              - 12:00pm
+              - 01:00pm
+              - 02:00pm
+              - 03:00pm
+              - 04:00pm
+              - 05:00pm
+              - 06:00pm
+              - 07:00pm
+              - 08:00pm
+              - 09:00pm
+              - 10:00pm
+              - 11:00pm
             name: East 6th Street
             rows:
               - Sun
@@ -4114,7 +5253,7 @@ definitions:
               - Thu
               - Fri
               - Sat
-            segment_id: '1595369397'
+            segment_id: "1595369397"
             state: Texas
           roadsegment:
             coordinates:
@@ -4307,30 +5446,30 @@ definitions:
           metadata:
             bearing: E
             columns:
-              - '12:00am'
-              - '01:00am'
-              - '02:00am'
-              - '03:00am'
-              - '04:00am'
-              - '05:00am'
-              - '06:00am'
-              - '07:00am'
-              - '08:00am'
-              - '09:00am'
-              - '10:00am'
-              - '11:00am'
-              - '12:00pm'
-              - '01:00pm'
-              - '02:00pm'
-              - '03:00pm'
-              - '04:00pm'
-              - '05:00pm'
-              - '06:00pm'
-              - '07:00pm'
-              - '08:00pm'
-              - '09:00pm'
-              - '10:00pm'
-              - '11:00pm'
+              - 12:00am
+              - 01:00am
+              - 02:00am
+              - 03:00am
+              - 04:00am
+              - 05:00am
+              - 06:00am
+              - 07:00am
+              - 08:00am
+              - 09:00am
+              - 10:00am
+              - 11:00am
+              - 12:00pm
+              - 01:00pm
+              - 02:00pm
+              - 03:00pm
+              - 04:00pm
+              - 05:00pm
+              - 06:00pm
+              - 07:00pm
+              - 08:00pm
+              - 09:00pm
+              - 10:00pm
+              - 11:00pm
             name: East 6th Street
             rows:
               - Sun
@@ -4340,7 +5479,7 @@ definitions:
               - Thu
               - Fri
               - Sat
-            segment_id: '1595369411'
+            segment_id: "1595369411"
             state: Texas
           roadsegment:
             coordinates:
@@ -4364,18 +5503,18 @@ definitions:
     properties:
       data:
         items:
-          $ref: '#/definitions/Data5'
+          $ref: "#/definitions/Data5"
         type: array
     required:
       - data
     title: VehicleTrafficCountsforRoadSegment
     type: object
-  'location[]':
+  "location[]":
     example:
       areatype: ring
       latitude: 30.264757
       longitude: -97.7356077
-      radius: '1'
+      radius: "1"
       type: buffer
       units: mi
     properties:
@@ -4400,11 +5539,11 @@ definitions:
       - longitude
       - latitude
       - areatype
-    title: 'location[]'
+    title: location[]
     type: object
-  'location[]2':
+  "location[]2":
     example:
-      region_id: '78702'
+      region_id: "78702"
       regiontype: zipcode
       type: region
     properties:
@@ -4418,5 +5557,5 @@ definitions:
       - region_id
       - regiontype
       - type
-    title: 'location[]2'
+    title: location[]2
     type: object

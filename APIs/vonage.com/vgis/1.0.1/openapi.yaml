@@ -1,21 +1,23 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.vonage.com/t/vbc.prod/vis/v1'
+  - url: https://api.vonage.com/t/vbc.prod/vis/v1
 info:
   contact:
     email: gunifydevops@vonage.com
     name: VGIS
-    url: 'https://integrate.vonage.com'
-  description: |
-    The Vonage Integration Suite API enables call control and webhooks for call events.
+    url: https://integrate.vonage.com
+  description: >
+    The Vonage Integration Suite API enables call control and webhooks for call
+    events.
+
 
     Your application must subscribe to the VonageIntegrationSuite API suite to use this API.
   title: Vonage Integration Suite
   version: 1.0.1
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/vgis.yml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/vgis.yml
+      version: "3.0"
   x-providerName: vonage.com
   x-serviceName: vgis
 tags:
@@ -23,40 +25,42 @@ tags:
   - name: Accounts
   - name: Calls
   - name: Events
-  - description: Webhooks are external URLs which subscribe to receive events via HTTP POST for a specified set of events.
+  - description: Webhooks are external URLs which subscribe to receive events via
+      HTTP POST for a specified set of events.
     name: Webhooks
 paths:
   /self:
     get:
       operationId: getUser
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: Success
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: User info
       tags:
@@ -67,33 +71,34 @@ paths:
     get:
       operationId: getAccount
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                $ref: "#/components/schemas/Account"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Account info
       tags:
@@ -115,16 +120,18 @@ paths:
           name: toDate
           schema:
             type: integer
-        - description: 'Filter by call direction. For multiple criteria, seperate values by a comma.'
+        - description: Filter by call direction. For multiple criteria, seperate values by
+            a comma.
           in: query
           name: direction
           schema:
             enum:
               - INBOUND
               - OUTBOUND
-            example: 'INBOUND,OUTBOUND'
+            example: INBOUND,OUTBOUND
             type: string
-        - description: 'Filter calls by state. For multiple criteria, seperate values by a comma.'
+        - description: Filter calls by state. For multiple criteria, seperate values by a
+            comma.
           in: query
           name: states
           schema:
@@ -135,7 +142,7 @@ paths:
               - ACTIVE
               - HELD
               - REMOTE_HELD
-            example: 'ACTIVE,RINGING'
+            example: ACTIVE,RINGING
             type: string
         - description: Page number of calls to return
           in: query
@@ -164,35 +171,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Call'
+                  $ref: "#/components/schemas/Call"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: List active calls
       tags:
@@ -205,39 +213,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CallCreate'
+              $ref: "#/components/schemas/CallCreate"
         description: Place call parameters
         required: true
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Call'
+                  $ref: "#/components/schemas/Call"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Place a call
       tags:
@@ -258,16 +267,18 @@ paths:
           name: toDate
           schema:
             type: integer
-        - description: 'Filter by call direction. For multiple criteria, seperate values by a comma.'
+        - description: Filter by call direction. For multiple criteria, seperate values by
+            a comma.
           in: query
           name: direction
           schema:
             enum:
               - INBOUND
               - OUTBOUND
-            example: 'INBOUND,OUTBOUND'
+            example: INBOUND,OUTBOUND
             type: string
-        - description: 'Filter calls by state. For multiple criteria, seperate values by a comma.'
+        - description: Filter calls by state. For multiple criteria, seperate values by a
+            comma.
           in: query
           name: states
           schema:
@@ -278,43 +289,44 @@ paths:
               - ACTIVE
               - HELD
               - REMOTE_HELD
-            example: 'ACTIVE,RINGING'
+            example: ACTIVE,RINGING
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventsCount'
+                $ref: "#/components/schemas/EventsCount"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Get calls count
       tags:
         - Calls
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/calls/{id}':
+  "/self/calls/{id}":
     delete:
       operationId: destroyCall
       parameters:
@@ -325,35 +337,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Call'
+                  $ref: "#/components/schemas/Call"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: End a call
       tags:
@@ -370,42 +383,43 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Call'
+                  $ref: "#/components/schemas/Call"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Get a call
       tags:
         - Calls
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/calls/{id}/answer':
+  "/self/calls/{id}/answer":
     put:
       operationId: callAnswer
       parameters:
@@ -416,40 +430,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Call'
+                $ref: "#/components/schemas/Call"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Answer call (On supported devices)
       tags:
         - Calls
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/calls/{id}/hold':
+  "/self/calls/{id}/hold":
     delete:
       operationId: callUnold
       parameters:
@@ -460,33 +475,34 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Call'
+                $ref: "#/components/schemas/Call"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Unhold
       tags:
@@ -503,40 +519,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Call'
+                $ref: "#/components/schemas/Call"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Put call on hold
       tags:
         - Calls
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/calls/{id}/transfer':
+  "/self/calls/{id}/transfer":
     post:
       operationId: callTransfer
       parameters:
@@ -550,44 +567,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CallTransfer'
+              $ref: "#/components/schemas/CallTransfer"
         description: Call transfer parameters
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Call'
+                $ref: "#/components/schemas/Call"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Transfer call
       tags:
         - Calls
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/calls/{id}/vmtransfer':
+  "/self/calls/{id}/vmtransfer":
     put:
       operationId: callVMTransfer
       parameters:
@@ -598,33 +616,34 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Call'
+                $ref: "#/components/schemas/Call"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Send call to voicemail
       tags:
@@ -660,7 +679,7 @@ paths:
             enum:
               - INBOUND
               - OUTBOUND
-            example: 'INBOUND,OUTBOUND'
+            example: INBOUND,OUTBOUND
             type: string
         - description: Filter events by state
           in: query
@@ -677,7 +696,7 @@ paths:
               - CANCELLED
               - ANSWERED
               - MISSED
-            example: 'ACTIVE,RINGING'
+            example: ACTIVE,RINGING
             type: string
         - description: Page number of events to return
           in: query
@@ -706,35 +725,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Event'
+                  $ref: "#/components/schemas/Event"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: List events
       tags:
@@ -762,7 +782,7 @@ paths:
             enum:
               - INBOUND
               - OUTBOUND
-            example: 'INBOUND,OUTBOUND'
+            example: INBOUND,OUTBOUND
             type: string
         - description: Filter events by state
           in: query
@@ -774,43 +794,44 @@ paths:
               - ACTIVE
               - HELD
               - REMOTE_HELD
-            example: 'ACTIVE,RINGING'
+            example: ACTIVE,RINGING
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EventsCount'
+                $ref: "#/components/schemas/EventsCount"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Get events count
       tags:
         - Events
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/events/{id}':
+  "/self/events/{id}":
     get:
       operationId: getEvent
       parameters:
@@ -821,35 +842,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Event'
+                  $ref: "#/components/schemas/Event"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Get event
       tags:
@@ -860,35 +882,36 @@ paths:
     get:
       operationId: listWebhooks
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Webhook'
+                  $ref: "#/components/schemas/Webhook"
                 type: array
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: List web hooks
       tags:
@@ -901,44 +924,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebhookCreate'
+              $ref: "#/components/schemas/WebhookCreate"
         description: Webhook create parameters
         required: true
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Webhook'
+                $ref: "#/components/schemas/Webhook"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Create a new webhook subscription
       tags:
         - Webhooks
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/webhooks/{id}':
+  "/self/webhooks/{id}":
     delete:
       operationId: destroyWebhook
       parameters:
@@ -949,29 +973,30 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        "204":
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Remove a web hook
       tags:
@@ -988,40 +1013,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Webhook'
+                $ref: "#/components/schemas/Webhook"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Get web hook details
       tags:
         - Webhooks
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/self/webhooks/{id}/renew':
+  "/self/webhooks/{id}/renew":
     put:
       operationId: renewWebhook
       parameters:
@@ -1032,33 +1058,34 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Webhook'
+                $ref: "#/components/schemas/Webhook"
           description: Successful
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: 'Bad Request: The client should not repeat the request without modifications'
-        '401':
-          description: 'Unauthorized: Invalid access token'
-        '403':
-          description: 'Forbidden: The user has no rights to access the resource(s)'
-        '408':
-          description: 'Timeout: The client may repeat the request without modifications'
-        '422':
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "Bad Request: The client should not repeat the request without
+            modifications"
+        "401":
+          description: "Unauthorized: Invalid access token"
+        "403":
+          description: "Forbidden: The user has no rights to access the resource(s)"
+        "408":
+          description: "Timeout: The client may repeat the request without modifications"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Validation Error
-        '500':
+        "500":
           description: Internal Server Error
-        '502':
+        "502":
           description: Bad Gateway
       summary: Renews a web hook
       tags:
@@ -1224,7 +1251,7 @@ components:
           type: string
         errors:
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           type: array
       type: object
     Event:
@@ -1396,7 +1423,7 @@ components:
           type: string
         createdAt:
           description: Created time for the webhook
-          example: '2019-01-01T00:00:00.000Z'
+          example: 2019-01-01T00:00:00.000Z
           type: string
         events:
           description: Subscribed events for the webhook
@@ -1409,7 +1436,7 @@ components:
           type: array
         expireAt:
           description: Expiration time for the webhook
-          example: '2019-01-01T00:00:00.000Z'
+          example: 2019-01-01T00:00:00.000Z
           type: string
         id:
           description: Unique identifier for the webhook
@@ -1425,11 +1452,11 @@ components:
           type: string
         purgeAt:
           description: Scheduled purge time for the webhook
-          example: '2019-01-01T00:00:00.000Z'
+          example: 2019-01-01T00:00:00.000Z
           type: string
         renewedAt:
           description: Last renewed time for the webhook
-          example: '2019-01-01T00:00:00.000Z'
+          example: 2019-01-01T00:00:00.000Z
           type: string
         signingAlgo:
           description: Signing algorithm for the webhook
@@ -1469,7 +1496,7 @@ components:
           type: string
         url:
           description: Destination URL for events
-          example: 'https://www.example.com'
+          example: https://www.example.com
           type: string
         userId:
           description: Unique identifier of the user
@@ -1507,6 +1534,6 @@ components:
           type: string
         url:
           description: Destination URL for events
-          example: 'https://www.example.com'
+          example: https://www.example.com
           type: string
       type: object

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
@@ -8,29 +8,31 @@ info:
   contact:
     email: bfritz@fadingsignal.com
     name: Open Movie Database
-    url: 'http://omdbapi.com'
-  description: 'The Open Movie Database. The OMDb API is a free web service to obtain movie information, all content and images on the site are contributed and maintained by our users.'
+    url: http://omdbapi.com
+  description: The Open Movie Database. The OMDb API is a free web service to
+    obtain movie information, all content and images on the site are contributed
+    and maintained by our users.
   license:
     name: CC BY-NC 4.0
-    url: 'https://creativecommons.org/licenses/by-nc/4.0/'
-  termsOfService: 'http://www.omdbapi.com/legal.htm'
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+  termsOfService: http://www.omdbapi.com/legal.htm
   title: OMDb
-  version: '1'
+  version: "1"
   x-apisguru-categories:
     - media
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'http://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/OMDb.png'
+    backgroundColor: "#FFFFFF"
+    url: http://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/OMDb.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/swagger.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Mermade/open_api_specifications/master/OMDb/swagger.json
+      version: "2.0"
   x-providerName: omdbapi.com
   x-unofficialSpec: true
 externalDocs:
   description: OMDb Usage
-  url: 'http://www.omdbapi.com/#usage'
+  url: http://www.omdbapi.com/#usage
 consumes:
   - application/json
 produces:
@@ -40,27 +42,28 @@ securityDefinitions: {}
 paths:
   /:
     get:
-      description: 'Find a movie, series or episode from the OMDb by title, IMDb-id or by free-text search'
+      description: Find a movie, series or episode from the OMDb by title, IMDb-id or
+        by free-text search
       operationId: Get_OMDb Search
       parameters:
-        - description: 'Movie title to search for. One of t, i or s is required.'
+        - description: Movie title to search for. One of t, i or s is required.
           in: query
           name: t
           required: false
           type: string
-        - description: 'A valid IMDb ID (e.g. tt1285016). One of t, i or s is required.'
+        - description: A valid IMDb ID (e.g. tt1285016). One of t, i or s is required.
           in: query
           name: i
           required: false
           type: string
-        - description: 'Movie title to search for. One of t, i or s is required.'
+        - description: Movie title to search for. One of t, i or s is required.
           in: query
           name: s
           required: false
           type: string
         - description: Year of release.
           in: query
-          name: 'y'
+          name: y
           required: false
           type: integer
         - description: Type of result to return.
@@ -115,10 +118,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Default response
           schema:
-            $ref: '#/definitions/combinedResult'
+            $ref: "#/definitions/combinedResult"
       security: []
       summary: OMDb Search
 definitions:

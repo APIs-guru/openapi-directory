@@ -1,29 +1,31 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.vonage.com/t/vbc.prod/provisioning'
+  - url: https://api.vonage.com/t/vbc.prod/provisioning
 info:
   contact:
     name: Vonage Business Cloud Support
-    url: 'https://businesssupport.vonage.com/contactus'
-  description: |
-    The Vonage Business Cloud User API enables you to retrieve information about users.
+    url: https://businesssupport.vonage.com/contactus
+  description: >
+    The Vonage Business Cloud User API enables you to retrieve information about
+    users.
+
 
     Your application must subscribe to the Provisioning API suite to use this API.
-  termsOfService: 'https://www.vonage.com/business/legal-policy-center/business-cloud/tos'
-  title: User
+  termsOfService: https://www.vonage.com/business/legal-policy-center/business-cloud/tos
+  title: User API
   version: 1.11.8
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/user.yml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/user.yml
+      version: "3.0"
   x-providerName: vonage.com
   x-serviceName: user
 paths:
-  '/api/accounts/{account_id}/users':
+  "/api/accounts/{account_id}/users":
     get:
       operationId: UserCtrl.getUsers
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
         - description: Number of records per page
           example: 10
           in: query
@@ -67,26 +69,26 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersHalResponse'
+                $ref: "#/components/schemas/UsersHalResponse"
           description: Success
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrorsResponse'
+                $ref: "#/components/schemas/ValidationErrorsResponse"
           description: Invalid parameters given
       security:
         - bearerAuth: []
       summary: Get account users data by account ID
-  '/api/accounts/{account_id}/users/{user_id}':
+  "/api/accounts/{account_id}/users/{user_id}":
     get:
       operationId: UserCtrl.getUserByID
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
         - description: The Vonage Business Cloud user ID
           in: path
           name: user_id
@@ -94,17 +96,17 @@ paths:
           schema:
             type: number
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserHalResponse'
+                $ref: "#/components/schemas/UserHalResponse"
           description: Success
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: User not found
       security:
         - bearerAuth: []
@@ -128,7 +130,7 @@ components:
           type: string
         value:
           description: Contact value
-          example: '14155550100'
+          example: "14155550100"
           type: string
       type: object
     DID:
@@ -139,7 +141,7 @@ components:
           type: string
         phone_number:
           description: Phone number
-          example: '14155550100'
+          example: "14155550100"
           type: string
       type: object
     DetailedInvalidParam:
@@ -175,13 +177,13 @@ components:
     Links:
       properties:
         first:
-          $ref: '#/components/schemas/FirstHref'
+          $ref: "#/components/schemas/FirstHref"
         next:
-          $ref: '#/components/schemas/NextHref'
+          $ref: "#/components/schemas/NextHref"
         prev:
-          $ref: '#/components/schemas/PrevHref'
+          $ref: "#/components/schemas/PrevHref"
         self:
-          $ref: '#/components/schemas/SelfHref'
+          $ref: "#/components/schemas/SelfHref"
       type: object
     NextHref:
       description: URL to the next page of records
@@ -206,7 +208,7 @@ components:
         contact_numbers:
           description: Collection of contact objects
           items:
-            $ref: '#/components/schemas/Contact'
+            $ref: "#/components/schemas/Contact"
           type: array
         email:
           description: Email address of the user
@@ -215,7 +217,7 @@ components:
         extensions:
           description: Collection of extension objects
           items:
-            $ref: '#/components/schemas/UserExtension'
+            $ref: "#/components/schemas/UserExtension"
           type: array
         first_name:
           description: First name of the user
@@ -237,26 +239,26 @@ components:
     UserEmbeddedObject:
       properties:
         data:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
       type: object
     UserExtension:
       properties:
         dids:
           description: Collection of phone numbers assigned to the extension
           items:
-            $ref: '#/components/schemas/DID'
+            $ref: "#/components/schemas/DID"
           type: array
         extension_number:
           description: Extension number
-          example: '789'
+          example: "789"
           type: string
       type: object
     UserHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/UserEmbeddedObject'
+          $ref: "#/components/schemas/UserEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           description: Current page number
           example: 1
@@ -278,15 +280,15 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
           type: array
       type: object
     UsersHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/UsersEmbeddedObject'
+          $ref: "#/components/schemas/UsersEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           description: Current page number
           example: 1
@@ -312,7 +314,7 @@ components:
         invalid_parameters:
           description: Invalid parameters and their reason for failing
           items:
-            $ref: '#/components/schemas/DetailedInvalidParam'
+            $ref: "#/components/schemas/DetailedInvalidParam"
           type: array
         status:
           description: Error status code

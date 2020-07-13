@@ -1,24 +1,27 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.math.tools'
-  - url: 'http://api.math.tools'
+  - url: https://api.math.tools
+  - url: http://api.math.tools
 info:
-  description: |
-    All about Numbers. REST access with json/xml/jsonp result support. Below is the documentation for the Numbers API. You can try them out right here. Find more information and subscribe at [math.tools](https://math.tools/api/numbers/)  
-  title: Numbers
-  version: '1.5'
+  description: >
+    All about Numbers. REST access with json/xml/jsonp result support. Below is
+    the documentation for the Numbers API. You can try them out right here. Find
+    more information and subscribe at
+    [math.tools](https://math.tools/api/numbers/)  
+  title: Numbers API
+  version: "1.5"
   x-apisguru-categories:
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://math.tools/branding/blackboard_small.png'
+    backgroundColor: "#FFFFFF"
+    url: https://math.tools/branding/blackboard_small.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://api.math.tools/yaml/math.tools.numbers.openapi.yaml'
-      version: '3.0'
+      url: https://api.math.tools/yaml/math.tools.numbers.openapi.yaml
+      version: "3.0"
   x-providerName: math.tools
 tags:
   - description: Number of the day. This API is free (rate limited).
@@ -27,7 +30,8 @@ tags:
     name: Number Facts
   - description: Generate Random and interesting numbers.
     name: Number Generation
-  - description: 'Spell out a number ordinal, cardinal or currency. This API is free (rate limited).'
+  - description: Spell out a number ordinal, cardinal or currency. This API is free
+      (rate limited).
     name: Spell
   - description: Convert from one base to another. This API is free (rate limited).
     name: Base Conversion
@@ -66,7 +70,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -89,7 +93,7 @@ paths:
                       }
                     }
           description: 200 success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -125,7 +129,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -148,7 +152,7 @@ paths:
                       }
                     }
           description: 200 success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -184,7 +188,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -207,7 +211,7 @@ paths:
                       }
                     }
           description: 200 success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -243,7 +247,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -266,7 +270,7 @@ paths:
                       }
                     }
           description: 200 success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -302,7 +306,7 @@ paths:
             format: string
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -323,7 +327,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -359,12 +363,12 @@ paths:
             format: string
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
-                  value: |-
+                  value: >-
                     {
                       "success": {
                         "total": 1
@@ -380,7 +384,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -409,12 +413,12 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
-                  value: |-
+                  value: >-
                     {
                       "success": {
                         "total": 1
@@ -428,7 +432,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -457,7 +461,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -476,7 +480,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -505,7 +509,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -524,7 +528,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -553,7 +557,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -572,7 +576,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -601,7 +605,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -620,7 +624,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -641,12 +645,12 @@ paths:
     get:
       description: Get the number of the day for current day
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
-                  value: |-
+                  value: >-
                     {
                       "success": {
                         "total": 1
@@ -869,7 +873,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -898,7 +902,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -918,7 +922,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -947,7 +951,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -967,7 +971,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -996,7 +1000,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1016,7 +1020,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1045,7 +1049,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1065,7 +1069,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1101,12 +1105,12 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
-                  value: |-
+                  value: >-
                     {
                       "success": {
                         "total": 1
@@ -1122,7 +1126,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1151,7 +1155,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1197,7 +1201,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1226,7 +1230,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1245,7 +1249,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1275,7 +1279,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1294,7 +1298,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1324,7 +1328,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1343,7 +1347,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1373,7 +1377,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1392,7 +1396,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1422,7 +1426,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1441,7 +1445,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1471,7 +1475,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1490,7 +1494,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1520,7 +1524,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1539,7 +1543,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:
@@ -1583,7 +1587,7 @@ paths:
             format: integer
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -1611,7 +1615,7 @@ paths:
                       }
                     }
           description: 200 Success response
-        '401':
+        "401":
           content:
             application/json:
               examples:

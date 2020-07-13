@@ -1,20 +1,21 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.nativeads.com
 info:
-  description: |
-    This is a Native Ads Publisher API it provides same functionality as Native Ads Publisher Account GUI.
-  title: Native Ads Publisher
+  description: >
+    This is a Native Ads Publisher API it provides same functionality as Native
+    Ads Publisher Account GUI.
+  title: Native Ads Publisher API
   version: 1.0.0
   x-apisguru-categories:
     - marketing
   x-logo:
-    url: 'https://api.nativeads.com/docs/publisher/images/nativeads-logo.png'
+    url: https://api.nativeads.com/docs/publisher/images/nativeads-logo.png
   x-origin:
     - format: swagger
-      url: 'https://api.nativeads.com/docs/publisher/swagger.json'
-      version: '2.0'
+      url: https://api.nativeads.com/docs/publisher/swagger.json
+      version: "2.0"
   x-providerName: nativeads.com
 produces:
   - application/json
@@ -33,15 +34,17 @@ paths:
           name: password
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: authentication response
           schema:
-            $ref: '#/definitions/authResponse'
-        '400':
+            $ref: "#/definitions/authResponse"
+        "400":
           description: error message
           schema:
-            $ref: '#/definitions/modelError'
+            $ref: "#/definitions/modelError"
       tags:
         - auth
   /publisher/reports/daily:
@@ -79,15 +82,17 @@ paths:
           name: page
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: report response
           schema:
-            $ref: '#/definitions/reportsDailyResponse'
-        '400':
+            $ref: "#/definitions/reportsDailyResponse"
+        "400":
           description: error message
           schema:
-            $ref: '#/definitions/modelError'
+            $ref: "#/definitions/modelError"
       tags:
         - reports
   /publisher/reports/website:
@@ -125,15 +130,17 @@ paths:
           name: page
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: report response
           schema:
-            $ref: '#/definitions/reportsWebsiteResponse'
-        '400':
+            $ref: "#/definitions/reportsWebsiteResponse"
+        "400":
           description: authentication error
           schema:
-            $ref: '#/definitions/modelError'
+            $ref: "#/definitions/modelError"
       tags:
         - reports
   /publisher/reports/widget:
@@ -171,15 +178,17 @@ paths:
           name: page
           required: true
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: report response
           schema:
-            $ref: '#/definitions/reportsWidgetResponse'
-        '400':
+            $ref: "#/definitions/reportsWidgetResponse"
+        "400":
           description: authentication error
           schema:
-            $ref: '#/definitions/modelError'
+            $ref: "#/definitions/modelError"
       tags:
         - reports
 definitions:
@@ -219,7 +228,7 @@ definitions:
     properties:
       items:
         items:
-          $ref: '#/definitions/reportsDailyItem'
+          $ref: "#/definitions/reportsDailyItem"
           type: object
         type: array
       success:
@@ -227,7 +236,7 @@ definitions:
       total_count:
         type: integer
       totals:
-        $ref: '#/definitions/totals'
+        $ref: "#/definitions/totals"
         type: object
   reportsWebsiteItem:
     properties:
@@ -251,7 +260,7 @@ definitions:
     properties:
       items:
         items:
-          $ref: '#/definitions/reportsWebsiteItem'
+          $ref: "#/definitions/reportsWebsiteItem"
           type: object
         type: array
       success:
@@ -259,7 +268,7 @@ definitions:
       total_count:
         type: integer
       totals:
-        $ref: '#/definitions/totals'
+        $ref: "#/definitions/totals"
         type: object
   reportsWidgetItem:
     properties:
@@ -287,7 +296,7 @@ definitions:
     properties:
       items:
         items:
-          $ref: '#/definitions/reportsWidgetItem'
+          $ref: "#/definitions/reportsWidgetItem"
           type: object
         type: array
       success:
@@ -295,7 +304,7 @@ definitions:
       total_count:
         type: integer
       totals:
-        $ref: '#/definitions/totals'
+        $ref: "#/definitions/totals"
         type: object
   totals:
     properties:

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.personio.de
@@ -8,15 +8,15 @@ info:
     x-twitter: PersonioHR
   description: Personio Authentication API
   title: Authentication
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - enterprise
   x-logo:
-    url: 'https://twitter.com/PersonioHR/profile_image?size=original'
+    url: https://twitter.com/PersonioHR/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/personio/api-docs/master/personio-auth-api.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/personio/api-docs/master/personio-auth-api.yaml
+      version: "2.0"
   x-providerName: personio.de
   x-serviceName: authentication
 consumes:
@@ -38,20 +38,22 @@ paths:
           name: client_secret
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json:
               data:
                 token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmRldi5wZXJzb25pby5kZTozMDAwMS92MS9hdXRoIiwiaWF0IjoxNDg5MDkxMzA2LCJleHAiOjE0ODkxNzc3MDYsIm5iZiI6MTQ4OTA5MTMwNiwianRpIjoiZmU1ZjkxOGY2MDZjOWI4OGMwMzM0ZmJkZjkyYzkwMzgiLCJzdWIiOiJPR014TVdRd1kySmxZbVF6Tm1RNVpqQmxOell6WmpsaSJ9.QZZCdlDjmL-LYdoDx2XLUfhwTdcjDgm9h4t-6JoACiM
               success: true
           schema:
-            $ref: '#/definitions/AuthenticationTokenResponse'
+            $ref: "#/definitions/AuthenticationTokenResponse"
 definitions:
   AuthenticationTokenResponse:
     allOf:
-      - $ref: '#/definitions/Response'
+      - $ref: "#/definitions/Response"
       - properties:
           data:
             properties:

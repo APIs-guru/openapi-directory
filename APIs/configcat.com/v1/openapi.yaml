@@ -1,77 +1,156 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://api.configcat.com'
+  - url: https://api.configcat.com
 info:
   contact:
     email: support@configcat.com
     name: ConfigCat
-    url: 'https://configcat.com'
+    url: https://configcat.com
     x-twitter: configcat
-  description: "**Base API URL**: https://api.configcat.com\n\nIf you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\nThe purpose of this API is to access the ConfigCat platform programmatically. \nYou can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\nThe API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON \nand JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).\n\n\n# OpenAPI Specification\n\nThe complete specification is publicly available here: [swagger.json](v1/swagger.json). \nYou can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or\n[Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.\n\n# Authentication\nThis API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). \n\n<!-- ReDoc-Inject: <security-definitions> -->\n\n# Throttling and rate limits\nAll the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:\n\n| Header | Description |\n| :- | :- |\n| X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. |\n| X-Rate-Limit-Reset     | The time\twhen the current rate limit period resets.\t\t\t\t\t\t  |\n\nWhen the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header.\n"
-  termsOfService: 'https://configcat.com/termsofserviceagreement'
-  title: ConfigCat Public Management
+  description: >
+    **Base API URL**: https://api.configcat.com
+
+
+    If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).
+
+
+    The purpose of this API is to access the ConfigCat platform programmatically. 
+
+    You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
+
+
+    The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
+
+    and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).
+
+
+
+    # OpenAPI Specification
+
+
+    The complete specification is publicly available here: [swagger.json](v1/swagger.json). 
+
+    You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or
+
+    [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.
+
+
+    # Authentication
+
+    This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). 
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+
+
+    # Throttling and rate limits
+
+    All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:
+
+
+    | Header | Description |
+
+    | :- | :- |
+
+    | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. |
+
+    | X-Rate-Limit-Reset     | The time	when the current rate limit period resets.						  |
+
+
+    When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header.
+  termsOfService: https://configcat.com/termsofserviceagreement
+  title: ConfigCat Public Management API
   version: v1
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://api.configcat.com/resources/configcat-logo-horiz.svg'
+    url: https://api.configcat.com/resources/configcat-logo-horiz.svg
   x-origin:
     - format: openapi
-      url: 'https://api.configcat.com/docs/v1/swagger.json'
-      version: '3.0'
+      url: https://api.configcat.com/docs/v1/swagger.json
+      version: "3.0"
   x-providerName: configcat.com
 security:
   - Basic: []
 tags:
-  - description: |-
-      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
+  - description: >-
+      With these endpoints you can control how your existing Feature Flags and
+      Settings should serve their values. 
+
       You can turn Feature Flags on or off, update Setting values and also add, remove or change the order of Percentage and Targeting Rules.
 
+
       These endpoints are determining the Environment and Config by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in
+
       the `X-CONFIGCAT-SDKKEY` request header. To identify the desired Feature Flag or Setting to change, 
+
       you can use either its `settingId` or `key` attribute. You can get those attributes 
+
       from the [Feature Flag & Setting](#tag/Feature-Flags-and-Settings) endpoints.
     name: Feature Flag & Setting values using SDK Key
-  - description: |-
-      With these endpoints you can control how your existing Feature Flags and Settings should serve their values. 
+  - description: >-
+      With these endpoints you can control how your existing Feature Flags and
+      Settings should serve their values. 
+
       You can turn Feature Flags on or off, update Setting values and also add, remove or reorder Percentage and Targeting Rules.
 
+
       To determine which Feature Flag or Setting you want to work with you have to pass its `settingId`. It can be
+
       obtained from the [Feature Flag & Setting](#tag/Feature-Flags-and-Settings) endpoints.
 
+
       You also have to specify in which Environment you want to change the served value configuration by its
+
       `environmentId` which can be obtained from the [List Environments](#operation/get-environments) endpoint.
     name: Feature Flag & Setting values
-  - description: |-
-      With these endpoints you can manage your Feature Flags or Settings within a Config. 
+  - description: >-
+      With these endpoints you can manage your Feature Flags or Settings within
+      a Config. 
+
       However you can't use them for manipulating the values of your Feature Flags and Settings,
+
       to do that please visit the [Feature Flag & Setting values using SDK Key](#tag/Feature-Flag-and-Setting-values-using-SDK-Key)
+
       and [Feature Flag & Setting values](#tag/Feature-Flag-and-Setting-values) sections of the API.
 
+
       For using these endpoints, first you have to select which Config you want to work with by its `configId` 
+
       which can be obtained from the [List Configs](#operation/get-configs) endpoint. 
+
       Then you can use it to create new Feature Flags or to get information about existing ones.
 
+
       Then you can obtain the `settingId` or `key` of your desired Feature Flag or Setting 
+
       to use them for further operations in this API. 
+
 
       <a href="https://configcat.com/docs/main-concepts/#setting" target="_blank">Here</a> you can read more about the concept of Settings.
     name: Feature Flags & Settings
-  - description: |-
+  - description: >-
       With these endpoints you can get useful information about your Products.
+
       This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
+
 
       <a href="https://configcat.com/docs/main-concepts/#product" target="_blank">Here</a> you can read more about the concept of Products.
     name: Products
-  - description: |-
+  - description: >-
       With these endpoints you can get useful information about your Configs.
+
       This also can be used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings) and their 
+
       [served values](#tag/Feature-Flag-and-Setting-values) through this API.
+
 
       <a href="https://configcat.com/docs/main-concepts/#config" target="_blank">Here</a> you can read more about the concept of Configs.
     name: Configs
-  - description: |-
-      With these endpoints you can update existing Environments or add new ones into your selected [Product](#tag/Products). 
+  - description: >-
+      With these endpoints you can update existing Environments or add new ones
+      into your selected [Product](#tag/Products). 
+
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank">Here</a> you can read more about the concept of Environments.
     name: Environments
@@ -80,10 +159,12 @@ tags:
   - description: Information about the current user.
     name: Me
 paths:
-  '/v1/configs/{configId}/settings':
+  "/v1/configs/{configId}/settings":
     get:
-      description: |-
-        This endpoint returns the list of the Feature Flags and Settings defined in a 
+      description: >-
+        This endpoint returns the list of the Feature Flags and Settings defined
+        in a 
+
         specified Config, identified by the `configId` parameter.
       operationId: get-settings
       parameters:
@@ -95,34 +176,39 @@ paths:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SettingModel'
+                  $ref: "#/components/schemas/SettingModel"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SettingModel'
+                  $ref: "#/components/schemas/SettingModel"
                 type: array
-          description: ''
-        '400':
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Flags
       tags:
         - Feature Flags & Settings
     post:
-      description: |-
-        This endpoint creates a new Feature Flag or Setting in a specified Config
+      description: >-
+        This endpoint creates a new Feature Flag or Setting in a specified
+        Config
+
         identified by the `configId` parameter.
+
 
         **Important:** The `key` attribute must be unique within the given Config.
       operationId: create-setting
@@ -138,38 +224,41 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateSettingModel'
+              $ref: "#/components/schemas/CreateSettingModel"
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSettingModel'
+              $ref: "#/components/schemas/CreateSettingModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateSettingModel'
+              $ref: "#/components/schemas/CreateSettingModel"
         required: true
       responses:
-        '201':
+        "201":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the creation was successful.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Flag
       tags:
         - Feature Flags & Settings
-  '/v1/environments/{environmentId}':
+  "/v1/environments/{environmentId}":
     put:
-      description: This endpoint updates an Environment identified by the `environmentId` parameter.
+      description: This endpoint updates an Environment identified by the
+        `environmentId` parameter.
       operationId: update-environment
       parameters:
         - description: The identifier of the Product.
@@ -183,38 +272,40 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
+                $ref: "#/components/schemas/EnvironmentModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/EnvironmentModel"
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Environment
       tags:
         - Environments
-  '/v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}':
+  "/v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}":
     delete:
-      description: ''
+      description: ""
       operationId: delete-integration-link
       parameters:
         - description: The identifier of the Environment.
@@ -236,7 +327,7 @@ paths:
           name: integrationLinkType
           required: true
           schema:
-            $ref: '#/components/schemas/IntegrationLinkType'
+            $ref: "#/components/schemas/IntegrationLinkType"
         - description: The key of the integration link.
           in: path
           name: key
@@ -244,28 +335,30 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/DeleteIntegrationLinkModel'
+                $ref: "#/components/schemas/DeleteIntegrationLinkModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteIntegrationLinkModel'
+                $ref: "#/components/schemas/DeleteIntegrationLinkModel"
           description: When everything is ok.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Integration link
       tags:
         - Integration links
     post:
-      description: ''
+      description: ""
       operationId: add-or-update-integration-link
       parameters:
         - description: The identifier of the Environment.
@@ -287,7 +380,7 @@ paths:
           name: integrationLinkType
           required: true
           schema:
-            $ref: '#/components/schemas/IntegrationLinkType'
+            $ref: "#/components/schemas/IntegrationLinkType"
         - description: The key of the integration link.
           in: path
           name: key
@@ -298,47 +391,57 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
           application/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkModel'
+                $ref: "#/components/schemas/IntegrationLinkModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkModel'
-          description: 'When everything is ok, the integration link data returned.'
-        '400':
+                $ref: "#/components/schemas/IntegrationLinkModel"
+          description: When everything is ok, the integration link data returned.
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Add or update Integration link
       tags:
         - Integration links
-  '/v1/environments/{environmentId}/settings/{settingId}/value':
+  "/v1/environments/{environmentId}/settings/{settingId}/value":
     get:
-      description: |-
+      description: >-
         This endpoint returns the value of a Feature Flag or Setting 
+
         in a specified Environment identified by the `environmentId` parameter.
 
+
         The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+
         The `value` represents what the clients will get when the evaluation requests of our SDKs 
+
         are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
 
+
         The `rolloutRules` and `percentageRules` attributes are representing the current 
+
         Targeting and Percentage Rules configuration of the actual Feature Flag or Setting 
+
         in an **ordered** collection, which means the order of the returned rules is matching to the
+
         evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
       operationId: get-setting-value
       parameters:
@@ -357,28 +460,102 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
-          description: 'When everything is ok, the setting value data returned.'
-        '400':
+                $ref: "#/components/schemas/SettingValueModel"
+          description: When everything is ok, the setting value data returned.
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values
     patch:
-      description: "This endpoint updates the value of a Feature Flag or Setting \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.\n\nThe advantage of using JSON Patch is that you can describe individual update operations on a resource\nwithout touching attributes that you don't want to change. It supports collection reordering, so it also \ncan be used for reordering the targeting rules of a Feature Flag or Setting.\n\nFor example: We have the following resource.\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n}\n```\nIf we send an update request body as below:\n```\n[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/value\",\n\t\t\"value\": true\n\t}\n]\n```\nOnly the default value is going to be set to `true` and all the Percentage Rules are remaining unchanged.\nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+      description: >-
+        This endpoint updates the value of a Feature Flag or Setting 
+
+        with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment.
+
+
+        Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+
+
+        The advantage of using JSON Patch is that you can describe individual update operations on a resource
+
+        without touching attributes that you don't want to change. It supports collection reordering, so it also 
+
+        can be used for reordering the targeting rules of a Feature Flag or Setting.
+
+
+        For example: We have the following resource.
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": false
+        }
+
+        ```
+
+        If we send an update request body as below:
+
+        ```
+
+        [
+        	{
+        		"op": "replace",
+        		"path": "/value",
+        		"value": true
+        	}
+        ]
+
+        ```
+
+        Only the default value is going to be set to `true` and all the Percentage Rules are remaining unchanged.
+
+        So we get a response like this:
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": true
+        }
+
+        ```
       operationId: update-setting-value
       parameters:
         - description: The identifier of the Environment.
@@ -395,7 +572,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -426,17 +604,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -449,7 +628,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json:
             examples:
@@ -474,17 +653,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -497,7 +677,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json-patch+json:
             examples:
@@ -522,17 +702,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -545,7 +726,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           text/json:
             examples:
@@ -570,17 +751,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -593,34 +775,92 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: When the patch was successful.
-        '204':
+        "204":
           description: When no change applied on the resource.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values
     put:
-      description: "This endpoint replaces the whole value of a Feature Flag or Setting in a specified Environment.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.\n\n**Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't \nwant to change in its original state. Not listing one means that it will reset.\n\nFor example: We have the following resource.\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n}\n```\nIf we send a replace request body as below:\n```\n{\n\t\"value\": true\n}\n```\nThen besides that the default value is set to `true`, all the Percentage Rules are deleted. \nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\": [],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+      description: >-
+        This endpoint replaces the whole value of a Feature Flag or Setting in a
+        specified Environment.
+
+
+        Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+
+
+        **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't 
+
+        want to change in its original state. Not listing one means that it will reset.
+
+
+        For example: We have the following resource.
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": false
+        }
+
+        ```
+
+        If we send a replace request body as below:
+
+        ```
+
+        {
+        	"value": true
+        }
+
+        ```
+
+        Then besides that the default value is set to `true`, all the Percentage Rules are deleted. 
+
+        So we get a response like this:
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [],
+        	"rolloutRules": [],
+        	"value": true
+        }
+
+        ```
       operationId: replace-setting-value
       parameters:
         - description: The identifier of the Environment.
@@ -637,7 +877,8 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
@@ -648,7 +889,8 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -661,11 +903,12 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -678,11 +921,12 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -695,32 +939,34 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SettingValueModel"
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values
-  '/v1/integrationLink/{integrationLinkType}/{key}/details':
+  "/v1/integrationLink/{integrationLinkType}/{key}/details":
     get:
-      description: ''
+      description: ""
       operationId: get-integration-link-details
       parameters:
         - description: The integration link's type.
@@ -728,7 +974,7 @@ paths:
           name: integrationLinkType
           required: true
           schema:
-            $ref: '#/components/schemas/IntegrationLinkType'
+            $ref: "#/components/schemas/IntegrationLinkType"
         - description: The key of the integration link.
           in: path
           name: key
@@ -736,44 +982,48 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkDetailsModel'
+                $ref: "#/components/schemas/IntegrationLinkDetailsModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkDetailsModel'
-          description: 'When everything is ok, the details for the integration link returned.'
-        '400':
+                $ref: "#/components/schemas/IntegrationLinkDetailsModel"
+          description: When everything is ok, the details for the integration link returned.
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Integration link
       tags:
         - Integration links
   /v1/me:
     get:
-      description: ''
+      description: ""
       operationId: get-me
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/MeModel'
+                $ref: "#/components/schemas/MeModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/MeModel'
-          description: ''
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+                $ref: "#/components/schemas/MeModel"
+          description: ""
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get authenticated user details
       tags:
         - Me
@@ -782,27 +1032,29 @@ paths:
       description: This endpoint returns the list of the Products that belongs to the user.
       operationId: get-products
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ProductModel-haljson'
+                  $ref: "#/components/schemas/ProductModel-haljson"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ProductModel'
+                  $ref: "#/components/schemas/ProductModel"
                 type: array
-          description: ''
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+          description: ""
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Products
       tags:
         - Products
-  '/v1/products/{productId}/auditlogs':
+  "/v1/products/{productId}/auditlogs":
     get:
       description: |-
         This endpoint returns the list of Audit logs for a given Product 
@@ -835,7 +1087,7 @@ paths:
           name: auditLogType
           schema:
             allOf:
-              - $ref: '#/components/schemas/AuditLogType'
+              - $ref: "#/components/schemas/AuditLogType"
             nullable: true
         - description: Filter Audit logs by starting UTC date.
           in: query
@@ -852,34 +1104,38 @@ paths:
             nullable: true
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AuditLogItemModel'
+                  $ref: "#/components/schemas/AuditLogItemModel"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AuditLogItemModel'
+                  $ref: "#/components/schemas/AuditLogItemModel"
                 type: array
-          description: ''
-        '400':
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Audit logs
       tags:
         - Audit logs
-  '/v1/products/{productId}/configs':
+  "/v1/products/{productId}/configs":
     get:
-      description: |-
-        This endpoint returns the list of the Configs that belongs to the given Product identified by the
+      description: >-
+        This endpoint returns the list of the Configs that belongs to the given
+        Product identified by the
+
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-configs
       parameters:
@@ -891,34 +1147,38 @@ paths:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ConfigModel-haljson'
+                  $ref: "#/components/schemas/ConfigModel-haljson"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ConfigModel'
+                  $ref: "#/components/schemas/ConfigModel"
                 type: array
-          description: ''
-        '400':
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Configs
       tags:
         - Configs
-  '/v1/products/{productId}/environments':
+  "/v1/products/{productId}/environments":
     get:
-      description: |-
-        This endpoint returns the list of the Environments that belongs to the given Product identified by the
+      description: >-
+        This endpoint returns the list of the Environments that belongs to the
+        given Product identified by the
+
         `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-environments
       parameters:
@@ -930,33 +1190,36 @@ paths:
             format: uuid
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
                 items:
-                  $ref: '#/components/schemas/EnvironmentModel'
+                  $ref: "#/components/schemas/EnvironmentModel"
                 type: array
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/EnvironmentModel'
+                  $ref: "#/components/schemas/EnvironmentModel"
                 type: array
-          description: ''
-        '400':
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: List Environments
       tags:
         - Environments
     post:
-      description: |-
+      description: >-
         This endpoint creates a new Environment in a specified Product 
+
         identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: create-environment
       parameters:
@@ -971,39 +1234,43 @@ paths:
         content:
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
+                $ref: "#/components/schemas/EnvironmentModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/EnvironmentModel"
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Create Environment
       tags:
         - Environments
-  '/v1/settings/{settingId}':
+  "/v1/settings/{settingId}":
     delete:
-      description: |-
-        This endpoint removes a Feature Flag or Setting from a specified Config, 
+      description: >-
+        This endpoint removes a Feature Flag or Setting from a specified
+        Config, 
+
         identified by the `configId` parameter.
       operationId: delete-setting
       parameters:
@@ -1015,22 +1282,26 @@ paths:
             format: int32
             type: integer
       responses:
-        '204':
+        "204":
           description: When the delete was successful.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Delete Flag
       tags:
         - Feature Flags & Settings
     get:
-      description: |-
-        This endpoint returns the metadata attributes of a Feature Flag or Setting 
+      description: >-
+        This endpoint returns the metadata attributes of a Feature Flag or
+        Setting 
+
         identified by the `settingId` parameter.
       operationId: get-setting
       parameters:
@@ -1042,28 +1313,86 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
-          description: 'When everything is ok, the setting data returned.'
-        '400':
+                $ref: "#/components/schemas/SettingModel"
+          description: When everything is ok, the setting data returned.
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get Flag
       tags:
         - Feature Flags & Settings
     patch:
-      description: "This endpoint updates the metadata of a Feature Flag or Setting \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Config.\n\nOnly the `name` and `hint` attributes are modifiable by this endpoint.\n\nThe advantage of using JSON Patch is that you can describe individual update operations on a resource\nwithout touching attributes that you don't want to change.\n\nFor example: We have the following resource.\n```\n{\n\t\"settingId\": 5345,\n\t\"key\": \"myAwesomeFeature\",\n\t\"name\": \"Tihs is a naem with soem typos.\",\n\t\"hint\": \"This Flag controls my awesome feature.\",\n\t\"settingType\": \"boolean\"\n}\n```\nIf we send an update request body as below:\n```\n[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/name\",\n\t\t\"value\": \"This is the name without typos.\"\n\t}\n]\n```\nOnly the name is going to be updated and all the other attributes are remaining unchanged.\nSo we get a response like this:\n```\n{\n\t\"settingId\": 5345,\n\t\"key\": \"myAwesomeFeature\",\n\t\"name\": \"This is the name without typos.\",\n\t\"hint\": \"This Flag controls my awesome feature.\",\n\t\"settingType\": \"boolean\"\n}\n```"
+      description: >-
+        This endpoint updates the metadata of a Feature Flag or Setting 
+
+        with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Config.
+
+
+        Only the `name` and `hint` attributes are modifiable by this endpoint.
+
+
+        The advantage of using JSON Patch is that you can describe individual update operations on a resource
+
+        without touching attributes that you don't want to change.
+
+
+        For example: We have the following resource.
+
+        ```
+
+        {
+        	"settingId": 5345,
+        	"key": "myAwesomeFeature",
+        	"name": "Tihs is a naem with soem typos.",
+        	"hint": "This Flag controls my awesome feature.",
+        	"settingType": "boolean"
+        }
+
+        ```
+
+        If we send an update request body as below:
+
+        ```
+
+        [
+        	{
+        		"op": "replace",
+        		"path": "/name",
+        		"value": "This is the name without typos."
+        	}
+        ]
+
+        ```
+
+        Only the name is going to be updated and all the other attributes are remaining unchanged.
+
+        So we get a response like this:
+
+        ```
+
+        {
+        	"settingId": 5345,
+        	"key": "myAwesomeFeature",
+        	"name": "This is the name without typos.",
+        	"hint": "This Flag controls my awesome feature.",
+        	"settingType": "boolean"
+        }
+
+        ```
       operationId: update-setting
       parameters:
         - description: The identifier of the Setting.
@@ -1078,58 +1407,68 @@ paths:
           application/*+json:
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json:
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json-patch+json:
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           text/json:
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the update was successful.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update Flag
       tags:
         - Feature Flags & Settings
-  '/v1/settings/{settingKeyOrId}/value':
+  "/v1/settings/{settingKeyOrId}/value":
     get:
-      description: |-
+      description: >-
         This endpoint returns the value of a Feature Flag or Setting 
+
         in a specified Environment identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
 
+
         The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
+
         The `value` represents what the clients will get when the evaluation requests of our SDKs 
+
         are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.
 
+
         The `rolloutRules` and `percentageRules` attributes are representing the current 
+
         Targeting and Percentage Rules configuration of the actual Feature Flag or Setting 
+
         in an **ordered** collection, which means the order of the returned rules is matching to the
+
         evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
       operationId: get-setting-value-by-sdkkey
       parameters:
@@ -1139,35 +1478,111 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)'
+        - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SettingValueModel"
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Get value
       tags:
         - Feature Flag & Setting values using SDK Key
     patch:
-      description: "This endpoint updates the value of a Feature Flag or Setting \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment\nidentified by the <a target=\"_blank\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.\n\nThe advantage of using JSON Patch is that you can describe individual update operations on a resource\nwithout touching attributes that you don't want to change. It supports collection reordering, so it also \ncan be used for reordering the targeting rules of a Feature Flag or Setting.\n\nFor example: We have the following resource.\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n}\n```\nIf we send an update request body as below:\n```\n[\n\t{\n\t\t\"op\": \"replace\",\n\t\t\"path\": \"/value\",\n\t\t\"value\": true\n\t}\n]\n```\nOnly the default served value is going to be set to `true` and all the Percentage Rules are remaining unchanged.\nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+      description: >-
+        This endpoint updates the value of a Feature Flag or Setting 
+
+        with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment
+
+        identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+
+
+        Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+
+
+        The advantage of using JSON Patch is that you can describe individual update operations on a resource
+
+        without touching attributes that you don't want to change. It supports collection reordering, so it also 
+
+        can be used for reordering the targeting rules of a Feature Flag or Setting.
+
+
+        For example: We have the following resource.
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": false
+        }
+
+        ```
+
+        If we send an update request body as below:
+
+        ```
+
+        [
+        	{
+        		"op": "replace",
+        		"path": "/value",
+        		"value": true
+        	}
+        ]
+
+        ```
+
+        Only the default served value is going to be set to `true` and all the Percentage Rules are remaining unchanged.
+
+        So we get a response like this:
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": true
+        }
+
+        ```
       operationId: update-setting-value-by-sdkkey
       parameters:
         - description: The key or id of the Setting.
@@ -1176,13 +1591,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
             nullable: true
             type: string
-        - description: 'The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)'
+        - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
           required: true
@@ -1213,17 +1629,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1236,7 +1653,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json:
             examples:
@@ -1261,17 +1678,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1284,7 +1702,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           application/json-patch+json:
             examples:
@@ -1309,17 +1727,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1332,7 +1751,7 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
           text/json:
             examples:
@@ -1357,17 +1776,18 @@ paths:
                     value:
                       comparator: contains
                       comparisonAttribute: Identifier
-                      comparisonValue: '@example.com'
+                      comparisonValue: "@example.com"
                       value: true
                   - op: add
                     path: /rolloutRules/-
                     value:
                       comparator: isOneOf
                       comparisonAttribute: Identifier
-                      comparisonValue: '@blacklist.com'
+                      comparisonValue: "@blacklist.com"
                       value: false
               reorder targeting rules:
-                description: This example swaps the first and the second targeting evaluation rule.
+                description: This example swaps the first and the second targeting evaluation
+                  rule.
                 value:
                   - from: /rolloutRules/0
                     op: move
@@ -1380,34 +1800,93 @@ paths:
                     value: true
             schema:
               items:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
               type: array
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
-          description: ''
-        '204':
+                $ref: "#/components/schemas/SettingValueModel"
+          description: ""
+        "204":
           description: When no change applied on the resource.
-        '400':
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Update value
       tags:
         - Feature Flag & Setting values using SDK Key
     put:
-      description: "This endpoint replaces the value of a Feature Flag or Setting \nin a specified Environment identified by the <a target=\"_blank\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.\n\n**Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't \nwant to change to its original state. Not listing one means that it will reset.\n\nFor example: We have the following resource.\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n}\n```\nIf we send a replace request body as below:\n```\n{\n\t\"value\": true\n}\n```\nThen besides that the default served value is set to `true`, all the Percentage Rules are deleted. \nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\": [],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+      description: >-
+        This endpoint replaces the value of a Feature Flag or Setting 
+
+        in a specified Environment identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+
+
+        Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
+
+
+        **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't 
+
+        want to change to its original state. Not listing one means that it will reset.
+
+
+        For example: We have the following resource.
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [
+        		{
+        			"percentage": 30,
+        			"value": true
+        		},
+        		{
+        			"percentage": 70,
+        			"value": false
+        		}
+        	],
+        	"rolloutRules": [],
+        	"value": false
+        }
+
+        ```
+
+        If we send a replace request body as below:
+
+        ```
+
+        {
+        	"value": true
+        }
+
+        ```
+
+        Then besides that the default served value is set to `true`, all the Percentage Rules are deleted. 
+
+        So we get a response like this:
+
+        ```
+
+        {
+        	"rolloutPercentageItems": [],
+        	"rolloutRules": [],
+        	"value": true
+        }
+
+        ```
       operationId: replace-setting-value-by-sdkkey
       parameters:
         - description: The key or id of the Setting.
@@ -1416,13 +1895,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The reason note for the Audit Log if the Product's "Config changes require a reason" preference is turned on.
+        - description: The reason note for the Audit Log if the Product's "Config changes
+            require a reason" preference is turned on.
           in: query
           name: reason
           schema:
             nullable: true
             type: string
-        - description: 'The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)'
+        - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
           in: header
           name: X-CONFIGCAT-SDKKEY
           required: true
@@ -1433,7 +1913,8 @@ paths:
           application/*+json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1446,11 +1927,12 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           application/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1463,11 +1945,12 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           text/json:
             examples:
               advanced:
-                description: This example turns on a feature flag and adds two items to its percentage evaluation rules.
+                description: This example turns on a feature flag and adds two items to its
+                  percentage evaluation rules.
                 value:
                   rolloutPercentageItems:
                     - percentage: 30
@@ -1480,26 +1963,28 @@ paths:
                 value:
                   value: true
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel-haljson'
+                $ref: "#/components/schemas/SettingValueModel-haljson"
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SettingValueModel"
+          description: ""
+        "400":
           description: Bad request.
-        '401':
-          description: Unauthorized. In case of the Public Management API credentials are invalid.
-        '404':
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are
+            invalid.
+        "404":
           description: Not found.
-        '429':
-          description: Too many requests. In case of the request rate exceeds the rate limits.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate
+            limits.
       summary: Replace value
       tags:
         - Feature Flag & Setting values using SDK Key
@@ -1642,7 +2127,7 @@ components:
       additionalProperties: false
       properties:
         hint:
-          description: 'A short description for the setting, shown on the Dashboard UI.'
+          description: A short description for the setting, shown on the Dashboard UI.
           maxLength: 1000
           minLength: 0
           nullable: true
@@ -1651,15 +2136,15 @@ components:
           description: The key of the setting.
           maxLength: 255
           minLength: 0
-          pattern: '^[a-zA-Z]+[a-zA-Z0-9_]*'
+          pattern: ^[a-zA-Z]+[a-zA-Z0-9_]*
           type: string
         name:
-          description: 'The name of the setting, shown on the Dashboard UI.'
+          description: The name of the setting, shown on the Dashboard UI.
           maxLength: 255
           minLength: 0
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
       required:
         - key
         - name
@@ -1685,15 +2170,15 @@ components:
       additionalProperties: false
       properties:
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         readOnly:
           type: boolean
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: "#/components/schemas/SettingDataModel"
         status:
           nullable: true
           type: string
@@ -1706,7 +2191,7 @@ components:
           type: integer
         details:
           items:
-            $ref: '#/components/schemas/IntegrationLinkDetail'
+            $ref: "#/components/schemas/IntegrationLinkDetail"
           nullable: true
           readOnly: true
           type: array
@@ -1718,7 +2203,7 @@ components:
           nullable: true
           type: string
         integrationLinkType:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          $ref: "#/components/schemas/IntegrationLinkType"
         key:
           nullable: true
           type: string
@@ -1777,7 +2262,7 @@ components:
           nullable: true
           type: string
         organization:
-          $ref: '#/components/schemas/OrganizationModel'
+          $ref: "#/components/schemas/OrganizationModel"
         productId:
           format: uuid
           type: string
@@ -1820,7 +2305,8 @@ components:
           type: integer
         value:
           additionalProperties: false
-          description: The value to serve when the user falls in the percentage rule. It must respect the setting type.
+          description: The value to serve when the user falls in the percentage rule. It
+            must respect the setting type.
           type: object
       required:
         - percentage
@@ -1851,7 +2337,7 @@ components:
       additionalProperties: false
       properties:
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          $ref: "#/components/schemas/RolloutRuleComparator"
         comparisonAttribute:
           description: The user attribute to compare.
           maxLength: 1000
@@ -1864,7 +2350,8 @@ components:
           type: string
         value:
           additionalProperties: false
-          description: The value to serve when the comparison matches. It must respect the setting type.
+          description: The value to serve when the comparison matches. It must respect the
+            setting type.
           type: object
       required:
         - comparisonAttribute
@@ -1891,7 +2378,7 @@ components:
           readOnly: true
           type: integer
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
       type: object
     SettingModel:
       additionalProperties: false
@@ -1909,7 +2396,7 @@ components:
           format: int32
           type: integer
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
       type: object
     SettingTagModel:
       additionalProperties: false
@@ -1938,12 +2425,12 @@ components:
       additionalProperties: false
       properties:
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         integrationLinks:
           items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
+            $ref: "#/components/schemas/IntegrationLinkModel"
           nullable: true
           type: array
         readOnly:
@@ -1951,20 +2438,20 @@ components:
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
           nullable: true
           type: array
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
+            $ref: "#/components/schemas/RolloutRuleModel"
           nullable: true
           type: array
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: "#/components/schemas/SettingDataModel"
         settingTags:
           items:
-            $ref: '#/components/schemas/SettingTagModel'
+            $ref: "#/components/schemas/SettingTagModel"
           nullable: true
           type: array
         value:
@@ -2009,7 +2496,7 @@ components:
                     nullable: true
                     type: string
                   integrationLinkType:
-                    $ref: '#/components/schemas/IntegrationLinkType'
+                    $ref: "#/components/schemas/IntegrationLinkType"
                   key:
                     nullable: true
                     type: string
@@ -2038,7 +2525,7 @@ components:
                   readOnly: true
                   type: integer
                 settingType:
-                  $ref: '#/components/schemas/SettingType'
+                  $ref: "#/components/schemas/SettingType"
               type: object
             settingTags:
               items:
@@ -2069,13 +2556,13 @@ components:
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
           nullable: true
           type: array
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
+            $ref: "#/components/schemas/RolloutRuleModel"
           nullable: true
           type: array
         value:
@@ -2099,13 +2586,13 @@ components:
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
           nullable: true
           type: array
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
+            $ref: "#/components/schemas/RolloutRuleModel"
           nullable: true
           type: array
         value:
@@ -2116,8 +2603,10 @@ components:
       type: object
   securitySchemes:
     Basic:
-      description: |-
-        To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
+      description: >-
+        To authenticate with the API you have to fill the `Authorization` HTTP
+        request header with your Public API credentials.
+
 
         You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: Basic

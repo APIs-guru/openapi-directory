@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -8,26 +8,26 @@ info:
   contact:
     email: mike.ralphson@gmail.com
     name: Mike Ralphson
-    url: 'https://github.com/mermade/swagger2openapi/issues'
+    url: https://github.com/mermade/swagger2openapi/issues
   description: Converter and validator for Swagger 2.0 to OpenAPI 3.0.x definitions
   license:
     name: MIT
-    url: 'https://opensource.org/licenses/MIT'
-  termsOfService: 'https://opensource.org/licenses/MIT'
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://opensource.org/licenses/MIT
   title: Swagger2OpenAPI Converter
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://avatars1.githubusercontent.com/u/15950345?v=3&s=200'
+    backgroundColor: "#FFFFFF"
+    url: https://avatars1.githubusercontent.com/u/15950345?v=3&s=200
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json
+      version: "2.0"
   x-providerName: openapi-converter.herokuapp.com
 externalDocs:
-  url: 'https://github.com/mermade/openapi-webconverter'
+  url: https://github.com/mermade/openapi-webconverter
 consumes:
   - application/json
   - application/x-yaml
@@ -45,7 +45,7 @@ tags:
 paths:
   /badge:
     get:
-      description: ''
+      description: ""
       operationId: getBadge
       parameters:
         - description: The URL to retrieve the OpenAPI 3.0.x definition from
@@ -54,16 +54,17 @@ paths:
           name: url
           required: true
           type: string
-          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json'
+          x-example: https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json
       responses:
-        '301':
+        "301":
           description: Moved
-      summary: Return a redirect to a badge svg file depending on a source definition's validity
+      summary: Return a redirect to a badge svg file depending on a source
+        definition's validity
       tags:
         - validation
   /convert:
     get:
-      description: ''
+      description: ""
       operationId: convertUrl
       parameters:
         - description: The URL to retrieve the OpenAPI 2.0 definition from
@@ -72,9 +73,9 @@ paths:
           name: url
           required: true
           type: string
-          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json'
+          x-example: https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json
       responses:
-        '200':
+        "200":
           description: default
           schema: {}
       summary: Convert a Swagger 2.0 definition to OpenAPI 3.0.x from a URL
@@ -83,7 +84,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: ''
+      description: ""
       operationId: convert
       parameters:
         - description: The file to upload and convert
@@ -91,7 +92,7 @@ paths:
           name: filename
           required: false
           type: string
-          x-example: ''
+          x-example: ""
         - description: The text of a Swagger 2.0 definition to convert
           in: formData
           name: source
@@ -103,29 +104,29 @@ paths:
               title: API
               version: 1.0.0
         - enum:
-            - 'on'
+            - on
           in: formData
           name: validate
           required: false
           type: string
-          x-example: ''
+          x-example: ""
       responses:
-        '200':
+        "200":
           description: default
           schema: {}
-        '400':
+        "400":
           description: Invalid request
           schema: {}
-      summary: 'Convert a Swagger 2.0 definition passed in the body to OpenAPI 3.0.x '
+      summary: "Convert a Swagger 2.0 definition passed in the body to OpenAPI 3.0.x "
       tags:
         - conversion
   /status:
     get:
-      description: ''
+      description: ""
       operationId: getStatus
       parameters: []
       responses:
-        '200':
+        "200":
           description: default
           schema: {}
       summary: Get the status of the API
@@ -133,7 +134,7 @@ paths:
         - metadata
   /validate:
     get:
-      description: ''
+      description: ""
       operationId: validateUrl
       parameters:
         - description: The URL to retrieve the OpenAPI 3.0.x definition from
@@ -142,19 +143,19 @@ paths:
           name: url
           required: true
           type: string
-          x-example: 'https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json'
+          x-example: https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json
       responses:
-        '200':
+        "200":
           description: default
           schema:
-            $ref: '#/definitions/validationResult'
+            $ref: "#/definitions/validationResult"
       summary: Validate an OpenAPI 3.0.x definition
       tags:
         - validation
     post:
       consumes:
         - multipart/form-data
-      description: ''
+      description: ""
       operationId: validate
       parameters:
         - description: The file to upload and validate
@@ -162,7 +163,7 @@ paths:
           name: filename
           required: false
           type: string
-          x-example: ''
+          x-example: ""
         - description: The text of an OpenAPI 3.0.x definition to validate
           in: formData
           name: source
@@ -175,11 +176,11 @@ paths:
               version: 1.0.0
             paths: {}
       responses:
-        '200':
+        "200":
           description: default
           schema:
-            $ref: '#/definitions/validationResult'
-        '400':
+            $ref: "#/definitions/validationResult"
+        "400":
           description: Invalid request
           schema: {}
       summary: Validate an OpenAPI 3.0.x definition supplied in the body of the request

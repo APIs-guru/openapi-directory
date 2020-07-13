@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.bufferapp.com
@@ -6,52 +6,65 @@ basePath: /1/
 info:
   description: Social media management for marketers and agencies
   title: Bufferapp
-  version: '1'
+  version: "1"
   x-apisguru-categories:
     - social
     - marketing
   x-logo:
-    url: 'https://d389zggrogs7qo.cloudfront.net/images/app/buffer-logo@2x.png'
+    url: https://d389zggrogs7qo.cloudfront.net/images/app/buffer-logo@2x.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/bufferapp.com/1/swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/bufferapp.com/1/swagger.yaml
+      version: "2.0"
   x-providerName: bufferapp.com
   x-unofficialSpec: true
 externalDocs:
-  url: 'https://buffer.com/developers/api'
+  url: https://buffer.com/developers/api
 consumes:
   - application/json
 produces:
   - application/json
 securityDefinitions:
   oauth_2_0:
-    authorizationUrl: 'https://bufferapp.com/oauth2/authorize'
-    description: |
+    authorizationUrl: https://bufferapp.com/oauth2/authorize
+    description: >
       Body example for authorisation request:
 
+
       client_id=...&
+
       redirect_uri=...&
+
       response_type=code
+
 
       Bidy example for token request:
 
+
       POST Data
+
       client_id=...&
+
       client_secret=...&
+
       redirect_uri=...&
+
       code=...&
+
       grant_type=authorization_code
+
 
       All requests to the Buffer API must be made using HTTPS, with the access token provided in the HTTP Authorization header, request body or query string.
     flow: accessCode
     scopes: {}
-    tokenUrl: 'https://api.bufferapp.com/1/oauth2/token.json'
+    tokenUrl: https://api.bufferapp.com/1/oauth2/token.json
     type: oauth2
 paths:
-  '/info/configuration{mediaTypeExtension}':
+  "/info/configuration{mediaTypeExtension}":
     get:
-      description: 'Returns an object with the current configuration that Buffer is using, including supported services, their icons and the varying limits of character and schedules.'
+      description: Returns an object with the current configuration that Buffer is
+        using, including supported services, their icons and the varying limits
+        of character and schedules.
       parameters:
         - enum:
             - .json
@@ -60,29 +73,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/configuration'
-        '400':
-          description: |
+            $ref: "#/definitions/configuration"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -96,24 +124,25 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/links/shares{mediaTypeExtension}':
+  "/links/shares{mediaTypeExtension}":
     get:
-      description: Returns an object with a the numbers of shares a link has had using Buffer.
+      description: Returns an object with a the numbers of shares a link has had using
+        Buffer.
       parameters:
         - enum:
             - .json
@@ -121,35 +150,51 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: URL-encoded URL of the page for which the number of shares is requested.
+        - description: URL-encoded URL of the page for which the number of shares is
+            requested.
           in: query
           name: url
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/shares'
-        '400':
-          description: |
+            $ref: "#/definitions/shares"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -163,22 +208,22 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/profiles/{id}/schedules/update{mediaTypeExtension}':
+  "/profiles/{id}/schedules/update{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
@@ -196,29 +241,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/success'
-        '400':
-          description: |
+            $ref: "#/definitions/success"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -232,23 +292,24 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/profiles/{id}/schedules{mediaTypeExtension}':
+  "/profiles/{id}/schedules{mediaTypeExtension}":
     get:
-      description: Returns details of the posting schedules associated with a social media profile.
+      description: Returns details of the posting schedules associated with a social
+        media profile.
       parameters:
         - in: path
           name: id
@@ -261,29 +322,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/schedules'
-        '400':
-          description: |
+            $ref: "#/definitions/schedules"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -297,25 +373,26 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/profiles/{id}/updates/pending{mediaTypeExtension}':
+  "/profiles/{id}/updates/pending{mediaTypeExtension}":
     get:
-      description: |
-        "Returns an array of updates that are currently in the buffer for an individual social media profile.
+      description: >
+        "Returns an array of updates that are currently in the buffer for an
+        individual social media profile.
       parameters:
         - in: path
           name: id
@@ -327,47 +404,66 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: 'Specifies the number of status updates to receive. If provided, must be between 1 and 100.'
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
-        - description: Specifies a unix timestamp which only status updates created after this time will be retrieved.
+        - description: Specifies a unix timestamp which only status updates created after
+            this time will be retrieved.
           format: date
           in: query
           name: since
           type: string
-        - description: If utc is set times will be returned relative to UTC rather than the users associated timezone.
+        - description: If utc is set times will be returned relative to UTC rather than
+            the users associated timezone.
           in: query
           name: utc
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/updates-array'
-        '400':
-          description: |
+            $ref: "#/definitions/updates-array"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -381,27 +477,28 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/profiles/{id}/updates/reorder{mediaTypeExtension}':
+  "/profiles/{id}/updates/reorder{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |
-        Edit the order at which statuses for the specified social media profile will be sent out of the buffer.
+      description: >
+        Edit the order at which statuses for the specified social media profile
+        will be sent out of the buffer.
       parameters:
         - in: path
           name: id
@@ -414,29 +511,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/shuffle'
-        '400':
-          description: |
+            $ref: "#/definitions/shuffle"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -450,24 +562,25 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/profiles/{id}/updates/sent{mediaTypeExtension}':
+  "/profiles/{id}/updates/sent{mediaTypeExtension}":
     get:
-      description: |
-        Returns an array of updates that have been sent from the buffer for an individual social media profile.
+      description: >
+        Returns an array of updates that have been sent from the buffer for an
+        individual social media profile.
       parameters:
         - in: path
           name: id
@@ -479,47 +592,66 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: 'Specifies the number of status updates to receive. If provided, must be between 1 and 100.'
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
-        - description: Specifies a unix timestamp which only status updates created after this time will be retrieved.
+        - description: Specifies a unix timestamp which only status updates created after
+            this time will be retrieved.
           format: date
           in: query
           name: since
           type: string
-        - description: If utc is set times will be returned relative to UTC rather than the users associated timezone.
+        - description: If utc is set times will be returned relative to UTC rather than
+            the users associated timezone.
           in: query
           name: utc
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/updates-array'
-        '400':
-          description: |
+            $ref: "#/definitions/updates-array"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -533,27 +665,28 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/profiles/{id}/updates/shuffle{mediaTypeExtension}':
+  "/profiles/{id}/updates/shuffle{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |
-        Randomize the order at which statuses for the specified social media profile will be sent out of the buffer.
+      description: >
+        Randomize the order at which statuses for the specified social media
+        profile will be sent out of the buffer.
       parameters:
         - in: path
           name: id
@@ -566,29 +699,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/shuffle'
-        '400':
-          description: |
+            $ref: "#/definitions/shuffle"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -602,21 +750,21 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/profiles/{id}{mediaTypeExtension}':
+  "/profiles/{id}{mediaTypeExtension}":
     get:
       description: Returns details of the single specified social media profile.
       parameters:
@@ -631,29 +779,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/profile'
-        '400':
-          description: |
+            $ref: "#/definitions/profile"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -667,22 +830,22 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/profiles{mediaTypeExtension}':
+  "/profiles{mediaTypeExtension}":
     get:
       description: Returns an array of social media profiles connected to a users account.
       parameters:
@@ -693,29 +856,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/profiles'
-        '400':
-          description: |
+            $ref: "#/definitions/profiles"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -729,22 +907,22 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/updates/create{mediaTypeExtension}':
+  "/updates/create{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
@@ -758,29 +936,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/newUpdate'
-        '400':
-          description: |
+            $ref: "#/definitions/newUpdate"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -794,21 +987,21 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/updates/{id}/destroy{mediaTypeExtension}':
+  "/updates/{id}/destroy{mediaTypeExtension}":
     post:
       description: Permanently delete an existing status update.
       parameters:
@@ -823,29 +1016,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/success'
-        '400':
-          description: |
+            $ref: "#/definitions/success"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -859,24 +1067,25 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/updates/{id}/interactions{mediaTypeExtension}':
+  "/updates/{id}/interactions{mediaTypeExtension}":
     get:
-      description: |
-        Returns the detailed information on individual interactions with the social media update such as favorites, retweets and likes.
+      description: >
+        Returns the detailed information on individual interactions with the
+        social media update such as favorites, retweets and likes.
       parameters:
         - in: path
           name: id
@@ -888,44 +1097,65 @@ paths:
           name: mediaTypeExtension
           required: true
           type: string
-        - description: |
-            Specifies a type of event to be retrieved, for example "retweet", "like", "comment", "mention" or "reshare". They can also be plural (e.g., "reshares"). Plurality has no effect other than visual semantics. See /info/configuration for more information on supported interaction events.
+        - description: >
+            Specifies a type of event to be retrieved, for example "retweet",
+            "like", "comment", "mention" or "reshare". They can also be plural
+            (e.g., "reshares"). Plurality has no effect other than visual
+            semantics. See /info/configuration for more information on supported
+            interaction events.
           in: query
           name: event
           required: true
           type: string
-        - description: Specifies the page of status updates to receive. If not specified the first page of results will be returned.
+        - description: Specifies the page of status updates to receive. If not specified
+            the first page of results will be returned.
           in: query
           name: page
           type: integer
-        - description: 'Specifies the number of status updates to receive. If provided, must be between 1 and 100.'
+        - description: Specifies the number of status updates to receive. If provided,
+            must be between 1 and 100.
           in: query
           name: count
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/interactions'
-        '400':
-          description: |
+            $ref: "#/definitions/interactions"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -939,24 +1169,26 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/updates/{id}/move_to_top{mediaTypeExtension}':
+  "/updates/{id}/move_to_top{mediaTypeExtension}":
     post:
-      description: Move an existing status update to the top of the queue and recalculate times for all updates in the queue. Returns the update with its new posting time.
+      description: Move an existing status update to the top of the queue and
+        recalculate times for all updates in the queue. Returns the update with
+        its new posting time.
       parameters:
         - in: path
           name: id
@@ -969,29 +1201,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/update'
-        '400':
-          description: |
+            $ref: "#/definitions/update"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -1005,23 +1252,24 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/updates/{id}/share{mediaTypeExtension}':
+  "/updates/{id}/share{mediaTypeExtension}":
     post:
-      description: Immediately shares a single pending update and recalculates times for updates remaining in the queue.
+      description: Immediately shares a single pending update and recalculates times
+        for updates remaining in the queue.
       parameters:
         - in: path
           name: id
@@ -1034,29 +1282,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/success'
-        '400':
-          description: |
+            $ref: "#/definitions/success"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -1070,21 +1333,21 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/updates/{id}/update{mediaTypeExtension}':
+  "/updates/{id}/update{mediaTypeExtension}":
     post:
       consumes:
         - application/x-www-form-urlencoded
@@ -1102,29 +1365,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/individual-update'
-        '400':
-          description: |
+            $ref: "#/definitions/individual-update"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -1138,21 +1416,21 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: An unknown error occurred.
-  '/updates/{id}{mediaTypeExtension}':
+  "/updates/{id}{mediaTypeExtension}":
     get:
       description: Returns a single social media update.
       parameters:
@@ -1167,29 +1445,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/update'
-        '400':
-          description: |
+            $ref: "#/definitions/update"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -1203,22 +1496,22 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
-  '/user{mediaTypeExtension}':
+  "/user{mediaTypeExtension}":
     get:
       description: Returns a single user.
       parameters:
@@ -1229,29 +1522,44 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/user'
-        '400':
-          description: |
+            $ref: "#/definitions/user"
+        "400":
+          description: >
             1003  Parameter not recognized.
+
             1004  Required parameter missing.
+
             1006  Parameter value not within bounds.
+
             1012  Profile did not save successfully.
+
             1016  Profile buffer could not be emptied.
+
             1022  Update did not save successfully.
+
             1025  Update was recently posted, can't post duplicate content.
+
             1026  Update must be in error status to requeue.
+
             1027  Update must be in buffer and not custom scheduled in order to move to top.
+
             1029  Event type not supported.
+
             1030  Media filetype not supported.
+
             1031  Media filesize out of acceptable range.
+
             1032  Unable to post image to LinkedIn group(s).
+
             1034  Cannot schedule updates in the past.
+
             1033  Comments can only be posted to Facebook at this time.
+
             1042  User did not save successfully.
-        '403':
+        "403":
           description: |
             403  Permission denied.
             1001  Access token required.
@@ -1265,19 +1573,19 @@ paths:
             1024  Update limit for team profile has been reached.
             1028  Update soft limit for profile reached.
             1051  No authorization to access client.
-        '404':
+        "404":
           description: |
             404  Endpoint not found.
             1010  Profile could not be found.
             1020  Update could not be found.
             1050  Client could not be found.
-        '405':
+        "405":
           description: |
             405  Method not allowed.
-        '406':
+        "406":
           description: |
             1005  Unsupported response format.
-        '500':
+        "500":
           description: |
             An unknown error occurred.
 definitions:
@@ -1306,11 +1614,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1342,11 +1650,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1366,11 +1674,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1390,11 +1698,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1425,11 +1733,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1449,11 +1757,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1484,11 +1792,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1508,11 +1816,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1532,11 +1840,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:
@@ -1567,11 +1875,11 @@ definitions:
                         type: number
                       icons:
                         properties:
-                          '16':
+                          "16":
                             type: string
-                          '32':
+                          "32":
                             type: string
-                          '64':
+                          "64":
                             type: string
                         type: object
                       link_attachments:

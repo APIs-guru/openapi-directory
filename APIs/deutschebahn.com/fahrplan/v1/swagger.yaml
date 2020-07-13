@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -8,27 +8,30 @@ info:
   contact:
     email: DBOpenData@deutschebahn.com
     name: DBOpenData
-    url: 'https://developer.deutschebahn.com/store/'
-  description: |-
-    A RESTful webservice to request a railway journey - FREE plan with restricted access (max. 10 requests per minute). Please ignore the message in the API Console about the access token.
+    url: https://developer.deutschebahn.com/store/
+  description: >-
+    A RESTful webservice to request a railway journey - FREE plan with
+    restricted access (max. 10 requests per minute). Please ignore the message
+    in the API Console about the access token.
+
 
     Register to use an less restricted version, which requires an access token.
   license:
     name: DB Data Portal
-    url: 'http://data.deutschebahn.com/pages/nutzungsbedingungen'
-  termsOfService: 'http://data.deutschebahn.com/nutzungsbedingungen.html'
+    url: http://data.deutschebahn.com/pages/nutzungsbedingungen
+  termsOfService: http://data.deutschebahn.com/nutzungsbedingungen.html
   title: Fahrplan-Free
   version: v1
   x-apisguru-categories:
     - transport
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png
   x-origin:
     - format: swagger
-      url: 'https://developer.deutschebahn.com/store/api-docs/DBOpenData/Fahrplan-Free/v1'
-      version: '2.0'
+      url: https://developer.deutschebahn.com/store/api-docs/DBOpenData/Fahrplan-Free/v1
+      version: "2.0"
   x-providerName: deutschebahn.com
   x-serviceName: fahrplan
 consumes:
@@ -36,7 +39,7 @@ consumes:
 produces:
   - application/json
 paths:
-  '/arrivalBoard/{id}':
+  "/arrivalBoard/{id}":
     get:
       description: Get arrival board at a given location at a given daten and time.
       parameters:
@@ -45,32 +48,35 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example: 2017-04-01 or 2017-04-01T10:30'
+        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example:
+            2017-04-01 or 2017-04-01T10:30"
           in: query
           name: date
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: arrival board
           schema:
-            $ref: '#/definitions/BoardResponse'
-        '400':
+            $ref: "#/definitions/BoardResponse"
+        "400":
           description: Invalid date/time specification.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '500':
+            $ref: "#/definitions/ErrorModel"
+        "500":
           description: Internal Server Error.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '503':
+            $ref: "#/definitions/ErrorModel"
+        "503":
           description: The service has been disabled temporarily.
           schema:
-            $ref: '#/definitions/ErrorModel'
+            $ref: "#/definitions/ErrorModel"
       summary: Get arrival board of a location
       x-auth-type: None
       x-throttling-tier: 10_per_minute
-  '/departureBoard/{id}':
+  "/departureBoard/{id}":
     get:
       description: Get departure board at a given location at a given daten and time.
       parameters:
@@ -79,57 +85,64 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example: 2017-04-01 or 2017-04-01T10:30'
+        - description: "Date and time in ISO-8601 format, yyyy-mm-ddThh:mm:ss, example:
+            2017-04-01 or 2017-04-01T10:30"
           in: query
           name: date
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: departure board
           schema:
-            $ref: '#/definitions/BoardResponse'
-        '400':
+            $ref: "#/definitions/BoardResponse"
+        "400":
           description: Invalid date/time specification.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '500':
+            $ref: "#/definitions/ErrorModel"
+        "500":
           description: Internal Server Error.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '503':
+            $ref: "#/definitions/ErrorModel"
+        "503":
           description: The service has been disabled temporarily.
           schema:
-            $ref: '#/definitions/ErrorModel'
+            $ref: "#/definitions/ErrorModel"
       summary: Get departure board of a location
       x-auth-type: None
       x-throttling-tier: 10_per_minute
-  '/journeyDetails/{id}':
+  "/journeyDetails/{id}":
     get:
-      description: Retrieve details of a journey. The id of journey should come from an arrival board or a departure board.
+      description: Retrieve details of a journey. The id of journey should come from
+        an arrival board or a departure board.
       parameters:
-        - description: Id of a journey. Use attribute 'detailsId' from the result of  'arrivalBoard' or 'departureBoard'
+        - description: Id of a journey. Use attribute 'detailsId' from the result
+            of  'arrivalBoard' or 'departureBoard'
           in: path
           name: id
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
-          description: 'journey details, locations of a journey'
+        "200":
+          description: journey details, locations of a journey
           schema:
-            $ref: '#/definitions/JourneyResponse'
-        '500':
+            $ref: "#/definitions/JourneyResponse"
+        "500":
           description: Internal Server Error.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '503':
+            $ref: "#/definitions/ErrorModel"
+        "503":
           description: The service has been disabled temporarily.
           schema:
-            $ref: '#/definitions/ErrorModel'
+            $ref: "#/definitions/ErrorModel"
       summary: Get details about a single journey
       x-auth-type: None
       x-throttling-tier: 10_per_minute
-  '/location/{name}':
+  "/location/{name}":
     get:
       description: Get information about locations matching the given name or name fragment
       parameters:
@@ -138,19 +151,21 @@ paths:
           name: name
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: location information
           schema:
-            $ref: '#/definitions/LocationResponse'
-        '500':
+            $ref: "#/definitions/LocationResponse"
+        "500":
           description: Internal Server Error.
           schema:
-            $ref: '#/definitions/ErrorModel'
-        '503':
+            $ref: "#/definitions/ErrorModel"
+        "503":
           description: The service has been disabled temporarily.
           schema:
-            $ref: '#/definitions/ErrorModel'
+            $ref: "#/definitions/ErrorModel"
       summary: Get location information
       x-auth-type: None
       x-throttling-tier: 10_per_minute
@@ -158,31 +173,31 @@ definitions:
   Board:
     properties:
       boardId:
-        description: ''
+        description: ""
         type: string
       dateTime:
-        description: ''
+        description: ""
         type: string
       detailsId:
-        description: ''
+        description: ""
         type: string
       name:
         description: Name of train
         type: string
       origin:
-        description: ''
+        description: ""
         type: string
       stopId:
-        description: ''
+        description: ""
         type: string
       stopName:
-        description: ''
+        description: ""
         type: string
       track:
-        description: ''
+        description: ""
         type: string
       type:
-        description: ''
+        description: ""
         type: string
     required:
       - name
@@ -199,7 +214,7 @@ definitions:
     properties:
       boards:
         items:
-          $ref: '#/definitions/Board'
+          $ref: "#/definitions/Board"
         minItems: 1
         type: array
         uniqueItems: true
@@ -224,7 +239,7 @@ definitions:
     properties:
       train_locs:
         items:
-          $ref: '#/definitions/TrainLocation'
+          $ref: "#/definitions/TrainLocation"
         minItems: 1
         type: array
         uniqueItems: true
@@ -234,16 +249,16 @@ definitions:
   Location:
     properties:
       id:
-        description: 'id of location (eva-number), example: 8000105'
+        description: "id of location (eva-number), example: 8000105"
         type: string
       lat:
-        description: 'latitude, example: 50.107149'
+        description: "latitude, example: 50.107149"
         type: number
       lon:
-        description: 'longitude, example: 8.663785'
+        description: "longitude, example: 8.663785"
         type: number
       name:
-        description: 'Name of location, example: Frankfurt(Main)Hbf'
+        description: "Name of location, example: Frankfurt(Main)Hbf"
         type: string
     required:
       - name
@@ -255,7 +270,7 @@ definitions:
     properties:
       locations:
         items:
-          $ref: '#/definitions/Location'
+          $ref: "#/definitions/Location"
         minItems: 1
         type: array
         uniqueItems: true
@@ -265,31 +280,31 @@ definitions:
   TrainLocation:
     properties:
       arrTime:
-        description: ''
+        description: ""
         type: string
       depTime:
-        description: ''
+        description: ""
         type: string
       lat:
-        description: ''
+        description: ""
         type: number
       lon:
-        description: ''
+        description: ""
         type: number
       operator:
-        description: ''
+        description: ""
         type: string
       stopId:
-        description: ''
+        description: ""
         type: string
       stopName:
-        description: ''
+        description: ""
         type: string
       train:
-        description: ''
+        description: ""
         type: string
       type:
-        description: ''
+        description: ""
         type: string
     required:
       - stopId

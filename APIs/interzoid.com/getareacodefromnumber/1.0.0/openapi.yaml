@@ -1,39 +1,41 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.interzoid.com'
+  - url: https://api.interzoid.com
 info:
   contact:
     email: support@interzoid.com
     name: API Support
-    url: 'https://www.interzoid.com'
+    url: https://www.interzoid.com
     x-twitter: interzoid
   description: This API provides area code information for a given telephone number.
   license:
     name: Interzoid license
-    url: 'https://www.interzoid.com/license'
-  termsOfService: 'https://www.interzoid.com/terms'
-  title: Interzoid Get Area Code From Number
+    url: https://www.interzoid.com/license
+  termsOfService: https://www.interzoid.com/terms
+  title: Interzoid Get Area Code From Number API
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/interzoid/profile_image?size=original'
+    url: https://twitter.com/interzoid/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://oas.interzoid.com/api/getareacodefromnumber.json'
-      version: '3.0'
+      url: https://oas.interzoid.com/api/getareacodefromnumber.json
+      version: "3.0"
   x-providerName: interzoid.com
   x-serviceName: getareacodefromnumber
 externalDocs:
   description: API home page and documentation
-  url: 'https://www.interzoid.com/services/getareacodefromnumber'
+  url: https://www.interzoid.com/services/getareacodefromnumber
 paths:
   /getareacodefromnumber:
     get:
-      description: The area code will be parsed out of a telephone number and used to retrieve information about the area code.
+      description: The area code will be parsed out of a telephone number and used to
+        retrieve information about the area code.
       operationId: getareacodefromnumber
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
@@ -46,7 +48,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -65,17 +67,17 @@ paths:
                     type: string
                 type: object
           description: Telephone number area code information
-        '400':
+        "400":
           description: bad request - insufficient parameters
-        '402':
+        "402":
           description: credits exhausted
-        '403':
+        "403":
           description: invalid license API key
-        '404':
+        "404":
           description: area code not found
-        '405':
+        "405":
           description: method not allowed
-        '500':
+        "500":
           description: internal server error
       summary: Gets area code information from a telephone number
       tags:

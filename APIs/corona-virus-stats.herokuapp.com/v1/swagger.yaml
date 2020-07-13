@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: corona-virus-stats.herokuapp.com
@@ -11,8 +11,8 @@ info:
     - open_data
   x-origin:
     - format: swagger
-      url: 'http://corona-virus-stats.herokuapp.com/api/v1/docs/?format=openapi'
-      version: '2.0'
+      url: http://corona-virus-stats.herokuapp.com/api/v1/docs/?format=openapi
+      version: "2.0"
   x-providerName: corona-virus-stats.herokuapp.com
 consumes:
   - application/json
@@ -36,19 +36,19 @@ paths:
           name: search
           required: false
           type: string
-        - description: 'Inform the page. Starting with 1. Default: 1'
+        - description: "Inform the page. Starting with 1. Default: 1"
           in: query
           name: page
           required: false
           type: integer
-        - description: 'Limit per page, Default: 20.'
+        - description: "Limit per page, Default: 20."
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             properties:
               count:
@@ -63,7 +63,7 @@ paths:
                 x-nullable: true
               results:
                 items:
-                  $ref: '#/definitions/CountryStats'
+                  $ref: "#/definitions/CountryStats"
                 type: array
             required:
               - count
@@ -78,26 +78,26 @@ paths:
       operationId: cases_general-stats_list
       parameters: []
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             items:
-              $ref: '#/definitions/GeneralStats'
+              $ref: "#/definitions/GeneralStats"
             type: array
       tags:
         - cases
     parameters: []
   /docs/:
     get:
-      description: ''
+      description: ""
       operationId: docs_list
       parameters: []
       produces:
         - application/coreapi+json
         - application/openapi+json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
       tags:
         - docs
     parameters: []
@@ -159,10 +159,9 @@ definitions:
         type: integer
         x-nullable: true
       total_recovered:
-        maximum: 9223372036854776000
-        minimum: -9223372036854776000
+        maxLength: 200
         title: Total recovered
-        type: integer
+        type: string
         x-nullable: true
     required:
       - country

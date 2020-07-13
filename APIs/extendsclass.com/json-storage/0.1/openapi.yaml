@@ -1,91 +1,91 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://extendsclass.com/api/json-storage'
+  - url: https://extendsclass.com/api/json-storage
 info:
   description: JSON storage API
   title: JSON storage
-  version: '0.1'
+  version: "0.1"
   x-apisguru-categories:
     - developer_tools
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://extendsclass.com/json-storage.openapi.json'
-      version: '3.0'
+      url: https://extendsclass.com/json-storage.openapi.json
+      version: "3.0"
   x-providerName: extendsclass.com
   x-serviceName: json-storage
 paths:
   /bin:
     post:
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateStatus'
+                $ref: "#/components/schemas/CreateStatus"
           description: Bin information (id and URL)
-        '413':
+        "413":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-          description: '''JSON data too large'' or ''Security key is too large'''
-        '422':
+                $ref: "#/components/schemas/Error"
+          description: "'JSON data too large' or 'Security key is too large'"
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Security key is required for private bin
       summary: Create a json bin
-  '/bin/{id}':
+  "/bin/{id}":
     delete:
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteStatus'
+                $ref: "#/components/schemas/DeleteStatus"
           description: Status of the deletion
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Wrong security key
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Bin not found
-        '422':
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Id must be specified
       summary: Delete a json bin
     get:
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: object
           description: Bin data
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Bin not found
-        '422':
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Id must be specified
       summary: Return a json bin
     parameters:
@@ -96,68 +96,68 @@ paths:
           type: string
     patch:
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateStatus'
+                $ref: "#/components/schemas/UpdateStatus"
           description: Bin data updated
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Wrong security key
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Bin not found
-        '413':
+        "413":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: JSON data too large
-        '422':
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Id must be specified
       summary: Partially update a json bin with JSON Merge Patch
     put:
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateStatus'
+                $ref: "#/components/schemas/UpdateStatus"
           description: Bin data updated
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Wrong security key
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Bin not found
-        '413':
+        "413":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: JSON data too large
-        '422':
+        "422":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Id must be specified
       summary: Update a json bin
 components:
@@ -168,7 +168,7 @@ components:
           title: Id of the bin
           type: string
         status:
-          title: 'Update status (0: Success)'
+          title: "Update status (0: Success)"
           type: integer
         uri:
           title: URI of the bin
@@ -176,7 +176,7 @@ components:
     DeleteStatus:
       properties:
         status:
-          title: 'Update status (0: Success)'
+          title: "Update status (0: Success)"
           type: integer
     Error:
       properties:
@@ -184,7 +184,7 @@ components:
           title: Error message
           type: string
         status:
-          title: 'Status (1: Error)'
+          title: "Status (1: Error)"
           type: integer
     UpdateStatus:
       properties:
@@ -192,5 +192,5 @@ components:
           title: Data updated
           type: object
         status:
-          title: 'Update status (0: Success)'
+          title: "Update status (0: Success)"
           type: integer

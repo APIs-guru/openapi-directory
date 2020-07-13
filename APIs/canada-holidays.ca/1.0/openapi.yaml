@@ -1,26 +1,27 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://canada-holidays.ca'
+  - url: https://canada-holidays.ca
 info:
   contact:
     email: paul@pcraig3.ca
     name: Paul Craig
-    url: 'https://canada-holidays.ca/feedback'
-  description: 'This API that lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
+    url: https://canada-holidays.ca/feedback
+  description: This API that lists all 28 public holidays for all 13 provinces and
+    territories in Canada, including federal holidays.
   license:
     name: MIT
-    url: 'https://github.com/pcraig3/hols/blob/master/LICENSE'
-  title: Canada Holidays
-  version: '1.0'
+    url: https://github.com/pcraig3/hols/blob/master/LICENSE
+  title: Canada Holidays API
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg'
+    backgroundColor: "#FFFFFF"
+    url: https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg
   x-origin:
     - format: openapi
-      url: 'https://api.swaggerhub.com/apis/pcraig3/canada-holidays/1.0'
-      version: '3.0'
+      url: https://api.swaggerhub.com/apis/pcraig3/canada-holidays/1.0
+      version: "3.0"
   x-providerName: canada-holidays.ca
 tags:
   - description: Get holiday(s) with associated provinces
@@ -35,7 +36,7 @@ paths:
       description: Returns a welcome message.
       operationId: get-api-vi
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -43,12 +44,13 @@ paths:
                   value:
                     _links:
                       holidays:
-                        href: 'http://localhost:3000/api/v1/holidays'
+                        href: http://localhost:3000/api/v1/holidays
                       provinces:
-                        href: 'http://localhost:3000/api/v1/provinces'
+                        href: http://localhost:3000/api/v1/provinces
                       self:
-                        href: 'http://localhost:3000/api/v1/'
-                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés
+                        href: http://localhost:3000/api/v1/
+                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans
+                      l’API canadienne des jours fériés
               schema:
                 properties:
                   _links:
@@ -57,21 +59,21 @@ paths:
                         properties:
                           href:
                             description: Domain to get all holidays
-                            example: 'http://localhost:3000/api/v1/holidays'
+                            example: http://localhost:3000/api/v1/holidays
                             type: string
                         type: object
                       provinces:
                         properties:
                           href:
                             description: Domain to get all provinces
-                            example: 'http://localhost:3000/api/v1/provinces'
+                            example: http://localhost:3000/api/v1/provinces
                             type: string
                         type: object
                       self:
                         properties:
                           href:
                             description: Root domain
-                            example: 'http://localhost:3000/api/v1/'
+                            example: http://localhost:3000/api/v1/
                             type: string
                         type: object
                     type: object
@@ -86,7 +88,8 @@ paths:
         - root
   /api/v1/holidays:
     get:
-      description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
+      description: Returns Canadian public holidays. Each holiday lists the regions
+        that observe it.
       operationId: get-api-v1-holidays
       parameters:
         - allowEmptyValue: true
@@ -94,31 +97,32 @@ paths:
           in: query
           name: year
           schema:
-            default: '2020'
+            default: "2020"
             maxLength: 4
             minLength: 4
-            pattern: '^\d{4}$'
+            pattern: ^\d{4}$
             type: string
         - allowEmptyValue: true
-          description: 'A boolean parameter. If true, will return only federal holidays. If false, will return no federal holidays.'
+          description: A boolean parameter. If true, will return only federal holidays. If
+            false, will return no federal holidays.
           in: query
           name: federal
           schema:
             enum:
-              - '1'
-              - '0'
-              - 'true'
-              - 'false'
+              - "1"
+              - "0"
+              - "true"
+              - "false"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 /holidays:
                   value:
                     holidays:
-                      - date: '2020-01-01'
+                      - date: 2020-01-01
                         federal: 1
                         id: 1
                         nameEn: New Year’s Day
@@ -148,7 +152,7 @@ paths:
                           - id: NU
                             nameEn: Nunavut
                             nameFr: Nunavut
-                          - id: 'ON'
+                          - id: ON
                             nameEn: Ontario
                             nameFr: Ontario
                           - id: PE
@@ -163,7 +167,7 @@ paths:
                           - id: YT
                             nameEn: Yukon
                             nameFr: Yukon
-                      - date: '2020-02-17'
+                      - date: 2020-02-17
                         federal: 0
                         id: 2
                         nameEn: Louis Riel Day
@@ -176,7 +180,7 @@ paths:
                 properties:
                   holidays:
                     items:
-                      $ref: '#/components/schemas/Holiday'
+                      $ref: "#/components/schemas/Holiday"
                     type: array
                 type: object
           description: OK
@@ -184,9 +188,10 @@ paths:
       summary: Get all holidays
       tags:
         - holidays
-  '/api/v1/holidays/{holidayId}':
+  "/api/v1/holidays/{holidayId}":
     get:
-      description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
+      description: Returns one Canadian statutory holiday by integer id. Returns a 404
+        response for invalid ids.
       operationId: get-holidays-holidayId
       parameters:
         - allowEmptyValue: true
@@ -194,20 +199,20 @@ paths:
           in: query
           name: year
           schema:
-            default: '2020'
+            default: "2020"
             maxLength: 4
             minLength: 4
-            pattern: '^\d{4}$'
+            pattern: ^\d{4}$
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 /holidays/2:
                   value:
                     holiday:
-                      date: '2020-02-17'
+                      date: 2020-02-17
                       federal: 0
                       id: 2
                       nameEn: Louis Riel Day
@@ -219,24 +224,24 @@ paths:
               schema:
                 properties:
                   holiday:
-                    $ref: '#/components/schemas/Holiday'
+                    $ref: "#/components/schemas/Holiday"
                 type: object
           description: OK
           headers: {}
-        '404':
+        "404":
           content:
             application/json:
               examples:
                 /holidays/100:
                   value:
                     error:
-                      message: 'Error: No holiday with id “100”'
+                      message: "Error: No holiday with id “100”"
                       status: 404
-                      timestamp: '2020-04-27T05:41:10.710Z'
+                      timestamp: 2020-04-27T05:41:10.710Z
               schema:
                 properties:
                   error:
-                    $ref: '#/components/schemas/Error'
+                    $ref: "#/components/schemas/Error"
                 type: object
           description: Not Found
       summary: Get a holiday by id
@@ -256,7 +261,8 @@ paths:
           type: integer
   /api/v1/provinces:
     get:
-      description: Returns provinces and territories in Canada. Each province or territory lists its associated holidays.
+      description: Returns provinces and territories in Canada. Each province or
+        territory lists its associated holidays.
       operationId: get-api-v1-provinces
       parameters:
         - allowEmptyValue: true
@@ -264,13 +270,13 @@ paths:
           in: query
           name: year
           schema:
-            default: '2020'
+            default: "2020"
             maxLength: 4
             minLength: 4
-            pattern: '^\d{4}$'
+            pattern: ^\d{4}$
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -278,12 +284,12 @@ paths:
                   value:
                     provinces:
                       - holidays:
-                          - date: '2020-01-01'
+                          - date: 2020-01-01
                             federal: 1
                             id: 1
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
-                          - date: '2020-02-17'
+                          - date: 2020-02-17
                             federal: 0
                             id: 4
                             nameEn: Family Day
@@ -292,18 +298,18 @@ paths:
                         nameEn: Alberta
                         nameFr: Alberta
                         nextHoliday:
-                          date: '2020-05-18'
+                          date: 2020-05-18
                           federal: 1
                           id: 11
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                       - holidays:
-                          - date: '2020-01-01'
+                          - date: 2020-01-01
                             federal: 1
                             id: 1
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
-                          - date: '2020-02-17'
+                          - date: 2020-02-17
                             federal: 0
                             id: 4
                             nameEn: Family Day
@@ -312,7 +318,7 @@ paths:
                         nameEn: British Columbia
                         nameFr: Colombie-Britannique
                         nextHoliday:
-                          date: '2020-05-18'
+                          date: 2020-05-18
                           federal: 1
                           id: 11
                           nameEn: Victoria Day
@@ -321,7 +327,7 @@ paths:
                 properties:
                   provinces:
                     items:
-                      $ref: '#/components/schemas/Province'
+                      $ref: "#/components/schemas/Province"
                     type: array
                 type: object
           description: OK
@@ -329,7 +335,7 @@ paths:
       summary: Get all provinces
       tags:
         - provinces
-  '/api/v1/provinces/{provinceId}':
+  "/api/v1/provinces/{provinceId}":
     get:
       description: Returns a Canadian province or territory with its associated holidays.
       operationId: get-api-v1-provinces-provinceId
@@ -339,13 +345,13 @@ paths:
           in: query
           name: year
           schema:
-            default: '2020'
+            default: "2020"
             maxLength: 4
             minLength: 4
-            pattern: '^\d{4}$'
+            pattern: ^\d{4}$
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -353,12 +359,12 @@ paths:
                   value:
                     province:
                       holidays:
-                        - date: '2020-01-01'
+                        - date: 2020-01-01
                           federal: 1
                           id: 1
                           nameEn: New Year’s Day
                           nameFr: Jour de l’An
-                        - date: '2020-02-17'
+                        - date: 2020-02-17
                           federal: 0
                           id: 2
                           nameEn: Louis Riel Day
@@ -367,7 +373,7 @@ paths:
                       nameEn: Manitoba
                       nameFr: Manitoba
                       nextHoliday:
-                        date: '2020-05-18'
+                        date: 2020-05-18
                         federal: 1
                         id: 11
                         nameEn: Victoria Day
@@ -375,24 +381,24 @@ paths:
               schema:
                 properties:
                   province:
-                    $ref: '#/components/schemas/Province'
+                    $ref: "#/components/schemas/Province"
                 type: object
           description: OK
           headers: {}
-        '404':
+        "404":
           content:
             application/json:
               examples:
                 /holidays/100:
                   value:
                     error:
-                      message: 'Error: No holiday with id “100”'
+                      message: "Error: No holiday with id “100”"
                       status: 404
-                      timestamp: '2020-04-27T05:41:10.710Z'
+                      timestamp: 2020-04-27T05:41:10.710Z
               schema:
                 properties:
                   error:
-                    $ref: '#/components/schemas/Error'
+                    $ref: "#/components/schemas/Error"
                 type: object
           description: Not Found
       summary: Get a province or territory by abbreviation
@@ -413,7 +419,7 @@ paths:
             - NS
             - NT
             - NU
-            - 'ON'
+            - ON
             - PE
             - QC
             - SK
@@ -426,7 +432,7 @@ components:
       properties:
         message:
           description: An error message
-          example: 'Error: No holiday with id “100”'
+          example: "Error: No holiday with id “100”"
           type: string
         status:
           description: An HTTP status code
@@ -436,31 +442,32 @@ components:
           type: integer
         timestamp:
           description: A UTC ISO timestamp
-          example: '2020-04-27T05:41:10.710Z'
+          example: 2020-04-27T05:41:10.710Z
           format: date-time
           type: string
       title: Error
       type: object
       x-examples:
         /holidays/100:
-          message: 'Error: No holiday with id “100”'
+          message: "Error: No holiday with id “100”"
           status: 404
-          timestamp: '2020-04-27T05:41:10.710Z'
+          timestamp: 2020-04-27T05:41:10.710Z
     Holiday:
-      description: 'A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.'
+      description: A Canadian holiday. Includes a name, date, and a list of regions
+        that observe this holiday.
       properties:
         date:
           description: ISO date
-          example: '2020-02-17'
+          example: 2020-02-17
           format: date
           type: string
         federal:
           description: Whether this holiday is observed by federally-regulated industries.
           enum:
-            - '0'
-            - '1'
-            - 'true'
-            - 'false'
+            - "0"
+            - "1"
+            - "true"
+            - "false"
           format: binary
           type: string
         id:
@@ -479,13 +486,13 @@ components:
           type: string
         provinces:
           items:
-            $ref: '#/components/schemas/Province'
+            $ref: "#/components/schemas/Province"
           type: array
       title: Holiday
       type: object
       x-examples:
         /holidays/2:
-          date: '2020-02-17'
+          date: 2020-02-17
           federal: 0
           id: 2
           nameEn: Louis Riel Day
@@ -495,7 +502,7 @@ components:
               nameEn: Manitoba
               nameFr: Manitoba
     Province:
-      description: 'A Canadian province or territory '
+      description: "A Canadian province or territory "
       properties:
         id:
           description: Canadian province abbreviations
@@ -508,7 +515,7 @@ components:
             - NS
             - NT
             - NU
-            - 'ON'
+            - ON
             - PE
             - QC
             - SK
@@ -524,52 +531,52 @@ components:
           example: Manitoba
           type: string
         nextHoliday:
-          $ref: '#/components/schemas/Holiday'
+          $ref: "#/components/schemas/Holiday"
         provinces:
           items:
-            $ref: '#/components/schemas/Holiday'
+            $ref: "#/components/schemas/Holiday"
           type: array
       title: Province
       type: object
       x-examples:
         /provinces/MB:
           holidays:
-            - date: '2020-01-01'
+            - date: 2020-01-01
               federal: 1
               id: 1
               nameEn: New Year’s Day
               nameFr: Jour de l’An
-            - date: '2020-02-17'
+            - date: 2020-02-17
               federal: 0
               id: 2
               nameEn: Louis Riel Day
               nameFr: Journée Louis Riel
-            - date: '2020-04-10'
+            - date: 2020-04-10
               federal: 1
               id: 7
               nameEn: Good Friday
               nameFr: Vendredi saint
-            - date: '2020-05-18'
+            - date: 2020-05-18
               federal: 1
               id: 11
               nameEn: Victoria Day
               nameFr: Fête de la Reine
-            - date: '2020-07-01'
+            - date: 2020-07-01
               federal: 1
               id: 15
               nameEn: Canada Day
               nameFr: Fête du Canada
-            - date: '2020-09-07'
+            - date: 2020-09-07
               federal: 1
               id: 24
               nameEn: Labour Day
               nameFr: Fête du travail
-            - date: '2020-10-12'
+            - date: 2020-10-12
               federal: 1
               id: 25
               nameEn: Thanksgiving
               nameFr: Action de grâce
-            - date: '2020-12-25'
+            - date: 2020-12-25
               federal: 1
               id: 27
               nameEn: Christmas Day
@@ -578,7 +585,7 @@ components:
           nameEn: Manitoba
           nameFr: Manitoba
           nextHoliday:
-            date: '2020-05-18'
+            date: 2020-05-18
             federal: 1
             id: 11
             nameEn: Victoria Day

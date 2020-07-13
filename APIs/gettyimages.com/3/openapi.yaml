@@ -247,7 +247,7 @@ paths:
 
         ##  Quickstart
 
-        You'll need an API key and an access token to use this resource.
+        You'll need an API key and an access token to use this resource. 
 
         Notifications older than 60 days will be removed from partner channels.
       parameters:
@@ -826,7 +826,7 @@ paths:
 
 
         You'll need an API key and access token to use this resource.
-
+        	
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -855,12 +855,12 @@ paths:
 
 
         You'll need an API key and access token to use this resource.
+         
 
+        	
+        This endpoint requires being a Getty Images customer to limit your results to only assets that you have a license to use, 
 
-
-        This endpoint requires being a Getty Images customer to limit your results to only assets that you have a license to use,
-
-        you need to also include an authorization token in the header of your request.
+        you need to also include an authorization token in the header of your request. 
 
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
@@ -1010,7 +1010,7 @@ paths:
         ```
 
 
-        If the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the image.
+        If the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the image. 
 
 
         Client Request:
@@ -1202,7 +1202,7 @@ paths:
         ```
 
 
-        If the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the video.
+        If the `auto_download` request query parameter is set to false, the API will return a HTTP status code 200, along with the URI in the response body which can be used to download the video. 
 
 
         Client Request:
@@ -1312,15 +1312,15 @@ paths:
         This endpoint returns the detailed event metadata for all specified
         events. Getty Images news, sports and entertainment photographers and
 
-        videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with
+        videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with 
 
-        an event, are assigned the same EventID. EventIDs are part of the meta-data returned in SearchForImages Results. Only content
+        an event, are assigned the same EventID. EventIDs are part of the meta-data returned in SearchForImages Results. Only content 
 
-        produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image)
+        produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) 
 
-        will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as
+        will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as 
 
-        "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week".
+        "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week". 
 
 
         You'll need an API key and access token to use this resource.
@@ -1375,19 +1375,19 @@ paths:
     get:
       description: >
         This endpoint returns the detailed event metadata for a specified event.
-        Getty Images news, sports and entertainment
+        Getty Images news, sports and entertainment 
 
-        photographers and videographers cover editorially relevant events occurring around the world.
+        photographers and videographers cover editorially relevant events occurring around the world.  
 
-        All images or video clips produced in association with an event, are assigned the same EventID.
+        All images or video clips produced in association with an event, are assigned the same EventID. 
 
-        EventIDs are part of the meta-data returned in SearchForImages Results. Only content produced under a Getty Images
+        EventIDs are part of the meta-data returned in SearchForImages Results. Only content produced under a Getty Images 
 
-        brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be
+        brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be 
 
-        consistently assigned an EventID. The Event framework may also be used to group similar content, such as
+        consistently assigned an EventID. The Event framework may also be used to group similar content, such as 
 
-        "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week".
+        "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week". 
 
 
         You'll need an API key and access token to use this resource.
@@ -1454,7 +1454,7 @@ paths:
         #### Summary Fields Set
 
 
-        The **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build
+        The **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build 
 
         search response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.
 
@@ -1482,7 +1482,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a 
 
         detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.
 
@@ -1493,22 +1493,22 @@ paths:
             "images":
             [
                 "allowed_use",
-                "artist",
-                "artist_title",
+                "artist", 
+                "artist_title", 
                 "asset_family",
                 "call_for_image",
-                "caption",
+                "caption", 
                 "city",
                 "collection_code",
-                "collection_id",
+                "collection_id", 
                 "collection_name",
-                "color_type",
-                "copyright",
-                "country",
-                "credit_line",
-                "date_created",
+                "color_type", 
+                "copyright", 
+                "country", 
+                "credit_line", 
+                "date_created", 
                 "date_submitted",
-                "download_sizes",
+                "download_sizes", 
                 "editorial_segments",
                 "event_ids",
                 "graphical_style",
@@ -1518,7 +1518,7 @@ paths:
                 "product_types",
                 "quality_rank",
                 "referral_destinations",
-                "state_province",
+                "state_province", 
                 "title"
             ]
         }
@@ -1531,7 +1531,7 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution
 
-        files that are most frequently used to build a UI displaying search results. The following fields are provided for every image
+        files that are most frequently used to build a UI displaying search results. The following fields are provided for every image 
 
         in your result set when you include **display_set** in your request.
 
@@ -1541,7 +1541,7 @@ paths:
         {
             "images":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -1665,8 +1665,8 @@ paths:
         This endpoint returns the detailed image metadata for a specified image.
 
 
-        You'll need an API key and access token to use this resource.
-
+        You'll need an API key and access token to use this resource. 
+         
         ## Working with Fields Sets
 
 
@@ -1706,9 +1706,9 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are 
 
-        often used to build a detailed view of images. The following fields are provided for every image in your
+        often used to build a detailed view of images. The following fields are provided for every image in your 
 
         result set when you include **detail_set** in your request.
 
@@ -1719,22 +1719,22 @@ paths:
             "images":
             [
                 "allowed_use",
-                "artist",
-                "artist_title",
+                "artist", 
+                "artist_title", 
                 "asset_family",
                 "call_for_image",
-                "caption",
+                "caption", 
                 "city",
                 "collection_code",
-                "collection_id",
+                "collection_id", 
                 "collection_name",
-                "color_type",
-                "copyright",
-                "country",
-                "credit_line",
-                "date_created",
+                "color_type", 
+                "copyright", 
+                "country", 
+                "credit_line", 
+                "date_created", 
                 "date_submitted",
-                "download_sizes",
+                "download_sizes", 
                 "editorial_segments",
                 "event_ids",
                 "graphical_style",
@@ -1744,7 +1744,7 @@ paths:
                 "product_types",
                 "quality_rank",
                 "referral_destinations",
-                "state_province",
+                "state_province", 
                 "title"
             ]
         }
@@ -1757,7 +1757,7 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low
 
-        resolution files that are most frequently used to build a UI displaying search results. The following fields are provided
+        resolution files that are most frequently used to build a UI displaying search results. The following fields are provided 
 
         for every image in your result set when you include **display_set** in your request.
 
@@ -1767,7 +1767,7 @@ paths:
         {
             "images":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -1966,7 +1966,7 @@ paths:
                 "collection_code",
                 "collection_id",
                 "collection_name",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "thumb"
@@ -1984,7 +1984,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a 
 
         detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.
 
@@ -2004,7 +2004,7 @@ paths:
                 "collection_name",
                 "copyright",
                 "date_created",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -2035,7 +2035,7 @@ paths:
         #### Display Fields Set
 
 
-        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files
+        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files 
 
         that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result
 
@@ -2047,7 +2047,7 @@ paths:
         {
             "images":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -2195,7 +2195,7 @@ paths:
                 "collection_code",
                 "collection_id",
                 "collection_name",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "thumb"
@@ -2213,7 +2213,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a 
 
         detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.
 
@@ -2233,7 +2233,7 @@ paths:
                 "collection_name",
                 "copyright",
                 "date_created",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -2264,7 +2264,7 @@ paths:
         #### Display Fields Set
 
 
-        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files
+        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files 
 
         that are most frequently used to build a UI displaying search results. The following fields are provided for every image in your result
 
@@ -2276,7 +2276,7 @@ paths:
         {
             "images":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -2394,7 +2394,7 @@ paths:
     get:
       description: |-
         This endpoint returns detailed order metadata for a specified order.
-        Use of this endpoint requires configuration changes to your API key.
+        Use of this endpoint requires configuration changes to your API key. 
 
         You'll need an API key and access token to use this resource.
       parameters:
@@ -2474,7 +2474,7 @@ paths:
     get:
       description: >
         This endpoint returns a list of all assets purchased on gettyimages.com
-        by the username used for authentication.
+        by the username used for authentication. 
 
         Use of this endpoint requires configuration changes to your API key. Please contact your sales representative
 
@@ -2544,7 +2544,7 @@ paths:
         Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image)
         will be consistently assigned an EventID. The Event framework may also
         be used to group similar content, such as "Hats from the Royal Wedding"
-        or "Odd-ballOffbeat images of the week".
+        or "Odd-ballOffbeat images of the week".   
 
 
         You'll need an API key and access token to use this resource.
@@ -2686,14 +2686,14 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "asset_family",
                 "caption",
                 "collection_code",
                 "collection_id",
                 "collection_name",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "thumb"
@@ -2711,7 +2711,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of images.
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a detailed view of images. 
 
         The following fields are provided for every image in your result set when you include **detail_set** in your request.
 
@@ -2719,7 +2719,7 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "allowed_use",
                 "artist",
@@ -2731,7 +2731,7 @@ paths:
                 "collection_name",
                 "copyright",
                 "date_created",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -2762,7 +2762,7 @@ paths:
         #### Display Fields Set
 
 
-        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most
+        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files that are most 
 
         frequently used to build a UI displaying search results. The following fields are provided for every image in your result set when you include **display_set**
 
@@ -2772,9 +2772,9 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -3178,7 +3178,7 @@ paths:
 
 
         You'll need an API key and access token to use this resource.
-
+         
         You can show different information in the response by specifying values on the "fields" parameter (see details below).
 
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
@@ -3193,7 +3193,7 @@ paths:
         #### Summary Fields Set
 
 
-        The **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to
+        The **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to 
 
         build search response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.
 
@@ -3201,14 +3201,14 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "asset_family",
                 "caption",
                 "collection_code",
                 "collection_id",
                 "collection_name",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "thumb"
@@ -3226,7 +3226,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to 
 
         build a detailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.
 
@@ -3234,7 +3234,7 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "allowed_use",
                 "artist",
@@ -3246,7 +3246,7 @@ paths:
                 "collection_name",
                 "copyright",
                 "date_created",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -3279,7 +3279,7 @@ paths:
 
         The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution
 
-        files that are most frequently used to build a UI displaying search results. The following fields are provided for every image
+        files that are most frequently used to build a UI displaying search results. The following fields are provided for every image 
 
         in your result set when you include **display_set** in your request.
 
@@ -3287,9 +3287,9 @@ paths:
         ```Go
 
         {
-            "images":
+            "images": 
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -3902,14 +3902,14 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "asset_family",
                 "caption",
                 "collection_code",
                 "collection_id",
                 "collection_name",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "thumb"
@@ -3933,7 +3933,7 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
                 "allowed_use",
                 "artist",
@@ -3945,7 +3945,7 @@ paths:
                 "collection_name",
                 "copyright",
                 "date_created",
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -3982,9 +3982,9 @@ paths:
         ```
 
         {
-            "images":
+            "images": 
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -4461,7 +4461,7 @@ paths:
 
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without
 
-        being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only
+        being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only 
 
         assets that you have a license to use, you need to also include an authorization token in the header of your request.
 
@@ -4485,9 +4485,9 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
-                "asset_family",
+                "asset_family", 
                 "caption",
                 "collection_code",
                 "collection_name",
@@ -4514,7 +4514,7 @@ paths:
         #### Detail Fields Set
 
 
-        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a
+        The **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a 
 
         detailed view of videos. The following fields are provided for every video in your result set when you include **detail_set** in your request.
 
@@ -4522,17 +4522,17 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "allowed_use",
                 "artist",
-                "asset_family",
+                "asset_family", 
         		"call_for_image",
-                "caption",
+                "caption", 
                 "clip_length",
                 "collection_code",
                 "collection_id",
-                "collection_name",
+                "collection_name", 
                 "color_type",
                 "copyright",
                 "date_created",
@@ -4565,9 +4565,9 @@ paths:
         #### Display Fields Set
 
 
-        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files
+        The **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution files 
 
-        that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result
+        that are most frequently used to build a UI displaying search results. The following fields are provided for every video in your result 
 
         set when you include **display_set** in your request.
 
@@ -4926,9 +4926,9 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
-                "asset_family",
+                "asset_family", 
                 "caption",
                 "collection_code",
                 "collection_name",
@@ -4961,17 +4961,17 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "allowed_use",
                 "artist",
-                "asset_family",
+                "asset_family", 
         		"call_for_image",
-                "caption",
+                "caption", 
                 "clip_length",
                 "collection_code",
                 "collection_id",
-                "collection_name",
+                "collection_name", 
                 "color_type",
                 "copyright",
                 "date_created",
@@ -5373,7 +5373,7 @@ paths:
 
         You'll need an API key and a [Resource Owner Grant](http://developers.gettyimages.com/en/authorization-faq.html) access token to use this resource.
 
-        Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key.
+        Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. 
 
 
         _Note_: Date of use can be in any unambiguous date format.
@@ -5441,7 +5441,7 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "asset_family",
                 "caption",
@@ -5476,7 +5476,7 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "allowed_use",
                 "artist",
@@ -5528,7 +5528,7 @@ paths:
         {
             "videos":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"
@@ -6140,7 +6140,7 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "asset_family",
                 "caption",
@@ -6175,7 +6175,7 @@ paths:
         ```
 
         {
-            "videos":
+            "videos": 
             [
                 "allowed_use",
                 "artist",
@@ -6227,7 +6227,7 @@ paths:
         {
             "videos":
             [
-                "display_sizes":
+                "display_sizes": 
                 [
                     {
                         "name": "comp"

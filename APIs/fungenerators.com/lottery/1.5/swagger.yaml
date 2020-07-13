@@ -1,19 +1,20 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
 host: api.fungenerators.com
 info:
-  description: |
-    Below is the documentation for the API calls. You can try them out right here. 
-  title: Random Lottery Number generator
-  version: '1.5'
+  description: >
+    Below is the documentation for the API calls. You can try them out right
+    here. 
+  title: Random Lottery Number generator API
+  version: "1.5"
   x-apisguru-categories:
     - entertainment
   x-origin:
     - format: swagger
-      url: 'https://fungenerators.com/yaml/lottery.yaml'
-      version: '2.0'
+      url: https://fungenerators.com/yaml/lottery.yaml
+      version: "2.0"
   x-providerName: fungenerators.com
   x-serviceName: lottery
 consumes:
@@ -31,14 +32,19 @@ tags:
   - description: Random Lottery number generation API
     externalDocs:
       description: Find out more
-      url: 'http://fungenerators.com/api/lottery'
+      url: http://fungenerators.com/api/lottery
     name: Lottery
 paths:
   /lottery/countries:
     get:
-      description: Get the complete list of countries supported in the number generation API.
+      description: Get the complete list of countries supported in the number
+        generation API.
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -56,7 +62,7 @@ paths:
                       ]
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -86,8 +92,12 @@ paths:
           name: count
           required: false
           type: integer
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -103,7 +113,7 @@ paths:
                           ]
                       }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -127,8 +137,12 @@ paths:
           name: country
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -148,7 +162,7 @@ paths:
                       ]
                   }
               }            
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-

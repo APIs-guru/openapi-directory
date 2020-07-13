@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: getsandbox.com
@@ -7,20 +7,20 @@ info:
   contact:
     email: hello@getsandbox.com
     name: Sandbox Support
-    url: 'https://getsandbox.com'
+    url: https://getsandbox.com
   description: Sandbox API
-  termsOfService: 'https://getsandbox.com/policy/customer-agreement'
-  title: Sandbox
+  termsOfService: https://getsandbox.com/policy/customer-agreement
+  title: Sandbox API
   version: v1
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    backgroundColor: '#161924'
-    url: 'https://getsandbox.com/lib/img/logo-white-72dpi.png'
+    backgroundColor: "#161924"
+    url: https://getsandbox.com/lib/img/logo-white-72dpi.png
   x-origin:
     - format: swagger
-      url: 'https://getsandbox.com/lib/js/vendor/swagger/swagger.json'
-      version: '2.0'
+      url: https://getsandbox.com/lib/js/vendor/swagger/swagger.json
+      version: "2.0"
   x-providerName: getsandbox.com
   x-tags:
     - sandbox
@@ -30,11 +30,7 @@ info:
     - Swagger
     - OpenAPI
 externalDocs:
-  url: 'https://getsandbox.com/docs/api/overview'
-consumes:
-  - application/json
-produces:
-  - application/json
+  url: https://getsandbox.com/docs/api/overview
 securityDefinitions:
   api_key:
     in: header
@@ -46,10 +42,12 @@ tags:
 paths:
   /1/activity/search:
     get:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: getSandboxesActivity
       parameters:
-        - description: 'Timestamp to start search from, epoch time in milliseconds.'
+        - description: Timestamp to start search from, epoch time in milliseconds.
           format: int64
           in: query
           name: fromTimestamp
@@ -60,12 +58,13 @@ paths:
           name: sourceSandboxes
           required: false
           type: string
-        - description: 'A keyword to search activities by, will match any part of the ActivityMessage.'
+        - description: A keyword to search activities by, will match any part of the
+            ActivityMessage.
           in: query
           name: keyword
           required: false
           type: string
-        - description: 'Flag to return all types of activity, defaults to just Requests'
+        - description: Flag to return all types of activity, defaults to just Requests
           in: query
           name: allTypes
           required: false
@@ -76,11 +75,13 @@ paths:
           name: maxResults
           required: false
           type: integer
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
-            application/json: |-
+            application/json: >-
               [
                 {
                   "createdTimestamp": 1464829513623,
@@ -175,22 +176,26 @@ paths:
               ]
           schema:
             items:
-              $ref: '#/definitions/ActivityMessage'
+              $ref: "#/definitions/ActivityMessage"
             type: array
       summary: searchActivity
       tags:
         - Activity
   /1/sandboxes:
     get:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: getSandboxes
       parameters:
         - in: query
           name: filterType
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
             application/json: |-
@@ -213,13 +218,15 @@ paths:
               ]
           schema:
             items:
-              $ref: '#/definitions/Sandbox'
+              $ref: "#/definitions/Sandbox"
             type: array
       summary: getSandboxes
       tags:
         - Sandbox
     post:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: createSandbox
       parameters:
         - description: Sandbox to be created
@@ -227,9 +234,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CreateSandbox'
+            $ref: "#/definitions/CreateSandbox"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
             application/json: |-
@@ -249,13 +258,15 @@ paths:
                 "sandboxUrl": "http://testbox.getsandbox.com"
               }
           schema:
-            $ref: '#/definitions/Sandbox'
+            $ref: "#/definitions/Sandbox"
       summary: createSandbox
       tags:
         - Sandbox
-  '/1/sandboxes/{sandboxName}':
+  "/1/sandboxes/{sandboxName}":
     delete:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: deleteSandbox
       parameters:
         - description: Name of the Sandbox
@@ -263,6 +274,8 @@ paths:
           name: sandboxName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         default:
           description: successful operation
@@ -270,7 +283,9 @@ paths:
       tags:
         - Sandbox
     get:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: getSandbox
       parameters:
         - description: Name of the Sandbox
@@ -278,8 +293,10 @@ paths:
           name: sandboxName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
             application/json: |-
@@ -299,12 +316,14 @@ paths:
                 "sandboxUrl": "http://testbox.getsandbox.com"
               }
           schema:
-            $ref: '#/definitions/Sandbox'
+            $ref: "#/definitions/Sandbox"
       summary: getSandbox
       tags:
         - Sandbox
     put:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: updateSandbox
       parameters:
         - description: Name of the Sandbox
@@ -317,9 +336,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Sandbox'
+            $ref: "#/definitions/Sandbox"
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
             application/json: |-
@@ -339,13 +360,15 @@ paths:
                 "sandboxUrl": "http://testbox.getsandbox.com"
               }
           schema:
-            $ref: '#/definitions/Sandbox'
+            $ref: "#/definitions/Sandbox"
       summary: updateSandbox
       tags:
         - Sandbox
-  '/1/sandboxes/{sandboxName}/fork':
+  "/1/sandboxes/{sandboxName}/fork":
     get:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: forkSandbox
       parameters:
         - description: Name of the Sandbox
@@ -353,8 +376,10 @@ paths:
           name: sandboxName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           examples:
             application/json: |-
@@ -374,13 +399,15 @@ paths:
                 "sandboxUrl": "http://testbox.getsandbox.com"
               }
           schema:
-            $ref: '#/definitions/Sandbox'
+            $ref: "#/definitions/Sandbox"
       summary: forkSandbox
       tags:
         - Sandbox
-  '/1/sandboxes/{sandboxName}/state':
+  "/1/sandboxes/{sandboxName}/state":
     delete:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: deleteSandboxState
       parameters:
         - description: Name of the Sandbox
@@ -388,6 +415,8 @@ paths:
           name: sandboxName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         default:
           description: successful operation
@@ -395,7 +424,9 @@ paths:
       tags:
         - Sandbox
     get:
-      description: ''
+      consumes:
+        - application/json
+      description: ""
       operationId: getSandboxState
       parameters:
         - description: Name of the Sandbox
@@ -403,6 +434,8 @@ paths:
           name: sandboxName
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         default:
           description: successful operation
@@ -420,7 +453,7 @@ definitions:
         description: The details of the message when type is 'log'
         type: string
       messageObject:
-        $ref: '#/definitions/RuntimeTransaction'
+        $ref: "#/definitions/RuntimeTransaction"
         description: The details of the message when type is 'request'
       messageType:
         enum:
@@ -434,11 +467,9 @@ definitions:
   ConfiguredRouteDetails:
     properties:
       activeErrorOverride:
-        default: false
         description: Whether error overrides are enabled or not.
         type: boolean
       activeLatency:
-        default: false
         description: Whether latency delays are enabled or not.
         type: boolean
       defaultLatency:
@@ -475,7 +506,7 @@ definitions:
           type: string
         type: object
       routeConfig:
-        $ref: '#/definitions/RouteConfig'
+        $ref: "#/definitions/RouteConfig"
       transport:
         type: string
     required:
@@ -484,33 +515,32 @@ definitions:
   CreateSandbox:
     properties:
       commitBaseTemplate:
-        default: false
         description: Whether to commit the example Sandbox definition upon creation.
         type: boolean
       description:
         description: Text describing this Sandbox.
         maxLength: 255
         minLength: 0
-        pattern: '^[A-Za-z-_ 0-9]*$'
+        pattern: ^[A-Za-z-_ 0-9]*$
         type: string
       name:
-        description: 'Optional name to give the Sandbox, will be generated if omitted.'
-        pattern: '^[A-Za-z-_ 0-9]*$'
+        description: Optional name to give the Sandbox, will be generated if omitted.
+        pattern: ^[A-Za-z-_ 0-9]*$
         type: string
       ownerOrganisationName:
         description: Name of the team this Sandbox should be created under.
         maxLength: 36
         minLength: 2
-        pattern: '^[a-zA-Z-_0-9]*$'
+        pattern: ^[a-zA-Z-_0-9]*$
         type: string
       parentSandboxName:
-        description: 'Name of the Sandbox this should be created under, if exists will be a ''clone''.'
-        pattern: '^[A-Za-z-_ 0-9]*$'
+        description: Name of the Sandbox this should be created under, if exists will be
+          a 'clone'.
+        pattern: ^[A-Za-z-_ 0-9]*$
         type: string
       transportType:
         enum:
           - HTTP
-          - JMS
         type: string
     type: object
   Error:
@@ -558,7 +588,7 @@ definitions:
         description: The body of the given request.
         type: string
       contentType:
-        description: 'The content type of the body, for example ''application/json''.'
+        description: The content type of the body, for example 'application/json'.
         type: string
       fullSandboxId:
         description: The parent ID of the Sandbox that received the request.
@@ -589,7 +619,7 @@ definitions:
         description: The name of the Sandbox that received the request.
         type: string
       transport:
-        description: 'Which transport the request was for, ''HTTP'' or ''JMS''.'
+        description: Which transport the request was for, 'HTTP'.
         type: string
     type: object
   RuntimeResponse:
@@ -602,7 +632,7 @@ definitions:
         format: int64
         type: integer
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
         description: Error if there is a problem during Sandbox execution.
       headers:
         additionalProperties:
@@ -613,17 +643,21 @@ definitions:
         description: The epoch time in milliseconds when the response was sent.
         format: int64
         type: integer
+      responseDelay:
+        description: Duration in milliseconds of the response delay.
+        format: int32
+        type: integer
       transport:
-        description: 'Which transport the request was for, ''HTTP'' or ''JMS''.'
+        description: Which transport the request was for, 'HTTP'.
         type: string
     type: object
   RuntimeTransaction:
     properties:
       request:
-        $ref: '#/definitions/RuntimeRequest'
+        $ref: "#/definitions/RuntimeRequest"
       responses:
         items:
-          $ref: '#/definitions/RuntimeResponse'
+          $ref: "#/definitions/RuntimeResponse"
         type: array
       sandboxName:
         description: The source sandbox name.
@@ -643,19 +677,19 @@ definitions:
       childSandboxes:
         description: Clones of this Sandbox.
         items:
-          $ref: '#/definitions/Sandbox'
+          $ref: "#/definitions/Sandbox"
         type: array
         uniqueItems: true
       configuredRoutes:
-        description: 'Extra configuration applied to some routes, delays, overrides etc.'
+        description: Extra configuration applied to some routes, delays, overrides etc.
         items:
-          $ref: '#/definitions/ConfiguredRouteDetails'
+          $ref: "#/definitions/ConfiguredRouteDetails"
         type: array
         uniqueItems: true
       description:
         maxLength: 255
         minLength: 0
-        pattern: '^[A-Za-z0-9 _\-]*$'
+        pattern: ^[A-Za-z0-9 _\-]*$
         type: string
       gitAccessToken:
         type: string
@@ -663,24 +697,23 @@ definitions:
         description: The git clone URL.
         type: string
       hasRepository:
-        default: false
         description: Whether this Sandbox has a git repository or not.
         type: boolean
       id:
         description: The ID of the Sandbox.
         type: string
       ipWhitelist:
-        description: 'The list of IPs allowed to make requests, all allowed if omitted.'
+        description: The list of IPs allowed to make requests, all allowed if omitted.
         items:
           type: string
         type: array
         uniqueItems: true
       name:
-        pattern: '^[a-z0-9\-]*$'
+        pattern: ^[a-z0-9\-]*$
         type: string
       parentSandbox:
-        $ref: '#/definitions/Sandbox'
-        description: 'If the Sandbox is a clone, which is it a clone of.'
+        $ref: "#/definitions/Sandbox"
+        description: If the Sandbox is a clone, which is it a clone of.
       properties:
         additionalProperties:
           type: object
@@ -708,7 +741,6 @@ definitions:
         description: The listener transport.
         enum:
           - HTTP
-          - JMS
         type: string
     required:
       - name

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.landregistry.gov.uk
@@ -7,16 +7,16 @@ info:
   contact:
     x-twitter: HMLandRegistry
   description: Land Registry Deed API
-  title: Deed
+  title: Deed API
   version: 1.0.0
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/HMLandRegistry/profile_image?size=original'
+    url: https://twitter.com/HMLandRegistry/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/LandRegistry/dm-deed-api/master/application/deed/schemas/deed-api.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/LandRegistry/dm-deed-api/master/application/deed/schemas/deed-api.json
+      version: "2.0"
   x-providerName: landregistry.gov.uk
   x-serviceName: deed
 produces:
@@ -26,7 +26,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: |-
+      description: >-
         The post Deed endpoint creates a new deed based on the JSON provided.
          The reponse will return a URL that can retrieve the created deed. 
          > REQUIRED: Land Registry system requests Conveyancer to confirm that the Borrowers identity has been established in accordance with Section 111 of the Network Access Agreement.
@@ -36,25 +36,29 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Deed_Application'
+            $ref: "#/definitions/Deed_Application"
       produces:
         - text/plain
       responses:
-        '201':
-          description: |
-            URL to the GET endpoint for the deed is returned on successful creation.
+        "201":
+          description: >
+            URL to the GET endpoint for the deed is returned on successful
+            creation.
           schema:
             type: string
-        '400':
-          description: |
-            Bad Request due to invalid schema. Response will include 1 or more schema errors
+        "400":
+          description: >
+            Bad Request due to invalid schema. Response will include 1 or more
+            schema errors
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Deed
-  '/deed/{deed_reference}':
+  "/deed/{deed_reference}":
     get:
-      description: |
-        The Deed endpoint returns details of a specific deed based on the unique deed reference.
+      description: >
+        The Deed endpoint returns details of a specific deed based on the unique
+        deed reference.
+
         The response includes the Title Number, Property information, Borrower(s) information and deed information.
       parameters:
         - description: Unique reference of the deed.
@@ -62,15 +66,17 @@ paths:
           name: deed_reference
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: A specific deed is returned
           schema:
-            $ref: '#/definitions/Operative_Deed'
-        '404':
+            $ref: "#/definitions/Operative_Deed"
+        "404":
           description: Deed not found
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Deed
       tags:
         - Deed
@@ -91,7 +97,7 @@ definitions:
         pattern: ^(?!\s*$).+
         type: string
       id:
-        pattern: '^[0-9]+$'
+        pattern: ^[0-9]+$
         type: string
       middle_name:
         pattern: ^(?!\s*$).+
@@ -100,7 +106,7 @@ definitions:
         pattern: ^(?!\s*$).+
         type: string
       token:
-        pattern: '^([a-zA-Z0-9]{8})$'
+        pattern: ^([a-zA-Z0-9]{8})$
         type: string
     required:
       - surname
@@ -110,7 +116,7 @@ definitions:
     type: object
   Borrowers:
     items:
-      $ref: '#/definitions/PrivateIndividualName'
+      $ref: "#/definitions/PrivateIndividualName"
     minItems: 1
     type: array
   ChargeClause:
@@ -123,19 +129,21 @@ definitions:
   Deed_Application:
     properties:
       borrowers:
-        $ref: '#/definitions/Borrowers'
+        $ref: "#/definitions/Borrowers"
       identity_checked:
-        pattern: '^[Y]$'
+        pattern: ^[Y]$
         type: string
       md_ref:
-        pattern: '^e-MD([0-9]{5}|([0-9]{3,4}[A-Z]{1}))$'
+        pattern: ^e-MD([0-9]{5}|([0-9]{3,4}[A-Z]{1}))$
         type: string
       property_address:
-        description: 'The address of property that the deed relates. This should be supplied in a comma separated format e.g. 30 wakefield rd, plymouth, PL6 3WA'
+        description: The address of property that the deed relates. This should be
+          supplied in a comma separated format e.g. 30 wakefield rd, plymouth,
+          PL6 3WA
         pattern: ^(?!\s*$).+
         type: string
       title_number:
-        pattern: '^([A-Z]{0,3}[1-9][0-9]{0,5}|[0-9]{1,6}[ZT])$'
+        pattern: ^([A-Z]{0,3}[1-9][0-9]{0,5}|[0-9]{1,6}[ZT])$
         type: string
     required:
       - title_number
@@ -163,20 +171,21 @@ definitions:
     type: object
   OpBorrowers:
     items:
-      $ref: '#/definitions/Borrower'
+      $ref: "#/definitions/Borrower"
     minItems: 1
     type: array
   Operative_Deed:
     properties:
       deed:
-        description: 'Unique deed, consisting of property, borrower and charge information as well as clauses for the deed.'
+        description: Unique deed, consisting of property, borrower and charge
+          information as well as clauses for the deed.
         properties:
           additional_provisions:
-            $ref: '#/definitions/AdditionalProvisions'
+            $ref: "#/definitions/AdditionalProvisions"
           borrowers:
-            $ref: '#/definitions/OpBorrowers'
+            $ref: "#/definitions/OpBorrowers"
           charge_clause:
-            $ref: '#/definitions/ChargeClause'
+            $ref: "#/definitions/ChargeClause"
           deed_status:
             description: Current state of the deed
             type: string
@@ -184,12 +193,16 @@ definitions:
             description: Text to display the make effective clause
             type: string
           lender:
-            $ref: '#/definitions/Lender'
+            $ref: "#/definitions/Lender"
           md_ref:
-            description: Land Registry assigned number for a Mortgage Deed (MD). If you wish to use an existing MD reference please prefix it with e- to comply with our system (eg e-MD12345)
+            description: Land Registry assigned number for a Mortgage Deed (MD). If you wish
+              to use an existing MD reference please prefix it with e- to comply
+              with our system (eg e-MD12345)
             type: string
           property_address:
-            description: 'The address of property that the deed relates. This should be supplied in a comma separated format e.g. 30 wakefield rd, plymouth, PL6 3WA'
+            description: The address of property that the deed relates. This should be
+              supplied in a comma separated format e.g. 30 wakefield rd,
+              plymouth, PL6 3WA
             type: string
           title_number:
             description: Unique Land Registry identifier for the registered estate.
@@ -200,10 +213,10 @@ definitions:
     additionalProperties: false
     properties:
       address:
-        pattern: '[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9](?:A-Z-245|[^CIKMOV]){2}'
+        pattern: "[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9](?:A-Z-245|[^CIKMOV]){2}"
         type: string
       dob:
-        pattern: '^(0[1-9]|[12][0-9]|3[01])[\/\-](0[1-9]|1[012])[/\-]\d{4}$'
+        pattern: ^(0[1-9]|[12][0-9]|3[01])[\/\-](0[1-9]|1[012])[/\-]\d{4}$
         type: string
       forename:
         pattern: ^(?!\s*$).+
@@ -218,7 +231,7 @@ definitions:
         pattern: ^(?!\s*$).+
         type: string
       phone_number:
-        pattern: '^(07[\d]{9})$'
+        pattern: ^(07[\d]{9})$
         type: string
       surname:
         pattern: ^(?!\s*$).+

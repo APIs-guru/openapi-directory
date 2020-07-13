@@ -1,61 +1,63 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.vonage.com/t/vbc.prod/provisioning'
+  - url: https://api.vonage.com/t/vbc.prod/provisioning
 info:
   contact:
     name: Vonage Business Cloud Support
-    url: 'https://businesssupport.vonage.com/contactus'
-  description: |
-    The Vonage Business Cloud Account API enables you to retrieve information about accounts.
+    url: https://businesssupport.vonage.com/contactus
+  description: >
+    The Vonage Business Cloud Account API enables you to retrieve information
+    about accounts.
+
 
     Your application must subscribe to the Provisioning API suite to use this API.
-  termsOfService: 'https://www.vonage.com/business/legal-policy-center/business-cloud/tos'
-  title: Account
+  termsOfService: https://www.vonage.com/business/legal-policy-center/business-cloud/tos
+  title: Account API
   version: 1.11.8
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/account.yml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/account.yml
+      version: "3.0"
   x-providerName: vonage.com
   x-serviceName: account
 paths:
-  '/api/accounts/{account_id}':
+  "/api/accounts/{account_id}":
     get:
       operationId: AccountCtrl.getAccountServicesByAccountID
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountHalResponse'
+                $ref: "#/components/schemas/AccountHalResponse"
           description: Success
-        '404':
+        "404":
           description: Account not found
       security:
         - bearerAuth: []
       summary: Get account data by ID
-  '/api/accounts/{account_id}/locations':
+  "/api/accounts/{account_id}/locations":
     get:
       operationId: AccountCtrl.getLocationsByAccountID
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LocationsHalResponse'
+                $ref: "#/components/schemas/LocationsHalResponse"
           description: Success
       security:
         - bearerAuth: []
       summary: Get account locations data by account ID
-  '/api/accounts/{account_id}/locations/{location_id}':
+  "/api/accounts/{account_id}/locations/{location_id}":
     get:
       operationId: AccountCtrl.getLocationByID
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
         - description: The Vonage Business Cloud location ID
           example: 327910
           in: path
@@ -64,13 +66,13 @@ paths:
           schema:
             type: number
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LocationHalResponse'
+                $ref: "#/components/schemas/LocationHalResponse"
           description: Success
-        '404':
+        "404":
           description: Location not found
       security:
         - bearerAuth: []
@@ -89,7 +91,7 @@ components:
     Account:
       properties:
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         id:
           description: Unique identifier of the account
           example: 571700
@@ -107,14 +109,14 @@ components:
       description: Account object
       properties:
         data:
-          $ref: '#/components/schemas/Account'
+          $ref: "#/components/schemas/Account"
       type: object
     AccountHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/AccountEmbeddedObject'
+          $ref: "#/components/schemas/AccountEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           description: Current page number
           example: 1
@@ -152,7 +154,7 @@ components:
           type: string
         postal_code:
           description: Postal code
-          example: '07733'
+          example: "07733"
           type: string
         state:
           description: State/Province code
@@ -179,7 +181,7 @@ components:
           type: string
         postal_code:
           description: Postal code
-          example: '07733'
+          example: "07733"
           type: string
         state:
           description: State/Province code
@@ -205,20 +207,20 @@ components:
     Links:
       properties:
         first:
-          $ref: '#/components/schemas/FirstHref'
+          $ref: "#/components/schemas/FirstHref"
         last:
-          $ref: '#/components/schemas/LastHref'
+          $ref: "#/components/schemas/LastHref"
         next:
-          $ref: '#/components/schemas/NextHref'
+          $ref: "#/components/schemas/NextHref"
         prev:
-          $ref: '#/components/schemas/PrevHref'
+          $ref: "#/components/schemas/PrevHref"
         self:
-          $ref: '#/components/schemas/SelfHref'
+          $ref: "#/components/schemas/SelfHref"
       type: object
     Location:
       properties:
         address:
-          $ref: '#/components/schemas/AddressWithTimeZone'
+          $ref: "#/components/schemas/AddressWithTimeZone"
         id:
           description: Unique identifier of the location
           example: 327910
@@ -232,14 +234,14 @@ components:
       description: Location object
       properties:
         data:
-          $ref: '#/components/schemas/Location'
+          $ref: "#/components/schemas/Location"
       type: object
     LocationHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/LocationEmbeddedObject'
+          $ref: "#/components/schemas/LocationEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           description: Current page number
           example: 1
@@ -262,15 +264,15 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
       type: object
     LocationsHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/LocationsEmbeddedObject'
+          $ref: "#/components/schemas/LocationsEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           example: 1
           type: number

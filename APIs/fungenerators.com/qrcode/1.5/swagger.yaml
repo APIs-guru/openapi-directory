@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -6,21 +6,24 @@ host: api.fungenerators.com
 info:
   contact:
     name: Fun Generators
-    url: 'http://fungenerators.com/'
-  description: |
-    Fungenerators API gives access to the full set of generators available at fungenerators.com so that you can integrate them in your workflow or an app. [Click here to get details and subscribe](http://fungenerators.com/api) . Here are the individual API links:
+    url: http://fungenerators.com/
+  description: >
+    Fungenerators API gives access to the full set of generators available at
+    fungenerators.com so that you can integrate them in your workflow or an app.
+    [Click here to get details and subscribe](http://fungenerators.com/api) .
+    Here are the individual API links:
 
       ## QR Code API ##
       Generate QR Code images for text, url, email , business cards etc. You can decode QR Code images and get the contents as well. The best and complete QR Code API on the cloud. [Click here to subscribe](http://fungenerators.com/api/qrcode)
-  termsOfService: 'https://fungenerators.com/terms'
-  title: Fun Generators
-  version: '1.5'
+  termsOfService: https://fungenerators.com/terms
+  title: Fun Generators API
+  version: "1.5"
   x-apisguru-categories:
     - entertainment
   x-origin:
     - format: swagger
-      url: 'https://fungenerators.com/yaml/qrcode.yaml'
-      version: '2.0'
+      url: https://fungenerators.com/yaml/qrcode.yaml
+      version: "2.0"
   x-providerName: fungenerators.com
   x-serviceName: qrcode
 consumes:
@@ -38,7 +41,7 @@ tags:
   - description: QR code API
     externalDocs:
       description: Find out more
-      url: 'http://fungenerators.com/api/qrcode'
+      url: http://fungenerators.com/api/qrcode
     name: QR Code
 paths:
   /qrcode/business_card:
@@ -135,8 +138,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -152,7 +159,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -180,7 +187,7 @@ paths:
           required: true
           type: file
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -192,7 +199,7 @@ paths:
                     "content_value": "http://fungenerators.com/qr-code/"
                 }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -234,8 +241,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -251,7 +262,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -281,8 +292,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -298,7 +313,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -328,8 +343,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -345,7 +364,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -375,8 +394,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -392,7 +415,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -422,8 +445,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -439,7 +466,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -469,8 +496,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -486,7 +517,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -516,8 +547,12 @@ paths:
           name: format
           required: false
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -533,7 +568,7 @@ paths:
                       }
                   ]
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-

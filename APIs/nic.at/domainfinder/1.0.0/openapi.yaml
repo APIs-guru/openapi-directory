@@ -1,19 +1,20 @@
 openapi: 3.0.2
 info:
-  title: nic.at Domainfinder
+  title: nic.at Domainfinder API Documentation
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-origin:
     - format: openapi
-      url: 'https://domainfinder.nic.at/openapi/'
-      version: '3.0'
+      url: https://domainfinder.nic.at/openapi/
+      version: "3.0"
   x-providerName: nic.at
   x-serviceName: domainfinder
 paths:
   /api/v1/suggest:
     get:
-      description: Provides a list of available .at domain names related to the given input term or domain
+      description: Provides a list of available .at domain names related to the given
+        input term or domain
       parameters:
         - description: Domainname/term to obtain suggestions for
           example: mydomain
@@ -23,7 +24,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -31,7 +32,7 @@ paths:
                   - mynewdomain.at
                   - newdomain.at
                 properties:
-                  '':
+                  "":
                     items:
                       type: string
                     type: array

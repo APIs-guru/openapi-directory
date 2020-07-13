@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -8,35 +8,39 @@ info:
   contact:
     email: partner@flinkster.de
     name: DB Rent GmbH
-  description: |-
-    This REST-API enables you to query for private transport sharing offers provided by companies and cities in Germany, Netherland and Austria. 
+  description: >-
+    This REST-API enables you to query for private transport sharing offers
+    provided by companies and cities in Germany, Netherland and Austria. 
+
     You can search for informations about the rental stations (points or areas) where you can find the rentals by utilizing the /areas/ ressource. 
+
     With the help of the proximity search in the /bookingproposals/ URI you can request the availabilities of the rentalobjects for spontaneous or planed usage in the future. 
+
 
     Feel free to browse through data by setting the parameter 'providernetwork' to the value: 
      1: Search for car sharing offers provided by the Flinkster platform (http://www.flinkster.de)
     2: Finding bike rental offers from Call a Bike (http://www.callabike.de) 
 
+
     You can find more details in the documentation section (Unfortunately only available in german language).
 
+
     Have lots of fun and we are lucky to take notice of your products or getting your feedback.
-  termsOfService: 'https://developer.deutschebahn.com/store/'
+  termsOfService: https://developer.deutschebahn.com/store/
   title: Flinkster_API_NG
   version: v1
   x-apisguru-categories:
     - transport
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png
   x-origin:
     - format: swagger
-      url: 'https://developer.deutschebahn.com/store/api-docs/DBOpenData/Flinkster_API_NG/v1'
-      version: '2.0'
+      url: https://developer.deutschebahn.com/store/api-docs/DBOpenData/Flinkster_API_NG/v1
+      version: "2.0"
   x-providerName: deutschebahn.com
   x-serviceName: flinkster
-produces:
-  - application/json
 tags:
   - name: areas
   - name: bookingproposals
@@ -93,34 +97,36 @@ paths:
           name: providernetwork
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AreaJO'
-        '403':
+            $ref: "#/definitions/AreaJO"
+        "403":
           description: |-
             Forbidden
             If provider is not allowed to display this area.
           schema:
-            $ref: '#/definitions/AreaJO'
-        '404':
+            $ref: "#/definitions/AreaJO"
+        "404":
           description: |-
             Not Found
             If no area was found for the given UID.
           schema:
-            $ref: '#/definitions/AreaJO'
+            $ref: "#/definitions/AreaJO"
       summary: List Areas by Criteria.
       tags:
         - areas
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/areas/{areaUID}':
+  "/areas/{areaUID}":
     get:
       description: Search for a specific area by UID.
       operationId: getArea
       parameters:
-        - description: 'The Area UID '
+        - description: "The Area UID "
           in: path
           name: areaUID
           required: true
@@ -130,23 +136,25 @@ paths:
           name: expand
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AreaJO'
-        '403':
+            $ref: "#/definitions/AreaJO"
+        "403":
           description: |-
             Forbidden
             If provider is not allowed to display this area.
           schema:
-            $ref: '#/definitions/AreaJO'
-        '404':
+            $ref: "#/definitions/AreaJO"
+        "404":
           description: |-
             Not Found
             If no area was found for the given UID.
           schema:
-            $ref: '#/definitions/AreaJO'
+            $ref: "#/definitions/AreaJO"
       summary: Get area by UID.
       tags:
         - areas
@@ -154,7 +162,8 @@ paths:
       x-throttling-tier: Unlimited
   /bookingproposals:
     get:
-      description: 'Here you can query all bookable Rental Objects with different Parameters (Time, Location,...)'
+      description: Here you can query all bookable Rental Objects with different
+        Parameters (Time, Location,...)
       operationId: listBookingProposals
       parameters:
         - format: double
@@ -202,23 +211,25 @@ paths:
           name: view
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RentalObjectJO'
-        '400':
+            $ref: "#/definitions/RentalObjectJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Query for available RentalObjects of a specific view
       tags:
         - bookingproposals
@@ -228,17 +239,19 @@ paths:
     get:
       description: Show Service index.
       operationId: getIndex
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/JsonCollection'
+            $ref: "#/definitions/JsonCollection"
       summary: Show index.
       tags:
         - index
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providernetworks/{providernetworkUID}/categories':
+  "/providernetworks/{providernetworkUID}/categories":
     get:
       description: Search for categorie.
       operationId: listCategories
@@ -251,29 +264,31 @@ paths:
           name: expand
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CategoryJO'
-        '400':
+            $ref: "#/definitions/CategoryJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Lists all categories
       tags:
         - categories
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providernetworks/{providernetworkUID}/categories/{categoryUID}':
+  "/providernetworks/{providernetworkUID}/categories/{categoryUID}":
     get:
       description: Search for categorie.
       operationId: getCategory
@@ -291,61 +306,66 @@ paths:
           name: expand
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CategoryJO'
-        '400':
+            $ref: "#/definitions/CategoryJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Get a Category by UID
       tags:
         - categories
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providernetworks/{providernetworkUID}/prices':
+  "/providernetworks/{providernetworkUID}/prices":
     get:
-      description: |
-        Prices of a rental object by query params. The params depend on the price determination strategy of the provider network.
+      description: >
+        Prices of a rental object by query params. The params depend on the
+        price determination strategy of the provider network.
       operationId: getPrices
       parameters:
         - in: path
           name: providernetworkUID
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RentalObjectJO'
-        '400':
+            $ref: "#/definitions/RentalObjectJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Get information about the prices.
       tags:
         - prices
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providernetworks/{providernetworkUID}/rentalobjects/{rentalObjectUID}':
+  "/providernetworks/{providernetworkUID}/rentalobjects/{rentalObjectUID}":
     get:
       description: |
         Get information about the Rental Object.
@@ -363,29 +383,31 @@ paths:
           name: expand
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RentalObjectJO'
-        '400':
+            $ref: "#/definitions/RentalObjectJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Get information about the RentalObject.
       tags:
         - rentalobjects
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providernetworks/{uid}':
+  "/providernetworks/{uid}":
     get:
       description: |
         Get information about the ProviderNetworkResources.
@@ -395,29 +417,31 @@ paths:
           name: uid
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RentalObjectJO'
-        '400':
+            $ref: "#/definitions/RentalObjectJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Get information about the ProviderNetworkResources.
       tags:
         - providernetworks
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/providers/{uid}':
+  "/providers/{uid}":
     get:
       description: |
         Get information about the ProviderResourcesCtrl.
@@ -427,23 +451,25 @@ paths:
           name: uid
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RentalObjectJO'
-        '400':
+            $ref: "#/definitions/RentalObjectJO"
+        "400":
           description: |-
             Bad Request
             One or more parameters have invalid values.
           schema:
-            $ref: '#/definitions/ErrorJO'
-        '403':
+            $ref: "#/definitions/ErrorJO"
+        "403":
           description: |-
             Forbidden
             Provider is not allowed to use this interface.
           schema:
-            $ref: '#/definitions/ErrorJO'
+            $ref: "#/definitions/ErrorJO"
       summary: Get information about the ProviderResourceImpl.
       tags:
         - providers
@@ -469,10 +495,10 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       address:
-        $ref: '#/definitions/AddressJO'
+        $ref: "#/definitions/AddressJO"
       attributes:
         additionalProperties:
           type: object
@@ -482,13 +508,13 @@ definitions:
       expand:
         type: string
       geometry:
-        $ref: '#/definitions/GeometryJO'
+        $ref: "#/definitions/GeometryJO"
       href:
         type: string
       name:
         type: string
       provider:
-        $ref: '#/definitions/ProviderJO'
+        $ref: "#/definitions/ProviderJO"
       providerAreaId:
         type: string
       providerNetworkIds:
@@ -511,10 +537,10 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       area:
-        $ref: '#/definitions/AreaJO'
+        $ref: "#/definitions/AreaJO"
       attributes:
         additionalProperties:
           type: object
@@ -531,11 +557,11 @@ definitions:
       name:
         type: string
       position:
-        $ref: '#/definitions/GeoJsonObject'
+        $ref: "#/definitions/GeoJsonObject"
       price:
-        $ref: '#/definitions/JsonCollectionPriceJO'
+        $ref: "#/definitions/JsonCollectionPriceJO"
       rentalObject:
-        $ref: '#/definitions/RentalObjectJO'
+        $ref: "#/definitions/RentalObjectJO"
       uid:
         type: string
     type: object
@@ -543,7 +569,7 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       attributes:
         additionalProperties:
@@ -559,7 +585,7 @@ definitions:
         type: string
       price:
         items:
-          $ref: '#/definitions/PriceJO'
+          $ref: "#/definitions/PriceJO"
         type: array
       uid:
         type: string
@@ -605,9 +631,9 @@ definitions:
           type: number
         type: array
       crs:
-        $ref: '#/definitions/Crs'
+        $ref: "#/definitions/Crs"
       geometry:
-        $ref: '#/definitions/GeoJsonObject'
+        $ref: "#/definitions/GeoJsonObject"
       id:
         type: string
       properties:
@@ -617,11 +643,11 @@ definitions:
     type: object
   FeatureCollection:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - properties:
           features:
             items:
-              $ref: '#/definitions/Feature'
+              $ref: "#/definitions/Feature"
             type: array
         type: object
   GeoJsonObject:
@@ -633,26 +659,26 @@ definitions:
           type: number
         type: array
       crs:
-        $ref: '#/definitions/Crs'
+        $ref: "#/definitions/Crs"
     type: object
   GeometryJO:
     properties:
       centroid:
-        $ref: '#/definitions/Point'
+        $ref: "#/definitions/Point"
       position:
-        $ref: '#/definitions/GeoJsonObject'
+        $ref: "#/definitions/GeoJsonObject"
     type: object
   JsonCollection:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       href:
         type: string
       items:
         items:
-          $ref: '#/definitions/JsonObject'
+          $ref: "#/definitions/JsonObject"
         type: array
       limit:
         format: int32
@@ -668,13 +694,13 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       href:
         type: string
       items:
         items:
-          $ref: '#/definitions/PriceJO'
+          $ref: "#/definitions/PriceJO"
         type: array
       limit:
         format: int32
@@ -690,7 +716,7 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       attributes:
         additionalProperties:
@@ -709,7 +735,7 @@ definitions:
     type: object
   LineString:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - type: object
   LinkJO:
     properties:
@@ -734,33 +760,33 @@ definitions:
     type: object
   MultiLineString:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - properties:
           coordinates:
             items:
               items:
-                $ref: '#/definitions/LngLatAlt'
+                $ref: "#/definitions/LngLatAlt"
               type: array
             type: array
         type: object
   MultiPoint:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - properties:
           coordinates:
             items:
-              $ref: '#/definitions/LngLatAlt'
+              $ref: "#/definitions/LngLatAlt"
             type: array
         type: object
   MultiPolygon:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - properties:
           coordinates:
             items:
               items:
                 items:
-                  $ref: '#/definitions/LngLatAlt'
+                  $ref: "#/definitions/LngLatAlt"
                 type: array
               type: array
             type: array
@@ -774,18 +800,18 @@ definitions:
           type: number
         type: array
       coordinates:
-        $ref: '#/definitions/LngLatAlt'
+        $ref: "#/definitions/LngLatAlt"
       crs:
-        $ref: '#/definitions/Crs'
+        $ref: "#/definitions/Crs"
     type: object
   Polygon:
     allOf:
-      - $ref: '#/definitions/GeoJsonObject'
+      - $ref: "#/definitions/GeoJsonObject"
       - properties:
           coordinates:
             items:
               items:
-                $ref: '#/definitions/LngLatAlt'
+                $ref: "#/definitions/LngLatAlt"
               type: array
             type: array
         type: object
@@ -793,7 +819,7 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       attributes:
         additionalProperties:
@@ -833,7 +859,7 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       attributes:
         additionalProperties:
@@ -854,14 +880,14 @@ definitions:
     properties:
       _links:
         items:
-          $ref: '#/definitions/LinkJO'
+          $ref: "#/definitions/LinkJO"
         type: array
       attributes:
         additionalProperties:
           type: object
         type: object
       category:
-        $ref: '#/definitions/CategoryJO'
+        $ref: "#/definitions/CategoryJO"
       description:
         type: string
       expand:
@@ -871,7 +897,7 @@ definitions:
       name:
         type: string
       provider:
-        $ref: '#/definitions/ProviderJO'
+        $ref: "#/definitions/ProviderJO"
       providerNetworkIds:
         items:
           format: int32

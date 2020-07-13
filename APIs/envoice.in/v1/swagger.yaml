@@ -1,30 +1,229 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.envoice.in
 info:
   contact:
     x-twitter: envoicein
-  description: "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1d39bbcddaf694d81100)\r\n<span style='margin-left: 0.5em;'>or</span>\r\n<a href='https://documenter.getpostman.com/view/3559821/envoice-api/RW1XL1mf' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r\n\r\n# Quickstart\r\n\r\nVisit [github](https://github.com/EmitKnowledge/Envoice) to view the quickstart tutorial.\r\n\r\n<div class='postman-tutorial'>\r\n\r\n# Tutorial for running the API in postman\r\n\r\nClick on \"\"Run in Postman\"\" button\r\n<br /><br />\r\n![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r\n\r\n --- \r\n\r\nA new page will open.\r\nClick the \"\"Postman for windows\"\" to run postman as a desktop app.\r\nMake sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r\n<br /><br />\r\n![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r\n\r\n --- \r\n\r\nIn chrome an alert might show up to set a default app for opening postman links. Click on \"\"Open Postman\"\".\r\n<br /><br />\r\n![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r\n\r\n --- \r\n\r\nThe OpenAPI specification will be imported in Postman as a new collection named \"\"Envoice api\"\"\r\n<br /><br />\r\n![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r\n\r\n --- \r\n\r\nWhen testing be sure to check and modify the environment variables to suit your api key and secret. The domain is set to envoice's endpoint so you don't really need to change that.  \r\n<sub>\\*Eye button in top right corner </sub>\r\n<br /><br /> \r\n![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r\n<br /><br /> \r\n![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r\n\r\n --- \r\n\r\nYou don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r\n<br /><br />\r\n![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r\n\r\n --- \r\n\r\nModify the example data to suit your needs and send a request.\r\n<br /><br />\r\n![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r\n</div>\r\n\r\n# Webhooks\r\n\r\nWebhooks allow you to build or set up Envoice Apps which subscribe to invoice activities. \r\nWhen one of those events is triggered, we'll send a HTTP POST payload to the webhook's configured URL. \r\nWebhooks can be used to update an external invoice data storage.\r\n\r\nIn order to use webhooks visit [this link](/account/settings#api-tab) and add upto 10 webhook urls that will return status `200` in order to signal that the webhook is working.\r\nAll nonworking webhooks will be ignored after a certain period of time and several retry attempts.\r\nIf after several attempts the webhook starts to work, we will send you all activities, both past and present, in chronological order.\r\n\r\nThe payload of the webhook is in format:\r\n```\r\n{\r\n    Signature: \"\"sha256 string\"\",\r\n    Timestamp: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\",\r\n    Activity: {\r\n        Message: \"string\",\r\n        Link: \"share url\",\r\n        Type: int,        \r\n        InvoiceNumber: \"string\",\r\n        InvoiceId: int,        \r\n        OrderNumber: \"string\",\r\n        OrderId: int,\r\n        Id: int,\r\n        CreatedOn: \"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\r\n    }\r\n}\r\n```            "
+  description: "[![Run in
+    Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-c\
+    ollection/1d39bbcddaf694d81100)\r
+
+    <span style='margin-left: 0.5em;'>or</span>\r
+
+    <a
+    href='https://documenter.getpostman.com/view/3559821/envoice-api/RW1XL1mf'
+    class='openapi-button' _ngcontent-c6>View Postman docs</a>\r
+
+    \r
+
+    # Quickstart\r
+
+    \r
+
+    Visit [github](https://github.com/EmitKnowledge/Envoice) to view the
+    quickstart tutorial.\r
+
+    \r
+
+    <div class='postman-tutorial'>\r
+
+    \r
+
+    # Tutorial for running the API in postman\r
+
+    \r
+
+    Click on \"\"Run in Postman\"\" button\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    A new page will open.\r
+
+    Click the \"\"Postman for windows\"\" to run postman as a desktop app.\r
+
+    Make sure you have already
+    [installed](https://www.getpostman.com/docs/postman/launching_postman/insta\
+    llation_and_updates) Postman.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    In chrome an alert might show up to set a default app for opening
+    postman links. Click on \"\"Open Postman\"\".\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    The OpenAPI specification will be imported in Postman as a new
+    collection named \"\"Envoice api\"\"\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    When testing be sure to check and modify the environment variables to
+    suit your api key and secret. The domain is set to envoice's endpoint so you
+    don't really need to change that.  \r
+
+    <sub>\\*Eye button in top right corner </sub>\r
+
+    <br /><br /> \r
+
+    ![postman - tutorial -
+    5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r
+
+    <br /><br /> \r
+
+    ![postman - tutorial -
+    6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    You don't need to change the values of the header parameters, because
+    they will be replaced automatically when you send a request with real values
+    from the environment configured in the previous step.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    Modify the example data to suit your needs and send a request.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial -
+    8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r
+
+    </div>\r
+
+    \r
+
+    # Webhooks\r
+
+    \r
+
+    Webhooks allow you to build or set up Envoice Apps which subscribe to
+    invoice activities. \r
+
+    When one of those events is triggered, we'll send a HTTP POST payload to
+    the webhook's configured URL. \r
+
+    Webhooks can be used to update an external invoice data storage.\r
+
+    \r
+
+    In order to use webhooks visit [this link](/account/settings#api-tab)
+    and add upto 10 webhook urls that will return status `200` in order to
+    signal that the webhook is working.\r
+
+    All nonworking webhooks will be ignored after a certain period of time
+    and several retry attempts.\r
+
+    If after several attempts the webhook starts to work, we will send you
+    all activities, both past and present, in chronological order.\r
+
+    \r
+
+    The payload of the webhook is in format:\r
+
+    ```\r
+
+    {\r
+
+    \    Signature: \"\"sha256 string\"\",\r
+
+    \    Timestamp: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\",\r
+
+    \    Activity: {\r
+
+    \        Message: \"string\",\r
+
+    \        Link: \"share url\",\r
+
+    \        Type: int,        \r
+
+    \        InvoiceNumber: \"string\",\r
+
+    \        InvoiceId: int,        \r
+
+    \        OrderNumber: \"string\",\r
+
+    \        OrderId: int,\r
+
+    \        Id: int,\r
+
+    \        CreatedOn: \"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\r
+
+    \    }\r
+
+    }\r
+
+    ```            "
   title: API v1.0.0
   version: v1
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://twitter.com/envoicein/profile_image?size=original'
+    url: https://twitter.com/envoicein/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://www.envoice.in/docs/api/v1/specification'
-      version: '2.0'
+      url: https://www.envoice.in/docs/api/v1/specification
+      version: "2.0"
   x-providerName: envoice.in
 securityDefinitions:
   x-auth-key:
-    description: 'Your account API key. Can be retrieved from your [account settings](/account/settings#api-tab).'
+    description: Your account API key. Can be retrieved from your [account
+      settings](/account/settings#api-tab).
     in: header
     name: x-auth-key
     type: apiKey
   x-auth-secret:
-    description: 'Your account API secret. Can be retrieved from your [account settings](/account/settings#api-tab). Keep it hidden.'
+    description: Your account API secret. Can be retrieved from your [account
+      settings](/account/settings#api-tab). Keep it hidden.
     in: header
     name: x-auth-secret
     type: apiKey
@@ -34,14 +233,14 @@ paths:
       consumes: []
       operationId: ClientApi_All
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -53,11 +252,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ClientDetailsApiModel'
+              $ref: "#/definitions/ClientDetailsApiModel"
             type: array
       summary: Return all clients for the account
       tags:
@@ -72,14 +271,14 @@ paths:
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -91,7 +290,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: boolean
@@ -113,15 +312,15 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/ClientDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ClientDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -133,7 +332,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -151,14 +350,14 @@ paths:
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -170,10 +369,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ClientDetailsApiModel'
+            $ref: "#/definitions/ClientDetailsApiModel"
       summary: Return client details. Activities and invoices included.
       tags:
         - Client
@@ -192,15 +391,15 @@ paths:
           name: client
           required: true
           schema:
-            $ref: '#/definitions/ClientCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ClientCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -212,7 +411,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -235,22 +434,22 @@ paths:
           name: client
           required: true
           schema:
-            $ref: '#/definitions/ClientUpdateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ClientUpdateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Update an existing client
       tags:
@@ -260,14 +459,14 @@ paths:
       consumes: []
       operationId: GeneralApi_Countries
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -279,11 +478,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CountryDetailsApiModel'
+              $ref: "#/definitions/CountryDetailsApiModel"
             type: array
       summary: Return all of the platform supported countries
       tags:
@@ -293,14 +492,14 @@ paths:
       consumes: []
       operationId: GeneralApi_Currencies
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -312,11 +511,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CurrencyDetailsApiModel'
+              $ref: "#/definitions/CurrencyDetailsApiModel"
             type: array
       summary: Return all of the platform supported currencies
       tags:
@@ -326,14 +525,14 @@ paths:
       consumes: []
       operationId: GeneralApi_DateFormats
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -345,7 +544,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
@@ -359,14 +558,14 @@ paths:
       consumes: []
       operationId: GeneralApi_UiLanguages
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -378,11 +577,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/UILanguageDetailsApiModel'
+              $ref: "#/definitions/UILanguageDetailsApiModel"
             type: array
       summary: Return all of the platform supported UI languages
       tags:
@@ -402,14 +601,14 @@ paths:
           name: queryOptions.pageSize
           required: false
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -421,10 +620,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ListResult[InvoiceDetailsApiModel]'
+            $ref: "#/definitions/ListResult[InvoiceDetailsApiModel]"
       summary: Return all invoices for the account
       tags:
         - Invoice
@@ -443,15 +642,15 @@ paths:
           name: statusModel
           required: true
           schema:
-            $ref: '#/definitions/ChangeStatusApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ChangeStatusApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -463,7 +662,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: boolean
@@ -485,15 +684,15 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/InvoiceDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/InvoiceDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -505,7 +704,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -518,20 +717,20 @@ paths:
       consumes: []
       operationId: InvoiceApi_Details
       parameters:
-        - description: ''
+        - description: ""
           format: int32
           in: query
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -543,10 +742,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InvoiceFullDetailsApiModel'
+            $ref: "#/definitions/InvoiceFullDetailsApiModel"
       summary: Return invoice data
       tags:
         - Invoice
@@ -565,15 +764,15 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/InvoiceCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/InvoiceCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -585,10 +784,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InvoiceFullDetailsApiModel'
+            $ref: "#/definitions/InvoiceFullDetailsApiModel"
       summary: Create an invoice
       tags:
         - Invoice
@@ -607,15 +806,15 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/SendInvoiceToAccountantApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/SendInvoiceToAccountantApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -627,7 +826,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -650,15 +849,15 @@ paths:
           name: deliveryOptions
           required: true
           schema:
-            $ref: '#/definitions/SendInvoiceToClientApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/SendInvoiceToClientApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -670,7 +869,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -688,14 +887,14 @@ paths:
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -707,7 +906,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             enum:
@@ -735,15 +934,15 @@ paths:
           name: invoice
           required: true
           schema:
-            $ref: '#/definitions/InvoiceUpdateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/InvoiceUpdateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -755,10 +954,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InvoiceFullDetailsApiModel'
+            $ref: "#/definitions/InvoiceFullDetailsApiModel"
       summary: Update an existing invoice
       tags:
         - Invoice
@@ -767,20 +966,20 @@ paths:
       consumes: []
       operationId: InvoiceApi_Uri
       parameters:
-        - description: ''
+        - description: ""
           format: int32
           in: query
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -792,10 +991,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/InvoiceUriApiModel'
+            $ref: "#/definitions/InvoiceUriApiModel"
       summary: Return the unique url to the client's invoice
       tags:
         - Invoice
@@ -814,14 +1013,14 @@ paths:
           name: queryOptions.pageSize
           required: false
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -833,10 +1032,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ListResult[OrderDetailsApiModel]'
+            $ref: "#/definitions/ListResult[OrderDetailsApiModel]"
       summary: Return all orders for the account
       tags:
         - Order
@@ -860,22 +1059,22 @@ paths:
           name: shippingDetails
           required: true
           schema:
-            $ref: '#/definitions/OrderShippingDetailsApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/OrderShippingDetailsApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Change order shipping details
       tags:
@@ -895,22 +1094,22 @@ paths:
           name: status
           required: true
           schema:
-            $ref: '#/definitions/ChangeOrderStatusApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ChangeOrderStatusApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Change order status
       tags:
@@ -930,15 +1129,15 @@ paths:
           name: order
           required: true
           schema:
-            $ref: '#/definitions/OrderDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/OrderDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -950,7 +1149,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -968,14 +1167,14 @@ paths:
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -987,10 +1186,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/OrderFullDetailsApiModel'
+            $ref: "#/definitions/OrderFullDetailsApiModel"
       summary: Return order details
       tags:
         - Order
@@ -1009,15 +1208,15 @@ paths:
           name: order
           required: true
           schema:
-            $ref: '#/definitions/OrderCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/OrderCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1029,7 +1228,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1042,14 +1241,14 @@ paths:
       consumes: []
       operationId: PaymentApi_Supported
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1061,13 +1260,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/PaymentGatewayDetailsApiModel'
+              $ref: "#/definitions/PaymentGatewayDetailsApiModel"
             type: array
-      summary: Return all supported payment gateways (no currencies means all are supported)
+      summary: Return all supported payment gateways (no currencies means all are
+        supported)
       tags:
         - Payment
   /api/product/all:
@@ -1085,14 +1285,14 @@ paths:
           name: queryOptions.pageSize
           required: false
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1104,10 +1304,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ListResult[ProductDetailsApiModel]'
+            $ref: "#/definitions/ListResult[ProductDetailsApiModel]"
       summary: Return all products for the account
       tags:
         - Product
@@ -1126,15 +1326,15 @@ paths:
           name: product
           required: true
           schema:
-            $ref: '#/definitions/ProductDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ProductDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1146,7 +1346,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1164,14 +1364,14 @@ paths:
           name: id
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1183,10 +1383,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProductFullDetailsApiModel'
+            $ref: "#/definitions/ProductFullDetailsApiModel"
       summary: Return product details
       tags:
         - Product
@@ -1205,15 +1405,15 @@ paths:
           name: product
           required: true
           schema:
-            $ref: '#/definitions/ProductCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ProductCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1225,7 +1425,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1248,22 +1448,22 @@ paths:
           name: product
           required: true
           schema:
-            $ref: '#/definitions/ProductUpdateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/ProductUpdateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Update an existing product
       tags:
@@ -1273,14 +1473,14 @@ paths:
       consumes: []
       operationId: TaxApi_All
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1292,11 +1492,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TaxDetailsApiModel'
+              $ref: "#/definitions/TaxDetailsApiModel"
             type: array
       summary: Return all taxes for the account
       tags:
@@ -1316,15 +1516,15 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/TaxDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/TaxDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1336,7 +1536,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1359,15 +1559,15 @@ paths:
           name: tax
           required: true
           schema:
-            $ref: '#/definitions/TaxCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/TaxCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1379,7 +1579,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1402,22 +1602,22 @@ paths:
           name: tax
           required: true
           schema:
-            $ref: '#/definitions/TaxUpdateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/TaxUpdateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Update an existing tax
       tags:
@@ -1427,14 +1627,14 @@ paths:
       consumes: []
       operationId: WorkTypeApi_All
       parameters:
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1446,11 +1646,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/WorkTypeDetailsApiModel'
+              $ref: "#/definitions/WorkTypeDetailsApiModel"
             type: array
       summary: Return all work types for the account
       tags:
@@ -1470,15 +1670,15 @@ paths:
           name: deleteModel
           required: true
           schema:
-            $ref: '#/definitions/WorkTypeDeleteApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/WorkTypeDeleteApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1490,7 +1690,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1508,14 +1708,14 @@ paths:
           name: workTypeId
           required: true
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1527,10 +1727,10 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WorkTypeDetailsApiModel'
+            $ref: "#/definitions/WorkTypeDetailsApiModel"
       summary: Return work type details
       tags:
         - WorkType
@@ -1549,15 +1749,15 @@ paths:
           name: workType
           required: true
           schema:
-            $ref: '#/definitions/WorkTypeCreateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/WorkTypeCreateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1569,7 +1769,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             format: int32
@@ -1608,14 +1808,14 @@ paths:
           name: queryOptions.pageSize
           required: false
           type: integer
-        - default: '[authentication key]'
-          description: ''
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
@@ -1627,11 +1827,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/WorkTypeDetailsApiModel'
+              $ref: "#/definitions/WorkTypeDetailsApiModel"
             type: array
       summary: Return all work types for the account that match the query param
       tags:
@@ -1651,22 +1851,22 @@ paths:
           name: workType
           required: true
           schema:
-            $ref: '#/definitions/WorkTypeUpdateApiModel'
-        - default: '[authentication key]'
-          description: ''
+            $ref: "#/definitions/WorkTypeUpdateApiModel"
+        - default: "[authentication key]"
+          description: ""
           in: header
           name: x-auth-key
           required: true
           type: string
-        - default: '[authentication secret]'
-          description: ''
+        - default: "[authentication secret]"
+          description: ""
           in: header
           name: x-auth-secret
           required: true
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Update an existing work type
       tags:
@@ -1721,7 +1921,7 @@ definitions:
       AdditionalEmails:
         description: Client additional emails contact for CC
         items:
-          $ref: '#/definitions/AdditionalClientEmailApiModel'
+          $ref: "#/definitions/AdditionalClientEmailApiModel"
         type: array
       Address:
         description: Client business address
@@ -1766,7 +1966,7 @@ definitions:
       AdditionalEmails:
         description: Client additional emails contact for CC
         items:
-          $ref: '#/definitions/AdditionalClientEmailApiModel'
+          $ref: "#/definitions/AdditionalClientEmailApiModel"
         type: array
       Address:
         description: Client business address
@@ -1812,7 +2012,7 @@ definitions:
       AdditionalEmails:
         description: Client additional emails contact for CC
         items:
-          $ref: '#/definitions/AdditionalClientEmailApiModel'
+          $ref: "#/definitions/AdditionalClientEmailApiModel"
         type: array
       Address:
         description: Client business address
@@ -1915,7 +2115,8 @@ definitions:
         description: Indicates to which invoice this activity refers to
         type: string
       Link:
-        description: 'Url which point out to a certain activity action. Ex: Click to view the payment'
+        description: "Url which point out to a certain activity action. Ex: Click to
+          view the payment"
         type: string
       Message:
         description: Message associated with the activity
@@ -1991,7 +2192,7 @@ definitions:
       Attachments:
         description: List of invoice attachments
         items:
-          $ref: '#/definitions/InvoiceCreateAttachmentApiModel'
+          $ref: "#/definitions/InvoiceCreateAttachmentApiModel"
         type: array
       ClientId:
         description: The client to whom this invoice is assigned
@@ -2016,7 +2217,7 @@ definitions:
       Items:
         description: List of invoice items
         items:
-          $ref: '#/definitions/InvoiceCreateItemApiModel'
+          $ref: "#/definitions/InvoiceCreateItemApiModel"
         type: array
       Notes:
         description: Internal note regarding the invoice
@@ -2027,13 +2228,13 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this invoice
         items:
-          $ref: '#/definitions/InvoiceGatewayApiModel'
+          $ref: "#/definitions/InvoiceGatewayApiModel"
         type: array
       PoNumber:
         description: Unique number generated by the buyer
         type: string
       RecurringProfile:
-        $ref: '#/definitions/InvoiceRecurringApiModel'
+        $ref: "#/definitions/InvoiceRecurringApiModel"
         description: Hold the recurring profile
       RecurringProfileId:
         description: Hold the id of the recurring profile
@@ -2096,7 +2297,7 @@ definitions:
         format: int32
         type: integer
       TaxPercentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
       WorkTypeId:
@@ -2117,14 +2318,14 @@ definitions:
         description: Security access token used for accessing the invoice anonymously
         type: string
       Client:
-        $ref: '#/definitions/ClientDetailsApiModel'
+        $ref: "#/definitions/ClientDetailsApiModel"
         description: Client data referened to this invoice
       ClonedFromId:
         description: Indicate from which invoice this invoice has been cloned from
         format: int32
         type: integer
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this invoice
       DiscountAmount:
         description: Amount that goes as a discount
@@ -2155,7 +2356,7 @@ definitions:
         description: Unique number generated by the buyer
         type: string
       RecurringProfile:
-        $ref: '#/definitions/InvoiceRecurringApiModel'
+        $ref: "#/definitions/InvoiceRecurringApiModel"
         description: Hold the recurring profile
       RecurringProfileId:
         description: Hold the id of the recurring profile
@@ -2194,22 +2395,22 @@ definitions:
       Activities:
         description: List of invoice activities. Invoice audit log
         items:
-          $ref: '#/definitions/InvoiceActivityApiModel'
+          $ref: "#/definitions/InvoiceActivityApiModel"
         type: array
       Attachments:
         description: List of invoice attachments
         items:
-          $ref: '#/definitions/InvoiceAttachmentApiModel'
+          $ref: "#/definitions/InvoiceAttachmentApiModel"
         type: array
       Client:
-        $ref: '#/definitions/ClientDetailsApiModel'
+        $ref: "#/definitions/ClientDetailsApiModel"
         description: Client data referened to this invoice
       ClonedFromId:
         description: Indicate from which invoice this invoice has been cloned from
         format: int32
         type: integer
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this invoice
       DiscountAmount:
         description: Amount that goes as a discount
@@ -2233,7 +2434,7 @@ definitions:
       Items:
         description: List of invoice items
         items:
-          $ref: '#/definitions/InvoiceItemApiModel'
+          $ref: "#/definitions/InvoiceItemApiModel"
         type: array
       Notes:
         description: Internal note regarding the invoice
@@ -2244,18 +2445,18 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this invoice
         items:
-          $ref: '#/definitions/InvoiceGatewayApiModel'
+          $ref: "#/definitions/InvoiceGatewayApiModel"
         type: array
       Payments:
         description: List of invoice payments
         items:
-          $ref: '#/definitions/InvoicePaymentApiModel'
+          $ref: "#/definitions/InvoicePaymentApiModel"
         type: array
       PoNumber:
         description: Unique number generated by the buyer
         type: string
       RecurringProfile:
-        $ref: '#/definitions/InvoiceRecurringApiModel'
+        $ref: "#/definitions/InvoiceRecurringApiModel"
         description: Hold the recurring profile
       RecurringProfileId:
         description: Hold the id of the recurring profile
@@ -2330,7 +2531,7 @@ definitions:
         format: int32
         type: integer
       TaxPercentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
       TotalAmount:
@@ -2427,7 +2628,9 @@ definitions:
           - Yearly
         type: string
       RecurranceValue:
-        description: "Recurring every [value] RecurrancePattern\r\nEx: Recur every 1 week"
+        description: "Recurring every [value] RecurrancePattern\r
+
+          Ex: Recur every 1 week"
         format: int32
         type: integer
       StartOfRecurrance:
@@ -2443,7 +2646,9 @@ definitions:
           - Finished
         type: string
       Title:
-        description: "Title of the recurring profile. \r\nEx: BRAND PACKAGE - 2017-08-16 - 2018-08-16"
+        description: "Title of the recurring profile. \r
+
+          Ex: BRAND PACKAGE - 2017-08-16 - 2018-08-16"
         type: string
     type: object
   InvoiceUpdateApiModel:
@@ -2451,7 +2656,7 @@ definitions:
       Attachments:
         description: List of invoice attachments
         items:
-          $ref: '#/definitions/InvoiceUpdateAttachmentApiModel'
+          $ref: "#/definitions/InvoiceUpdateAttachmentApiModel"
         type: array
       ClientId:
         description: The client to whom this invoice is assigned
@@ -2480,7 +2685,7 @@ definitions:
       Items:
         description: List of invoice items
         items:
-          $ref: '#/definitions/InvoiceUpdateItemApiModel'
+          $ref: "#/definitions/InvoiceUpdateItemApiModel"
         type: array
       Notes:
         description: Internal note regarding the invoice
@@ -2491,13 +2696,13 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this invoice
         items:
-          $ref: '#/definitions/InvoiceGatewayApiModel'
+          $ref: "#/definitions/InvoiceGatewayApiModel"
         type: array
       PoNumber:
         description: Unique number generated by the buyer
         type: string
       RecurringProfile:
-        $ref: '#/definitions/InvoiceRecurringApiModel'
+        $ref: "#/definitions/InvoiceRecurringApiModel"
         description: Hold the recurring profile
       RecurringProfileId:
         description: Hold the id of the recurring profile
@@ -2568,7 +2773,7 @@ definitions:
         format: int32
         type: integer
       TaxPercentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
       WorkTypeId:
@@ -2582,7 +2787,7 @@ definitions:
         description: Unique link to the invoice
         type: string
     type: object
-  'ListResult[InvoiceDetailsApiModel]':
+  "ListResult[InvoiceDetailsApiModel]":
     properties:
       Count:
         format: int32
@@ -2590,19 +2795,19 @@ definitions:
         type: integer
       ErrorMessages:
         items:
-          $ref: '#/definitions/IErrorInfo'
+          $ref: "#/definitions/IErrorInfo"
         type: array
       IsFaulted:
         type: boolean
       Result:
         items:
-          $ref: '#/definitions/InvoiceDetailsApiModel'
+          $ref: "#/definitions/InvoiceDetailsApiModel"
         type: array
       TotalCount:
         format: int32
         type: integer
     type: object
-  'ListResult[OrderDetailsApiModel]':
+  "ListResult[OrderDetailsApiModel]":
     properties:
       Count:
         format: int32
@@ -2610,19 +2815,19 @@ definitions:
         type: integer
       ErrorMessages:
         items:
-          $ref: '#/definitions/IErrorInfo'
+          $ref: "#/definitions/IErrorInfo"
         type: array
       IsFaulted:
         type: boolean
       Result:
         items:
-          $ref: '#/definitions/OrderDetailsApiModel'
+          $ref: "#/definitions/OrderDetailsApiModel"
         type: array
       TotalCount:
         format: int32
         type: integer
     type: object
-  'ListResult[ProductDetailsApiModel]':
+  "ListResult[ProductDetailsApiModel]":
     properties:
       Count:
         format: int32
@@ -2630,13 +2835,13 @@ definitions:
         type: integer
       ErrorMessages:
         items:
-          $ref: '#/definitions/IErrorInfo'
+          $ref: "#/definitions/IErrorInfo"
         type: array
       IsFaulted:
         type: boolean
       Result:
         items:
-          $ref: '#/definitions/ProductDetailsApiModel'
+          $ref: "#/definitions/ProductDetailsApiModel"
         type: array
       TotalCount:
         format: int32
@@ -2691,7 +2896,7 @@ definitions:
       Attachments:
         description: List of Order attachments
         items:
-          $ref: '#/definitions/OrderAttachmentApiModel'
+          $ref: "#/definitions/OrderAttachmentApiModel"
         type: array
       CouponCode:
         description: Coupon to apply in order to get the discount
@@ -2710,7 +2915,7 @@ definitions:
       Items:
         description: List of Order items
         items:
-          $ref: '#/definitions/OrderItemApiModel'
+          $ref: "#/definitions/OrderItemApiModel"
         type: array
       Name:
         description: Product alias
@@ -2719,10 +2924,10 @@ definitions:
         description: Customer note to seller
         type: string
       OrderBillingDetails:
-        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        $ref: "#/definitions/OrderBillingDetailsApiModel"
         description: Order billing details
       OrderShippingDetails:
-        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        $ref: "#/definitions/OrderShippingDetailsApiModel"
         description: Order sshipping details
       ProductId:
         description: Product id
@@ -2785,7 +2990,7 @@ definitions:
         description: Coupon to apply in order to get the discount
         type: string
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this order
       CurrencyId:
         description: Foreign key Currency
@@ -2809,10 +3014,10 @@ definitions:
         description: Customer note to seller
         type: string
       OrderBillingDetails:
-        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        $ref: "#/definitions/OrderBillingDetailsApiModel"
         description: Order billing details
       OrderShippingDetails:
-        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        $ref: "#/definitions/OrderShippingDetailsApiModel"
         description: Order sshipping details
       ProductId:
         description: Product id
@@ -2871,13 +3076,13 @@ definitions:
       Attachments:
         description: List of Order attachments
         items:
-          $ref: '#/definitions/OrderAttachmentApiModel'
+          $ref: "#/definitions/OrderAttachmentApiModel"
         type: array
       CouponCode:
         description: Coupon to apply in order to get the discount
         type: string
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this order
       CurrencyId:
         description: Foreign key Currency
@@ -2897,7 +3102,7 @@ definitions:
       Items:
         description: List of Order items
         items:
-          $ref: '#/definitions/OrderItemApiModel'
+          $ref: "#/definitions/OrderItemApiModel"
         type: array
       Name:
         description: Product alias
@@ -2906,10 +3111,10 @@ definitions:
         description: Customer note to seller
         type: string
       OrderBillingDetails:
-        $ref: '#/definitions/OrderBillingDetailsApiModel'
+        $ref: "#/definitions/OrderBillingDetailsApiModel"
         description: Order billing details
       OrderShippingDetails:
-        $ref: '#/definitions/OrderShippingDetailsApiModel'
+        $ref: "#/definitions/OrderShippingDetailsApiModel"
         description: Order sshipping details
       ProductId:
         description: Product id
@@ -3029,7 +3234,7 @@ definitions:
       SupportedCurrencies:
         description: List of supported currencies.
         items:
-          $ref: '#/definitions/CurrencyApiModel'
+          $ref: "#/definitions/CurrencyApiModel"
         type: array
     type: object
   ProductAttachmentApiModel:
@@ -3088,12 +3293,12 @@ definitions:
       Attachments:
         description: List of product attachments
         items:
-          $ref: '#/definitions/ProductAttachmentApiModel'
+          $ref: "#/definitions/ProductAttachmentApiModel"
         type: array
       Coupons:
         description: List of product coupons
         items:
-          $ref: '#/definitions/ProductCouponApiModel'
+          $ref: "#/definitions/ProductCouponApiModel"
         type: array
       CurrencyId:
         description: Foreign key Currency
@@ -3105,12 +3310,12 @@ definitions:
       Discounts:
         description: List of product discounts
         items:
-          $ref: '#/definitions/ProductDiscountApiModel'
+          $ref: "#/definitions/ProductDiscountApiModel"
         type: array
       Items:
         description: List of product items
         items:
-          $ref: '#/definitions/ProductItemApiModel'
+          $ref: "#/definitions/ProductItemApiModel"
         type: array
       Name:
         description: Product alias
@@ -3118,7 +3323,7 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this product
         items:
-          $ref: '#/definitions/ProductGatewayApiModel'
+          $ref: "#/definitions/ProductGatewayApiModel"
         type: array
       ShippingAmount:
         description: Cost for shipping the product
@@ -3154,7 +3359,7 @@ definitions:
         description: After payment description
         type: string
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this product
       CurrencyId:
         description: Foreign key Currency
@@ -3237,15 +3442,15 @@ definitions:
       Attachments:
         description: List of product attachments
         items:
-          $ref: '#/definitions/ProductAttachmentApiModel'
+          $ref: "#/definitions/ProductAttachmentApiModel"
         type: array
       Coupons:
         description: List of product coupons
         items:
-          $ref: '#/definitions/ProductCouponApiModel'
+          $ref: "#/definitions/ProductCouponApiModel"
         type: array
       Currency:
-        $ref: '#/definitions/CurrencyDetailsApiModel'
+        $ref: "#/definitions/CurrencyDetailsApiModel"
         description: The currency related to this product
       CurrencyId:
         description: Foreign key Currency
@@ -3257,7 +3462,7 @@ definitions:
       Discounts:
         description: List of product discounts
         items:
-          $ref: '#/definitions/ProductDiscountApiModel'
+          $ref: "#/definitions/ProductDiscountApiModel"
         type: array
       Id:
         description: Product id
@@ -3266,7 +3471,7 @@ definitions:
       Items:
         description: List of product items
         items:
-          $ref: '#/definitions/ProductItemApiModel'
+          $ref: "#/definitions/ProductItemApiModel"
         type: array
       Name:
         description: Product alias
@@ -3274,7 +3479,7 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this product
         items:
-          $ref: '#/definitions/ProductGatewayApiModel'
+          $ref: "#/definitions/ProductGatewayApiModel"
         type: array
       ShippingAmount:
         description: Cost for shipping the product
@@ -3365,12 +3570,12 @@ definitions:
       Attachments:
         description: List of product attachments
         items:
-          $ref: '#/definitions/ProductAttachmentApiModel'
+          $ref: "#/definitions/ProductAttachmentApiModel"
         type: array
       Coupons:
         description: List of product coupons
         items:
-          $ref: '#/definitions/ProductCouponApiModel'
+          $ref: "#/definitions/ProductCouponApiModel"
         type: array
       CurrencyId:
         description: Foreign key Currency
@@ -3382,7 +3587,7 @@ definitions:
       Discounts:
         description: List of product discounts
         items:
-          $ref: '#/definitions/ProductDiscountApiModel'
+          $ref: "#/definitions/ProductDiscountApiModel"
         type: array
       Id:
         description: Product id
@@ -3391,7 +3596,7 @@ definitions:
       Items:
         description: List of product items
         items:
-          $ref: '#/definitions/ProductItemApiModel'
+          $ref: "#/definitions/ProductItemApiModel"
         type: array
       Name:
         description: Product alias
@@ -3399,7 +3604,7 @@ definitions:
       PaymentGateways:
         description: List of enabled payment gateways for this product
         items:
-          $ref: '#/definitions/ProductGatewayApiModel'
+          $ref: "#/definitions/ProductGatewayApiModel"
         type: array
       ShippingAmount:
         description: Cost for shipping the product
@@ -3474,7 +3679,7 @@ definitions:
         description: Name of the task
         type: string
       Percentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
     type: object
@@ -3499,7 +3704,7 @@ definitions:
         description: Name of the task
         type: string
       Percentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
     type: object
@@ -3513,7 +3718,7 @@ definitions:
         description: Name of the task
         type: string
       Percentage:
-        description: 'Task percentage. Ex: 18%'
+        description: "Task percentage. Ex: 18%"
         format: double
         type: number
     type: object
@@ -3533,7 +3738,7 @@ definitions:
   WorkTypeCreateApiModel:
     properties:
       Title:
-        description: 'Indicates the title of of the work type (Logo design, development...)'
+        description: Indicates the title of of the work type (Logo design, development...)
         type: string
     type: object
   WorkTypeDeleteApiModel:
@@ -3554,7 +3759,7 @@ definitions:
         format: int32
         type: integer
       Title:
-        description: 'Indicates the title of of the work type (Logo design, development...)'
+        description: Indicates the title of of the work type (Logo design, development...)
         type: string
     type: object
   WorkTypeUpdateApiModel:
@@ -3564,6 +3769,6 @@ definitions:
         format: int32
         type: integer
       Title:
-        description: 'Indicates the title of of the work type (Logo design, development...)'
+        description: Indicates the title of of the work type (Logo design, development...)
         type: string
     type: object

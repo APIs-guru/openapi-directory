@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -6,21 +6,23 @@ host: api.funtranslations.com
 info:
   contact:
     name: Fun Translations
-    url: 'https://funtranslations.com/api/braille'
+    url: https://funtranslations.com/api/braille
     x-twitter: funtranslate
-  description: |
-    Braille conversion API on the cloud. Translate from English text to Braille and get Braille results suitable for many display types.[Click here to subscribe](http://funtranslations.com/api/braille) 
-  termsOfService: 'https://funtranslations.com/terms'
-  title: FunTranslations Braille
-  version: '2.3'
+  description: >
+    Braille conversion API on the cloud. Translate from English text to Braille
+    and get Braille results suitable for many display types.[Click here to
+    subscribe](http://funtranslations.com/api/braille) 
+  termsOfService: https://funtranslations.com/terms
+  title: FunTranslations Braille API
+  version: "2.3"
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/funtranslate/profile_image?size=original'
+    url: https://twitter.com/funtranslate/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://funtranslations.com/yaml/funtranslations.braille.yaml'
-      version: '2.0'
+      url: https://funtranslations.com/yaml/funtranslations.braille.yaml
+      version: "2.0"
   x-providerName: funtranslations.com
   x-serviceName: braile
 consumes:
@@ -38,12 +40,15 @@ tags:
   - description: Braille Translation API
     externalDocs:
       description: Find out more
-      url: 'http://funtranslations.com/api/braille'
+      url: http://funtranslations.com/api/braille
     name: Braille
 paths:
   /translate/braille:
     get:
-      description: Translate from English to Braille. This is what you use if you have a braille display. This API translates the English text into characters that a braille display understands and you can feed the translated text directly to the display.
+      description: Translate from English to Braille. This is what you use if you have
+        a braille display. This API translates the English text into characters
+        that a braille display understands and you can feed the translated text
+        directly to the display.
       parameters:
         - description: Text to translate
           format: string
@@ -51,11 +56,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -69,7 +78,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -85,7 +94,9 @@ paths:
         - Braille
   /translate/braille/dots:
     get:
-      description: Use this to see which dots are enabled for each Braille letters. This is highly educational (to see which dots are enabled) and can potentially drive a non braille display which works on individual dots.
+      description: Use this to see which dots are enabled for each Braille letters.
+        This is highly educational (to see which dots are enabled) and can
+        potentially drive a non braille display which works on individual dots.
       parameters:
         - description: Text to translate
           format: string
@@ -93,8 +104,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -150,7 +165,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -166,7 +181,9 @@ paths:
         - Braille
   /translate/braille/html:
     get:
-      description: Translate from English to Braille Image characters. This is probably what you want to use if you are displaying braille in a browser.
+      description: Translate from English to Braille Image characters. This is
+        probably what you want to use if you are displaying braille in a
+        browser.
       parameters:
         - description: Text to translate
           format: string
@@ -174,8 +191,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -231,7 +252,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -247,7 +268,9 @@ paths:
         - Braille
   /translate/braille/image:
     get:
-      description: Translate from English to Braille image characters. This is probably what you want to use if you are displaying braille in a browser.
+      description: Translate from English to Braille image characters. This is
+        probably what you want to use if you are displaying braille in a
+        browser.
       parameters:
         - description: Text to translate
           format: string
@@ -255,11 +278,15 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
-            application/json: |-
+            application/json: >-
               {
                   "success": {
                       "total": 1
@@ -312,7 +339,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-
@@ -336,8 +363,12 @@ paths:
           name: text
           required: true
           type: string
+      produces:
+        - application/json
+        - application/xml
+        - application/js
       responses:
-        '200':
+        "200":
           description: 200  response
           examples:
             application/json: |-
@@ -393,7 +424,7 @@ paths:
                       }
                   }
               }
-        '401':
+        "401":
           description: 401  response
           examples:
             application/json: |-

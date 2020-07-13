@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.wordassociations.net
@@ -6,19 +6,25 @@ basePath: /associations/v1.0
 info:
   contact:
     email: contact@wordassociations.net
-  description: 'The Word Associations Network API allows developers to embed the ability to find associations for a word or phrase into their mobile apps or web services. Words are grouped by semantics, meaning, and psychological perception. The Word Associations Network API currently supports English, French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please [register and subscribe](https://api.wordassociations.net/subscriptions/) to one of available tariff plans to get a valid API key.'
-  termsOfService: 'https://wordassociations.net/en/api'
-  title: Word Associations
-  version: '1.0'
+  description: The Word Associations Network API allows developers to embed the
+    ability to find associations for a word or phrase into their mobile apps or
+    web services. Words are grouped by semantics, meaning, and psychological
+    perception. The Word Associations Network API currently supports English,
+    French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please
+    [register and subscribe](https://api.wordassociations.net/subscriptions/) to
+    one of available tariff plans to get a valid API key.
+  termsOfService: https://wordassociations.net/en/api
+  title: Word Associations API
+  version: "1.0"
   x-apisguru-categories:
     - text
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://wordassociations.net/en/images/network.png'
+    backgroundColor: "#FFFFFF"
+    url: https://wordassociations.net/en/images/network.png
   x-origin:
     - format: swagger
-      url: 'https://api.wordassociations.net/documentation/swagger.json'
-      version: '2.0'
+      url: https://api.wordassociations.net/documentation/swagger.json
+      version: "2.0"
   x-providerName: wordassociations.net
 consumes:
   - application/x-www-form-urlencoded
@@ -26,7 +32,9 @@ produces:
   - application/json
 securityDefinitions:
   internalApiKey:
-    description: 'API key. Please register and subscribe to one of available tariff plans to get a valid API key https://api.wordassociations.net/subscriptions/.'
+    description: API key. Please register and subscribe to one of available tariff
+      plans to get a valid API key
+      https://api.wordassociations.net/subscriptions/.
     in: query
     name: apikey
     type: apiKey
@@ -39,9 +47,11 @@ paths:
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
-          description: |
+          description: >
             Word or phrase to find associations with.
+
             Tip. You can use multiple parameters 'text' in a request (from 1 to 10 inclusive). This way you can get associations for several input words or phrases in one response.
+
             Restriction: regardless of the size of the text association lookup is always performed by the first 10 words of the text.
           in: query
           items:
@@ -73,10 +83,13 @@ paths:
           required: true
           type: string
         - default: stimulus
-          description: |
+          description: >
             Type of result.
+
             Possible values: 
+
             * stimulus - an input data (the text parameter) is considered as a response word. The service returns a list of stimuli words, which evoke a given response word;
+
             * response - an input data (the text parameter) is considered as a stimulus word. The service returns a list of response words, which come to mind for a given stimulus word.
           enum:
             - stimulus
@@ -86,9 +99,11 @@ paths:
           required: false
           type: string
         - default: 50
-          description: |
+          description: >
             Maximum number of results to return.
+
             Allows to limit the number of results (associations) in response.
+
             The value of this parameter is an integer number from 1 to 300 inclusive.
           in: query
           maximum: 300
@@ -101,13 +116,19 @@ paths:
             - adjective
             - verb
             - adverb
-          description: |
+          description: >
             Parts of speech to return.
+
             Allows to limit results by specified parts of speech. The value of this parameter is a list of parts of speech separated by comma.
+
             The following parts of speech codes are supported:
+
             * noun
+
             * adjective
+
             * verb
+
             * adverb
           in: query
           items:
@@ -121,7 +142,7 @@ paths:
           name: pos
           required: false
           type: array
-        - default: 'yes'
+        - default: yes
           description: |
             Indentation switch for pretty printing of JSON response.
             Allows to either turn on or off space indentation for a response.
@@ -129,31 +150,37 @@ paths:
             * yes - turns indentation with spaces on;
             * no - turn indentation with spaces off;
           enum:
-            - 'yes'
-            - 'no'
+            - yes
+            - no
           in: query
           name: indent
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful response
           schema:
-            $ref: '#/definitions/Body'
-        '401':
+            $ref: "#/definitions/Body"
+        "401":
           description: Invalid API key
-        '429':
+        "429":
           description: The monthly limit on the number of requests is exceeded
-        '501':
+        "501":
           description: The specified language is not supported
     post:
+      consumes:
+        - application/x-www-form-urlencoded
       description: |
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
-          description: |
+          description: >
             Word or phrase to find associations with.
+
             Tip. You can use multiple parameters 'text' in a request (from 1 to 10 inclusive). This way you can get associations for several input words or phrases in one response.
+
             Restriction: regardless of the size of the text association lookup is always performed by the first 10 words of the text.
           in: formData
           items:
@@ -185,10 +212,13 @@ paths:
           required: true
           type: string
         - default: stimulus
-          description: |
+          description: >
             Type of result.
+
             Possible values: 
+
             * stimulus - an input data (the text parameter) is considered as a response word. The service returns a list of stimuli words, which evoke a given response word;
+
             * response - an input data (the text parameter) is considered as a stimulus word. The service returns a list of response words, which come to mind for a given stimulus word.
           enum:
             - stimulus
@@ -198,9 +228,11 @@ paths:
           required: false
           type: string
         - default: 50
-          description: |
+          description: >
             Maximum number of results to return.
+
             Allows to limit the number of results (associations) in response.
+
             The value of this parameter is an integer number from 1 to 300 inclusive.
           in: formData
           maximum: 300
@@ -213,13 +245,19 @@ paths:
             - adjective
             - verb
             - adverb
-          description: |
+          description: >
             Parts of speech to return.
+
             Allows to limit results by specified parts of speech. The value of this parameter is a list of parts of speech separated by comma.
+
             The following parts of speech codes are supported:
+
             * noun
+
             * adjective
+
             * verb
+
             * adverb
           in: formData
           items:
@@ -233,7 +271,7 @@ paths:
           name: pos
           required: false
           type: array
-        - default: 'yes'
+        - default: yes
           description: |
             Indentation switch for pretty printing of JSON response.
             Allows to either turn on or off space indentation for a response.
@@ -241,22 +279,24 @@ paths:
             * yes - turns indentation with spaces on;
             * no - turn indentation with spaces off;
           enum:
-            - 'yes'
-            - 'no'
+            - yes
+            - no
           in: formData
           name: indent
           required: false
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Successful response
           schema:
-            $ref: '#/definitions/Body'
-        '401':
+            $ref: "#/definitions/Body"
+        "401":
           description: Invalid API key
-        '429':
+        "429":
           description: The monthly limit on the number of requests is exceeded
-        '501':
+        "501":
           description: The specified language is not supported
 definitions:
   Body:
@@ -265,10 +305,10 @@ definitions:
         format: int32
         type: integer
       request:
-        $ref: '#/definitions/Request'
+        $ref: "#/definitions/Request"
       response:
         items:
-          $ref: '#/definitions/Response'
+          $ref: "#/definitions/Response"
         type: array
       version:
         type: string
@@ -303,7 +343,7 @@ definitions:
     properties:
       items:
         items:
-          $ref: '#/definitions/Item'
+          $ref: "#/definitions/Item"
         type: array
       text:
         type: string

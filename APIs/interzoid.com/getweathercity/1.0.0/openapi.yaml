@@ -1,39 +1,42 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.interzoid.com'
+  - url: https://api.interzoid.com
 info:
   contact:
     email: support@interzoid.com
     name: API Support
-    url: 'https://www.interzoid.com'
+    url: https://www.interzoid.com
     x-twitter: interzoid
-  description: 'This API provides current weather information for US Cities, including temperatures, wind speeds, wind direction, relative humidity, and visibility.'
+  description: This API provides current weather information for US Cities,
+    including temperatures, wind speeds, wind direction, relative humidity, and
+    visibility.
   license:
     name: Interzoid license
-    url: 'https://www.interzoid.com/license'
-  termsOfService: 'https://www.interzoid.com/terms'
-  title: Interzoid Get Weather City
+    url: https://www.interzoid.com/license
+  termsOfService: https://www.interzoid.com/terms
+  title: Interzoid Get Weather City API
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/interzoid/profile_image?size=original'
+    url: https://twitter.com/interzoid/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://oas.interzoid.com/api/getweathercity.json'
-      version: '3.0'
+      url: https://oas.interzoid.com/api/getweathercity.json
+      version: "3.0"
   x-providerName: interzoid.com
   x-serviceName: getweathercity
 externalDocs:
   description: API home page and documentation
-  url: 'https://www.interzoid.com/services/getweathercity'
+  url: https://www.interzoid.com/services/getweathercity
 paths:
   /getweather:
     get:
       description: Use city and state to retrieve current US weather information.
       operationId: getweather
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
@@ -52,7 +55,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -81,17 +84,17 @@ paths:
                     type: string
                 type: object
           description: Current weather information for a US city
-        '400':
+        "400":
           description: bad request - insufficient parameters
-        '402':
+        "402":
           description: credits exhausted
-        '403':
+        "403":
           description: invalid license API key
-        '404':
+        "404":
           description: city/state not found
-        '405':
+        "405":
           description: method not allowed
-        '500':
+        "500":
           description: internal server error
       summary: Gets current weather information for a US city and state
       tags:

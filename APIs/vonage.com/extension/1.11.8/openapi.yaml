@@ -1,29 +1,31 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.vonage.com/t/vbc.prod/provisioning'
+  - url: https://api.vonage.com/t/vbc.prod/provisioning
 info:
   contact:
     name: Vonage Business Cloud Support
-    url: 'https://businesssupport.vonage.com/contactus'
-  description: |
-    The Vonage Business Cloud Extension API enables you to retrieve information about extensions.
+    url: https://businesssupport.vonage.com/contactus
+  description: >
+    The Vonage Business Cloud Extension API enables you to retrieve information
+    about extensions.
+
 
     Your application must subscribe to the Provisioning API suite to use this API.
-  termsOfService: 'https://www.vonage.com/business/legal-policy-center/business-cloud/tos'
-  title: Extension
+  termsOfService: https://www.vonage.com/business/legal-policy-center/business-cloud/tos
+  title: Extension API
   version: 1.11.8
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/extension.yml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/vonage-business-cloud/extension.yml
+      version: "3.0"
   x-providerName: vonage.com
   x-serviceName: extension
 paths:
-  '/api/accounts/{account_id}/extensions':
+  "/api/accounts/{account_id}/extensions":
     get:
       operationId: ExtensionCtrl.getAccountExtensions
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
         - description: Number of records per page
           example: 10
           in: query
@@ -46,7 +48,7 @@ paths:
           schema:
             type: number
         - description: Filter by phone number
-          example: '14155550100'
+          example: "14155550100"
           in: query
           name: phone_number
           required: false
@@ -67,26 +69,26 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EndUserRouteHalResponse'
+                $ref: "#/components/schemas/EndUserRouteHalResponse"
           description: Success
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationErrorsResponse'
+                $ref: "#/components/schemas/ValidationErrorsResponse"
           description: Invalid parameters given
       security:
         - bearerAuth: []
       summary: Get account extensions data by account ID
-  '/api/accounts/{account_id}/extensions/{extension_number}':
+  "/api/accounts/{account_id}/extensions/{extension_number}":
     get:
       operationId: ExtensionCtrl.getAccountExtensionByID
       parameters:
-        - $ref: '#/components/parameters/AccountID'
+        - $ref: "#/components/parameters/AccountID"
         - description: The extension number
           example: 789
           in: path
@@ -95,17 +97,17 @@ paths:
           schema:
             type: number
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EndUserRouteHalResponse'
+                $ref: "#/components/schemas/EndUserRouteHalResponse"
           description: Success
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: "#/components/schemas/ErrorResponse"
           description: Extension not found
       security:
         - bearerAuth: []
@@ -147,7 +149,7 @@ components:
           type: string
         phone_number:
           description: Phone number
-          example: '14155550100'
+          example: "14155550100"
           type: string
       type: object
     DetailedInvalidParam:
@@ -172,7 +174,7 @@ components:
         dids:
           description: Collection of phone numbers assigned to the extension
           items:
-            $ref: '#/components/schemas/DID'
+            $ref: "#/components/schemas/DID"
           type: array
         dnd_enabled:
           description: Do Not Disturb status of the extension
@@ -181,18 +183,18 @@ components:
         extension_handsets:
           description: Collection of handsets assigned to the extension
           items:
-            $ref: '#/components/schemas/Line'
+            $ref: "#/components/schemas/Line"
           type: array
         extension_number:
           description: Extension number
-          example: '789'
+          example: "789"
           type: string
         location_id:
           description: Unique identifier of the assigned location
           example: 145214
           type: number
         user:
-          $ref: '#/components/schemas/BasicUser'
+          $ref: "#/components/schemas/BasicUser"
         vtt_enabled:
           description: Voicemail transcription status of the location
           example: true
@@ -201,14 +203,14 @@ components:
     EndUserRouteEmbeddedObject:
       properties:
         data:
-          $ref: '#/components/schemas/EndUserRoute'
+          $ref: "#/components/schemas/EndUserRoute"
       type: object
     EndUserRouteHalResponse:
       properties:
         _embedded:
-          $ref: '#/components/schemas/EndUserRouteEmbeddedObject'
+          $ref: "#/components/schemas/EndUserRouteEmbeddedObject"
         _links:
-          $ref: '#/components/schemas/Links'
+          $ref: "#/components/schemas/Links"
         page:
           description: Current page number
           example: 1
@@ -261,13 +263,13 @@ components:
     Links:
       properties:
         first:
-          $ref: '#/components/schemas/FirstHref'
+          $ref: "#/components/schemas/FirstHref"
         next:
-          $ref: '#/components/schemas/NextHref'
+          $ref: "#/components/schemas/NextHref"
         prev:
-          $ref: '#/components/schemas/PrevHref'
+          $ref: "#/components/schemas/PrevHref"
         self:
-          $ref: '#/components/schemas/SelfHref'
+          $ref: "#/components/schemas/SelfHref"
       type: object
     NextHref:
       description: URL to the next page of records
@@ -295,7 +297,7 @@ components:
         invalid_parameters:
           description: Invalid parameters and their reason for failing
           items:
-            $ref: '#/components/schemas/DetailedInvalidParam'
+            $ref: "#/components/schemas/DetailedInvalidParam"
           type: array
         status:
           description: Error status code

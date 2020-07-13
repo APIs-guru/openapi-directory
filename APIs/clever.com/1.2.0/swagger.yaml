@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.clever.com
@@ -7,41 +7,40 @@ info:
   contact:
     x-twitter: clever
   description: Serves the Clever Data API
-  title: Data
+  title: Data API
   version: 1.2.0
   x-apisguru-categories:
     - education
   x-logo:
-    url: 'https://twitter.com/clever/profile_image?size=original'
+    url: https://twitter.com/clever/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Clever/swagger-api/master/v1.2.yml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Clever/swagger-api/master/v1.2.yml
+      version: "2.0"
   x-providerName: clever.com
 produces:
   - application/json
 securityDefinitions:
   oauth:
-    authorizationUrl: 'https://clever.com/oauth/authorize'
+    authorizationUrl: https://clever.com/oauth/authorize
     flow: accessCode
-    tokenUrl: 'https://clever.com/oauth/tokens'
+    tokenUrl: https://clever.com/oauth/tokens
     type: oauth2
-    x-default: TEST_TOKEN
 security:
   - oauth: []
 responses:
   BadRequest:
     description: Bad Request
     schema:
-      $ref: '#/definitions/BadRequest'
+      $ref: "#/definitions/BadRequest"
   InternalError:
     description: Internal Error
     schema:
-      $ref: '#/definitions/InternalError'
+      $ref: "#/definitions/InternalError"
   NotFound:
     description: Entity Not Found
     schema:
-      $ref: '#/definitions/NotFound'
+      $ref: "#/definitions/NotFound"
 paths:
   /contacts:
     get:
@@ -58,13 +57,13 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsResponse'
+            $ref: "#/definitions/StudentContactsResponse"
       tags:
         - Contacts
-  '/contacts/{id}':
+  "/contacts/{id}":
     get:
       description: Returns a specific student contact
       operationId: getContact
@@ -74,15 +73,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentContactResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Contacts
-  '/contacts/{id}/district':
+  "/contacts/{id}/district":
     get:
       description: Returns the district for a student contact
       operationId: getDistrictForStudentContact
@@ -92,15 +91,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Contacts
-  '/contacts/{id}/student':
+  "/contacts/{id}/student":
     get:
       description: Returns the student for a student contact
       operationId: getStudentForContact
@@ -110,12 +109,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Contacts
   /district_admins:
@@ -133,13 +132,13 @@ paths:
           name: show_links
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictAdminsResponse'
+            $ref: "#/definitions/DistrictAdminsResponse"
       tags:
         - District Admins
-  '/district_admins/{id}':
+  "/district_admins/{id}":
     get:
       description: Returns a specific district admin
       operationId: getDistrictAdmin
@@ -149,12 +148,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictAdminResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictAdminResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - District Admins
   /districts:
@@ -162,13 +161,13 @@ paths:
       description: Returns a list of districts
       operationId: getDistricts
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictsResponse'
+            $ref: "#/definitions/DistrictsResponse"
       tags:
         - Districts
-  '/districts/{id}':
+  "/districts/{id}":
     get:
       description: Returns a specific district
       operationId: getDistrict
@@ -181,15 +180,15 @@ paths:
           name: include
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/admins':
+  "/districts/{id}/admins":
     get:
       description: Returns the admins for a district
       operationId: getAdminsForDistrict
@@ -199,15 +198,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictAdminsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictAdminsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/schools':
+  "/districts/{id}/schools":
     get:
       description: Returns the schools for a district
       operationId: getSchoolsForDistrict
@@ -229,15 +228,15 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/sections':
+  "/districts/{id}/sections":
     get:
       description: Returns the sections for a district
       operationId: getSectionsForDistrict
@@ -259,15 +258,15 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SectionsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/status':
+  "/districts/{id}/status":
     get:
       description: Returns the status of the district
       operationId: getDistrictStatus
@@ -277,15 +276,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictStatusResponses'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictStatusResponses"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/students':
+  "/districts/{id}/students":
     get:
       description: Returns the students for a district
       operationId: getStudentsForDistrict
@@ -307,15 +306,15 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
-  '/districts/{id}/teachers':
+  "/districts/{id}/teachers":
     get:
       description: Returns the teachers for a district
       operationId: getTeachersForDistrict
@@ -337,12 +336,12 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeachersResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Districts
   /school_admins:
@@ -363,13 +362,13 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolAdminsResponse'
+            $ref: "#/definitions/SchoolAdminsResponse"
       tags:
         - School Admins
-  '/school_admins/{id}':
+  "/school_admins/{id}":
     get:
       description: Returns a specific school admin
       operationId: getSchoolAdmin
@@ -382,15 +381,15 @@ paths:
           name: include
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolAdminResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolAdminResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - School Admins
-  '/school_admins/{id}/schools':
+  "/school_admins/{id}/schools":
     get:
       description: Returns the schools for a school admin
       operationId: getSchoolsForSchoolAdmin
@@ -409,12 +408,12 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - School Admins
   /schools:
@@ -435,13 +434,13 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolsResponse'
+            $ref: "#/definitions/SchoolsResponse"
       tags:
         - Schools
-  '/schools/{id}':
+  "/schools/{id}":
     get:
       description: Returns a specific school
       operationId: getSchool
@@ -451,15 +450,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Schools
-  '/schools/{id}/district':
+  "/schools/{id}/district":
     get:
       description: Returns the district for a school
       operationId: getDistrictForSchool
@@ -469,15 +468,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Schools
-  '/schools/{id}/sections':
+  "/schools/{id}/sections":
     get:
       description: Returns the sections for a school
       operationId: getSectionsForSchool
@@ -499,15 +498,15 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SectionsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Schools
-  '/schools/{id}/students':
+  "/schools/{id}/students":
     get:
       description: Returns the students for a school
       operationId: getStudentsForSchool
@@ -529,15 +528,15 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Schools
-  '/schools/{id}/teachers':
+  "/schools/{id}/teachers":
     get:
       description: Returns the teachers for a school
       operationId: getTeachersForSchool
@@ -559,12 +558,12 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeachersResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Schools
   /sections:
@@ -585,13 +584,13 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
+            $ref: "#/definitions/SectionsResponse"
       tags:
         - Sections
-  '/sections/{id}':
+  "/sections/{id}":
     get:
       description: Returns a specific section
       operationId: getSection
@@ -601,15 +600,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SectionResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
-  '/sections/{id}/district':
+  "/sections/{id}/district":
     get:
       description: Returns the district for a section
       operationId: getDistrictForSection
@@ -619,15 +618,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
-  '/sections/{id}/school':
+  "/sections/{id}/school":
     get:
       description: Returns the school for a section
       operationId: getSchoolForSection
@@ -637,15 +636,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
-  '/sections/{id}/students':
+  "/sections/{id}/students":
     get:
       description: Returns the students for a section
       operationId: getStudentsForSection
@@ -664,15 +663,15 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
-  '/sections/{id}/teacher':
+  "/sections/{id}/teacher":
     get:
       description: Returns the primary teacher for a section
       operationId: getTeacherForSection
@@ -682,15 +681,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeacherResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeacherResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
-  '/sections/{id}/teachers':
+  "/sections/{id}/teachers":
     get:
       description: Returns the teachers for a section
       operationId: getTeachersForSection
@@ -709,12 +708,12 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeachersResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Sections
   /students:
@@ -735,13 +734,13 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
+            $ref: "#/definitions/StudentsResponse"
       tags:
         - Students
-  '/students/{id}':
+  "/students/{id}":
     get:
       description: Returns a specific student
       operationId: getStudent
@@ -754,15 +753,15 @@ paths:
           name: include
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
-  '/students/{id}/contacts':
+  "/students/{id}/contacts":
     get:
       description: Returns the contacts for a student
       operationId: getContactsForStudent
@@ -775,15 +774,15 @@ paths:
           name: limit
           type: integer
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentContactsForStudentResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentContactsForStudentResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
-  '/students/{id}/district':
+  "/students/{id}/district":
     get:
       description: Returns the district for a student
       operationId: getDistrictForStudent
@@ -793,15 +792,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
-  '/students/{id}/school':
+  "/students/{id}/school":
     get:
       description: Returns the primary school for a student
       operationId: getSchoolForStudent
@@ -811,15 +810,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
-  '/students/{id}/sections':
+  "/students/{id}/sections":
     get:
       description: Returns the sections for a student
       operationId: getSectionsForStudent
@@ -838,15 +837,15 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SectionsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
-  '/students/{id}/teachers':
+  "/students/{id}/teachers":
     get:
       description: Returns the teachers for a student
       operationId: getTeachersForStudent
@@ -865,12 +864,12 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeachersResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Students
   /teachers:
@@ -891,13 +890,13 @@ paths:
           name: where
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeachersResponse'
+            $ref: "#/definitions/TeachersResponse"
       tags:
         - Teachers
-  '/teachers/{id}':
+  "/teachers/{id}":
     get:
       description: Returns a specific teacher
       operationId: getTeacher
@@ -910,15 +909,15 @@ paths:
           name: include
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/TeacherResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/TeacherResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
-  '/teachers/{id}/district':
+  "/teachers/{id}/district":
     get:
       description: Returns the district for a teacher
       operationId: getDistrictForTeacher
@@ -928,15 +927,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/DistrictResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/DistrictResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
-  '/teachers/{id}/grade_levels':
+  "/teachers/{id}/grade_levels":
     get:
       description: Returns the grade levels for sections a teacher teaches
       operationId: getGradeLevelsForTeacher
@@ -946,15 +945,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/GradeLevelsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/GradeLevelsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
-  '/teachers/{id}/school':
+  "/teachers/{id}/school":
     get:
       description: Retrieves school info for a teacher.
       operationId: getSchoolForTeacher
@@ -964,15 +963,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SchoolResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SchoolResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
-  '/teachers/{id}/sections':
+  "/teachers/{id}/sections":
     get:
       description: Returns the sections for a teacher
       operationId: getSectionsForTeacher
@@ -991,15 +990,15 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/SectionsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/SectionsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
-  '/teachers/{id}/students':
+  "/teachers/{id}/students":
     get:
       description: Returns the students for a teacher
       operationId: getStudentsForTeacher
@@ -1018,12 +1017,12 @@ paths:
           name: ending_before
           type: string
       responses:
-        '200':
+        "200":
           description: OK Response
           schema:
-            $ref: '#/definitions/StudentsResponse'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/StudentsResponse"
+        "404":
+          $ref: "#/responses/NotFound"
       tags:
         - Teachers
 definitions:
@@ -1059,7 +1058,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: "#/definitions/Name"
         x-nullable: true
       title:
         type: string
@@ -1068,19 +1067,19 @@ definitions:
   DistrictAdminResponse:
     properties:
       data:
-        $ref: '#/definitions/DistrictAdmin'
+        $ref: "#/definitions/DistrictAdmin"
     type: object
   DistrictAdminsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/DistrictAdmin'
+          $ref: "#/definitions/DistrictAdmin"
         type: array
     type: object
   DistrictResponse:
     properties:
       data:
-        $ref: '#/definitions/District'
+        $ref: "#/definitions/District"
     type: object
   DistrictStatus:
     properties:
@@ -1125,20 +1124,20 @@ definitions:
   DistrictStatusResponse:
     properties:
       data:
-        $ref: '#/definitions/DistrictStatus'
+        $ref: "#/definitions/DistrictStatus"
     type: object
   DistrictStatusResponses:
     properties:
       data:
         items:
-          $ref: '#/definitions/DistrictStatusResponse'
+          $ref: "#/definitions/DistrictStatusResponse"
         type: array
     type: object
   DistrictsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/DistrictResponse'
+          $ref: "#/definitions/DistrictResponse"
         type: array
     type: object
   GradeLevelsResponse:
@@ -1211,18 +1210,18 @@ definitions:
         x-validation: true
       high_grade:
         enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
-          - '11'
-          - '12'
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
           - PreKindergarten
           - Kindergarten
           - PostGraduate
@@ -1238,22 +1237,22 @@ definitions:
         type: string
         x-validation: true
       location:
-        $ref: '#/definitions/Location'
+        $ref: "#/definitions/Location"
         x-nullable: true
       low_grade:
         enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
-          - '11'
-          - '12'
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
           - PreKindergarten
           - Kindergarten
           - PostGraduate
@@ -1273,7 +1272,7 @@ definitions:
         type: string
         x-nullable: true
       principal:
-        $ref: '#/definitions/Principal'
+        $ref: "#/definitions/Principal"
       school_number:
         type: string
       sis_id:
@@ -1285,7 +1284,7 @@ definitions:
   SchoolAdmin:
     properties:
       credentials:
-        $ref: '#/definitions/Credentials'
+        $ref: "#/definitions/Credentials"
       district:
         type: string
         x-validation: true
@@ -1295,7 +1294,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: "#/definitions/Name"
       schools:
         items:
           type: string
@@ -1310,25 +1309,25 @@ definitions:
   SchoolAdminResponse:
     properties:
       data:
-        $ref: '#/definitions/SchoolAdmin'
+        $ref: "#/definitions/SchoolAdmin"
     type: object
   SchoolAdminsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/SchoolAdminResponse'
+          $ref: "#/definitions/SchoolAdminResponse"
         type: array
     type: object
   SchoolResponse:
     properties:
       data:
-        $ref: '#/definitions/School'
+        $ref: "#/definitions/School"
     type: object
   SchoolsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/SchoolResponse'
+          $ref: "#/definitions/SchoolResponse"
         type: array
     type: object
   Section:
@@ -1351,18 +1350,18 @@ definitions:
         x-validation: true
       grade:
         enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
-          - '11'
-          - '12'
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
           - PreKindergarten
           - Kindergarten
           - PostGraduate
@@ -1420,19 +1419,19 @@ definitions:
         type: array
         x-validation: true
       term:
-        $ref: '#/definitions/Term'
+        $ref: "#/definitions/Term"
         x-nullable: true
     type: object
   SectionResponse:
     properties:
       data:
-        $ref: '#/definitions/Section'
+        $ref: "#/definitions/Section"
     type: object
   SectionsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/SectionResponse'
+          $ref: "#/definitions/SectionResponse"
         type: array
     type: object
   Student:
@@ -1442,7 +1441,7 @@ definitions:
         type: string
         x-validation: true
       credentials:
-        $ref: '#/definitions/Credentials'
+        $ref: "#/definitions/Credentials"
       district:
         type: string
         x-validation: true
@@ -1453,9 +1452,9 @@ definitions:
         x-validation: true
       ell_status:
         enum:
-          - 'Y'
-          - 'N'
-          - ''
+          - Y
+          - N
+          - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -1466,24 +1465,24 @@ definitions:
         enum:
           - M
           - F
-          - ''
+          - ""
         type: string
         x-nullable: true
         x-validation: true
       grade:
         enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
-          - '11'
-          - '12'
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
+          - "6"
+          - "7"
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
           - PreKindergarten
           - Kindergarten
           - PostGraduate
@@ -1497,9 +1496,9 @@ definitions:
         x-validation: true
       hispanic_ethnicity:
         enum:
-          - 'Y'
-          - 'N'
-          - ''
+          - Y
+          - N
+          - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -1511,10 +1510,10 @@ definitions:
         type: string
         x-validation: true
       location:
-        $ref: '#/definitions/Location'
+        $ref: "#/definitions/Location"
         x-nullable: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: "#/definitions/Name"
       race:
         enum:
           - Caucasian
@@ -1524,7 +1523,7 @@ definitions:
           - Hawaiian or Other Pacific Islander
           - Two or More Races
           - Unknown
-          - ''
+          - ""
         type: string
         x-nullable: true
         x-validation: true
@@ -1579,32 +1578,32 @@ definitions:
   StudentContactResponse:
     properties:
       data:
-        $ref: '#/definitions/StudentContact'
+        $ref: "#/definitions/StudentContact"
     type: object
   StudentContactsForStudentResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/StudentContact'
+          $ref: "#/definitions/StudentContact"
         type: array
     type: object
   StudentContactsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/StudentContactResponse'
+          $ref: "#/definitions/StudentContactResponse"
         type: array
     type: object
   StudentResponse:
     properties:
       data:
-        $ref: '#/definitions/Student'
+        $ref: "#/definitions/Student"
     type: object
   StudentsResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/StudentResponse'
+          $ref: "#/definitions/StudentResponse"
         type: array
     type: object
   Teacher:
@@ -1614,7 +1613,7 @@ definitions:
         type: string
         x-validation: true
       credentials:
-        $ref: '#/definitions/Credentials'
+        $ref: "#/definitions/Credentials"
         x-nullable: true
       district:
         type: string
@@ -1630,7 +1629,7 @@ definitions:
         type: string
         x-validation: true
       name:
-        $ref: '#/definitions/Name'
+        $ref: "#/definitions/Name"
       school:
         type: string
         x-validation: true
@@ -1654,13 +1653,13 @@ definitions:
   TeacherResponse:
     properties:
       data:
-        $ref: '#/definitions/Teacher'
+        $ref: "#/definitions/Teacher"
     type: object
   TeachersResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/TeacherResponse'
+          $ref: "#/definitions/TeacherResponse"
         type: array
     type: object
   Term:

@@ -1,56 +1,69 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: mandrillapp.com
 basePath: /api/1.0/
 info:
-  description: |
-    Mandrill is a reliable, scalable, and secure delivery API for transactional emails from websites and applications. It's ideal for sending data-driven transactional emails, including targeted e-commerce and personalized one-to-one messages.
+  description: >
+    Mandrill is a reliable, scalable, and secure delivery API for transactional
+    emails from websites and applications. It's ideal for sending data-driven
+    transactional emails, including targeted e-commerce and personalized
+    one-to-one messages.
   title: Mandrill
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - email
     - marketing
   x-logo:
-    url: 'http://mandrill.com/assets/images/brand/logo-vertical-light-735b5657.png'
+    url: http://mandrill.com/assets/images/brand/logo-vertical-light-735b5657.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/mandrillapp.com/1.0/swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/mandrillapp.com/1.0/swagger.yaml
+      version: "2.0"
   x-providerName: mandrillapp.com
   x-unofficialSpec: true
 externalDocs:
-  url: 'https://mandrillapp.com/api/docs/'
+  url: https://mandrillapp.com/api/docs/
 securityDefinitions: {}
 paths:
   /exports/activity.json:
     post:
-      description: 'Begins an export of your activity history. The activity will be exported to a zip archive containing a single file named activity.csv in the same format as you would be able to export from your account''s activity view. It includes the following fields: Date, Email Address, Sender, Subject, Status, Tags, Opens, Clicks, Bounce Detail. If you have configured any custom metadata fields, they will be included in the exported data.'
+      description: "Begins an export of your activity history. The activity will be
+        exported to a zip archive containing a single file named activity.csv in
+        the same format as you would be able to export from your account's
+        activity view. It includes the following fields: Date, Email Address,
+        Sender, Subject, Status, Tags, Opens, Clicks, Bounce Detail. If you have
+        configured any custom metadata fields, they will be included in the
+        exported data."
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/exports_activity'
+            $ref: "#/definitions/exports_activity"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/exports_satus'
+            $ref: "#/definitions/exports_satus"
   /exports/info.json:
     post:
-      description: 'Returns information about an export job. If the export job''s state is ''complete'', the returned data will include a URL you can use to fetch the results. Every export job produces a zip archive, but the format of the archive is distinct for each job type. The api calls that initiate exports include more details about the output format for that job type.'
+      description: Returns information about an export job. If the export job's state
+        is 'complete', the returned data will include a URL you can use to fetch
+        the results. Every export job produces a zip archive, but the format of
+        the archive is distinct for each job type. The api calls that initiate
+        exports include more details about the output format for that job type.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/exports_info-response'
+            $ref: "#/definitions/exports_info-response"
   /exports/list.json:
     post:
       description: Returns a list of your exports.
@@ -59,40 +72,46 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/exports_list-response'
+            $ref: "#/definitions/exports_list-response"
   /exports/rejects.json:
     post:
-      description: 'Begins an export of your rejection blacklist. The blacklist will be exported to a zip archive containing a single file named rejects.csv that includes the following fields: email, reason, detail, created_at, expires_at, last_event_at, expires_at.'
+      description: "Begins an export of your rejection blacklist. The blacklist will
+        be exported to a zip archive containing a single file named rejects.csv
+        that includes the following fields: email, reason, detail, created_at,
+        expires_at, last_event_at, expires_at."
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/notify_email'
+            $ref: "#/definitions/notify_email"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/exports_satus'
+            $ref: "#/definitions/exports_satus"
   /exports/whitelist.json:
     post:
-      description: 'Begins an export of your rejection whitelist. The whitelist will be exported to a zip archive containing a single file named whitelist.csv that includes the following fields: email, detail, created_at.'
+      description: "Begins an export of your rejection whitelist. The whitelist will
+        be exported to a zip archive containing a single file named
+        whitelist.csv that includes the following fields: email, detail,
+        created_at."
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/notify_email'
+            $ref: "#/definitions/notify_email"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/exports_satus'
+            $ref: "#/definitions/exports_satus"
   /inbound/add-domain.json:
     post:
       description: Add an inbound domain to your account
@@ -101,12 +120,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_info'
+            $ref: "#/definitions/inbound_info"
   /inbound/add-route.json:
     post:
       description: Add a new mailbox route to an inbound domain
@@ -115,40 +134,42 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/inbound_add-route'
+            $ref: "#/definitions/inbound_add-route"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/route'
+            $ref: "#/definitions/route"
   /inbound/check-domain.json:
     post:
-      description: Check the MX settings for an inbound domain. The domain must have already been added with the add-domain call
+      description: Check the MX settings for an inbound domain. The domain must have
+        already been added with the add-domain call
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_info'
+            $ref: "#/definitions/inbound_info"
   /inbound/delete-domain.json:
     post:
-      description: Delete an inbound domain from the account. All mail will stop routing for this domain immediately.
+      description: Delete an inbound domain from the account. All mail will stop
+        routing for this domain immediately.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_info'
+            $ref: "#/definitions/inbound_info"
   /inbound/delete-route.json:
     post:
       description: Delete an existing inbound mailbox route
@@ -157,12 +178,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/route'
+            $ref: "#/definitions/route"
   /inbound/domains.json:
     post:
       description: List the domains that have been configured for inbound delivery
@@ -171,12 +192,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_domains-response'
+            $ref: "#/definitions/inbound_domains-response"
   /inbound/routes.json:
     post:
       description: List the mailbox routes defined for an inbound domain
@@ -185,40 +206,43 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_routes-response'
+            $ref: "#/definitions/inbound_routes-response"
   /inbound/send-raw.json:
     post:
-      description: 'Take a raw MIME document destined for a domain with inbound domains set up, and send it to the inbound hook exactly as if it had been sent over SMTP'
+      description: Take a raw MIME document destined for a domain with inbound domains
+        set up, and send it to the inbound hook exactly as if it had been sent
+        over SMTP
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/inbound_send-raw'
+            $ref: "#/definitions/inbound_send-raw"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/inbound_send-raw-response'
+            $ref: "#/definitions/inbound_send-raw-response"
   /inbound/update-route.json:
     post:
-      description: 'Update the pattern or webhook of an existing inbound mailbox route. If null is provided for any fields, the values will remain unchanged.'
+      description: Update the pattern or webhook of an existing inbound mailbox route.
+        If null is provided for any fields, the values will remain unchanged.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/inbound_update-route'
+            $ref: "#/definitions/inbound_update-route"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/route'
+            $ref: "#/definitions/route"
   /ips/cancel-warmup.json:
     post:
       description: Cancels the warmup process for a dedicated IP.
@@ -227,54 +251,57 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip'
+            $ref: "#/definitions/ip"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ip_info'
+            $ref: "#/definitions/ip_info"
   /ips/check-custom-dns.json:
     post:
-      description: Tests whether a domain name is valid for use as the custom reverse DNS for a dedicated IP.
+      description: Tests whether a domain name is valid for use as the custom reverse
+        DNS for a dedicated IP.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip_domain'
+            $ref: "#/definitions/ip_domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_check-custom-dns-response'
+            $ref: "#/definitions/ips_check-custom-dns-response"
   /ips/create-pool.json:
     post:
-      description: 'Creates a pool and returns it. If a pool already exists with this name, no action will be performed.'
+      description: Creates a pool and returns it. If a pool already exists with this
+        name, no action will be performed.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ips_pool-key'
+            $ref: "#/definitions/ips_pool-key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_pool'
+            $ref: "#/definitions/ips_pool"
   /ips/delete-pool.json:
     post:
-      description: 'Deletes a pool. A pool must be empty before you can delete it, and you cannot delete your default pool.'
+      description: Deletes a pool. A pool must be empty before you can delete it, and
+        you cannot delete your default pool.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ips_pool-key'
+            $ref: "#/definitions/ips_pool-key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_delete-pool-response'
+            $ref: "#/definitions/ips_delete-pool-response"
   /ips/delete.json:
     post:
       description: Deletes a dedicated IP. This is permanent and cannot be undone.
@@ -283,12 +310,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip'
+            $ref: "#/definitions/ip"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_delete-response'
+            $ref: "#/definitions/ips_delete-response"
   /ips/info.json:
     post:
       description: Retrieves information about a single dedicated ip.
@@ -297,12 +324,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip'
+            $ref: "#/definitions/ip"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ip_info'
+            $ref: "#/definitions/ip_info"
   /ips/list-pools.json:
     post:
       description: Lists your dedicated IP pools.
@@ -311,12 +338,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_list-pools-response'
+            $ref: "#/definitions/ips_list-pools-response"
   /ips/list.json:
     post:
       description: Lists your dedicated IPs.
@@ -325,12 +352,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_list-response'
+            $ref: "#/definitions/ips_list-response"
   /ips/pool-info.json:
     post:
       description: Describes a single dedicated IP pool.
@@ -339,26 +366,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ips_pool-key'
+            $ref: "#/definitions/ips_pool-key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_pool'
+            $ref: "#/definitions/ips_pool"
   /ips/provision.json:
     post:
-      description: 'Requests an additional dedicated IP for your account. Accounts may have one outstanding request at any time, and provisioning requests are processed within 24 hours.'
+      description: Requests an additional dedicated IP for your account. Accounts may
+        have one outstanding request at any time, and provisioning requests are
+        processed within 24 hours.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ips_provision'
+            $ref: "#/definitions/ips_provision"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ips_provision-response'
+            $ref: "#/definitions/ips_provision-response"
   /ips/set-custom-dns.json:
     post:
       description: Configures the custom DNS name for a dedicated IP.
@@ -367,12 +396,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip_domain'
+            $ref: "#/definitions/ip_domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ip_info'
+            $ref: "#/definitions/ip_info"
   /ips/set-pool.json:
     post:
       description: Moves a dedicated IP to a different pool.
@@ -381,26 +410,30 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ips_set-pool'
+            $ref: "#/definitions/ips_set-pool"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ip_info'
+            $ref: "#/definitions/ip_info"
   /ips/start-warmup.json:
     post:
-      description: 'Begins the warmup process for a dedicated IP. During the warmup process, Mandrill will gradually increase the percentage of your mail that is sent over the warming-up IP, over a period of roughly 30 days. The rest of your mail will be sent over shared IPs or other dedicated IPs in the same pool.'
+      description: Begins the warmup process for a dedicated IP. During the warmup
+        process, Mandrill will gradually increase the percentage of your mail
+        that is sent over the warming-up IP, over a period of roughly 30 days.
+        The rest of your mail will be sent over shared IPs or other dedicated
+        IPs in the same pool.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ip'
+            $ref: "#/definitions/ip"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ip_info'
+            $ref: "#/definitions/ip_info"
   /messages/cancel-scheduled.json:
     post:
       description: Cancels a scheduled email.
@@ -409,12 +442,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_cancel-scheduled'
+            $ref: "#/definitions/messages_cancel-scheduled"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/schedulingchange_info'
+            $ref: "#/definitions/schedulingchange_info"
   /messages/content.json:
     post:
       description: Get the full content of a recently sent message
@@ -423,12 +456,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/messages_content-response'
+            $ref: "#/definitions/messages_content-response"
   /messages/info.json:
     post:
       description: Get the information for a single recently sent message
@@ -437,40 +470,41 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/messages_info-response'
+            $ref: "#/definitions/messages_info-response"
   /messages/list-scheduled.json:
     post:
-      description: 'Queries your scheduled emails by sender or recipient, or both.'
+      description: Queries your scheduled emails by sender or recipient, or both.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_list-scheduled'
+            $ref: "#/definitions/messages_list-scheduled"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/messages_list-scheduled-response'
+            $ref: "#/definitions/messages_list-scheduled-response"
   /messages/parse.json:
     post:
-      description: 'Parse the full MIME document for an email message, returning the content of the message broken into its constituent pieces'
+      description: Parse the full MIME document for an email message, returning the
+        content of the message broken into its constituent pieces
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_parse'
+            $ref: "#/definitions/messages_parse"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/messages_parse-response'
+            $ref: "#/definitions/messages_parse-response"
   /messages/reschedule.json:
     post:
       description: Reschedules a scheduled email.
@@ -479,54 +513,60 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_reschedule'
+            $ref: "#/definitions/messages_reschedule"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/schedulingchange_info'
+            $ref: "#/definitions/schedulingchange_info"
   /messages/search-time-series.json:
     post:
-      description: Search the content of recently sent messages and return the aggregated hourly stats for matching messages
+      description: Search the content of recently sent messages and return the
+        aggregated hourly stats for matching messages
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_search-time-series'
+            $ref: "#/definitions/messages_search-time-series"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/timeseries'
+            $ref: "#/definitions/timeseries"
   /messages/search.json:
     post:
-      description: 'Search the content of recently sent messages and optionally narrow by date range, tags and senders. This method may be called up to 20 times per minute. If you need the data more often, you can use /messages/info.json to get the information for a single message, or webhooks to push activity to your own application for querying.'
+      description: Search the content of recently sent messages and optionally narrow
+        by date range, tags and senders. This method may be called up to 20
+        times per minute. If you need the data more often, you can use
+        /messages/info.json to get the information for a single message, or
+        webhooks to push activity to your own application for querying.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_search'
+            $ref: "#/definitions/messages_search"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/messages_search-response'
+            $ref: "#/definitions/messages_search-response"
   /messages/send-raw.json:
     post:
-      description: 'Take a raw MIME document for a message, and send it exactly as if it were sent through Mandrill''s SMTP servers'
+      description: Take a raw MIME document for a message, and send it exactly as if
+        it were sent through Mandrill's SMTP servers
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_send-raw'
+            $ref: "#/definitions/messages_send-raw"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/message_send-status'
+            $ref: "#/definitions/message_send-status"
   /messages/send-template.json:
     post:
       description: Send a new transactional message through Mandrill using a template
@@ -535,12 +575,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_send-template'
+            $ref: "#/definitions/messages_send-template"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/message_send-status'
+            $ref: "#/definitions/message_send-status"
   /messages/send.json:
     post:
       description: Send a new transactional message through Mandrill
@@ -549,12 +589,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/messages_send'
+            $ref: "#/definitions/messages_send"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/message_send-status'
+            $ref: "#/definitions/message_send-status"
   /metadata/add.json:
     post:
       description: Add a new custom metadata field to be indexed for the account.
@@ -563,26 +603,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/metadata_template'
+            $ref: "#/definitions/metadata_template"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/metadata_info'
+            $ref: "#/definitions/metadata_info"
   /metadata/delete.json:
     post:
-      description: 'Delete an existing custom metadata field. Deletion isn''t instataneous, and /metadata/list will continue to return the field until the asynchronous deletion process is complete.'
+      description: Delete an existing custom metadata field. Deletion isn't
+        instataneous, and /metadata/list will continue to return the field until
+        the asynchronous deletion process is complete.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/name'
+            $ref: "#/definitions/name"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/metadata_info'
+            $ref: "#/definitions/metadata_info"
   /metadata/list.json:
     post:
       description: Get the list of custom metadata fields indexed for the account.
@@ -591,12 +633,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/metadata_list-response'
+            $ref: "#/definitions/metadata_list-response"
   /metadata/update.json:
     post:
       description: Update an existing custom metadata field.
@@ -605,82 +647,94 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/metadata_template'
+            $ref: "#/definitions/metadata_template"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/metadata_info'
+            $ref: "#/definitions/metadata_info"
   /rejects/add.json:
     post:
-      description: Adds an email to your email rejection blacklist. Addresses that you add manually will never expire and there is no reputation penalty for removing them from your blacklist. Attempting to blacklist an address that has been whitelisted will have no effect.
+      description: Adds an email to your email rejection blacklist. Addresses that you
+        add manually will never expire and there is no reputation penalty for
+        removing them from your blacklist. Attempting to blacklist an address
+        that has been whitelisted will have no effect.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/rejects_add'
+            $ref: "#/definitions/rejects_add"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/rejects_add-response'
+            $ref: "#/definitions/rejects_add-response"
   /rejects/delete.json:
     post:
-      description: 'Deletes an email rejection. There is no limit to how many rejections you can remove from your blacklist, but keep in mind that each deletion has an affect on your reputation.'
+      description: Deletes an email rejection. There is no limit to how many
+        rejections you can remove from your blacklist, but keep in mind that
+        each deletion has an affect on your reputation.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/rejects_delete'
+            $ref: "#/definitions/rejects_delete"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/rejects_delete-response'
+            $ref: "#/definitions/rejects_delete-response"
   /rejects/list.json:
     post:
-      description: 'Retrieves your email rejection blacklist. You can provide an email address to limit the results. Returns up to 1000 results. By default, entries that have expired are excluded from the results; set include_expired to true to include them.'
+      description: Retrieves your email rejection blacklist. You can provide an email
+        address to limit the results. Returns up to 1000 results. By default,
+        entries that have expired are excluded from the results; set
+        include_expired to true to include them.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/rejects_list'
+            $ref: "#/definitions/rejects_list"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/rejects_list-response'
+            $ref: "#/definitions/rejects_list-response"
   /senders/add-domain.json:
     post:
-      description: 'Adds a sender domain to your account. Sender domains are added automatically as you send, but you can use this call to add them ahead of time.'
+      description: Adds a sender domain to your account. Sender domains are added
+        automatically as you send, but you can use this call to add them ahead
+        of time.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/sender_domain_info'
+            $ref: "#/definitions/sender_domain_info"
   /senders/check-domain.json:
     post:
-      description: 'Checks the SPF and DKIM settings for a domain. If you haven''t already added this domain to your account, it will be added automatically.'
+      description: Checks the SPF and DKIM settings for a domain. If you haven't
+        already added this domain to your account, it will be added
+        automatically.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/sender_domain_info'
+            $ref: "#/definitions/sender_domain_info"
   /senders/domains.json:
     post:
       description: Returns the sender domains that have been added to this account.
@@ -689,26 +743,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/senders_domains-response'
+            $ref: "#/definitions/senders_domains-response"
   /senders/info.json:
     post:
-      description: 'Return more detailed information about a single sender, including aggregates of recent stats'
+      description: Return more detailed information about a single sender, including
+        aggregates of recent stats
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/sender_address'
+            $ref: "#/definitions/sender_address"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/senders_info-response'
+            $ref: "#/definitions/senders_info-response"
   /senders/list.json:
     post:
       description: Return the senders that have tried to use this account.
@@ -717,40 +772,46 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/senders'
+            $ref: "#/definitions/senders"
   /senders/time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for a sender
+      description: Return the recent history (hourly stats for the last 30 days) for a
+        sender
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/sender_address'
+            $ref: "#/definitions/sender_address"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/time-series'
+            $ref: "#/definitions/time-series"
   /senders/verify-domain.json:
     post:
-      description: 'Sends a verification email in order to verify ownership of a domain. Domain verification is an optional step to confirm ownership of a domain. Once a domain has been verified in a Mandrill account, other accounts may not have their messages signed by that domain unless they also verify the domain. This prevents other Mandrill accounts from sending mail signed by your domain.'
+      description: Sends a verification email in order to verify ownership of a
+        domain. Domain verification is an optional step to confirm ownership of
+        a domain. Once a domain has been verified in a Mandrill account, other
+        accounts may not have their messages signed by that domain unless they
+        also verify the domain. This prevents other Mandrill accounts from
+        sending mail signed by your domain.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/senders_verify-domain'
+            $ref: "#/definitions/senders_verify-domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/senders_verify-domain-response'
+            $ref: "#/definitions/senders_verify-domain-response"
   /subaccounts/add.json:
     post:
       description: Add a new subaccount
@@ -759,68 +820,73 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/subaccount_info'
+            $ref: "#/definitions/subaccount_info"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccount_info2'
+            $ref: "#/definitions/subaccount_info2"
   /subaccounts/delete.json:
     post:
-      description: 'Delete an existing subaccount. Any email related to the subaccount will be saved, but stats will be removed and any future sending calls to this subaccount will fail.'
+      description: Delete an existing subaccount. Any email related to the subaccount
+        will be saved, but stats will be removed and any future sending calls to
+        this subaccount will fail.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccount_info2'
+            $ref: "#/definitions/subaccount_info2"
   /subaccounts/info.json:
     post:
-      description: 'Given the ID of an existing subaccount, return the data about it'
+      description: Given the ID of an existing subaccount, return the data about it
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccounts_info-response'
+            $ref: "#/definitions/subaccounts_info-response"
   /subaccounts/list.json:
     post:
-      description: 'Get the list of subaccounts defined for the account, optionally filtered by a prefix'
+      description: Get the list of subaccounts defined for the account, optionally
+        filtered by a prefix
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/url_key'
+            $ref: "#/definitions/url_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccounts_list-response'
+            $ref: "#/definitions/subaccounts_list-response"
   /subaccounts/pause.json:
     post:
-      description: Pause a subaccount's sending. Any future emails delivered to this subaccount will be queued for a maximum of 3 days until the subaccount is resumed.
+      description: Pause a subaccount's sending. Any future emails delivered to this
+        subaccount will be queued for a maximum of 3 days until the subaccount
+        is resumed.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccount_info2'
+            $ref: "#/definitions/subaccount_info2"
   /subaccounts/resume.json:
     post:
       description: Resume a paused subaccount's sending
@@ -829,12 +895,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/id'
+            $ref: "#/definitions/id"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccount_info2'
+            $ref: "#/definitions/subaccount_info2"
   /subaccounts/update.json:
     post:
       description: Update an existing subaccount
@@ -843,54 +909,58 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/subaccount_info'
+            $ref: "#/definitions/subaccount_info"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/subaccount_info2'
+            $ref: "#/definitions/subaccount_info2"
   /tags/all-time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for all tags
+      description: Return the recent history (hourly stats for the last 30 days) for
+        all tags
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/timeseries'
+            $ref: "#/definitions/timeseries"
   /tags/delete.json:
     post:
-      description: 'Deletes a tag permanently. Deleting a tag removes the tag from any messages that have been sent, and also deletes the tag''s stats. There is no way to undo this operation, so use it carefully.'
+      description: Deletes a tag permanently. Deleting a tag removes the tag from any
+        messages that have been sent, and also deletes the tag's stats. There is
+        no way to undo this operation, so use it carefully.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/tag_key'
+            $ref: "#/definitions/tag_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tags_delete-response'
+            $ref: "#/definitions/tags_delete-response"
   /tags/info.json:
     post:
-      description: 'Return more detailed information about a single tag, including aggregates of recent stats'
+      description: Return more detailed information about a single tag, including
+        aggregates of recent stats
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/tag_key'
+            $ref: "#/definitions/tag_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tags_info-response'
+            $ref: "#/definitions/tags_info-response"
   /tags/list.json:
     post:
       description: Return all of the user-defined tag information
@@ -899,12 +969,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tags_list-response'
+            $ref: "#/definitions/tags_list-response"
   /tags/time-series.json:
     post:
       description: Return the recent history (hourly stats for the last 30 days) for a tag
@@ -913,12 +983,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/tag_key'
+            $ref: "#/definitions/tag_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/timeseries'
+            $ref: "#/definitions/timeseries"
   /templates/add.json:
     post:
       description: Add a new template
@@ -927,12 +997,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/template'
+            $ref: "#/definitions/template"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/template_detailed'
+            $ref: "#/definitions/template_detailed"
   /templates/delete.json:
     post:
       description: Delete a template
@@ -941,12 +1011,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/name'
+            $ref: "#/definitions/name"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/template_detailed'
+            $ref: "#/definitions/template_detailed"
   /templates/info.json:
     post:
       description: Get the information for an existing template
@@ -955,12 +1025,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/name'
+            $ref: "#/definitions/name"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/template_detailed'
+            $ref: "#/definitions/template_detailed"
   /templates/list.json:
     post:
       description: Return a list of all the templates available to this user
@@ -969,68 +1039,72 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/templates_list'
+            $ref: "#/definitions/templates_list"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/templates_list-response'
+            $ref: "#/definitions/templates_list-response"
   /templates/publish.json:
     post:
-      description: Publish the content for the template. Any new messages sent using this template will start using the content that was previously in draft.
+      description: Publish the content for the template. Any new messages sent using
+        this template will start using the content that was previously in draft.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/name'
+            $ref: "#/definitions/name"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/template_detailed'
+            $ref: "#/definitions/template_detailed"
   /templates/render.json:
     post:
-      description: 'Inject content and optionally merge fields into a template, returning the HTML that results'
+      description: Inject content and optionally merge fields into a template,
+        returning the HTML that results
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/templates_render'
+            $ref: "#/definitions/templates_render"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/templates_render-response'
+            $ref: "#/definitions/templates_render-response"
   /templates/time-series.json:
     post:
-      description: Return the recent history (hourly stats for the last 30 days) for a template
+      description: Return the recent history (hourly stats for the last 30 days) for a
+        template
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/name'
+            $ref: "#/definitions/name"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/time-series'
+            $ref: "#/definitions/time-series"
   /templates/update.json:
     post:
-      description: 'Update the code for an existing template. If null is provided for any fields, the values will remain unchanged.'
+      description: Update the code for an existing template. If null is provided for
+        any fields, the values will remain unchanged.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/template'
+            $ref: "#/definitions/template"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/template_detailed'
+            $ref: "#/definitions/template_detailed"
   /urls/add-tracking-domain.json:
     post:
       description: Add a tracking domain to your account
@@ -1039,26 +1113,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tracking-domain-status'
+            $ref: "#/definitions/tracking-domain-status"
   /urls/check-tracking-domain.json:
     post:
-      description: Checks the CNAME settings for a tracking domain. The domain must have been added already with the add-tracking-domain call
+      description: Checks the CNAME settings for a tracking domain. The domain must
+        have been added already with the add-tracking-domain call
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/domain'
+            $ref: "#/definitions/domain"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/tracking-domain-status'
+            $ref: "#/definitions/tracking-domain-status"
   /urls/list.json:
     post:
       description: Get the 100 most clicked URLs
@@ -1067,12 +1142,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/url_infos'
+            $ref: "#/definitions/url_infos"
   /urls/search.json:
     post:
       description: Return the 100 most clicked URLs that match the search query given
@@ -1081,12 +1156,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/url_key'
+            $ref: "#/definitions/url_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/url_infos'
+            $ref: "#/definitions/url_infos"
   /urls/time-series.json:
     post:
       description: Return the recent history (hourly stats for the last 30 days) for a url
@@ -1095,12 +1170,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/urls_time-series'
+            $ref: "#/definitions/urls_time-series"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/urls_time-series-response'
+            $ref: "#/definitions/urls_time-series-response"
   /urls/tracking-domains.json:
     post:
       description: Get the list of tracking domains set up for this account
@@ -1109,12 +1184,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/urls_tracking-domains-response'
+            $ref: "#/definitions/urls_tracking-domains-response"
   /users/info.json:
     post:
       description: Return the information about the API-connected user
@@ -1123,12 +1198,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/users_info-response'
+            $ref: "#/definitions/users_info-response"
   /users/ping.json:
     post:
       description: Validate an API key and respond to a ping
@@ -1137,9 +1212,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
   /users/ping2.json:
     post:
@@ -1149,26 +1224,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/users_ping2-response'
+            $ref: "#/definitions/users_ping2-response"
   /users/senders.json:
     post:
-      description: 'Return the senders that have tried to use this account, both verified and unverified'
+      description: Return the senders that have tried to use this account, both
+        verified and unverified
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/senders'
+            $ref: "#/definitions/senders"
   /webhooks/add.json:
     post:
       description: Add a new webhook
@@ -1177,12 +1253,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/webhooks_add'
+            $ref: "#/definitions/webhooks_add"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/webhook'
+            $ref: "#/definitions/webhook"
   /webhooks/delete.json:
     post:
       description: Delete an existing webhook
@@ -1191,26 +1267,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/webhook_key'
+            $ref: "#/definitions/webhook_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/webhook'
+            $ref: "#/definitions/webhook"
   /webhooks/info.json:
     post:
-      description: 'Given the ID of an existing webhook, return the data about it'
+      description: Given the ID of an existing webhook, return the data about it
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/webhook_key'
+            $ref: "#/definitions/webhook_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/webhook'
+            $ref: "#/definitions/webhook"
   /webhooks/list.json:
     post:
       description: Get the list of all webhooks defined on the account
@@ -1219,12 +1295,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/api_key'
+            $ref: "#/definitions/api_key"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/webhooks_list-response'
+            $ref: "#/definitions/webhooks_list-response"
   /webhooks/update.json:
     post:
       description: Update an existing webhook
@@ -1233,26 +1309,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/webhooks_update'
+            $ref: "#/definitions/webhooks_update"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/webhook'
+            $ref: "#/definitions/webhook"
   /whitelists/add.json:
     post:
-      description: 'Adds an email to your email rejection whitelist. If the address is currently on your blacklist, that blacklist entry will be removed automatically.'
+      description: Adds an email to your email rejection whitelist. If the address is
+        currently on your blacklist, that blacklist entry will be removed
+        automatically.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/email'
+            $ref: "#/definitions/email"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/whitelists_add-response'
+            $ref: "#/definitions/whitelists_add-response"
   /whitelists/delete.json:
     post:
       description: Removes an email address from the whitelist.
@@ -1261,26 +1339,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/email'
+            $ref: "#/definitions/email"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/whitelists_delete-response'
+            $ref: "#/definitions/whitelists_delete-response"
   /whitelists/list.json:
     post:
-      description: Retrieves your email rejection whitelist. You can provide an email address or search prefix to limit the results. Returns up to 1000 results.
+      description: Retrieves your email rejection whitelist. You can provide an email
+        address or search prefix to limit the results. Returns up to 1000
+        results.
       parameters:
         - in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/email'
+            $ref: "#/definitions/email"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/whitelists_list-response'
+            $ref: "#/definitions/whitelists_list-response"
 definitions:
   api_key:
     properties:
@@ -1365,11 +1445,11 @@ definitions:
       created_at:
         type: string
       finished_at:
-        type: 'null'
+        type: "null"
       id:
         type: string
       result_url:
-        type: 'null'
+        type: "null"
       state:
         type: string
       type:
@@ -1686,7 +1766,7 @@ definitions:
   messages_cancel-scheduled:
     properties:
       id:
-        type: 'null'
+        type: "null"
       key:
         type: string
     type: object
@@ -2024,9 +2104,9 @@ definitions:
               type: object
             type: array
           auto_html:
-            type: 'null'
+            type: "null"
           auto_text:
-            type: 'null'
+            type: "null"
           bcc_address:
             type: string
           from_email:
@@ -2069,7 +2149,7 @@ definitions:
           important:
             type: boolean
           inline_css:
-            type: 'null'
+            type: "null"
           merge:
             type: boolean
           merge_vars:
@@ -2094,7 +2174,7 @@ definitions:
                 type: string
             type: object
           preserve_recipients:
-            type: 'null'
+            type: "null"
           recipient_metadata:
             items:
               properties:
@@ -2108,9 +2188,9 @@ definitions:
               type: object
             type: array
           return_path_domain:
-            type: 'null'
+            type: "null"
           signing_domain:
-            type: 'null'
+            type: "null"
           subaccount:
             type: string
           subject:
@@ -2133,15 +2213,15 @@ definitions:
               type: object
             type: array
           track_clicks:
-            type: 'null'
+            type: "null"
           track_opens:
-            type: 'null'
+            type: "null"
           tracking_domain:
-            type: 'null'
+            type: "null"
           url_strip_qs:
-            type: 'null'
+            type: "null"
           view_content_link:
-            type: 'null'
+            type: "null"
         type: object
       send_at:
         type: string
@@ -2161,7 +2241,7 @@ definitions:
       raw_message:
         type: string
       return_path_domain:
-        type: 'null'
+        type: "null"
       send_at:
         type: string
       to:
@@ -2191,9 +2271,9 @@ definitions:
               type: object
             type: array
           auto_html:
-            type: 'null'
+            type: "null"
           auto_text:
-            type: 'null'
+            type: "null"
           bcc_address:
             type: string
           from_email:
@@ -2236,7 +2316,7 @@ definitions:
           important:
             type: boolean
           inline_css:
-            type: 'null'
+            type: "null"
           merge:
             type: boolean
           merge_vars:
@@ -2261,7 +2341,7 @@ definitions:
                 type: string
             type: object
           preserve_recipients:
-            type: 'null'
+            type: "null"
           recipient_metadata:
             items:
               properties:
@@ -2275,9 +2355,9 @@ definitions:
               type: object
             type: array
           return_path_domain:
-            type: 'null'
+            type: "null"
           signing_domain:
-            type: 'null'
+            type: "null"
           subaccount:
             type: string
           subject:
@@ -2300,15 +2380,15 @@ definitions:
               type: object
             type: array
           track_clicks:
-            type: 'null'
+            type: "null"
           track_opens:
-            type: 'null'
+            type: "null"
           tracking_domain:
-            type: 'null'
+            type: "null"
           url_strip_qs:
-            type: 'null'
+            type: "null"
           view_content_link:
-            type: 'null'
+            type: "null"
         type: object
       send_at:
         type: string

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.jumpseller.com
@@ -6,17 +6,18 @@ basePath: /v1
 info:
   contact:
     x-twitter: jumpseller
-  description: Explore all our endpoints with your own set of of access tokens. All changes affect your production Jumpseller store.
-  title: Jumpseller API
-  version: '1'
+  description: Explore all our endpoints with your own set of of access tokens.
+    All changes affect your production Jumpseller store.
+  title: ""
+  version: "1"
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/jumpseller/profile_image?size=original'
+    url: https://twitter.com/jumpseller/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.jumpseller.com/swagger.json'
-      version: '2.0'
+      url: https://api.jumpseller.com/swagger.json
+      version: "2.0"
   x-providerName: jumpseller.com
 consumes:
   - application/json
@@ -72,53 +73,54 @@ paths:
   /categories.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Category'
+            $ref: "#/definitions/Category"
       summary: Retrieve all Categories.
       tags:
         - Categories
     post:
-      description: Category's permalink is automatically generated from the given category's name.
+      description: Category's permalink is automatically generated from the given
+        category's name.
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Category parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Category'
+            $ref: "#/definitions/Category"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CategoryEdit'
+            $ref: "#/definitions/CategoryEdit"
       summary: Create a new Category.
       tags:
         - Categories
   /categories/count.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
+            $ref: "#/definitions/Count"
       summary: Count all Categories.
       tags:
         - Categories
-  '/categories/{id}.json':
+  "/categories/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Category
           format: int32
           in: path
@@ -126,21 +128,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Category Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing Category.
       tags:
         - Categories
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Category
           format: int32
           in: path
@@ -148,21 +150,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: The selected Category.
           schema:
-            $ref: '#/definitions/Category'
-        '404':
+            $ref: "#/definitions/Category"
+        "404":
           description: Category Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Category.
       tags:
         - Categories
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Category
           format: int32
           in: path
@@ -174,65 +176,67 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CategoryEdit'
+            $ref: "#/definitions/CategoryEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Category'
-        '404':
+            $ref: "#/definitions/Category"
+        "404":
           description: Category Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Category.
       tags:
         - Categories
   /checkout_custom_fields.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: An array of Checkout Custom Fields
           schema:
             items:
-              $ref: '#/definitions/CheckoutCustomField'
+              $ref: "#/definitions/CheckoutCustomField"
             type: array
       summary: Retrieve all Checkout Custom Fields.
       tags:
         - Checkout Custom Fields
     post:
+      description: "Type values can be: input, selection, checkbox, date or text. Area
+        values can be: contact, billing_shipping or other."
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: CheckoutCustomField parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CheckoutCustomFieldEdit'
+            $ref: "#/definitions/CheckoutCustomFieldEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CheckoutCustomField'
+              $ref: "#/definitions/CheckoutCustomField"
             type: array
-        '404':
+        "404":
           description: CheckoutCustomField Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new CheckoutCustomField.
       tags:
         - Checkout Custom Fields
-  '/checkout_custom_fields/{id}.json':
+  "/checkout_custom_fields/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CheckoutCustomField
           format: int32
           in: path
@@ -240,21 +244,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: CheckoutCustomField Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing CheckoutCustomField.
       tags:
         - Checkout Custom Fields
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CheckoutCustomField
           format: int32
           in: path
@@ -262,21 +266,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CheckoutCustomField'
-        '404':
+            $ref: "#/definitions/CheckoutCustomField"
+        "404":
           description: CheckoutCustomField Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single CheckoutCustomField.
       tags:
         - Checkout Custom Fields
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CheckoutCustomField
           format: int32
           in: path
@@ -288,41 +292,41 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CheckoutCustomFieldEdit'
+            $ref: "#/definitions/CheckoutCustomFieldEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CheckoutCustomField'
+              $ref: "#/definitions/CheckoutCustomField"
             type: array
-        '404':
+        "404":
           description: CheckoutCustomField Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a CheckoutCustomField.
       tags:
         - Checkout Custom Fields
   /countries.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: An array of Countries
           schema:
             items:
-              $ref: '#/definitions/Country'
+              $ref: "#/definitions/Country"
             type: array
       summary: Retrieve all Countries.
       tags:
         - Countries
-  '/countries/{country_code}.json':
+  "/countries/{country_code}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ISO3166 Country Code
           format: string
           in: path
@@ -330,22 +334,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A Country information object
           schema:
-            $ref: '#/definitions/Country'
-        '404':
+            $ref: "#/definitions/Country"
+        "404":
           description: Country Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Country information.
       tags:
         - Countries
-  '/countries/{country_code}/regions.json':
+  "/countries/{country_code}/regions.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ISO3166 Country Code
           format: string
           in: path
@@ -353,25 +357,25 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An array of Regions from a single Country
           schema:
             items:
-              $ref: '#/definitions/Region'
+              $ref: "#/definitions/Region"
             type: array
-        '404':
+        "404":
           description: Country Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Regions from a single Country.
       tags:
         - Countries
         - Regions
-  '/countries/{country_code}/regions/{region_code}.json':
+  "/countries/{country_code}/regions/{region_code}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ISO3166 Country Code
           format: string
           in: path
@@ -385,64 +389,174 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A Region information object
           schema:
-            $ref: '#/definitions/Region'
-        '404':
+            $ref: "#/definitions/Region"
+        "404":
           description: Country or Region not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Region information object.
       tags:
         - Countries
         - Regions
+  /custom_fields.json:
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+      responses:
+        "200":
+          description: An array of Custom Fields
+          schema:
+            items:
+              $ref: "#/definitions/CustomField"
+            type: array
+      summary: Retrieve all Store's Custom Fields.
+      tags:
+        - Custom Fields
+    post:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Custom Field parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CustomField"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/CustomField"
+            type: array
+      summary: Create a new Custom Field.
+      tags:
+        - Custom Fields
+  "/custom_fields/{id}.json":
+    delete:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the CustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: CustomField Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Delete an existing CustomField.
+      tags:
+        - Custom Fields
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the CustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/CustomField"
+        "404":
+          description: CustomField Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Retrieve a single CustomField.
+      tags:
+        - Custom Fields
+    put:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the CustomField
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: CustomField parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/CustomFieldFields"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/CustomField"
+            type: array
+        "404":
+          description: CustomField Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Update a CustomField.
+      tags:
+        - Custom Fields
   /customer_categories.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: An array of Customer Categories
           schema:
             items:
-              $ref: '#/definitions/CustomerCategory'
+              $ref: "#/definitions/CustomerCategory"
             type: array
       summary: Retrieve all Customer Categories.
       tags:
         - Customer Categories
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: CustomerCategory parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerCategoryEdit'
+            $ref: "#/definitions/CustomerCategoryEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CustomerCategory'
+              $ref: "#/definitions/CustomerCategory"
             type: array
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new CustomerCategory.
       tags:
         - Customer Categories
-  '/customer_categories/{id}.json':
+  "/customer_categories/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -450,21 +564,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing CustomerCategory.
       tags:
         - Customer Categories
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -472,21 +586,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CustomerCategory'
-        '404':
+            $ref: "#/definitions/CustomerCategory"
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single CustomerCategory.
       tags:
         - Customer Categories
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -498,26 +612,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerCategoryEdit'
+            $ref: "#/definitions/CustomerCategoryEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CustomerCategory'
+              $ref: "#/definitions/CustomerCategory"
             type: array
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a CustomerCategory.
       tags:
         - Customer Categories
-  '/customer_categories/{id}/customers.json':
+  "/customer_categories/{id}/customers.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -525,21 +639,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete Customers from an existing CustomerCategory.
       tags:
         - Customer Categories
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -547,23 +661,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Customer'
+              $ref: "#/definitions/Customer"
             type: array
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieves the customers in a CustomerCategory.
       tags:
         - Customer Categories
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the CustomerCategory
           format: int32
           in: path
@@ -575,102 +689,102 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Customer'
+            $ref: "#/definitions/Customer"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Customer'
+              $ref: "#/definitions/Customer"
             type: array
-        '404':
+        "404":
           description: CustomerCategory Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Adds Customers to a CustomerCategory.
       tags:
         - Customer Categories
   /customers.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: An array of Orders
           schema:
             items:
-              $ref: '#/definitions/Customer'
+              $ref: "#/definitions/Customer"
             type: array
       summary: Retrieve all Customers.
       tags:
         - Customers
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Customer parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerWithPasswordNoID'
+            $ref: "#/definitions/CustomerWithPasswordNoID"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Customer'
+              $ref: "#/definitions/Customer"
             type: array
-        '404':
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Customer.
       tags:
         - Customers
   /customers/count.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
+            $ref: "#/definitions/Count"
       summary: Count all Customers.
       tags:
         - Customers
-  '/customers/email/{email}.json':
+  "/customers/email/{email}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Email of the Customer
           in: path
           name: email
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Customer'
-        '404':
+            $ref: "#/definitions/Customer"
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Customer.
       tags:
         - Customers
-  '/customers/{id}.json':
+  "/customers/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -678,21 +792,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing Category.
       tags:
         - Customers
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -700,21 +814,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Customer'
-        '404':
+            $ref: "#/definitions/Customer"
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Customer.
       tags:
         - Customers
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -726,26 +840,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerWithPassword'
+            $ref: "#/definitions/CustomerWithPassword"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Customer'
+              $ref: "#/definitions/Customer"
             type: array
-        '404':
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a new Customer.
       tags:
         - Customers
-  '/customers/{id}/fields':
+  "/customers/{id}/fields":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -753,23 +867,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CustomerAdditionalField'
+              $ref: "#/definitions/CustomerAdditionalField"
             type: array
-        '404':
-          description: Customer doesn't have additional fields.
+        "404":
+          description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieves the Customer Additional Field of a Customer.
       tags:
         - Customer Additional Fields
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -781,27 +895,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerAdditionalFieldEdit'
+            $ref: "#/definitions/CustomerAdditionalFieldEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CustomerAdditionalField'
+              $ref: "#/definitions/CustomerAdditionalField"
             type: array
-        '404':
+        "404":
           description: Customer Additional Field Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Adds Customer Additional Fields to a Customer.
       tags:
         - Customer Additional Fields
-  '/customers/{id}/fields/{field_id}':
+  "/customers/{id}/fields/{field_id}":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/CustomerIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/CustomerIDParam"
         - description: Id of the Customer Additional Field
           format: int32
           in: path
@@ -809,21 +923,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a Customer Additional Field.
       tags:
         - Customer Additional Fields
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Customer
           format: int32
           in: path
@@ -837,24 +951,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/CustomerAdditionalField'
+              $ref: "#/definitions/CustomerAdditionalField"
             type: array
-        '404':
+        "404":
           description: Customer Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Customer Additional Field.
       tags:
         - Customer Additional Fields
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/CustomerIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/CustomerIDParam"
         - description: Id of the Customer Additional Field
           format: int32
           in: path
@@ -862,100 +976,65 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CustomerAdditionalField'
-        '400':
+            $ref: "#/definitions/CustomerAdditionalField"
+        "400":
           description: Customer Additional Field Bad Parameters.
           schema:
-            $ref: '#/definitions/BadParams'
-        '404':
+            $ref: "#/definitions/BadParams"
+        "404":
           description: Customer Additional Field Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a Customer Additional Field.
       tags:
         - Customer Additional Fields
-  /fields.json:
-    get:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-      responses:
-        '200':
-          description: An array of Custom Fields
-          schema:
-            items:
-              $ref: '#/definitions/Field'
-            type: array
-      summary: Retrieve all Store's Custom Fields.
-      tags:
-        - Custom Fields
-    post:
-      parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: Custom Field parameters.
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Field'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Field'
-            type: array
-      summary: Create a new Custom Field.
-      tags:
-        - Custom Fields
   /hooks.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: An array of Hooks
           schema:
             items:
-              $ref: '#/definitions/Hook'
+              $ref: "#/definitions/Hook"
             type: array
       summary: Retrieve all Hooks.
       tags:
         - Hooks
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Hook parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/HookEdit'
+            $ref: "#/definitions/HookEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Hook'
-        '404':
+            $ref: "#/definitions/Hook"
+        "404":
           description: Hook Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Hook.
       tags:
         - Hooks
-  '/hooks/{id}.json':
+  "/hooks/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Hook
           format: int32
           in: path
@@ -963,21 +1042,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Hook Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing Hook.
       tags:
         - Hooks
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Hook
           format: int32
           in: path
@@ -985,21 +1064,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Hook'
-        '404':
+            $ref: "#/definitions/Hook"
+        "404":
           description: Hook Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Hook.
       tags:
         - Hooks
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Hook
           format: int32
           in: path
@@ -1011,137 +1090,145 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/HookEdit'
+            $ref: "#/definitions/HookEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Hook'
+              $ref: "#/definitions/Hook"
             type: array
-        '404':
+        "404":
           description: Hook Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a Hook.
       tags:
         - Hooks
   /jsapps.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/App'
+            $ref: "#/definitions/App"
       summary: Retrieve all the Store's JSApps
       tags:
         - Apps
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: JSApp parameters to create
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/JSAppEdit'
+            $ref: "#/definitions/JSAppEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/JSApp'
+              $ref: "#/definitions/JSApp"
             type: array
       summary: Create a Store JSApp
       tags:
         - Apps
-  '/jsapps/{code}.json':
+  "/jsapps/{code}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Code of the App
           in: path
           name: code
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: App Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing JSApp.
       tags:
         - Apps
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Code of the App
           in: path
           name: code
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/JSApp'
+            $ref: "#/definitions/JSApp"
       summary: Retrieve a JSApp
       tags:
         - Apps
   /orders.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: An array of Orders
           schema:
             items:
-              $ref: '#/definitions/Order'
+              $ref: "#/definitions/Order"
             type: array
       summary: Retrieve all Orders.
       tags:
         - Orders
     post:
-      description: 'Use the JSON format:<br/>''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}''<br/>or in CURL:<br/>curl -X POST -d ''{ "order": {"status": "Paid", "shipping_method_id": 123, "products": [{ "id": 123, "qty": 1}], "customer": {"id": 123}}}'' "https://610d738f.ngrok.io/api/v1/orders.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      description: "Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\",
+        \"shipping_method_id\": 123, \"products\": [{ \"id\": 123, \"qty\": 1}],
+        \"customer\": {\"id\": 123}}}'<br/>or in CURL:<br/>curl -X POST -d '{
+        \"order\": {\"status\": \"Paid\", \"shipping_method_id\": 123,
+        \"products\": [{ \"id\": 123, \"variant_id\": 123, \"qty\": 1}],
+        \"customer\": {\"id\": 123}}}'
+        \"https://api.jumpseller.com/v1/orders.json?login=storecode&authtoken=X\
+        XXXX\" -H \"Content-Type:application/json\" "
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Order parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderEdit'
+            $ref: "#/definitions/OrderEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Order'
+              $ref: "#/definitions/Order"
             type: array
       summary: Create a new Order.
       tags:
         - Orders
-  '/orders/after/{id}.json':
+  "/orders/after/{id}.json":
     get:
-      description: 'For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.'
+      description: For example the GET /orders/after/5000 will return Order 5001,
+        5002, 5003, etc.
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Order
           format: int32
           in: path
@@ -1149,35 +1236,35 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Order'
-        '404':
+            $ref: "#/definitions/Order"
+        "404":
           description: Order Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve orders filtered by Order Id.
       tags:
         - Orders
   /orders/count.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
+            $ref: "#/definitions/Count"
       summary: Count all Orders.
       tags:
         - Orders
-  '/orders/status/{status}.json':
+  "/orders/status/{status}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Status of the Order used as filter
           enum:
             - Abandoned
@@ -1189,24 +1276,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Order'
+              $ref: "#/definitions/Order"
             type: array
-        '404':
+        "404":
           description: Status Invalid.
           schema:
-            $ref: '#/definitions/StatusInvalid'
+            $ref: "#/definitions/StatusInvalid"
       summary: Retrieve orders filtered by status.
       tags:
         - Orders
-  '/orders/{id}.json':
+  "/orders/{id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Order
           format: int32
           in: path
@@ -1214,22 +1301,33 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Order'
-        '404':
+            $ref: "#/definitions/Order"
+        "404":
           description: Order Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Order.
       tags:
         - Orders
     put:
-      description: 'Only ''status'', ''tracking_number'', ''tracking_company'', ''additional_information'' and ''additional_fields'' are available for update.<br/>Use the JSON format:<br/>''{ "order": {"status": "Paid", "tracking_company": "other", "tracking_number": "123456789", "additional_information": "My custom message.", "additional_fields": [{"label": "Gift Name", "value": "Duarte"}, {"label": "Gift Wrapping Color", "value": "Green"}]} }}''<br/>or in CURL:<br/>curl -X PUT -d ''{ "order": {"status": "Paid", "additional_information": "My custom message."}}'' "https://610d738f.ngrok.io/api/v1/orders/{id}.json?login=storecode&authtoken=XXXXX" -H "Content-Type:application/json" '
+      description: "Only 'status', 'tracking_number', 'tracking_company',
+        'additional_information' and 'additional_fields' are available for
+        update.<br/>Use the JSON format:<br/>'{ \"order\": {\"status\":
+        \"Paid\", \"tracking_company\": \"other\", \"tracking_number\":
+        \"123456789\", \"additional_information\": \"My custom message.\",
+        \"additional_fields\": [{\"label\": \"Gift Name\", \"value\":
+        \"Duarte\"}, {\"label\": \"Gift Wrapping Color\", \"value\":
+        \"Green\"}]} }}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"order\":
+        {\"status\": \"Paid\", \"additional_information\": \"My custom
+        message.\"}}'
+        \"https://api.jumpseller.com/api/v1/orders/{id}.json?login=storecode&au\
+        thtoken=XXXXX\" -H \"Content-Type:application/json\" "
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Order
           format: int32
           in: path
@@ -1241,26 +1339,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderEdit'
+            $ref: "#/definitions/OrderEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Order'
+              $ref: "#/definitions/Order"
             type: array
-        '404':
+        "404":
           description: Order Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Order.
       tags:
         - Orders
-  '/orders/{id}/history.json':
+  "/orders/{id}/history.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Order
           format: int32
           in: path
@@ -1268,19 +1366,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: An array with Order History
           schema:
             items:
-              $ref: '#/definitions/OrderHistory'
+              $ref: "#/definitions/OrderHistory"
             type: array
       summary: Retrieve all Order History.
       tags:
         - Orders
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the OrderHistory
           format: int32
           in: path
@@ -1292,37 +1390,75 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderHistoryEdit'
+            $ref: "#/definitions/OrderHistoryEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/OrderHistory'
+              $ref: "#/definitions/OrderHistory"
             type: array
       summary: Create a new Order History Entry.
+      tags:
+        - Orders
+  "/orders/{id}/shipping.json":
+    put:
+      description: "Only 'name' and 'amount' are available for update.<br/>Use the
+        JSON format:<br/>'{ \"shipping\": {\"name\": \"Shipping Service Name\",
+        \"amount\": \"1000.00\"}}'<br/>or in CURL:<br/>curl -X PUT -d '{
+        \"shipping\": {\"name\": \"Shipping Service Name\", \"amount\":
+        \"1000.00\"}}'
+        \"https://610d738f.ngrok.io/api/v1/orders/{id}/shipping.json?login=stor\
+        ecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: Id of the Order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Order Shipping parameters to change
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/OrderShippingEdit"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Order"
+            type: array
+        "404":
+          description: Order Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Modify an existing Order's shipping method name and amount.
       tags:
         - Orders
   /payment_methods.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: An array of Payment Methods
           schema:
             items:
-              $ref: '#/definitions/PaymentMethod'
+              $ref: "#/definitions/PaymentMethod"
             type: array
       summary: Retrieve all Store's Payment Methods.
       tags:
         - Payment Methods
-  '/payment_methods/{id}.json':
+  "/payment_methods/{id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Payment Method
           format: int32
           in: path
@@ -1330,79 +1466,79 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PaymentMethod'
-        '404':
+            $ref: "#/definitions/PaymentMethod"
+        "404":
           description: PaymentMethod Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Payment Method.
       tags:
         - Payment Methods
   /products.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/LimitParam'
-        - $ref: '#/parameters/PageParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/LimitParam"
+        - $ref: "#/parameters/PageParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
       summary: Retrieve all Products.
       tags:
         - Products
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Product parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductEdit'
+            $ref: "#/definitions/ProductEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
       summary: Create a new Product.
       tags:
         - Products
-  '/products/after/{id}.json':
+  "/products/after/{id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieves Products after the given id.
       tags:
         - Products
-  '/products/category/{category_id}.json':
+  "/products/category/{category_id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Category ID of the Product used as filter
           format: int32
           in: path
@@ -1410,24 +1546,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve Products filtered by category.
       tags:
         - Products
-  '/products/category/{category_id}/count.json':
+  "/products/category/{category_id}/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Category ID of the Product used as filter
           format: int32
           in: path
@@ -1435,35 +1571,35 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Category Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count Products filtered by category.
       tags:
         - Products
   /products/count.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
+            $ref: "#/definitions/Count"
       summary: Count all Products.
       tags:
         - Products
   /products/search.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Query for the Product
           format: string
           in: query
@@ -1471,24 +1607,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: An array of products
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Invalid query.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a Product List from a query.
       tags:
         - Products
-  '/products/status/{status}.json':
+  "/products/status/{status}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Status of the Product used as filter
           enum:
             - available
@@ -1499,24 +1635,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Status Invalid.
           schema:
-            $ref: '#/definitions/StatusInvalid'
+            $ref: "#/definitions/StatusInvalid"
       summary: Retrieve Products filtered by status.
       tags:
         - Products
-  '/products/status/{status}/count.json':
+  "/products/status/{status}/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Status of the Product used as filter
           enum:
             - available
@@ -1527,39 +1663,39 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Status Invalid.
           schema:
-            $ref: '#/definitions/StatusInvalid'
+            $ref: "#/definitions/StatusInvalid"
       summary: Count Products filtered by status.
       tags:
         - Products
-  '/products/{id}.json':
+  "/products/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing Product.
       tags:
         - Products
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1567,92 +1703,328 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Product'
-        '404':
+            $ref: "#/definitions/Product"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Product.
       tags:
         - Products
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Product parameters to change
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductEdit'
+            $ref: "#/definitions/ProductEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Product.
       tags:
         - Products
-  '/products/{id}/fields.json':
+  "/products/{id}/attachments.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Field'
+              $ref: "#/definitions/Attachment"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
+      summary: Retrieve all Product Attachments.
+      tags:
+        - Product Attachments
+    post:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Product Attachment parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/AttachmentEdit"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Attachment"
+            type: array
+      summary: Create a new Product Attachment.
+      tags:
+        - Product Attachments
+  "/products/{id}/attachments/count.json":
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Count"
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Count all Product Attachments.
+      tags:
+        - Product Attachments
+  "/products/{id}/attachments/{attachment_id}.json":
+    delete:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Id of the Product Attachment
+          format: int32
+          in: path
+          name: attachment_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Delete a Product Attachment.
+      tags:
+        - Product Attachments
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Id of the Product Attachment
+          format: int32
+          in: path
+          name: attachment_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/Attachment"
+            type: array
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Create a new Product Attachment.
+      tags:
+        - Product Attachments
+  "/products/{id}/digital_products.json":
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/DigitalProduct"
+            type: array
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Retrieve all Product DigitalProducts.
+      tags:
+        - Product DigitalProducts
+    post:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Product DigitalProduct parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/DigitalProductEdit"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/DigitalProduct"
+            type: array
+      summary: Create a new Product DigitalProduct.
+      tags:
+        - Product DigitalProducts
+  "/products/{id}/digital_products/count.json":
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: ID of the Product
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Count"
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Count all Product DigitalProducts.
+      tags:
+        - Product DigitalProducts
+  "/products/{id}/digital_products/{digital_product_id}.json":
+    delete:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Id of the Product DigitalProduct
+          format: int32
+          in: path
+          name: digital_product_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Delete a Product DigitalProduct.
+      tags:
+        - Product DigitalProducts
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+        - description: Id of the Product DigitalProduct
+          format: int32
+          in: path
+          name: digital_product_id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/DigitalProduct"
+            type: array
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
+      summary: Create a new Product DigitalProduct.
+      tags:
+        - Product DigitalProducts
+  "/products/{id}/fields.json":
+    get:
+      parameters:
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/ProductCustomField"
+            type: array
+        "404":
+          description: Product Not Found.
+          schema:
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Product Custom Fields
       tags:
         - Product Custom Fields
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Product Custom Field parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductCustomField'
+            $ref: "#/definitions/ProductCustomField"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Product'
+              $ref: "#/definitions/Product"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Product Custom Field.
       tags:
         - Product Custom Fields
-  '/products/{id}/fields/count.json':
+  "/products/{id}/fields/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1660,22 +2032,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count all Product Custom Fields.
       tags:
         - Product Custom Fields
-  '/products/{id}/images.json':
+  "/products/{id}/images.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1683,45 +2055,45 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Product Images.
       tags:
         - Product Images
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Product Image parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ImageEdit'
+            $ref: "#/definitions/ImageEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
       summary: Create a new Product Image.
       tags:
         - Product Images
-  '/products/{id}/images/count.json':
+  "/products/{id}/images/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1729,23 +2101,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count all Product Images.
       tags:
         - Product Images
-  '/products/{id}/images/{image_id}.json':
+  "/products/{id}/images/{image_id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Image
           format: int32
           in: path
@@ -1753,22 +2125,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a Product Image.
       tags:
         - Product Images
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Image
           format: int32
           in: path
@@ -1776,24 +2148,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Image'
+              $ref: "#/definitions/Image"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Product Image.
       tags:
         - Product Images
-  '/products/{id}/options.json':
+  "/products/{id}/options.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1801,45 +2173,45 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOption'
+              $ref: "#/definitions/ProductOption"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Product Options.
       tags:
         - Product Options
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Product Option parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductOptionEdit'
+            $ref: "#/definitions/ProductOptionEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOption'
+              $ref: "#/definitions/ProductOption"
             type: array
       summary: Create a new Product Option.
       tags:
         - Product Options
-  '/products/{id}/options/count.json':
+  "/products/{id}/options/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1847,23 +2219,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count all Product Options.
       tags:
         - Product Options
-  '/products/{id}/options/{option_id}.json':
+  "/products/{id}/options/{option_id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -1871,22 +2243,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a Product Option.
       tags:
         - Product Options
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -1894,24 +2266,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOption'
+              $ref: "#/definitions/ProductOption"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Product Option.
       tags:
         - Product Options
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -1923,26 +2295,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductOptionEdit'
+            $ref: "#/definitions/ProductOptionEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOption'
+              $ref: "#/definitions/ProductOption"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Product Option.
       tags:
         - Product Options
-  '/products/{id}/options/{option_id}/values.json':
+  "/products/{id}/options/{option_id}/values.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -1956,24 +2328,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOptionValue'
+              $ref: "#/definitions/ProductOptionValue"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Product Option Values.
       tags:
         - Product Option Values
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -1985,22 +2357,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductOptionValueEdit'
+            $ref: "#/definitions/ProductOptionValueEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOptionValue'
+              $ref: "#/definitions/ProductOptionValue"
             type: array
       summary: Create a new Product Option Value.
       tags:
         - Product Option Values
-  '/products/{id}/options/{option_id}/values/count.json':
+  "/products/{id}/options/{option_id}/values/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -2014,23 +2386,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count all Product Option Values.
       tags:
         - Product Option Values
-  '/products/{id}/options/{option_id}/values/{value_id}.json':
+  "/products/{id}/options/{option_id}/values/{value_id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -2044,22 +2416,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a Product Option Value.
       tags:
         - Product Option Values
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -2073,24 +2445,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ProductOptionValue'
+              $ref: "#/definitions/ProductOptionValue"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Product Option Value.
       tags:
         - Product Option Values
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Option
           format: int32
           in: path
@@ -2108,24 +2480,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductOptionValueEdit'
+            $ref: "#/definitions/ProductOptionValueEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProductOptionValue'
-        '404':
+            $ref: "#/definitions/ProductOptionValue"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Product Option Value.
       tags:
         - Product Option Values
-  '/products/{id}/variants.json':
+  "/products/{id}/variants.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -2133,47 +2505,47 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Variant'
+              $ref: "#/definitions/Variant"
             type: array
-        '404':
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve all Product Variants.
       tags:
         - Product Variants
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Product Variant parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/VariantEdit'
+            $ref: "#/definitions/VariantEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Variant'
-        '404':
+            $ref: "#/definitions/Variant"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Product Variant.
       tags:
         - Product Variants
-  '/products/{id}/variants/count.json':
+  "/products/{id}/variants/count.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: ID of the Product
           format: int32
           in: path
@@ -2181,23 +2553,23 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Count'
-        '404':
+            $ref: "#/definitions/Count"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Count all Product Variants.
       tags:
         - Product Variants
-  '/products/{id}/variants/{variant_id}.json':
+  "/products/{id}/variants/{variant_id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Variant
           format: int32
           in: path
@@ -2205,22 +2577,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Variant'
-        '404':
+            $ref: "#/definitions/Variant"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Product Variant.
       tags:
         - Product Variants
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - $ref: '#/parameters/ProductIDParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - $ref: "#/parameters/ProductIDParam"
         - description: Id of the Product Variant
           format: int32
           in: path
@@ -2232,75 +2604,75 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/VariantEdit'
+            $ref: "#/definitions/VariantEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Variant'
-        '404':
+            $ref: "#/definitions/Variant"
+        "404":
           description: Product Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify an existing Product Variant.
       tags:
         - Product Variants
   /promotions.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
-        - description: 'Promotions'' list restriction (default: 50 | max: 200).'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
+        - description: "Promotions' list restriction (default: 50 | max: 200)."
           format: integer
           in: query
           name: limit
           required: false
           type: integer
-        - description: 'Promotions'' list page (default: 1).'
+        - description: "Promotions' list page (default: 1)."
           format: integer
           in: query
           name: page
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of Promotions
           schema:
             items:
-              $ref: '#/definitions/Promotion'
+              $ref: "#/definitions/Promotion"
             type: array
       summary: Retrieve all Promotions.
       tags:
         - Promotions
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Promotion parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PromotionEdit'
+            $ref: "#/definitions/PromotionEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Promotion'
+              $ref: "#/definitions/Promotion"
             type: array
-        '404':
+        "404":
           description: Promotion Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Promotion.
       tags:
         - Promotions
-  '/promotions/{id}.json':
+  "/promotions/{id}.json":
     delete:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Promotion
           format: int32
           in: path
@@ -2308,21 +2680,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '404':
+        "404":
           description: Promotion Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an existing Promotion.
       tags:
         - Promotions
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Promotion
           format: int32
           in: path
@@ -2330,21 +2702,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Promotion'
-        '404':
+            $ref: "#/definitions/Promotion"
+        "404":
           description: Promotion Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Promotion.
       tags:
         - Promotions
     put:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Promotion
           format: int32
           in: path
@@ -2356,41 +2728,41 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PromotionEdit'
+            $ref: "#/definitions/PromotionEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Promotion'
+              $ref: "#/definitions/Promotion"
             type: array
-        '404':
+        "404":
           description: Promotion Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a Promotion.
       tags:
         - Promotions
   /shipping_methods.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: An array of Shipping Methods
           schema:
             items:
-              $ref: '#/definitions/ShippingMethod'
+              $ref: "#/definitions/ShippingMethod"
             type: array
       summary: Retrieve all Store's Shipping Methods.
       tags:
         - Shipping Methods
-  '/shipping_methods/{id}.json':
+  "/shipping_methods/{id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Shipping Method
           format: int32
           in: path
@@ -2398,42 +2770,42 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ShippingMethod'
-        '404':
+            $ref: "#/definitions/ShippingMethod"
+        "404":
           description: ShippingMethod Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Shipping Method.
       tags:
         - Shipping Methods
   /store/info.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Store'
+            $ref: "#/definitions/Store"
       summary: Retrieve Store Information
       tags:
         - Stores
   /store/languages.json:
     get:
-      description: ''
+      description: ""
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Language'
+              $ref: "#/definitions/Language"
             type: array
       summary: Retrieve Store Languages
       tags:
@@ -2441,47 +2813,47 @@ paths:
   /taxes.json:
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
       responses:
-        '200':
+        "200":
           description: An array of Taxes
           schema:
             items:
-              $ref: '#/definitions/Tax'
+              $ref: "#/definitions/Tax"
             type: array
       summary: Retrieve all Taxes.
       tags:
         - Taxes
     post:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Tax parameters.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/TaxEdit'
+            $ref: "#/definitions/TaxEdit"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Tax'
+              $ref: "#/definitions/Tax"
             type: array
-        '404':
+        "404":
           description: Tax Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Create a new Tax.
       tags:
         - Taxes
-  '/taxes/{id}.json':
+  "/taxes/{id}.json":
     get:
       parameters:
-        - $ref: '#/parameters/LoginParam'
-        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: "#/parameters/LoginParam"
+        - $ref: "#/parameters/AuthtokenParam"
         - description: Id of the Tax
           format: int32
           in: path
@@ -2489,14 +2861,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: A Tax information object
           schema:
-            $ref: '#/definitions/Tax'
-        '404':
+            $ref: "#/definitions/Tax"
+        "404":
           description: Tax Not Found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a single Tax information.
       tags:
         - Taxes
@@ -2505,7 +2877,7 @@ definitions:
     properties:
       apps:
         items:
-          $ref: '#/definitions/AppFields'
+          $ref: "#/definitions/AppFields"
         type: array
     type: object
   AppFields:
@@ -2530,6 +2902,35 @@ definitions:
         description: Page of the app
         type: string
     type: object
+  Attachment:
+    properties:
+      attachment:
+        $ref: "#/definitions/AttachmentFields"
+    type: object
+  AttachmentEdit:
+    properties:
+      attachment:
+        $ref: "#/definitions/AttachmentEditFields"
+    type: object
+  AttachmentEditFields:
+    properties:
+      filename:
+        description: Filename of the attachment (with file extensison)
+        type: string
+      url:
+        description: "Public accessible URL with the desired file contents. (LIMIT: 100MB)"
+        type: string
+    type: object
+  AttachmentFields:
+    properties:
+      id:
+        description: Unique identifier of the attachment
+        format: int32
+        type: integer
+      url:
+        description: Private URL of the attachment
+        type: string
+    type: object
   BadParams:
     properties:
       message:
@@ -2545,6 +2946,9 @@ definitions:
       country:
         description: Country of the Customer's Billing Address (ISO 3166-1 alpha-2)
         type: string
+      country_code:
+        description: Country code of the Customer's Billing Address
+        type: string
       municipality:
         description: Municipality of the Customer's Billing Address
         type: string
@@ -2555,8 +2959,12 @@ definitions:
         description: Postal code of the Customer's Billing Address
         type: string
       region:
-        description: 'Region of the Customer''s Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)'
-        type: integer
+        description: Region of the Customer's Billing Address (Use the FIPS standard -
+          http://www.geonames.org/countries/)
+        type: string
+      region_code:
+        description: Region code of the Customer's Billing Address
+        type: string
       surname:
         description: Surname of the Customer's Billing Address
         type: string
@@ -2566,12 +2974,12 @@ definitions:
   Category:
     properties:
       category:
-        $ref: '#/definitions/CategoryFields'
+        $ref: "#/definitions/CategoryFields"
     type: object
   CategoryEdit:
     properties:
       category:
-        $ref: '#/definitions/CategoryEditFields'
+        $ref: "#/definitions/CategoryEditFields"
     type: object
   CategoryEditFields:
     properties:
@@ -2603,12 +3011,12 @@ definitions:
   CheckoutCustomField:
     properties:
       checkout_custom_field:
-        $ref: '#/definitions/CheckoutCustomFieldFields'
+        $ref: "#/definitions/CheckoutCustomFieldFields"
     type: object
   CheckoutCustomFieldEdit:
     properties:
       checkout_custom_field:
-        $ref: '#/definitions/CheckoutCustomFieldEditFields'
+        $ref: "#/definitions/CheckoutCustomFieldEditFields"
     type: object
   CheckoutCustomFieldEditFields:
     properties:
@@ -2701,20 +3109,47 @@ definitions:
         type: string
       name:
         type: string
+  CustomField:
+    properties:
+      field:
+        $ref: "#/definitions/CustomFieldFields"
+    type: object
+  CustomFieldFields:
+    properties:
+      id:
+        description: Unique identifier of the Custom Field
+        format: int32
+        type: integer
+      label:
+        description: Label given to the Custom Field
+        type: string
+      type:
+        description: Type of the Custom Field
+        enum:
+          - text
+          - selection
+          - input
+        type: string
+      values:
+        description: All the possible Values of the Custom Field (for type 'selection')
+        items:
+          type: string
+        type: array
+    type: object
   Customer:
     properties:
       customer:
-        $ref: '#/definitions/CustomerFields'
+        $ref: "#/definitions/CustomerFields"
     type: object
   CustomerAdditionalField:
     properties:
       customer_additional_field:
-        $ref: '#/definitions/CustomerAdditionalFieldFields'
+        $ref: "#/definitions/CustomerAdditionalFieldFields"
     type: object
   CustomerAdditionalFieldEdit:
     properties:
       customer_additional_field:
-        $ref: '#/definitions/CustomerAdditionalFieldEditFields'
+        $ref: "#/definitions/CustomerAdditionalFieldEditFields"
     type: object
   CustomerAdditionalFieldEditFields:
     properties:
@@ -2753,12 +3188,12 @@ definitions:
   CustomerCategory:
     properties:
       category:
-        $ref: '#/definitions/CustomerCategoryFields'
+        $ref: "#/definitions/CustomerCategoryFields"
     type: object
   CustomerCategoryEdit:
     properties:
       category:
-        $ref: '#/definitions/CustomerCategoryEditFields'
+        $ref: "#/definitions/CustomerCategoryEditFields"
     type: object
   CustomerCategoryEditFields:
     properties:
@@ -2782,10 +3217,10 @@ definitions:
   CustomerFields:
     properties:
       billing_address:
-        $ref: '#/definitions/BillingAddress'
+        $ref: "#/definitions/BillingAddress"
       customer_additional_fields:
         items:
-          $ref: '#/definitions/CustomerAdditionalField'
+          $ref: "#/definitions/CustomerAdditionalField"
         type: array
       customer_category:
         items:
@@ -2802,7 +3237,7 @@ definitions:
         description: Phone of the Customer
         type: string
       shipping_address:
-        $ref: '#/definitions/ShippingAddress'
+        $ref: "#/definitions/ShippingAddress"
       status:
         description: Status of the Customer
         enum:
@@ -2814,7 +3249,7 @@ definitions:
   CustomerFieldsWithPassword:
     properties:
       billing_address:
-        $ref: '#/definitions/BillingAddress'
+        $ref: "#/definitions/BillingAddress"
       email:
         description: Email of the Customer
         type: string
@@ -2829,7 +3264,7 @@ definitions:
         description: Phone of the Customer
         type: string
       shipping_address:
-        $ref: '#/definitions/ShippingAddress'
+        $ref: "#/definitions/ShippingAddress"
       status:
         description: Status of the Customer
         enum:
@@ -2841,7 +3276,7 @@ definitions:
   CustomerFieldsWithPasswordNoID:
     properties:
       billing_address:
-        $ref: '#/definitions/BillingAddress'
+        $ref: "#/definitions/BillingAddress"
       customer_category:
         items:
           type: integer
@@ -2856,7 +3291,7 @@ definitions:
         description: Phone of the Customer
         type: string
       shipping_address:
-        $ref: '#/definitions/ShippingAddress'
+        $ref: "#/definitions/ShippingAddress"
       status:
         description: Status of the Customer
         enum:
@@ -2868,49 +3303,55 @@ definitions:
   CustomerWithPassword:
     properties:
       customer:
-        $ref: '#/definitions/CustomerFieldsWithPassword'
+        $ref: "#/definitions/CustomerFieldsWithPassword"
     type: object
   CustomerWithPasswordNoID:
     properties:
       customer:
-        $ref: '#/definitions/CustomerFieldsWithPasswordNoID'
+        $ref: "#/definitions/CustomerFieldsWithPasswordNoID"
     type: object
-  Field:
+  DigitalProduct:
     properties:
-      field:
-        $ref: '#/definitions/FieldFields'
+      digital_product:
+        $ref: "#/definitions/DigitalProductFields"
     type: object
-  FieldFields:
+  DigitalProductEdit:
     properties:
-      id:
-        description: Unique identifier of the Field
+      digital_product:
+        $ref: "#/definitions/DigitalProductEditFields"
+    type: object
+  DigitalProductEditFields:
+    properties:
+      filename:
+        description: Filename of the digital product (with file extensison)
+        type: string
+      url:
+        description: "Public accessible URL with the desired file contents. (LIMIT: 100MB)"
+        type: string
+    type: object
+  DigitalProductFields:
+    properties:
+      expiration_seconds:
+        description: Time left in seconds before the current private URL expires
         format: int32
         type: integer
-      label:
-        description: Label given to the Field
+      id:
+        description: Unique identifier of the digital product
+        format: int32
+        type: integer
+      url:
+        description: Private URL of the digital product
         type: string
-      type:
-        description: Type of the Field
-        enum:
-          - text
-          - selection
-          - input
-        type: string
-      values:
-        description: All the possible Values of the Field (for type 'selection')
-        items:
-          type: string
-        type: array
     type: object
   Hook:
     properties:
       hook:
-        $ref: '#/definitions/HookFields'
+        $ref: "#/definitions/HookFields"
     type: object
   HookEdit:
     properties:
       hook:
-        $ref: '#/definitions/HookEditFields'
+        $ref: "#/definitions/HookEditFields"
     type: object
   HookEditFields:
     properties:
@@ -2961,12 +3402,12 @@ definitions:
   Image:
     properties:
       image:
-        $ref: '#/definitions/ImageFields'
+        $ref: "#/definitions/ImageFields"
     type: object
   ImageEdit:
     properties:
       image:
-        $ref: '#/definitions/ImageEditFields'
+        $ref: "#/definitions/ImageEditFields"
     type: object
   ImageEditFields:
     properties:
@@ -3003,7 +3444,7 @@ definitions:
   JSAppEdit:
     properties:
       app:
-        $ref: '#/definitions/JSApp'
+        $ref: "#/definitions/JSApp"
     type: object
   Language:
     properties:
@@ -3018,12 +3459,12 @@ definitions:
   Order:
     properties:
       order:
-        $ref: '#/definitions/OrderFields'
+        $ref: "#/definitions/OrderFields"
     type: object
   OrderEdit:
     properties:
       order:
-        $ref: '#/definitions/OrderEditFields'
+        $ref: "#/definitions/OrderEditFields"
     type: object
   OrderEditFields:
     properties:
@@ -3031,10 +3472,10 @@ definitions:
         description: Additional information for the given Order
         type: string
       customer:
-        $ref: '#/definitions/CustomerFields'
+        $ref: "#/definitions/CustomerFields"
       products:
         items:
-          $ref: '#/definitions/OrderProduct'
+          $ref: "#/definitions/OrderProduct"
         type: array
       shipping_method_id:
         description: Shipping method e.g. Royal Mail
@@ -3060,7 +3501,7 @@ definitions:
         description: Additional information for the given Order
         type: string
       billing_address:
-        $ref: '#/definitions/BillingAddress'
+        $ref: "#/definitions/BillingAddress"
       checkout_url:
         description: Store Checkout Order URL for the given Order
         type: string
@@ -3074,7 +3515,7 @@ definitions:
         description: Currency of the Order
         type: string
       customer:
-        $ref: '#/definitions/Customer'
+        $ref: "#/definitions/Customer"
       discount:
         description: Discount value for the given Order
         format: float
@@ -3094,7 +3535,7 @@ definitions:
         type: string
       products:
         items:
-          $ref: '#/definitions/OrderProduct'
+          $ref: "#/definitions/OrderProduct"
         type: array
       recovery_url:
         description: Recovery Order URL for the given Order
@@ -3112,7 +3553,7 @@ definitions:
         format: float
         type: number
       shipping_address:
-        $ref: '#/definitions/ShippingAddress'
+        $ref: "#/definitions/ShippingAddress"
       shipping_discount:
         description: Shipping Discount value for the given order
         format: float
@@ -3128,6 +3569,10 @@ definitions:
         description: Shipping Tax value for the given order
         format: float
         type: number
+      shipping_taxes:
+        items:
+          $ref: "#/definitions/OrderShippingTax"
+        type: array
       status:
         description: Status of the Order
         enum:
@@ -3137,7 +3582,8 @@ definitions:
           - Paid
         type: string
       subtotal:
-        description: 'Subtotal value for the given Order. Excluding taxes, shipping and discounts'
+        description: Subtotal value for the given Order. Excluding taxes, shipping and
+          discounts
         format: float
         type: number
       tax:
@@ -3145,7 +3591,8 @@ definitions:
         format: float
         type: number
       total:
-        description: 'Total value for the given Order. Including taxes, shipping and discounts'
+        description: Total value for the given Order. Including taxes, shipping and
+          discounts
         format: float
         type: number
       tracking_company:
@@ -3160,12 +3607,12 @@ definitions:
   OrderHistory:
     properties:
       order_history:
-        $ref: '#/definitions/OrderHistoryFields'
+        $ref: "#/definitions/OrderHistoryFields"
     type: object
   OrderHistoryEdit:
     properties:
       order_history:
-        $ref: '#/definitions/OrderHistoryEditFields'
+        $ref: "#/definitions/OrderHistoryEditFields"
     type: object
   OrderHistoryEditFields:
     properties:
@@ -3213,6 +3660,10 @@ definitions:
       sku:
         description: Stock Keeping Unit of the Order Product
         type: string
+      taxes:
+        items:
+          $ref: "#/definitions/OrderProductTax"
+        type: array
       variant_id:
         description: Unique identifier of the original Product Variant
         format: int32
@@ -3223,10 +3674,71 @@ definitions:
         format: float
         type: number
     type: object
+  OrderProductTax:
+    properties:
+      fixed:
+        default: false
+        description: False if rate is a percentage and true if rate is monetary
+        type: boolean
+      id:
+        description: Unique identifier of the Order Product Tax
+        format: int32
+        type: integer
+      name:
+        description: Name of the category that the tax is associated with
+        type: string
+      rate:
+        description: Tax rate
+        format: float
+        type: number
+      tax_on_product_price:
+        default: false
+        description: False if tax is not included on product price
+        type: boolean
+    type: object
+  OrderShippingEdit:
+    properties:
+      shipping:
+        $ref: "#/definitions/OrderShippingEditFields"
+    type: object
+  OrderShippingEditFields:
+    properties:
+      amount:
+        description: Price of the Order Shipping
+        format: float
+        type: number
+      name:
+        description: Shipping Method Name
+        type: string
+  OrderShippingTax:
+    properties:
+      country:
+        description: Code of the associated country
+        type: string
+      fixed:
+        default: false
+        description: False if rate is a percentage and true if rate is monetary
+        type: boolean
+      id:
+        description: Unique identifier of the Order Shipping Tax
+        format: int32
+        type: integer
+      rate:
+        description: Tax rate
+        format: float
+        type: number
+      region:
+        description: Code of the associated region
+        type: string
+      tax_on_shipping_price:
+        default: false
+        description: False if shipping tax is not included on shipping price
+        type: boolean
+    type: object
   PaymentMethod:
     properties:
       payment_method:
-        $ref: '#/definitions/PaymentMethodFields'
+        $ref: "#/definitions/PaymentMethodFields"
     type: object
   PaymentMethodFields:
     properties:
@@ -3262,12 +3774,12 @@ definitions:
   Product:
     properties:
       product:
-        $ref: '#/definitions/ProductFields'
+        $ref: "#/definitions/ProductFields"
     type: object
   ProductCustomField:
     properties:
-      field_value:
-        $ref: '#/definitions/ProductCustomFieldFields'
+      field:
+        $ref: "#/definitions/ProductCustomFieldFields"
     type: object
   ProductCustomFieldFields:
     properties:
@@ -3277,20 +3789,21 @@ definitions:
         type: integer
       value:
         description: The value for the ProductCustomField
-        items:
-          type: string
-        type: array
+        type: string
     type: object
   ProductEdit:
     properties:
       product:
-        $ref: '#/definitions/ProductEditFields'
+        $ref: "#/definitions/ProductEditFields"
     type: object
   ProductEditFields:
     properties:
+      barcode:
+        description: Barcode of the product
+        type: string
       categories:
         items:
-          $ref: '#/definitions/CategoryFields'
+          $ref: "#/definitions/CategoryFields"
         type: array
       description:
         description: Description of the product
@@ -3370,14 +3883,17 @@ definitions:
         format: float
         type: number
     required:
-      - price
       - name
+      - price
     type: object
   ProductFields:
     properties:
+      barcode:
+        description: Barcode of the product
+        type: string
       categories:
         items:
-          $ref: '#/definitions/CategoryFields'
+          $ref: "#/definitions/CategoryFields"
         type: array
       created_at:
         description: Date of product creation
@@ -3410,7 +3926,7 @@ definitions:
         type: integer
       images:
         items:
-          $ref: '#/definitions/ImageFields'
+          $ref: "#/definitions/ImageFields"
         type: array
       length:
         description: Length of the product
@@ -3454,7 +3970,7 @@ definitions:
         type: boolean
       variants:
         items:
-          $ref: '#/definitions/VariantFields'
+          $ref: "#/definitions/VariantFields"
         type: array
       weight:
         default: 1
@@ -3469,12 +3985,12 @@ definitions:
   ProductOption:
     properties:
       option:
-        $ref: '#/definitions/ProductOptionFields'
+        $ref: "#/definitions/ProductOptionFields"
     type: object
   ProductOptionEdit:
     properties:
       option:
-        $ref: '#/definitions/ProductOptionEditFields'
+        $ref: "#/definitions/ProductOptionEditFields"
     type: object
   ProductOptionEditFields:
     properties:
@@ -3517,18 +4033,18 @@ definitions:
         type: integer
       values:
         items:
-          $ref: '#/definitions/ProductOptionValueFields'
+          $ref: "#/definitions/ProductOptionValueFields"
         type: array
     type: object
   ProductOptionValue:
     properties:
       value:
-        $ref: '#/definitions/ProductOptionValueFields'
+        $ref: "#/definitions/ProductOptionValueFields"
     type: object
   ProductOptionValueEdit:
     properties:
       value:
-        $ref: '#/definitions/ProductOptionValueEditFields'
+        $ref: "#/definitions/ProductOptionValueEditFields"
     type: object
   ProductOptionValueEditFields:
     properties:
@@ -3554,21 +4070,30 @@ definitions:
         format: int32
         type: integer
       product_option:
-        $ref: '#/definitions/ProductOption'
+        $ref: "#/definitions/ProductOption"
       variants:
         items:
-          $ref: '#/definitions/Variant'
+          $ref: "#/definitions/Variant"
         type: array
+    type: object
+  ProductOptionVariantEdit:
+    properties:
+      name:
+        description: Name of the product option
+        type: string
+      value:
+        description: Value of the product option
+        type: string
     type: object
   Promotion:
     properties:
       promotion:
-        $ref: '#/definitions/PromotionFields'
+        $ref: "#/definitions/PromotionFields"
     type: object
   PromotionEdit:
     properties:
       promotion:
-        $ref: '#/definitions/PromotionEditFields'
+        $ref: "#/definitions/PromotionEditFields"
     type: object
   PromotionEditFields:
     properties:
@@ -3576,22 +4101,25 @@ definitions:
         description: Creation date of the promotion (requires 'lasts' param - 'date')
         type: string
       buys_at_least:
-        description: 'Controls the promotion''s condition (''none'', ''price'', ''qty'')'
+        description: Controls the promotion's condition ('none', 'price', 'qty')
         type: string
       categories:
-        description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
+        description: Products Categories where the promotion will be applied (requires
+          'discount_target' param - 'categories')
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       code:
         description: Code of the promotion
         type: string
       condition_price:
-        description: Minimum order amount to validate the promotion (requires 'buys_at_least' param - 'price')
+        description: Minimum order amount to validate the promotion (requires
+          'buys_at_least' param - 'price')
         format: float
         type: number
       condition_qty:
-        description: Minimum quantity of ordered itens to validate the promotion (requires 'buys_at_least' param - 'qty')
+        description: Minimum quantity of ordered itens to validate the promotion
+          (requires 'buys_at_least' param - 'qty')
         format: int32
         type: integer
       cumulative:
@@ -3599,23 +4127,26 @@ definitions:
         description: True if the promotion can be acumulated with others
         type: boolean
       customer_categories:
-        description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
+        description: Customer Categories to whom the promotion will be applied (requires
+          'customers' param - 'categories')
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       customers:
-        description: 'Controls to which customers the promotion will be applied (''all'', ''loggedin'', ''categories'')'
+        description: Controls to which customers the promotion will be applied ('all',
+          'loggedin', 'categories', 'guests')
         type: string
       discount_amount_fix:
         description: Fixed discount amount of the promotion (requires 'type' param - 'fix')
         format: float
         type: number
       discount_amount_percent:
-        description: Percentual discount amount of the promotion (requires 'type' param - 'percentage')
+        description: Percentual discount amount of the promotion (requires 'type' param
+          - 'percentage')
         format: float
         type: number
       discount_target:
-        description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
+        description: Where the promotion will be applied ('order', 'shipping', 'categories')
         type: string
       enabled:
         default: true
@@ -3625,32 +4156,35 @@ definitions:
         description: Expiration date of the promotion (requires 'lasts' param - 'date')
         type: string
       lasts:
-        description: 'Controls when the promotion will expire (''none'', ''date'', ''max_times_used'')'
+        description: Controls when the promotion will expire ('none', 'date',
+          'max_times_used')
         type: string
       max_times_used:
-        description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
+        description: Maximum amount a promotion can be used (requires 'lasts' param -
+          'max_times_used')
         format: int32
         type: integer
       name:
         description: Name of the product
         type: string
       products:
-        description: Products where the promotion will be applied (requires 'discount_target' param - 'categories')
+        description: Products where the promotion will be applied (requires
+          'discount_target' param - 'categories')
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       type:
-        description: 'Controls if the discount will be a fixed area (''fix'', ''percentage'')'
+        description: Controls if the discount will be a fixed area ('fix', 'percentage')
         type: string
     type: object
   PromotionFields:
     properties:
       begins_at:
-        description: Creation date of the promotion
+        description: Creation date of the promotion (requires 'lasts' param - 'date')
         type: string
       categories:
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       code:
         description: Code of the promotion
@@ -3669,7 +4203,7 @@ definitions:
         type: boolean
       customer_categories:
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       discount_amount_fix:
         description: Fixed discount amount of the promotion
@@ -3680,21 +4214,26 @@ definitions:
         format: float
         type: number
       discount_target:
-        description: 'Where the promotion will be applied (''order'', ''shipping'', ''categories'')'
+        description: Where the promotion will be applied ('order', 'shipping', 'categories')
         type: string
       enabled:
         default: true
         description: If the promotion is currently enabled
         type: boolean
       expires_at:
-        description: Expiration date of the promotion
+        description: Expiration date of the promotion (requires 'lasts' param - 'date')
         type: string
       id:
         description: Unique identifier of the product
         format: int32
         type: integer
+      lasts:
+        description: Controls when the promotion will expire ('none', 'date',
+          'max_times_used')
+        type: string
       max_times_used:
-        description: Maximum amount a promotion can be used
+        description: Maximum amount a promotion can be used (requires 'lasts' param -
+          'max_times_used')
         format: int32
         type: integer
       name:
@@ -3702,10 +4241,10 @@ definitions:
         type: string
       products:
         items:
-          $ref: '#/definitions/Id'
+          $ref: "#/definitions/Id"
         type: array
       status:
-        description: 'Status of the promotion (''active'', ''expired'')'
+        description: Status of the promotion ('active', 'expired')
         type: string
       times_used:
         description: Amount of times the promotion was used
@@ -3729,6 +4268,9 @@ definitions:
       country:
         description: Country of the Customer's Shipping Address (ISO 3166-1 alpha-2)
         type: string
+      country_code:
+        description: Country code of the Customer's Shipping Address
+        type: string
       municipality:
         description: Municipality of the Customer's Shipping Address
         type: string
@@ -3739,15 +4281,19 @@ definitions:
         description: Postal code of the Customer's Shipping Address
         type: string
       region:
-        description: 'Region of the Customer''s Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)'
-        type: integer
+        description: Region of the Customer's Shipping Address (Use the FIPS standard -
+          http://www.geonames.org/countries/)
+        type: string
+      region_code:
+        description: Region code of the Customer's Shipping Address
+        type: string
       surname:
         description: Surname of the Customer's Shipping Address
         type: string
   ShippingMethod:
     properties:
       shipping_method:
-        $ref: '#/definitions/ShippingMethodFields'
+        $ref: "#/definitions/ShippingMethodFields"
     type: object
   ShippingMethodFields:
     properties:
@@ -3810,12 +4356,12 @@ definitions:
   Tax:
     properties:
       field:
-        $ref: '#/definitions/TaxFields'
+        $ref: "#/definitions/TaxFields"
     type: object
   TaxEdit:
     properties:
       field:
-        $ref: '#/definitions/TaxEditFields'
+        $ref: "#/definitions/TaxEditFields"
     type: object
   TaxEditFields:
     properties:
@@ -3874,12 +4420,12 @@ definitions:
   Variant:
     properties:
       variant:
-        $ref: '#/definitions/VariantFields'
+        $ref: "#/definitions/VariantFields"
     type: object
   VariantEdit:
     properties:
       variant:
-        $ref: '#/definitions/VariantEditFields'
+        $ref: "#/definitions/VariantEditFields"
     type: object
   VariantEditFields:
     properties:
@@ -3891,6 +4437,10 @@ definitions:
         description: Unique identifier of the product image to associate with this variant
         format: int32
         type: integer
+      options:
+        items:
+          $ref: "#/definitions/ProductOptionVariantEdit"
+        type: array
       price:
         description: Price of the product
         format: float
@@ -3909,10 +4459,6 @@ definitions:
     type: object
   VariantFields:
     properties:
-      discount:
-        description: Discount of the product
-        format: float
-        type: number
       id:
         description: Unique identifier of the product
         format: int32

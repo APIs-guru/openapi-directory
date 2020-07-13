@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.evemarketer.com
@@ -6,17 +6,18 @@ basePath: /ec
 info:
   contact:
     x-twitter: EVEMarketer
-  description: EVEMarketer Marketstat API is almost compatible with EVE-Central's Marketstat API.
-  title: EVEMarketer Marketstat
+  description: EVEMarketer Marketstat API is almost compatible with EVE-Central's
+    Marketstat API.
+  title: EVEMarketer Marketstat API
   version: 1.0.1
   x-apisguru-categories:
     - entertainment
   x-logo:
-    url: 'https://twitter.com/EVEMarketer/profile_image?size=original'
+    url: https://twitter.com/EVEMarketer/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.evemarketer.com/ec/swagger.yaml'
-      version: '2.0'
+      url: https://api.evemarketer.com/ec/swagger.yaml
+      version: "2.0"
   x-providerName: evemarketer.com
 tags:
   - description: marketstat
@@ -25,8 +26,10 @@ paths:
   /marketstat:
     get:
       parameters:
-        - description: |
-            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
+        - description: >
+            TypeID. Multiple TypeIDs can be specified in the following format
+            (up to 200 TypeIDs per request):
+
             typeid=34&typeid=35 or typeid=34,35
           in: query
           items:
@@ -48,7 +51,7 @@ paths:
       produces:
         - application/xml
       responses:
-        '200':
+        "200":
           description: Successful Request
           headers:
             X-Ratelimit-Limit:
@@ -58,13 +61,14 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch seconds.
+              description: The time at which the current rate limit window resets in UTC epoch
+                seconds.
               type: integer
           schema:
-            $ref: '#/definitions/ExecAPI'
-        '400':
+            $ref: "#/definitions/ExecAPI"
+        "400":
           description: Invalid Parameters
-        '429':
+        "429":
           description: Rate limit exceeded
       summary: XML Marketstat
       tags:
@@ -73,8 +77,10 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-        - description: |
-            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
+        - description: >
+            TypeID. Multiple TypeIDs can be specified in the following format
+            (up to 200 TypeIDs per request):
+
             typeid=34&typeid=35 or typeid=34,35
           in: formData
           items:
@@ -96,7 +102,7 @@ paths:
       produces:
         - application/xml
       responses:
-        '200':
+        "200":
           description: Successful Request
           headers:
             X-Ratelimit-Limit:
@@ -106,13 +112,14 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch seconds.
+              description: The time at which the current rate limit window resets in UTC epoch
+                seconds.
               type: integer
           schema:
-            $ref: '#/definitions/ExecAPI'
-        '400':
+            $ref: "#/definitions/ExecAPI"
+        "400":
           description: Invalid Parameters
-        '429':
+        "429":
           description: Rate limit exceeded
       summary: XML Marketstat
       tags:
@@ -122,8 +129,10 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-        - description: |
-            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
+        - description: >
+            TypeID. Multiple TypeIDs can be specified in the following format
+            (up to 200 TypeIDs per request):
+
             typeid=34&typeid=35 or typeid=34,35
           in: formData
           items:
@@ -145,7 +154,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful Request
           headers:
             X-Ratelimit-Limit:
@@ -155,23 +164,26 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch seconds.
+              description: The time at which the current rate limit window resets in UTC epoch
+                seconds.
               type: integer
           schema:
             items:
-              $ref: '#/definitions/Type'
+              $ref: "#/definitions/Type"
             type: array
-        '400':
+        "400":
           description: Invalid Parameters
-        '429':
+        "429":
           description: Rate limit exceeded
       summary: JSON Marketstat
       tags:
         - marketstat
     post:
       parameters:
-        - description: |
-            TypeID. Multiple TypeIDs can be specified in the following format (up to 200 TypeIDs per request):
+        - description: >
+            TypeID. Multiple TypeIDs can be specified in the following format
+            (up to 200 TypeIDs per request):
+
             typeid=34&typeid=35 or typeid=34,35
           in: query
           items:
@@ -193,7 +205,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful Request
           headers:
             X-Ratelimit-Limit:
@@ -203,15 +215,16 @@ paths:
               description: The number of remaining requests in the current period
               type: integer
             X-Ratelimit-Reset:
-              description: The time at which the current rate limit window resets in UTC epoch seconds.
+              description: The time at which the current rate limit window resets in UTC epoch
+                seconds.
               type: integer
           schema:
             items:
-              $ref: '#/definitions/Type'
+              $ref: "#/definitions/Type"
             type: array
-        '400':
+        "400":
           description: Invalid Parameters
-        '429':
+        "429":
           description: Rate limit exceeded
       summary: JSON Marketstat
       tags:
@@ -220,14 +233,14 @@ definitions:
   ExecAPI:
     properties:
       marketstat:
-        $ref: '#/definitions/MarketStatXML'
+        $ref: "#/definitions/MarketStatXML"
       method:
         example: marketstat_xml
         type: string
         xml:
           attribute: true
       version:
-        example: '2.0'
+        example: "2.0"
         type: string
         xml:
           attribute: true
@@ -270,17 +283,17 @@ definitions:
     items:
       properties:
         buy:
-          $ref: '#/definitions/TypeStatXML'
+          $ref: "#/definitions/TypeStatXML"
         sell:
-          $ref: '#/definitions/TypeStatXML'
+          $ref: "#/definitions/TypeStatXML"
       type: object
     type: array
   Type:
     properties:
       buy:
-        $ref: '#/definitions/TypeStat'
+        $ref: "#/definitions/TypeStat"
       sell:
-        $ref: '#/definitions/TypeStat'
+        $ref: "#/definitions/TypeStat"
     type: object
   TypeStat:
     properties:
@@ -294,7 +307,7 @@ definitions:
         format: double
         type: number
       forQuery:
-        $ref: '#/definitions/ForQuery'
+        $ref: "#/definitions/ForQuery"
       generated:
         description: Generated at (UNIX Timestamp msec)
         example: 1499280224508

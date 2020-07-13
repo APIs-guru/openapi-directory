@@ -1,15 +1,15 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://localhost:5001/engines/nmap/'
-  - url: 'http://localhost:5004/engines/ssllabs/'
-  - url: 'http://localhost:5005/engines/arachni/'
-  - url: 'http://localhost:5006/engines/owl_dns/'
-  - url: 'http://localhost:5007/engines/virustotal/'
-  - url: 'http://localhost:5008/engines/urlvoid/'
-  - url: 'http://localhost:5009/engines/cortex/'
-  - url: 'http://localhost:5012/engines/owl_leaks/'
-  - url: 'http://localhost:5013/engines/owl_code/'
-  - url: 'http://localhost:5014/engines/sslscan/'
+  - url: http://localhost:5001/engines/nmap/
+  - url: http://localhost:5004/engines/ssllabs/
+  - url: http://localhost:5005/engines/arachni/
+  - url: http://localhost:5006/engines/owl_dns/
+  - url: http://localhost:5007/engines/virustotal/
+  - url: http://localhost:5008/engines/urlvoid/
+  - url: http://localhost:5009/engines/cortex/
+  - url: http://localhost:5012/engines/owl_leaks/
+  - url: http://localhost:5013/engines/owl_code/
+  - url: http://localhost:5014/engines/sslscan/
 info:
   contact:
     email: getsupport@patrowl.io
@@ -17,29 +17,29 @@ info:
   description: This is the API documentation for Patrowl Engines usage.
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Swagger API-REST for Patrowl Engines
   version: 1.0.0
   x-apisguru-categories:
     - security
   x-logo:
-    url: 'https://twitter.com/patrowl_io/profile_image?size=original'
+    url: https://twitter.com/patrowl_io/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.18
       format: openapi
-      url: 'https://raw.githubusercontent.com/Patrowl/PatrowlDocs/master/api/openapi-patrowl-engines.yaml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/Patrowl/PatrowlDocs/master/api/openapi-patrowl-engines.yaml
+      version: "3.0"
   x-providerName: patrowl.local
 externalDocs:
   description: Find out more about Patrowl
-  url: 'https://github.com/Patrowl/PatrowlDocs'
+  url: https://github.com/Patrowl/PatrowlDocs
 tags:
   - description: SSLScan API documentation
     externalDocs:
       description: Find out more
-      url: 'https://github.com/Patrowl/PatrowlDocs'
+      url: https://github.com/Patrowl/PatrowlDocs
     name: patrowl-engine
 paths:
   /:
@@ -47,11 +47,11 @@ paths:
       description: Return index page
       operationId: getDefaultPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Index page
       tags:
@@ -61,16 +61,16 @@ paths:
       description: Clean all current scans.
       operationId: CleanScansPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Clean all scans
       tags:
         - patrowl-engine
-  '/clean/{scanId}':
+  "/clean/{scanId}":
     get:
       description: Clean scan identified by id.
       operationId: CleanScanPage
@@ -82,16 +82,16 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Clean scan
       tags:
         - patrowl-engine
-  '/getfindings/{scanId}':
+  "/getfindings/{scanId}":
     get:
       description: Get findings on finished scans.
       operationId: GetFindingPage
@@ -103,11 +103,11 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Findings'
+                $ref: "#/components/schemas/Findings"
           description: successful operation
       summary: Get findings on finished scans
       tags:
@@ -117,11 +117,11 @@ paths:
       description: Return information on engine.
       operationId: getInfoPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Engine info page
       tags:
@@ -131,7 +131,7 @@ paths:
       description: Return liveness page
       operationId: getLivenessPage
       responses:
-        '200':
+        "200":
           description: successful operation
       summary: Liveness page
       tags:
@@ -141,7 +141,7 @@ paths:
       description: Return liveness page
       operationId: getReadinessPage
       responses:
-        '200':
+        "200":
           description: successful operation
       summary: Readiness page
       tags:
@@ -151,11 +151,11 @@ paths:
       description: Reload the configuration file.
       operationId: reloadConfigurationPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Configuration reloading page
       tags:
@@ -168,14 +168,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScanDefinition'
+              $ref: "#/components/schemas/ScanDefinition"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Start a new scan
       tags:
@@ -185,16 +185,16 @@ paths:
       description: Status all current scans.
       operationId: StatusScansPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Status on all scans
       tags:
         - patrowl-engine
-  '/status/{scanId}':
+  "/status/{scanId}":
     get:
       description: Status of a scan identified by id.
       operationId: StatusScanPage
@@ -206,16 +206,16 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Status of a scan
       tags:
         - patrowl-engine
-  '/stop/{scanId}':
+  "/stop/{scanId}":
     get:
       description: Stop a scan identified by id.
       operationId: StopScanPage
@@ -227,11 +227,11 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Stop a scan
       tags:
@@ -241,11 +241,11 @@ paths:
       description: Stop all current scans.
       operationId: StopScansPage
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'
+                $ref: "#/components/schemas/ApiResponse"
           description: successful operation
       summary: Stop all scans
       tags:
@@ -255,7 +255,7 @@ paths:
       description: Return test page
       operationId: getTestPage
       responses:
-        '200':
+        "200":
           description: successful operation
       summary: Test page
       tags:
@@ -381,7 +381,7 @@ components:
                   - application
                 type: string
               id:
-                example: '3'
+                example: "3"
                 type: string
               value:
                 example: 8.8.8.8

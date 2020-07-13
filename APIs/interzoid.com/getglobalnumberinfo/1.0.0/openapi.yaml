@@ -1,39 +1,44 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.interzoid.com'
+  - url: https://api.interzoid.com
 info:
   contact:
     email: support@interzoid.com
     name: API Support
-    url: 'https://www.interzoid.com'
+    url: https://www.interzoid.com
     x-twitter: interzoid
-  description: 'This API provides geographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.'
+  description: This API provides geographic information for a global telephone
+    number, including city and country information, primary languages spoken,
+    and mobile device identification.
   license:
     name: Interzoid license
-    url: 'https://www.interzoid.com/license'
-  termsOfService: 'https://www.interzoid.com/terms'
-  title: Interzoid Get Global Phone Number Information
+    url: https://www.interzoid.com/license
+  termsOfService: https://www.interzoid.com/terms
+  title: Interzoid Get Global Phone Number Information API
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/interzoid/profile_image?size=original'
+    url: https://twitter.com/interzoid/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://oas.interzoid.com/api/getglobalnumberinfo.json'
-      version: '3.0'
+      url: https://oas.interzoid.com/api/getglobalnumberinfo.json
+      version: "3.0"
   x-providerName: interzoid.com
   x-serviceName: getglobalnumberinfo
 externalDocs:
   description: API home page and documentation
-  url: 'https://www.interzoid.com/services/getglobalnumberinfo'
+  url: https://www.interzoid.com/services/getglobalnumberinfo
 paths:
   /getglobalnumberinfo:
     get:
-      description: 'Get demographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.'
+      description: Get demographic information for a global telephone number,
+        including city and country information, primary languages spoken, and
+        mobile device identification.
       operationId: getglobalnumberinfo
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
@@ -46,7 +51,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -73,17 +78,17 @@ paths:
                     type: string
                 type: object
           description: Global telephone demographic information
-        '400':
+        "400":
           description: bad request - insufficient parameters
-        '402':
+        "402":
           description: credits exhausted
-        '403':
+        "403":
           description: invalid license API key
-        '404':
+        "404":
           description: telephone number not found
-        '405':
+        "405":
           description: method not allowed
-        '500':
+        "500":
           description: internal server error
       summary: Get demographic information for a global telephone number
       tags:

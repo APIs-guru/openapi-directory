@@ -1,25 +1,24 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.faretrotter.com
-basePath: /v2.0/%7Bapikey%7D
+basePath: /v2.0/{apikey}
 info:
   contact:
     x-twitter: faretrotter
-  description: Multimodal travel API to return modes of transportation between cities and points of interest.
-  title: Faretrotter Travel
-  version: '2.0'
+  description: Multimodal travel API to return modes of transportation between
+    cities and points of interest.
+  title: Faretrotter Travel API
+  version: "2.0"
   x-apisguru-categories:
     - transport
   x-logo:
-    url: 'https://twitter.com/faretrotter/profile_image?size=original'
+    url: https://twitter.com/faretrotter/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Faretrotter/api/master/docs/oas20.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Faretrotter/api/master/docs/oas20.yaml
+      version: "2.0"
   x-providerName: faretrotter.com
-produces:
-  - application/json
 securityDefinitions:
   ApiKeyAuth:
     in: header
@@ -29,26 +28,29 @@ paths:
   /places:
     get:
       operationId: GET_places
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Everything worked as expected.
           schema:
-            $ref: '#/definitions/PlaceResponse'
-        '400':
-          description: Parameters did not match the endpoint requirements. Check that all required fields are present and spelt correctly.
-        '401':
+            $ref: "#/definitions/PlaceResponse"
+        "400":
+          description: Parameters did not match the endpoint requirements. Check that all
+            required fields are present and spelt correctly.
+        "401":
           description: Authentication Failed.
-        '402':
+        "402":
           description: All parameters are correct but the request failed.
-        '403':
+        "403":
           description: Request IP does not match IP address registered with key.
-        '404':
+        "404":
           description: The endpoint doesn't exist.
-        '429':
+        "429":
           description: Too many requests hit the API too quickly.
-        '501':
+        "501":
           description: Server error
-        '502':
+        "502":
           description: Server error
       summary: Returns possible modes of transportation between two cities.
   /routes:
@@ -73,26 +75,29 @@ paths:
           name: destination_lng
           required: true
           type: number
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Everything worked as expected.
           schema:
-            $ref: '#/definitions/RoutesResponse'
-        '400':
-          description: Parameters did not match the endpoint requirements. Check that all required fields are present and spelt correctly.
-        '401':
+            $ref: "#/definitions/RoutesResponse"
+        "400":
+          description: Parameters did not match the endpoint requirements. Check that all
+            required fields are present and spelt correctly.
+        "401":
           description: Authentication Failed.
-        '402':
+        "402":
           description: All parameters are correct but the request failed.
-        '403':
+        "403":
           description: Request IP does not match IP address registered with key.
-        '404':
+        "404":
           description: The endpoint doesn't exist.
-        '429':
+        "429":
           description: Too many requests hit the API too quickly.
-        '501':
+        "501":
           description: Server error
-        '502':
+        "502":
           description: Server error
 definitions:
   PlaceResponse:
@@ -137,7 +142,7 @@ definitions:
     properties:
       places:
         items:
-          $ref: '#/definitions/PlaceResponse'
+          $ref: "#/definitions/PlaceResponse"
         type: array
       request:
         properties:
@@ -220,7 +225,7 @@ definitions:
             type: array
           places:
             items:
-              $ref: '#/definitions/PlaceResponse'
+              $ref: "#/definitions/PlaceResponse"
             type: array
           routes:
             items:

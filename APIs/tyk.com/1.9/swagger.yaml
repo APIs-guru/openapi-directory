@@ -1,26 +1,25 @@
-swagger: '2.0'
-schemes:
-  - https
+swagger: "2.0"
 host: tyk.local
 info:
   contact:
     x-twitter: tyk_io
-  title: Gateway
-  version: '1.9'
+  title: Gateway REST API
+  version: "1.9"
   x-apisguru-categories:
     - enterprise
   x-logo:
-    url: 'https://twitter.com/tyk_io/profile_image?size=original'
+    url: https://twitter.com/tyk_io/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/TykTechnologies/tyk-swagger-definitions/master/tyk_gateway_api.yml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/TykTechnologies/tyk-swagger-definitions/master/tyk_gateway_api.yml
+      version: "2.0"
   x-providerName: tyk.com
 paths:
   /tyk/apis/:
     get:
-      description: |
-        Gets a list of *API Definition* objects that are currently live on the gateway 
+      description: >
+        Gets a list of *API Definition* objects that are currently live on the
+        gateway 
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -29,10 +28,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful list response
           schema:
-            $ref: '#/definitions/APIDefinitionList'
+            $ref: "#/definitions/APIDefinitionList"
     post:
       description: |
         Create an *API Definition* object
@@ -40,9 +39,9 @@ paths:
         - in: body
           name: api_definition
           schema:
-            $ref: '#/definitions/APIDefinition'
+            $ref: "#/definitions/APIDefinition"
       responses:
-        '200':
+        "200":
           description: Succesful API Deletion
           schema:
             properties:
@@ -58,7 +57,7 @@ paths:
                   - error
                 type: string
             type: object
-  '/tyk/apis/{apiID}':
+  "/tyk/apis/{apiID}":
     delete:
       description: |
         Deletes an *API Definition* object, if it exists
@@ -75,7 +74,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful API Deletion
           schema:
             properties:
@@ -107,10 +106,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful API response
           schema:
-            $ref: '#/definitions/APIDefinition'
+            $ref: "#/definitions/APIDefinition"
     put:
       description: |
         Updates an *API Definition* object, if it exists
@@ -129,9 +128,9 @@ paths:
         - in: body
           name: api_definition
           schema:
-            $ref: '#/definitions/APIDefinition'
+            $ref: "#/definitions/APIDefinition"
       responses:
-        '200':
+        "200":
           description: Succesful API Deletion
           schema:
             properties:
@@ -165,7 +164,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful healthcheck response
           schema:
             properties:
@@ -198,7 +197,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
           schema:
             properties:
@@ -218,7 +217,12 @@ paths:
           name: x-tyk-authorization
           required: true
           type: string
-        - description: 'Adding the `suppress_reset` parameter and setting it to `1`, will cause Tyk to not reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when ADDing a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour.'
+        - description: Adding the `suppress_reset` parameter and setting it to `1`, will
+            cause Tyk to not reset the quota limit that is in the current live
+            quota manager. By default Tyk will reset the quota in the live quota
+            manager (initialising it) when ADDing a key. Adding the
+            `suppress_reset` flag to the URL parameters will avoid this
+            behaviour.
           format: integer
           in: query
           name: suppress_reset
@@ -227,9 +231,9 @@ paths:
         - in: body
           name: session_object
           schema:
-            $ref: '#/definitions/SessionObject'
+            $ref: "#/definitions/SessionObject"
       responses:
-        '200':
+        "200":
           description: Key Created Response
           schema:
             properties:
@@ -245,10 +249,12 @@ paths:
                   - error
                 type: string
             type: object
-  '/tyk/keys/{keyId}':
+  "/tyk/keys/{keyId}":
     delete:
-      description: |
-        Remove this *API token* from the gateway, this will completely destroy the token and metadata associated with the token and instantly stop access from being granted
+      description: >
+        Remove this *API token* from the gateway, this will completely destroy
+        the token and metadata associated with the token and instantly stop
+        access from being granted
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -268,7 +274,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Key Deleted Response
           schema:
             properties:
@@ -285,8 +291,10 @@ paths:
                 type: string
             type: object
     post:
-      description: |
-        Add a pre-specified *API token* with the *session object* defined in the body, this operatin creates a custom token that dsoes not use the gateway naming convention for tokens
+      description: >
+        Add a pre-specified *API token* with the *session object* defined in the
+        body, this operatin creates a custom token that dsoes not use the
+        gateway naming convention for tokens
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -302,9 +310,9 @@ paths:
         - in: body
           name: session_object
           schema:
-            $ref: '#/definitions/SessionObject'
+            $ref: "#/definitions/SessionObject"
       responses:
-        '200':
+        "200":
           description: Key Added Response
           schema:
             properties:
@@ -321,8 +329,9 @@ paths:
                 type: string
             type: object
     put:
-      description: |
-        Update an *API token* with the *session object* defined in the body, this operatin overwrites the existing object
+      description: >
+        Update an *API token* with the *session object* defined in the body,
+        this operatin overwrites the existing object
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -335,7 +344,12 @@ paths:
           name: keyId
           required: true
           type: string
-        - description: 'Adding the `suppress_reset` parameter and setting it to `1`, will cause Tyk to not reset the quota limit that is in the current live quota manager. By default Tyk will reset the quota in the live quota manager (initialising it) when ADDing a key. Adding the `suppress_reset` flag to the URL parameters will avoid this behaviour.'
+        - description: Adding the `suppress_reset` parameter and setting it to `1`, will
+            cause Tyk to not reset the quota limit that is in the current live
+            quota manager. By default Tyk will reset the quota in the live quota
+            manager (initialising it) when ADDing a key. Adding the
+            `suppress_reset` flag to the URL parameters will avoid this
+            behaviour.
           format: integer
           in: query
           name: suppress_reset
@@ -344,7 +358,7 @@ paths:
         - in: body
           name: session_object
           schema:
-            $ref: '#/definitions/SessionObject'
+            $ref: "#/definitions/SessionObject"
         - description: Back-end to target
           format: string
           in: query
@@ -352,7 +366,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Key Updated Response
           schema:
             properties:
@@ -370,8 +384,9 @@ paths:
             type: object
   /tyk/oauth/authorize-client/:
     post:
-      description: |
-        The final request from an authorising party for a redirect URI during the Tyk OAuth flow
+      description: >
+        The final request from an authorising party for a redirect URI during
+        the Tyk OAuth flow
       parameters:
         - description: tyk gateway shared secret
           format: string
@@ -379,32 +394,38 @@ paths:
           name: x-tyk-authorization
           required: true
           type: string
-        - description: 'Should be provided by requesting client as part of authorisation request, this should be either `code` or `token` depending on the methods you have specified for the API'
+        - description: Should be provided by requesting client as part of authorisation
+            request, this should be either `code` or `token` depending on the
+            methods you have specified for the API
           format: string
           in: formData
           name: response_type
           required: true
           type: string
-        - description: Should be provided by requesting client as part of authorisation request. The Client ID that is making the request
+        - description: Should be provided by requesting client as part of authorisation
+            request. The Client ID that is making the request
           format: string
           in: formData
           name: client_id
           required: true
           type: string
-        - description: Should be provided by requesting client as part of authorisation request. Must match with the record stored with Tyk
+        - description: Should be provided by requesting client as part of authorisation
+            request. Must match with the record stored with Tyk
           format: string
           in: formData
           name: redirect_uri
           required: true
           type: string
-        - description: A string representation of a *Session Object (form-encoded)*. This should be provided by your application in order to apply any quotas or rules to the key
+        - description: A string representation of a *Session Object (form-encoded)*. This
+            should be provided by your application in order to apply any quotas
+            or rules to the key
           format: string
           in: formData
           name: key_rules
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful token response
           schema:
             properties:
@@ -440,11 +461,11 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: Succesful create response
           schema:
-            $ref: '#/definitions/OAuthClient'
-  '/tyk/oauth/clients/{apiId}':
+            $ref: "#/definitions/OAuthClient"
+  "/tyk/oauth/clients/{apiId}":
     get:
       description: |
         Get a list of OAuth clients bound to this back end 
@@ -462,11 +483,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful listy response
           schema:
-            $ref: '#/definitions/OAuthClients'
-  '/tyk/oauth/clients/{apiId}/{clientId}':
+            $ref: "#/definitions/OAuthClients"
+  "/tyk/oauth/clients/{apiId}/{clientId}":
     delete:
       description: |
         Delete the OAuth client
@@ -490,7 +511,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful OAuth client deletion
           schema:
             properties:
@@ -506,7 +527,7 @@ paths:
                   - error
                 type: string
             type: object
-  '/tyk/oauth/refresh/{keyId}':
+  "/tyk/oauth/refresh/{keyId}":
     delete:
       description: |
         Invalidate a refresh token
@@ -528,7 +549,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful token revoked
           schema:
             properties:
@@ -556,7 +577,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful reload response
           schema:
             properties:
@@ -577,7 +598,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Succesful reload response
           schema:
             properties:
@@ -719,21 +740,21 @@ definitions:
               recheck_wait:
                 type: number
               service_discovery:
-                $ref: '#/definitions/ServiceDiscoverConfiguration'
+                $ref: "#/definitions/ServiceDiscoverConfiguration"
             type: object
           custom_middleware:
             properties:
               post:
                 items:
-                  $ref: '#/definitions/MiddlewareDefinition'
+                  $ref: "#/definitions/MiddlewareDefinition"
                 type: array
               pre:
                 items:
-                  $ref: '#/definitions/MiddlewareDefinition'
+                  $ref: "#/definitions/MiddlewareDefinition"
                 type: array
               response:
                 items:
-                  $ref: '#/definitions/MiddlewareDefinition'
+                  $ref: "#/definitions/MiddlewareDefinition"
                 type: array
             type: object
           do_not_track:
@@ -761,7 +782,7 @@ definitions:
               preserve_host_header:
                 type: boolean
               service_discovery:
-                $ref: '#/definitions/ServiceDiscoverConfiguration'
+                $ref: "#/definitions/ServiceDiscoverConfiguration"
               strip_listen_path:
                 type: boolean
               target_list:
@@ -799,13 +820,13 @@ definitions:
             type: boolean
           versions:
             additionalProperties:
-              $ref: '#/definitions/VersionDefinition'
+              $ref: "#/definitions/VersionDefinition"
             type: object
         type: object
     type: object
   APIDefinitionList:
     items:
-      $ref: '#/definitions/APIDefinition'
+      $ref: "#/definitions/APIDefinition"
     type: array
   AccessRights:
     properties:
@@ -822,7 +843,7 @@ definitions:
     properties:
       method_actions:
         additionalProperties:
-          $ref: '#/definitions/EndpointMethodMeta'
+          $ref: "#/definitions/EndpointMethodMeta"
         type: object
       path:
         type: string
@@ -871,7 +892,7 @@ definitions:
     type: object
   OAuthClients:
     items:
-      $ref: '#/definitions/OAuthClient'
+      $ref: "#/definitions/OAuthClient"
     type: array
   ServiceDiscoverConfiguration:
     properties:
@@ -898,7 +919,7 @@ definitions:
     properties:
       access_rights:
         additionalProperties:
-          $ref: '#/definitions/AccessRights'
+          $ref: "#/definitions/AccessRights"
         type: object
       allowance:
         type: number
@@ -908,7 +929,7 @@ definitions:
         properties:
           hash_type:
             enum:
-              - ''
+              - ""
               - bcrypt
             type: string
           password:
@@ -981,7 +1002,7 @@ definitions:
         properties:
           black_list:
             items:
-              $ref: '#/definitions/EndPointMeta'
+              $ref: "#/definitions/EndPointMeta"
             type: array
           cache:
             items:
@@ -1015,7 +1036,7 @@ definitions:
             type: array
           ignored:
             items:
-              $ref: '#/definitions/EndPointMeta'
+              $ref: "#/definitions/EndPointMeta"
             type: array
           size_limits:
             items:
@@ -1030,19 +1051,19 @@ definitions:
             type: array
           transform:
             items:
-              $ref: '#/definitions/TemplateMeta'
+              $ref: "#/definitions/TemplateMeta"
             type: array
           transform_headers:
             items:
-              $ref: '#/definitions/HeaderInjectionMeta'
+              $ref: "#/definitions/HeaderInjectionMeta"
             type: array
           transform_response:
             items:
-              $ref: '#/definitions/TemplateMeta'
+              $ref: "#/definitions/TemplateMeta"
             type: array
           transform_response_headers:
             items:
-              $ref: '#/definitions/HeaderInjectionMeta'
+              $ref: "#/definitions/HeaderInjectionMeta"
             type: array
           url_rewrites:
             items:
@@ -1076,7 +1097,7 @@ definitions:
             type: array
           white_list:
             items:
-              $ref: '#/definitions/EndPointMeta'
+              $ref: "#/definitions/EndPointMeta"
             type: array
         type: object
       global_headers:

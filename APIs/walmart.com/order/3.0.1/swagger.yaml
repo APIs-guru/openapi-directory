@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: developer.walmart.com
@@ -7,31 +7,31 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: 'Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.'
-  title: Orders
+  description: Please make sure you use the correct version of the APIs for your
+    use case. To find out the appropriate version, go to the API Docs  drop down
+    on the menu.
+  title: Orders API
   version: 3.0.1
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/Walmart/profile_image?size=original'
+    url: https://twitter.com/Walmart/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.walmart.com/v1/swaggerProxy?type=order'
-      version: '2.0'
+      url: https://developer.walmart.com/v1/swaggerProxy?type=order
+      version: "2.0"
   x-providerName: walmart.com
   x-serviceName: order
-consumes:
-  - application/xml
-  - application/json
-produces:
-  - application/xml
-  - application/json
 tags:
   - name: Version 3
 paths:
   /v3/orders:
     get:
-      description: You can display a list of all orders with the query parameter filter criteria.
+      consumes:
+        - application/xml
+        - application/json
+      description: You can display a list of all orders with the query parameter
+        filter criteria.
       operationId: getAllOrders
       parameters:
         - description: Ship Node
@@ -49,7 +49,8 @@ paths:
           name: customerOrderId
           required: false
           type: string
-        - description: The purchase order ID associated with the order to retrieve. One customer order can have multiple purchase orders associated with it.
+        - description: The purchase order ID associated with the order to retrieve. One
+            customer order can have multiple purchase orders associated with it.
           in: query
           name: purchaseOrderId
           required: false
@@ -69,18 +70,21 @@ paths:
           name: createdEndDate
           required: false
           type: string
-        - description: Limit orders to those that have order lines with an expected ship date after this date.
+        - description: Limit orders to those that have order lines with an expected ship
+            date after this date.
           in: query
           name: fromExpectedShipDate
           required: false
           type: string
-        - description: 'Limit orders to those that have order lines with an expected ship date before this date. '
+        - description: "Limit orders to those that have order lines with an expected ship
+            date before this date. "
           in: query
           name: toExpectedShipDate
           required: false
           type: string
         - default: 10
-          description: The number of orders to be returned. Do not set this parameter to over 200 orders.
+          description: The number of orders to be returned. Do not set this parameter to
+            over 200 orders.
           format: int32
           in: query
           name: limit
@@ -145,6 +149,9 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
@@ -153,7 +160,11 @@ paths:
         - Version 3
   /v3/orders/released:
     get:
-      description: You can display all released orders that have been created and are ready for fulfilment.
+      consumes:
+        - application/xml
+        - application/json
+      description: You can display all released orders that have been created and are
+        ready for fulfilment.
       operationId: getReleasedOrders
       parameters:
         - description: Ship Node
@@ -166,7 +177,8 @@ paths:
           name: createdStartDate
           required: true
           type: string
-        - description: The number of orders to be returned. Do not set this parameter to over 200 orders.
+        - description: The number of orders to be returned. Do not set this parameter to
+            over 200 orders.
           format: int32
           in: query
           name: limit
@@ -231,18 +243,28 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Get all released orders
       tags:
         - Version 3
-  '/v3/orders/released{nextCursor}':
+  "/v3/orders/released{nextCursor}":
     get:
-      description: You can display all released orders that have been created and are ready for fulfilment with nextCursor path parameter.
+      consumes:
+        - application/xml
+        - application/json
+      description: You can display all released orders that have been created and are
+        ready for fulfilment with nextCursor path parameter.
       operationId: getNextCursorReleasedOrders
       parameters:
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+        - description: Used for pagination when there are more than 200 orders to
+            retrieve. The nextCursor value of the returned response includes a
+            link to another GET call to retrieve the next page. Copy the link
+            and paste it in the next call.
           in: path
           name: nextCursor
           required: true
@@ -306,14 +328,20 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Get released orders for next page
       tags:
         - Version 3
-  '/v3/orders/{purchaseOrderId}':
+  "/v3/orders/{purchaseOrderId}":
     get:
+      consumes:
+        - application/xml
+        - application/json
       description: You can display details of a specific order based on the purchaseOrderId.
       operationId: getOrderByPurchaseOrderId
       parameters:
@@ -386,15 +414,24 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Get an order
       tags:
         - Version 3
-  '/v3/orders/{purchaseOrderId}/acknowledge':
+  "/v3/orders/{purchaseOrderId}/acknowledge":
     post:
-      description: "You can acknowledge an entire order, including all of its order lines. Walmart business rules require to acknowledge orders within\_four\_hour of receipt of the order, except in extenuating circumstances."
+      consumes:
+        - application/xml
+        - application/json
+      description: You can acknowledge an entire order, including all of its order
+        lines. Walmart business rules require to acknowledge orders
+        within four hour of receipt of the order, except in extenuating
+        circumstances.
       operationId: acknowledgeOrders
       parameters:
         - description: Purchase Order ID
@@ -466,15 +503,24 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Acknowledge orders
       tags:
         - Version 3
-  '/v3/orders/{purchaseOrderId}/cancel':
+  "/v3/orders/{purchaseOrderId}/cancel":
     post:
-      description: 'You can cancel one or more order lines. You must include a purchaseOrderLineNumber when cancelling an order. After cancelling your order, update the inventory for the cancelled order and send it in the next inventory feed.'
+      consumes:
+        - application/xml
+        - application/json
+      description: You can cancel one or more order lines. You must include a
+        purchaseOrderLineNumber when cancelling an order. After cancelling your
+        order, update the inventory for the cancelled order and send it in the
+        next inventory feed.
       operationId: cancelOrder
       parameters:
         - description: Purchase Order ID
@@ -552,15 +598,23 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Cancel order lines
       tags:
         - Version 3
-  '/v3/orders/{purchaseOrderId}/refund':
+  "/v3/orders/{purchaseOrderId}/refund":
     post:
-      description: You can refund one or more order lines that have been shipped. The response to a successful call contains the order with the refunded line item.
+      consumes:
+        - application/xml
+        - application/json
+      description: You can refund one or more order lines that have been shipped. The
+        response to a successful call contains the order with the refunded line
+        item.
       operationId: refundOrder
       parameters:
         - description: Purchase Order ID
@@ -638,15 +692,24 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Refund order lines
       tags:
         - Version 3
-  '/v3/orders/{purchaseOrderId}/shipping':
+  "/v3/orders/{purchaseOrderId}/shipping":
     post:
-      description: 'You can change the status of order lines to "Shipped" and trigger the charge to a customer. You must acknowledge your orders before sending a shipping update to avoid underselling. An order line, once marked as shipped, cannot be updated.'
+      consumes:
+        - application/xml
+        - application/json
+      description: You can change the status of order lines to "Shipped" and trigger
+        the charge to a customer. You must acknowledge your orders before
+        sending a shipping update to avoid underselling. An order line, once
+        marked as shipped, cannot be updated.
       operationId: shippingOrder
       parameters:
         - description: Purchase Order ID
@@ -724,18 +787,28 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation
       summary: Shipping updates
       tags:
         - Version 3
-  '/v3/orders{nextCursor}':
+  "/v3/orders{nextCursor}":
     get:
-      description: You can display a list of all orders with nextCursor path parameter pagination criteria.
+      consumes:
+        - application/xml
+        - application/json
+      description: You can display a list of all orders with nextCursor path parameter
+        pagination criteria.
       operationId: getAllOrdersNext
       parameters:
-        - description: Used for pagination when there are more than 200 orders to retrieve. The nextCursor value of the returned response includes a link to another GET call to retrieve the next page. Copy the link and paste it in the next call.
+        - description: Used for pagination when there are more than 200 orders to
+            retrieve. The nextCursor value of the returned response includes a
+            link to another GET call to retrieve the next page. Copy the link
+            and paste it in the next call.
           in: path
           name: nextCursor
           required: true
@@ -799,6 +872,9 @@ paths:
           name: WM_QOS.CORRELATION_ID
           required: true
           type: string
+      produces:
+        - application/xml
+        - application/json
       responses:
         default:
           description: successful operation

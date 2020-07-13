@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: skynewz-api-fortnite.herokuapp.com
@@ -7,16 +7,16 @@ info:
   contact:
     x-twitter: FortniteGame
   description: REST API about Fortnite game
-  title: FORTNITE
+  title: FORTNITE REST API
   version: 3.1.5
   x-apisguru-categories:
     - entertainment
   x-logo:
-    url: 'https://twitter.com/FortniteGame/profile_image?size=original'
+    url: https://twitter.com/FortniteGame/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/SkYNewZ/rest-fornite-api/develop/src/public/swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/SkYNewZ/rest-fornite-api/develop/src/public/swagger.yaml
+      version: "2.0"
   x-providerName: skynewz-api-fortnite.herokuapp.com
   x-unofficialSpec: true
 consumes:
@@ -46,7 +46,7 @@ paths:
   /check:
     get:
       responses:
-        '200':
+        "200":
           description: Fortnite is okay !
           schema:
             properties:
@@ -71,7 +71,7 @@ paths:
   /news:
     get:
       responses:
-        '200':
+        "200":
           description: A JSON objects of current news
           schema:
             properties:
@@ -143,7 +143,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Your access token
           schema:
             properties:
@@ -153,7 +153,7 @@ paths:
                 description: Time in seconds for the validity of token
                 type: string
             type: object
-        '401':
+        "401":
           description: Authentication failed
           schema:
             properties:
@@ -162,7 +162,7 @@ paths:
               success:
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Authentication failed. User not found
           schema:
             properties:
@@ -177,7 +177,7 @@ paths:
   /pve/info:
     get:
       responses:
-        '200':
+        "200":
           description: All okay
           schema:
             type: object
@@ -193,10 +193,10 @@ paths:
             type: object
       security:
         - Bearer: []
-      summary: 'Get Fortnite PVE Info (storm, etc)'
+      summary: Get Fortnite PVE Info (storm, etc)
       tags:
         - PVE
-  '/pve/user/{username}':
+  "/pve/user/{username}":
     get:
       parameters:
         - description: Fortnite username
@@ -205,11 +205,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: All okay
           schema:
             type: object
-        '404':
+        "404":
           description: User not found or not found on this plateform
           schema:
             properties:
@@ -234,10 +234,10 @@ paths:
       summary: Get PVE Stat by given username
       tags:
         - PVE
-  '/stats/id/{plateform}/{id}':
+  "/stats/id/{plateform}/{id}":
     get:
       parameters:
-        - description: 'Playing plateform, can be xb1, ps4 or pc'
+        - description: Playing plateform, can be xb1, ps4 or pc
           in: path
           name: plateform
           required: true
@@ -248,12 +248,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: JSON Object of user stats
           schema:
             properties:
               group:
-                description: 'Stats on solo, duo or squad'
+                description: Stats on solo, duo or squad
                 properties:
                   duo:
                     properties:
@@ -272,7 +272,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -316,7 +316,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -360,7 +360,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -415,7 +415,7 @@ paths:
                   score:
                     type: integer
                   timePlayed:
-                    description: 'Number of days, hours and minutes played'
+                    description: Number of days, hours and minutes played
                     type: string
                   top10:
                     description: Number of top10
@@ -443,9 +443,9 @@ paths:
                     type: integer
                 type: object
             type: object
-        '400':
-          description: 'Please precise a good platform: ps4/xb1/pc'
-        '404':
+        "400":
+          description: "Please precise a good platform: ps4/xb1/pc"
+        "404":
           description: User not found or not found on this plateform
           schema:
             properties:
@@ -470,10 +470,10 @@ paths:
       summary: Get user's stats by user id
       tags:
         - Stats
-  '/stats/{plateform}/{username}':
+  "/stats/{plateform}/{username}":
     get:
       parameters:
-        - description: 'Playing plateform, can be xb1, ps4 or pc'
+        - description: Playing plateform, can be xb1, ps4 or pc
           in: path
           name: plateform
           required: true
@@ -484,12 +484,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: JSON Object of user stats
           schema:
             properties:
               group:
-                description: 'Stats on solo, duo or squad'
+                description: Stats on solo, duo or squad
                 properties:
                   duo:
                     properties:
@@ -508,7 +508,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -552,7 +552,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -596,7 +596,7 @@ paths:
                       score:
                         type: integer
                       timePlayed:
-                        description: 'Number of days, hours and minutes played'
+                        description: Number of days, hours and minutes played
                         type: string
                       top10:
                         description: Number of top10
@@ -651,7 +651,7 @@ paths:
                   score:
                     type: integer
                   timePlayed:
-                    description: 'Number of days, hours and minutes played'
+                    description: Number of days, hours and minutes played
                     type: string
                   top10:
                     description: Number of top10
@@ -679,9 +679,9 @@ paths:
                     type: integer
                 type: object
             type: object
-        '400':
-          description: 'Please precise a good platform: ps4/xb1/pc'
-        '404':
+        "400":
+          description: "Please precise a good platform: ps4/xb1/pc"
+        "404":
           description: User not found or not found on this plateform
           schema:
             properties:
@@ -709,7 +709,7 @@ paths:
   /store:
     get:
       responses:
-        '200':
+        "200":
           description: Current store object
           schema:
             type: object
@@ -728,10 +728,10 @@ paths:
       summary: Get Fortnite Store
       tags:
         - Store
-  '/user/{plateform}/{username}':
+  "/user/{plateform}/{username}":
     get:
       parameters:
-        - description: 'Playing plateform, can be xb1, ps4 or pc'
+        - description: Playing plateform, can be xb1, ps4 or pc
           in: path
           name: plateform
           required: true
@@ -742,7 +742,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: JSON Object of user
           schema:
             properties:
@@ -752,7 +752,7 @@ paths:
                 description: ID of player
                 type: string
             type: object
-        '404':
+        "404":
           description: User not found or not found on this plateform
           schema:
             properties:

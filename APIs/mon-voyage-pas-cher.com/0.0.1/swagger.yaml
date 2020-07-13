@@ -1,16 +1,16 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.mon-voyage-pas-cher.com
 info:
-  title: Mon-voyage-pas-cher.com Public
+  title: Mon-voyage-pas-cher.com Public API
   version: 0.0.1
   x-apisguru-categories:
     - transport
   x-origin:
     - format: swagger
-      url: 'https://www.mon-voyage-pas-cher.com/assets/documentation/swagger.yaml'
-      version: '2.0'
+      url: https://www.mon-voyage-pas-cher.com/assets/documentation/swagger.yaml
+      version: "2.0"
   x-providerName: mon-voyage-pas-cher.com
 consumes:
   - application/json
@@ -24,7 +24,14 @@ securityDefinitions:
 paths:
   /airports:
     get:
-      description: 'This webservice is providing you the ability to retrieve a list of airports matching your search criterias.<br />The 3 mains search criterias are<br />- by country code, this will list all airports for a given country.<br />- by latitude/longitude with a radius in km. You can actually combine those 2 criterias, and search for example the closest airport in the USA of Vancoucer, Canada.<br />- The last way to use the API is by searching directly with a IATA CODE in the location parameter, this will only return one result in the array of data results'
+      description: This webservice is providing you the ability to retrieve a list of
+        airports matching your search criterias.<br />The 3 mains search
+        criterias are<br />- by country code, this will list all airports for a
+        given country.<br />- by latitude/longitude with a radius in km. You can
+        actually combine those 2 criterias, and search for example the closest
+        airport in the USA of Vancoucer, Canada.<br />- The last way to use the
+        API is by searching directly with a IATA CODE in the location parameter,
+        this will only return one result in the array of data results
       operationId: getAirport
       parameters:
         - description: the language code of the language you want the content to be returned
@@ -37,23 +44,28 @@ paths:
           name: language
           required: true
           type: string
-        - description: The location you want to search for. Either a latitude/longitude point or a letter airport IATA CODE ( ex. LHR ) if you want the detail for only one single airport.
+        - description: The location you want to search for. Either a latitude/longitude
+            point or a letter airport IATA CODE ( ex. LHR ) if you want the
+            detail for only one single airport.
           in: query
           name: location
-          pattern: '^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: false
           type: string
         - default: 100
-          description: 'Radius in km for a lat/long search, will be ignore if a IATA is passed in location parameter code is passed'
+          description: Radius in km for a lat/long search, will be ignore if a IATA is
+            passed in location parameter code is passed
           in: query
           maximum: 500
           name: radius
           required: false
           type: integer
-        - description: 'Filter - The country ISO code 2 letters, provided by the GET /countries. If passed the results will be filtered to this country only, regardless if you passed a lat/long and a large radius'
+        - description: Filter - The country ISO code 2 letters, provided by the GET
+            /countries. If passed the results will be filtered to this country
+            only, regardless if you passed a lat/long and a large radius
           in: query
           name: countrycode
-          pattern: '^[A-Za-z]{2}$'
+          pattern: ^[A-Za-z]{2}$
           required: false
           type: string
         - description: Filter the results to only the top and large airports airports.
@@ -62,14 +74,14 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/AirportsSearchResponse'
-        '500':
+            $ref: "#/definitions/AirportsSearchResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search airports by country / Search nearby airports / Search an airport
@@ -78,12 +90,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -102,18 +118,21 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: airports
   /cities/findcitiesfromlatlong:
     get:
-      description: Search cities according to given criterias. Either lat/long + radius or country code. A limit can be given but cannot exceed 50 results.<br /> A significant city will be defined according to the pourcent of population within a country.
+      description: Search cities according to given criterias. Either lat/long +
+        radius or country code. A limit can be given but cannot exceed 50
+        results.<br /> A significant city will be defined according to the
+        pourcent of population within a country.
       operationId: getCities
       parameters:
         - description: the language code of the language you want the content to be returned
@@ -129,24 +148,26 @@ paths:
         - description: if you want to limit the result to one country
           in: query
           name: countrycode
-          pattern: '^[A-Za-z]{2}$'
+          pattern: ^[A-Za-z]{2}$
           required: false
           type: string
-        - description: 'The Lat/Long of the location your are seeking cities ( ex. 45.4478988,3.23456)'
+        - description: The Lat/Long of the location your are seeking cities ( ex.
+            45.4478988,3.23456)
           in: query
           name: location
-          pattern: '^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: false
           type: string
         - default: 20
-          description: 'Radius in km for a lat/long search. Default is 20km and there is no maximum, but need to be combined with limit. code is passed'
+          description: Radius in km for a lat/long search. Default is 20km and there is no
+            maximum, but need to be combined with limit. code is passed
           in: query
           maximum: 200
           name: radius
           required: false
           type: integer
         - default: 20
-          description: 'Limit of the result. Default is 20 rows, and maximum is 50.'
+          description: Limit of the result. Default is 20 rows, and maximum is 50.
           in: query
           maximum: 50
           minimum: 1
@@ -160,32 +181,34 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: 'distance,asc'
-          description: 'The order you want the result ordered. Default is population while when entering a lat/long, you can order the results by distance from requested lat/long point'
+        - default: distance,asc
+          description: The order you want the result ordered. Default is population while
+            when entering a lat/long, you can order the results by distance from
+            requested lat/long point
           enum:
-            - 'distance,desc'
-            - 'distance,asc'
-            - 'population,desc'
-            - 'population,asc'
-            - 'elevation,desc'
-            - 'elevation,asc'
-            - 'name,desc'
-            - 'name,asc'
-            - 'timezone,asc'
-            - 'timezone,desc'
+            - distance,desc
+            - distance,asc
+            - population,desc
+            - population,asc
+            - elevation,desc
+            - elevation,asc
+            - name,desc
+            - name,asc
+            - timezone,asc
+            - timezone,desc
           in: query
           name: sort
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CitiesResponse'
-        '500':
+            $ref: "#/definitions/CitiesResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search all cities from lat/long or countrycode
@@ -194,12 +217,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -218,13 +245,13 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: cities
   /cities/findcitiesfromtext:
@@ -251,35 +278,37 @@ paths:
         - description: if you want to limit the result to one country
           in: query
           name: countrycode
-          pattern: '^[A-Za-z]{2}$'
+          pattern: ^[A-Za-z]{2}$
           required: false
           type: string
-        - default: 'population,desc'
-          description: 'The order you want the result ordered. Default is population while when entering a lat/long, you can order the results by distance from requested lat/long point'
+        - default: population,desc
+          description: The order you want the result ordered. Default is population while
+            when entering a lat/long, you can order the results by distance from
+            requested lat/long point
           enum:
-            - 'population,desc'
-            - 'population,asc'
-            - 'elevation,desc'
-            - 'elevation,asc'
-            - 'name,desc'
-            - 'name,asc'
-            - 'timezone,asc'
-            - 'timezone,desc'
-            - 'match_score,desc'
-            - 'match_score,asc'
+            - population,desc
+            - population,asc
+            - elevation,desc
+            - elevation,asc
+            - name,desc
+            - name,asc
+            - timezone,asc
+            - timezone,desc
+            - match_score,desc
+            - match_score,asc
           in: query
           name: sort
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CitiesResponse'
-        '500':
+            $ref: "#/definitions/CitiesResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Retrieve cities informations from a string / build an autocomplete
@@ -288,12 +317,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -312,18 +345,21 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: cities
   /cities/significant:
     get:
-      description: Search cities according to given criterias. Either lat/long + radius or country code. A limit can be given but cannot exceed 50 results.<br /> A significant city will be defined according to the pourcent of population within a country.
+      description: Search cities according to given criterias. Either lat/long +
+        radius or country code. A limit can be given but cannot exceed 50
+        results.<br /> A significant city will be defined according to the
+        pourcent of population within a country.
       operationId: getSignificantCities
       parameters:
         - description: the language code of the language you want the content to be returned
@@ -337,7 +373,8 @@ paths:
           required: true
           type: string
         - default: 0.5
-          description: The pourcent of population the cities need to be in order to appear in results
+          description: The pourcent of population the cities need to be in order to appear
+            in results
           in: query
           maximum: 5
           minimum: 0.05
@@ -347,24 +384,26 @@ paths:
         - description: if you want to limit the result to one country
           in: query
           name: countrycode
-          pattern: '^[A-Za-z]{2}$'
+          pattern: ^[A-Za-z]{2}$
           required: false
           type: string
-        - description: 'The Lat/Long of the location your are seeking cities ( ex. 45.4478988,3.23456)'
+        - description: The Lat/Long of the location your are seeking cities ( ex.
+            45.4478988,3.23456)
           in: query
           name: location
-          pattern: '^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: false
           type: string
         - default: 20
-          description: 'Radius in km for a lat/long search. Default is 20km and there is no maximum, but need to be combined with limit. code is passed'
+          description: Radius in km for a lat/long search. Default is 20km and there is no
+            maximum, but need to be combined with limit. code is passed
           in: query
           maximum: 200
           name: radius
           required: false
           type: integer
         - default: 20
-          description: 'Limit of the result. Default is 20 rows, and maximum is 50.'
+          description: Limit of the result. Default is 20 rows, and maximum is 50.
           in: query
           maximum: 50
           minimum: 1
@@ -378,32 +417,34 @@ paths:
           name: offset
           required: false
           type: integer
-        - default: 'population,desc'
-          description: 'The order you want the result ordered. Default is population while when entering a lat/long, you can order the results by distance from requested lat/long point'
+        - default: population,desc
+          description: The order you want the result ordered. Default is population while
+            when entering a lat/long, you can order the results by distance from
+            requested lat/long point
           enum:
-            - 'distance,desc'
-            - 'distance,asc'
-            - 'population,desc'
-            - 'population,asc'
-            - 'elevation,desc'
-            - 'elevation,asc'
-            - 'name,desc'
-            - 'name,asc'
-            - 'timezone,asc'
-            - 'timezone,desc'
+            - distance,desc
+            - distance,asc
+            - population,desc
+            - population,asc
+            - elevation,desc
+            - elevation,asc
+            - name,desc
+            - name,asc
+            - timezone,asc
+            - timezone,desc
           in: query
           name: sort
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CitiesResponse'
-        '500':
+            $ref: "#/definitions/CitiesResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search significant cities from lat/long or countrycode
@@ -412,12 +453,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -436,18 +481,19 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: cities
   /continents:
     get:
-      description: This webservice is providing you the ability to retrieve all informations about continents
+      description: This webservice is providing you the ability to retrieve all
+        informations about continents
       operationId: getContinents
       parameters:
         - description: The language code of the language you want the content to be returned
@@ -460,20 +506,21 @@ paths:
           name: language
           required: true
           type: string
-        - description: 'The code of the continent you want to retrieve, this parameter is not required if you want ot retrieve all continents at once'
+        - description: The code of the continent you want to retrieve, this parameter is
+            not required if you want ot retrieve all continents at once
           in: query
           name: continentcode
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ContinentsResponse'
-        '500':
+            $ref: "#/definitions/ContinentsResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search all continents or one specific continent
@@ -482,12 +529,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -506,18 +557,22 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: continents
   /countries:
     get:
-      description: 'This webservice is providing you the ability to retrieve a list of countries matching your search criterias.<br />The 2 mains ways to search use this API are<br />- by countrycode, it will only returns you one country<br />- without the countrycode parameter which will return the full list of countries'
+      description: This webservice is providing you the ability to retrieve a list of
+        countries matching your search criterias.<br />The 2 mains ways to
+        search use this API are<br />- by countrycode, it will only returns you
+        one country<br />- without the countrycode parameter which will return
+        the full list of countries
       operationId: getCountries
       parameters:
         - description: the language code of the language you want the content to be returned
@@ -536,14 +591,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/CountriesResponse'
-        '500':
+            $ref: "#/definitions/CountriesResponse"
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search all countries or one specific country
@@ -552,12 +607,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -576,34 +635,39 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: countries
   /distance:
     get:
-      description: 'This webservice is providing you the ability to calculate the distance between 2 lat/long points, it returns you the value in km or miles'
+      description: This webservice is providing you the ability to calculate the
+        distance between 2 lat/long points, it returns you the value in km or
+        miles
       operationId: getDistance
       parameters:
-        - description: 'The location as a latitude / longitude point ( ex. 67.85572,20.22513 ) of location point A'
+        - description: The location as a latitude / longitude point ( ex.
+            67.85572,20.22513 ) of location point A
           in: query
           name: locationA
-          pattern: '^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: true
           type: string
-        - description: 'The location as a latitude / longitude point ( ex. 67.85572,20.22513 ) of location point B'
+        - description: The location as a latitude / longitude point ( ex.
+            67.85572,20.22513 ) of location point B
           in: query
           name: locationB
-          pattern: '^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: true
           type: string
         - default: kms
-          description: The unit of length you want the elevation returned either meters or feet returned
+          description: The unit of length you want the elevation returned either meters or
+            feet returned
           enum:
             - kms
             - miles
@@ -612,16 +676,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/DistanceResponse'
-        '403':
+            $ref: "#/definitions/DistanceResponse"
+        "403":
           description: Forbidden
-        '500':
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Calculate distance between lats/longs
@@ -630,12 +694,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -654,29 +722,41 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: elevation
   /elevation:
     get:
-      description: 'This webservice is providing you the ability to retrieve the elevation in meters or feet of ONE or MULTIPLE given latitude/longitude point(s). <br />If you use MULTIPLE lat/long point, the maximum number of point you can send in one request is 256. Be aware that if MULTIPLE mode, the results are de-deplicated if you are sending the same latitude/longitude point multiple times.<br />If your workload is a batch of millions of lat/long point, You will also get better throughput if you send around 100 lat/long points in one request than the maximum. This maximum is mostly allowed for people trying to graph altitudes.'
+      description: This webservice is providing you the ability to retrieve the
+        elevation in meters or feet of ONE or MULTIPLE given latitude/longitude
+        point(s). <br />If you use MULTIPLE lat/long point, the maximum number
+        of point you can send in one request is 256. Be aware that if MULTIPLE
+        mode, the results are de-deplicated if you are sending the same
+        latitude/longitude point multiple times.<br />If your workload is a
+        batch of millions of lat/long point, You will also get better throughput
+        if you send around 100 lat/long points in one request than the maximum.
+        This maximum is mostly allowed for people trying to graph altitudes.
       operationId: getElevation
       parameters:
-        - default: '67.85572,20.22513'
-          description: 'The location as a latitude / longitude point ( ex. 67.85572,20.22513 ) or a list of coordinates separated using the pipe (''|'') character. The maximum number of coordinates you can send at one time is 20 ( ex. 67.85572,20.22513|27.85572,20.22513 )'
+        - default: 67.85572,20.22513
+          description: The location as a latitude / longitude point ( ex.
+            67.85572,20.22513 ) or a list of coordinates separated using the
+            pipe ('|') character. The maximum number of coordinates you can send
+            at one time is 20 ( ex. 67.85572,20.22513|27.85572,20.22513 )
           in: query
           name: locations
-          pattern: '^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)+((\|\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)){0,256}$'
+          pattern: ^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)+((\|\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)){0,256}$
           required: true
           type: string
         - default: meters
-          description: The unit of length you want the elevation returned either meters or feet returned
+          description: The unit of length you want the elevation returned either meters or
+            feet returned
           enum:
             - meters
             - feet
@@ -685,16 +765,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ElevationResponse'
-        '403':
+            $ref: "#/definitions/ElevationResponse"
+        "403":
           description: Forbidden
-        '500':
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search elevation informations from lat/long
@@ -703,12 +783,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -727,24 +811,28 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: elevation
   /pong:
     get:
-      description: 'Returns a ping. In case you need a health check in your system. Cannot be called /ping as AWS is using this route for their health check. This webservice doesn''t have CORS enable, as it''s supposed to be call server to server and not from a webpage ( it won''t work over the tester)'
+      description: Returns a ping. In case you need a health check in your system.
+        Cannot be called /ping as AWS is using this route for their health
+        check. This webservice doesn't have CORS enable, as it's supposed to be
+        call server to server and not from a webpage ( it won't work over the
+        tester)
       operationId: getPing
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PongResponse'
+            $ref: "#/definitions/PongResponse"
       security:
         - x-api-key: []
       tags:
@@ -752,36 +840,42 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     x-swagger-router-controller: ping
   /sun_positions:
     get:
-      description: 'This webservice is providing you the ability to retrieve the time of each phases of the sunlight cycle. Sunset, sunrise, sunriseEnd, golden hour, solarNoon, dawn, dusk and more for a given location and date. If the date if not provided, the response provided return informations for today at UTC time.'
+      description: This webservice is providing you the ability to retrieve the time
+        of each phases of the sunlight cycle. Sunset, sunrise, sunriseEnd,
+        golden hour, solarNoon, dawn, dusk and more for a given location and
+        date. If the date if not provided, the response provided return
+        informations for today at UTC time.
       operationId: getSun
       parameters:
         - description: Here you can send either a latitude / longitude
           in: query
           name: location
-          pattern: '^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: true
           type: string
-        - description: 'The date for what you will get the data ( full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21 ), if not provided as parameter, today is going to be used'
+        - description: The date for what you will get the data ( full-date notation as
+            defined by RFC 3339, section 5.6, for example, 2017-07-21 ), if not
+            provided as parameter, today is going to be used
           format: date
           in: query
           name: date
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/SunPositionResponse'
-        '403':
+            $ref: "#/definitions/SunPositionResponse"
+        "403":
           description: Forbidden
-        '500':
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search position of sun from lat/long and date
@@ -790,12 +884,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -814,40 +912,45 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: sun_moon
   /swagger:
     x-swagger-pipe: swagger_raw
   /timezone:
     get:
-      description: 'This webservice is providing you the ability to retrieve the tz database time zones ( https://en.wikipedia.org/wiki/List_of_tz_database_time_zones )  from a given location ( )latitude and longitude or IATA code ). It also returns you the current time at the provided location.'
+      description: This webservice is providing you the ability to retrieve the tz
+        database time zones (
+        https://en.wikipedia.org/wiki/List_of_tz_database_time_zones )  from a
+        given location ( )latitude and longitude or IATA code ). It also returns
+        you the current time at the provided location.
       operationId: getTimezone
       parameters:
-        - default: '45.8326307,6.8650517'
-          description: 'Here you can send either a latitude / longitude ( ex. 67.85572,20.22513 ) or a IATA Code ( ex. LHR for London Heathrow)'
+        - default: 45.8326307,6.8650517
+          description: Here you can send either a latitude / longitude ( ex.
+            67.85572,20.22513 ) or a IATA Code ( ex. LHR for London Heathrow)
           in: query
           name: location
-          pattern: '^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$'
+          pattern: ^[A-Za-z]{3}$|^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TimezoneResponse'
-        '403':
+            $ref: "#/definitions/TimezoneResponse"
+        "403":
           description: Forbidden
-        '500':
+        "500":
           description: The error message object
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - x-api-key: []
       summary: Search timezone and time informations from lat/long
@@ -856,12 +959,16 @@ paths:
       x-amazon-apigateway-integration:
         httpMethod: POST
         type: aws_proxy
-        uri: '${lambda_handler_invoke_arn}'
+        uri: ${lambda_handler_invoke_arn}
     options:
+      consumes:
+        - application/json
       description: |
         Enable CORS by returning correct headers
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: Default response for CORS method
           headers:
             Access-Control-Allow-Headers:
@@ -880,13 +987,13 @@ paths:
         responses:
           default:
             responseParameters:
-              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
-              method.response.header.Access-Control-Allow-Methods: '''*'''
-              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: |
                 {}
-            statusCode: '200'
+            statusCode: "200"
         type: mock
     x-swagger-router-controller: timezone
 definitions:
@@ -897,7 +1004,7 @@ definitions:
         type: integer
       data:
         items:
-          $ref: '#/definitions/DataAirportsSearch'
+          $ref: "#/definitions/DataAirportsSearch"
         type: array
       message:
         type: string
@@ -910,7 +1017,8 @@ definitions:
     properties:
       alternatename:
         items:
-          description: Here is a list of alternate name for the city in the requested language
+          description: Here is a list of alternate name for the city in the requested
+            language
           type: string
         type: array
       asciiname:
@@ -944,7 +1052,7 @@ definitions:
         type: integer
       data:
         items:
-          $ref: '#/definitions/CitiesData'
+          $ref: "#/definitions/CitiesData"
         type: array
       message:
         type: string
@@ -982,7 +1090,7 @@ definitions:
         type: integer
       data:
         items:
-          $ref: '#/definitions/ContinentData'
+          $ref: "#/definitions/ContinentData"
         type: array
       message:
         type: string
@@ -998,7 +1106,8 @@ definitions:
         type: number
       alternatename:
         items:
-          description: 'The other given name, nickname of the country, this is as well as in requested language but also foreign languages'
+          description: The other given name, nickname of the country, this is as well as
+            in requested language but also foreign languages
           type: string
         type: array
       areainsqkm:
@@ -1039,14 +1148,16 @@ definitions:
         type: string
       neighbors:
         items:
-          description: Here is a list of country code that have territorial border with the this country
+          description: Here is a list of country code that have territorial border with
+            the this country
           type: string
         type: array
       population:
         description: The total population in this country
         type: number
       postalcode:
-        description: 'The format of the postal codes if multiple format to be applied, then a pipe | is used as separator'
+        description: The format of the postal codes if multiple format to be applied,
+          then a pipe | is used as separator
         type: string
       postalcoderegex:
         description: The regex to use to check a postal code for this country
@@ -1061,7 +1172,7 @@ definitions:
         type: integer
       data:
         items:
-          $ref: '#/definitions/CountriesData'
+          $ref: "#/definitions/CountriesData"
         type: array
       message:
         type: string
@@ -1108,7 +1219,8 @@ definitions:
       count:
         type: integer
       data:
-        description: 'Here is the distance between latlong A and latlong B, in the requested unit'
+        description: Here is the distance between latlong A and latlong B, in the
+          requested unit
         type: number
       message:
         type: string
@@ -1131,7 +1243,7 @@ definitions:
         type: integer
       data:
         items:
-          $ref: '#/definitions/ElevationData'
+          $ref: "#/definitions/ElevationData"
         type: array
       message:
         type: string
@@ -1173,7 +1285,8 @@ definitions:
         format: date-time
         type: string
       goldenHourEnd:
-        description: Date and time of the golden hour end at local time of the given location
+        description: Date and time of the golden hour end at local time of the given
+          location
         format: date-time
         type: string
       nadir:
@@ -1222,7 +1335,7 @@ definitions:
       count:
         type: integer
       data:
-        $ref: '#/definitions/SunPositionData'
+        $ref: "#/definitions/SunPositionData"
         type: object
       message:
         type: string

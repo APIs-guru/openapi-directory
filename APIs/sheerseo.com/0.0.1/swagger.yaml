@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.sheerseo.com
@@ -6,19 +6,22 @@ basePath: /seo/api
 info:
   contact:
     name: API Support
-    url: 'https://www.sheerseo.com/seo-monitoring-tools/support.html'
+    url: https://www.sheerseo.com/seo-monitoring-tools/support.html
     x-twitter: sheerseo
-  description: 'Sheerseo API has 2 stages:<br>First stage - initiating the task: You fill in your task and receive in return the task id. <br>Second stage - collecting the results: send a request containing the task ids you got at the first stage and collecting the results.'
-  title: SheerSEO
+  description: "Sheerseo API has 2 stages:<br>First stage - initiating the task:
+    You fill in your task and receive in return the task id. <br>Second stage -
+    collecting the results: send a request containing the task ids you got at
+    the first stage and collecting the results."
+  title: SheerSEO API
   version: 0.0.1
   x-apisguru-categories:
     - hosting
   x-logo:
-    url: 'https://twitter.com/sheerseo/profile_image?size=original'
+    url: https://twitter.com/sheerseo/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://www.sheerseo.com/api/swagger.yaml'
-      version: '2.0'
+      url: https://www.sheerseo.com/api/swagger.yaml
+      version: "2.0"
   x-providerName: sheerseo.com
 consumes:
   - application/json; charset=utf-8
@@ -40,24 +43,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CollectRequest'
+            $ref: "#/definitions/CollectRequest"
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/rankCollectResponse'
-        '400':
+            $ref: "#/definitions/rankCollectResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Server Overload
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - ApiKeyAuth: []
   /rank-submit:
@@ -70,24 +73,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/rankSubmitRequest'
+            $ref: "#/definitions/rankSubmitRequest"
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/rankSubmitResponse'
-        '400':
+            $ref: "#/definitions/rankSubmitResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Server Overload
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - ApiKeyAuth: []
     x-swagger-router-controller: hello_world
@@ -101,24 +104,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CollectRequest'
+            $ref: "#/definitions/CollectRequest"
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/serpCollectResponse'
-        '400':
+            $ref: "#/definitions/serpCollectResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Server Overload
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - ApiKeyAuth: []
   /serp-submit:
@@ -131,24 +134,24 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/serpSubmitRequest'
+            $ref: "#/definitions/serpSubmitRequest"
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/serpSubmitResponse'
-        '400':
+            $ref: "#/definitions/serpSubmitResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Server Overload
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       security:
         - ApiKeyAuth: []
     x-swagger-router-controller: hello_world
@@ -185,7 +188,8 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: 'A code for the localization, which is a combination of country and language'
+        description: A code for the localization, which is a combination of country and
+          language
         enum:
           - us
           - uk
@@ -210,7 +214,7 @@ definitions:
           - dk
           - nz
           - gr
-          - 'no'
+          - no
           - in
           - ms
           - pl
@@ -229,7 +233,7 @@ definitions:
         type: string
       localization_zip:
         description: option to localize the results per zip code
-        example: '90210'
+        example: "90210"
         type: string
       search_engine:
         default: google
@@ -251,7 +255,8 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: 'A code for the localization, which is a combination of country and language'
+        description: A code for the localization, which is a combination of country and
+          language
         enum:
           - us
           - uk
@@ -276,7 +281,7 @@ definitions:
           - dk
           - nz
           - gr
-          - 'no'
+          - no
           - in
           - ms
           - pl
@@ -317,7 +322,8 @@ definitions:
         example: seo software
         type: string
       localization_code:
-        description: 'A code for the localization, which is a combination of country and language'
+        description: A code for the localization, which is a combination of country and
+          language
         enum:
           - us
           - uk
@@ -342,7 +348,7 @@ definitions:
           - dk
           - nz
           - gr
-          - 'no'
+          - no
           - in
           - ms
           - pl
@@ -372,14 +378,16 @@ definitions:
         example: google
         type: string
       status:
-        description: status of this task request. "ok" means we're working on collecting it. "invalid" means there was an error and it won't be collected
+        description: status of this task request. "ok" means we're working on collecting
+          it. "invalid" means there was an error and it won't be collected
         enum:
           - ok
           - invalid
         example: ok
         type: string
       task_id:
-        description: the assigned task id for this task. Should be used later in the serp-collect request
+        description: the assigned task id for this task. Should be used later in the
+          serp-collect request
         example: 16ad9957b23x140753
         type: string
     required:
@@ -396,18 +404,20 @@ definitions:
               properties:
                 error_message:
                   description: error message in case task status is invalid
-                  example: ''
+                  example: ""
                   type: string
                 keyword:
                   description: keyword (search term)
                   example: seo software
                   type: string
                 local_pack_rank:
-                  description: 'relevent only to google: show the local pack rank of the domain in case exist'
+                  description: "relevent only to google: show the local pack rank of the domain in
+                    case exist"
                   example: 1
                   type: integer
                 localization_code:
-                  description: 'A code for the localization, which is a combination of country and language'
+                  description: A code for the localization, which is a combination of country and
+                    language
                   enum:
                     - us
                     - uk
@@ -432,7 +442,7 @@ definitions:
                     - dk
                     - nz
                     - gr
-                    - 'no'
+                    - no
                     - in
                     - ms
                     - pl
@@ -451,7 +461,7 @@ definitions:
                   type: string
                 localization_zip:
                   description: option to localize the results per zip code
-                  example: ''
+                  example: ""
                   type: string
                 rank:
                   description: the exact rank of the domain in the search engine asked
@@ -460,9 +470,9 @@ definitions:
                 ready:
                   description: task ready indicator
                   enum:
-                    - 'true'
-                    - 'false'
-                  example: 'true'
+                    - "true"
+                    - "false"
+                  example: "true"
                   type: string
                 search_engine:
                   description: google/bing/google_mobile
@@ -486,7 +496,8 @@ definitions:
   rankSubmitRequest:
     properties:
       priority:
-        description: The priority for the keyword jobs submitted. High priority costs double credits. Default value is low.
+        description: The priority for the keyword jobs submitted. High priority costs
+          double credits. Default value is low.
         enum:
           - low
           - high
@@ -495,7 +506,7 @@ definitions:
       tasks:
         description: The keyword RANK jobs. Maximum 1000 jobs per a single request.
         items:
-          $ref: '#/definitions/KeywordJobRank'
+          $ref: "#/definitions/KeywordJobRank"
         type: array
     required:
       - tasks
@@ -510,7 +521,7 @@ definitions:
         type: integer
       tasks:
         items:
-          $ref: '#/definitions/KeywordTask'
+          $ref: "#/definitions/KeywordTask"
         type: array
     required:
       - response_code
@@ -526,14 +537,15 @@ definitions:
               properties:
                 error_message:
                   description: error message in case task status is invalid
-                  example: ''
+                  example: ""
                   type: string
                 keyword:
                   description: keyword (search term)
                   example: seo software
                   type: string
                 localization_code:
-                  description: 'A code for the localization, which is a combination of country and language'
+                  description: A code for the localization, which is a combination of country and
+                    language
                   enum:
                     - us
                     - uk
@@ -558,7 +570,7 @@ definitions:
                     - dk
                     - nz
                     - gr
-                    - 'no'
+                    - no
                     - in
                     - ms
                     - pl
@@ -577,7 +589,7 @@ definitions:
                   type: string
                 localization_zip:
                   description: option to localize the results per zip code
-                  example: ''
+                  example: ""
                   type: string
                 num_results:
                   description: number of results found in SERP
@@ -598,9 +610,9 @@ definitions:
                 ready:
                   description: task ready indicator
                   enum:
-                    - 'true'
-                    - 'false'
-                  example: 'true'
+                    - "true"
+                    - "false"
+                  example: "true"
                   type: string
                 search_engine:
                   example: google
@@ -619,7 +631,8 @@ definitions:
   serpSubmitRequest:
     properties:
       priority:
-        description: The priority for the keyword jobs submitted. High priority costs double credits. Default value is low.
+        description: The priority for the keyword jobs submitted. High priority costs
+          double credits. Default value is low.
         enum:
           - low
           - high
@@ -628,7 +641,7 @@ definitions:
       tasks:
         description: The keyword SERP jobs. Maximum 1000 jobs per a single request.
         items:
-          $ref: '#/definitions/KeywordJobSerp'
+          $ref: "#/definitions/KeywordJobSerp"
         type: array
     required:
       - tasks
@@ -643,7 +656,7 @@ definitions:
         type: integer
       tasks:
         items:
-          $ref: '#/definitions/KeywordTask'
+          $ref: "#/definitions/KeywordTask"
         type: array
     required:
       - response_code

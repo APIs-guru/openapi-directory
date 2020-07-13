@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.digitallinguistics.io
@@ -7,7 +7,7 @@ info:
   contact:
     email: dhieber@umail.ucsb.edu
     name: Daniel W. Hieber
-    url: 'http://danielhieber.com/'
+    url: http://danielhieber.com/
   description: The Digital Linguistics (DLx) REST API
   license:
     name: MIT
@@ -16,23 +16,27 @@ info:
   x-apisguru-categories:
     - text
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://avatars3.githubusercontent.com/u/5896943?s=200&v=4'
+    backgroundColor: "#FFFFFF"
+    url: https://avatars3.githubusercontent.com/u/5896943?s=200&v=4
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/digitallinguistics/api/master/public/swagger/swagger.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/digitallinguistics/api/master/public/swagger/swagger.json
+      version: "2.0"
   x-providerName: digitallinguistics.io
 externalDocs:
   description: How to use the API
-  url: 'http://developer.digitallinguistics.io/api/'
+  url: http://developer.digitallinguistics.io/api/
 consumes:
   - application/json
 produces:
   - application/json
 securityDefinitions:
   Authorization:
-    description: 'An access token (JSON Web Token) included in the `Authorization` header in the format `Bearer {token}`. Tokens may be retrieved programmatically from https://digitallinguistics.auth0.com. See the authorization documentation at http://developer.digitallinguistics.io/api/.'
+    description: An access token (JSON Web Token) included in the `Authorization`
+      header in the format `Bearer {token}`. Tokens may be retrieved
+      programmatically from https://digitallinguistics.auth0.com. See the
+      authorization documentation at
+      http://developer.digitallinguistics.io/api/.
     in: header
     name: Authorization
     type: apiKey
@@ -47,32 +51,47 @@ parameters:
     schema:
       type: object
   continuation:
-    description: 'The `dlx-continuation` header is used to send a continuation token with the request, when retrieving the next page of results.'
+    description: The `dlx-continuation` header is used to send a continuation token
+      with the request, when retrieving the next page of results.
     in: header
     name: continuation
     required: false
     type: string
   deleted:
     default: false
-    description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+    description: Setting the `deleted` option to `true` will return results that
+      have been marked for deletion, but not yet deleted from the database.
+      Otherwise requests for a resource marked for deletion will return a 410
+      error.
     in: query
     name: deleted
     required: false
     type: boolean
   ifMatch:
-    description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+    description: The `If-Match` header is used with PUT and DELETE requests to check
+      whether you have the most up-to-date version of the resource before
+      updating or deleting it. The value of the `If-Match` header is the ETag
+      (`_etag`) property of the resource. It is recommended that your
+      application use this header whenever possible to avoid data conflicts.
     in: header
     name: ifMatch
     required: false
     type: string
   ifModifiedSince:
-    description: The `If-Modified-Since` header is used to retrieve only results modified since a given time. The value of this header must be a valid date string.
+    description: The `If-Modified-Since` header is used to retrieve only results
+      modified since a given time. The value of this header must be a valid date
+      string.
     in: header
     name: ifModifiedSince
     required: false
     type: string
   ifNoneMatch:
-    description: 'If `If-None-Match` header is used with GET requests to check whether you already have the most up-to-date version of the resource, and therefore do not need the resource sent again. The value of the `If-None-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to reduce bandwidth.'
+    description: If `If-None-Match` header is used with GET requests to check
+      whether you already have the most up-to-date version of the resource, and
+      therefore do not need the resource sent again. The value of the
+      `If-None-Match` header is the ETag (`_etag`) property of the resource. It
+      is recommended that your application use this header whenever possible to
+      reduce bandwidth.
     in: header
     name: ifNoneMatch
     required: false
@@ -108,53 +127,58 @@ parameters:
     required: true
     type: string
   maxItemCount:
-    description: 'The `dlx-max-item-count` header is used to limit the number of results to a certain amount at a time (by default all results will be returned). If there are more results to be returned, a continuation token will also be sent in the `dlx-continuation` header.'
+    description: The `dlx-max-item-count` header is used to limit the number of
+      results to a certain amount at a time (by default all results will be
+      returned). If there are more results to be returned, a continuation token
+      will also be sent in the `dlx-continuation` header.
     in: header
     name: maxItemCount
     required: false
     type: string
   public:
-    default: 'false'
-    description: 'Set this parameter to `true` to include all publicly-accessible resources, not just those that the user is listed as an Owner, Contributor, or Viewer for.'
+    default: "false"
+    description: Set this parameter to `true` to include all publicly-accessible
+      resources, not just those that the user is listed as an Owner,
+      Contributor, or Viewer for.
     in: query
     name: public
     required: false
     type: string
 responses:
   BadRequest:
-    description: '400: There was a problem with the request.'
+    description: "400: There was a problem with the request."
   Conflict:
-    description: '409: There was a data conflict in the database.'
+    description: "409: There was a data conflict in the database."
   Created:
-    description: '201: The resource was created successfully.'
+    description: "201: The resource was created successfully."
     headers:
       Last-Modified:
         description: The time that the item was last modified
         type: string
   DeleteSuccessful:
-    description: '204: Delete operation successful.'
+    description: "204: Delete operation successful."
   Forbidden:
-    description: '403: Unauthorized.'
+    description: "403: Unauthorized."
   LargePayload:
-    description: '413: Request payload is too large.'
+    description: "413: Request payload is too large."
   MethodNotAllowed:
-    description: '405: Method not allowed.'
+    description: "405: Method not allowed."
   NotAcceptable:
-    description: '406: Cannot return data in requested format.'
+    description: "406: Cannot return data in requested format."
   NotFound:
-    description: '404: Database resource not found.'
+    description: "404: Database resource not found."
   NotImplemented:
-    description: '501: This feature is not yet implemented.'
+    description: "501: This feature is not yet implemented."
   NotModified:
-    description: '304: Not modified.'
+    description: "304: Not modified."
   PreconditionFailed:
-    description: '412: A precondition for the operation was not met.'
+    description: "412: A precondition for the operation was not met."
   RetryOperation:
-    description: '449: Retry the operation'
+    description: "449: Retry the operation"
   ServerError:
-    description: '500: An error occurred on the server.'
+    description: "500: An error occurred on the server."
   Success:
-    description: '200: Operation successful.'
+    description: "200: Operation successful."
     headers:
       Last-Modified:
         description: The time that the item was last modified
@@ -166,27 +190,27 @@ responses:
         description: The number of items returned in the response
         type: string
   Timeout:
-    description: '408: The request timed out.'
+    description: "408: The request timed out."
   TokenExpired:
-    description: '419: Access token expired.'
+    description: "419: Access token expired."
   TooManyRequests:
-    description: '429: Too many requests.'
+    description: "429: Too many requests."
   Unauthorized:
-    description: '401: Authorization missing or invalid.'
+    description: "401: Authorization missing or invalid."
     headers:
       WWW-Authenticate:
         description: An access token is required.
         type: string
   Unprocessable:
-    description: '422: The data is not properly formatted.'
+    description: "422: The data is not properly formatted."
   UpdateSuccessful:
-    description: '200: Update successful.'
+    description: "200: Update successful."
     headers:
       Last-Modified:
         description: The time that the item was last modified
         type: string
   UpsertSuccessful:
-    description: '201: Upsert successful.'
+    description: "201: Upsert successful."
     headers:
       Last-Modified:
         description: The time that the item was last modified
@@ -199,39 +223,52 @@ tags:
 paths:
   /languages:
     get:
-      description: Retrieves all the Languages that the authenticated user or client has permission to access.
+      description: Retrieves all the Languages that the authenticated user or client
+        has permission to access.
       operationId: getLanguages
       parameters:
-        - description: 'The `dlx-continuation` header is used to send a continuation token with the request, when retrieving the next page of results.'
+        - description: The `dlx-continuation` header is used to send a continuation token
+            with the request, when retrieving the next page of results.
           in: header
           name: continuation
           required: false
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: The `If-Modified-Since` header is used to retrieve only results modified since a given time. The value of this header must be a valid date string.
+        - description: The `If-Modified-Since` header is used to retrieve only results
+            modified since a given time. The value of this header must be a
+            valid date string.
           in: header
           name: ifModifiedSince
           required: false
           type: string
-        - description: 'The `dlx-max-item-count` header is used to limit the number of results to a certain amount at a time (by default all results will be returned). If there are more results to be returned, a continuation token will also be sent in the `dlx-continuation` header.'
+        - description: The `dlx-max-item-count` header is used to limit the number of
+            results to a certain amount at a time (by default all results will
+            be returned). If there are more results to be returned, a
+            continuation token will also be sent in the `dlx-continuation`
+            header.
           in: header
           name: maxItemCount
           required: false
           type: string
-        - default: 'false'
-          description: 'Set this parameter to `true` to include all publicly-accessible resources, not just those that the user is listed as an Owner, Contributor, or Viewer for.'
+        - default: "false"
+          description: Set this parameter to `true` to include all publicly-accessible
+            resources, not just those that the user is listed as an Owner,
+            Contributor, or Viewer for.
           in: query
           name: public
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -255,8 +292,8 @@ paths:
           schema:
             type: object
       responses:
-        '201':
-          description: '201: The resource was created successfully.'
+        "201":
+          description: "201: The resource was created successfully."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -265,7 +302,10 @@ paths:
       tags:
         - Language
     put:
-      description: 'Creates a Language if it does not yet exist (i.e. if the resource does not have an `id` property yet), or replaces the existing Language resource if it does. Note that this replaces the *entire* Language. It is not a partial update.'
+      description: Creates a Language if it does not yet exist (i.e. if the resource
+        does not have an `id` property yet), or replaces the existing Language
+        resource if it does. Note that this replaces the *entire* Language. It
+        is not a partial update.
       operationId: upsertLanguage
       parameters:
         - description: A database resource to upsert
@@ -274,14 +314,19 @@ paths:
           required: true
           schema:
             type: object
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '201':
-          description: '201: Upsert successful.'
+        "201":
+          description: "201: Upsert successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -289,7 +334,7 @@ paths:
       summary: Upsert (create or replace) a Language
       tags:
         - Language
-  '/languages/{languageID}':
+  "/languages/{languageID}":
     delete:
       operationId: deleteLanguage
       parameters:
@@ -298,14 +343,19 @@ paths:
           name: languageID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '204':
-          description: '204: Delete operation successful.'
+        "204":
+          description: "204: Delete operation successful."
       summary: Delete a Language by ID
       tags:
         - Language
@@ -318,19 +368,27 @@ paths:
           required: true
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: 'If `If-None-Match` header is used with GET requests to check whether you already have the most up-to-date version of the resource, and therefore do not need the resource sent again. The value of the `If-None-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to reduce bandwidth.'
+        - description: If `If-None-Match` header is used with GET requests to check
+            whether you already have the most up-to-date version of the
+            resource, and therefore do not need the resource sent again. The
+            value of the `If-None-Match` header is the ETag (`_etag`) property
+            of the resource. It is recommended that your application use this
+            header whenever possible to reduce bandwidth.
           in: header
           name: ifNoneMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -341,13 +399,15 @@ paths:
             dlx-item-count:
               description: The number of items returned in the response
               type: string
-        '304':
-          description: '304: Not modified.'
+        "304":
+          description: "304: Not modified."
       summary: Retrieve a Language by ID
       tags:
         - Language
     patch:
-      description: 'Performs a partial update the Language whose ID is specified in the URL. If the Language object has an `id` property, is ignored in favor of the ID in the URL.'
+      description: Performs a partial update the Language whose ID is specified in the
+        URL. If the Language object has an `id` property, is ignored in favor of
+        the ID in the URL.
       operationId: updateLanguage
       parameters:
         - description: The ID of the Language to perform the operation on
@@ -361,14 +421,19 @@ paths:
           required: true
           schema:
             type: object
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Update successful.'
+        "200":
+          description: "200: Update successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -376,7 +441,7 @@ paths:
       summary: Perform a partial update on a Language
       tags:
         - Language
-  '/languages/{languageID}/lexemes':
+  "/languages/{languageID}/lexemes":
     get:
       operationId: getLexemesByLanguage
       parameters:
@@ -385,36 +450,48 @@ paths:
           name: languageID
           required: true
           type: string
-        - description: 'The `dlx-continuation` header is used to send a continuation token with the request, when retrieving the next page of results.'
+        - description: The `dlx-continuation` header is used to send a continuation token
+            with the request, when retrieving the next page of results.
           in: header
           name: continuation
           required: false
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: The `If-Modified-Since` header is used to retrieve only results modified since a given time. The value of this header must be a valid date string.
+        - description: The `If-Modified-Since` header is used to retrieve only results
+            modified since a given time. The value of this header must be a
+            valid date string.
           in: header
           name: ifModifiedSince
           required: false
           type: string
-        - description: 'The `dlx-max-item-count` header is used to limit the number of results to a certain amount at a time (by default all results will be returned). If there are more results to be returned, a continuation token will also be sent in the `dlx-continuation` header.'
+        - description: The `dlx-max-item-count` header is used to limit the number of
+            results to a certain amount at a time (by default all results will
+            be returned). If there are more results to be returned, a
+            continuation token will also be sent in the `dlx-continuation`
+            header.
           in: header
           name: maxItemCount
           required: false
           type: string
-        - default: 'false'
-          description: 'Set this parameter to `true` to include all publicly-accessible resources, not just those that the user is listed as an Owner, Contributor, or Viewer for.'
+        - default: "false"
+          description: Set this parameter to `true` to include all publicly-accessible
+            resources, not just those that the user is listed as an Owner,
+            Contributor, or Viewer for.
           in: query
           name: public
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -438,8 +515,8 @@ paths:
           required: true
           type: string
       responses:
-        '201':
-          description: '201: The resource was created successfully.'
+        "201":
+          description: "201: The resource was created successfully."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -456,14 +533,19 @@ paths:
           name: languageID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '201':
-          description: '201: Upsert successful.'
+        "201":
+          description: "201: Upsert successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -472,7 +554,7 @@ paths:
       tags:
         - Language
         - Lexeme
-  '/languages/{languageID}/lexemes/{lexemeID}':
+  "/languages/{languageID}/lexemes/{lexemeID}":
     delete:
       operationId: deleteLexemeByLanguage
       parameters:
@@ -486,14 +568,19 @@ paths:
           name: lexemeID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '204':
-          description: '204: Delete operation successful.'
+        "204":
+          description: "204: Delete operation successful."
       summary: Delete a Lexeme by ID
       tags:
         - Language
@@ -512,19 +599,27 @@ paths:
           required: true
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: 'If `If-None-Match` header is used with GET requests to check whether you already have the most up-to-date version of the resource, and therefore do not need the resource sent again. The value of the `If-None-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to reduce bandwidth.'
+        - description: If `If-None-Match` header is used with GET requests to check
+            whether you already have the most up-to-date version of the
+            resource, and therefore do not need the resource sent again. The
+            value of the `If-None-Match` header is the ETag (`_etag`) property
+            of the resource. It is recommended that your application use this
+            header whenever possible to reduce bandwidth.
           in: header
           name: ifNoneMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -535,8 +630,8 @@ paths:
             dlx-item-count:
               description: The number of items returned in the response
               type: string
-        '304':
-          description: '304: Not modified.'
+        "304":
+          description: "304: Not modified."
       summary: Get a Lexeme by ID
       tags:
         - Language
@@ -554,14 +649,19 @@ paths:
           name: lexemeID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Update successful.'
+        "200":
+          description: "200: Update successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -571,21 +671,29 @@ paths:
         - Lexeme
   /lexemes:
     get:
-      description: Retrieve all Lexemes that the authenticated user has permission to access. Include a `languageID` query parameter to limit results to Lexemes from a particular Language.
+      description: Retrieve all Lexemes that the authenticated user has permission to
+        access. Include a `languageID` query parameter to limit results to
+        Lexemes from a particular Language.
       operationId: getLexemes
       parameters:
-        - description: 'The `dlx-continuation` header is used to send a continuation token with the request, when retrieving the next page of results.'
+        - description: The `dlx-continuation` header is used to send a continuation token
+            with the request, when retrieving the next page of results.
           in: header
           name: continuation
           required: false
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: The `If-Modified-Since` header is used to retrieve only results modified since a given time. The value of this header must be a valid date string.
+        - description: The `If-Modified-Since` header is used to retrieve only results
+            modified since a given time. The value of this header must be a
+            valid date string.
           in: header
           name: ifModifiedSince
           required: false
@@ -596,20 +704,26 @@ paths:
           name: languageID
           required: false
           type: string
-        - description: 'The `dlx-max-item-count` header is used to limit the number of results to a certain amount at a time (by default all results will be returned). If there are more results to be returned, a continuation token will also be sent in the `dlx-continuation` header.'
+        - description: The `dlx-max-item-count` header is used to limit the number of
+            results to a certain amount at a time (by default all results will
+            be returned). If there are more results to be returned, a
+            continuation token will also be sent in the `dlx-continuation`
+            header.
           in: header
           name: maxItemCount
           required: false
           type: string
-        - default: 'false'
-          description: 'Set this parameter to `true` to include all publicly-accessible resources, not just those that the user is listed as an Owner, Contributor, or Viewer for.'
+        - default: "false"
+          description: Set this parameter to `true` to include all publicly-accessible
+            resources, not just those that the user is listed as an Owner,
+            Contributor, or Viewer for.
           in: query
           name: public
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -624,7 +738,8 @@ paths:
       tags:
         - Lexeme
     post:
-      description: 'Add a new Lexeme. A `languageID` must be provided either as a query parameter, or as an attribute on the Lexeme body.'
+      description: Add a new Lexeme. A `languageID` must be provided either as a query
+        parameter, or as an attribute on the Lexeme body.
       operationId: addLexeme
       parameters:
         - allowEmptyValue: true
@@ -634,8 +749,8 @@ paths:
           required: false
           type: string
       responses:
-        '201':
-          description: '201: The resource was created successfully.'
+        "201":
+          description: "201: The resource was created successfully."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -644,10 +759,16 @@ paths:
       tags:
         - Lexeme
     put:
-      description: 'Upsert (add or replace) a Lexeme. A `languageID` must be provided either as a query parameter, or as an attribute on the Lexeme body.'
+      description: Upsert (add or replace) a Lexeme. A `languageID` must be provided
+        either as a query parameter, or as an attribute on the Lexeme body.
       operationId: upsertLexeme
       parameters:
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
@@ -659,8 +780,8 @@ paths:
           required: false
           type: string
       responses:
-        '201':
-          description: '201: Upsert successful.'
+        "201":
+          description: "201: Upsert successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -668,7 +789,7 @@ paths:
       summary: Upsert (add or replace) a Lexeme
       tags:
         - Lexeme
-  '/lexemes/{lexemeID}':
+  "/lexemes/{lexemeID}":
     delete:
       operationId: deleteLexeme
       parameters:
@@ -677,14 +798,19 @@ paths:
           name: lexemeID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '204':
-          description: '204: Delete operation successful.'
+        "204":
+          description: "204: Delete operation successful."
       summary: Delete a Lexeme by ID
       tags:
         - Lexeme
@@ -697,19 +823,27 @@ paths:
           required: true
           type: string
         - default: false
-          description: 'Setting the `deleted` option to `true` will return results that have been marked for deletion, but not yet deleted from the database. Otherwise requests for a resource marked for deletion will return a 410 error.'
+          description: Setting the `deleted` option to `true` will return results that
+            have been marked for deletion, but not yet deleted from the
+            database. Otherwise requests for a resource marked for deletion will
+            return a 410 error.
           in: query
           name: deleted
           required: false
           type: boolean
-        - description: 'If `If-None-Match` header is used with GET requests to check whether you already have the most up-to-date version of the resource, and therefore do not need the resource sent again. The value of the `If-None-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to reduce bandwidth.'
+        - description: If `If-None-Match` header is used with GET requests to check
+            whether you already have the most up-to-date version of the
+            resource, and therefore do not need the resource sent again. The
+            value of the `If-None-Match` header is the ETag (`_etag`) property
+            of the resource. It is recommended that your application use this
+            header whenever possible to reduce bandwidth.
           in: header
           name: ifNoneMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Operation successful.'
+        "200":
+          description: "200: Operation successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified
@@ -720,8 +854,8 @@ paths:
             dlx-item-count:
               description: The number of items returned in the response
               type: string
-        '304':
-          description: '304: Not modified.'
+        "304":
+          description: "304: Not modified."
       summary: Get a Lexeme by ID
       tags:
         - Lexeme
@@ -734,14 +868,19 @@ paths:
           name: lexemeID
           required: true
           type: string
-        - description: The `If-Match` header is used with PUT and DELETE requests to check whether you have the most up-to-date version of the resource before updating or deleting it. The value of the `If-Match` header is the ETag (`_etag`) property of the resource. It is recommended that your application use this header whenever possible to avoid data conflicts.
+        - description: The `If-Match` header is used with PUT and DELETE requests to check
+            whether you have the most up-to-date version of the resource before
+            updating or deleting it. The value of the `If-Match` header is the
+            ETag (`_etag`) property of the resource. It is recommended that your
+            application use this header whenever possible to avoid data
+            conflicts.
           in: header
           name: ifMatch
           required: false
           type: string
       responses:
-        '200':
-          description: '200: Update successful.'
+        "200":
+          description: "200: Update successful."
           headers:
             Last-Modified:
               description: The time that the item was last modified

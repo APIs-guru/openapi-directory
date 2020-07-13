@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: tinyuid.com
@@ -7,7 +7,7 @@ info:
   contact:
     email: contact@tinyuid.com
     name: TinyUID
-    url: 'https://tinyuid.com/feedback'
+    url: https://tinyuid.com/feedback
   description: Paste a Long URL link to shorten it
   title: TinyUID.com
   version: 1.0.0
@@ -15,19 +15,17 @@ info:
     - developer_tools
   x-origin:
     - format: swagger
-      url: 'https://tinyuid.com/tinyuid-swagger.yaml'
-      version: '2.0'
+      url: https://tinyuid.com/tinyuid-swagger.yaml
+      version: "2.0"
   x-providerName: tinyuid.com
 externalDocs:
-  url: 'https://tinyuid.com/docs'
-consumes:
-  - application/x-www-form-urlencoded
-  - multipart/form-data
-produces:
-  - application/json
+  url: https://tinyuid.com/docs
 paths:
   /v1/shorten:
     post:
+      consumes:
+        - application/x-www-form-urlencoded
+        - multipart/form-data
       parameters:
         - description: Link
           format: url
@@ -35,8 +33,10 @@ paths:
           name: url
           required: true
           type: string
+      produces:
+        - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:

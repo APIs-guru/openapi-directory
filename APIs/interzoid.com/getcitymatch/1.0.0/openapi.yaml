@@ -1,39 +1,43 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.interzoid.com'
+  - url: https://api.interzoid.com
 info:
   contact:
     email: support@interzoid.com
     name: API Support
-    url: 'https://www.interzoid.com'
+    url: https://www.interzoid.com
     x-twitter: interzoid
-  description: 'This API provides a similarity key used to match with other similar city name data, including for purposes of deduplication, fuzzy matching, or merging of datasets. A much higher match rate will be achieved by matching on the algorithmically generated similarity key rather than the data itself.'
+  description: This API provides a similarity key used to match with other similar
+    city name data, including for purposes of deduplication, fuzzy matching, or
+    merging of datasets. A much higher match rate will be achieved by matching
+    on the algorithmically generated similarity key rather than the data itself.
   license:
     name: Interzoid license
-    url: 'https://www.interzoid.com/license'
-  termsOfService: 'https://www.interzoid.com/terms'
-  title: Interzoid Get City Match Similarity Key
+    url: https://www.interzoid.com/license
+  termsOfService: https://www.interzoid.com/terms
+  title: Interzoid Get City Match Similarity Key API
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/interzoid/profile_image?size=original'
+    url: https://twitter.com/interzoid/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://oas.interzoid.com/api/getcitymatch.json'
-      version: '3.0'
+      url: https://oas.interzoid.com/api/getcitymatch.json
+      version: "3.0"
   x-providerName: interzoid.com
   x-serviceName: getcitymatch
 externalDocs:
   description: API home page and documentation
-  url: 'https://www.interzoid.com/services/getcitymatch'
+  url: https://www.interzoid.com/services/getcitymatch
 paths:
   /getcitymatch:
     get:
       description: Gets a similarity key for matching purposes for city name data.
       operationId: getcitymatch
       parameters:
-        - description: Your Interzoid license API key. Register at www.interzoid.com/register
+        - description: Your Interzoid license API key. Register at
+            www.interzoid.com/register
           in: query
           name: license
           required: true
@@ -46,7 +50,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -59,15 +63,15 @@ paths:
                     type: string
                 type: object
           description: Generated similarity key for city name data
-        '400':
+        "400":
           description: bad request - insufficient parameters
-        '402':
+        "402":
           description: credits exhausted
-        '403':
+        "403":
           description: invalid license API key
-        '405':
+        "405":
           description: method not allowed
-        '500':
+        "500":
           description: internal server error
       summary: Gets a similarity key for matching purposes for city name data
       tags:
