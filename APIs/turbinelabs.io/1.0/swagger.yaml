@@ -1,4 +1,4 @@
-swagger: "2.0"
+swagger: '2.0'
 schemes:
   - https
 host: api.turbinelabs.io
@@ -6,34 +6,26 @@ basePath: /v1.0
 info:
   contact:
     x-twitter: GoTurbine
-  description: >
+  description: |
     The Turbine Labs API provides CRUD operations for core object types, and is
-
     mostly RESTy. The easiest way to interact with the API is with
-
     [tbnctl](https://docs.turbinelabs.io/advanced/tbnctl.html).
-
     If you want to make direct HTTP calls, however, you can obtain an access
-
     token using tbnctl, and then pass it in the Authorization header,
-
     prefixed by `Token `:
-
     ```console
-
     curl -H "Authorization: Token <access token>" https://api.turbinelabs.io/v1.0/cluster
-
     ```
-  title: Turbine Labs API
-  version: "1.0"
+  title: Turbine Labs
+  version: '1.0'
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: https://twitter.com/GoTurbine/profile_image?size=original
+    url: 'https://twitter.com/GoTurbine/profile_image?size=original'
   x-origin:
     - format: swagger
-      url: https://raw.githubusercontent.com/turbinelabs/api/master/swagger.yml
-      version: "2.0"
+      url: 'https://raw.githubusercontent.com/turbinelabs/api/master/swagger.yml'
+      version: '2.0'
   x-providerName: turbinelabs.io
 produces:
   - application/json
@@ -45,11 +37,9 @@ securityDefinitions:
 security:
   - api_key: []
 tags:
-  - description: A logical deployment of services, which typically maps to a
-      datacenter, availability zone, or compute cluster.
+  - description: 'A logical deployment of services, which typically maps to a datacenter, availability zone, or compute cluster.'
     name: Zone
-  - description: A configuration that can be applied to one or more running Proxies
-      serving one or more Domains.
+  - description: A configuration that can be applied to one or more running Proxies serving one or more Domains.
     name: Proxy
   - description: An interface and port a Proxy will listen on
     name: Listener
@@ -57,34 +47,29 @@ tags:
     name: Domain
   - description: A served path within a Domain.
     name: Route
-  - description: A collection of rules specifying how a request should be mapped to
-      an instance within a cluster. These may be shared between multiple Routes.
+  - description: A collection of rules specifying how a request should be mapped to an instance within a cluster. These may be shared between multiple Routes.
     name: Shared Rules
-  - description: A collection of Instances, homogeneous in their purpose,
-      heterogeneous in their metadata.
+  - description: 'A collection of Instances, homogeneous in their purpose, heterogeneous in their metadata.'
     name: Cluster
-  - description: A collection of events that have occurred in your infrastructure.
-      This includes changes detected by the deployed collectors (new Clusters or
-      Cluster instances) as well as routing changes through the UI or API.
+  - description: A collection of events that have occurred in your infrastructure. This includes changes detected by the deployed collectors (new Clusters or Cluster instances) as well as routing changes through the UI or API.
     name: Audit Log
 paths:
   /admin/user/self:
     get:
       description: Request the user object for an authorized requesting account.
       responses:
-        "200":
+        '200':
           description: The authorized user.
           schema:
-            $ref: "#/definitions/User"
+            $ref: '#/definitions/User'
         default:
           description: Unexpected error.
           schema:
-            $ref: "#/definitions/Error"
-      summary: Returns the user object for the account authorized and making this
-        request.
+            $ref: '#/definitions/Error'
+      summary: Returns the user object for the account authorized and making this request.
       tags:
         - User Management
-  "/admin/user/self/access_token/{access-token-key}":
+  '/admin/user/self/access_token/{access-token-key}':
     delete:
       parameters:
         - description: the key of the Access Token that should be deleted
@@ -100,27 +85,26 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: An empty result if the API key deletion was successful.
         default:
-          description: An error; may be unexpected or validation error if the last API was
-            removed.
+          description: An error; may be unexpected or validation error if the last API was removed.
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: Delete the specified access token.
       tags:
         - User Management
   /admin/user/self/access_tokens:
     get:
       responses:
-        "200":
+        '200':
           description: A list of Access Tokens defined for the authenticated user.
           schema:
-            $ref: "#/definitions/MultiAccessTokens"
+            $ref: '#/definitions/MultiAccessTokens'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: Lists Access Tokens that are configured for the authenticated user.
       tags:
         - User Management
@@ -128,50 +112,46 @@ paths:
       consumes:
         - application/json
       parameters:
-        - description: A short string (<255 characters) describing the expected use of the
-            token.
+        - description: A short string (<255 characters) describing the expected use of the token.
           in: body
           name: description
           required: true
           schema:
-            $ref: "#/definitions/AccessTokenDescription"
+            $ref: '#/definitions/AccessTokenDescription'
       responses:
-        "200":
+        '200':
           description: The new Access Token that was created.
           schema:
-            $ref: "#/definitions/AccessToken"
+            $ref: '#/definitions/AccessToken'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: Creates a new Access Token and associates it with the authenticated user.
       tags:
         - User Management
   /changelog/adhoc:
     get:
-      description: Perform an adhoc query against the change log for your org. The
-        filter is a JSON encoded FilterSum as defined in this file.
+      description: Perform an adhoc query against the change log for your org. The filter is a JSON encoded FilterSum as defined in this file.
       parameters:
-        - description: Encoded FilterSums representing the query you would like to
-            execute. See object definition for details.
+        - description: Encoded FilterSums representing the query you would like to execute. See object definition for details.
           in: query
           name: filter
           type: string
-          x-ref-encoded-object: "#/definitions/FilterSums"
+          x-ref-encoded-object: '#/definitions/FilterSums'
       responses:
-        "200":
+        '200':
           description: A list of changes that meet the provided filter.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
-      summary: Allows an arbitrary filter to be specified and applied to the org\'s
-        change log.
+            $ref: '#/definitions/Error'
+      summary: Allows an arbitrary filter to be specified and applied to the org\'s change log.
       tags:
         - Audit Log
-  "/changelog/cluster-graph/{clusterKey}":
+  '/changelog/cluster-graph/{clusterKey}':
     get:
       description: |
         Gets all changes to a cluster.
@@ -214,12 +194,9 @@ paths:
           name: ref_id
           required: false
           type: string
-        - description: >
-            If set to "before" then changes will be returned that occurred
-            before
-
+        - description: |
+            If set to "before" then changes will be returned that occurred before
             reference ID. If "after" then changes will be returned that have
-
             occurred since the reference ID.
           enum:
             - before
@@ -229,25 +206,22 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: A list of changes occurring during the requested window.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get changes related to the indicated cluster
       tags:
         - Audit Log
-  "/changelog/domain-graph/{domainKey}":
+  '/changelog/domain-graph/{domainKey}':
     get:
-      description: >
-        Gets all changes to a domain, the proxies that front the specified
-        domain,
-
+      description: |
+        Gets all changes to a domain, the proxies that front the specified domain,
         routes within that domain, the shared rules of each route, the clusters
-
         connected via route or shared rules.
       parameters:
         - description: the domain key to see an audit log for
@@ -288,12 +262,9 @@ paths:
           name: ref_id
           required: false
           type: string
-        - description: >
-            If set to "before" then changes will be returned that occurred
-            before
-
+        - description: |
+            If set to "before" then changes will be returned that occurred before
             reference ID. If "after" then changes will be returned that have
-
             occurred since the reference ID.
           enum:
             - before
@@ -303,18 +274,18 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: A list of changes occurring during the requested window.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get changes related to the indicated domain
       tags:
         - Audit Log
-  "/changelog/route-graph/{routeKey}":
+  '/changelog/route-graph/{routeKey}':
     get:
       description: |
         Gets all changes to a route, the domains associated with it, the shared
@@ -358,12 +329,9 @@ paths:
           name: ref_id
           required: false
           type: string
-        - description: >
-            If set to "before" then changes will be returned that occurred
-            before
-
+        - description: |
+            If set to "before" then changes will be returned that occurred before
             reference ID. If "after" then changes will be returned that have
-
             occurred since the reference ID.
           enum:
             - before
@@ -373,18 +341,18 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: A list of changes occurring during the requested window.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get changes related to the indicated route
       tags:
         - Audit Log
-  "/changelog/shared-rules-graph/{sharedRulesKey}":
+  '/changelog/shared-rules-graph/{sharedRulesKey}':
     get:
       description: |
         Gets all changes associated with set of Shared Rules; the domains using
@@ -428,12 +396,9 @@ paths:
           name: ref_id
           required: false
           type: string
-        - description: >
-            If set to "before" then changes will be returned that occurred
-            before
-
+        - description: |
+            If set to "before" then changes will be returned that occurred before
             reference ID. If "after" then changes will be returned that have
-
             occurred since the reference ID.
           enum:
             - before
@@ -443,18 +408,18 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: A list of changes occurring during the requested window.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get changes related to the indicated SharedRules
       tags:
         - Audit Log
-  "/changelog/zone/{zoneKey}":
+  '/changelog/zone/{zoneKey}':
     get:
       description: Retrieve all changes in the specified zone.
       parameters:
@@ -496,12 +461,9 @@ paths:
           name: ref_id
           required: false
           type: string
-        - description: >
-            If set to "before" then changes will be returned that occurred
-            before
-
+        - description: |
+            If set to "before" then changes will be returned that occurred before
             reference ID. If "after" then changes will be returned that have
-
             occurred since the reference ID.
           enum:
             - before
@@ -511,14 +473,14 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: A list of changes occurring during the requested window.
           schema:
-            $ref: "#/definitions/PaginatedChangeDescriptions"
+            $ref: '#/definitions/PaginatedChangeDescriptions'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get changes in a specified zone
       tags:
         - Audit Log
@@ -534,14 +496,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of clusters
           schema:
-            $ref: "#/definitions/MultiClusterResult"
+            $ref: '#/definitions/MultiClusterResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get clusters
       tags:
         - Cluster
@@ -555,20 +517,20 @@ paths:
           name: cluster
           required: true
           schema:
-            $ref: "#/definitions/ClusterCreate"
+            $ref: '#/definitions/ClusterCreate'
       responses:
-        "200":
+        '200':
           description: the newly created cluster
           schema:
-            $ref: "#/definitions/ClusterResult"
+            $ref: '#/definitions/ClusterResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create cluster
       tags:
         - Cluster
-  "/cluster/{clusterKey}":
+  '/cluster/{clusterKey}':
     delete:
       description: Delete an existing cluster
       parameters:
@@ -585,14 +547,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete cluster
       tags:
         - Cluster
@@ -606,14 +568,14 @@ paths:
           type: string
           x-example: 7ef80556-60bb-46bd-4cec-f4e2533aa75c
       responses:
-        "200":
+        '200':
           description: a result containing a single cluster
           schema:
-            $ref: "#/definitions/ClusterResult"
+            $ref: '#/definitions/ClusterResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get cluster
       tags:
         - Cluster
@@ -633,20 +595,20 @@ paths:
           name: cluster
           required: true
           schema:
-            $ref: "#/definitions/Cluster"
+            $ref: '#/definitions/Cluster'
       responses:
-        "200":
+        '200':
           description: A result containing the modified cluster
           schema:
-            $ref: "#/definitions/ClusterResult"
+            $ref: '#/definitions/ClusterResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: modify cluster
       tags:
         - Cluster
-  "/cluster/{clusterKey}/instances":
+  '/cluster/{clusterKey}/instances':
     post:
       consumes:
         - application/json
@@ -663,20 +625,20 @@ paths:
           name: instance
           required: true
           schema:
-            $ref: "#/definitions/Instance"
+            $ref: '#/definitions/Instance'
       responses:
-        "200":
+        '200':
           description: the newly created instance
           schema:
-            $ref: "#/definitions/InstanceResult"
+            $ref: '#/definitions/InstanceResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: add instance
       tags:
         - Cluster
-  "/cluster/{clusterKey}/instances/{instanceIdentifier}":
+  '/cluster/{clusterKey}/instances/{instanceIdentifier}':
     delete:
       description: Remove an instance from a cluster
       parameters:
@@ -692,21 +654,21 @@ paths:
           required: true
           type: string
           x-example: 7ef80556-60bb-46bd-4cec-f4e2533aa75c
-        - description: the instance to remove, identified as <host>:<port>
+        - description: 'the instance to remove, identified as <host>:<port>'
           in: path
           name: instanceIdentifier
           required: true
           type: string
-          x-example: foo-1.useast.test.com:8080
+          x-example: 'foo-1.useast.test.com:8080'
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: remove instance
       tags:
         - Cluster
@@ -722,14 +684,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of domains
           schema:
-            $ref: "#/definitions/MultiDomainResult"
+            $ref: '#/definitions/MultiDomainResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get domains
       tags:
         - Domain
@@ -743,20 +705,20 @@ paths:
           name: domain
           required: true
           schema:
-            $ref: "#/definitions/DomainCreate"
+            $ref: '#/definitions/DomainCreate'
       responses:
-        "200":
+        '200':
           description: the newly created zone
           schema:
-            $ref: "#/definitions/DomainResult"
+            $ref: '#/definitions/DomainResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create domain
       tags:
         - Domain
-  "/domain/{domainKey}":
+  '/domain/{domainKey}':
     delete:
       description: Delete an existing domain
       parameters:
@@ -773,14 +735,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete domain
       tags:
         - Domain
@@ -794,14 +756,14 @@ paths:
           type: string
           x-example: 48cf1c9b-f027-4223-b405-d48018ffb900
       responses:
-        "200":
+        '200':
           description: a result containing a single domain
           schema:
-            $ref: "#/definitions/DomainResult"
+            $ref: '#/definitions/DomainResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get domain
       tags:
         - Domain
@@ -817,14 +779,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of listeners
           schema:
-            $ref: "#/definitions/MultiListenerResult"
+            $ref: '#/definitions/MultiListenerResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: list listeners
       tags:
         - Listener
@@ -838,20 +800,20 @@ paths:
           name: listener
           required: true
           schema:
-            $ref: "#/definitions/ListenerCreate"
+            $ref: '#/definitions/ListenerCreate'
       responses:
-        "200":
+        '200':
           description: the newly created listener
           schema:
-            $ref: "#/definitions/ListenerResult"
+            $ref: '#/definitions/ListenerResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create listener
       tags:
         - Listener
-  "/listener/{listenerKey}":
+  '/listener/{listenerKey}':
     delete:
       description: Delete existing listener
       parameters:
@@ -868,14 +830,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Listener"
+            $ref: '#/definitions/Listener'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete listener
       tags:
         - Listener
@@ -889,14 +851,14 @@ paths:
           type: string
           x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
       responses:
-        "200":
+        '200':
           description: a result containing a single listener
           schema:
-            $ref: "#/definitions/ListenerResult"
+            $ref: '#/definitions/ListenerResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get listener
       tags:
         - Listener
@@ -916,16 +878,16 @@ paths:
           name: listener
           required: true
           schema:
-            $ref: "#/definitions/Listener"
+            $ref: '#/definitions/Listener'
       responses:
-        "200":
+        '200':
           description: A result containing the modified cluster
           schema:
-            $ref: "#/definitions/ListenerResult"
+            $ref: '#/definitions/ListenerResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: modify listener
       tags:
         - Listener
@@ -941,14 +903,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of proxies
           schema:
-            $ref: "#/definitions/MultiProxyResult"
+            $ref: '#/definitions/MultiProxyResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: list proxies
       tags:
         - Proxy
@@ -962,20 +924,20 @@ paths:
           name: proxy
           required: true
           schema:
-            $ref: "#/definitions/ProxyCreate"
+            $ref: '#/definitions/ProxyCreate'
       responses:
-        "200":
+        '200':
           description: the newly created proxy
           schema:
-            $ref: "#/definitions/ProxyResult"
+            $ref: '#/definitions/ProxyResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create proxy
       tags:
         - Proxy
-  "/proxy/{proxyKey}":
+  '/proxy/{proxyKey}':
     delete:
       description: Delete existing proxy
       parameters:
@@ -992,14 +954,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Proxy"
+            $ref: '#/definitions/Proxy'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete proxy
       tags:
         - Proxy
@@ -1013,14 +975,14 @@ paths:
           type: string
           x-example: 72c86057-ee8d-4a2b-a3a7-760fbd1d3b9f
       responses:
-        "200":
+        '200':
           description: a result containing a single proxy
           schema:
-            $ref: "#/definitions/ProxyResult"
+            $ref: '#/definitions/ProxyResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get proxy
       tags:
         - Proxy
@@ -1036,14 +998,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of routes
           schema:
-            $ref: "#/definitions/MultiRouteResult"
+            $ref: '#/definitions/MultiRouteResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get routes
       tags:
         - Route
@@ -1057,20 +1019,20 @@ paths:
           name: route
           required: true
           schema:
-            $ref: "#/definitions/RouteCreate"
+            $ref: '#/definitions/RouteCreate'
       responses:
-        "200":
+        '200':
           description: the newly created route
           schema:
-            $ref: "#/definitions/RouteResult"
+            $ref: '#/definitions/RouteResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create route
       tags:
         - Route
-  "/route/{routeKey}":
+  '/route/{routeKey}':
     delete:
       description: Delete an existing route
       parameters:
@@ -1087,14 +1049,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete route
       tags:
         - Route
@@ -1108,14 +1070,14 @@ paths:
           type: string
           x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
       responses:
-        "200":
+        '200':
           description: a result containing a single route
           schema:
-            $ref: "#/definitions/RouteResult"
+            $ref: '#/definitions/RouteResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get route
       tags:
         - Route
@@ -1135,16 +1097,16 @@ paths:
           name: route
           required: true
           schema:
-            $ref: "#/definitions/Route"
+            $ref: '#/definitions/Route'
       responses:
-        "200":
+        '200':
           description: A result containing the modified route
           schema:
-            $ref: "#/definitions/RouteResult"
+            $ref: '#/definitions/RouteResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: modify route
       tags:
         - Route
@@ -1152,25 +1114,22 @@ paths:
     get:
       description: Get a list of shared_rules
       parameters:
-        - description: >
-            A JSON encoded array of SharedRulesFilter objects. The filter is
-            taken
-
+        - description: |
+            A JSON encoded array of SharedRulesFilter objects. The filter is taken
             as a union of intersections. In other words an object that matches
-
             every constraint in any SharedRulesFilter will be included.
           in: query
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: a result containing a list of shared_rules
           schema:
-            $ref: "#/definitions/MultiSharedRulesResult"
+            $ref: '#/definitions/MultiSharedRulesResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get shared_rules
       tags:
         - Shared Rules
@@ -1184,20 +1143,20 @@ paths:
           name: shared_rules
           required: true
           schema:
-            $ref: "#/definitions/SharedRulesCreate"
+            $ref: '#/definitions/SharedRulesCreate'
       responses:
-        "200":
+        '200':
           description: the newly created shared_rules object
           schema:
-            $ref: "#/definitions/SharedRulesResult"
+            $ref: '#/definitions/SharedRulesResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create shared_rules
       tags:
         - Shared Rules
-  "/shared_rules/{sharedRulesKey}":
+  '/shared_rules/{sharedRulesKey}':
     delete:
       description: Delete an existing shared_rules object
       parameters:
@@ -1214,14 +1173,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete shared_rules object
       tags:
         - Route
@@ -1235,14 +1194,14 @@ paths:
           type: string
           x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
       responses:
-        "200":
+        '200':
           description: a result containing a single shared_rules object
           schema:
-            $ref: "#/definitions/SharedRulesResult"
+            $ref: '#/definitions/SharedRulesResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get shared_rules object
       tags:
         - Shared Rules
@@ -1262,16 +1221,16 @@ paths:
           name: shared_rules
           required: true
           schema:
-            $ref: "#/definitions/SharedRules"
+            $ref: '#/definitions/SharedRules'
       responses:
-        "200":
+        '200':
           description: A result containing the modified shared_rules object
           schema:
-            $ref: "#/definitions/SharedRulesResult"
+            $ref: '#/definitions/SharedRulesResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: modify shared_rules object
       tags:
         - Shared Rules
@@ -1288,14 +1247,14 @@ paths:
           name: filters
           type: string
       responses:
-        "200":
+        '200':
           description: A result containing an array of zones
           schema:
-            $ref: "#/definitions/MultiZoneResult"
+            $ref: '#/definitions/MultiZoneResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get a list of zones
       tags:
         - Zone
@@ -1310,20 +1269,20 @@ paths:
           name: zone
           required: true
           schema:
-            $ref: "#/definitions/ZoneCreate"
+            $ref: '#/definitions/ZoneCreate'
       responses:
-        "200":
+        '200':
           description: A result containing the newly created zone
           schema:
-            $ref: "#/definitions/ZoneResult"
+            $ref: '#/definitions/ZoneResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: create zone
       tags:
         - Zone
-  "/zone/{zoneKey}":
+  '/zone/{zoneKey}':
     delete:
       description: |
         Delete a zone.
@@ -1341,14 +1300,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f07240700b9
       responses:
-        "200":
+        '200':
           description: an empty result
           schema:
-            $ref: "#/definitions/Empty"
+            $ref: '#/definitions/Empty'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: delete zone
       tags:
         - Zone
@@ -1363,14 +1322,14 @@ paths:
           type: string
           x-example: 9cd24183-f848-48f8-6f55-0f0724070000
       responses:
-        "200":
+        '200':
           description: a result containing a single zone
           schema:
-            $ref: "#/definitions/ZoneResult"
+            $ref: '#/definitions/ZoneResult'
         default:
           description: Unexpected error
           schema:
-            $ref: "#/definitions/Error"
+            $ref: '#/definitions/Error'
       summary: get zone
       tags:
         - Zone
@@ -1411,56 +1370,46 @@ definitions:
   AllConstraints:
     properties:
       dark:
-        $ref: "#/definitions/ClusterConstraints"
+        $ref: '#/definitions/ClusterConstraints'
       light:
-        $ref: "#/definitions/ClusterConstraints"
+        $ref: '#/definitions/ClusterConstraints'
       tap:
-        $ref: "#/definitions/ClusterConstraints"
+        $ref: '#/definitions/ClusterConstraints'
     required:
       - light
     type: object
   CORSConfig:
-    description: >
+    description: |
       Experimental: Controls simple CORS responses for the associated domain.
-
       The configurable properties map closely to the CORS specification which
-
       should be referenced for a full discussion on their meaning:
-
       https://www.w3.org/TR/cors/ or https://developer.mozilla.org/docs/Web/HTTP/Access_control_CORS.
     properties:
       allow_credentials:
-        description: >
+        description: |
           Indicates whether the response to request can be exposed when the
-
           omit credentials flag is unset
-
           https://www.w3.org/TR/cors/#access-control-allow-credentials-response-header.
         type: boolean
       allowed_headers:
-        description: >
+        description: |
           Specifies what headers are allowed to be set when a request is made.
-
           https://www.w3.org/TR/cors/#access-control-allow-headers-response-header.
         items:
           type: string
         type: array
       allowed_methods:
-        description: >
+        description: |
           Indicates which HTTP request types may be used to call an endpoint.
-
           https://www.w3.org/TR/cors/#access-control-allow-methods-response-header.
         items:
           type: string
         type: array
       allowed_origins:
-        description: >
+        description: |
           Must contain a single element specifying the domain (origin) allowed
-
           to make requsets to this domain. If any origin is acceptable '*' may
-
           be used as a wildcard https://www.w3.org/TR/cors/#origin-request-header,
-
           https://www.w3.org/TR/cors/#access-control-allow-origin-response-header.
         items:
           type: string
@@ -1473,9 +1422,8 @@ definitions:
           type: string
         type: array
       max_age:
-        description: >
+        description: |
           Sets how long (in seconds) the response to a preflight request may be
-
           cached. A value of -1 will disable caching. https://www.w3.org/TR/cors/#access-control-max-age-response-header.
         type: integer
     required:
@@ -1489,13 +1437,10 @@ definitions:
       the proxy instance.
     properties:
       certificate_path:
-        description: >
+        description: |
           Path to a certificate in the PEM format for the domain. If multiple
-
           certificates need to be specified then should be contained in this file
-
           in the following order: first the primary certificate followed by any
-
           intermediary certificats.
         type: string
       key_path:
@@ -1522,7 +1467,7 @@ definitions:
       diffs:
         description: A collection of attribute updates that compose this change.
         items:
-          $ref: "#/definitions/ChangeEntry"
+          $ref: '#/definitions/ChangeEntry'
         type: array
       txn:
         description: |
@@ -1556,15 +1501,12 @@ definitions:
           - cluster
         type: string
       path:
-        description: A dot-separated / bracket-indexed path to the field changed on the
-          object.
+        description: A dot-separated / bracket-indexed path to the field changed on the object.
         type: string
-        x-example: cluster.instance[10.0.1.5:8080].metadata[pod-template-hash]
+        x-example: 'cluster.instance[10.0.1.5:8080].metadata[pod-template-hash]'
       value:
-        description: >
-          The value that has been added or removed to the object at the
-          attribute
-
+        description: |
+          The value that has been added or removed to the object at the attribute
           path indicated in path.
         type: string
       zone_key:
@@ -1606,7 +1548,7 @@ definitions:
     type: object
   Cluster:
     allOf:
-      - $ref: "#/definitions/ClusterCreate"
+      - $ref: '#/definitions/ClusterCreate'
       - properties:
           checksum:
             type: string
@@ -1623,42 +1565,37 @@ definitions:
       constraint_key:
         type: string
       metadata:
-        $ref: "#/definitions/Metadata"
+        $ref: '#/definitions/Metadata'
       properties:
-        $ref: "#/definitions/Metadata"
+        $ref: '#/definitions/Metadata'
       response_data:
         allOf:
-          - $ref: "#/definitions/ResponseData"
-        description: >
-          When a request is served by a cluster selected by this constraint
-          annotate
-
+          - $ref: '#/definitions/ResponseData'
+        description: |
+          When a request is served by a cluster selected by this constraint annotate
           the response with the information specified within this ResponseData
-
           object. It's possible that multiple response data configurations will
-
           apply; if that's the case then the values from ClusterConstarint takes
-
           precedence over those from a Route or SharedRules object.
       weight:
         type: integer
     type: object
   ClusterConstraints:
     items:
-      $ref: "#/definitions/ClusterConstraint"
+      $ref: '#/definitions/ClusterConstraint'
     type: array
   ClusterCreate:
     properties:
       circuit_breakers:
-        $ref: "#/definitions/CircuitBreakers"
+        $ref: '#/definitions/CircuitBreakers'
       health_checks:
-        $ref: "#/definitions/HealthChecks"
+        $ref: '#/definitions/HealthChecks'
       instances:
-        $ref: "#/definitions/Instances"
+        $ref: '#/definitions/Instances'
       name:
         type: string
       outlier_detection:
-        $ref: "#/definitions/OutlierDetection"
+        $ref: '#/definitions/OutlierDetection'
       require_tls:
         description: |
           If set, requests to this collection of hosts will be made via HTTPS.
@@ -1683,7 +1620,7 @@ definitions:
   ClusterResult:
     properties:
       result:
-        $ref: "#/definitions/Cluster"
+        $ref: '#/definitions/Cluster'
     type: object
   CohortSeed:
     properties:
@@ -1719,21 +1656,15 @@ definitions:
           cookie's 'Domain' attribute.
         type: string
       expires_in_sec:
-        description: >
-          This indicates how long a cookie will be valid, in seconds. If not set
-          the
-
+        description: |
+          This indicates how long a cookie will be valid, in seconds. If not set the
           default is to provide no expiration information. If set to 0 the cookie will
-
           have an 'Expires' attribute set to 'Mon, 1 Jan 0001 12:00:00 UTC'. For values
-
           greater than 0 the cookie's 'Max-Age' attribute will be set to that value.
         type: integer
       http_only:
-        description: >
-          If set the cookie value will not be accessible via Document.cookie.
-          Maps
-
+        description: |
+          If set the cookie value will not be accessible via Document.cookie. Maps
           directly to 'HttpOnly' attribute.
         type: boolean
       name:
@@ -1745,22 +1676,17 @@ definitions:
           the 'Path' attribute.
         type: string
       same_site:
-        description: >
-          Allows assertions how a cookie should behave wend making cross-site
-          requests.
-
+        description: |
+          Allows assertions how a cookie should behave wend making cross-site requests.
           Maps directly to 'SameSite' attribute. If unset no guidance will be included
-
           in the cookie.
         enum:
           - Strict
           - Lax
         type: string
       secure:
-        description: >
-          If set the cookie will only be sent on subsequent requests when
-          accessing
-
+        description: |
+          If set the cookie will only be sent on subsequent requests when accessing
           a server via HTTPS. Maps directly to 'Secure' attribute.
         type: boolean
       value:
@@ -1770,16 +1696,14 @@ definitions:
           a specific request.
         type: string
       value_is_literal:
-        description: >
-          If true then the value attribute is treated as a literal and no
-          attempt
-
+        description: |
+          If true then the value attribute is treated as a literal and no attempt
           to resolve to a server metadatum.
         type: boolean
     type: object
   Domain:
     allOf:
-      - $ref: "#/definitions/DomainCreate"
+      - $ref: '#/definitions/DomainCreate'
       - properties:
           checksum:
             type: string
@@ -1801,21 +1725,17 @@ definitions:
       checksum:
         type: string
       cors_config:
-        $ref: "#/definitions/CORSConfig"
+        $ref: '#/definitions/CORSConfig'
       domain_key:
         type: string
       force_https:
-        description: >
-          If set to true, requests must use TLS. If a request is not using TLS,
-          (as determined by
-
+        description: |
+          If set to true, requests must use TLS. If a request is not using TLS, (as determined by
           the scheme or the presence of X-Forwarded-Proto header), a 301 redirect will be sent
-
           telling the client to use HTTPS.
         type: boolean
       gzip_enabled:
-        description: "Experimental: if set to true will enable gzip compression on data
-          that passes trough this domain"
+        description: 'Experimental: if set to true will enable gzip compression on data that passes trough this domain'
         type: boolean
       name:
         type: string
@@ -1823,10 +1743,10 @@ definitions:
         type: integer
       redirects:
         items:
-          $ref: "#/definitions/Redirect"
+          $ref: '#/definitions/Redirect'
         type: array
       ssl_config:
-        $ref: "#/definitions/SSLConfig"
+        $ref: '#/definitions/SSLConfig'
       zone_key:
         type: string
     required:
@@ -1854,7 +1774,7 @@ definitions:
   DomainResult:
     properties:
       result:
-        $ref: "#/definitions/Domain"
+        $ref: '#/definitions/Domain'
     type: object
   Empty:
     type: object
@@ -1884,12 +1804,10 @@ definitions:
           A dot-separated / bracket-indexed path to the field changed on the
           object. '%' may be used as a wildcard.
         type: string
-        x-example: cluster.instance[%].metadata[app-name]
+        x-example: 'cluster.instance[%].metadata[app-name]'
       attribute_value:
-        description: >
-          The value that has been added or removed to the object at the
-          attribute
-
+        description: |
+          The value that has been added or removed to the object at the attribute
           path indicated in path.
         type: string
       change_txn:
@@ -1935,7 +1853,7 @@ definitions:
         type: string
         x-example: 1c7b1c5e-1a23-4d04-5cb4-eccea4d5994c
       time_range:
-        $ref: "#/definitions/TimeRange"
+        $ref: '#/definitions/TimeRange'
       zone_key:
         description: The zone this object is located in.
         type: string
@@ -1946,7 +1864,7 @@ definitions:
       and:
         description: An array of changelog filters that will be joined via logical AND.
         items:
-          $ref: "#/definitions/Filter"
+          $ref: '#/definitions/Filter'
         type: array
     type: object
   FilterSums:
@@ -1954,7 +1872,7 @@ definitions:
       or:
         description: An array of changelog filters that will be joined via logical OR.
         items:
-          $ref: "#/definitions/FilterProducts"
+          $ref: '#/definitions/FilterProducts'
         type: array
     type: object
   HTTPHealthCheck:
@@ -1972,7 +1890,7 @@ definitions:
         type: string
       request_headers_to_add:
         allOf:
-          - $ref: "#/definitions/Metadata"
+          - $ref: '#/definitions/Metadata'
         description: |
           Specifies a list of HTTP headers that should be added to each request
           sent to the health checked cluster.
@@ -1983,25 +1901,20 @@ definitions:
         type: string
     type: object
   HeaderConstraint:
-    description: >
-      Indicates that a request's headers should meet some requirement before
-      being
-
+    description: |
+      Indicates that a request's headers should meet some requirement before being
       selected for a rewrite. Must have zore or one elements.
     properties:
       case_sensitive:
-        description: If set, the header value check will be case sensitive.
+        description: 'If set, the header value check will be case sensitive.'
         type: boolean
       invert:
-        description: >
-          If set, the header constraint will succeed if the match described
-          faile.
+        description: |
+          If set, the header constraint will succeed if the match described faile.
         type: boolean
       name:
-        description: >
-          The header that is being checked. This must match the regexp
-          "^[0-9a-zA-Z-]+$".
-
+        description: |
+          The header that is being checked. This must match the regexp "^[0-9a-zA-Z-]+$".
           This is checked in a case insensitive manner.
         type: string
       value:
@@ -2029,10 +1942,8 @@ definitions:
           Instance metadatum value no header will be sent.
         type: string
       value_is_literal:
-        description: >
-          If true then the value attribute is treated as a literal and no
-          attempt
-
+        description: |
+          If true then the value attribute is treated as a literal and no attempt
           to resolve instance metadatum to find a value.
         type: boolean
     type: object
@@ -2046,9 +1957,9 @@ definitions:
           checker can be defined per HealthCheck.
         properties:
           http_health_check:
-            $ref: "#/definitions/HTTPHealthCheck"
+            $ref: '#/definitions/HTTPHealthCheck'
           tcp_health_check:
-            $ref: "#/definitions/TCPHealthCheck"
+            $ref: '#/definitions/TCPHealthCheck'
         type: object
       healthy_edge_interval_msec:
         description: |
@@ -2087,10 +1998,8 @@ definitions:
           Defaults to 60s.
         type: integer
       reuse_connection:
-        description: >
-          Whether or not to reuse health check connections between health
-          checks.
-
+        description: |
+          Whether or not to reuse health check connections between health checks.
           Default is true.
         type: boolean
       timeout_msec:
@@ -2130,29 +2039,29 @@ definitions:
     type: object
   HealthChecks:
     items:
-      $ref: "#/definitions/HealthCheck"
+      $ref: '#/definitions/HealthCheck'
     type: array
   Instance:
     properties:
       host:
         type: string
       metadata:
-        $ref: "#/definitions/Metadata"
+        $ref: '#/definitions/Metadata'
       port:
         type: integer
     type: object
   InstanceResult:
     properties:
       result:
-        $ref: "#/definitions/Instance"
+        $ref: '#/definitions/Instance'
     type: object
   Instances:
     items:
-      $ref: "#/definitions/Instance"
+      $ref: '#/definitions/Instance'
     type: array
   Listener:
     allOf:
-      - $ref: "#/definitions/ListenerCreate"
+      - $ref: '#/definitions/ListenerCreate'
       - properties:
           checksum:
             type: string
@@ -2161,7 +2070,6 @@ definitions:
             x-example: 9cd24183-f848-48f8-6f55-0f0724070000
         required:
           - listener_key
-          - zone_key
           - checksum
         type: object
   ListenerCreate:
@@ -2185,12 +2093,9 @@ definitions:
         type: integer
         x-example: 80
       protocol:
-        description: >
-          the protocol this listener will handle. http and http2 configure the
-          listener to only
-
+        description: |
+          the protocol this listener will handle. http and http2 configure the listener to only
           process requests of that type. http_auto will adapt to HTTP/1.1 and HTTP/2 as needed.
-
           tcp configures the listener to be a tcp proxy
         enum:
           - http
@@ -2199,20 +2104,18 @@ definitions:
           - tcp
         type: string
       tracing_config:
-        $ref: "#/definitions/TracingConfig"
+        $ref: '#/definitions/TracingConfig'
       zone_key:
         type: string
     required:
-      - listener_key
       - name
-      - host
       - port
       - protocol
     type: object
   ListenerResult:
     properties:
       result:
-        $ref: "#/definitions/Listener"
+        $ref: '#/definitions/Listener'
     type: object
   Match:
     description: |
@@ -2238,7 +2141,7 @@ definitions:
         type: string
       from:
         allOf:
-          - $ref: "#/definitions/Metadatum"
+          - $ref: '#/definitions/Metadatum'
         description: |
           The request attribute key and value to match. `key` must always be
           defined while `value` can be unspecified (only if behavior is set to
@@ -2267,7 +2170,7 @@ definitions:
         type: string
       to:
         allOf:
-          - $ref: "#/definitions/Metadatum"
+          - $ref: '#/definitions/Metadatum'
         description: |
           The constraints on a cluster that a matched request should map to. If
           to.key is specified and to.value is not, the matched from.value will
@@ -2279,11 +2182,11 @@ definitions:
     type: object
   Matches:
     items:
-      $ref: "#/definitions/Match"
+      $ref: '#/definitions/Match'
     type: array
   Metadata:
     items:
-      $ref: "#/definitions/Metadatum"
+      $ref: '#/definitions/Metadatum'
     type: array
   Metadatum:
     properties:
@@ -2296,56 +2199,56 @@ definitions:
     properties:
       result:
         items:
-          $ref: "#/definitions/AccessToken"
+          $ref: '#/definitions/AccessToken'
         type: array
     type: object
   MultiClusterResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Cluster"
+          $ref: '#/definitions/Cluster'
         type: array
     type: object
   MultiDomainResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Domain"
+          $ref: '#/definitions/Domain'
         type: array
     type: object
   MultiListenerResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Listener"
+          $ref: '#/definitions/Listener'
         type: array
     type: object
   MultiProxyResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Proxy"
+          $ref: '#/definitions/Proxy'
         type: array
     type: object
   MultiRouteResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Route"
+          $ref: '#/definitions/Route'
         type: array
     type: object
   MultiSharedRulesResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/SharedRules"
+          $ref: '#/definitions/SharedRules'
         type: array
     type: object
   MultiZoneResult:
     properties:
       result:
         items:
-          $ref: "#/definitions/Zone"
+          $ref: '#/definitions/Zone'
         type: array
     type: object
   OutlierDetection:
@@ -2362,49 +2265,34 @@ definitions:
           be ejected for longer than `interval_msec`.
         type: integer
       consecutive_5xx:
-        description: >
-          The number of consecutive 5xx responses before a consecutive 5xx
-          ejection
-
+        description: |
+          The number of consecutive 5xx responses before a consecutive 5xx ejection
           occurs. Defaults to 5. Setting this to 0 effectively turns off the
-
           consecutive 5xx detector.
         type: integer
       consecutive_gateway_failure:
-        description: >
+        description: |
           The number of consecutive gateway failures (502, 503, 504 status or
-
           connection errors that are mapped to one of those status codes) before a
-
           consecutive gateway failure ejection occurs. Defaults to 5. Setting this
-
           to 0 effectively turns off the consecutive gateway failure detector.
         type: integer
       enforcing_consecutive_5xx:
-        description: >
-          The % chance that a host will be actually ejected when an outlier
-          status
-
+        description: |
+          The % chance that a host will be actually ejected when an outlier status
           is detected through consecutive 5xx. This setting can be used to disable
-
           ejection or to ramp it up slowly. Defaults to 100.
         type: integer
       enforcing_consecutive_gateway_failure:
-        description: >
-          The % chance that a host will be actually ejected when an outlier
-          status
-
+        description: |
+          The % chance that a host will be actually ejected when an outlier status
           is detected through consecutive gateway failures. This setting can be
-
           used to disable ejection or to ramp it up slowly. Defaults to 0.
         type: integer
       enforcing_success_rate:
-        description: >
-          The % chance that a host will be actually ejected when an outlier
-          status
-
+        description: |
+          The % chance that a host will be actually ejected when an outlier status
           is detected through success rate statistics. This setting can be used to
-
           disable ejection or to ramp it up slowly. Defaults to 100.
         type: integer
       interval_msec:
@@ -2421,49 +2309,31 @@ definitions:
           host.
         type: integer
       success_rate_minimum_hosts:
-        description: >
-          The number of hosts in a cluster that must have enough request volume
-          to
-
+        description: |
+          The number of hosts in a cluster that must have enough request volume to
           detect success rate outliers. If the number of hosts is less than this
-
           setting, outlier detection via success rate statistics is not performed
-
           for any host in the cluster. Defaults to 5. Setting this to 0 effectively
-
           triggers the success rate detector regardless of the number of valid hosts
-
           during an interval (as determined by `success_rate_request_volume`).
         type: integer
       success_rate_request_volume:
-        description: >
+        description: |
           The minimum number of total requests that must be collected in one
-
           interval (as defined by interval_msec) to include this host
-
           in success rate based outlier detection. If the volume is lower than this
-
           setting, outlier detection via success rate statistics is not performed
-
           for that host. Defaults to 100. Must be greater than 0.
         type: integer
       success_rate_stdev_factor:
-        description: >
-          This factor is used to determine the ejection threshold for success
-          rate
-
+        description: |
+          This factor is used to determine the ejection threshold for success rate
           outlier ejection. The ejection threshold is the difference between the
-
           mean success rate, and the product of this factor and the standard
-
           deviation of the mean success rate: mean - (stdev *
-
           success_rate_stdev_factor). This factor is divided by a thousand to get a
-
           double. That is, if the desired factor is 1.9, the runtime value should
-
           be 1900. Defaults to 1900. Setting this to 0 effectively turns off the
-
           success rate detector.
         type: integer
     type: object
@@ -2490,20 +2360,20 @@ definitions:
   PaginatedChangeDescriptions:
     properties:
       details:
-        $ref: "#/definitions/PaginationDetails"
+        $ref: '#/definitions/PaginationDetails'
       result:
         items:
-          $ref: "#/definitions/ChangeDescription"
+          $ref: '#/definitions/ChangeDescription'
         type: array
     type: object
   PaginationDetails:
     properties:
       pagination:
-        $ref: "#/definitions/PageDetails"
+        $ref: '#/definitions/PageDetails'
     type: object
   Proxy:
     allOf:
-      - $ref: "#/definitions/ProxyCreate"
+      - $ref: '#/definitions/ProxyCreate'
       - properties:
           checksum:
             type: string
@@ -2511,7 +2381,6 @@ definitions:
             type: string
         required:
           - proxy_key
-          - zone_key
           - checksum
         type: object
   ProxyCreate:
@@ -2552,23 +2421,21 @@ definitions:
   ProxyResult:
     properties:
       result:
-        $ref: "#/definitions/Proxy"
+        $ref: '#/definitions/Proxy'
     type: object
   Redirect:
     description: |
       Specifies how a URL within a domain should be rewritten when requested.
     properties:
       from:
-        description: A regexp that will be matched against the URL (not including the
-          host/port). May include capture groups for reference in "to."
+        description: A regexp that will be matched against the URL (not including the host/port). May include capture groups for reference in "to."
         type: string
       header_constraints:
         items:
-          $ref: "#/definitions/HeaderConstraint"
+          $ref: '#/definitions/HeaderConstraint'
         type: array
       name:
-        description: A unique (to this Domain) name for the Redirect. Must match the
-          regexp "^[0-9a-zA-Z-]+$"
+        description: 'A unique (to this Domain) name for the Redirect. Must match the regexp "^[0-9a-zA-Z-]+$"'
         type: string
       redirect_type:
         description: How this redirect should be presented via HTTP response code.
@@ -2577,9 +2444,7 @@ definitions:
           - temporary
         type: string
       to:
-        description: The new URL that will be constructed from the request. Capture
-          groups from "from" may be referenced as "$&lt;group number&gt;" which
-          begins at 1.
+        description: The new URL that will be constructed from the request. Capture groups from "from" may be referenced as "$&lt;group number&gt;" which begins at 1.
         type: string
     required:
       - name
@@ -2591,22 +2456,20 @@ definitions:
     properties:
       cookies:
         items:
-          $ref: "#/definitions/CookieDatum"
+          $ref: '#/definitions/CookieDatum'
         type: array
       headers:
         items:
-          $ref: "#/definitions/HeaderDatum"
+          $ref: '#/definitions/HeaderDatum'
         type: array
     type: object
   RetryPolicy:
     description: Number of times to retry a request and how long to wait before timing out.
     properties:
       num_retries:
-        description: >
+        description: |
           Number of times to retry an upstream request. Note that the initial
-
           connection attempt is not included in this number, hence 0 means initial
-
           attempt and no retries, and 1 means initial attempt plus one retry.
         format: int64
         type: integer
@@ -2615,15 +2478,14 @@ definitions:
         format: int64
         type: integer
       timeout_msec:
-        description: >
-          Total time limit in milliseconds for all attempts (including the
-          initial attempt)
+        description: |
+          Total time limit in milliseconds for all attempts (including the initial attempt)
         format: int64
         type: integer
     type: object
   Route:
     allOf:
-      - $ref: "#/definitions/RouteCreate"
+      - $ref: '#/definitions/RouteCreate'
       - properties:
           checksum:
             type: string
@@ -2638,14 +2500,14 @@ definitions:
       checksum:
         type: string
       cohort_seed:
-        $ref: "#/definitions/CohortSeed"
+        $ref: '#/definitions/CohortSeed'
       domain_key:
         type: string
       path:
         type: string
       response_data:
         allOf:
-          - $ref: "#/definitions/ResponseData"
+          - $ref: '#/definitions/ResponseData'
         description: |
           When a request is served by this Route annotate the response with the
           information specified within this ResponseData object. It's possible
@@ -2653,12 +2515,12 @@ definitions:
           case then the values from Route take precedence over those from a
           SharedRules object.
       retry_policy:
-        $ref: "#/definitions/RetryPolicy"
+        $ref: '#/definitions/RetryPolicy'
       route_key:
         type: string
       rules:
         items:
-          $ref: "#/definitions/Rule"
+          $ref: '#/definitions/Rule'
         type: array
       shared_rules_key:
         type: string
@@ -2688,16 +2550,16 @@ definitions:
   RouteResult:
     properties:
       result:
-        $ref: "#/definitions/Route"
+        $ref: '#/definitions/Route'
     type: object
   Rule:
     properties:
       cohort_seed:
-        $ref: "#/definitions/CohortSeed"
+        $ref: '#/definitions/CohortSeed'
       constraints:
-        $ref: "#/definitions/AllConstraints"
+        $ref: '#/definitions/AllConstraints'
       matches:
-        $ref: "#/definitions/Matches"
+        $ref: '#/definitions/Matches'
       methods:
         items:
           type: string
@@ -2706,26 +2568,21 @@ definitions:
         type: string
     type: object
   SSLConfig:
-    description: >
+    description: |
       Experimental: Specifies whether a domain should support SSL/TLS
-
       connections from clients.  If not set the proxy will expect unencrypted HTTP
-
       traffic.
     properties:
       cert_key_pairs:
         description: SSLConfig must have one cert_key_pairs entry specified.
         items:
-          $ref: "#/definitions/CertKeyPathPair"
+          $ref: '#/definitions/CertKeyPathPair'
         type: array
       cipher_filter:
-        description: >
+        description: |
           An OpenSSL compatible filter string indicating the ciphers acceptable
-
           for this proxy to use while communicating with clients. The default value
-
           is EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH. For more information
-
           see https://wiki.openssl.org/index.php/Manual:Ciphers(1)
         type: string
       protocols:
@@ -2740,7 +2597,7 @@ definitions:
     type: object
   SharedRules:
     allOf:
-      - $ref: "#/definitions/SharedRulesCreate"
+      - $ref: '#/definitions/SharedRulesCreate'
       - properties:
           checksum:
             type: string
@@ -2755,14 +2612,14 @@ definitions:
       checksum:
         type: string
       cohort_seed:
-        $ref: "#/definitions/CohortSeed"
+        $ref: '#/definitions/CohortSeed'
       default:
-        $ref: "#/definitions/AllConstraints"
+        $ref: '#/definitions/AllConstraints'
       properties:
-        $ref: "#/definitions/Metadata"
+        $ref: '#/definitions/Metadata'
       response_data:
         allOf:
-          - $ref: "#/definitions/ResponseData"
+          - $ref: '#/definitions/ResponseData'
         description: |
           When a request is served by a Route that is part of this SharedRules
           group the response is annotated with the information specified within
@@ -2771,17 +2628,16 @@ definitions:
           the applicable Route and ClusterConstarint takes precedence over those
           specified here.
       retry_policy:
-        $ref: "#/definitions/RetryPolicy"
+        $ref: '#/definitions/RetryPolicy'
       rules:
         items:
-          $ref: "#/definitions/Rule"
+          $ref: '#/definitions/Rule'
         type: array
       shared_rules_key:
         type: string
       zone_key:
         type: string
     required:
-      - name
       - zone_key
       - default
     type: object
@@ -2797,7 +2653,7 @@ definitions:
   SharedRulesResult:
     properties:
       result:
-        $ref: "#/definitions/SharedRules"
+        $ref: '#/definitions/SharedRules'
     type: object
   TCPHealthCheck:
     properties:
@@ -2827,8 +2683,7 @@ definitions:
         format: int64
         type: integer
       start:
-        description: The beginning of the window we want to see changes for; measured in
-          microseconds since Unix Epoch.
+        description: The beginning of the window we want to see changes for; measured in microseconds since Unix Epoch.
         format: int64
         type: integer
     type: object
@@ -2837,17 +2692,14 @@ definitions:
       Configures tracing operations to be performed on the given listener
     properties:
       ingress:
-        description: >
-          Determines whether spans sent from this listener should be treated as
-          ingress
-
+        description: |
+          Determines whether spans sent from this listener should be treated as ingress
           or egress operations.
         type: boolean
         x-example: true
       request_headers_for_tags:
-        description: >
-          the headers specified here will be added to the generated spans as
-          annotations
+        description: |
+          the headers specified here will be added to the generated spans as annotations
         items:
           type: string
         type: array
@@ -2864,7 +2716,7 @@ definitions:
           A timestamp that marks when a user was deleted. It is in the format
           yyyy-mm-ddThh:mm:ss.SZ. The timezone will always be UTC.
         type: string
-        x-example: 2017-08-14T17:29:11.986438Z
+        x-example: '2017-08-14T17:29:11.986Z'
       login_email:
         type: string
       user_key:
@@ -2904,5 +2756,5 @@ definitions:
   ZoneResult:
     properties:
       result:
-        $ref: "#/definitions/Zone"
+        $ref: '#/definitions/Zone'
     type: object
