@@ -302,7 +302,7 @@ info:
 
     --- | ---
 
-    tenant.html | the tenant's webpage; it contains a short description and the entry points of the tenant 
+    tenant.html | the tenant's webpage; it contains a short description and the entry points of the tenant
 
     user.html | the user's profile page
 
@@ -783,7 +783,7 @@ info:
 
     The external data sources and generators can be defined by the use of so-called [tenants](https://doc.phantauth.net/#/tenant). To learn more, please go to chapter [Tenant](https://doc.phantauth.net/#/tenant).
   title: PhantAuth
-  version: ""
+  version: 1.0.0
   x-origin:
     - format: swagger
       url: https://www.phantauth.net/api.json
@@ -1363,7 +1363,7 @@ paths:
         In lack of a fleet name, all calls generate a different fleet object to the randomly generated fleet name.
       parameters:
         - description: >
-            
+
             The identifier or email address of the fleet; it is integrated in the `sub` property and is the basis of the other generated properties.
           in: path
           name: fleetname
@@ -1490,7 +1490,7 @@ paths:
         In lack of a team name, all calls generate a different team object to the randomly generated team name.
       parameters:
         - description: >
-            
+
             The identifier or email address of the team; it is integrated in the `sub` property and is the basis of the other generated properties.
           in: path
           name: teamname
