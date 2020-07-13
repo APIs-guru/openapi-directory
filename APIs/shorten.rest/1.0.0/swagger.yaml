@@ -17,55 +17,55 @@ info:
     A default destination is always set and specific destinations can be set to redirect the end user to preferred destinations based on the user&apos;s geographical location (country) and device Operating System.
 
 
-    In order to use the Shorten.Rest URL Shortening API you can choose to bind your own branded domain, sub-domain or to use our default domain - Short.FYI
+    In order to use the Shorten.Rest URL Shortening API you can choose to bind your own branded domain, sub-domain or to use our default domain - Short.FYI 
 
-     ### Destination Matching
+     ### Destination Matching 
 
-     When creating or editing a short URL (&apos;alias&apos;) you can choose to specify a destination for each country and OS ([Supported OSes list](#tag/OperatingSystems)) combination.
+     When creating or editing a short URL (&apos;alias&apos;) you can choose to specify a destination for each country and OS ([Supported OSes list](#tag/OperatingSystems)) combination. 
 
-     When a user clicks on the short link, Shorten.rest will examine the end user's country (determined by User's IP) and OS (User agent) and match the most suitable destination for each user.
+     When a user clicks on the short link, Shorten.rest will examine the end user's country (determined by User's IP) and OS (User agent) and match the most suitable destination for each user. 
 
-     (*) If no destination is set for a specific request combination Shorten.rest will use the default destination that exists within each short URL
+     (*) If no destination is set for a specific request combination Shorten.rest will use the default destination that exists within each short URL 
 
-     (**) BRANDED DOMAINS: If the requested alias does not exist in our database - Shorten.rest will redirect the user to the default fallback you set within your dashboard under the ‘Alias Not Found Page Url’ value for a custom domain.
+     (**) BRANDED DOMAINS: If the requested alias does not exist in our database - Shorten.rest will redirect the user to the default fallback you set within your dashboard under the ‘Alias Not Found Page Url’ value for a custom domain. 
 
-     (***) Operating System (OS) destinations are stronger than a country destination!
-     For example - if you have a custom landing page that is targeting people in the USA and a second landing page that is hyper focused for people who use iOS devices - a person clicking on your link in the USA that is on an iPhone will be redirected to the iOS landing page, while all other devices will be redirected to the USA landing page.
+     (***) Operating System (OS) destinations are stronger than a country destination! 
+     For example - if you have a custom landing page that is targeting people in the USA and a second landing page that is hyper focused for people who use iOS devices - a person clicking on your link in the USA that is on an iPhone will be redirected to the iOS landing page, while all other devices will be redirected to the USA landing page. 
 
      | OS  | Country  | Destination |
     | :------------: |:---------------:| -----|
 
     | iOS      |  | YourDestination.com/ios |
 
-    |       | US        |   YourDestination.com/usa |
+    |       | US        |   YourDestination.com/usa | 
 
      Shorten.rest will choose the YourDestination.com/ios url as the most suitable destination.
 
-     ### Branded Domain Attributes
+     ### Branded Domain Attributes 
 
-     When setting up your custom domain you can include optional metatags and snippets ([Supported snippets list](#tag/Snippets)). These parameters (such as retargeting, tracking and conversion pixels) are populated and fired on click - at the time of the redirect.
+     When setting up your custom domain you can include optional metatags and snippets ([Supported snippets list](#tag/Snippets)). These parameters (such as retargeting, tracking and conversion pixels) are populated and fired on click - at the time of the redirect. 
 
-     By default the parameters you set in the domain setting will be included in all Short URLs associated with that domain.
+     By default the parameters you set in the domain setting will be included in all Short URLs associated with that domain. 
 
-     You can always override the domain defaults for each URL by passing the appropriate variables when creating or updating a short URL
+     You can always override the domain defaults for each URL by passing the appropriate variables when creating or updating a short URL 
 
-     ### Setting a Custom string for an Alias (short.fyi/alias)
+     ### Setting a Custom string for an Alias (short.fyi/alias) 
 
-     While creating a short URL you can specify which domain to use. You can choose to use your own branded domain or our default domain - Short.fyi.
+     While creating a short URL you can specify which domain to use. You can choose to use your own branded domain or our default domain - Short.fyi. 
 
      Each Alias is unique within a domain they are related to. This means that if multiple accounts use you the same domain (for example short.fyi), if an alias is already taken you may not create a new destination for it.
 
-     That said - If you would like to use a specific alias which is already taken - the only way to do so is to create it on a new domain you own and have attached to your Shorten.rest account.
+     That said - If you would like to use a specific alias which is already taken - the only way to do so is to create it on a new domain you own and have attached to your Shorten.rest account. 
 
-     ### Random Aliases
+     ### Random Aliases 
 
-     By default - unless you specify a vanity URI for your alias each URL that is shortened on our platform will have a random string generated by the API. This means that if the &apos;alias&apos; attribute of a /aliases POST request is not provided, or is an empty string, a random string of seven characters will be generated and returned as part of the POST response.
+     By default - unless you specify a vanity URI for your alias each URL that is shortened on our platform will have a random string generated by the API. This means that if the &apos;alias&apos; attribute of a /aliases POST request is not provided, or is an empty string, a random string of seven characters will be generated and returned as part of the POST response. 
 
-     You can also place the @**rnd** macro within the alias field when you create a new alias, for example /vanity/@rnd, which might return an alias like /vanity/ZMAefRt, or /vanity@rnd, which might produce something like /vanityMRtvxadf. Only the first @rnd in an alias attribute will be replaced.
+     You can also place the @**rnd** macro within the alias field when you create a new alias, for example /vanity/@rnd, which might return an alias like /vanity/ZMAefRt, or /vanity@rnd, which might produce something like /vanityMRtvxadf. Only the first @rnd in an alias attribute will be replaced. 
 
-     ### NOTES
+     ### NOTES 
 
-     ( * ) All methods of the Shorten.REST API require that your API key be provided in **x-api-key** header.
+     ( * ) All methods of the Shorten.REST API require that your API key be provided in **x-api-key** header. 
 
      (**) All API parameters are case sensitive
   title: Shorten.REST API Documentation
@@ -74,7 +74,8 @@ info:
     - developer_tools
   x-logo:
     backgroundColor: rgb(236, 236, 236)
-    url: https://shorten.rest/assets/logo.png
+    href: https://shorten.rest
+    url: https://shorten.rest/wp-content/uploads/2020/02/shorten.rest-logo.png
   x-origin:
     - format: swagger
       url: https://docs.shorten.rest/swagger.json
@@ -152,7 +153,7 @@ paths:
       description: >-
         This POST method creates a new alias under a specified domain. If no
         domain is specified in the request the alias will be attached to the
-        default domain Short.fyi
+        default domain Short.fyi 
 
          **NOTE:** You can override the domain level Meta Tags and Tracking Snippets by specifying them for each URL. Any variables you add to a specific URL will always override domain level settings.
       operationId: CreateAlias
@@ -193,9 +194,9 @@ paths:
         If no domain is provided you will receive the alias found attached to
         the Short.fyi domain (if it exists and is linked to your account!)
 
-         ### NOTE:
+         ### NOTE: 
 
-         ( * )If you add a metatag or a snippet with a same name to an alias and the domain it's related to, the value will be taken from the alias and not the domain
+         ( * )If you add a metatag or a snippet with a same name to an alias and the domain it's related to, the value will be taken from the alias and not the domain 
 
          ( ** ) When you update any array property (like destinations) the block is updated **completely** so you have to specify the old records to avoid deleting them
 
@@ -232,9 +233,9 @@ paths:
     get:
       description: >-
         Obtain a list of all alias names associated with your account and given
-        domain. Result array is in descending order by creation date.
+        domain. Result array is in descending order by creation date. 
 
-         If no domain is specified you will receive a list of all the alias names you have created using the Short.fyi domain.
+         If no domain is specified you will receive a list of all the alias names you have created using the Short.fyi domain. 
 
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetAliases
@@ -272,7 +273,7 @@ paths:
     get:
       description: >-
         Retrieve the raw click data for your account. Clicks are retrieved by
-        creation date in descending order.
+        creation date in descending order. 
 
          If there are more results than the limit for the request the response will return you a value in lastId property you can specify it in the continueFrom query parameter to get the next batch of records.
       operationId: GetClicks
