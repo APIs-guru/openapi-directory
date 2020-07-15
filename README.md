@@ -12,7 +12,7 @@
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 <a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/backers/badge.svg" /></a> <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/openapi-directory/sponsors/badge.svg" /></a> <a href="#partners" alt="Partners on Open Collective"><img src="https://opencollective.com/openapi-directory/partner/badge.svg" /></a>
 
-Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) formats.<BR>
+Directory of API definitions in [OpenAPI(fka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) and [3.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md) formats.<BR>
 API access to collection: [Go!][apiDoc-link] - We also have an [RSS Feed](http://api.apis.guru/v2/list.rss)
 
 [![Add API][addAPI-image]][addAPI-link]
@@ -94,7 +94,7 @@ All API definitions acquired from public sources under the [Fair use](http://en.
 Definition sources
 --------------------------
 Some definitions are taken from Open Source projects:
- - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) description for Instagram API
+ - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(fka Swagger) description for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(fka Swagger) definition for BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (fka Swagger) 2.0 description for Medium API
  - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for the Giphy API
