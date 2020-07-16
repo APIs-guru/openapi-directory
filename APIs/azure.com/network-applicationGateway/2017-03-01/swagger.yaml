@@ -1,19 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: management.azure.com
 info:
-  description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
+  description: The Microsoft Azure Network management API provides a RESTful set
+    of web services that interact with Microsoft Azure Networks service to
+    manage your network resources. The API has entities that capture the
+    relationship between an end user and the Microsoft Azure Networks service.
   title: NetworkManagementClient
-  version: '2017-03-01'
+  version: 2017-03-01
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+    url: https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/applicationGateway.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/applicationGateway.json
+      version: "2.0"
+    - format: swagger
+      url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/applicationGateway.json
+      version: "2.0"
   x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-applicationGateway
@@ -26,7 +32,7 @@ produces:
   - application/json
 securityDefinitions:
   azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/authorize
     description: Azure Active Directory OAuth2 Flow
     flow: implicit
     scopes:
@@ -43,43 +49,47 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: The subscription credentials which uniquely identify the Microsoft
+      Azure subscription. The subscription ID forms part of the URI for every
+      service call.
     in: path
     name: subscriptionId
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets':
+  "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets":
     get:
       description: Lists all available web application firewall rule sets.
       operationId: ApplicationGateways_ListAvailableWafRuleSets
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Success. The operation returns a list of all available web application firewall rule sets.
+        "200":
+          description: Success. The operation returns a list of all available web
+            application firewall rule sets.
           schema:
-            $ref: '#/definitions/ApplicationGatewayAvailableWafRuleSetsResult'
+            $ref: "#/definitions/ApplicationGatewayAvailableWafRuleSetsResult"
       tags:
         - ApplicationGateways
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways':
+  "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways":
     get:
       description: Gets all the application gateways in a subscription.
       operationId: ApplicationGateways_ListAll
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Success. The operation returns a list of ApplicationGateway resources.
+        "200":
+          description: Success. The operation returns a list of ApplicationGateway
+            resources.
           schema:
-            $ref: '#/definitions/ApplicationGatewayListResult'
+            $ref: "#/definitions/ApplicationGatewayListResult"
       tags:
         - ApplicationGateways
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways":
     get:
       description: Lists all application gateways in a resource group.
       operationId: ApplicationGateways_List
@@ -89,18 +99,19 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Success. The operation returns a list of ApplicationGateway resources.
+        "200":
+          description: Success. The operation returns a list of ApplicationGateway
+            resources.
           schema:
-            $ref: '#/definitions/ApplicationGatewayListResult'
+            $ref: "#/definitions/ApplicationGatewayListResult"
       tags:
         - ApplicationGateways
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}":
     delete:
       description: Deletes the specified application gateway.
       operationId: ApplicationGateways_Delete
@@ -115,14 +126,14 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
+        "200":
           description: Delete successful.
-        '202':
+        "202":
           description: Accepted and the operation will complete asynchronously.
-        '204':
+        "204":
           description: Request successful. Resource with the specified name does not exist
       tags:
         - ApplicationGateways
@@ -141,13 +152,14 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Request successful. The operation returns an ApplicationGateway resource.
+        "200":
+          description: Request successful. The operation returns an ApplicationGateway
+            resource.
           schema:
-            $ref: '#/definitions/ApplicationGateway'
+            $ref: "#/definitions/ApplicationGateway"
       tags:
         - ApplicationGateways
     put:
@@ -164,29 +176,33 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - description: Parameters supplied to the create or update application gateway operation.
+        - description: Parameters supplied to the create or update application gateway
+            operation.
           in: body
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ApplicationGateway'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+            $ref: "#/definitions/ApplicationGateway"
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Update successful. The operation returns the resulting ApplicationGateway resource.
+        "200":
+          description: Update successful. The operation returns the resulting
+            ApplicationGateway resource.
           schema:
-            $ref: '#/definitions/ApplicationGateway'
-        '201':
-          description: Create successful. The operation returns the resulting ApplicationGateway resource.
+            $ref: "#/definitions/ApplicationGateway"
+        "201":
+          description: Create successful. The operation returns the resulting
+            ApplicationGateway resource.
           schema:
-            $ref: '#/definitions/ApplicationGateway'
+            $ref: "#/definitions/ApplicationGateway"
       tags:
         - ApplicationGateways
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth":
     post:
-      description: Gets the backend health of the specified application gateway in a resource group.
+      description: Gets the backend health of the specified application gateway in a
+        resource group.
       operationId: ApplicationGateways_BackendHealth
       parameters:
         - description: The name of the resource group.
@@ -199,24 +215,25 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
+        - description: Expands BackendAddressPool and BackendHttpSettings referenced in
+            backend health.
           in: query
           name: $expand
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Request successful.
           schema:
-            $ref: '#/definitions/ApplicationGatewayBackendHealth'
-        '202':
+            $ref: "#/definitions/ApplicationGatewayBackendHealth"
+        "202":
           description: Accepted and the operation will complete asynchronously.
       tags:
         - ApplicationGateways
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start":
     post:
       description: Starts the specified application gateway.
       operationId: ApplicationGateways_Start
@@ -231,17 +248,18 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Request successful. The operation starts the ApplicationGateway resource.
-        '202':
+        "200":
+          description: Request successful. The operation starts the ApplicationGateway
+            resource.
+        "202":
           description: Accepted and the operation will complete asynchronously.
       tags:
         - ApplicationGateways
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop":
     post:
       description: Stops the specified application gateway in a resource group.
       operationId: ApplicationGateways_Stop
@@ -256,12 +274,13 @@ paths:
           name: applicationGatewayName
           required: true
           type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: "#/parameters/ApiVersionParameter"
+        - $ref: "#/parameters/SubscriptionIdParameter"
       responses:
-        '200':
-          description: Request successful. The operation stops the ApplicationGateway resource.
-        '202':
+        "200":
+          description: Request successful. The operation stops the ApplicationGateway
+            resource.
+        "202":
           description: Accepted and the operation will complete asynchronously.
       tags:
         - ApplicationGateways
@@ -293,28 +312,29 @@ definitions:
     description: Application gateway resource
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayAuthenticationCertificate:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Authentication certificates of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesForma\
+          t"
         x-ms-client-flatten: true
   ApplicationGatewayAuthenticationCertificatePropertiesFormat:
     description: Authentication certificates properties of an application gateway.
@@ -323,7 +343,8 @@ definitions:
         description: Certificate public data.
         type: string
       provisioningState:
-        description: 'Provisioning state of the authentication certificate resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the authentication certificate resource.
+          Possible values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
   ApplicationGatewayAvailableWafRuleSetsResult:
     description: Response for ApplicationGatewayAvailableWafRuleSets API service call.
@@ -331,7 +352,7 @@ definitions:
       value:
         description: The list of application gateway rule sets.
         items:
-          $ref: '#/definitions/ApplicationGatewayFirewallRuleSet'
+          $ref: "#/definitions/ApplicationGatewayFirewallRuleSet"
         type: array
   ApplicationGatewayBackendAddress:
     description: Backend address of an application gateway.
@@ -344,21 +365,20 @@ definitions:
         type: string
   ApplicationGatewayBackendAddressPool:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Backend Address Pool of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Resource that is unique within a resource group. This name can be used to access the resource.
+        description: Resource that is unique within a resource group. This name can be
+          used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayBackendAddressPoolPropertiesFormat:
     description: Properties of Backend Address Pool of an application gateway.
@@ -366,51 +386,948 @@ definitions:
       backendAddresses:
         description: Backend addresses
         items:
-          description: Backend address of an application gateway.
-          properties:
-            fqdn:
-              description: Fully qualified domain name (FQDN).
-              type: string
-            ipAddress:
-              description: IP address
-              type: string
+          $ref: "#/definitions/ApplicationGatewayBackendAddress"
         type: array
       backendIPConfigurations:
         description: Collection of references to IPs defined in network interfaces.
         items:
-          $ref: './networkInterface.json#/definitions/NetworkInterfaceIPConfiguration'
+          allOf:
+            - properties:
+                id:
+                  description: Resource ID.
+                  type: string
+              x-ms-azure-resource: true
+          description: IPConfiguration in a network interface.
+          properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is
+                updated.
+              type: string
+            name:
+              description: The name of the resource that is unique within a resource group.
+                This name can be used to access the resource.
+              type: string
+            properties:
+              description: Properties of IP configuration.
+              properties:
+                applicationGatewayBackendAddressPools:
+                  description: The reference of ApplicationGatewayBackendAddressPool resource.
+                  items:
+                    allOf:
+                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                          rties/backendIPConfigurations/items/allOf/0"
+                    description: Backend Address Pool of an application gateway.
+                    properties:
+                      etag:
+                        description: A unique read-only string that changes whenever the resource is
+                          updated.
+                        type: string
+                      name:
+                        description: Resource that is unique within a resource group. This name can be
+                          used to access the resource.
+                        type: string
+                      properties:
+                        description: Properties of Backend Address Pool of an application gateway.
+                        properties:
+                          backendAddresses:
+                            description: Backend addresses
+                            items:
+                              description: Backend address of an application gateway.
+                              properties:
+                                fqdn:
+                                  description: Fully qualified domain name (FQDN).
+                                  type: string
+                                ipAddress:
+                                  description: IP address
+                                  type: string
+                            type: array
+                          backendIPConfigurations:
+                            description: Collection of references to IPs defined in network interfaces.
+                            items:
+                              allOf:
+                                - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                    rties/backendIPConfigurations/items/allOf/0"
+                              description: IPConfiguration in a network interface.
+                              properties:
+                                etag:
+                                  description: A unique read-only string that changes whenever the resource is
+                                    updated.
+                                  type: string
+                                name:
+                                  description: The name of the resource that is unique within a resource group.
+                                    This name can be used to access the
+                                    resource.
+                                  type: string
+                                properties:
+                                  description: Properties of IP configuration.
+                                  properties:
+                                    applicationGatewayBackendAddressPools:
+                                      description: The reference of ApplicationGatewayBackendAddressPool resource.
+                                      items:
+                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/p\
+                                          roperties/properties/properties/appli\
+                                          cationGatewayBackendAddressPools/item\
+                                          s"
+                                      type: array
+                                    loadBalancerBackendAddressPools:
+                                      description: The reference of LoadBalancerBackendAddressPool resource.
+                                      items:
+                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/p\
+                                          roperties/properties/properties/loadB\
+                                          alancerBackendAddressPools/items"
+                                      type: array
+                                    loadBalancerInboundNatRules:
+                                      description: A list of references of LoadBalancerInboundNatRules.
+                                      items:
+                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/p\
+                                          roperties/properties/properties/loadB\
+                                          alancerInboundNatRules/items"
+                                      type: array
+                                    primary:
+                                      description: Gets whether this is a primary customer address on the network
+                                        interface.
+                                      type: boolean
+                                    privateIPAddress:
+                                      type: string
+                                    privateIPAddressVersion:
+                                      description: "Available from Api-Version 2016-03-30 onwards, it represents
+                                        whether the specific ipconfiguration is
+                                        IPv4 or IPv6. Default is taken as
+                                        IPv4.  Possible values are: 'IPv4' and
+                                        'IPv6'."
+                                      enum:
+                                        - IPv4
+                                        - IPv6
+                                      type: string
+                                      x-ms-enum:
+                                        modelAsString: true
+                                        name: IPVersion
+                                    privateIPAllocationMethod:
+                                      description: "Defines how a private IP address is assigned. Possible values are:
+                                        'Static' and 'Dynamic'."
+                                      enum:
+                                        - Static
+                                        - Dynamic
+                                      type: string
+                                      x-ms-enum:
+                                        modelAsString: true
+                                        name: IPAllocationMethod
+                                    provisioningState:
+                                      type: string
+                                    publicIPAddress:
+                                      $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                        rties/backendIPConfigurations/items/pro\
+                                        perties/properties/properties/publicIPA\
+                                        ddress"
+                                    subnet:
+                                      $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                        rties/backendIPConfigurations/items/pro\
+                                        perties/properties/properties/subnet"
+                            type: array
+                          provisioningState:
+                            description: "Provisioning state of the backend address pool resource. Possible
+                              values are: 'Updating', 'Deleting', and 'Failed'."
+                            type: string
+                  type: array
+                loadBalancerBackendAddressPools:
+                  description: The reference of LoadBalancerBackendAddressPool resource.
+                  items:
+                    allOf:
+                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                          rties/backendIPConfigurations/items/allOf/0"
+                    description: Pool of backend IP addresses.
+                    properties:
+                      etag:
+                        description: A unique read-only string that changes whenever the resource is
+                          updated.
+                        type: string
+                      name:
+                        description: Gets name of the resource that is unique within a resource group.
+                          This name can be used to access the resource.
+                        type: string
+                      properties:
+                        description: Properties of the backend address pool.
+                        properties:
+                          backendIPConfigurations:
+                            description: Gets collection of references to IP addresses defined in network
+                              interfaces.
+                            items:
+                              $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                rties/backendIPConfigurations/items/properties/\
+                                properties/properties/applicationGatewayBackend\
+                                AddressPools/items/properties/properties/proper\
+                                ties/backendIPConfigurations/items"
+                            readOnly: true
+                            type: array
+                          loadBalancingRules:
+                            description: Gets load balancing rules that use this backend address pool.
+                            items:
+                              $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                rties/backendIPConfigurations/items/allOf/0"
+                            readOnly: true
+                            type: array
+                          outboundNatRule:
+                            $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                              rties/backendIPConfigurations/items/allOf/0"
+                            description: Gets outbound rules that use this backend address pool.
+                            readOnly: true
+                          provisioningState:
+                            description: "Get provisioning state of the public IP resource. Possible values
+                              are: 'Updating', 'Deleting', and 'Failed'."
+                            type: string
+                  type: array
+                loadBalancerInboundNatRules:
+                  description: A list of references of LoadBalancerInboundNatRules.
+                  items:
+                    allOf:
+                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                          rties/backendIPConfigurations/items/allOf/0"
+                    description: Inbound NAT rule of the load balancer.
+                    properties:
+                      etag:
+                        description: A unique read-only string that changes whenever the resource is
+                          updated.
+                        type: string
+                      name:
+                        description: Gets name of the resource that is unique within a resource group.
+                          This name can be used to access the resource.
+                        type: string
+                      properties:
+                        description: Properties of the inbound NAT rule.
+                        properties:
+                          backendIPConfiguration:
+                            $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                              rties/backendIPConfigurations/items/properties/pr\
+                              operties/properties/applicationGatewayBackendAddr\
+                              essPools/items/properties/properties/properties/b\
+                              ackendIPConfigurations/items"
+                          backendPort:
+                            description: The port used for the internal endpoint. Acceptable values range
+                              from 1 to 65535.
+                            format: int32
+                            type: integer
+                          enableFloatingIP:
+                            description: Configures a virtual machine's endpoint for the floating IP
+                              capability required to configure a SQL AlwaysOn
+                              Availability Group. This setting is required when
+                              using the SQL AlwaysOn Availability Groups in SQL
+                              server. This setting can't be changed after you
+                              create the endpoint.
+                            type: boolean
+                          frontendIPConfiguration:
+                            $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                              rties/backendIPConfigurations/items/allOf/0"
+                            description: A reference to frontend IP addresses.
+                          frontendPort:
+                            description: The port for the external endpoint. Port numbers for each rule must
+                              be unique within the Load Balancer. Acceptable
+                              values range from 1 to 65534.
+                            format: int32
+                            type: integer
+                          idleTimeoutInMinutes:
+                            description: The timeout for the TCP idle connection. The value can be set
+                              between 4 and 30 minutes. The default value is 4
+                              minutes. This element is only used when the
+                              protocol is set to TCP.
+                            format: int32
+                            type: integer
+                          protocol:
+                            description: "The transport protocol for the endpoint. Possible values are:
+                              'Udp' or 'Tcp'"
+                            enum:
+                              - Udp
+                              - Tcp
+                            type: string
+                            x-ms-enum:
+                              modelAsString: true
+                              name: TransportProtocol
+                          provisioningState:
+                            description: "Gets the provisioning state of the public IP resource. Possible
+                              values are: 'Updating', 'Deleting', and 'Failed'."
+                            type: string
+                  type: array
+                primary:
+                  description: Gets whether this is a primary customer address on the network
+                    interface.
+                  type: boolean
+                privateIPAddress:
+                  type: string
+                privateIPAddressVersion:
+                  description: "Available from Api-Version 2016-03-30 onwards, it represents
+                    whether the specific ipconfiguration is IPv4 or IPv6.
+                    Default is taken as IPv4.  Possible values are: 'IPv4' and
+                    'IPv6'."
+                  enum:
+                    - IPv4
+                    - IPv6
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: IPVersion
+                privateIPAllocationMethod:
+                  description: "Defines how a private IP address is assigned. Possible values are:
+                    'Static' and 'Dynamic'."
+                  enum:
+                    - Static
+                    - Dynamic
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: IPAllocationMethod
+                provisioningState:
+                  type: string
+                publicIPAddress:
+                  allOf:
+                    - properties:
+                        id:
+                          description: Resource ID.
+                          type: string
+                        location:
+                          description: Resource location.
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          description: Resource tags.
+                          type: object
+                        type:
+                          description: Resource type.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Public IP address resource.
+                  properties:
+                    etag:
+                      description: A unique read-only string that changes whenever the resource is
+                        updated.
+                      type: string
+                    properties:
+                      description: Public IP address properties.
+                      properties:
+                        dnsSettings:
+                          description: Contains FQDN of the DNS record associated with the public IP
+                            address
+                          properties:
+                            domainNameLabel:
+                              description: Gets or sets the Domain name label.The concatenation of the domain
+                                name label and the regionalized DNS zone make up
+                                the fully qualified domain name associated with
+                                the public IP address. If a domain name label is
+                                specified, an A DNS record is created for the
+                                public IP in the Microsoft Azure DNS system.
+                              type: string
+                            fqdn:
+                              description: Gets the FQDN, Fully qualified domain name of the A DNS record
+                                associated with the public IP. This is the
+                                concatenation of the domainNameLabel and the
+                                regionalized DNS zone.
+                              type: string
+                            reverseFqdn:
+                              description: "Gets or Sets the Reverse FQDN. A user-visible, fully qualified
+                                domain name that resolves to this public IP
+                                address. If the reverseFqdn is specified, then a
+                                PTR DNS record is created pointing from the IP
+                                address in the in-addr.arpa domain to the
+                                reverse FQDN. "
+                              type: string
+                        idleTimeoutInMinutes:
+                          description: The idle timeout of the public IP address.
+                          format: int32
+                          type: integer
+                        ipAddress:
+                          type: string
+                        ipConfiguration:
+                          $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                            rties/backendIPConfigurations/items/properties/prop\
+                            erties/properties/subnet/properties/properties/prop\
+                            erties/ipConfigurations/items"
+                        provisioningState:
+                          description: "The provisioning state of the PublicIP resource. Possible values
+                            are: 'Updating', 'Deleting', and 'Failed'."
+                          type: string
+                        publicIPAddressVersion:
+                          description: "The public IP address version. Possible values are: 'IPv4' and
+                            'IPv6'."
+                          enum:
+                            - IPv4
+                            - IPv6
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: IPVersion
+                        publicIPAllocationMethod:
+                          description: "The public IP allocation method. Possible values are: 'Static' and
+                            'Dynamic'."
+                          enum:
+                            - Static
+                            - Dynamic
+                          type: string
+                          x-ms-enum:
+                            modelAsString: true
+                            name: IPAllocationMethod
+                        resourceGuid:
+                          description: The resource GUID property of the public IP resource.
+                          type: string
+                subnet:
+                  allOf:
+                    - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                        rties/backendIPConfigurations/items/allOf/0"
+                  description: Subnet in a virtual network resource.
+                  properties:
+                    etag:
+                      description: A unique read-only string that changes whenever the resource is
+                        updated.
+                      type: string
+                    name:
+                      description: The name of the resource that is unique within a resource group.
+                        This name can be used to access the resource.
+                      type: string
+                    properties:
+                      properties:
+                        addressPrefix:
+                          description: The address prefix for the subnet.
+                          type: string
+                        ipConfigurations:
+                          description: Gets an array of references to the network interface IP
+                            configurations using subnet.
+                          items:
+                            allOf:
+                              - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                  rties/backendIPConfigurations/items/allOf/0"
+                            description: IPConfiguration
+                            properties:
+                              etag:
+                                description: A unique read-only string that changes whenever the resource is
+                                  updated.
+                                type: string
+                              name:
+                                description: The name of the resource that is unique within a resource group.
+                                  This name can be used to access the resource.
+                                type: string
+                              properties:
+                                description: Properties of IP configuration.
+                                properties:
+                                  privateIPAddress:
+                                    description: The private IP address of the IP configuration.
+                                    type: string
+                                  privateIPAllocationMethod:
+                                    description: The private IP allocation method. Possible values are 'Static' and
+                                      'Dynamic'.
+                                    enum:
+                                      - Static
+                                      - Dynamic
+                                    type: string
+                                    x-ms-enum:
+                                      modelAsString: true
+                                      name: IPAllocationMethod
+                                  provisioningState:
+                                    description: "Gets the provisioning state of the public IP resource. Possible
+                                      values are: 'Updating', 'Deleting', and
+                                      'Failed'."
+                                    type: string
+                                  publicIPAddress:
+                                    $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                      rties/backendIPConfigurations/items/prope\
+                                      rties/properties/properties/publicIPAddre\
+                                      ss"
+                                    description: The reference of the public IP resource.
+                                  subnet:
+                                    $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                      rties/backendIPConfigurations/items/prope\
+                                      rties/properties/properties/subnet"
+                                    description: The reference of the subnet resource.
+                          readOnly: true
+                          type: array
+                        networkSecurityGroup:
+                          allOf:
+                            - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                rties/backendIPConfigurations/items/properties/\
+                                properties/properties/publicIPAddress/allOf/0"
+                          description: NetworkSecurityGroup resource.
+                          properties:
+                            etag:
+                              description: A unique read-only string that changes whenever the resource is
+                                updated.
+                              type: string
+                            properties:
+                              description: Network Security Group resource.
+                              properties:
+                                defaultSecurityRules:
+                                  description: The default security rules of network security group.
+                                  items:
+                                    $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                      rties/backendIPConfigurations/items/prope\
+                                      rties/properties/properties/subnet/proper\
+                                      ties/properties/properties/networkSecurit\
+                                      yGroup/properties/properties/properties/s\
+                                      ecurityRules/items"
+                                  type: array
+                                networkInterfaces:
+                                  description: A collection of references to network interfaces.
+                                  items:
+                                    allOf:
+                                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/p\
+                                          roperties/properties/properties/publi\
+                                          cIPAddress/allOf/0"
+                                    description: A network interface in a resource group.
+                                    properties:
+                                      etag:
+                                        description: A unique read-only string that changes whenever the resource is
+                                          updated.
+                                        type: string
+                                      properties:
+                                        description: "NetworkInterface properties. "
+                                        properties:
+                                          dnsSettings:
+                                            description: DNS settings of a network interface.
+                                            properties:
+                                              appliedDnsServers:
+                                                description: If the VM that uses this NIC is part of an Availability Set, then
+                                                  this list will have the union
+                                                  of all DNS servers from all
+                                                  NICs that are part of the
+                                                  Availability Set. This
+                                                  property is what is configured
+                                                  on each of those VMs.
+                                                items:
+                                                  type: string
+                                                type: array
+                                              dnsServers:
+                                                description: List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch
+                                                  to azure provided DNS
+                                                  resolution. 'AzureProvidedDNS'
+                                                  value cannot be combined with
+                                                  other IPs, it must be the only
+                                                  value in dnsServers
+                                                  collection.
+                                                items:
+                                                  type: string
+                                                type: array
+                                              internalDnsNameLabel:
+                                                description: Relative DNS name for this NIC used for internal communications
+                                                  between VMs in the same
+                                                  virtual network.
+                                                type: string
+                                              internalDomainNameSuffix:
+                                                description: Even if internalDnsNameLabel is not specified, a DNS entry is
+                                                  created for the primary NIC of
+                                                  the VM. This DNS name can be
+                                                  constructed by concatenating
+                                                  the VM name with the value of
+                                                  internalDomainNameSuffix.
+                                                type: string
+                                              internalFqdn:
+                                                description: Fully qualified DNS name supporting internal communications between
+                                                  VMs in the same virtual
+                                                  network.
+                                                type: string
+                                          enableAcceleratedNetworking:
+                                            description: If the network interface is accelerated networking enabled.
+                                            type: boolean
+                                          enableIPForwarding:
+                                            description: Indicates whether IP forwarding is enabled on this network
+                                              interface.
+                                            type: boolean
+                                          ipConfigurations:
+                                            description: A list of IPConfigurations of the network interface.
+                                            items:
+                                              allOf:
+                                                - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                    rties/backendIPConfiguratio\
+                                                    ns/items/allOf/0"
+                                              description: IPConfiguration in a network interface.
+                                              properties:
+                                                etag:
+                                                  description: A unique read-only string that changes whenever the resource is
+                                                    updated.
+                                                  type: string
+                                                name:
+                                                  description: The name of the resource that is unique within a resource group.
+                                                    This name can be used to
+                                                    access the resource.
+                                                  type: string
+                                                properties:
+                                                  description: Properties of IP configuration.
+                                                  properties:
+                                                    applicationGatewayBackendAddressPools:
+                                                      description: The reference of ApplicationGatewayBackendAddressPool resource.
+                                                      items:
+                                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                          rties/backendIPConfig\
+                                                          urations/items/proper\
+                                                          ties/properties/prope\
+                                                          rties/applicationGate\
+                                                          wayBackendAddressPool\
+                                                          s/items"
+                                                      type: array
+                                                    loadBalancerBackendAddressPools:
+                                                      description: The reference of LoadBalancerBackendAddressPool resource.
+                                                      items:
+                                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                          rties/backendIPConfig\
+                                                          urations/items/proper\
+                                                          ties/properties/prope\
+                                                          rties/loadBalancerBac\
+                                                          kendAddressPools/item\
+                                                          s"
+                                                      type: array
+                                                    loadBalancerInboundNatRules:
+                                                      description: A list of references of LoadBalancerInboundNatRules.
+                                                      items:
+                                                        $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                          rties/backendIPConfig\
+                                                          urations/items/proper\
+                                                          ties/properties/prope\
+                                                          rties/loadBalancerInb\
+                                                          oundNatRules/items"
+                                                      type: array
+                                                    primary:
+                                                      description: Gets whether this is a primary customer address on the network
+                                                        interface.
+                                                      type: boolean
+                                                    privateIPAddress:
+                                                      type: string
+                                                    privateIPAddressVersion:
+                                                      description: "Available from Api-Version 2016-03-30 onwards, it represents
+                                                        whether the specific
+                                                        ipconfiguration is IPv4
+                                                        or IPv6. Default is
+                                                        taken as IPv4.  Possible
+                                                        values are: 'IPv4' and
+                                                        'IPv6'."
+                                                      enum:
+                                                        - IPv4
+                                                        - IPv6
+                                                      type: string
+                                                      x-ms-enum:
+                                                        modelAsString: true
+                                                        name: IPVersion
+                                                    privateIPAllocationMethod:
+                                                      description: "Defines how a private IP address is assigned. Possible values are:
+                                                        'Static' and 'Dynamic'."
+                                                      enum:
+                                                        - Static
+                                                        - Dynamic
+                                                      type: string
+                                                      x-ms-enum:
+                                                        modelAsString: true
+                                                        name: IPAllocationMethod
+                                                    provisioningState:
+                                                      type: string
+                                                    publicIPAddress:
+                                                      $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                        rties/backendIPConfigur\
+                                                        ations/items/properties\
+                                                        /properties/properties/\
+                                                        publicIPAddress"
+                                                    subnet:
+                                                      $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                                        rties/backendIPConfigur\
+                                                        ations/items/properties\
+                                                        /properties/properties/\
+                                                        subnet"
+                                            type: array
+                                          macAddress:
+                                            description: The MAC address of the network interface.
+                                            type: string
+                                          networkSecurityGroup:
+                                            $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                              rties/backendIPConfigurations/ite\
+                                              ms/properties/properties/properti\
+                                              es/subnet/properties/properties/p\
+                                              roperties/networkSecurityGroup"
+                                            description: The reference of the NetworkSecurityGroup resource.
+                                          primary:
+                                            description: Gets whether this is a primary network interface on a virtual
+                                              machine.
+                                            type: boolean
+                                          provisioningState:
+                                            description: "The provisioning state of the public IP resource. Possible values
+                                              are: 'Updating', 'Deleting', and
+                                              'Failed'."
+                                            type: string
+                                          resourceGuid:
+                                            description: The resource GUID property of the network interface resource.
+                                            type: string
+                                          virtualMachine:
+                                            $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                              rties/backendIPConfigurations/ite\
+                                              ms/allOf/0"
+                                            description: The reference of a virtual machine.
+                                  readOnly: true
+                                  type: array
+                                provisioningState:
+                                  description: "The provisioning state of the public IP resource. Possible values
+                                    are: 'Updating', 'Deleting', and 'Failed'."
+                                  type: string
+                                resourceGuid:
+                                  description: The resource GUID property of the network security group resource.
+                                  type: string
+                                securityRules:
+                                  description: A collection of security rules of the network security group.
+                                  items:
+                                    allOf:
+                                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/a\
+                                          llOf/0"
+                                    description: Network security rule.
+                                    properties:
+                                      etag:
+                                        description: A unique read-only string that changes whenever the resource is
+                                          updated.
+                                        type: string
+                                      name:
+                                        description: The name of the resource that is unique within a resource group.
+                                          This name can be used to access the
+                                          resource.
+                                        type: string
+                                      properties:
+                                        properties:
+                                          access:
+                                            description: "The network traffic is allowed or denied. Possible values are:
+                                              'Allow' and 'Deny'."
+                                            enum:
+                                              - Allow
+                                              - Deny
+                                            type: string
+                                            x-ms-enum:
+                                              modelAsString: true
+                                              name: SecurityRuleAccess
+                                          description:
+                                            description: A description for this rule. Restricted to 140 chars.
+                                            type: string
+                                          destinationAddressPrefix:
+                                            description: The destination address prefix. CIDR or source IP range. Asterisk
+                                              '*' can also be used to match all
+                                              source IPs. Default tags such as
+                                              'VirtualNetwork',
+                                              'AzureLoadBalancer' and 'Internet'
+                                              can also be used.
+                                            type: string
+                                          destinationPortRange:
+                                            description: The destination port or range. Integer or range between 0 and
+                                              65535. Asterisk '*' can also be
+                                              used to match all ports.
+                                            type: string
+                                          direction:
+                                            description: "The direction of the rule. The direction specifies if rule will be
+                                              evaluated on incoming or outgoing
+                                              traffic. Possible values are:
+                                              'Inbound' and 'Outbound'."
+                                            enum:
+                                              - Inbound
+                                              - Outbound
+                                            type: string
+                                            x-ms-enum:
+                                              modelAsString: true
+                                              name: SecurityRuleDirection
+                                          priority:
+                                            description: The priority of the rule. The value can be between 100 and 4096.
+                                              The priority number must be unique
+                                              for each rule in the collection.
+                                              The lower the priority number, the
+                                              higher the priority of the rule.
+                                            format: int32
+                                            type: integer
+                                          protocol:
+                                            description: Network protocol this rule applies to. Possible values are 'Tcp',
+                                              'Udp', and '*'.
+                                            enum:
+                                              - Tcp
+                                              - Udp
+                                              - "*"
+                                            type: string
+                                            x-ms-enum:
+                                              modelAsString: true
+                                              name: SecurityRuleProtocol
+                                          provisioningState:
+                                            description: "The provisioning state of the public IP resource. Possible values
+                                              are: 'Updating', 'Deleting', and
+                                              'Failed'."
+                                            type: string
+                                          sourceAddressPrefix:
+                                            description: "The CIDR or source IP range. Asterisk '*' can also be used to
+                                              match all source IPs. Default tags
+                                              such as 'VirtualNetwork',
+                                              'AzureLoadBalancer' and 'Internet'
+                                              can also be used. If this is an
+                                              ingress rule, specifies where
+                                              network traffic originates from. "
+                                            type: string
+                                          sourcePortRange:
+                                            description: The source port or range. Integer or range between 0 and 65535.
+                                              Asterisk '*' can also be used to
+                                              match all ports.
+                                            type: string
+                                        required:
+                                          - protocol
+                                          - sourceAddressPrefix
+                                          - destinationAddressPrefix
+                                          - access
+                                          - direction
+                                  type: array
+                                subnets:
+                                  description: A collection of references to subnets.
+                                  items:
+                                    $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                      rties/backendIPConfigurations/items/prope\
+                                      rties/properties/properties/subnet"
+                                  readOnly: true
+                                  type: array
+                        provisioningState:
+                          description: The provisioning state of the resource.
+                          type: string
+                        resourceNavigationLinks:
+                          description: Gets an array of references to the external resources using subnet.
+                          items:
+                            allOf:
+                              - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                  rties/backendIPConfigurations/items/allOf/0"
+                            description: ResourceNavigationLink resource.
+                            properties:
+                              etag:
+                                description: A unique read-only string that changes whenever the resource is
+                                  updated.
+                                readOnly: true
+                                type: string
+                              name:
+                                description: Name of the resource that is unique within a resource group. This
+                                  name can be used to access the resource.
+                                type: string
+                              properties:
+                                description: Properties of ResourceNavigationLink.
+                                properties:
+                                  link:
+                                    description: Link to the external resource
+                                    type: string
+                                  linkedResourceType:
+                                    description: Resource type of the linked resource.
+                                    type: string
+                                  provisioningState:
+                                    description: Provisioning state of the ResourceNavigationLink resource.
+                                    readOnly: true
+                                    type: string
+                          type: array
+                        routeTable:
+                          allOf:
+                            - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                rties/backendIPConfigurations/items/properties/\
+                                properties/properties/publicIPAddress/allOf/0"
+                          description: Route table resource.
+                          properties:
+                            etag:
+                              description: Gets a unique read-only string that changes whenever the resource
+                                is updated.
+                              type: string
+                            properties:
+                              description: Route Table resource
+                              properties:
+                                provisioningState:
+                                  description: "The provisioning state of the resource. Possible values are:
+                                    'Updating', 'Deleting', and 'Failed'."
+                                  type: string
+                                routes:
+                                  description: Collection of routes contained within a route table.
+                                  items:
+                                    allOf:
+                                      - $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                          rties/backendIPConfigurations/items/a\
+                                          llOf/0"
+                                    description: Route resource
+                                    properties:
+                                      etag:
+                                        description: A unique read-only string that changes whenever the resource is
+                                          updated.
+                                        type: string
+                                      name:
+                                        description: The name of the resource that is unique within a resource group.
+                                          This name can be used to access the
+                                          resource.
+                                        type: string
+                                      properties:
+                                        description: Route resource
+                                        properties:
+                                          addressPrefix:
+                                            description: The destination CIDR to which the route applies.
+                                            type: string
+                                          nextHopIpAddress:
+                                            description: The IP address packets should be forwarded to. Next hop values are
+                                              only allowed in routes where the
+                                              next hop type is VirtualAppliance.
+                                            type: string
+                                          nextHopType:
+                                            description: "The type of Azure hop the packet should be sent to. Possible
+                                              values are:
+                                              'VirtualNetworkGateway',
+                                              'VnetLocal', 'Internet',
+                                              'VirtualAppliance', and 'None'"
+                                            enum:
+                                              - VirtualNetworkGateway
+                                              - VnetLocal
+                                              - Internet
+                                              - VirtualAppliance
+                                              - None
+                                            type: string
+                                            x-ms-enum:
+                                              modelAsString: true
+                                              name: RouteNextHopType
+                                          provisioningState:
+                                            description: "The provisioning state of the resource. Possible values are:
+                                              'Updating', 'Deleting', and
+                                              'Failed'."
+                                            type: string
+                                        required:
+                                          - nextHopType
+                                  type: array
+                                subnets:
+                                  description: A collection of references to subnets.
+                                  items:
+                                    $ref: "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat/prope\
+                                      rties/backendIPConfigurations/items/prope\
+                                      rties/properties/properties/subnet"
+                                  readOnly: true
+                                  type: array
         type: array
       provisioningState:
-        description: 'Provisioning state of the backend address pool resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the backend address pool resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
   ApplicationGatewayBackendHealth:
     description: List of ApplicationGatewayBackendHealthPool resources.
     properties:
       backendAddressPools:
         items:
-          $ref: '#/definitions/ApplicationGatewayBackendHealthPool'
+          $ref: "#/definitions/ApplicationGatewayBackendHealthPool"
         type: array
   ApplicationGatewayBackendHealthHttpSettings:
     description: Application gateway BackendHealthHttp settings.
     properties:
       backendHttpSettings:
-        $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
+        $ref: "#/definitions/ApplicationGatewayBackendHttpSettings"
         description: Reference of an ApplicationGatewayBackendHttpSettings resource.
       servers:
         description: List of ApplicationGatewayBackendHealthServer resources.
         items:
-          $ref: '#/definitions/ApplicationGatewayBackendHealthServer'
+          $ref: "#/definitions/ApplicationGatewayBackendHealthServer"
         type: array
   ApplicationGatewayBackendHealthPool:
     description: Application gateway BackendHealth pool.
     properties:
       backendAddressPool:
-        $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+        $ref: "#/definitions/ApplicationGatewayBackendAddressPool"
         description: Reference of an ApplicationGatewayBackendAddressPool resource.
       backendHttpSettingsCollection:
         description: List of ApplicationGatewayBackendHealthHttpSettings resources.
         items:
-          $ref: '#/definitions/ApplicationGatewayBackendHealthHttpSettings'
+          $ref: "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
         type: array
   ApplicationGatewayBackendHealthServer:
     description: Application gateway backendhealth http settings.
@@ -431,28 +1348,24 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayBackendHealthServerHealth
       ipConfiguration:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
   ApplicationGatewayBackendHttpSettings:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Backend address pool settings of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayBackendHttpSettingsPropertiesFormat:
     description: Properties of Backend address pool settings of an application gateway.
@@ -460,14 +1373,11 @@ definitions:
       authenticationCertificates:
         description: Array of references to application gateway authentication certificates.
         items:
-          properties:
-            id:
-              description: Resource ID.
-              type: string
-          x-ms-azure-resource: true
+          $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+            frontendPort"
         type: array
       connectionDraining:
-        $ref: '#/definitions/ApplicationGatewayConnectionDraining'
+        $ref: "#/definitions/ApplicationGatewayConnectionDraining"
         description: Connection draining of the backend http settings resource.
       cookieBasedAffinity:
         description: Cookie based affinity.
@@ -483,11 +1393,8 @@ definitions:
         format: int32
         type: integer
       probe:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       protocol:
         description: Protocol.
         enum:
@@ -498,17 +1405,23 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the backend http settings resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       requestTimeout:
-        description: Request timeout in seconds. Application Gateway will fail the request if response is not received within RequestTimeout. Acceptable values are from 1 second to 86400 seconds.
+        description: Request timeout in seconds. Application Gateway will fail the
+          request if response is not received within RequestTimeout. Acceptable
+          values are from 1 second to 86400 seconds.
         format: int32
         type: integer
   ApplicationGatewayConnectionDraining:
-    description: Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration.
+    description: Connection draining allows open connections to a backend server to
+      be active for a specified time after the backend server got removed from
+      the configuration.
     properties:
       drainTimeoutInSec:
-        description: The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds.
+        description: The number of seconds connection draining is active. Acceptable
+          values are from 1 second to 3600 seconds.
         exclusiveMaximum: false
         exclusiveMinimum: false
         format: int32
@@ -528,7 +1441,8 @@ definitions:
         description: The name of the rule group that will be disabled.
         type: string
       rules:
-        description: 'The list of rules that will be disabled. If null, all rules of the rule group will be disabled.'
+        description: The list of rules that will be disabled. If null, all rules of the
+          rule group will be disabled.
         items:
           format: int32
           type: integer
@@ -560,38 +1474,18 @@ definitions:
       rules:
         description: The rules of the web application firewall rule group.
         items:
-          $ref: '#/definitions/ApplicationGatewayFirewallRule'
+          $ref: "#/definitions/ApplicationGatewayFirewallRule"
         type: array
     required:
       - ruleGroupName
       - rules
   ApplicationGatewayFirewallRuleSet:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-          location:
-            description: Resource location.
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          tags:
-            additionalProperties:
-              type: string
-            description: Resource tags.
-            type: object
-          type:
-            description: Resource type.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGateway/allOf/0"
     description: A web application firewall rule set.
     properties:
       properties:
-        $ref: '#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayFirewallRuleSetPropertiesFormat:
     description: Properties of the web application firewall rule set.
@@ -602,7 +1496,7 @@ definitions:
       ruleGroups:
         description: The rule groups of the web application firewall rule set.
         items:
-          $ref: '#/definitions/ApplicationGatewayFirewallRuleGroup'
+          $ref: "#/definitions/ApplicationGatewayFirewallRuleGroup"
         type: array
       ruleSetType:
         description: The type of the web application firewall rule set.
@@ -616,21 +1510,20 @@ definitions:
       - ruleGroups
   ApplicationGatewayFrontendIPConfiguration:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Frontend IP configuration of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayFrontendIPConfigurationPropertiesFormat:
     description: Properties of Frontend IP configuration of an application gateway.
@@ -648,37 +1541,31 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: 'Provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the public IP resource. Possible values are:
+          'Updating', 'Deleting', and 'Failed'."
         type: string
       publicIPAddress:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       subnet:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
   ApplicationGatewayFrontendPort:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Frontend port of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayFrontendPortPropertiesFormat:
     description: Properties of Frontend port of an application gateway.
@@ -688,35 +1575,32 @@ definitions:
         format: int32
         type: integer
       provisioningState:
-        description: 'Provisioning state of the frontend port resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the frontend port resource. Possible values
+          are: 'Updating', 'Deleting', and 'Failed'."
         type: string
   ApplicationGatewayHttpListener:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Http listener of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayHttpListenerPropertiesFormat:
     description: Properties of HTTP listener of an application gateway.
     properties:
       frontendIPConfiguration:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       frontendPort:
         properties:
           id:
@@ -736,47 +1620,43 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: 'Provisioning state of the HTTP listener resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the HTTP listener resource. Possible values
+          are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       requireServerNameIndication:
         description: Applicable only if protocol is https. Enables SNI for multi-hosting.
         type: boolean
       sslCertificate:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
   ApplicationGatewayIPConfiguration:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
-    description: IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
+    description: IP configuration of an application gateway. Currently 1 public and
+      1 private IP configuration is allowed.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayIPConfigurationPropertiesFormat:
     description: Properties of IP configuration of an application gateway.
     properties:
       provisioningState:
-        description: 'Provisioning state of the application gateway subnet resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the application gateway subnet resource.
+          Possible values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       subnet:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
   ApplicationGatewayListResult:
     description: Response for ListApplicationGateways API service call.
     properties:
@@ -786,66 +1666,59 @@ definitions:
       value:
         description: List of an application gateways in a resource group.
         items:
-          $ref: '#/definitions/ApplicationGateway'
+          $ref: "#/definitions/ApplicationGateway"
         type: array
   ApplicationGatewayPathRule:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Path rule of URL path map of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayPathRulePropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayPathRulePropertiesFormat:
     description: Properties of probe of an application gateway.
     properties:
       backendAddressPool:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       backendHttpSettings:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       paths:
         description: Path rules of URL path map.
         items:
           type: string
         type: array
       provisioningState:
-        description: 'Path rule of URL path map resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Path rule of URL path map resource. Possible values are:
+          'Updating', 'Deleting', and 'Failed'."
         type: string
   ApplicationGatewayProbe:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Probe of the application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayProbePropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayProbePropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayProbePropertiesFormat:
     description: Properties of probe of an application gateway.
@@ -854,11 +1727,14 @@ definitions:
         description: Host name to send the probe to.
         type: string
       interval:
-        description: The probing interval in seconds. This is the time interval between two consecutive probes. Acceptable values are from 1 second to 86400 seconds.
+        description: The probing interval in seconds. This is the time interval between
+          two consecutive probes. Acceptable values are from 1 second to 86400
+          seconds.
         format: int32
         type: integer
       path:
-        description: 'Relative path of probe. Valid path starts from ''/''. Probe is sent to <Protocol>://<host>:<port><path>'
+        description: Relative path of probe. Valid path starts from '/'. Probe is sent
+          to <Protocol>://<host>:<port><path>
         type: string
       protocol:
         description: Protocol.
@@ -870,14 +1746,19 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the backend http settings resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       timeout:
-        description: the probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds.
+        description: the probe timeout in seconds. Probe marked as failed if valid
+          response is not received with this timeout period. Acceptable values
+          are from 1 second to 86400 seconds.
         format: int32
         type: integer
       unhealthyThreshold:
-        description: The probe retry count. Backend server is marked down after consecutive probe failure count reaches UnhealthyThreshold. Acceptable values are from 1 second to 20.
+        description: The probe retry count. Backend server is marked down after
+          consecutive probe failure count reaches UnhealthyThreshold. Acceptable
+          values are from 1 second to 20.
         format: int32
         type: integer
   ApplicationGatewayPropertiesFormat:
@@ -886,37 +1767,37 @@ definitions:
       authenticationCertificates:
         description: Authentication certificates of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayAuthenticationCertificate'
+          $ref: "#/definitions/ApplicationGatewayAuthenticationCertificate"
         type: array
       backendAddressPools:
         description: Backend address pool of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
+          $ref: "#/definitions/ApplicationGatewayBackendAddressPool"
         type: array
       backendHttpSettingsCollection:
         description: Backend http settings of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
+          $ref: "#/definitions/ApplicationGatewayBackendHttpSettings"
         type: array
       frontendIPConfigurations:
         description: Frontend IP addresses of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayFrontendIPConfiguration'
+          $ref: "#/definitions/ApplicationGatewayFrontendIPConfiguration"
         type: array
       frontendPorts:
         description: Frontend ports of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayFrontendPort'
+          $ref: "#/definitions/ApplicationGatewayFrontendPort"
         type: array
       gatewayIPConfigurations:
         description: Subnets of application the gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayIPConfiguration'
+          $ref: "#/definitions/ApplicationGatewayIPConfiguration"
         type: array
       httpListeners:
         description: Http listeners of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayHttpListener'
+          $ref: "#/definitions/ApplicationGatewayHttpListener"
         type: array
       operationalState:
         description: Operational state of the application gateway resource.
@@ -933,79 +1814,71 @@ definitions:
       probes:
         description: Probes of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayProbe'
+          $ref: "#/definitions/ApplicationGatewayProbe"
         type: array
       provisioningState:
-        description: 'Provisioning state of the application gateway resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the application gateway resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       requestRoutingRules:
         description: Request routing rules of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayRequestRoutingRule'
+          $ref: "#/definitions/ApplicationGatewayRequestRoutingRule"
         type: array
       resourceGuid:
         description: Resource GUID property of the application gateway resource.
         type: string
       sku:
-        $ref: '#/definitions/ApplicationGatewaySku'
+        $ref: "#/definitions/ApplicationGatewaySku"
         description: SKU of the application gateway resource.
       sslCertificates:
         description: SSL certificates of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewaySslCertificate'
+          $ref: "#/definitions/ApplicationGatewaySslCertificate"
         type: array
       sslPolicy:
-        $ref: '#/definitions/ApplicationGatewaySslPolicy'
+        $ref: "#/definitions/ApplicationGatewaySslPolicy"
         description: SSL policy of the application gateway resource.
       urlPathMaps:
         description: URL path map of the application gateway resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayUrlPathMap'
+          $ref: "#/definitions/ApplicationGatewayUrlPathMap"
         type: array
       webApplicationFirewallConfiguration:
-        $ref: '#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration'
+        $ref: "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration"
         description: Web application firewall configuration.
   ApplicationGatewayRequestRoutingRule:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: Request routing rule of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayRequestRoutingRulePropertiesFormat:
     description: Properties of request routing rule of the application gateway.
     properties:
       backendAddressPool:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       backendHttpSettings:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       httpListener:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       provisioningState:
-        description: 'Provisioning state of the request routing rule resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the request routing rule resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       ruleType:
         description: Rule type.
@@ -1017,11 +1890,8 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayRequestRoutingRuleType
       urlPathMap:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
   ApplicationGatewaySku:
     description: SKU of an application gateway
     properties:
@@ -1052,21 +1922,20 @@ definitions:
           name: ApplicationGatewayTier
   ApplicationGatewaySslCertificate:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
     description: SSL certificates of an application gateway.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewaySslCertificatePropertiesFormat:
     description: Properties of SSL certificates of an application gateway.
@@ -1075,13 +1944,16 @@ definitions:
         description: Base-64 encoded pfx certificate. Only applicable in PUT Request.
         type: string
       password:
-        description: Password for the pfx file specified in data. Only applicable in PUT request.
+        description: Password for the pfx file specified in data. Only applicable in PUT
+          request.
         type: string
       provisioningState:
-        description: 'Provisioning state of the SSL certificate resource Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the SSL certificate resource Possible values
+          are: 'Updating', 'Deleting', and 'Failed'."
         type: string
       publicCertData:
-        description: Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request.
+        description: Base-64 encoded Public cert data corresponding to pfx specified in
+          data. Only applicable in GET request.
         type: string
   ApplicationGatewaySslPolicy:
     description: Application gateway SSL policy.
@@ -1100,44 +1972,39 @@ definitions:
         type: array
   ApplicationGatewayUrlPathMap:
     allOf:
-      - properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
-    description: UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.
+      - $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
+    description: UrlPathMaps give a url path to the backend mapping information for
+      PathBasedRouting.
     properties:
       etag:
-        description: A unique read-only string that changes whenever the resource is updated.
+        description: A unique read-only string that changes whenever the resource is
+          updated.
         type: string
       name:
-        description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
+        description: Name of the resource that is unique within a resource group. This
+          name can be used to access the resource.
         type: string
       properties:
-        $ref: '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'
+        $ref: "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
         x-ms-client-flatten: true
   ApplicationGatewayUrlPathMapPropertiesFormat:
     description: Properties of UrlPathMap of the application gateway.
     properties:
       defaultBackendAddressPool:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       defaultBackendHttpSettings:
-        properties:
-          id:
-            description: Resource ID.
-            type: string
-        x-ms-azure-resource: true
+        $ref: "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat/properties/\
+          frontendPort"
       pathRules:
         description: Path rule of URL path map resource.
         items:
-          $ref: '#/definitions/ApplicationGatewayPathRule'
+          $ref: "#/definitions/ApplicationGatewayPathRule"
         type: array
       provisioningState:
-        description: 'Provisioning state of the backend http settings resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
+        description: "Provisioning state of the backend http settings resource. Possible
+          values are: 'Updating', 'Deleting', and 'Failed'."
         type: string
   ApplicationGatewayWebApplicationFirewallConfiguration:
     description: Application gateway web application firewall configuration.
@@ -1145,7 +2012,7 @@ definitions:
       disabledRuleGroups:
         description: The disabled rule groups.
         items:
-          $ref: '#/definitions/ApplicationGatewayFirewallDisabledRuleGroup'
+          $ref: "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
         type: array
       enabled:
         description: Whether the web application firewall is enabled or not.
@@ -1160,7 +2027,8 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayFirewallMode
       ruleSetType:
-        description: 'The type of the web application firewall rule set. Possible values are: ''OWASP''.'
+        description: "The type of the web application firewall rule set. Possible values
+          are: 'OWASP'."
         type: string
       ruleSetVersion:
         description: The version of the rule set type.
