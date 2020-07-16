@@ -27,7 +27,7 @@ If you want to reference this project and you need an icon or even a banner, che
 
 The project was started by Ivan Goncharov of APIs.guru, it is now maintained by [Mike Ralphson](https://github.com/MikeRalphson) of [Mermade Software](https://github.com/mermade). Check out our other [OpenAPI-related projects](https://github.com/search?q=org%3AMermade+openapi).
 
-APIs.guru provide services and consultancy around GraphQL, OpenAPI/Swagger spec and APIs in general.
+APIs.guru provide services and consultancy around the GraphQL and OpenAPI specifications and APIs in general.
 You can contact us at founders@apis.guru / mike.ralphson@gmail.com
 
 [![Become a backer](https://opencollective.com/openapi-directory/tiers/backer.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
@@ -35,7 +35,7 @@ You can contact us at founders@apis.guru / mike.ralphson@gmail.com
 What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs
-* [Convert](https://github.com/lucybot/api-spec-converter) non-OpenAPI formats into OpenAPI(fka Swagger) 2.0
+* [Convert](https://github.com/lucybot/api-spec-converter) non-OpenAPI formats into OpenAPI 3.0
 * Fix mistakes, ~80% of definitions have some
 * Add additional data, like: logo, categories, …
 * Update definitions on at least a weekly basis
@@ -49,9 +49,16 @@ API definition acceptance criteria
 Update procedure
 --------------------------
 All definitions are automatically updated from their original source.
-You can see this under `x-origin` property inside [each](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
-We run our update script at least weekly and manually check diffs before commit.
+You can see this in the `x-origin` property within [each](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) `openapi.yaml` or `swagger.yaml` file.
+We run our update script at least weekly and automatically revalidate before committing.
 If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/openapi-directory/issues/new).
+
+Own-Label API Directory
+-----------------------
+
+![Own-Label logo](branding/own-label.png)
+
+**Do you want an 'own-label' or internal version of the OpenAPI Directory to create your own marketplace or keep track and document both your internal APIs and the external API definitions your organisation depends on? If so contact us now!**
 
 Existing integrations
 --------------------------
@@ -72,11 +79,11 @@ Existing integrations
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
 
 Also used as test suite in the following projects:
- - [ReDoc](https://github.com/Rebilly/ReDoc) - **Swagger-generated API Reference Documentation**
- - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
+ - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
+ - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - OpenAPI parser and validator for Node and browsers
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
- - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
- - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for Swagger(OpenApi) Request parameters and Response objects
+ - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq OpenAPI addon
+ - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for OpenAPI Request parameters and Response objects
  - [swagger-search](https://github.com/IG-Group/swagger-search) - An application that collects and indexes swagger docs from your microservices architecture
 
 
@@ -94,9 +101,9 @@ All API definitions acquired from public sources under the [Fair use](http://en.
 Definition sources
 --------------------------
 Some definitions are taken from Open Source projects:
- - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(fka Swagger) description for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(fka Swagger) definition for BBC Nitro and iBL APIs
- - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (fka Swagger) 2.0 description for Medium API
+ - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI description for Instagram API
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI definition for BBC Nitro and iBL APIs
+ - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI 2.0 description for Medium API
  - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for the Giphy API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
