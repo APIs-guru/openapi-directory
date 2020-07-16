@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Tweets and Users
-  version: "2.8"
+  version: "2.9"
   x-apisguru-categories:
     - social
   x-logo:
@@ -219,10 +219,10 @@ paths:
         - Tweets
   "/labs/2/tweets/{id}/hidden":
     put:
-      description: Tweet ID in the path is that of the reply to hide.
+      description: Tweet ID in the path is that of the reply to hide or unhide.
       operationId: hideReplyById
       parameters:
-        - description: The ID of the reply that you want to hide.
+        - description: The ID of the reply that you want to hide or unhide.
           in: path
           name: id
           required: true
@@ -234,8 +234,6 @@ paths:
             schema:
               properties:
                 hidden:
-                  enum:
-                    - true
                   type: boolean
               type: object
       responses:
@@ -247,15 +245,13 @@ paths:
                   data:
                     properties:
                       hidden:
-                        enum:
-                          - true
                         type: boolean
                     type: object
                 type: object
-          description: A successful response. The reply has been hidden.
+          description: A successful response. The reply has been hidden or unhidden.
         default:
           $ref: "#/components/responses/HttpErrorResponse"
-      summary: Hides a reply to an owned conversation.
+      summary: Hides or unhides a reply to an owned conversation.
       tags:
         - Tweets
   /labs/2/users:
