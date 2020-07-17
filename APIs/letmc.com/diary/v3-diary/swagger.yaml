@@ -1,20 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: live-api.letmc.com
 info:
   contact:
     x-twitter: agentOSSoftware
-  title: 'AgentOS Api V3, diary'
+  title: AgentOS Api V3, diary
   version: v3-diary
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/agentOSSoftware/profile_image?size=original'
+    url: https://twitter.com/agentOSSoftware/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://live-api.letmc.com/swagger/docs/v3-diary'
-      version: '2.0'
+      url: https://live-api.letmc.com/swagger/docs/v3-diary
+      version: "2.0"
+    - format: swagger
+      url: https://live-api.letmc.com/swagger/docs/v3-diary
+      version: "2.0"
   x-providerName: letmc.com
   x-serviceName: diary
 securityDefinitions:
@@ -27,7 +30,7 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v3/diary/{shortName}/allocations':
+  "/v3/diary/{shortName}/allocations":
     get:
       consumes: []
       deprecated: false
@@ -65,16 +68,17 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DiaryBookingModel'
+              $ref: "#/definitions/DiaryBookingModel"
             type: array
-      summary: Get a list of all available allocations for a date + 7 days for a specified appointment type
+      summary: Get a list of all available allocations for a date + 7 days for a
+        specified appointment type
       tags:
         - DiaryController
-  '/v3/diary/{shortName}/appointment':
+  "/v3/diary/{shortName}/appointment":
     delete:
       consumes: []
       deprecated: false
@@ -96,7 +100,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
@@ -122,10 +126,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentModel'
+            $ref: "#/definitions/DiaryAppointmentModel"
       summary: Get an appointment by ID
       tags:
         - DiaryController
@@ -157,7 +161,7 @@ paths:
           name: appointmentDetails
           required: true
           schema:
-            $ref: '#/definitions/DiaryAppointmentDetails'
+            $ref: "#/definitions/DiaryAppointmentDetails"
         - description: Sales or Lettings property?
           in: query
           name: lettings
@@ -169,7 +173,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
@@ -201,7 +205,7 @@ paths:
           name: appointmentDetails
           required: true
           schema:
-            $ref: '#/definitions/DiaryAppointmentDetails'
+            $ref: "#/definitions/DiaryAppointmentDetails"
         - description: Sales or Lettings property?
           in: query
           name: lettings
@@ -213,14 +217,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
       summary: Update an existing appointment using its unique identifier
       tags:
         - DiaryController
-  '/v3/diary/{shortName}/appointmentsbetweendates':
+  "/v3/diary/{shortName}/appointmentsbetweendates":
     get:
       consumes: []
       deprecated: false
@@ -274,14 +278,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentModelResults'
-      summary: A collection of diary appointments linked to a company filtered between specific dates and by appointment type
+            $ref: "#/definitions/DiaryAppointmentModelResults"
+      summary: A collection of diary appointments linked to a company filtered between
+        specific dates and by appointment type
       tags:
         - DiaryController
-  '/v3/diary/{shortName}/appointmenttypes':
+  "/v3/diary/{shortName}/appointmenttypes":
     get:
       consumes: []
       deprecated: false
@@ -310,14 +315,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentTypeModelResults'
+            $ref: "#/definitions/DiaryAppointmentTypeModelResults"
       summary: A collection of all diary appointment types
       tags:
         - DiaryController
-  '/v3/diary/{shortName}/recurringappointment':
+  "/v3/diary/{shortName}/recurringappointment":
     get:
       consumes: []
       deprecated: false
@@ -359,11 +364,11 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentModelResults'
-      summary: 'Retrieves all recurring appointments:-'
+            $ref: "#/definitions/DiaryAppointmentModelResults"
+      summary: Retrieves all recurring appointments:-
       tags:
         - DiaryController
 definitions:
@@ -371,7 +376,7 @@ definitions:
     description: Submission Model - Structure to submit the appointment details
     properties:
       AllocationDetails:
-        $ref: '#/definitions/DiaryBookingModel'
+        $ref: "#/definitions/DiaryBookingModel"
         description: Allocation details to link the appointment too
       AppointmentType:
         description: The Appointment Type ID
@@ -382,7 +387,7 @@ definitions:
       Guests:
         description: A collection of guests linked to the appointment. If none leave empty
         items:
-          $ref: '#/definitions/DiaryGuestDetails'
+          $ref: "#/definitions/DiaryGuestDetails"
         type: array
       Subject:
         description: The subject of the appointment
@@ -415,30 +420,31 @@ definitions:
         format: date-time
         type: string
       LinkedProperties:
-        description: 'A collection of properties linked to the appointment:-'
+        description: A collection of properties linked to the appointment:-
         items:
-          $ref: '#/definitions/LinkedPropertiesModel'
+          $ref: "#/definitions/LinkedPropertiesModel"
         type: array
       NextRecurringDate:
-        description: 'Date appointment next repeats:-'
+        description: Date appointment next repeats:-
         format: date-time
         type: string
       OID:
         description: The unique Object ID (OID).
         type: string
       Recurrence:
-        description: 'The reccurrence interval for the appointment:-'
+        description: The reccurrence interval for the appointment:-
         format: int32
         type: integer
       RecurrenceType:
-        description: 'The type of recurrence:-'
+        description: The type of recurrence:-
         type: string
       RemindAt:
         description: The date/time to remind the staff member of this appointment.
         format: date-time
         type: string
       RemindBefore:
-        description: The number of minutes before the appointment start date/time to remind the staff member. -1 means don't remind.
+        description: The number of minutes before the appointment start date/time to
+          remind the staff member. -1 means don't remind.
         enum:
           - Min
           - Min2
@@ -479,7 +485,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/DiaryAppointmentModel'
+          $ref: "#/definitions/DiaryAppointmentModel"
         type: array
     type: object
   DiaryAppointmentTypeModel:
@@ -516,7 +522,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/DiaryAppointmentTypeModel'
+          $ref: "#/definitions/DiaryAppointmentTypeModel"
         type: array
     type: object
   DiaryBookingModel:
@@ -550,7 +556,7 @@ definitions:
         description: Mobile phone
         type: string
       OID:
-        description: 'The unique identifier of a user, only submit this is known'
+        description: The unique identifier of a user, only submit this is known
         type: string
       Surname:
         description: Surname
@@ -583,9 +589,9 @@ definitions:
         description: Is the tenancy signed?
         type: boolean
       LinkedTenants:
-        description: 'A collection of tenants linked to the tenancy:-'
+        description: A collection of tenants linked to the tenancy:-
         items:
-          $ref: '#/definitions/LinkedTenantModel'
+          $ref: "#/definitions/LinkedTenantModel"
         type: array
       OID:
         description: OID
@@ -645,10 +651,10 @@ definitions:
         description: ETag
         type: string
       LatestTenancy:
-        $ref: '#/definitions/LatestTenancyModel'
+        $ref: "#/definitions/LatestTenancyModel"
         description: The latest tenancy linked to the property
       MainLandlord:
-        $ref: '#/definitions/LinkedLandlordModel'
+        $ref: "#/definitions/LinkedLandlordModel"
         description: The main landlord linked to the property
       OID:
         description: OID
